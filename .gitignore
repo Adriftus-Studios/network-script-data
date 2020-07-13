@@ -17,3 +17,7 @@ playerdata/*
 
 # ██ [ Root Directories           ] ██
 
+
+# ██ [ Scriptdata Files           ] ██
+scriptdata/discord/token.yml
+scriptdata/discord/webhooks.yml
