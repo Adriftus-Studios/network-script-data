@@ -1,11 +1,3 @@
-# Build and Release Folders
-Web/bin-debug/*
-
-
-# ██ [ Restricted Folders         ] ██
-playerdata/*
-
-
 # ██ [ File-types                 ] ██
 *.old
 *.archive
@@ -16,6 +8,12 @@ playerdata/*
 
 
 # ██ [ Root Directories           ] ██
+playerdata
+resource_packs/*
+
+
+# ██ [ Scriptdata Directories     ] ██
+scriptdata/twitch/*
 
 
 # ██ [ Scriptdata Files           ] ██
