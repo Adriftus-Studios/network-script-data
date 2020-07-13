@@ -1,0 +1,144 @@
+# Detailed explanation of all options available at https://github.com/NEZNAMY/TAB/wiki/config.yml
+
+change-nametag-prefix-suffix: true
+change-tablist-prefix-suffix: true
+enable-header-footer: true
+header:
+- '&8&m      %animation:PC1%&m        %animation:PC2%&m          %animation:PC1%[ &7B%animation:PC1%e&7hrCr%animation:PC1%a&7ft %animation:PC1%]%animation:PC2%&m          %animation:PC1%&m        &8&m      '
+- '%animation:LT3% %animation:LT2% %animation:LT1% %animation:PC1%[&7Online Players%animation:PC2%: &e%online%%animation:PC1%]'
+- ''
+footer:
+- '%animation:footies%'
+- '%animation:LT3% %animation:LT2% %animation:LT1% %animation:PC1%[&7Server TPS%animation:PC2%: &e%tps%%animation:PC1%] %animation:GT1% %animation:GT2% %animation:GT3%'
+- '%animation:LT3% %animation:LT2% %animation:LT1% %animation:PC1%[&7%animation:timekey%%animation:PC2%: &e%animation:timevalue%%animation:PC1%] %animation:GT1% %animation:GT2% %animation:GT3%'
+- '%animation:footies2%'
+Users:
+  _NEZNAMY_:
+    tabprefix: '&6&lTAB Author &a'
+    tagprefix: '&6&lTAB &r&a'
+    abovename: '&bOh look, 3 lines of text !'
+    belowname: '&eThere''s only one plugin out there supporting it'
+enable-collision: true
+revert-collision-rule-in-worlds:
+- revertedworld
+do-not-move-spectators: false
+yellow-number-in-tablist: ' %ping% '
+per-world-settings:
+  world1:
+    header:
+    - an example of world with custom
+    footer:
+    - header/footer and prefix/suffix
+    Groups:
+      Owner:
+        tabprefix: '&0&l[&a&lOwner&0&l] &a'
+        tagprefix: '&2&lOwner &a'
+  world2-world3:
+    header:
+    - This is a shared header for
+    - world2 and world3
+group-sorting-priority-list:
+- coordinator
+- administrator
+- moderator
+- moderation
+- support
+- producer
+- constructor
+- sponsor
+- patron
+- visitor
+- silent
+- default
+disable-features-in-worlds:
+  header-footer:
+  - disabledworld
+  tablist-names:
+  - disabledworld
+  nametag:
+  - disabledworld
+  tablist-objective:
+  - disabledworld
+  bossbar:
+  - disabledworld
+  belowname:
+  - disabledworld
+placeholders:
+  afk-yes: ' &4*&4&lAFK&4*&r'
+  afk-no: ''
+  date-format: dd/MM/yyyy
+  time-format: h:mm a
+  time-offset: 0
+  remove-strings:
+  - '[]'
+  - < >
+rank-aliases:
+  Admin: '&4&lADMIN'
+  Mod: '&b&lMOD'
+  Premium: '&6&lPREMIUM'
+  Ultra: '&b&lULTRA'
+  Legend: '&a&lLEGEND'
+  Titan: '&c&lTITAN'
+  Youtuber: '&c&lYOUTUBE'
+  _OTHER_: '&7No Rank'
+classic-vanilla-belowname:
+  enabled: false
+  number: '%health%'
+  text: '&b&l/&7%player_max_health% &c❤'
+unlimited-nametag-prefix-suffix-mode:
+  enabled: true
+  modify-npc-names: false
+  belowname: '&7%health%&b&l/&7%denizen_<player.health_max>% &c❤'
+Groups:
+  Coordinator:
+    tabprefix: ' &2[&aMod&2]&r  '
+    tagprefix: '&2[&aMod&2]&r '
+    customtabname: '%denizen_<yaml[global.player.<player.uuid>].read[Tab_Display_Name]||<player.name>>%'
+    abovename: '%denizen_<proc[get_player_title]>%'
+    belowname: '&7%health%&b&l/&7%denizen_<player.health_max>% &c❤'
+    header:
+    #- '&8&m      %animation:PC1%&m        %animation:PC2%&m          %animation:PC1%[ &7B%animation:PC1%e&7hrCr%animation:PC1%a&7ft %animation:PC1%]%animation:PC2%&m          %animation:PC1%&m        &8&m      '
+    - '%animation:Welcome%'
+    - '%animation:LT3% %animation:LT2% %animation:LT1% %animation:PC1%[&7Online Players%animation:PC2%: &e%online%%animation:PC1%] %animation:GT1% %animation:GT2% %animation:GT3%'
+    - ''
+    - '%animation:PC1%[&7Used memory%animation:PC2%: &a%memory-used% &eMB &6/ &a%memory-max% &eMB%animation:PC1%]'
+  Administrator:
+    tabprefix: ' &6[&eMod&6]&r '
+    tagprefix: ' &6[&eMod&6]&r '
+    customtabname: '%denizen_<yaml[global.player.<player.uuid>].read[Tab_Display_Name]||<player.name>>%'
+    abovename: '%denizen_<proc[get_player_title]>%'
+    belowname: '&7%health%&b&l/&7%denizen_<player.health_max>% &c❤'
+  Moderator:
+    tabprefix: ' &6[&eMod&6]&r '
+    tagprefix: ' &6[&eMod&6]&r '
+    customtabname: '%denizen_<yaml[global.player.<player.uuid>].read[Tab_Display_Name]||<player.name>>%'
+    abovename: '%denizen_<proc[get_player_title]||No<&sp>Title>%'
+    belowname: '&7%health%&b&l/&7%denizen_<player.health_max>% &c❤'
+  Moderation:
+    tabprefix: ' &6[&eMod&6]&r '
+    tagprefix: ' &6[&eMod&6]&r '
+    customtabname: '%denizen_<yaml[global.player.<player.uuid>].read[Tab_Display_Name]||<player.name>>%'
+    abovename: '%denizen_<proc[get_player_title]>%'
+    belowname: '&7%health%&b&l/&7%denizen_<player.health_max>% &c❤'
+  silent:
+    tabprefix: '&0&l[&7&lPlayer&0&l] &3'
+    tagprefix: '&2&lPlayer &3'
+    customtabname: ' %displayname%'
+    abovename: '%denizen_<proc[get_player_title]>%'
+    belowname: '&7%health%&b&l/&7%denizen_<player.health_max>% &c❤'
+  default:
+    belowname: '&7%health%&b&l/&7%denizen_<player.health_max>% &c❤'
+  npc:
+    belowname: '&7%health%&b/&7%player_max_health% &c❤'
+  example_group:
+    header:
+    - This is an example of per-group header/footer
+    footer:
+    - applied to a group
+  _OTHER_:
+    tabprefix: '%vault-prefix%'
+    tagprefix: '%vault-prefix%'
+    tabsuffix: '%afk%'
+    tagsuffix: '%afk%'
+    customtabname: '%essentialsnick%'
+    customtagname: '%essentialsnick%'

@@ -1,0 +1,106 @@
+# Citizens Configuration
+
+general:
+  authlib:
+    profile-url: https://sessionserver.mojang.com/session/minecraft/profile/
+  debug-file: ''
+  debug-mode: false
+  debug-pathfinding: false
+  color-scheme:
+    message-error: <c>
+    message-highlight: <e>
+    message: <a>
+  translation:
+    locale: ''
+npc:
+  chat:
+    options:
+      bystanders-hear-targeted-chat: true
+      max-number-of-targets-to-show: 2
+      multiple-targets-format: <target>|, <target>| & <target>| & others
+      range: 5
+      max-text-range: 500
+    format:
+      no-targets: '[<npc>]: <text>'
+      with-target-to-bystanders: '[<npc>] -> [<target>]: <text>'
+      to-target: '[<npc>] -> You: <text>'
+      with-targets-to-bystanders: '[<npc>] -> [<targets>]: <text>'
+  pathfinding:
+    default-distance-margin: 4
+    default-path-distance-margin: 3
+    update-path-rate: 20
+    maximum-new-pathfinder-iterations: 50000
+    new-finder-open-doors: true
+    attack-range: 3.0625
+    use-new-finder: true
+    disable-mc-fallback-navigation: true
+    new-finder:
+      iterations-per-tick: 25000
+      check-bounding-boxes: false
+      open-doors: false
+  default:
+    look-close:
+      enabled: true
+      range: 4
+      random-look-enabled: false
+      random-look-delay: 60
+      disable-while-navigating: true
+    pathfinding:
+      range: 50
+    random-talker: false
+    realistic-looking: false
+    stationary-ticks: -1
+    talk-close:
+      enabled: false
+      range: 5
+    text:
+      '0': Hi, I'm <npc>!
+    waypoints:
+      cache-paths: false
+  limits:
+    default-limit: 10
+    max-permission-checks: 100
+    max-packet-entries: 15
+    max-speed: 100
+  tablist:
+    disable: true
+  chunks:
+    always-keep-loaded: false
+  skins:
+    max-retries: -1
+    retry-delay: 30
+    rotation-update-degrees: 90.0
+    use-latest-by-default: false
+    view-distance: 200.0
+  packets:
+    update-delay: 30
+  selection:
+    quick-select: false
+    item: none
+    message: <b>You selected <a><npc><b>!
+  player:
+    remove-from-list: true
+  server-ownership: false
+  text:
+    max-talk-cooldown: 5
+    min-talk-cooldown: 10
+    talk-item: book
+  teleport-delay: -1
+  controllable:
+    use-boat-controls: true
+    max-ground-speed: 0.5
+    ground-direction-modifier: 1.0
+  player-scoreboard-teams:
+    enable: true
+advanced:
+  check-minecraft-version: true
+economy:
+  npc:
+    cost: 100.0
+storage:
+  save-task:
+    delay: 72000
+  file: saves.yml
+  type: yaml
+subplugins:
+  folder: plugins
