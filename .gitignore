@@ -19,3 +19,5 @@ scriptdata/twitch/*
 # ██ [ Scriptdata Files           ] ██
 scriptdata/discord/token.yml
 scriptdata/discord/webhooks.yml
+denizen_scripts/relay/Handlers/message_handler.dsc
+denizen_scripts/relay/Tasks/Note_Command.dsc
