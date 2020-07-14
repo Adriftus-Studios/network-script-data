@@ -20,3 +20,6 @@
 - **Describe the evidence that you have on the need for this request**: Validation of user problem and desired outcome is statistically(no pun intended) the only way to argue with me if you believe I wouldn't agree else-wise. 
 - **Describe if you have any ideas on how we may solve this**: Giving the space to help and suggest ideas are great for creating structural or dynamic features, mini-games and commands.
 - **Describe how urgent this is and why**: Explain the space to give insight into the urgency of this issue and why.
+
+## Commercial Compliance
+Feature requests should also bear in mind general terms and conditions placed by Mojang. This information can be found [Here](https://account.mojang.com/terms#commercial)
