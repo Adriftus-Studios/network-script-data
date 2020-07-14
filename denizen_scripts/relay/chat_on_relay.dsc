@@ -56,10 +56,14 @@ discord_watcher:
           - define Text <yaml[chat_config].read[channels.<[channel]>.format.message].replace[].parsed>
           - define Insert <[Text]>
           - define MessageText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
-          - if <context.attachments||null> != null:
-            - foreach <context.attachments> as:attachment:
-                - define "attachments:|:<&click[<[attachment]>].type[OPEN_URL]><&hover[Click to Open.]><&l><&n><&lb>Attachment<&rb><&end_hover><&end_click>"
-          - define Message <[DiscIcon]><[ChannelText]><[NameText]><[Separator]><[MessageText]><&sp><[attachments].space_separated||>
+          - define Attachments <list[]>
+          - if <context.attachments||invalid> != invalid:
+              - foreach <context.attachments> as:Attachment:
+                  - define Hover "<&color[#F3FFAD]>Click to Open Link <&color[#26FFC9]>:<&nl><&color[#F3FFAD]><[Attachment]>"
+                  - define Text <&3>[<&b><&n>Link<&3>]<&r>
+                  - define Url <[Attachment]>
+                  - define UrlText <[Attachment].include[<proc[MsgURL].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
+          - define Message <[DiscIcon]><[ChannelText]><[NameText]><[Separator]><[UrlText].unseparated><[MessageText]>
           - define Definitions <list_single[<[Channel]>].include[<[Message]>]>
           - bungeerun <[Server]> chat_send_message def:<[Definitions]>
 
