@@ -56,9 +56,10 @@ discord_watcher:
           - define Text <yaml[chat_config].read[channels.<[channel]>.format.message].replace[].parsed>
           - define Insert <[Text]>
           - define MessageText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
-
-          - define Message <[DiscIcon]><[ChannelText]><[NameText]><[Separator]><[MessageText]>
-
+          - if <context.attachments||null> != null:
+            - foreach <context.attachments> as:attachment:
+                - define "attachments:|:<&click[<[attachment]>].type[OPEN_URL]><&hover[Click to Open.]><&l><&n><&lb>Attachment<&rb><&end_hover><&end_click>"
+          - define Message <[DiscIcon]><[ChannelText]><[NameText]><[Separator]><[MessageText]><&sp><[attachments].space_separated||>
           - define Definitions <list_single[<[Channel]>].include[<[Message]>]>
           - bungeerun <[Server]> chat_send_message def:<[Definitions]>
 
