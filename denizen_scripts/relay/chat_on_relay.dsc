@@ -45,7 +45,7 @@ discord_watcher:
 
         #^- define Name <context.author.nickname[<context.group>]||<context.author.name>>
           - define Name <context.author.name>
-          - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
+          - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
           - define Text <&7><[Name]>
           - define Insert @<context.author.nickname[<context.group>]||<context.author.name>>
           - define NameText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
@@ -56,14 +56,15 @@ discord_watcher:
           - define Text <yaml[chat_config].read[channels.<[channel]>.format.message].replace[].parsed>
           - define Insert <[Text]>
           - define MessageText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
-          - define Attachments <list[]>
+          - define Attachments <list[<empty>]>
           - if <context.attachments||invalid> != invalid:
-              - foreach <context.attachments> as:Attachment:
-                  - define Hover "<&color[#F3FFAD]>Click to Open Link <&color[#26FFC9]>:<&nl><&color[#F3FFAD]><[Attachment]>"
-                  - define Text <&3>[<&b><&n>Link<&3>]<&r>
-                  - define Url <[Attachment]>
-                  - define UrlText <[Attachment].include[<proc[MsgURL].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
-          - define Message <[DiscIcon]><[ChannelText]><[NameText]><[Separator]><[UrlText].unseparated><[MessageText]>
+            - foreach <context.attachments> as:Attachment:
+              - define Hover "<&color[#F3FFAD]>Click to Open Link <&color[#26FFC9]>:<&nl><&color[#F3FFAD]><[Attachment]>"
+              - define Text <&3>[<&b><&n>Link<&3>]<&r>
+              - define Url <[Attachment]>
+              - define Attachments <[Attachments].include[<proc[MsgURL].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
+          - define Attachments <[Attachments].unseparated><&sp>
+          - define Message <[DiscIcon]><[ChannelText]><[NameText]><[Separator]><[Attachments]><[MessageText]>
           - define Definitions <list_single[<[Channel]>].include[<[Message]>]>
           - bungeerun <[Server]> chat_send_message def:<[Definitions]>
 
