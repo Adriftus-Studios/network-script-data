@@ -1,6 +1,6 @@
 embeds:
 - description: |-
-    ```bash
+    ```md
     - git pull
     - reload all
     ```
