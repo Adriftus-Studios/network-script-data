@@ -20,7 +20,7 @@ do
     done
 
     ### Server Scripts
-    Path1="$RepoRoot/denizen_scripts/$Server/"
+    Path1="$RepoRoot/denizen_scripts/$Server/repo-link/"
     Path2="$DediRoot/servers/$Server/plugins/Denizen/scripts/"
     if [ -h $Path2 ]
     then
