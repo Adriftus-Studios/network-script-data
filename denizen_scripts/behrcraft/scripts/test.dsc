@@ -20,3 +20,12 @@ WebgettestCommand:
         - announce to_console <entry[saveName].result>
         #- announce to_console <entry[saveName].status>
         #- announce to_console <entry[saveName].time_ran>
+
+
+testvent:
+    type: world
+    events:
+        on player places *chest:
+            - if <player.name> != behr_riley:
+                - stop
+            - narrate <context.location.other_block||invalid>
