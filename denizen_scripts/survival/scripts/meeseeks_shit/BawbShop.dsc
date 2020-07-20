@@ -24,7 +24,6 @@ BawbShop:
             #^- case ToolMenu:
             #^    - define Back <item[Action_Item].with[material=Red_stained_glass_pane;display_name=<&c>[<&7>Main<&sp>Menu<&c>];nbt=<list[Menu/BawbShop|Action/MainMenu]>;enchantments=silk_touch,1;flags=hide_all]>
             #^    - define SoftMenu:|:<item[Action_Item].with[material=Clock;display_name=Navigator]>|<item[Action_Item].with[material=player_head;display_name=<&3>M<&b>eeseeks<&sp><&3>T<&b>ransportation<&sp><&3>B<&b>ox;skull_skin=<server.flag[Behrry.Essentials.SavedHeads].map_get[Package]>]>|blank|blank|<[Back]>
-            #^    
             #^    - inventory set d:<[Inventory]> o:<[SoftMenu]>
             #^    - inventory open d:<[Inventory]>
 
@@ -57,7 +56,7 @@ BawbShop:
                 - define MeeseeksPrice <player.flag[Behrry.Meeseeks.MeeseeksCount].add[1].mul[100000].add[<player.flag[Behrry.Meeseeks.MeeseeksCount].add[1].mul[50000]>]>
                 #$ Beta Tester ShortTerm
                 - flag server Bread.Game.Clicker.BetaTesters:->:<player.uuid>
-                - advancement id:MeeseeksBetaTester icon:player_head[skull_skin=<server.flag[Behrry.Essentials.SavedHeads].map_get[MeeseeksBox]>] "title:<&2>B<&a>eta <&2>T<&a>ester" "description:<&e>Research takes 5 seconds. YEAH, SCIENCE!"
+                - advancement id:MeeseeksBetaTester icon:player_head[skull_skin=786a4323-40b0-45eb-937c-9a90e6313d9b|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWJiNDMzOTFhOWRiZmY5ZWFkYWUwN2I2ODYyNTk1YzkxZDA0YzU5MzhlMjNjMjg1YWM2MGM0Yjg3NjliMjQifX19] "title:<&2>B<&a>eta <&2>T<&a>ester" "description:<&e>Research takes 5 seconds. YEAH, SCIENCE!"
                 - advancement id:MeeseeksBetaTester grant:<player>
                     #$**TEMPORARY until Replacement, Recursive Logic can correct this afterwards**$#
             # $ ██ [ Currency Remove, Debug Mode                                  ] ██

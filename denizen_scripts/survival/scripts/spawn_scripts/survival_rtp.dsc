@@ -5,19 +5,20 @@ survival_rtp:
   maximum: 34000
   world: mainland
   script:
-    - define min <script[survival_rtp].yaml_key[minimum]>
-    - define max <script[survival_rtp].yaml_key[maximum]>
-    - define world <script[survival_rtp].yaml_key[world]>
+    - define min <script.data_key[minimum]>
+    - define max <script.data_key[maximum]>
+    - define world <script.data_key[world]>
     - define x <util.random.int[<[min]>].to[<[max]>].*[<list[1|-1].random>]>
     - define z <util.random.int[<[min]>].to[<[max]>].*[<list[1|-1].random>]>
     - chunkload <location[<[x]>,200,<[z]>,<[world]>].chunk> duration:10s
     - wait 5t
+    - narrate "<&a>You have 1 minute of no fall damage."
     - teleport <location[<[x]>,300,<[z]>,<[world]>]>
     - flag player no_fall:true duration:1m
-    - if !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[Explorer]||false>:
+    - if !<yaml[global.player.<player.uuid>].contains[titles.unlocked.explorer]>:
+  #^- if !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[Explorer]||false>:
       - define id First_RTP
       - inject Achievement_give
-    - narrate "<&a>You have 1 minute of no fall damage."
     - wait 1m
     - narrate "<&c>You now take fall damage as normal."
 
@@ -35,7 +36,7 @@ survival_rtp_portal:
   debug: false
   events:
     on player enters spawn_cuboid:
-      - flag server people_in_spawn:|:<player>
+      - flag server people_in_spawn:->:<player>
       - time player reset
       - if !<server.has_flag[spawn_portal_running]>:
         - flag server spawn_portal_running:true
@@ -69,7 +70,7 @@ spawn_speed_handler:
   script:
     - while <server.has_flag[spawn_portal_running]> && <server.has_flag[people_in_spawn]>:
       - adjust <queue> linked_player:<server.flag[people_in_spawn].random>
-      - cast speed duration:3s <server.flag[people_in_spawn]> hide_particles
+      - cast speed duration:3s <server.flag[people_in_spawn].filter[is_online]> hide_particles
       - wait 2s
 
 spawn_sound_effects_handler:
@@ -78,4 +79,4 @@ spawn_sound_effects_handler:
   debug: false
   script:
     - adjust <player> stop_sound:music
-    - playsound <player> sound:<script[spawn_sound_effects_handler].yaml_key[sounds].as_list.random> pitch:1 volume:150 sound_category:music
+    - playsound <player> sound:<script[spawn_sound_effects_handler].data_key[sounds].as_list.random> pitch:1 volume:150 sound_category:music

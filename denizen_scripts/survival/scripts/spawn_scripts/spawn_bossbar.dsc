@@ -16,7 +16,6 @@ spawn_bossbar:
         - bossbar update spawn_bossbar players:<cuboid[spawn_cuboid].players>
     on player exits spawn_cuboid:
       - wait 1t
-      - narrate test
       - if <server.current_bossbars.contains[spawn_bossbar]>:
         - bossbar remove spawn_bossbar
       - if !<cuboid[spawn_cuboid].players.is_empty>:
