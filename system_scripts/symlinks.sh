@@ -8,8 +8,8 @@ do
     ### Server Configurations
     for File in bukkit.yml paper.yml server.properties spigot.yml
     do
-        Path1="$DediRoot/servers/$Server/$File"
-        Path2="$RepoRoot/configurations/1.16_servers/$Server/$File" 
+        Path1="$RepoRoot/configurations/1.16_servers/$Server/$File" 
+        Path2="$DediRoot/servers/$Server/$File"
         if [ -h $Path2 ]
         then
             echo "/$Server/$File Link Established"
@@ -20,8 +20,8 @@ do
     done
 
     ### Server Scripts
-    Path1="$DediRoot/servers/$Server/plugins/Denizen/scripts/"
-    Path2="$RepoRoot/denizen_scripts/$Server/"
+    Path1="$RepoRoot/denizen_scripts/$Server/"
+    Path2="$DediRoot/servers/$Server/plugins/Denizen/scripts/"
     if [ -h $Path2 ]
     then
         echo "/denizen_scripts/$Server Link Established"
@@ -33,7 +33,6 @@ do
         ln -s $Path1 $Path2
         echo "/denizen_scripts/$Server Link Created"
     fi 
-
 
     ### Server Script Data
     Path1="$RepoRoot/scriptdata/global/"
