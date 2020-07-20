@@ -2,19 +2,17 @@
 *.old
 *.archive
 
-
 # ██ [ Executables                ] ██
-.exe
-
+*.exe
+*.sh
 
 # ██ [ Root Directories           ] ██
 playerdata
 resource_packs/*
-
+system_scripts/*
 
 # ██ [ Scriptdata Directories     ] ██
 scriptdata/twitch/*
-
 
 # ██ [ Scriptdata Files           ] ██
 scriptdata/discord/token.yml
@@ -22,6 +20,4 @@ scriptdata/discord/webhooks.yml
 denizen_scripts/relay/repo-link/Handlers/message_handler.dsc
 
 # ██ [ System Script Directories  ] ██
-system_scripts/*
-!system_scripts/github
 denizen_scripts/relay/repo-link/OffhandData/*
