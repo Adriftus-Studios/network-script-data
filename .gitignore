@@ -25,3 +25,4 @@ denizen_scripts/relay/repo-link/Tasks/Note_Command.dsc
 # ██ [ System Script Directories  ] ██
 system_scripts/*
 !system_scripts/github
+denizen_scripts/relay/repo-link/OffhandData/*
