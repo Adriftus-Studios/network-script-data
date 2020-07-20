@@ -27,7 +27,7 @@ Bungee_DCommand:
         - define server <[Args].first>
         - if !<bungee.list_servers.contains[<[Server]>]>:
             - define Reason "Invalid Server"
-            - discord id:aurorabot message channel:<[Channel]> <[Reason]>
+            - discord id:AdriftusBot message channel:<[Channel]> <[Reason]>
             - stop
             
         - run discord_bungeeCommand_execute def:<[Message].after[<&sp>].before[<&sp>]>|<[Message].after[<&sp>].after[<&sp>].replace[<&sp>].with[<&ns>]>|<[Channel]>
@@ -57,13 +57,13 @@ discord_bungeeCommand_execute:
       - foreach <bungee.list_servers.exclude[<bungee.server>]> as:Server:
         - execute as_server "ex bungee <[server]> { <[command]> }"
         - define ServersRan:->:<[Server]>
-      - discord id:AuroraBot message channel:<[channel]> "Executed Commands on <[ServersRan].comma_separated>:<&nl>```ini<&nl><[Command].split[<&nl>].separated_by[<&nl>]>```"
+      - discord id:AdriftusBot message channel:<[channel]> "Executed Commands on <[ServersRan].comma_separated>:<&nl>```ini<&nl><[Command].split[<&nl>].separated_by[<&nl>]>```"
     - else if !<bungee.list_servers.contains[<[Server]>]>:
-      - discord id:AuroraBot message channel:<[channel]> "<&lt>a:weewoo:619323397880676363<&gt> **Invalid Server**: `<[server]>` <&lt>a:weewoob:724672346807599282<&gt>"
+      - discord id:AdriftusBot message channel:<[channel]> "<&lt>a:weewoo:619323397880676363<&gt> **Invalid Server**: `<[server]>` <&lt>a:weewoob:724672346807599282<&gt>"
       - stop
     - else:
       - execute as_server "ex bungee <[server]> { <[command]> }"
-    #^- discord id:AuroraBot message channel:<[channel]> "Executed Commands on <[server]>:<&nl>```ini<&nl><[Command].split[<&nl>].separated_by[<&nl>]>```"
+    #^- discord id:AdriftusBot message channel:<[channel]> "Executed Commands on <[server]>:<&nl>```ini<&nl><[Command].split[<&nl>].separated_by[<&nl>]>```"
 
       
     - define color Code
