@@ -26,7 +26,7 @@ Note_DCommand:
     - if !<script[DDTBCTY].list_keys[WebHooks].contains[<[Channel]>]>:
       - stop
     - define UserID <[Author].ID>
-    - define Headers <list[User-Agent/really|Authorization/Bot<&sp>NzM0ODgyNTUxMjE4NDM4MTg2.XxYK_A.-p5gNHlEWRTdZs0Kd6d5ntYDZ_Q]>
+    - define Headers <list[User-Agent/really|Authorization/Bot<&sp><yaml[AdriftusBot_temp].read[AdriftusBotToken]>]>
 
     - ~webget https://discordapp.com/api/users/<[UserID]> Headers:<[Headers]> save:Response
     - Define UserPFP https://cdn.discordapp.com/avatars/<[UserID]>/<util.parse_yaml[<entry[Response].result>].get[avatar]>
