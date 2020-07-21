@@ -75,9 +75,11 @@ Status_DCommand:
         - define Fields <[Fields].include[<[Field]>]>
     
   # % Build Data
-    - define Data "<map[].with[title].as[<[Server]> Status]>"
-    - define Data <[Data].with[color].as[code]>
+  #^- define Data "<map[].with[title].as[<[Server]> Status]>"
+    - define Data <<map[].with[color].as[code]>
     - define Data <[Data].with[fields].as[<[Fields]>]>
+    - define data "<[Data].with[username].as[<[Server]> Server]>"
+    - define Data <[Data].with[avatar_url].as[https://img.icons8.com/nolan/64/source-code.png]>
     - if !<[Duplicates].exclude[Online].is_empty>:
       - define Data "<[Data].with[description].as[**Flags Used**: `<[Duplicates].comma_separated>`]>"
     - define Data <[Data].with[time].as[Default]>

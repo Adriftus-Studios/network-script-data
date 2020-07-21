@@ -34,7 +34,6 @@ Embedded_Discord_Message_New:
     script:
     # - ██ [ Inject Dependencies                     ] ██
         - inject Definition_Registry_Mapped
-        - inject Embedded_Color_Formatting
         - define Data <map[]>
         - define Embeds <map[]>
 
@@ -47,6 +46,9 @@ Embedded_Discord_Message_New:
                 - define Embeds <[Embeds].with[<[String]>].as[<[<[String]>]>]>
 
         - if <[Color].exists>:
+            - inject Embedded_Color_Formatting
+            - if <[Color]> == 0:
+                - define Color 5820671
             - define Embeds <[Embeds].with[color].as[<[Color]>]>
 
         - if <[Timestamp].exists>:
