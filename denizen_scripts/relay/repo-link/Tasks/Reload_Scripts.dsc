@@ -2,16 +2,13 @@ Reload_Scripts_DCommand:
     type: task
     PermissionRoles:
 # - ██ [ Staff Roles  ] ██
-        - Development Team
         - Lead Developer
         - External Developer
         - Developer
 
 # - ██ [ Public Roles ] ██
-        - Development Team
         - Lead Developer
         - Developer
-        - Developer In Training
     definitions: Message|Channel|Author|Group
     debug: false
     Context: Color

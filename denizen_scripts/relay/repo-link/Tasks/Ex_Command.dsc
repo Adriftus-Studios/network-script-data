@@ -2,13 +2,11 @@ Ex_DCommand:
     type: task
     PermissionRoles:
 # - ██ [ Staff Roles  ] ██
-        - Development Team
         - Lead Developer
         - External Developer
         - Developer
 
 # - ██ [ Public Roles ] ██
-        - Development Team
         - Lead Developer
         - Developer
     definitions: Message|Channel|Author|Group

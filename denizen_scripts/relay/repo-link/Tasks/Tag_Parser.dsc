@@ -2,17 +2,13 @@ Tag_Parser_DCommand:
     type: task
     PermissionRoles:
 # - ██ [ Staff Roles  ] ██
-        - Development Team
         - Lead Developer
         - External Developer
         - Developer
 
 # - ██ [ Public Roles ] ██
-        - Public Dev
-        - Development Team
         - Lead Developer
         - Developer
-        - Developer In Training
     definitions: Message|Channel|Author|Group
     debug: true
     Context: Color
