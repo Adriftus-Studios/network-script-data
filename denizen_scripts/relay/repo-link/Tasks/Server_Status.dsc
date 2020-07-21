@@ -10,7 +10,6 @@ Status_DCommand:
     - Lead Developer
     - Developer
   definitions: Message|Channel|Author|Group
-  debug: true
   script:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject Role_Verification
@@ -21,36 +20,65 @@ Status_DCommand:
       - define Args:->:Relay
     - define Server <[Args].first>
 
+    - if <[Args].size> > 9:
+      - stop
+
+  # % ██ [ Help Argument ] ██
     - if <[Server]> == help:
       - define Data <yaml[SDS_StatusDCmd].to_json>
       - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
       - define headers <list[User-Agent/really|Content-Type/application/json]>
       - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
       - stop
+
+  # % ██ [ All Argument ] ██
+    - if <list[Network|Servers|All].contains[<[Server]>]>:
+      - define Data <map[].with[color].as[code]>
+      - define Data "<[Data].with[username].as[Network Status]>"
+      - define Data <[Data].with[avatar_url].as[https://img.icons8.com/nolan/64/source-code.png]>
+
+      - define Fields <list[]>
+      - define FieldMap <map[].with[inline].as[true]>
+      - foreach <yaml[BUNGEE_CONFIG].list_keys[servers]> as:Server:
+        - define Field <[FieldMap].with[name].as[<[Server].to_titlecase>]>
+        - if <bungee.list_servers.contains[<[Server]>]>:
+          - ~Bungeetag server:<[Server]> <bungee.connected> save:Data
+          - define Status <entry[Data].result||false>
+        - else:
+          - define Status false
+
+        - if <[Status]>:
+          - define Field <[Field].with[value].as[`Online`]>
+        - else:
+          - define Field <[Field].with[value].as[**`Offline`**]>
+        - define Fields <[Fields].include[<[Field]>]>
+      - if <[Args].size> > 1:
+        - define "<[Data].with[description].as[Note: Flags cannot be used for Network Status.]>"
+
+      - define Data <[Data].with[fields].as[<[Fields]>]>
+      - bungeerun Relay Embedded_Discord_Message_New def:<list[<[Channel]>].include[<[Data]>]>
+      - stop
       
-    #$ Inject Error Response
+  # % ██ [ Server Argument Check ] ██
     - if !<yaml[BUNGEE_CONFIG].list_keys[servers].contains[<[Server]>]>:
       - stop
     - else if !<bungee.list_servers.contains[<[Server]>]>:
       - stop
-
-    - else if <[Args].size> > 9:
-      - stop
     - else if <[Args].size> == 1:
       - define Args:->:-online
       - define Flags <list[-o]>
-  # % All Flag
+  # % ██ [ All Flag ] ██
     - else if <list[-a|-all].contains_any[<[Args]>]>:
       - define Flags <list[-o|-p|-w|-pl|-v|-ch|-tps|-s]>
     - else:
       - define Flags <[Args].remove[first]>
     
-  # % Define Empty Defintions
+  # % ██ [ Define Empty Defintions ] ██
     - define Fields <list[]>
     - define Duplicates <list[]>
     - define FieldMap <map[].with[inline].as[true]>
 
-  # % Online Flag
+  # % ██ [ Online Flag ] ██
     - if <list[-o|-online].contains_any[<[Flags]>]>:
       - define Duplicates:->:Online
       - define Field <[FieldMap].with[name].as[Online]>
@@ -61,7 +89,7 @@ Status_DCommand:
         - define Field <[Field].with[value].as[<entry[Data].result>]>
       - define Fields <[Fields].include[<[Field]>]>
 
-  # % Entry Flags
+  # % ██ [ Entry Flags ] ██
     - foreach <script.list_keys[Flags].exclude[o|online]> as:Flag:
       - define FlagName <script.data_key[Flags.<[Flag]>.nodes]||invalid>
       - if <[Flags].contains_any[<[Flagname].parse_tag[-<[Parse_Value]>]>]>:
@@ -74,7 +102,7 @@ Status_DCommand:
         - define Field <[Field].with[value].as[<entry[Data].result>]>
         - define Fields <[Fields].include[<[Field]>]>
     
-  # % Build Data
+  # % ██ [ Build Data
   #^- define Data "<map[].with[title].as[<[Server]> Status]>"
     - define Data <map[].with[color].as[code]>
     - define Data <[Data].with[fields].as[<[Fields]>]>
@@ -84,8 +112,6 @@ Status_DCommand:
       - define Data "<[Data].with[description].as[**Flags Used**: `<[Duplicates].comma_separated>`]>"
     - define Data <[Data].with[time].as[Default]>
     - bungeerun Relay Embedded_Discord_Message_New def:<list[<[Channel]>].include[<[Data]>]>
-
-  # % ██ [ Build Data ] ██
 
   Flags:
     Players:
@@ -104,6 +130,7 @@ Status_DCommand:
       nodes:
         - pl
         - plugins
+        - versions
     Version:
       tag: "Version<&co> `<server.version>`<&nl>Denizen Version: `<server.denizen_version>`"
       nodes:
