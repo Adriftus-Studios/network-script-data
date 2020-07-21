@@ -1,12 +1,12 @@
 Note_DCommand:
   type: task
   PermissionRoles:
-  # - ██ [ Staff Roles  ] ██
+  # % ██ [ Staff Roles  ] ██
     - Lead Developer
     - External Developer
     - Developer
 
-  # - ██ [ Public Roles ] ██
+  # % ██ [ Public Roles ] ██
     - Lead Developer
     - Developer
   definitions: Message|Channel|Author|Group
@@ -47,18 +47,3 @@ Note_DCommand:
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
     - define headers <list[User-Agent/really|Content-Type/application/json]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
-
-
-#| {
-#|   "embeds": [
-#|   {
-#|     "description": ":hamburger: Notes can be saved by typing `/note `, followed by your note.\nYou can delete or remove this note by clicking the `X` in the example above.",
-#|     "author": {
-#|     "name": "Bear",
-#|     "icon_url": "https://cdn.discordapp.com/attachments/547556605328359455/603671749917147136/rainbow.gif"
-#|     }
-#|   }
-#|   ],
-#|   "username": "NoteHook",
-#|   "avatar_url": "https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png"
-#| }
