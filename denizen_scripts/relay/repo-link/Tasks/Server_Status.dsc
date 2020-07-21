@@ -21,6 +21,13 @@ Status_DCommand:
       - define Args:->:Relay
     - define Server <[Args].first>
 
+    - if <[Server]> == help:
+      - define Data <yaml[SDS_StatusDCmd].to_json>
+      - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
+      - define headers <list[User-Agent/really|Content-Type/application/json]>
+      - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+      - stop
+      
     #$ Inject Error Response
     - if !<yaml[BUNGEE_CONFIG].list_keys[servers].contains[<[Server]>]>:
       - stop

@@ -47,7 +47,6 @@ Embedded_Discord_Message_New:
                 - define Embeds <[Embeds].with[<[String]>].as[<[<[String]>]>]>
 
         - if <[Color].exists>:
-            - inject Embedded_Color_Formatting
             - define Embeds <[Embeds].with[color].as[<[Color]>]>
 
         - if <[Timestamp].exists>:
