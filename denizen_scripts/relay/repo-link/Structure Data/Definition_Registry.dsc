@@ -13,5 +13,5 @@ Definition_Registry_Mapped:
     definitions: Definitions
     speed: 0
     script:
-        - foreach <[Definitions].list_keys> as:Key:
+        - foreach <[Definitions].keys> as:Key:
             - define <[Key]> <[Definitions].get[<[Key]>]>
