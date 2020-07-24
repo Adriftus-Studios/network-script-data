@@ -27,40 +27,40 @@
 ## FileTree
 
 - [configurations](configurations) | Config files for default server symlinks
-	- [1.15_server](configurations\1.15_server) | Server Configs for 1.15 Paper platform
-	- [1.16_server](configurations\1.16_server) | Server Configs for 1.16 Paper platform
-	- [Citizens](configurations\Citizens) | Config for Citizens
-	- [CMI](configurations\CMI) | Config for CMI, disables most content
-	- [Denizen](configurations\Denizen) | Config for Denizen for proper use with the Network
-	- [Depenizen](configurations\Depenizen) | Config for Depenizen with proper localhost pointer
-	- [GadgetsMenu](configurations\GadgetsMenu) | Config for GadgetsMenu
-	- [nonsymbolic](configurations\nonsymbolic) | Configs not symlinked across the network
-		- [behrcraft](configurations\nonsymbolic\behrcraft) | Non-Symlinked Configurations
-		- [off_network](configurations\nonsymbolic\off_network) | Non-Symlinked Configurations
-			- [Depenizen](configurations\nonsymbolic\Depenizen) | Config for Depenizen with proper localhost pointer
-	- [worldedit](configurations\worldedit) | Config for World Edit
+	- [1.15_server](configurations/1.15_server) | Server Configs for 1.15 Paper platform
+	- [1.16_server](configurations/1.16_server) | Server Configs for 1.16 Paper platform
+	- [Citizens](configurations/Citizens) | Config for Citizens
+	- [CMI](configurations/CMI) | Config for CMI, disables most content
+	- [Denizen](configurations/Denizen) | Config for Denizen for proper use with the Network
+	- [Depenizen](configurations/Depenizen) | Config for Depenizen with proper localhost pointer
+	- [GadgetsMenu](configurations/GadgetsMenu) | Config for GadgetsMenu
+	- [nonsymbolic](configurations/nonsymbolic) | Configs not symlinked across the network
+		- [behrcraft](configurations/nonsymbolic/behrcraft) | Non-Symlinked Configurations
+		- [off_network](configurations/nonsymbolic/off_network) | Non-Symlinked Configurations
+			- [Depenizen](configurations/nonsymbolic/Depenizen) | Config for Depenizen with proper localhost pointer
+	- [worldedit](configurations/worldedit) | Config for World Edit
 
 - [denizen_scripts](denizen_scripts) | Denizen Script Directory
-	- [global](denizen_scripts\global) | Global scripts shared across the entire network
-		- [handlers](denizen_scripts\global\handlers) | Global Handler Scripts
-		- [commands](denizen_scripts\global\commands) | Global Command Scripts
-		- [dependencies](denizen_scripts\global\dependencies) | Global Dependencies and Procedure Scripts
-	- [behrcraft](denizen_scripts\behrcraft) | Scripts used locally to BehrCraft
-	- [survival](denizen_scripts\survival) | Scripts used locally to Survival
-	- [hub1](denizen_scripts\hub1) | Scripts used locally to Hub1
-	- [relay](denizen_scripts\relay) | Scripts used locally to the Relay server
+	- [global](denizen_scripts/global) | Global scripts shared across the entire network
+		- [handlers](denizen_scripts/global/handlers) | Global Handler Scripts
+		- [commands](denizen_scripts/global/commands) | Global Command Scripts
+		- [dependencies](denizen_scripts/global/dependencies) | Global Dependencies and Procedure Scripts
+	- [behrcraft](denizen_scripts/behrcraft) | Scripts used locally to BehrCraft
+	- [survival](denizen_scripts/survival) | Scripts used locally to Survival
+	- [hub1](denizen_scripts/hub1) | Scripts used locally to Hub1
+	- [relay](denizen_scripts/relay) | Scripts used locally to the Relay server
 
 - [docs](docs) | Documentation and write-ups
 
 - [images](images) | Network Image Directory
-    - [logos](images\logos) | Official logos and images for the Network
+    - [logos](images/logos) | Official logos and images for the Network
 
 - [playerdata](playerdata) | :x: gitignored
 
 - [resource_packs]() | :x: gitignored
 
 - [scriptdata](scriptdata) | 
-    - [chat](scriptdata\chat) | Global chat data
+    - [chat](scriptdata/chat) | Global chat data
 	- [discord]() | :x: gitignored
   - [twitch]() | :x: gitignored
 	
