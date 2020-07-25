@@ -6,7 +6,7 @@ TPDecline_Command:
     usage: /tpdecline (<&lt>Player<&gt>)
     permission: Behr.Essentials.tpdecline
     tab complete:
-        - define Blacklist <server.online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
+        - define Blacklist <server.online_players.filter[has_flag[Behr.Moderation.Hide]].include[<Player>]>
         - Inject Online_Player_Tabcomplete
     script:
     # % ██ [ Check Args ] ██
