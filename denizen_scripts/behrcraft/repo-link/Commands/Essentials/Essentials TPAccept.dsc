@@ -6,14 +6,14 @@ TPAccept_Command:
     usage: /tpaccept (<&lt>Player<&gt>)
     permission: Behr.Essentials.tpaccept
     tab complete:
-        - define Blacklist <server.list_online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
+        - define Blacklist <server.list_online_players.filter[has_flag[Behr.Moderation.Hide]].include[<Player>]>
         - Inject Online_Player_Tabcomplete
     script:
         - if !<context.args.is_empty>:
             - if <context.args.size> > 1:
                 - inject Command_Syntax
 
-        - if <player.has_flag[Behr.Essentials.Teleport.Rrequest]>:
+        - if <player.has_flag[Behr.Essentials.Teleport.Request]>:
             - if <context.args.is_empty>:
                 - define User <player.flag[Behr.Essentials.Teleport.Request].first.before[/]>
                 - define Loc <player.flag[Behr.Essentials.Teleport.Request].first.after[/]>

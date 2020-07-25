@@ -8,7 +8,7 @@ TPHere_Command:
     aliases:
         - tpahere
     tab complete:
-        - define Blacklist <server.list_online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
+        - define Blacklist <server.list_online_players.filter[has_flag[Behr.Moderation.Hide]].include[<Player>]>
         - inject Online_Player_Tabcomplete
     script:
     # % ██ [ Check Args ] ██
@@ -60,17 +60,17 @@ TPHere_Command:
         - define HoverA "<proc[Colorize].context[Teleport To:|Green]><&nl><proc[User_Display_Simple].context[<player>]>"
         - define DisplayA "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
         - define CommandA "tpaccept <player.name>"
-        - define Accept <proc[MsgCmd].context[<def[hoverA]>|<def[displayA]>|<def[commandA]>]>
+        - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
     
         - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
         - define DisplayB "<&c>[<&4><&chr[2716]><&c>]"
         - define CommandB "tpdecline <player.name>"
-        - define Decline <proc[MsgCmd].context[<def[hoverB]>|<def[displayB]>|<def[commandB]>]>
+        - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
     
         - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
         - define DisplayC "<&c>[<&4><&chr[2716]><&c>]"
         - define CommandC "tphere <[User].name> Cancel"
-        - define Cancel <proc[MsgCmd].context[<def[hoverC]>|<def[displayC]>|<def[commandC]>]>
+        - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
     
     # % ██ [ Adjust Flags ] ██
         - flag <[User]> Behr.Essentials.teleport.request:->:<player>/<player.location> duration:3m
