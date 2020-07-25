@@ -4,7 +4,7 @@ murdermobs_Command:
     debug: false
     description: Murders the mobs around all players.
     usage: /murdermobs (Radius) (Mobs)
-    permission: behrry.essentials.murdermobs
+    permission: Behr.Essentials.Murdermobs
     RadiusCheck:
         - if <[Radius]> < 0:
             - narrate "<proc[Colorize].context[Radius cannot be negative.|red]>"
@@ -22,45 +22,45 @@ murdermobs_Command:
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
             - determine <[List].filter[starts_with[<context.args.get[1]>]]>
     script:
-    # @ ██ [ Check Args ] ██
+    # % ██ [ Check Args ] ██
         - if <context.args.size> > 2:
-            - inject Command_Syntax Instantly
+            - inject Command_Syntax
     
-    # @ ██ [ Check for Default ] ██
+    # % ██ [ Check for Default ] ██
         - if <context.args.get[1]||null> == null:
             - define Radius 50
             - define Mobs Hostiles
         
-    # @ ██ [ Check First Arg ] ██
+    # % ██ [ Check First Arg ] ██
         - else if <context.args.get[1].is_integer>:
             - define Radius <context.args.get[1]>
-            - inject Locally RadiusCheck Instantly
+            - inject Locally RadiusCheck
         - else if <server.list_entity_types.include[All|Hostiles].exclude[Player].contains_any[<context.args.get[1].split[,]>]>:
             - define Mobs <context.args.get[1].split[,]>
         - else:
-            - inject Command_Syntax Instantly
+            - inject Command_Syntax
 
-    # @ ██ [ Check for Default Second Arg ] ██
+    # % ██ [ Check for Default Second Arg ] ██
         - if <context.args.get[2]||null> == null:
             - if <[Radius].exists>:
                 - define Mobs Hostiles
             - else:
                 - define Radius 50
 
-    # @ ██ [ Check Second Arg ] ██
+    # % ██ [ Check Second Arg ] ██
         - else if <context.args.get[2].is_integer>:
             - if <[Radius].exists>:
-                - inject Command_Syntax Instantly
+                - inject Command_Syntax
             - define Radius <context.args.get[2]>
-            - inject Locally RadiusCheck Instantly
+            - inject Locally RadiusCheck
         - else if <server.list_entity_types.include[All|Hostiles].exclude[Player].contains_any[<context.args.get[2].split[,]>]>:
             - if <[Mobs].exists>:
-                - inject Command_Syntax Instantly
+                - inject Command_Syntax
             - define Mobs <context.args.get[2].split[,]>
         - else:
-            - inject Command_Syntax Instantly
+            - inject Command_Syntax
 
-    # @ ██ [ Murder ] ██
+    # % ██ [ Murder ] ██
         #- foreach <server.list_online_players> as:Player:
         - if <[Mobs]> == all:
             - remove <Player.location.find.entities.within[<[Radius]>].filter[is_living].filter[is_player.not].filter[is_npc.not]>

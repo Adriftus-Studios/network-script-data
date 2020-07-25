@@ -4,32 +4,35 @@ TabOffline_Command:
     debug: false
     description: Enables offline player tab-completion for moderation commands
     usage: /tabofflinemode (Player)
-    permission: behrry.essentials.tabofflinemode
+    permission: Behr.Essentials.Tabofflinemode
     aliases:
         - taboffline
         - tomode
         - offlinetab
     tab complete:
         - if <player.groups.in_group[Moderation]>:
-            - inject Online_Player_Tabcomplete Instantly
+            - inject Online_Player_Tabcomplete
     script:
-    # @ ██ [  Check Args ] ██
-        - if <context.args.get[2]||null> != null:
-            - inject Command_Syntax Instantly
-        
-    # @ ██ [  Check if specifying a player ] ██
-        - if <context.args.get[1]||null> == null:
-            - if <player.has_flag[behrry.essentials.tabofflinemode]>:
-                - flag <player> behrry.essentials.tabofflinemode:!
+    # % ██ [ Check Args ] ██
+        - if !<context.args.is_empty>:
+            - inject Command_Syntax
+
+        - if <context.args.size> > 1:
+            - inject Command_Syntax
+
+    # % ██ [ Check if specifying a player ] ██
+        - if <context.args.size> == 1:
+            - if <player.has_flag[Behr.Essentials.tabofflinemode]>:
+                - flag <player> Behr.Essentials.tabofflinemode:!
             - else:
-                - flag <player> behrry.essentials.tabofflinemode
+                - flag <player> Behr.Essentials.tabofflinemode
         - else:
-            - define User <context.args.get[1]>
-            - inject Player_Verification_Offline Instantly
+            - define User <context.args.first>
+            - inject Player_Verification_Offline
             - if <player.groups.in_group[Moderation]>:
-                - if <player.has_flag[behrry.essentials.tabofflinemode]>:
-                    - flag <[User]> behrry.essentials.tabofflinemode:!
+                - if <player.has_flag[Behr.Essentials.tabofflinemode]>:
+                    - flag <[User]> Behr.Essentials.tabofflinemode:!
                 - else:
-                    - flag <[User]> behrry.essentials.tabofflinemode
+                    - flag <[User]> Behr.Essentials.tabofflinemode
             - else:
                 - narrate "<proc[Colorize].context[<[User].name> is not a moderator.|red]>"

@@ -6,7 +6,7 @@ gamemodeinventory_Command:
     admindescription: Adjusts another player's or your inventory to the gamemode inventory specified.
     usage: /gamemodeinventory <&lt>Gamemode<&gt>
     adminusage: /gamemodeinventory (Player) <&lt>Gamemode<&gt>
-    permission: Behrry.Essentials.GamemodeInventory
+    permission: Behr.Essentials.GamemodeInventory
     aliases:
         - gminv
     tab complete:
@@ -14,11 +14,15 @@ gamemodeinventory_Command:
             - define Arg1 <list[Adventure|Creative|Survival|Spectator].exclude[<player.gamemode>]>
             - inject OneArg_Command_Tabcomplete Instantly
     script:
-        - if <context.args.get[3]||null> != null || <context.args.get[1]||null> == null:
+        - if <context.args.is_empty> || <context.args.size> > 2:
             - inject Command_Syntax Instantly
-        - if <context.args.get[2]||null> != null:
+        - else if <context.args.size> == 1:
+            - define User <player>
+            - if <list[Adventure|Creative|Survival|Spectator].contains[<context.args.first>]>:
+                - define Gamemode <context.args.first>
+        - else if <context.args.size> == 2:
             - if <player.groups.contains[Moderation]>:
-                - define User <context.args.get[1]>
+                - define User <context.args.first>
                 - define Player_Verification Instantly
                 - if <list[Adventure|Creative|Survival|Spectator].contains[<context.args.get[2]>]>:
                     - define Gamemode <context.args.get[2]>
@@ -27,9 +31,6 @@ gamemodeinventory_Command:
             - else:
                 - inject Admin_Permission_Denied Instantly
         - else:
-            - define User <player>
-            - if <list[Adventure|Creative|Survival|Spectator].contains[<context.args.get[1]>]>:
-                - define Gamemode <context.args.get[1]>
             - else:
                 - inject Command_Syntax Instantly
 

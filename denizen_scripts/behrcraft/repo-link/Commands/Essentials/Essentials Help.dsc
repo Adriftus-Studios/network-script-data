@@ -4,7 +4,7 @@ Help_Command:
     debug: false
     description: Prints commands and command info.
     usage: /help (#)
-    permission: Behrry.Essentials.Help
+    permission: Behr.Essentials.Help
     #tab complete:
     #    - define Arg1 <util.list_numbers_to[5]>
     #    - inject OneArg_Command_Tabcomplete
@@ -16,23 +16,23 @@ Help_Handler:
     debug: false
     description: Prints commands and command info.
     usage: /help (#)
-    permission: Behrry.Essentials.Help
+    permission: Behr.Essentials.Help
     events:
         on ?|help command:
-        # @ ██ [  Verify command syntax ] ██
+        # % ██ [ Verify command syntax ] ██
             - determine passively fulfilled
             - if <context.args.get[2]||null> != null:
-                - inject Command_Syntax Instantly
-            - if <context.args.get[1]||null> == null:
+                - inject Command_Syntax
+            - if <context.args.first||null> == null:
                 - define HelpPage 1
-            - else if <context.args.get[1].is_integer>:
-                - define HelpPage <context.args.get[1]>
+            - else if <context.args.first.is_integer>:
+                - define HelpPage <context.args.first>
             - else:
-                - inject Command_Syntax Instantly
+                - inject Command_Syntax
             
             - define Commands <server.list_scripts.parse[name].filter[ends_with[_Command]].alphabetical>
 
-        # @ ██ [  Verify Console Ran ] ██
+        # % ██ [ Verify Console Ran ] ██
             - if <context.source_type> == server:
                 - foreach <[Commands]> as:command:
                     - define Syntax "<proc[Colorize].context[<script[<[Command]>].yaml_key[Usage].parsed||>|Yellow]>"
@@ -40,40 +40,40 @@ Help_Handler:
                     - announce to_console "<[Syntax]> <[Description]>"
                 - stop
 
-        # @ ██ [  Verify Permissions | Build list ] ██
+        # % ██ [ Verify Permissions | Build list ] ██
             - foreach <[Commands]> as:command:
                 - if !<player.has_permission[<script[<[Command]>].yaml_key[permission]||null>]>:
                     - foreach next
                 - else:
                     - define CommandList:->:<[Command]>
                 
-        # @ ██ [  Setup Notes ] ██
-        # @ ██ [  + -------- /Help | Commands | Info -------- +" ] ██
-        # @ ██ [  /command <args> (args) | Does this thing here ] ██
-        # @ ██ [  /command <args> (args) | Does this thing here ] ██
-        # @ ██ [  + -------- [ ] Previous | Next [ ] -------- +" ] ██
+        # % ██ [ Setup Notes ] ██
+        # % ██ [ + -------- /Help | Commands | Info -------- +" ] ██
+        # % ██ [ /command <args> (args) | Does this thing here ] ██
+        # % ██ [ /command <args> (args) | Does this thing here ] ██
+        # % ██ [ + -------- [ ] Previous | Next [ ] -------- +" ] ██
 
-        # @ ██ [  Format Body ] ██
-        # @ ██ [  /command <args> (args) | Does this thing here ] ██
+        # % ██ [ Format Body ] ██
+        # % ██ [ /command <args> (args) | Does this thing here ] ██
             
-        # @ ██ [  Distribute Pages ] ██
+        # % ██ [ Distribute Pages ] ██
             - define Lines 8
             - define PageCount <[CommandList].size.div[<[Lines]>].round_up>
             - if <[HelpPage]> > <[PageCount]>:
                 - define reason "Invalid Page Number."
-                - inject Command_Error Instantly
+                - inject Command_Error
             - define Math1 "<element[<[Lines]>].mul[<[HelpPage].sub[1]>].add[1]>"
             - define Math2 "<element[<[Lines]>].mul[<[HelpPage].sub[1]>].add[<[Lines]>]>"
             - define CommandPage "<[CommandList].get[<[Math1]>].to[<[Math2]>]>"
 
-        # @ ██ [  Format Header ] ██
-        # @ ██ [  + -------- /Help | Commands | Info -------- +" ] ██
+        # % ██ [ Format Header ] ██
+        # % ██ [ + -------- /Help | Commands | Info -------- +" ] ██
             - define DP "<element[].pad_left[6].with[x].replace[x].with[<&2>-<&a>-]>"
             - define PageDisplay "<&6>[<&e><[HelpPage]><&6>/<&e><[PageCount]><&6>]"
             - define Header "<&a>+ <[DP]> <proc[Colorize].context[/Help ~ Commands ~ Info|Green]> <[DP]> +"
             
-        # @ ██ [  Format Footer ] ██
-        # @ ██ [  + -------- [ ] Previous | Next [ ] -------- +" ] ██
+        # % ██ [ Format Footer ] ██
+        # % ██ [ + -------- [ ] Previous | Next [ ] -------- +" ] ██
             - define Footer "<&a>+ <[DP]> <proc[Colorize].context[Q Previous Z Next Y|Green]> <[DP]> +"
             - if <[HelpPage]> == 1:
                 - define Previous "<&7>[<&8><&chr[25c0]><&7>]"
@@ -104,10 +104,10 @@ Help_Handler:
 
             - else:
                 - define reason "Invalid Page Number."
-                - inject Command_Error Instantly
+                - inject Command_Error
             - define Footer <[Footer].replace[Q].with[<[Previous]>].replace[Y].with[<[Next]>].replace[Z].with[<[PageDisplay]>]>
             
-        # @ ██ [ Print ] ██
+        # % ██ [ Print ] ██
             - narrate <[Header]>
             - foreach <[CommandPage]> as:Command:
                 - define Hover "<proc[Colorize].context[Click to Insert:|green]><&nl><proc[Colorize].context[<script[<[Command]>].yaml_key[Usage].parsed>|Yellow]>"

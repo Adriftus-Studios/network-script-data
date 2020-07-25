@@ -4,15 +4,15 @@ Oxygen_Command:
     debug: false
     description: Hungers or satiates a player's oxygen.
     usage: /Oxygen (player) <&lt>#<&gt>
-    permission: Behrry.Essentials.Oxygen
+    permission: Behr.Essentials.Oxygen
     tab complete:
-        - inject Online_Player_Tabcomplete Instantly
+        - inject Online_Player_Tabcomplete
     script:
-    # @ ██ [  Check args ] ██
+    # % ██ [ Check args ] ██
         - if <context.args.size> > 2:
-            - inject Command_Syntax Instantly
+            - inject Command_Syntax
             
-    # @ ██ [  Check if using self or named player ] ██
+    # % ██ [ Check if using self or named player ] ██
         - if <context.args.size> == 1:
             - define User <player>
             - define Level <context.args.get[1]>
@@ -21,7 +21,7 @@ Oxygen_Command:
             - inject Player_Verification
             - define Level <context.args.get[2]>
         
-    # @ ██ [  Verify number ] ██
+    # % ██ [ Verify number ] ██
         - if !<[Level].is_integer>:
             - narrate format:Colorize_Red "Oxygen must be a number."
             - stop
@@ -35,19 +35,19 @@ Oxygen_Command:
             - narrate format:Colorize_Red "Oxygen cannot be a decimal."
             - stop
 
-    # @ ██ [  Check food adjustment direction & narrate ] ██
-    # @ ██ [  Refresh Oxygen ] ██
+    # % ██ [ Check food adjustment direction & narrate ] ██
+    # % ██ [ Refresh Oxygen ] ██
         - if <[User].food_level> > <[Level]>:
             - if <[User]> != <player>:
                 - narrate "<proc[Display_Name_Simple].context[<[User]>]><proc[Colorize].context['s Oxygen level was refreshed.|green]>"
             - narrate targets:<[User]> format:Colorize_Green "Your Oxygen level was refreshed."
 
-    # @ ██ [  Did nothing / stayed the same ] ██
+    # % ██ [ Did nothing / stayed the same ] ██
         - else if <[User].food_level> == <[Level]>:
             - narrate format:Colorize_yellow "Nothing interesting happens."
             - stop
 
-    # @ ██ [  Deplete Oxygen ] ██
+    # % ██ [ Deplete Oxygen ] ██
         - else if <[User].food_level> < <[Level]>:
             - if <[User]> != <player>:
                 - narrate "<proc[Display_Name_Simple].context[<[User]>]><proc[Colorize].context['s Oxygen level was depleted.|green]>"

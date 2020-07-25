@@ -4,13 +4,13 @@ DeathTop_Hiscores_Command:
     debug: false
     description: Checks the deathtop highscores
     usage: /deathtop <&lt>Skill/Total<&gt>
-    permission: behrry.skill.deathtop
+    permission: Behr.Skill.Deathtop
     tab complete:
         - define arg1 <list[Deaths]>
         - inject OneArg_Command_Tabcomplete Instantly
         #- determine <proc[OneArg_Command_Tabcomplete].context[1|<[Arg1].escaped>]>
     script:
-        #@ Verify args
+      # % Verify args
         - if !<list[0|1].contains[<context.args.size>]>:
             - inject Command_Syntax Instantly
 

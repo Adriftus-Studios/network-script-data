@@ -4,25 +4,24 @@ Heal_Command:
     debug: false
     description: Heals a player
     usage: /heal (player)
-    permission: Behrry.Essentials.Heal
+    permission: Behr.Essentials.Heal
     tab complete:
         - if <player.groups.contains[Moderation]>:
-            - inject Online_Player_Tabcomplete Instantly
+            - define Blacklist <list[<player>]>
+            - inject Online_Player_Tabcomplete
     script:
-    # @ ██ [  Verify args ] ██
-        - if <context.args.get[2]||null> != null:
-            - inject Command_Syntax Instantly
-        
-    # @ ██ [  Check if self or player named ] ██
-        - if <context.args.get[1]||null> == null:
+    # % ██ [  Verify args ] ██
+        - if <context.args.is_empty>:
             - define User <player>
-        - else:
-            - define User <context.args.get[1]>
+        - else if <context.args.size> == 1:
+            - define User <context.args.first>
             - inject Player_Verification
-            - if <[User]> != <player>:
-                - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[was healed.|green]>"
-        
-    # @ ██ [  Heal Player ] ██
+        - else:
+            - inject Command_Syntax
+
+    # % ██ [  Heal Player ] ██
         - heal <[User]>
         - adjust <[User]> food_level:20
+        - if <[User]> != <player>:
+            - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[was healed.|green]>"
         - narrate targets:<[User]> format:Colorize_Green "You were healed."

@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /gmr gamemode (open/close)/(true/false)/(on/off)
-# | ██
-# % ██  [ Command ] ██
 GMR_Command:
     type: command
     name: gmr

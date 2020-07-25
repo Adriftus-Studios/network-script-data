@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /gms - gamemode Survival command
-# | ██
-# % ██  [ Command ] ██
 gms_Command:
     type: command
     name: gms
@@ -15,22 +11,22 @@ gms_Command:
         - if <player.groups.contains[Moderation]>:
             - inject Online_Player_Tabcomplete Instantly
     script:
-    # @ ██ [  Check Args ] ██
+    # % ██ [   Check Args ] ██
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
         
-    # @ ██ [  Check if specifying Player ] ██
+    # % ██ [   Check if specifying Player ] ██
         - if <context.args.get[1]||null> == null:
             - define User <player>
         - else:
-        # @ ██ [  Check if player is a moderator ] ██
+        # % ██ [   Check if player is a moderator ] ██
             - if <player.groups.contains[Moderation]>:
                 - define User <context.args.get[1]>
                 - inject Player_Verification Instantly
             - else:
                 - inject Admin_Permission_Denied Instantly
 
-    # @ ██ [  Check User's Gamemode ] ██
+    # % ██ [   Check User's Gamemode ] ██
         - if <[User].gamemode> == Survival:
             - if <[User]> == <player>:
                 - narrate targets:<player> "<proc[Colorize].context[You are already in Survival Mode.|red]>"

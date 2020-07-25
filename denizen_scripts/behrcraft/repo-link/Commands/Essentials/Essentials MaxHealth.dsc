@@ -6,40 +6,44 @@ MaxHealth_Command:
     usage: /maxhealth <&lt>Player<&gt> <&lt>#<&gt>
     aliases:
         - maxhp
-    permission: Behrry.Essentials.MaxHealth
+    permission: Behr.Essentials.MaxHealth
     tab complete:
         - define Blacklist <server.list_online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
-        - inject Online_Player_Tabcomplete Instantly
+        - inject Online_Player_Tabcomplete
     script:
-    # @ ██ [  Check Args ] ██
-        - if <context.args.get[3]||null> != null:
-            - inject Command_Syntax Instantly
+    # % ██ [ Check Args ] ██
+        - if <context.args.is_empty> || <context.args.size> > 2:
+            - inject Command_Syntax
         
-    # @ ██ [  Check if specifying another User ] ██
-        - if <context.args.get[2]||null> != null:
-            - define User <context.args.get[1]>
-            - inject Player_Verification Instantly
-            - define NewHealth <context.args.get[2]>
-        - else:
-        # @ ██ [  Default Self ] ██
+        # % ██ [ Default Self ] ██
+        - if <context.args.size> == 1:
             - define User <player>
-            - define NewHealth <context.args.get[1]>
+            - define NewHealth <context.args.first>
+    # % ██ [ Check if specifying another User ] ██
+        - else:
+            - define User <context.args.first>
+            - inject Player_Verification
+            - define NewHealth <context.args.get[2]>
 
-    # @ ██ [  Check Health Arg ] ██
+    # % ██ [ Check Health Arg ] ██
         - if !<[NewHealth].is_integer>:
             - define Reason "Health is measured as a number."
-            - inject Command_Error Instantly
+            - inject Command_Error
+
         - if <[NewHealth]> < 1:
             - define Reason "Health cannot be negative or below 1."
-            - inject Command_Error Instantly
+            - inject Command_Error
+
         - if <[NewHealth].contains[.]>:
             - define Reason "Health cannot have a decimal."
-            - inject Command_Error Instantly
+            - inject Command_Error
+
         - if <[NewHealth]> > 100:
             - define Reason "Health can range up to 100."
-            - inject Command_Error Instantly
+            - inject Command_Error
+
     
-    # @ ██ [  Adjust Health ] ██
+    # % ██ [ Adjust Health ] ██
         - adjust <[User]> max_health:<[NewHealth]>
         - narrate targets:<[User]> "<proc[Colorize].context[Maximum Health adjusted to:|green]> <&e><[NewHealth]>"
         - if <context.args.get[2]||null> != null:

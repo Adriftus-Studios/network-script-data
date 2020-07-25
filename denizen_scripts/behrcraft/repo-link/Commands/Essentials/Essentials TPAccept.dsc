@@ -1,44 +1,41 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /tpaccept - Accepts a teleport request
-# | ██
-# % ██  [ Command ] ██
 TPAccept_Command:
     type: command
     name: tpaccept
     debug: false
     description: Accepts a teleport request sent to you.
     usage: /tpaccept (<&lt>Player<&gt>)
-    permission: behrry.essentials.tpaccept
+    permission: Behr.Essentials.tpaccept
     tab complete:
         - define Blacklist <server.list_online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
         - Inject Online_Player_Tabcomplete
     script:
-        - if <context.args.get[2]||null> != null:
-            - inject Command_Syntax Instantly
+        - if !<context.args.is_empty>:
+            - if <context.args.size> > 1:
+                - inject Command_Syntax
 
-        - if <player.has_flag[behrry.essentials.teleport.request]>:
-            - if <context.args.get[1]||null> == null:
-                - define User <player.flag[behrry.essentials.teleport.request].get[1].before[/]>
-                - define Loc <player.flag[behrry.essentials.teleport.request].get[1].after[/]>
+        - if <player.has_flag[Behr.Essentials.Teleport.Rrequest]>:
+            - if <context.args.is_empty>:
+                - define User <player.flag[Behr.Essentials.Teleport.Request].first.before[/]>
+                - define Loc <player.flag[Behr.Essentials.Teleport.Request].first.after[/]>
             - else:
-                - define User <context.args.get[1]>
-                - inject Player_Verification_Offline Instantly
-                - if <player.flag[behrry.essentials.teleport.request].parse[before[/]].contains[<[User]>]>:
-                    - define Loc <player.flag[behrry.essentials.teleport.request].map_get[<[User]>]>
+                - define User <context.args.first>
+                - inject Player_Verification_Offline
+                - if <player.flag[Behr.Essentials.Teleport.Request].parse[before[/]].contains[<[User]>]>:
+                    - define Loc <player.flag[Behr.Essentials.Teleport.Request].map_get[<[User]>]>
                 - else:
                     - narrate "<proc[Colorize].context[No teleport request found.|red]>"
                     - stop
             
             - narrate targets:<[User]>|<player> "<proc[Colorize].context[Teleport request accepted.|green]>"
-            - if <player.has_flag[behrry.essentials.teleport.requesttype]>:
-                - if <player.flag[behrry.essentials.teleport.requesttype].map_get[<[User]>]||false> == teleportto:
-                    - flag <player> behrry.essentials.teleport.requesttype:<-:<[User]>/teleportto
-                    - flag <player> behrry.essentials.teleport.request:<-:<[User]>/<[Loc]>
-                    - flag <[User]> behrry.essentials.teleport.back:<[User].location>
+            - if <player.has_flag[Behr.Essentials.Teleport.Requesttype]>:
+                - if <player.flag[Behr.Essentials.Teleport.Requesttype].map_get[<[User]>]||false> == teleportto:
+                    - flag <player> Behr.Essentials.Teleport.Requesttype:<-:<[User]>/teleportto
+                    - flag <player> Behr.Essentials.Teleport.Request:<-:<[User]>/<[Loc]>
+                    - flag <[User]> Behr.Essentials.Teleport.Back:<[User].location>
                     - teleport <[User]> <player.location.add[0.01,0,0.01]>
             - else:
-                - flag <player> behrry.essentials.teleport.request:<-:<[User]>/<[Loc]>
-                - flag <player> behrry.essentials.teleport.back:<player.location>
+                - flag <player> Behr.Essentials.Teleport.Request:<-:<[User]>/<[Loc]>
+                - flag <player> Behr.Essentials.Teleport.Back:<player.location>
                 - teleport <player> <[Loc].add[0.01,0,0.01]>
 
         - else:

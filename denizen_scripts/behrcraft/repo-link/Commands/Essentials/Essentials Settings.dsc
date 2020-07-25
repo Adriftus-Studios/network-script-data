@@ -4,12 +4,12 @@ settings_Command:
     debug: false
     description: Adjusts your personal settings.
     usage: /settings (Setting (On/Off)/default)
-    permission: behrry.essentials.settings
+    permission: Behr.Essentials.Settings
     script:
-    # @ ██ [  Check for args ] ██
-        #- to-do: GUI
+    # % ██ [ Check for args ] ██
+    # $ ██ [ to-do: GUI ] ██
         - if <context.args.size> != 1:
-            - inject Command_Syntax Instantly
+            - inject Command_Syntax
         
         - if <context.args.get[1]> == Default:
             - foreach <script.key[Settings.Defaults]> as:Flag:
@@ -28,10 +28,10 @@ settings_Command:
             - Behrry.Chat.Joins
             - Behrry.Chat.Quit
 
-            - Behrry.Essentials.BedSpawn
+            - Behr.Essentials.BedSpawn
 
-        #@ Chat History Loading
-        #% Settings for enabling/disabling these settings when Chat History loads
+    # % ██ [ Chat History Loading ] ██
+    # % ██ [ Settings for enabling/disabling these settings when Chat History loads ] ██
         Behrry.Settings.ChatHistory:
             - FirstJoined
             - Joined
@@ -39,15 +39,15 @@ settings_Command:
             - Quit
             - Players
             - PrivateMessage
-        
-        #@ Chat
-        #% Settings for what messages players receive in-game
+
+    # % ██ [ Chat ] ██
+    # % ██ [ Settings for what messages players receive in-game ] ██
         Behrry.Settings.Chat:
             - Joins
             - Quit
 
-        #@ Essentials
-        #% Settings for enabling/disabling Survival Settings
+    # % ██ [ Essentials ] ██
+    # % ██ [ Settings for enabling/disabling Survival Settings ] ██
         Behrry.Settings.Essentials:
             - BedSpawn
         

@@ -4,44 +4,44 @@ TPHere_Command:
     debug: false
     description: Requests a player to teleport to you.
     usage: /tphere <&lt>Player<&gt> (Cancel)
-    permission: behrry.essentials.tphere
+    permission: Behr.essentials.tphere
     aliases:
         - tpahere
     tab complete:
         - define Blacklist <server.list_online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
         - inject Online_Player_Tabcomplete
     script:
-    # @ ██ [  Check Args ] ██
+    # % ██ [ Check Args ] ██
         - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
-            - inject Command_Syntax Instantly
+            - inject Command_Syntax
         
-    # @ ██ [  Check if requesting Everyone ] ██
+    # % ██ [ Check if requesting Everyone ] ██
         - if <context.args.get[1]> == everyone:
             - foreach <server.list_online_players.exclude[<player>]> as:User:
-            # @ ██ [  Reroute command for each player ] ██
+            # % ██ [ Reroute command for each player ] ██
                 - execute as_player "tphere <[User].name>"
             - stop
         - else:
             - define User <context.args.get[1]>
-            - inject Player_Verification Instantly
+            - inject Player_Verification
 
-    # @ ██ [  Check if User is Player ] ██
+    # % ██ [ Check if User is Player ] ██
         - if <[User]> == <player>:
             - narrate format:colorize_yellow "Nothing interesting happens."
             - stop
 
-    # @ ██ [  Check second Arg ] ██
+    # % ██ [ Check second Arg ] ██
         - if <context.args.get[2]||null> != null:
-        # @ ██ [  Check if canceling request ] ██
+        # % ██ [ Check if canceling request ] ██
             - if <context.args.get[2]||null> != Cancel:
-                - inject Command_Syntax Instantly
+                - inject Command_Syntax
             - else:
-            # @ ██ [  Check if player has request open ] ██
-                - if <[User].has_flag[behrry.essentials.teleport.request]>:
-                    - if <[User].flag[behrry.essentials.teleport.request].parse[before[/]].contains[<player>]>:
+            # % ██ [ Check if player has request open ] ██
+                - if <[User].has_flag[Behr.Essentials.teleport.request]>:
+                    - if <[User].flag[Behr.Essentials.teleport.request].parse[before[/]].contains[<player>]>:
                         - narrate targets:<[User]>|<player> "<proc[Colorize].context[Teleport request cancelled.|green]>"
-                        - define KeyValue <[User].flag[behrry.essentials.teleport.request].map_get[<player>]>
-                        - flag <[User]> behrry.essentials.teleport.request:<-:<player>/<[KeyValue]>
+                        - define KeyValue <[User].flag[Behr.Essentials.teleport.request].map_get[<player>]>
+                        - flag <[User]> Behr.Essentials.teleport.request:<-:<player>/<[KeyValue]>
                         - stop
                     - else:
                         - narrate "<proc[Colorize].context[No teleport request found.|red]>"
@@ -50,13 +50,13 @@ TPHere_Command:
                     - narrate "<proc[Colorize].context[No teleport request found.|red]>"
                     - stop
 
-    # @ ██ [  Check if User is still queued a request ] ██
-        - if <[User].has_flag[behrry.essentials.teleport.request]>:
-            - if <[User].flag[behrry.essentials.teleport.request].parse[before[/]].contains[<player>]>:
+    # % ██ [ Check if User is still queued a request ] ██
+        - if <[User].has_flag[Behr.Essentials.teleport.request]>:
+            - if <[User].flag[Behr.Essentials.teleport.request].parse[before[/]].contains[<player>]>:
                 - narrate format:Colorize_Red "Teleport request still pending."
                 - stop
 
-    # @ ██ [  Format Buttons ] ██
+    # % ██ [ Format Buttons ] ██
         - define HoverA "<proc[Colorize].context[Teleport To:|Green]><&nl><proc[User_Display_Simple].context[<player>]>"
         - define DisplayA "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
         - define CommandA "tpaccept <player.name>"
@@ -72,9 +72,9 @@ TPHere_Command:
         - define CommandC "tphere <[User].name> Cancel"
         - define Cancel <proc[MsgCmd].context[<def[hoverC]>|<def[displayC]>|<def[commandC]>]>
     
-    # @ ██ [  Adjust Flags ] ██
-        - flag <[User]> behrry.essentials.teleport.request:->:<player>/<player.location> duration:3m
+    # % ██ [ Adjust Flags ] ██
+        - flag <[User]> Behr.Essentials.teleport.request:->:<player>/<player.location> duration:3m
 
-    # @ ██ [  Print to Players ] ██
+    # % ██ [ Print to Players ] ██
         - narrate targets:<[User]> "<&b>| <[Accept]> <&b>| <[Decline]> <&b>| <proc[User_Display_Simple].context[<player>]> <proc[Colorize].context[sent a Teleport Request.|green]>"
         - narrate targets:<player> "<&b>| <[Cancel]> <&b>| <proc[Colorize].context[Teleport request sent to:|green]> <proc[User_Display_Simple].context[<[User]>]><&2>."

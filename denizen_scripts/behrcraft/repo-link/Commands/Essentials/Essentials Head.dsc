@@ -6,11 +6,11 @@ Head_Command:
     usage: /head <&lt>Name<&gt> (UUID)
     permission: Behrry.Essentials.Head
     script:
-    # @ ██ [  Check Args ] ██
+    # % ██ [ Check Args ] ██
         - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
 
-    # @ ██ [  Check if specifying UUID ] ██
+    # % ██ [ Check if specifying UUID ] ██
         - define PlayerName <context.args.get[1]>
         - if <context.args.get[2]||null> == null:
             - if <[PlayerName]> == Behr_Riley:

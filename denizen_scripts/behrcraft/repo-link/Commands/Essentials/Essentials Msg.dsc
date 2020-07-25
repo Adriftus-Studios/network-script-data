@@ -4,19 +4,19 @@ Message_Command:
     debug: false
     description: Messages a player
     usage: /msg <&lt>Player<&gt> <&lt>Message<&gt>
-    permission: Behrry.Essentials.Msg
+    permission: Behr.Essentials.Msg
     aliases:
         - message
         - m
     tab complete:
         - define Blacklist <server.online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
-        - inject Online_Player_Tabcomplete Instantly
+        - inject Online_Player_Tabcomplete
     script:
         - if <context.args.size> < 2:
-            - inject Command_Syntax Instantly
+            - inject Command_Syntax
 
         - define User <context.args.get[1]>
-        - inject Player_Verification Instantly
+        - inject Player_Verification
         - if <[User]> == <player>:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
             - stop
@@ -32,17 +32,17 @@ Reply_Command:
     debug: false
     description: Replies to the last player who messaged you.
     usage: /r <&lt>Message<&gt>
-    permission: Behrry.Essentials.Reply
+    permission: Behr.Essentials.Reply
     aliases:
         - reply
     script:
-    # @ ██ [  Check for Empty Arg ] ██
+    # % ██ [ Check for Empty Arg ] ██
         - if <context.args.is_empty>:
-            - inject Command_Syntax Instantly
-    # @ ██ [  Check if player has a return recip. ] ██
+            - inject Command_Syntax
+    # % ██ [ Check if player has a return recip. ] ██
         - if <player.has_flag[Behrry.Chat.LastReply]>:
             - define User <player.flag[Behrry.Chat.LastReply]>
-            - inject Player_Verification Instantly
+            - inject Player_Verification
         - else:
             - narrate format:Colorize_Red "Nobody to respond to."
             - stop

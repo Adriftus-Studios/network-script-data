@@ -4,22 +4,22 @@ Hat_Command:
     debug: true
     description: Places a held item as a hat
     usage: /hat
-    permission: Behrry.Essentials.Hat
+    permission: Behr.Essentials.Hat
     script:
-    # @ ██ [  Check Args ] ██
-        - if <context.args.get[1]||null> != null:
-            - inject Command_Syntax Instantly
+    # % ██ [  Check Args ] ██
+        - if !<context.args.first.is_empty>:
+            - inject Command_Syntax
         
-    # @ ██ [  Check item ] ██
+    # % ██ [  Check item ] ██
         - if <player.item_in_hand.material.name> == air:
             - narrate format:Colorize_Red "No item in hand."
             - stop
         
-    # @ ██ [  Check if player is wearing a hat already ] ██
+    # % ██ [  Check if player is wearing a hat already ] ██
         - if <player.equipment.helmet.material.name> != air:
             - narrate format:Colorize_Red "You must remove your current hat first."
             - stop
         
-    # @ ██ [  Receive Hat ] ██
+    # % ██ [  Receive Hat ] ██
         - equip <player> head:<player.item_in_hand.with[quantity=1]>
         - take iteminhand quantity:1

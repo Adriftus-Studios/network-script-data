@@ -6,7 +6,7 @@ World_Command:
     admindescription: Teleports you, or another player, to the specified world; Additionally manages worlds.
     usage: /world (WorldName)
     adminusage: /world (Create/Destroy/Load/Unload/Teleport (Player)) <&lt>WorldName<&gt>
-    permission: behrry.essentials.world
+    permission: Behr.Essentials.World
     aliases:
         - spawn
     tab complete:
@@ -51,29 +51,29 @@ World_Command:
                     - default:
                         - stop
 
-            - if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>]> && <context.args.get[1]> == Teleport:
+            - if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>]> && <context.args.first> == Teleport:
                 - determine <server.list_online_players.exclude[<player>].parse[name]>
-            - if <context.args.size> == 3 && !<context.raw_args.ends_with[<&sp>]> && <context.args.get[1]> == Teleport:
+            - if <context.args.size> == 3 && !<context.raw_args.ends_with[<&sp>]> && <context.args.first> == Teleport:
                 - determine <server.list_online_players.exclude[<player>].parse[name].filter[starts_with[<context.args.last>]]>
 
     script:
-    # @ ██ [ Check Args ] ██
+    # % ██ [  Check Args ] ██
         - if <context.args.is_empty>:
-            - flag player Behrry.Essentials.Teleport.Back:<player.location>
+            - flag player Behr.Essentials.Teleport.Back:<player.location>
             - teleport <player> <world[world].spawn_location>
             - stop
 
-    # @ ██ [ /world World ] ██
+    # % ██ [  /world World ] ██
         - else if <context.args.size> == 1:
             - define World <context.args.first.to_titlecase>
 
-            # @ ██ [ Check if world is Blacklisted ] ██
+            # % ██ [  Check if world is Blacklisted ] ██
             - define blacklist <list[World_Nether|World_The_End|Runescape50px1]>
             - if <[Blacklist].contains[<[World]>]>:
                 - if !<player.groups.contains_any[Coordinator|Administrator|Developer]>:
-                    - inject Command_Syntax Instantly
+                    - inject Command_Syntax
             
-            # @ ██ [ Check if world is loaded ] ██
+            # % ██ [  Check if world is loaded ] ██
             - if !<server.list_worlds.parse[name].contains[<[World]>]>:
                 - narrate "<&e><[World].to_titlecase> <proc[Colorize].context[is not currently loaded.|Red]>"
                 - if <player.groups.contains_any[Coordinator|Administrator|Developer]>:
@@ -84,32 +84,32 @@ World_Command:
                     - narrate "<&b>| <[Accept]> <&b>| <proc[Colorize].context[Create World instead?:|green]> <[World]>"
                 - stop
 
-            # @ ██ [ Check if reasonable teleport ] ██
+            # % ██ [  Check if reasonable teleport ] ██
             - if <player.world.name> == <[World]>:
                 - if <player.location.distance[<world[<[World]>].spawn_location>]> < 20:
                     - narrate format:Colorize_red "You are already here."
                     - stop
 
-        # @ ██ [ Check for Creative Ban ] ██
+        # % ██ [  Check for Creative Ban ] ██
             - if <[World]> == Creative && <player.has_flag[Behrry.Moderation.CreativeBan]>:
                 - narrate "This world is Creative Only and you are Creative Banned."
                 - stop
 
-            # @ ██ [ Teleport player to the world ] ██
-            - flag <Player> behrry.essentials.teleport.back:<player.location>
+            # % ██ [  Teleport player to the world ] ██
+            - flag <Player> Behr.Essentials.teleport.back:<player.location>
             - teleport <player> <world[<[World]>].spawn_location>
             - narrate "<proc[Colorize].context[You were teleported to world:|green]> <[World]>"
             - stop
 
         - else if !<player.groups.contains_any[Coordinator|Administrator|Developer]>:
-            - inject Command_Syntax Instantly
+            - inject Command_Syntax
 
         - else if <context.args.size> < 2:
             - define Reason "Must specify a name."
-            - inject Command_Error Instantly
+            - inject Command_Error
 
         - else if <context.args.size> > 4:
-            - inject Command_Syntax Instantly
+            - inject Command_Syntax
 
         - define ValidFolders "<server.list_files[../../].exclude[<script[WorldFileList].yaml_key[Blacklist]>]>"
         - foreach <[ValidFolders]> as:Folder:
@@ -119,10 +119,10 @@ World_Command:
         - define ValidWorlds:!|:<[ValidWorlds].exclude[<[LoadedWorlds]>]>
         - define World <context.args.get[2]>
         
-        - choose <context.args.get[1]>:
+        - choose <context.args.first>:
             - case Create:
                 - if <context.args.size> != 2:
-                    - inject Command_Syntax Instantly
+                    - inject Command_Syntax
 
                 - if <[LoadedWorlds].contains[<[World]>]>:
                     - narrate format:colorize_red "This world is loaded already."
@@ -141,11 +141,11 @@ World_Command:
 
             - case Destroy:
                 - if <context.args.size> != 2:
-                    - inject Command_Syntax Instantly
+                    - inject Command_Syntax
                     
                 - if !<[LoadedWorlds].contains[<[World]>]>:
                     - define Reason "World does not exist."
-                    - inject Command_Error Instantly
+                    - inject Command_Error
 
                 - if <[World]> == world:
                     - narrate format:Colorize_Red "This World requires manual deletion."
@@ -160,7 +160,7 @@ World_Command:
 
             - case Load:
                 - if <context.args.size> != 2:
-                    - inject Command_Syntax Instantly
+                    - inject Command_Syntax
                     
                 - if <[LoadedWorlds].contains[<[World]>]>:
                     - narrate format:colorize_red "This world is loaded already."
@@ -175,7 +175,7 @@ World_Command:
 
             - case Unload:
                 - if <context.args.size> != 2:
-                    - inject Command_Syntax Instantly
+                    - inject Command_Syntax
                     
                 - if !<[LoadedWorlds].contains[<[World]>]>:
                     - narrate format:colorize_red "This world is not loaded."
@@ -194,15 +194,15 @@ World_Command:
 
             - case Teleport:
                 - if <context.args.size> < 2:
-                    - inject Command_Syntax Instantly
+                    - inject Command_Syntax
                 
                 - if <context.args.size> == 3:
                     - define User <context.args.get[3]>
-                    - inject Player_Verification Instantly
+                    - inject Player_Verification
                 - else:
                     - define User <player>
 
-                # @ ██ [ Check if world is loaded ] ██
+                # % ██ [  Check if world is loaded ] ██
                 - if !<server.list_worlds.parse[name].contains[<[World]>]>:
                     - narrate "<&e><[World].to_titlecase> <proc[Colorize].context[is not currently loaded.|Red]>"
                     - define Hover "<proc[Colorize].context[Click to Create:|green]><&nl><&e><[World]>"
@@ -212,13 +212,13 @@ World_Command:
                     - narrate "<&b>| <[Accept]> <&b>| <proc[Colorize].context[Create World instead?:|green]> <[World]>"
                     - stop
 
-                # @ ██ [ Check if reasonable teleport ] ██
+                # % ██ [  Check if reasonable teleport ] ██
                 - if <[User].world.name> == <[World]>:
                     - if <[User].location.distance[<world[<[World]>].spawn_location>]> < 20:
                         - narrate format:Colorize_red "Player is already there."
                         - stop
 
-                # @ ██ [ Check for Creative Ban ] ██
+                # % ██ [  Check for Creative Ban ] ██
                 - if <[World]> == Creative && <[User].has_flag[Behrry.Moderation.CreativeBan]>:
                     - if <[User]> != <player>:
                         - narrate targets:<player> "Player is Creative Banned."
@@ -226,15 +226,15 @@ World_Command:
                         - narrate targets:<[User]> "This world is Creative Only and you are Creative Banned."
                     - stop
 
-                # @ ██ [ Teleport player to the world ] ██
-                - flag <[User]> behrry.essentials.teleport.back:<player.location>
+                # % ██ [  Teleport player to the world ] ██
+                - flag <[User]> Behr.Essentials.teleport.back:<player.location>
                 - teleport <[User]> <world[<[World]>].spawn_location>
                 - narrate targets:<[User]> "<proc[Colorize].context[You were teleported to world:|green]> <[World]>"
                 - if <[User]> != <player>:
                     - narrate "<proc[Colorize].context[was teleported to world:|green]> <[World]>"
 
             - default:
-                - inject Command_Syntax Instantly
+                - inject Command_Syntax
     LoadWorld:
         - if !<player.has_flag[Behrry.Constructor.WorldPrompt.Load]>:
             - flag player Behrry.Constructor.WorldPrompt.Load duration:10s

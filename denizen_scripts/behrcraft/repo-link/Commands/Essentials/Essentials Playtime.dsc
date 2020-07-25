@@ -4,37 +4,37 @@ Playtime_Command:
     debug: false
     description: Shows you a player's current playtime.
     usage: /playtime <&lt>Player<&gt>
-    permission: behrry.essentials.playtime
+    permission: Behr.essentials.playtime
     aliases:
         - pt
     tab complete:
         - if <player.groups.contains[Moderation]>:
-            - inject All_Player_Tabcomplete Instantly
+            - inject All_Player_Tabcomplete
     script:
-    # @ ██ [  Check Args ] ██
+    # % ██ [ Check Args ] ██
         - if <context.args.size> > 1:
-            - inject Command_Syntax Instantly
+            - inject Command_Syntax
         
-    # @ ██ [  Check if specifying another player ] ██
+    # % ██ [ Check if specifying another player ] ██
         - if <context.args.get[1]||null> == null:
             - define User <player>
         - else:
             - define User <context.args.get[1]>
-            - inject Player_Verification_Offline Instantly
+            - inject Player_Verification_Offline
         
-    # @ ██ [  Check if player is online ] ██
+    # % ██ [ Check if player is online ] ██
         - if <[User].is_online>:
             - define PDays <&e><[User].statistic[PLAY_ONE_MINUTE].div[1728000].round_down><&f>
             - define PHours <&e><[User].statistic[PLAY_ONE_MINUTE].div[72000].round_down.mod[24]><&f>
             - define PMinutes <&e><[User].statistic[PLAY_ONE_MINUTE].div[1200].round_down.mod[60]><&f>
             - define FirstDays <&e><util.date.time.duration.sub[<[User].first_played>].in_days.round_down><&f>
         - else:
-            - define PDays <[User].flag[behrry.essentials.lastPDays]>
-            - define PHours <[User].flag[behrry.essentials.lastPHours]>
-            - define PMinutes <[User].flag[behrry.essentials.lastPMinutes]>
-            - define FirstDays <[User].flag[behrry.essentials.lastFirstDays]>
+            - define PDays <[User].flag[Behr.Essentials.lastPDays]>
+            - define PHours <[User].flag[Behr.Essentials.lastPHours]>
+            - define PMinutes <[User].flag[Behr.Essentials.lastPMinutes]>
+            - define FirstDays <[User].flag[Behr.Essentials.lastFirstDays]>
 
-    # @ ██ [  Send Message ] ██
+    # % ██ [ Send Message ] ██
         - Define Text "<proc[User_Display_Simple].context[<[User]>]> <&2>P<&a>laytime<&2>: <[PDays]> <&2>d<&a>ays<&2>, <[PHours]> <&2>h<&a>ours<&2>, <[PMinutes]> <&2>m<&a>inute<&2>s <&b><&pipe> <&2>F<&a>irst <&2>L<&a>ogin: <[FirstDays]> <&2>d<&a>ays <&2>a<&a>go<&2>."
         - narrate <[Text]>
 
@@ -43,7 +43,7 @@ Playtime_Handler:
     debug: false
     events:
         on player quits:
-        - flag <player> behrry.essentials.lastPDays:<&e><player.statistic[PLAY_ONE_MINUTE].div[1728000].round_down><&f>
-        - flag <player> behrry.essentials.lastPHours:<&e><player.statistic[PLAY_ONE_MINUTE].div[72000].round_down.mod[24]><&f>
-        - flag <player> behrry.essentials.lastPMinutes:<&e><player.statistic[PLAY_ONE_MINUTE].div[1200].round_down.mod[60]><&f>
-        - flag <player> behrry.essentials.lastFirstDays:<&e><util.date.time.duration.sub[<player.first_played>].in_days.round_down><&f>
+        - flag <player> Behr.Essentials.lastPDays:<&e><player.statistic[PLAY_ONE_MINUTE].div[1728000].round_down><&f>
+        - flag <player> Behr.Essentials.lastPHours:<&e><player.statistic[PLAY_ONE_MINUTE].div[72000].round_down.mod[24]><&f>
+        - flag <player> Behr.Essentials.lastPMinutes:<&e><player.statistic[PLAY_ONE_MINUTE].div[1200].round_down.mod[60]><&f>
+        - flag <player> Behr.Essentials.lastFirstDays:<&e><util.date.time.duration.sub[<player.first_played>].in_days.round_down><&f>
