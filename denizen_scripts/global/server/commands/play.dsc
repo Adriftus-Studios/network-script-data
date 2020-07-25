@@ -11,6 +11,7 @@ command_play:
     # % ██ [ Verify Args ] ██
     - if <context.args.is_empty>:
       - inventory open d:command_play_inventory
+      - stop
     - else if <context.args.size> > 1:
       - inject Command_Syntax
       
