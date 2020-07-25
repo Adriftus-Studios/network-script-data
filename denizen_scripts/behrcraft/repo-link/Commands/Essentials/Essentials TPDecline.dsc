@@ -6,10 +6,8 @@ TPDecline_Command:
     usage: /tpdecline (<&lt>Player<&gt>)
     permission: Behr.Essentials.tpdecline
     tab complete:
-        - if <context.args.size||0> == 0:
-            - determine <server.online_players.parse[name].exclude[<player.name>]>
-        - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.online_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+        - define Blacklist <server.online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
+        - Inject Online_Player_Tabcomplete
     script:
     # % ██ [ Check Args ] ██
         - if <context.args.get[2]||null> != null:
@@ -18,11 +16,11 @@ TPDecline_Command:
     # % ██ [ Check if player has a request ] ██
         - if <player.has_flag[Behr.Essentials.teleport.request]>:
         # % ██ [ Check if player is specifying player ] ██
-            - if <context.args.get[1]||null> == null:
-                - define User <player.flag[Behr.Essentials.teleport.request].get[1].before[/]>
-                - define Loc <player.flag[Behr.Essentials.teleport.request].get[1].after[/]>
+            - if <context.args.first||null> == null:
+                - define User <player.flag[Behr.Essentials.teleport.request].first.before[/]>
+                - define Loc <player.flag[Behr.Essentials.teleport.request].first.after[/]>
             - else:
-                - define User <context.args.get[1]>
+                - define User <context.args.first>
                 - inject Player_Verification_Offline
             # % ██ [ Check if player is requested a teleport ] ██
                 - if <player.flag[Behr.Essentials.teleport.request].parse[before[/]].contains[<[User]>]>:

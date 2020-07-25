@@ -9,10 +9,10 @@ Production_Handler:
             - define ClickType <context.click_type>
             - define Selection <player.we_selection||null>
             - if <[ClickType].contains[left]>:
-                - execute as_op "/hpos1" silent
+                - execute as_op /hpos1 silent
                 - define SelIndex 1
             - else if <[ClickType].contains[right]>:
-                - execute as_op "/hpos2" silent
+                - execute as_op /hpos2 silent
                 - define SelIndex 2
             - else:
                 - stop
@@ -35,9 +35,9 @@ SelectionDisplay:
 
             - if <[Loc].material.after[<&lb>].length> > 1:
                 - define MechanismList <[Loc].material.after[<&lb>].before[<&rb>].split[;]>
-                - define Mechanisms "<&nl><&3>[<&b>Mechanisms<&3>]<&e><&nl><&a>[<&e><[MechanismList].separated_by[<&a><&rb><&nl><&a><&lb><&e>]><&a>]"
+                - define Mechanisms <&nl><&3>[<&b>Mechanisms<&3>]<&e><&nl><&a>[<&e><[MechanismList].separated_by[<&a><&rb><&nl><&a><&lb><&e>]><&a>]
             - define Text "<[LocText]> <[Size]>"
-            - define Hover "<&3>[<&b>Material<&3>] <&e><[Loc].material.name><[Mechanisms].replace[<&pipe>].with[<&a><&pipe><&e>]||>"
+            - define Hover "<&3>[<&b>Material<&3>] <&e><[Loc].material.name><[Mechanisms].replace[|].with[<&a>|<&e>]||>"
             - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
         - else:
             - narrate <[LocText]>

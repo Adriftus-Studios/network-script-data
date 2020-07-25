@@ -3,10 +3,10 @@ damage_handler:
     debug: false
     events:
         on player damages entity:
-        # @ ██ [  Determine damage amount ] ██
+        # % ██ [  Determine damage amount ] ██
             - define Damage <context.final_damage>
             
-        # @ ██ [  Determine if damage is impossible ] ██
+        # % ██ [  Determine if damage is impossible ] ██
             - if <[Damage]> > 80:
                 - stop
             - if <player.flag[Behrry.skill.exp.cd]||0> < 75:
@@ -14,11 +14,11 @@ damage_handler:
             - else:
                 - stop
             
-        # @ ██ [  Determine Spawner or Exploit ] ██
+        # % ██ [  Determine Spawner or Exploit ] ██
             - if <player.location.find.entities.within[5].size||30> > 25:
                 - stop
 
-        # @ ██ [  Determine damage style ] ██
+        # % ██ [  Determine damage style ] ██
             - choose <context.cause>:
                 - case projectile:
                     - run add_xp def:<[Damage]>|Ranged instantly

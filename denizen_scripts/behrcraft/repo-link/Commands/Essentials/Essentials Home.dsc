@@ -13,7 +13,7 @@ Home_Command:
         - if <context.args.size||0> == 0:
           - determine <player.flag[Behr.Essentials.Homes].parse[before[/]]||>
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <player.flag[Behr.Essentials.Homes].parse[before[/]].filter[starts_with[<context.args.get[1]>]]||>
+            - determine <player.flag[Behr.Essentials.Homes].parse[before[/]].filter[starts_with[<context.args.first>]]||>
         - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
             - determine "remove"
         - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
@@ -53,21 +53,21 @@ Home_Command:
 
     # % ██ [ Define the home name and determine if removing ] ██
         - if <context.args.size> == 1:
-            - define Name <context.args.get[1]>
+            - define Name <context.args.first>
             - define Remove false
             - define Relocate False
         - else:
             - if <context.raw_args.contains[remove]>:
-                - if <context.args.get[1]> == remove:
+                - if <context.args.first> == remove:
                     - define Name <context.args.get[2]>
                 - else:
-                    - define Name <context.args.get[1]>
+                    - define Name <context.args.first>
                 - define Remove true
             - else:
-                - if <context.args.get[1]> == Relocate:
+                - if <context.args.first> == Relocate:
                     - define Name <context.args.get[2]>
                 - else:
-                    - define Name <context.args.get[1]>
+                    - define Name <context.args.first>
                 - define Relocate true
 
     # % ██ [ check if the home exists ] ██
@@ -243,7 +243,7 @@ Home_GUI:
                 - run Home_GUI def:<list[Menu/Home_GUI|Action/Teleport].escaped>
 
 HomeGUI_Handler:
-    type: yaml data
+    type: data
     t:
     - case "menuAddHome":
         - execute as_player "sethome Home<player.flag[Behr.Essentials.Homes].size.add[1]||>"

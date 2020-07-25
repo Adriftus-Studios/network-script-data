@@ -18,7 +18,6 @@ Restart_Handler:
                 - announce "<&6>--<&e>Server will restart in five minutes.<&6>--"
                 - run Server_Restart_Task def:<duration[300]>|20
 
-
 Server_Restart_Task:
     type: task
     debug: false
@@ -54,4 +53,3 @@ Server_Restart_Task:
         - bossbar remove Restart
  
         - inject Locally Restart
-

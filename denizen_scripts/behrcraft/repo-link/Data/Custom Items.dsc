@@ -1,17 +1,3 @@
-Script_Book:
-    type: item
-    material: writable_book
-    debug: false
-
-Script_Book_Handler:
-    type: world
-    events:
-        on player clicks with Script_Book:
-            - if <player.is_sneaking> && <context.click_type.contains[left]>:
-                - foreach <context.item.book_pages> as:Page:
-                    - foreach <[Page].split[<&nl>]> as:Line:
-                        - execute as_op "ex <[Line]>"
-
 MagicSword:
     type: item
     debug: false

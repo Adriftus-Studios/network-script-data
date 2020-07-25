@@ -3,7 +3,7 @@ Save_Handler:
     debug: false
     events:
         on system time minutely every:15:
-            - if <server.list_online_players.size> == 0:
+            - if <server.online_players.size> == 0:
                 - if <server.has_flag[behrry.essentials.save.lastrack]>:
                     - stop
                 - else:

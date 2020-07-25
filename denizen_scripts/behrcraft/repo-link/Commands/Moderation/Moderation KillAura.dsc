@@ -6,11 +6,12 @@ KillAura_Command:
     usage: /killaura (Player)
     permission: Behrry.Moderation.KillAura
     script:
-        - if <context.args.size> > 1:
+        - if <context.args.is_empty>:
+            - define User <player>
+
+        - else if <context.args.size> > 1:
             - inject Command_Syntax Instantly
         
-        - if <context.args.size> == 0:
-            - define User <player>
         - else:
             - define User <context.args.get[1]>
             - inject Player_Verification Instantly

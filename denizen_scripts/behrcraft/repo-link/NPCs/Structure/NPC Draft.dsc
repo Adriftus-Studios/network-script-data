@@ -416,7 +416,7 @@ Draft_NPC:
     #                    - define HardMenu:->:Blank
     #                - else:
     #                    - define MenuItem <[SoftMenu].get[<[Value].sub[<[Math]>]>]>
-    #                    - define Description <script.yaml_key[<[Gui]>.<[SoftMenu].get[<[Value].sub[<[Math]>]>]>]>
+    #                    - define Description <script.data_key[<[Gui]>.<[SoftMenu].get[<[Value].sub[<[Math]>]>]>]>
     #                    - if <[Mode]||null> == <[MenuItem].split.first>:
     #                        - define Material eye_of_ender
     #                    - else:
@@ -470,8 +470,8 @@ Draft_NPC:
     #            - Greet
     #            - Trade
     #    tab complete:
-    #        - define Arg1 <script.yaml_key[Args]>
-    #        - define Arg2 <script.yaml_key[SubArgs.SetAction]>
+    #        - define Arg1 <script.data_key[Args]>
+    #        - define Arg2 <script.data_key[SubArgs.SetAction]>
     #        - define SubArgs <script.list_keys[SubArgs].as_list>
     #
     #        - if <context.args.size> == 0:
@@ -481,11 +481,11 @@ Draft_NPC:
     #
     #        - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
     #            - if <context.args.get[1].contains_any[<[SubArgs]>]>:
-    #                - determine <script.yaml_key[SubArgs.<context.args.get[1]>]>
+    #                - determine <script.data_key[SubArgs.<context.args.get[1]>]>
     #
     #        - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
     #            - if <context.args.get[1].contains_any[<[SubArgs]>]>:
-    #                - determine <script.yaml_key[SubArgs.<context.args.get[1]>].filter[starts_with[<context.args.get[2]>]]>
+    #                - determine <script.data_key[SubArgs.<context.args.get[1]>].filter[starts_with[<context.args.get[2]>]]>
     #    script:
     #        - if <context.args.size> == 0:
     #            - stop
@@ -528,8 +528,8 @@ Draft_NPC:
     #            - case SetAction:
     #                # @ ██ [ Check Args ] ██
     #                - define Arg2 <context.args.get[2].to_titlecase||null>
-    #                - if <[Arg2]> == null || <context.args.size> > 2 || !<script.yaml_key[SubArgs.SetAction].contains[<[Arg2]>]>:
-    #                    - narrate "<&e>Available SetAction Commands<&6>: <&a><script.yaml_key[SubArgs.SetAction].separated_by[<&6>, <&a>]>"
+    #                - if <[Arg2]> == null || <context.args.size> > 2 || !<script.data_key[SubArgs.SetAction].contains[<[Arg2]>]>:
+    #                    - narrate "<&e>Available SetAction Commands<&6>: <&a><script.data_key[SubArgs.SetAction].separated_by[<&6>, <&a>]>"
     #                    - stop
     #
     #                # @ ██ [ Check if NPC selected ] ██
@@ -575,7 +575,7 @@ Draft_NPC:
     #                - run Meeseeks_GUI_Builder def:ManageShop|<npc.id>
     #
     #            - default:
-    #                - narrate "<&e>Available Commands<&6>: <&a><script.yaml_key[Args].separated_by[<&6>, <&a>]>"
+    #                - narrate "<&e>Available Commands<&6>: <&a><script.data_key[Args].separated_by[<&6>, <&a>]>"
     #
     #debug_events:
     #    type: world

@@ -1,9 +1,5 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /Mute - Adjusts a player's mute
-# | ██
-# % ██  [ Command ] ██
 Mute_Command:
-    type: command
+    type: data
     name: mute
     debug: false
     description: Mutes a player

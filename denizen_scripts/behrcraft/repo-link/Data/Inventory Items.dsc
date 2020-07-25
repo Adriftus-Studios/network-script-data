@@ -107,7 +107,7 @@ action_item_builder:
         - determine <item[Action_Item].with[material=<[Material]>;display_name=<[Display_Name]><[N]||><[E]||><[L]||>]>
 
 Heads:
-    type: yaml data
+    type: data
     Minus: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDgyYzIzOTkyYTAyNzI1ZDllZDFiY2Q5MGZkMDMwN2M4MjYyZDg3ZTgwY2U2ZmFjODA3ODM4N2RlMThkMDg1MSJ9fX0=
     Plus: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWQ4NjA0YjllMTk1MzY3Zjg1YTIzZDAzZDlkZDUwMzYzOGZjZmIwNWIwMDMyNTM1YmM0MzczNDQyMjQ4M2JkZSJ9fX0=
     Neeseeks: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWJiNDMzOTFhOWRiZmY5ZWFkYWUwN2I2ODYyNTk1YzkxZDA0YzU5MzhlMjNjMjg1YWM2MGM0Yjg3NjliMjQifX19

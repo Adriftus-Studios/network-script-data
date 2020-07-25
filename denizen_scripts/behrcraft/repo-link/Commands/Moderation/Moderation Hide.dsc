@@ -6,11 +6,11 @@ Hide_Command:
   usage: /hide (on/off)
   permission: behrry.moderation.hide
   script:
-# @ ██ [ Check for args ] ██
+# % ██ [ Check for args ] ██
     - if !<list[0|1].contains[<context.args.size>]>:
       - inject Command_Syntax Instantly
     
-# @ ██ [ Define definitions ] ██
+# % ██ [ Define definitions ] ██
     - define Arg <context.args.get[1]||null>
     - define ModeFlag "behrry.moderation.hide"
     - define ModeName "Invisibility mode"
@@ -54,7 +54,7 @@ Hide_Handler:
           - else:
             - adjust <player> hide_entity:<[Mod]>
                 
-  # @ ██ [ Check if a hidden mod ] ██
+  # % ██ [ Check if a hidden mod ] ██
       - if <player.has_flag[behrry.moderation.hide]>:
         - execute as_server "dynmap:dynmap hide <player.name>"
         - inject Chat_Event_Messages path:Quit_Event
@@ -70,7 +70,7 @@ Invisible:
   type: task
   definitions: User|Players|Toggle|ID
   script:
-   #@ Unescape Definitions
+ # % ██ [ Unescape Definitions ] ██
     - define Players <[Players].unescaped>
     - if <[Toggle]>:
       - cast <[User]> invisibility power:1 duration:9999

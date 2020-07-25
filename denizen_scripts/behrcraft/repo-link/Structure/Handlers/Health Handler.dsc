@@ -1,5 +1,5 @@
 Health_Handler:
-    type: yaml data
+    type: data
 #    debug: false
 #    events:
 #        on entity damages entity:

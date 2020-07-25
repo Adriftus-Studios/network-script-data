@@ -30,11 +30,11 @@ BehrEdit_Command:
         - define Command "be help"
         - narrate "<&4>I<&c>nvalid <&4>U<&c>sage<&4>. <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
     script:
-        - choose <context.args.get[1]||<context.alias||null>>:
+        - choose <context.args.first||<context.alias||null>>:
             - case Help be:
                 - narrate "<&8><&M>+-------<&2><&M>-----<&a><&M>----<&2>[ <&2>B<&e>e<&a>hr<&2>E<&a>dit <&2>C<&a>ommands <&2>]<&a><&M>----<&2><&M>-----<&8><&M>-------+"
                 - foreach <script.list_keys[Commands]> as:Command:
-                    - define D <script.yaml_key[Commands.<[Command]>]>
+                    - define D <script.data_key[Commands.<[Command]>]>
                     - define Text <&6>/<&e><[Command]>
                     - define Hover "<&2>S<&a>hift<&e>-<&2>C<&a>lick <&2>t<&a>o <&2>I<&a>nsert<&e>:<&nl><[Text]>"
                     - define Insert /<[Command]><&sp>
@@ -46,7 +46,7 @@ BehrEdit_Command:
             - case bSel:
                 - choose <context.args.size>:
                     - case 2:
-                        - define ModeQty <context.args.get[1]>
+                        - define ModeQty <context.args.first>
                         - if <list[Single|Multiple].contains[<[ModQty]>]>:
                             - inject Locally Syntax
                             - define ModeType <context.args.get[2]>
@@ -122,7 +122,7 @@ FuckLuckPerms:
     debug: false
     script:
         - foreach <script[GroupSetters].list_keys[players]> as:Player:
-            - foreach <script[GroupSetters].yaml_key[players.<[Player]>]> as:Group:
+            - foreach <script[GroupSetters].data_key[players.<[Player]>]> as:Group:
                 - execute as_server "lp user <[Player]> parent add <[Group]>"
                 - wait 1t
             - define ListedPlayers:->:<server.match_player[<[Player]>]||null>
@@ -132,11 +132,11 @@ FuckLuckPerms:
         #    - foreach <list[Silent|Visitor|Patron]> as:Group:
         #        - execute as_server "lp user <[Player]> parent add <[Group]>"
         #        - wait 1t
-    #    - foreach <script[PermissionNodes].yaml_key[silent]> as:Node:
+    #    - foreach <script[PermissionNodes].data_key[silent]> as:Node:
     #        - execute as_server "lp group silent permission unset <[Node]>"
     #        - execute as_server "lp group silent permission set <[Node]>"
 GroupSetters:
-    type: yaml data
+    type: data
     players:
         behr_riley:
             - moderation
@@ -228,7 +228,7 @@ GroupSetters:
 
 
 PermissionNodes:
-    type: yaml data
+    type: data
 
     patron:
     - Behrry.Essentials.Repair

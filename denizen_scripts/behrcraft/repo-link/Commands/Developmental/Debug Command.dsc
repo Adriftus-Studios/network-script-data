@@ -7,25 +7,25 @@ debug_Command:
     permission: behrry.essentials.debug
     script:
     # @ ██ [  Check for args ] ██
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.first||null> == null:
             - inject Command_Syntax Instantly
         
     # @ ██ [  Check if we're running a scriptname or command ] ██
-        - if <context.args.get[1]> == run && <context.args.get[2]||null> != null && <context.args.get[2]> != debug:
+        - if <context.args.first> == run && <context.args.get[2]||null> != null && <context.args.get[2]> != debug:
             - if <context.args.get[3]||null> == null:
                 - run <context.args.get[2]>
             - else:
-                - run <context.args.get[2]> path:<context.raw_args.after[<context.args.get[1]><&sp>]>
+                - run <context.args.get[2]> path:<context.raw_args.after[<context.args.first><&sp>]>
             
     # @ ██ [  check if they have a debug location ] ██
         - else:
             - execute as_op "denizen debug -r"
             - if <context.args.size> == 1:
             # @ ██ [  /command ] ██
-                - execute as_op "<context.args.get[1]>"
+                - execute as_op "<context.args.first>"
             - else:
             # @ ██ [  /command arg1+ ] ██
-                - execute as_op "<context.args.get[1]> <context.raw_args.after[<context.args.get[1]><&sp>]>"
+                - execute as_op "<context.args.first> <context.raw_args.after[<context.args.first><&sp>]>"
             - execute as_op "denizen submit"
 
 
@@ -67,7 +67,7 @@ debug_Command:
 prank:
     type: task
     script:
-        - foreach <script[pronk].yaml_key[dialogue]> as:text:
+        - foreach <script[pronk].data_key[dialogue]> as:text:
             - announce "<&a>☼<&sp><&r><player.name.display_name><&r> <[text]>"
             - if <[Loop_Index]> < 3:
                 - wait 15t
@@ -78,7 +78,7 @@ prank:
             - else:
                 - wait 3t
 pronk:
-    type: yaml data
+    type: data
     dialogue:
         - "What the fuck"
         - "did you just fucking say about me"

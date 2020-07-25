@@ -35,14 +35,14 @@ Help_Handler:
         # % ██ [ Verify Console Ran ] ██
             - if <context.source_type> == server:
                 - foreach <[Commands]> as:command:
-                    - define Syntax "<proc[Colorize].context[<script[<[Command]>].yaml_key[Usage].parsed||>|Yellow]>"
-                    - define Description "<&b>| <&3><script[<[Command]>].yaml_key[description]||>"
+                    - define Syntax "<proc[Colorize].context[<script[<[Command]>].data_key[Usage].parsed||>|Yellow]>"
+                    - define Description "<&b>| <&3><script[<[Command]>].data_key[description]||>"
                     - announce to_console "<[Syntax]> <[Description]>"
                 - stop
 
         # % ██ [ Verify Permissions | Build list ] ██
             - foreach <[Commands]> as:command:
-                - if !<player.has_permission[<script[<[Command]>].yaml_key[permission]||null>]>:
+                - if !<player.has_permission[<script[<[Command]>].data_key[permission]||null>]>:
                     - foreach next
                 - else:
                     - define CommandList:->:<[Command]>
@@ -110,8 +110,8 @@ Help_Handler:
         # % ██ [ Print ] ██
             - narrate <[Header]>
             - foreach <[CommandPage]> as:Command:
-                - define Hover "<proc[Colorize].context[Click to Insert:|green]><&nl><proc[Colorize].context[<script[<[Command]>].yaml_key[Usage].parsed>|Yellow]>"
-                - define Text "<proc[Colorize].context[<script[<[Command]>].yaml_key[Usage].parsed>|Yellow]> <&b>&pipe <&3><script[<[Command]>].yaml_key[description]>"
-                - define Command "<script[<[Command]>].yaml_key[name]> "
+                - define Hover "<proc[Colorize].context[Click to Insert:|green]><&nl><proc[Colorize].context[<script[<[Command]>].data_key[Usage].parsed>|Yellow]>"
+                - define Text "<proc[Colorize].context[<script[<[Command]>].data_key[Usage].parsed>|Yellow]> <&b>&pipe <&3><script[<[Command]>].data_key[description]>"
+                - define Command "<script[<[Command]>].data_key[name]> "
                 - narrate "<proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>"
             - narrate <[Footer]>

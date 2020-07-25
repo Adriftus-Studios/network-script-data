@@ -13,6 +13,7 @@ Spawner_Command:
     # % ██ [  Correct syntax? ] ██
         - if <context.args.is_empty>:
             - inject Command_Syntax Instantly
+
         - if <context.args.size> > 3:
             - inject Command_Syntax Instantly
 
@@ -61,7 +62,6 @@ Spawner_Command:
             - if !<[User].inventory.can_fit[<[Item].with[quantity=<[Quantity]>]>]>:
                 - define Reason "Not enough room."
                 - inject Command_Error Instantly
-
 
 entangle:
     type: item

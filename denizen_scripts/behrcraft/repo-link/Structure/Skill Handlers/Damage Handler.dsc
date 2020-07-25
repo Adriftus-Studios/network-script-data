@@ -102,7 +102,7 @@ DamageProc:
 #            - define Magic <[EntityA].flag[MagicLevel]||1>
 #            - define MagicBonus <[EntityA].flag[MagicBonus]||0>
 #            - define MagicStrength <[EntityA].flag[MagicStrength]||0>
-#            - define MaxHit <script.yaml_key[Spell.<[Spell]>].mul[<element[1].add[<[MagicStrength]>]>]||1>
+#            - define MaxHit <script.data_key[Spell.<[Spell]>].mul[<element[1].add[<[MagicStrength]>]>]||1>
 #
 #            # - ██ Define Entity [A] {Attack Roll}||{Maximum Effective Level}||{Maximum Effective Base} 
 #            - define AttackRoll <[Magic].add[3].mul[<[MagicBonus].add[64]>]>

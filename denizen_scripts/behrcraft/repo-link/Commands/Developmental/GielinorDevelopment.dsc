@@ -136,7 +136,7 @@ testcmdr:
       - define Arg1 <list[TreePlanter|CuboidSchematicSave|CuboidCopy|Replicate|TeleOver|CuboidExpandsiveSelector|RepeatySet|RepeatySetMaterialSet|SkeletonFixCuboid|SkeletonFixSphere|TileMonitor|GetAxe|StonePather]>
       - inject MultiArg_Command_Tabcomplete Instantly
   script:
-    - choose <context.args.get[1]||<context.alias||null>>:
+    - choose <context.args.first||<context.alias||null>>:
       #- Used to test the axe
       - case AxeTester:
         - if <player.flag[GielinorDevelopment.AxeMode]> != AxeTester:
@@ -629,7 +629,7 @@ CastleWarsPortals:
       - playeffect effect:redstone at:<[Loc].add[<[Offset]>]> offset:0.0 special_data:1.5|<[Color]> visibility:50
 
 CastleWars_Handler:
-  type: yaml data
+  type: data
   debug: false
   events:
     on player enters CastleWarsVarrockPortal:

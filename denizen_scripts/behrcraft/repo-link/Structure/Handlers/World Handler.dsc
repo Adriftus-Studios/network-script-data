@@ -31,5 +31,5 @@ World_Handler:
         #^    - teleport <player> <player.location.with_world[SkyBlock].with_y[-50].with_pose[<player>]>
         #^    - adjust <player> velocity:<[Velocity]>
         on server start:
-            - foreach <server.list_worlds.exclude[<world[world]>]> as:world:
+            - foreach <server.worlds.exclude[<world[world]>]> as:world:
                 - adjust <[world]> keep_spawn:false

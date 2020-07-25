@@ -12,37 +12,37 @@ Chat_Handler:
             - determine passively cancelled
             - define Message <context.message.parse_color>
             
-        # @ ██ [  Mute Check, Formatting & Print ] ██
+        # % ██ [  Mute Check, Formatting & Print ] ██
             - if <player.flag[behrry.moderation.muted]||false>:
                 - define Moderation <server.list_online_players.filter[in_group[Moderation]]>
                 - narrate format:Muted_Chat_Format targets:<[Moderation]> <[Message].strip_color>
                 - stop
                 
-        # @ ██ [  Fixing your group ] ██
+        # % ██ [  Fixing your group ] ██
             - run locally GroupManager Instantly
 
-        # @ ██ [  BChat Check, Formatting & Print ] ██
+        # % ██ [  BChat Check, Formatting & Print ] ██
             - if <player.has_flag[Behrry.Essentials.BChat]>:
                 - define Targets <server.list_online_players.filter[has_permission[behrry.essentials.bchat]]>
                 - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
                 - narrate targets:<[Targets]> "<[Prefix]> <&7><[Message].parse_color>"
                 - stop
             
-        # @ ██ [ Check if hidden moderator ] ██
+        # % ██ [ Check if hidden moderator ] ██
             - if <player.has_flag[behrry.moderation.hide]>:
                 - narrate format:Colorize_red "You are currently hidden."
                 - stop
 
-        # @ ██ [  VoiceChat Check, Formatting & Print ] ██
+        # % ██ [  VoiceChat Check, Formatting & Print ] ██
             - if <player.has_flag[Behrry.Essentials.VoiceChat]>:
                 - define Targets <server.list_online_players_flagged[behrry.essentials.voicechat]>
                 - define Prefix "<&b>[┤<proc[Colorize].context[VoiceChat]|Blue]><player.display_name||<player.name>><&3>:<&r>"
                 - narrate targets:<[Targets]> "<[Prefix]> <[Message].parse_color><&r>"
                 - stop
 
-        # @ ██ [  Message Formatting ] ██
+        # % ██ [  Message Formatting ] ██
             - if <player.groups.contains_any[Moderation|Producer|Sponsor]>:
-                - define Prefix "<script[Ranks].yaml_key[<player.groups.get[1]||>.Prefix.<player.groups.get[2]||>].parsed||><player.display_name||<player.name>><&r>"
+                - define Prefix "<script[Ranks].data_key[<player.groups.get[1]||>.Prefix.<player.groups.get[2]||>].parsed||><player.display_name||<player.name>><&r>"
             - else:
                 - define Prefix "<&7><player.display_name><&r>"
             - define Hover "<proc[Colorize].context[Real Name:|green]><&nl><player.name><&nl><proc[Colorize].context[Click to Message|green]>"
@@ -51,17 +51,17 @@ Chat_Handler:
             - define NewMessage "<proc[MsgHint].context[<[Hover].escaped>|<[Text].escaped>|<[Command]>]>"
             - define DiscordMessage "**<player.display_name.strip_color>**: <[Message].strip_color>"
                 
-        # @ ██ [  Run individual player checks ] ██
+        # % ██ [  Run individual player checks ] ██
             - foreach <server.list_online_players> as:Player:
-            # @ ██ [  Check if player is ignoring chatter ] ██
+            # % ██ [  Check if player is ignoring chatter ] ██
                 - if <[Player].flag[Behrry.Essentials.IgnoreList].contains[<player>]||false>:
                     - define Blacklist:->:<[Player]>
 
-        # @ ██ [  Log chat ] ██
+        # % ██ [  Log chat ] ██
             - define log <player>/<[NewMessage]>
             - inject Chat_Logger Instantly
 
-        # @ ██ [  Print chat ] ██
+        # % ██ [  Print chat ] ██
             - narrate targets:<server.list_online_players.exclude[<[Blacklist]||>]> <[NewMessage]>
             - if <player.has_flag[Behrry.Essentials.Display_Name]>:
                 - announce to_console format:Console_Chatter_displayname_Format "<[Message]>"
@@ -87,16 +87,16 @@ Discord_Relay:
         #^        - if <player.flag[Behrry.Essentials.IgnoreList].contains[<[User]>]>:
         #^            - define Blacklist:->:<[User]>
 
-        # @ ██ [ Check if player is Muted ] ██
+        # % ██ [ Check if player is Muted ] ██
         # ^    - if <[User].has_flag[behrry.moderation.muted]>:
         # ^        - define Moderation <server.list_online_players.filter[in_group[Moderation]]>
         # ^        - narrate format:Muted_Chat_Format targets:<[Moderation].include[<[User]>]> "<[Message].unescaped.strip_color>"
         # ^        - stop
-        # @ ██ [ Log the Chat ] ██
+        # % ██ [ Log the Chat ] ██
             - define Log Discord/<[Message].unescaped>
             - inject Chat_Logger Instantly
 
-        # @ ██ [ Print to Chat ] ██
+        # % ██ [ Print to Chat ] ██
             - announce to_console "<[ConsoleMessage].unescaped>"
             - narrate targets:<server.list_online_players.exclude[<[BlackList]||>]> "<[Message].unescaped>"
             #- announce "<[Message].unescaped>"
@@ -120,7 +120,7 @@ Console_Chatter_Format:
     # - ██ | These should be flagged  | ██
     
 Ranks:
-    type: yaml data
+    type: data
     Moderation:
         Prefix:
             CMeme: <&2>[<&a>Mod<&2>]<&sp><&r>

@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /silentchest - Silently and discretely opens chests
-# | ██
-# % ██  [ Command ] ██
 silentchest_Command:
   type: command
   name: silentchest

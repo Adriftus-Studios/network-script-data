@@ -25,7 +25,7 @@ World_Command:
             - if <context.args.size> == 0:
                 - determine <[SubCommands].include[<[LoadedWorlds]>]>
 
-            - define ValidFolders "<server.list_files[../../].exclude[<script[WorldFileList].yaml_key[Blacklist]>]>"
+            - define ValidFolders "<server.list_files[../../].exclude[<script[WorldFileList].data_key[Blacklist]>]>"
             - foreach <[ValidFolders]> as:Folder:
                 - if <server.list_files[../../<[Folder]>].contains[level.dat]||false>:
                     - define ValidWorlds:->:<[Folder]>
@@ -111,7 +111,7 @@ World_Command:
         - else if <context.args.size> > 4:
             - inject Command_Syntax
 
-        - define ValidFolders "<server.list_files[../../].exclude[<script[WorldFileList].yaml_key[Blacklist]>]>"
+        - define ValidFolders "<server.list_files[../../].exclude[<script[WorldFileList].data_key[Blacklist]>]>"
         - foreach <[ValidFolders]> as:Folder:
             - if <server.list_files[../../<[Folder]>].contains[level.dat]||false>:
                 - define ValidWorlds:|:<[Folder]>
@@ -307,7 +307,7 @@ World_Command:
         - narrate "<&c>World Unloaded<&4>: <&6>[<&e><[World].to_titlecase><&6>]"
 
 WorldFileList:
-    type: yaml data
+    type: data
     Worlds:
         - world
         - world_nether

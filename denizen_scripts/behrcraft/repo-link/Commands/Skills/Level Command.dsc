@@ -9,23 +9,23 @@ Level_Command:
         - define Args <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
         - inject OneArg_Command_Tabcomplete
     script:
-        #@ Verify args
+    # % ██ [ Verify args ] ██
         - if <context.args.size||0> > 1:
             - inject Command_Syntax Instantly
         
-        #@ Check if blank
+    # % ██ [ Check if blank ] ██
         - if <context.args.get[1]||null> == null:
             - narrate format:Colorize_Green "Available Skills:"
             - narrate format:Colorize_Yellow "Attack, Strength, Defense, Hitpoints, Ranged, Mining, Woodcutting, Farming, Construction"
             - stop
 
-        #@ Verify Skill
+    # % ██ [ Verify Skill ] ██
         - define Skills <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
         - define Skill <context.args.get[1].to_titlecase>
         - if !<[Skills].contains[<[Skill]>]>:
             - inject Command_Syntax Instantly
 
-        #@ Verify exists
+    # % ██ [ Verify exists ] ██
         - if !<player.has_flag[behrry.skill.<[skill]>.Exp]>:
             - flag player behrry.skill.<[skill]>.Exp:0
         - if !<player.has_flag[behrry.skill.<[skill]>.ExpReq]>:
@@ -33,7 +33,7 @@ Level_Command:
         - if !<player.has_flag[behrry.skill.<[skill]>.Level]>:
             - flag player behrry.skill.<[skill]>.Level:1
 
-        #@ Print Format
+    # % ██ [ Print Format ] ██
         - define Lvl <player.flag[behrry.skill.<[Skill]>.Level]>
         - define TotalExp <player.flag[behrry.skill.<[Skill]>.Exp].round>
         - define ExpReq <player.flag[behrry.skill.<[Skill]>.ExpReq].round>

@@ -7,9 +7,9 @@ Command_Syntax:
     type: task
     debug: false
     script:
-        - define Command "<queue.script.yaml_key[aliases].get[1]||<queue.script.yaml_key[Name]>> "
-        - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.yaml_key[Usage].parsed>|Yellow]>"
-        - define Text "<proc[Colorize].context[Syntax: <queue.script.yaml_key[Usage].parsed>|Yellow]>"
+        - define Command "<queue.script.data_key[aliases].first||<queue.script.data_key[Name]>> "
+        - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.data_key[Usage].parsed>|Yellow]>"
+        - define Text "<proc[Colorize].context[Syntax: <queue.script.data_key[Usage].parsed>|Yellow]>"
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
@@ -21,9 +21,9 @@ Command_Error:
     type: task
     debug: false
     script:
-        - define Hover "<proc[Colorize].context[You typed:|red]><&r><&nl><&c>/<context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <queue.script.yaml_key[Usage].parsed>"
+        - define Hover "<proc[Colorize].context[You typed:|red]><&r><&nl><&c>/<context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <queue.script.data_key[Usage].parsed>"
         - define Text "<proc[Colorize].context[<[Reason]>|red]>"
-        - define Command "<queue.script.yaml_key[aliases].get[1]||<context.alias||<context.command>>> "
+        - define Command "<queue.script.data_key[aliases].first||<context.alias||<context.command>>> "
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
@@ -335,7 +335,7 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
 # @ ██    Command Dependencies | Unique Command Features
 # % ██
 # @ ██  [ Activates or Deactivates a toggle command ] ██
-# @ ██  [ Usage ] - define Arg <context.args.get[1]||null>
+# @ ██  [ Usage ] - define Arg <context.args.first||null>
 # @ ██  [       ] - define ModeFlag "behrry.essentials.example"
 # @ ██  [       ] - define ModeName "Mode Name"
 # @ ██  [       ] - inject Activation_Arg_Command Instantly

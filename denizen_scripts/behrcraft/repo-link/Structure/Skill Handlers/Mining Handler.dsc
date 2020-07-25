@@ -54,5 +54,7 @@ Ability_Command:
     type: command
     name: Ability
     permission: test
+    usage: /Ability <&lt>Skill<&gt>
+    description: Runs the ability lol
     script:
         - flag player Behrry.Skill.Mining.Ability.PowerMining.Cooldown:!

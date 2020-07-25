@@ -6,12 +6,12 @@ ListBanned_Command:
     usage: /listbanned
     permission: behrry.moderation.listbanned
     script:
-        #@ Verify args
-        - if <context.args.get[1]||null> != null:
+    # % ██ [ Verify args ] ██
+        - if <context.args.first||null> != null:
             - inject Command_Syntax Instantly
 
-        #@ Check for banned players
-        - define BannedList <server.list_banned_players>
+    # % ██ [ Check for banned players ] ██
+        - define BannedList <server.banned_players>
         - if <[BannedList].size> == 0:
             - narrate format:Colorize_red "There are no banned players."
         - else:

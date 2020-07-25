@@ -15,7 +15,7 @@ SoundBoard_Command:
     
     - define Sounds <server.list_sounds.parse[replace[_].with[<&sp>].to_titlecase.replace[<&sp>].with[_]]>
     - if <context.raw_args.ends_with[<&sp>]>:
-      - choose <context.args.get[1]>:
+      - choose <context.args.first>:
         - case Page:
           - determine <util.list_numbers_to[30]>
         - case Search Play:
@@ -23,7 +23,7 @@ SoundBoard_Command:
         - default:
           - determine <empty>
     - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
-      - choose <context.args.get[1]>:
+      - choose <context.args.first>:
         - case Page:
           - determine <util.list_numbers_to[30].filter[starts_with[<context.args.last>]]>
         - case Search:
@@ -37,13 +37,13 @@ SoundBoard_Command:
       - case 0:
         - run SoundBoard def:<list[Action/Main_Menu].escaped>
       - case 1:
-        - choose <context.args.get[1]>:
+        - choose <context.args.first>:
           - case Favorites:
             - run SoundBoard def:<list[Action/Favorites_Menu|page/1].escaped>
           - default:
             - inject Command_Syntax Instantly
       - case 2:
-        - choose <context.args.get[1]>:
+        - choose <context.args.first>:
           - case Page:
             - define Page <context.args.get[2]>
             - define MaxPage <server.list_sounds.size.div[27]>
@@ -91,7 +91,7 @@ SoundBoard:
         - define Display "<&6>S<&e>ound <&6>B<&e>oard"
         - define "Lore:!|:<empty>|<&7>View & Play Sounds"
         - define NBT:!|:Menu/SoundBoard|Action/SoundBoard_Menu|Page/1
-        - define Skin <script[Letters].yaml_key[Misc.Note]>
+        - define Skin <script[Letters].data_key[Misc.Note]>
         - define SoftMenu:|:blank|Blank|<item[Action_Item].with[material=player_head;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;Skull_Skin=a|<[Skin]>]>
         - inject Locally FavoritesButton Instantly
         - inject Locally SearchButton Instantly
@@ -110,7 +110,7 @@ SoundBoard:
           - stop
         - define InvSize <[Sounds].size.div[9].round_up.min[4].max[2].mul[9]>
         - define Index <proc[PageNumbers].context[<[Page]>|<[InvSize].sub[9]>]>
-        - define SoundSelection <[Sounds].get[<[Index].get[1]>].to[<[Index].get[2]>]>
+        - define SoundSelection <[Sounds].get[<[Index].first>].to[<[Index].get[2]>]>
         - define MaxPage <[Sounds].size.div[9].round_up>
         - inject Locally SoundButtons Instantly
         - define ActiveMenu Searched_Menu
@@ -124,7 +124,7 @@ SoundBoard:
           - repeat <element[9].sub[<element[<[Sounds].Size>].mod[9]>]>:
             - define Items:|:<item[Blank]>
 
-        - define SoftMenu:|:<[Left].get[1]>|<[Left].get[2]>|<[MainMenu]>|<[Favorites]>|<[StopSound]>|<[Search]>|<item[Blank]>|<[Right].get[1]>|<[Right].get[2]>
+        - define SoftMenu:|:<[Left].first>|<[Left].get[2]>|<[MainMenu]>|<[Favorites]>|<[StopSound]>|<[Search]>|<item[Blank]>|<[Right].first>|<[Right].get[2]>
         
         - inventory set d:<[Inventory]> o:<[Items].parse[with[nbt=<list[Query/<[Query]>]>]]>
         - inventory set d:<[Inventory]> o:<[SoftMenu].parse[with[nbt=<list[Query/<[Query]>]>]]> slot:<[InvSize].sub[8]>
@@ -141,7 +141,7 @@ SoundBoard:
           - define Sounds <player.flag[Behrry.Developmental.FavoriteSounds]>
           - define InvSize <[Sounds].size.div[9].round_up.min[4].max[2].mul[9]>
           - define Index <proc[PageNumbers].context[<[Page]>|<[InvSize].sub[9]>]>
-          - define SoundSelection <[Sounds].get[<[Index].get[1]>].to[<[Index].get[2]>]>
+          - define SoundSelection <[Sounds].get[<[Index].first>].to[<[Index].get[2]>]>
           - define MaxPage <[Sounds].size.div[9].round_up>
           - inject Locally SoundButtons Instantly
           - define ActiveMenu FavoritesMenu
@@ -152,7 +152,7 @@ SoundBoard:
             - repeat <element[9].sub[<element[<[Sounds].Size>].mod[9]>]>:
               - define Items:|:Blank
 
-          - define SoftMenu:|:<[Left].get[1]>|<[Left].get[2]>|<[MainMenu]>|Blank|<[StopSound]>|Blank|Blank|<[Right].get[1]>|<[Right].get[2]>
+          - define SoftMenu:|:<[Left].first>|<[Left].get[2]>|<[MainMenu]>|Blank|<[StopSound]>|Blank|Blank|<[Right].first>|<[Right].get[2]>
           
           - inventory set d:<[Inventory]> o:<[Items]>
         - inventory set d:<[Inventory]> o:<[SoftMenu]> slot:<[InvSize].sub[8]>
@@ -163,7 +163,7 @@ SoundBoard:
         - playsound sound:ENTITY_ENDER_EYE_DEATH <player> pitch:<util.random.decimal[1.8].to[2]>
         - define Index <proc[PageNumbers].context[<[Page]>|27]>
         - define Sounds <server.list_sounds>
-        - define SoundSelection <[Sounds].get[<[Index].get[1]>].to[<[Index].get[2]>]>
+        - define SoundSelection <[Sounds].get[<[Index].first>].to[<[Index].get[2]>]>
         - define MaxPage <[Sounds].size.div[27].round_down>
         - inject Locally SoundButtons Instantly
         - define ActiveMenu SoundBoard_Menu
@@ -173,7 +173,7 @@ SoundBoard:
         - inject Locally StopSoundButton Instantly
         - inject Locally SearchButton Instantly
 
-        - define SoftMenu:|:<[Left].get[1]>|<[Left].get[2]>|<[MainMenu]>|<[Favorites]>|<[StopSound]>|<[Search]>|Blank|<[Right].get[1]>|<[Right].get[2]>
+        - define SoftMenu:|:<[Left].first>|<[Left].get[2]>|<[MainMenu]>|<[Favorites]>|<[StopSound]>|<[Search]>|Blank|<[Right].first>|<[Right].get[2]>
 
         - define Title "<&2>Sounds <&6><[Page]><&4>/<&6><[MaxPage]>"
         - define Inventory <inventory[Generic[Size=36;title=<[Title]>]]>
@@ -226,14 +226,14 @@ SoundBoard:
       - define Display "<&6><&chr[25c0]><&sp> [<&e>Previous<&6>]"
       - define "Lore:!|:<empty>|<&7>Change Page"
       - define NBT:!|:Menu/SoundBoard|Action/<[ActiveMenu]>|Page/<[Page].sub[1]>
-      - define Skin <script[Letters].yaml_key[Misc.Left]>
+      - define Skin <script[Letters].data_key[Misc.Left]>
       - define Previous <item[Action_Item].with[material=player_head;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;skull_skin=a|<[Skin]>]>
       - if <[Page].sub[1]> == 1:
         - define Left <list[<item[Blank]>|<[Previous]>]>
       - else:
         - define Display "<&6><&chr[25c0]><&sp> [<&e>First<&6>]"
         - define NBT:!|:Menu/SoundBoard|Action/<[ActiveMenu]>|Page/1
-        - define Skin <script[Letters].yaml_key[Misc.First]>
+        - define Skin <script[Letters].data_key[Misc.First]>
         - define First <item[Action_Item].with[material=player_head;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;skull_skin=a|<[Skin]>]>
         - define Left <list[<[First]>|<[Previous]>]>
 
@@ -243,7 +243,7 @@ SoundBoard:
       - define Display "<&6>[<&e>Next<&6>] <&chr[25b6]>"
       - define "Lore:!|:<empty>|<&7>Change Page"
       - define NBT:!|:Menu/SoundBoard|Action/<[ActiveMenu]>|Page/<[Page].add[1]>
-      - define Skin <script[Letters].yaml_key[Misc.Right]>
+      - define Skin <script[Letters].data_key[Misc.Right]>
       - define Next <item[Action_Item].with[material=player_head;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;skull_skin=a|<[Skin]>]>
       
       - if <[Page].add[1]> == <[MaxPage]>:
@@ -251,7 +251,7 @@ SoundBoard:
       - else:
         - define Display "<&6>[<&e>Last<&6>] <&chr[25b6]>"
         - define NBT:!|:Menu/SoundBoard|Action/<[ActiveMenu]>|Page/<[MaxPage]>
-        - define Skin <script[Letters].yaml_key[Misc.Last]>
+        - define Skin <script[Letters].data_key[Misc.Last]>
         - define Last <item[Action_Item].with[material=player_head;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;skull_skin=a|<[Skin]>]>
         - define Right <list[<[Next]>|<[Last]>]>
 
@@ -259,13 +259,13 @@ SoundBoard:
     - define Display "<&6>M<&e>ain <&6>M<&e>enu"
     - define "Lore:!|:<empty>|<&7>Return to Main Menu"
     - define NBT:!|:Menu/SoundBoard|Action/Main_Menu|Page/1
-    - define Skin <script[Letters].yaml_key[Misc.Note]>
+    - define Skin <script[Letters].data_key[Misc.Note]>
     - define MainMenu <item[Action_Item].with[material=player_head;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;skull_skin=a|<[Skin]>]>
   FavoritesButton:
     - define Display "<&d><&l><&chr[272F]> <&5>F<&d>avorites"
     - define "Lore:!|:<empty>|<&7>Show Favorites"
     - define NBT:!|:Menu/SoundBoard|Action/Favorites_Menu|Page/1
-    - define Skin <script[Letters].yaml_key[Misc.Star]>
+    - define Skin <script[Letters].data_key[Misc.Star]>
     - define Favorites <item[Action_Item].with[material=player_head;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;skull_skin=a|<[Skin]>]>
   SoundButtons:
     - foreach <[SoundSelection]> as:Sound:
@@ -284,7 +284,7 @@ SoundBoard:
     - define Display "<&6>S<&e>earch"
     - define "Lore:!|:<empty>|<&7>Search for Sounds"
     - define NBT:!|:Menu/SoundBoard|Action/Search
-    - define skin <script[Letters].yaml_key[Misc.Question]>
+    - define skin <script[Letters].data_key[Misc.Question]>
     - define Search <item[Action_Item].with[material=player_head;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;skull_skin=a|<[Skin]>]>
   StopSoundButton:
     - define Display "<&4>S<&c>top <&4>S<&c>ounds"
@@ -303,7 +303,7 @@ PageNumbers:
 
 
 Letters:
-  type: yaml data
+  type: data
   Misc:
     Question: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTAzNWM1MjgwMzZiMzg0YzUzYzljOGExYTEyNTY4NWUxNmJmYjM2OWMxOTdjYzlmMDNkZmEzYjgzNWIxYWE1NSJ9fX0=
     Note: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjIyZTQwYjRiZmJjYzA0MzMwNDRkODZkNjc2ODVmMDU2NzAyNTkwNDI3MWQwYTc0OTk2YWZiZTNmOWJlMmMwZiJ9fX0=

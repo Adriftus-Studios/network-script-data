@@ -15,11 +15,11 @@ TPPos_Command:
         
         - choose <context.args.size>:
             - case 2:
-                - define X <context.args.get[1]>
+                - define X <context.args.first>
                 - define Z <context.args.get[2]>
 
             - case 3:
-                - define X <context.args.get[1]>
+                - define X <context.args.first>
                 - if <context.args.get[2].is_integer>:
                     - if <context.args.get[3].is_integer>:
                         - defien Y <context.args.get[2]>
@@ -35,7 +35,7 @@ TPPos_Command:
                     - inject Command_Syntax
 
             - case 4:
-                - define X <context.args.get[1]>
+                - define X <context.args.first>
                 - define Y <context.args.get[2]>
                 - define Z <context.args.get[3]>
                 - if <server.list_worlds.parse[name].contains[<context.args.get[4]>]>:

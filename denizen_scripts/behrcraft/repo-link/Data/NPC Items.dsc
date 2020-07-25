@@ -21,17 +21,17 @@ Item_Handler:
                 - playsound BLOCK_IRON_DOOR_OPEN <context.location>
             - switch <context.location> state:on
             - wait 2s
-            #@ Check if the door was removed
+        # % ██ [ Check if the door was removed ] ██
             - if <context.location.material.name> == iron_door:
                 - if <context.location.material.switched>:
                     - define Switched true
                 - switch <context.location> state:off
-            #@ Check if door actually closed
+        # % ██ [ Check if door actually closed ] ██
             - if !<context.location.material.switched> && <[Switched].exists>:
                 - playsound BLOCK_IRON_DOOR_CLOSE <context.location>
-            #- wait 15t
-            #- if <context.location.material.name> == iron_door && <context.location.material.switched>:
-            #    - switch <context.location>
+          #^- wait 15t
+          #^- if <context.location.material.name> == iron_door && <context.location.material.switched>:
+          #^    - switch <context.location>
 
 bob_the_sword:
     type: item

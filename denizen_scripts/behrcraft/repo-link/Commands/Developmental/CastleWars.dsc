@@ -1,5 +1,5 @@
 CastleWars_NotableLocations:
-  type: yaml data
+  type: data
   Hub:
     Blue:
       FlagDir: NORTH_West
@@ -159,14 +159,14 @@ Event_Command:
     - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
       - determine <[SubCommands].filter[starts_with[<context.args.last>]]>
     - if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
-      - choose <context.args.get[1]>:
+      - choose <context.args.first>:
         - case Queue:
           - determine <[Events]>
         - case Pause Stop:
           - if <server.has_flag[Behrry.Event.ActiveEvents]>:
             - determine <server.flag[Behrry.Event.ActiveEvents]>
     - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
-      - choose <context.args.get[1]>:
+      - choose <context.args.first>:
         - case Queue:
           - determine <[Events]>
         - case Pause Stop:
@@ -177,7 +177,7 @@ Event_Command:
     - if <context.args.size> != 2:
       - inject Command_Syntax Instantly
     
-    - define Event <context.args.get[1]>
+    - define Event <context.args.first>
     - define Command <context.args.get[2]>
     
     #@ Determine Arg
@@ -205,7 +205,7 @@ Event_Command:
 
 
 throwtestthandler:
-  type: yaml data
+  type: data
   debug: false
   events:
     on player clicks air with teststck:
@@ -257,14 +257,14 @@ BehrsPreChunker:
       - define World <player.world>
 
       #- define Diff <element[14].add[<[ChunkRadius].sub[2].mul[8]>]>
-      - define ChunkRadius <context.args.get[1]>
+      - define ChunkRadius <context.args.first>
       - repeat <[ChunkRadius]>:
         - define TotalChunks:+:<[Value].mul[4].sub[2].add[<[Value].mul[4]>]>
 
       - define StringLength <[TotalChunks].length>
 
       #- if <server.has_flag[Behrry.Chunkload.<[World]>.Progress]>:
-      #  - define run <server.flag[Behrry.Chunkload.<[World]>.Progress].get[1]>
+      #  - define run <server.flag[Behrry.Chunkload.<[World]>.Progress].first>
       #  - define x <server.flag[Behrry.Chunkload.<[World]>.Progress].get[2]>
       #  - define y <server.flag[Behrry.Chunkload.<[World]>.Progress].get[3]>
       #- else:

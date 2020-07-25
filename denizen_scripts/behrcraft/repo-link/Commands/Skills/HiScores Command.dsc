@@ -10,17 +10,17 @@ Hiscores_Command:
         #- inject OneArg_Command_Tabcomplete Instantly
         - determine <proc[OneArg_Command_Tabcomplete].context[1|<[Arg1].escaped>]>
     script:
-        #@ Verify args
+    # % ██ [ Verify args ] ██
         - if <context.args.size||0> > 1:
             - inject Command_Syntax Instantly
 
-        #@ Check if blank
+    # % ██ [ Check if blank ] ██
         - if <context.args.get[1]||null> == null:
             - narrate format:Colorize_Green "Available Skills:"
             - narrate format:Colorize_Yellow "Attack, Strength, Defense, Hitpoints, Ranged, Mining, Woodcutting, Farming, Construction"
             - stop
 
-        #@ Verify Skill
+    # % ██ [ Verify Skill ] ██
         - define Skills <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
         - define Skill <context.args.get[1].to_titlecase>
         - if !<[Skills].contains[<[Skill]>]>:

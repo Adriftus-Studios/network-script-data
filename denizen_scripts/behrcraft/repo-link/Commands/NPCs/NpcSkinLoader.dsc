@@ -1,15 +1,9 @@
-# : original source:
-# : https://forum.denizenscript.com/viewtopic.php?f=13&t=133
-
-# | Allows a player to set an npc's skin with a url using /npc skin [-u/--url] <url> (slim)
-# | Just drop this file into the Denizen/scripts folder and you're done!
-
 skin_url_handler:
-    type: yaml data
+    type: data
     debug: false
     events:
         on npc command:
-            - if <context.args.get[1].to_lowercase||null> != skin:
+            - if <context.args.first.to_lowercase||null> != skin:
                 - stop
             - if !<list[-u|--url].contains[<context.args.get[2].to_lowercase||null>]>:
                 - stop
@@ -72,8 +66,8 @@ skin_url_task:
     debug: false
     definitions: key|url|model
     script:
-        - define req "https://api.mineskin.org/generate/url"
+        - define req https://api.mineskin.org/generate/url
         - if <[model]> == slim:
-            - define req "<[req]>?model=slim"
-        - ~webget <[req]> "post:url=<[url]>" timeout:5s save:res
+            - define req <[req]>?model=slim
+        - ~webget <[req]> post:url=<[url]> timeout:5s save:res
         - flag server <[key]>:<entry[res].result||null>

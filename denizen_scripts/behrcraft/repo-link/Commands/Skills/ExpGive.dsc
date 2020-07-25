@@ -9,7 +9,7 @@ ExperienceAdjust_Command:
         - if <context.args.size||0> != 4:
             - if <context.args.get[3]||null> != reset || <context.args.size||0> != 3:
                 - inject Command_Syntax Instantly
-        - define User <context.args.get[1]||null>
+        - define User <context.args.first||null>
         - inject Player_Verification_Offline Instantly
 
         - define Skills <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>

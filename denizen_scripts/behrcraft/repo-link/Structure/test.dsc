@@ -9,6 +9,7 @@
 HomeTest:
     type: task
     debug: false
+    definitions: ChunkHolders
     script:
         - foreach <server.list_players.filter[has_flag[Behrry.Essentials.homes]]> as:Player:
             - define PlayersWithHomes:->:<[Player]>

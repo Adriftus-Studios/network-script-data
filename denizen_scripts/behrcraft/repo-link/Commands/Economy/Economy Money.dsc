@@ -11,7 +11,7 @@ Coins_Command:
         - bal
         - balance
     script:
-    # @ ██ [  Check for args ] ██
+    # % ██ [  Check for args ] ██
         - if <context.args.size> > 1:
             - inject Command_Syntax Instantly
 

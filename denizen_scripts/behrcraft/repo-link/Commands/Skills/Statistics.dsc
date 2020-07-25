@@ -8,7 +8,6 @@ DeathTop_Hiscores_Command:
     tab complete:
         - define arg1 <list[Deaths]>
         - inject OneArg_Command_Tabcomplete Instantly
-        #- determine <proc[OneArg_Command_Tabcomplete].context[1|<[Arg1].escaped>]>
     script:
       # % Verify args
         - if !<list[0|1].contains[<context.args.size>]>:
@@ -20,4 +19,3 @@ DeathTop_Hiscores_Command:
         - narrate "<&2>+<&a>-------<&6>[<&e> Hiscores <&6>] <&b>| <&6>[<&e> Deaths <&6>]<&a>-------<&2>+"
         - foreach <[PlayerGet]> as:Player:
             - narrate "<proc[User_Display_Simple].context[<[Player]>]> <&b>| <&e> Deaths<&6>: <&a><[Player].statistic[deaths]>"
-       

@@ -7,15 +7,15 @@ rchat:
     script:
         - if <context.args.size> < 2:
             - inject Command_Syntax Instantly
-        - if <context.args.get[1]> == random:
+        - if <context.args.first> == random:
             - if !<server.has_flag[Behrry.Developmental.RchatQueue]>:
-                - flag server Behrry.Developmental.RchatQueue:|:<script.yaml_key[Random].random[99]>
+                - flag server Behrry.Developmental.RchatQueue:|:<script.data_key[Random].random[99]>
             - define Name <server.flag[Behrry.Developmental.RchatQueue].first>
             - flag server Behrry.Developmental.RchatQueue:<-:<[Name]>
             - flag server Behrry.Developmental.RchatQueue:->:<[Name]>
         - else:
-            - define Name <context.args.get[1]>
-        - announce "<&7><[Name]><&b>:<&r> <context.raw_args.after[<context.args.get[1]><&sp>].parse_color>"
+            - define Name <context.args.first>
+        - announce "<&7><[Name]><&b>:<&r> <context.raw_args.after[<context.args.first><&sp>].parse_color>"
     random:
         - bob
         - Tom_Hansen

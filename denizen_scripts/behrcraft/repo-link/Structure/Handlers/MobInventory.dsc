@@ -6,19 +6,19 @@ MobInv:
     usage: /mobinv
     permission: behrry.essentials.mobinv
     script:
-    # @ ██ [ Check args ] ██
+    # % ██ [ Check args ] ██
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
 
-    # @ ██ [ Define mob ] ██
+    # % ██ [ Define mob ] ██
         - define Mob <player.target||null>
 
-    # @ ██ [ Check mob ] ██
+    # % ██ [ Check mob ] ██
         - if <[Mob]> == null || <[Mob].is_player>:
             - narrate format:Colorize_red "Target must be a valid entity."
             - stop
         
-    # @ ██ [ Check if is sheep ] ██
+    # % ██ [ Check if is sheep ] ██
         - if <[Mob].entity_type> == sheep:
             - if <[Mob].is_sheared>:
                 - define Wool <item[air]>
@@ -28,12 +28,12 @@ MobInv:
             - inventory open d:<[Inventory]>
             - stop
 
-    # @ ██ [ Check if the inventory is valid ] ██
+    # % ██ [ Check if the inventory is valid ] ██
         - if <[Mob].inventory||null> == null:
             - narrate format:Colorize_red "Target must have a valid inventory."
             - stop
         
-    # @ ██ [ Check if is villager ] ██
+    # % ██ [ Check if is villager ] ██
         - if <[Mob].entity_type> == Villager:
             - define Inventory <player.uuid>VillagerInventory_<[Mob].uuid>
             - note as:<[Inventory]> <inventory[generic[size=9;contents=<[Mob].inventory.list_contents>]]>

@@ -1,9 +1,5 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /kick - Kicks a named player.
-# | ██
-# % ██  [ Command ] ██
 Kick_Command:
-    type: command
+    type: data
     name: kick
     debug: false
     description: Kicks a player.
@@ -12,7 +8,7 @@ Kick_Command:
     tab complete:
         - inject Online_Player_Tabcomplete Instantly
     script:
-        #@ Verify args
+    # % ██ [ Verify args ] ██
         - if <context.args.size> == 0:
             - inject Command_Syntax Instantly
         - define User <context.args.get[1]>

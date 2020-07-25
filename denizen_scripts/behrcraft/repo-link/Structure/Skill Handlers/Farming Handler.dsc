@@ -16,7 +16,7 @@ Farming_Handler:
 
     events:
         on player clicks sweet_berry_bush:
-            #@ Check for bonemeal
+        # % ██ [ Check for bonemeal ] ██
             - if <context.item> == bone_meal:
                 - define XP 1
             - else:
@@ -25,7 +25,7 @@ Farming_Handler:
                 - else:
                     - stop
 
-            #@ Check for Cooldown
+        # % ██ [ Check for Cooldown ] ██
             - if <player.flag[Behrry.skill.exp.cd]||0> < 75:
                 - flag player behrry.skill.exp.cd:+:<[XP]> duration:1s
             - else:
@@ -34,16 +34,16 @@ Farming_Handler:
             - inject Locally ExpGet Instantly
 
         on player breaks beetroots:
-           ##@ Check for bonemeal
-           #- if <context.item> == bone_meal:
-           #    - define XP 1
-           #- else:
+       # % ██ [ Check for bonemeal ] ██
+        #^ - if <context.item> == bone_meal:
+        #^     - define XP 1
+        #^ - else:
             - if <context.location.material.age> > 2:
                 - define XP <context.location.material.age>
             - else:
                 - stop
 
-            #@ Check for Cooldown
+        # % ██ [ Check for Cooldown ] ██
             - if <player.flag[Behrry.skill.exp.cd]||0> < 75:
                 - flag player behrry.skill.exp.cd:+:<[XP]> duration:1s
             - else:
@@ -56,7 +56,7 @@ Farming_Handler:
             - else:
                 - stop
 
-            #@ Check for Cooldown
+        # % ██ [ Check for Cooldown ] ██
             - if <player.flag[Behrry.skill.exp.cd]||0> < 75:
                 - flag player behrry.skill.exp.cd:+:<[XP]> duration:1s
             - else:

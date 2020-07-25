@@ -10,15 +10,15 @@ CreativeBan_Command:
     tab complete:
         - inject All_Player_Tabcomplete Instantly
     script:
-    # @ ██ [ Verify args ] ██
+    # % ██ [ Verify args ] ██
         - if <context.args.get[2]||null> == null:
             - inject Command_Syntax Instantly
 
-    # @ ██ [ Verify player ] ██
-        - define User <context.args.get[1]>
+    # % ██ [ Verify player ] ██
+        - define User <context.args.first>
         - inject Player_Verification_Offline Instantly
 
-    # @ ██ [ Verify duration ] ██
+    # % ██ [ Verify duration ] ██
         - define Duration <context.args.get[2]>
         - if <duration[<[Duration]>]||null> == null:
             - define Reason "Invalid Duration."
@@ -27,7 +27,7 @@ CreativeBan_Command:
             - define Reason "You can only temporarily creative-ban someone for up to three days."
             - inject Command_Error Instantly
 
-    # @ ██ [ Check if player is a moderator ] ██
+    # % ██ [ Check if player is a moderator ] ██
         - if <[User].in_group[Moderation]>:
             - if <[User]> == <player>:
                 - narrate Colorize_Red "You cannot ban yourself."
@@ -36,14 +36,14 @@ CreativeBan_Command:
                 - narrate Colorize_Red "This player cannot be banned from creative."
                 - stop
 
-    # @ ██ [ Check if reason is specified ] ██
+    # % ██ [ Check if reason is specified ] ██
         - if <context.args.get[3]||null> != null:
-            - define Reason <context.raw_args.after[<context.args.get[1]><&sp>]>
+            - define Reason <context.raw_args.after[<context.args.first><&sp>]>
             - if <[User].is_online>:
                 - narrate targets:<[User]> "<proc[Colorize].context[You were banned from Creative for:|red]> <[Reason]>"
-            - narrate targets:<server.list_online_players.filter[in_group[Moderation]]> <proc[User_Display_Simple].context[<[User]>]> <&e>was banned from creative for: <&a><[Reason]>"
+            - narrate targets:<server.online_players.filter[in_group[Moderation]]> "<proc[User_Display_Simple].context[<[User]>]> <&e>was banned from creative for: <&a><[Reason]>"
             - flag <[User]> Behrry.Moderation.CreativeBan:<[Reason]> duration:<[Duration]>
         - else:
             - narrate targets:<[User]> "<proc[Colorize].context[You were banned from Creative.|red]>"
-            - narrate targets:<server.list_online_players.filter[in_group[Moderation]]> <proc[User_Display_Simple].context[<[User]>]> <&e>was banned from creative."
+            - narrate targets:<server.online_players.filter[in_group[Moderation]]> "<proc[User_Display_Simple].context[<[User]>]> <&e>was banned from creative."
             - flag <[User]> Behrry.Moderation.CreativeBan:<[Reason]> duration:<[Duration]>

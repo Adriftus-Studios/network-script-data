@@ -1,8 +1,3 @@
-# : ███████████████████████████████████████████████████████
-# | ██   Dialogue Formatting
-# | ██   Basic Script names reserved for formatting scripts
-# : ██
-# | ██ [ NPC Formatting ] ██
 npc:
   type: format
   debug: false

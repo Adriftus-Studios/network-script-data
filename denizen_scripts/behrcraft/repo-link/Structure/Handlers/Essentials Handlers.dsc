@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██     Essentials Main Structure
-# | ██
-# % ██    [ Chat Management ] ██
-# $ ██    [ To-Do ]                     ██
 Essentials:
     type: world
     debug: false

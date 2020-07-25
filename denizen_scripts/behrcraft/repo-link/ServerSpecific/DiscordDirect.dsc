@@ -18,4 +18,4 @@
 #```
 #
 type:
-    type: yaml data
+    type: data

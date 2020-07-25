@@ -10,27 +10,27 @@ PlayerData_Command:
     tab complete:
         - inject All_Player_Tabcomplete Instantly
     script:
-    # @ ██ [ Check Args] ██
+    # % ██ [ Check Args] ██
         - if <context.args.size> != 1:
             - inject Command_Syntax Instantly
         
-    # @ ██ [  Check player arg ] ██
+    # % ██ [ Check player arg ] ██
         - define User <context.args.get[1]>
         - inject Player_Verification_Offline Instantly
         
-    # @ ██ [  Essentials ] ██
-    # @ ██ [  GameModes ] ██
+    # % ██ [ Essentials ] ██
+    # % ██ [ GameModes ] ██
         - foreach <list[Survival|Creative|Spectator|Adventure]> as:Gamemode:
         # $ ██ [ Flag Consistency Update: ] ██
         # $ ██ | Replace: Gamemode.Inventory.*
         # $ ██ | With:    Behrry.Essentials.GamemodeInventory.*
             - define Inventories:->:Gamemode.Inventory.<[Gamemode]>
         
-    # @ ██ [  Define Settings ] ██
+    # % ██ [ Define Settings ] ██
         - define SettingsList <list[settings.essentials.bedspawn]>
        
 
-    # @ ██ [  Define Sponsor Settings ] ██
+    # % ██ [ Define Sponsor Settings ] ██
         - define List <list[Behrry.Essentials.RepairLimit]>
 
 Flag_Consistency_Task:

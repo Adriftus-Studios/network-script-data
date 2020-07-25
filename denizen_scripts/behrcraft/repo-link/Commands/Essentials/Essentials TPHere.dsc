@@ -12,17 +12,17 @@ TPHere_Command:
         - inject Online_Player_Tabcomplete
     script:
     # % ██ [ Check Args ] ██
-        - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
+        - if <context.args.is_empty> || <context.args.size> > 2:
             - inject Command_Syntax
         
     # % ██ [ Check if requesting Everyone ] ██
-        - if <context.args.get[1]> == everyone:
+        - if <context.args.first> == everyone:
             - foreach <server.list_online_players.exclude[<player>]> as:User:
             # % ██ [ Reroute command for each player ] ██
                 - execute as_player "tphere <[User].name>"
             - stop
         - else:
-            - define User <context.args.get[1]>
+            - define User <context.args.first>
             - inject Player_Verification
 
     # % ██ [ Check if User is Player ] ██

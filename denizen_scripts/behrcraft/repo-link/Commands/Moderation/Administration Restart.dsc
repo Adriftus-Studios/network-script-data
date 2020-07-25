@@ -9,33 +9,33 @@ Restart_Command:
         - define Args <list[Instant|Queue|Skip|Set]>
         - inject OneArg_Command_Tabcomplete Instantly
     script:
-    # @ ██ [  Check for args ] ██
+    # % ██ [ Check for args ] ██
         - if <context.args.is_empty>:
             - if <context.source_type> == server:
                 - inject Server_Restart_Task path:Restart Instantly
                 - stop
             - inject Command_Syntax Instantly
 
-    # @ ██ [ Check if Console Ran ] ██
+    # % ██ [ Check if Console Ran ] ██
         - if <context.source_type> == server:
-            - if <context.args.get[1]||null> != instant:
+            - if <context.args.first||null> != instant:
                 - announce to_console format:Colorize_Red "Can only be instant from Console."
                 - stop
 
-    # @ ██ [  Run sub-command ] ██
-        - choose <context.args.get[1]>:
+    # % ██ [ Run sub-command ] ██
+        - choose <context.args.first>:
             - case Queue:
-            # @ ██ [  Check args ] ██
+            # % ██ [ Check args ] ██
                 - if <context.args.get[2]||null> == null:
                     - define Time <duration[300s]>
                     - define Speed 20
 
                 - else:
-                # @ ██ [  Check for speed ] ██
+                # % ██ [ Check for speed ] ██
                     - if <context.args.get[3]||null> == null:
                         - define Speed 20
 
-                # @ ██ [  Check speed format & values ] ██
+                # % ██ [ Check speed format & values ] ██
                     - else:
                         - define Speed <context.args.get[3]>
                         - if !<[Speed].is_integer>:
@@ -51,8 +51,8 @@ Restart_Command:
                             - narrate format:Colorize_Red "Time cannot exceed 100 ticks."
                             - stop
 
-                # @ ██ [  Check time format ] ██
-                    - if <context.args.get[1].contains[.]>:
+                # % ██ [ Check time format ] ██
+                    - if <context.args.first.contains[.]>:
                         - narrate format:Colorize_Red "Time cannot contain decimals."
                         - stop
                     - define Time <duration[<context.args.get[2]>]||invalid>
@@ -60,7 +60,7 @@ Restart_Command:
                         - narrate format:Colorize_Red "Invalid time format."
                         - stop
 
-                # @ ██ [  Check time values ] ██
+                # % ██ [ Check time values ] ██
                     - if <[Time].in_seconds> < 0:
                         - narrate format:Colorize_Red "Time cannot be negative."
                         - stop
@@ -70,18 +70,18 @@ Restart_Command:
                     
                 - run Server_Restart_Task def:<[Time]>|<[Speed]>
 
-        # @ ██ [  Skip the next restart ] ██
+        # % ██ [ Skip the next restart ] ██
             - case Skip:
                 - if <context.args.get[2]||null> != null:
                     - inject Command_Syntax Instantly
                 - flag server behrry.essentials.restartskip
             
-        # @ ██ [  Instantly restart the server ] ██
+        # % ██ [ Instantly restart the server ] ██
             - case Instant:
                 - if <context.args.get[2]||null> != null:
                     - inject Command_Syntax Instantly
                 - inject Server_Restart_Task path:Restart Instantly
             
-        # @ ██ [  Invalid sub-command ] ██
+        # % ██ [ Invalid sub-command ] ██
             - case default:
                 - inject Command_Syntax Instantly
