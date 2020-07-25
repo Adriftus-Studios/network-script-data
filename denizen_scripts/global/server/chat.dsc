@@ -41,12 +41,12 @@ chat_system_events:
       #-- foreach <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]> as:Server:
           #^- bungeerun <[server]> chat_send_message def:<[channel]>|<[message].escaped>
         #-- bungeerun <[server]> chat_send_message def:<list_single[<[channel]>].include[<[message]>]>
-      - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers].exclude[<bungee.server>]>]>
-      - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include[<[message]>]>
-      - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
-      #^- bungeerun relay chat_send_message def:<[channel]>|<player.name>|<context.message.escaped>|<bungee.server>
-        - bungeerun relay chat_send_message def:<list_single[<[Channel]>].include[<player.name>].include[<context.message>].include[<bungee.server>]>
-      - inject chat_history_save
+        - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
+        - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include[<[message]>]>
+        - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
+        #^- bungeerun relay chat_send_message def:<[channel]>|<player.name>|<context.message.escaped>|<bungee.server>
+          - bungeerun relay chat_send_message def:<list_single[<[Channel]>].include[<player.name>].include[<context.message>].include[<bungee.server>]>
+        - inject chat_history_save
 
 chat_history_save:
   type: task
