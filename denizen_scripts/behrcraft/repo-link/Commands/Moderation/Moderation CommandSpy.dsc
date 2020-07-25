@@ -53,7 +53,7 @@ command_listener:
       - if <[Blacklist].contains[<context.command>]> || <context.server> || <player> == <server.match_player[behr_riley]||null>:
         - stop
 
-      - foreach <server..online_players_flagged[behrry.moderation.commandlistening]> as:Moderator:
+      - foreach <server.online_players_flagged[behrry.moderation.commandlistening]> as:Moderator:
         - if <[Moderator]> != <player>:
           - if <script[<context.command>_Command].data_key[permission]||null> != null:
             - define Permission <script[<context.command>_Command].data_key[permission]>
