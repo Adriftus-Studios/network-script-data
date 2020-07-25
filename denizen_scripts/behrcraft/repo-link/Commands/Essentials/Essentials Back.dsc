@@ -20,4 +20,7 @@ Back_Command:
         - narrate format:Colorize_Green "Returning to last location"
         - flag <player> Behr.Essentials.Teleport.Back:<player.location>
         - chunkload <[BackLoc].chunk>
-        - teleport <player> <[BackLoc].below.points_between[<[BackLoc].highest.above>].filter[material.is_solid.not].first>
+        - if <[BackLoc].below.points_between[<[BackLoc].highest.above>].filter[material.is_solid.not].is_empty>:
+            - teleport <player> <[BackLoc]>
+        - else:
+            - teleport <player> <[BackLoc].below.points_between[<[BackLoc].highest.above>].filter[material.is_solid.not].first>
