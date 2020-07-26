@@ -65,14 +65,21 @@ item_system_global_data:
       beater: melee_damage/buff|ranged_damage/buff|attack_speed/debuff
       silverstrike: melee_damage/buff|speed/buff|health/debuff
       bear: health/buff|melee_damage/buff|attack_speed/debuff
+      soldier: health/buff|ranged_damage/buff|attack_speed/debuff
+      scout: health/buff|speed/buff|armor/debuff
       horse: speed/buff|attack_speed/buff|melee_damage/debuff
       monkey: speed/buff|ranged_damage/buff|health/debuff
       turtle: health/buff|armor/buff|speed/debuff
+    ###### RARE ######
+    #### buff/buff ###
     2:
+      swordsman: attack_speed/buff|health/buff
+      assassin: attack_speed/buff|armor/buff
       warrior: melee_damage/buff|health/buff
       ranger: ranged_damage/buff|health/buff
+      tank: ranged_damage/buff|armor/buff
       quicksilver: speed/buff|health/buff
-      tortoise: health/buff|armor/buff
+      tortoise: armor/buff|health/buff
   ## INTERNALS ##
   calculations:
     melee_damage: <[level].*[3]>
@@ -82,15 +89,15 @@ item_system_global_data:
     attack_speed: <[level].*[.15]>
     health: <[level].+[4]>
   nbt_attributes:
-    melee_damage: generic.attackDamage
-    speed: generic.movementSpeed
+    melee_damage: generic.attack_damage
+    speed: generic.movement_speed
     armor: generic.armor
-    attack_speed: generic.attackSpeed
-    health: generic.maxHealth
+    attack_speed: generic.attack_speed
+    health: generic.max_health
   nbt_other:
     ranged_damage: bow_damage
   nbt_slots:
-    netherite_sword: mainahnd
+    netherite_sword: mainhand
     diamond_sword: mainhand
     iron_sword: mainhand
     wooden_sword: mainhand
