@@ -16,13 +16,13 @@ tutorial_start:
   script:
     - showfake barrier <cuboid[<location[tutorial_start_hologram].backward.left[2]>|<location[tutorial_start_hologram].backward.right[2].above[3]>].blocks> duration:10h
     - foreach <script[tutorial_data].data_key[start.hologram]>:
-      - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_start_hologram].-[<[loop_index].*0.25]>]> duration:10h
+      - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_start_hologram].sub[0,<[loop_index].*0.25]>,0]> duration:10h
     - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<script[tutorial_data].data_key[start.start_button]>] <location[tutorial_start_hologram].-[<script[tutorial_data].data_key[start.hologram].size.+[2].*0.25]>]>
     - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<script[tutorial_data].data_key[start.stop_button]>] <location[tutorial_start_hologram].-[<script[tutorial_data].data_key[start.hologram].size.+[2].*0.25]>]>
 
 tutorial_events:
   type: world
   events:
-    on player click fake entity:
+    on player clicks fake entity:
       - narrate <context.entity.entity_type>
       - narrate <context.entity.name>
