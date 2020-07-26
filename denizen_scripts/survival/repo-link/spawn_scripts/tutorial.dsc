@@ -25,4 +25,4 @@ tutorial_events:
   events:
     on player clicks fake entity:
       - narrate <context.entity.entity_type>
-      - narrate <context.entity.uuid>
+      - narrate <context.entity.describe>
