@@ -10,7 +10,6 @@ Reload_Scripts_DCommand:
     - Lead Developer
     - Developer
   definitions: Message|Channel|Author|Group
-  debug: false
   Context: Color
   speed: 0
   script:
@@ -35,7 +34,6 @@ Reload_Scripts_DCommand:
 
 Reload_Scripts_Queue:
   type: task
-  debug: true
   version: 1.2
   definitions: Channel|Definitions
   speed: 0
@@ -97,7 +95,6 @@ Reload_Task:
 
 Reload_Error_Detection:
   type: world
-  debug: false
   events:
     on reload scripts:
     # % ██ [ Verify Relay Induced Reload   ] ██
