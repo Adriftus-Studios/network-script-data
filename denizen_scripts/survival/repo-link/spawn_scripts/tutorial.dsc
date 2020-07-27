@@ -60,8 +60,6 @@ tutorial_next:
       - while <player.location.distance[<location[tutorial_<[stage]>]>]> > 5:
         - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
         - foreach <[points]>:
-          - if <[loop_index]> == 11:
-            - foreach stop
           - if !<player.is_online>:
             - flag player tutorial:!
             - stop
@@ -70,7 +68,8 @@ tutorial_next:
       - foreach <script[tutorial_data].data_key[<[stage]>.hologram]>:
         - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_start_hologram].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
       - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<script[tutorial_data].data_key[continue_button].parse_color>] <location[tutorial_start_hologram].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.*[0.25]>,0]> duration:10h
-    - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_start_hologram].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.+[4].*[0.25]>,0]> duration:10h
+      - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_start_hologram].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.+[4].*[0.25]>,0]> duration:10h
+      - stop
     - flag player tutorial:!
     - narrate "<&a>You have completed the tutorial!"
 
