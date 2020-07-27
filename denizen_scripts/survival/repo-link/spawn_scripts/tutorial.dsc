@@ -58,7 +58,7 @@ tutorial_next:
     - if <location[tutorial_<[stage]>]||null> != null:
       - look <player> tutorial_<[stage]>
       - while <player.location.distance[<location[tutorial_<[stage]>]>]> > 5:
-        - define points <player.location.points_between[<location[tutorial_<[stage]>]>]>
+        - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
         - foreach <[points]>:
           - if <[loop_index]> == 11:
             - foreach stop
@@ -69,7 +69,8 @@ tutorial_next:
           - wait 1t
       - foreach <script[tutorial_data].data_key[<[stage]>.hologram]>:
         - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_start_hologram].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
-      - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<&a><&b><script[tutorial_data].data_key[continue_button].parse_color>] <location[tutorial_start_hologram].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.+[2].*0.25]>,0]> duration:10h
+      - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<script[tutorial_data].data_key[continue_button].parse_color>] <location[tutorial_start_hologram].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.*[0.25]>,0]> duration:10h
+    - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_start_hologram].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.+[4].*[0.25]>,0]> duration:10h
     - flag player tutorial:!
     - narrate "<&a>You have completed the tutorial!"
 
@@ -77,7 +78,6 @@ tutorial_events:
   type: world
   events:
     on player clicks fake entity flagged:tutorial:
-      - narrate <context.entity.name>
       - if <context.entity.name> == ContinueTutorial:
         - foreach <player.fake_entities>:
           - fakespawn <[value]> cancel
