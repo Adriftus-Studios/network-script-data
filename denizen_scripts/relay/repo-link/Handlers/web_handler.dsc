@@ -1,6 +1,5 @@
 web_handler:
   type: world
-  debug: true
   Domains:
     Github: 140.82.115
     self: 0:0:0:0:0:0:0:1
@@ -22,7 +21,7 @@ web_handler:
         - define data <yaml[webhook_template_git-pull].to_json>
         - define headers <list[User-Agent/really|Content-Type/application/json]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
-      - else if <[domain]> == <script.data_key[Domains.Github]>:
+      - else if <[domain]> == <script.data_key[Domains.self]>:
         - bungee <bungee.list_servers.exclude[<bungee.server>]>:
           - reload
         - wait 1t
