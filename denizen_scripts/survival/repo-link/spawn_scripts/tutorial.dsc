@@ -5,7 +5,7 @@ tutorial_data:
     quantity: 5
     offset: 0.5
   continue_button: "&aClick me to Continue"
-  continue_button: "&aComplete Tutorial"
+  complete_button: "&aComplete Tutorial"
   start:
     hologram:
       - "&6Welcome To Adriftus Survival"
