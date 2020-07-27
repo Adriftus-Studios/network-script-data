@@ -97,7 +97,6 @@ item_system_global_data:
       pirate: melee_damage/buff|speed/buff
       tank: ranged_damage/buff|armor/buff
       ranger: ranged_damage/buff|health/buff
-      tank: ranged_damage/buff|armor/buff
       quicksilver: speed/buff|health/buff
   ## INTERNALS ##
   calculations:
