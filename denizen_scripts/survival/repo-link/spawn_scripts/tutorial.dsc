@@ -42,6 +42,12 @@ tutorial_data:
       - "&eBe aware, nothing is free."
       - "&a--------------------------"
       - "&euse &b/warps &e and go to the market."
+    particle_guide: true
+  6:
+    hologram:
+      - "&6The Market"
+      - "&eYou can buy all sorts of upgrades and items here"
+      - "&eYou can also get daily rewards!"
     title: &6Use &b/warps
     subtitle: Go to the market.
     message: &6/warp &eto the market
