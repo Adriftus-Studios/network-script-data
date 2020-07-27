@@ -86,3 +86,5 @@ tutorial_events:
         - flag player tutorial:!
         - narrate "<&e>You have opted to skip the tutorial."
         - narrate "<&e>Please view <&b>/help <&e>for any questions."
+      - else:
+        - narrate "noop"
