@@ -2,6 +2,7 @@ web_handler:
   type: world
   Domains:
     Github: 140.82.115
+    self: 0:0:0:0:0:0:0:1
   events:
     on post request:
       - define Domain <context.address>
@@ -20,5 +21,9 @@ web_handler:
         - define data <yaml[webhook_template_git-pull].to_json>
         - define headers <list[User-Agent/really|Content-Type/application/json]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+      - else if <[domain]> == <script.data_key[Domains.Github]>:
+        - bungee <bungee.list_servers.exclude[<bungee.server>]>:
+          - reload
+        - reload
       - else:
         - announce to_console "Attempted request from <[Domain]>"

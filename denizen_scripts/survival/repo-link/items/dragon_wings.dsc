@@ -43,7 +43,9 @@ dragon_wings_liftoff:
   script:
     - if <player.location.above[4].material.name.contains[water]>:
       - adjust <player> velocity:0,10,0
-    - adjust <player> gravity:false
+      - wait 10
+    - if <player.has_flag[Dragon_Wings_Fly]>:
+      - adjust <player> gravity:false
     - while <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> velocity:0,0.5,0
       - inventory adjust slot:39 nbt:power/<player.equipment.chest.nbt[power].-[0.01]>
