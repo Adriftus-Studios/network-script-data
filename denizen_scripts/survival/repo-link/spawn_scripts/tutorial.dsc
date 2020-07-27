@@ -44,12 +44,11 @@ tutorial_start:
   type: task
   script:
     - flag player tutorial:0
-    - showfake barrier <cuboid[<location[tutorial_start_hologram].backward.left[2]>|<location[tutorial_start_hologram].backward.right[2].above[3]>].blocks> duration:10h
     - foreach <script[tutorial_data].data_key[start.hologram]>:
       - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_start_hologram].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
-    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&a><&b><script[tutorial_data].data_key[start.start_button].parse_color>] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].data_key[start.hologram].size.+[2].*[0.25]>,0]> duration:10h
+    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&a><&b><script[tutorial_data].data_key[start.start_button].parse_color>] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].data_key[start.hologram].size.*[0.25]>,0]> duration:10h
     - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].data_key[start.hologram].size.+[4].*[0.25]>,0]> duration:10h
-    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&b><&a><script[tutorial_data].data_key[start.skip_button].parse_color>] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].data_key[start.hologram].size.+[2].*[0.25]>,0]> duration:10h
+    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&b><&a><script[tutorial_data].data_key[start.skip_button].parse_color>] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].data_key[start.hologram].size.*[0.25]>,0]> duration:10h
     - fakespawn armor_stand[visible=false;custom_name=SkipTutorial] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].data_key[start.hologram].size.+[4].*[0.25]>,0]> duration:10h
 
 tutorial_next:
