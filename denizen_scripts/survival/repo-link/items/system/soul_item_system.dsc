@@ -54,32 +54,51 @@ item_system_global_data:
     ####### COMMON #######
     ######## buff ########
     0:
-      basher: melee_damage/buff
-      sprinter: speed/buff
+      armadillo: armor/buff
+      rusher: attack_speed/buff
       cow: health/buff
+      basher: melee_damage/buff
+      hawk: ranged_damage/buff
+      sprinter: speed/buff
     ###### UNCOMMON ######
     ## buff/buff/debuff ##
     1:
-      barbarian: melee_damage/buff|ranged_damage/buff|speed/debuff
-      kamikaze: melee_damage/buff|ranged_damage/buff|health/debuff
-      beater: melee_damage/buff|ranged_damage/buff|attack_speed/debuff
-      silverstrike: melee_damage/buff|speed/buff|health/debuff
+      fighter: armor/buff|attack_speed/buff|health/debuff
+      frontier: armor/buff|attack_speed/buff|ranged_damage/debuff
+      wyvern: armor/buff|health/buff|ranged_damage/debuff
+      turtle: armor/buff|health/buff|speed/debuff
+      journeyman: armor/buff|melee_damage/buff|health/debuff
+      sniper: armor/buff|ranged_damaged/buff|speed/debuff
+      knight: attack_speed/buff|health/buff|ranged_damage/debuff
+      naive: attack_speed/buff|melee_damage/buff|armor/debuff
+      horse: attack_speed/buff|speed/buff|melee_damage/debuff
       bear: health/buff|melee_damage/buff|attack_speed/debuff
+      cleric: health/buff|ranged_damage/buff|armor/debuff
       soldier: health/buff|ranged_damage/buff|attack_speed/debuff
       scout: health/buff|speed/buff|armor/debuff
-      horse: speed/buff|attack_speed/buff|melee_damage/debuff
-      monkey: speed/buff|ranged_damage/buff|health/debuff
-      turtle: health/buff|armor/buff|speed/debuff
+      beater: melee_damage/buff|ranged_damage/buff|attack_speed/debuff
+      kamikaze: melee_damage/buff|ranged_damage/buff|health/debuff
+      barbarian: melee_damage/buff|ranged_damage/buff|speed/debuff
+      pegasus: melee_damage/buff|speed/buff|armor/debuff
+      silverstrike: melee_damage/buff|speed/buff|health/debuff
+      monkey: ranged_damage/buff|speed/buff|health/debuff
+      valkyrie: ranged_damage/buff|speed/buff|armor/debuff
     ###### RARE ######
     #### buff/buff ###
     2:
-      swordsman: attack_speed/buff|health/buff
+      tortoise: armor/buff|health/buff
+      paladin: armor/buff|melee_damage/buff
+      chief: armor/buff|ranged_damage/buff
+      steamroller: armor/buff|speed/buff
       assassin: attack_speed/buff|armor/buff
+      swordsman: attack_speed/buff|health/buff
+      sabre: attack_speed/buff|melee_damage/buff
       warrior: melee_damage/buff|health/buff
+      pirate: melee_damage/buff|speed/buff
+      tank: ranged_damage/buff|armor/buff
       ranger: ranged_damage/buff|health/buff
       tank: ranged_damage/buff|armor/buff
       quicksilver: speed/buff|health/buff
-      tortoise: armor/buff|health/buff
   ## INTERNALS ##
   calculations:
     melee_damage: <[level].*[3]>
