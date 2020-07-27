@@ -68,8 +68,8 @@ tutorial_next:
           - wait 1t
       - foreach <script[tutorial_data].data_key[<[stage]>.hologram]>:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_<[stage]>].above[4].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
-      - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<script[tutorial_data].data_key[continue_button].parse_color>] <location[tutorial_<[stage]>].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.*[0.25]>,0]> duration:10h
-      - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_<[stage]>].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.*[0.25]>,0]> duration:10h
+      - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<script[tutorial_data].data_key[continue_button].parse_color>] <location[tutorial_<[stage]>]> duration:10h
+      - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_<[stage]>].sub[0,0.5,0]> duration:10h
       - stop
     - flag player tutorial:!
     - narrate "<&a>You have completed the tutorial!"
