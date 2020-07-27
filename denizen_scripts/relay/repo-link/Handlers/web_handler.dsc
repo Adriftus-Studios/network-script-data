@@ -12,6 +12,9 @@ web_handler:
         - define Script ../network-script-data/system_scripts/github/git-pull
 
         - shell <[Script]> <[Request]>
+        - announce to_console "Webhook received!"
+        - announce to_console "Script ran: <[script]>"
+        - announce to_console "Request received: <[request]>"
 
         - define Hook <script[DDTBCTY].data_key[WebHooks.650016499502940170.hook]>
         - define data <yaml[webhook_template_git-pull].to_json>
