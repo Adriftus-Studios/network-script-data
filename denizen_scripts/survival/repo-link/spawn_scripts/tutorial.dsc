@@ -47,8 +47,8 @@ tutorial_start:
     - showfake barrier <cuboid[<location[tutorial_start_hologram].backward.left[2]>|<location[tutorial_start_hologram].backward.right[2].above[3]>].blocks> duration:10h
     - foreach <script[tutorial_data].data_key[start.hologram]>:
       - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_start_hologram].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
-    - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<&a><&b><script[tutorial_data].data_key[start.start_button].parse_color>] <location[tutorial_start_hologram].right.sub[0,<script[tutorial_data].data_key[start.hologram].size.+[2].*0.25]>,0]>
-    - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<&b><&a><script[tutorial_data].data_key[start.stop_button].parse_color>] <location[tutorial_start_hologram].left.sub[0,<script[tutorial_data].data_key[start.hologram].size.+[2].*0.25]>,0]>
+    - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<&a><&b><script[tutorial_data].data_key[start.start_button].parse_color>] <location[tutorial_start_hologram].right.sub[0,<script[tutorial_data].data_key[start.hologram].size.+[2].*[0.25]>,0]>
+    - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<&b><&a><script[tutorial_data].data_key[start.stop_button].parse_color>] <location[tutorial_start_hologram].left.sub[0,<script[tutorial_data].data_key[start.hologram].size.+[2].*[0.25]>,0]>
 
 tutorial_next:
   type: task
@@ -75,7 +75,7 @@ tutorial_next:
 tutorial_events:
   type: world
   events:
-    on player clicks fake entity:
+    on player clicks fake entity flagged:tutorial:
       - if <context.entity.name.starts_with[<&a><&b>]>:
         - foreach <player.fake_entities>:
           - fakespawn <[value]> cancel
