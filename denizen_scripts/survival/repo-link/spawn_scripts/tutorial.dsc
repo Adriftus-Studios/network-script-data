@@ -67,7 +67,7 @@ tutorial_next:
             - stop
           - playeffect <script[tutorial_data].data_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].data_key[particle_trail.quantity]> offset:<script[tutorial_data].data_key[particle_trail.offset]> targets:<player>
           - wait 1t
-      - foreach <script[tutorial_data].data_key<[stage]>.hologram]>:
+      - foreach <script[tutorial_data].data_key[<[stage]>.hologram]>:
         - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_start_hologram].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
       - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<&a><&b><script[tutorial_data].data_key[continue_button].parse_color>] <location[tutorial_start_hologram].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.+[2].*0.25]>,0]> duration:10h
     - flag player tutorial:!
