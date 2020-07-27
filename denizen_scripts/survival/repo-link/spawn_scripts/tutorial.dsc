@@ -16,21 +16,25 @@ tutorial_data:
       - "&6Adriftus Survival"
       - "&aThis tutorial will teach you the server rules"
       - "&aIt will also walk you through the basic commands"
+    particle_guide: true
   2:
     hologram:
       - "&6Rule #1"
       - "&eNo harrassing other players"
       - "&cStop Means Stop"
+    particle_guide: true
   3:
     hologram:
       - "&6Rule #1"
       - "&eAvoid profanity in public channels"
       - "&eKeep your language kid appropriate"
+    particle_guide: true
   4:
     hologram:
       - "&6Warp Command"
       - "&b/warps &ewill open the warp menu"
       - "&eYou can visit server warps, or other player's warps."
+    particle_guide: true
   5:
     hologram:
       - "&6Grim"
@@ -38,6 +42,9 @@ tutorial_data:
       - "&eBe aware, nothing is free."
       - "&a--------------------------"
       - "&euse &b/warps &e and go to the market."
+    title: &6Use &b/warps
+    subtitle: Go to the market.
+    message: &6/warp &eto the market
 
 
 tutorial_start:
@@ -57,17 +64,25 @@ tutorial_next:
   script:
     - define stage <player.flag[tutorial]>
     - if <location[tutorial_<[stage]>]||null> != null:
-      - look <player> tutorial_<[stage]>
-      - while <player.location.distance[<location[tutorial_<[stage]>]>]> > 5:
-        - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
-        - foreach <[points]>:
-          - if !<player.is_online>:
-            - flag player tutorial:!
-            - stop
-          - playeffect <script[tutorial_data].data_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].data_key[particle_trail.quantity]> offset:<script[tutorial_data].data_key[particle_trail.offset]> targets:<player>
-          - wait 1t
-      - foreach <script[tutorial_data].data_key[<[stage]>.hologram]>:
-        - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_<[stage]>].above[4].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
+      - if <script[tutorial_data].list_keys[<[stage]>].contains[title]>:
+        - if <script[tutorial_data].list_keys[<[stage]>].contains[subtitle]>:
+          - title title:<script[tutorial_data].data_key[<[stage]>.title].parse_color> subtitle:<script[tutorial_data].data_key[<[stage]>.subtitle]>
+        - else:
+          - title title:<script[tutorial_data].data_key[<[stage]>.title].parse_color>
+      - if <script[tutorial_data].list_keys[<[stage]>].contains[message]>:
+        - narrate <script[tutorial_data].data_key[<[stage]>.message].parse_color>
+      - if <script[tutorial_data].list_keys[<[stage]>].contains[particle_guide]> && <script[tutorial_data].data_key[<[stage]>.particle_guide]>:
+        - look <player> tutorial_<[stage]>
+        - while <player.location.distance[<location[tutorial_<[stage]>]>]> > 5:
+          - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
+          - foreach <[points]>:
+            - if !<player.is_online>:
+              - flag player tutorial:!
+              - stop
+            - playeffect <script[tutorial_data].data_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].data_key[particle_trail.quantity]> offset:<script[tutorial_data].data_key[particle_trail.offset]> targets:<player>
+            - wait 1t
+        - foreach <script[tutorial_data].data_key[<[stage]>.hologram]>:
+          - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_<[stage]>].above[2].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
       - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<script[tutorial_data].data_key[continue_button].parse_color>] <location[tutorial_<[stage]>].above[1]> duration:10h
       - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_<[stage]>].sub[0,0.5,0]> duration:10h
       - stop
