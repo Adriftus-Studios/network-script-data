@@ -25,7 +25,7 @@ dragon_wings_end:
     - flag player Dragon_Wings_Fly:!
     - if <player.has_flag[Dragon_Wings_Recover]>:
       - stop
-    - flag player Dragon_Wings_Recover:yeeeee
+    - flag player Dragon_Wings_Recover:<queue>
     - adjust <player> gravity:true
     - while <player.has_flag[Dragon_Wings_Recover]> && <player.equipment.chest.script.name||null> == dragon_wings && !<player.has_flag[Dragon_Wings_Fly]>:
       - if <player.equipment.chest.nbt[power]> >= 1 || <player.has_flag[Dragon_Wings_Fly]>:
@@ -43,7 +43,7 @@ dragon_wings_liftoff:
   script:
     - if <player.location.above[4].material.name.contains[water]>:
       - adjust <player> velocity:0,10,0
-      - wait 10
+      - wait 10t
     - if <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> gravity:false
     - while <player.has_flag[Dragon_Wings_Fly]>:
@@ -109,7 +109,9 @@ dragon_wings_events:
         - if <player.equipment.chest.nbt[power]> <= 0:
           - inject dragon_wings_end
           - stop
-        - flag player Dragon_Wings_Recover:!
+        - if <player.has_flag[Dragon_Wings_Recover]>:
+          - queue <player.flag[Dragon_Wings_Recover]> clear
+          - flag player Dragon_Wings_Recover:!
         - flag player Dragon_Wings_Fly:yeeeeee
         - if !<player.gliding>:
           - inject dragon_wings_liftoff
