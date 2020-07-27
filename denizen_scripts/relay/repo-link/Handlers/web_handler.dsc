@@ -24,6 +24,7 @@ web_handler:
       - else if <[domain]> == <script.data_key[Domains.Github]>:
         - bungee <bungee.list_servers.exclude[<bungee.server>]>:
           - reload
+        - wait 1t
         - reload
       - else:
         - announce to_console "Attempted request from <[Domain]>"
