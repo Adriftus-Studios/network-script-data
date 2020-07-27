@@ -20,3 +20,5 @@ web_handler:
         - define data <yaml[webhook_template_git-pull].to_json>
         - define headers <list[User-Agent/really|Content-Type/application/json]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+      - else:
+        - announce to_console "Attempted request from <[Domain]>"
