@@ -5,7 +5,7 @@ web_handler:
     Github: 140.82.115
     self: 0:0:0:0:0:0:0:1
   events:
-    on post request:
+    after post request:
       - define Domain <context.address>
       - if <[Domain].starts_with[<script.data_key[Domains.Github]>]>:
         - announce to_console success
