@@ -43,6 +43,7 @@ tutorial_data:
 tutorial_start:
   type: task
   script:
+    - teleport <player> tutorial_start
     - flag player tutorial:0
     - foreach <script[tutorial_data].data_key[start.hologram]>:
       - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_start_hologram].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
