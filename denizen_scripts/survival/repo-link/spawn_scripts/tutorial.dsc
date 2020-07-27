@@ -105,6 +105,8 @@ tutorial_events:
         - flag player tutorial:++
         - run tutorial_next
       - else if <context.entity.name> == SkipTutorial:
+        - foreach <player.fake_entities>:
+          - fakespawn <[value]> cancel
         - flag player tutorial:!
         - narrate "<&e>You have opted to skip the tutorial."
         - narrate "<&e>Please view <&b>/help <&e>for any questions."
