@@ -55,7 +55,7 @@ tutorial_next:
   type: task
   script:
     - define stage <player.flag[tutorial]>
-    - if <server.notables[locations].contains[tutorial_<[stage]>]>:
+    - if <location[tutorial_<[stage]>]||null> != null:
       - look <player> tutorial_<[stage]>
       - while <player.location.distance[<location[tutorial_<[stage]>]>]> > 5:
         - define points <player.location.points_between[<location[tutorial_<[stage]>]>]>
