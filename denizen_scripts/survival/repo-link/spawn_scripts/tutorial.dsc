@@ -4,7 +4,7 @@ tutorial_data:
     particle: totem
     quantity: 5
     offset: 0.5
-  continue_button: &aClick me to Continue
+  continue_button: "&aClick me to Continue"
   start:
     hologram:
       - "&6Welcome To Adriftus Survival"
@@ -69,7 +69,7 @@ tutorial_next:
       - foreach <script[tutorial_data].data_key[<[stage]>.hologram]>:
         - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_<[stage]>].above[2].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
       - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<script[tutorial_data].data_key[continue_button].parse_color>] <location[tutorial_<[stage]>].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.*[0.25]>,0]> duration:10h
-      - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_<[stage]>].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.+[4].*[0.25]>,0]> duration:10h
+      - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_<[stage]>].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.+[2].*[0.25]>,0]> duration:10h
       - stop
     - flag player tutorial:!
     - narrate "<&a>You have completed the tutorial!"
