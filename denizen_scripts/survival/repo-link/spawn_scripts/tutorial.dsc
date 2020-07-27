@@ -61,7 +61,7 @@ tutorial_next:
         - define points <player.location.points_between[<location[tutorial_<[stage]>]>]>
         - foreach <[points]>:
           - if <[loop_index]> == 11:
-            - repeat stop
+            - foreach stop
           - if !<player.is_online>:
             - flag player tutorial:!
             - stop
