@@ -67,7 +67,7 @@ tutorial_next:
           - playeffect <script[tutorial_data].data_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].data_key[particle_trail.quantity]> offset:<script[tutorial_data].data_key[particle_trail.offset]> targets:<player>
           - wait 1t
       - foreach <script[tutorial_data].data_key[<[stage]>.hologram]>:
-        - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_<[stage]>].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
+        - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_<[stage]>].above[2].sub[0,<[loop_index].*[0.25]>,0]> duration:10h
       - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<script[tutorial_data].data_key[continue_button].parse_color>] <location[tutorial_<[stage]>].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.*[0.25]>,0]> duration:10h
       - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_<[stage]>].sub[0,<script[tutorial_data].data_key[<[stage]>.hologram].size.+[4].*[0.25]>,0]> duration:10h
       - stop
@@ -87,5 +87,3 @@ tutorial_events:
         - flag player tutorial:!
         - narrate "<&e>You have opted to skip the tutorial."
         - narrate "<&e>Please view <&b>/help <&e>for any questions."
-      - else:
-        - narrate "noop"
