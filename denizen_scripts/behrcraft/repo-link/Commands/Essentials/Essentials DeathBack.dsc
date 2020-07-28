@@ -22,4 +22,7 @@ deathback_Command:
         - define BackLoc <player.flag[Behr.Essentials.Teleport.DeathBack].as_location>
         - flag <player> Behr.Essentials.Teleport.DeathBack:<player.location>
         - chunkload <[BackLoc].chunk>
-        - teleport <player> <[BackLoc].below.points_between[<[BackLoc].highest.above>].filter[material.is_solid.not].first>
+        - if <[BackLoc].below.points_between[<[BackLoc].highest.above>].filter[material.is_solid.not].is_empty>:
+            - teleport <player> <[BackLoc]>
+        - else:
+            - teleport <player> <[BackLoc].below.points_between[<[BackLoc].highest.above>].filter[material.is_solid.not].first>
