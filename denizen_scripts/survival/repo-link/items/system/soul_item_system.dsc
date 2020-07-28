@@ -1,5 +1,5 @@
 item_system_global_data:
-  type: yaml data
+  type: data
   settings:
     lore:
       ## ---------------------------------- ##
@@ -16,10 +16,10 @@ item_system_global_data:
       - "<&a>--------------------------"
       middle:
         global:
-        - "<&e>Level<&co> <[level_stars]>"
-        - ""
-        weapons: <&e>Base Damage<&co> <&b><[damage]>
-        armors: <&e>Base Armor<&co> <&b><[armor]>
+        - <&e>Level<&co> <[level_stars]>
+        - <empty>
+        weapons: <&e>Base Damage<&co> <&b><[bonus]>
+        armors: <&e>Base Armor<&co> <&b><[bonus]>
         unique_buffs:
           sunfire: <&6>Sets attackers on fire.
           life_saving: <&6>Prevents death, and heals you (10 minute CD)
@@ -39,8 +39,8 @@ item_system_global_data:
           attack_speed: <&7>Attack Speed <&c>-<[final_value]./[4].round_to[2].mul[100]>%
           health: <&7>Health <&c>-<[final_value]>
         flavor:
-          - "<&7>"
-          - "<&e><[flavor]>"
+          - <empty>
+          - <&e><[flavor]>
       bottom:
         - "<&a>--------------------------"
     rarity_colors:
@@ -54,50 +54,140 @@ item_system_global_data:
     ####### COMMON #######
     ######## buff ########
     0:
-      armadillo: armor/buff
-      rusher: attack_speed/buff
-      cow: health/buff
-      basher: melee_damage/buff
-      hawk: ranged_damage/buff
-      sprinter: speed/buff
+      armadillo:
+        armor: buff
+      rusher:
+        attack_speed: buff
+      cow:
+        health: buff
+      basher:
+        melee_damage: buff
+      hawk:
+        ranged_damage: buff
+      sprinter:
+        speed: buff
     ###### UNCOMMON ######
     ## buff/buff/debuff ##
     1:
-      fighter: armor/buff|attack_speed/buff|health/debuff
-      frontier: armor/buff|attack_speed/buff|ranged_damage/debuff
-      wyvern: armor/buff|health/buff|ranged_damage/debuff
-      turtle: armor/buff|health/buff|speed/debuff
-      journeyman: armor/buff|melee_damage/buff|health/debuff
-      sniper: armor/buff|ranged_damaged/buff|speed/debuff
-      knight: attack_speed/buff|health/buff|ranged_damage/debuff
-      naive: attack_speed/buff|melee_damage/buff|armor/debuff
-      horse: attack_speed/buff|speed/buff|melee_damage/debuff
-      bear: health/buff|melee_damage/buff|attack_speed/debuff
-      cleric: health/buff|ranged_damage/buff|armor/debuff
-      soldier: health/buff|ranged_damage/buff|attack_speed/debuff
-      scout: health/buff|speed/buff|armor/debuff
-      beater: melee_damage/buff|ranged_damage/buff|attack_speed/debuff
-      kamikaze: melee_damage/buff|ranged_damage/buff|health/debuff
-      barbarian: melee_damage/buff|ranged_damage/buff|speed/debuff
-      pegasus: melee_damage/buff|speed/buff|armor/debuff
-      silverstrike: melee_damage/buff|speed/buff|health/debuff
-      monkey: ranged_damage/buff|speed/buff|health/debuff
-      valkyrie: ranged_damage/buff|speed/buff|armor/debuff
+      fighter:
+        armor: buff
+        attack_speed: buff
+        health: debuff
+      frontier:
+        armor: buff
+        attack_speed: buff
+        ranged_damage: debuff
+      wyvern:
+        armor: buff
+        health: buff
+        ranged_damage: debuff
+      turtle:
+        armor: buff
+        health: buff
+        speed: debuff
+      journeyman:
+        armor: buff
+        melee_damage: buff
+        health: debuff
+      sniper:
+        armor: buff
+        ranged_damaged: buff
+        speed: debuff
+      knight:
+        attack_speed: buff
+        health: buff
+        ranged_damage: debuff
+      naive:
+        attack_speed: buff
+        melee_damage: buff
+        armor: debuff
+      horse:
+        attack_speed: buff
+        speed: buff
+        melee_damage: debuff
+      bear:
+        health: buff
+        melee_damage: buff
+        attack_speed: debuff
+      cleric:
+        health: buff
+        ranged_damage: buff
+        armor: debuff
+      soldier:
+        health: buff
+        ranged_damage: buff
+        attack_speed: debuff
+      scout:
+        health: buff
+        speed: buff
+        armor: debuff
+      beater:
+        melee_damage: buff
+        ranged_damage: buff
+        attack_speed: debuff
+      kamikaze:
+        melee_damage: buff
+        ranged_damage: buff
+        health: debuff
+      barbarian:
+        melee_damage: buff
+        ranged_damage: buff
+        speed: debuff
+      pegasus:
+        melee_damage: buff
+        speed: buff
+        armor: debuff
+      silverstrike:
+        melee_damage: buff
+        speed: buff
+        health: debuff
+      monkey:
+        ranged_damage: buff
+        speed: buff
+        health: debuff
+      valkyrie:
+        ranged_damage: buff
+        speed: buff
+        armor: debuff
     ###### RARE ######
     #### buff/buff ###
     2:
-      tortoise: armor/buff|health/buff
-      paladin: armor/buff|melee_damage/buff
-      chief: armor/buff|ranged_damage/buff
-      steamroller: armor/buff|speed/buff
-      assassin: attack_speed/buff|armor/buff
-      swordsman: attack_speed/buff|health/buff
-      sabre: attack_speed/buff|melee_damage/buff
-      warrior: melee_damage/buff|health/buff
-      pirate: melee_damage/buff|speed/buff
-      tank: ranged_damage/buff|armor/buff
-      ranger: ranged_damage/buff|health/buff
-      quicksilver: speed/buff|health/buff
+      tortoise:
+        armor: buff
+        health: buff
+      paladin:
+        armor: buff
+        melee_damage: buff
+      chief:
+        armor: buff
+        ranged_damage: buff
+      steamroller:
+        armor: buff
+        speed: buff
+      assassin:
+        attack_speed: buff
+        armor: buff
+      swordsman:
+        attack_speed: buff
+        health: buff
+      sabre:
+        attack_speed: buff
+        melee_damage: buff
+      warrior:
+        melee_damage: buff
+        health: buff
+      pirate:
+        melee_damage: buff
+        speed: buff
+      tank:
+        ranged_damage: buff
+        armor: buff
+      ranger:
+        ranged_damage: buff
+        health: buff
+      quicksilver:
+        speed: buff
+        health: buff
   ## INTERNALS ##
   calculations:
     melee_damage: <[level].*[3]>
@@ -193,11 +283,11 @@ soul_forge_inventory:
     redfiller: <item[red_stained_glass_pane].with[display_name=<&e>]>
     blackfiller: <item[black_stained_glass_pane].with[display_name=<&e>]>
   slots:
-   - "[grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller]"
-   - "[redfiller] [redfiller] [redfiller] [blackfiller] [blackfiller] [blackfiller] [redfiller] [redfiller] [redfiller]"
-   - "[redfiller] [] [redfiller] [blackfiller] [grayfiller] [blackfiller] [redfiller] [] [redfiller]"
-   - "[redfiller] [redfiller] [redfiller] [blackfiller] [blackfiller] [blackfiller] [redfiller] [redfiller] [redfiller]"
-   - "[grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller]"
+   - [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller]
+   - [redfiller] [redfiller] [redfiller] [blackfiller] [blackfiller] [blackfiller] [redfiller] [redfiller] [redfiller]
+   - [redfiller] [] [redfiller] [blackfiller] [grayfiller] [blackfiller] [redfiller] [] [redfiller]
+   - [redfiller] [redfiller] [redfiller] [blackfiller] [blackfiller] [blackfiller] [redfiller] [redfiller] [redfiller]
+   - [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller] [grayfiller]
 
 
 soul_forge_events:
@@ -206,7 +296,7 @@ soul_forge_events:
     on player clicks gray_stained_glass_pane|red_stained_glass_pane|black_stained_glass_pane|player_head in soul_forge_inventory priority:-2000:
       - determine cancelled
     on player clicks item in soul_forge_inventory:
-      - if <context.raw_slot> == 23 && <context.inventory.slot[23].material.name||air> != gray_stained_glass_pane:
+      - if <context.raw_slot> == 23 && <context.inventory.slot[23].material.name> != gray_stained_glass_pane:
         - wait 1t
         - foreach <list[20|26]> as:slot:
           - if <context.inventory.slot[<[slot]>].quantity> == 1:
@@ -218,7 +308,7 @@ soul_forge_events:
       - ratelimit <player> 1t
       - inventory set slot:23 d:<context.inventory> o:<proc[item_with_soul_create].context[<context.inventory.slot[20]>|<context.inventory.slot[26]>]>
     on player opens soul_forge_inventory:
-      - inventory set d:<context.inventory> slot:5 "o:<item[player_head].with[skull_skin=<player.uuid>;display_name=<&d>        Soul Forge;lore=<&5>---------------------|<&a>|<&e>Place a <&b>soul<&e> on the left|<&a>|<&e>Place an <&a>item<&e> on the right]>"
+      - inventory set d:<context.inventory> slot:5 "o:<item[player_head].with[skull_skin=<player.uuid>;display_name=<&d>        Soul Forge;lore=<&5>---------------------|<empty>|<&e>Place a <&b>soul<&e> on the left|<empty>|<&e>Place an <&a>item<&e> on the right]>"
     on player closes soul_forge_inventory:
       - foreach <list[20|26]>:
         - if <context.inventory.slot[<[value]>].material.name> != air:
@@ -247,24 +337,45 @@ item_with_soul:
   material: diamond_sword
   display name: <&c>ERROR - REPORT THIS
 
+#@get_random_soul:
+#@  type: procedure
+#@  definitions: rarity|level
+#@  script:
+#^    - define soul_type <script[item_system_global_data].list_keys[soul_names.<[rarity]>].random>
+#^    - foreach <script[item_system_global_data].yaml_key[soul_names.<[rarity]>.<[soul_type]>]> as:modifier:
+#^      - define stat <[modifier].before[/]>
+#^      - define type <[modifier].after[/]>
+#^      - if <[type]> == buff:
+#^        - define buffs:->:<[stat]>,<script[item_system_global_data].yaml_key[calculations.<[stat]>].parsed>
+#^      - else:
+#^        - define debuffs:->:<[stat]>,<script[item_system_global_data].yaml_key[calculations.<[stat]>].parsed>
+#^    - if <[buffs]||null> != null:
+#^      - define buffs_and_debuffs:|:buffs/<[buffs].escaped>
+#^    - if <[debuffs]||null> != null:
+#^      - define buffs_and_debuffs:|:debuffs/<[debuffs].escaped>
+#^    - define flavor:<element[<&d>Soul&spItem<&nl><&e>Combine&spwith&spArmor&spor&spWeapons].escaped>
+#^    - determine <proc[item_system_build_item].context[<item[soul].with[nbt=soul/<[soul_type]>,<[level]>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>|flavor/<[flavor]>|<[buffs_and_debuffs].separated_by[|]>]>]>
+
 get_random_soul:
   type: procedure
   definitions: rarity|level
   script:
     - define soul_type <script[item_system_global_data].list_keys[soul_names.<[rarity]>].random>
-    - foreach <script[item_system_global_data].yaml_key[soul_names.<[rarity]>.<[soul_type]>]> as:modifier:
-      - define stat <[modifier].before[/]>
-      - define type <[modifier].after[/]>
+    - define NBT <map.with[soul].as[<map.with[type].as[<[soul_type]>].with[level].as[<[level]>]>]>
+    - define NBT <[NBT].with[rarity].as[<[rarity]>].with[soul_level].as[<[level]>].with[active_soul].as[<[soul_type]>]>
+    - foreach <script[item_system_global_data].data_key[soul_names.<[rarity]>.<[soul_type]>]> Key:Stat as:Type:
       - if <[type]> == buff:
-        - define buffs:|:<[stat]>,<script[item_system_global_data].yaml_key[calculations.<[stat]>].parsed>
+        - define buffs:->:<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>
       - else:
-        - define debuffs:|:<[stat]>,<script[item_system_global_data].yaml_key[calculations.<[stat]>].parsed>
-    - if <[buffs]||null> != null:
-      - define buffs_and_debuffs:|:buffs/<[buffs].escaped>
-    - if <[debuffs]||null> != null:
-      - define buffs_and_debuffs:|:debuffs/<[debuffs].escaped>
-    - define flavor:<element[<&d>Soul&spItem<&nl><&e>Combine&spwith&spArmor&spor&spWeapons].escaped>
-    - determine <proc[item_system_build_item].context[<item[soul].with[nbt=soul/<[soul_type]>,<[level]>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>|flavor/<[flavor]>|<[buffs_and_debuffs].separated_by[|]>]>]>
+        - define debuffs:->:<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>
+    - define buffs_and_debuffs <map>
+    - if <[buffs].exists>:
+      - define buffs_and_debuffs <[buffs_and_debuffs].with[buffs].as[<list_single[<[buffs]>]>]>
+    - if <[debuffs].exists>:
+      - define buffs_and_debuffs <[buffs_and_debuffs].with[debuffs].as[<list_single[<[debuffs]>]>]>
+    - define flavor "<&d>Soul Item<&nl><&e>Combine with Armor or Weapons"
+    - define NBT <[NBT].with[flavor].as[<[flavor]>].include[<[buffs_and_debuffs]>]>
+    - determine <proc[item_system_build_item].context[<item[soul].with[nbt=<[NBT]>]>]>
 
 item_with_soul_create:
   type: procedure
@@ -272,33 +383,32 @@ item_with_soul_create:
   script:
     - if <[item1].material.name> == air || <[item2].material.name> == air:
       - determine gray_stained_glass_pane
-    - if !<list[<[item1]>|<[item2]>].filter[material.name.is[==].to[<script[soul].yaml_key[material]>]].get[1].has_nbt[soul]>:
+    - if !<list[<[item1]>].include[<[item2]>].filter[material.name.is[==].to[<script[soul].data_key[material]>]].first.has_nbt[soul]>:
       - determine gray_stained_glass_pane
-    - define soul_item <list[<[item1]>|<[item2]>].filter[has_nbt[soul]].get[1]>
-    - define soul_type <[soul_item].nbt[soul].before[,]>
-    - define soul_level <[soul_item].nbt[soul].after[,]>
-    - define rarity <[soul_item].nbt[rarity]>
-    - define item <list[<[item1]>|<[item2]>].filter[has_nbt[soul].not].get[1].material.name>
-    - define enchants <list[<[item1]>|<[item2]>].filter[has_nbt[soul].not].get[1].enchantments.with_levels.escaped||<list[]>>
-    - determine <proc[item_create_soul_item].context[<[item]>|<[soul_type]>|<[soul_level]>|<[rarity]>|<[enchants]>]>
+
+    - define soul_item <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].first>
+    - define contexts <list.include[<list[<[item1]>|<[item2]>].filter[has_nbt[soul].not].first.material.name>]>
+    - define contexts <[contexts].include[<[soul_item].nbt[soul].get[type]>]>
+    - define contexts <[contexts].include[<[soul_item].nbt[soul].get[level]>]>
+    - define contexts <[contexts].include[<[soul_item].nbt[rarity]>]>
+    - define contexts <[context].include[<list_single[<list[<[item1]>|<[item2]>].parse_tag[<[parse_value].enchantments.with_levels>].combined.deduplicate>]>]>
+    - determine <proc[item_create_soul_item].context[<[Contexts]>]>
 
 item_create_soul_item:
   type: procedure
-  definitions: material|soul_type|level|rarity|enchants_escaped
+  definitions: material|soul_type|level|rarity|enchantments
   script:
-    - if <[material].matches[<script[item_system_global_data].yaml_key[regex_type_check.weapon]>]>:
-      - define base <script[item_system_global_data].yaml_key[defaults.damage.<[material]>]>
-    - foreach <script[item_system_global_data].yaml_key[soul_names.<[rarity]>.<[soul_type]>]> as:modifier:
-      - define stat <[modifier].before[/]>
-      - define type <[modifier].after[/]>
+    - if <[material].matches[<script[item_system_global_data].data_key[regex_type_check.weapon]>]>:
+      - define base <script[item_system_global_data].data_key[defaults.damage.<[material]>]>
+    - foreach <script[item_system_global_data].data_key[soul_names.<[rarity]>.<[soul_type]>]> key:stat as:type:
       - if <[type]> == buff:
-        - define buffs:|:<[stat]>,<script[item_system_global_data].yaml_key[calculations.<[stat]>].parsed>
+        - define buffs:->:<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>
       - else:
-        - define debuffs:|:<[stat]>,<script[item_system_global_data].yaml_key[calculations.<[stat]>].parsed>
-    - if <[enchants_escaped].unescaped.as_list.size||0> >= 1:
-      - define item_to_build <item[<[material]>].with[enchantments=<[enchants_escaped].unescaped>;nbt=buffs/<[buffs].escaped||none>|debuffs/<[debuffs].escaped||none>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>]>
+        - define debuffs:->:<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>
+    - if !<[enchantments].is_empty>:
+      - define item_to_build <item[<[material]>].with[enchantments=<[enchantments]>;nbt=buffs/<[buffs]||none>|debuffs/<[debuffs]||none>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>]>
     - else:
-      - define item_to_build <item[<[material]>].with[nbt=buffs/<[buffs].escaped||none>|debuffs/<[debuffs].escaped||none>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>]>
+      - define item_to_build <item[<[material]>].with[nbt=buffs/<[buffs]||none>|debuffs/<[debuffs]||none>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>]>
     - determine <proc[item_system_build_item].context[<[item_to_build]>]>
 
 # TODO - Make This WAY less fucking stupid.
@@ -308,80 +418,109 @@ item_system_build_item:
   type: procedure
   definitions: item
   script:
-    - define level <[item].nbt[soul_level]||0>
-    - if <[level]> != 0:
+  # % ██ [ Determine the amount of Stars  ] ██
+    - if <[item].has_nbt[soul_level]>:
+      - define level <[item].nbt[soul_level]>
       - define level_stars <list[].pad_right[<[level]>].with[<&e>✭].pad_right[5].with[<&7>✭].unseparated>
     - else:
+      - define level 0
       - define level_stars <list[].pad_right[5].with[<&7>✭].unseparated>
-    - define base <script[item_system_global_data].yaml_key[defaults.damage.<[item].material.name>]||0>
-    - if <[item].has_nbt[buffs]> && <[item].material.name> != <script[soul].yaml_key[material]> && <[item].nbt[buffs]||none> != none:
-      - foreach <[item].nbt[buffs].unescaped.as_list> as:buff:
-        - if <script[item_system_global_data].yaml_key[nbt_attributes.<[buff].before[,]>]||null> != null:
-          - define attribute <script[item_system_global_data].yaml_key[nbt_attributes.<[buff].before[,]>]>
-          - define slot <script[item_system_global_data].yaml_key[nbt_slots.<[item].material.name>]>
-          - if <[buff].before[,]> == melee_damage:
-            - define value <[buff].after[,].+[<[base]>]>
-          - else:
-            - define value <[buff].after[,]>
-          - define nbt_attributes:|:<[attribute]>/<[slot]>/0/<[value]>
-        - else:
-          - define value <[buff].after[,]>
-          - define nbt:|:<script[item_system_global_data].yaml_key[nbt_other.<[buff].before[,]>]>/<[value]>
-    - if <[item].has_nbt[debuffs]> && <[item].material.name> != <script[soul].yaml_key[material]> && <[item].nbt[debuffs]||none> != none:
-      - foreach <[item].nbt[debuffs].unescaped.as_list> as:debuff:
-        - if <script[item_system_global_data].yaml_key[nbt_attributes.<[debuff].before[,]>]||null> != null:
-          - define attribute <script[item_system_global_data].yaml_key[nbt_attributes.<[debuff].before[,]>]>
-          - define slot <script[item_system_global_data].yaml_key[nbt_slots.<[item].material.name>]>
-          - if <[debuff].before[,]> == melee_damage:
-            - define value <[debuff].after[,].+[<[base]>]>
-          - else:
-            - define value <[debuff].after[,]>
-          - define nbt_attributes:|:<[attribute]>/<[slot]>/0/-<[value]>
-        - else:
-          - define value <[debuff].after[,]>
-          - define nbt:|:<script[item_system_global_data].yaml_key[nbt_other.<[debuff].before[,]>]>/<[value]>
-    - define rarity_color <script[item_system_global_data].yaml_key[settings.rarity_colors.<[item].nbt[rarity]||0>].parsed>
-    # TODO - Clean this up, and turn it into a loop using nbt[applicable_lore]
-    - define name1 <[item].script.name||<[item].material.name>>
-    - if <[item].has_nbt[active_soul]>:
-      - define "name:<[rarity_color]><[name1].replace[_].with[<&sp>].to_titlecase> of the <[item].nbt[active_soul].to_titlecase>"
+
+  # % ██ [ Determine the base of the item?  ] ██
+    - if <script[item_system_global_data].list_keys[defaults.damage].contains[<[item].material.name>]>:
+      - define base <script[item_system_global_data].data_key[defaults.damage.<[item].material.name>]>
     - else:
-      - define "name:<[rarity_color]><[name1].replace[_].with[<&sp>].to_titlecase>"
-    #- define lore:|:<script[item_system_global_data].yaml_key[settings.lore.top].parse[parsed]>
-    - define lore:|:<script[item_system_global_data].yaml_key[settings.lore.middle.global].parse[parsed]>
-    - if <[item].material.name.matches[<script[item_system_global_data].yaml_key[regex_type_check.weapon]>]>:
-      - define damage <script[item_system_global_data].yaml_key[defaults.damage.<[item].material.name>]>
-      - define lore:|:<script[item_system_global_data].yaml_key[settings.lore.middle.weapons].parsed>
-    - if <[item].material.name.matches[<script[item_system_global_data].yaml_key[regex_type_check.armor]>]>:
-      - define armor <script[item_system_global_data].yaml_key[defaults.armor.<[item].material.name>]>
-      - define lore:|:<script[item_system_global_data].yaml_key[settings.lore.middle.armors].parsed>
-    ##- if <[item].nbt[buffs].unescaped.as_list||<[item].nbt[soul_buffs].unescaped.as_list||null>> != null:
-    ##  - define lore:|:<&a>Buffs
-    - foreach <[item].nbt[buffs].unescaped.as_list||<[item].nbt[soul_buffs].unescaped.as_list||<list[]>>> as:buff:
-      - if <[buff]> == none:
-        - foreach next
-      - define final_value <[buff].after[,]>
-      - define lore:|:<script[item_system_global_data].yaml_key[settings.lore.middle.buffs.<[buff].before[,]>].parsed>
-    - foreach <[item].nbt[debuffs].unescaped.as_list||<[item].nbt[soul_debuffs].unescaped.as_list||<list[]>>> as:debuff:
-      - if <[debuff]> == none:
-        - foreach next
-      - define final_value <[debuff].after[,]>
-      - define lore:|:<script[item_system_global_data].yaml_key[settings.lore.middle.debuffs.<[debuff].before[,]>].parsed>
+      - define base 0
+
+
+  # % ██ [ NOTES FOR CONSTRUCTING THE MAP FROM THE LIST OF MAPS  ] ██
+      #| 1) foreach the list, foreach the map
+      #^  - foreach <[item].nbt[buffs]> as:buffs:
+      #^    - foreach <[buff]> key:buff as:stat:
+      #| 2) foreach the list, construct a fuller map
+      #^  - define map <map>
+      #^  - foreach <[item].nbt[buffs]> as:buffs:
+      #^    - define map <[map].include[<[buffs]>]>
+      #| 3) construct the map from the list
+      #^  - foreach <[item].nbt[<[modifier]>].parse[to_list].combine.to_map> key:alt as:stat:
+
+
+  # % ██ [ Determine the NBT_Attributes  ] ██
+    - define nbt <list>
+    - foreach <list[buffs|debuffs]> as:modifier:
+      - if <[item].has_nbt[<[modifier]>]> && <[item].material.name> != <script[soul].data_key[material]> && <[Item].nbt[<[modifier]>]> != none:
+        - define nbt_attributes <list>
+        - foreach <[item].nbt[<[modifier]>].parse[to_list].combine.to_map> key:alt as:stat:
+          - if <script[item_system_global_data].data_key[nbt_attributes].contains[<[alt]>]>
+            - define attribute <script[item_system_global_data].data_key[nbt_attributes.<[alt]>]>
+            - define slot <script[item_system_global_data].data_key[nbt_slots.<[item].material.name>]>
+            - if <[alt]> == melee_damage:
+              - if <[Modifier]> == buff:
+                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[stat].add[<[base]>]>]>
+              - else:
+                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[stat].sub[<[base]>]>]>
+            - else:
+              - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[stat]>]>
+          - else:
+            - define nbt <map.with[<script[item_system_global_data].data_key[nbt_other.<[alt]>]>].as[<[alt]>]>
+
+
+  # % ██ [ Determine Misc Item Properties  ] ██
+    - if <[Item].has_script>:
+      - define sn1 <[item].script.name>
+    - else:
+      - define sn1 <[Item].material.name>
+
+
+    - if <[Item].has_nbt[rarity]>:
+      - define rarity_color <script[item_system_global_data].data_key[settings.rarity_colors.<[item].nbt[rarity]>].parsed>
+    - else:
+      - define rarity_color <script[item_system_global_data].data_key[settings.rarity_colors.0].parsed>
+    # TODO - Clean this up, and turn it into a loop using nbt[applicable_lore]
+
+    - if <[item].has_nbt[active_soul]>:
+      - define name "<[rarity_color]><[name1].replace[_].with[<&sp>].to_titlecase> of the <[item].nbt[active_soul].to_titlecase>"
+    - else:
+      - define name <[rarity_color]><[name1].replace[_].with[<&sp>].to_titlecase>
+
+
+    - define lore <list.include[<script[item_system_global_data].parsed_key[settings.lore.top]>]>
+    - define lore <[lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.global]>]>
+    - if <[item].material.name.matches[<script[item_system_global_data].data_key[regex_type_check.weapon]>]>:
+      - define damage <script[item_system_global_data].data_key[defaults.damage.<[item].material.name>]>
+      - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.weapons]>]>
+
+    - if <[item].material.name.matches[<script[item_system_global_data].data_key[regex_type_check.armor]>]>:
+      - define armor <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]>
+      - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.armors]>]>
+
+    - foreach <list[buffs|debuffs]> as:modifier:
+      - foreach <[item].nbt[<[modifier]>].parse[to_list].combine.to_map> key:alt as:final_value:
+        - if <[alt]> == none:
+          - foreach next
+        - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.buffs.<[alt]>]>]>
+
     - if <[item].has_nbt[flavor]>:
       - define flavor <[item].nbt[flavor].unescaped>
-      - define lore:|:<script[item_system_global_data].yaml_key[settings.lore.middle.flavor].parse[parsed]>
-    #- define lore:|:<script[item_system_global_data].yaml_key[settings.lore.bottom].parse[parsed]>
-    - if <[nbt]||null> != null:
-      - define final:|:nbt=<[nbt]>
-    - if <[nbt_attributes]||null> != null:
-      - define final:|:nbt_attributes=<[nbt_attributes].separated_by[$]>
-    - determine <[item].with[display_name=<[name]>;lore=<[lore]>;flags=HIDE_ALL;<[final].separated_by[;].replace[$].with[|]||nbt=vanilla/true>]>
+      - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.flavor]>]>
+    - define lore <[lore].include[<script[item_system_global_data].parsed_key[settings.lore.bottom]>]>
+
+    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;flags=HIDE_ALL]>
+    - if !<[nbt].is_empty>:
+      - define NewItem <[NewItem].with[nbt=<[nbt]>]>
+    - else:
+      - define NewItem <[NewItem].with[nbt=vanilla/true]>
+
+    - if <[nbt_attributes].exists> && !<[nbt_attributes].is_empty>:
+      - define NewItem <[NewItem].with[nbt_attributes=<[nbt_attributes]>]>
+
+    - determine <[NewItem]>
     
 vanilla_craft_item_build:
   type: world
   events:
     on player crafts *_(sword|axe|chestplate|leggings|boots|helmet) bukkit_priority:HIGHEST:
-      - if <context.item.display||null> == null:
+      - if !<context.item.has_display>:
         - determine <proc[item_system_build_item].context[<context.item>]>
 
     
@@ -389,5 +528,5 @@ vanilla_craft_item_build2:
   type: world
   events:
     on player crafts diamond_sword bukkit_priority:HIGHEST:
-      - if <context.item.display||null> == null:
+      - if !<context.item.has_display>:
         - determine <proc[item_system_build_item].context[<context.item>]>
