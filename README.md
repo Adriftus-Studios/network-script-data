@@ -27,8 +27,8 @@
 ## FileTree
 
 - [configurations](configurations) | Config files for default server symlinks
-	- [1.15_server](configurations/1.15_server) | Server Configs for 1.15 Paper platform
-	- [1.16_server](configurations/1.16_server) | Server Configs for 1.16 Paper platform
+	- [1.15_servers](configurations/1.15_servers) | Server Configs for 1.15 Paper platform
+	- [1.16_servers](configurations/1.16_servers) | Server Configs for 1.16 Paper platform
 	- [Citizens](configurations/Citizens) | Config for Citizens
 	- [CMI](configurations/CMI) | Config for CMI, disables most content
 	- [Denizen](configurations/Denizen) | Config for Denizen for proper use with the Network
