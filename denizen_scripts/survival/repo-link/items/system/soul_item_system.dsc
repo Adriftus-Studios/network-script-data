@@ -337,25 +337,6 @@ item_with_soul:
   material: diamond_sword
   display name: <&c>ERROR - REPORT THIS
 
-#@get_random_soul:
-#@  type: procedure
-#@  definitions: rarity|level
-#@  script:
-#^    - define soul_type <script[item_system_global_data].list_keys[soul_names.<[rarity]>].random>
-#^    - foreach <script[item_system_global_data].yaml_key[soul_names.<[rarity]>.<[soul_type]>]> as:modifier:
-#^      - define stat <[modifier].before[/]>
-#^      - define type <[modifier].after[/]>
-#^      - if <[type]> == buff:
-#^        - define buffs:->:<[stat]>,<script[item_system_global_data].yaml_key[calculations.<[stat]>].parsed>
-#^      - else:
-#^        - define debuffs:->:<[stat]>,<script[item_system_global_data].yaml_key[calculations.<[stat]>].parsed>
-#^    - if <[buffs]||null> != null:
-#^      - define buffs_and_debuffs:|:buffs/<[buffs].escaped>
-#^    - if <[debuffs]||null> != null:
-#^      - define buffs_and_debuffs:|:debuffs/<[debuffs].escaped>
-#^    - define flavor:<element[<&d>Soul&spItem<&nl><&e>Combine&spwith&spArmor&spor&spWeapons].escaped>
-#^    - determine <proc[item_system_build_item].context[<item[soul].with[nbt=soul/<[soul_type]>,<[level]>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>|flavor/<[flavor]>|<[buffs_and_debuffs].separated_by[|]>]>]>
-
 get_random_soul:
   type: procedure
   definitions: rarity|level
@@ -432,25 +413,12 @@ item_system_build_item:
     - else:
       - define base 0
 
-
-  # % ██ [ NOTES FOR CONSTRUCTING THE MAP FROM THE LIST OF MAPS  ] ██
-      #| 1) foreach the list, foreach the map
-      #^  - foreach <[item].nbt[buffs]> as:buffs:
-      #^    - foreach <[buff]> key:buff as:stat:
-      #| 2) foreach the list, construct a fuller map
-      #^  - define map <map>
-      #^  - foreach <[item].nbt[buffs]> as:buffs:
-      #^    - define map <[map].include[<[buffs]>]>
-      #| 3) construct the map from the list
-      #^  - foreach <[item].nbt[<[modifier]>].parse[to_list].combine.to_map> key:alt as:stat:
-
-
   # % ██ [ Determine the NBT_Attributes  ] ██
     - define nbt <list>
     - foreach <list[buffs|debuffs]> as:modifier:
       - if <[item].has_nbt[<[modifier]>]> && <[item].material.name> != <script[soul].data_key[material]> && <[Item].nbt[<[modifier]>]> != none:
         - define nbt_attributes <list>
-        - foreach <[item].nbt[<[modifier]>].parse[to_list].combine.to_map> key:alt as:stat:
+        - foreach <[item].nbt[<[modifier]>].merge_maps> key:alt as:stat:
           - if <script[item_system_global_data].data_key[nbt_attributes].contains[<[alt]>]>
             - define attribute <script[item_system_global_data].data_key[nbt_attributes.<[alt]>]>
             - define slot <script[item_system_global_data].data_key[nbt_slots.<[item].material.name>]>
@@ -464,13 +432,11 @@ item_system_build_item:
           - else:
             - define nbt <map.with[<script[item_system_global_data].data_key[nbt_other.<[alt]>]>].as[<[alt]>]>
 
-
   # % ██ [ Determine Misc Item Properties  ] ██
     - if <[Item].has_script>:
       - define sn1 <[item].script.name>
     - else:
       - define sn1 <[Item].material.name>
-
 
     - if <[Item].has_nbt[rarity]>:
       - define rarity_color <script[item_system_global_data].data_key[settings.rarity_colors.<[item].nbt[rarity]>].parsed>
@@ -495,7 +461,7 @@ item_system_build_item:
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.armors]>]>
 
     - foreach <list[buffs|debuffs]> as:modifier:
-      - foreach <[item].nbt[<[modifier]>].parse[to_list].combine.to_map> key:alt as:final_value:
+      - foreach <[item].nbt[<[modifier]>].merge_maps> key:alt as:final_value:
         - if <[alt]> == none:
           - foreach next
         - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.buffs.<[alt]>]>]>
@@ -522,7 +488,6 @@ vanilla_craft_item_build:
     on player crafts *_(sword|axe|chestplate|leggings|boots|helmet) bukkit_priority:HIGHEST:
       - if !<context.item.has_display>:
         - determine <proc[item_system_build_item].context[<context.item>]>
-
     
 vanilla_craft_item_build2:
   type: world
