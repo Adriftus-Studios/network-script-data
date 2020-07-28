@@ -69,6 +69,7 @@ cause_error_command:
   type: command
   name: cause_error
   permission: cause_error
+  debug: false
   script:
   - define item:<player.item_in_hand>
   - define location:<player.location.forward[10]>

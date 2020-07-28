@@ -50,6 +50,7 @@ chat_system_events:
 
 chat_history_save:
   type: task
+  debug: false
   definitions: Channel|Message
   script:
   #^- yaml id:chat_history set <[channel]>_history:|:<map[channel/<[channel]>|message/<[message_escaped]||<[message].escaped>>|time/<server.current_time_millis>].escaped>
@@ -59,6 +60,7 @@ chat_history_save:
 
 chat_history_show:
   type: task
+  debug: false
   script:
     - define list <list[]>
     - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
@@ -118,7 +120,7 @@ chat_send_message:
 
 chat_system_flag_manager:
   type: world
-  debug: true
+  debug: false
   events:
     on player joins server:
       - waituntil rate:10t <yaml.list.contains[global.player.<player.uuid>].or[<player.is_online.not>]>
