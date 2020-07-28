@@ -511,7 +511,7 @@ item_system_build_item:
     - else:
       - define NewItem <[NewItem].with[nbt=vanilla/true]>
 
-    - if <[nbt_attributes].exists> && !<[nbt_attributes].is_empty>:
+    - if !<[nbt_attributes].is_empty>:
       - define NewItem <[NewItem].with[nbt_attributes=<[nbt_attributes]>]>
 
     - determine <[NewItem]>
