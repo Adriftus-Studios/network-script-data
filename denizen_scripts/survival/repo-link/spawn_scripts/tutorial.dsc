@@ -157,6 +157,9 @@ tutorial_next:
             - if !<player.is_online>:
               - flag player tutorial:!
               - stop
+            - define this_point <[value]>
+            - while <[this_point].material.name.is[!=].to[air]>:
+              - define this_point <[value].above>
             - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
             - wait 1t
       - foreach <script[tutorial_data].parsed_key[<[stage]>.hologram]>:
