@@ -170,7 +170,7 @@ tutorial_next:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<script[tutorial_data].parsed_key[complete_button].parse_color>] <location[tutorial_<[stage]>].above[1]> duration:10m
       - else:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<script[tutorial_data].parsed_key[continue_button].parse_color>] <location[tutorial_<[stage]>].above[1]> duration:10m
-      - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_<[stage]>].sub[0,0.5,0]> duration:10m
+      - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_<[stage]>]> duration:10m
       - stop
     - flag player tutorial:!
     - flag player tutorial_status:completed
