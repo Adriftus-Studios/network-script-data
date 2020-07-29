@@ -25,21 +25,35 @@ Webget_DCommand:
     - if <[Args].is_empty> || <[Args].size> > 9:
       - stop
 
-  # % ██ [ Check for Multiple Webget Queues        ] ██
-    - if <queue.list.filter[id.contains_any_text[<script.name>]].size> > 1:
-      - define Queues <queue.list.filter[id.contains_any_text[<script.name>]]>
-      - define FallbackRefURL https://discordapp.com/channels/<[Group]>/<[Channel]>/<[MessageID]>
-      - define QueueData "<[Queues].parse_tag[<&lb>Reference<&rb>(<[Parse_Value].definition[RefURL]||<[FallbackRefURL]>>): `<[Parse_Value].definition[URL]||(Invalid URL)>`].separated_by[<&nl>]>"
-      - define Color Red
-      - inject Embedded_Color_Formatting
-      - define Embeds "<list[<map[color/<[Color]>].with[title].as[Too Many Active Requests].with[description].as[Webget declined. There are currently two queue's in process:<&nl><[QueueData]>]>]>"
-      - define Data "<[Data].with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
-      - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
-      - stop
-
   # % ██ [ Check for Help Argument                 ] ██
     - if <list[help|-help].contains[<[Args].first>]>:
       - define Data <yaml[SDS_WebgetDCmd].to_json>
+      - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
+      - stop
+
+  # % ██ [ Check for Queue Management Argument     ] ██
+    - if <list[clear|-clear|cancel|-cancel].contains[<[Args].first>]>:
+      - define Queues <queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>]>
+      - define FallbackRefURL https://discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
+      - define QueueData "<[Queues].parse_tag[<&lb>Reference<&rb>(<[Parse_Value].definition[RefURL]||<[FallbackRefURL]>>): `<[Parse_Value].definition[URL]||(Invalid URL)>`].separated_by[<&nl>]>"
+      - define Color Red
+      - inject Embedded_Color_Formatting
+      - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Webget Queues Cleared].with[description].as[Webget queues forcibly closed: **<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>** queue's in process:<&nl><[QueueData]>]>]>"
+      - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
+      - foreach <[Queues]> as:Queue:
+        - queue <[Queue]> clear
+      - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
+      - stop
+
+  # % ██ [ Check for Multiple Webget Queues        ] ██
+    - if <queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size> > 2:
+      - define Queues <queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>]>
+      - define FallbackRefURL https://discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
+      - define QueueData "<[Queues].parse_tag[<&lb>Reference<&rb>(<[Parse_Value].definition[RefURL]||<[FallbackRefURL]>>): `<[Parse_Value].definition[URL]||(Invalid URL)>`].separated_by[<&nl>]>"
+      - define Color Red
+      - inject Embedded_Color_Formatting
+      - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Too Many Active Requests].with[description].as[Webget declined. There are currently **<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>** queue's in process:<&nl><[QueueData]><&nl>Use `/webget clear` to clear active requests.]>]>"
+      - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
       - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
       - stop
 
@@ -50,9 +64,11 @@ Webget_DCommand:
         - define <[ArgDef]> <[Args].get[<[Args].find[<[Args].filter[starts_with[<[ArgDef]>:]].first>]>].after[<[ArgDef]>:]>
 
   # % ██ [ Verify Timeout                          ] ██
-    - if !<[Timeout].exists> || <duration[<[Timeout]>]||invalid> == invalid:
+    - if !<[Timeout].exists>:
       - define Timeout <duration[10s]>
-      - define EntryResults "<[EntryResults].include[<&nl>**Warning**: `Invalid Duration Defaulted to 10s.`]>"
+    - else if <duration[<[Timeout]>]||invalid> == invalid:
+        - define EntryResults "<[EntryResults].include[<&nl>**Warning**: `Invalid Duration, Defaulted to 10s.`]>"
+        - define Timeout <duration[10s]>
     - else if <[Timeout].in_minutes> > 5:
       - define Timouet <duration[5m]>
       - define EntryResults "<[EntryResults].include[<&nl>**Warning**: `Maximum timeout is 5 minutes. Defaulted to 5m.`]>"
@@ -106,7 +122,7 @@ Webget_DCommand:
 
   # % ██ [ Return Results                          ] ██
     - inject Embedded_Color_Formatting
-    - define Embeds "<list[<map[color/<[Color]>].with[description].as[Command ran: `/WebGet <[Args].space_separated>`<[EntryResults].unseparated>]>]>"
+    - define Embeds "<list[<map.with[color].as[<[Color]>].with[description].as[Command ran: `/WebGet <[Args].space_separated>`<[EntryResults].unseparated>]>]>"
     - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
 
     - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
