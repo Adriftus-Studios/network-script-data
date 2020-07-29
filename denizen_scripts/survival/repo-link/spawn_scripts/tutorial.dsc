@@ -119,6 +119,8 @@ tutorial_spawn_finale:
 tutorial_command:
   type: command
   name: tutorial
+  description: Start the Tutorial!
+  usage: /tutorial
   script:
     - inject tutorial_start
 
