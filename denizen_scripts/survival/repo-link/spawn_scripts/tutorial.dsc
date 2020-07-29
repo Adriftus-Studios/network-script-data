@@ -157,12 +157,11 @@ tutorial_next:
             - if !<player.is_online>:
               - flag player tutorial:!
               - stop
-            - define this_point <[value]>
-            - while <[this_point].material.name.is[!=].to[air]>:
-              - define this_point <[value].above>
-            - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[this_point]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
+            - while <[value].material.name> != air:
+              - define value <[value].above[2]>
+            - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
             - wait 1t
-          - wait 1s
+          - wait 5t
       - foreach <script[tutorial_data].parsed_key[<[stage]>.hologram]>:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_<[stage]>].above[3].sub[0,<[loop_index].*[0.25]>,0]> duration:10m
       - if <script[tutorial_data].parsed_key[<[stage].+[1]>]||null> == null:
