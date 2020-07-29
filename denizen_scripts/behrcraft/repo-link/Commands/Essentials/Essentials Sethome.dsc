@@ -13,7 +13,7 @@ SetHome_Command:
                 - determine "<proc[Colorize].context[This Home Exists Already!|red]>"
     script:
     # % ██ [ Verify args ] ██
-        - if <context.args.size.is_empty>:
+        - if <context.args.is_empty>:
             - inject Command_Syntax
 
     # % ██ [ Define name/loc ] ██

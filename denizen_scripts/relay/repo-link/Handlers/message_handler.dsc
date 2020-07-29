@@ -24,7 +24,7 @@ Message_Handler:
       - define Channel <context.Channel.id>
       - define Group <context.Group||Is_Direct>
     #^- define No_Mention_Message <context.No_Mention_Message.escaped||WebHook>
-    #^- define Message_ID <context.Message_ID||WebHook>
+      - define Message_ID <context.Message_ID||WebHook>
     #^- define Mentions <context.Mentions||WebHook>
     #^- define Is_Direct <context.Is_Direct>
 
@@ -49,8 +49,8 @@ Message_Handler:
             - ~Run Status_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case note meetingnote meetingnotes meetingsnote meetingsnotes meatingnote meatingnotes meatingsnote meatingsnotes notemeeting notesmeeting snotemeeting snotesmeeting notemeating notesmeating snotemeating snotesmeating:
             - ~Run Note_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
-          - case webget:
-            - ~Run Webget_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
+          - case webget wget:
+            - ~Run Webget_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
 
     # % ██ [ General Plaintext Scripts       ] ██
       - else if <[Message].starts_with[yay]> || <[Message].contains[<&sp>yay<&sp>]>:

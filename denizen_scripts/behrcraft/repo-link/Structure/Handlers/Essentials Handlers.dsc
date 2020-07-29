@@ -19,8 +19,8 @@ Essentials:
             - if <context.reason> == "Illegal characters in chat":
                 - determine cancelled
         on player dies:
-            - flag player behrry.essentials.teleport.deathback:<player.location>
-        #    - define key Behrry.Essentials.Cached_Inventories
+            - flag player Behr.essentials.teleport.deathback:<player.location>
+        #    - define key Behr.Essentials.Cached_Inventories
         #    - define YamlSize <yaml[<player.uuid>].read[<[Key]>].size||0>
         #    - define UID <yaml[<player.uuid>].read[<[Key]>].get[<[YamlSize]>].before[Lasagna]||0>
         #    - if <[YamlSize]> > 9:
@@ -35,7 +35,7 @@ Essentials:
                 - determine passively <player.world.spawn_location>
         on pl|plugin|plugins command:
             - determine passively fulfilled
-            - narrate "Plugins (4): <&a>BehrEdit<&f>, <&a>BehrryEssentials<&f>, <&a>Citizens<&f>, <&a>Denizen<&f>"
+            - narrate "Plugins (4): <&a>BehrEdit<&f>, <&a>BehrEssentials<&f>, <&a>Citizens<&f>, <&a>Denizen<&f>"
         on player enters minecart:
             - define Vehicle <context.vehicle>
             - adjust <[Vehicle]> speed:0.5

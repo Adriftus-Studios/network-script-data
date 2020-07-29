@@ -7,7 +7,7 @@ DelHome_Command:
     usage: /delhome <&lt>HomeName<&gt>
     tab complete:
         - if <player.has_flag[Behr.Essentials.Homes]>:
-            - define Arg1 <player.flag[Behr.Essentials.Homes].parse[before[/]]>
+            - define Args <player.flag[Behr.Essentials.Homes].parse[before[/]]>
             - inject OneArg_Command_Tabcomplete
     script:
     # % ██ [ Verify args ] ██

@@ -1,6 +1,6 @@
 player_data_handler:
   type: world
-  debug: true
+  debug: false
   events:
     on player logs in:
     # % ██ [ Load Server Player Data ] ██
@@ -54,18 +54,21 @@ player_data_handler:
 
 global_player_data_unloaded:
   type: task
+  debug: false
   definitions: uuid
   script:
       - yaml id:data_handler set players.<[uuid]>.data_loaded:false
 
 global_player_data_loaded:
   type: task
+  debug: false
   definitions: uuid
   script:
       - yaml id:data_handler set players.<[uuid]>.data_loaded:true
 
 global_player_data_load:
   type: task
+  debug: false
   definitions: uuid
   script:
     - if <server.has_file[data/globalData/players/<[uuid]>.yml]>:
@@ -76,6 +79,7 @@ global_player_data_load:
 
 global_player_data_unload:
   type: task
+  debug: false
   definitions: uuid
   script:
     - ~yaml id:global.player.<[uuid]> savefile:data/globalData/players/<[uuid]>.yml
