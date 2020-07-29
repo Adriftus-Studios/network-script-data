@@ -151,7 +151,7 @@ tutorial_next:
         - narrate <script[tutorial_data].parsed_key[<[stage]>.message].parse_color>
       - if <script[tutorial_data].list_keys[<[stage]>].contains[particle_guide]> && <script[tutorial_data].parsed_key[<[stage]>.particle_guide]>:
         - look <player> tutorial_<[stage]>
-        - while <player.location.distance[<location[tutorial_<[stage]>]>]> > 7:
+        - while <player.location.world.name> == spawn && <player.location.distance[<location[tutorial_<[stage]>]>]> > 7:
           - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
           - foreach <[points]>:
             - if !<player.is_online>:
