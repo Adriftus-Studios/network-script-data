@@ -19,7 +19,7 @@ Webget_DCommand:
     - define EntryResults <list>
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
     - define RHeaders <list[User-Agent/really|Content-Type/application/json]>
-    - define RefURL https://discordapp.com/channels/<[Group]>/<[Channel]>/<[MessageID]>
+    - define RefURL https://discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
 
   # % ██ [ Verify Arguments                        ] ██
     - if <[Args].is_empty> || <[Args].size> > 9:
@@ -75,8 +75,8 @@ Webget_DCommand:
 
   # % ██ [ Check for Confirmation Flag             ] ██
     - if <[Args].contains_any[-c|-confirm]>:
-      - define Message "Confirmation Notice: `Request Received. Submitting with a timeout of: <[Timeout]>`"
-      - define CData "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[content].as[<[Message]>].with[tts].as[true]>"
+      - define Message "Confirmation Notice: `Request Received. Submitting with a timeout of: <[Timeout].formatted>`"
+      - define CData "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[content].as[<[Message]>].to_json>"
       - ~webget <[Hook]> data:<[CData]> headers:<[RHeaders]>
 
   # % ██ [ Create Webget                           ] ██
@@ -112,7 +112,7 @@ Webget_DCommand:
     - if <[Args].contains_any[-r|-result]>:
       - define EntryResults "<[EntryResults].include[<&nl>**Result Status**: `<entry[Response].result||Invalid Save Entry>`]>"
     - if <[Args].contains_any[-t|-time|-timeran|-time-ran]>:
-      - define EntryResults "<[EntryResults].include[<&nl>**Time Ran**: `<entry[Response].time_ran||Invalid Save Entry>`]>"
+      - define EntryResults "<[EntryResults].include[<&nl>**Time Ran**: `<entry[Response].time_ran.formatted||Invalid Save Entry>`]>"
 
   # % ██ [ Determine Color Display                 ] ██
     - if "<[EntryResults].contains_any_text[Invalid Save Entry|**Warning**:]>":
