@@ -35,13 +35,16 @@ Webget_DCommand:
     - if <list[clear|-clear|cancel|-cancel].contains[<[Args].first>]>:
       - define Queues <queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>]>
       - define FallbackRefURL https://discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
-      - define QueueData "<[Queues].parse_tag[<&lb>Reference<&rb>(<[Parse_Value].definition[RefURL]||<[FallbackRefURL]>>): `<[Parse_Value].definition[URL]||(Invalid URL)>`].separated_by[<&nl>]>"
       - define Color Red
       - inject Embedded_Color_Formatting
-      - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Webget Queues Cleared].with[description].as[Webget queues forcibly closed: **<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>** queue's in process:<&nl><[QueueData]>]>]>"
+      - if <[Queues].is_empty>:
+        - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Error: `No Active Queues.`]>]>"
+      - else:
+        - define QueueData "<[Queues].parse_tag[<&lb>Reference<&rb>(<[Parse_Value].definition[RefURL]||<[FallbackRefURL]>>): `<[Parse_Value].definition[URL]||(Invalid URL)>`].separated_by[<&nl>]>"
+        - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Webget Queues Cleared].with[description].as[Webget queues forcibly closed **<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>** queue's in process:<&nl><[QueueData]>]>]>"
+        - foreach <[Queues]> as:Queue:
+          - queue <[Queue]> clear
       - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
-      - foreach <[Queues]> as:Queue:
-        - queue <[Queue]> clear
       - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
       - stop
 
