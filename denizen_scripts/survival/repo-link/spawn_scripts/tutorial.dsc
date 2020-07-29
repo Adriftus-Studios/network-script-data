@@ -178,7 +178,7 @@ tutorial_timeout:
   definitions: stage
   script:
     - while <player.flag[tutorial]||null> == <[stage]>:
-      - if <queue.time_run> > <duration[10m]>:
+      - if <queue.time_ran> > <duration[10m]>:
         - inject tutorial_skipped
         - narrate "<&e>Your tutorial has timed out"
         - narrate "<&e>You may use <&b>/tutorial<&e> at any time to restart it."
