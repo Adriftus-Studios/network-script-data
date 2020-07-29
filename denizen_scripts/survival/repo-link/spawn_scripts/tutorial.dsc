@@ -142,6 +142,8 @@ tutorial_next:
     - define stage <player.flag[tutorial]>
     - if <location[tutorial_<[stage]>]||null> != null:
       - run tutorial_timeout def:<[stage]>
+      - if <script[tutorial_data].list_keys[<[stage]>].contains[run_task]>:
+        - run <script[tutorial_data].parsed_key[<[stage]>.run_task]>
       - if <script[tutorial_data].list_keys[<[stage]>].contains[title]>:
         - if <script[tutorial_data].list_keys[<[stage]>].contains[subtitle]>:
           - title title:<script[tutorial_data].parsed_key[<[stage]>.title].parse_color> subtitle:<script[tutorial_data].parsed_key[<[stage]>.subtitle]>
@@ -169,8 +171,6 @@ tutorial_next:
       - else:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<script[tutorial_data].parsed_key[continue_button].parse_color>] <location[tutorial_<[stage]>].above[1]> duration:10m
       - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_<[stage]>].sub[0,0.5,0]> duration:10m
-      - if <script[tutorial_data].list_keys[<[stage]>].contains[run_task]>:
-        - run <script[tutorial_data].parsed_key[<[stage]>.run_task]>
       - stop
     - flag player tutorial:!
     - flag player tutorial_status:completed
