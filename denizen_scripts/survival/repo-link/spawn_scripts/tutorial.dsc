@@ -159,6 +159,11 @@ tutorial_next:
             - if !<player.is_online>:
               - flag player tutorial:!
               - stop
+            - if <player.location.distance[<location[tutorial_<[stage]>]>]> > 40:
+              - narrate "<&e>You have gone too far from your next tutorial location."
+              - narrate "<&e>You may restart it at any time by using <&b>/tutorial"
+              - inject tutorial_skipped
+              - stop
             - while <[value].material.name> != air:
               - define value <[value].above[2]>
             - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
