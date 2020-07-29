@@ -163,12 +163,13 @@ tutorial_next:
               - define value <[value].above[2]>
             - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
             - wait 1t
-          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance]||100>:
+          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].+[3]||100>:
             - narrate "<&e>You have gone too far from your next tutorial location."
             - narrate "<&e>You may restart it at any time by using <&b>/tutorial"
             - inject tutorial_skipped
             - stop
-          - define last_distance <player.location.distance[<location[tutorial_<[stage]>]>]>
+          - else if <player.location.distance[<location[tutorial_<[stage]>]>]> < <[last_distance]||100>:
+            - define last_distance <player.location.distance[<location[tutorial_<[stage]>]>]>
           - wait 5t
       - foreach <script[tutorial_data].parsed_key[<[stage]>.hologram]>:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<[value].parse_color>] <location[tutorial_<[stage]>].above[3].sub[0,<[loop_index].*[0.25]>,0]> duration:10m
