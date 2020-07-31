@@ -117,7 +117,7 @@ market_system_data:
       category: potion_ingredients
       minimum_value: 20
       
-    dragons_breath:
+    dragon_breath:
       category: potion_ingredients
       minimum_value: 20
       
