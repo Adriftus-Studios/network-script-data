@@ -33,7 +33,7 @@ tutorial_data:
   4:
     hologram:
       - "<&6>Warp Command"
-      - "<&b>Warps can be made by any player within their claim"
+      - "<&b>Warps can be made by any player within their claim."
       - "<&e>You can visit server warps, or other player's warps."
       - "<&a>Command Menu<&co> <&b>/warps"
     particle_guide: true
