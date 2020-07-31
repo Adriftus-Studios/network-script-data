@@ -73,7 +73,7 @@ tutorial_data:
     hologram:
       - "<&d><&l>The World (1/2)"
       - "<&e>The world is split into 2 sections<&co>"
-      - "<&e>The &cSavage Lands &eare the inner 20,000 blocks".
+      - "<&e>The &cSavage Lands &eare the inner 20,000 blocks."
       - "<&e>The &2Outer Realms &eare everywhere outside of that."
     particle_guide: true
   10:
