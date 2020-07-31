@@ -15,40 +15,41 @@ tutorial_data:
   1:
     hologram:
       - "<&6>Adriftus Survival"
-      - "<&a>This tutorial will teach you the server rules"
-      - "<&a>It will also walk you through the basic commands"
+      - "<&a>This tutorial will teach you the server rules."
+      - "<&a>It will also walk you through the basic commands."
     particle_guide: true
   2:
     hologram:
       - "<&6>Rule <&ns>1"
-      - "<&e>No harrassing other players"
-      - "<&c>Stop Means Stop"
+      - "<&e>No harrassing other players."
+      - "<&c>Stop Means Stop."
     particle_guide: true
   3:
     hologram:
       - "<&6>Rule <&ns>2"
-      - "<&e>Avoid profanity in public channels"
-      - "<&e>Keep your language kid appropriate"
+      - "<&e>Avoid profanity in public channels."
+      - "<&c>Keep your language kid appropriate."
     particle_guide: true
   4:
     hologram:
       - "<&6>Warp Command"
-      - "<&b>Warps can be made by any player, within their claim"
+      - "<&b>Warps can be made by any player within their claim"
       - "<&e>You can visit server warps, or other player's warps."
-      - "<&a>Command<&co> <&b>/warps"
+      - "<&a>Command Menu<&co> <&b>/warps"
     particle_guide: true
   5:
     hologram:
       - "<&6>Grim"
       - "<&e>Grim can help you return to your death location"
-      - "<&e>Be aware, nothing is free."
+      - "<&c>Be aware, nothing is free."
       - "<&a>--------------------------"
-      - "<&e>use <&b>/warps <&e>and go to the market."
+      - "<&e>Use <&b>/warps <&e>and go to the market to continue."
     particle_guide: true
   6:
     hologram:
       - "<&6>The Market"
-      - "<&e>You can buy all sorts of upgrades and items here"
+      - "<&e>You can buy all sorts of upgrades and items here!"
+      - "<&e>Be sure to check out the stocks and cosmetic vendors."
       - "<&e>You can also get daily rewards!"
     title: "<&6>Use <&b>/warps"
     subtitle: "Go to the server warp: Marketplace"
@@ -56,49 +57,50 @@ tutorial_data:
   7:
     hologram:
       - "<&6>Claims"
-      - "<&e>You can claim chunks to different groups"
-      - "<&e>If a group doesn't exist, it be created"
+      - "<&e>You can claim land!"
+      - "<&e>You can also give access to different groups of players"
+      - "<&e>If a group doesn't exist, it will be created"
       - "<&e>You can manage everything related to chunks in the GUI"
       - "<&a>Command<&co> <&b>/claims"
     particle_guide: true
   8:
     hologram:
       - "<&d>Soul Forge"
-      - "<&e>Here you can forge your items with souls"
-      - "<&e>Souls can be acquired in the <&c>Savage Lands"
+      - "<&e>Here you can forge your items with souls."
+      - "<&c>Souls can be acquired in the <&4>Savage Lands."
     particle_guide: true
   9:
     hologram:
-      - "<&7>The World"
-      - "<&e>The world is split into 2 sections"
-      - "<&e>The &cSavage Lands &eare the inner 20k"
-      - "<&e>The &2Outer Realms &eare everywhere outside of that"
+      - "<&d>The World (1)"
+      - "<&e>The world is split into 2 sections<&co>"
+      - "<&e>The &cSavage Lands &eare the inner 20,000 blocks".
+      - "<&e>The &2Outer Realms &eare everywhere outside of that."
     particle_guide: true
   10:
     hologram:
-      - "<&7>The World"
-      - "<&e>The <&c>Savage Lands &eare <&c>PvP Enabled"
-      - "<&e>Beware of your encounters here as mobs also spawn."
-      - "<&e>The <&2>Outer Realms <&e>are a safe haven"
-      - "<&e>No mobs will spawn, and PvP is disabled"
+      - "<&d>The World (2)"
+      - "<&e>The <&c>Savage Lands &ehave <&c>PvP Enabled."
+      - "<&e>Beware of encounters there as monsters will spawn."
+      - "<&e>The <&2>Outer Realms <&e>are a safe haven."
+      - "<&e>No monsters will spawn, and PvP is disabled."
     particle_guide: true
   11:
     hologram:
       - "<&6>End Game"
-      - "<&e>The close to the center of the world you get"
-      - "<&e>The harder the mobs will be, and the better loot they drop"
-      - "<&e>The only <&d>Ender Portal <&e>resides at the bottom of the dungeon there"
-      - "<&e>Should you manage to endure, great rewards await"
+      - "<&e>The closer to the center of the world you get,"
+      - "<&e>Monsters will be harder to defeat, and drop better loot."
+      - "<&e>The only <&d>Ender Portal <&e>resides at the bottom of a dungeon in the center."
+      - "<&e>Should you manage to endure the challenge, powerful rewards await."
     particle_guide: true
     run_task: tutorial_spawn_finale
   12:
     hologram:
       - "<&a>Start Your Journey"
-      - "<&e>Jump through the hole to be teleported to the gameworld"
-      - "<&e>If you need any additional help, consult <&b>/help"
-      - "<&e>You can return to spawn at any point with <&b>/spawn"
-      - "<&e>There is no way to return to your location, however."
-      - "<&c>Make sure you <&b>/sethome"
+      - "<&e>Jump through the hole to be teleported to the game world."
+      - "<&e>If you need any additional help, consult <&b>/help<&e>."
+      - "<&e>You can return to spawn at any point with <&b>/spawn<&e>."
+      - "<&e>Make sure you <&b>/sethome <&c>if you like where you land."
+      - "<&c>There is no other way to return to the same location."
     particle_guide: true
 
 
@@ -201,7 +203,7 @@ tutorial_skipped:
       - fakespawn <[value]> cancel
     - flag player tutorial:!
     - flag player tutorial_status:skipped
-    
+
 
 tutorial_events:
   type: world
