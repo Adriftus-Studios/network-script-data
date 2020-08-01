@@ -165,7 +165,7 @@ bow_trail_block_2_color:
       - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|<[color1]> targets:<player.location.world.players>
       - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|<[color2]> targets:<player.location.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
-  
+
 
 
 
@@ -203,6 +203,8 @@ bowtrails_gui_command:
   type: command
   name: bowtrails
   debug: false
+  usage: /bowtrails
+  description: Used to access and change any unlocked cosmetic bow trails.
   aliases:
     - "bowtrail"
     - "bt"
