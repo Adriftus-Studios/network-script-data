@@ -20,7 +20,7 @@ mob_spawning_system_events:
   type: world
   debug: false
   settings:
-    blacklist: tropical_fish|salmon|cod|horse|donkey|cow|chicken|sheep|pig|pufferfish|llama|trader_llama|armor_stand
+    blacklist: tropical_fish|salmon|cod|horse|donkey|cow|chicken|sheep|pig|pufferfish|llama|trader_llama|armor_stand|squid
     min: 1000
     max: 20000
   events:
