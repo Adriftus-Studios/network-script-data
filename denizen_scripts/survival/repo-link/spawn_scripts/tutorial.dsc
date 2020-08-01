@@ -32,18 +32,15 @@ tutorial_data:
     particle_guide: true
   4:
     hologram:
-      - "<&6><&l>Warp Command"
-      - "<&b>Warps can be made by any player within their claim."
-      - "<&e>You can visit server warps, or other player's warps."
-      - "<&a>Command Menu<&co> <&b>/warps"
+      - "<&6><&l>Vote Crates"
+      - "<&e>Voting for our server will earn you rewards."
+      - "<&e>Use <&b>/vote <&e>to find out how."
     particle_guide: true
   5:
     hologram:
-      - "<&6><&l>Grim"
-      - "<&e>Grim can help you return to your death location."
-      - "<&c>Be aware, nothing is free."
-      - "<&a>--------------------------"
-      - "<&e>Use <&b>/warps <&e>and go to the market to continue."
+      - "<&6><&l>Soul Forge"
+      - "<&e>Here you can forge your items with souls."
+      - "<&c>Souls can be acquired in the <&4>Savage Lands."
     particle_guide: true
   6:
     hologram:
@@ -53,8 +50,60 @@ tutorial_data:
       - "<&e>You can also get daily rewards!"
     title: "<&6>Use <&b>/warps"
     subtitle: "Go to the server warp: Marketplace"
-    message: "<&6>/warp &eto the server warp: Marketplace"
   7:
+    hologram:
+      - "<&6><&l>Cosmetics"
+      - "<&e>Here you can purchase titles and bow trails!"
+      - "<&c>Use <&6>/titles<&e> and <&6>/bowtrails<&e> to use them."
+    particle_guide: true
+  8:
+    hologram:
+      - "<&6><&l>Claims"
+      - "<&e>Here you can purchase upgrades for your claim."
+      - "<&c>Upgrades only apply within your claim."
+    particle_guide: true
+  9:
+    hologram:
+      - "<&6><&l>Mystery Boxes"
+      - "<&e>Here you can purchase mysterious packages."
+      - "<&e>Who knows what they might contain."
+    particle_guide: true
+  10:
+    hologram:
+      - "<&6><&l>Stonks!"
+      - "<&e>Our Stonks Broker buys and sells items."
+      - "<&e>Prices fluctuate, so check back often!"
+    particle_guide: true
+  11:
+    hologram:
+      - "<&6><&l>Survivalist"
+      - "<&e>Want a little something a little more useful?"
+      - "<&e>The survivalist sells backpacks, tents, and more!"
+    particle_guide: true
+  12:
+    hologram:
+      - "<&6><&l>Daily Rewards"
+      - "<&e>Wait a minute, is that you from the future?"
+      - "<&e>Maybe you have something to give yourself."
+      - "<&c>Each day you can recieve a daily reward."
+    particle_guide: true
+  13:
+    hologram:
+      - "<&6><&l>Warp Command"
+      - "<&b>Warps can be made by any player within their claim."
+      - "<&e>You can visit server warps, or other player's warps."
+      - "<&e>Command Menu<&co> <&b>/warps"
+      - "<&a>--------------------------"
+      - "<&e>Use <&b>/warps <&e>and go to Grim to continue."
+    particle_guide: true
+    message: "<&6>/warp <&e>to the server warp<&co> Grim"
+  14:
+    hologram:
+      - "<&6><&l>Grim"
+      - "<&e>Grim can help you return to your death location."
+      - "<&c>Be aware, nothing is free."
+    particle_guide: true
+  15:
     hologram:
       - "<&6><&l>Claims"
       - "<&e>You can claim land!"
@@ -63,37 +112,46 @@ tutorial_data:
       - "<&e>You can manage everything related to chunks in the GUI."
       - "<&a>Command<&co> <&b>/claims"
     particle_guide: true
-  8:
+  16:
     hologram:
-      - "<&d><&l>Soul Forge"
-      - "<&e>Here you can forge your items with souls."
-      - "<&c>Souls can be acquired in the <&4>Savage Lands."
+      - "<&6><&l>Elevators"
+      - "<&e>Gold blocks function as elevators."
+      - "<&e>You can travel up, or down 25 blocks at a time."
+      - "<&e>Step inside to give it a try!"
     particle_guide: true
-  9:
+  17:
     hologram:
-      - "<&d><&l>The World (1/2)"
+      - "<&6><&l>The World (1/2)"
       - "<&e>The world is split into 2 sections<&co>"
-      - "<&e>The &cSavage Lands &eare the inner 20,000 blocks."
-      - "<&e>The &2Outer Realms &eare everywhere outside of that."
+      - "<&e>The <&c>Savage Lands <&e>are the inner 20,000 blocks."
+      - "<&e>The <&2>Outer Realms <&e>are everywhere outside of that."
     particle_guide: true
-  10:
+  18:
     hologram:
-      - "<&d><&l>The World Part (2/2)"
-      - "<&e>The <&c>Savage Lands &ehave <&c>PvP Enabled."
+      - "<&6><&l>The World Part (2/2)"
+      - "<&e>The <&c>Savage Lands <&e>have <&c>PvP Enabled."
       - "<&e>Beware of encounters there as monsters will spawn."
       - "<&e>The <&2>Outer Realms <&e>are a safe haven."
       - "<&e>No monsters will spawn, and PvP is disabled."
     particle_guide: true
-  11:
+  19:
+    hologram:
+      - "<&6><&l>Chat"
+      - "<&e>We have cross-server chat available"
+      - "<&e>Use <&6>/chat<&e> to change your channel"
+      - "<&e>You can also click on the channel name in chat!"
+      - "<&c>Please keep our rules in mind."
+    particle_guide: true
+  20:
     hologram:
       - "<&6><&l>End Game"
-      - "<&e>The closer to the center of the world you get,"
-      - "<&e>Monsters will be harder to defeat, and drop better loot."
+      - "<&e>Monsters grow stronger as you venture towards the center of the world."
+      - "<&e>These monsters posess and guard more powerful equipment and items."
       - "<&e>The only <&d>Ender Portal <&e>resides at the bottom of a dungeon in the center."
       - "<&e>Should you manage to endure the challenge, powerful rewards await."
     particle_guide: true
     run_task: tutorial_spawn_finale
-  12:
+  21:
     hologram:
       - "<&a><&l>Start Your Journey"
       - "<&e>Jump through the hole to be teleported to the game world."
@@ -155,6 +213,7 @@ tutorial_next:
         - narrate <script[tutorial_data].parsed_key[<[stage]>.message]>
       - if <script[tutorial_data].list_keys[<[stage]>].contains[particle_guide]> && <script[tutorial_data].parsed_key[<[stage]>.particle_guide]>:
         - look <player> tutorial_<[stage]>
+        - define last_distance 128
         - while <player.location.world.name> == spawn && <player.location.distance[<location[tutorial_<[stage]>]>]> > 7:
           - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
           - foreach <[points]>:
@@ -165,12 +224,12 @@ tutorial_next:
               - define value <[value].above[2]>
             - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
             - wait 1t
-          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].+[5]||100>:
+          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].+[5]>:
             - narrate "<&e>You have gone too far from your next tutorial location."
             - narrate "<&e>You may restart it at any time by using <&b>/tutorial"
             - inject tutorial_skipped
             - stop
-          - else if <player.location.distance[<location[tutorial_<[stage]>]>]> < <[last_distance]||100>:
+          - else if <player.location.distance[<location[tutorial_<[stage]>]>]> < <[last_distance]>:
             - define last_distance <player.location.distance[<location[tutorial_<[stage]>]>]>
           - wait 5t
       - foreach <script[tutorial_data].parsed_key[<[stage]>.hologram]>:
@@ -190,8 +249,8 @@ tutorial_timeout:
   type: task
   definitions: stage
   script:
-    - while <player.flag[tutorial]||null> == <[stage]>:
-      - if <queue.time_ran> > <duration[10m]>:
+    - while <player.has_flag[tutorial]> && <player.flag[tutorial]> == <[stage]>:
+      - if <queue.time_ran.in_seconds> > 600:
         - inject tutorial_skipped
         - narrate "<&e>Your tutorial has timed out."
         - narrate "<&e>You may use <&b>/tutorial<&e> at any time to restart it."
