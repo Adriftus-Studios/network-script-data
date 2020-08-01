@@ -1,0 +1,63 @@
+{
+    "embeds": [
+      {
+        "color": 8781824,
+        "fields": [
+          {
+            "name": "Reason:",
+            "value": "Didn't give behr an ItemTag.mechanisms or ItemTag.describe tag."
+          },
+          {
+            "name": "Action:",
+            "value": "Ban",
+            "inline": true
+          },
+          {
+            "name": "Duration:",
+            "value": "3 days",
+            "inline": true
+          },
+          {
+            "name": "Incident #:",
+            "value": "1",
+            "inline": true
+          }
+        ],
+        "author": {
+          "name": "User: mcmonkey4eva",
+          "icon_url": "https://minotar.net/helm/mcmonkey4eva"
+        },
+        "footer": {
+          "text": "Banned by:Behr_Riley",
+          "icon_url": "https://minotar.net/helm/_Behr"
+        },
+        "timestamp": "2020-07-16T20:51:00.000Z"
+      },
+      {
+        "color": 8781824,
+        "fields": [
+          {
+            "name": "Reason:",
+            "value": "did not give behr a method to remove ItemTag.script secret sauce mechanism."
+          },
+          {
+            "name": "Action:",
+            "value": "Kicked",
+            "inline": true
+          },
+          {
+            "name": "Incident #:",
+            "value": "2",
+            "inline": true
+          }
+        ],
+        "footer": {
+          "text": "Kicked by: Behr_Riley",
+          "icon_url": "https://minotar.net/helm/_Behr"
+        },
+        "timestamp": "2020-05-20T04:14:00.000Z"
+      }
+    ],
+    "username": "Moderation Report",
+    "avatar_url": "https://img.icons8.com/nolan/64/warning-shield.png"
+  }
