@@ -35,7 +35,7 @@ Status_DCommand:
     - if <list[Network|Servers|All].contains[<[Server]>]>:
       - define Data <map[].with[color].as[code]>
       - define Data "<[Data].with[username].as[Network Status]>"
-      - define Data <[Data].with[avatar_url].as[https://img.icons8.com/nolan/64/source-code.png]>
+      - define Data <[Data].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
 
       - define Fields <list[]>
       - define FieldMap <map[].with[inline].as[true]>
@@ -107,7 +107,7 @@ Status_DCommand:
     - define Data <map[].with[color].as[code]>
     - define Data <[Data].with[fields].as[<[Fields]>]>
     - define data "<[Data].with[username].as[<[Server]> Server]>"
-    - define Data <[Data].with[avatar_url].as[https://img.icons8.com/nolan/64/source-code.png]>
+    - define Data <[Data].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
     - if !<[Duplicates].exclude[Online].is_empty>:
       - define Data "<[Data].with[description].as[**Flags Used**: `<[Duplicates].comma_separated>`]>"
     - define Data <[Data].with[time].as[Default]>

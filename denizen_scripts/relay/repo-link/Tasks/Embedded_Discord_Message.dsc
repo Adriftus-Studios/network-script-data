@@ -7,9 +7,9 @@ Embedded_Discord_Message:
         #- inject Embedded_Color_Formatting
         - inject Embedded_Time_Formatting
         - if <script[DDTBCTY].list_keys[WebHooks].contains[<[Channel]>]>:
-            - define Token <script[DDTBCTY].yaml_key[WebHooks.<[Channel]>.Hook]>
+            - define Token <script[DDTBCTY].data_key[WebHooks.<[Channel]>.Hook]>
             - define Data <yaml[webhook_template_<[Template]>].to_json.parsed>
-            - ~webget <[Token]> 'headers:<list[Content-Type/application/json|User-Agent/denizen]>' 'data:<[Data]>' save:test
+            - ~webget <[Token]> headers:<list[Content-Type/application/json|User-Agent/denizen]> data:<[Data]> save:test
             - narrate <entry[test].result>
 
 TestTask:
@@ -17,10 +17,10 @@ TestTask:
     debug: true
     definitions: data
     script:
-        - define thumbnail <map[].with[url].as[https://img.icons8.com/nolan/64/source-code.png]>
-        - define image <map[].with[url].as[https://img.icons8.com/nolan/64/source-code.png]>
+        - define thumbnail <map.with[url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
+        - define image <map.with[url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
 
-        - define Data <map[].with[embeds].as[<list[<map[].with[thumbnail].as[<[thumbnail]>].with[image].as[<[Image]>]>]>]>
+        - define Data <map.with[embeds].as[<list[<map[].with[thumbnail].as[<[thumbnail]>].with[image].as[<[Image]>]>]>]>
         - define Data <[Data].to_json>
         - define channel 626098849127071746
         - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
@@ -34,8 +34,8 @@ Embedded_Discord_Message_New:
     script:
     # - ██ [ Inject Dependencies                     ] ██
         - inject Definition_Registry_Mapped
-        - define Data <map[]>
-        - define Embeds <map[]>
+        - define Data <map>
+        - define Embeds <map>
 
         - foreach <list[username|avatar_url|tts]> as:String:
             - if <[<[String]>].exists>:
