@@ -17,6 +17,7 @@ scriptdata/twitch/*
 # ██ [ Scriptdata Files           ] ██
 scriptdata/discord/token.yml
 scriptdata/discord/webhooks.yml
+scriptdata/global/players
 denizen_scripts/relay/repo-link/Handlers/message_handler.dsc
 
 # ██ [ System Script Directories  ] ██

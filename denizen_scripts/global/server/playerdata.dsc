@@ -53,14 +53,9 @@ Player_Data_Join_Event:
     - define GlobalYaml global.player.<[UUID]>
     
   # % ██ [ Verify Player ] ██
-    - if <server.match_offline_player[<[UUID]>]||invalid> != invalid:
-      - waituntil rate:2t <player[<[UUID]>].is_online> || <[Timeout].duration_since[<util.time_now>].seconds> > 0:
-      - if !<player[<[UUID]>].is_online>:
-        - stop
-    - else:
-      - waituntil rate:2t <server.match_player[<[UUID]>].is_online||false> || <[Timeout].duration_since[<util.time_now>].seconds> > 0:
-      - if !<server.match_player[<[UUID]>].is_online||false>:
-        - stop
+    - waituntil rate:2t <player[<[UUID]>].is_online||false> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0
+    - if !<player[<[UUID]>].is_online>:
+      - stop
     
   # % ██ [ Load Global Player Data ] ██
     - yaml id:<[GlobalYaml]> load:data/global/players/<[UUID]>.yml
@@ -87,6 +82,19 @@ Player_Data_Quit_Event:
   debug: true
   definitions: UUID
   script:
+    - Run Unload_Player_Data def:<[UUID]>
+
+Player_Data_Switch_Event:
+  type: task
+  debug: true
+  definitions: UUID
+  script:
+    - Run Unload_Player_Data def:<[UUID]>
+
+Unload_Player_Data:
+  type: task
+  debug: false
+  definitions: UUID
   # % ██ [ Cache Player Info ] ██
     - define Player <player[<[UUID]>]>
     - define UUID <[Player].uuid>

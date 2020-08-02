@@ -1,5 +1,6 @@
 global_data_handler:
   type: world
+  debug: false
   events:
     on server starts:
       - yaml id:data_handler create
@@ -9,7 +10,7 @@ global_data_handler:
       - define Name <context.name>
       - define UUID <context.uuid>
       - define GlobalYaml global.player.<[UUID]>
-      - yaml id:data_handler set player.<[UUID]>:
+      - yaml id:data_handler set player.<[UUID]>:<empty>
 
     # % ██ [ Verify Global Player Data Exists ] ██
       - define Directory data/global/players/<[UUID]>.yml
