@@ -14,7 +14,7 @@ player_data_handler:
     on delta time minutely every:5:
       - foreach <server.online_players> as:Player:
         - ~yaml id:player.<[Player].uuid> savefile:data/players/<[Player].uuid>.yml
-        - ~yaml id:player.<[Player].uuid> savefile:data/globalData/players/<[Player].uuid>.yml
+        - ~yaml id:global.player.<[Player].uuid> savefile:data/global/players/<[Player].uuid>.yml
 
 Player_Data_Join_Event:
   type: task
@@ -37,7 +37,7 @@ Player_Data_Join_Event:
     - define Name <player[<[UUID]>].name>
     - if !<yaml[<[GlobalYaml]>].contains[Display_Name]>:
       - yaml id:<[GlobalYaml]> set Display_Name:<[Name]>
-    - adjust <player> Display_Name:<yaml[<[GlobalYaml]>].read[Display_Name]>
+    - adjust  <player[<[UUID]>]> Display_Name:<yaml[<[GlobalYaml]>].read[Display_Name]>
 
   # % ██ [ Load Tab_Display_Name ] ██
     - if !<yaml[<[GlobalYaml]>].contains[Tab_Display_name]>:
