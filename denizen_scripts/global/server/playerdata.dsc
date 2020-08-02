@@ -76,7 +76,7 @@ Unload_Player_Data:
   # % ██ [ Cache Player Info ] ██
     - waituntil rate:1s <bungee.connected>
     - define Player <player[<[UUID]>]>
-    - define UUID <[Player].uuid>
+    - define Name <[Player].name>
     - define PlayerMap <map.with[Player].as[<[Player]>].with[UUID].as[<[UUID]>].with[Server].as[<bungee.server>]>
     - if <yaml[global.player.<[UUID]>].contains[Rank]>:
       - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[global.player.<[UUID]>].read[rank].strip_color>]>
