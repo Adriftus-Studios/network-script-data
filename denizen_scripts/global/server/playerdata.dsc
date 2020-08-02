@@ -81,9 +81,6 @@ Unload_Player_Data:
     - if <yaml[global.player.<[UUID]>].contains[Rank]>:
       - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[global.player.<[UUID]>].read[rank].strip_color>]>
 
-  # % ██ [ Fire Player Quit Tasks ] ██
-    - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap]>]>
-
   # % ██ [ Unload Server Player Data ] ██
     - ~yaml id:player.<[UUID]> savefile:data/players/<[UUID]>.yml
     - yaml id:player.<[UUID]> unload

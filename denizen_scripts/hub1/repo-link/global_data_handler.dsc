@@ -36,11 +36,14 @@ global_data_handler:
     # % ██ [ Track Player ] ██
       - if <yaml[data_handler].contains[player.<[UUID]>.server]>:
         - yaml id:data_handler set server.<yaml[data_handler].read[player.<[UUID]>.server]>:<-:<[PlayerMap]>
+        - define Event Switched
+      - else:
+        - define Event Joined
       - yaml id:data_handler set player.<[UUID]>.server:<[Server]>
       - yaml id:data_handler set server.<[Server]>:->:<[PlayerMap]>
 
     # % ██ [ Fire Player Login Events ] ██
-      - bungeerun <[Server]> Player_Data_Join_Event def:<[UUID]>
+      - bungeerun <[Server]> Player_Data_Join_Event def:<[UUID]>|<[Event]>
 
     on bungee player leaves network:
     # % ██ [ Cache Player Info ] ██
