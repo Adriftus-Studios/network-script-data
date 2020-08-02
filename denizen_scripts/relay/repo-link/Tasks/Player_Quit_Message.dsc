@@ -1,4 +1,4 @@
-Player_Join_Message:
+Player_Quit_Message:
     type: task
     debug: false
     definitions: Definitions
@@ -8,9 +8,9 @@ Player_Join_Message:
         - inject Definition_Registry
         
         - if <[Rank].exists>:
-            - define Footer "<map.with[text].as[<[Rank]> ★ Joined on <[Server]>]>"
+            - define Footer "<map.with[text].as[<[Rank]> ★ Left the network]>"
         - else:
-            - define Footer "<map.with[text].as[Joined <[Server]>]>"
+            - define Footer "<map.with[text].as[Left the network]>"
         - define Footer <[Footer].with[icon_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png]>
         - define Embeds <list[<map.with[color].as[<[Color]>].with[footer].as[<[Footer]>]>]>
 

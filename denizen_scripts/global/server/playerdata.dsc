@@ -24,25 +24,29 @@ Player_Data_Join_Event:
   # % ██ [ Cache Player Info ] ██
     - define Timeout <util.time_now.add[5m]>
     - define GlobalYaml global.player.<[UUID]>
-    
+
   # % ██ [ Verify Player ] ██
     - waituntil rate:2t <player[<[UUID]>].is_online||false> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0
     - if !<player[<[UUID]>].is_online>:
       - stop
-    
+
   # % ██ [ Load Global Player Data ] ██
     - yaml id:<[GlobalYaml]> load:data/global/players/<[UUID]>.yml
 
     # % ██ [ Load and Set Display_Name ] ██
+    - define Name <player[<[UUID]>].name>
     - if !<yaml[<[GlobalYaml]>].contains[Display_Name]>:
-      - yaml id:<[GlobalYaml]> set Display_Name:<player.name>
+      - yaml id:<[GlobalYaml]> set Display_Name:<[Name]>
     - adjust <player> Display_Name:<yaml[<[GlobalYaml]>].read[Display_Name]>
 
   # % ██ [ Load Tab_Display_Name ] ██
     - if !<yaml[<[GlobalYaml]>].contains[Tab_Display_name]>:
-      - yaml id:<[GlobalYaml]> set Tab_Display_name:<player.name>
+      - yaml id:<[GlobalYaml]> set Tab_Display_name:<[Name]>
 
     # % ██ [ Fire Player Login Tasks ] ██
+    - define PlayerMap <map.with[Name].as[<[Name]>].with[Server].as[<bungee.server>]>
+    - if <yaml[<[GlobalYaml]>].contains[Rank]>:
+      - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[global.player.<[UUID]>].read[rank].strip_color>]>
     - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
 
 Player_Data_Quit_Event:
@@ -50,22 +54,31 @@ Player_Data_Quit_Event:
   debug: true
   definitions: UUID
   script:
-    - Run Unload_Player_Data def:<[UUID]>
+    - inject Unload_Player_Data
+    - bungeerun Relay Player_Quit_Message def:<list_single[<[PlayerMap]>]>
 
 Player_Data_Switch_Event:
   type: task
   debug: true
   definitions: UUID
   script:
-    - Run Unload_Player_Data def:<[UUID]>
+    - inject Unload_Player_Data
+    - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap]>]>
 
 Unload_Player_Data:
   type: task
   debug: false
   definitions: UUID
   # % ██ [ Cache Player Info ] ██
+    - waituntil rate:1s <bungee.connected>
     - define Player <player[<[UUID]>]>
     - define UUID <[Player].uuid>
+    - define PlayerMap <map.with[Player].as[<[Player]>].with[UUID].as[<[UUID]>].with[Server].as[<bungee.server>]>
+    - if <yaml[global.player.<[UUID]>].contains[Rank]>:
+      - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[global.player.<[UUID]>].read[rank].strip_color>]>
+
+  # % ██ [ Fire Player Quit Tasks ] ██
+    - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap]>]>
 
   # % ██ [ Unload Server Player Data ] ██
     - ~yaml id:player.<[UUID]> savefile:data/players/<[UUID]>.yml
