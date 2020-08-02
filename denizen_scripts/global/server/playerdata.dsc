@@ -69,6 +69,7 @@ Unload_Player_Data:
   type: task
   debug: false
   definitions: UUID
+  script:
   # % ██ [ Cache Player Info ] ██
     - waituntil rate:1s <bungee.connected>
     - define Player <player[<[UUID]>]>
