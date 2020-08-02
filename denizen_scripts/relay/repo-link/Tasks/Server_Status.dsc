@@ -39,7 +39,7 @@ Status_DCommand:
 
       - define Fields <list[]>
       - define FieldMap <map[].with[inline].as[true]>
-      - foreach <yaml[BUNGEE_CONFIG].list_keys[servers]> as:Server:
+      - foreach <yaml[bungee.config].list_keys[servers]> as:Server:
         - define Field <[FieldMap].with[name].as[<[Server].to_titlecase>]>
         - if <bungee.list_servers.contains[<[Server]>]>:
           - ~Bungeetag server:<[Server]> <bungee.connected> save:Data
@@ -60,7 +60,7 @@ Status_DCommand:
       - stop
       
   # % ██ [ Server Argument Check ] ██
-    - if !<yaml[BUNGEE_CONFIG].list_keys[servers].contains[<[Server]>]>:
+    - if !<yaml[bungee.config].list_keys[servers].contains[<[Server]>]>:
       - stop
     - else if !<bungee.list_servers.contains[<[Server]>]>:
       - stop
