@@ -32,6 +32,8 @@ titles_gui_command:
   aliases:
     - "titles"
   debug: false
+  usage: /title
+  description: Used to access and change any unlocked titles.
   script:
     - inject title_inventory_open
 

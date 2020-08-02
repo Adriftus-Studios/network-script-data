@@ -48,8 +48,6 @@ tutorial_data:
       - "<&e>You can buy all sorts of upgrades and items here!"
       - "<&e>Be sure to check out the stocks and cosmetic vendors."
       - "<&e>You can also get daily rewards!"
-    title: "<&6>Use <&b>/warps"
-    subtitle: "Go to the server warp: Marketplace"
   7:
     hologram:
       - "<&6><&l>Cosmetics"
@@ -96,7 +94,8 @@ tutorial_data:
       - "<&a>--------------------------"
       - "<&e>Use <&b>/warps <&e>and go to Grim to continue."
     particle_guide: true
-    message: "<&6>/warp <&e>to the server warp<&co> Grim"
+    title: "<&6>Use <&b>/warps"
+    subtitle: "<&e>Go to the server warp: Grim"
   14:
     hologram:
       - "<&6><&l>Grim"
@@ -157,7 +156,7 @@ tutorial_data:
       - "<&e>Jump through the hole to be teleported to the game world."
       - "<&e>If you need any additional help, consult <&b>/help<&e>."
       - "<&e>You can return to spawn at any point with <&b>/spawn<&e>."
-      - "<&e>Make sure you <&b>/sethome <&c>if you like where you land."
+      - "<&e>Make sure you <&b>/sethome <&e>if you like where you land."
       - "<&c>There is no other way to return to the same location."
     particle_guide: true
 
