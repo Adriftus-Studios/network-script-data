@@ -25,12 +25,12 @@ Reload_Scripts_DCommand:
     - else if <[Args].size> == 1:
       - if <[Args].first> == all:
         - foreach <bungee.list_servers> as:Server:
-          - run Reload_Scripts_Queue def:<[Channel]>|<list[Color/Code|Server/<[Server]>].escaped>
+          - run Reload_Scripts_Queue def:<list[<[Channel]>].include_single[<map.with[Color].as[Code].with[Server].as[<[Server]>]>]>
       - else if !<bungee.list_servers.contains[<[Args].first>]>:
         - inject Embedded_Error_Response
       - else:
         - define Server <[Args].first>
-    - run Reload_Scripts_Queue def:<[Channel]>|<list[Color/Code|Server/<[Server]>].escaped>
+    - run Reload_Scripts_Queue def:<list[<[Channel]>].include[<map.with[Color].as[Code].with[Server].as[<[Server]>]>]>
 
 Reload_Scripts_Queue:
   type: task

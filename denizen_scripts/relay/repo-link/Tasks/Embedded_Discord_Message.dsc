@@ -33,7 +33,7 @@ Embedded_Discord_Message_New:
     definitions: Channel|Definitions
     script:
     # - ██ [ Inject Dependencies                     ] ██
-        - inject Definition_Registry_Mapped
+        - inject Definition_Registry
         - define Data <map>
         - define Embeds <map>
 

@@ -11,33 +11,6 @@ player_data_handler:
         - yaml id:player.<player.uuid> create
         - ~yaml id:player.<player.uuid> savefile:<[ServerYaml]>
 
-#^      - define GlobalData <yaml[<[GlobalYaml]>].list_keys[]>
-#^
-#%    # % ██ [ Load and Set Display_Name ] ██
-#^      - if !<[GlobalData].contains[display_name]>:
-#^        - yaml id:<[GlobalYaml]> set Display_Name:<player.name>
-#^      - adjust <player> display_name:<yaml[<[GlobalYaml]>].read[Display_Name]>
-#^
-#%    # % ██ [ Load Tab_Display_Name ] ██
-#^      - if !<[GlobalData].contains[Tab_Display_name]>:
-#^        - yaml id:<[GlobalYaml]> set Tab_Display_name:<player.name>
-#^
-#%    # % ██ [ Verify Rank ] ██
-#^      - if <[GlobalData].contains[Rank]>:
-#^        - define Rank <yaml[<[GlobalYaml]>].read[Rank]>
-#^        - bungeerun relay Player_Join_Message def:<player.name>|<bungee.server>|<player.uuid>|<[Rank]>
-#^      - else:
-#^        - bungeerun relay Player_Join_Message def:<player.name>|<bungee.server>|<player.uuid>
-#^
-#@  on player quits:
-#%  # % ██ [ Unload Server Player Data ] ██
-#^    - ~yaml id:player.<player.uuid> savefile:data/players/<player.uuid>.yml
-#^    - yaml id:player.<player.uuid> unload
-#@
-#%  # % ██ [ Unload Global Player Data ] ██
-#^    - ~yaml id:global.player.<player.uuid> savefile:data/globalData/players/<player.uuid>.yml
-#^    - yaml id:global.player.<player.uuid> unload
-
     on delta time minutely every:5:
       - foreach <server.online_players> as:Player:
         - ~yaml id:player.<[Player].uuid> savefile:data/players/<[Player].uuid>.yml
@@ -69,13 +42,8 @@ Player_Data_Join_Event:
     - if !<yaml[<[GlobalYaml]>].contains[Tab_Display_name]>:
       - yaml id:<[GlobalYaml]> set Tab_Display_name:<player.name>
 
-  # % ██ [ Verify Rank ] ██
-  #^- waituntil rate:1s <bungee.connected>
-  #^- if <yaml[<[GlobalYaml]>].contains[Rank]>:
-  #^  - define Rank <yaml[<[GlobalYaml]>].read[Rank]>
-  #^  - bungeerun relay Player_Join_Message def:<player.name>|<bungee.server>|<player.uuid>|<[Rank]>
-  #^- else:
-  #^  - bungeerun relay Player_Join_Message def:<player.name>|<bungee.server>|<player.uuid>
+    # % ██ [ Fire Player Login Tasks ] ██
+    - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
 
 Player_Data_Quit_Event:
   type: task

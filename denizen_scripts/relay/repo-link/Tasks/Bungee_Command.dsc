@@ -30,15 +30,6 @@ Bungee_DCommand:
             
         - run discord_bungeeCommand_execute def:<[Message].after[<&sp>].before[<&sp>]>|<[Message].after[<&sp>].after[<&sp>].replace[<&sp>].with[<&ns>]>|<[Channel]>
 
-#^ /bungee behr ```yml
-#^ - define World <world[World]>
-#^ - announce "Hello <[World].name>!"```
-
-# - ██ [ Send Embedded Message                   ] ██
-        #- run Embedded_Discord_Message def:Command_Ran|<[Channel]>|<list[Color/Code|Author/<[Author].Name>|Server/<[Server].to_titlecase>|Command//<[Command].escaped>].escaped>
-
-
-# ^ /bungee announce Hello everyone!;announce We'll be starting in an hour.;announce Thanks.
 discord_bungeeCommand_execute:
   type: task
   debug: false

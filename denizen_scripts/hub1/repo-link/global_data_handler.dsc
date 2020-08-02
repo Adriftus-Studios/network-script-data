@@ -41,7 +41,7 @@ global_data_handler:
 
     # % ██ [ Fire Player Login Events ] ██
       - bungeerun <[Server]> Player_Data_Join_Event def:<[UUID]>
-    #^- bungeerun Relay Player_Login_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
+      - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
 
     on bungee player leaves network:
     # % ██ [ Cache Player Info ] ██
@@ -56,4 +56,4 @@ global_data_handler:
 
     # % ██ [ Fire Player Quit Events ] ██
       - bungeerun <[Server]> Player_Data_Quit_Event def:<[UUID]>
-    #^- bungeerun Relay Player_Quit_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
+      - bungeerun Relay Player_Quit_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
