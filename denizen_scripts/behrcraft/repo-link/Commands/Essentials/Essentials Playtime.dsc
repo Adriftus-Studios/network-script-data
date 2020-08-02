@@ -27,7 +27,7 @@ Playtime_Command:
             - define PDays <&e><[User].statistic[PLAY_ONE_MINUTE].div[1728000].round_down><&f>
             - define PHours <&e><[User].statistic[PLAY_ONE_MINUTE].div[72000].round_down.mod[24]><&f>
             - define PMinutes <&e><[User].statistic[PLAY_ONE_MINUTE].div[1200].round_down.mod[60]><&f>
-            - define FirstDays <&e><util.date.time.duration.sub[<[User].first_played>].in_days.round_down><&f>
+            - define FirstDays <&e><util.time_now.duration_since[<[User].first_played_time>].in_days.round_down><&f>
         - else:
             - define PDays <[User].flag[Behr.Essentials.lastPDays]>
             - define PHours <[User].flag[Behr.Essentials.lastPHours]>
@@ -46,4 +46,4 @@ Playtime_Handler:
         - flag <player> Behr.Essentials.lastPDays:<&e><player.statistic[PLAY_ONE_MINUTE].div[1728000].round_down><&f>
         - flag <player> Behr.Essentials.lastPHours:<&e><player.statistic[PLAY_ONE_MINUTE].div[72000].round_down.mod[24]><&f>
         - flag <player> Behr.Essentials.lastPMinutes:<&e><player.statistic[PLAY_ONE_MINUTE].div[1200].round_down.mod[60]><&f>
-        - flag <player> Behr.Essentials.lastFirstDays:<&e><util.date.time.duration.sub[<player.first_played>].in_days.round_down><&f>
+        - flag <player> Behr.Essentials.lastFirstDays:<&e><util.time_now.duration_since[<player.first_played_time>].in_days.round_down><&f>
