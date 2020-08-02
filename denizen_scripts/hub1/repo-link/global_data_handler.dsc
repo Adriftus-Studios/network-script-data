@@ -87,7 +87,7 @@ External_Player_Data_Join_Event:
 
     # % ██ [ Load Global Player Data ] ██
       - yaml id:<[GlobalYaml]> Create
-      - foreach <[Map]>:
+      - foreach <[PlayerData]>:
         - yaml id:<[GlobalYaml]> Set <[Key]>:<[Value]>
 
       # % ██ [ Load and Set Display_Name ] ██
