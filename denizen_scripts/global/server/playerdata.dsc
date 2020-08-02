@@ -47,6 +47,8 @@ Player_Data_Join_Event:
     - define PlayerMap <map.with[Name].as[<[Name]>].with[Server].as[<bungee.server>]>
     - if <yaml[<[GlobalYaml]>].contains[Rank]>:
       - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[global.player.<[UUID]>].read[rank].strip_color>]>
+      
+    - waituntil rate:1s <bungee.connected>
     - if <[Event]> == Joined:
       - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap]>]>
     - else:
