@@ -10,78 +10,91 @@ player_data_handler:
       - else:
         - yaml id:player.<player.uuid> create
         - ~yaml id:player.<player.uuid> savefile:<[ServerYaml]>
-        
-    # % ██ [ Process Global Data Load ] ██
-      - define GlobalYaml global.player.<player.uuid>
-      - if !<yaml.list.contains[<[GlobalYaml]>]>:
-        - define YamlDir data/globalData/players/<player.uuid>.yml
-        - if !<server.has_file[<[YamlDir]>]>:
-          - yaml id:<[GlobalYaml]> create
-          - yaml id:<[GlobalYaml]> savefile:<[YamlDir]>
-        - else:
-          - yaml id:<[GlobalYaml]> load:<[YamlDir]>
-      - define GlobalData <yaml[<[GlobalYaml]>].list_keys[]>
 
-    # % ██ [ Load and Set Display_Name ] ██
-      - if !<[GlobalData].contains[display_name]>:
-        - yaml id:<[GlobalYaml]> set Display_Name:<player.name>
-      - adjust <player> display_name:<yaml[<[GlobalYaml]>].read[Display_Name]>
-      
-    # % ██ [ Load Tab_Display_Name ] ██
-      - if !<[GlobalData].contains[Tab_Display_name]>:
-        - yaml id:<[GlobalYaml]> set Tab_Display_name:<player.name>
-
-    # % ██ [ Verify Rank ] ██
-      - if <[GlobalData].contains[Rank]>:
-        - define Rank <yaml[<[GlobalYaml]>].read[Rank]>
-        - bungeerun relay Player_Join_Message def:<player.name>|<bungee.server>|<player.uuid>|<[Rank]>
-      - else:
-        - bungeerun relay Player_Join_Message def:<player.name>|<bungee.server>|<player.uuid>
-
-    on player quits:
-    # % ██ [ Unload Server Player Data ] ██
-      - ~yaml id:player.<player.uuid> savefile:data/players/<player.uuid>.yml
-      - yaml id:player.<player.uuid> unload
-
-    # % ██ [ Unload Global Player Data ] ██
-      - ~yaml id:global.player.<player.uuid> savefile:data/globalData/players/<player.uuid>.yml
-      - yaml id:global.player.<player.uuid> unload
+#^      - define GlobalData <yaml[<[GlobalYaml]>].list_keys[]>
+#^
+#%    # % ██ [ Load and Set Display_Name ] ██
+#^      - if !<[GlobalData].contains[display_name]>:
+#^        - yaml id:<[GlobalYaml]> set Display_Name:<player.name>
+#^      - adjust <player> display_name:<yaml[<[GlobalYaml]>].read[Display_Name]>
+#^
+#%    # % ██ [ Load Tab_Display_Name ] ██
+#^      - if !<[GlobalData].contains[Tab_Display_name]>:
+#^        - yaml id:<[GlobalYaml]> set Tab_Display_name:<player.name>
+#^
+#%    # % ██ [ Verify Rank ] ██
+#^      - if <[GlobalData].contains[Rank]>:
+#^        - define Rank <yaml[<[GlobalYaml]>].read[Rank]>
+#^        - bungeerun relay Player_Join_Message def:<player.name>|<bungee.server>|<player.uuid>|<[Rank]>
+#^      - else:
+#^        - bungeerun relay Player_Join_Message def:<player.name>|<bungee.server>|<player.uuid>
+#^
+#@  on player quits:
+#%  # % ██ [ Unload Server Player Data ] ██
+#^    - ~yaml id:player.<player.uuid> savefile:data/players/<player.uuid>.yml
+#^    - yaml id:player.<player.uuid> unload
+#@
+#%  # % ██ [ Unload Global Player Data ] ██
+#^    - ~yaml id:global.player.<player.uuid> savefile:data/globalData/players/<player.uuid>.yml
+#^    - yaml id:global.player.<player.uuid> unload
 
     on delta time minutely every:5:
       - foreach <server.online_players> as:Player:
         - ~yaml id:player.<[Player].uuid> savefile:data/players/<[Player].uuid>.yml
         - ~yaml id:player.<[Player].uuid> savefile:data/globalData/players/<[Player].uuid>.yml
 
-global_player_data_unloaded:
+Player_Data_Join_Event:
   type: task
-  debug: false
-  definitions: uuid
+  debug: true
+  definitions: UUID
   script:
-      - yaml id:data_handler set players.<[uuid]>.data_loaded:false
+  # % ██ [ Cache Player Info ] ██
+    - define Timeout <util.time_now.add[5m]>
+    - define GlobalYaml global.player.<[UUID]>
+    
+  # % ██ [ Verify Player ] ██
+    - if <server.match_offline_player[<[UUID]>]||invalid> != invalid:
+      - waituntil rate:2t <player[<[UUID]>].is_online> || <[Timeout].duration_since[<util.time_now>].seconds> > 0:
+      - if !<player[<[UUID]>].is_online>:
+        - stop
+    - else:
+      - waituntil rate:2t <server.match_player[<[UUID]>].is_online||false> || <[Timeout].duration_since[<util.time_now>].seconds> > 0:
+      - if !<server.match_player[<[UUID]>].is_online||false>:
+        - stop
+    
+  # % ██ [ Load Global Player Data ] ██
+    - yaml id:<[GlobalYaml]> load:data/global/players/<[UUID]>.yml
 
-global_player_data_loaded:
-  type: task
-  debug: false
-  definitions: uuid
-  script:
-      - yaml id:data_handler set players.<[uuid]>.data_loaded:true
+    # % ██ [ Load and Set Display_Name ] ██
+    - if !<yaml[<[GlobalYaml]>].contains[Display_Name]>:
+      - yaml id:<[GlobalYaml]> set Display_Name:<player.name>
+    - adjust <player> Display_Name:<yaml[<[GlobalYaml]>].read[Display_Name]>
 
-global_player_data_load:
-  type: task
-  debug: false
-  definitions: uuid
-  script:
-    - if <server.has_file[data/globalData/players/<[uuid]>.yml]>:
-      - ~yaml id:global.player.<[uuid]> load:data/globalData/players/<[uuid]>.yml
-      - bungeerun hub1 global_player_data_loaded def:<[uuid]>
-    - foreach <server.scripts.filter[name.starts_with[player_join_event]]||<list[]>>:
-      - run <[value]> player:<[uuid].as_player>
+  # % ██ [ Load Tab_Display_Name ] ██
+    - if !<yaml[<[GlobalYaml]>].contains[Tab_Display_name]>:
+      - yaml id:<[GlobalYaml]> set Tab_Display_name:<player.name>
 
-global_player_data_unload:
+  # % ██ [ Verify Rank ] ██
+  #^- waituntil rate:1s <bungee.connected>
+  #^- if <yaml[<[GlobalYaml]>].contains[Rank]>:
+  #^  - define Rank <yaml[<[GlobalYaml]>].read[Rank]>
+  #^  - bungeerun relay Player_Join_Message def:<player.name>|<bungee.server>|<player.uuid>|<[Rank]>
+  #^- else:
+  #^  - bungeerun relay Player_Join_Message def:<player.name>|<bungee.server>|<player.uuid>
+
+Player_Data_Quit_Event:
   type: task
-  debug: false
-  definitions: uuid
+  debug: true
+  definitions: UUID
   script:
-    - ~yaml id:global.player.<[uuid]> savefile:data/globalData/players/<[uuid]>.yml
-    - bungeerun hub1 global_player_data_unloaded def:<[uuid]>
-    - yaml id:global.player.<[uuid]> unload
+  # % ██ [ Cache Player Info ] ██
+    - define Player <player[<[UUID]>]>
+    - define UUID <[Player].uuid>
+
+  # % ██ [ Unload Server Player Data ] ██
+    - ~yaml id:player.<[UUID]> savefile:data/players/<[UUID]>.yml
+    - yaml id:player.<[UUID]> unload
+
+  # % ██ [ Unload Global Player Data ] ██
+    - ~yaml id:global.player.<[UUID]> savefile:data/global/players/<[UUID]>.yml
+    - yaml id:global.player.<[UUID]> unload
