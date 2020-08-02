@@ -48,9 +48,9 @@ Player_Data_Join_Event:
     - if <yaml[<[GlobalYaml]>].contains[Rank]>:
       - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[global.player.<[UUID]>].read[rank].strip_color>]>
     - if <[Event]> == Joined:
-      - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
+      - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap]>]>
     - else:
-      - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
+      - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap]>]>
 
 Player_Data_Quit_Event:
   type: task
