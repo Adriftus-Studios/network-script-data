@@ -19,7 +19,7 @@ player_data_handler:
 Player_Data_Join_Event:
   type: task
   debug: true
-  definitions: UUID
+  definitions: UUID|Event
   script:
   # % ██ [ Cache Player Info ] ██
     - define Timeout <util.time_now.add[5m]>
@@ -47,7 +47,10 @@ Player_Data_Join_Event:
     - define PlayerMap <map.with[Name].as[<[Name]>].with[Server].as[<bungee.server>]>
     - if <yaml[<[GlobalYaml]>].contains[Rank]>:
       - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[global.player.<[UUID]>].read[rank].strip_color>]>
-    - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
+    - if <[Event]> == Joined:
+      - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
+    - else:
+      - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap].with[Server].as[<[Server]>]>]>
 
 Player_Data_Quit_Event:
   type: task
