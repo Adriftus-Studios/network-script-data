@@ -3,7 +3,7 @@ Player_Quit_Message:
     debug: false
     definitions: Definitions
     script:
-        - define color green
+        - define color red
         - inject Embedded_Color_Formatting
         - inject Definition_Registry
         
