@@ -55,7 +55,7 @@ gamemode_tab_complete:
   debug: false
   script:
     - if !<player.has_permission[dutilities.gamemode.other]>:
-      - determine <list[]>
+      - determine <list>
     - else if <context.args.is_empty||true> || <context.raw_args.ends_with[<&sp>]>:
       - determine <server.list_online_players.parse[name]>
     - else if <context.args.size> >= 1 && <context.raw_args.ends_with[<&sp>].not>:

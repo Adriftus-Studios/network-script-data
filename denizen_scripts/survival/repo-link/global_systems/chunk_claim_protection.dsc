@@ -81,7 +81,7 @@ claiming_command:
       - determine <yaml[claims].list_keys[groups].filter[starts_with[<player.uuid>]].parse[after[~].before[/]].parse[replace[_].with[<&sp>]]>
     - else if <context.args.get[1]||null> != null && <context.args.get[2]||null> == null:
       - determine <yaml[claims].list_keys[groups].filter[starts_with[<player.uuid>]].parse[after[~].before[/]].filter[starts_with[<context.args.get[1]>]].parse[replace[_].with[<&sp>]]>
-    - determine <list[]>
+    - determine <list>
   script:
     - if <context.args.get[1]||null> == null:
       - narrate "<&c>You must specify a group to claim this to."

@@ -57,7 +57,7 @@ Reload_Scripts_Queue:
         - define color Yellow
         - inject Embedded_Color_Formatting
         - define Title "Script Reload Pushed"
-        - define Footer "<map[].with[text].as[Scripts: <entry[ScriptCount].result> (No Error Response)]>"
+        - define Footer "<map.with[text].as[Scripts: <entry[ScriptCount].result> (No Error Response)]>"
         - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
         - define Data "<map[username/<[Server]> Server|avatar_url/https://img.icons8.com/nolan/64/source-code.png].with[embeds].as[<[Embeds]>].to_json>"
         - define Hook <[Hook]>
@@ -72,11 +72,11 @@ Reload_Scripts_Queue:
         - if <[ScriptCount]> == invalid:
           - define color Red
           - define Title "Script Reload Pushed"
-          - define Footer "<map[].with[text].as[Scripts: ~ (No Error Response)]>"
+          - define Footer "<map.with[text].as[Scripts: ~ (No Error Response)]>"
         - else:
           - define color Yellow
           - define Title "Script Reload Pushed (No Response)"
-          - define Footer "<map[].with[text].as[Scripts: <entry[ScriptCount].result> (No Error Response)]>"
+          - define Footer "<map.with[text].as[Scripts: <entry[ScriptCount].result> (No Error Response)]>"
         - inject Embedded_Color_Formatting
         - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
         - define Data "<map[username/<[Server]> Server|avatar_url/https://img.icons8.com/nolan/64/source-code.png].with[embeds].as[<[Embeds]>].to_json>"
@@ -116,7 +116,7 @@ Reload_Response:
     # % ██ [ Inject Dependencies           ] ██
     - inject Embedded_Color_Formatting
 
-    - define Footer <map[].with[text].as[Scripts:<&sp><[ScriptCount]>]>
+    - define Footer <map.with[text].as[Scripts:<&sp><[ScriptCount]>]>
     - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
     - define Data "<map[username/<[Server]> Server|avatar_url/https://img.icons8.com/nolan/64/source-code.png].with[embeds].as[<[Embeds]>].to_json>"
     - define Hook <[Hook]>

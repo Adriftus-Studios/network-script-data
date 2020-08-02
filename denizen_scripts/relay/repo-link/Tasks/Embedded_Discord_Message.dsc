@@ -20,7 +20,7 @@ TestTask:
         - define thumbnail <map.with[url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
         - define image <map.with[url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
 
-        - define Data <map.with[embeds].as[<list[<map[].with[thumbnail].as[<[thumbnail]>].with[image].as[<[Image]>]>]>]>
+        - define Data <map.with[embeds].as[<list[<map.with[thumbnail].as[<[thumbnail]>].with[image].as[<[Image]>]>]>]>
         - define Data <[Data].to_json>
         - define channel 626098849127071746
         - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>

@@ -15,7 +15,7 @@ combat_log_events:
       - if <player.has_flag[combat]>:
         - hurt <player.health> <player>
     on delta time secondly every:1:
-      - foreach <server.list_online_players.filter[has_flag[combat]]||<list[]>> as:player:
+      - foreach <server.list_online_players.filter[has_flag[combat]]||<list>> as:player:
         - adjust <queue> linked_player:<[player]>
         - if <player.flag[combat].expiration.in_seconds||0> < 1:
           - wait 1s

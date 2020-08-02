@@ -42,7 +42,7 @@ mob_spawning_system_events:
       - if <entry[mob].spawned_entity||null> == null:
         - stop
       - adjust <entry[mob].spawned_entity> "custom_name:<[mob_type].to_titlecase> <&e>Level <[difficulty]>"
-      - foreach <script[custom_<[mob_type]>].list_keys[custom.scaling_values]||<list[]>>:
+      - foreach <script[custom_<[mob_type]>].list_keys[custom.scaling_values]||<list>>:
         - define base <script[custom_<[mob_type]>].yaml_key[custom.scaling_values.<[value]>.base]||<context.entity.attribute_value[<[value]>]>>
         - narrate <[base]>
         - define attributes_built:|:<[value]>/<script[custom_<[mob_type]>].yaml_key[custom.scaling_values.<[value]>.scaling_formula].parsed>

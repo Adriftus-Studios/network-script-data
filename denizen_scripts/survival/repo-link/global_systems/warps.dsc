@@ -41,9 +41,9 @@ warp_command:
   name: warp
   tab complete:
     - if <context.args.is_empty>:
-      - determine <script[server_warps_yaml].list_keys[warps].include[<yaml[player.<player.uuid>].list_keys[warps.favorite]||<list[]>>].include[<yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].parse[after[~]]>]>
+      - determine <script[server_warps_yaml].list_keys[warps].include[<yaml[player.<player.uuid>].list_keys[warps.favorite]||<list>>].include[<yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].parse[after[~]]>]>
     - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-      - determine <script[server_warps_yaml].list_keys[warps].include[<yaml[player.<player.uuid>].list_keys[warps.favorite]||<list[]>>].include[<yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].parse[after[~]]>].filter[starts_with[<context.args.get[1]>]]>
+      - determine <script[server_warps_yaml].list_keys[warps].include[<yaml[player.<player.uuid>].list_keys[warps.favorite]||<list>>].include[<yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].parse[after[~]]>].filter[starts_with[<context.args.get[1]>]]>
   script:
     - if <context.args.get[1]||null> == null:
       - inventory open d:warps_GUI_main_menu
@@ -134,7 +134,7 @@ warps_my_warps_GUI_open:
   script:
     - define inventory <inventory[warps_my_warps_GUI]>
     - define type personal
-    - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].include[<yaml[player.<player.uuid].read[warps.has_access]>]||<list[]>>]> as:identifier:
+    - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].include[<yaml[player.<player.uuid].read[warps.has_access]>]||<list>>]> as:identifier:
       - inject build_warp_item
       - if <[identifier].before[~]> == <player.uuid>:
         - define list:|:<[item].with[nbt=action/warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
@@ -216,7 +216,7 @@ favorite_warps:
 favorite_warps_open:
   type: task
   script:
-    - foreach <yaml[player.<player.uuid>].list_keys[warps.favorites]||<list[]>>:
+    - foreach <yaml[player.<player.uuid>].list_keys[warps.favorites]||<list>>:
       - define identifier <yaml[player.<player.uuid>].read[warps.favorites.<[value]>]>
       - define type personal
       - inject build_warp_item
@@ -794,7 +794,7 @@ warps_remove_from_chunk:
   type: task
   definitions: chunk
   script:
-    - foreach <yaml[claims].read[<[chunk].world>.<[chunk].x>.<[chunk].z>]||<list[]>> as:ID:
+    - foreach <yaml[claims].read[<[chunk].world>.<[chunk].x>.<[chunk].z>]||<list>> as:ID:
       - yaml id:warps set warps.personal.<[ID]>:!
     - yaml id:warps set chunks.<[chunk].world>.<[chunk].x>.<[chunk].z>:!
 

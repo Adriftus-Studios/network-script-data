@@ -31,7 +31,7 @@ mod_online_inv:
     border: <item[light_blue_stained_glass_pane].with[display_name=<&r>]>
     close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close;nbt=<list[to/close]>]>
   procedural items:
-    - define inventory:<list[]>
+    - define inventory:<list>
     # Loop over list of online players.
     - foreach <server.online_players> as:player:
       # Match item display name and lore to information about the online player.
@@ -66,7 +66,7 @@ mod_online_inv_events:
         - narrate "<&c>You cannot perform actions on other staff members."
         - stop
       - define uuid <server.match_player[<context.item.display.strip_color>].uuid>
-      - define map <map[].with[uuid].as[<[uuid]>]>
+      - define map <map.with[uuid].as[<[uuid]>]>
       - define map <[map].with[display_name].as[<yaml[global.player.<[uuid]>].read[Display_Name]||None>]>
       - define map <[map].with[rank].as[<yaml[global.player.<[uuid]>].read[Rank]||None>]>
       - define map <[map].with[current].as[<yaml[global.player.<[uuid]>].read[chat.channels.current]||None>]>
@@ -138,7 +138,7 @@ mod_send_inv:
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;nbt=<list[to/actions]>]>
     head: <item[mod_player_item]>
   procedural items:
-    - define inventory:<list[]>
+    - define inventory:<list>
     - foreach <yaml[bungee.config].list_keys[servers]> as:server:
       - if <yaml[bungee.config].read[servers.<[server]>.show_in_play_menu]>:
         - define name <[server]>
@@ -181,7 +181,7 @@ mod_kick_inv:
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;nbt=<list[to/actions]>]>
     head: <item[mod_player_item]>
   procedural items:
-    - define inventory:<list[]>
+    - define inventory:<list>
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_kick_infractions].list_keys[<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>
@@ -227,7 +227,7 @@ mod_ban_inv:
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;nbt=<list[to/actions]>]>
     head: <item[mod_player_item]>
   procedural items:
-    - define inventory:<list[]>
+    - define inventory:<list>
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_ban_infractions].list_keys[<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>

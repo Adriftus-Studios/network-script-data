@@ -99,7 +99,7 @@ mod_get_infractions:
   debug: false
   definitions: script
   script:
-    - define result <list[]>
+    - define result <list>
     - foreach <script[<[script]>].list_keys[].exclude[type]> as:level:
       - foreach <script[<[script]>].list_keys[<[level]>]> as:infraction:
         - define result:|:<[level]>.<[infraction]>

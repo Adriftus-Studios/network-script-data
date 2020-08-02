@@ -33,12 +33,12 @@ Status_DCommand:
 
   # % ██ [ All Argument ] ██
     - if <list[Network|Servers|All].contains[<[Server]>]>:
-      - define Data <map[].with[color].as[code]>
+      - define Data <map.with[color].as[code]>
       - define Data "<[Data].with[username].as[Network Status]>"
       - define Data <[Data].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
 
-      - define Fields <list[]>
-      - define FieldMap <map[].with[inline].as[true]>
+      - define Fields <list>
+      - define FieldMap <map.with[inline].as[true]>
       - foreach <yaml[bungee.config].list_keys[servers]> as:Server:
         - define Field <[FieldMap].with[name].as[<[Server].to_titlecase>]>
         - if <bungee.list_servers.contains[<[Server]>]>:
@@ -74,9 +74,9 @@ Status_DCommand:
       - define Flags <[Args].remove[first]>
     
   # % ██ [ Define Empty Defintions ] ██
-    - define Fields <list[]>
-    - define Duplicates <list[]>
-    - define FieldMap <map[].with[inline].as[true]>
+    - define Fields <list>
+    - define Duplicates <list>
+    - define FieldMap <map.with[inline].as[true]>
 
   # % ██ [ Online Flag ] ██
     - if <list[-o|-online].contains_any[<[Flags]>]>:
@@ -103,8 +103,8 @@ Status_DCommand:
         - define Fields <[Fields].include[<[Field]>]>
     
   # % ██ [ Build Data
-  #^- define Data "<map[].with[title].as[<[Server]> Status]>"
-    - define Data <map[].with[color].as[code]>
+  #^- define Data "<map.with[title].as[<[Server]> Status]>"
+    - define Data <map.with[color].as[code]>
     - define Data <[Data].with[fields].as[<[Fields]>]>
     - define data "<[Data].with[username].as[<[Server]> Server]>"
     - define Data <[Data].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>

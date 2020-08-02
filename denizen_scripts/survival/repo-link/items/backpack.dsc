@@ -8,7 +8,7 @@ Backpack:
     - "<&e>Hold in Hand"
     - "<&b>Place block to open"
   mechanisms:
-    nbt: backpack_slots/9|backpack_contents/<list[]>|unique/<server.current_time_millis>
+    nbt: backpack_slots/9|backpack_contents/<list>|unique/<server.current_time_millis>
 
 Backpack_events:
   type: world

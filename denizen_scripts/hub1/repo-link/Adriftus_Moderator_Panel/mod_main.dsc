@@ -52,7 +52,7 @@ mod_command:
           - ~yaml id:<[id]> load:<[dir]>
         # Save yaml data into map object
         # Use - define map <[map].with[key].as[value]> to avoid object hacking.
-        - define map <map[].with[uuid].as[<[uuid]>]>
+        - define map <map.with[uuid].as[<[uuid]>]>
         - define map <[map].with[display_name].as[<yaml[<[id]>].read[Display_Name]||None>]>
         - define map <[map].with[rank].as[<yaml[<[id]>].read[Rank]||None>]>
         - define map <[map].with[current].as[<yaml[<[id]>].read[chat.channels.current]||None>]>
