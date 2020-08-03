@@ -6,6 +6,7 @@ global_data_handler:
       - yaml id:data_handler create
 
     on bungee player joins network:
+      - inject Error_Handler.Start
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
@@ -25,8 +26,10 @@ global_data_handler:
 
         - yaml id:<[GlobalYaml]> create
         - yaml id:<[GlobalYaml]> savefile:<[Directory]>
+        - inject Error_Handler.Return
 
     on bungee player switches to server:
+      - inject Error_Handler.Start
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
@@ -51,8 +54,10 @@ global_data_handler:
       #^- define PlayerData <yaml[global.player.<[UUID]>].list_keys[].parse_tag[<map.with[<[parse_value]>].as[<yaml[global.player.<[UUID]>].read[<[parse_value]>]>]>].combine>
         - define PlayerData <yaml[global.player.<[UUID]>].read[]>
         - run External_Player_Data_Join_Event def:<list_single[<[PlayerMap]>].include_single[<[PlayerData]>].include[<[Server]>|<[Event]>]>
+        - inject Error_Handler.Return
 
     on bungee player leaves network:
+      - inject Error_Handler.Start
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
@@ -66,6 +71,7 @@ global_data_handler:
 
     # % ██ [ Fire Player Quit Events ] ██
       - bungeerun <[Server]> Player_Data_Quit_Event def:<[UUID]>
+      - inject Error_Handler.Return
 
 External_Player_Data_Join_Event:
   type: task
@@ -108,3 +114,27 @@ External_Player_Data_Join_Event:
         - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap]>]>
       - else:
         - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap]>]>
+
+Error_Handler:
+  type: task
+  debug: true
+  Record:
+    - debug record start
+  script:
+    - ~debug record submit save:mylog
+    - foreach <list[Name|UUID|Server]> as:Tag:
+      - if !<[<[Tag]>].exists>:
+        - foreach next
+      - else:
+        - if <[<[Tag]>]> != null:
+          - foreach next
+      - define WeirdList:->:<[Tag]>
+    - if !<[WeirdList].exists>:
+      - stop
+    - define Context <list>
+    - foreach <[WeirdList]> as:Tag:
+      - define Context "<[Context].include_single[`**<&lt>context.<[Tag]><&gt>`** returned: `<[<[Tag]>]>`]>"
+    - define Context "<[Context].include_single[`**<&lt>context.<[Tag]><&gt>`** returned: `<[<[Tag]>]>`]>"
+    - define Link "<entry[mylog].submitted||DEBUG FAILED>"
+    - define Text "<&lt>@!626086306606350366<&gt> <&lt>a:blueweewoo:725197352645689435<&gt> I'm alerting you about the script setup for debugging a Bungee Event issue:<&nl> <[Link]><&nl><[Context].separated_by[<&nl>]>"
+    - bungeerun Relay Simple_Discord_Embed def:<list_single[<[Text]>].include[626086306606350366]>
