@@ -15,8 +15,8 @@ tutorial_data:
   1:
     hologram:
       - "<&6><&l>Adriftus Survival"
-      - "<&a>This tutorial will teach you the server rules."
-      - "<&a>It will also walk you through the basic commands."
+      - "<&e>This tutorial will teach you the server rules."
+      - "<&e>It will also walk you through the basic commands."
     particle_guide: true
   2:
     hologram:
@@ -40,6 +40,7 @@ tutorial_data:
     hologram:
       - "<&6><&l>Soul Forge"
       - "<&e>Here you can forge your items with souls."
+      - "<&e>Doing so will infuse special powers into your gear"
       - "<&c>Souls can be acquired in the <&4>Savage Lands."
     particle_guide: true
   6:
@@ -48,17 +49,19 @@ tutorial_data:
       - "<&e>You can buy all sorts of upgrades and items here!"
       - "<&e>Be sure to check out the stocks and cosmetic vendors."
       - "<&e>You can also get daily rewards!"
+    particle_guide: true
   7:
     hologram:
       - "<&6><&l>Cosmetics"
       - "<&e>Here you can purchase titles and bow trails!"
-      - "<&c>Use <&6>/titles<&e> and <&6>/bowtrails<&e> to use them."
+      - "<&e>Use <&b>/titles<&e> and <&b>/bowtrails<&e> to use them."
     particle_guide: true
   8:
     hologram:
       - "<&6><&l>Claims"
       - "<&e>Here you can purchase upgrades for your claim."
-      - "<&c>Upgrades only apply within your claim."
+      - "<&e>Upgrades only apply <&c>within<&e> your claim."
+      - "<&c>The claims system will be explained in a few steps."
     particle_guide: true
   9:
     hologram:
@@ -75,7 +78,7 @@ tutorial_data:
   11:
     hologram:
       - "<&6><&l>Survivalist"
-      - "<&e>Want a little something a little more useful?"
+      - "<&e>Want something a little more useful?"
       - "<&e>The survivalist sells backpacks, tents, and more!"
     particle_guide: true
   12:
@@ -88,20 +91,20 @@ tutorial_data:
   13:
     hologram:
       - "<&6><&l>Warp Command"
-      - "<&b>Warps can be made by any player within their claim."
+      - "<&e>Warps can be made by any player within their claim."
       - "<&e>You can visit server warps, or other player's warps."
       - "<&e>Command Menu<&co> <&b>/warps"
       - "<&a>--------------------------"
       - "<&e>Use <&b>/warps <&e>and go to Grim to continue."
     particle_guide: true
-    title: "<&6>Use <&b>/warps"
-    subtitle: "<&e>Go to the server warp: Grim"
   14:
     hologram:
       - "<&6><&l>Grim"
       - "<&e>Grim can help you return to your death location."
-      - "<&c>Be aware, nothing is free."
+      - "<&c>... For a cost."
     particle_guide: true
+    title: "<&6>Use <&b>/warps"
+    subtitle: "<&e>Go to the server warp: <&4>Grim"
   15:
     hologram:
       - "<&6><&l>Claims"
@@ -109,7 +112,7 @@ tutorial_data:
       - "<&e>You can also give access to different groups of players."
       - "<&e>If a group doesn't exist, it will be created."
       - "<&e>You can manage everything related to chunks in the GUI."
-      - "<&a>Command<&co> <&b>/claims"
+      - "<&a>Command Menu<&co> <&b>/claims"
     particle_guide: true
   16:
     hologram:
@@ -137,7 +140,7 @@ tutorial_data:
     hologram:
       - "<&6><&l>Chat"
       - "<&e>We have cross-server chat available"
-      - "<&e>Use <&6>/chat<&e> to change your channel"
+      - "<&e>Use <&b>/chat<&e> to change your channel"
       - "<&e>You can also click on the channel name in chat!"
       - "<&c>Please keep our rules in mind."
     particle_guide: true
@@ -145,7 +148,7 @@ tutorial_data:
     hologram:
       - "<&6><&l>End Game"
       - "<&e>Monsters grow stronger as you venture towards the center of the world."
-      - "<&e>These monsters posess and guard more powerful equipment and items."
+      - "<&e>These monsters possess and guard more powerful equipment and items."
       - "<&e>The only <&d>Ender Portal <&e>resides at the bottom of a dungeon in the center."
       - "<&e>Should you manage to endure the challenge, powerful rewards await."
     particle_guide: true
