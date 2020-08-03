@@ -1,5 +1,6 @@
 tutorial_data:
   type: data
+  distance_check: 14
   particle_trail:
     particle: totem
     quantity: 5
@@ -216,7 +217,7 @@ tutorial_next:
       - if <script[tutorial_data].list_keys[<[stage]>].contains[particle_guide]> && <script[tutorial_data].parsed_key[<[stage]>.particle_guide]>:
         - look <player> tutorial_<[stage]>
         - define last_distance 128
-        - while <player.location.world.name> == spawn && <player.location.distance[<location[tutorial_<[stage]>]>]> > 7:
+        - while <player.location.world.name> == spawn && <player.location.distance[<location[tutorial_<[stage]>]>]> > <script[tutorial_data].data_key[distance_check]>:
           - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
           - foreach <[points]>:
             - if !<player.is_online>:
