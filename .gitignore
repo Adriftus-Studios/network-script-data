@@ -11,6 +11,9 @@ playerdata
 resource_packs/*
 system_scripts/*
 
+# ██ [ Server Directories         ] ██
+denizen_scripts/gielinordev
+
 # ██ [ Scriptdata Directories     ] ██
 scriptdata/twitch/*
 
