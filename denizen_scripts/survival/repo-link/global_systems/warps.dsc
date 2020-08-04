@@ -3,7 +3,7 @@
 ##################
 
 server_warps_yaml:
-  type: yaml data
+  type: data
   warps:
     spawn:
       location: spawn
@@ -570,7 +570,6 @@ warp_management_GUI_panel_events:
             - flag player text_input:warps_set_player_head/<context.inventory.slot[5].nbt[warp_id]>
             - narrate "<&e>Enter the player name you want to use."
             - inventory close
-            - 
           - default:
             - narrate "<&c>NOT YET IMPLEMENTED"
 

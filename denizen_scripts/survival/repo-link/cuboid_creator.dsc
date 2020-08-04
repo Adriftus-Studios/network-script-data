@@ -1,6 +1,7 @@
 # Cuboid Tool
 cuboid_tool_item:
   type: item
+  debug: false
   material: stick
   display name: <&a><&l>Selection Tool
   lore:
@@ -10,6 +11,7 @@ cuboid_tool_item:
 
 cuboid_wand_command:
   type: command
+  debug: false
   name: wand
   permission: worldedit.wand
   script:
@@ -20,6 +22,7 @@ cuboid_wand_command:
 # Command for cuboid
 cuboid_command:
   type: command
+  debug: false
   name: cube
   aliases:
     - cuboid
@@ -48,6 +51,7 @@ cuboid_command:
 
 cuboid_noting_locations:
   type: world
+  debug: false
   events:
     on player left clicks block with cuboid_tool_item:
       - determine passively cancelled
@@ -63,6 +67,7 @@ cuboid_noting_locations:
 # Abuse Prevention
 cuboid_tool_abuse_prevention:
     type: world
+    debug: false
     events:
         on player drops cuboid_tool_item:
         - remove <context.entity>

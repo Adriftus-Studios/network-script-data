@@ -1,5 +1,6 @@
 single_sleep_script:
   type: world
+  debug: false
   time_change_duration_in_ticks: 60
   events:
     on player enters bed:

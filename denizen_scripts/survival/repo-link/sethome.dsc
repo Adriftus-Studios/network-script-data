@@ -1,6 +1,7 @@
 
 sethome_command:
   type: command
+  debug: false
   name: sethome
   script:
   - if <player.location.world.environment> != end:
@@ -11,6 +12,7 @@ sethome_command:
 
 delhome_command:
   type: command
+  debug: false
   name: delhome
   script:
   - note remove as:home_<player.uuid>
@@ -18,6 +20,7 @@ delhome_command:
 
 home_command:
   type: command
+  debug: false
   name: home
   script:
   - if <location[home_<player.uuid>]||null> != null:
