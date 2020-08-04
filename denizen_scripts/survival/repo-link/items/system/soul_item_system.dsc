@@ -91,7 +91,7 @@ item_system_global_data:
         health: debuff
       sniper:
         armor: buff
-        ranged_damaged: buff
+        ranged_damage: buff
         speed: debuff
       knight:
         attack_speed: buff
