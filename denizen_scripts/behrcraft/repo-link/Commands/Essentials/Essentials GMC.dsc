@@ -67,9 +67,9 @@ gmc_Command:
 #    tab complete:
 #        - if <player.flag[Behrry.Essentials.Rank]> < 3:
 #            - if <context.args.size||0> == 0:
-#                - determine <server.list_online_players.parse[name]>
+#                - determine <server.online_players.parse[name]>
 #            - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-#                - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.first>]]>
+#                - determine <server.online_players.parse[name].filter[starts_with[<context.args.first>]]>
 #    Request:
 #        - define DisplayA "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
 #        - define CommandA "gmc <player.name> accept"
@@ -90,7 +90,7 @@ gmc_Command:
 #    script:
 #        - if <context.args.get[2]||null> != null:
 #            - if <player.flag[Behrry.Essentials.Rank]> < 4:
-#                - define Ranked <server.list_online_players.filter[flag[Behrry.Essentials.Rank].is[less].than[<[Rank].sub[1]>]]>
+#                - define Ranked <server.online_players.filter[flag[Behrry.Essentials.Rank].is[less].than[<[Rank].sub[1]>]]>
 #                - if <context.args.get[2]> == Accept:
 #                    - define User <context.ars.get[2]>
 #                    - inject Player_Verification Instantly
@@ -118,7 +118,7 @@ gmc_Command:
 #                - if <player.has_flag[behrry.essentials.gamemode.request]>:
 #                    - narrate "<proc[Colorize].context[You've already requested Creative Mode.|red]>"
 #                - else:
-#                    - define Requested <server.list_online_players.filter[flag[Behrry.Essentials.Rank].is[less].than[<[Rank].sub[1]>]]>
+#                    - define Requested <server.online_players.filter[flag[Behrry.Essentials.Rank].is[less].than[<[Rank].sub[1]>]]>
 #                    - if <[Requested]>.size> != 0:
 #                        - flag player behrry.essentials.gamemode.request
 #                        - foreach <[Requested]> as:User:

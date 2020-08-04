@@ -26,7 +26,7 @@ Hiscores_Command:
         - if !<[Skills].contains[<[Skill]>]>:
             - inject Command_Syntax Instantly
 
-        - define Players <server.list_players_flagged[behrry.skill.<[Skill]>.Level]>
+        - define Players <server.players_flagged[behrry.skill.<[Skill]>.Level]>
         - define PlayersOrdered <[Players].sort_by_number[flag[behrry.skill.<[Skill]>.Level]].reverse>
         - define PlayerGet <[PlayersOrdered].first.to[8]>
         - narrate "<&2>+<&a>-------<&6>[<&e> hiscores <&6>] <&b>| <&6>[<&e> <[Skill]> <&6>]<&a>-------<&2>+"

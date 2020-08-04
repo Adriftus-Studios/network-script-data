@@ -53,7 +53,7 @@ Nickname_Command:
         - if <[Nickname].contains_any[&k]>:
             - narrate "<proc[Colorize].context[Obfuscated names are blacklisted.|red]>"
             - stop
-        - define Blacklist "<server.list_players.filter[in_group[moderation]].parse[name].include[Admin|a d m i n|owner|owna|administrator|moderator|server|behr_riley|Founder]>"
+        - define Blacklist "<server.players.filter[in_group[moderation]].parse[name].include[Admin|a d m i n|owner|owna|administrator|moderator|server|behr_riley|Founder]>"
         - if <[Nickname].contains_any[Mod&|Admin&|Helper&|Owner&|Founder&]>:
             - narrate format:Colorize_Red "Illegal Name."
             - stop

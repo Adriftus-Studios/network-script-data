@@ -3,7 +3,7 @@ error_handler_events:
   debug: false
   events:
     on player dies:
-      - foreach <server.list_players||<list>> as:player:
+      - foreach <server.players||<list>> as:player:
         - if <[player].has_flag[staff]> && <[player].is_online>:
           - narrate "Teleport to death point: <element[<&l><&lb>Death<&sp>Point<&rb>].on_click[/ex -q teleport <context.entity.location>]>"
     on script generates error:

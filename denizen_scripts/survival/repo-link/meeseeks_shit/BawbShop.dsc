@@ -474,7 +474,7 @@ Admin_Meeseeks_Command:
 
         - define Arg2FlagArgs <script.data_key[PlayerFlags]>
         - define Arg2SpawnArgs <server.match_player[_Behr].flag[Behrry.Meeseeks.OwnedMeeseeks]||>
-        - define Arg2ListFlagsArgs <server.list_online_players.parse[name]>
+        - define Arg2ListFlagsArgs <server.online_players.parse[name]>
 
         - inject MultiArg_With_MultiArgs_Command_Tabcomplete Instantly
     aliases:

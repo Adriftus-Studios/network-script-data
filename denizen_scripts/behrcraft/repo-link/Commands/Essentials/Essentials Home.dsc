@@ -93,7 +93,7 @@ Home_Command:
             - stop
 
     # % ██ [ Check if home world exists ] ██
-        - if !<server.list_worlds.contains[<[Location].world>]>:
+        - if !<server.worlds.contains[<[Location].world>]>:
             - narrate format:Colorize_Red "World is not loaded."
             - stop
 
@@ -122,7 +122,7 @@ Home_GUI:
         - case Main_Menu:
             - define Homes <player.flag[Behr.Essentials.Homes]>
             - define Title "My Homes"
-            - define WorldList <server.list_worlds.parse[name]>
+            - define WorldList <server.worlds.parse[name]>
             - choose <[Mode]>:
                 - case Teleport:
                     - define ActionLore "<&3>C<&b>lick <&3>t<&b>o <&3>T<&b>eleport"

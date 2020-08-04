@@ -21,7 +21,7 @@ World_Command:
 
         - if <context.alias> != spawn:
             - define SubCommands <list[Create|Destroy|Load|Unload|Teleport]>
-            - define LoadedWorlds <server.list_worlds.parse[name]>
+            - define LoadedWorlds <server.worlds.parse[name]>
             - if <context.args.size> == 0:
                 - determine <[SubCommands].include[<[LoadedWorlds]>]>
 
@@ -52,9 +52,9 @@ World_Command:
                         - stop
 
             - if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>]> && <context.args.first> == Teleport:
-                - determine <server.list_online_players.exclude[<player>].parse[name]>
+                - determine <server.online_players.exclude[<player>].parse[name]>
             - if <context.args.size> == 3 && !<context.raw_args.ends_with[<&sp>]> && <context.args.first> == Teleport:
-                - determine <server.list_online_players.exclude[<player>].parse[name].filter[starts_with[<context.args.last>]]>
+                - determine <server.online_players.exclude[<player>].parse[name].filter[starts_with[<context.args.last>]]>
 
     script:
     # % ██ [  Check Args ] ██
@@ -74,7 +74,7 @@ World_Command:
                     - inject Command_Syntax
             
             # % ██ [  Check if world is loaded ] ██
-            - if !<server.list_worlds.parse[name].contains[<[World]>]>:
+            - if !<server.worlds.parse[name].contains[<[World]>]>:
                 - narrate "<&e><[World].to_titlecase> <proc[Colorize].context[is not currently loaded.|Red]>"
                 - if <player.groups.contains_any[Coordinator|Administrator|Developer]>:
                     - define Hover "<proc[Colorize].context[Click to Create:|green]><&nl><&e><[World]>"
@@ -115,7 +115,7 @@ World_Command:
         - foreach <[ValidFolders]> as:Folder:
             - if <server.list_files[../../<[Folder]>].contains[level.dat]||false>:
                 - define ValidWorlds:|:<[Folder]>
-        - define LoadedWorlds <server.list_worlds.parse[name]>
+        - define LoadedWorlds <server.worlds.parse[name]>
         - define ValidWorlds:!|:<[ValidWorlds].exclude[<[LoadedWorlds]>]>
         - define World <context.args.get[2]>
         
@@ -203,7 +203,7 @@ World_Command:
                     - define User <player>
 
                 # % ██ [  Check if world is loaded ] ██
-                - if !<server.list_worlds.parse[name].contains[<[World]>]>:
+                - if !<server.worlds.parse[name].contains[<[World]>]>:
                     - narrate "<&e><[World].to_titlecase> <proc[Colorize].context[is not currently loaded.|Red]>"
                     - define Hover "<proc[Colorize].context[Click to Create:|green]><&nl><&e><[World]>"
                     - define Text "<&a>[<&2><&l><&chr[2714]><&r><&a>]"

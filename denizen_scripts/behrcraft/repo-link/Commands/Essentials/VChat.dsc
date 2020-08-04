@@ -11,7 +11,7 @@ VChat_Command:
     aliases:
         - vc
     chat:
-        - define Targets <server.list_online_players_flagged[Behr.Essentials.vchat]>
+        - define Targets <server.online_players_flagged[Behr.Essentials.vchat]>
         - define Prefix "<&b>┤<proc[Colorize].context[<player.display_name.strip_color>:|Blue]>"
         - define Message "<&2><context.raw_args.parse_color>"
         - narrate targets:<[Targets]> "<[Prefix]> <[Message]>"

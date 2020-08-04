@@ -13,9 +13,9 @@ FlySpeed_Command:
         - if <player.groups.in_group[Moderation]>:
             - define Arg2 <list[Lightspeed|ludicrous|Plaid]>
             - if <context.args.size||0> == 0:
-                - determine <server.list_players.parse[name].exclude[<player.name>]>
+                - determine <server.players.parse[name].exclude[<player.name>]>
             - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-                - determine <server.list_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.first>]]>
+                - determine <server.players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.first>]]>
             - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
                 - determine <[Arg2].filter[starts_with[<context.args.get[2]>]]>
     script:

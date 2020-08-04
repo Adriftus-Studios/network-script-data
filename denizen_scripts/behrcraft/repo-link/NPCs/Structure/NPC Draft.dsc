@@ -137,8 +137,8 @@ Draft_NPC:
     #                    - inventory open d:<npc[<[NpcID]>].inventory>
     #                - case Manage:
     #                    - flag player Behrry.Meeseeks.ShopMode:Select
-    #                    - if <server.list_online_players_flagged[Behrry.Meeseeks.ActiveInventory].size> > 0:
-    #                        - foreach <server.list_online_players_flagged[Behrry.Meeseeks.ActiveInventory]> as:Player:
+    #                    - if <server.online_players_flagged[Behrry.Meeseeks.ActiveInventory].size> > 0:
+    #                        - foreach <server.online_players_flagged[Behrry.Meeseeks.ActiveInventory]> as:Player:
     #                            - if <[Player].flag[Behrry.Meeseeks.ActiveInventory]> == <[NpcID]>:
     #                                - narrate targets:<[Player]> "The owner is now managing the shop."
     #                                - inventory player:<[Player]> close

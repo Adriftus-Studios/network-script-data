@@ -61,7 +61,7 @@ murdermobs_Command:
             - inject Command_Syntax
 
     # % ██ [ Murder ] ██
-        #- foreach <server.list_online_players> as:Player:
+        #- foreach <server.online_players> as:Player:
         - if <[Mobs]> == all:
             - remove <Player.location.find.entities.within[<[Radius]>].filter[is_living].filter[is_player.not].filter[is_npc.not]>
         - else if <[Mobs]> == Hostiles:

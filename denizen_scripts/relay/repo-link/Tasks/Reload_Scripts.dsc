@@ -21,7 +21,7 @@ Reload_Scripts_DCommand:
     - if <[Args].size> == 0:
       - reload
       - define Server Relay
-      - define ScriptCount <server.list_scripts.size>
+      - define ScriptCount <server.scripts.size>
     - else if <[Args].size> == 1:
       - if <[Args].first> == all:
         - foreach <bungee.list_servers> as:Server:
@@ -51,7 +51,7 @@ Reload_Scripts_Queue:
         - bungeerun <[Server]> Reload_Task def:<[Hook]>
       - case false:
         #$ This should be a transcribed embedded message
-        - ~bungeetag server:<[Server]> <server.list_scripts.size> save:ScriptCount
+        - ~bungeetag server:<[Server]> <server.scripts.size> save:ScriptCount
         - bungee <[Server]>:
           - reload
         - define color Yellow
@@ -65,7 +65,7 @@ Reload_Scripts_Queue:
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
       - default:
         #$ This should be a transcribed embedded message
-        - ~bungeetag server:<[Server]> <server.list_scripts.size> save:ScriptCount
+        - ~bungeetag server:<[Server]> <server.scripts.size> save:ScriptCount
         - bungee <[Server]>:
           - reload
         - define ScriptCount <entry[ScriptCount].result||invalid>

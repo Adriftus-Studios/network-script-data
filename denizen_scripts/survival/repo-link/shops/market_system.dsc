@@ -495,7 +495,7 @@ market_system_shutdown:
     - playsound <server.online_players> sound:ENTITY_EXPERIENCE_ORB_PICKUP volume:0.6 pitch:1.4
     - flag server market_timer:true duration:10s
     - flag server market_open:false
-    - define player_list:<server.list_players.filter[open_inventory.script.name.starts_with[market_system]]>
+    - define player_list:<server.players.filter[open_inventory.script.name.starts_with[market_system]]>
     - foreach <[player_list]>:
       - inventory close player:<[value]>
     - narrate "<&c>The Market is updating, and will be available again within a few moments." targets:<[player_list]>

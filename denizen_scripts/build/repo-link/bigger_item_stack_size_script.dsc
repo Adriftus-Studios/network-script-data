@@ -22,10 +22,10 @@ reload_scripts:
     reload:
       - yaml create id:server.recipe_fixer
       - adjust server reset_recipes
-      - foreach <server.list_scripts>:
+      - foreach <server.scripts>:
           - if <[value].data_key[type]> == item && <[value].data_key[recipes]||null> != null:
               - foreach <[value].list_keys[recipes]> as:recipe:
-                - if <server.list_material_types.parse[name].contains[<[value].name.replace[custom_].with[]>]>:
+                - if <server.material_types.parse[name].contains[<[value].name.replace[custom_].with[]>]>:
                   - if <server.list_recipe_ids.contains[minecraft:<[value].name.replace[custom_].with[]>]>:
                     - yaml id:server.recipe_fixer set recipes:|:<[value].name>
                 - if <[value].data_key[recipes.<[recipe]>.type]> == shaped:

@@ -107,7 +107,7 @@ CoinTop_Command:
         - moneytop
         - coinstop
     script:
-        - define Players <server.list_players_flagged[Behrry.Economy.Coins]>
+        - define Players <server.players_flagged[Behrry.Economy.Coins]>
         - define PlayersOrdered <[Players].sort_by_number[flag[Behrry.Economy.Coins]].reverse>
         - define PrintCount 8
         - define TotalPages <[PlayersOrdered].size.div[<[PrintCount]>].round_up>
