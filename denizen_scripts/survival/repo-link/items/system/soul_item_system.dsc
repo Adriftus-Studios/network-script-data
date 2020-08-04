@@ -275,6 +275,7 @@ item_system_global_data:
 ################
 soul_forge_inventory:
   type: inventory
+  debug: false
   title: <&5>Soul Forge
   inventory: chest
   size: 45
@@ -292,6 +293,7 @@ soul_forge_inventory:
 
 soul_forge_events:
   type: world
+  debug: false
   events:
     on player clicks gray_stained_glass_pane|red_stained_glass_pane|black_stained_glass_pane|player_head in soul_forge_inventory priority:-2000:
       - determine cancelled
@@ -315,6 +317,7 @@ soul_forge_events:
           - give <context.inventory.slot[<[value]>]> to:<player.inventory>
 soul_forge_command:
   type: command
+  debug: false
   name: open_soul_forge
   permission: not.a.perm
   script:
@@ -325,6 +328,7 @@ soul_forge_command:
 
 soul:
   type: item
+  debug: false
   material: clay_ball
   display_name: <&c>ERROR - REPORT THIS
   mechanisms:
@@ -334,32 +338,38 @@ soul:
 
 item_with_soul:
   type: item
+  debug: false
   material: diamond_sword
   display name: <&c>ERROR - REPORT THIS
 
 get_random_soul:
   type: procedure
+  debug: false
   definitions: rarity|level
   script:
+    - define buffs <list>
+    - define debuffs <list>
     - define soul_type <script[item_system_global_data].list_keys[soul_names.<[rarity]>].random>
-    - define NBT <map.with[soul].as[<map.with[type].as[<[soul_type]>].with[level].as[<[level]>]>]>
-    - define NBT <[NBT].with[rarity].as[<[rarity]>].with[soul_level].as[<[level]>].with[active_soul].as[<[soul_type]>]>
+
+    - define NBT <list_single[soul/<map.with[type].as[<[soul_type]>].with[level].as[<[level]>]>]>
+    - define NBT <[NBT].include_single[rarity/<[rarity]>].include_single[soul_level/<[level]>].include_single[active_soul/<[soul_type]>]>
     - foreach <script[item_system_global_data].data_key[soul_names.<[rarity]>.<[soul_type]>]> Key:Stat as:Type:
       - if <[type]> == buff:
-        - define buffs:->:<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>
+        - define buffs <[buffs].include_single[<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>]>
       - else:
-        - define debuffs:->:<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>
-    - define buffs_and_debuffs <map>
-    - if <[buffs].exists>:
-      - define buffs_and_debuffs <[buffs_and_debuffs].with[buffs].as[<list_single[<[buffs]>]>]>
-    - if <[debuffs].exists>:
-      - define buffs_and_debuffs <[buffs_and_debuffs].with[debuffs].as[<list_single[<[debuffs]>]>]>
+        - define debuffs <[debuffs].include_single[<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>]>
+    - if !<[buffs].is_empty>:
+      - define NBT <[NBT].include_single[buffs/<[buffs]>]>
+    - if !<[debuffs].is_empty>:
+      - define NBT <[NBT].include_single[debuffs/<[debuffs]>]>
     - define flavor "<&d>Soul Item<&nl><&e>Combine with Armor or Weapons"
-    - define NBT <[NBT].with[flavor].as[<[flavor]>].include[<[buffs_and_debuffs]>]>
-    - determine <proc[item_system_build_item].context[<item[soul].with[nbt=<[NBT]>]>]>
+    - define NBT <[NBT].include_single[flavor/<[flavor]>]>
+    - define Context <list_single[<item[Soul]>].include_single[<[NBT]>]>
+    - determine <proc[item_system_build_item].context[<[Context]>]>
 
 item_with_soul_create:
   type: procedure
+  debug: false
   definitions: item1|item2
   script:
     - if <[item1].material.name> == air || <[item2].material.name> == air:
@@ -377,6 +387,7 @@ item_with_soul_create:
 
 item_create_soul_item:
   type: procedure
+  debug: false
   definitions: material|soul_type|level|rarity|enchantments
   script:
     - if <[material].matches[<script[item_system_global_data].data_key[regex_type_check.weapon]>]>:
@@ -397,15 +408,19 @@ item_create_soul_item:
 # This is some AJ level shit....
 item_system_build_item:
   type: procedure
-  definitions: item
+  definitions: item|NBT
+  debug: false
   script:
+    - define Item <[Item].with[nbt=<[NBT]>]>
+    - debug debug <[NBT]>
+
   # % ██ [ Determine the amount of Stars  ] ██
     - if <[item].has_nbt[soul_level]>:
       - define level <[item].nbt[soul_level]>
-      - define level_stars <list[].pad_right[<[level]>].with[<&e>✭].pad_right[5].with[<&7>✭].unseparated>
+      - define level_stars <list.pad_right[<[level]>].with[<&e>✭].pad_right[5].with[<&7>✭].unseparated>
     - else:
       - define level 0
-      - define level_stars <list[].pad_right[5].with[<&7>✭].unseparated>
+      - define level_stars <list.pad_right[5].with[<&7>✭].unseparated>
 
   # % ██ [ Determine the base of the item?  ] ██
     - if <script[item_system_global_data].list_keys[defaults.damage].contains[<[item].material.name>]>:
@@ -415,11 +430,12 @@ item_system_build_item:
 
   # % ██ [ Determine the NBT_Attributes  ] ██
     - define nbt <list>
+    - define nbt_attributes <list>
     - foreach <list[buffs|debuffs]> as:modifier:
+      - debug debug <[item].nbt>
       - if <[item].has_nbt[<[modifier]>]> && <[item].material.name> != <script[soul].data_key[material]> && <[Item].nbt[<[modifier]>]> != none:
-        - define nbt_attributes <list>
         - foreach <[item].nbt[<[modifier]>].merge_maps> key:alt as:stat:
-          - if <script[item_system_global_data].data_key[nbt_attributes].contains[<[alt]>]>
+          - if <script[item_system_global_data].data_key[nbt_attributes].contains[<[alt]>]>:
             - define attribute <script[item_system_global_data].data_key[nbt_attributes.<[alt]>]>
             - define slot <script[item_system_global_data].data_key[nbt_slots.<[item].material.name>]>
             - if <[alt]> == melee_damage:
@@ -430,7 +446,7 @@ item_system_build_item:
             - else:
               - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[stat]>]>
           - else:
-            - define nbt <map.with[<script[item_system_global_data].data_key[nbt_other.<[alt]>]>].as[<[alt]>]>
+            - define nbt <[nbt].include_single[<script[item_system_global_data].data_key[nbt_other.<[alt]>]>/<[alt]>]>
 
   # % ██ [ Determine Misc Item Properties  ] ██
     - if <[Item].has_script>:
@@ -445,9 +461,9 @@ item_system_build_item:
     # TODO - Clean this up, and turn it into a loop using nbt[applicable_lore]
 
     - if <[item].has_nbt[active_soul]>:
-      - define name "<[rarity_color]><[name1].replace[_].with[<&sp>].to_titlecase> of the <[item].nbt[active_soul].to_titlecase>"
+      - define name "<[rarity_color]><[sn1].replace[_].with[<&sp>].to_titlecase> of the <[item].nbt[active_soul].to_titlecase>"
     - else:
-      - define name <[rarity_color]><[name1].replace[_].with[<&sp>].to_titlecase>
+      - define name <[rarity_color]><[sn1].replace[_].with[<&sp>].to_titlecase>
 
 
     - define lore <list.include[<script[item_system_global_data].parsed_key[settings.lore.top]>]>
@@ -461,13 +477,15 @@ item_system_build_item:
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.armors]>]>
 
     - foreach <list[buffs|debuffs]> as:modifier:
-      - foreach <[item].nbt[<[modifier]>].merge_maps> key:alt as:final_value:
-        - if <[alt]> == none:
-          - foreach next
-        - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.buffs.<[alt]>]>]>
+      - if <[item].has_nbt[<[modifier]>]>:
+        - foreach <[item].nbt[<[modifier]>]> as:Modifiers:
+          - foreach <[Modifiers]> key:alt as:final_value:
+            - if <[alt]> == none:
+                - foreach next
+            - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.buffs.<[alt]>]>]>
 
     - if <[item].has_nbt[flavor]>:
-      - define flavor <[item].nbt[flavor].unescaped>
+      - define flavor <[item].nbt[flavor]>
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.flavor]>]>
     - define lore <[lore].include[<script[item_system_global_data].parsed_key[settings.lore.bottom]>]>
 
@@ -484,6 +502,7 @@ item_system_build_item:
     
 vanilla_craft_item_build:
   type: world
+  debug: false
   events:
     on player crafts *_(sword|axe|chestplate|leggings|boots|helmet) bukkit_priority:HIGHEST:
       - if !<context.item.has_display>:
@@ -491,6 +510,7 @@ vanilla_craft_item_build:
     
 vanilla_craft_item_build2:
   type: world
+  debug: false
   events:
     on player crafts diamond_sword bukkit_priority:HIGHEST:
       - if !<context.item.has_display>:
