@@ -27,7 +27,7 @@ mob_spawning_system_events:
     on entity spawns in:mainland:
       - if <script[mob_spawning_system_events].yaml_key[settings.blacklist].contains[<context.entity.entity_type>]>:
         - stop
-      - if <context.entity.script.name||null> == null:
+      - if <context.entity.script.name||null> == null && !<context.entity.is_mythicmob>:
         - determine passively cancelled
       - else:
         - stop
