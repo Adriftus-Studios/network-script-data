@@ -11,14 +11,14 @@ RenameHome_Command:
         - if <context.args.size||0> == 0:
           - determine <player.flag[Behr.Essentials.homes].parse[before[/]]||>
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <player.flag[Behr.Essentials.homes].parse[before[/]].filter[starts_with[<context.args.get[1]>]]||>
+            - determine <player.flag[Behr.Essentials.homes].parse[before[/]].filter[starts_with[<context.args.first>]]||>
     script:
     # % ██ [ Verify args ] ██
         - if <context.args.get[3]||null> != null:
             - inject Command_Syntax
 
     # % ██ [ Open GUI without args ] ██
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.first||null> == null:
             - run Home_GUI def:Rename
             - stop
 
@@ -28,7 +28,7 @@ RenameHome_Command:
             - stop
 
     # % ██ [ Check first home ] ██
-        - define Name <context.args.get[1]>
+        - define Name <context.args.first>
         - if !<player.flag[Behr.Essentials.homes].parse[before[/]].contains[<[Name]>]||null>:
             - narrate "<proc[Colorize].context[Home does not exist.|red]>"
             - stop

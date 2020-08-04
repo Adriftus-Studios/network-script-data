@@ -13,7 +13,7 @@ Restart_Handler:
             - if <util.date.time.hour.mod[12]> == 1 && <util.date.time.minute> == 55:
                 - if <server.has_flag[behrry.essentials.restartskip]>:
                     - flag server behrry.essentials.restartskip:!
-                    - narrate targets:<server.list_online_players.filter[in_group[Moderation]]> format:Colorize_yellow "Server restart queue skipped."
+                    - narrate targets:<server.online_players.filter[in_group[Moderation]]> format:Colorize_yellow "Server restart queue skipped."
                     - stop
                 - announce "<&6>--<&e>Server will restart in five minutes.<&6>--"
                 - run Server_Restart_Task def:<duration[300]>|20
@@ -34,7 +34,7 @@ Server_Restart_Task:
         - define s <[Time].time.second.pad_left[2].with[0]>
         - define Clock <&e><[m]><&6>:<&e><[s]>
 
-        - bossbar create Restart players:<server.list_online_players> "title:<&4><&l>S<&c><&l>erver <&4><&l>R<&c><&l>estart<&4>: <[Clock]>" color:red progress:1
+        - bossbar create Restart players:<server.online_players> "title:<&4><&l>S<&c><&l>erver <&4><&l>R<&c><&l>estart<&4>: <[Clock]>" color:red progress:1
         - repeat <[TimeInt]>:
             - if <server.has_flag[behrry.essentials.restartskip]>:
                 - announce format:Colorize_Green "Server Restart Skipped."
@@ -49,7 +49,7 @@ Server_Restart_Task:
             - define Clock <&e><[m]><&6>:<&e><[s]>
             - define Timer <[Time].in_seconds.div[<[TimeInt]>]>
 
-            - bossbar update Restart players:<server.list_online_players> "title:<&4><&l>S<&c><&l>erver <&4><&l>R<&c><&l>estart<&4>: <[Clock]>" color:red progress:<[Timer]>
+            - bossbar update Restart players:<server.online_players> "title:<&4><&l>S<&c><&l>erver <&4><&l>R<&c><&l>estart<&4>: <[Clock]>" color:red progress:<[Timer]>
         - bossbar remove Restart
  
         - inject Locally Restart

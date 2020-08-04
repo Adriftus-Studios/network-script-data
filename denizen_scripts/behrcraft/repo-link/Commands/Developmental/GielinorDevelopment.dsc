@@ -583,7 +583,7 @@ onetimebiome:
   debug: false
   script:
     - define Sel <player.we_selection>
-    - define Biomes <server.list_biome_types.parse[name]>
+    - define Biomes <server.biome_types.parse[name]>
     - foreach <[Sel].blocks.filter[material.name.is[==].to[chiseled_stone_bricks]]> as:StartLoc:
       - define i:++
       - if <[i]> == <[Biomes].size>:
@@ -648,7 +648,7 @@ CastleWars_Handler:
       - wait 1t
       - if !<server.has_flag[Behrry.Event.CastleWars.EntranceLit]>:
         - flag server Behrry.Event.CastleWars.EntranceLit
-        - while <server.has_flag[Behrry.Event.CastleWars.EntranceLit]> && <cuboid[CastleWarsEntrance].list_players.size> > 0:
+        - while <server.has_flag[Behrry.Event.CastleWars.EntranceLit]> && <cuboid[CastleWarsEntrance].players.size> > 0:
           - foreach <list[red|green|blue]> as:Team:
             - run CastleWarsPortals def:<[Team]>
           - wait 3s

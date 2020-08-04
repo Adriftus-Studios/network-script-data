@@ -13,7 +13,7 @@ Ban_Command:
             - inject Command_Syntax Instantly
 
     # % ██ [ Verify player ] ██
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification_Offline Instantly
 
     # % ██ [ Check if player is a moderator ] ██
@@ -27,7 +27,7 @@ Ban_Command:
 
     # % ██ [ Check if reason is specified ] ██
         - if <context.args.size> == 2:
-            - define Reason <context.raw_args.after[<context.args.get[1]><&sp>]>
+            - define Reason <context.raw_args.after[<context.args.first><&sp>]>
             - announce "<proc[User_Display_Simple].context[<[User]>]> <&e>was banned for: <&a><[Reason]>"
             - ban <[User]> reason:<[Reason]>
         - else:

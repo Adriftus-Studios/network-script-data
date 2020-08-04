@@ -153,7 +153,7 @@ Event_Command:
   description: Manages Event Queues.
   tab complete:
     - define SubCommands <list[Queue|Pause|Stop]>
-    - define Events <server.list_scripts.filter[ends_with[Event]]>
+    - define Events <server.scripts.filter[ends_with[Event]]>
     - if <context.args.size> == 0:
       - determine <[SubCommands]>
     - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
@@ -324,11 +324,11 @@ IcecapadePreChunk:
     - else if <context.args.size> == 1 && "!<context.raw_args.ends_with[ ]>":
         - determine <list[16|32|64|128|256].filter[starts_with[<context.args.first>]]>
     - else if <context.args.size> < 2:
-        - determine <server.list_worlds.parse[name]>
+        - determine <server.worlds.parse[name]>
     - else if <context.args.size> == 2 && "!<context.raw_args.ends_with[ ]>":
-        - determine <server.list_worlds.parse[name].filter[starts_with[<context.args.last>]]>
+        - determine <server.worlds.parse[name].filter[starts_with[<context.args.last>]]>
     script:
-    - if <context.args.size> == 2 && <context.args.first.is_integer> && <context.args.first> >= 4 && <server.list_worlds.parse[name].contains[<context.args.last>]>:
+    - if <context.args.size> == 2 && <context.args.first.is_integer> && <context.args.first> >= 4 && <server.worlds.parse[name].contains[<context.args.last>]>:
         - narrate "<&3>[PreChunk] Generation started! See console for information."
         - define world <context.args.get[2]>
         #- define X <context.args.first.mul[-1]>

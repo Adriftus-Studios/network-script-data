@@ -15,7 +15,7 @@ PlayerData_Command:
             - inject Command_Syntax Instantly
         
     # % ██ [ Check player arg ] ██
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification_Offline Instantly
         
     # % ██ [ Essentials ] ██
@@ -45,7 +45,7 @@ Flag_Consistency_Task:
         - define Minute <util.date.time.Minute>
         - define Time <[Day]>-<[Month]>-<[Year]>---<[Hour]>-<[Minute]>
 
-        - foreach <server.list_players> as:Player:
+        - foreach <server.players> as:Player:
             - if <[Player].has_flag[<[OldFlag]>]>:
                 - flag <[Player]> <[NewFlag]>:<[Player].flag[<[OldFlag]>]>
                 - log "<[Player]> (<[Player].name>/<[Player].UUID>) OldFlag:<[OldFlag]>:<[Player].flag[<[OldFlag]> && NewFlag:<[NewFlag]>:<[Player].flag[<[NewFlag]>" type:INFO file:plugins/Denizen/data/ConsistencyUpdate_<[Time]>.log

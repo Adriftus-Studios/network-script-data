@@ -58,7 +58,7 @@ discord_bungeeCommand_execute:
     - define color Code
     - inject Embedded_Color_Formatting
     - define Text "Executed Commands on <[server]>:<&nl>```ini<&nl><[Command].split[<&nl>].separated_by[<&nl>]>```"
-    - define Embeds "<list[<map[color/<[Color]>].with[description].as[<[Text]>]>]>"
+    - define Embeds <list[<map[color/<[Color]>].with[description].as[<[Text]>]>]>
     - define Data <map[username/<[Server]><&sp>Server|avatar_url/https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>

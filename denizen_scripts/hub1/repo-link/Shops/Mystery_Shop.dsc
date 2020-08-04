@@ -2,7 +2,7 @@ store_hub_mysteryShop_command:
   type: command
   name: openmysteryShop
   script:
-    - inventory open d:store_hub_mysteryShop player:<server.match_player[<context.args.get[1]>]||<player>>
+    - inventory open d:store_hub_mysteryShop player:<server.match_player[<context.args.first>]||<player>>
 
 
 store_hub_mysteryShop:
@@ -17,9 +17,9 @@ store_hub_mysteryShop:
       - define list:|:<item[store_hub_mysteryShop_<[value]>]>
     - determine <[list]>
   slots:
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
 
 
 store_hub_mysteryShop_filler:
@@ -80,11 +80,11 @@ store_hub_mysteryShop_boxes_inventory:
       505: <item[ender_chest]>[quantity=3;nbt=<list[price/11200|number/50|stars/5]>;display_name=<&b>50<&sp><&e>⭐⭐⭐⭐⭐<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>11200<&sp><&b>ⓐ]
       1005: <item[ender_chest]>[quantity=4;nbt=<list[price/16000|number/100|stars/5]>;display_name=<&b>100<&sp><&e>⭐⭐⭐⭐⭐<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>16000<&sp><&b>ⓐ]
     slots:
-      - "[101] [251] [501] [1001] [filler] [filler] [filler] [filler] [filler]"
-      - "[102] [252] [502] [1002] [filler] [filler] [filler] [filler] [filler]"
-      - "[103] [253] [503] [1003] [filler] [filler] [filler] [filler] [filler]"
-      - "[104] [254] [504] [1004] [filler] [filler] [filler] [filler] [filler]"
-      - "[105] [255] [505] [1005] [filler] [filler] [filler] [filler] [filler]"
+      - [101] [251] [501] [1001] [filler] [filler] [filler] [filler] [filler]
+      - [102] [252] [502] [1002] [filler] [filler] [filler] [filler] [filler]
+      - [103] [253] [503] [1003] [filler] [filler] [filler] [filler] [filler]
+      - [104] [254] [504] [1004] [filler] [filler] [filler] [filler] [filler]
+      - [105] [255] [505] [1005] [filler] [filler] [filler] [filler] [filler]
 
 store_hub_mysteryShop_boxes_events:
   type: world
@@ -98,7 +98,7 @@ store_hub_mysteryShop_boxes_events:
         - define newBal <proc[getGlobalPlayerData].context[economy.AuroraCoins.current].-[<context.item.nbt[price]>]>
         - run setGlobalPlayerData def:economy.AuroraCoins.current|<[newBal]>
         - execute server "/gmysterybox give <player.name> <context.item.nbt[number]> <context.item.nbt[stars]>"
-        - narrate "<&a>You have succesfully purchased: <&r><context.item.nbt[number]> <&e><list[].pad_left[<context.item.nbt[stars]>].with[⭐]>].separated_by[]><&7><list[].pad_right[<context.item.nbt[stars].-[5].abs>].with[✩]>].separated_by[]> <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>."
+        - narrate "<&a>You have succesfully purchased: <&r><context.item.nbt[number]> <&e><list.pad_left[<context.item.nbt[stars]>].with[⭐]>].separated_by[]><&7><list.pad_right[<context.item.nbt[stars].-[5].abs>].with[✩]>].separated_by[]> <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>."
       - else:
         - narrate "<&c>You do not have enough <&b>Aurora Coins<&c> for that."
       - inventory close

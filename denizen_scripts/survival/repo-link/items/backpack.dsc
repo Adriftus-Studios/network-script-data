@@ -4,7 +4,7 @@ Backpack:
   display name: <&a>Backpack
   lore:
     - "<&e>Slots<&co> <&a>9"
-    - "<&a>"
+    - <&a>
     - "<&e>Hold in Hand"
     - "<&b>Place block to open"
   mechanisms:

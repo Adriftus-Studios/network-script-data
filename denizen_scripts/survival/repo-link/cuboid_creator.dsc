@@ -5,7 +5,7 @@ cuboid_tool_item:
   material: stick
   display name: <&a><&l>Selection Tool
   lore:
-  - "<&b>Usage<&co>"
+  - <&b>Usage<&co>
   - "<&a>Left Click - Save Position 1"
   - "<&a>Right Click - Save Position 2"
 
@@ -15,7 +15,7 @@ cuboid_wand_command:
   name: wand
   permission: worldedit.wand
   script:
-    - if <context.args.get[1]||null> == null:
+    - if <context.args.first||null> == null:
       - give cuboid_tool_item
       - determine fulfilled
 
@@ -32,13 +32,13 @@ cuboid_command:
       - determine <list[save|schem|clear]>
   permission message: <&c>Sorry <player.name>, you can't perform that command.
   script:
-    - if <context.args.get[1]||null> == null:
+    - if <context.args.first||null> == null:
       - narrate "<&c>Please select an area, and choose a name."
-    - else if <context.args.get[1]> == clear:
+    - else if <context.args.first> == clear:
       - note remove as:cuboid_selection_left_<player.uuid>
       - note remove as:cuboid_selection_right_<player.uuid>
       - narrate "<&a>Successfully removed your Cube Selection"
-    - else if <context.args.get[1]> == save:
+    - else if <context.args.first> == save:
       - if <context.args.get[2]||null> == null:
         - narrate "<&c>Please name your Cuboid"
       - if !<server.list_notables[cuboids].parse[notable_name].contains[<context.args.get[2]>]>:

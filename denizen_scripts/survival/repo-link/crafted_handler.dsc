@@ -4,7 +4,7 @@ send_to_crafted:
   name: crafted_send
   permission: not.a.perm
   script:
-    - adjust <queue> linked_player:<server.match_player[<context.args.get[1]>]>
+    - adjust <queue> linked_player:<server.match_player[<context.args.first>]>
     - if <yaml[crafted].read[whitelist].contains_any[<player.uuid>|<player.name>]>:
       - adjust <player> send_to:crafted
     - else:

@@ -7,7 +7,7 @@ MobInv:
     permission: behrry.essentials.mobinv
     script:
     # % ██ [ Check args ] ██
-        - if <context.args.get[1]||null> != null:
+        - if <context.args.first||null> != null:
             - inject Command_Syntax Instantly
 
     # % ██ [ Define mob ] ██

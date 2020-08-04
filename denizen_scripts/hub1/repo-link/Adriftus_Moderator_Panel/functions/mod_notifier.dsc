@@ -4,7 +4,7 @@ mod_message_staff:
   debug: false
   definitions: message
   script:
-    - narrate targets:<server.list_players.filter[has_permission[mod.staff]]> <[message]>
+    - narrate targets:<server.players.filter[has_permission[mod.staff]]> <[message]>
 
 # -- Return `kicked` messages
 mod_kick_message:

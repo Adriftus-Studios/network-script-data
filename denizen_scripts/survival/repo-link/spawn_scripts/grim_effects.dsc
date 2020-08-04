@@ -12,4 +12,4 @@ grim_area_effects:
       - time player reset
       - adjust <player> stop_sound:music
       - wait 1t
-      - playsound <player> sound:<script[spawn_sound_effects_handler].yaml_key[sounds].as_list.random> pitch:1 volume:150 sound_category:music
+      - playsound <player> sound:<script[spawn_sound_effects_handler].data_key[sounds].as_list.random> pitch:1 volume:150 sound_category:music

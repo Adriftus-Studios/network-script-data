@@ -24,7 +24,7 @@ TPPos_Command:
                     - if <context.args.get[3].is_integer>:
                         - defien Y <context.args.get[2]>
                         - define Z <context.args.get[3]>
-                    - else if <server.list_worlds.parse[name].contains[<context.args.get[3]>]>:
+                    - else if <server.worlds.parse[name].contains[<context.args.get[3]>]>:
                         - define Y top
                         - define Z <context.args.get[2]>
                         - define World <context.args.get[3]>
@@ -38,7 +38,7 @@ TPPos_Command:
                 - define X <context.args.first>
                 - define Y <context.args.get[2]>
                 - define Z <context.args.get[3]>
-                - if <server.list_worlds.parse[name].contains[<context.args.get[4]>]>:
+                - if <server.worlds.parse[name].contains[<context.args.get[4]>]>:
                     - define World <context.args.get[4]>
                 - else:
                     - define Reason "Invalid World."

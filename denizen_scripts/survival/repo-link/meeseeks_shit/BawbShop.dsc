@@ -298,8 +298,8 @@ Meeseeks_Operator:
                 - flag server Meeseeks.Shop.ChestLock
             - if <server.flag[Meeseeks.Shop.ChestLock].parse[before[/]].contains[<[Chest]>]>:
                 - define ChestData <server.flag[Meeseeks.Shop.ChestLock].map_get[<[Chest]>].split[/]>
-                - if <[ChestData].get[1]> != <npc.owner.uuid>:
-                    - narrate "<proc[Colorize].context[Chest locked by player:|red]> <proc[User_Display_Simple].context[<player[<[ChestData].get[1]>]>]>"
+                - if <[ChestData].first> != <npc.owner.uuid>:
+                    - narrate "<proc[Colorize].context[Chest locked by player:|red]> <proc[User_Display_Simple].context[<player[<[ChestData].first>]>]>"
                     - stop
             - else:
                 - flag <npc> Meeseeks.Shop.ChestLocks:->:<[Chest]>
@@ -429,9 +429,9 @@ Meeseeks_Operator:
         - repeat <[TotalPages]>:
             # @ ██ [ Determine Definitions [2*/2]          ] ██
             - define Page <[Value]>
-            - define Math1 "<[InventorySize].sub[9].mul[<[Page].sub[1]>].add[1]>"
-            - define Math2 "<[InventorySize].sub[9].mul[<[Page].sub[1]>].add[<[InventorySize].sub[9]>]>"
-            - define ItemList "<[ShopContents].get[<[Math1]>].to[<[Math2]>]>"
+            - define Math1 <[InventorySize].sub[9].mul[<[Page].sub[1]>].add[1]>
+            - define Math2 <[InventorySize].sub[9].mul[<[Page].sub[1]>].add[<[InventorySize].sub[9]>]>
+            - define ItemList <[ShopContents].get[<[Math1]>].to[<[Math2]>]>
 
         # @ ██ [ Build Softmenu                            ] ██
             - define SoftMenu:!
@@ -472,9 +472,9 @@ Admin_Meeseeks_Command:
     tab complete:
         - define Arg1 <list[Flag|ListFlags|Spawn|NewBox]>
 
-        - define Arg2FlagArgs <script.yaml_key[PlayerFlags]>
+        - define Arg2FlagArgs <script.data_key[PlayerFlags]>
         - define Arg2SpawnArgs <server.match_player[_Behr].flag[Behrry.Meeseeks.OwnedMeeseeks]||>
-        - define Arg2ListFlagsArgs <server.list_online_players.parse[name]>
+        - define Arg2ListFlagsArgs <server.online_players.parse[name]>
 
         - inject MultiArg_With_MultiArgs_Command_Tabcomplete Instantly
     aliases:
@@ -482,7 +482,7 @@ Admin_Meeseeks_Command:
     script:
         - if <context.args.size> < 1:
             - inject Command_Syntax Instantly
-        - define Arg1 <context.args.get[1]>
+        - define Arg1 <context.args.first>
         - choose <[Arg1]>:
             - case Flag:
                 - define Value <context.raw_args.after[<context.args.get[2><&sp>]>
@@ -496,28 +496,28 @@ Admin_Meeseeks_Command:
                     - narrate "<&e>Flag<&6>: <&a><context.args.get[2]><&e> set to<&6>:<&a><context.raw_args.after[<context.args.get[<context.args.get[2]><&sp>]>"
             - case ListFlags:
                 - if <context.args.get[2]||null> == null:
-                    - define List <script.yaml_key[PlayerFlags]>
+                    - define List <script.data_key[PlayerFlags]>
                     - define User <player>
                 - else if <context.args.get[2].is_integer>:
-                    - define List <script.yaml_key[NpcFlags]>
+                    - define List <script.data_key[NpcFlags]>
                     - if <npc[<context.args.get[2]>]||invalid> == invalid:
                         - narrate invalid:<context.args.get[2]>
                         - stop
                     - define User <npc[<context.args.get[2]>]>
                 - else:
-                    - define List <script.yaml_key[PlayerFlags]>
+                    - define List <script.data_key[PlayerFlags]>
                     - define User <context.args.get[2]>
                     - inject Player_Verification
                 - flag server TestingTarget:<[User]>
                 - define Hover "<&e>Click to <&a>Insert <&e><[User].name>"
                 - define Text "<&b><&m>--------- <&e>Flags for<&6>: <&a><[User].name> <&b><&m>---------"
                 - define Command "ex flag <&lt>server.flag[TestingTarget]<&gt> "
-                - narrate "<proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>"
+                - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
                 - foreach <[List]> as:Flag:
                     - define Hover "<&e>Shift<&6>+<&e>Click to <&a>Insert"
                     - define Text "<&e>- <[Flag]> <&b>== <&a><[User].flag[<[Flag]>]||null>"
-                    - define Insert "<[Flag]>"
-                    - narrate "<proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>"
+                    - define Insert <[Flag]>
+                    - narrate <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
 
 Inventory_Debug:
     type: task

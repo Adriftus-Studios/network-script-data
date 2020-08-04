@@ -26,14 +26,14 @@ mod_spectate_command:
         - adjust <player> gamemode:spectator
         - narrate "<&7>[<&b>ModSpec<&7>] <&a>Toggled ModSpec." targets:<player>
     - else:
-      - if <server.online_players.parse[name.to_lowercase].contains[<context.args.get[1].to_lowercase>]>:
+      - if <server.online_players.parse[name.to_lowercase].contains[<context.args.first.to_lowercase>]>:
         - if <player.gamemode> != SPECTATOR:
           - flag player spectateEnabled
           - flag player lastGM:<player.gamemode>
           - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
         - adjust <player> gamemode:spectator
-        - teleport <player> <server.match_player[<context.args.get[1]>].location>
-        - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <context.args.get[1]>." targets:<player>
+        - teleport <player> <server.match_player[<context.args.first>].location>
+        - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <context.args.first>." targets:<player>
       - else:
         - narrate "<&c>That player is not online!"
 

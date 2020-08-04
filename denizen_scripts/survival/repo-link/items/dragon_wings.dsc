@@ -11,7 +11,7 @@ dragon_wings:
   display name: <&5>Dragon Wings
   lore:
     - "<&d>Power<&co> <&a>100%"
-    - "<&a>"
+    - <&a>
     - "<&6>Taken from the <&d>Ender Dragon<&6>!"
   mechanisms:
     nbt: power/1
@@ -103,7 +103,7 @@ dragon_wings_events:
       - if <player.is_flying>:
         - stop
       - if <player.equipment.chest.script.name||null> == dragon_wings:
-        - if !<script[dragon_wings_settings].yaml_key[settings.worlds].contains[<player.location.world.name>]>:
+        - if !<script[dragon_wings_settings].data_key[settings.worlds].contains[<player.location.world.name>]>:
           - inject dragon_wings_toggle_glow
           - stop
         - if <player.equipment.chest.nbt[power]> <= 0:

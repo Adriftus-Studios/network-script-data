@@ -22,18 +22,18 @@ reload_scripts:
     reload:
       - yaml create id:server.recipe_fixer
       - adjust server reset_recipes
-      - foreach <server.list_scripts>:
-          - if <[value].yaml_key[type]> == item && <[value].yaml_key[recipes]||null> != null:
+      - foreach <server.scripts>:
+          - if <[value].data_key[type]> == item && <[value].data_key[recipes]||null> != null:
               - foreach <[value].list_keys[recipes]> as:recipe:
-                - if <server.list_material_types.parse[name].contains[<[value].name.replace[custom_].with[]>]>:
+                - if <server.material_types.parse[name].contains[<[value].name.replace[custom_].with[]>]>:
                   - if <server.list_recipe_ids.contains[minecraft:<[value].name.replace[custom_].with[]>]>:
                     - yaml id:server.recipe_fixer set recipes:|:<[value].name>
-                - if <[value].yaml_key[recipes.<[recipe]>.type]> == shaped:
-                  - yaml id:server.recipe_fixer set restricted.shaped.<[value].yaml_key[recipes.<[recipe]>.input].as_list.separated_by[_].replace[|].with[_]>:|:<[value].name><&co><[value].yaml_key[recipes.<[recipe]>.output_quantity]>
-                - if <[value].yaml_key[recipes.<[recipe]>.type]> == shapeless:
-                  - yaml id:server.recipe_fixer set restricted.shapeless.<[value].yaml_key[recipes.<[recipe]>.input].as_list.alphabetical.separated_by[_]>:|:<[value].name><&co><[value].yaml_key[recipes.<[recipe]>.output_quantity]>
-                - if <[value].yaml_key[recipes.<[recipe]>.type]> == furnace:
-                  - yaml id:server.recipe_fixer set restricted.furnace.<[value].yaml_key[recipes.<[recipe]>.input]>:<[value].name><&co><[value].yaml_key[recipes.<[recipe]>.output_quantity]||1><&co><[value].yaml_key[recipes.<[recipe]>.cook_time]>
+                - if <[value].data_key[recipes.<[recipe]>.type]> == shaped:
+                  - yaml id:server.recipe_fixer set restricted.shaped.<[value].data_key[recipes.<[recipe]>.input].as_list.separated_by[_].replace[|].with[_]>:|:<[value].name><&co><[value].data_key[recipes.<[recipe]>.output_quantity]>
+                - if <[value].data_key[recipes.<[recipe]>.type]> == shapeless:
+                  - yaml id:server.recipe_fixer set restricted.shapeless.<[value].data_key[recipes.<[recipe]>.input].as_list.alphabetical.separated_by[_]>:|:<[value].name><&co><[value].data_key[recipes.<[recipe]>.output_quantity]>
+                - if <[value].data_key[recipes.<[recipe]>.type]> == furnace:
+                  - yaml id:server.recipe_fixer set restricted.furnace.<[value].data_key[recipes.<[recipe]>.input]>:<[value].name><&co><[value].data_key[recipes.<[recipe]>.output_quantity]||1><&co><[value].data_key[recipes.<[recipe]>.cook_time]>
       - yaml id:server.recipe_fixer set recipes:<yaml[server.recipe_fixer].read[recipes].as_list.deduplicate>
     events:
       on server start:
@@ -50,12 +50,12 @@ custom_item_override:
         - if <context.slot> != -998:
           - if <player.open_inventory.inventory_type> == workbench:
             - wait 1t
-            - if <yaml[server.recipe_fixer].read[restricted.shaped.<player.open_inventory.matrix.parse[script.name.to_lowercase||air].separated_by[_]>].get[1].as_item||null> != null:
-              - define item:<yaml[server.recipe_fixer].read[restricted.shaped.<player.open_inventory.matrix.parse[script.name.to_lowercase||air].separated_by[_]>].get[1].as_item.with[quantity=<yaml[server.recipe_fixer].read[restricted.shaped.<player.open_inventory.matrix.parse[script.name.to_lowercase||air].separated_by[_]>].get[1].split[:].get[2]>]>
+            - if <yaml[server.recipe_fixer].read[restricted.shaped.<player.open_inventory.matrix.parse[script.name.to_lowercase||air].separated_by[_]>].first.as_item||null> != null:
+              - define item:<yaml[server.recipe_fixer].read[restricted.shaped.<player.open_inventory.matrix.parse[script.name.to_lowercase||air].separated_by[_]>].first.as_item.with[quantity=<yaml[server.recipe_fixer].read[restricted.shaped.<player.open_inventory.matrix.parse[script.name.to_lowercase||air].separated_by[_]>].first.split[:].get[2]>]>
               - inject build_item
               - adjust <player.open_inventory> result:<[item]>
-            - if <yaml[server.recipe_fixer].read[restricted.shapeless.<player.open_inventory.matrix.parse[script.name.to_lowercase].filter[is[!=].to[null]].separated_by[_]>].get[1].as_item||null> != null:
-              - define item:<yaml[server.recipe_fixer].read[restricted.shapeless.<player.open_inventory.matrix.parse[script.name.to_lowercase].filter[is[!=].to[null]].separated_by[_]>].get[1].as_item.with[quantity=<yaml[server.recipe_fixer].read[restricted.shapeless.<player.open_inventory.matrix.parse[script.name.to_lowercase].filter[is[!=].to[null]].separated_by[_]>].get[1].split[:].get[2]>]>
+            - if <yaml[server.recipe_fixer].read[restricted.shapeless.<player.open_inventory.matrix.parse[script.name.to_lowercase].filter[is[!=].to[null]].separated_by[_]>].first.as_item||null> != null:
+              - define item:<yaml[server.recipe_fixer].read[restricted.shapeless.<player.open_inventory.matrix.parse[script.name.to_lowercase].filter[is[!=].to[null]].separated_by[_]>].first.as_item.with[quantity=<yaml[server.recipe_fixer].read[restricted.shapeless.<player.open_inventory.matrix.parse[script.name.to_lowercase].filter[is[!=].to[null]].separated_by[_]>].first.split[:].get[2]>]>
               - inject build_item
               - adjust <player.open_inventory> result:<[item]>
 
@@ -69,7 +69,7 @@ build_item_command:
       - stop
     - inject build_item
     - inventory set d:<player.inventory> o:<[item]> slot:<player.held_item_slot.with[nbt=something/somevalue]>
-    - narrate "Done"
+    - narrate Done
 
 build_item:
   type: task

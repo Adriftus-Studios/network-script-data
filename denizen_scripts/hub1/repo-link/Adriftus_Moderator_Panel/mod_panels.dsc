@@ -142,7 +142,7 @@ mod_send_inv:
     - foreach <yaml[bungee.config].list_keys[servers]> as:server:
       - if <yaml[bungee.config].read[servers.<[server]>.show_in_play_menu]>:
         - define name <[server]>
-        - define lore <list[].include[<yaml[bungee.config].read[servers.<[server]>.description].parsed>]>
+        - define lore <list.include[<yaml[bungee.config].parsed_key[servers.<[server]>.description]>]>
         - define lore:|:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
         - define lore:|:<player.flag[amp_map].as_map.get[uuid].as_player.name>
         - define lore:|:<&d>Clic<&sp>Droit<&sp>pour<&sp>envoyer<&co>

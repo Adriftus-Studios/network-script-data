@@ -13,7 +13,7 @@ chat_system_events:
         - define msg <context.message.parse_color.strip_color>
 
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
-      - define Text <yaml[chat_config].read[channels.<[channel]>.format.channel].parsed>
+      - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - define Command "chat <[channel]>"
       - define ChannelText <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
       
@@ -21,20 +21,20 @@ chat_system_events:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
       - else:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
-      - define Text <yaml[chat_config].read[channels.<[channel]>.format.name].parsed>
+      - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
       - define Hint "msg <player.name> "
       - define NameText <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Hint]>]>
 
-      - define Separator <yaml[chat_config].read[channels.<[channel]>.format.separator].parsed>
+      - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
 
       - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"
-      - define Text <yaml[chat_config].read[channels.<[channel]>.format.message].parsed>
+      - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message]>
       - define Insert <[Text]>
       - define MessageText <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
 
       - define Message <[ChannelText]><[NameText]><[Separator]><[MessageText]>
       
-      - narrate "<[message]>" targets:<server.online_players_flagged[chat_channel_<[channel]>]>
+      - narrate <[message]> targets:<server.online_players_flagged[chat_channel_<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
         - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include[<[message]>]>
@@ -62,7 +62,7 @@ chat_history_show:
       - define list <[List].include[<yaml[chat_history].read[<[Channel]>_history]>]>
     - if <[List].is_empty>:
       - stop
-    - foreach <[list].sort_by_number[get[time]].reverse.get[1].to[20].reverse.parse[get[message]]> as:Message:
+    - foreach <[list].sort_by_number[get[time]].reverse.first.to[20].reverse.parse[get[message]]> as:Message:
       - narrate <[Message]>
 
 chat_command:
@@ -75,7 +75,7 @@ chat_command:
     - if <context.args.is_empty>:
       - determine <yaml[chat_config].list_keys[channels].filter_tag[<player.has_permission[<yaml[chat_config].read[channels.<[filter_value]>.permission]>]>]>
     - else:
-      - determine <yaml[chat_config].list_keys[channels].filter_tag[<player.has_permission[<yaml[chat_config].read[channels.<[filter_value]>.permission]>]>].filter[starts_with[<context.args.get[1]>]]>
+      - determine <yaml[chat_config].list_keys[channels].filter_tag[<player.has_permission[<yaml[chat_config].read[channels.<[filter_value]>.permission]>]>].filter[starts_with[<context.args.first>]]>
   script:
     - if <context.args.is_empty>:
       - inject chat_settings_open
@@ -90,7 +90,7 @@ chat_command:
       - yaml set id:global.player.<player.uuid> chat.channels.current:<[Channel]>
       - if !<yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<[Channel]>]>:
         - yaml id:global.player.<player.uuid> set chat.channels.active:->:<[Channel]>
-      - narrate "<&b>Now Talking in <yaml[chat_config].read[channels.<[Channel]>.format.channel].parsed>"
+      - narrate "<&b>Now Talking in <yaml[chat_config].parsed_key[channels.<[Channel]>.format.channel]>"
     - if <[Channel]> == reload:
       - inject chat_settings_reload
       - foreach <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>|<bungee.server>]> as:server:
@@ -105,7 +105,7 @@ chat_send_message:
 #@definitions: channel|message_escaped
   definitions: Channel|Message
   script:
-      - narrate "<[Message]>" targets:<server.online_players_flagged[chat_channel_<[channel]>]>
+      - narrate <[Message]> targets:<server.online_players_flagged[chat_channel_<[channel]>]>
       - inject chat_history_save
 
 chat_system_flag_manager:
@@ -182,15 +182,15 @@ chat_settings_events:
                 - stop
               - yaml set id:global.player.<player.uuid> chat.channels.active:<-:<context.item.nbt[action]>
               - flag player chat_channel_<context.item.nbt[action]>:!
-              - narrate "<&b>You are no longer listening to <yaml[chat_config].read[channels.<context.item.nbt[action]>.format.channel].parsed>"
+              - narrate "<&b>You are no longer listening to <yaml[chat_config].parsed_key[channels.<context.item.nbt[action]>.format.channel]>"
             - else:
               - yaml set id:global.player.<player.uuid> chat.channels.active:|:<context.item.nbt[action]>
               - flag player chat_channel_<context.item.nbt[action]>
-              - narrate "<&b>You are now listening to <yaml[chat_config].read[channels.<context.item.nbt[action]>.format.channel].parsed>"
+              - narrate "<&b>You are now listening to <yaml[chat_config].parsed_key[channels.<context.item.nbt[action]>.format.channel]>"
           - case RIGHT:
             - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> != <context.item.nbt[action]>:
               - yaml set id:global.player.<player.uuid> chat.channels.current:<context.item.nbt[action]>
-              - narrate "<&b>You are now talking in <yaml[chat_config].read[channels.<context.item.nbt[action]>.format.channel].parsed>"
+              - narrate "<&b>You are now talking in <yaml[chat_config].parsed_key[channels.<context.item.nbt[action]>.format.channel]>"
         - inject chat_settings_open
             
 
@@ -200,17 +200,17 @@ chat_settings_open:
   script:
     - define inventory <inventory[chat_settings]>
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
-      - define name <yaml[chat_config].read[channels.<[channel]>.format.channel].parsed>
+      - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - if <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
         - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<[channel]>]>:
           - define icon <item[green_wool]>
           - define "lore:!|:<&a>You are listening to this channel."
-          - define "lore:|:<&a>-----------------------------"
+          - define lore:|:<&a>-----------------------------
           - define "lore:|:<&b>Left click to stop listening."
         - else:
           - define icon <item[red_wool]>
           - define "lore:!|:<&c>You are not listening to this channel."
-          - define "lore:|:<&a>-----------------------------"
+          - define lore:|:<&a>-----------------------------
           - define "lore:|:<&b>Left click to start listening."
         - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <[channel]>:
           - define icon <item[yellow_wool]>

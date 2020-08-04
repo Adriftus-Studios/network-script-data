@@ -1,19 +1,19 @@
 test_economy:
   type: economy
   priority: normal
-  # The name of the currency in the singular (such as "dollar" or "euro").
+  # The name of the currency in the singular (such as dollar or euro).
   name single: dollar
-  # The name of the currency in the plural (such as "dollars" or "euros").
+  # The name of the currency in the plural (such as dollars or euros).
   name plural: dollars
   # How many digits after the decimal to include. For example, '2' means '1.05' is a valid amount, but '1.005' will be rounded.
   digits: 2
-  # Format the standard output for the money in human-readable format. Use "<amount>" for the actual amount to display.
+  # Format the standard output for the money in human-readable format. Use <amount> for the actual amount to display.
   # Fully supports tags.
   format: $<amount.format_number>
   # A tag that returns the balance of a linked player. Use a 'proc[]' tag if you need more complex logic.
   # Must return a decimal number.
   balance: <player.flag[money]||0>
-  # A tag that returns a boolean indicating whether the linked player has the amount specified by auto-tag "<amount>".
+  # A tag that returns a boolean indicating whether the linked player has the amount specified by auto-tag <amount>.
   # Use a 'proc[]' tag if you need more complex logic.
   # Must return 'true' or 'false'.
   has: <player.flag[money].is[or_more].than[<amount>]>
@@ -41,26 +41,26 @@ economy_balance_check_command:
   type: command
   name: balance
   aliases:
-    - "bal"
-    - "money"
+    - bal
+    - money
   script:
-    - narrate "<&2>----------------------------"
+    - narrate <&2>----------------------------
     - narrate "<&a>Coins: <&e><player.money>"
     - narrate "<&a>Adriftus Coins: <&e>0"
-    - narrate "<&2>----------------------------"
+    - narrate <&2>----------------------------
   
 economy_balance_top:
   type: command
   name: balance_top
   aliases:
-    - "baltop"
-    - "balancetop"
-    - "richest"
+    - baltop
+    - balancetop
+    - richest
   script:
-    - narrate "<&a>-----------------------------"
+    - narrate <&a>-----------------------------
     - narrate "<&a>----    Top Balances    -----"
-    - narrate "<&a>-----------------------------"
-    - foreach <server.list_players.filter[flag[money].is[!=].to[null]].sort_by_number[money].reverse.get[1].to[10]>:
+    - narrate <&a>-----------------------------
+    - foreach <server.players.filter[flag[money].is[!=].to[null]].sort_by_number[money].reverse.first.to[10]>:
       - narrate "<&e><[loop_index]>. <[value].name><&co> <&b><[value].flag[money]>"
 
 economy_bank_note:
@@ -84,7 +84,7 @@ economy_withdraw:
   type: command
   name: withdraw
   script:
-    - define amount <context.args.get[1]||null>
+    - define amount <context.args.first||null>
     - if <[amount]> == null:
       - narrate "<&c>You must specify how much you want to withdraw."
       - stop

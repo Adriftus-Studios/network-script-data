@@ -12,14 +12,14 @@ mod_server_kick_task:
   debug: false
   script:
     - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
-    - define player <server.match_offline_player[<context.args.get[1]>]>
+    - define player <server.match_offline_player[<context.args.first>]>
     - define reason <context.args.get[2].to[<context.args.size>].space_separated||1.Kicked>
     - define level <tern[<[reason].substring[2,2].is[==].to[.]>].pass[<[reason].before[.]>].fail[1]>
     - define reason <tern[<[reason].substring[2,2].is[==].to[.]>].pass[<[reason].after[.]>].fail[<[reason]>]>
     - run mod_log_action def:<[moderator]>|<[player].uuid>|<[level]>|<[reason]>|Kick
     - run mod_notify_action def:<[moderator]>|<[player].uuid>|<[level]>|<[reason]>|Kick
     - run mod_message_discord def:<[moderator]>|<[player].name>|<[level]>|<[reason]>|Kick
-    - kick <server.match_offline_player[<context.args.get[1]>]> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[reason]>]>
+    - kick <server.match_offline_player[<context.args.first>]> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[reason]>]>
 
 
 # -- /ban listener
@@ -38,9 +38,9 @@ mod_server_ban_task:
     - if <context.args.is_empty>:
       - narrate "<&6>A<&e>MP <&6>- /ban -- Server banning."
       - narrate "<&f>/ban [username] (reason)"
-    - else if <server.match_offline_player[<context.args.get[1]>]||null> != null:
+    - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
-      - define target <server.match_offline_player[<context.args.get[1]>]>
+      - define target <server.match_offline_player[<context.args.first>]>
       - if <context.args.size> == 2:
         - define reason <context.args.remove[1].space_separated>
         - define level <context.args.get[2].before[.]>
@@ -75,7 +75,7 @@ mod_server_ban_command:
     - if <context.args.is_empty>:
       - determine <[players]>
     - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[players].filter[starts_with[<context.args.get[1]>]]>
+      - determine <[players].filter[starts_with[<context.args.first>]]>
     - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
       - determine <[lengths]>
     - else if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>].not>:
@@ -88,15 +88,15 @@ mod_server_ban_command:
     - if <context.args.is_empty>:
       - narrate "<&6>A<&e>MP <&6>- /tempban -- Server banning."
       - narrate "<&f>/tempban [username] [duration] (reason)"
-    - else if <server.match_offline_player[<context.args.get[1]>]||null> != null:
-      - if <server.match_offline_player[<context.args.get[1]>].name> == <player.name>:
+    - else if <server.match_offline_player[<context.args.first>]||null> != null:
+      - if <server.match_offline_player[<context.args.first>].name> == <player.name>:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
-      - else if <server.match_offline_player[<context.args.get[1]>].has_permission[mod.staff]>:
+      - else if <server.match_offline_player[<context.args.first>].has_permission[mod.staff]>:
         - narrate "<&c>You cannot perform actions on other staff members."
         - stop
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
-      - define target <server.match_offline_player[<context.args.get[1]>]>
+      - define target <server.match_offline_player[<context.args.first>]>
       # -- ? <context.args.get[2].as_duration||null>
       - if <context.args.get[2]||null> != null:
         - define length <context.args.get[2]>
@@ -130,7 +130,7 @@ mod_global_ban_command:
     - if <context.args.is_empty>:
       - determine <[players]>
     - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[players].filter[starts_with[<context.args.get[1]>]]>
+      - determine <[players].filter[starts_with[<context.args.first>]]>
     - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
       - determine <[lengths]>
     - else if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>].not>:
@@ -143,15 +143,15 @@ mod_global_ban_command:
     - if <context.args.is_empty>:
       - narrate "<&6>A<&e>MP <&6>- /gban -- Network-wide banning."
       - narrate "<&f>/gban [username] [duration] (reason)"
-    - else if <server.match_offline_player[<context.args.get[1]>]||null> != null:
-      - if <server.match_offline_player[<context.args.get[1]>].name> == <player.name>:
+    - else if <server.match_offline_player[<context.args.first>]||null> != null:
+      - if <server.match_offline_player[<context.args.first>].name> == <player.name>:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
-      - else if <server.match_offline_player[<context.args.get[1]>].has_permission[mod.staff]>:
+      - else if <server.match_offline_player[<context.args.first>].has_permission[mod.staff]>:
         - narrate "<&c>You cannot perform actions on other staff members."
         - stop
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
-      - define target <server.match_offline_player[<context.args.get[1]>]>
+      - define target <server.match_offline_player[<context.args.first>]>
       # -- ? <context.args.get[2].as_duration||null>
       - if <context.args.get[2]||null> != null:
         - define length <context.args.get[2]>
@@ -185,9 +185,9 @@ mod_server_unban_task:
     - if <context.args.is_empty>:
       - narrate "<&6>A<&e>MP <&6>- /unban -- Server unbanning."
       - narrate "<&f>/unban [username]"
-    - else if <server.match_offline_player[<context.args.get[1]>]||null> != null:
+    - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
-      - define uuid <server.match_offline_player[<context.args.get[1]>].uuid>
+      - define uuid <server.match_offline_player[<context.args.first>].uuid>
       - define reason <context.args.get[2]||Unbanned>
       # Define directory and YAML ID
       - define dir data/players/<[uuid]>.yml
@@ -221,7 +221,7 @@ mod_server_unban_command:
     - if <context.args.is_empty>:
       - determine <[arguments]>
     - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[arguments].filter[starts_with[<context.args.get[1]>]]>
+      - determine <[arguments].filter[starts_with[<context.args.first>]]>
     - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
       - determine <list[Unbanned]>
   script:
@@ -229,9 +229,9 @@ mod_server_unban_command:
     - if <context.args.is_empty>:
       - narrate "<&6>A<&e>MP <&6>- /unsban -- Server unbanning."
       - narrate "<&f>/unsban [username]"
-    - else if <server.match_offline_player[<context.args.get[1]>]||null> != null:
+    - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
-      - define uuid <server.match_offline_player[<context.args.get[1]>].uuid>
+      - define uuid <server.match_offline_player[<context.args.first>].uuid>
       - define reason <context.args.get[2]||Unbanned>
       # Define directory and YAML ID
       - define dir data/players/<[uuid]>.yml
@@ -265,7 +265,7 @@ mod_global_unban_command:
     - if <context.args.is_empty>:
       - determine <[arguments]>
     - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[arguments].filter[starts_with[<context.args.get[1]>]]>
+      - determine <[arguments].filter[starts_with[<context.args.first>]]>
     - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
       - determine <list[Unbanned]>
   script:
@@ -273,9 +273,9 @@ mod_global_unban_command:
     - if <context.args.is_empty>:
       - narrate "<&6>A<&e>MP <&6>- /ungban -- Network-wide unbanning."
       - narrate "<&f>/ungban [username]"
-    - else if <server.match_offline_player[<context.args.get[1]>]||null> != null:
+    - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
-      - define uuid <server.match_offline_player[<context.args.get[1]>].uuid>
+      - define uuid <server.match_offline_player[<context.args.first>].uuid>
       - define reason <context.args.get[2]||Unbanned>
       # Define directory and YAML ID
       - define dir data/globalData/players/<[uuid]>.yml

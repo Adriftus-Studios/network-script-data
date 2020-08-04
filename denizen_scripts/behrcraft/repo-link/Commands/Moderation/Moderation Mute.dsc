@@ -8,18 +8,18 @@ Mute_Command:
     tab complete:
         - if !<player.has_flag[behrry.essentials.tabofflinemode]>:
             - if <context.args.size||0> == 0:
-                - determine <server.list_online_players.parse[name].exclude[<player.name>]>
+                - determine <server.online_players.parse[name].exclude[<player.name>]>
             - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-                - determine <server.list_online_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+                - determine <server.online_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.first>]]>
             - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
                 - determine remove
             - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
                 - determine <[Arg2].filter[starts_with[remove]]>
         - else:
             - if <context.args.size||0> == 0:
-                - determine <server.list_players.parse[name].exclude[<player.name>]>
+                - determine <server.players.parse[name].exclude[<player.name>]>
             - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-                - determine <server.list_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+                - determine <server.players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.first>]]>
             - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
                 - determine remove
             - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
@@ -29,7 +29,7 @@ Mute_Command:
         - if <context.args.size> > 2 || <context.args.size> < 1:
             - inject Command_Syntax Instantly
             
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification_Offline Instantly
         - if <context.args.get[2]||null> == null:
             - if <player.has_flag[behrry.moderation.muted]>:

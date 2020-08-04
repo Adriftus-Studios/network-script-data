@@ -7,9 +7,9 @@ Command_Syntax:
     type: task
     debug: false
     script:
-        - define Command "<queue.script.yaml_key[aliases].get[1]||<queue.script.yaml_key[Name]>> "
-        - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.yaml_key[Usage].parsed>|Yellow]>"
-        - define Text "<proc[Colorize].context[Syntax: <queue.script.yaml_key[Usage].parsed>|Yellow]>"
+        - define Command "<queue.script.data_key[aliases].first||<queue.script.data_key[Name]>> "
+        - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.parsed_key[Usage]>|Yellow]>"
+        - define Text "<proc[Colorize].context[Syntax: <queue.script.parsed_key[Usage]>|Yellow]>"
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
@@ -21,9 +21,9 @@ Command_Error:
     type: task
     debug: false
     script:
-        - define Hover "<proc[Colorize].context[You Typed:|red]><&r><&nl><&4>/<&c><context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <proc[Colorize].context[<queue.script.yaml_key[Usage].parsed>|yellow]>"
-        - define Text "<proc[Colorize].context[<[Reason]>|red]>"
-        - define Command "<queue.script.yaml_key[aliases].get[1]||<context.alias||<context.command>>> "
+        - define Hover "<proc[Colorize].context[You Typed:|red]><&r><&nl><&4>/<&c><context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <proc[Colorize].context[<queue.script.parsed_key[Usage]>|yellow]>"
+        - define Text <proc[Colorize].context[<[Reason]>|red]>
+        - define Command "<queue.script.data_key[aliases].first||<context.alias||<context.command>>> "
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
@@ -36,7 +36,7 @@ Permission_Error:
     debug: false
     script:
         - define Text "<proc[Colorize].context[You don't have permission to do that.|red]>"
-        - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.yaml_key[adminpermission]>"
+        - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.data_key[adminpermission]>"
         - narrate <proc[HoverMsg].context[<[Hover]>|<[Text]>]>
         - stop
 
@@ -48,7 +48,7 @@ Admin_Verification:
     type: task
     debug: false
     script:
-        - if !<player.has_permission[<queue.script.yaml_key[adminpermission]>]>:
+        - if !<player.has_permission[<queue.script.data_key[adminpermission]>]>:
             - inject Permission_Error
 
 #$# % ██  [ Specifically not moderation, no permission message ] ██
@@ -126,7 +126,7 @@ User_Display_Simple:
         - if <[User].has_flag[behrry.essentials.display_name]>:
             - determine "<&r><[User].display_name||<[User].flag[behrry.essentials.display_name]>><&r> <proc[Colorize].context[(<[User].name>)|yellow]>"
         - else:
-            - determine "<proc[Colorize].context[<[User].name>|yellow]>"
+            - determine <proc[Colorize].context[<[User].name>|yellow]>
 
 # % ██  [ Logging chat for global chat ] ██
 # - ██  [ Usage ]  - define Log SettingsKey/<[Message]>
@@ -137,7 +137,7 @@ Chat_Logger:
     script:
         - if <server.flag[Behrry.Essentials.ChatHistory.Global].size||0> > 24:
             - flag server Behrry.Essentials.ChatHistory.Global:<-:<server.flag[Behrry.Essentials.ChatHistory.Global].first>
-        - flag server "Behrry.Essentials.ChatHistory.Global:->:<[Log]>"
+        - flag server Behrry.Essentials.ChatHistory.Global:->:<[Log]>
 
 # @ ███████████████████████████████████████████████████████████
 # @ ██    Command Dependencies | Tab Completion
@@ -152,15 +152,15 @@ Chat_Logger:
 # - ██  [  # 3  ] - determine <proc[Online_Player_Tabcomplete].context[1|<player>]>
 # % ██  [       ]   tab completes all players online by their name for the first arg, blacklisting players flagged "Admin"
 # % ██  [       ]   the Blacklist must be escaped if it is a list of players
-# - ██  [ # 4.1 ] - determine <proc[Online_Player_Tabcomplete].context[1|<server.list_players_flagged[Admin].escaped>]>
+# - ██  [ # 4.1 ] - determine <proc[Online_Player_Tabcomplete].context[1|<server.players_flagged[Admin].escaped>]>
 # % ██  [       ]   OR you can inject the script directly as opposed to using the procedure tag:
 # % ██  [       ]   tab completes all players by their name for the first arg, blacklisting online players flagged "Admin"
-# - ██  [  #4.2 ] - define blacklist <server.list_online_players_flagged[Admin]>
+# - ██  [  #4.2 ] - define blacklist <server.online_players_flagged[Admin]>
 # - ██  [       ] - inject Online_Player_Tabcomplete
 # % ██  [       ]
 # % ██  [       ]   tab completes all players by their name for the second arg, and blacklisting online players flagged "Admin"
 # - ██  [  # 5  ] - define iArg 2
-# - ██  [       ] - define blacklist <server.list_online_players_flagged[Admin]>
+# - ██  [       ] - define blacklist <server.online_players_flagged[Admin]>
 # - ██  [       ] - inject Online_Player_Tabcomplete
 Online_Player_Tabcomplete:
     type: task
@@ -170,9 +170,9 @@ Online_Player_Tabcomplete:
         - if !<[iArg].exists>:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <server.list_online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
+            - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -187,15 +187,15 @@ Online_Player_Tabcomplete:
 # % ██  [       ]
 # % ██  [       ]   tab completes all players by their name for the first arg, blacklisting players flagged "Admin"
 # % ██  [       ]   the Blacklist must be escaped if it is a list of players
-# - ██  [ # 4.1 ] - determine <proc[All_Player_Tabcomplete].context[1|<server.list_players_flagged[Admin].escaped>]>
+# - ██  [ # 4.1 ] - determine <proc[All_Player_Tabcomplete].context[1|<server.players_flagged[Admin].escaped>]>
 # % ██  [       ]   OR you can inject the script directly as opposed to using the procedure tag:
 # % ██  [       ]   tab completes all players by their name for the first arg, blacklisting players flagged "Admin"
-# - ██  [  #4.2 ] - define blacklist <server.list_players_flagged[Admin]>
+# - ██  [  #4.2 ] - define blacklist <server.players_flagged[Admin]>
 # - ██  [       ] - inject All_Player_Tabcomplete
 # % ██  [       ]
 # % ██  [       ]   tab completes all players by their name for the second arg, and blacklisting players flagged "Admin"
 # - ██  [  # 5  ] - define iArg 2
-# - ██  [       ] - define blacklist <server.list_players_flagged[Admin]>
+# - ██  [       ] - define blacklist <server.players_flagged[Admin]>
 # - ██  [       ] - inject All_Player_Tabcomplete
 All_Player_Tabcomplete:
     type: task
@@ -205,9 +205,9 @@ All_Player_Tabcomplete:
         - if !<[iArg].exists>:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <server.list_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
+            - determine <server.players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <server.players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -390,7 +390,7 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
 # @ ██    Command Dependencies | Unique Command Features
 # % ██
 # @ ██  [ Activates or Deactivates a toggle command ] ██
-# @ ██  [ Usage ] - define Arg <context.args.get[1]||null>
+# @ ██  [ Usage ] - define Arg <context.args.first||null>
 # @ ██  [       ] - define ModeFlag "Behr.Essentials.Example"
 # @ ██  [       ] - define ModeName "Mode Name"
 # @ ██  [       ] - inject Activation_Arg_Command Instantly

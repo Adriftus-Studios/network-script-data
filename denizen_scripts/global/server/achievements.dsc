@@ -20,12 +20,12 @@ Achievement_give:
   type: task
   definitions: id
   script:
-    - if <script[achievement_data].yaml_key[achievements.<[id]>]||null> == null:
+    - if <script[achievement_data].data_key[achievements.<[id]>]||null> == null:
       - error
     - else:
-      - define name <script[achievement_data].yaml_key[achievements.<[id]>.name].parse_color>
-      - define description <script[achievement_data].yaml_key[achievements.<[id]>.description].parse_color>
-      - define reward_text <script[achievement_data].yaml_key[achievements.<[id]>.reward.text].parse_color>
-      - foreach <script[achievement_data].yaml_key[GUI].parse[parse_color.parsed]>:
+      - define name <script[achievement_data].data_key[achievements.<[id]>.name].parse_color>
+      - define description <script[achievement_data].data_key[achievements.<[id]>.description].parse_color>
+      - define reward_text <script[achievement_data].data_key[achievements.<[id]>.reward.text].parse_color>
+      - foreach <script[achievement_data].data_key[GUI].parse[parse_color.parsed]>:
         - narrate <[value]>
-      - run <script[achievement_data].yaml_key[achievements.<[id]>.reward.script].before[/]> def:<script[achievement_data].yaml_key[achievements.<[id]>.reward.script].after[/]>
+      - run <script[achievement_data].data_key[achievements.<[id]>.reward.script].before[/]> def:<script[achievement_data].data_key[achievements.<[id]>.reward.script].after[/]>

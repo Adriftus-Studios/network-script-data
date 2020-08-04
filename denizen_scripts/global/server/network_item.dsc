@@ -70,9 +70,9 @@ network_item_inventory:
     cosmetics_item: <item[hub_cosmetics_item].with[nbt=item/cosmetics]>
     settings_item: <item[hub_settings_item].with[nbt=item/settings]>
   slots:
-    - "[filler] [filler] [filler] [filler] [this_player_head] [filler] [filler] [filler] [filler]"
-    - "[filler] [server_item] [filler] [warp_item] [filler] [cosmetics_item] [filler] [settings_item] [filler]"
-    - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
+    - [filler] [filler] [filler] [filler] [this_player_head] [filler] [filler] [filler] [filler]
+    - [filler] [server_item] [filler] [warp_item] [filler] [cosmetics_item] [filler] [settings_item] [filler]
+    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
 
 network_item_inventory_events:
   type: world

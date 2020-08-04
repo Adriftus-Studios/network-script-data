@@ -53,13 +53,13 @@ tutorial_data:
     particle_guide: true
   7:
     hologram:
-      - "<&6><&l>Cosmetics"
+      - <&6><&l>Cosmetics
       - "<&e>Here you can purchase titles and bow trails!"
       - "<&e>Use <&b>/titles<&e> and <&b>/bowtrails<&e> to use them."
     particle_guide: true
   8:
     hologram:
-      - "<&6><&l>Claims"
+      - <&6><&l>Claims
       - "<&e>Here you can purchase upgrades for your claim."
       - "<&e>Upgrades only apply <&c>within<&e> your claim."
       - "<&c>The claims system will be explained in a few steps."
@@ -72,13 +72,13 @@ tutorial_data:
     particle_guide: true
   10:
     hologram:
-      - "<&6><&l>Stonks!"
+      - <&6><&l>Stonks!
       - "<&e>Our Stonks Broker buys and sells items."
       - "<&e>Prices fluctuate, so check back often!"
     particle_guide: true
   11:
     hologram:
-      - "<&6><&l>Survivalist"
+      - <&6><&l>Survivalist
       - "<&e>Want something a little more useful?"
       - "<&e>The survivalist sells backpacks, tents, and more!"
     particle_guide: true
@@ -95,12 +95,12 @@ tutorial_data:
       - "<&e>Warps can be made by any player within their claim."
       - "<&e>You can visit server warps, or other player's warps."
       - "<&e>Command Menu<&co> <&b>/warps"
-      - "<&a>--------------------------"
+      - <&a>--------------------------
       - "<&e>Use <&b>/warps <&e>and go to Grim to continue."
     particle_guide: true
   14:
     hologram:
-      - "<&6><&l>Grim"
+      - <&6><&l>Grim
       - "<&e>Grim can help you return to your death location."
       - "<&c>... For a cost."
     particle_guide: true
@@ -108,7 +108,7 @@ tutorial_data:
     subtitle: "<&e>Go to the server warp: <&4>Grim"
   15:
     hologram:
-      - "<&6><&l>Claims"
+      - <&6><&l>Claims
       - "<&e>You can claim land!"
       - "<&e>You can also give access to different groups of players."
       - "<&e>If a group doesn't exist, it will be created."
@@ -117,7 +117,7 @@ tutorial_data:
     particle_guide: true
   16:
     hologram:
-      - "<&6><&l>Elevators"
+      - <&6><&l>Elevators
       - "<&e>Gold blocks function as elevators."
       - "<&e>You can travel up, or down 25 blocks at a time."
       - "<&e>Step inside to give it a try!"
@@ -139,7 +139,7 @@ tutorial_data:
     particle_guide: true
   19:
     hologram:
-      - "<&6><&l>Chat"
+      - <&6><&l>Chat
       - "<&e>We have cross-server chat available"
       - "<&e>Use <&b>/chat<&e> to change your channel"
       - "<&e>You can also click on the channel name in chat!"

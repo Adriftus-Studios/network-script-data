@@ -11,7 +11,7 @@ settings_Command:
         - if <context.args.size> != 1:
             - inject Command_Syntax
         
-        - if <context.args.get[1]> == Default:
+        - if <context.args.first> == Default:
             - foreach <script.key[Settings.Defaults]> as:Flag:
                 - flag <player> <[Flag]>
 

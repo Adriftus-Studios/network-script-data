@@ -16,11 +16,11 @@ gmc_Command:
             - inject Command_Syntax Instantly
             
     # % ██ [   Check for self or named player ] ██
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.first||null> == null:
             - define User <player>
         - else:
             - if <player.groups.contains[Moderation]>:
-                - define User <context.args.get[1]>
+                - define User <context.args.first>
                 - inject Player_Verification Instantly
             - else:
                 - inject Admin_Permission_Denied Instantly
@@ -67,9 +67,9 @@ gmc_Command:
 #    tab complete:
 #        - if <player.flag[Behrry.Essentials.Rank]> < 3:
 #            - if <context.args.size||0> == 0:
-#                - determine <server.list_online_players.parse[name]>
+#                - determine <server.online_players.parse[name]>
 #            - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-#                - determine <server.list_online_players.parse[name].filter[starts_with[<context.args.get[1]>]]>
+#                - determine <server.online_players.parse[name].filter[starts_with[<context.args.first>]]>
 #    Request:
 #        - define DisplayA "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
 #        - define CommandA "gmc <player.name> accept"
@@ -90,7 +90,7 @@ gmc_Command:
 #    script:
 #        - if <context.args.get[2]||null> != null:
 #            - if <player.flag[Behrry.Essentials.Rank]> < 4:
-#                - define Ranked <server.list_online_players.filter[flag[Behrry.Essentials.Rank].is[less].than[<[Rank].sub[1]>]]>
+#                - define Ranked <server.online_players.filter[flag[Behrry.Essentials.Rank].is[less].than[<[Rank].sub[1]>]]>
 #                - if <context.args.get[2]> == Accept:
 #                    - define User <context.ars.get[2]>
 #                    - inject Player_Verification Instantly
@@ -112,13 +112,13 @@ gmc_Command:
 #                    - inject Command_Syntax Instantly
 #            - else:
 #                - inject Command_Syntax Instantly
-#        - if <context.args.get[1]||null> == null:
+#        - if <context.args.first||null> == null:
 #            - define Rank 5
 #            - if <player.flag[Behrry.Essentials.Rank]> > <[Rank]>:
 #                - if <player.has_flag[behrry.essentials.gamemode.request]>:
 #                    - narrate "<proc[Colorize].context[You've already requested Creative Mode.|red]>"
 #                - else:
-#                    - define Requested <server.list_online_players.filter[flag[Behrry.Essentials.Rank].is[less].than[<[Rank].sub[1]>]]>
+#                    - define Requested <server.online_players.filter[flag[Behrry.Essentials.Rank].is[less].than[<[Rank].sub[1]>]]>
 #                    - if <[Requested]>.size> != 0:
 #                        - flag player behrry.essentials.gamemode.request
 #                        - foreach <[Requested]> as:User:
@@ -139,6 +139,6 @@ gmc_Command:
 #                - if <[User].gamemode> == creative:
 #                    - narrate "<[User].name.display]> <proc[Colorize].context[is already in Creative Mode.|red]>"
 #                - else:
-#                    - define User <context.args.get[1]>
+#                    - define User <context.args.first>
 #                    - inject Player_Verification
 #                    - adjust <[User]> gamemode:creative

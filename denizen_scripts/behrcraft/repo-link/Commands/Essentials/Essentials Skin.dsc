@@ -13,23 +13,23 @@ Skin_Command:
             - determine <[Arg1]>
 
         - else if <context.args.size> == 1 && !<[Whitespace]>:
-            - determine <[Arg1].filter[starts_with[<context.args.get[1]>]]>
+            - determine <[Arg1].filter[starts_with[<context.args.first>]]>
 
         - if !<player.has_flag[Behr.Essentials.SavedSkins]>:
             - stop
         - define SavedSkins <player.flag[Behr.Essentials.SavedSkins].parse[before[/]]>
 
-        - if <context.args.size> == 1 && <[Arg2].contains[<context.args.get[1]>]> && <[Whitespace]> && <player.has_flag[Behr.Essentials.SavedSkins]>:
+        - if <context.args.size> == 1 && <[Arg2].contains[<context.args.first>]> && <[Whitespace]> && <player.has_flag[Behr.Essentials.SavedSkins]>:
             - determine <[SavedSkins]>
 
-        - else if <context.args.size> == 2 && <[Arg2].contains[<context.args.get[1]>]> && !<[Whitespace]> && <player.has_flag[Behr.Essentials.SavedSkins]>:
+        - else if <context.args.size> == 2 && <[Arg2].contains[<context.args.first>]> && !<[Whitespace]> && <player.has_flag[Behr.Essentials.SavedSkins]>:
             - determine <[SavedSkins].filter[starts_with[<context.args.get[2]>]]>
     script:
     # % ██ [ Check for args ] ██
         - if <context.args.size> == 0:
             - inject Command_Syntax
         
-        - define SkinArg <context.args.get[1]>
+        - define SkinArg <context.args.first>
         - choose <[SkinArg]>:
             - case Reset:
                 - adjust <player> skin:<player.name>
@@ -172,7 +172,7 @@ Skin_Command:
 #%   # % ██ [ /skin Arg ] ██
 #^        - define Whitespace <context.raw_args.ends_with[<&sp>]>
 #^        - else if <context.args.size> == 1 && !<[Whitespace]>:
-#^            - determine <[Arg1].filter[starts_with[<context.args.get[1]>]]>
+#^            - determine <[Arg1].filter[starts_with[<context.args.first>]]>
 #
 #%   # % ██ [ Does the player even have saved skins to tab complete for? ] ██
 #^        - if !<player.has_flag[SuperSuit_SavedSkins]>:
@@ -180,11 +180,11 @@ Skin_Command:
 #^        - define SavedSkins <player.flag[SuperSuit_SavedSkins].parse[before[/]]>
 #
 #%   # % ██ [ /skin Arg\s ] ██
-#^        - if <context.args.size> == 1 && <[Arg2].contains[<context.args.get[1]>]> && <[Whitespace]>:
+#^        - if <context.args.size> == 1 && <[Arg2].contains[<context.args.first>]> && <[Whitespace]>:
 #^            - determine <[SavedSkins]>
 #
 #%   # % ██ [ /skin Arg\sArg ] ██
-#^        - else if <context.args.size> == 2 && <[Arg2].contains[<context.args.get[1]>]> && !<[Whitespace]>:
+#^        - else if <context.args.size> == 2 && <[Arg2].contains[<context.args.first>]> && !<[Whitespace]>:
 #^            - determine <[SavedSkins].filter[starts_with[<context.args.get[2]>]]>
 #    syntax:
 #^        - narrate "<&e>Available Sub-Commands: <&a><list[Reset|Set|Save|Delete|List|Rename].separated_by[<&6>, <&a>]>"
@@ -194,7 +194,7 @@ Skin_Command:
 #^        - if <context.args.size> == 0:
 #^            - inject locally syntax
 #
-#^        - define SkinArg <context.args.get[1]>
+#^        - define SkinArg <context.args.first>
 #^        - choose <[SkinArg]>:
 #%       # % ██ [ /skin reset - Resets the player's skin to their own ] ██
 #^            - case Reset:

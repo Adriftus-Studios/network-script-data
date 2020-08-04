@@ -13,10 +13,10 @@ inventorysee_Command:
             - inject Online_Player_Tabcomplete Instantly
     script:
     # % ██ [ Verify args ] ██
-        - if <context.args.get[1]||null> == null || <context.args.get[2]||null> != null:
+        - if <context.args.first||null> == null || <context.args.get[2]||null> != null:
             - inject Command_syntax instantly
     # % ██ [ Verify player ] ██
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification_Offline Instantly
         
     # % ██ [ Verify usage ] ██

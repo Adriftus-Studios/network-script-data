@@ -15,14 +15,14 @@ Message_Command:
         - if <context.args.size> < 2:
             - inject Command_Syntax
 
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification
         - if <[User]> == <player>:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
             - stop
 
         - flag <[User]> Behrry.Chat.LastReply:<player.name>
-        - define Message <context.raw_args.after[<context.args.get[1]><&sp>].parse_color><&r>
+        - define Message <context.raw_args.after[<context.args.first><&sp>].parse_color><&r>
         - narrate targets:<player>  "<&7>[<&8><[User].name><&7>]<&1> <&chr[00ab]> <&9><[Message]>"
         - narrate targets:<[User]>  "<&7>[<&8><player.name><&7>]<&1> <&chr[00bb]> <&9><[Message]>"
 

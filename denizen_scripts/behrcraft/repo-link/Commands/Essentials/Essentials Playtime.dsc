@@ -16,10 +16,10 @@ Playtime_Command:
             - inject Command_Syntax
         
     # % ██ [ Check if specifying another player ] ██
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.first||null> == null:
             - define User <player>
         - else:
-            - define User <context.args.get[1]>
+            - define User <context.args.first>
             - inject Player_Verification_Offline
         
     # % ██ [ Check if player is online ] ██

@@ -15,20 +15,20 @@ Hiscores_Command:
             - inject Command_Syntax Instantly
 
     # % ██ [ Check if blank ] ██
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.first||null> == null:
             - narrate format:Colorize_Green "Available Skills:"
             - narrate format:Colorize_Yellow "Attack, Strength, Defense, Hitpoints, Ranged, Mining, Woodcutting, Farming, Construction"
             - stop
 
     # % ██ [ Verify Skill ] ██
         - define Skills <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
-        - define Skill <context.args.get[1].to_titlecase>
+        - define Skill <context.args.first.to_titlecase>
         - if !<[Skills].contains[<[Skill]>]>:
             - inject Command_Syntax Instantly
 
-        - define Players <server.list_players_flagged[behrry.skill.<[Skill]>.Level]>
+        - define Players <server.players_flagged[behrry.skill.<[Skill]>.Level]>
         - define PlayersOrdered <[Players].sort_by_number[flag[behrry.skill.<[Skill]>.Level]].reverse>
-        - define PlayerGet <[PlayersOrdered].get[1].to[8]>
+        - define PlayerGet <[PlayersOrdered].first.to[8]>
         - narrate "<&2>+<&a>-------<&6>[<&e> hiscores <&6>] <&b>| <&6>[<&e> <[Skill]> <&6>]<&a>-------<&2>+"
         - foreach <[PlayerGet]> as:Player:
             - narrate "<proc[User_Display_Simple].context[<[Player]>]> <&b>| <&e> Level<&6>: <&a><[Player].flag[behrry.skill.<[Skill]>.Level]> <&b>| <&e> Exp<&6>: <&a><[Player].flag[behrry.skill.<[Skill]>.Exp].round>"

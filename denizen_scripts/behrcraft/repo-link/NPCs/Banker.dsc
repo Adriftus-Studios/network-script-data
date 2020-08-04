@@ -141,7 +141,7 @@ PlayerBank_Handler:
         - if <context.inventory.replace[<player.uuid>].starts_with[in@pBank].not||true>:
             - stop
         - define BankID <context.inventory.after[_]>
-        - define dvlist <context.inventory.list_contents.get[1].to[45]>
+        - define dvlist <context.inventory.list_contents.first.to[45]>
         - yaml set id:pBankKey "<player.uuid>.<[BankID]>:<[dvlist]>"
         - yaml "savefile:data/pBank/pBankKey.yml" "id:pBankKey"
         - define id "<player.uuid>pBank_<[BankID]>"
