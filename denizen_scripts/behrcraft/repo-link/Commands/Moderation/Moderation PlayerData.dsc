@@ -15,7 +15,7 @@ PlayerData_Command:
             - inject Command_Syntax Instantly
         
     # % ██ [ Check player arg ] ██
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification_Offline Instantly
         
     # % ██ [ Essentials ] ██

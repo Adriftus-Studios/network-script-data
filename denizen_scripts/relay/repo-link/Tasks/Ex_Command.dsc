@@ -25,18 +25,18 @@ Ex_DCommand:
         - else if <[Args].size> == 1:
             - define server Relay
             - define Command "ex <[Args].space_separated>"
-            - execute as_server "<[Command]>"
+            - execute as_server <[Command]>
         - else:
             - if !<bungee.list_servers.contains[<[Args].first>]>:
                 - define server Relay
                 - define Command "ex <[Args].space_separated>"
-                - execute as_server "<[Command]>"
+                - execute as_server <[Command]>
             - else:
                 - if <bungee.list_servers.contains[<[Args].first>]>:
                     - define Server <[Args].first>
                     - define Command "ex <[Args].remove[1].space_separated>"
                     - bungee <[Server]>:
-                        - execute as_server "<[Command]>"
+                        - execute as_server <[Command]>
     
         - define color Code
         - inject Embedded_Color_Formatting

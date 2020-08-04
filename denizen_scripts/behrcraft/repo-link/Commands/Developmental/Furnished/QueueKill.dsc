@@ -25,8 +25,8 @@ QueueKill_command:
                 - define Command "QueueKill <[Queue].id>"
                 - narrate <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
         - else:
-            - if !<queue.exists[<context.args.get[1]>]>:
+            - if !<queue.exists[<context.args.first>]>:
                 - narrate "<&c>Queue has ended or does not exist."
                 - stop
-            - narrate "<&e>Killing Queue<&6>: <&a><queue.list.exclude[<queue>].get[1]>"
-            - queue <queue[<context.args.get[1]>]> stop
+            - narrate "<&e>Killing Queue<&6>: <&a><queue.list.exclude[<queue>].first>"
+            - queue <queue[<context.args.first>]> stop

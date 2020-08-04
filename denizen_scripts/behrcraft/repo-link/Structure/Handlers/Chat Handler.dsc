@@ -24,7 +24,7 @@ Chat_Handler:
         # % ██ [  BChat Check, Formatting & Print ] ██
             - if <player.has_flag[Behrry.Essentials.BChat]>:
                 - define Targets <server.list_online_players.filter[has_permission[behrry.essentials.bchat]]>
-                - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
+                - define Prefix <&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:
                 - narrate targets:<[Targets]> "<[Prefix]> <&7><[Message].parse_color>"
                 - stop
             
@@ -36,19 +36,19 @@ Chat_Handler:
         # % ██ [  VoiceChat Check, Formatting & Print ] ██
             - if <player.has_flag[Behrry.Essentials.VoiceChat]>:
                 - define Targets <server.list_online_players_flagged[behrry.essentials.voicechat]>
-                - define Prefix "<&b>[┤<proc[Colorize].context[VoiceChat]|Blue]><player.display_name||<player.name>><&3>:<&r>"
+                - define Prefix <&b>[┤<proc[Colorize].context[VoiceChat]|Blue]><player.display_name||<player.name>><&3>:<&r>
                 - narrate targets:<[Targets]> "<[Prefix]> <[Message].parse_color><&r>"
                 - stop
 
         # % ██ [  Message Formatting ] ██
             - if <player.groups.contains_any[Moderation|Producer|Sponsor]>:
-                - define Prefix "<script[Ranks].data_key[<player.groups.get[1]||>.Prefix.<player.groups.get[2]||>].parsed||><player.display_name||<player.name>><&r>"
+                - define Prefix <script[Ranks].parsed_key[<player.groups.first||>.Prefix.<player.groups.get[2]||>]||><player.display_name||<player.name>><&r>
             - else:
-                - define Prefix "<&7><player.display_name><&r>"
+                - define Prefix <&7><player.display_name><&r>
             - define Hover "<proc[Colorize].context[Real Name:|green]><&nl><player.name><&nl><proc[Colorize].context[Click to Message|green]>"
             - define Text "<[Prefix]><&b>:<&r> <[Message]>"
             - define Command "message <player.name> "
-            - define NewMessage "<proc[MsgHint].context[<[Hover].escaped>|<[Text].escaped>|<[Command]>]>"
+            - define NewMessage <proc[MsgHint].context[<[Hover].escaped>|<[Text].escaped>|<[Command]>]>
             - define DiscordMessage "**<player.display_name.strip_color>**: <[Message].strip_color>"
                 
         # % ██ [  Run individual player checks ] ██
@@ -64,9 +64,9 @@ Chat_Handler:
         # % ██ [  Print chat ] ██
             - narrate targets:<server.list_online_players.exclude[<[Blacklist]||>]> <[NewMessage]>
             - if <player.has_flag[Behrry.Essentials.Display_Name]>:
-                - announce to_console format:Console_Chatter_displayname_Format "<[Message]>"
+                - announce to_console format:Console_Chatter_displayname_Format <[Message]>
             - else:
-                - announce to_console format:Console_Chatter_Format "<[Message]>"
+                - announce to_console format:Console_Chatter_Format <[Message]>
 
 Discord_Relay:
     type: task
@@ -90,16 +90,16 @@ Discord_Relay:
         # % ██ [ Check if player is Muted ] ██
         # ^    - if <[User].has_flag[behrry.moderation.muted]>:
         # ^        - define Moderation <server.list_online_players.filter[in_group[Moderation]]>
-        # ^        - narrate format:Muted_Chat_Format targets:<[Moderation].include[<[User]>]> "<[Message].unescaped.strip_color>"
+        # ^        - narrate format:Muted_Chat_Format targets:<[Moderation].include[<[User]>]> <[Message].unescaped.strip_color>
         # ^        - stop
         # % ██ [ Log the Chat ] ██
             - define Log Discord/<[Message].unescaped>
             - inject Chat_Logger Instantly
 
         # % ██ [ Print to Chat ] ██
-            - announce to_console "<[ConsoleMessage].unescaped>"
-            - narrate targets:<server.list_online_players.exclude[<[BlackList]||>]> "<[Message].unescaped>"
-            #- announce "<[Message].unescaped>"
+            - announce to_console <[ConsoleMessage].unescaped>
+            - narrate targets:<server.list_online_players.exclude[<[BlackList]||>]> <[Message].unescaped>
+            #- announce <[Message].unescaped>
     
 
 Muted_Chat_Format:

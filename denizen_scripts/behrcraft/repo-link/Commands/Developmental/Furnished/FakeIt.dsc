@@ -159,7 +159,7 @@ Fakeit:
         #------------------------------------------------------------
         - modifyblock <[Loc]> chest[direction=<[RandomDirection]>]
         #------------------------------------------------------------
-        #^- adjustblock <[Loc]> half:<[Halves].get[1]>
+        #^- adjustblock <[Loc]> half:<[Halves].first>
         #^- modifyblock <[Loc2]> chest[direction=<[RandomDirection]>]
         #^- adjustblock <[Loc2]> half:<[Halves].get[2]>
         #------------------------------------------------------------
@@ -223,7 +223,7 @@ ReplaceMaterials_Command:
     tab complete:
         - define Arg1 <list[slab|stairs|fence|trapdoor|wall]>
         - if <context.args.size> != 0:
-            - choose <context.args.get[1]>:
+            - choose <context.args.first>:
                 - case slabs slab:
                     - define SlabMaterials <server.list_material_types.parse[name].filter[contains[_slab]].parse[before[_slab]]>
                     - define Arg2 <[SlabMaterials]>
@@ -253,7 +253,7 @@ ReplaceMaterials_Command:
         - define ReplaceFrom <context.args.get[2]>
         - define ReplaceTo <context.args.get[3]>
 
-        - choose <context.args.get[1]>:
+        - choose <context.args.first>:
             - case stairs stair:
                 - if !<server.list_material_types.parse[name].filter[contains[_stairs]].contains[<[ReplaceFrom]>_stairs|<[Replaceto]>_stairs]>:
                     - narrate format:Colorize_Red "Invalid material."

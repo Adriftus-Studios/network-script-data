@@ -12,7 +12,7 @@ NPC_Interaction:
         
     # @ ██ [ Define Definitions ] ██
         - define NPC <npc[<queue.id.after_last[/]>]>
-        - define Options <npc.script.yaml_key[Options.<[Option]>]>
+        - define Options <npc.script.data_key[Options.<[Option]>]>
 
     # @ ██ [ Construct Options Chat ] ██
         - foreach <[Options]> as:Option:
@@ -21,7 +21,7 @@ NPC_Interaction:
             # @ ██ [ Check if options on cooldown are:                   ] ██
             # % ██ [ This queue's relevant NPC                           ] ██
             # % ██ [ Any of the listed options                           ] ██
-                - if <player.flag[Behrry.Interaction.OptionsCooldown].parse[before[/]].contains[<queue.split[/].get[2].as_script.name>]> && <player.flag[Behrry.Interaction.OptionsCooldown].parse[after[/]].contains[<[Option].split[/].limit[2].get[1]>]>:
+                - if <player.flag[Behrry.Interaction.OptionsCooldown].parse[before[/]].contains[<queue.split[/].get[2].as_script.name>]> && <player.flag[Behrry.Interaction.OptionsCooldown].parse[after[/]].contains[<[Option].split[/].limit[2].first>]>:
                     - foreach next
 
         # @ ██ [ Define Hover and Text Messages                          ] ██
@@ -34,8 +34,8 @@ NPC_Interaction:
         # @ ██ [ Build Commands and Flags                                ] ██
             - define UUID <util.random.uuid>
         # % ██ [ / Loop_Index / UUID / Script Name / Selection / NPC     ] ██
-            - define Command1 "dialogue <[Loop_Index]> <[UUID]> <queue.split[/].get[2]> <[Option].split[/].limit[2].get[1]> <[NPC]>"
-            - flag Behrry.Interaction.ActiveOptions:|:<[Loop_Index]>/<[UUID]>/<queue.split[/].get[2]>/<[Option].split[/].limit[2].get[1]>/<[NPC]> duration:10s
+            - define Command1 "dialogue <[Loop_Index]> <[UUID]> <queue.split[/].get[2]> <[Option].split[/].limit[2].first> <[NPC]>"
+            - flag Behrry.Interaction.ActiveOptions:|:<[Loop_Index]>/<[UUID]>/<queue.split[/].get[2]>/<[Option].split[/].limit[2].first>/<[NPC]> duration:10s
 
         # @ ██ [ Print Messages                                          ] ██
             - narrate <proc[MsgHint].context[<[Hover0]>|<[Message0]>|<[Command0]>]><proc[MsgCmd].context[<[Hover1]>|<[Message1]>|<[Command1]>]>
@@ -80,7 +80,7 @@ NPC_Interaction:
                     - queue <player.flag[Behrry.Interaction.QuickClick].as_queue> stop
                     - flag player Behrry.Interaction.QuickClick:!
                 - flag player Behrry.Interaction.Cooldown.QuickClickTrigger duration:2s
-                - inject <queue.script> path:Selections.<queue.script.yaml_key[Dialogue.QuickClick]>
+                - inject <queue.script> path:Selections.<queue.script.data_key[Dialogue.QuickClick]>
                 - inject Locally Disengage Instantly
             - if <queue.script.list_keys[Dialogue].contains[QuickClick]>:
                 - flag player Behrry.Interaction.QuickClick:<queue> duration:2s

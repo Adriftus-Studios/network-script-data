@@ -15,9 +15,9 @@ Ping_Command:
             - inject Command_Syntax
         
     # % ██ [ Check if specifying another User ] ██
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.first||null> == null:
             - narrate "<proc[Colorize].context[Current Ping:|green]> <&e><Player.ping>"
         - else:
-            - define User <context.args.get[1]>
+            - define User <context.args.first>
             - inject Player_Verification
             - narrate "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s Current Ping:|green]> <&e><[User].ping>"

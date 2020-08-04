@@ -7,7 +7,7 @@ Discordc_Command:
     aliases:
         - dc
     script:
-        - choose <context.args.get[1]||null>:
+        - choose <context.args.first||null>:
             - case start:
                 - inject Discord_Handler path:StartBots
             - case restart:

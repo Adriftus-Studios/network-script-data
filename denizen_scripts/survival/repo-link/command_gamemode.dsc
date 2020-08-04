@@ -72,7 +72,7 @@ gamemode_handle_command:
       - stop
     - else:
       - define target_list:<context.args>
-    - define gamemode:<queue.script.yaml_key[gamemode]>
+    - define gamemode:<queue.script.data_key[gamemode]>
     - foreach <[target_list]> as:target:
       - if !<[target].is_player>:
         - define target:<server.match_player[<[target]>]||null>

@@ -13,7 +13,7 @@ GMR_Command:
             - determine <[Arg1]>
         #/command█X
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <[Arg1].filter[starts_with[<context.args.get[1]>]]>
+            - determine <[Arg1].filter[starts_with[<context.args.first>]]>
         #/command█X█
         - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
             - determine <[Arg2]>
@@ -25,9 +25,9 @@ GMR_Command:
         - if <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
         # - argcheck 1 - Gamemode   /c [?]
-        - if <context.args.get[1]||null> != null:
-            - if <list[Adventure|Creative|Survival|Spectator].contains[<context.args.get[1]>]>:
-                - define Gamemode <context.args.get[1]>
+        - if <context.args.first||null> != null:
+            - if <list[Adventure|Creative|Survival|Spectator].contains[<context.args.first>]>:
+                - define Gamemode <context.args.first>
             - else:
                 - inject Command_Syntax Instantly
         - else:

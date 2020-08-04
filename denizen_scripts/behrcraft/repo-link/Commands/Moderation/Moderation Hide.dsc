@@ -11,7 +11,7 @@ Hide_Command:
       - inject Command_Syntax Instantly
     
 # % ██ [ Define definitions ] ██
-    - define Arg <context.args.get[1]||null>
+    - define Arg <context.args.first||null>
     - define ModeFlag "behrry.moderation.hide"
     - define ModeName "Invisibility mode"
     - inject Activation_Arg Instantly

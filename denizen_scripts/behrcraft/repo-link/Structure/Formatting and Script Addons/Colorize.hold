@@ -28,7 +28,7 @@ Colorize:
 
         # - First-Letter-Case
         - foreach <[String].unescaped.replace[&pipe].with[<&chr[6969]>].split[<&sp>]>:
-            - define String1 <[1]><[value].split[].get[1]>
+            - define String1 <[1]><[value].split[].first>
             - if <[value].split[].size> == 1:
                 - define String2 <[2]>
             - else:

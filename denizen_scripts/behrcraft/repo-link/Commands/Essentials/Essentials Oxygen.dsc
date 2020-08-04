@@ -15,9 +15,9 @@ Oxygen_Command:
     # % ██ [ Check if using self or named player ] ██
         - if <context.args.size> == 1:
             - define User <player>
-            - define Level <context.args.get[1]>
+            - define Level <context.args.first>
         - else:
-            - define User <context.args.get[1]>
+            - define User <context.args.first>
             - inject Player_Verification
             - define Level <context.args.get[2]>
         

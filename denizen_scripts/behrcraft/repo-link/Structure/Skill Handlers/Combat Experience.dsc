@@ -46,7 +46,7 @@ Attack_Style:
         - if <context.args.size||0> != 1:
             - inject Command_Syntax Instantly
         
-        - define Style <context.args.get[1]>
+        - define Style <context.args.first>
         - if !<list[Accurate|Aggressive|Defensive].contains[<[Style]>]>:
             - inject Command_Syntax Instantly
         

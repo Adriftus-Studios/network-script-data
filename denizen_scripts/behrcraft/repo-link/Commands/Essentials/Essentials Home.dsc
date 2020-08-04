@@ -153,7 +153,7 @@ Home_GUI:
                     - define Display "<&6>N<&e>ame<&6>: <&a><[HomeName]>"
                     - define Lore "<list[<[ActionLore]>|<&6>W<&e>orld<&6>: <&a><[HomeLoc].world.name>|<&6>L<&e>ocation<&6>: <&6>[<&a><[HomeLoc].x.round_up>,<[HomeLoc].y.round_up>,<[HomeLoc].z.round_up><&6>]]>"
                     - define NBT <[ActionNBT].include[name/<[HomeName]>|Location/<[HomeLoc]>]>
-                    - define Item <item[Action_Item].with[material=Player_Head;Skull_skin=a|<script.yaml_key[House]>;display_name=<[Display]>;lore=<[Lore]>;nbt=<[NBT]>]>
+                    - define Item <item[Action_Item].with[material=Player_Head;Skull_skin=a|<script.data_key[House]>;display_name=<[Display]>;lore=<[Lore]>;nbt=<[NBT]>]>
                     - define HomeList:->:<[Item]>
 
             - define HomeCount <[HomeList].size>

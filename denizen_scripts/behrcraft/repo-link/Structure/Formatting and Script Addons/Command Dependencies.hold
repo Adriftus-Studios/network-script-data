@@ -8,8 +8,8 @@ Command_Syntax:
     debug: false
     script:
         - define Command "<queue.script.data_key[aliases].first||<queue.script.data_key[Name]>> "
-        - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.data_key[Usage].parsed>|Yellow]>"
-        - define Text "<proc[Colorize].context[Syntax: <queue.script.data_key[Usage].parsed>|Yellow]>"
+        - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.parsed_key[Usage]>|Yellow]>"
+        - define Text "<proc[Colorize].context[Syntax: <queue.script.parsed_key[Usage]>|Yellow]>"
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
@@ -21,7 +21,7 @@ Command_Error:
     type: task
     debug: false
     script:
-        - define Hover "<proc[Colorize].context[You typed:|red]><&r><&nl><&c>/<context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <queue.script.data_key[Usage].parsed>"
+        - define Hover "<proc[Colorize].context[You typed:|red]><&r><&nl><&c>/<context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <queue.script.parsed_key[Usage]>"
         - define Text "<proc[Colorize].context[<[Reason]>|red]>"
         - define Command "<queue.script.data_key[aliases].first||<context.alias||<context.command>>> "
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>

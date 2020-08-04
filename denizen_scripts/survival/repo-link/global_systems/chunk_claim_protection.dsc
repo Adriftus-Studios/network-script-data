@@ -56,10 +56,10 @@ claiming_help:
   name: claimhelp
   permission: adriftus.admin
   script:
-    - narrate "<&a>----------------------------------"
+    - narrate <&a>----------------------------------
     - narrate "<&a>Use <&b>/claims <&a>for the claims GUI"
     - narrate "<&e>You can also claim directly to a group using <&b>/claim (groupID)<&e>."
-    - narrate "<&a>----------------------------------"
+    - narrate <&a>----------------------------------
 
 claiming_GUI_command:
   type: command
@@ -77,15 +77,15 @@ claiming_command:
   description: Claim the chunk you're currently standing in, to the group specified.
   usage: /claim (GroupID)
   tab complete:
-    - if <context.args.get[1]||null> == null:
+    - if <context.args.first||null> == null:
       - determine <yaml[claims].list_keys[groups].filter[starts_with[<player.uuid>]].parse[after[~].before[/].replace[_].with[<&sp>]]>
-    - else if <context.args.get[1]||null> != null && <context.args.get[2]||null> == null:
-      - determine <yaml[claims].list_keys[groups].filter[starts_with[<player.uuid>]].parse[after[~].before[/]].filter[starts_with[<context.args.get[1]>]].parse[replace[_].with[<&sp>]]>
+    - else if <context.args.first||null> != null && <context.args.get[2]||null> == null:
+      - determine <yaml[claims].list_keys[groups].filter[starts_with[<player.uuid>]].parse[after[~].before[/]].filter[starts_with[<context.args.first>]].parse[replace[_].with[<&sp>]]>
     - determine <list>
   script:
-    - if <context.args.get[1]||null> == null:
+    - if <context.args.first||null> == null:
       - narrate "<&c>You must specify a group to claim this to."
-      - narrate "<&c><script[claiming_command].yaml_key[usage]>"
+      - narrate <&c><script[claiming_command].data_key[usage]>
       - stop
     - if !<context.raw_args.matches_character_set[1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>]>:
       - narrate "<&c>Claim names can only have letters, numbers, and spaces"
@@ -101,7 +101,7 @@ claiming_command_chunk_map:
 claiming_claimmap_script:
   type: task
   script:
-    - if !<script[claim_system_yaml_settings].yaml_key[settings.allowed_worlds].contains[<player.location.world.name>]>:
+    - if !<script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.location.world.name>]>:
       - narrate "<&c>Claims are not allowed in this world."
       - stop
     - foreach <proc[claim_system_build_chunkmap].context[<player.location.chunk>|true]>:
@@ -113,7 +113,7 @@ claiming_command_guide_to_chunk:
   type: command
   name: chunkguide
   script:
-    - run claim_system_guide_to_chunk_main def:<chunk[<context.args.get[1]>,<context.args.get[2]>,<player.location.world>]>
+    - run claim_system_guide_to_chunk_main def:<chunk[<context.args.first>,<context.args.get[2]>,<player.location.world>]>
 
 #########################
 ## GLOBALLY USED ITEMS ##
@@ -148,7 +148,7 @@ claiming_claim_button:
   debug: false
   script:
   - define chunk <player.location.chunk>
-  - if !<script[claim_system_yaml_settings].yaml_key[settings.allowed_worlds].contains[<player.location.world.name>]>:
+  - if !<script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.location.world.name>]>:
       - determine <item[claiming_action_unavailable]>
   - if <yaml[claims].read[limits.current.<player.uuid>]||0> >= <yaml[claims].read[limits.max.<player.uuid>]||30>:
       - determine <item[claiming_action_unavailable_limit]>
@@ -167,14 +167,14 @@ claiming_claim_this_chunk_button:
   display name: <&a>Claim This Chunk.
   lore:
   - "<&a>Claim Limit<&co> <yaml[claims].read[limits.current.<player.uuid>]||0>/<yaml[claims].read[limits.max.<player.uuid>]||30>"
-  - "<&a>"
-  - "<&c>ATTENTION"
+  - <&a>
+  - <&c>ATTENTION
   - "<&e>This will require text input"
   - "<&e>Enter the group in chat"
-  - "<&a>"
+  - <&a>
   - "<&b>You may claim multiple chunks"
   - "<&b>to the same group"
-  - "<&a>"
+  - <&a>
   - "<&a>Relevent Command: <&e>/claim (groupID)"
 
 claiming_unclaim_this_chunk_button:
@@ -239,10 +239,10 @@ claiming_inventory:
     manage_my_groups: <item[claiming_manage_my_groups_button].with[nbt=action/manage_groups]>
     group_upgrades: <item[claiming_group_upgrades_button].with[nbt=action/group_upgrades]>
   slots:
-  - "[filler] [filler] [filler] [filler] [this_player_info] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [claim_this_chunk] [filler] [filler] [manage_my_groups] [filler] [filler] [group_upgrades] [filler]"
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
+  - [filler] [filler] [filler] [filler] [this_player_info] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [claim_this_chunk] [filler] [filler] [manage_my_groups] [filler] [filler] [group_upgrades] [filler]
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
 
 # GUI INVENTORY EVENTS
 claiming_inventory_events:
@@ -265,9 +265,9 @@ claiming_inventory_events:
           - inventory close
           - inject claiming_claimmap_script
     on player opens claiming_inventory:
-    - if <script[claim_system_yaml_settings].yaml_key[settings.allowed_worlds].contains[<player.location.world.name>]>:
+    - if <script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.location.world.name>]>:
       - define claim_map_icon <item[map].with[flags=HIDE_ALL;display_name=<&b>Claim<&sp>Map;lore=<proc[claim_system_build_chunkmap].context[<player.location.chunk>|false].include[<&a>|<&a>Relevent<&sp>Command<&co><&sp><&e>/ClaimMap]>;nbt=action/claim_map]>
-      - inventory set slot:<script[claiming_inventory].yaml_key[custom_slots_map.claim_map_icon]> d:<context.inventory> o:<[claim_map_icon]>
+      - inventory set slot:<script[claiming_inventory].data_key[custom_slots_map.claim_map_icon]> d:<context.inventory> o:<[claim_map_icon]>
 
 #######################
 ## MULTI CHUNK CLAIM ##
@@ -280,10 +280,10 @@ claiming_multi_chunk_GUI:
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
   slots:
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [] [filler] [] [filler] [] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [claiming_back_button] [filler] [filler] [filler] [filler]"
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [claiming_back_button] [filler] [filler] [filler] [filler]
 
 claiming_multi_chunk_GUI_events:
   type: world
@@ -359,12 +359,12 @@ claiming_group_selection_inventory:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
     back_button: <item[claiming_back_button].with[nbt=back/back]>
   slots:
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [] [filler] [] [filler] [] [filler] [] [filler]"
-  - "[filler] [] [filler] [] [filler] [] [filler] [] [filler]"
-  - "[filler] [] [filler] [] [filler] [] [filler] [] [filler]"
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]"
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
+  - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
+  - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
 
 # THE EVENTS FOR THE GUI
 
@@ -477,18 +477,18 @@ claiming_group_management_permission_generation:
       - else:
         - define permission_buttons:|:<item[claiming_group_management_permission_icon_disabled].with[display_name=<&e><[permission].to_titlecase>;nbt=permission/<[permission]>]>
     - define permission_buttons <[permission_buttons].pad_right[6].with[<item[white_stained_glass_pane].with[display_name=<&a>]>]>
-    - foreach <script[claiming_group_management_inventory].yaml_key[permission_button_slots]> as:slot:
+    - foreach <script[claiming_group_management_inventory].data_key[permission_button_slots]> as:slot:
       - inventory set d:<player.open_inventory> slot:<[slot]> o:<[permission_buttons].get[<[loop_index]>]>
     - if <[target]> == everyone:
-      - inventory set d:<player.open_inventory> slot:<script[claiming_group_management_inventory].yaml_key[permission_head]> o:<item[claiming_group_management_everyone_icon].with[nbt=owner/everyone|group/<[groupName]>]>
+      - inventory set d:<player.open_inventory> slot:<script[claiming_group_management_inventory].data_key[permission_head]> o:<item[claiming_group_management_everyone_icon].with[nbt=owner/everyone|group/<[groupName]>]>
     - else:
       - define name <[target].as_player.name>
       - define lore <list[<&e>Modifying<&sp>permissions<&sp>for<&sp><[name]>]>
-      - inventory set d:<player.open_inventory> slot:<script[claiming_group_management_inventory].yaml_key[permission_head]> o:<item[player_head].with[skull_skin=<[target]>;display_name=<[name]>;lore=<[lore]>;nbt=owner/<[target]>|group/<[groupName]>]>
+      - inventory set d:<player.open_inventory> slot:<script[claiming_group_management_inventory].data_key[permission_head]> o:<item[player_head].with[skull_skin=<[target]>;display_name=<[name]>;lore=<[lore]>;nbt=owner/<[target]>|group/<[groupName]>]>
     - if <[target]> != everyone:
-      - inventory set d:<player.open_inventory> slot:<script[claiming_group_management_inventory].yaml_key[remove_member_button]> o:<item[claiming_group_management_remove_member].with[display_name=<&c>Remove<&sp><[name]><&sp>From<&sp><[groupName].after[~]>.;nbt=action/remove_member]>
+      - inventory set d:<player.open_inventory> slot:<script[claiming_group_management_inventory].data_key[remove_member_button]> o:<item[claiming_group_management_remove_member].with[display_name=<&c>Remove<&sp><[name]><&sp>From<&sp><[groupName].after[~]>.;nbt=action/remove_member]>
     - else:
-      - inventory set d:<player.open_inventory> slot:<script[claiming_group_management_inventory].yaml_key[remove_member_button]> o:<script[claiming_group_management_inventory].yaml_key[definitions.filler].parsed>
+      - inventory set d:<player.open_inventory> slot:<script[claiming_group_management_inventory].data_key[remove_member_button]> o:<script[claiming_group_management_inventory].parsed_key[definitions.filler]>
 
 # The GUI
 claiming_group_management_inventory:
@@ -505,12 +505,12 @@ claiming_group_management_inventory:
     add_member: <item[claiming_group_management_add_member].with[nbt=action/add_member]>
     settings: <item[claiming_group_management_settings].with[nbt=action/settings]>
   slots:
-  - "[] [] [] [] [] [] [] [] []"
-  - "[] [] [] [] [] [] [] [] []"
-  - "[] [] [] [] [] [] [] [] []"
-  - "[filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]"
-  - "[add_member] [filler] [] [] [] [] [] [] [filler]"
-  - "[] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [settings]"
+  - [] [] [] [] [] [] [] [] []
+  - [] [] [] [] [] [] [] [] []
+  - [] [] [] [] [] [] [] [] []
+  - [filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]
+  - [add_member] [filler] [] [] [] [] [] [] [filler]
+  - [] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [settings]
 
 claiming_group_management_inventory_events:
   type: world
@@ -518,18 +518,18 @@ claiming_group_management_inventory_events:
   events:
     on player clicks item in claiming_group_management_inventory:
     - determine passively cancelled
-    - define group <context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[group]>
+    - define group <context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[group]>
     - if <context.item.has_nbt[target]>:
-      - run claiming_group_management_permission_generation def:<context.item.nbt[target]>|<context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[group]>
+      - run claiming_group_management_permission_generation def:<context.item.nbt[target]>|<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[group]>
     - if <context.item.has_nbt[permission]>:
-      - define target <context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[owner]>
+      - define target <context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[owner]>
       - if <context.item.nbt[action]> == enable:
-        - yaml id:claims set groups.<context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[group]>.members.<context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[owner]>.<context.item.nbt[permission]>:true
+        - yaml id:claims set groups.<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[group]>.members.<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[owner]>.<context.item.nbt[permission]>:true
         - inventory set d:<player.open_inventory> slot:<context.slot> o:<item[claiming_group_management_permission_icon_enabled].with[display_name=<&e><context.item.nbt[permission].to_titlecase>;nbt=permission/<context.item.nbt[permission]>]>
         - if <context.item.nbt[permission]> == fly:
           - run claim_system_add_fly_target def:<[group]>|<[target]>
       - else:
-        - yaml id:claims set groups.<context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[group]>.members.<context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[owner]>.<context.item.nbt[permission]>:false
+        - yaml id:claims set groups.<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[group]>.members.<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[owner]>.<context.item.nbt[permission]>:false
         - inventory set d:<player.open_inventory> slot:<context.slot> o:<item[claiming_group_management_permission_icon_disabled].with[display_name=<&e><context.item.nbt[permission].to_titlecase>;nbt=permission/<context.item.nbt[permission]>]>
         - if <context.item.nbt[permission]> == fly:
           - run claim_system_remove_fly_target def:<[group]>|<[target]>
@@ -538,23 +538,23 @@ claiming_group_management_inventory_events:
     - if <context.item.has_nbt[action]>:
       - choose <context.item.nbt[action]>:
         - case add_member:
-          - flag player text_input:claiming_protection_addMember/<context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[group]>
+          - flag player text_input:claiming_protection_addMember/<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[group]>
           - inventory close
-          - narrate "<&a>--------------------------------------------"
+          - narrate <&a>--------------------------------------------
           - narrate "<&e>Enter the player's name you want to add to this group"
           - narrate "<&c>Note: this player must be online"
-          - narrate "<&a>--------------------------------------------"
+          - narrate <&a>--------------------------------------------
         - case settings:
           - inventory open d:claiming_protection_settings
           - wait 1t
-          - inventory set slot:<script[claiming_protection_settings].yaml_key[group_slot]> d:<player.open_inventory> o:<item[white_stained_glass_pane].with[display_name=<&e>;nbt=group/<[group]>]>
+          - inventory set slot:<script[claiming_protection_settings].data_key[group_slot]> d:<player.open_inventory> o:<item[white_stained_glass_pane].with[display_name=<&e>;nbt=group/<[group]>]>
           - give <proc[claiming_protection_settings_generate_settings_buttons].context[<[group]>]> to:<player.open_inventory>
         - case remove_member:
-          - run claiming_protection_removeMember def:<context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[owner].as_player>|<context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[group]>
+          - run claiming_protection_removeMember def:<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[owner].as_player>|<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[group]>
           - inventory open d:claiming_group_management_inventory
           - wait 1t
-          - give <proc[claiming_group_management_member_generation].context[<context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[group]>]> to:<player.open_inventory>
-          - run claiming_group_management_permission_generation def:everyone|<context.inventory.slot[<script[claiming_group_management_inventory].yaml_key[permission_head]>].nbt[group]>
+          - give <proc[claiming_group_management_member_generation].context[<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[group]>]> to:<player.open_inventory>
+          - run claiming_group_management_permission_generation def:everyone|<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[group]>
       
 ###################
 ## SETTINGS MENU ##
@@ -710,12 +710,12 @@ claiming_protection_settings:
     delete_group: <item[claiming_group_management_disband].with[nbt=action/disband]>
     back_button: <item[claiming_back_button].with[nbt=action/back]>
   slots:
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [delete_group]"
-  - "[filler] [filler] [] [] [] [] [] [filler] [filler]"
-  - "[filler] [filler] [] [] [] [] [] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]"
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [delete_group]
+  - [filler] [filler] [] [] [] [] [] [filler] [filler]
+  - [filler] [filler] [] [] [] [] [] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
 
 # TASKS AND PROCEDURES FOR BUILDING THE DYNAMIC BUTTONS
 claiming_protection_settings_generate_settings_buttons:
@@ -737,7 +737,7 @@ claiming_protection_settings_generate_settings_buttons:
       - define list:|:<item[<[setting_value]>_wool].with[lore=<[lore]>;display_name=<[display]><&co><&sp><[setting_value].to_titlecase>;nbt=setting/<[setting]>]>
     - else if <list[weather-control|time-control].contains[<[setting]>]>:
       - define "lore:<&e><[display]> is currently set to <[setting_value].to_titlecase>"
-      - define CMD <script[claiming_group_management_<[setting]>_icon].yaml_key[CMD.<[setting_value]>]>
+      - define CMD <script[claiming_group_management_<[setting]>_icon].data_key[CMD.<[setting_value]>]>
       - define list:|:<item[claiming_group_management_<[setting]>_icon].with[custom_model_data=<[CMD]>;lore=<[lore]>;display_name=<[display]><&co><&sp><[setting_value].to_titlecase>;nbt=setting/<[setting]>]>
     - else:
       - if <[setting_value]>:
@@ -753,7 +753,7 @@ claiming_protection_settings_process_click:
   debug: false
   definitions: setting|value
   script:
-  - define group <player.open_inventory.slot[<script[claiming_protection_settings].yaml_key[group_slot]>].nbt[group]>
+  - define group <player.open_inventory.slot[<script[claiming_protection_settings].data_key[group_slot]>].nbt[group]>
   - if <[value]||null> == null:
     - if <list[weather-control|time-control|color].contains[<[setting]>]>:
       - inject claiming_protection_settings_build_bottom_settings
@@ -762,7 +762,7 @@ claiming_protection_settings_process_click:
       - flag player text_input:claiming_protection_settings_change_name/<[group]>
       - narrate "<&e>What you would like to display the group as?"
       - inventory close
-    - else if <player.open_inventory.slot[<script[claiming_protection_settings].yaml_key[setting_show_slot]>]].material.name> != white_stained_glass_pane:
+    - else if <player.open_inventory.slot[<script[claiming_protection_settings].data_key[setting_show_slot]>]].material.name> != white_stained_glass_pane:
       - inject claiming_protection_settings_reset_bottom
   # If Setting a Value
   - else:
@@ -783,7 +783,7 @@ claiming_protection_setting_update_button:
   script:
   - inventory open d:claiming_protection_settings
   - wait 1t
-  - inventory set slot:<script[claiming_protection_settings].yaml_key[group_slot]> d:<player.open_inventory> o:<item[white_stained_glass_pane].with[display_name=<&e>;nbt=group/<[group]>]>
+  - inventory set slot:<script[claiming_protection_settings].data_key[group_slot]> d:<player.open_inventory> o:<item[white_stained_glass_pane].with[display_name=<&e>;nbt=group/<[group]>]>
   - give <proc[claiming_protection_settings_generate_settings_buttons].context[<[group]>]> to:<player.open_inventory>
     
 
@@ -791,34 +791,34 @@ claiming_protection_settings_reset_bottom:
   type: task
   debug: false
   script:
-  - foreach <script[claiming_protection_settings].yaml_key[setting_show_slot].include[<player.open_inventory.slot[<script[claiming_protection_settings].yaml_key[setting_optional_buttons_slots]>]>]> as:slot:
-    - inventory set d:<player.open_inventory> slot:<[slot]> o:<script[claiming_protection_settings].yaml_key[definitions.filler]>
+  - foreach <script[claiming_protection_settings].data_key[setting_show_slot].include[<player.open_inventory.slot[<script[claiming_protection_settings].data_key[setting_optional_buttons_slots]>]>]> as:slot:
+    - inventory set d:<player.open_inventory> slot:<[slot]> o:<script[claiming_protection_settings].data_key[definitions.filler]>
 
 claiming_protection_settings_build_bottom_settings:
   type: task
   debug: false
   script:
-  - inventory set slot:<script[claiming_protection_settings].yaml_key[setting_show_slot]> d:<player.open_inventory> o:<script[claiming_protection_settings].yaml_key[definitions.filler].parsed.with[nbt=setting/<[setting]>]>
+  - inventory set slot:<script[claiming_protection_settings].data_key[setting_show_slot]> d:<player.open_inventory> o:<script[claiming_protection_settings].parsed_key[definitions.filler].with[nbt=setting/<[setting]>]>
   - if <[setting]> == time-control:
     - define times <list[off|sunrise|morning|noon|evening|sunset|midnight]>
-    - foreach <script[claiming_protection_settings].yaml_key[setting_optional_buttons_slots]> as:slot:
-      - define CMD <script[claiming_group_management_time-control_icon].yaml_key[CMD.<[times].get[<[loop_index]>]>]>
-      - define "display:<&e>Set<&sp>To<&co><&sp><[times].get[<[loop_index]>]>"
+    - foreach <script[claiming_protection_settings].data_key[setting_optional_buttons_slots]> as:slot:
+      - define CMD <script[claiming_group_management_time-control_icon].data_key[CMD.<[times].get[<[loop_index]>]>]>
+      - define display:<&e>Set<&sp>To<&co><&sp><[times].get[<[loop_index]>]>
       - inventory set slot:<[slot]> d:<player.open_inventory> o:<item[claiming_group_management_time-control_icon].with[custom_model_data=<[CMD]>;display_name=<[display]>;nbt=set_to/<[times].get[<[loop_index]>]>]>
   - else if <[setting]> == weather-control:
     - define weathers <list[off|sunny|storm|thunder]>
     - repeat 7:
       - if <list[1|2|7].contains[<[value]>]>:
-        - define list:|:<script[claiming_protection_settings].yaml_key[definitions.filler].parsed>
+        - define list:|:<script[claiming_protection_settings].parsed_key[definitions.filler]>
       - else:
-        - define CMD <script[claiming_group_management_weather-control_icon].yaml_key[CMD.<[weathers].get[<[value].-[2]>]>]>
-        - define "display:<&e>Set<&sp>To<&co><&sp><[weathers].get[<[value].-[2]>]>"
+        - define CMD <script[claiming_group_management_weather-control_icon].data_key[CMD.<[weathers].get[<[value].-[2]>]>]>
+        - define display:<&e>Set<&sp>To<&co><&sp><[weathers].get[<[value].-[2]>]>
         - define list:|:<item[claiming_group_management_time-control_icon].with[custom_model_data=<[CMD]>;display_name=<[display]>;nbt=set_to/<[weathers].get[<[value].-[2]>]>]>
-    - foreach <script[claiming_protection_settings].yaml_key[setting_optional_buttons_slots]> as:slot:
+    - foreach <script[claiming_protection_settings].data_key[setting_optional_buttons_slots]> as:slot:
       - inventory set slot:<[slot]> d:<player.open_inventory> o:<[list].get[<[loop_index]>]>
   - else:
     - define colors <list[blue|green|pink|purple|red|white|yellow]>
-    - foreach <script[claiming_protection_settings].yaml_key[setting_optional_buttons_slots]> as:slot:
+    - foreach <script[claiming_protection_settings].data_key[setting_optional_buttons_slots]> as:slot:
       - define color <[colors].get[<[loop_index]>]>
       - inventory set slot:<[slot]> d:<player.open_inventory> o:<item[<[color]>_wool].with[display_name=<proc[getColorCode].context[<[color]>]><[color].to_titlecase>;nbt=set_to/<[color]>]>
 
@@ -828,7 +828,7 @@ claiming_protection_settings_events:
   events:
     on player clicks item in claiming_protection_settings:
     - determine passively cancelled
-    - define setting <context.item.nbt[setting]||<context.inventory.slot[<script[claiming_protection_settings].yaml_key[setting_show_slot]>].nbt[setting]||null>>
+    - define setting <context.item.nbt[setting]||<context.inventory.slot[<script[claiming_protection_settings].data_key[setting_show_slot]>].nbt[setting]||null>>
     - if <context.item.has_nbt[set_to]>:
       - run claiming_protection_settings_process_click def:<[setting]>|<context.item.nbt[set_to]>
     - else if <context.item.has_nbt[setting]>:
@@ -836,10 +836,10 @@ claiming_protection_settings_events:
     - else if <context.item.has_nbt[action]>:
       - choose <context.item.nbt[action]>:
         - case disband:
-          - run claiming_protection_group_disband def:<context.inventory.slot[<script[claiming_protection_settings].yaml_key[group_slot]>].nbt[group]>
+          - run claiming_protection_group_disband def:<context.inventory.slot[<script[claiming_protection_settings].data_key[group_slot]>].nbt[group]>
           - inventory open d:claiming_group_selection_inventory
         - case back:
-          - define group <context.inventory.slot[<script[claiming_protection_settings].yaml_key[group_slot]>].nbt[group]>
+          - define group <context.inventory.slot[<script[claiming_protection_settings].data_key[group_slot]>].nbt[group]>
           - inventory open d:claiming_group_management_inventory
           - wait 1t
           - give <proc[claiming_group_management_member_generation].context[<[group]>]> to:<player.open_inventory>
@@ -847,7 +847,7 @@ claiming_protection_settings_events:
           - wait 1t
           - inject claiming_settings_update
     on player closes claiming_protection_settings:
-    - define group <context.inventory.slot[<script[claiming_protection_settings].yaml_key[group_slot]>].nbt[group]>
+    - define group <context.inventory.slot[<script[claiming_protection_settings].data_key[group_slot]>].nbt[group]>
     - inject claiming_settings_update
 
 
@@ -862,7 +862,7 @@ claiming_multiclaim:
   type: task
   definitions: name|location|area
   script:
-    - if !<script[claim_system_yaml_settings].yaml_key[settings.allowed_worlds].contains[<[location].world.name>]>:
+    - if !<script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<[location].world.name>]>:
       - narrate "<&c>Claims are not allowed in this world."
       - stop
     - if !<[name].matches_character_set[1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>]>:
@@ -940,7 +940,7 @@ claiming_protection_claim:
   debug: false
   definitions: name|location
   script:
-  - if !<script[claim_system_yaml_settings].yaml_key[settings.allowed_worlds].contains[<[location].world.name>]>:
+  - if !<script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<[location].world.name>]>:
     - narrate "<&c>Claims are not allowed in this world."
     - stop
   - if !<[name].matches_character_set[1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>]>:
@@ -1103,7 +1103,7 @@ claiming_protection_settings_change_name:
   - inject text_input_complete
   - inventory open d:claiming_protection_settings
   - wait 1t
-  - inventory set slot:<script[claiming_protection_settings].yaml_key[group_slot]> d:<player.open_inventory> o:<item[white_stained_glass_pane].with[display_name=<&e>;nbt=group/<[group]>]>
+  - inventory set slot:<script[claiming_protection_settings].data_key[group_slot]> d:<player.open_inventory> o:<item[white_stained_glass_pane].with[display_name=<&e>;nbt=group/<[group]>]>
   - give <proc[claiming_protection_settings_generate_settings_buttons].context[<[group]>]> to:<player.open_inventory>
   - wait 1t
   - inject claiming_settings_update
@@ -1163,11 +1163,11 @@ claiming_protection_events:
     - define group <yaml[claims].read[<context.location.chunk.world>.<context.location.chunk.x>.<context.location.chunk.z>]||null>
     - if <[group]> == null:
       - stop
-    - if <script[claiming_protection_events].yaml_key[farmables].contains[<context.material.name>]>:
+    - if <script[claiming_protection_events].data_key[farmables].contains[<context.material.name>]>:
       - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.farm]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.farm]>:
         - narrate "<&c>You do not have permission to farm here."
         - determine cancelled
-      - else if <script[claiming_protection_events].yaml_key[no_break_bottom].contains[<context.material.name>]> && !<yaml[claims].read[groups.<[group]>.members.everyone.break]> && !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false>:
+      - else if <script[claiming_protection_events].data_key[no_break_bottom].contains[<context.material.name>]> && !<yaml[claims].read[groups.<[group]>.members.everyone.break]> && !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false>:
         - if <context.location.below.material.name> != <context.material.name>:
           - narrate "<&c>You cannot farm the bottom of this, without break permission."
           - determine cancelled
@@ -1175,7 +1175,7 @@ claiming_protection_events:
         - narrate "<&c>This plant hasn't matured yet."
         - determine cancelled
       - else:
-        - if <script[claim_system_upgrade_auto-replant].yaml_key[replantables].contains[<context.material.name>]>:
+        - if <script[claim_system_upgrade_auto-replant].data_key[replantables].contains[<context.material.name>]>:
           - inject claim_system_upgrade_auto-replant
     - else if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.break]>:
       - narrate "<&c>You do not have permission to break blocks here."
@@ -1268,7 +1268,7 @@ claiming_system_upgrade_events:
       - inject claiming_system_bossBar_Stop
       - wait 2t
       - foreach fly|time-control|weather-control as:upgrade_name:
-        - define newgroup:<player.location.cuboids.filter[notable_name.starts_with[claim]].get[1].notable_name.after[.].before[/]||null>
+        - define newgroup:<player.location.cuboids.filter[notable_name.starts_with[claim]].first.notable_name.after[.].before[/]||null>
         - if <[newgroup]> != null:
           - if <yaml[claims].read[groups.<[newgroup]>.members.<player.uuid>.<[upgrade_name]>]||true> || <yaml[claims].read[groups.<[newgroup]>.members.everyone.<[upgrade_name]>]||true>:
             - if <yaml[claims].read[groups.<[newgroup]>.upgrades.<[upgrade_name]>]> && <yaml[claims].read[groups.<[newgroup]>.settings.<[upgrade_name]>]> != off:
@@ -1345,9 +1345,9 @@ claiming_system_bossbar_initialize:
 ##  type: task
 ##  script:
 ##      - if <server.has_flag[wilderness_bossbar_flags]>:
-##        - bossbar <player.uuid>.in_claim "title:<&2>Wilderness" color:green flags:<server.flag[wilderness_bossbar_flags]>
+##        - bossbar <player.uuid>.in_claim title:<&2>Wilderness color:green flags:<server.flag[wilderness_bossbar_flags]>
 ##      - else:
-##        - bossbar <player.uuid>.in_claim "title:<&2>Wilderness" color:green
+##        - bossbar <player.uuid>.in_claim title:<&2>Wilderness color:green
 
 claiming_system_bossBar_OuterRealms:
   type: task
@@ -1372,14 +1372,14 @@ claiming_system_bossBar_Biome:
   script:
   - foreach <script[claim_system_yaml_settings].list_keys[biomes]>:
     - if <player.location.biome.name.contains_any[<[value].as_list>]>
-      - define title_color <script[claim_system_yaml_settings].yaml_key[biomes.<[value]>.title_color].parsed>
-      - define bossbar_color <script[claim_system_yaml_settings].yaml_key[biomes.<[value]>.bossbar_color].parsed>
-      - define bossbar_flags <script[claim_system_yaml_settings].yaml_key[biomes.<[value]>.bossbar_flags]||null>
+      - define title_color <script[claim_system_yaml_settings].parsed_key[biomes.<[value]>.title_color]>
+      - define bossbar_color <script[claim_system_yaml_settings].parsed_key[biomes.<[value]>.bossbar_color]>
+      - define bossbar_flags <script[claim_system_yaml_settings].data_key[biomes.<[value]>.bossbar_flags]||null>
   - title title:<[title_color]><player.location.biome.name.to_titlecase>
   - if <[bossbar_flags]> != null:
-    - bossbar <player.uuid>.in_claim "title:<&2><player.location.biome.name.to_titlecase>" color:<[bossbar_color]> flags:<[bossbar_flags]>
+    - bossbar <player.uuid>.in_claim title:<&2><player.location.biome.name.to_titlecase> color:<[bossbar_color]> flags:<[bossbar_flags]>
   - else:
-    - bossbar <player.uuid>.in_claim "title:<&2><player.location.biome.name.to_titlecase>" color:<[bossbar_color]>
+    - bossbar <player.uuid>.in_claim title:<&2><player.location.biome.name.to_titlecase> color:<[bossbar_color]>
 
 ###########################
 ## CLAIM UPGRADE IMPACTS ##
@@ -1414,10 +1414,10 @@ claim_system_upgrade_keep_inventory:
   events:
     on player dies:
     - if !<player.location.cuboids.filter[notable_name.starts_with[claim]].is_empty>:
-      - define group <player.location.cuboids.filter[note_name.starts_with[claim]].parse[note_name.after[.].before[/]].get[1]>
+      - define group <player.location.cuboids.filter[note_name.starts_with[claim]].parse[note_name.after[.].before[/]].first>
       - if <yaml[claims].read[groups.<[group]>.settings.keep-inventory]> && <yaml[claims].read[groups.<[group]>.upgrades.keep-inventory]>:
-        - determine passively "KEEP_INV"
-        - determine passively "NO_DROPS"
+        - determine passively KEEP_INV
+        - determine passively NO_DROPS
 
 # FLY
 
@@ -1543,11 +1543,11 @@ claim_system_build_chunkmap:
           - define "row_<[z]>:|:<element[<&c><&lb><[x_color]>X<&c><&rb>].on_hover[<[group_color]><[group_owner_name]><&nl><[group_color]><[group_name]>].on_click[/chunkguide <[x_to_use]> <[z_to_use]>]>"
       - else:
         - if <[group_owner]> == <player.uuid>:
-          - define "row_<[z]>:|:<element[<&a><&lb><[x_color]>X<&a><&rb>]>"
+          - define row_<[z]>:|:<element[<&a><&lb><[x_color]>X<&a><&rb>]>
         - else if <[group_owner]> == Wilderness:
-          - define "row_<[z]>:|:<element[<&2><&lb><[x_color]>X<&2><&rb>]>"
+          - define row_<[z]>:|:<element[<&2><&lb><[x_color]>X<&2><&rb>]>
         - else:
-          - define "row_<[z]>:|:<element[<&c><&lb><[x_color]>X<&c><&rb>]>"
+          - define row_<[z]>:|:<element[<&c><&lb><[x_color]>X<&c><&rb>]>
   - define "list:|:<&e>--------------------------------|<&b>                    NORTH"
   - repeat 9:
     - define list:|:<[row_<[value]>].separated_by[<&sp><&sp>]>

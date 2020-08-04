@@ -7,7 +7,7 @@ resourcepack_Command:
     permission: Behr.essentials.resourcepack
     script:
     # % ██ [ Check for args ] ██
-        - if <context.args.get[1]||null> != null:
+        - if <context.args.first||null> != null:
             - inject Command_Syntax
         
     # % ██ [ check if they have a resourcepack location ] ██

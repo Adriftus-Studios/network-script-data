@@ -7,9 +7,9 @@ Command_Syntax:
     type: task
     debug: false
     script:
-        - define Command "<queue.script.yaml_key[aliases].get[1]||<queue.script.yaml_key[Name]>> "
-        - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.yaml_key[Usage].parsed>|Yellow]>"
-        - define Text "<proc[Colorize].context[Syntax: <queue.script.yaml_key[Usage].parsed>|Yellow]>"
+        - define Command "<queue.script.data_key[aliases].first||<queue.script.data_key[Name]>> "
+        - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.parsed_key[Usage]>|Yellow]>"
+        - define Text "<proc[Colorize].context[Syntax: <queue.script.parsed_key[Usage]>|Yellow]>"
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
@@ -21,9 +21,9 @@ Command_Error:
     type: task
     debug: false
     script:
-        - define Hover "<proc[Colorize].context[You Typed:|red]><&r><&nl><&4>/<&c><context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <proc[Colorize].context[<queue.script.yaml_key[Usage].parsed>|yellow]>"
-        - define Text "<proc[Colorize].context[<[Reason]>|red]>"
-        - define Command "<queue.script.yaml_key[aliases].get[1]||<context.alias||<context.command>>> "
+        - define Hover "<proc[Colorize].context[You Typed:|red]><&r><&nl><&4>/<&c><context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <proc[Colorize].context[<queue.script.parsed_key[Usage]>|yellow]>"
+        - define Text <proc[Colorize].context[<[Reason]>|red]>
+        - define Command "<queue.script.data_key[aliases].first||<context.alias||<context.command>>> "
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
@@ -36,7 +36,7 @@ Permission_Error:
     debug: false
     script:
         - define Text "<proc[Colorize].context[You don't have permission to do that.|red]>"
-        - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.yaml_key[adminpermission]>"
+        - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.data_key[adminpermission]>"
         - narrate <proc[HoverMsg].context[<[Hover]>|<[Text]>]>
         - stop
 
@@ -48,7 +48,7 @@ Admin_Verification:
     type: task
     debug: false
     script:
-        - if !<player.has_permission[<queue.script.yaml_key[adminpermission]>]>:
+        - if !<player.has_permission[<queue.script.data_key[adminpermission]>]>:
             - inject Permission_Error
 
 #$# % ██  [ Specifically not moderation, no permission message ] ██
@@ -126,7 +126,7 @@ User_Display_Simple:
         - if <[User].has_flag[behrry.essentials.display_name]>:
             - determine "<&r><[User].display_name||<[User].flag[behrry.essentials.display_name]>><&r> <proc[Colorize].context[(<[User].name>)|yellow]>"
         - else:
-            - determine "<proc[Colorize].context[<[User].name>|yellow]>"
+            - determine <proc[Colorize].context[<[User].name>|yellow]>
 
 # % ██  [ Logging chat for global chat ] ██
 # - ██  [ Usage ]  - define Log SettingsKey/<[Message]>
@@ -137,7 +137,7 @@ Chat_Logger:
     script:
         - if <server.flag[Behrry.Essentials.ChatHistory.Global].size||0> > 24:
             - flag server Behrry.Essentials.ChatHistory.Global:<-:<server.flag[Behrry.Essentials.ChatHistory.Global].first>
-        - flag server "Behrry.Essentials.ChatHistory.Global:->:<[Log]>"
+        - flag server Behrry.Essentials.ChatHistory.Global:->:<[Log]>
 
 # @ ███████████████████████████████████████████████████████████
 # @ ██    Command Dependencies | Tab Completion
@@ -390,7 +390,7 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
 # @ ██    Command Dependencies | Unique Command Features
 # % ██
 # @ ██  [ Activates or Deactivates a toggle command ] ██
-# @ ██  [ Usage ] - define Arg <context.args.get[1]||null>
+# @ ██  [ Usage ] - define Arg <context.args.first||null>
 # @ ██  [       ] - define ModeFlag "Behr.Essentials.Example"
 # @ ██  [       ] - define ModeName "Mode Name"
 # @ ██  [       ] - inject Activation_Arg_Command Instantly

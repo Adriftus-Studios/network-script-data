@@ -19,7 +19,7 @@ silentchest_Command:
       - flag player behrry.moderation.silentchest:!
       - narrate "<proc[Colorize].context[Silent Chest Mode Enabled.|green]>"
   script:
-    - define Arg <context.args.get[1]||null>
+    - define Arg <context.args.first||null>
     - define ModeFlag behrry.moderation.silentchest
     - define ModeName "Silent Chest"
     - inject Activation_Arg_Command Instantly

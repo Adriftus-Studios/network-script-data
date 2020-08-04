@@ -20,9 +20,9 @@ VChat_Command:
         - bungeerun Discord Discord_Message def:519612225854504962|<[DiscordMessage]>
     script:
     # % ██ [   Check Args ] ██
-        - if <context.args.is_empty> || <list[On|off].contains[<context.args.get[1]>]>:
+        - if <context.args.is_empty> || <list[On|off].contains[<context.args.first>]>:
             - if <context.args.get[2]||null> == null:
-                - define Arg <context.args.get[1]||null>
+                - define Arg <context.args.first||null>
                 - define ModeFlag "Behr.Essentials.vchat"
                 - define ModeName " <&b>┤VChat"
                 - inject Activation_Arg

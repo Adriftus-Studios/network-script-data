@@ -2,7 +2,7 @@ Lighter:
     type: item
     debug: false
     material: blaze_rod
-    display name: "<&6>L<&e>ighter"
+    display name: <&6>L<&e>ighter
 
 Lighter_Handler:
     type: world

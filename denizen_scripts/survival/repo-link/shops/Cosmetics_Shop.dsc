@@ -2,7 +2,7 @@ store_hub_cosmeticShop_command:
   type: command
   name: opencosmeticShop
   script:
-    - inventory open d:store_hub_cosmeticShop player:<server.match_player[<context.args.get[1]>]||<player>>
+    - inventory open d:store_hub_cosmeticShop player:<server.match_player[<context.args.first>]||<player>>
 
 
 store_hub_cosmeticShop:
@@ -63,11 +63,11 @@ store_hub_cosmeticShop_titles_inventory:
   definitions:
     filler: <item[store_hub_cosmeticShop_filler]>
   slots:
-    - "[filler] [] [filler] [] [filler] [] [filler] [] [filler]"
-    - "[filler] [filler] [] [filler] [] [filler] [] [filler] [filler]"
-    - "[filler] [] [filler] [] [filler] [] [filler] [] [filler]"
-    - "[filler] [filler] [] [filler] [] [filler] [] [filler] [filler]"
-    - "[filler] [] [filler] [] [filler] [] [filler] [] [filler]"
+    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
+    - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
+    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
+    - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
+    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
 
 store_hub_cosmeticShop_title_open:
   type: task
@@ -77,9 +77,9 @@ store_hub_cosmeticShop_title_open:
       - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tag]>]||false>:
         - define lore "<&c>You already own this title.|<&a>Price<&co><&sp>300<&sp><&b>ⓐ"
       - else:
-        - define lore "<&a>Price<&co><&sp>300<&sp><&b>ⓐ"
+        - define lore <&a>Price<&co><&sp>300<&sp><&b>ⓐ
       - define item <item[name_tag]>[nbt=<list[price/300|tag/<[tag]>]>;lore=<[lore]>]
-      - adjust <[item]> "display_name:<yaml[titles].read[titles.<[tag]>.tag].parse_color>" save:new
+      - adjust <[item]> display_name:<yaml[titles].read[titles.<[tag]>.tag].parse_color> save:new
       - define list:|:<entry[new].result>
     - give <[list]> to:<[inventory]>
     - inventory open d:<[inventory]>
@@ -158,11 +158,11 @@ store_hub_cosmeticShop_bowTrails_inventory:
     definitions:
       filler: <item[store_hub_cosmeticShop_filler]>
     slots:
-      - "[filler] [] [filler] [] [filler] [] [filler] [] [filler]"
-      - "[filler] [filler] [] [filler] [] [filler] [] [filler] [filler]"
-      - "[filler] [] [filler] [] [filler] [] [filler] [] [filler]"
-      - "[filler] [filler] [] [filler] [] [filler] [] [filler] [filler]"
-      - "[filler] [] [filler] [] [filler] [] [filler] [] [filler]"
+      - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
+      - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
+      - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
+      - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
+      - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
 
 store_hub_cosmeticShop_bowtrails_open:
   type: task
@@ -172,9 +172,9 @@ store_hub_cosmeticShop_bowtrails_open:
       - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<[trail]>]||false>:
         - define lore "<&c>You already own this bow trail.|<&a>Price<&co><&sp>300<&sp><&b>ⓐ"
       - else:
-        - define lore "<&a>Price<&co><&sp>300<&sp><&b>ⓐ"
+        - define lore <&a>Price<&co><&sp>300<&sp><&b>ⓐ
       - define item <item[<yaml[bowtrails].read[bowtrails.<[trail]>.icon]>].with[nbt=<list[price/300|trail/<[trail]>]>;lore=<[lore]>]>
-      - adjust <[item]> "display_name:<yaml[bowtrails].read[bowtrails.<[trail]>.name].parse_color>" save:new
+      - adjust <[item]> display_name:<yaml[bowtrails].read[bowtrails.<[trail]>.name].parse_color> save:new
       - define list:|:<entry[new].result>
     - give <[list]> to:<[inventory]>
     - inventory open d:<[inventory]>

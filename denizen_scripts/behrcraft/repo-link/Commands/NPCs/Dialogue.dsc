@@ -16,7 +16,7 @@ Dialogue_Command:
     # % ██ [ Define Definitions                    ] ██
         - define Options <player.flag[Behrry.Interaction.ActiveOptions]>
         - define OptionsFiltered <[Options].filter[split[/].get[3].contains_any[<player.flag[Behrry.Interaction.ActiveNPC]>]]>
-        - define OptionChoice <context.args.get[1]>
+        - define OptionChoice <context.args.first>
 
     # % ██ [ Check if Player ran command directly  ] ██
         - if <context.args.size> == 1:

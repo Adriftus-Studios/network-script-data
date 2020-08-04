@@ -25,7 +25,7 @@ discord_watcher:
         - define DiscIcon <proc[MsgHover].context[<[Hover]>|<[Text]>]>
 
         - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
-        - define Text <yaml[chat_config].read[channels.<[channel]>.format.channel].parsed>
+        - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
         - define Command "chat <[channel]>"
         - define ChannelText <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
 
@@ -35,10 +35,10 @@ discord_watcher:
         - define Insert @<context.author.nickname[<context.group>]||<context.author.name>>
         - define NameText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         
-        - define Separator <yaml[chat_config].read[channels.<[channel]>.format.separator].parsed>
+        - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
 
         - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"
-        - define Text <yaml[chat_config].read[channels.<[channel]>.format.message].replace[].parsed>
+        - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message].replace[]>
         - define Insert <[Text]>
         - define MessageText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         - define Attachments <list[<empty>]>

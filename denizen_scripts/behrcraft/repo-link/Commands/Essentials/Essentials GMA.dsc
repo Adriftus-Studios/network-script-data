@@ -16,12 +16,12 @@ gma_Command:
             - inject Command_Syntax Instantly
         
     # % ██ [   Check if specifying Player ] ██
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.first||null> == null:
             - define User <player>
         - else:
         # % ██ [   Check if player is a moderator ] ██
             - if <player.groups.contains[Moderation]>:
-                - define User <context.args.get[1]>
+                - define User <context.args.first>
                 - inject Player_Verification Instantly
             - else:
                 - inject Admin_Permission_Denied Instantly

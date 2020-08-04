@@ -67,7 +67,7 @@ daily_reward_command:
   name: give_daily_reward
   permission: not.a.perm
   script:
-    - inject daily_rewards_test player:<server.match_player[<context.args.get[1]>]>
+    - inject daily_rewards_test player:<server.match_player[<context.args.first>]>
 
 daily_reward_config_manager:
   type: world

@@ -27,11 +27,11 @@ command_play:
       
     # % ██ [ Check for Same Server ] ██
     - else if <bungee.server> == <context.args.first.to_lowercase>:
-      - define Reason "You're already on <yaml[bungee.config].read[servers.<context.args.first.to_lowercase>.display_name].parsed>."
+      - define Reason "You're already on <yaml[bungee.config].parsed_key[servers.<context.args.first.to_lowercase>.display_name]>."
       - inject Command_Error
       
     # % ██ [ Transfer Server ] ██
-    - narrate "<&e>Joining Server<&co> <yaml[bungee.config].read[servers.<context.args.first.to_lowercase>.display_name].parsed>"
+    - narrate "<&e>Joining Server<&co> <yaml[bungee.config].parsed_key[servers.<context.args.first.to_lowercase>.display_name]>"
     - adjust <player> send_to:<context.args.first.to_lowercase>
 
 command_play_events:
@@ -56,13 +56,13 @@ command_play_events:
           - adjust <player> send_to:survival
           - stop
         - if <bungee.server> == <context.item.nbt[server]>:
-          - narrate "<&c>You are already on the <yaml[bungee.config].read[servers.<context.item.nbt[server]>.display_name].parsed> <&c>server."
+          - narrate "<&c>You are already on the <yaml[bungee.config].parsed_key[servers.<context.item.nbt[server]>.display_name]> <&c>server."
           - stop
         - if <bungee.list_servers.contains[<context.item.nbt[server]>]>:
-          - narrate "<&e>Joining Server<&co> <yaml[bungee.config].read[servers.<context.item.nbt[server]>.display_name].parsed>"
+          - narrate "<&e>Joining Server<&co> <yaml[bungee.config].parsed_key[servers.<context.item.nbt[server]>.display_name]>"
           - adjust <player> send_to:<context.item.nbt[server]>
         - else:
-          - narrate "<yaml[bungee.config].read[servers.<context.item.nbt[server]>.display_name].parsed> <&c>server is currently offline."
+          - narrate "<yaml[bungee.config].parsed_key[servers.<context.item.nbt[server]>.display_name]> <&c>server is currently offline."
 
 pull_bungee_config:
   type: task
@@ -79,19 +79,19 @@ command_play_inventory:
   size: 27
   inventory_type: chest
   definitions:
-    player: <item[player_head]||<item[human_skull]>>[display_name=<&b><player.name>;lore=<&3>Current<&sp>Server<&co><&sp><yaml[bungee.config].read[servers.<bungee.server>.display_name].parsed>;skull_skin=<player.uuid>]
-    hub: <item[<yaml[bungee.config].read[servers.hub1.material]>]>[display_name=<yaml[bungee.config].read[servers.<bungee.server>.display_name].parsed>;nbt=<list[server/hub1]>]
+    player: <item[player_head]||<item[human_skull]>>[display_name=<&b><player.name>;lore=<&3>Current<&sp>Server<&co><&sp><yaml[bungee.config].parsed_key[servers.<bungee.server>.display_name]>;skull_skin=<player.uuid>]
+    hub: <item[<yaml[bungee.config].read[servers.hub1.material]>]>[display_name=<yaml[bungee.config].parsed_key[servers.<bungee.server>.display_name]>;nbt=<list[server/hub1]>]
     filler: <item[white_stained_glass_pane].with[display_name=<&c>]>
   procedural items:
     - foreach <yaml[bungee.config].list_keys[servers]> as:server:
       # Check if the server is set up for /play menu
       - if <yaml[bungee.config].read[servers.<[server]>.show_in_play_menu]||false> :
-        - if <yaml[bungee.config].read[servers.<[server]>.restricted]||false> && !<yaml[bungee.config].read[servers.<[server]>.restricted_check].parsed||true>:
+        - if <yaml[bungee.config].read[servers.<[server]>.restricted]||false> && !<yaml[bungee.config].parsed_key[servers.<[server]>.restricted_check]||true>:
           - foreach next
         # Get the material from the config
         - define item <item[<yaml[bungee.config].read[servers.<[server]>.material]>]>
         # Set the display name
-        - adjust <[item]> display_name:<yaml[bungee.config].read[servers.<[server]>.display_name].parsed> save:item
+        - adjust <[item]> display_name:<yaml[bungee.config].parsed_key[servers.<[server]>.display_name]> save:item
         # Set the Lore
         # Top Border first
         - define lore:<&e>---------------------
@@ -101,7 +101,7 @@ command_play_inventory:
         - else:
           - define lore:|:<&c>Server<&sp>Status<&co><&sp>Offline
         # Then the server's description
-        - define lore:|:<yaml[bungee.config].read[servers.<[server]>.description].parsed>
+        - define lore:|:<yaml[bungee.config].parsed_key[servers.<[server]>.description]>
         # Bottom border
         - define lore:|:<&e>---------------------
         - adjust <entry[item].result> lore:<[lore]> save:item
@@ -109,9 +109,9 @@ command_play_inventory:
         - define list:|:<entry[item].result>
     - determine <[list]>
   slots:
-    - "[filler] [filler] [filler] [filler] [player] [filler] [filler] [filler] [filler]"
-    - "[filler] [] [filler] [] [filler] [] [filler] [] [filler]"
-    - "[filler] [filler] [filler] [filler] [hub] [filler] [filler] [filler] [filler]"
+    - [filler] [filler] [filler] [filler] [player] [filler] [filler] [filler] [filler]
+    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
+    - [filler] [filler] [filler] [filler] [hub] [filler] [filler] [filler] [filler]
 
 telix_command:
   type: command

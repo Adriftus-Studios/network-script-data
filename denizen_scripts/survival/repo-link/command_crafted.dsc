@@ -4,7 +4,7 @@ craftable:
   debug: false
   script:
     - if <player.has_flag[craft_admin]>:
-      - if <player.has_flag[crafted_confirm]> && <player.flag[crafted_confirm]> == <context.args.get[1]||null>:
+      - if <player.has_flag[crafted_confirm]> && <player.flag[crafted_confirm]> == <context.args.first||null>:
         - yaml id:crafted set whitelist:|:<player.flag[crafted_confirm]>
         - narrate "<&b><player.flag[crafted_confirm]> <&e>can now access crafted, based on name."
         - narrate "<&e>This is functionally no different."
@@ -12,11 +12,11 @@ craftable:
         - flag player crafted_confirm:!
         - stop
       - flag player crafted_confirm:!
-      - define target <server.match_offline_player[<context.args.get[1]>]||null>
+      - define target <server.match_offline_player[<context.args.first>]||null>
       - if <[target]> == null:
-        - narrate "<&c>Unknown Player<&co> <&e><context.args.get[1]>"
-        - narrate "<element[<&e>Click here to add the player by their name.].on_hover[<&e>Add player <&b><context.args.get[1]> <&e>by name].on_click[/craftable <context.args.get[1]>]>"
-        - flag player crafted_confirm:<context.args.get[1]> duration:2m
+        - narrate "<&c>Unknown Player<&co> <&e><context.args.first>"
+        - narrate "<element[<&e>Click here to add the player by their name.].on_hover[<&e>Add player <&b><context.args.first> <&e>by name].on_click[/craftable <context.args.first>]>"
+        - flag player crafted_confirm:<context.args.first> duration:2m
         - stop
       - if <yaml[crafted].read[whitelist].contains_any[<[target].uuid>|<[target].name>]>:
         - narrate "<&b><[target].name> <&c>already has access to the server."
@@ -34,16 +34,16 @@ uncraftable:
   debug: false
   script:
     - if <player.has_flag[craft_admin]>:
-      - define target <server.match_offline_player[<context.args.get[1]>]||<context.args.get[1].as_player||null>>
-      - if <[target]> == null && !<yaml[crafted].read[whitelist].contains_any[<[target].uuid||null>|<[target].name||<context.args.get[1]>>]>:
-        - narrate "<&c>Unknown Player<&co> <&e><context.args.get[1]>"
+      - define target <server.match_offline_player[<context.args.first>]||<context.args.first.as_player||null>>
+      - if <[target]> == null && !<yaml[crafted].read[whitelist].contains_any[<[target].uuid||null>|<[target].name||<context.args.first>>]>:
+        - narrate "<&c>Unknown Player<&co> <&e><context.args.first>"
         - stop
-      - if !<yaml[crafted].read[whitelist].contains_any[<[target].uuid||null>|<[target].name||<context.args.get[1]>>]>:
+      - if !<yaml[crafted].read[whitelist].contains_any[<[target].uuid||null>|<[target].name||<context.args.first>>]>:
         - narrate "<&b><[target].name> <&c>does not have access to the server."
         - stop
-      - yaml id:crafted set whitelist:!|:<yaml[crafted].read[whitelist].exclude[<[target].uuid||null>|<[target].name||<context.args.get[1]>>]>
+      - yaml id:crafted set whitelist:!|:<yaml[crafted].read[whitelist].exclude[<[target].uuid||null>|<[target].name||<context.args.first>>]>
       - yaml id:crafted savefile:data/crafted.yml
-      - narrate "<&b><[target].name||<context.args.get[1]>> <&e>no longer has access to <&6>Crafted<&e>."
+      - narrate "<&b><[target].name||<context.args.first>> <&e>no longer has access to <&6>Crafted<&e>."
       - if <[target]> != null:
         - adjust <[target]> hide_entity:<server.flag[crafted_npc]>
     - else:

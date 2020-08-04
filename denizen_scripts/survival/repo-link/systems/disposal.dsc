@@ -5,7 +5,7 @@ disposal_inventory_listener:
   blacklist: water_bucket|glass_bottle|potion
   events:
     on player right clicks cauldron:
-      - if <queue.script.yaml_key[blacklist].contains[<player.item_in_hand.material.name>]>:
+      - if <queue.script.data_key[blacklist].contains[<player.item_in_hand.material.name>]>:
         - stop
       - else if <context.location.material.level> == 0:
         - inventory open d:disposal_inventory

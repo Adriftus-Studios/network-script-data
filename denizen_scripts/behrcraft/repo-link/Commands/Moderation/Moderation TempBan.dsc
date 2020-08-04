@@ -12,7 +12,7 @@ Tempban_Command:
         - if <context.args.get[2]||null> == null:
             - inject Command_Syntax Instantly
     # % ██ [ Verify player ] ██
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification_Offline Instantly
 
     # % ██ [ Verify duration ] ██
@@ -35,7 +35,7 @@ Tempban_Command:
 
     # % ██ [ Check if reason is specified ] ██
         - if <context.args.get[3]||null> != null:
-            - define Reason <context.raw_args.after[<context.args.get[1]><&sp>]>
+            - define Reason <context.raw_args.after[<context.args.first><&sp>]>
             - announce "<proc[User_Display_Simple].context[<[User]>]> <&e>was banned for: <&a><[Reason]>"
             - ban <[User]> duration:<[Duration]> reason:<[Reason]>
         - else:

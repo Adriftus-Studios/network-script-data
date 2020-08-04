@@ -13,7 +13,7 @@ item_system_global_data:
       ##  Probably.                         ##
       ########################################
       top:
-      - "<&a>--------------------------"
+      - <&a>--------------------------
       middle:
         global:
         - <&e>Level<&co> <[level_stars]>
@@ -42,7 +42,7 @@ item_system_global_data:
           - <empty>
           - <&e><[flavor]>
       bottom:
-        - "<&a>--------------------------"
+        - <&a>--------------------------
     rarity_colors:
       0: <&7>
       1: <&a>
@@ -321,7 +321,7 @@ soul_forge_command:
   name: open_soul_forge
   permission: not.a.perm
   script:
-    - inventory open d:soul_forge_inventory player:<server.match_player[<context.args.get[1]>]>
+    - inventory open d:soul_forge_inventory player:<server.match_player[<context.args.first>]>
 #################
 ## SOUL SYSTEM ##
 #################
@@ -404,7 +404,7 @@ item_create_soul_item:
     - determine <proc[item_system_build_item].context[<[item_to_build]>]>
 
 # TODO - Make This WAY less fucking stupid.
-# Lore should be built off the nbt "applicable_lore", in a foreach loop properly
+# Lore should be built off the nbt applicable_lore, in a foreach loop properly
 # This is some AJ level shit....
 item_system_build_item:
   type: procedure
@@ -455,9 +455,9 @@ item_system_build_item:
       - define sn1 <[Item].material.name>
 
     - if <[Item].has_nbt[rarity]>:
-      - define rarity_color <script[item_system_global_data].data_key[settings.rarity_colors.<[item].nbt[rarity]>].parsed>
+      - define rarity_color <script[item_system_global_data].parsed_key[settings.rarity_colors.<[item].nbt[rarity]>]>
     - else:
-      - define rarity_color <script[item_system_global_data].data_key[settings.rarity_colors.0].parsed>
+      - define rarity_color <script[item_system_global_data].parsed_key[settings.rarity_colors.0]>
     # TODO - Clean this up, and turn it into a loop using nbt[applicable_lore]
 
     - if <[item].has_nbt[active_soul]>:

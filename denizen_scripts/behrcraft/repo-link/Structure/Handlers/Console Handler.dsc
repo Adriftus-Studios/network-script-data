@@ -10,7 +10,7 @@ Console_Handler:
                 - if <context.had_error>:
                     - narrate targets:<server.match_player[behr_riley]> "<&c>Reload Error"
                 - else:
-                    - narrate targets:<server.match_player[behr_riley]> "<&a>Reloaded"
+                    - narrate targets:<server.match_player[behr_riley]> <&a>Reloaded
  
         on script generates error:
             - if "<context.message.contains_any_text[list_flags|{ braced } command format|'&dot' or '&cm']>":

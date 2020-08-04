@@ -9,11 +9,11 @@ vote_GUI_test:
     filler: <item[black_stained_glass_pane]>
     rotating: "<item[<list[red|blue|magenta|orange|purple|yellow|lime|pink|cyan].random>_stained_glass_pane].with[display_name=<&e>Click to Select]>"
   slots:
-    - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-    - "[filler] [filler] [filler] [rotating] [rotating] [rotating] [filler] [filler] [filler]"
-    - "[filler] [filler] [filler] [rotating] [rotating] [rotating] [filler] [filler] [filler]"
-    - "[filler] [filler] [filler] [rotating] [rotating] [rotating] [filler] [filler] [filler]"
-    - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
+    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+    - [filler] [filler] [filler] [rotating] [rotating] [rotating] [filler] [filler] [filler]
+    - [filler] [filler] [filler] [rotating] [rotating] [rotating] [filler] [filler] [filler]
+    - [filler] [filler] [filler] [rotating] [rotating] [rotating] [filler] [filler] [filler]
+    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
 
 vote_GUI_test_open:
   type: task
@@ -26,22 +26,22 @@ vote_GUI_test_open:
     - inventory open d:lotto_<player.uuid>
     - repeat 40:
       - narrate <[value]>
-      - foreach <script[vote_GUI_test].yaml_key[custom.lotto_slots]> as:slot:
+      - foreach <script[vote_GUI_test].data_key[custom.lotto_slots]> as:slot:
         - inventory set slot:<[slot]> d:<inventory[lotto_<player.uuid>]> o:<list[red|blue|magenta|orange|purple|yellow|lime|pink|cyan].random>_stained_glass_pane
       - wait 1t
     - repeat 20:
       - narrate <[value]>
-      - foreach <script[vote_GUI_test].yaml_key[custom.lotto_slots]> as:slot:
+      - foreach <script[vote_GUI_test].data_key[custom.lotto_slots]> as:slot:
         - inventory set slot:<[slot]> d:<inventory[lotto_<player.uuid>]> o:<list[red|blue|magenta|orange|purple|yellow|lime|pink|cyan].random>_stained_glass_pane
       - wait 2t
     - repeat 20:
       - narrate <[value]>
-      - foreach <script[vote_GUI_test].yaml_key[custom.lotto_slots]> as:slot:
+      - foreach <script[vote_GUI_test].data_key[custom.lotto_slots]> as:slot:
         - inventory set slot:<[slot]> d:<inventory[lotto_<player.uuid>]> o:<list[red|blue|magenta|orange|purple|yellow|lime|pink|cyan].random>_stained_glass_pane
       - wait 3t
     - repeat 20:
       - narrate <[value]>
-      - foreach <script[vote_GUI_test].yaml_key[custom.lotto_slots]> as:slot:
+      - foreach <script[vote_GUI_test].data_key[custom.lotto_slots]> as:slot:
         - inventory set slot:<[slot]> d:<inventory[lotto_<player.uuid>]> o:<list[red|blue|magenta|orange|purple|yellow|lime|pink|cyan].random>_stained_glass_pane
       - wait 4t
     - flag player vote_roulette:!
@@ -60,9 +60,9 @@ vote_GUI_test_events:
         - stop
       - wait 1t
       - if !<context.item.material.name.starts_with[black]>:
-        - define win <player.flag[vote_win].get[1].as_item>
+        - define win <player.flag[vote_win].first.as_item>
         - inventory set d:lotto_<player.uuid> slot:<context.slot> "o:<[win].with[display_name=<&e>You won <&b><[win].material.name.replace[_].with[<&sp>].to_titlecase><&e>!]>"
-        - flag player vote_win:<-:<player.flag[vote_win].get[1]>
+        - flag player vote_win:<-:<player.flag[vote_win].first>
         - narrate "<&e>You won <&b><[win].material.name.replace[_].with[<&sp>].to_titlecase><&e>!"
         - give <[win]>
         - if !<player.has_flag[vote_win]>:

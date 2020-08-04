@@ -30,7 +30,7 @@ butler_command:
   name: open_butler_menu
   permission: not.a.perm
   script:
-    - inventory open d:<inventory[butler_menu]> player:<server.match_player[<context.args.get[1]>]>
+    - inventory open d:<inventory[butler_menu]> player:<server.match_player[<context.args.first>]>
 
 butler_menu:
   type: inventory
@@ -39,5 +39,5 @@ butler_menu:
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
   slots:
-    - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
+    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     
