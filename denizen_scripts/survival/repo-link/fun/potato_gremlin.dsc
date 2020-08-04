@@ -27,7 +27,7 @@ potato_gremlin_potato_stick:
   material: wooden_sword
   display name: <&c>Gremlin Poky
   mechanisms:
-    flags: hide_all
+    hides: all
   enchantments:
   - sharpness:9
   lore:
