@@ -55,8 +55,8 @@ General_Meeseeks_Handler:
     events:
         on player places Meeseeks_Box:
             - define Loc <context.location>
-            - flag player Behrry.Meeseeks.UnspawnedCount:-:1
-            - take item_in_hand
+            - flag player Behrry.Meeseeks.UnspawnedCount:--
+            - take iteminhand
             - create player Meeseeks <[Loc].add[0.5,1.1,0.5]> save:Meeseeks
             - foreach <[Loc].add[0.5,0.2,0.5].points_between[<[Loc].add[0.5,2.5,0.5]>].distance[0.01]> as:Area:
                 - playeffect <[Area]> effect:CLOUD visibility:125 quantity:1 offset:0.5
@@ -91,19 +91,18 @@ Global_Inventory_Handler:
                 - determine passively cancelled
                 - if <context.inventory.size> == 9:
                     - stop
-                - define npc <context.inventory.notable_name.before_last[_].after_last[_]>
+                - define npc <context.inventory.note_name.before_last[_].after_last[_]>
                 - define x <element[10].power[<context.hotbar_button.sub[1]>]>
                 - flag player Behrry.Meeseeks.Shop.PriceModifier:<[x]>
                 - define HelpSlot 3
                 - inject Meeseeks_Shop.Color npc:<[NPC]>
                 - inject Meeseeks_Shop.Help npc:<[NPC]>
-
                 - inventory set d:<context.inventory> slot:<context.inventory.size.sub[4]> o:<[Help]>
                 - stop
             - else if <context.raw_slot> < <context.inventory.size.sub[9]>:
                 - if <context.item.has_nbt[Menu]>:
                     - determine passively cancelled
-                    - define NewAction <context.inventory.notable_name.after_last[_]>
+                    - define NewAction <context.inventory.note_name.after_last[_]>
                     - run npc:<context.item.nbt[NPC]> <script[<context.item.nbt[Menu]>]> def:<list_single[<context.item.nbt.exclude[Action/<context.item.nbt[Action]||null>].include[Action/<[NewAction]>Click]>].include[<context.click>|<context.raw_slot>]>
 
         on item moves from inventory to inventory:
@@ -114,9 +113,9 @@ Global_Inventory_Handler:
                 - if <context.origin.location.is_locked>:
                     - determine cancelled
         on player closes Meeseeks_Inventory*:
-            - define npc <context.inventory.notable_name.before_last[_].after_last[_]>
+            - define npc <context.inventory.note_name.before_last[_].after_last[_]>
             - flag <npc[<[NPC]>]> ActiveUsers:<-:<player>
-            - note as:<context.inventory.notable_name> remove
+            - note as:<context.inventory.note_name> remove
         on player drops Meeseeks_Key:
             - remove <context.entity>
         on player drops Meeseeks_Box:
@@ -128,13 +127,11 @@ Global_Inventory_Handler:
             - define PLoc <player.eye_location.below[0.2]>
             - define TLoc <player.item_in_hand.nbt[LockLoc].as_location.center.above[0.5]>
             - define Steps <[PLoc].points_between[<[TLoc]>].distance[0.1]>
-
             - foreach <[Steps]> as:Loc:
                 - if <[Loop_Index]> < <[Steps].size.div[2].add[3]>:
                     - define i:++
                 - else:
                     - define i:--
-
                 - define y <[i].mul[0.5].power[1.3].div[<[i]>].sub[1]>
                 - define ParticleColor <color[<util.random.int[230].to[250]>,<util.random.int[200].to[220]>,0]>
                 - playeffect effect:redstone at:<[Loc].above[<[y]>]> offset:0 special_data:1|<[ParticleColor]>
@@ -142,7 +139,6 @@ Global_Inventory_Handler:
                     - wait 1t
                 - if <[Loop_Index].mod[10]> == 0:
                     - playeffect effect:end_rod at:<[Loc].above[<[y]>]> offset:0
-                    
             - repeat 180:
                 - define ParticleColor <color[<util.random.int[230].to[250]>,<util.random.int[200].to[220]>,0]>
                 - playeffect effect:redstone at:<[Loc].add[<location[0,0,0.66].rotate_around_y[<[value].to_radians.mul[10]>]>]> offset:0 special_data:1|<[ParticleColor]>
@@ -172,7 +168,6 @@ Global_Inventory_Handler:
                     - narrate format:colorize_red "Locked Chests cannot be broken."
                 - else:
                     - narrate format:colorize_yellow "Locked Chest Removed."
-
                 - run Chest_Unlock_Task def:<context.location>
 
         #on player clicks chest|barrel|trapped_chest with Meeseeks_Key:
@@ -186,7 +181,7 @@ Global_Inventory_Handler:
                 - if <player.item_in_hand.scriptname> != Meeseeks_Key:
                     - inject Meeseeks_Chest_locked_Display_Task
                     - stop
-                - if <[LockedChests].list_keys.contains[<[Chest].simple>]> || <[LockedChests].list_keys.contains[<[Chest].add[<[Chest].material.relative_vector||0,0,0>].simple>]>:
+                - if <[LockedChests].keys.contains[<[Chest].simple>]> || <[LockedChests].keys.contains[<[Chest].add[<[Chest].material.relative_vector||0,0,0>].simple>]>:
                     - if <npc[<[LockedChests].get[<[Chest].simple>].first>].owner> == <player> || <npc[<[LockedChests].get[<[Chest].add[<[Chest].material.relative_vector||0,0,0>].simple>].first>].owner> == <player>:
                         - if <[Chest].lock.after[ey].from_secret_colors> == <context.item.nbt[UUID]> || <[Chest].add[<[Chest].material.relative_vector||0,0,0>].lock.after[ey].from_secret_colors> == <context.item.nbt[UUID]>:
                             - take <context.item>

@@ -300,7 +300,7 @@ soul_forge_events:
     on player clicks item in soul_forge_inventory:
       - if <context.raw_slot> == 23 && <context.inventory.slot[23].material.name> != gray_stained_glass_pane:
         - wait 1t
-        - foreach <list[20|26]> as:slot:
+        - foreach 20|26 as:slot:
           - if <context.inventory.slot[<[slot]>].quantity> == 1:
             - take <context.inventory.slot[<[slot]>]> from:<context.inventory>
           - else:
@@ -312,14 +312,14 @@ soul_forge_events:
     on player opens soul_forge_inventory:
       - inventory set d:<context.inventory> slot:5 "o:<item[player_head].with[skull_skin=<player.uuid>;display_name=<&d>        Soul Forge;lore=<&5>---------------------|<empty>|<&e>Place a <&b>soul<&e> on the left|<empty>|<&e>Place an <&a>item<&e> on the right]>"
     on player closes soul_forge_inventory:
-      - foreach <list[20|26]>:
+      - foreach 20|26:
         - if <context.inventory.slot[<[value]>].material.name> != air:
           - give <context.inventory.slot[<[value]>]> to:<player.inventory>
 soul_forge_command:
   type: command
   debug: false
   name: open_soul_forge
-  permission: not.a.perm
+  permission: adriftus.admin
   script:
     - inventory open d:soul_forge_inventory player:<server.match_player[<context.args.first>]>
 #################
@@ -333,7 +333,7 @@ soul:
   display_name: <&c>ERROR - REPORT THIS
   mechanisms:
     enchantments: luck,1
-    flags: HIDE_ENCHANTS
+    flags: ENCHANTS
   lore_type: <&d>Soul Item
 
 item_with_soul:
@@ -353,7 +353,7 @@ get_random_soul:
 
     - define NBT <list_single[soul/<map.with[type].as[<[soul_type]>].with[level].as[<[level]>]>]>
     - define NBT <[NBT].include_single[rarity/<[rarity]>].include_single[soul_level/<[level]>].include_single[active_soul/<[soul_type]>]>
-    - foreach <script[item_system_global_data].data_key[soul_names.<[rarity]>.<[soul_type]>]> Key:Stat as:Type:
+    - foreach <script[item_system_global_data].data_key[soul_names.<[rarity]>.<[soul_type]>]> key:stat as:type:
       - if <[type]> == buff:
         - define buffs <[buffs].include_single[<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>]>
       - else:
@@ -431,7 +431,7 @@ item_system_build_item:
   # % ██ [ Determine the NBT_Attributes  ] ██
     - define nbt <list>
     - define nbt_attributes <list>
-    - foreach <list[buffs|debuffs]> as:modifier:
+    - foreach buffs|debuffs as:modifier:
       - debug debug <[item].nbt>
       - if <[item].has_nbt[<[modifier]>]> && <[item].material.name> != <script[soul].data_key[material]> && <[Item].nbt[<[modifier]>]> != none:
         - foreach <[item].nbt[<[modifier]>].merge_maps> key:alt as:stat:
@@ -476,7 +476,7 @@ item_system_build_item:
       - define armor <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]>
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.armors]>]>
 
-    - foreach <list[buffs|debuffs]> as:modifier:
+    - foreach buffs|debuffs as:modifier:
       - if <[item].has_nbt[<[modifier]>]>:
         - foreach <[item].nbt[<[modifier]>]> as:Modifiers:
           - foreach <[Modifiers]> key:alt as:final_value:

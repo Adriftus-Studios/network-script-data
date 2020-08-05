@@ -17,7 +17,7 @@
 ##TEMPLATE END##
 
 mob_spawning_system_events:
-  type: world
+  type: data
   debug: false
   settings:
     blacklist: tropical_fish|salmon|cod|horse|donkey|cow|chicken|sheep|pig|pufferfish|llama|trader_llama|armor_stand|squid
@@ -34,7 +34,7 @@ mob_spawning_system_events:
       - foreach <list[<context.location.z.abs>|<context.location.x.abs>]>:
         - if <[value]> < <script[mob_spawning_system_events].data_key[settings.min]> || <[value]> > <script[mob_spawning_system_events].data_key[settings.max]>:
           - stop
-      - define difficulty <element[11].-[<list[<context.location.z>|<context.location.x>].highest.abs./[2000].+[1]>].round_up>
+      - define difficulty <element[11].sub[<list[<context.location.z>|<context.location.x>].highest.abs.div[2000].add[1]>].round_up>
       - if !<context.location.find.entities[<context.entity.entity_type>].within[25].is_empty||false>:
         - stop
       - define mob_type <context.entity.entity_type>

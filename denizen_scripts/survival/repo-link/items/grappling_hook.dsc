@@ -12,7 +12,7 @@ grappling_hook_events:
   debug: false
   worlds: mainland|mainland_nether
   events:
-    on player right clicks with:grappling_hook:
+    on player right clicks block with:grappling_hook:
       - determine passively cancelled
       - if !<script[grappling_hook_events].data_key[worlds].contains[<player.location.world.name>]>:
         - narrate "<&c>You cannot use that here."
@@ -60,7 +60,7 @@ grappling_hook_sanity:
   definitions: loc
   script:
     - flag player grappling:!
-    - if <[loc]> == false:
+    - if <[loc].not>:
       - stop
     - teleport <[loc].with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
 
