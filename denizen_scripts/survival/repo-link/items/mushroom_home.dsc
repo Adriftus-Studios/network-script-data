@@ -13,7 +13,7 @@ miraculous_mushroom_events:
   type: world
   debug: false
   events:
-    on player right clicks with:mushroom_home bukkit_priority:HIGHEST:
+    on player right clicks block with:mushroom_home bukkit_priority:HIGHEST:
       - determine passively cancelled
       - if <context.relative||null> == null:
         - stop
@@ -22,7 +22,7 @@ miraculous_mushroom_events:
       - define top <yaml[mushroom_config].parsed_key[mushroom_relatives.cuboids.top.a].to_cuboid[<yaml[mushroom_config].parsed_key[mushroom_relatives.cuboids.top.b]>]>
       - define stem <yaml[mushroom_config].parsed_key[mushroom_relatives.cuboids.stem.a].to_cuboid[<yaml[mushroom_config].parsed_key[mushroom_relatives.cuboids.stem.b]>]>
       - if <[top].blocks.include[<[stem].blocks>].size> != <[top].blocks[air].include[<[stem].blocks[air]>].size>:
-        - narrate "<&c>Not enough room to place"
+        - narrate "<&c>Not enough room to place."
         - stop
       - if !<context.relative.below.material.is_solid>:
         - narrate "<&c>Unstable location."
@@ -41,7 +41,7 @@ miraculous_mushroom_events:
         - if <context.item.has_nbt[<[key]>]> && <context.item.nbt[<[key]>].as_list.size> > 0:
           - inventory set o:<context.item.nbt[<[key]>]> d:<yaml[mushroom_config].parsed_key[mushroom_relatives.saves.<[key]>].inventory>
     on player clicks lever:
-      - if <context.location.notable_name.starts_with[mushroom_home]||false>:
+      - if <context.location.note_name.starts_with[mushroom_home]||false>:
         - determine passively cancelled
       - wait 1t
       - if <context.location.notable_name.starts_with[mushroom_home~<player.uuid>]||false>:
