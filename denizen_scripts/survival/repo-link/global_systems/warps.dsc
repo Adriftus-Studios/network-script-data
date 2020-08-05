@@ -34,7 +34,7 @@ warps_command:
   type: command
   name: warps
   script:
-    - inventory open d:warps_GUI_main_menu
+  - inventory open d:warps_GUI_main_menu
 
 warp_command:
   type: command
@@ -86,29 +86,29 @@ warps_GUI_main_menu_events:
   type: world
   events:
     on player clicks item in warps_GUI_main_menu:
-      - determine passively cancelled
-      - if <context.item.has_nbt[action]>:
-        - choose <context.item.nbt[action]>:
-          - case close:
-            - inventory close
-          - case server_warps:
-            - inventory open d:warps_GUI_server_warps_menu
-          - case player_warps:
-            - inventory open d:warps_GUI_player_warps_menu_top
-          - case manage_warps:
-            - inject warp_management_GUI_populate
-            - inventory open d:<[inventory]>
-          - case new_warp:
-            - if <player.location.cuboids.filter[notable_name.starts_with[claim.<player.uuid>]].is_empty>:
-              - narrate "<&c>You can only create warps in your own claim."
-              - stop
-            - flag player text_input:create_warp/personal|<player.location>
-            - narrate "<&a>Enter a name for your <&b>Warp<&a>."
-            - inventory close
-          - case my_warps:
-            - inject warps_my_warps_GUI_open
-          - case favorite_warps:
-            - inject favorite_warps_open
+    - determine passively cancelled
+    - if <context.item.has_nbt[action]>:
+      - choose <context.item.nbt[action]>:
+        - case close:
+          - inventory close
+        - case server_warps:
+          - inventory open d:warps_GUI_server_warps_menu
+        - case player_warps:
+          - inventory open d:warps_GUI_player_warps_menu_top
+        - case manage_warps:
+          - inject warp_management_GUI_populate
+          - inventory open d:<[inventory]>
+        - case new_warp:
+          - if <player.location.cuboids.filter[notable_name.starts_with[claim.<player.uuid>]].is_empty>:
+            - narrate "<&c>You can only create warps in your own claim."
+            - stop
+          - flag player text_input:create_warp/personal|<player.location>
+          - narrate "<&a>Enter a name for your <&b>Warp<&a>."
+          - inventory close
+        - case my_warps:
+          - inject warps_my_warps_GUI_open
+        - case favorite_warps:
+          - inject favorite_warps_open
 
 
 #######################
@@ -132,29 +132,29 @@ warps_my_warps_GUI:
 warps_my_warps_GUI_open:
   type: task
   script:
-    - define inventory <inventory[warps_my_warps_GUI]>
-    - define type personal
-    - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].include[<yaml[player.<player.uuid].read[warps.has_access]>]||<list>>]> as:identifier:
-      - inject build_warp_item
-      - if <[identifier].before[~]> == <player.uuid>:
-        - define list:|:<[item].with[nbt=action/warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
-      - else:
-        - define list:|:<[item].with[nbt=action/warp]>
-    - if <[list]||null> != null:
-      - give <[list]> to:<[inventory]>
-    - inventory open d:<[inventory]>
+  - define inventory <inventory[warps_my_warps_GUI]>
+  - define type personal
+  - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].include[<yaml[player.<player.uuid].read[warps.has_access]>]||<list>>]> as:identifier:
+    - inject build_warp_item
+    - if <[identifier].before[~]> == <player.uuid>:
+      - define list:|:<[item].with[nbt=action/warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
+    - else:
+      - define list:|:<[item].with[nbt=action/warp]>
+  - if <[list].is_empty.not>:
+    - give <[list]> to:<[inventory]>
+  - inventory open d:<[inventory]>
 
 warps_my_warps_GUI_events:
   type: world
   events:
     on player clicks item in warps_my_warps_GUI:
-      - determine passively cancelled
-      - if <context.item.has_nbt[action]>:
-        - choose <context.item.nbt[action]>:
-          - case warp:
-            - teleport <yaml[warps].read[warps.personal.<context.item.nbt[warp]>.location].as_location>
-          - case back:
-            - inventory open d:warps_GUI_main_menu
+    - determine passively cancelled
+    - if <context.item.has_nbt[action]>:
+      - choose <context.item.nbt[action]>:
+        - case warp:
+          - teleport <yaml[warps].read[warps.personal.<context.item.nbt[warp]>.location].as_location>
+        - case back:
+          - inventory open d:warps_GUI_main_menu
 
 ##################
 ## SERVER WARPS ##
@@ -185,14 +185,14 @@ warps_GUI_server_warps_menu_events:
   type: world
   events:
     on player clicks item in warps_GUI_server_warps_menu:
-      - determine passively cancelled
-      - if <context.item.has_nbt[action]>:
-        - choose <context.item.nbt[action]>:
-          - case back:
-            - inventory open d:warps_GUI_main_menu
-          - case warp:
-            - teleport <player> <context.item.nbt[location]>
-            - inventory close
+    - determine passively cancelled
+    - if <context.item.has_nbt[action]>:
+      - choose <context.item.nbt[action]>:
+        - case back:
+          - inventory open d:warps_GUI_main_menu
+        - case warp:
+          - teleport <player> <context.item.nbt[location]>
+          - inventory close
 
 ####################
 ## FAVORITE WARPS ##
@@ -206,43 +206,43 @@ favorite_warps:
     filler: white_stained_glass_pane[display_name=<&a>]
     back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/back]>
   slots:
-   - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-   - "[filler] [] [] [] [] [] [] [] [filler]"
-   - "[filler] [] [] [] [] [] [] [] [filler]"
-   - "[filler] [] [] [] [] [] [] [] [filler]"
-   - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-   - "[filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]"
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [] [] [] [] [] [] [] [filler]
+  - [filler] [] [] [] [] [] [] [] [filler]
+  - [filler] [] [] [] [] [] [] [] [filler]
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
 
 favorite_warps_open:
   type: task
   script:
-    - foreach <yaml[player.<player.uuid>].list_keys[warps.favorites]||<list>>:
-      - define identifier <yaml[player.<player.uuid>].read[warps.favorites.<[value]>]>
-      - define type personal
-      - inject build_warp_item
-      - define "list:|:<[item].with[display_name=<&e><[value]>;nbt=name/<[value]>;lore=<[item].lore.remove[first].include[<&e>----------------|<&a>Left Click to Warp.|<&c>Right Click to Remove]>]>"
-    - define inventory <inventory[favorite_warps]>
-    - if <[list]||null> != null:
-      - give <[list]> to:<[inventory]>
-    - inventory open d:<[inventory]>
+  - foreach <yaml[player.<player.uuid>].list_keys[warps.favorites]||<list>>:
+    - define identifier <yaml[player.<player.uuid>].read[warps.favorites.<[value]>]>
+    - define type personal
+    - inject build_warp_item
+    - define "list:|:<[item].with[display_name=<&e><[value]>;nbt=name/<[value]>;lore=<[item].lore.remove[first].include[<&e>----------------|<&a>Left Click to Warp.|<&c>Right Click to Remove]>]>"
+  - define inventory <inventory[favorite_warps]>
+  - if <[list].is_empty.not>
+    - give <[list]> to:<[inventory]>
+  - inventory open d:<[inventory]>
 
 favorite_warps_events:
   type: world
   events:
     on player clicks item in favorite_warps:
-      - determine passively cancelled
-      - wait 1t
-      - if <context.item.has_nbt[warp]>:
-        - choose <context.click>:
-          - case RIGHT:
-            - define ID <context.item.nbt[warp]>
-            - define name <context.item.nbt[name]>
-            - define inventory <context.inventory.script.name>
-            - inject warps_handle_favorite
-          - case LEFT:
-            - teleport <yaml[warps].read[warps.personal.<context.item.nbt[warp]>.location]>
-      - if <context.item.has_nbt[action]>:
-        - inventory open d:warps_GUI_main_menu
+    - determine passively cancelled
+    - wait 1t
+    - if <context.item.has_nbt[warp]>:
+      - choose <context.click>:
+        - case RIGHT:
+          - define ID <context.item.nbt[warp]>
+          - define name <context.item.nbt[name]>
+          - define inventory <context.inventory.script.name>
+          - inject warps_handle_favorite
+        - case LEFT:
+          - teleport <yaml[warps].read[warps.personal.<context.item.nbt[warp]>.location]>
+    - if <context.item.has_nbt[action]>:
+      - inventory open d:warps_GUI_main_menu
 
 ##################
 ## PLAYER WARPS ##
@@ -313,23 +313,23 @@ warps_GUI_player_warps_menu_pages_events:
   type: world
   events:
     on player clicks item in warps_GUI_player_warps_menu_pages|warps_GUI_player_warps_menu_top:
-      - determine passively cancelled
-      - if <context.item.has_nbt[action]>:
-        - choose <context.item.nbt[action]>:
-          - case back:
-            - inventory open d:warps_GUI_main_menu
-          - case warp:
-            - choose <context.click>:
-              - case SHIFT_LEFT:
-                - inject warps_handle_vote
-              - case SHIFT_RIGHT:
-                - inject warps_favorite
-              - default:
-                - teleport <yaml[warps].read[warps.personal.<context.item.nbt[warp]>.location].as_location>
-          - case next_page:
-            - inject Warps_GUI_player_warps_menu_next_page
-          - case previous_page:
-            - inject Warps_GUI_player_warps_menu_previous_page
+    - determine passively cancelled
+    - if <context.item.has_nbt[action]>:
+      - choose <context.item.nbt[action]>:
+        - case back:
+          - inventory open d:warps_GUI_main_menu
+        - case warp:
+          - choose <context.click>:
+            - case SHIFT_LEFT:
+              - inject warps_handle_vote
+            - case SHIFT_RIGHT:
+              - inject warps_favorite
+            - default:
+              - teleport <yaml[warps].read[warps.personal.<context.item.nbt[warp]>.location].as_location>
+        - case next_page:
+          - inject Warps_GUI_player_warps_menu_next_page
+        - case previous_page:
+          - inject Warps_GUI_player_warps_menu_previous_page
 
 Warps_GUI_player_warps_menu_next_page:
   type: task
@@ -543,8 +543,8 @@ warp_management_GUI_panel_events:
             - define inventory <inventory[warp_management_GUI_panel]>
             - inject warp_management_GUI_panel_populate
             - inventory open d:<[inventory]>
-          - case set_members:
-            - TODO
+          # - case set_members:
+          #   - TODO
           - case delete_warp:
             - define ID <context.inventory.slot[5].nbt[warp_id]>
             - inject remove_warp_personal
@@ -596,11 +596,11 @@ warps_handle_vote:
       - stop
     - if <yaml[warps].read[warps.personal.<[ID]>.voters].contains[<player.uuid>]>:
       - yaml id:warps set warps.personal.<[ID]>.voters:<-:<player.uuid>
-      - yaml id:warps set warps.personal.<[ID]>.votes:-:1
+      - yaml id:warps set warps.personal.<[ID]>.votes:--
       - narrate "<&e>You have rescinded your vote."
     - else:
       - yaml id:warps set warps.personal.<[ID]>.voters:|:<player.uuid>
-      - yaml id:warps set warps.personal.<[ID]>.votes:+:1
+      - yaml id:warps set warps.personal.<[ID]>.votes:++
       - narrate "<&e>You have voted for this warp!"
     - flag server warp_votes:<server.flag[warp_votes].as_map.with[<[ID]>].as[<yaml[warps].read[warps.personal.<[ID]>.votes]>]>
     - define identifier <context.item.nbt[warp]>
@@ -669,7 +669,7 @@ warps_set_lore:
   type: task
   definitions: lore|ID
   script:
-    - if !<[lore].matches_character_set[1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>;&!'<&dq>]>:
+    - if !<[lore].matches_character_set[1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>;&!<&sq><&dq>]>:
       - narrate "<&c>Invalid characters were specified, only numbers, letters, and color codes may be used."
       - stop
     - yaml set id:warps warps.personal.<[ID]>.lore:!|:<[lore].parse_color.split[;]>
@@ -681,7 +681,7 @@ warps_set_name:
   type: task
   definitions: name|ID
   script:
-    - if !<[name].matches_character_set[&1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>'!]>:
+    - if !<[name].matches_character_set[&1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp><&sq>!]>:
       - narrate "<&c>Invalid characters were specified, only numbers, letters, and color codes may be used."
       - stop
     - yaml set id:warps warps.personal.<[ID]>.display_name:<[name].parse_color>
@@ -693,7 +693,7 @@ warps_set_material:
   type: task
   definitions: material_name|ID
   script:
-    - if !<[material_name].matches_character_set[&1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>_'!]>:
+    - if !<[material_name].matches_character_set[&1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>_<&sq>!]>:
       - narrate "<&c>Invalid characters were specified, only numbers, letters, and color codes may be used."
       - stop
     - if <material[<[material_name]>]||null> == null:
@@ -708,7 +708,7 @@ warps_set_player_head:
   type: task
   definitions: name|ID
   script:
-    - if !<[name].matches_character_set[&1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>_'!]>:
+    - if !<[name].matches_character_set[&1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>_<&sq>!]>:
       - narrate "<&c>Invalid characters were specified, only numbers, letters, and color codes may be used."
       - stop
     - yaml set id:warps warps.personal.<[ID]>.material:<item[player_head].with[skull_skin=<[name]>]>

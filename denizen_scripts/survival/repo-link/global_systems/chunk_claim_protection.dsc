@@ -1268,7 +1268,7 @@ claiming_system_upgrade_events:
       - inject claiming_system_bossBar_Stop
       - wait 2t
       - foreach fly|time-control|weather-control as:upgrade_name:
-        - define newgroup:<player.location.cuboids.filter[notable_name.starts_with[claim]].first.notable_name.after[.].before[/]||null>
+        - define newgroup:<player.location.cuboids.filter[notable_name.starts_with[claim]].first.note_name.after[.].before[/]||null>
         - if <[newgroup]> != null:
           - if <yaml[claims].read[groups.<[newgroup]>.members.<player.uuid>.<[upgrade_name]>]||true> || <yaml[claims].read[groups.<[newgroup]>.members.everyone.<[upgrade_name]>]||true>:
             - if <yaml[claims].read[groups.<[newgroup]>.upgrades.<[upgrade_name]>]> && <yaml[claims].read[groups.<[newgroup]>.settings.<[upgrade_name]>]> != off:
@@ -1413,7 +1413,7 @@ claim_system_upgrade_keep_inventory:
   debug: false
   events:
     on player dies:
-    - if !<player.location.cuboids.filter[notable_name.starts_with[claim]].is_empty>:
+    - if !<player.location.cuboids.filter[note_name.starts_with[claim]].is_empty>:
       - define group <player.location.cuboids.filter[note_name.starts_with[claim]].parse[note_name.after[.].before[/]].first>
       - if <yaml[claims].read[groups.<[group]>.settings.keep-inventory]> && <yaml[claims].read[groups.<[group]>.upgrades.keep-inventory]>:
         - determine passively KEEP_INV
