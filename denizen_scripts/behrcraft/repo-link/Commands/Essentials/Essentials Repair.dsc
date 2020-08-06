@@ -48,4 +48,3 @@ Repair_Command:
             - define Item <player.item_in_hand>
             - take iteminhand
             - give <[Item].with[durability=0]>
-            

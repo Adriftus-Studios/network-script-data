@@ -93,5 +93,3 @@ network_item_inventory_events:
           - case cosmetics:
             # TODO
             - narrate "<&c>Not Yet Implemented."
-            
-        

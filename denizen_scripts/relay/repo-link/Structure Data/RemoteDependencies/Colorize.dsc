@@ -45,4 +45,3 @@ Colorize_Blue:
     type: format
     debug: false
     format: <proc[Colorize].context[<text>|blue]>
-    
