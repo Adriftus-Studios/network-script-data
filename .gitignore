@@ -20,6 +20,7 @@ scriptdata/global/twitch
 scriptdata/global/bungee
 
 # ██ [ Scriptdata Files           ] ██
+scriptdata/global/Behr_Essentials
 scriptdata/global/discord/token.yml
 scriptdata/global/discord/webhooks.yml
 scriptdata/global/players
