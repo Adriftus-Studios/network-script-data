@@ -146,9 +146,9 @@ CastleWars_Event:
         - announce "<&c>Castle Wars Game was stopped."
 
 
-Event_Command:
+Event_Commandy:
   type: command
-  name: event
+  name: eventy
   usage: /event <&gt>>EventName<&lt> (Queue/Pause/Stop/Manage (AddTime/SlowTime/Settings))
   description: Manages Event Queues.
   tab complete:
