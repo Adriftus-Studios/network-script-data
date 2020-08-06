@@ -14,7 +14,7 @@ global_data_handler:
       - yaml id:data_handler set player.<[UUID]>:<empty>
 
     # % ██ [ Verify Global Player Data Exists ] ██
-      - define Directory data/players/<[UUID]>.yml
+      - define Directory data/global/players/<[UUID]>.yml
       - if !<server.has_file[<[Directory]>]>:
         # $ ██ [ Temporary for resolving current playerdata prior to transition ] ██
         - if <server.has_file[data/globalData/players/<[UUID]>.yml]>:
@@ -50,8 +50,7 @@ global_data_handler:
       - if <[LocalServers].contains[<[Server]>]>:
         - bungeerun <[Server]> Player_Data_Join_Event def:<[UUID]>|<[Event]>
       - else:
-        - yaml id:global.player.<[UUID]> load:data/players/<[UUID]>.yml
-      #^- define PlayerData <yaml[global.player.<[UUID]>].list_keys[].parse_tag[<map.with[<[parse_value]>].as[<yaml[global.player.<[UUID]>].read[<[parse_value]>]>]>].combine>
+        - yaml id:global.player.<[UUID]> load:data/global/players/<[UUID]>.yml
         - define PlayerData <yaml[global.player.<[UUID]>].read[]>
         - run External_Player_Data_Join_Event def:<list_single[<[PlayerMap]>].include_single[<[PlayerData]>].include[<[Server]>|<[Event]>]>
         - inject Error_Handler.Return
