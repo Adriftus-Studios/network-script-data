@@ -15,7 +15,8 @@ system_scripts/*
 denizen_scripts/gielinordev
 
 # ██ [ Scriptdata Directories     ] ██
-scriptdata/twitch/*
+scriptdata/twitch
+scriptdata/bungee
 
 # ██ [ Scriptdata Files           ] ██
 scriptdata/discord/token.yml
