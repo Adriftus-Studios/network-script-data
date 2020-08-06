@@ -53,16 +53,16 @@ chat_history_save:
 
 chat_history_show:
   type: task
-  debug: false
+  debug: true
   script:
     - define list <list>
-    - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].contains[channels.<[Filter_Value]>]>]> as:Channel:
+    - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
       - if !<yaml[chat_history].contains[<[Channel]>_history]>:
         - foreach next
       - define list <[List].include[<yaml[chat_history].read[<[Channel]>_history]>]>
     - if <[List].is_empty>:
       - stop
-    - foreach <[list].sort_by_number[get[time]].reverse.first.to[20].reverse.parse[get[message]]> as:Message:
+    - foreach <[list].sort_by_number[get[time]].reverse.get[1].to[20].reverse.parse[get[message]]> as:Message:
       - narrate <[Message]>
 
 chat_command:
@@ -192,7 +192,6 @@ chat_settings_events:
               - yaml set id:global.player.<player.uuid> chat.channels.current:<context.item.nbt[action]>
               - narrate "<&b>You are now talking in <yaml[chat_config].parsed_key[channels.<context.item.nbt[action]>.format.channel]>"
         - inject chat_settings_open
-            
 
 chat_settings_open:
   type: task
