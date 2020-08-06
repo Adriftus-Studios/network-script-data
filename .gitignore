@@ -5,6 +5,7 @@
 # ██ [ Executables                ] ██
 *.exe
 *.sh
+*.jar
 
 # ██ [ Root Directories           ] ██
 playerdata
@@ -15,12 +16,14 @@ system_scripts/*
 denizen_scripts/gielinordev
 
 # ██ [ Scriptdata Directories     ] ██
-scriptdata/twitch/*
+scriptdata/twitch
+scriptdata/bungee
 
 # ██ [ Scriptdata Files           ] ██
 scriptdata/discord/token.yml
 scriptdata/discord/webhooks.yml
 scriptdata/global/players
+scriptdata/network/titles.yml
 denizen_scripts/relay/repo-link/Handlers/message_handler.dsc
 
 # ██ [ System Script Directories  ] ██

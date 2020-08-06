@@ -14,7 +14,7 @@ mod_ban_player:
       - yaml id:<[id]> set banned.moderator:<[moderator]>
       - kick <[uuid].as_player> reason:<proc[mod_ban_message].context[<[moderator]>|<[level]>|<[infraction]>|<[length]>|<util.time_now>]>
     - else:
-      - define dir data/<tern[<[global].exists>].pass[globalData/].fail[]>players/<[uuid]>.yml
+      - define dir data/<tern[<[global].exists>].pass[global/].fail[]>players/<[uuid]>.yml
       - define id amp.banned.<[uuid]>
       - ~yaml id:<[id]> load:<[dir]>
       - yaml id:<[id]> set banned.level:<[level]>

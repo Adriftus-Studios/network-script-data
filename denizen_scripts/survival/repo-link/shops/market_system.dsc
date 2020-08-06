@@ -23,7 +23,7 @@ market_command:
 ## THIS CAN BE DONE BY DELETING ONE OF THE FILLER SPOTS
 
 market_system_data:
-  type: yaml data
+  type: data
   settings:
     adjustment_amount: 2
     ## IMPORTANT
@@ -306,7 +306,7 @@ market_system_category_events:
 
 
 #---------------#
-# - FUNCTIONS - # 
+# - FUNCTIONS - #
 #---------------#
 market_system_category_setup:
   type: task

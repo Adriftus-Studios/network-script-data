@@ -884,7 +884,7 @@ claiming_multiclaim:
         - if <yaml[claims].read[<[chunk].world>.<[this_x]>.<[this_z]>]||null> != null && !<yaml[claims].read[<[chunk].world>.<[this_x]>.<[this_z]>].starts_with[<player.uuid>]||true>:
           - narrate "<&c>Unable to claim due to other nearby claims."
           - stop
-    - if !<yaml[claims].list_keys[groups].contains[<player.uuid>~<[name]>]||false>:
+    - if !<yaml[claims].contains[groups.<player.uuid>~<[name]>]>:
       - inject claiming_initialize_group
     - define claimed 0
     - repeat <[area]> as:x_loop:
@@ -959,13 +959,13 @@ claiming_protection_claim:
     - stop
   # --- THE GROUP LIMIT IS SET ON THE NEXT LINE ---
   # TODO Make this not hard coded, potentially an upgrade system
-  - if <yaml[claims].list_keys[groups].filter[starts_with[<player.uuid>]].size||0> >= 8 && !<yaml[claims].list_keys[groups].contains[<player.uuid>~<[name]>]||true>:
+  - if <yaml[claims].list_keys[groups].filter[starts_with[<player.uuid>]].size> >= 8 && !<yaml[claims].contains[groups.<player.uuid>~<[name]>]>:
     - narrate "<&c>You cannot make more than 8 different groups at this time."
     - stop
   - yaml id:claims set <[chunk].world>.<[chunk].x>.<[chunk].z>:<player.uuid>~<[name]>
   - note <[chunk].cuboid> as:claim.<player.uuid>~<[name]>/<[chunk].world>x<[chunk].x>z<[chunk].z>
   - yaml id:claims set limits.current.<player.uuid>:+:1
-  - if !<yaml[claims].list_keys[groups].contains[<player.uuid>~<[name]>]||false>:
+  - if !<yaml[claims].contains[groups.<player.uuid>~<[name]>]>:
     - inject claiming_initialize_group
   - narrate "<&a>You have claimed this chunk to your <[name].replace[_].with[<&sp>]> group."
   - narrate "<&7>Claim Limit<&co> <&b><yaml[claims].read[limits.current.<player.uuid>]||0><&7>/<&b><yaml[claims].read[limits.max.<player.uuid>]||30>"

@@ -18,7 +18,7 @@ player_data_handler:
 
 Player_Data_Join_Event:
   type: task
-  debug: true
+  debug: false
   definitions: UUID|Event
   script:
   # % ██ [ Cache Player Info ] ██
@@ -56,7 +56,7 @@ Player_Data_Join_Event:
 
 Player_Data_Quit_Event:
   type: task
-  debug: true
+  debug: false
   definitions: UUID
   script:
     - inject Unload_Player_Data
@@ -64,7 +64,7 @@ Player_Data_Quit_Event:
 
 Player_Data_Switch_Event:
   type: task
-  debug: true
+  debug: false
   definitions: UUID
   script:
     - inject Unload_Player_Data

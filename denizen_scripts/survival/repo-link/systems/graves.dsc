@@ -70,15 +70,15 @@ graves_handler:
       - if <yaml[graves].read[grave.<[value]>.time]> < 1:
         - if !<[value].as_location.chunk.is_loaded>:
           - chunkload <[value].as_location.chunk> duration:20s
-        - if <yaml[graves].list_keys[grave.<[value]>].contains[hologram1]>:
+        - if <yaml[graves].contains[grave.<[value]>.hologram1]>:
           - remove <yaml[graves].read[grave.<[value]>.hologram1]>
-        - if <yaml[graves].list_keys[grave.<[value]>].contains[hologram2]>:
+        - if <yaml[graves].contains[grave.<[value]>.hologram2]>:
           - remove <yaml[graves].read[grave.<[value]>.hologram2]>
         - modifyblock <[value]> air
         - drop <yaml[graves].read[grave.<[value]>.items]> <[value]>
         - yaml id:graves set grave.<[value]>:!
         - stop
-      - if <yaml[graves].list_keys[grave.<[value]>].contains[hologram2]> && <yaml[graves].read[grave.<[value]>.hologram2].as_entity.is_spawned||false>:
+      - if <yaml[graves].contains[grave.<[value]>.hologram2]> && <yaml[graves].contains[grave.<[value]>.hologram2]> && <server.entity_is_spawned[<yaml[graves].read[grave.<[value]>.hologram2]>]>:
         - define time <yaml[graves].read[grave.<[value]>.time].as_duration.formatted>
         - adjust <yaml[graves].read[grave.<[value]>.hologram2].as_entity> custom_name:<script[graves_config].data_key[hologram.timer_display].parse_color.parsed>
   events:
@@ -113,22 +113,22 @@ graves_handler:
       - yaml id:graves set grave.<[location].simple>.owner:<player.uuid>
       - if <script[graves_config].data_key[hologram.enabled]>:
         - spawn armor_stand[marker=true;visible=false;custom_name=<script[graves_config].data_key[hologram.display].parse_color.parsed>;custom_name_visible=true] <[location].center.above[0.75]> save:as
-        - yaml id:graves set grave.<[location].simple>.hologram1:<entry[as].spawned_entity>
+        - yaml id:graves set grave.<[location].simple>.hologram1:<entry[as].spawned_entity.uuid>
       - if <script[graves_config].data_key[hologram.timer]>:
         - define time <script[graves_config].data_key[grave_max_duration].as_duration.formatted>
         - spawn armor_stand[marker=true;visible=false;custom_name=<script[graves_config].data_key[hologram.timer_display].parse_color.parsed>;custom_name_visible=true] <[location].center.above[0.5]> save:as
-        - yaml id:graves set grave.<[location].simple>.hologram2:<entry[as].spawned_entity>
+        - yaml id:graves set grave.<[location].simple>.hologram2:<entry[as].spawned_entity.uuid>
     on player breaks player_head bukkit_priority:LOWEST:
-      - if !<yaml[graves].list_keys[grave].contains[<context.location.simple>]>:
+      - if !<yaml[graves].contains[grave.<context.location.simple>]>:
         - stop
       - determine passively cancelled
       - if <yaml[graves].read[grave.<context.location.simple>.owner]> != <player.uuid>:
         - narrate <script[graves_config].data_key[messages.not_your_grave].parse_color>
         - stop
-      - if <yaml[graves].list_keys[grave.<context.location.simple>].contains[hologram1]>:
-        - remove <yaml[graves].read[grave.<context.location.simple>.hologram1]>
-      - if <yaml[graves].list_keys[grave.<context.location.simple>].contains[hologram2]>:
-        - remove <yaml[graves].read[grave.<context.location.simple>.hologram2]>
+      - if <yaml[graves].contains[grave.<context.location.simple>.hologram1]> && <server.entity_is_spawned[<yaml[graves].read[grave.<context.location.simple>.hologram1]>]>:
+        - remove <entity[<yaml[graves].read[grave.<context.location.simple>.hologram1]>]>
+      - if <yaml[graves].contains[grave.<context.location.simple>.hologram2]> && <server.entity_is_spawned[<yaml[graves].read[grave.<context.location.simple>.hologram2]>]>:
+        - remove <entity[<yaml[graves].read[grave.<context.location.simple>.hologram2]>]>
       - give <yaml[graves].read[grave.<context.location.simple>.items]>
       - narrate <script[graves_config].data_key[messages.retrieved_grave].parse_color>
       - yaml id:graves set grave.<context.location.simple>:!
