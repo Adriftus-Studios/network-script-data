@@ -16,14 +16,14 @@ system_scripts/*
 denizen_scripts/gielinordev
 
 # ██ [ Scriptdata Directories     ] ██
-scriptdata/twitch
-scriptdata/bungee
+scriptdata/global/twitch
+scriptdata/global/bungee
 
 # ██ [ Scriptdata Files           ] ██
-scriptdata/discord/token.yml
-scriptdata/discord/webhooks.yml
-scriptdata/players
-scriptdata/network/titles.yml
+scriptdata/global/discord/token.yml
+scriptdata/global/discord/webhooks.yml
+scriptdata/global/players
+scriptdata/global/network/titles.yml
 denizen_scripts/relay/repo-link/Handlers/message_handler.dsc
 
 # ██ [ System Script Directories  ] ██
