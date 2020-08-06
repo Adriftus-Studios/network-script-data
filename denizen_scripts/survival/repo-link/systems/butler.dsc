@@ -40,4 +40,3 @@ butler_menu:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
   slots:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    

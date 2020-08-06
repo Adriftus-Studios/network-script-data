@@ -57,9 +57,3 @@ MobInv_Handler:
             - inventory clear d:<[Inventory]>
             - inventory set d:<[Inventory]> o:<[Inventory].list_contents>
             - note as:<[Inventory]> remove
-
-#MobInventory_Handler:
-#    type: world
-#    events:
-#        on player
-#

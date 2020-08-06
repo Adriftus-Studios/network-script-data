@@ -43,4 +43,3 @@ ExperienceAdjust_Command:
                 - flag <[User]> behrry.skill.<[Skill]>.ExpReq:0
             - case default:
                 - inject Command_Syntax Instantly
-        

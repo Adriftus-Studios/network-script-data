@@ -20,4 +20,3 @@ spawn_bossbar:
         - bossbar remove spawn_bossbar
       - if !<cuboid[spawn_cuboid].players.is_empty>:
         - bossbar spawn_bossbar title:<&2>Adriftus<&sp>Spawn color:green flags:create_fog players:<cuboid[spawn_cuboid].players>
-      

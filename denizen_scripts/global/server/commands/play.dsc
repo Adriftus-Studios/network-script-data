@@ -133,4 +133,3 @@ hub_command:
   name: hub
   script:
   - adjust <player> send_to:hub1
-   

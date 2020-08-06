@@ -9,4 +9,3 @@ Me_Command:
             - inject Command_Syntax
             
         - announce "<&5><player.name> <context.raw_args.parse_color.strip_color>"
-        

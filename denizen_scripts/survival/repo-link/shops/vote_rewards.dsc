@@ -74,4 +74,3 @@ vote_GUI_test_events:
       - narrate "<&c>You have <&b><player.flag[vote_win].size> <&c> reward remaining!"
     on player closes vote_GUI_test flagged:vote_roulette:
       - inventory open d:lotto_<player.uuid>
-    
