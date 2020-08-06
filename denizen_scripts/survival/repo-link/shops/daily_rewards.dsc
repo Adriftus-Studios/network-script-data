@@ -73,8 +73,8 @@ daily_reward_config_manager:
   type: world
   debug: false
   load_yaml:
-    - if <server.has_file[data/globalData/network/daily_rewards.yml]>:
-      - yaml id:daily_reward load:data/globalData/network/daily_rewards.yml
+    - if <server.has_file[data/global/network/daily_rewards.yml]>:
+      - yaml id:daily_reward load:data/global/network/daily_rewards.yml
   events:
     on server start:
       - inject locally load_yaml
