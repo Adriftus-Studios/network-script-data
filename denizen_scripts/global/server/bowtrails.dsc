@@ -326,8 +326,8 @@ bowtrail_config_manager:
   type: world
   debug: false
   load_yaml:
-    - if <server.has_file[data/globalData/network/bowtrails.yml]>:
-      - yaml id:bowtrails load:data/globalData/network/bowtrails.yml
+    - if <server.has_file[data/global/network/bowtrails.yml]>:
+      - yaml id:bowtrails load:data/global/network/bowtrails.yml
   events:
     on server start:
       - inject locally load_yaml

@@ -5,6 +5,7 @@
 # ██ [ Executables                ] ██
 *.exe
 *.sh
+*.jar
 
 # ██ [ Root Directories           ] ██
 playerdata
@@ -22,6 +23,7 @@ scriptdata/bungee
 scriptdata/discord/token.yml
 scriptdata/discord/webhooks.yml
 scriptdata/global/players
+scriptdata/network/titles.yml
 denizen_scripts/relay/repo-link/Handlers/message_handler.dsc
 
 # ██ [ System Script Directories  ] ██

@@ -6,7 +6,7 @@ mod_log_action:
   script:
     # -- Logs moderator actions into date-named log files.
     # Define directory and YAML ID
-    - define dir data/globalData/players/<[uuid]>.yml
+    - define dir data/global/players/<[uuid]>.yml
     - define id global.player.<[uuid]>
     # Load yaml data
     - if !<yaml.list.contains[<[id]>]>:
@@ -33,7 +33,7 @@ mod_log_action:
     - define logTime TIME<&co><&sp><[time].format[yyyy-MM-dd<&sp>HH:mm:ss]><&nl>
     # Construct logged contents and log the information.
     - define log:<&nl><[logModerator]><[logPlayer]><[logLevel]><[logInfraction]><[logAction]><[logLength]><[logTime]><[border]>
-    - log <[log]> type:info file:plugins/Denizen/data/globalData/admin/moderation/<[time].format[yyyy-MM-dd]>.log
+    - log <[log]> type:info file:plugins/Denizen/data/global/admin/moderation/<[time].format[yyyy-MM-dd]>.log
 
 mod_log_ban:
   type: task
@@ -55,4 +55,4 @@ mod_log_ban:
     - define logTime TIME<&co><&sp><[time].format[yyyy-MM-dd<&sp>HH:mm:ss]><&nl>
     # Construct logged contents and log the information.
     - define log:<&nl><[logModerator]><[logPlayer]><[logLevel]><[logInfraction]><[logLength]><[logTime]><[border]>
-    - log <[log]> type:info file:plugins/Denizen/data/globalData/bans/<[uuid]>.log
+    - log <[log]> type:info file:plugins/Denizen/data/global/bans/<[uuid]>.log

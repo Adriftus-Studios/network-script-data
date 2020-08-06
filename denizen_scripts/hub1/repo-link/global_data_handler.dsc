@@ -17,8 +17,8 @@ global_data_handler:
       - define Directory data/global/players/<[UUID]>.yml
       - if !<server.has_file[<[Directory]>]>:
         # $ ██ [ Temporary for resolving current playerdata prior to transition ] ██
-        - if <server.has_file[data/globalData/players/<[UUID]>.yml]>:
-          - yaml id:<[GlobalYaml]> load:data/globalData/players/<[UUID]>.yml
+        - if <server.has_file[data/global/players/<[UUID]>.yml]>:
+          - yaml id:<[GlobalYaml]> load:data/global/players/<[UUID]>.yml
           - yaml id:<[GlobalYaml]> savefile:<[Directory]>
           - yaml id:<[GlobalYaml]> unload
           - stop

@@ -148,8 +148,8 @@ titles_config_manager:
   type: world
   debug: false
   load_yaml:
-    - if <server.has_file[data/globalData/network/titles.yml]>:
-      - yaml id:titles load:data/globalData/network/titles.yml
+    - if <server.has_file[data/global/network/titles.yml]>:
+      - yaml id:titles load:data/global/network/titles.yml
   events:
     on server start:
       - inject locally load_yaml

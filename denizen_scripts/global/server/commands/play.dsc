@@ -16,7 +16,7 @@ command_play:
       - inject Command_Syntax
       
     # % ██ [ Verify Valid Server for Network ] ██
-    - else if !<yaml[bungee.config].list_keys[servers].contains[<context.args.first.to_lowercase>]>:
+    - else if !<yaml[bungee.config].contains[servers.<context.args.first.to_lowercase>]>:
       - define Reason "Invalid Server."
       - inject Command_Error
 
@@ -70,7 +70,7 @@ pull_bungee_config:
   script:
     - if <yaml.list.contains[bungee.config]>:
       - yaml id:bungee.config unload
-    - yaml id:bungee.config load:../../../../bungee/config.yml
+    - yaml id:bungee.config load:data/global/bungee/config.yml
 
 command_play_inventory:
   type: inventory
