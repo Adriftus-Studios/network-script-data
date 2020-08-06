@@ -2,7 +2,7 @@ global_data_handler:
   type: world
   debug: true
   events:
-    on server starts:
+    on server start:
       - yaml id:data_handler create
 
     on bungee player joins network:
@@ -122,14 +122,15 @@ Error_Handler:
     - debug record start
   script:
     - ~debug record submit save:mylog
-    - foreach <list[Name|UUID|Server]> as:Tag:
-      - if !<[<[Tag]>].exists>:
+    - define WeirdList <list>
+    - foreach Name|UUID|Server as:Tag:
+      - if <[<[Tag]>]||invalid> == invalid:
         - foreach next
       - else:
-        - if <[<[Tag]>]> != null:
+        - if <[<[Tag]>]> == null:
           - foreach next
       - define WeirdList:->:<[Tag]>
-    - if !<[WeirdList].exists>:
+    - if <[WeirdList].is_empty>:
       - stop
     - define Context <list>
     - foreach <[WeirdList]> as:Tag:
