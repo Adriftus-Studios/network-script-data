@@ -14,7 +14,7 @@ player_data_handler:
     on delta time minutely every:5:
       - foreach <server.online_players> as:Player:
         - ~yaml id:player.<[Player].uuid> savefile:data/players/<[Player].uuid>.yml
-        - ~yaml id:global.player.<[Player].uuid> savefile:data/global/players/<[Player].uuid>.yml
+        - ~yaml id:global.player.<[Player].uuid> savefile:data/players/<[Player].uuid>.yml
 
 Player_Data_Join_Event:
   type: task
@@ -31,7 +31,7 @@ Player_Data_Join_Event:
       - stop
 
   # % ██ [ Load Global Player Data ] ██
-    - yaml id:<[GlobalYaml]> load:data/global/players/<[UUID]>.yml
+    - yaml id:<[GlobalYaml]> load:data/players/<[UUID]>.yml
 
     # % ██ [ Load and Set Display_Name ] ██
     - define Name <player[<[UUID]>].name>
@@ -88,5 +88,5 @@ Unload_Player_Data:
     - yaml id:player.<[UUID]> unload
 
   # % ██ [ Unload Global Player Data ] ██
-    - ~yaml id:global.player.<[UUID]> savefile:data/global/players/<[UUID]>.yml
+    - ~yaml id:global.player.<[UUID]> savefile:data/players/<[UUID]>.yml
     - yaml id:global.player.<[UUID]> unload

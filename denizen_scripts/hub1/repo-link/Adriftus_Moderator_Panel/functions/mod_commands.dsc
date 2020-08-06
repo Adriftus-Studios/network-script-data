@@ -278,7 +278,7 @@ mod_global_unban_command:
       - define uuid <server.match_offline_player[<context.args.first>].uuid>
       - define reason <context.args.get[2]||Unbanned>
       # Define directory and YAML ID
-      - define dir data/global/players/<[uuid]>.yml
+      - define dir data/players/<[uuid]>.yml
       - define id amp.target.<[uuid]>
       # Load yaml data
       - ~yaml id:<[id]> load:<[dir]>

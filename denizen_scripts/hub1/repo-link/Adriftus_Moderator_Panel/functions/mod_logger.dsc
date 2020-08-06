@@ -6,7 +6,7 @@ mod_log_action:
   script:
     # -- Logs moderator actions into date-named log files.
     # Define directory and YAML ID
-    - define dir data/global/players/<[uuid]>.yml
+    - define dir data/players/<[uuid]>.yml
     - define id global.player.<[uuid]>
     # Load yaml data
     - if !<yaml.list.contains[<[id]>]>:

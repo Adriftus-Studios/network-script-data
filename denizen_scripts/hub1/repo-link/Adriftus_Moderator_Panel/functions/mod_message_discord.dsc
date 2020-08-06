@@ -64,7 +64,7 @@ mod_get_incidents_task:
   debug: false
   script:
     # Define directory and YAML ID
-    - define dir data/global/players/<server.match_offline_player[<[player]>].uuid>.yml
+    - define dir data/players/<server.match_offline_player[<[player]>].uuid>.yml
     - define id amp.get.<server.match_offline_player[<[player]>].uuid>
     # Load yaml data
     - ~yaml id:<[id]> load:<[dir]>
