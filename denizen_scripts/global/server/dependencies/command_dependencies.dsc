@@ -346,7 +346,7 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
                                 - define i2 <[Value]>
                                 - if <context.args.size.add[1]> != <[i2]>:
                                     - repeat next
-                                - define iArg <context.args.get[<[ArgSize].add[1].sub[<[i2]>]>]>
+                                - define iArg <context.args.get[<[ArgSize].add[1].sub[<[i1]>]>]>
                                 - if <[Arg<[i1]>].contains[<[iArg]>]>:
                                     - if <[Arg<[ArgSize].add[1]><[iArg]>Args].exists>:
                                         - determine <[Arg<[ArgSize].add[1]><[iArg]>Args]>
