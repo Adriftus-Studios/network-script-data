@@ -15,18 +15,18 @@ Nickname_Command:
             - inject Online_Player_Tabcomplete Instantly
     script:
     # % ██ [ correct syntax? ] ██
-        - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
+        - if <context.args.first||null> == null || <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
     # % ██ [ one or two args? ] ██
         - if <context.args.get[2]||null> == null:
             - define User <player>
-            - define Nickname <context.args.get[1]>
+            - define Nickname <context.args.first>
         - else:
             - if <player.groups.contains[Moderation]>:
-                - define User <context.args.get[1]>
+                - define User <context.args.first>
                 - inject Player_Verification_Offline Instantly
             - else:
-                - if <context.args.get[1]> == <player.name>:
+                - if <context.args.first> == <player.name>:
                     - define User <player>
                 - else:
                     - narrate format:Colorize_Red "You don't have permission to do that."
@@ -53,7 +53,7 @@ Nickname_Command:
         - if <[Nickname].contains_any[&k]>:
             - narrate "<proc[Colorize].context[Obfuscated names are blacklisted.|red]>"
             - stop
-        - define Blacklist "<server.list_players.filter[in_group[moderation]].parse[name].include[Admin|a d m i n|owner|owna|administrator|moderator|server|behr_riley|Founder]>"
+        - define Blacklist "<server.players.filter[in_group[moderation]].parse[name].include[Admin|a d m i n|owner|owna|administrator|moderator|server|behr_riley|Founder]>"
         - if <[Nickname].contains_any[Mod&|Admin&|Helper&|Owner&|Founder&]>:
             - narrate format:Colorize_Red "Illegal Name."
             - stop

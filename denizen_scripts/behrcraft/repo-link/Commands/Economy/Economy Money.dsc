@@ -20,7 +20,7 @@ Coins_Command:
                 - flag player Behrry.Economy.Coins:1
             - narrate "<&e>Coin Balance<&6>: <&a><player.flag[Behrry.Economy.Coins].format_number>"
         - else:
-            - define User <context.args.get[1]>
+            - define User <context.args.first>
             - inject Player_Verification_Offline Instantly
         
             - if !<[User].has_flag[Behrry.Economy.Coins]>:
@@ -42,7 +42,7 @@ Pay_Command:
         - if <context.args.size> != 2:
             - inject Command_Syntax Instantly
 
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification Instantly
 
         - if <[User]> == <player>:
@@ -107,24 +107,24 @@ CoinTop_Command:
         - moneytop
         - coinstop
     script:
-        - define Players <server.list_players_flagged[Behrry.Economy.Coins]>
+        - define Players <server.players_flagged[Behrry.Economy.Coins]>
         - define PlayersOrdered <[Players].sort_by_number[flag[Behrry.Economy.Coins]].reverse>
         - define PrintCount 8
         - define TotalPages <[PlayersOrdered].size.div[<[PrintCount]>].round_up>
 
         - if <context.args.size> == 0:
             - define Page 1
-        - else if <context.args.get[1].is_integer>:
-            - if <context.args.get[1]> < 0:
+        - else if <context.args.first.is_integer>:
+            - if <context.args.first> < 0:
                 - narrate format:Colorize_Red "Page must be a valid number."
                 - stop
-            - else if <context.args.get[1].contains[.]>:
+            - else if <context.args.first.contains[.]>:
                 - narrate format:Colorize_Red "Page cannot be a decimal."
                 - stop
-            - else if <context.args.get[1]> > <[TotalPages]>:
+            - else if <context.args.first> > <[TotalPages]>:
                 - narrate format:Colorize_Red "Invalid Page."
                 - stop
-            - define Page <context.args.get[1]>
+            - define Page <context.args.first>
         - else:
             - inject Command_Syntax Instantly
 

@@ -11,16 +11,16 @@ Hide_Command:
       - inject Command_Syntax Instantly
     
 # % ██ [ Define definitions ] ██
-    - define Arg <context.args.get[1]||null>
+    - define Arg <context.args.first||null>
     - define ModeFlag "behrry.moderation.hide"
     - define ModeName "Invisibility mode"
     - inject Activation_Arg Instantly
-    - define Moderators <server.list_online_players.filter[in_group[Moderation]]>
+    - define Moderators <server.online_players.filter[in_group[Moderation]]>
 
     - if <player.has_flag[behrry.moderation.hide]>:
       - execute as_server "dynmap:dynmap hide <player.name>"
       - inject Chat_Event_Messages path:Quit_Event
-      - foreach <server.list_online_players.exclude[<[Moderators]>]> as:Player:
+      - foreach <server.online_players.exclude[<[Moderators]>]> as:Player:
         - adjust <[Player]> hide_entity:<player>
       - run Invisible def:<player>|<[Moderators].escaped>|true|HiddenModerators
       - while <player.is_online> && <player.has_flag[behrry.moderation.hide]>:
@@ -46,7 +46,7 @@ Hide_Handler:
         - determine passively cancelled
         - narrate format:Colorize_Red "You cannot attack while hidden."
     on player logs in:
-      - define HiddenModerators <server.list_online_players.filter[has_flag[behrry.moderation.hide]]>
+      - define HiddenModerators <server.online_players.filter[has_flag[behrry.moderation.hide]]>
       - if <[HiddenModerators].size> > 0:
         - foreach <[HiddenModerators]> as:Mod:
           - if <player.in_group[Moderation]>:
@@ -58,7 +58,7 @@ Hide_Handler:
       - if <player.has_flag[behrry.moderation.hide]>:
         - execute as_server "dynmap:dynmap hide <player.name>"
         - inject Chat_Event_Messages path:Quit_Event
-        - foreach <server.list_online_players.exclude[<[Moderators]>]> as:Player:
+        - foreach <server.online_players.exclude[<[Moderators]>]> as:Player:
           - adjust <[Player]> hide_entity:<player>
         - run Invisible def:<player>|<[Moderators].escaped>|true|HiddenModerators
         - while <player.is_online> && <player.has_flag[behrry.moderation.hide]>:

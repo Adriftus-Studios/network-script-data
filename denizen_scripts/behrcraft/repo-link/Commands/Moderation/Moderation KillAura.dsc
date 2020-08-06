@@ -13,7 +13,7 @@ KillAura_Command:
             - inject Command_Syntax Instantly
         
         - else:
-            - define User <context.args.get[1]>
+            - define User <context.args.first>
             - inject Player_Verification Instantly
         
         - if <[User].has_flag[Behrry.Moderation.KillAura]>:

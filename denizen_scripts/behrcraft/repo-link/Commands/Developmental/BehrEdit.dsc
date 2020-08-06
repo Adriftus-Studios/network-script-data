@@ -110,7 +110,7 @@ fuckloadedchunks:
     type: task
     debug: false
     script:
-        - define size <server.list_worlds.exclude[<world[world]>].parse[loaded_chunks.size].sum>
+        - define size <server.worlds.exclude[<world[world]>].parse[loaded_chunks.size].sum>
         - foreach <list[world_nether|world_the_end|Runescape50px1|Creative|SkyBlock]> as:World:
             - foreach <world[<[World]>].loaded_chunks> as:Chunk:
                 - adjust <[Chunk]> unload
@@ -126,7 +126,7 @@ FuckLuckPerms:
                 - execute as_server "lp user <[Player]> parent add <[Group]>"
                 - wait 1t
             - define ListedPlayers:->:<server.match_player[<[Player]>]||null>
-        #- foreach <server.list_players.exclude[<[ListedPlayers]>].parse[name]> as:Player:
+        #- foreach <server.players.exclude[<[ListedPlayers]>].parse[name]> as:Player:
         #    - if <[Player]> == null:
         #        - foreach next
         #    - foreach <list[Silent|Visitor|Patron]> as:Group:

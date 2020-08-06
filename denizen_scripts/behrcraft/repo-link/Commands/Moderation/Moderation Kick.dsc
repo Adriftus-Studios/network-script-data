@@ -11,7 +11,7 @@ Kick_Command:
     # % ██ [ Verify args ] ██
         - if <context.args.size> == 0:
             - inject Command_Syntax Instantly
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification Instantly
 
         - if <[User].in_group[Moderation]>:
@@ -26,7 +26,7 @@ Kick_Command:
                 - stop
 
         - if <context.args.get[2]||null> != null:
-            - define Reason <context.raw_args.after[<context.args.get[1]><&sp>]>
+            - define Reason <context.raw_args.after[<context.args.first><&sp>]>
             - announce "<proc[User_Display_Simple].context[<[User]>]> <&e>was kicked for: <&a><[Reason]>"
             - flag <[User]> behrry.moderation.kicked duration:1s
             - kick <[User]> reason:<[Reason]>

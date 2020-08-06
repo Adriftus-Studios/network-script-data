@@ -137,8 +137,8 @@ Draft_NPC:
     #                    - inventory open d:<npc[<[NpcID]>].inventory>
     #                - case Manage:
     #                    - flag player Behrry.Meeseeks.ShopMode:Select
-    #                    - if <server.list_online_players_flagged[Behrry.Meeseeks.ActiveInventory].size> > 0:
-    #                        - foreach <server.list_online_players_flagged[Behrry.Meeseeks.ActiveInventory]> as:Player:
+    #                    - if <server.online_players_flagged[Behrry.Meeseeks.ActiveInventory].size> > 0:
+    #                        - foreach <server.online_players_flagged[Behrry.Meeseeks.ActiveInventory]> as:Player:
     #                            - if <[Player].flag[Behrry.Meeseeks.ActiveInventory]> == <[NpcID]>:
     #                                - narrate targets:<[Player]> "The owner is now managing the shop."
     #                                - inventory player:<[Player]> close
@@ -155,7 +155,7 @@ Draft_NPC:
     #            # % ██ | Raw Shop:    Meeseeks_Shop_<npc.id>       | ██
     #            - if <context.inventory.notable_name.contains[ManageShop]>:
     #                - define NpcID <context.inventory.notable_name.after_last[_]>
-    #                - define NewContents <context.inventory.list_contents.get[1].to[36]>
+    #                - define NewContents <context.inventory.list_contents.first.to[36]>
     #                - define ShopInventory <inventory[Meeseeks_Shop_<[NpcID]>]>
     #                - inventory clear d:<[ShopInventory]>
     #                - inventory set d:<[ShopInventory]> o:<[NewContents]>
@@ -164,7 +164,7 @@ Draft_NPC:
     #            # % ██ [ Trade Shop: Meeseeks_Trade_<[NpcID]> ] ██
     #            - if <context.inventory.notable_name.contains[Trade]>:
     #                - define NpcID <context.inventory.notable_name.after_last[_]>
-    #                - define NewContents <context.inventory.list_contents.get[1].to[36]>
+    #                - define NewContents <context.inventory.list_contents.first.to[36]>
     #                - define ShopInventory <inventory[Meeseeks_Shop_<[NpcID]>]>
     #                - inventory clear d:<[ShopInventory]>
     #                - note <[NewContents]> as:<[ShopInventory]>
@@ -321,8 +321,8 @@ Draft_NPC:
     #                    - define Lore "<&e>Item Price<&6>:|<&a><[Price]> Coins|<&2>(<&a><[Price].mul[<[Quantity]>]> Total<&2>)"
     #                    - define Nbt "Price/<[Price]>|TotalPrice/<[Price].mul[<[Quantity]>]>"
     #
-    #                - inventory adjust d:<context.inventory> slot:<context.slots.get[1]> lore:<[Lore]>
-    #                - inventory adjust d:<context.inventory> slot:<context.slots.get[1]> nbt:<[Nbt]>
+    #                - inventory adjust d:<context.inventory> slot:<context.slots.first> lore:<[Lore]>
+    #                - inventory adjust d:<context.inventory> slot:<context.slots.first> nbt:<[Nbt]>
     #            - else:
     #                - determine cancelled
     #                #^ - if <context.inventory.slot[<context.slots>].filter[material.name.is[==].to[air].not].size> > 0:
@@ -333,8 +333,8 @@ Draft_NPC:
     #                #^ - if <context.slots.size> == 1:
     #                #^     - define Lore "<&e>Item Price<&6>:|<&a><[Price]> Coins"
     #                #^     - define Nbt "Price/<[Price]>
-    #                #^     - inventory adjust d:<context.inventory> slot:<context.slots.get[1]> lore:<[Lore]>
-    #                #^     - inventory adjust d:<context.inventory> slot:<context.slots.get[1]> nbt:<[Nbt]>
+    #                #^     - inventory adjust d:<context.inventory> slot:<context.slots.first> lore:<[Lore]>
+    #                #^     - inventory adjust d:<context.inventory> slot:<context.slots.first> nbt:<[Nbt]>
     #                #^ - else:
     #                #^     - determine cancelled
     #                #^     #^- foreach <context.slots> as:Slot:
@@ -477,19 +477,19 @@ Draft_NPC:
     #        - if <context.args.size> == 0:
     #            - Determine <[Arg1]>
     #        - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-    #            - determine <[Arg1].filter[starts_with[<context.args.get[1]>]]>
+    #            - determine <[Arg1].filter[starts_with[<context.args.first>]]>
     #
     #        - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
-    #            - if <context.args.get[1].contains_any[<[SubArgs]>]>:
-    #                - determine <script.data_key[SubArgs.<context.args.get[1]>]>
+    #            - if <context.args.first.contains_any[<[SubArgs]>]>:
+    #                - determine <script.data_key[SubArgs.<context.args.first>]>
     #
     #        - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
-    #            - if <context.args.get[1].contains_any[<[SubArgs]>]>:
-    #                - determine <script.data_key[SubArgs.<context.args.get[1]>].filter[starts_with[<context.args.get[2]>]]>
+    #            - if <context.args.first.contains_any[<[SubArgs]>]>:
+    #                - determine <script.data_key[SubArgs.<context.args.first>].filter[starts_with[<context.args.get[2]>]]>
     #    script:
     #        - if <context.args.size> == 0:
     #            - stop
-    #        - define Arg1 <context.args.get[1]>
+    #        - define Arg1 <context.args.first>
     #        - choose <[Arg1]>:
     #            - case Select:
     #                - if <player.target||null> == null:

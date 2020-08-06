@@ -14,4 +14,4 @@ npc_selected:
 player:
   type: format
   debug: false
-  format: "<&e><player.name.display><&r><&e><&co> <&r><&o><text>"
+  format: "<&e><player.display_name><&r><&e><&co> <&r><&o><text>"

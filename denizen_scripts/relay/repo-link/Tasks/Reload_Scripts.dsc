@@ -21,16 +21,16 @@ Reload_Scripts_DCommand:
     - if <[Args].size> == 0:
       - reload
       - define Server Relay
-      - define ScriptCount <server.list_scripts.size>
+      - define ScriptCount <server.scripts.size>
     - else if <[Args].size> == 1:
       - if <[Args].first> == all:
         - foreach <bungee.list_servers> as:Server:
-          - run Reload_Scripts_Queue def:<[Channel]>|<list[Color/Code|Server/<[Server]>].escaped>
+          - run Reload_Scripts_Queue def:<list[<[Channel]>].include_single[<map.with[Color].as[Code].with[Server].as[<[Server]>]>]>
       - else if !<bungee.list_servers.contains[<[Args].first>]>:
         - inject Embedded_Error_Response
       - else:
         - define Server <[Args].first>
-    - run Reload_Scripts_Queue def:<[Channel]>|<list[Color/Code|Server/<[Server]>].escaped>
+    - run Reload_Scripts_Queue def:<list[<[Channel]>].include[<map.with[Color].as[Code].with[Server].as[<[Server]>]>]>
 
 Reload_Scripts_Queue:
   type: task
@@ -51,13 +51,13 @@ Reload_Scripts_Queue:
         - bungeerun <[Server]> Reload_Task def:<[Hook]>
       - case false:
         #$ This should be a transcribed embedded message
-        - ~bungeetag server:<[Server]> <server.list_scripts.size> save:ScriptCount
+        - ~bungeetag server:<[Server]> <server.scripts.size> save:ScriptCount
         - bungee <[Server]>:
           - reload
         - define color Yellow
         - inject Embedded_Color_Formatting
         - define Title "Script Reload Pushed"
-        - define Footer "<map[].with[text].as[Scripts: <entry[ScriptCount].result> (No Error Response)]>"
+        - define Footer "<map.with[text].as[Scripts: <entry[ScriptCount].result> (No Error Response)]>"
         - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
         - define Data "<map[username/<[Server]> Server|avatar_url/https://img.icons8.com/nolan/64/source-code.png].with[embeds].as[<[Embeds]>].to_json>"
         - define Hook <[Hook]>
@@ -65,18 +65,18 @@ Reload_Scripts_Queue:
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
       - default:
         #$ This should be a transcribed embedded message
-        - ~bungeetag server:<[Server]> <server.list_scripts.size> save:ScriptCount
+        - ~bungeetag server:<[Server]> <server.scripts.size> save:ScriptCount
         - bungee <[Server]>:
           - reload
         - define ScriptCount <entry[ScriptCount].result||invalid>
         - if <[ScriptCount]> == invalid:
           - define color Red
           - define Title "Script Reload Pushed"
-          - define Footer "<map[].with[text].as[Scripts: ~ (No Error Response)]>"
+          - define Footer "<map.with[text].as[Scripts: ~ (No Error Response)]>"
         - else:
           - define color Yellow
           - define Title "Script Reload Pushed (No Response)"
-          - define Footer "<map[].with[text].as[Scripts: <entry[ScriptCount].result> (No Error Response)]>"
+          - define Footer "<map.with[text].as[Scripts: <entry[ScriptCount].result> (No Error Response)]>"
         - inject Embedded_Color_Formatting
         - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
         - define Data "<map[username/<[Server]> Server|avatar_url/https://img.icons8.com/nolan/64/source-code.png].with[embeds].as[<[Embeds]>].to_json>"
@@ -116,7 +116,7 @@ Reload_Response:
     # % ██ [ Inject Dependencies           ] ██
     - inject Embedded_Color_Formatting
 
-    - define Footer <map[].with[text].as[Scripts:<&sp><[ScriptCount]>]>
+    - define Footer <map.with[text].as[Scripts:<&sp><[ScriptCount]>]>
     - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
     - define Data "<map[username/<[Server]> Server|avatar_url/https://img.icons8.com/nolan/64/source-code.png].with[embeds].as[<[Embeds]>].to_json>"
     - define Hook <[Hook]>

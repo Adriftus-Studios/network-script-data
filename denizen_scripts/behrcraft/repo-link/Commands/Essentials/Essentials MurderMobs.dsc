@@ -20,23 +20,23 @@ murdermobs_Command:
         - if <context.args.size> == 1:
             - determine <[List]>
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <[List].filter[starts_with[<context.args.get[1]>]]>
+            - determine <[List].filter[starts_with[<context.args.first>]]>
     script:
     # % ██ [ Check Args ] ██
         - if <context.args.size> > 2:
             - inject Command_Syntax
     
     # % ██ [ Check for Default ] ██
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.first||null> == null:
             - define Radius 50
             - define Mobs Hostiles
         
     # % ██ [ Check First Arg ] ██
-        - else if <context.args.get[1].is_integer>:
-            - define Radius <context.args.get[1]>
+        - else if <context.args.first.is_integer>:
+            - define Radius <context.args.first>
             - inject Locally RadiusCheck
-        - else if <server.list_entity_types.include[All|Hostiles].exclude[Player].contains_any[<context.args.get[1].split[,]>]>:
-            - define Mobs <context.args.get[1].split[,]>
+        - else if <server.list_entity_types.include[All|Hostiles].exclude[Player].contains_any[<context.args.first.split[,]>]>:
+            - define Mobs <context.args.first.split[,]>
         - else:
             - inject Command_Syntax
 
@@ -61,7 +61,7 @@ murdermobs_Command:
             - inject Command_Syntax
 
     # % ██ [ Murder ] ██
-        #- foreach <server.list_online_players> as:Player:
+        #- foreach <server.online_players> as:Player:
         - if <[Mobs]> == all:
             - remove <Player.location.find.entities.within[<[Radius]>].filter[is_living].filter[is_player.not].filter[is_npc.not]>
         - else if <[Mobs]> == Hostiles:

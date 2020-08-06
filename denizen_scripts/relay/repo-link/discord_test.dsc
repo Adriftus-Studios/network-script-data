@@ -12,7 +12,7 @@
 #      - case "manager-chat":
 #        - define Channel 626086306606350366
 #        
-#    - define Hook <script[DDTBCTY].yaml_key[WebHooks.<[Channel].id>.hook]>
+#    - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel].id>.hook]>
 #    - define data '{"content": "<[messageEscaped].unescaped>", "username": "<[Name]>", "avatar_url": "https://minotar.net/helm/<[Name]>"}'
 #    - define Data <map[content/<[messageEscaped].unescaped>|username/<[Name]>|avatar_url/https://minotar.net/helm/<[Name]>].to_json>
 #    - define headers <list[User-Agent/really|Content-Type/application/json]>

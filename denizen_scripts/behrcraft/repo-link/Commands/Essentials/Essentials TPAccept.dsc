@@ -6,7 +6,7 @@ TPAccept_Command:
     usage: /tpaccept (<&lt>Player<&gt>)
     permission: Behr.Essentials.tpaccept
     tab complete:
-        - define Blacklist <server.list_online_players.filter[has_flag[Behr.Moderation.Hide]].include[<Player>]>
+        - define Blacklist <server.online_players.filter[has_flag[Behr.Moderation.Hide]].include[<Player>]>
         - Inject Online_Player_Tabcomplete
     script:
         - if !<context.args.is_empty>:

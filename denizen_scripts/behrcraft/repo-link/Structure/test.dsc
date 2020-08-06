@@ -11,7 +11,7 @@ HomeTest:
     debug: false
     definitions: ChunkHolders
     script:
-        - foreach <server.list_players.filter[has_flag[Behrry.Essentials.homes]]> as:Player:
+        - foreach <server.players.filter[has_flag[Behrry.Essentials.homes]]> as:Player:
             - define PlayersWithHomes:->:<[Player]>
             - foreach <[player].flag[Behrry.Essentials.homes].parse[after[/].as_location.chunk]> as:Chunk:
                 - if <[Chunk].is_loaded||false>:

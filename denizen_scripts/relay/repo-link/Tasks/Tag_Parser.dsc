@@ -25,13 +25,13 @@ Tag_Parser_DCommand:
       - define Server Relay
       - define Tag <[Args].first>
     - else:
-      - if <yaml[bungee_config].list_keys[servers].contains[<[Args].first>]>:
+      - if <yaml[bungee.config].contains[servers.<[Args].first>]>:
         - if !<bungee.list_servers.contains[<[Args].first>]>:
           - define color red
           - inject Embedded_Color_Formatting
           - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
           - define Embeds "<list[<map[description/<[Args].first> is **Not Connected** or is **OFFLINE**.|color/<[Color]>]>]>"
-          - define Data "<map[username/Server Status Warning|avatar_url/https://img.icons8.com/nolan/64/buysellads.png].with[embeds].as[<[Embeds]>].to_json>"
+          - define Data "<map[username/Server Status Warning|avatar_url/https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
           - define headers <list[User-Agent/really|Content-Type/application/json]>
           - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
           - stop
@@ -50,9 +50,9 @@ Tag_Parser_DCommand:
   # % ██ [ Send Embedded Message           ] ██
     - define color Code
     - inject Embedded_Color_Formatting
-    - define Footer "<map[].with[text].as[Parsed on: <[Server]> for: <[tag]>]>"
+    - define Footer "<map.with[text].as[Parsed on: <[Server]> for: <[tag]>]>"
     - define Embeds <list[<map[color/<[Color]>].with[footer].as[<[Footer]>].with[description].as[<[TagData].unescaped>]>]>
-    - define Data "<map[username/Tag Parser Results|avatar_url/https://img.icons8.com/nolan/64/buysellads.png].with[embeds].as[<[Embeds]>].to_json>"
+    - define Data "<map[username/Tag Parser Results|avatar_url/https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
     - define headers <list[User-Agent/really|Content-Type/application/json]>
@@ -95,9 +95,9 @@ Tag_Receive:
   # % ██ [ Send Embedded Message           ] ██
     - define color Code
     - inject Embedded_Color_Formatting
-    - define Footer "<map[].with[text].as[Parsed on: <[Server]> for: <[tag]>]>"
+    - define Footer "<map.with[text].as[Parsed on: <[Server]> for: <[tag]>]>"
     - define Embeds <list[<map[color/<[Color]>].with[footer].as[<[Footer]>].with[description].as[<[TagData].unescaped>]>]>
-    - define Data "<map[username/Tag Parser Results|avatar_url/https://img.icons8.com/nolan/64/buysellads.png].with[embeds].as[<[Embeds]>].to_json>"
+    - define Data "<map[username/Tag Parser Results|avatar_url/https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
     - define headers <list[User-Agent/really|Content-Type/application/json]>

@@ -9,5 +9,6 @@ Embedded_Error_Response:
     - define Syntax "/Reload <&lt>Server<&gt>/All"
     - define Context <bungee.list_servers.parse[To_Titlecase].include[All].comma_separated>
     - define Footer "You typed: <[Message]>"
-    - run Embedded_Discord_Message def:Command_Error_Support_Syntax_Context1|<[Channel]>|<list[Color/red|Description/<[Description].escaped>|Syntax/<[Syntax].escaped>|Context/<[Context].escaped>|Footer/<[Footer].escaped>].escaped>
+    - define map <map.with[Color].as[red].with[Description].as[<[Description]>].with[Syntax].as[<[Syntax]>].with[Context].as[<[Context]>].with[Footer].as[<[Footer]>]>
+    - run Embedded_Discord_Message def:<list[Command_Error_Support_Syntax_Context1|<[Channel]>].include_single[<[Map]>]>
     - stop

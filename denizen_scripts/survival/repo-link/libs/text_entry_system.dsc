@@ -14,7 +14,7 @@ text_input_handler:
       - determine passively cancelled
       - if <context.message> == /cancel:
         - stop
-      - if !<context.message.matches_character_set[1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>;&!_'<&dq>]>:
+      - if !<context.message.matches_character_set[1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>;&!_<&sq><&dq>]>:
         - narrate "<&c>Invalid characters were specified, only numbers and letters may be used..."
         - stop
       - run <player.flag[text_input].before[/]> def:<context.message>|<player.flag[text_input].after[/]>
@@ -25,6 +25,8 @@ text_input_handler:
 text_input_cancel:
   type: command
   name: cancel
+  description: Cancels the current text input.
+  usage: /cancel
   script:
     - if <player.has_flag[text_input]>:
       - narrate "<&e>Text entry mode has been cancelled without saving changes."

@@ -13,7 +13,7 @@ SoundBoard_Command:
     - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
       - determine <[List].filter[starts_with[<context.args.last>]]>
     
-    - define Sounds <server.list_sounds.parse[replace[_].with[<&sp>].to_titlecase.replace[<&sp>].with[_]]>
+    - define Sounds <server.sound_types.parse[replace[_].with[<&sp>].to_titlecase.replace[<&sp>].with[_]]>
     - if <context.raw_args.ends_with[<&sp>]>:
       - choose <context.args.first>:
         - case Page:
@@ -46,7 +46,7 @@ SoundBoard_Command:
         - choose <context.args.first>:
           - case Page:
             - define Page <context.args.get[2]>
-            - define MaxPage <server.list_sounds.size.div[27]>
+            - define MaxPage <server.sound_types.size.div[27]>
             - if <[Page]> > 0 && <[Page]> < <[MaxPage]> && !<[Page].contains[.]>:
               - run SoundBoard def:<list[Action/SoundBoard_Menu|Page/<[Page]>].escaped>
             - else:
@@ -55,7 +55,7 @@ SoundBoard_Command:
             - run SoundBoard def:<list[Action/Searched_Menu|Query/<context.args.get[2]>|Page/1].escaped>
             - narrate "<&6>S<&e>howing <&6>R<&e>esults <&6>f<&e>or<&6>: <&a><context.args.get[2]>"
           - case play:
-            - if <server.list_sounds.contains[<context.args.get[2]>]>:
+            - if <server.sound_types.contains[<context.args.get[2]>]>:
               - playsound <player> sound:<context.args.get[2]>
             - else:
               - narrate "<&4>I<&c>nvalid <&4>S<&c>ound<&4>."
@@ -103,7 +103,7 @@ SoundBoard:
         - playsound sound:ENTITY_ENDER_EYE_DEATH <player> pitch:<util.random.decimal[1.8].to[2]>
         - inject Locally MainMenuButton Instantly
         - define Query <[Query].unescaped>
-        - define Sounds <server.list_sounds.filter[contains[<[Query]>]]>
+        - define Sounds <server.sound_types.filter[contains[<[Query]>]]>
         - if <[Sounds].is_empty>:
           - narrate "<&4>N<&c>o <&4>R<&c>esults."
           - run SoundBoard def:<list[Action/Main_Menu].escaped>
@@ -162,7 +162,7 @@ SoundBoard:
       - case SoundBoard_Menu:
         - playsound sound:ENTITY_ENDER_EYE_DEATH <player> pitch:<util.random.decimal[1.8].to[2]>
         - define Index <proc[PageNumbers].context[<[Page]>|27]>
-        - define Sounds <server.list_sounds>
+        - define Sounds <server.sound_types>
         - define SoundSelection <[Sounds].get[<[Index].first>].to[<[Index].get[2]>]>
         - define MaxPage <[Sounds].size.div[27].round_down>
         - inject Locally SoundButtons Instantly

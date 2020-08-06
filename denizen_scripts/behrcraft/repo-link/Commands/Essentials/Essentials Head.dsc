@@ -7,11 +7,11 @@ Head_Command:
     permission: Behrry.Essentials.Head
     script:
     # % ██ [ Check Args ] ██
-        - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
+        - if <context.args.first||null> == null || <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
 
     # % ██ [ Check if specifying UUID ] ██
-        - define PlayerName <context.args.get[1]>
+        - define PlayerName <context.args.first>
         - if <context.args.get[2]||null> == null:
             - if <[PlayerName]> == Behr_Riley:
                 - narrate <&c>no

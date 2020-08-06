@@ -12,9 +12,9 @@ grappling_hook_events:
   debug: false
   worlds: mainland|mainland_nether
   events:
-    on player right clicks with:grappling_hook:
+    on player right clicks block with:grappling_hook:
       - determine passively cancelled
-      - if !<script[grappling_hook_events].yaml_key[worlds].contains[<player.location.world.name>]>:
+      - if !<script[grappling_hook_events].data_key[worlds].contains[<player.location.world.name>]>:
         - narrate "<&c>You cannot use that here."
         - stop
       - if <player.has_flag[grappling]>:
@@ -23,11 +23,11 @@ grappling_hook_events:
       - shoot arrow shooter:<player> speed:3 script:grappling_hook_pull save:hook
       - flag player grappling:true duration:10s
       - wait 1t
-      - flag <entry[hook].shot_entities.get[1]> no_trail:true duration:30s
+      - flag <entry[hook].shot_entities.first> no_trail:true duration:30s
       - repeat 999:
-        - if !<entry[hook].shot_entities.get[1].is_spawned> || !<player.has_flag[grappling]>:
+        - if !<entry[hook].shot_entities.first.is_spawned> || !<player.has_flag[grappling]>:
           - stop
-        - playeffect redstone at:<player.location.points_between[<entry[hook].shot_entities.get[1].location>].distance[0.5]> quantity:5 special_data:1|gray offset:0.1
+        - playeffect redstone at:<player.location.points_between[<entry[hook].shot_entities.first.location>].distance[0.5]> quantity:5 special_data:1|gray offset:0.1
         - wait 2t
     on player shoots block flagged:grappling bukkit_priority:LOWEST:
       - flag player grappling:<context.location.add[<context.hit_face>].center>
@@ -38,10 +38,10 @@ grappling_hook_pull:
  script:
    - if !<[hit_entities].is_empty||true>:
      - wait 1t
-     - if <player.can_see[<[hit_entities].get[1]>]||false>:
+     - if <player.can_see[<[hit_entities].first>]||false>:
        - push <[hit_entities]> d:<player.location> script:grappling_hook_sanity def:false
      - else:
-       - if <[hit_entities].get[1].is_spawned>:
+       - if <[hit_entities].first.is_spawned>:
          - narrate "<&c>Unable to grapple this mob from here."
        - flag player grappling:!
    - else if <[location].find.blocks.within[2].filter[material.name.is[!=].to[air]].is_empty> || !<player.can_see[<[last_entity]>]||true>:
@@ -60,7 +60,7 @@ grappling_hook_sanity:
   definitions: loc
   script:
     - flag player grappling:!
-    - if <[loc]> == false:
+    - if <[loc].not>:
       - stop
     - teleport <[loc].with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
 

@@ -30,8 +30,10 @@ titles_gui_command:
   type: command
   name: title
   aliases:
-    - "titles"
+    - titles
   debug: false
+  usage: /title
+  description: Used to access and change any unlocked titles.
   script:
     - inject title_inventory_open
 
@@ -56,12 +58,12 @@ title_inventory:
     next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;nbt=action/next_page]>
     previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;nbt=action/previous_page]>
   slots:
-    - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-    - "[filler] [] [] [] [] [] [] [] [filler]"
-    - "[filler] [] [] [] [] [] [] [] [filler]"
-    - "[filler] [] [] [] [] [] [] [] [filler]"
-    - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-    - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
+    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+    - [filler] [] [] [] [] [] [] [] [filler]
+    - [filler] [] [] [] [] [] [] [] [filler]
+    - [filler] [] [] [] [] [] [] [] [filler]
+    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
 
 title_inventory_events:
   type: world
@@ -81,10 +83,10 @@ title_inventory_events:
             - yaml id:global.player.<player.uuid> set titles.current:!
             - inject title_inventory_open
           - case next_page:
-            - define page <context.inventory.slot[<script[title_inventory].yaml_key[custom.mapping.page_marker]>].nbt[page].+[1]>
+            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].nbt[page].+[1]>
             - inject title_inventory_open
           - case previous_page:
-            - define page <context.inventory.slot[<script[title_inventory].yaml_key[custom.mapping.page_marker]>].nbt[page].-[1]>
+            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].nbt[page].-[1]>
             - inject title_inventory_open
 
 title_inventory_open:
@@ -103,15 +105,15 @@ title_inventory_open:
       - choose <[value]>:
         - case next_page:
           - if <[unlocked_tags].size> > <[page].-[1].*[21].+[21]>:
-            - inventory set d:<[inventory]> slot:<script[title_inventory].yaml_key[custom.mapping.next_page]> o:<script[title_inventory].yaml_key[definitions.next_page].parsed>
+            - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.next_page]> o:<script[title_inventory].parsed_key[definitions.next_page]>
         - case previous_page:
           - if <[page]> > 1:
-            - inventory set d:<[inventory]> slot:<script[title_inventory].yaml_key[custom.mapping.previous_page]> o:<script[title_inventory].yaml_key[definitions.previous_page].parsed>
+            - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.previous_page]> o:<script[title_inventory].parsed_key[definitions.previous_page]>
         - case current_title:
           - inject build_current_title
-          - inventory set d:<[inventory]> slot:<script[title_inventory].yaml_key[custom.mapping.current_title]> o:<[item]>
+          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.current_title]> o:<[item]>
         - case page_marker:
-          - inventory set d:<[inventory]> slot:<script[title_inventory].yaml_key[custom.mapping.page_marker]> o:<script[title_inventory].yaml_key[definitions.filler].parsed.with[nbt=page/<[page]>]>
+          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.page_marker]> o:<script[title_inventory].parsed_key[definitions.filler].with[nbt=page/<[page]>]>
     - inventory open d:<[inventory]>
 
 build_title_select_item:
@@ -124,7 +126,7 @@ build_title_select_item:
     - define material <yaml[titles].read[gui.tag_select_item.material]>
     - define lore <yaml[titles].read[gui.tag_select_item.lore].parse[parse_color.parsed]>
     - define name <yaml[titles].read[gui.tag_select_item.displayname].parse_color.parsed>
-    - define item "<item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;nbt=action/set_title|title/<[tagID]>]>"
+    - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;nbt=action/set_title|title/<[tagID]>]>
 
 build_current_title:
   type: task

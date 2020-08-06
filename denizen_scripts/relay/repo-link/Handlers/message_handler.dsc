@@ -33,8 +33,8 @@ Message_Handler:
     # % ██ [ @Mention Based Scripts          ] ██
 
     # % ██ [ Command  Based Scripts          ] ██
-      - if <[Message].unescaped.starts_with[/]>:
-        - choose <[Message].unescaped.before[<&sp>].after[/]>:
+      - if <[Message].starts_with[/]>:
+        - choose <[Message].before[<&sp>].after[/]>:
           - case reload:
             - ~Run Reload_Scripts_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case tag parse:

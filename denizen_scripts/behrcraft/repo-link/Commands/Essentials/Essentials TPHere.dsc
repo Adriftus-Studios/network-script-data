@@ -8,7 +8,7 @@ TPHere_Command:
     aliases:
         - tpahere
     tab complete:
-        - define Blacklist <server.list_online_players.filter[has_flag[Behr.Moderation.Hide]].include[<Player>]>
+        - define Blacklist <server.online_players.filter[has_flag[Behr.Moderation.Hide]].include[<Player>]>
         - inject Online_Player_Tabcomplete
     script:
     # % ██ [ Check Args ] ██
@@ -17,7 +17,7 @@ TPHere_Command:
         
     # % ██ [ Check if requesting Everyone ] ██
         - if <context.args.first> == everyone:
-            - foreach <server.list_online_players.exclude[<player>]> as:User:
+            - foreach <server.online_players.exclude[<player>]> as:User:
             # % ██ [ Reroute command for each player ] ██
                 - execute as_player "tphere <[User].name>"
             - stop

@@ -4,4 +4,4 @@ Embedded_Color_Formatting:
     speed: 0
     script:
         - if <[Color].exists>:
-            - define Color <script[DDTBCTY].yaml_key[Colors.<[Color]>]||0>
+            - define Color <script[DDTBCTY].data_key[Colors.<[Color]>]||0>

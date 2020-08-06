@@ -3,7 +3,7 @@ Parkour_events:
   type: world
   events:
     on player enters notable cuboid:
-      - define notable_name <context.cuboids.filter[notable_name.starts_with[parkour]].parse[notable_name].get[1]||null>
+      - define notable_name <context.cuboids.filter[notable_name.starts_with[parkour]].parse[notable_name].first||null>
       - if <[notable_name]> == null:
         - stop
       - define level <[notable_name].after[~]||null>
@@ -30,7 +30,7 @@ Parkour_events:
           - teleport <player> parkour_complete
           - wait 1t
           - flag player parkour:!
-          - title "title:<&a>Complete!"
+          - title title:<&a>Complete!
           - playsound <player> sound:entity_level_up volume:1.0 pitch:0.8
           - firework <player.location> power:0.2 star primary:yellow fade:white flicker
           - narrate "<&a><&l>You made it! Check the leaderboard!"
@@ -43,7 +43,7 @@ parkour_master_interact_command:
   usage: /parkour
   permission: custom.command.parkour
   script:
-    - adjust <queue> linked_player:<server.match_player[<context.args.get[1]>]>
+    - adjust <queue> linked_player:<server.match_player[<context.args.first>]>
     - if <player.has_flag[parkour]>:
       - if <player.is_sneaking>:
         - narrate "<&a>You have been removed from the challenge!"

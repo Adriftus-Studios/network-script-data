@@ -159,7 +159,7 @@ Fakeit:
         #------------------------------------------------------------
         - modifyblock <[Loc]> chest[direction=<[RandomDirection]>]
         #------------------------------------------------------------
-        #^- adjustblock <[Loc]> half:<[Halves].get[1]>
+        #^- adjustblock <[Loc]> half:<[Halves].first>
         #^- modifyblock <[Loc2]> chest[direction=<[RandomDirection]>]
         #^- adjustblock <[Loc2]> half:<[Halves].get[2]>
         #------------------------------------------------------------
@@ -223,25 +223,25 @@ ReplaceMaterials_Command:
     tab complete:
         - define Arg1 <list[slab|stairs|fence|trapdoor|wall]>
         - if <context.args.size> != 0:
-            - choose <context.args.get[1]>:
+            - choose <context.args.first>:
                 - case slabs slab:
-                    - define SlabMaterials <server.list_material_types.parse[name].filter[contains[_slab]].parse[before[_slab]]>
+                    - define SlabMaterials <server.material_types.parse[name].filter[contains[_slab]].parse[before[_slab]]>
                     - define Arg2 <[SlabMaterials]>
                     - define Arg3 <[SlabMaterials]>
                 - case stairs stair:
-                    - define StairsMaterials <server.list_material_types.parse[name].filter[contains[_stairs]].parse[before[_stairs]]>
+                    - define StairsMaterials <server.material_types.parse[name].filter[contains[_stairs]].parse[before[_stairs]]>
                     - define Arg2 <[StairsMaterials]>
                     - define Arg3 <[StairsMaterials]>
                 - case fence:
-                    - define FenceMaterials <server.list_material_types.parse[name].filter[contains[_fence]].parse[before[_fence]]>
+                    - define FenceMaterials <server.material_types.parse[name].filter[contains[_fence]].parse[before[_fence]]>
                     - define Arg2 <[FenceMaterials]>
                     - define Arg3 <[FenceMaterials]>
                 - case trapdoor trapdoors:
-                    - define TrapdoorMaterials <server.list_material_types.parse[name].filter[contains[_trapdoor]].parse[before[_trapdoor]]>
+                    - define TrapdoorMaterials <server.material_types.parse[name].filter[contains[_trapdoor]].parse[before[_trapdoor]]>
                     - define Arg2 <[TrapdoorMaterials]>
                     - define Arg3 <[TrapdoorMaterials]>
                 - case wall walls:
-                    - define WallMaterials <server.list_material_types.parse[name].filter[contains[_wall]].filter[contains_any[banner|torch|bubble|coral|sign|creeper|skeleton|zombie|head].not].parse[before[_wall]]>
+                    - define WallMaterials <server.material_types.parse[name].filter[contains[_wall]].filter[contains_any[banner|torch|bubble|coral|sign|creeper|skeleton|zombie|head].not].parse[before[_wall]]>
                     - define Arg2 <[WallMaterials]>
                     - define Arg3 <[WallMaterials]>
         - inject MultiArg_Command_Tabcomplete Instantly
@@ -253,9 +253,9 @@ ReplaceMaterials_Command:
         - define ReplaceFrom <context.args.get[2]>
         - define ReplaceTo <context.args.get[3]>
 
-        - choose <context.args.get[1]>:
+        - choose <context.args.first>:
             - case stairs stair:
-                - if !<server.list_material_types.parse[name].filter[contains[_stairs]].contains[<[ReplaceFrom]>_stairs|<[Replaceto]>_stairs]>:
+                - if !<server.material_types.parse[name].filter[contains[_stairs]].contains[<[ReplaceFrom]>_stairs|<[Replaceto]>_stairs]>:
                     - narrate format:Colorize_Red "Invalid material."
                     - inject CommanD_Syntax Instantly
                 - foreach <list[north|south|east|west]> as:Direction:
@@ -265,7 +265,7 @@ ReplaceMaterials_Command:
                         - execute as_op "/replace <[arg1]> <[arg2]>"
 
             - case slabs slab:
-                - if !<server.list_material_types.parse[name].filter[contains[_slab]].contains[<[ReplaceFrom]>_slab|<[Replaceto]>_slab]>:
+                - if !<server.material_types.parse[name].filter[contains[_slab]].contains[<[ReplaceFrom]>_slab|<[Replaceto]>_slab]>:
                     - narrate format:Colorize_Red "Invalid material."
                 - foreach <list[top|bottom|double]> as:Half:
                     - define arg1 "<[ReplaceFrom]>_slab[type=<[Half]>]"
@@ -273,7 +273,7 @@ ReplaceMaterials_Command:
                     - execute as_op "/replace <[arg1]> <[arg2]>"
             
             - case fence:
-                - if !<server.list_material_types.parse[name].filter[contains[_fence]].contains[<[ReplaceFrom]>_fence|<[Replaceto]>_fence]>:
+                - if !<server.material_types.parse[name].filter[contains[_fence]].contains[<[ReplaceFrom]>_fence|<[Replaceto]>_fence]>:
                     - narrate format:Colorize_Red "Invalid material."
 
                 - define Fences <player.we_selection.blocks.filter[material.name.contains[<[ReplaceFrom]>_fence]]>
@@ -281,7 +281,7 @@ ReplaceMaterials_Command:
                     - define Faces <[Fence].material.faces>
                     - modifyblock <[Fence]> <material[<[ReplaceTo]>_fence].with[faces=<[Faces]>]>
             - case wall:
-                - if !<server.list_material_types.parse[name].filter[contains[_fence]].contains[<[ReplaceFrom]>_fence|<[Replaceto]>_fence]>:
+                - if !<server.material_types.parse[name].filter[contains[_fence]].contains[<[ReplaceFrom]>_fence|<[Replaceto]>_fence]>:
                     - narrate format:Colorize_Red "Invalid material."
 
                 - define Walls <player.we_selection.blocks.filter[material.name.contains[<[ReplaceFrom]>_wall]]>

@@ -12,7 +12,7 @@ playerdata
 resource_packs/*
 system_scripts/*
 
-# ██ [ Server Directories           ] ██
+# ██ [ Server Directories         ] ██
 denizen_scripts/gielinordev
 
 # ██ [ Scriptdata Directories     ] ██
@@ -22,6 +22,7 @@ scriptdata/bungee
 # ██ [ Scriptdata Files           ] ██
 scriptdata/discord/token.yml
 scriptdata/discord/webhooks.yml
+scriptdata/global/players
 denizen_scripts/relay/repo-link/Handlers/message_handler.dsc
 
 # ██ [ System Script Directories  ] ██

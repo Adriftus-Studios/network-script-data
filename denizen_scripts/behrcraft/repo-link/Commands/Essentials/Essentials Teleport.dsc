@@ -18,7 +18,7 @@ Teleport_Command:
             - inject Command_Syntax
 
     # % ██ [ Check player arg ] ██
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification_Offline
 
     # % ██ [ Check for multi-player teleporting ] ██
@@ -84,7 +84,7 @@ Teleport_Command:
                 - inject Admin_Permission_Denied
 
         # % ██ [ Teleport multiple people to last player ] ██
-            - foreach <context.raw_args.split[<&sp>].get[1].to[<context.args.size.sub[1]>]> as:User:
+            - foreach <context.raw_args.split[<&sp>].first.to[<context.args.size.sub[1]>]> as:User:
                 - inject Player_Verification
                 - if <[PlayerList].contains[<[User]>]||false>:
                     - define reason "<proc[Player_Display_Simple].context[<[User]>]> was entered more than once."

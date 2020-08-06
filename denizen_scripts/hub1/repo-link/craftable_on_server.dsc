@@ -4,15 +4,15 @@ crafted_allow_command:
   name: craftable
   permission: craftable.control
   script:
-    - if <context.args.get[1]||null> == null:
+    - if <context.args.first||null> == null:
       - narrate "<&c>You must specify a player to induct."
       - stop
     - if <bungee.server> == hub1:
-      - define targetName <context.args.get[1]>
+      - define targetName <context.args.first>
       - define report_back false
       - inject crafted_allow
     - else:
-      - bungeerun hub1 crafted_allow def:<context.args.get[1]>|true|<player>
+      - bungeerun hub1 crafted_allow def:<context.args.first>|true|<player>
 
 crafted_deny_command:
   type: command
@@ -20,15 +20,15 @@ crafted_deny_command:
   name: uncraftable
   permission: craftable.control
   script:
-    - if <context.args.get[1]||null> == null:
+    - if <context.args.first||null> == null:
       - narrate "<&c>You must specify a player to induct."
       - stop
     - if <bungee.server> == hub1:
-      - define targetName <context.args.get[1]>
+      - define targetName <context.args.first>
       - define report_back false
       - inject crafted_deny
     - else:
-      - bungeerun hub1 crafted_deny def:<context.args.get[1]>|true|<player>
+      - bungeerun hub1 crafted_deny def:<context.args.first>|true|<player>
 
 crafted_allow:
   type: task

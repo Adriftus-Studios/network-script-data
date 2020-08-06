@@ -30,15 +30,6 @@ Bungee_DCommand:
             
         - run discord_bungeeCommand_execute def:<[Message].after[<&sp>].before[<&sp>]>|<[Message].after[<&sp>].after[<&sp>].replace[<&sp>].with[<&ns>]>|<[Channel]>
 
-#^ /bungee behr ```yml
-#^ - define World <world[World]>
-#^ - announce "Hello <[World].name>!"```
-
-# - ██ [ Send Embedded Message                   ] ██
-        #- run Embedded_Discord_Message def:Command_Ran|<[Channel]>|<list[Color/Code|Author/<[Author].Name>|Server/<[Server].to_titlecase>|Command//<[Command].escaped>].escaped>
-
-
-# ^ /bungee announce Hello everyone!;announce We'll be starting in an hour.;announce Thanks.
 discord_bungeeCommand_execute:
   type: task
   debug: false
@@ -67,8 +58,8 @@ discord_bungeeCommand_execute:
     - define color Code
     - inject Embedded_Color_Formatting
     - define Text "Executed Commands on <[server]>:<&nl>```ini<&nl><[Command].split[<&nl>].separated_by[<&nl>]>```"
-    - define Embeds "<list[<map[color/<[Color]>].with[description].as[<[Text]>]>]>"
-    - define Data <map[username/<[Server]><&sp>Server|avatar_url/https://img.icons8.com/nolan/64/buysellads.png].with[embeds].as[<[Embeds]>].to_json>
+    - define Embeds <list[<map[color/<[Color]>].with[description].as[<[Text]>]>]>
+    - define Data <map[username/<[Server]><&sp>Server|avatar_url/https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
     - define headers <list[User-Agent/really|Content-Type/application/json]>

@@ -1,5 +1,6 @@
 player_death_event:
   type: world
+  debug: false
   events:
     on player death:
       - flag <player> player_death_location:<player.location>

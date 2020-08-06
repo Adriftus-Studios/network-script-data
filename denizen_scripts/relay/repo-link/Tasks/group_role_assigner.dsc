@@ -80,5 +80,5 @@ Group_Role_Assigner:
         misc:
             602011398138101760: "Minecraft Explorer"
             732777026842263582: "⁣ ⁣ ⁣⁣ ⁣ ⁣ ⁣ ⁣ Notifications ⁣ ⁣ ⁣ ⁣ ⁣ ⁣⁣ ⁣ ⁣ ⁣"
-            712037337764462683: "Ignored"
-            602038729443377152: "Jailed"
+            712037337764462683: Ignored
+            602038729443377152: Jailed

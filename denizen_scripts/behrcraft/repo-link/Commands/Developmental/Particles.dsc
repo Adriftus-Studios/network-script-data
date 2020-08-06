@@ -323,7 +323,7 @@ particlefluctuatetest:
     name: ptester
     permission: test
     script:
-        - if <context.args.get[1]> == add:
+        - if <context.args.first> == add:
             - if <context.args.get[2]> == a:
                 - if <context.args.size> == 3:
                     - flag server test.a:+:<context.args.get[3]>
@@ -335,7 +335,7 @@ particlefluctuatetest:
                 - else:
                     - flag server test.b:++
 
-        - else if <context.args.get[1]> == sub:
+        - else if <context.args.first> == sub:
             - if <context.args.get[2]> == a:
                 - if <context.args.size> == 3:
                     - flag server test.a:-:<context.args.get[3]>
@@ -347,7 +347,7 @@ particlefluctuatetest:
                 - else:
                     - flag server test.b:--
 
-        - else if <context.args.get[1]> == set:
+        - else if <context.args.first> == set:
             - if <context.args.get[2]> == a:
                 - flag server test.a:<context.args.get[3]>
             - else:

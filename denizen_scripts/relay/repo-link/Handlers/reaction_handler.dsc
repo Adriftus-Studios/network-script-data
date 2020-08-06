@@ -1,7 +1,3 @@
-# $ ███████████████████████████████████████████████████████████
-# - ██    Server Start | Stop Events
-# ^ ██
-# - ██  [ Discord Handlers                    ] ██
 Reaction_Handler:
   type: world
   debug: false

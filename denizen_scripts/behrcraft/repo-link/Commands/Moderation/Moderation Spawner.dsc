@@ -6,8 +6,8 @@ Spawner_Command:
     usage: /Spawner <&lt>Type<&gt> (Player) (#)
     permission: Behrry.Moderation.Spawner
     tab complete:
-        - define Arg1 <server.list_material_types.filter[contains[spawn_egg]].parse[name.before[_spawn_egg]]>
-        - define Arg2 <server.list_online_players.parse[name]>
+        - define Arg1 <server.material_types.filter[contains[spawn_egg]].parse[name.before[_spawn_egg]]>
+        - define Arg2 <server.online_players.parse[name]>
         - inject MultiArg_Command_Tabcomplete Instantly
     script:
     # % ██ [  Correct syntax? ] ██
@@ -19,7 +19,7 @@ Spawner_Command:
 
     # % ██ [  Define Data ] ██
         - define Type <context.args.first.to_titlecase>
-        - if <server.list_material_types.filter[contains[spawn_egg]].parse[name.before[_spawn_egg]].contains[<[Type]>]>:
+        - if <server.material_types.filter[contains[spawn_egg]].parse[name.before[_spawn_egg]].contains[<[Type]>]>:
             - define Item <item[Spawner].with[display_name=<[Type]><&sp>Spawner;nbt=key/<[Type]>]>
 
     # % ██ [ Choose Arg Count ] ██
