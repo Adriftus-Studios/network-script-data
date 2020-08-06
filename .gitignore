@@ -5,14 +5,19 @@
 # ██ [ Executables                ] ██
 *.exe
 *.sh
+*.jar
 
 # ██ [ Root Directories           ] ██
 playerdata
 resource_packs/*
 system_scripts/*
 
+# ██ [ Server Directories           ] ██
+denizen_scripts/gielinordev
+
 # ██ [ Scriptdata Directories     ] ██
-scriptdata/twitch/*
+scriptdata/twitch
+scriptdata/bungee
 
 # ██ [ Scriptdata Files           ] ██
 scriptdata/discord/token.yml

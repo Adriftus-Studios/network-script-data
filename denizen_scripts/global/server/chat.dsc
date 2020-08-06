@@ -62,9 +62,9 @@ chat_history_show:
   type: task
   debug: false
   script:
-    - define list <list[]>
-    - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
-      - if !<yaml[chat_history].list_keys[].contains[<[Channel]>_history]>:
+    - define list <list>
+    - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].contains[channels.<[Filter_Value]>]>]> as:Channel:
+      - if !<yaml[chat_history].contains[<[Channel]>_history]>:
         - foreach next
       - define list <[List].include[<yaml[chat_history].read[<[Channel]>_history]>]>
   #^- narrate <[list].parse[unescaped].sort_by_number[get[time]].size>
@@ -95,7 +95,7 @@ chat_command:
       - inject Command_Error
 
     - define Channel <context.args.first.to_lowercase>
-    - if <yaml[chat_config].list_keys[channels].contains[<[Channel]>]> && ( <player.has_permission[<yaml[chat_config].read[channels.<[Channel]>.permission]>]> || <yaml[chat_config].read[channels.<[Channel]>.permission]> == none ):
+    - if <yaml[chat_config].contains[channels.<[Channel]>]> && ( <player.has_permission[<yaml[chat_config].read[channels.<[Channel]>.permission]>]> || <yaml[chat_config].read[channels.<[Channel]>.permission]> == none ):
       - yaml set id:global.player.<player.uuid> chat.channels.current:<[Channel]>
       - if !<yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<[Channel]>]>:
         - yaml id:global.player.<player.uuid> set chat.channels.active:->:<[Channel]>
@@ -153,10 +153,10 @@ chat_settings_reload:
   type: task
   debug: false
   script:
-    - if <server.has_file[data/globalData/chat/channels.yml]>:
+    - if <server.has_file[data/global/chat/channels.yml]>:
       - if <yaml.list.contains[chat_config]>:
         - yaml id:chat_config unload
-      - yaml id:chat_config load:data/globalData/chat/channels.yml
+      - yaml id:chat_config load:data/global/chat/channels.yml
     - if !<yaml.list.contains[chat_history]>:
       - if <server.has_file[data/chat_history.yml]>:
         - yaml id:chat_history load:data/chat_history.yml
