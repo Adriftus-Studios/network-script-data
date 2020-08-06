@@ -20,13 +20,6 @@ Chat_Handler:
                 
         # % ██ [  Fixing your group ] ██
             - run locally GroupManager Instantly
-
-        # % ██ [  BChat Check, Formatting & Print ] ██
-            - if <player.has_flag[Behrry.Essentials.BChat]>:
-                - define Targets <server.online_players.filter[has_permission[behrry.essentials.bchat]]>
-                - define Prefix <&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:
-                - narrate targets:<[Targets]> "<[Prefix]> <&7><[Message].parse_color>"
-                - stop
             
         # % ██ [ Check if hidden moderator ] ██
             - if <player.has_flag[behrry.moderation.hide]>:
