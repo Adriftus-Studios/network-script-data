@@ -60,7 +60,7 @@ Status_DCommand:
       - stop
       
   # % ██ [ Server Argument Check ] ██
-    - if !<yaml[bungee.config].list_keys[servers].contains[<[Server]>]>:
+    - if !<yaml[bungee.config].contains[servers.<[Server]>]>:
       - stop
     - else if !<bungee.list_servers.contains[<[Server]>]>:
       - stop

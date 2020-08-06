@@ -25,7 +25,7 @@ Tag_Parser_DCommand:
       - define Server Relay
       - define Tag <[Args].first>
     - else:
-      - if <yaml[bungee.config].list_keys[servers].contains[<[Args].first>]>:
+      - if <yaml[bungee.config].contains[servers.<[Args].first>]>:
         - if !<bungee.list_servers.contains[<[Args].first>]>:
           - define color red
           - inject Embedded_Color_Formatting

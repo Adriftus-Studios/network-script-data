@@ -634,7 +634,7 @@ warps_add_member:
     - if <[target]> == null:
       - narrate "<&c>Unknown Player<&co> <&e><[player]><&c>."
       - stop
-    - if <yaml[warps].list_keys[warps.personal.<[ID]>.can_use].contains[<[target].uuid>]>:
+    - if <yaml[warps].contains[warps.personal.<[ID]>.can_use.<[target].uuid>]>:
       - narrate "<&c>Player already has access to this warp."
       - inject text_input_complete
       - inject warp_management_GUI_panel_populate

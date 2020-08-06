@@ -11,7 +11,7 @@ faketitlegrabber:
         - if <context.args.is_empty>:
             - inject Command_Syntax
 
-        - else if !<yaml[titles].list_keys[titles].contains[<context.args.first>]>:
+        - else if !<yaml[titles].contains[titles.<context.args.first>]>:
             - inject command_Syntax
         - else:
             - run title_unlock def:<context.args.first>
