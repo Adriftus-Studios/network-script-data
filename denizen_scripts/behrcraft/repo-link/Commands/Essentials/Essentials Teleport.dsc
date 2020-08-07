@@ -38,6 +38,11 @@ Teleport_Command:
                     - narrate format:Colorize_Red "Teleport request still pending."
                     - stop
 
+            # - ██ [ Temporary Event Handle ] ██
+                - if <player.has_flag[Event.InEvent]>:
+                    - narrate format:Colorize_Red "You cannot do that during an event."
+                    - stop
+
                 - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<player>]>"
                 - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
                 - define CommandA "tpaccept <player.name>"

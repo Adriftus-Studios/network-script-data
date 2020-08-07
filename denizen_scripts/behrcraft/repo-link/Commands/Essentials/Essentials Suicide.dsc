@@ -10,6 +10,11 @@ Suicide_Command:
         - if !<context.args.is_empty>:
             - inject Command_Syntax
 
+    # - ██ [ Temporary Event Handle ] ██
+        - if <player.has_flag[Event.InEvent]>:
+            - narrate format:Colorize_Red "You cannot do that during an event."
+            - stop
+
     # % ██ [ Check player's Gamemode ] ██
         - if <list[spectator|creative].contains[<player.gamemode>]>:
             - repeat 10:

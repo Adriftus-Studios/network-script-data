@@ -13,6 +13,11 @@ TPAccept_Command:
             - if <context.args.size> > 1:
                 - inject Command_Syntax
 
+    # - ██ [ Temporary Event Handle ] ██
+        - if <player.has_flag[Event.InEvent]>:
+            - narrate format:Colorize_Red "You cannot do that during an event."
+            - stop
+
         - if <player.has_flag[Behr.Essentials.Teleport.Request]>:
             - if <context.args.is_empty>:
                 - define User <player.flag[Behr.Essentials.Teleport.Request].first.before[/]>

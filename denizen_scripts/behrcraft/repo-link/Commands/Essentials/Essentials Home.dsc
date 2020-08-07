@@ -24,6 +24,11 @@ Home_Command:
             - run Home_GUI
             - stop
 
+    # - ██ [ Temporary Event Handle ] ██
+        - if <player.has_flag[Event.InEvent]>:
+            - narrate format:Colorize_Red "You cannot do that during an event."
+            - stop
+
     # % ██ [ Check for existing homes ] ██
         - else if !<player.has_flag[Behr.Essentials.Homes]>:
             - narrate format:Colorize_Red "You have no homes"

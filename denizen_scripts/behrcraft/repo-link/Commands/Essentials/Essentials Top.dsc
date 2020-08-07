@@ -9,6 +9,12 @@ Top_Command:
     # % ██ [ Check for args ] ██
         - if !<context.args.is_empty>:
             - inject Command_Syntax
+
+    # - ██ [ Temporary Event Handle ] ██
+        - if <player.has_flag[Event.InEvent]>:
+            - narrate format:Colorize_Red "You cannot do that during an event."
+            - stop
+
     # % ██ [ check if they're already at the top ] ██
         - if <player.location.y> > <player.location.highest.y>:
             - narrate "<proc[Colorize].context[Nothing Interesting Happens.|yellow]>"

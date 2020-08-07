@@ -14,6 +14,11 @@ TPHere_Command:
     # % ██ [ Check Args ] ██
         - if <context.args.is_empty> || <context.args.size> > 2:
             - inject Command_Syntax
+
+    # - ██ [ Temporary Event Handle ] ██
+        - if <player.has_flag[Event.InEvent]>:
+            - narrate format:Colorize_Red "You cannot do that during an event."
+            - stop
         
     # % ██ [ Check if requesting Everyone ] ██
         - if <context.args.first> == everyone:

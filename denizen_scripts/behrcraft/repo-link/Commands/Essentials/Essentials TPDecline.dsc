@@ -13,6 +13,11 @@ TPDecline_Command:
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax
 
+    # - ██ [ Temporary Event Handle ] ██
+        - if <player.has_flag[Event.InEvent]>:
+            - narrate format:Colorize_Red "You cannot do that during an event."
+            - stop
+
     # % ██ [ Check if player has a request ] ██
         - if <player.has_flag[Behr.Essentials.teleport.request]>:
         # % ██ [ Check if player is specifying player ] ██

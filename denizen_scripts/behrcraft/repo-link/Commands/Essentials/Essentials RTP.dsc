@@ -10,6 +10,11 @@ RTP_Command:
         - if !<context.args.is_empty>:
             - inject Command_Syntax
 
+    # - ██ [ Temporary Event Handle ] ██
+        - if <player.has_flag[Event.InEvent]>:
+            - narrate format:Colorize_Red "You cannot do that during an event."
+            - stop
+
     # % ██ [ Define integers ] ██
         - define distance 6000
 
