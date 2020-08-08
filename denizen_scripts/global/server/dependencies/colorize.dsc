@@ -14,8 +14,8 @@ Colorize:
                 - define 1 <&2>
                 - define 2 <&a>
             - case Red:
-                - define 1 <&4>
-                - define 2 <&c>
+                - define 1 <&color[#ff3300]>
+                - define 2 <&color[#ff5c33]>
             - case Purple:
                 - define 1 <&5>
                 - define 2 <&d>

@@ -17,7 +17,7 @@ market_command:
 # ---------------------- #
 # - Market System Data - #
 # ---------------------- #
-# The below yaml data script container is for adding/removing/categorizing/pricing items
+# The below data script container is for adding/removing/categorizing/pricing items
 ## IMPORTANT
 ## WHEN ADDING A NEW CATEGORY, MODIFY THE market_system_main_GUI SCRIPT TO MAKE ROOM FOR IT
 ## THIS CAN BE DONE BY DELETING ONE OF THE FILLER SPOTS
@@ -351,7 +351,7 @@ market_system_categories_sell_item:
       - if <[quantity]> == 1:
         - narrate "<&c>You do not have that item to sell."
       - else:
-        - narrate "<&c>You do no have enough of that item to sell <[quantity]>"
+        - narrate "<&c>You do not have enough of that item to sell <[quantity]>"
       - stop
     - give money quantity:<[cost]>
     - take <[item].as_item> quantity:<[quantity]>
@@ -365,7 +365,7 @@ market_system_category_set_buy_sell_items:
     - define slot <script[market_system_category_GUI].data_key[custom_slots_map.buy_sell_item]>
     - define buy_price <yaml[current_market].read[items.<[item]>.value]>
     - define sell_price <[buy_price].-[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
-    - define "lore:<&a>Buy Price<&co><&e><[buy_price]>|<&c>Sell Price<&co><[sell_price]>"
+    - define "lore:<&a>Buy Price<&co> <&e><[buy_price]>|<&c>Sell Price<&co> <[sell_price]>"
     - define name <&a><[item].replace[_].with[<&sp>].to_titlecase>
     - inventory set slot:<[slot]> d:<[inventory]> o:<[item].as_item.with[display_name=<[name]>;lore=<[lore]>;nbt=item/<[item]>]>
     # SELL ALL

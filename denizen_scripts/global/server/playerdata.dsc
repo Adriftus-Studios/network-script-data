@@ -31,6 +31,8 @@ Player_Data_Join_Event:
       - stop
 
   # % ██ [ Load Global Player Data ] ██
+    - if !<server.has_flag[data/players/<[UUID]>.yml]>:
+      - yaml id:<[GlobalYaml]> create
     - yaml id:<[GlobalYaml]> load:data/players/<[UUID]>.yml
 
     # % ██ [ Load and Set Display_Name ] ██
