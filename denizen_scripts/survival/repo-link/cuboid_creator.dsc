@@ -28,7 +28,7 @@ cuboid_command:
     - cuboid
   permission: worldedit.command.cube
   tab complete:
-    - if <context.args.size||0> == 0:
+    - if <context.args.is_empty>:
       - determine <list[save|schem|clear]>
   permission message: <&c>Sorry <player.name>, you can't perform that command.
   script:
