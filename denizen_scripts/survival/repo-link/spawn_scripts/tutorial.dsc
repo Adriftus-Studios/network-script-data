@@ -103,7 +103,7 @@ tutorial_data:
       - <&6><&l>Grim
       - "<&e>Grim can help you return to your death location."
       - "<&c>... For a cost."
-    particle_guide: true
+    particle_guide: false
     title: "<&6>Use <&b>/warps"
     subtitle: "<&e>Go to the server warp: <&4>Grim"
   15:
@@ -172,6 +172,10 @@ tutorial_data:
 tutorial_spawn_finale:
   type: task
   script:
+    - repeat 20:
+      - wait 1t
+      - playeffect redstone at:<location[tutorial_dragon]> special_data:1|black quantity:<[loop_value].*[2]> offset:<[loop_value].*[0.2]>
+      - playeffect dragon_breath at:<location[dragon_tutorial]> data:0.5 quantity:10 offset:0
     - fakespawn ender_dragon <location[tutorial_dragon]> duration:10m
 
 
@@ -191,6 +195,7 @@ tutorial_start:
   type: task
   script:
     - teleport <player> tutorial_start
+    - playsound <player> sound:entity_ender_pearl_throw volume:0.5
     - flag player tutorial:0
     - foreach <script[tutorial_data].parsed_key[start.hologram]>:
       - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value]>] <location[tutorial_start_hologram].sub[0,<[loop_index].*[0.25]>,0]> duration:10m
@@ -216,6 +221,7 @@ tutorial_next:
         - narrate <script[tutorial_data].parsed_key[<[stage]>.message]>
       - if <script[tutorial_data].list_keys[<[stage]>].contains[particle_guide]> && <script[tutorial_data].parsed_key[<[stage]>.particle_guide]>:
         - look <player> tutorial_<[stage]>
+        - playsound <player> sound:entity_ender_pearl_throw volume:0.5
         - define last_distance 128
         - while <player.location.world.name> == spawn && <player.location.distance[<location[tutorial_<[stage]>]>]> > <script[tutorial_data].data_key[distance_check]>:
           - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
@@ -246,6 +252,8 @@ tutorial_next:
       - stop
     - flag player tutorial:!
     - flag player tutorial_status:completed
+    - playsound <player> sound:entity_player_levelup volume:0.5
+    - firework <player.location> random trail
     - narrate "<&a>You have completed the tutorial!"
     - narrate "<&a>Please jump through the hole in front of you to begin your journey!"
 
@@ -257,6 +265,7 @@ tutorial_timeout:
       - if <queue.time_ran.in_seconds> > 600:
         - inject tutorial_skipped
         - narrate "<&4>Your tutorial has timed out."
+        - playsound <player> sound:block_beacon_deactivate volume:0.5
         - narrate "<element[<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>.].on_hover[<&e>Click to restart the tutorial].on_click[/tutorial]>"
       - wait 10s
 
@@ -265,14 +274,15 @@ tutorial_skipped:
   script:
     - foreach <player.fake_entities>:
       - fakespawn <[value]> cancel
+    - playsound <player> sound:entity_chicken_ambient volume:0.5
     - flag player tutorial:!
     - flag player tutorial_status:skipped
-
 
 tutorial_events:
   type: world
   events:
     on player clicks fake entity flagged:tutorial:
+      - playsound <player> sound:ui_button_click volume:0.5
       - if <context.entity.name> == ContinueTutorial:
         - foreach <player.fake_entities>:
           - fakespawn <[value]> cancel
