@@ -3,16 +3,24 @@
         Adriftus Network Script Data
     </h2>
     <h1 align=center> 
-        Partial Access Directory 
+        Partial Access Directory
     </h2>
 </p>
+
 <p align=center>
     <!--- Discord Activity ---->
     <a href=https://discord.gg/MjXemPr>
         <img src=https://img.shields.io/discord/481711026962694146?logo=discord>
     </a>
 </p>
-  
+
+<p align=center>
+    <!--- Getting Started Guide ---->
+    <a href=https://github.com/AuroraInteractive/network-script-data/tree/master/docs/guides/1.getting-started.md>
+        <img src=https://img.shields.io/badge/docs-getting%20started-informational.svg?logo=read-the-docs>
+    </a>
+</p>
+
 <!---
 [![License](https://img.shields.io/github/license/AuroraInteractive/network-script-data.svg?logo=read-the-docs)](https://github.com/AuroraInteractive/network-script-data)
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-green.svg?logo=PayPal)](https://www.paypal.com/paypalme2/BearRiley)
