@@ -221,7 +221,6 @@ tutorial_next:
         - narrate <script[tutorial_data].parsed_key[<[stage]>.message]>
       - if <script[tutorial_data].list_keys[<[stage]>].contains[particle_guide]> && <script[tutorial_data].parsed_key[<[stage]>.particle_guide]>:
         - look <player> tutorial_<[stage]>
-        - playsound <player> sound:entity_ender_pearl_throw volume:0.5
         - define last_distance 128
         - while <player.location.world.name> == spawn && <player.location.distance[<location[tutorial_<[stage]>]>]> > <script[tutorial_data].data_key[distance_check]>:
           - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
