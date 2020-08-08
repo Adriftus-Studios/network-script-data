@@ -41,9 +41,9 @@ cuboid_command:
     - else if <context.args.first> == save:
       - if <context.args.get[2]||null> == null:
         - narrate "<&c>Please name your Cuboid"
-      - if !<server.list_notables[cuboids].parse[notable_name].contains[<context.args.get[2]>]>:
+      - if <cuboid[<context.args.get[2]>]||invalid> != invalid:
         - if <player.has_flag[point1]> && <player.has_flag[point2]>:
-          - note <cuboid[<player.flag[point1]>|<player.flag[point2]>]> as:<context.args.get[2]>
+          - note <player.flag[point1].to_cuboid[<player.flag[point2]>]> as:<context.args.get[2]>
           - narrate "<&6> - Your selection Has been saved as<&co> <&a><context.args.get[2]>"
         - else:
           - narrate "<&c>You have no selection made"
