@@ -45,9 +45,19 @@ cuboid_command:
         - if <player.has_flag[point1]> && <player.has_flag[point2]>:
           - note <cuboid[<player.flag[point1]>|<player.flag[point2]>]> as:<context.args.get[2]>
           - narrate "<&6> - Your selection Has been saved as<&co> <&a><context.args.get[2]>"
+        - else:
+          - narrate "<&c>You have no selection made"
       - else:
         - narrate "<&c>You already have a cuboid named <&a><context.args.get[2]><&nl><&c>Remove it before continuing."
-      # Thinking of adding a way to directly add the cube as a schematic from here...
+    - else if <context.args.first> == schem:
+      - if <context.args.get[2]||null> == null:
+        - narrate "<&c>Please use <&a>create<&c> to save your schematic"
+      - if <context.arge.get[2]> == create:
+        - if !<server.list_notables[cuboids].parse[notable_name].contains[<context.args.get[3]>]>:
+          - narrate "<&c>Your schematic name, and previous cuboid name must match."
+        - else:
+          - schematic create name:<context.args.get[3]> <context.args.get[3]> <player.location>
+          - ~schematic save name:<context.args.get[3]>
 
 cuboid_noting_locations:
   type: world
