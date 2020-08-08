@@ -3,10 +3,10 @@ Backpack:
   material: chest
   display name: <&a>Backpack
   lore:
-    - "<&e>Slots<&co> <&a>9"
+    - <&e>Slots<&co> <&a>9
     - <&a>
-    - "<&e>Hold in Hand"
-    - "<&b>Place block to open"
+    - <&e>Hold in Hand
+    - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/9|backpack_contents/<list>|unique/<server.current_time_millis>
 

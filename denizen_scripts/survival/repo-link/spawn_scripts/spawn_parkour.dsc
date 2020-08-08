@@ -2,12 +2,12 @@
 Parkour_events:
   type: world
   events:
-    on player enters notable cuboid:
-      - define notable_name <context.cuboids.filter[notable_name.starts_with[parkour]].parse[notable_name].first||null>
-      - if <[notable_name]> == null:
+    on player enters area:
+      - define note_name <context.cuboids.filter[note_name.starts_with[parkour]].parse[note_name].first||null>
+      - if <[note_name]> == null:
         - stop
-      - define level <[notable_name].after[~]||null>
-      - choose <[notable_name].after[.].before[~]>:
+      - define level <[note_name].after[~]||null>
+      - choose <[note_name].after[.].before[~]>:
         # parkour.SetWaypoint~#
         - case SetWaypoint:
           - if <player.has_flag[parkour]>:
@@ -25,11 +25,12 @@ Parkour_events:
             - teleport <[parkour_map].get[<player.flag[parkour]>]>
         # parkour.finish
         - case finish:
-          - if <player.has_permission[not.a.perm]>:
+          - if <player.has_permission[adriftus.admin]>:
             - narrate "<&c>You can't play for real. But you made it to the top!"
           - teleport <player> parkour_complete
           - wait 1t
           - flag player parkour:!
+          - run title_unlock def:Flashyjumper
           - title title:<&a>Complete!
           - playsound <player> sound:entity_level_up volume:1.0 pitch:0.8
           - firework <player.location> power:0.2 star primary:yellow fade:white flicker

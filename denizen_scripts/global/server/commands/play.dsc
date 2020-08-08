@@ -76,8 +76,8 @@ command_play_inventory:
   type: inventory
   debug: false
   inventory: chest
+  title: <&a>Play Menu
   size: 27
-  inventory_type: chest
   definitions:
     player: <item[player_head]||<item[human_skull]>>[display_name=<&b><player.name>;lore=<&3>Current<&sp>Server<&co><&sp><yaml[bungee.config].parsed_key[servers.<bungee.server>.display_name]>;skull_skin=<player.uuid>]
     hub: <item[<yaml[bungee.config].read[servers.hub1.material]>]>[display_name=<yaml[bungee.config].parsed_key[servers.<bungee.server>.display_name]>;nbt=<list[server/hub1]>]

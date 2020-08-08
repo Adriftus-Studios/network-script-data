@@ -8,8 +8,6 @@ title_unlock:
   script:
     - if <yaml[titles].read[titles.<[tagID]>]||null> != null && !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tagID]>]||false>:
       - yaml id:global.player.<player.uuid> set titles.unlocked:|:<[tagID]>
-    - else:
-      - error
 
 
 title_remove:
@@ -19,8 +17,6 @@ title_remove:
   script:
     - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tagID]>]||false>:
       - yaml id:global.player.<player.uuid> set titles.unlocked:<-:<[tagID]>
-    - else:
-      - error
 
 ##################
 ## Open Command ##
