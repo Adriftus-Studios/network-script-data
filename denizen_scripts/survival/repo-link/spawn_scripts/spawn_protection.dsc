@@ -19,20 +19,12 @@ spawn_world_protection:
       - if !<player.has_flag[world.spawn.modify]> && !<player.has_flag[world.spawn.can_shoot]>:
         - determine cancelled
 
-# fall protection in spawn
-spawn_player_takes_fall_damage:
+# Anti Damaged
+spawn_player_takes_damage:
   type: world
   debug: false
   events:
-    on player damaged by fall in:spawn:
-      - determine cancelled
-
-# Anti pvp in spawn
-spawn_player_damages:
-  type: world
-  debug: false
-  events:
-    on player damaged by player in:spawn:
+    on player damaged in:spawn:
       - determine cancelled
 
 # Anti Hunger
@@ -40,7 +32,15 @@ spawn_player_food_level:
   type: world
   debug: false
   events:
-    on entity changes food level in:spawn:
+    on player changes food level in:spawn:
+      - determine 20
+
+# Anti Drown
+spawn_player_drowns:
+  type: world
+  debug: false
+  events:
+    on player changes air level in:spawn:
       - determine cancelled
 
 # Save the bees!
