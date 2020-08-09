@@ -3,9 +3,10 @@
         Adriftus Network Script Data
     </h2>
     <h1 align=center> 
-        Partial Access Directory 
+        Partial Access Directory
     </h2>
 </p>
+
 <p align=center>
     <!--- Organize Tracker ---->
     <a href=https://github.com/AuroraInteractive/network-script-data/labels/Organize>
@@ -49,6 +50,22 @@
     <!--- Server Statuses would be an optimal add here ---->
 </p>
 </p>
+
+<p align=center>
+    <!--- Getting Started Guide ---->
+    <a href=https://github.com/AuroraInteractive/network-script-data/tree/master/docs/guides/1.getting-started.md>
+        <img src=https://img.shields.io/badge/docs-getting%20started-informational.svg?logo=read-the-docs>
+    </a>
+</p>
+
+<!---
+[![License](https://img.shields.io/github/license/AuroraInteractive/network-script-data.svg?logo=read-the-docs)](https://github.com/AuroraInteractive/network-script-data)
+[![PayPal](https://img.shields.io/badge/Donate-PayPal-green.svg?logo=PayPal)](https://www.paypal.com/paypalme2/BearRiley)
+[![DiscordActivity](https://img.shields.io/discord/481711026962694146?logo=discord)](https://discord.gg/4beFHHv)
+[![Dynmap](https://img.shields.io/website?down_color=lightgrey&down_message=Offline&label=Dynmap&up_message=Online&url=http%3A%2F%2F76.119.243.194%3A8123%2Findex.html)](http://76.119.243.194:8123/index.html)
+![Languages](https://img.shields.io/github/languages/count/AuroraInteractive/network-script-data)
+[![Pulse](https://img.shields.io/github/commit-activity/m/AuroraInteractive/network-script-data)](https://github.com/AuroraInteractive/network-script-data/pulse)
+[![FeatureRequests](https://img.shields.io/github/issues/AuroraInteractive/network-script-data/Feature&20Request?label=Feature%20Requests)](https://github.com/AuroraInteractive/network-script-data/issues?q=is%3Aopen+is%3Aissue+label%3A%22Feature+Request%22) --->
 
 
 # Table of Contents
