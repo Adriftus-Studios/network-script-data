@@ -14,7 +14,7 @@ server_warps_yaml:
       location: spawn_market
       material: diamond_block
       lore: <&e>Buy and Sell|<&b>Prices Change Hourly
-      display: <&2>M<&a>arket<&2>pl<&a>ace
+      display: <&a>Marketplace
     grim:
       location: spawn_grim
       material: blaze_powder
