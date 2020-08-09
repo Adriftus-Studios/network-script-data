@@ -46,7 +46,7 @@ mod_command:
           - define id global.player.<[uuid]>
         - else:
           # Define directory and YAML ID
-          - define dir data/players/<[uuid]>.yml
+          - define dir data/global/players/<[uuid]>.yml
           - define id amp.target.<[uuid]>
           # Load yaml data
           - ~yaml id:<[id]> load:<[dir]>
