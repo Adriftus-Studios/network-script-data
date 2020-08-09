@@ -37,7 +37,7 @@
 <p align=center>
     <!--- Website Status ---->
     <a href=>
-        <img src=https://img.shields.io/website?logo=openstreetmap&down_color=lightgrey&down_message=Offline&label=Addriftus.com&up_message=Online&url=http%3A%2F%2Fadriftus.com>
+        <img src=https://img.shields.io/website?logo=openstreetmap&down_color=lightgrey&down_message=Offline&label=Adriftus.com&up_message=Online&url=http%3A%2F%2Fadriftus.com>
     </a>
     <!--- Discord Activity ---->
     <a href=https://discord.gg/MjXemPr>
