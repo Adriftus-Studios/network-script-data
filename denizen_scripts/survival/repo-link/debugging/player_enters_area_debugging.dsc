@@ -1,11 +1,12 @@
 player_enters_area_debugging:
     type: task
+    debug: false
     definitions: area|cause|to|from|cancelled|event_header|event_name|script|queue
     wrapper:
         - define Context <list>
         - foreach area|cause|to|from|cancelled|event_header|event_name as:Tag:
             - define Context <[Context].include_single[<element[<&lt>context.<[Tag]>||<&c>Invalid<&gt>].parsed||<&c>Invalid>]>
-        - ~Run player_enters_area_debugging def:<[Context].include[<queue.script.name>|<queue.id>]>
+        - ~Run player_enters_area_debugging def:<[Context].include[<queue.script.name>|<queue.id.after[<queue.script.name><&3>*<&b>]>]>
     script:
         - if <player.has_permission[override]>:
             - flag server player_enters_area_debugging:++ duration:1s
