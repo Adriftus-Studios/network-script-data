@@ -18,6 +18,8 @@ denizen_scripts/gielinordev
 # ██ [ Scriptdata Directories     ] ██
 scriptdata/global/twitch
 scriptdata/global/bungee
+scriptdata/global/admin
+scriptdata/global/bans
 
 # ██ [ Scriptdata Files           ] ██
 scriptdata/global/Behr_Essentials
