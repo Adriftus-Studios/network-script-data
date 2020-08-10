@@ -58,8 +58,8 @@ chat_system_data_manager:
   type: world
   debug: false
   load:
-    - if <server.has_file[data/globalLiveData/chat/channels.yml]>:
-      - yaml id:chat_config load:data/globalLiveData/chat/channels.yml
+    - if <server.has_file[data/global/chat/channels.yml]>:
+      - yaml id:chat_config load:data/global/chat/channels.yml
     - if <yaml.list.contains[discord_watcher]>:
       - yaml id:discord_watcher unload
     - yaml create id:discord_watcher
