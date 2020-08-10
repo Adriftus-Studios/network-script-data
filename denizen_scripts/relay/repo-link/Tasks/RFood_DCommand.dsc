@@ -21,7 +21,7 @@ RFood_DCommand:
       - define Food <server.flag[Data.Lists.Foods].random>
       - define Message "<&lt>:hambehrgeur:732716255567413309<&gt><&sp>Your random food selection<&co><&nl><[Food]>!"
     - else if <[Args].first> == Add:
-      - define Suggestion "<[Message].after[ ].replace[`].with[']>"
+      - define Suggestion "<[Message].after[add ].replace[`].with[']>"
       - flag server Data.Lists.Foods:->:<[Suggestion]>
       - define Message "<&lt>:hambehrgeur:732716255567413309<&gt><&sp> Added `<[Suggestion]>` to your delicious randomizer listo thingo!"
 
