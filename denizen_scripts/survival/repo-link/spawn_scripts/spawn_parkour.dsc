@@ -2,10 +2,10 @@
 Parkour_events:
   type: world
   events:
-    on player enters area:
-      - define note_name <context.cuboids.filter[note_name.starts_with[parkour]].parse[note_name].first||null>
-      - if <[note_name]> == null:
-        - stop
+    on player enters parkour*:
+      # $ ---- Debugging ------------------------ #
+      - inject player_enters_area_debugging.wrapper
+      # $ ---- ---------------------------------- #
       - define level <[note_name].after[~]||null>
       - choose <[note_name].after[.].before[~]>:
         # parkour.SetWaypoint~#
@@ -72,4 +72,7 @@ parkour_leave_handler:
   type: world
   events:
     on player exits spawn_cuboid:
+      # $ ---- Debugging ------------------------ #
+      - inject player_enters_area_debugging.wrapper
+      # $ ---- ---------------------------------- #
       - flag player parkour:!
