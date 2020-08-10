@@ -62,6 +62,7 @@ network_item_events:
 network_item_inventory:
   type: inventory
   inventory: chest
+  title: <&a>Play Menu
   definitions:
     filler: <item[white_stained_glass_pane]>
     this_player_head: <item[player_head].with[skull_skin=<player.name>;display_name=<player.name>]>
@@ -84,9 +85,8 @@ network_item_inventory_events:
           - case server:
             - inventory open d:command_play_inventory
           - case warp:
-            - inventory close
-            - wait 1t
-            - execute as_op "cmi warp"
+            # TODO
+            - narrate "<&c>Work in Progress."
           - case settings:
             # TODO
             - narrate "<&c>Not Yet Implemented."

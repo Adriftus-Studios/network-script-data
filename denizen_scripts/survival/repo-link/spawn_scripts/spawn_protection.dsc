@@ -19,34 +19,24 @@ spawn_world_protection:
       - if !<player.has_flag[world.spawn.modify]> && !<player.has_flag[world.spawn.can_shoot]>:
         - determine cancelled
 
-# Anti Damaged
+
+# Anti Damaged Events
 spawn_player_takes_damage:
   type: world
   debug: false
   events:
+# Anti Damaged Player
     on player damaged in:spawn:
       - determine cancelled
 
 # Anti Hunger
-spawn_player_food_level:
-  type: world
-  debug: false
-  events:
     on player changes food level in:spawn:
       - determine 20
 
 # Anti Drown
-spawn_player_drowns:
-  type: world
-  debug: false
-  events:
     on player changes air level in:spawn:
       - determine cancelled
 
 # Save the bees!
-spawn_bee_damage_prevent:
-  type: world
-  debug: false
-  events:
     on bee damaged by player in:spawn:
       - determine cancelled
