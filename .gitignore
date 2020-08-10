@@ -10,7 +10,7 @@
 # ██ [ Root Directories           ] ██
 playerdata
 resource_packs/*
-system_scripts/*
+system_scripts/system
 
 # ██ [ Server Directories         ] ██
 denizen_scripts/gielinordev
