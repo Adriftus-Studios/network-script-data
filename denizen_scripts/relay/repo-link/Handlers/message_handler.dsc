@@ -37,7 +37,7 @@ Message_Handler:
         - choose <[Message].before[<&sp>].after[/]>:
           - case reload:
             - ~Run Reload_Scripts_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
-          - case tag parse:
+          - case tag parse t:
             - ~Run Tag_Parser_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case ex execute:
             - ~Run Ex_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
@@ -51,6 +51,8 @@ Message_Handler:
             - ~Run Note_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case webget wget:
             - ~Run Webget_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
+          - case food foodget foodgit gitfood getfood whereshouldieat wheredoieat whereeat whereieat whereeat eatwhere randomfood foodrandom:
+            - ~Run RFood_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
 
     # % ██ [ General Plaintext Scripts       ] ██
       - else if <[Message].starts_with[yay]> || <[Message].contains[<&sp>yay<&sp>]>:
