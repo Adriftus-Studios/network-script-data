@@ -16,7 +16,7 @@ player_enters_area_debugging:
             - define Context <[Context].include[<[Script]>|<[Queue]>]>
             - define Hover <[Context].separated_by[<&nl>]>
             - define Text "<&2>[<&a>Event Fired<&2>]<&b> Hover for Debug Content<&3>."
-            - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
+            - narrate <&hover[<[Hover]>]><[Text]><&end_hover>
 
 player_enters_area_error_handler:
     type: world
