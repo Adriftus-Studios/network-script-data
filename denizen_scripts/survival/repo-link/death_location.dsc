@@ -4,8 +4,6 @@ player_death_event:
   events:
     on player death:
       - flag <player> player_death_location:<player.location>
-      
-      - teleport <player> spawn
       - if <player.world.name> == world:
         - narrate "<&c>You just died at <&b>X <player.location.x.round_to[0]><&c>, <&b>Y <player.location.y.round_to[0]><&c>, <&b>Z <player.location.z.round_to[0]> <&c>in the Overworld"
       - else if <player.world.name> == world_nether:

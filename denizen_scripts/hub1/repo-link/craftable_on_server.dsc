@@ -2,6 +2,8 @@ crafted_allow_command:
   type: command
   debug: false
   name: craftable
+  usage: /craftable [player]
+  description: Whitelists a player to Crafted
   permission: craftable.control
   script:
     - if <context.args.first||null> == null:
@@ -18,6 +20,8 @@ crafted_deny_command:
   type: command
   debug: false
   name: uncraftable
+  usage: /uncraftable [player]
+  description: Revokes a player's access to Crafted
   permission: craftable.control
   script:
     - if <context.args.first||null> == null:

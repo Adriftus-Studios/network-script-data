@@ -101,24 +101,24 @@ action_item_builder:
     definitions: material|display_name|NBT|shiney|lore
     debug: false
     script:
-        - if <[NBT].exists>:
+        - if <[NBT]||null> != null:
             - foreach <[NBT].unescaped> as:Nbt:
                 - define Key <[NBT].before[/]>
                 - define Value <[NBT].after[/]>
                 - define NbtList:|:<[Key]>/<[Value]>
             - define n ;nbt=<[NbtList]>
 
-        - if <[Shiney].exists>:
+        - if <[Shiney]||null> != null:
             - if <[Shiney]>:
-                - define E ;enchantments=silk_touch,1;flags=hide_all
+                - define E ;enchantments=silk_touch,1;hides=all
 
-        - if <[Lore].exists>:
+        - if <[Lore]||null> != null:
             - define l ;lore=<[Lore].unescaped>
 
         - determine <item[Action_Item].with[material=<[Material]>;display_name=<[Display_Name]><[N]||><[E]||><[L]||>]>
 
 Heads:
-    type: yaml data
+    type: data
     Minus: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDgyYzIzOTkyYTAyNzI1ZDllZDFiY2Q5MGZkMDMwN2M4MjYyZDg3ZTgwY2U2ZmFjODA3ODM4N2RlMThkMDg1MSJ9fX0=
     Plus: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWQ4NjA0YjllMTk1MzY3Zjg1YTIzZDAzZDlkZDUwMzYzOGZjZmIwNWIwMDMyNTM1YmM0MzczNDQyMjQ4M2JkZSJ9fX0=
     Neeseeks: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWJiNDMzOTFhOWRiZmY5ZWFkYWUwN2I2ODYyNTk1YzkxZDA0YzU5MzhlMjNjMjg1YWM2MGM0Yjg3NjliMjQifX19

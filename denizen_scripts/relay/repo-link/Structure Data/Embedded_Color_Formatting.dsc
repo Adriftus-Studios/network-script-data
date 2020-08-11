@@ -3,5 +3,5 @@ Embedded_Color_Formatting:
     debug: false
     speed: 0
     script:
-        - if <[Color].exists>:
+        - if <[Color]||null> != null:
             - define Color <script[DDTBCTY].data_key[Colors.<[Color]>]||0>

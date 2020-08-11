@@ -98,8 +98,8 @@ Particle1:
         - foreach <[Path]> as:Loc:
             - if <[Loc].material.is_solid>:
                 - foreach stop
-            - if !<cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].list_entities.exclude[<[Player]>].is_empty>:
-                - ActionBar "<&6>Entity Struck!<&e>: <&2><cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].list_entities.exclude[<[Player]>].parse[name].comma_separated>" targets:<[Player].location.find.players.within[50]>
+            - if !<[Loc].add[0.1,0.1,0.1].to_cuboid[<[Loc].sub[0.1,1,0.1]>].entities.exclude[<[Player]>].is_empty>:
+                - ActionBar "<&6>Entity Struck!<&e>: <&2><[Loc].add[0.1,0.1,0.1].to_cuboid[<[Loc].sub[0.1,1,0.1]>].entities.exclude[<[Player]>].parse[name].comma_separated>" targets:<[Player].location.find.players.within[50]>
                 - foreach stop
             - playeffect effect:CLOUD at:<[Loc]> quantity:1 data:0.1 offset:0.0 visibility:100 special_data:2.5|black
             - playeffect effect:REDSTONE at:<[Loc]> quantity:1 data:0.2 offset:0.1 visibility:100 special_data:2.5|black
@@ -143,8 +143,8 @@ Particle1a:
         #^- foreach <[Path]> as:Loc:
         #^    - if <[Loc].material.is_solid>:
         #^        - foreach stop
-        #^    - if !<cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].list_entities.exclude[<[Player]>].is_empty>:
-        #^        - ActionBar "<&6>Entity Struck!<&e>: <&2><cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].list_entities.exclude[<[Player]>].parse[name].comma_separated>" targets:<[Player].location.find.players.within[50]>
+        #^    - if !<cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].entities.exclude[<[Player]>].is_empty>:
+        #^        - ActionBar "<&6>Entity Struck!<&e>: <&2><cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].entities.exclude[<[Player]>].parse[name].comma_separated>" targets:<[Player].location.find.players.within[50]>
         #^        - foreach stop
         #^    - playeffect effect:CLOUD at:<[Loc]> quantity:1 data:0.1 offset:0.0 visibility:100 special_data:2.5|black
         #^    - playeffect effect:REDSTONE at:<[Loc]> quantity:1 data:0.2 offset:0.1 visibility:100 special_data:2.5|black
@@ -185,8 +185,8 @@ Particle1b:
         #_ collision
             - if <[LocSp].material.is_solid>:
                 - foreach stop
-            - if !<cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].list_entities.exclude[<[Player]>].is_empty>:
-                - ActionBar "<&6>Entity Struck!<&e>: <&2><cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].list_entities.exclude[<[Player]>].parse[name].comma_separated>" targets:<[Player].location.find.players.within[50]>
+            - if !<[Loc].add[0.1,0.1,0.1].to_cuboid[<[Loc].sub[0.1,1,0.1]>].entities.exclude[<[Player]>].is_empty>:
+                - ActionBar "<&6>Entity Struck!<&e>: <&2><[Loc].add[0.1,0.1,0.1].to_cuboid[<[Loc].sub[0.1,1,0.1]>].entities.exclude[<[Player]>].parse[name].comma_separated>" targets:<[Player].location.find.players.within[50]>
                 - foreach stop
         #_
             - playeffect effect:CLOUD at:<[Locsp]> quantity:1 data:0.1 offset:0.0 visibility:100 special_data:2.5|black
@@ -292,7 +292,7 @@ smallspiralparticle4:
         #- repeat <[q]>:
         - define Points <[Player].location.above[1].points_between[<[TargetLoc]>].distance[0.05]>
         - define PointCt <[Points].size>
-        - define M <cuboid[<[Player].location>|<[TargetLoc]>].center>
+        - define M <[Player].location.to_cuboid[<[TargetLoc]>].center>
         #$ replace ending [1] with distance multiplied
         - define MaxY <element[1].add[<[Player].location.y.sub[<[TargetLoc].y>]>].min[3].add[2]>
         - foreach <[Points]> as:Loc:
@@ -399,8 +399,8 @@ Particle2m:
         - foreach <[Path]> as:Loc:
             - if <[Loc].material.is_solid>:
                 - foreach stop
-            - if !<cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].list_entities.exclude[<[Player]>].is_empty>:
-                - ActionBar "<&6>Entity Struck!<&e>: <&2><cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].list_entities.exclude[<[Player]>].parse[name].comma_separated>"
+            - if !<[Loc].add[0.1,0.1,0.1].to_cuboid[<[Loc].sub[0.1,1,0.1]>].entities.exclude[<[Player]>].is_empty>:
+                - ActionBar "<&6>Entity Struck!<&e>: <&2><cuboid[<[Loc].add[0.1,0.1,0.1]>|<[Loc].sub[0.1,1,0.1]>].entities.exclude[<[Player]>].parse[name].comma_separated>"
                 - foreach stop
 
 
@@ -425,10 +425,10 @@ Entity_Particle_RadiusSwirl_Layered2:
     definitions: Target|WhileFlag|Radius|Density|Speed|Layers|Particle|Offset
     script:
         #@ Definition Check & Defaults [ 1-2 / 8 ]
-        - if !<[Target].exists>:
+        - if <[Target]||null> == null:
             - narrate format:Colorize_Red "Missing Target"
             - stop
-        - if !<[WhileFlag].exists>:
+        - if <[WhileFlag]||null> == null:
             - define Flag Test
 
         #@ Check for active queue to remove & replace
@@ -441,17 +441,17 @@ Entity_Particle_RadiusSwirl_Layered2:
         #- Check defs?
         #^- define Definitions <list[Radius|Density|Speed|Layers|Particle|Offset]>
         #^- define Defaults <list[4|4|4|3|Villager_Happy|0,0.45,0]>
-        - if !<[Radius].exists>:
+        - if <[Radius]||null> == null:
             - define Radius 4
-        - if !<[Density].exists>:
+        - if <[Density]||null> == null:
             - define Density 4
-        - if !<[Speed].exists>:
+        - if <[Speed]||null> == null:
             - define Speed 4
-        - if !<[Layers].exists>:
+        - if <[Layers]||null> == null:
             - define Layers 3
-        - if !<[Particle].exists>:
+        - if <[Particle]||null> == null:
             - define Particle Villager_Happy
-        - if !<[Offset].exists>:
+        - if <[Offset]||null> == null:
             - define Offset 0,0.45,0
 
         #@ Display Particles

@@ -36,7 +36,7 @@ skin_url_handler:
             - run skin_url_task def:<[key]>|<[url]>|<[model]> id:<[key]> instantly
             - while <queue.exists[<[key]>]>:
                 - if <[loop_index]> > 20:
-                    - queue q@<[key]> clear
+                    - queue <queue[<[key]>]> clear
                     - narrate "<&a>The request timed out. Is the url valid?"
                     - stop
                 - wait 5t

@@ -1,5 +1,7 @@
 store_hub_mysteryShop_command:
   type: command
+  usage: /openmysteryShop (player)
+  description: Opens the mystery shop
   name: openmysteryShop
   script:
     - inventory open d:store_hub_mysteryShop player:<server.match_player[<context.args.first>]||<player>>
@@ -8,6 +10,7 @@ store_hub_mysteryShop_command:
 store_hub_mysteryShop:
   type: inventory
   debug: false
+  inventory: chest
   size: 27
   title: <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&5>S<&d>h<&5>o<&d>p
   definitions:
@@ -27,9 +30,9 @@ store_hub_mysteryShop_filler:
  material: glass_pane
  display name: <&b>
  enchantments:
- - damage_all:1
+ - sharpness:1
  mechanisms:
-   flags: HIDE_ENCHANTS|HIDE_ATTRIBUTES
+   hides: ENCHANTS|ATTRIBUTES
 
 
 store_hub_mysteryShop_filler_events:
@@ -44,17 +47,18 @@ store_hub_mysteryShop_boxes:
  material: ender_chest
  display name: <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>
  enchantments:
- - damage_all:1
+ - sharpness:1
  lore:
  - "<&e>Buy some <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>."
  - "<&e>Redeem these at the Crates area on the Hub."
  - "<&b>You can access your available cosmetics with <&a>/cosmetics"
  mechanisms:
-   flags: HIDE_ENCHANTS|HIDE_ATTRIBUTES
+   hides: ENCHANTS|ATTRIBUTES
 
 store_hub_mysteryShop_boxes_inventory:
     type: inventory
     debug: true
+    inventory: chest
     title: <&a>Buying <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.
     size: 45
     definitions:
@@ -91,14 +95,11 @@ store_hub_mysteryShop_boxes_events:
   events:
     on player clicks store_hub_mysteryShop_boxes in store_hub_mysteryShop:
       - inventory open d:store_hub_mysteryShop_boxes_inventory
-
     on player clicks ender_chest in store_hub_mysteryShop_boxes_inventory:
       - determine passively cancelled
-      - if <proc[getGlobalPlayerData].context[economy.AuroraCoins.current]> >= <context.item.nbt[price]>:
-        - define newBal <proc[getGlobalPlayerData].context[economy.AuroraCoins.current].-[<context.item.nbt[price]>]>
-        - run setGlobalPlayerData def:economy.AuroraCoins.current|<[newBal]>
-        - execute server "/gmysterybox give <player.name> <context.item.nbt[number]> <context.item.nbt[stars]>"
-        - narrate "<&a>You have succesfully purchased: <&r><context.item.nbt[number]> <&e><list.pad_left[<context.item.nbt[stars]>].with[⭐]>].separated_by[]><&7><list.pad_right[<context.item.nbt[stars].-[5].abs>].with[✩]>].separated_by[]> <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>."
+      - if <player.money> >= <context.item.nbt[price]>:
+        - yaml id:global.player.<player.uuid> set Economy.AdriftusCoin:-:<context.item.nbt[price]>
+        - narrate "<&a>You have succesfully purchased: <&r><context.item.nbt[number]> <&e><list.pad_left[<context.item.nbt[stars]>].with[⭐].separated_by[]><&7><list.pad_right[<context.item.nbt[stars].-[5].abs>].with[✩].separated_by[]> <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>."
       - else:
-        - narrate "<&c>You do not have enough <&b>Aurora Coins<&c> for that."
+        - narrate "<&c>You do not have enough <&b>Adriftus Coins<&c> for that."
       - inventory close

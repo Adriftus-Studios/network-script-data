@@ -3,7 +3,7 @@ store_hub_mysteryShop_command:
   name: openmysteryShop
   description: Opens the Mystery Shop
   usage: /openmysteryshop
-  permission: not.a.perm
+  permission: adriftus.admin
   script:
     - inventory open d:store_hub_mysteryShop player:<server.match_player[<context.args.first>]||<player>>
 

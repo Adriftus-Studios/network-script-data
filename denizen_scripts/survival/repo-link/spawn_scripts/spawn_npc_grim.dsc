@@ -64,9 +64,7 @@ grim_steal_prevention:
           - determine passively cancelled
           - playsound <player> sound:UI_BUTTON_CLICK
           - inventory close
-        - case filler:
-          - determine cancelled
-        - case head:
+        - case filler head:
           - determine cancelled
         - case location:
           - determine passively cancelled
@@ -79,7 +77,7 @@ grim_steal_prevention:
             - narrate "<&c>You do not have a death location for me to show you."
             - inventory close
           - else:
-            - narrate "<&a>You death location is <player.flag[player_death_location].as_location.simple.formatted||not set>"
+            - narrate "<&a>Your death location is <player.flag[player_death_location].as_location.simple.formatted||not set>"
             - inventory close
             - teleport <player> <player.flag[player_death_location].as_location.up[2]>
             - adjust <player> gamemode:spectator
@@ -110,7 +108,7 @@ grim_steal_prevention:
             - inventory close
             - playeffect at:<player.location.center.up[1]> effect:totem quantity:50
             - wait 1s
-            - teleport <player> <player.flag[player_death_location].as_location||null>
+            - teleport <player> <player.flag[player_death_location].as_location>
             - flag <player> player_death_location:!
         - case decline:
           - inventory close

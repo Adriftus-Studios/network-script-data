@@ -17,6 +17,8 @@ disposal_command:
   type: command
   name: disposal
   permission: custom.command.dispose
+  usage: /disposal
+  description: Opens the disposal inventory
   permission message: <&c>Sorry, <&6><player.name><&c>, you can't use <&d><&l>/disposal<&r><&c> because you don't have permission!
   script:
     - inventory open d:disposal_inventory
@@ -39,10 +41,11 @@ disposal_inventory:
 # Items
 trashinfo:
   type: item
-  material: player_head[skull_skin=d545a15d-96f6-4602-afb2-6cb0f0375ea6|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGVlZjc4ZWRkNDdhNzI1ZmJmOGMyN2JiNmE3N2Q3ZTE1ZThlYmFjZDY1Yzc3ODgxZWM5ZWJmNzY4NmY3YzgifX19=]
+  material: player_head
   display name: <&6>Help
   mechanisms:
     nbt: action/trashinfo
+    skull_skin: d545a15d-96f6-4602-afb2-6cb0f0375ea6|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGVlZjc4ZWRkNDdhNzI1ZmJmOGMyN2JiNmE3N2Q3ZTE1ZThlYmFjZDY1Yzc3ODgxZWM5ZWJmNzY4NmY3YzgifX19=
   lore:
   - <&6><&n>______________________________
   - <&d>Items placed here are destroyed forever!

@@ -7,7 +7,7 @@ MagicSword:
         - sharpness:10
     mechanisms:
         unbreakable: true
-        flags: hide_all
+        hides: all
 
 MagicSwordHandler:
     type: world
@@ -40,7 +40,7 @@ MagicSwordHandler:
                 #- narrate "<&c>Old<&4>: <&e><context.final_damage>"
                 #- narrate "<&e>New<&6>: <&2><[Damage]>"
                 - determine <[Damage]>
-        on player right clicks with MagicSword:
+        on player right clicks block with:MagicSword:
             - if <player.target||null> == null:
                 - stop
             - if !<player.target.is_spawned>:

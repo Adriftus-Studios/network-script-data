@@ -174,7 +174,7 @@ tutorial_spawn_finale:
   script:
     - repeat 20:
       - wait 1t
-      - playeffect redstone at:<location[tutorial_dragon]> special_data:1|black quantity:<[loop_value].*[2]> offset:<[loop_value].*[0.2]>
+      - playeffect redstone at:<location[tutorial_dragon]> special_data:1|black quantity:<[value].mul[2]> offset:<[value].mul[0.2]>
       - playeffect dragon_breath at:<location[tutorial_dragon]> data:0.5 quantity:10 offset:0
 
 
@@ -197,11 +197,11 @@ tutorial_start:
     - playsound <player> sound:entity_ender_pearl_throw volume:0.5
     - flag player tutorial:0
     - foreach <script[tutorial_data].parsed_key[start.hologram]>:
-      - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value]>] <location[tutorial_start_hologram].sub[0,<[loop_index].*[0.25]>,0]> duration:10m
-    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&a><&b><script[tutorial_data].parsed_key[start.start_button]>] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.*[0.25]>,0]> duration:10m
-    - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.+[4].*[0.25]>,0]> duration:10m
-    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&b><&a><script[tutorial_data].parsed_key[start.skip_button]>] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.*[0.25]>,0]> duration:10m
-    - fakespawn armor_stand[visible=false;custom_name=SkipTutorial] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.+[4].*[0.25]>,0]> duration:10m
+      - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value]>] <location[tutorial_start_hologram].sub[0,<[loop_index].mul[0.25]>,0]> duration:10m
+    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&a><&b><script[tutorial_data].parsed_key[start.start_button]>] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.mul[0.25]>,0]> duration:10m
+    - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.add[4].mul[0.25]>,0]> duration:10m
+    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&b><&a><script[tutorial_data].parsed_key[start.skip_button]>] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.mul[0.25]>,0]> duration:10m
+    - fakespawn armor_stand[visible=false;custom_name=SkipTutorial] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.add[4].mul[0.25]>,0]> duration:10m
 
 tutorial_next:
   type: task
@@ -232,7 +232,7 @@ tutorial_next:
               - define value <[value].above[2]>
             - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
             - wait 1t
-          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].+[5]>:
+          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].add[5]>:
             - narrate "<&4>You have gone too far from your next tutorial location."
             - narrate "<element[<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>.].on_hover[<&e>Click to restart the tutorial].on_click[/tutorial]>"
             - inject tutorial_skipped
@@ -241,9 +241,9 @@ tutorial_next:
             - define last_distance <player.location.distance[<location[tutorial_<[stage]>]>]>
           - wait 5t
       - foreach <script[tutorial_data].parsed_key[<[stage]>.hologram]>:
-        - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<[value]>] <location[tutorial_<[stage]>].above[3].sub[0,<[loop_index].*[0.25]>,0]> duration:10m
+        - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<[value]>] <location[tutorial_<[stage]>].above[3].sub[0,<[loop_index].add[0.25]>,0]> duration:10m
         - wait 4t
-      - if <script[tutorial_data].parsed_key[<[stage].+[1]>]||null> == null:
+      - if <script[tutorial_data].parsed_key[<[stage].add[1]>]||null> == null:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<script[tutorial_data].parsed_key[complete_button]>] <location[tutorial_<[stage]>].above[1]> duration:10m
       - else:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<script[tutorial_data].parsed_key[continue_button]>] <location[tutorial_<[stage]>].above[1]> duration:10m

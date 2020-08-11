@@ -18,7 +18,7 @@ NPC_Interaction:
     # % ██ [ Give the player a period of time to cancel out option with QuickClick ] ██
         - wait 2s
     # % ██ [ Check if forcibly removing an option, or set of options, from the cooldown ] ██
-        - if <[DeDupe].exists>:
+        - if <[DeDupe]||null> != null:
             - foreach <[Dedupe].unescaped.as_list> as:Selection:
                 - flag player Behrry.Interaction.OptionsCooldown:<-:<queue.split[/].get[2].as_script.name>/<[Selection]>
         

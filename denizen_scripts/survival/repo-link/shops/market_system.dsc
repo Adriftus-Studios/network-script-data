@@ -2,7 +2,7 @@
 market_command:
   type: command
   name: open_market
-  permission: not.a.perm
+  permission: adriftus.admin
   script:
     - if <server.flag[market_open]>:
       - inventory open d:market_system_main_GUI player:<server.match_player[<context.args.first>]>
@@ -34,19 +34,19 @@ market_system_data:
     crafting:
       material: diamond_ore
       CMD: 0
-      lore: &eVarious materials for crafting.
+      lore: <&e>Various materials for crafting.
     building:
       material: oak_planks
       CMD: 0
-      lore: &3Building Stuffs!
+      lore: <&3>Building Stuffs!
     potion_ingredients:
       material: spider_eye
       CMD: 0
-      lore: &5Brewing Ingredients for the masses!
+      lore: <&5>Brewing Ingredients for the masses!
     commodities:
       material: milk_bucket
       CMD: 0
-      lore: &aTrade Goods!
+      lore: <&a>Trade Goods!
   items:
     # Crafting
     diamond:
@@ -206,8 +206,8 @@ market_system_main_GUI:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
   procedural items:
     - foreach <script[market_system_data].list_keys[categories]> as:category:
-      - define name <&e><[category].to_titlecase>
-      - define lore <script[market_system_data].data_key[categories.<[category]>.lore].parse_color>
+      - define name <&e><[category].replace_text[_].with[<&sp>].to_titlecase>
+      - define lore <script[market_system_data].parsed_key[categories.<[category]>.lore]>
       - define material <script[market_system_data].data_key[categories.<[category]>.material]>
       - define CMD <script[market_system_data].data_key[categories.<[category]>.CMD]>
       - define list:|:<item[<[material]>].with[custom_model_data=<[CMD]>;display_name=<[name]>;lore=<[lore]>;nbt=category/<[category]>]>

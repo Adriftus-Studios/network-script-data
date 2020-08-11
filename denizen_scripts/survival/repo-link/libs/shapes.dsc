@@ -200,7 +200,7 @@ cosmetic_command:
           - define offset:<player.location.sub[<[center]>]>
           - define points:<[layers].get[<[value]>].unescaped>
           - define points:|:<[layers].get[<[layers].size.sub[<[value]>]>].unescaped>
-          - playeffect redstone at:<[points].parse[add[<[offset]>].with_world[<player.location.world>]]> quantity:1 offset:0 visibility:100 special_data:1|<co@91,225,245>
+          - playeffect redstone at:<[points].parse[add[<[offset]>].with_world[<player.location.world>]]> quantity:1 offset:0 visibility:100 special_data:1|<color[91,225,245]>
           - wait 1t
     - else if <context.args.first> == curve1:
       - define sphere:<proc[define_sphere1].context[<player.location>|1.5|1]>
@@ -212,7 +212,7 @@ cosmetic_command:
         - narrate "<&b>Activated cosmetic effect curve1"
         - flag player curve
       - while <player.has_flag[curve]||false>:
-        - if <player.is_spawned||false> == false:
+        - if !<player.is_online>:
           - stop
         - define point:<[sphere].random>
         - define offset:<player.location.sub[<[center]>]>
@@ -282,7 +282,7 @@ test_effects_command:
           - define offset:<[center].sub[<player.location>]>
           - define points:<[layers].get[<[value]>].unescaped>
           - define points:|:<[layers].get[<[layers].size.sub[<[value]>]>].unescaped>
-          - playeffect redstone at:<[points].parse[sub[<[offset]>]]> quantity:1 offset:0 visibility:100 special_data:1|<co@91,225,245>
+          - playeffect redstone at:<[points].parse[sub[<[offset]>]]> quantity:1 offset:0 visibility:100 special_data:1|<color[91,225,245]>
           - wait 2t
     - case circle:
       - define points:<proc[define_circle].context[<player.location.forward[4]>|3]>

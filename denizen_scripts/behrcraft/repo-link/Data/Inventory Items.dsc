@@ -11,7 +11,7 @@ LastPageArrow:
     mechanisms:
         custom_model_data: 131
     #potion_effects: "INSTANT_HEAL,false,false"
-    #flags: hide_all
+    #hides: all
     display name: <&2><&chr[25c0]> <&2>L<&a>ast <&2>P<&a>age <&2><&chr[25c0]>
   #<&a>◀ <&2>L<&a>ast <&2>P<&a>age <&2>◀
 NextPageArrow:
@@ -21,7 +21,7 @@ NextPageArrow:
     mechanisms:
         custom_model_data: 132
       #potion_effects: "INSTANT_HEAL,false,false"
-        flags: hide_all
+        hides: all
     display name: <&a><&chr[27a4]> <&2>N<&a>ext <&2>P<&a>age <&2><&chr[27a4]>
   #display name: <&a><&chr[25b6]> <&2>N<&a>ext <&2>P<&a>age <&2><&chr[25b6]>
   #<&a>◀ <&2>L<&a>ast <&2>P<&a>age <&2>◀
@@ -33,7 +33,7 @@ Deposit_All:
     material: music_disc_11
     mechanisms:
         custom_model_data: 134
-        flags: hide_all
+        hides: all
     display name: <&2>D<&a>eposit <&2>A<&a>ll
 Deposit_Equipement:
     type: item
@@ -41,7 +41,7 @@ Deposit_Equipement:
     material: music_disc_11
     mechanisms:
         custom_model_data: 133
-        flags: hide_all
+        hides: all
     display name: <&2>D<&a>eposit <&2>A<&a>ll <&2>E<&a>quipment
 Equipment_Slot:
     type: item
@@ -49,7 +49,7 @@ Equipment_Slot:
     material: music_disc_11
     mechanisms:
         custom_model_data: 136
-        flags: hide_all
+        hides: all
     display name: <&2>E<&a>quipment <&2>M<&a>enu
 
 
@@ -69,8 +69,7 @@ action_item_handler:
                         - define NbtData:|:<[Key]>/<context.item.nbt[<[Key]>]>
                     - run <script[<context.item.nbt[Menu]>]> def:<[NbtData].escaped> npc:<npc[<context.item.nbt[NpcID]>]>
                     #- run <script[<context.item.nbt[Menu]>]> def:<context.item.nbt[Action]> npc:<npc[<context.item.nbt[NpcID]>]>
-
-                - else if <context.item.has_nbt[Menu]>:
+                - else:
                     - foreach <context.item.nbt_keys> as:Key:
                         - define NbtData:|:<[Key]>/<context.item.nbt[<[Key]>]>
                     - run <script[<context.item.nbt[Menu]>]> def:<[NbtData].escaped>|<context.click>|<context.raw_slot>
@@ -81,8 +80,8 @@ action_item_handler:
                 - narrate format:colorize_green "Spawn Meeseeks? Place again to confirm"
                 - determine cancelled
 
-            - if <context.item_in_hand.has_nbt[Script]>:
-                - run <script[<context.item_in_hand.nbt[Script]>]> def:<context.location>
+            - if <player.item_in_hand.has_nbt[Script]>:
+                - run <script[<player.item_in_hand.nbt[Script]>]> def:<context.location>
             - determine cancelled
 #$ <proc[action_item_builder].context[]>
 action_item_builder:
@@ -90,18 +89,18 @@ action_item_builder:
     definitions: material|display_name|NBT|shiney|lore
     debug: false
     script:
-        - if <[NBT].exists>:
+        - if <[NBT]||null> != null:
             - foreach <[NBT].unescaped> as:Nbt:
                 - define Key <[NBT].before[/]>
                 - define Value <[NBT].after[/]>
                 - define NbtList:|:<[Key]>/<[Value]>
             - define n ;nbt=<[NbtList]>
 
-        - if <[Shiney].exists>:
+        - if <[Shiney]||null> != null:
             - if <[Shiney]>:
-                - define E ;enchantments=silk_touch,1;flags=hide_all
+                - define E ;enchantments=silk_touch,1;hides=all
 
-        - if <[Lore].exists>:
+        - if <[Lore]||null> != null:
             - define l ;lore=<[Lore].unescaped>
 
         - determine <item[Action_Item].with[material=<[Material]>;display_name=<[Display_Name]><[N]||><[E]||><[L]||>]>

@@ -18,7 +18,7 @@ Console_Handler:
             - if <context.queue.contains[EXCOMMAND_]||false>:
                 - stop
 
-            - if <server.match_offline_player[behr_].is_online>:
+            - if <server.match_offline_player[behr_riley].is_online>:
                 - if <queue.exists[<context.queue.id||null>]>:
                     - define Hover0 "<&c>Click to Kill Queue<&4><&nl><context.queue.id>"
                     - define Text0 <&c>[<&4><&chr[2716]><&c>]<&r><&sp>
@@ -26,7 +26,6 @@ Console_Handler:
                     - define QK <proc[MsgCmd].context[<[Hover0]>|<[Text0]>|<[Command0]>]>
                 - define Hover  "<&e>in <&c><context.queue.script.relative_filename||null><&e><&nl><context.message||null>"
                 - define Text "<&4>Script Error<&co> <&c><context.queue.script.name||null> <&e>on line<&6>: <&4>[<&c><context.line||unknown><&4>]"
-
                 - narrate targets:<server.match_player[behr_riley]> <[QK]||><proc[MsgHover].context[<[Hover]>|<[Text]>]>
 
         on server generates exception:

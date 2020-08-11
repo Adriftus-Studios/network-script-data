@@ -26,7 +26,7 @@ mod_log_action:
     - define logLevel LEVEL<&co><&sp><[level]><&nl>
     - define logInfraction INFRACTION<&co><&sp><[infraction]><&nl>
     - define logAction ACTION<&co><&sp><[action]><&nl>
-    - if <[length].exists>:
+    - if <[length]||null> != null:
       - define logLength LENGTH<&co><&sp><[length]><&nl>
     - else:
       - define logLength LENGTH<&co><&sp>Not<&sp>Applied<&nl>

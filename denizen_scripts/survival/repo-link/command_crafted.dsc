@@ -2,6 +2,8 @@ craftable:
   type: command
   name: craftable
   debug: false
+  description: Allows players to access Crafted
+  usage: /craftable <&lt>player<&gt>
   script:
     - if <player.has_flag[craft_admin]>:
       - if <player.has_flag[crafted_confirm]> && <player.flag[crafted_confirm]> == <context.args.first||null>:
@@ -32,6 +34,8 @@ uncraftable:
   type: command
   name: uncraftable
   debug: false
+  description: Allows players to revoke access from Crafted
+  usage: /uncraftable <&lt>player<&gt>
   script:
     - if <player.has_flag[craft_admin]>:
       - define target <server.match_offline_player[<context.args.first>]||<context.args.first.as_player||null>>
@@ -53,6 +57,8 @@ list_crafted:
   type: command
   name: list_crafted
   debug: false
+  description: Lists the whitelisted players on Crafted
+  usage: /list_crafted
   script:
     - if <player.has_flag[craft_admin]>:
       - foreach <yaml[crafted].read[whitelist].deduplicate> as:user:

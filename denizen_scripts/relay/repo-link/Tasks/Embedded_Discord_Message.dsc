@@ -38,20 +38,20 @@ Embedded_Discord_Message_New:
         - define Embeds <map>
 
         - foreach <list[username|avatar_url|tts]> as:String:
-            - if <[<[String]>].exists>:
+            - if <[<[String]>]||null> != null:
                 - define Data <[Data].with[<[String]>].as[<[<[String]>]>]>
 
         - foreach <list[title|description|author|footer|fields|Thumbnail|image]> as:String:
-            - if <[<[String]>].exists>:
+            - if <[<[String]>]||null> != null:
                 - define Embeds <[Embeds].with[<[String]>].as[<[<[String]>]>]>
 
-        - if <[Color].exists>:
+        - if <[Color]||null> != null:
             - inject Embedded_Color_Formatting
             - if <[Color]> == 0:
                 - define Color 5820671
             - define Embeds <[Embeds].with[color].as[<[Color]>]>
 
-        - if <[Timestamp].exists>:
+        - if <[Timestamp]||null> != null:
             - if <[TimeStamp]> == Default:
                 - inject Embedded_Time_Formatting
             - define Embeds <[Embeds].with[timestamp].as[<[Time]>]>

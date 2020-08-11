@@ -8,10 +8,10 @@ Lighter_Handler:
     type: world
     debug: false
     events:
-        on player right clicks with Lighter:
+        on player right clicks block with:Lighter:
             - if <player.has_permission[Behrry.Constructor.Light]>:
                 - define Loc <player.location.cursor_on>
-                - define Chunk <player.location.chunk.after[@]>
+                - define Chunk <player.location.chunk.x>,<player.location.chunk.z>,<player.world>
                 - if !<server.has_flag[LighterChunks.<[Chunk]>]>:
                     - flag server LighterChunks.<[Chunk]>:->:<[Loc]>
                 - else if !<server.flag[LighterChunks.<[Chunk]>].contains[<[Loc]>]>:

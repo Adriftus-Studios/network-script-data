@@ -1,7 +1,7 @@
 player_joins_server:
   type: world
   events:
-    on player logs in for the first:
+    on player logs in for the first time:
       - flag player first_joined:true
     on player joins:
       - if <player.has_flag[first_joined]>:

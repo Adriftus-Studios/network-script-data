@@ -1,7 +1,9 @@
 its_a_trap:
   type: command
   name: pig_trap
-  permission: not.a.perm
+  permission: adriftus.admin
+  usage: /pig_trap <&l>player<&gt>
+  description: Pig Trap!
   script:
     - adjust <queue> linked_player:<server.match_player[<context.args.first>]>
     - adjust <player> noclip:true

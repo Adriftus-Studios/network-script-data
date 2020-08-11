@@ -66,7 +66,7 @@ graves_handler:
     - ~yaml id:graves savefile:data/graves.yml
   tick:
     - foreach <yaml[graves].list_keys[grave]||<list>>:
-      - yaml id:graves set grave.<[value]>.time:-:1
+      - yaml id:graves set grave.<[value]>.time:--
       - if <yaml[graves].read[grave.<[value]>.time]> < 1:
         - if !<[value].as_location.chunk.is_loaded>:
           - chunkload <[value].as_location.chunk> duration:20s

@@ -8,8 +8,8 @@ survival_rtp:
     - define min <script.data_key[minimum]>
     - define max <script.data_key[maximum]>
     - define world <script.data_key[world]>
-    - define x <util.random.int[<[min]>].to[<[max]>].*[<list[1|-1].random>]>
-    - define z <util.random.int[<[min]>].to[<[max]>].*[<list[1|-1].random>]>
+    - define x <util.random.int[<[min]>].to[<[max]>].mul[<list[1|-1].random>]>
+    - define z <util.random.int[<[min]>].to[<[max]>].mul[<list[1|-1].random>]>
     - chunkload <location[<[x]>,200,<[z]>,<[world]>].chunk> duration:10s
     - wait 5t
     - narrate "<&a>You have 1 minute of no fall damage."

@@ -65,8 +65,8 @@ BawbShop:
                 # $ ██ [ Currency Remove, Debug Mode                              ] ██
                 # $ ██ [ flag player Behrry.Economy.Coins:-:<[MeeseeksPrice]>     ] ██
                     - take money <[MeeseeksPrice]>
-                    - flag player Behrry.Meeseeks.MeeseeksCount:+:1
-                    - flag player Behrry.Meeseeks.UnspawnedCount:+:1
+                    - flag player Behrry.Meeseeks.MeeseeksCount:++
+                    - flag player Behrry.Meeseeks.UnspawnedCount:++
                     - define Box "<item[Meeseeks_Box].with[material=player_head;display_name=<&3>M<&b>eeseeks<&sp><&3>T<&b>ransportation<&sp><&3>B<&b>ox;nbt=<list[uniquifier/<util.random.uuid>]>;skull_skin=2fb3eec1-a76d-4c75-a817-b81895a76c07|eyJ0aW1lc3RhbXAiOjE1ODU1MzA1OTYxNjcsInByb2ZpbGVJZCI6IjJmYjNlZWMxYTc2ZDRjNzVhODE3YjgxODk1YTc2YzA3IiwicHJvZmlsZU5hbWUiOiJQaW5reSIsInNpZ25hdHVyZVJlcXVpcmVkIjp0cnVlLCJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTgzMjRkMzhkYzE1ZjM4Nzc5ZDIyM2M0OTUzYzQ3ZTI2NDI4YjFlNzQ1MjQyOTE0NjAwNTdkNmQxZWY4ZWRmNiIsIm1ldGFkYXRhIjp7Im1vZGVsIjoic2xpbSJ9fX19;lore=<list[<&a>There's an unspawned|<&a>Meeseeks in here!]>]>"
                     - narrate "You bought a Meeseeks!"
                     - give <[Box]>
@@ -82,7 +82,7 @@ SpawnMeeseeks:
         - if !<player.has_flag[Behrry.Meeseeks.UnspawnedCount]>:
             - flag player Behrry.Meeseeks.UnspawnedCount:0
         - if <player.flag[Behrry.Meeseeks.UnspawnedCount]> > 0:
-            - flag player Behrry.Meeseeks.UnspawnedCount:-:1
+            - flag player Behrry.Meeseeks.UnspawnedCount:--
             - take item_in_hand
             - create player Meeseeks <[Loc].add[0.5,1.1,0.5]> save:Meeseeks
             - foreach <[Loc].add[0.5,0.2,0.5].points_between[<[Loc].add[0.5,2.5,0.5]>].distance[0.01]> as:Area:
@@ -114,7 +114,7 @@ Meeseeks_Operator:
     definitions: NbtData|NpcID
     script:
     # @ ██ [ Default to Operator Menu                      ] ██
-        - if !<[NbtData].exists>:
+        - if <[NbtData]||null> == null:
             - if <player> == <npc.owner>:
                 - define Action OperatorMenu
             - else if <npc.has_flag[Meeseeks.Shop.Inventory]>:
@@ -123,7 +123,7 @@ Meeseeks_Operator:
                 - narrate format:NPC Howdy!
                 - stop
         - else:
-            - define Action <[NbtData].unescaped.as_list.map_get[Action]>
+            - define Action <[NbtData].unescaped.as_map.get[Action]>
 
     # @ ██ [ Determine Option                              ] ██
         - choose <[Action]>:
@@ -417,7 +417,7 @@ Meeseeks_Operator:
                 - define ShopContents:->:<[NewItem]>
             #- define ShopContents:|:<[Chest].inventory.list_contents.exclude[<item[air]>]>
     InventoryBuilder:
-        - if !<[ShopContents].exists>:
+        - if <[ShopContents]||null> == null:
             - define ShopContents:|:air
     # @ ██ [ Determine Definitions [1/2]                   ] ██
         - define Title "<&3><npc.owner.flag[Behrry.Essentials.Display_name]||<npc.owner.name>><&r><&2>'s Shop"
@@ -546,10 +546,10 @@ Entity_Particle_RadiusSwirl_Layered:
     definitions: Target|WhileFlag|Radius|Density|Speed|Layers|Particle|Offset
     script:
         #@ Definition Check & Defaults [ 1-2 / 8 ]
-        - if !<[Target].exists>:
+        - if <[Target]||null> == null:
             - narrate format:Colorize_Red "Missing Target"
             - stop
-        - if !<[WhileFlag].exists>:
+        - if <[WhileFlag]||null> == null:
             - define Flag Test
 
         #@ Check for active queue to remove & replace
@@ -562,17 +562,17 @@ Entity_Particle_RadiusSwirl_Layered:
         #- Check defs?
         #^- define Definitions <list[Radius|Density|Speed|Layers|Particle|Offset]>
         #^- define Defaults <list[4|4|4|3|Villager_Happy|0,0.45,0]>
-        - if !<[Radius].exists>:
+        - if <[Radius]||null> == null:
             - define Radius 4
-        - if !<[Density].exists>:
+        - if <[Density]||null> == null:
             - define Density 4
-        - if !<[Speed].exists>:
+        - if <[Speed]||null> == null:
             - define Speed 4
-        - if !<[Layers].exists>:
+        - if <[Layers]||null> == null:
             - define Layers 3
-        - if !<[Particle].exists>:
+        - if <[Particle]||null> == null:
             - define Particle Villager_Happy
-        - if !<[Offset].exists>:
+        - if <[Offset]||null> == null:
             - define Offset 0,0.45,0
 
         #@ Display Particles

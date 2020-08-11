@@ -28,13 +28,13 @@ mod_actions_inv_events:
   events:
     on player clicks mod_ban_item in mod_actions_inv:
       - flag <player> amp_map:<player.flag[amp_map].as_map.with[from].as[<tern[<context.click.is[==].to[right]>].pass[network].fail[server]>]>
-      - inventory open d:<inventory[mod_ban_inv]>
+      - inventory open d:mod_ban_inv
 
     on player clicks mod_send_item in mod_actions_inv:
-      - inventory open d:<inventory[mod_send_inv]>
+      - inventory open d:mod_send_inv
 
     on player clicks mod_kick_item in mod_actions_inv:
-      - inventory open d:<inventory[mod_kick_inv]>
+      - inventory open d:mod_kick_inv
 
     on player right clicks mod_*mute_item in mod_actions_inv:
       # - Check if target player is muted from somewhere?
@@ -44,4 +44,4 @@ mod_actions_inv_events:
       - else:
         - flag <player.flag[amp_map].as_map.get[uuid].as_player> muted
         - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|1|Muted<&sp>by<&sp><player.name>|Mute
-      - inventory open d:<inventory[mod_actions_inv]>
+      - inventory open d:mod_actions_inv

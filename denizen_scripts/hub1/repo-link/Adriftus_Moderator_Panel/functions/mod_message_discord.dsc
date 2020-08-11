@@ -35,7 +35,7 @@ mod_message_discord:
     - define field2_inline true
     - define fields:|:<map.with[name].as[<[field2_name]>].with[value].as[<[field2_value]>].with[inline].as[<[field2_inline]>]>
 
-    - if <[length].exists>:
+    - if <[length]||null> != null:
       - define fieldD_name Duration<&co>
       - define fieldD_value <[length].as_duration.formatted>
       - define fieldD_inline true

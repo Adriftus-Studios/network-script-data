@@ -925,7 +925,7 @@ claiming_protection_group_disband:
   definitions: group
   script:
   - yaml id:claims set groups.<[group]>:!
-  - foreach <server.notables[cuboids].filter[notable_name.starts_with[claim.<[group]>]]> as:cuboid:
+  - foreach <server.notables[cuboids].filter[note_name.starts_with[claim.<[group]>]]> as:cuboid:
     - define chunk <[cuboid].as_cuboid.center.chunk>
     - yaml id:claims set <[chunk].world>.<[chunk].x>.<[chunk].z>:!
     - yaml id:claims set limits.current.<player.uuid>:--
@@ -1272,7 +1272,7 @@ claiming_system_upgrade_events:
       - inject claiming_system_bossBar_Stop
       - wait 2t
       - foreach fly|time-control|weather-control as:upgrade_name:
-        - define newgroup:<player.location.cuboids.filter[notable_name.starts_with[claim]].first.note_name.after[.].before[/]||null>
+        - define newgroup:<player.location.cuboids.filter[note_name.starts_with[claim]].first.note_name.after[.].before[/]||null>
         - if <[newgroup]> != null:
           - if <yaml[claims].read[groups.<[newgroup]>.members.<player.uuid>.<[upgrade_name]>]||true> || <yaml[claims].read[groups.<[newgroup]>.members.everyone.<[upgrade_name]>]||true>:
             - if <yaml[claims].read[groups.<[newgroup]>.upgrades.<[upgrade_name]>]> && <yaml[claims].read[groups.<[newgroup]>.settings.<[upgrade_name]>]> != off:

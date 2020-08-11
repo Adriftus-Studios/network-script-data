@@ -78,7 +78,7 @@ SoundBoard:
   debug: false
   definitions: nbt|click|slot
   script:
-    - if <[nbt].exists>:
+    - if <[nbt]||null> != null:
       - foreach <[nbt].unescaped> as:Data:
         - define <[Data].before[/]> <[Data].after[/]>
     - else:

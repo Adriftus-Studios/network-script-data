@@ -29,7 +29,7 @@ Essentials:
         #    - yaml id:<player.uuid> set <[Key]>:->:<[UID].add[1]>Lasagna<player.inventory.list_contents>
         #    - yaml id:<player.uuid> savefile:../../../../.playerdata/<player.uuid>.dsc
         on player respawns:
-            - if <player.flag[settings.essentials.bedspawn]||false> == true:
+            - if <player.flag[settings.essentials.bedspawn]||false>:
                 - determine passively <player.bed_spawn>
             - else:
                 - determine passively <player.world.spawn_location>
