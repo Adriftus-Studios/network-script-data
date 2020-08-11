@@ -159,5 +159,4 @@ items:
     type: item
     material: stick
     mechanisms:
-        nbt:
-            - key/<util.random.duuid>
+        nbt: key/<util.random.duuid>

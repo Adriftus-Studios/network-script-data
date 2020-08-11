@@ -252,8 +252,8 @@ BehrsPreChunker:
   permission: test
   script:
     - if <player.name.contains[behr_riley]>:
-      - define x <player.location.chunk.after[@].before[,]>
-      - define y <player.location.chunk.after[@].before_last[,].after[,]>
+      - define x <player.location.chunk.x>
+      - define y <player.location.chunk.z>
       - define World <player.world>
 
       #- define Diff <element[14].add[<[ChunkRadius].sub[2].mul[8]>]>
@@ -333,8 +333,8 @@ IcecapadePreChunk:
         - define world <context.args.get[2]>
         #- define X <context.args.first.mul[-1]>
         #- define Y <context.args.first.mul[-1]>
-        - define X <player.location.chunk.after[@].before[,]>
-        - define Y <player.location.chunk.after[@].before_last[,].after[,]>
+        - define X <player.location.chunk.x>
+        - define Y <player.location.chunk.z>
         - define loops <[X].mul[-2].abs>
         - repeat <[loops]>:
             - chunkload <chunk[<[X]>,<[Y]>,<[world]>]> d:1t

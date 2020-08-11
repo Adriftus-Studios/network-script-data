@@ -4,9 +4,11 @@ Chat_Handler:
     GroupManager:
         - flag player behrry.chat.experience:+:25
         - if !<player.in_group[Visitor]>:
-            - execute as_server "lp user <player> parent add Visitor"
+            - group add Visitor
+            # - execute as_server "lp user <player> parent add Visitor"
         - else if <player.flag[behrry.chat.experience]> > 1000 && !<player.in_group[Patron]>:
-            - execute as_server "lp user <player> parent add Patron"
+            - group add Patron
+            # - execute as_server "lp user <player> parent add Patron"
     events:
         on player chats bukkit_priority:lowest:
             - determine passively cancelled

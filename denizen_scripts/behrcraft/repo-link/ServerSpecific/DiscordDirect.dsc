@@ -17,5 +17,5 @@
 #* ../dir/.t Server | Template Localhost Server
 #```
 #
-type:
-    type: data
+# type:
+#     type: data

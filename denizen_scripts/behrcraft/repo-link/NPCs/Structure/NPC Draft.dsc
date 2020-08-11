@@ -360,7 +360,7 @@ Draft_NPC:
     #                    - stop
     #            - if <[Quantity]> > <context.item.quantity>:
     #                - define Quantity <context.item.quantity>
-    #            - define Item <context.item.with[quantity=<[Quantity]>;remove_nbt=<list[Price|TotalPrice]>;lore=li@]>
+    #            - define Item <context.item.with[quantity=<[Quantity]>;remove_nbt=<list[Price|TotalPrice]>;lore=]>
     #            - if !<player.inventory.can_fit[<[Item]>]>:
     #                - narrate format:Colorize_Red "Not enough room for item!"
     #                - stop

@@ -69,8 +69,8 @@ Tile_Indicator_Task_old:
         - define cuboid <cuboid[<[Loc].add[<[Radius]>,0,<[Radius]>]>|<[Loc].sub[<[Radius]>,0,<[Radius]>]>]>
         
         - foreach <[Cuboid].blocks.filter[x.mod[2].is[==].to[1]].filter[z.mod[2].is[==].to[0]]> as:Loc:
-            - define RLocations li@
-            - define BLocations li@
+            - define RLocations <list>
+            - define BLocations <list>
             #-Red Bars
             #@ AirCheck
             - if <[Loc].material.name> == air:

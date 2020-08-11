@@ -80,7 +80,7 @@ command_play_inventory:
   size: 27
   definitions:
     player: <item[player_head]||<item[human_skull]>>[display_name=<&b><player.name>;lore=<&3>Current<&sp>Server<&co><&sp><yaml[bungee.config].parsed_key[servers.<bungee.server>.display_name]>;skull_skin=<player.uuid>]
-    hub: <item[<yaml[bungee.config].read[servers.hub1.material]>]>[display_name=<yaml[bungee.config].parsed_key[servers.<bungee.server>.display_name]>;nbt=<list[server/hub1]>]
+    hub: <item[<yaml[bungee.config].read[servers.hub1.material]>]>[display_name=<&a>Return<&sp>To<&sp>Hub;nbt=server/hub1]
     filler: <item[white_stained_glass_pane].with[display_name=<&c>]>
   procedural items:
     - foreach <yaml[bungee.config].list_keys[servers]> as:server:

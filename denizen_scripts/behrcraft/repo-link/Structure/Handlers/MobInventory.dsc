@@ -50,7 +50,7 @@ MobInv_Handler:
         #    - determine passively cancelled
         on player clicks in *VillagerInventory*:
             - define Whitelist <list[Wheat_Seeds|Beetroot_Seeds|Bread|Carrot|Potato|Beetroot|Wheat]>
-            - if !<[Whitelist].contains[<context.item.material.name||null>]>:
+            - if !<[Whitelist].contains[<context.item.material.name>]>:
                 - determine passively cancelled
         on player closes *SheepInventory*|*VillagerInventory*:
             - define Inventory <context.inventory>

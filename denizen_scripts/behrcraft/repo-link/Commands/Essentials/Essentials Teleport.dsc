@@ -69,7 +69,7 @@ Teleport_Command:
                 - if <[User].has_flag[Behr.Essentials.teleport.request]>:
                     - if <[User].flag[Behr.Essentials.teleport.request].parse[before[/]].contains[<player>]>:
                         - narrate targets:<[User]>|<player> Format:Colorize_Green "Teleport request cancelled."
-                        - define KeyValue <[User].flag[Behr.Essentials.teleport.request].map_get[<player>]>
+                        - define KeyValue <[User].flag[Behr.Essentials.teleport.request].as_map.get[<player>]>
                         - flag <[User]> Behr.Essentials.teleport.request:<-:<player>/<[KeyValue]>
                         - stop
                     - else:
