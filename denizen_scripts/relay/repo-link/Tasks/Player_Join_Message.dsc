@@ -7,7 +7,7 @@ Player_Join_Message:
         - inject Embedded_Color_Formatting
         - inject Definition_Registry
         
-        - if <[Rank].exists>:
+        - if <[Rank]||null> != null:
             - define Footer "<map.with[text].as[<[Rank]> ★ Joined on <[Server]>]>"
         - else:
             - define Footer "<map.with[text].as[Joined <[Server]>]>"

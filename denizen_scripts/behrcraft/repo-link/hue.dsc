@@ -40,7 +40,7 @@ actionbartest:
 #^        - define r <[color].red>
 #^        - define g <[color].green>
 #^        - define b <[color].blue>
-#^        - if <[Int].exists>:
+#^        - if <[Int]||null> != null:
 #^            - define i <element[1530].div[<[int]>].round_up>
 #^        - else:
 #^            - define i 45

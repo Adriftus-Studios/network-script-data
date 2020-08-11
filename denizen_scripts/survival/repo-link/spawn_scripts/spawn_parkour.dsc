@@ -67,6 +67,8 @@ parkour_quit_command:
         - flag player parkour:!
         - teleport <player> parkour_complete
         - stop
+      - else:
+        - narrate "<&c>You are not currently participating in the parkour!"
 
 parkour_leave_handler:
   type: world

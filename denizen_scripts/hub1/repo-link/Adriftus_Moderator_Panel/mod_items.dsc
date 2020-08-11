@@ -8,7 +8,7 @@ mod_mute_item:
     - "<&6>Empêchez le joueur de parler."
     - "Right Click / Clic Droit"
   mechanisms:
-    flags: ALL
+    hides: ALL
 
 mod_unmute_item:
   type: item
@@ -20,7 +20,7 @@ mod_unmute_item:
     - "<&e>Permettez le joueur de parler."
     - "Right Click / Clic Droit"
   mechanisms:
-    flags: ALL
+    hides: ALL
 
 mod_send_item:
   type: item
@@ -31,7 +31,7 @@ mod_send_item:
     - "<&d>Transfer the Player to a Server."
     - "<&d>Envoyez le joueur au serveur."
   mechanisms:
-    flags: ALL
+    hides: ALL
 
 mod_kick_item:
   type: item
@@ -43,7 +43,7 @@ mod_kick_item:
     - "<&e>Kick the Player from the Server."
     - "<&e>Coup de pied du serveur."
   mechanisms:
-    flags: ALL
+    hides: ALL
 
 mod_ban_item:
   type: item
@@ -60,7 +60,7 @@ mod_ban_item:
   enchantments:
     - ARROW_INFINITE:1
   mechanisms:
-    flags: HIDE_ATTRIBUTES|HIDE_ENCHANTS
+    hides: ATTRIBUTES|ENCHANTS
 
 mod_player_item:
   type: item

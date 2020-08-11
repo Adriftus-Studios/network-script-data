@@ -84,7 +84,7 @@ Nickname_Command:
 
             - stop
     # % ██ [  Too long ? ] ██
-        - if <[Nickname].parse_color.strip_color.length> > 16 || <[HexColored].exists>:
+        - if <[Nickname].parse_color.strip_color.length> > 16 || <[HexColored]||null> != null:
             - define reason "Nicknames should be less than 16 charaters."
             - inject Command_Error
     #%  % Blacklisting a list of names %  %#

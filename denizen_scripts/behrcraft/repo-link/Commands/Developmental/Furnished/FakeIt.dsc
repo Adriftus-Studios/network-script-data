@@ -4,9 +4,9 @@ Fakeit:
     definitions: origin|height
     script:
         #@ Origin/height?
-        - if !<[Origin].exists>:
+        - if <[Origin]||null> == null:
             - define Origin 5
-        - if !<[Height].exists>:
+        - if !<[Height]||null> == null:
             - define Height 6
 
         #@ Main Definitions
@@ -17,20 +17,20 @@ Fakeit:
         #@ Main Room
         - define P1 <[Cuboid].min.with_y[<[Origin]>]>
         - define P2 <[Cuboid].max.with_y[<[Origin].add[<[Height]>]>]>
-        - define PC <cuboid[<[P1]>|<[P2]>]>
+        - define PC <[P1].to_cuboid[<[P2]>]>
         - define ClearList:|:<[PC].blocks>
 
         #@ Floor
         - define F1 <[Cuboid].min.with_y[<[Origin]>]>
         - define F2 <[Cuboid].max.with_y[<[Origin]>]>
-        - define FC <cuboid[<[F1]>|<[F2]>]>
+        - define FC <[F1].to_cuboid[<[F2]>]>
         - define TL <[FC].blocks.filter[x.round_up.abs.mod[4].is[==].to[2]].filter[z.round_up.abs.mod[4].is[==].to[0]]>
         - define FloorSpace:|:<[FC].blocks.exclude[<[TL]>]>
 
         #@ OuterShell1
         - define L1 <[P1].sub[1,1,1]>
         - define L2 <[p2].add[1,1,1]>
-        - define LC <cuboid[<[L1]>|<[L2]>]>
+        - define LC <[L1].to_cuboid[<[L2]>]>
         - define FLL <[LC].blocks.exclude[<[ClearList]>].filter[material.name.contains_any[water|lava]]>
         - define FLLL <[FLL].filter[material.name.contains[lava]]>
         - define MaterialClaimList:|:<[FLLL].parse[material.name]>
@@ -38,7 +38,7 @@ Fakeit:
         #@ OuterShell2
         - define S1 <[P1].sub[3,3,3]>
         - define S2 <[p2].add[3,3,3]>
-        - define SC <cuboid[<[S1]>|<[S2]>]>
+        - define SC <[S1].to_cuboid[<[S2]>]>
         - define CL <[SC].blocks.exclude[<[ClearList]>]>
         - define FCL <[CL].filter[material.contains_any[<[PreciousMaterials]>]]>
 
@@ -49,7 +49,7 @@ Fakeit:
         - repeat 4:
             - define C1 <[CC].add[<[d1].get[<[Value]>]>]>
             - define C2 <[CC].add[<[d2].get[<[value]>]>]>
-            - define DC <cuboid[<[c1]>|<[c2]>]>
+            - define DC <[C1].to_cuboid[<[C2]>]>
             - define Doorways:|:<[DC].blocks>
 
         #@ Build MaterialList
@@ -84,7 +84,7 @@ Fakeit:
         - if !<[FLL].is_empty>:
             - foreach <[FLL]> as:block:
                 - modifyblock <[block]> glass
-        #- if <[GravelList].exists>:
+        #- if <[GravelList]||null> != null:
 
         #@ goodies
         - define item <item[torch].with[quantity=<util.random.int[1].to[20]>]>
@@ -94,7 +94,7 @@ Fakeit:
         - foreach <[MaterialClaimList].exclude[Air]> as:Item:
             - if <[Item]> == lava:
                 - define Item Lava_Bucket
-                - if <[LavaChests].exists>:
+                - if <[LavaChests]||null> != null:
                     - foreach <[LavaChests]> as:Chest:
                         - if <[Chest].can_fit[<[Item]>]>:
                             - give <[Item]> to:<[NewChest]>

@@ -32,7 +32,7 @@ survivalistInventoryInject:
     type: task
     script:
     - define inventory <inventory[survivalistInventory]>
-    - give "<item[player_head].with[skull_skin=<player.skull_skin>;display_name=<&e><&o><player.name>;lore=<&a>Money: <&e><player.money>]>" to:<[inventory]> slot:5
+    - give "<item[player_head].with[skull_skin=<player.skull_skin>;display_name=<&e><&o><player.display_name>;lore=<&a>Money: <&e><player.money>]>" to:<[inventory]> slot:5
     - inventory open d:<[inventory]>
 
 survivalistHandler:
@@ -73,19 +73,19 @@ survivalistData:
             Item: <item[Backpack]>
             Prices: 500/300
         Backpack18:
-            Item: "<item[chest].with[nbt=backpack_slots/18|backpack_contents/<list>|unique/<server.current_time_millis>;display_name=<&a>Backpack;lore=<&e>Slots<&co> <&a>18|<&a>|<&e>Hold in Hand|<&b>Place block to open]>"
+            Item: "<item[Backpack].with[nbt=backpack_slots/18|backpack_contents/<list>|unique/<server.current_time_millis>;display_name=<&a>Backpack;lore=<&e>Slots<&co> <&a>18|<&a>|<&e>Hold in Hand|<&b>Place block to open]>"
             Prices: 700/500
         Backpack27:
-            Item: "<item[chest].with[nbt=backpack_slots/27|backpack_contents/<list>|unique/<server.current_time_millis>;display_name=<&a>Backpack;lore=<&e>Slots<&co> <&a>27|<&a>|<&e>Hold in Hand|<&b>Place block to open]>"
+            Item: "<item[Backpack].with[nbt=backpack_slots/27|backpack_contents/<list>|unique/<server.current_time_millis>;display_name=<&a>Backpack;lore=<&e>Slots<&co> <&a>27|<&a>|<&e>Hold in Hand|<&b>Place block to open]>"
             Prices: 900/700
         Backpack36:
-            Item: "<item[chest].with[nbt=backpack_slots/36|backpack_contents/<list>|unique/<server.current_time_millis>;display_name=<&a>Backpack;lore=<&e>Slots<&co> <&a>36|<&a>|<&e>Hold in Hand|<&b>Place block to open]>"
+            Item: "<item[Backpack].with[nbt=backpack_slots/36|backpack_contents/<list>|unique/<server.current_time_millis>;display_name=<&a>Backpack;lore=<&e>Slots<&co> <&a>36|<&a>|<&e>Hold in Hand|<&b>Place block to open]>"
             Prices: 1100/900
         Backpack45:
-            Item: "<item[chest].with[nbt=backpack_slots/45|backpack_contents/<list>|unique/<server.current_time_millis>;display_name=<&a>Backpack;lore=<&e>Slots<&co> <&a>45|<&a>|<&e>Hold in Hand|<&b>Place block to open]>"
+            Item: "<item[Backpack].with[nbt=backpack_slots/45|backpack_contents/<list>|unique/<server.current_time_millis>;display_name=<&a>Backpack;lore=<&e>Slots<&co> <&a>45|<&a>|<&e>Hold in Hand|<&b>Place block to open]>"
             Prices: 1300/1100
         Backpack54:
-            Item: "<item[chest].with[nbt=backpack_slots/54|backpack_contents/<list>|unique/<server.current_time_millis>;display_name=<&a>Backpack;lore=<&e>Slots<&co> <&a>54|<&a>|<&e>Hold in Hand|<&b>Place block to open]>"
+            Item: "<item[Backpack].with[nbt=backpack_slots/54|backpack_contents/<list>|unique/<server.current_time_millis>;display_name=<&a>Backpack;lore=<&e>Slots<&co> <&a>54|<&a>|<&e>Hold in Hand|<&b>Place block to open]>"
             Prices: 1500/1300
         GrapplingHook:
             Item: <item[grappling_hook]>

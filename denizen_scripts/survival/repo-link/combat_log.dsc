@@ -17,7 +17,7 @@ combat_log_events:
     on delta time secondly every:1:
       - foreach <server.online_players.filter[has_flag[combat]]||<list>> as:player:
         - adjust <queue> linked_player:<[player]>
-        - if <player.flag[combat].expiration.in_seconds||0> < 1:
+        - if <player.flag[combat].expiration.in_seconds||0> <= 1:
           - wait 1s
           - narrate "<&b>You are no longer in combat."
 
@@ -40,7 +40,7 @@ calculate_damage:
       - if <[damaged].script||null> != null:
         - define defence_modifier:<[damaged].script.data_key[custom.defence_modifier.<[type]>]||1>
     - define damage:<[damage].mul[<[damage_modifier]>].div[<[defence_modifier]>]>
-    - define final_damage:<[damage].mul[<el@1.sub[<el@20.mul[<[armor].div[5]>].div[25]>]>]>
+    - define final_damage:<[damage].mul[<element[1].sub[<element[20].mul[<[armor].div[5]>].div[25]>]>]>
     - if <[final_damage]> < 0.5:
       - define final_damage:0.5
     - determine <[final_damage]>
@@ -50,7 +50,7 @@ calculate_burn:
   type: procedure
   definitions: initial|reduction
   script:
-    - determine <[initial].*[<element[100].-[<[reduction]>]>]>
+    - determine <[initial].mul[<element[100].sub[<[reduction]>]>]>
 
 logout_quit_command:
   type: command

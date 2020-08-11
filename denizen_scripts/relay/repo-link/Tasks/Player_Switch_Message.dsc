@@ -7,7 +7,7 @@ Player_Switch_Message:
         - inject Embedded_Color_Formatting
         - inject Definition_Registry
         
-        - if <[Rank].exists>:
+        - if <[Rank]||null> != null:
             - define Footer "<map.with[text].as[<[Rank]> ★ Switched to <[Server].to_titlecase>]>"
         - else:
             - define Footer "<map.with[text].as[Switched to <[Server].to_titlecase>]>"

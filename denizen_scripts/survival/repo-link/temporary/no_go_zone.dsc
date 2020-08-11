@@ -5,6 +5,6 @@ no_go_zone:
       # $ ---- Debugging ------------------------ #
       - inject player_enters_area_debugging.wrapper
       # $ ---- ---------------------------------- #
-      - if !<player.has_permission[not.a.perm]>:
+      - if !<player.has_permission[adriftus.admin]>:
         - narrate "<&c>This area is not ready yet."
         - determine cancelled

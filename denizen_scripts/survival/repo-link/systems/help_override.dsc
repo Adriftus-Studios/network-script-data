@@ -13,9 +13,9 @@ help_override:
           - foreach <yaml[help.<context.args.first>].read[default].parse[parsed]>:
             - narrate <[value]>
         - else if <yaml[help.<context.args.first>].read[<context.args.get[2]>]||null> != null:
-          - narrate <&2><list.pad_right[<context.args.get[2].length.+[10]>].with[-].unseparated>
+          - narrate <&2><list.pad_right[<context.args.get[2].length.add[10]>].with[-].unseparated>
           - narrate "<&2>---- <&e><context.args.get[2].to_titlecase> <&2>----"
-          - narrate <&2><list.pad_right[<context.args.get[2].length.+[10]>].with[-].unseparated>
+          - narrate <&2><list.pad_right[<context.args.get[2].length.add[10]>].with[-].unseparated>
           - foreach <yaml[help.<context.args.first>].read[<context.args.get[2]>].parse[parsed]>:
             - narrate <[value]>
         - else:

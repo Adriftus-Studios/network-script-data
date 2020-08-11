@@ -11,21 +11,23 @@
 mod_command:
   type: command
   debug: false
-  permission: mod.staff
+  permission: adriftus.staff
   name: mod
   description: Adriftus Moderator Panel
-  usage: /mod (username)
+  usage: /mod [username]
   tab complete:
     # -- One Argument Tab Complete
-    - define arguments <server.online_players.parse[name].exclude[<player.name>]>
-    - if <context.args.is_empty>:
-      - determine <[arguments]>
-    - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[arguments].filter[starts_with[<context.args.first>]]>
+    - define Blacklist <player||null>
+    - inject Online_Player_Tabcomplete
+    # - define arguments <server.online_players.parse[name].exclude[<player.name>]>
+    # - if <context.args.is_empty>:
+    #   - determine <[arguments]>
+    # - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
+    #   - determine <[arguments].filter[starts_with[<context.args.first>]]>
   script:
     # -- Hopefully this logic will work & make sense in a few weeks.
     - if <context.args.is_empty>:
-      - inventory open d:<inventory[mod_online_inv]>
+      - inventory open d:mod_online_inv
     - else if <context.args.first> == version:
       - narrate "<&6>Adriftus <&e>Moderator Panel"
       - narrate "<&f>Version 2.0.0 - 2020-07-31"
@@ -34,7 +36,7 @@ mod_command:
       - if <server.match_offline_player[<context.args.first>].name> == <player.name>:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
-      - else if <server.match_offline_player[<context.args.first>].has_permission[mod.staff]>:
+      - else if <server.match_offline_player[<context.args.first>].has_permission[adriftus.staff]>:
         - narrate "<&c>You cannot perform actions on other staff members."
         - stop
       - else:

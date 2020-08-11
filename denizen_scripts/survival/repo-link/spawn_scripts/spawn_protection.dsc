@@ -15,7 +15,7 @@ spawn_world_protection:
     on player breaks hanging in:spawn_cuboid:
       - if !<player.has_flag[world.spawn.modify]>:
         - determine cancelled
-    on player clicks bukkit_priority:HIGHEST in:spawn_cuboid:
+    on player clicks block bukkit_priority:HIGHEST in:spawn_cuboid:
       - if !<player.has_flag[world.spawn.modify]> && !<player.has_flag[world.spawn.can_shoot]>:
         - determine cancelled
 

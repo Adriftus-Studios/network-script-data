@@ -3,10 +3,10 @@ butler_summon:
   script:
     - define loc <player.location.forward_flat[3]>
     - repeat 20:
-      - playeffect redstone <[loc]> visibility:40 quantity:40 special_data:3|orange offset:<[value].*[0.05]>
+      - playeffect redstone <[loc]> visibility:40 quantity:40 special_data:3|orange offset:<[value].mul[0.05]>
       - wait 1t
-    - teleport <server.flag[butler_npc]> <[loc].with_yaw[<[loc].yaw.-[180]>]>
-    - playeffect redstone <[loc]> visibility:40 quantity:40 special_data:3|orange offset:<[value].*[0.1]>
+    - teleport <server.flag[butler_npc]> <[loc].with_yaw[<[loc].yaw.sub[180]>]>
+    - playeffect redstone <[loc]> visibility:40 quantity:40 special_data:3|orange offset:<[value].mul[0.1]>
     - wait 1t
     - narrate "<&6>Adriftus Butler<&co> <&e>How can I help you?"
     - wait 200t
@@ -28,7 +28,9 @@ butler_events:
 butler_command:
   type: command
   name: open_butler_menu
-  permission: not.a.perm
+  permission: adriftus.admin
+  description: Opens the Butler Menu for the specified player
+  usage: /open_butler_menu <&lt>player<&gt>
   script:
     - inventory open d:<inventory[butler_menu]> player:<server.match_player[<context.args.first>]>
 
@@ -39,4 +41,5 @@ butler_menu:
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
   slots:
+  # TODO: Finish inventory (seems to not be)
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]

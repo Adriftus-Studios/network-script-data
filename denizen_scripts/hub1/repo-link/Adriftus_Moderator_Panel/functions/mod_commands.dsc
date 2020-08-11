@@ -14,12 +14,12 @@ mod_server_kick_task:
     - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
     - define player <server.match_offline_player[<context.args.first>]>
     - define reason <context.args.get[2].to[<context.args.size>].space_separated||1.Kicked>
-    - define level <tern[<[reason].substring[2,2].is[==].to[.]>].pass[<[reason].before[.]>].fail[1]>
-    - define reason <tern[<[reason].substring[2,2].is[==].to[.]>].pass[<[reason].after[.]>].fail[<[reason]>]>
+    - define level <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].before[.]>].fail[1]>
+    - define reason <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].after[.]>].fail[<[reason]>]>
     - run mod_log_action def:<[moderator]>|<[player].uuid>|<[level]>|<[reason]>|Kick
     - run mod_notify_action def:<[moderator]>|<[player].uuid>|<[level]>|<[reason]>|Kick
     - run mod_message_discord def:<[moderator]>|<[player].name>|<[level]>|<[reason]>|Kick
-    - kick <server.match_offline_player[<context.args.first>]> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[reason]>]>
+    - kick <server.match_player[<context.args.first>]> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[reason]>]>
 
 
 # -- /ban listener
@@ -61,29 +61,34 @@ mod_server_ban_task:
 mod_server_ban_command:
   type: command
   debug: false
-  permission: mod.moderator
+  permission: adriftus.moderator
   name: sban
   aliases:
     - tempban
   description: Temporary server banning
   usage: /sban [username] [duration] (reason)
   tab complete:
+    - define Arg1 <server.players.exclude[<player>].parse[name]>
+    - define Arg2 <list[7d|14d|30d]>
+    - define Arg3 <proc[mod_get_infractions].context[mod_ban_infractions]>
+    - inject MultiArg_Command_Tabcomplete
+
     # -- Two + 1/2 Argument Tab Complete
-    - define players <server.online_players.parse[name].exclude[<player.name>]>
-    - define lengths <list[7d|14d|30d]>
-    - define reasons <proc[mod_get_infractions].context[mod_ban_infractions]>
-    - if <context.args.is_empty>:
-      - determine <[players]>
-    - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[players].filter[starts_with[<context.args.first>]]>
-    - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
-      - determine <[lengths]>
-    - else if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[lengths].filter[starts_with[<context.args.get[2]>]]>
-    - else if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>]>:
-      - determine <[reasons]>
-    - else if <context.args.size> == 3 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[reasons].filter[starts_with[<context.args.get[3]>]]>
+    # - define players <server.online_players.parse[name].exclude[<player.name>]>
+    # - define lengths <list[7d|14d|30d]>
+    # - define reasons <proc[mod_get_infractions].context[mod_ban_infractions]>
+    # - if <context.args.is_empty>:
+    #   - determine <[players]>
+    # - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
+    #   - determine <[players].filter[starts_with[<context.args.first>]]>
+    # - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
+    #   - determine <[lengths]>
+    # - else if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>].not>:
+    #   - determine <[lengths].filter[starts_with[<context.args.get[2]>]]>
+    # - else if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>]>:
+    #   - determine <[reasons]>
+    # - else if <context.args.size> == 3 && <context.raw_args.ends_with[<&sp>].not>:
+    #   - determine <[reasons].filter[starts_with[<context.args.get[3]>]]>
   script:
     - if <context.args.is_empty>:
       - narrate "<&6>A<&e>MP <&6>- /tempban -- Server banning."
@@ -92,7 +97,7 @@ mod_server_ban_command:
       - if <server.match_offline_player[<context.args.first>].name> == <player.name>:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
-      - else if <server.match_offline_player[<context.args.first>].has_permission[mod.staff]>:
+      - else if <server.match_offline_player[<context.args.first>].has_permission[adriftus.staff]>:
         - narrate "<&c>You cannot perform actions on other staff members."
         - stop
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
@@ -101,8 +106,8 @@ mod_server_ban_command:
       - if <context.args.get[2]||null> != null:
         - define length <context.args.get[2]>
         - define reason <context.args.get[3].to[<context.args.size>].space_separated||3.Banned>
-        - define level <tern[<[reason].substring[2,2].is[==].to[.]>].pass[<[reason].before[.]>].fail[3]>
-        - define reason <tern[<[reason].substring[2,2].is[==].to[.]>].pass[<[reason].after[.]>].fail[<[reason]>]>
+        - define level <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].before[.]>].fail[3]>
+        - define reason <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].after[.]>].fail[<[reason]>]>
         - run mod_log_action def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|<[length]>
         - run mod_log_ban def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|<[length]>
         - run mod_notify_action def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|<[length]>
@@ -118,27 +123,31 @@ mod_server_ban_command:
 mod_global_ban_command:
   type: command
   debug: false
-  permission: mod.moderator
+  permission: adriftus.moderator
   name: gban
   description: Network-wide banning
   usage: /gban [username] [duration] (reason)
   tab complete:
+    - define Arg1 <server.players.exclude[<player>].parse[name]>
+    - define Arg2 <list[7d|14d|30d]>
+    - define Arg3 <proc[mod_get_infractions].context[mod_ban_infractions]>
+    - inject MultiArg_Command_Tabcomplete
     # -- Two + 1/2 Argument Tab Complete
-    - define players <server.online_players.parse[name].exclude[<player.name>]>
-    - define lengths <list[7d|14d|30d]>
-    - define reasons <proc[mod_get_infractions].context[mod_ban_infractions]>
-    - if <context.args.is_empty>:
-      - determine <[players]>
-    - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[players].filter[starts_with[<context.args.first>]]>
-    - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
-      - determine <[lengths]>
-    - else if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[lengths].filter[starts_with[<context.args.get[2]>]]>
-    - else if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>]>:
-      - determine <[reasons]>
-    - else if <context.args.size> == 3 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[reasons].filter[starts_with[<context.args.get[3]>]]>
+    # - define players <server.online_players.parse[name].exclude[<player.name>]>
+    # - define lengths <list[7d|14d|30d]>
+    # - define reasons <proc[mod_get_infractions].context[mod_ban_infractions]>
+    # - if <context.args.is_empty>:
+    #   - determine <[players]>
+    # - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
+    #   - determine <[players].filter[starts_with[<context.args.first>]]>
+    # - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
+    #   - determine <[lengths]>
+    # - else if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>].not>:
+    #   - determine <[lengths].filter[starts_with[<context.args.get[2]>]]>
+    # - else if <context.args.size> == 2 && <context.raw_args.ends_with[<&sp>]>:
+    #   - determine <[reasons]>
+    # - else if <context.args.size> == 3 && <context.raw_args.ends_with[<&sp>].not>:
+    #   - determine <[reasons].filter[starts_with[<context.args.get[3]>]]>
   script:
     - if <context.args.is_empty>:
       - narrate "<&6>A<&e>MP <&6>- /gban -- Network-wide banning."
@@ -147,7 +156,7 @@ mod_global_ban_command:
       - if <server.match_offline_player[<context.args.first>].name> == <player.name>:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
-      - else if <server.match_offline_player[<context.args.first>].has_permission[mod.staff]>:
+      - else if <server.match_offline_player[<context.args.first>].has_permission[adriftus.staff]>:
         - narrate "<&c>You cannot perform actions on other staff members."
         - stop
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
@@ -156,8 +165,8 @@ mod_global_ban_command:
       - if <context.args.get[2]||null> != null:
         - define length <context.args.get[2]>
         - define reason <context.args.get[3].to[<context.args.size>].space_separated||3.Banned>
-        - define level <tern[<[reason].substring[2,2].is[==].to[.]>].pass[<[reason].before[.]>].fail[3]>
-        - define reason <tern[<[reason].substring[2,2].is[==].to[.]>].pass[<[reason].after[.]>].fail[<[reason]>]>
+        - define level <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].before[.]>].fail[3]>
+        - define reason <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].after[.]>].fail[<[reason]>]>
         - run mod_log_action def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|<[length]>
         - run mod_log_ban def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|<[length]>
         - run mod_message_discord def:<[moderator]>|<[target].name>|<[level]>|<[reason]>|Ban|<[length]>
@@ -209,21 +218,25 @@ mod_server_unban_task:
 mod_server_unban_command:
   type: command
   debug: false
-  permission: mod.admin
+  permission: adriftus.admin
   name: unsban
   aliases:
     - sunban
   description: Server unbanning
   usage: /unsban [username]
   tab complete:
+    - define Arg1 <server.players.exclude[<player>].parse[name]>
+    - define Arg2 Unbanned
+    - inject MultiArg_Command_Tabcomplete
+
     # -- One + 1/2 Argument Tab Complete
-    - define arguments <server.online_players.parse[name].exclude[<player.name>]>
-    - if <context.args.is_empty>:
-      - determine <[arguments]>
-    - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[arguments].filter[starts_with[<context.args.first>]]>
-    - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
-      - determine <list[Unbanned]>
+    # - define arguments <server.online_players.parse[name].exclude[<player.name>]>
+    # - if <context.args.is_empty>:
+    #   - determine <[arguments]>
+    # - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
+    #   - determine <[arguments].filter[starts_with[<context.args.first>]]>
+    # - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
+    #   - determine <list[Unbanned]>
   script:
     # -- Removes `banned` YAML key from global player data.
     - if <context.args.is_empty>:
@@ -253,21 +266,25 @@ mod_server_unban_command:
 mod_global_unban_command:
   type: command
   debug: false
-  permission: mod.admin
+  permission: adriftus.admin
   name: ungban
   aliases:
     - gunban
   description: Network-wide unbanning
   usage: /ungban [username]
   tab complete:
+    - define Arg1 <server.players.exclude[<player>].parse[name]>
+    - define Arg2 Unbanned
+    - inject MultiArg_Command_Tabcomplete
+    
     # -- One + 1/2 Argument Tab Complete
-    - define arguments <server.online_players.parse[name].exclude[<player.name>]>
-    - if <context.args.is_empty>:
-      - determine <[arguments]>
-    - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[arguments].filter[starts_with[<context.args.first>]]>
-    - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
-      - determine <list[Unbanned]>
+    # - define arguments <server.online_players.parse[name].exclude[<player.name>]>
+    # - if <context.args.is_empty>:
+    #   - determine <[arguments]>
+    # - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
+    #   - determine <[arguments].filter[starts_with[<context.args.first>]]>
+    # - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
+    #   - determine <list[Unbanned]>
   script:
     # -- Removes `banned` YAML key from global player data.
     - if <context.args.is_empty>:

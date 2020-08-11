@@ -99,7 +99,7 @@ warps_GUI_main_menu_events:
           - inject warp_management_GUI_populate
           - inventory open d:<[inventory]>
         - case new_warp:
-          - if <player.location.cuboids.filter[notable_name.starts_with[claim.<player.uuid>]].is_empty>:
+          - if <player.location.cuboids.filter[note_name.starts_with[claim.<player.uuid>]].is_empty>:
             - narrate "<&c>You can only create warps in your own claim."
             - stop
           - flag player text_input:create_warp/personal|<player.location>

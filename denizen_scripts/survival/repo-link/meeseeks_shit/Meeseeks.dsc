@@ -3,9 +3,9 @@ Meeseeks:
     debug: false
     actions:
         on assignment:
-            - flag npc ItemPrices:<map[<empty>/<empty>]>
+            - flag npc ItemPrices:<map>
             - if !<server.has_flag[Meeseeks.LockedChests]>:
-                - flag server Meeseeks.LockedChests:->:<map[<empty>/<empty>]>
+                - flag server Meeseeks.LockedChests:->:<map>
         #on exit proximity:
             #- inject NPC_Interaction path:Exit
         on click:
@@ -267,13 +267,13 @@ Chest_Unlock_Task:
     script:
         - define Chest <[Chest].as_location>
         - define LockedChests <server.flag[Meeseeks.LockedChests].as_map>
-        - if <[LockedChests].list_keys.contains[<[Chest].simple>]>:
+        - if <[LockedChests].keys.contains[<[Chest].simple>]>:
             #- if <npc[<[LockedChests].get[<[Chest].simple>].first>].owner> == <player>:
                 #- if <[Chest].lock.after[ey].from_secret_colors> == <context.item.nbt[UUID]>:
             - define LockedChests <[LockedChests].exclude[<[Chest].simple>]>
             - flag server Meeseeks.LockedChests:<[LockedChests]>
             - adjust <[Chest]> lock
-        - if <[LockedChests].list_keys.contains[<[Chest].add[<[Chest].material.relative_vector||0,0,0>].simple>]>:
+        - if <[LockedChests].keys.contains[<[Chest].add[<[Chest].material.relative_vector||0,0,0>].simple>]>:
             - define LockedChests <[LockedChests].exclude[<[Chest].add[<[Chest].material.relative_vector||0,0,0>].simple>]>
             - flag server Meeseeks.LockedChests:<[LockedChests]>
             - adjust <[Chest].add[<[Chest].material.relative_vector||0,0,0>]> lock
@@ -302,9 +302,9 @@ Meeseeks_Shop:
 
             - case KeyBox:
                 - inject locally ChestRadius
-                - if <[ChestList].exists>:
+                - if <[ChestList]||null> != null:
                     - foreach <[ChestList].filter[is_locked]> as:Chest:
-                        - if <[LockedChests].list_keys.contains[<[Chest].simple>]>:
+                        - if <[LockedChests].keys.contains[<[Chest].simple>]>:
                             - if <[LockedChests].get[<[Chest].simple>].first> == <npc.id>:
                                 - define UUID <[LockedChests].get[<[Chest].simple>].get[2]>
                                 - define Key "<item[Meeseeks_Key].with[nbt=UUID/<[UUID]>|LockLoc/<[Chest].simple>;display_name=<&b>K<&3>ey<[UUID].to_secret_colors>;lore=<empty>|<&7>Unlocks chest at<&8>:|<&e><[Chest].simple.before_last[,].replace[,].with[<&6>, <&e>]>]>"
@@ -314,8 +314,8 @@ Meeseeks_Shop:
                 - else:
                     - narrate format:colorize_red "No chests near to lock."
                     - stop
-                - if !<[Keys].exists>:
-                    - define Keys <list[<empty>]>
+                - if <[Keys]||null> == null:
+                    - define Keys <list>
 
                 - define HelpSlot 4
                 - inject locally Color
@@ -330,7 +330,7 @@ Meeseeks_Shop:
                 - inject locally InventoryCache
                 - inject locally ChestRadius
                 - inject locally color
-                - if !<[ChestList].exists>:
+                - if <[ChestList]||null> == null:
                     - if <npc.has_flag[ShopOpen]>:
                         - narrate format:Colorize_Red "Shop closed! No chests near."
                         - flag npc ShopOpen:!
@@ -361,7 +361,7 @@ Meeseeks_Shop:
                                 - foreach next
                             - inject locally PricedItemLore
                             - define Items:->:<[Item].with[lore=<[Lore]>;nbt=menu/Meeseeks_Shop|action/ManageClick|npc/<npc>|Price/<[Price]>]>
-                - if <[Items].exists>:
+                - if <[Items]||null> != null:
                     - define Size <[Items].size.div[9].round_up.mul[9].max[9].min[36]>
                     - define ItemList <[Items]>
                     - define ItemList <[ItemList].include[<item[blank].repeat_as_list[<[Size].sub[<[Items].size>].mod[10]>]>]>
@@ -376,7 +376,7 @@ Meeseeks_Shop:
                         - flag npc ShopOpen:!
                     - define Size 0
                     - define HelpSlot 1
-                    - define ItemList <list[<empty>]>
+                    - define ItemList <list>
                 - inject locally Help
                 - choose <[Action]>:
                     - case Preview Manage:
@@ -395,7 +395,7 @@ Meeseeks_Shop:
                     - define status <&c>Closed
                 - else:
                     - inject locally ChestRadius
-                    - if !<[Chestlist].exists>:
+                    - if !<[Chestlist]||null> == null:
                         - narrate format:Colorize_Red "No items available for sale. Lock chests nearby to setup shop."
                         - stop
                     - if <[ChestList].filter[is_locked].parse[inventory].deduplicate.parse[list_contents.filter[material.name.is[!=].to[Air]]].size> == 0:
@@ -427,7 +427,7 @@ Meeseeks_Shop:
                             - wait 4t
                 - else if <[Click].contains[right]>:
                     - inject locally ChestRadius
-                    - if !<[ChestList].exists>:
+                    - if <[ChestList]||null> == null:
                         - narrate format:Colorize_Red "No Un-Locked Chests Near."
                         - stop
                     - else if <[ChestList].filter[inventory.list_contents.is_empty.not].is_empty>:
@@ -439,7 +439,7 @@ Meeseeks_Shop:
                             - define LockedChests <[LockedChests].with[<[Chest].simple>].as[<list[<npc.id>|<[UUID]>]>]>
                             - adjust <[Chest]> lock:<&b>K<&3>ey<[UUID].to_secret_colors>
                             - if <npc.has_flag[ShopOpen]>:
-                                - if !<npc.flag[ItemPrices].as_map.list_keys.contains[<[Chest].inventory.list_contents.filter[material.name.is[!=].to[Air]].parse[with[quantity=1]].deduplicate>]>:
+                                - if !<npc.flag[ItemPrices].as_map.keys.contains[<[Chest].inventory.list_contents.filter[material.name.is[!=].to[Air]].parse[with[quantity=1]].deduplicate>]>:
                                     - narrate format:Colorize_Yellow "New shop items found! Shop closed until price verified."
                                     - flag npc ShopOpen:!
                         - flag server Meeseeks.LockedChests:<[LockedChests]>
@@ -483,8 +483,8 @@ Meeseeks_Shop:
                                 - stop
                     - define TotalPrice <[Price].mul[<[TakeQuantity]>]>
 
-                    - take money <[TotalPrice]>
-                    - give money <npc.owner> <[TotalPrice]>
+                    - money take quantity:<[TotalPrice]>
+                    - money give quantity:<[TotalPrice]> players:<npc.owner>
                     #- flag player Behrry.Economy.Coins:-:<[TotalPrice]>
                     #- flag <npc.owner> Behrry.Economy.Coins:+:<[TotalPrice]>
                     
@@ -531,7 +531,7 @@ Meeseeks_Shop:
                         
                     #@ Build Item List || Generate Inventory Contents
                     - inject locally PricedItemLore
-                    - define nbt <list[price/<[Price]>]>
+                    - define nbt price/<[Price]>
                     - flag npc ItemPrices:<npc.flag[ItemPrices].as_map.with[<[Item]>].as[<[Price]>]>
                     - wait 1t
                     - inventory adjust d:<player.open_inventory> slot:<[Slot]> lore:<[Lore]>
@@ -586,11 +586,11 @@ Meeseeks_Shop:
             - flag server Meeseeks.LockedChests:->:<map[<empty>/<empty>]>
         - define LockedChests <server.flag[Meeseeks.LockedChests].as_map>
         - foreach <[ChestsNear].deduplicate> as:Chest:
-            - if <[LockedChests].list_keys.contains[<[Chest].simple>]>:
+            - if <[LockedChests].keys.contains[<[Chest].simple>]>:
                 - if <[LockedChests].get[<[Chest].simple>].first> != <npc.id>:
                     - foreach next
             - if <[Chest].material.half||invalid> != invalid:
-                - if <[LockedChests].list_keys.contains[<[Chest].add[<[Chest].material.relative_vector>].simple>]>:
+                - if <[LockedChests].keys.contains[<[Chest].add[<[Chest].material.relative_vector>].simple>]>:
                     - if <[ChestList].contains[<[Chest].add[<[Chest].material.relative_vector>]>]||false> || <[LockedChests].get[<[Chest].add[<[Chest].material.relative_vector>].simple>].first> != <npc.id>:
                         - foreach next
             - define ChestList:->:<[Chest]>
@@ -604,7 +604,7 @@ Meeseeks_Shop:
                     - stop
             - define Item <[StrippedItem].with[quantity=<[StackQuantity].sub[<[TakeQuantity]>]>]>
         - if <list[Preview|PreviewClick|Manage|Shop].contains[<[Action]>]>:
-            - if !<[ItemPrices].list_keys.contains[<[Item].with[quantity=1]>]>:
+            - if !<[ItemPrices].keys.contains[<[Item].with[quantity=1]>]>:
                 - define ItemPrices <[ItemPrices].with[<[Item].with[quantity=1]>].as[1]>
                 - flag npc ItemPrices:<npc.flag[ItemPrices].as_map.with[<[Item]>].as[1]>
             - define Price <[ItemPrices].get[<[Item].with[quantity=1]>]>

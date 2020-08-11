@@ -85,7 +85,7 @@ Tag_Receive:
   definitions: TagData|TagError
   script:
   # % ██ [                     ] ██
-    - if <[TagError].exists>:
+    - if <[TagError]||null> != null:
       - define Color Red
     - else:
       - define Color Code
@@ -115,8 +115,8 @@ Tag_Parse_Listener:
         - announce to_console "<&4>Error:<&c> <context.queue>"
         - announce to_console "<&4>Error:<&c> <context.script>"
         - announce to_console "<&4>Error:<&c> <context.line>"
-    on script generates exception:
-      - announce to_console "Script Generates exception-------------------------------------------------"
+    on server generates exception:
+      - announce to_console "Server Generates exception-------------------------------------------------"
       - if <context.queue.id.contains[Tag_Parse]>:
         - determine passively cancelled
         - announce to_console "<&4>Error:<&c> <context.message>"

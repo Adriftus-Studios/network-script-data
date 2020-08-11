@@ -6,9 +6,11 @@ mod_spectate_command:
   aliases:
     - spectate
   description: Moderator spectate
-  usage: /spec (username)
+  usage: /spec [username]
   tab completions:
-    1: <server.online_players.parse[name].exclude[<player.name>]>
+    - define Blacklist <player||null>
+    - inject Online_Player_Tabcomplete
+    # 1: <server.online_players.parse[name].exclude[<player.name>]>
   script:
     - if <player.has_flag[spectateEnabled]> && <context.args.is_empty>:
       - flag player spectateEnabled:!
@@ -26,7 +28,7 @@ mod_spectate_command:
         - adjust <player> gamemode:spectator
         - narrate "<&7>[<&b>ModSpec<&7>] <&a>Toggled ModSpec." targets:<player>
     - else:
-      - if <server.online_players.parse[name.to_lowercase].contains[<context.args.first.to_lowercase>]>:
+      - if <server.match_player[<context.args.first>]||null> != null:
         - if <player.gamemode> != SPECTATOR:
           - flag player spectateEnabled
           - flag player lastGM:<player.gamemode>

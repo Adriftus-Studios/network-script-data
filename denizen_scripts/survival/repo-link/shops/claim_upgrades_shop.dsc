@@ -72,7 +72,7 @@ claiming_protection_group_upgrades_events:
         - wait 1t
         - take <player.item_in_hand>
         - stop
-      - define group <player.location.cuboids.filter[notable_name.starts_with[claim]].first.notable_name.after[.].before[/]||null>
+      - define group <player.location.cuboids.filter[note_name.starts_with[claim]].first.note_name.after[.].before[/]||null>
       - if <[group]> != null:
         - define name <proc[getColorCode].context[<yaml[claims].read[groups.<[group]>.settings.color]>]><yaml[claims].read[groups.<[group]>.settings.display_name]>
         - if <player.flag[upgrade_confirmation]||null> != <[group]>:

@@ -425,10 +425,10 @@ Entity_Particle_RadiusSwirl_Layered2:
     definitions: Target|WhileFlag|Radius|Density|Speed|Layers|Particle|Offset
     script:
         #@ Definition Check & Defaults [ 1-2 / 8 ]
-        - if !<[Target].exists>:
+        - if <[Target]||null> == null:
             - narrate format:Colorize_Red "Missing Target"
             - stop
-        - if !<[WhileFlag].exists>:
+        - if <[WhileFlag]||null> == null:
             - define Flag Test
 
         #@ Check for active queue to remove & replace
@@ -441,17 +441,17 @@ Entity_Particle_RadiusSwirl_Layered2:
         #- Check defs?
         #^- define Definitions <list[Radius|Density|Speed|Layers|Particle|Offset]>
         #^- define Defaults <list[4|4|4|3|Villager_Happy|0,0.45,0]>
-        - if !<[Radius].exists>:
+        - if <[Radius]||null> == null:
             - define Radius 4
-        - if !<[Density].exists>:
+        - if <[Density]||null> == null:
             - define Density 4
-        - if !<[Speed].exists>:
+        - if <[Speed]||null> == null:
             - define Speed 4
-        - if !<[Layers].exists>:
+        - if <[Layers]||null> == null:
             - define Layers 3
-        - if !<[Particle].exists>:
+        - if <[Particle]||null> == null:
             - define Particle Villager_Happy
-        - if !<[Offset].exists>:
+        - if <[Offset]||null> == null:
             - define Offset 0,0.45,0
 
         #@ Display Particles

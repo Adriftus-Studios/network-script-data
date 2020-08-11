@@ -2,7 +2,9 @@ send_to_crafted:
   type: command
   debug: false
   name: crafted_send
-  permission: not.a.perm
+  permission: adriftus.admin
+  description: Sends the specified player to Crafted
+  usage: /crafted_send <&lt>player<&gt>
   script:
     - adjust <queue> linked_player:<server.match_player[<context.args.first>]>
     - if <yaml[crafted].read[whitelist].contains_any[<player.uuid>|<player.name>]>:

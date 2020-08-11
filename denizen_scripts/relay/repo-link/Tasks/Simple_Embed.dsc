@@ -2,11 +2,11 @@ Simple_Discord_Embed:
     type: task
     definitions: Text|Channel|Username
     script:
-        - if !<[Username].exists>:
+        - if <[Username]||null> == null:
             - define Username "Dehr Network Bot"
-        - if !<[Channel].exists>:
+        - if <[Channel]||null> == null:
             - define Channel 626098849127071746
-        - if !<[Text].exists>:
+        - if <[Text]||null> == null:
             - stop
 
         - define color Code

@@ -40,7 +40,7 @@ mod_online_inv_events:
   events:
     on player clicks player_head in mod_online_inv:
       - flag <player> amp_map:!
-      - if <server.match_player[<context.item.display.strip_color>].has_permission[mod.staff]>:
+      - if <server.match_player[<context.item.display.strip_color>].has_permission[adriftus.staff]>:
         - narrate "<&c>You cannot perform actions on other staff members."
         - stop
       - define uuid <server.match_player[<context.item.display.strip_color>].uuid>
@@ -50,4 +50,4 @@ mod_online_inv_events:
       - define map <[map].with[current].as[<yaml[global.player.<[uuid]>].read[chat.channels.current]||None>]>
       - define map <[map].with[active].as[<yaml[global.player.<[uuid]>].read[chat.channels.active]||None>]>
       - flag <player> amp_map:<[map]>
-      - inventory open d:<inventory[mod_actions_inv]>
+      - inventory open d:mod_actions_inv

@@ -44,7 +44,7 @@ miraculous_mushroom_events:
       - if <context.location.note_name.starts_with[mushroom_home]||false>:
         - determine passively cancelled
       - wait 1t
-      - if <context.location.notable_name.starts_with[mushroom_home~<player.uuid>]||false>:
+      - if <context.location.note_name.starts_with[mushroom_home~<player.uuid>]||false>:
         - define lever_loc <context.location.center.with_pitch[0].with_yaw[<yaml[mushroom_config].read[directional_converter.direction.<context.location.material.direction>]>]>
         - define cuboid <yaml[mushroom_config].parsed_key[mushroom_relatives.cuboids.whole.a].to_cuboid[<yaml[mushroom_config].parsed_key[mushroom_relatives.cuboids.whole.b]>]>
         - foreach <yaml[mushroom_config].list_keys[mushroom_relatives.checks]> as:material:
@@ -68,7 +68,7 @@ miraculous_mushroom_events:
             - stop
         - foreach <yaml[mushroom_config].list_keys[mushroom_relatives.saves]> as:key:
           - define nbt:|:<[key]>/<yaml[mushroom_config].parsed_key[mushroom_relatives.saves.<[key]>].inventory.list_contents.escaped||air>
-        - note remove as:<context.location.notable_name>
+        - note remove as:<context.location.note_name>
         - define top <yaml[mushroom_config].parsed_key[mushroom_relatives.cuboids.top.a].to_cuboid[<yaml[mushroom_config].parsed_key[mushroom_relatives.cuboids.top.b]>]>
         - define stem <yaml[mushroom_config].parsed_key[mushroom_relatives.cuboids.stem.a].to_cuboid[<yaml[mushroom_config].parsed_key[mushroom_relatives.cuboids.stem.b]>]>
         - modifyblock <[stem].blocks[ladder]> air no_physics

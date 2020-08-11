@@ -16,11 +16,8 @@ murdermobs_Command:
             - narrate "<proc[Colorize].context[Radius cannot contain decimals.|red]>"
             - stop
     tab complete:
-        - define List <list[Bat|Bee|Blaze|Cave_Spider|Chicken|Cod|Cow|Creeper|Dolphin|Donkey|Drowned|Elder_Guardian|Ender_Dragon|Enderman|Endermite|Evoker|Fox|Ghast|Giant|Guardian|Horse|Husk|Illusioner|Iron_Golem|Llama|Magma_Cube|Minecart|Mule|Mushroom_Cow|Ocelot|Panda|Parrot|Phantom|Pig|Pig_Zombie|Pillager|Polar_Bear|Pufferfish|Rabbit|Salmon|Sheep|Shulker|Silverfish|Skeleton|Skeleton_Horse|Snowman|Spider|Squid|Stray|Tropical_Fish|Turtle|Vex|Villager|Vindicator|Witch|Wither|Wolf|Zombie|Zombie_Horse|Zombie_Villager]>
-        - if <context.args.size> == 1:
-            - determine <[List]>
-        - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <[List].filter[starts_with[<context.args.first>]]>
+        - define Args <list[Bat|Bee|Blaze|Cave_Spider|Chicken|Cod|Cow|Creeper|Dolphin|Donkey|Drowned|Elder_Guardian|Ender_Dragon|Enderman|Endermite|Evoker|Fox|Ghast|Giant|Guardian|Horse|Husk|Illusioner|Iron_Golem|Llama|Magma_Cube|Minecart|Mule|Mushroom_Cow|Ocelot|Panda|Parrot|Phantom|Pig|Pig_Zombie|Pillager|Polar_Bear|Pufferfish|Rabbit|Salmon|Sheep|Shulker|Silverfish|Skeleton|Skeleton_Horse|Snowman|Spider|Squid|Stray|Tropical_Fish|Turtle|Vex|Villager|Vindicator|Witch|Wither|Wolf|Zombie|Zombie_Horse|Zombie_Villager]>
+        - inject OneArg_Command_Tabcomplete
     script:
     # % ██ [ Check Args ] ██
         - if <context.args.size> > 2:
@@ -35,26 +32,26 @@ murdermobs_Command:
         - else if <context.args.first.is_integer>:
             - define Radius <context.args.first>
             - inject Locally RadiusCheck
-        - else if <server.list_entity_types.include[All|Hostiles].exclude[Player].contains_any[<context.args.first.split[,]>]>:
+        - else if <server.entity_types.include[All|Hostiles].exclude[Player].contains_any[<context.args.first.split[,]>]>:
             - define Mobs <context.args.first.split[,]>
         - else:
             - inject Command_Syntax
 
     # % ██ [ Check for Default Second Arg ] ██
         - if <context.args.get[2]||null> == null:
-            - if <[Radius].exists>:
+            - if <[Radius]||null> != null:
                 - define Mobs Hostiles
             - else:
                 - define Radius 50
 
     # % ██ [ Check Second Arg ] ██
         - else if <context.args.get[2].is_integer>:
-            - if <[Radius].exists>:
+            - if <[Radius]||null> != null:
                 - inject Command_Syntax
             - define Radius <context.args.get[2]>
             - inject Locally RadiusCheck
-        - else if <server.list_entity_types.include[All|Hostiles].exclude[Player].contains_any[<context.args.get[2].split[,]>]>:
-            - if <[Mobs].exists>:
+        - else if <server.entity_types.include[All|Hostiles].exclude[Player].contains_any[<context.args.get[2].split[,]>]>:
+            - if <[Mobs]||null> != null:
                 - inject Command_Syntax
             - define Mobs <context.args.get[2].split[,]>
         - else:
