@@ -2,7 +2,7 @@
 # @ ██    Command Dependencies | Easy injections to complete scripts
 # % ██
 # % ██  [ Command Syntax Error & Stop ] ██
-# - ██  [ Usage ] - inject Command_Syntax Instantly
+# - ██  [ Usage ] - inject Command_Syntax
 Command_Syntax:
     type: task
     debug: false
@@ -16,7 +16,7 @@ Command_Syntax:
 
 # % ██  [ Used a command wrongly, provide reason ] ██
 # - ██  [ Usage ] - define Reason "no"
-# - ██  [       ] - inject Command_Error Instantly
+# - ██  [       ] - inject Command_Error
 Command_Error:
     type: task
     debug: false
@@ -52,7 +52,7 @@ Admin_Verification:
             - inject Permission_Error
 
 #$# % ██  [ Specifically not moderation, no permission message ] ██
-#$# - ██  [ Usage ] - inject Admin_Permission_Denied instantly
+#$# - ██  [ Usage ] - inject Admin_Permission_Denied
 #$Admin_Permission_Denied:
 #$    type: task
 #$    debug: false
@@ -64,7 +64,7 @@ Admin_Verification:
 
 # % ██  [ Verifies a player online ] ██
 # - ██  [ Usage ]  - define User playername
-# - ██  [       ]  - inject Player_Verification Instantly
+# - ██  [       ]  - inject Player_Verification
 Player_Verification:
     type: task
     debug: false
@@ -75,14 +75,14 @@ Player_Verification:
         - stop
     script:
         - if <[User].length> < 4:
-            - inject locally ErrorProcess Instantly
+            - inject locally ErrorProcess
         - else if <server.match_player[<[User]>]||null> == null:
-            - inject locally ErrorProcess Instantly
+            - inject locally ErrorProcess
         - define User <server.match_player[<[User]>]>
 
 # % ██  [ Verifies a player online or offline ] ██
 # - ██  [ Usage ]  - define User playername
-# - ██  [       ]  - inject Player_Verification_Offline Instantly
+# - ██  [       ]  - inject Player_Verification_Offline
 Player_Verification_Offline:
     type: task
     debug: false
@@ -93,10 +93,10 @@ Player_Verification_Offline:
         - stop
     script:
         - if <[User].length> < 4:
-            - inject locally ErrorProcess Instantly
+            - inject locally ErrorProcess
         - else if <server.match_player[<[User]>]||null> == null:
             - if <server.match_offline_player[<[User]>]||null> == null:
-                - inject locally ErrorProcess Instantly
+                - inject locally ErrorProcess
             - else:
                 - define User <server.match_offline_player[<[User]>]>
         - else:
@@ -104,7 +104,7 @@ Player_Verification_Offline:
 
 # % ██  [ Verifies a player online or offline, returns null instead of closing the queue if invalid ] ██
 # - ██  [ Usage ]  - define User playername
-# - ██  [       ]  - inject Player_Verification_Offline_NullReturn Instantly
+# - ██  [       ]  - inject Player_Verification_Offline_NullReturn
 Player_Verification_Offline_NullReturn:
     type: task
     debug: false
@@ -130,7 +130,7 @@ User_Display_Simple:
 
 # % ██  [ Logging chat for global chat ] ██
 # - ██  [ Usage ]  - define Log SettingsKey/<[Message]>
-# - ██  [       ]  - inject ChatLog Instantly
+# - ██  [       ]  - inject ChatLog
 Chat_Logger:
     type: task
     debug: false
@@ -170,9 +170,9 @@ Online_Player_Tabcomplete:
         - if !<[iArg].exists>:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
+            - determine <server.online_players.exclude[<[Blacklist]||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <server.online_players.exclude[<[Blacklist]||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -205,9 +205,9 @@ All_Player_Tabcomplete:
         - if !<[iArg].exists>:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <server.players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
+            - determine <server.players.exclude[<[Blacklist]||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <server.players.exclude[<[Blacklist]||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -241,7 +241,7 @@ OneArg_Command_Tabcomplete:
 # - ██  [       ] - define Arg2 <list[thin|handtossed|brooklyn]>
 # - ██  [       ] - define Arg3 <list[redsauce|bbq|alfredo]>
 # - ██  [       ] - define Arg4 <list[pepperonies|sausage|pineapples|none]>
-# - ██  [       ] - inject MultiArg_Command_Tabcomplete Instantly
+# - ██  [       ] - inject MultiArg_Command_Tabcomplete
 MultiArg_Command_Tabcomplete:
     type: task
     debug: false
@@ -273,7 +273,7 @@ MultiArg_Command_Tabcomplete:
 # - ██  [       ] - define Arg2LargeArgs <list[Pepperonies|Sausage|Ham|Chicken|Pineapples|Bacon]>
 # - ██  [       ] - define Arg3 <list[RedSauce|bbq|alfredo]>
 # - ██  [       ] - define Arg4RedSauceArgs <list[Pepperonies|Sausage|Pineapples]>
-# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete Instantly
+# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete
 # % ██  [ Notes ] Tab-completes a list of options for a numbered list of args with specific args per args
 MultiArg_With_MultiArgs_Command_Tabcomplete:
     type: task
@@ -305,7 +305,7 @@ MultiArg_With_MultiArgs_Command_Tabcomplete:
 # - ██  [  # 1  ] - define Arg1 <list[Option1|Option2]>
 # - ██  [  # 1  ] - define Arg2Option1Args <list[Option3|Option4]>
 # - ██  [  # 1  ] - define Arg3Option2Args <list[Option5|Option6]>
-# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete Instantly
+# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete
 # % ██  [ Notes ] Tab-completes a list of options for a numbered list of args with specific args per args
 MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
     type: task
@@ -393,7 +393,7 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
 # @ ██  [ Usage ] - define Arg <context.args.first||null>
 # @ ██  [       ] - define ModeFlag "Behr.Essentials.Example"
 # @ ██  [       ] - define ModeName "Mode Name"
-# @ ██  [       ] - inject Activation_Arg_Command Instantly
+# @ ██  [       ] - inject Activation_Arg_Command
 # @ ██  [       ]
 # @ ██  [       ] - run Activation_Arg_Command "def:Behr.Essentials.Example|Mode Name"
 # @ ██  [       ] - run Activation_Arg_Command "def:Behr.Essentials.Example|Mode Name|on"
@@ -417,16 +417,16 @@ Activation_Arg:
     script:
         - choose <[Arg]||null>:
             - case on true activate:
-                - inject locally Activate Instantly
+                - inject locally Activate
             - case off false deactivate:
-                - inject locally Deactivate Instantly
+                - inject locally Deactivate
             - case null:
                 - if <player.has_flag[<[ModeFlag]>]>:
-                    - inject locally Deactivate Instantly
+                    - inject locally Deactivate
                 - else:
-                    - inject locally Activate Instantly
+                    - inject locally Activate
             - default:
-                - inject Command_Syntax Instantly
+                - inject Command_Syntax
 
 
 
