@@ -212,7 +212,7 @@ cosmetic_command:
         - narrate "<&b>Activated cosmetic effect curve1"
         - flag player curve
       - while <player.has_flag[curve]||false>:
-        - if <player.is_spawned||false> == false:
+        - if !<player.is_online>:
           - stop
         - define point:<[sphere].random>
         - define offset:<player.location.sub[<[center]>]>

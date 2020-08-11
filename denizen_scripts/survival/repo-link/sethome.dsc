@@ -39,4 +39,10 @@ home_respawn_event:
   type: world
   events:
     on player respawns bukkit_priority:HIGHEST ignorecancelled:true:
-      - determine <location[home_<player.uuid>]||<location[spawn]>>
+    - determine passively <location[home_<player.uuid>]||spawn>
+    - flag player fallImmunity d:10s
+    - narrate "<&a>You have 10 seconds of spawn protection."
+    - wait 10s
+    - narrate "<&a>Your spawn protection has worn off."
+    on player damaged flagged:fallImmunity:
+    - determine cancelled
