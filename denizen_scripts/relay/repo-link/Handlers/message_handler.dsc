@@ -51,7 +51,7 @@ Message_Handler:
             - ~Run Note_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case webget wget:
             - ~Run Webget_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
-          - case food foodget foodgit gitfood getfood whereshouldieat wheredoieat whereeat whereieat whereeat eatwhere randomfood foodrandom:
+          - case food foodget foodgit gitfood getfood wheretoeat whereshouldieat wheredoieat whereeat whereieat whereeat eatwhere randomfood foodrandom:
             - ~Run RFood_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
 
     # % ██ [ General Plaintext Scripts       ] ██
