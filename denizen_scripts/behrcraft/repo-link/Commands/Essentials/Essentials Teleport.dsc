@@ -21,16 +21,33 @@ Teleport_Command:
         - define User <context.args.first>
         - inject Player_Verification_Offline
 
+    # % ██ [ Check single arg usage ] ██
+        - if <context.args.size> == 1:
+            - if <[User]> == <player>:
+                - narrate format:Colorize_Yellow "Nothing interesting happens."
+            - else:
+                - inject Locally Permission_Check
+        - else:
+            - if <player.in_group[Moderator]>:
+                - define User2 <[User]>
+                - define User <context.args.get[2]>
+                - inject Player_Verification_Offline
+                - teleport <[User2]> <[User]>
+            - else:
+                - define reason "Not enough permission"
+
+    # % ██ [ Check for Request flag ] ██
+    Permission_Check:
+        - if !<player.in_group[Moderation]> || <context.args.contains_any[-r|-req|-request]>:
+            - inject Locally Teleport_Prompt
+        - else:
+            - teleport <player> <[User]>
+    Teleport_Prompt:
         - if <[User].has_flag[Behr.Essentials.Teleport.Requests]>:
             - define TeleportMap <[User].flag[Behr.Essentials.Teleport.Requests]>
         - else:
             - define TeleportMap <map>
 
-        - if !<player.in_group[Moderation]> || <context.args.contains_any[-r|-req|-request]>:
-            - inject Locally TeleportPrompt
-        - else:
-            - teleport <player> <[User]>
-    TeleportPrompt:
         - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<player>]>"
         - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
         - define CommandA "tpaccept <player.name>"
