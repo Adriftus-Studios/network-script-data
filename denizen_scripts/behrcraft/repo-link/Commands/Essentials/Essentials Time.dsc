@@ -8,7 +8,7 @@ Time_Command:
     aliases:
         - nick
     tab complete:
-        - define Arg1 <list[Start|Day|Noon|Sunset|Bedtime|Dusk|Night|Midnight|Sunrise|Dawn]>
+        - define Args <list[Start|Day|Noon|Sunset|Bedtime|Dusk|Night|Midnight|Sunrise|Dawn]>
         - inject OneArg_Command_Tabcomplete
     script:
     # % ██ [ Check Args ] ██
