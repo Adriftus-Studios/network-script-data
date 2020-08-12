@@ -35,8 +35,8 @@ TPAccept_Command:
         - flag <player> Behr.Essentials.Teleport.Request:<[Flag].exclude[<[User]>]>
         - choose <[TeleportMap].get[RequestType]>:
             - case TeleportTo:
-                - teleport <[User]> <[Loc]>
                 - flag <[User]> Behr.Essentials.Teleport.Back:<[User].location>
+                - teleport <[User]> <[Loc]>
             - case TeleportHere:
-                - teleport <player> <[Loc]>
                 - flag <player> Behr.Essentials.Teleport.Back:<player.location>
+                - teleport <player> <[Loc]>
