@@ -132,8 +132,6 @@ PlayerBank_Handler:
         - else:
             - yaml load:data/pBank/pBankKey.yml id:pBankKey
     Inventory_Save:
-        - if <context.inventory.replace[<player.uuid>].starts_with[<inventory[pBank]>].not||true>:
-            - stop
         - define BankID <context.inventory.after[_]>
         - define dvlist <context.inventory.list_contents.first.to[45]>
         - yaml set id:pBankKey "<player.uuid>.<[BankID]>:<[dvlist]>"
@@ -145,11 +143,11 @@ PlayerBank_Handler:
             - inject Locally Inventory_Load
         on reload scripts:
             - inject Locally Inventory_Load
-        on player closes inventory:
+        on player closes pBank*:
             - inject Locally Inventory_Save
         on player clicks blank in inventory:
             - determine cancelled
-        on player clicks LastPageArrow|NextPageArrow in inventory:
+        on player clicks LastPageArrow|NextPageArrow in pBank*:
             - determine passively cancelled
             - inject locally Inventory_Save
             - run Open_Bank def:<context.item.nbt[bankid]> Instantly
