@@ -10,11 +10,6 @@ Back_Command:
         - if !<context.args.is_empty>:
             - inject Command_Syntax
 
-    # - ██ [ Temporary Event Handle ] ██
-        - if <player.has_flag[Event.InEvent]>:
-            - narrate format:Colorize_Red "You cannot do that during an event."
-            - stop
-
     # % ██ [ check if they have a back location ] ██
         - if !<player.has_flag[Behr.Essentials.Teleport.Back]>:
             - narrate format:Colorize_Red "No back location to return to"

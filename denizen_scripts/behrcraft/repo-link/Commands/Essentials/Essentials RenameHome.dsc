@@ -17,11 +17,6 @@ RenameHome_Command:
         - if <context.args.get[3]||null> != null:
             - inject Command_Syntax
 
-    # - ██ [ Temporary Event Handle ] ██
-        - if <player.has_flag[Event.InEvent]>:
-            - narrate format:Colorize_Red "You cannot do that during an event."
-            - stop
-
     # % ██ [ Open GUI without args ] ██
         - if <context.args.first||null> == null:
             - run Home_GUI def:Rename

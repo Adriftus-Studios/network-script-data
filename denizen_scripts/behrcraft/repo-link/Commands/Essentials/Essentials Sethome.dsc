@@ -16,11 +16,6 @@ SetHome_Command:
         - if <context.args.is_empty>:
             - inject Command_Syntax
 
-    # - ██ [ Temporary Event Handle ] ██
-        - if <player.has_flag[Event.InEvent]>:
-            - narrate format:Colorize_Red "You cannot do that during an event."
-            - stop
-
     # % ██ [ Define name/loc ] ██
         - define Name <context.args.first>
         - define Location <player.location.simple.as_location.add[0.5,0,0.5].with_yaw[<player.location.yaw>].with_pitch[<player.location.pitch>]>

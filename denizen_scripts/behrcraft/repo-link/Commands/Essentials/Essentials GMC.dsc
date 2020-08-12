@@ -14,11 +14,6 @@ gmc_Command:
     # % ██ [   Verify args ] ██
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
-
-    # - ██ [ Temporary Event Handle ] ██
-        - if <player.has_flag[Event.InEvent]>:
-            - narrate format:Colorize_Red "You cannot do that during an event."
-            - stop
             
     # % ██ [   Check for self or named player ] ██
         - if <context.args.first||null> == null:
