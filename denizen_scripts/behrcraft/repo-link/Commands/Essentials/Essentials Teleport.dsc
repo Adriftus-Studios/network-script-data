@@ -26,7 +26,10 @@ Teleport_Command:
         - else:
             - define TeleportMap <map>
 
-        - inject Locally TeleportPrompt
+        - if !<player.in_group[Moderation]> || <context.args.contains_any[-r|-req|-request]>:
+            - inject Locally TeleportPrompt
+        - else:
+            - teleport <player> <[User]>
     TeleportPrompt:
         - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<player>]>"
         - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
