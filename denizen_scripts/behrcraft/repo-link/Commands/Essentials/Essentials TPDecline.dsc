@@ -9,38 +9,29 @@ TPDecline_Command:
         - define Blacklist <server.online_players.filter[has_flag[Behr.Moderation.Hide]].include[<Player>]>
         - Inject Online_Player_Tabcomplete
     script:
-    # % ██ [ Check Args ] ██
-        - if <context.args.get[2]||null> != null:
+        - if <context.args.size> > 1:
             - inject Command_Syntax
 
-    # - ██ [ Temporary Event Handle ] ██
-        - if <player.has_flag[Event.InEvent]>:
-            - narrate format:Colorize_Red "You cannot do that during an event."
+        - if !<player.has_flag[Behr.Essentials.Teleport.Request]>:
+            - narrate format:Colorize_Red "No teleport request found."
             - stop
+        - define Flag <player.flag[Behr.Essentials.Teleport.Request].as_map>
 
-    # % ██ [ Check if player has a request ] ██
-        - if <player.has_flag[Behr.Essentials.teleport.request]>:
-        # % ██ [ Check if player is specifying player ] ██
-            - if <context.args.first||null> == null:
-                - define User <player.flag[Behr.Essentials.teleport.request].first.before[/]>
-                - define Loc <player.flag[Behr.Essentials.teleport.request].first.after[/]>
-            - else:
-                - define User <context.args.first>
-                - inject Player_Verification_Offline
-            # % ██ [ Check if player is requested a teleport ] ██
-                - if <player.flag[Behr.Essentials.teleport.request].parse[before[/]].contains[<[User]>]>:
-                    - define Loc <player.flag[Behr.Essentials.teleport.request].map_get[<[User]>]>
-                - else:
-                    - narrate "<proc[Colorize].context[No teleport request found.|red]>"
-                    - stop
-
-        # % ██ [ Check teleport request type, adjust flags ] ██
-            - if <player.flag[Behr.Essentials.teleport.requesttype].map_get[<[User]>]||false> == teleportto:
-                - flag <player> Behr.Essentials.teleport.requesttype:<-:<[User]>/teleportto
-            - flag <player> Behr.Essentials.teleport.request:<-:<[User]>/<[Loc]>
-
-        # % ██ [ Print to Players ] ██
-            - narrate targets:<player> "<proc[Colorize].context[Teleport request declined.|green]>"
-            - narrate targets:<[User]> "<proc[User_Display_Simple].context[<player>]> <proc[Colorize].context[declined your teleport request.|green]>"
+        - if <context.args.is_empty>:
+            - define User <[Flag].keys.first>
+            - define TeleportMap <[Flag].get[<[Flag].keys.first>]>
+            - define Loc <[TeleportMap].get[Location]>
         - else:
-            - narrate "<proc[Colorize].context[No teleport request found.|red]>"
+            - define User <context.args.first>
+            - inject Player_Verification_Offline
+            - if !<[Flag].contains[<[User]>]>:
+                - narrate format:Colorize_Red "No teleport request found."
+                - stop
+            - define TeleportMap <[Flag].get[<[User]>]>
+            - define Loc <[TeleportMap].get[Location].add[0.01,0.01,0.01]>
+            
+        - flag <player> Behr.Essentials.Teleport.Request:<[Flag].exclude[<[User]>]>
+
+    # % ██ [ Print to Players ] ██
+        - narrate targets:<player> "<proc[Colorize].context[Teleport request declined.|green]>"
+        - narrate targets:<[User]> "<proc[User_Display_Simple].context[<player>]> <proc[Colorize].context[declined your teleport request.|green]>"
