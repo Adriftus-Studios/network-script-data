@@ -10,7 +10,7 @@ BStaff:
   enchantments:
     - BINDING_CURSE
   mechanisms:
-    hides: HIDE_ALL
+    hides: ALL
 
 BehrEdit_Command:
     type: command

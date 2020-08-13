@@ -2,17 +2,17 @@ Production_Handler:
     type: world
     debug: false
     events:
-        on player clicks with World_Edit_Selector:
+        on player clicks block with:World_Edit_Selector:
             - determine passively cancelled
             #$ Fake it until you make it
             - define Loc <player.location.cursor_on>
             - define ClickType <context.click_type>
             - define Selection <player.we_selection||null>
             - if <[ClickType].contains[left]>:
-                - execute as_op /hpos1 silent
+                #- execute as_op /hpos1 silent
                 - define SelIndex 1
             - else if <[ClickType].contains[right]>:
-                - execute as_op /hpos2 silent
+                #- execute as_op /hpos2 silent
                 - define SelIndex 2
             - else:
                 - stop
@@ -22,8 +22,8 @@ SelectionDisplay:
     type: task
     debug: false
     script:
+        - define LocText "<&2>[<&a>Selection <[SelIndex]><&2>] <&6>[<&e><[Loc].x><&6>, <&e><[Loc].y><&6>, <&e><[Loc].z><&6>]"
         - if <[Selection]||null> != null:
-            - define LocText "<&2>[<&a>Selection <[SelIndex]><&2>] <&6>[<&e><[Loc].x><&6>, <&e><[Loc].y><&6>, <&e><[Loc].z><&6>]"
             - define XSize <[Selection].max.X.sub[<[Selection].min.X>].add[1]>
             - define YSize <[Selection].max.Y.sub[<[Selection].min.Y>].add[1]>
             - define ZSize <[Selection].max.Z.sub[<[Selection].min.Z>].add[1]>

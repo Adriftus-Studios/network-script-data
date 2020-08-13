@@ -1,18 +1,10 @@
 survivalistAssignment:
     type: assignment
-    interact scripts:
-    - survivalistInteract
     actions:
         on assignment:
         - trigger name:click state:true
-
-survivalistInteract:
-    type: interact
-    steps:
-        1:
-            click trigger:
-                script:
-                - inject survivalistInventoryInject
+        on click:
+        - inject survivalistInventoryInject
 
 survivalistInventory:
     type: inventory

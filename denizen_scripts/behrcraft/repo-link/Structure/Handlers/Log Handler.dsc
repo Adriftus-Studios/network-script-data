@@ -60,10 +60,11 @@ Login_Handler:
                 - flag player Behrry.Essentials.FirstLogin
                 - define Message "<&6><player.name> <&d>joined BehrCraft for the first time!"
                 - define DiscordMessage "<&lt>a:sheep:693346095249752066<&gt> **<player.name>** joined BehrCraft for the first time! <&lt>a:sheep:693346095249752066<&gt>"
-                - foreach <server.online_players> as:Player:
+                - announce <[Message]>
+                # - foreach <server.online_players> as:Player:
                 # $ ██ [ Implement with /Settings Command ] ██
                     #- if <[Player].has_flag[Behrry.Settings.Chat.FirstJoined]>:
-                    - narrate targets:<[Player]> <[Message]>
+                    # - narrate targets:<[Player]> <[Message]>
                 - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
                 - stop
 
@@ -116,10 +117,11 @@ Chat_Event_Messages:
         - define DiscordMessage ":heavy_plus_sign: **<player.name>** joined the game."
 
     # % ██ [ Print the message ] ██
-        - foreach <server.online_players> as:Player:
+        - announce <[Message]>
+        # - foreach <server.online_players> as:Player:
         # $ ██ [ Implement with /Settings Command ] ██
             #- if <[Player].has_flag[Behrry.Settings.Chat.Joins]>:
-            - narrate targets:<[Player]> <[Message]>
+            # - narrate targets:<[Player]> <[Message]>
         - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
 
     Quit_Event:
@@ -132,10 +134,11 @@ Chat_Event_Messages:
         - define DiscordMessage ":heavy_minus_sign: **<player.name>** left the game."
 
     # % ██ [ Print the message ] ██
-        - foreach <server.online_players> as:Player:
+        - announce <[Message]>
+        # - foreach <server.online_players> as:Player:
         # $ ██ [ Implement with /Settings Command ] ██
             #- if <[Player].has_flag[Behrry.Settings.Chat.quits]>:
-            - narrate targets:<[Player]> <[Message]>
+            # - narrate targets:<[Player]> <[Message]>
         - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
 ChatEvent_Message:
     type: task
