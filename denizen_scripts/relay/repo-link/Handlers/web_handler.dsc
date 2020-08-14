@@ -21,15 +21,14 @@ web_handler:
     #^- define Headers <list[user-agent/behrrison|application/x-www-form-urlencoded]>
       - define Headers <yaml[discord_response].read[Headers]>
       - define URL <yaml[discord_response].read[URL]>
-      - define data <yaml[discord_response].parsed_key[Response]>
+      - define data <yaml[discord_response].parsed_key[Response].url_encode>
 
       - announce to_console <&3>----------------------------------------------
       - announce to_console "<&6><&lt>[<&e>Headers<&6>]<&gt> <&b> <[Headers]>"
       - announce to_console "<&6><&lt>[<&e>URL<&6>]<&gt> <&b> <[URL]>"
-      - announce to_console "<&6><&lt>[<&e>data<&6>]<&gt> <&b> <[data]>"
-      - announce to_console "<&6><&lt>[<&e>data<&6>.<&e>to_json<&6>]<&gt> <&b> <[data].to_json>"
+      - announce to_console "<&6><&lt>[<&e>data<&6>.<&e>url_encode<&6>]<&gt> <&b> <[data]>"
 
-      - ~webget <[URL]> Headers:<[Headers]> Data:<[Data].to_json> save:response
+      - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
 
       - announce to_console <&3>----------------------------------------------
       - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>failed<&6><&gt> <&b>| <&3><entry[response].failed> <&b>| <&a>returns whether the webget failed. A failure occurs when the status is no..."
