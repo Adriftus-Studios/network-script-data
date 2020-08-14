@@ -6,6 +6,7 @@ web_handler:
   events:
     after post request:
       - define Domain <context.address>
+      - discord id:adriftusbot message channel:626098849127071746 "**<&lt>context.address<&gt>**: `<context.address>`<&nl>**<&lt>context.query<&gt>**: `<context.query>`"
       - if <[Domain].starts_with[<script.data_key[Domains.Github]>]>:
         - announce to_console success
 
