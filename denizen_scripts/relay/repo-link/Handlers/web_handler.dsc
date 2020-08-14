@@ -4,6 +4,12 @@ web_handler:
     Github: 140.82.115
     self: 0:0:0:0:0:0:0:1
   events:
+    after get request:
+      - announce to_console "<&6><&lt><&e>context<&6>.<&e>address<&6><&gt> <&b>| <&a>Returns the IP address of the device that sent the request."
+      - announce to_console "<&6><&lt><&e>context<&6>.<&e>request<&6><&gt> <&b>| <&a>Returns the path that was requested."
+      - announce to_console "<&6><&lt><&e>context<&6>.<&e>query<&6><&gt> <&b>| <&a>Returns an ElementTag of the raw query included with the request."
+      - announce to_console "<&6><&lt><&e>context<&6>.<&e>query_map<&6><&gt> <&b>| <&a>Returns a map of the query."
+      - announce to_console "<&6><&lt><&e>context<&6>.<&e>user_info<&6><&gt> <&b>| <&a>Returns info about the authenticated user sending the request, if any."
     after post request:
       - define Domain <context.address>
       - define Context "**<&lt>context.address<&gt>**: `<context.address>`<&nl>**<&lt>context.query<&gt>**: `<context.query>`"
