@@ -11,6 +11,9 @@ web_handler:
       - announce to_console "<&6><&lt><&e>context<&6>.<&e>query_map<&6><&gt> <&b>| <&3><context.query_map> <&b>| <&a>Returns a map of the query."
       - announce to_console "<&6><&lt><&e>context<&6>.<&e>user_info<&6><&gt> <&b>| <&3><context.user_info> <&b>| <&a>Returns info about the authenticated user sending the request, if any."
 
+      - if <context.request> != /oAuth/Discord:
+        - stop
+
       - define Code <context.query_map.get[code]>
       - define UUID <context.query_map.get[state]>
 
