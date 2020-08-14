@@ -10,6 +10,17 @@ web_handler:
       - announce to_console "<&6><&lt><&e>context<&6>.<&e>query<&6><&gt> <&b>| <&3><context.query> <&b>| <&a>Returns an ElementTag of the raw query included with the request."
       - announce to_console "<&6><&lt><&e>context<&6>.<&e>query_map<&6><&gt> <&b>| <&3><context.query_map> <&b>| <&a>Returns a map of the query."
       - announce to_console "<&6><&lt><&e>context<&6>.<&e>user_info<&6><&gt> <&b>| <&3><context.user_info> <&b>| <&a>Returns info about the authenticated user sending the request, if any."
+
+      - define Code <context.query_map.get[code]>
+      - define UUID <context.query_map.get[state]>
+
+    #^- define Headers <list[user-agent/behrrison|application/x-www-form-urlencoded]>
+      - define Headers <yaml[discord_response].read[Headers]>
+      - define URL <yaml[discord_response].read[URL]>
+      - define data <yaml[discord_response].parsed_key[Response]>
+
+      - ~webget <[URL]> Headers:<[Headers]> Data:<[Data].to_json>
+
     after post request:
       - define Domain <context.address>
       - define Context "**<&lt>context.address<&gt>**: `<context.address>`<&nl>**<&lt>context.query<&gt>**: `<context.query>`"
