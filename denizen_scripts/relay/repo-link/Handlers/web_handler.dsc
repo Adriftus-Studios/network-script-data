@@ -11,6 +11,7 @@ web_handler:
       - announce to_console "<&6><&lt><&e>context<&6>.<&e>query_map<&6><&gt> <&b>| <&3><context.query_map> <&b>| <&a>Returns a map of the query."
       - announce to_console "<&6><&lt><&e>context<&6>.<&e>user_info<&6><&gt> <&b>| <&3><context.user_info> <&b>| <&a>Returns info about the authenticated user sending the request, if any."
 
+      - announce to_console <&3>----------------------------------------------
       - if <context.request> != /oAuth/Discord:
         - stop
 
@@ -22,12 +23,17 @@ web_handler:
       - define URL <yaml[discord_response].read[URL]>
       - define data <yaml[discord_response].parsed_key[Response]>
 
+      - announce to_console <&3>----------------------------------------------
+      - announce to_console "<&6><&lt>[<&e>Headers<&6>]<&gt> <&b> <[Headers]>"
+      - announce to_console "<&6><&lt>[<&e>URL<&6>]<&gt> <&b> <[URL]>"
+      - announce to_console "<&6><&lt>[<&e>data<&6>]<&gt> <&b> <[data]>"
+
       - ~webget <[URL]> Headers:<[Headers]> Data:<[Data].to_json> save:response
 
+      - announce to_console <&3>----------------------------------------------
       - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>failed<&6><&gt> <&b>| <&3><entry[response].failed> <&b>| <&a>returns whether the webget failed. A failure occurs when the status is no..."
       - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>result<&6><&gt> <&b>| <&3><entry[response].result> <&b>| <&a>returns the result of the webget. This is null only if webget failed to connect to the url."
       - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>status<&6><&gt> <&b>| <&3><entry[response].status> <&b>| <&a>returns the HTTP status code of the webget. This is null only if webget failed to connect to the url."
-      - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>time_ran<&6><&gt> <&b>| <&3><entry[response].time_ran> <&b>| <&a>returns a DurationTag indicating how long the web connection processing took."
 
     after post request:
       - define Domain <context.address>
