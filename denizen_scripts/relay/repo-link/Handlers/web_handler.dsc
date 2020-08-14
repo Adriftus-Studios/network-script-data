@@ -27,6 +27,7 @@ web_handler:
       - announce to_console "<&6><&lt>[<&e>Headers<&6>]<&gt> <&b> <[Headers]>"
       - announce to_console "<&6><&lt>[<&e>URL<&6>]<&gt> <&b> <[URL]>"
       - announce to_console "<&6><&lt>[<&e>data<&6>]<&gt> <&b> <[data]>"
+      - announce to_console "<&6><&lt>[<&e>data<&6>.<&e>to_json<&6>]<&gt> <&b> <[data].to_json>"
 
       - ~webget <[URL]> Headers:<[Headers]> Data:<[Data].to_json> save:response
 
