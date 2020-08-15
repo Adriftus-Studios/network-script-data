@@ -19,7 +19,12 @@ web_handler:
           - inject Web_Debug.Webget_Response
 
           - define oAuth_Data <entry[response].result.split[&].parse[split[=].limit[2].separated_by[/]].to_map>
-          - narrate <[oAuth_Data]>
+          - define Access_Token <[oAuth_Data].get[access_token]>
+
+          - define Headers <[Headers].include[Authorization/<[Access_Token]>]>
+          - ~webget https://api.github.com/user/repos Headers:<[Headers]> save:response
+          - inject Web_Debug.Webget_Response
+          
 
         - case /oAuth/Discord:
           - define Code <context.query_map.get[code]>
@@ -44,6 +49,7 @@ web_handler:
           - define Avatar https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>
 
           - ~webget <yaml[discord_response].read[Scope_URLs.Connections]> headers:<[Headers]> save:response
+          - inject Web_Debug.Webget_Response
           - define UserData <util.parse_yaml[<entry[response].result>]>
 
     after post request:
@@ -52,6 +58,10 @@ web_handler:
       - define Domain <context.address>
 
       - if <[Domain].starts_with[<script.data_key[Domains.Github]>]>:
+        - define Map <util.parse_yaml[<context.query>]>
+        - if <[Map].get[ref]> != refs/heads/master && <[Map].get[repository].get[full_name]> != AuroraInteractive/network-script-data:
+          - stop
+
         - define Request <context.request.after[github/]>
         - define Script ../network-script-data/system_scripts/github/git-pull
 
