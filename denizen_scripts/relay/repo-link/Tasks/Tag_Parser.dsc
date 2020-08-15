@@ -10,7 +10,7 @@ Tag_Parser_DCommand:
     - Lead Developer
     - Developer
   definitions: Message|Channel|Author|Group
-  debug: true
+  debug: false
   Context: Color
   speed: 0
   script:
@@ -61,6 +61,7 @@ Tag_Parser_DCommand:
 # $ ██ [ Run on Relay ] ██
 Tag_ParseFrom:
   type: task
+  debug: false
   definitions: Server|Tag
   script:
     - flag server TagUnparsed:<[Tag].escaped> duration:1s
@@ -70,6 +71,7 @@ Tag_ParseFrom:
 # $ ██ [ Run on Server induced by Relay ] ██
 Tag_Parse:
   type: task
+  debug: false
   definitions: Tag
   script:
     - define TagData <[Tag].unescaped.parsed>
@@ -82,6 +84,7 @@ Tag_Parse:
 # $ ██ [ Run on Relay induced by Server ] ██
 Tag_Receive:
   type: task
+  debug: false
   definitions: TagData|TagError
   script:
   # % ██ [                     ] ██
@@ -117,7 +120,7 @@ Tag_Parse_Listener:
         - announce to_console "<&4>Error:<&c> <context.line>"
     on server generates exception:
       - announce to_console "Server Generates exception-------------------------------------------------"
-      - if <context.queue.id.contains[Tag_Parse]>:
+      - if <context.queue.id.contains[Tag_Parse]||false>:
         - determine passively cancelled
         - announce to_console "<&4>Error:<&c> <context.message>"
         - announce to_console "<&4>Error:<&c> <context.full_trace>"
