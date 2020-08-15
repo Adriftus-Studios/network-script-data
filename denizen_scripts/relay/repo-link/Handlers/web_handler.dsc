@@ -26,8 +26,8 @@ web_handler:
           - inject Web_Debug.Webget_Response
 
           - announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
-          - ~webget https://api.github.com/repos/AuroraInteractive/Telix/forks Headers:<[Headers]> save:response
-          - inject Web_Debug.Webget_Response
+        #^- ~webget https://api.github.com/repos/AuroraInteractive/Telix/forks Headers:<[Headers]> save:response
+        #^- inject Web_Debug.Webget_Response
 
         - case /oAuth/Discord:
           - define Code <context.query_map.get[code]>
