@@ -13,7 +13,7 @@ web_handler:
           - define Code <context.query_map.get[code]>
           - define Headers <yaml[discord_response].read[GitHub.Headers]>
           - define URL <yaml[discord_response].read[GitHub.url]>
-          - define Data <yaml[discord_response].parsed_key[GitHub.Scopes]>
+          - define Data <yaml[discord_response].parsed_key[GitHub.Scopes].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
 
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
           - inject Web_Debug.Webget_Response
