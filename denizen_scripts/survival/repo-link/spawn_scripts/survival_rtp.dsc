@@ -27,9 +27,6 @@ survival_falloff_rtp:
   debug: false
   events:
     on player enters spawn_below:
-      # $ ---- Debugging ------------------------ #
-      - inject player_enters_area_debugging.wrapper
-      # $ ---- ---------------------------------- #
       - wait 1t
       - if <player.is_online>:
         - inject survival_rtp
@@ -39,9 +36,6 @@ survival_rtp_portal:
   debug: false
   events:
     on player enters spawn_cuboid:
-      # $ ---- Debugging ------------------------ #
-      - inject player_enters_area_debugging.wrapper
-      # $ ---- ---------------------------------- #
       - flag server people_in_spawn:->:<player>
       - time player reset
       - if !<server.has_flag[spawn_portal_running]>:
@@ -51,9 +45,6 @@ survival_rtp_portal:
       - wait 5t
       - inject spawn_sound_effects_handler
     on player exits spawn_cuboid:
-      # $ ---- Debugging ------------------------ #
-      - inject player_enters_area_debugging.wrapper
-      # $ ---- ---------------------------------- #
       - flag server people_in_spawn:<-:<player>
       - wait 1s
       - if <server.has_flag[spawn_portal_running]> && <cuboid[spawn_cuboid].players.is_empty>:
