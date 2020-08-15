@@ -18,6 +18,9 @@ web_handler:
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
           - inject Web_Debug.Webget_Response
 
+          - define oAuth_Data <entry[response].result.split[&].parse[split[=].limit[2].separated_by[/]].to_map>
+          - narrate <[oAuth_Data]>
+
         - case /oAuth/Discord:
           - define Code <context.query_map.get[code]>
           - define UUID <context.query_map.get[state]>
@@ -42,9 +45,6 @@ web_handler:
 
           - ~webget <yaml[discord_response].read[Scope_URLs.Connections]> headers:<[Headers]> save:response
           - define UserData <util.parse_yaml[<entry[response].result>]>
-
-        - default:
-          - inject Web_Debug.Submit
 
     after post request:
       - inject Web_Debug.Post_Request
