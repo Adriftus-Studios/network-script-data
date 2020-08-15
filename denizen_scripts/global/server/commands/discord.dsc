@@ -22,7 +22,7 @@ Discord_Command:
         - else:
             - if <context.args.get[1]> != link:
                 - inject Command_Syntax
-            - define url https://discord.com/api/oauth2/authorize?client_id=716381772610273430&redirect_uri=http%3A%2F%2F147.135.7.85%3A25580%2FoAuth%2FDiscord&response_type=code&scope=identify%20connections&state=<player.uuid>
-            - define Hover "<proc[Colorize].context[Click to follow Link:|green]><&nl><proc[Colorize].context[<[URL]>|blue]>"
+            - define url https://discord.com/api/oauth2/authorize?client_id=716381772610273430&redirect_uri=http%3A%2F%2F147.135.7.85%3A25580%2FoAuth%2FDiscord&response_type=code&scope=identify%20connections&state=<player.uuid>_<util.random.uuid>
+            - define Hover "<proc[Colorize].context[Click Link to link Discord to Minecraft|green]><&nl><proc[Colorize].context[https://discord.com/oauth2/authorize|blue]>"
             - define Text format:Colorize_Yellow "Click Link to link Discord to Minecraft"
             - narrate <proc[MsgURL].context[<[Hover]>|<[Text]>|<[URL]>]>

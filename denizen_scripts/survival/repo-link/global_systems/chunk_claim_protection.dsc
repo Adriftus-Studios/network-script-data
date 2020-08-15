@@ -1257,12 +1257,10 @@ claiming_system_upgrade_events:
             - inject claim_system_apply_upgrade_fly
             - foreach next
         - inject claim_system_apply_upgrade_<[upgrade_name]>
-    on player exits area:
+    on player exits claim*:
     # $ ---- Debugging ------------------------ #
     - inject player_enters_area_debugging.wrapper
     # $ ---- ---------------------------------- #
-    - if <context.cuboids.filter[note_name.starts_with[claim]].is_empty>:
-      - stop
     - define group <context.cuboids.filter[note_name.starts_with[claim]].parse[note.after[.].before[/]].first>
     - flag player claim_enter_ignore:<[group]> duration:6t
     - wait 2t
