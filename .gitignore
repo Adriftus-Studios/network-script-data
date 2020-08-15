@@ -25,6 +25,7 @@ scriptdata/global/bans
 scriptdata/global/Behr_Essentials
 scriptdata/global/discord/token.yml
 scriptdata/global/discord/webhooks.yml
+scriptdata/global/discord/oAuth_Data.yml
 scriptdata/global/players
 scriptdata/global/network/titles.yml
 denizen_scripts/relay/repo-link/Handlers/message_handler.dsc
