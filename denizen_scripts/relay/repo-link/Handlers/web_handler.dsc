@@ -50,9 +50,6 @@ web_handler:
       - inject Web_Debug.Post_Request
 
       - define Domain <context.address>
-      - define Context "**<&lt>context.address<&gt>**: `<context.address>`<&nl>**<&lt>context.query<&gt>**: `<context.query>`"
-      - discord id:adriftusbot message channel:626098849127071746 <[Context]>
-      - announce to_console <[Context]>
 
       - if <[Domain].starts_with[<script.data_key[Domains.Github]>]>:
         - define Request <context.request.after[github/]>
