@@ -21,7 +21,7 @@ web_handler:
           - define oAuth_Data <entry[response].result.split[&].parse[split[=].limit[2].separated_by[/]].to_map>
           - define Access_Token <[oAuth_Data].get[access_token]>
 
-          - define Headers <[Headers].include[Authorization/<[Access_Token]>]>
+          - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user/repos Headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
           
