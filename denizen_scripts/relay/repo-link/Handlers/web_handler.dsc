@@ -10,24 +10,44 @@ web_handler:
 
       - choose <context.request>:
         - case /oAuth/GitHub:
+        #| Cache Info
           - define Code <context.query_map.get[code]>
+          - define UUID <context.query_map.get[state]>
+
           - define Headers <yaml[discord_response].read[GitHub.Headers]>
           - define URL <yaml[discord_response].read[GitHub.url]>
           - define Data <yaml[discord_response].parsed_key[GitHub.Scopes].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
 
+        #| Token Exchange
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
           - inject Web_Debug.Webget_Response
 
           - define oAuth_Data <entry[response].result.split[&].parse[split[=].limit[2].separated_by[/]].to_map>
           - define Access_Token <[oAuth_Data].get[access_token]>
 
+        #| Obtain User Info
+          - announce to_console "<&c>-- User Info -----------------------------------"
+          - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
+          - ~webget https://api.github.com/user Headers:<[Headers]> save:response
+          - inject Web_Debug.Webget_Response
+
+        #| Obtain User Repository Info
           - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user/repos Headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
+          - define UserData <util.parse_yaml[<entry[Response].result>]>
+          - define Repositories <[UserData].parse_tag[<[Parse_Value].get[full_name]>]>
 
-          - announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
-          - ~webget https://api.github.com/repos/AuroraInteractive/Telix/forks Headers:<[Headers]> method:POST save:response
-          - inject Web_Debug.Webget_Response
+       #| Create Fork
+#^       - announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
+#^       - ~webget https://api.github.com/repos/AuroraInteractive/Telix/forks Headers:<[Headers]> method:POST save:response
+#^       - inject Web_Debug.Webget_Response
+
+       #| Create Webhook
+#^       - announce to_console "<&c>-WebHook Creation --------------------------------------------------------------"
+#^       - define Data '{"name": "ATE webhook","config": {"url": "http://76.119.243.194:25580/github/<[User]>/Telix","content-type": "json"}}'
+#^       - ~webget https://api.github.com/repos/AuroraInteractive/Telix/forks Headers:<[Headers]> method:POST data:<[Data]> save:response
+#^       - inject Web_Debug.Webget_Response
 
         - case /oAuth/Discord:
           - define Code <context.query_map.get[code]>
