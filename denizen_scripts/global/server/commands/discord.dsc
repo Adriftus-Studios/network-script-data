@@ -10,7 +10,7 @@ Discord_Command:
         - inject OneArg_Command_Tabcomplete
     script:
     # % ██ [ Check Args ] ██
-        - if !<context.args.size> > 1:
+        - if <context.args.size> > 1:
             - inject Command_Syntax
         
     # % ██ [ Print Discord Link ] ██
@@ -22,7 +22,7 @@ Discord_Command:
         - else:
             - if <context.args.get[1]> != link:
                 - inject Command_Syntax
-            - define url https://discord.com/api/oauth2/authorize?client_id=716381772610273430&redirect_uri=http%3A%2F%2F147.135.7.85%3A25580%2FoAuth%2FDiscord&response_type=code&scope=identify%20connections&state=<player.uuid>_<util.random.uuid>
+            - define url https://discord.com/api/oauth2/authorize?client_id=716381772610273430&redirect_uri=http<&pc>3A<&pc>2F<&pc>2F147.135.7.85<&pc>3A25580<&pc>2FoAuth<&pc>2FDiscord&response_type=code&scope=identify<&pc>20connections&state=<player.uuid>_<util.random.uuid>
             - define Hover "<proc[Colorize].context[Click Link to link Discord to Minecraft|green]><&nl><proc[Colorize].context[https://discord.com/oauth2/authorize|blue]>"
             - define Text format:Colorize_Yellow "Click Link to link Discord to Minecraft"
             - narrate <proc[MsgURL].context[<[Hover]>|<[Text]>|<[URL]>]>
