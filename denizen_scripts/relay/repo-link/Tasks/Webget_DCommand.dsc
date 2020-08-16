@@ -11,7 +11,7 @@ Webget_DCommand:
     - Lead Developer
     - Developer
   definitions: Message|Channel|Author|Group|MessageID
-  debug: false
+  debug: true
   script:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject Role_Verification
@@ -110,12 +110,48 @@ Webget_DCommand:
   # % ██ [ Listener Flags                          ] ██
     - if <[Args].contains_any[-f|-failed]>:
       - define EntryResults "<[EntryResults].include[<&nl>**Failed Status**: `<entry[Response].failed||Invalid Save Entry>`]>"
+
     - if <[Args].contains_any[-s|-status]>:
-      - define EntryResults "<[EntryResults].include[<&nl>**HTTP Status**: `<entry[Response].status||Invalid Save Entry>`]>"
-    - if <[Args].contains_any[-r|-result]>:
+      - define EntryResults "<[EntryResults].include[<&nl>**HTTP Status**: <proc[HTTP_Status_Codes].context[<entry[Response].status||Invalid Save Entry>]>]>"
+
+    - if <[Args].contains_any[-r|-result]> || "<entry[Response].result||Invalid Save Entry>" < 2000:
       - define EntryResults "<[EntryResults].include[<&nl>**Result Status**: `<entry[Response].result||Invalid Save Entry>`]>"
+
     - if <[Args].contains_any[-t|-time|-timeran|-time-ran]>:
       - define EntryResults "<[EntryResults].include[<&nl>**Time Ran**: `<entry[Response].time_ran.formatted||Invalid Save Entry>`]>"
+
+    - if <[Args].contains_any[-l|-log|-logs]> || <[EntryResults].unseparated.length> > 2000:
+      - define UUID <util.random.duuid.after[_]>
+      - define File_Location ../../web/webget/
+
+#+    # % ██ [ Check for JSON format               ] ██
+#^    - if <util.parse_yaml[<entry[Response].result>]||invalid> != Invalid || <util.parse_yaml[{"Data":<[<entry[Response].result>]>}]||Invalid> != Invalid:
+#^      - define Ext .json
+#^    - else:
+#+    # % ██ [ Check for YAML / DSC format         ] ██
+#^      - define Temp_Locaton data/temp/<util.random.uuid>.txt
+#^      - ~log <entry[Response].result> type:none file:<[Temp_Locaton]>
+#^      - flag server WebGet.Log_Queue:<queue.id> duration:5s
+#^      - ~yaml id:TempLoad load:<[Temp_Locaton]>
+#^    - define Timeout <util.time_now.add[5s]>
+#^    - waituntil rate:1s <server.has_flag[WebGet.LogResponse]> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0:
+#^    - if <server.has_flag[WebGet.LogResponse]>:
+#^      - if <server.flag[WebGet.LogResponse]> != "Invalid Yaml":
+#^        - define Extension .yml
+#^    - if <[Extension]||invalid> == invalid:
+#+    # % ██ [ Check For HTML Format               ] ██
+#^      - if <entry[Response].result.contains_any_text[<&lt>html<&gt>]>:
+#^        - define Extension .html
+#^      - else:
+#+    # % ██ [ Determine Fallback Format           ] ██
+#^        - define Extension .txt
+#^    - if <server.has_flag[Temp_Locaton]>:
+#^      - adjust server delete_file:<[Temp_Locaton]>
+
+      - define Extension .txt
+      - define URL http://147.135.7.85:25580/webget?name=<[UUID]><[Extension]>
+      - log <entry[Response].result> type:none file:<[File_Location]><[UUID]><[Extension]>
+      - define EntryResults "<[EntryResults].include[<&nl>**Log Output**: [`<[UUID]><[Extension]>`](<[URL]>)]>"
 
   # % ██ [ Determine Color Display                 ] ██
     - if "<[EntryResults].contains_any_text[Invalid Save Entry|**Warning**:]>":
@@ -124,14 +160,8 @@ Webget_DCommand:
       - define color Code
 
   # % ██ [ Return Results                          ] ██
-    - if <[EntryResults].unseparated.length> > 2000:
-      - define uuid <util.random.uuid>
-      - log <[EntryResults].unseparated> type:none "file:../../web/webget/<[uuid]>.html"
-      - define output http://147.135.7.85:25580/webget?name=<[uuid]>
-    - else:
-      - define output <[EntryResults].unseparated>
     - inject Embedded_Color_Formatting
-    - define Embeds "<list[<map.with[color].as[<[Color]>].with[description].as[Command ran: `/WebGet <[Args].space_separated>`<[output]>]>]>"
+    - define Embeds "<list[<map.with[color].as[<[Color]>].with[description].as[Command ran: `/WebGet <[Args].space_separated>`<[EntryResults].unseparated>]>]>"
     - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
 
     - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
