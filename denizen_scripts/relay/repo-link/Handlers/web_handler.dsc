@@ -7,7 +7,7 @@ web_handler:
   events:
     on server start:
       - yaml id:oAuth load:data/global/discord/oAuth_Data.yml
-    after get request:
+    on get request:
       - if <context.request||invalid> == favicon.ico:
         - stop
       - inject Web_Debug
@@ -112,7 +112,7 @@ web_handler:
           - else:
             - determine CODE:404
 
-    after post request:
+    on post request:
       - define Domain <context.address>
       - if <[Domain].starts_with[<script.data_key[Domains.Github]>]>:
         - define Map <util.parse_yaml[{"Data":<context.query>}].get[Data]>
