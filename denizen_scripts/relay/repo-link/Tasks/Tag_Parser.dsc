@@ -112,7 +112,7 @@ Tag_Parse_Listener:
   events:
     on script generates error:
       - announce to_console "Script Generates Error-------------------------------------------------"
-      - if <context.queue.id.contains[Tag_Parse]>:
+      - if <context.queue.id.contains[Tag_Parse]||false>:
         - determine passively cancelled
         - announce to_console "<&4>Error:<&c> <context.message>"
         - announce to_console "<&4>Error:<&c> <context.queue>"
