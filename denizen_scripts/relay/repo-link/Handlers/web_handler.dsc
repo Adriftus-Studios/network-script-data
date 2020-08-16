@@ -1,6 +1,6 @@
 web_handler:
   type: world
-  debug: true
+  debug: false
   Domains:
     Github: 140.82.115
     self: 0:0:0:0:0:0:0:1
@@ -32,14 +32,13 @@ web_handler:
           - ~webget https://api.github.com/user Headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
           - define UserData <util.parse_yaml[{<entry[Response].result>}]>
-          - narrate <&2><[UserData]>
+          - narrate User <&a><[UserData].keys>
 
         #| Obtain User Repository Info
-          - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
-          - ~webget https://api.github.com/user/repos Headers:<[Headers]> save:response
-          - inject Web_Debug.Webget_Response
-          - define UserData <util.parse_yaml[{<entry[Response].result>}]>
-          - narrate <&2><[UserData]>
+        #^- define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
+        #^- ~webget https://api.github.com/user/repos Headers:<[Headers]> save:response
+        #^- inject Web_Debug.Webget_Response
+        #^- define UserData <util.parse_yaml[{<entry[Response].result>}]>
 
        #| Create Fork
 #^       - announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
