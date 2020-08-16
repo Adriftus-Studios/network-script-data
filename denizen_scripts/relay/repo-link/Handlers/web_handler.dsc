@@ -73,10 +73,13 @@ web_handler:
           - define URL <yaml[oAuth].read[URL_Scopes.Discord.Token_Exchange]>
           - define Data <list[oAuth_Parameters|Discord.Token_Exchange.Parameters|Discord.client_id|Discord.client_secret]>
           - define Data <[Data].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>
+          - announce to_console <&2><[Data]>
           - define Data <[Data].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
 
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
           - inject Web_Debug.Webget_Response
+          - if <entry[response].status> == 401:
+            - stop
 
         # % ██ [ Save Access Token Response Data ] ██
           - define Access_Token_Response <util.parse_yaml[<entry[response].result>]>
@@ -90,6 +93,8 @@ web_handler:
 
           - ~webget <[URL]> headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
+          - if <entry[response].status> == 401:
+            - stop
 
         # % ██ [ Save User Data                  ] ██
           - define UserData <util.parse_yaml[<entry[response].result>]>
