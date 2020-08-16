@@ -17,13 +17,14 @@ web_handler:
         - case /oAuth/GitHub:
         # % ██ [ Cache Data                      ] ██
           - define Code <context.query_map.get[code]>
-          - define UUID <context.query_map.get[state]>
+          - define State <context.query_map.get[state]>
+          - define Platform GitHub
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[GitHub.Token_Exchange.Headers]>]>
 
         # % ██ [ Token Exchange                  ] ██
           - define URL <yaml[oAuth].read[URL_Scopes.GitHub.Token_Exchange]>
-          - define Data <list[oAuth_Parameters|GitHub.Application|GitHub.Token_Exchange.Scopes.scope].merge_maps>
-          - define Data <[Data].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>
+          - define Data <list[oAuth_Parameters|GitHub.Application|GitHub.Token_Exchange.Parameters]>
+          - define Data <[Data].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>].merge_maps>
           - define Data <[Data].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
 
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
@@ -95,6 +96,7 @@ web_handler:
 
         # % ██ [ Save User Data                  ] ██
           - define User_Data <util.parse_yaml[<entry[response].result>]>
+          - narrate "<&c>User_Data: <&2><[User_Data]>"
           - define User_ID <[User_Data].get[id]>
           - define Avatar https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>
 
@@ -103,10 +105,7 @@ web_handler:
           - ~webget <[URL]> headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
 
-          - define User_Data <util.parse_yaml[{"Data":<entry[response].result>}].get[Data]>
-          - define Connections_Data <list>
-          - foreach <[User_Data]> as:Connections:
-            - define Connections_Data <[Connections_Data].include_single[<list[type|id|name|verified].parse_tag[<[Connections].get[<[Parse_Value]>]>]>]>
+          - define User_Data <util.parse_yaml[{<entry[response].result>]>
 
     after post request:
       - define Domain <context.address>
