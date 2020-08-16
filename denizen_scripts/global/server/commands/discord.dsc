@@ -6,11 +6,11 @@ Discord_Command:
     usage: /discord
     permission: Behr.Essentials.Discord
     tab complete:
-        - define Args Link
+        - define Args <list[Connect]>
         - inject OneArg_Command_Tabcomplete
     script:
     # % ██ [ Check Args ] ██
-        - if !<context.args.is_empty>:
+        - if !<context.args.size> > 1:
             - inject Command_Syntax
         
     # % ██ [ Print Discord Link ] ██

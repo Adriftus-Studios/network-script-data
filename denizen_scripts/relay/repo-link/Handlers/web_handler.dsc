@@ -5,76 +5,97 @@ web_handler:
     Github: 140.82.115
     self: 0:0:0:0:0:0:0:1
   events:
+    on server start:
+      - yaml id:oAuth load:data/global/discord/oAuth_Data.yml
     after get request:
       - inject Web_Debug
       - inject Web_Debug.Get_Response
 
       - choose <context.request>:
         - case /oAuth/GitHub:
-        #| Cache Info
+        # % ██ [ Cache Data                      ] ██
           - define Code <context.query_map.get[code]>
           - define UUID <context.query_map.get[state]>
+          - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[GitHub.Token_Exchange.Headers]>]>
 
-          - define Headers <yaml[discord_response].read[GitHub.Headers]>
-          - define URL <yaml[discord_response].read[GitHub.url]>
-          - define Data <yaml[discord_response].parsed_key[GitHub.Scopes].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
+        # % ██ [ Token Exchange                  ] ██
+          - define URL <yaml[oAuth].read[URL_Scopes.GitHub.Token_Exchange]>
+          - define Data <list[oAuth_Parameters|GitHub.client_id|GitHub.client_secret|GitHub.Token_Exchange.Scopes.scope]>
+          - define Data <[Data].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>
+          - define Data <[Data].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
 
-        #| Token Exchange
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
           - inject Web_Debug.Webget_Response
 
+        # % ██ [ Save Access Token Response Data ] ██
           - define oAuth_Data <entry[response].result.split[&].parse[split[=].limit[2].separated_by[/]].to_map>
           - define Access_Token <[oAuth_Data].get[access_token]>
 
-        #| Obtain User Info
-          - announce to_console "<&c>-- User Info -----------------------------------"
+        # % ██ [ Obtain User Info                ] ██
           - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user Headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
-          - define UserData <util.parse_yaml[{"data":<entry[Response].result>}]>
-          - narrate <&2><[UserData]>
-          - narrate <&a><[UserData].get[data]>
 
-        #| Obtain User Repository Info
+        # % ██ [ Save User Data                  ] ██
+          - define UserData <util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
+          - define Login <[UserData].get[login]>
+          - define Avatar <[UserData].get[avatar_url]>
+          - define ID <[UserData].get[id]>
+          - define Creation_Date <[UserData].get[created_at]>
+
+        # % ██ [ Obtain User Repository Info     ] ██
         #^- define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
         #^- ~webget https://api.github.com/user/repos Headers:<[Headers]> save:response
         #^- inject Web_Debug.Webget_Response
+
         #^- define UserData <util.parse_yaml[{<entry[Response].result>}]>
 
-       #| Create Fork
-#^       - announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
-#^       - ~webget https://api.github.com/repos/AuroraInteractive/Telix/forks Headers:<[Headers]> method:POST save:response
-#^       - inject Web_Debug.Webget_Response
+       # % ██ [ Create Fork                      ] ██
+        #^- announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
+        #^- ~webget https://api.github.com/repos/AuroraInteractive/Telix/forks Headers:<[Headers]> method:POST save:response
+        #^- inject Web_Debug.Webget_Response
 
-       #| Create Webhook
-#^       - announce to_console "<&c>-WebHook Creation --------------------------------------------------------------"
-#^       - define Data '{"name": "ATE webhook","config": {"url": "http://76.119.243.194:25580/github/<[User]>/Telix","content-type": "json"}}'
-#^       - ~webget https://api.github.com/repos/AuroraInteractive/Telix/forks Headers:<[Headers]> method:POST data:<[Data]> save:response
-#^       - inject Web_Debug.Webget_Response
+       # % ██ [ Create Webhook                   ] ██
+        #^- announce to_console "<&c>-WebHook Creation --------------------------------------------------------------"
+        #^- define Data '{"name": "ATE webhook","config": {"url": "http://76.119.243.194:25580/github/<[User]>/Telix","content-type": "json"}}'
+        #^- ~webget https://api.github.com/repos/AuroraInteractive/Telix/forks Headers:<[Headers]> method:POST data:<[Data]> save:response
+        #^- inject Web_Debug.Webget_Response
 
         - case /oAuth/Discord:
+        # % ██ [ Cache Data                      ] ██
           - define Code <context.query_map.get[code]>
-          - define UUID <context.query_map.get[state]>
+          - define State <context.query_map.get[state]>
+          - define Platform Discord
 
-          - define Headers <list[User-Agent|application].parse_tag[<yaml[discord_response].parsed_key[<[Parse_Value]>]>]>
-          - define URL <yaml[discord_response].read[Token_Exchange.Token_URL]>
-          - define data <yaml[discord_response].parsed_key[Token_Exchange.Scopes].include[<yaml[discord_response].read[Token_Exchange.Auth>].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
+          - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
+
+        # % ██ [ Token Exchange                  ] ██
+          - define URL <yaml[oAuth].read[URL_Scopes.Discord.Token_Exchange]>
+          - define Data <list[oAuth_Parameters|Discord.Token_Exchange.Parameters|Discord.client_id|Discord.client_secret]>
+          - define Data <[Data].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>
+          - define Data <[Data].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
 
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
           - inject Web_Debug.Webget_Response
 
-          - define oAuth_Data <util.parse_yaml[<entry[response].result>]>
-          - define Access_Token <[oAuthData].get[access_token]>
-          - define Refresh_Token <[oAuthData].get[refresh_token]>
-          - define Expirey <[oAuthData].get[expires_in]>
+        # % ██ [ Save Access Token Response Data ] ██
+          - define Access_Token_Response <util.parse_yaml[<entry[response].result>]>
+          - define Access_Token <[Access_Token_Response].get[access_token]>
+          - define Refresh_Token <[Access_Token_Response].get[refresh_token]>
+          - define Expirey <[Access_Token_Response].get[expires_in]>
 
-          - define Headers <list[User-Agent|Authorization].parse_tag[<yaml[discord_response].parsed_key[<[Parse_Value]>]>]>
-          - ~webget <yaml[discord_response].read[Scope_URLs.Identify]> headers:<[Headers]> save:response
+        # % ██ [ Obtain User Info                ] ██
+          - define Headers <[Headers].include[<yaml[oAuth].parsed_key[Discord.Client_Credentials.Headers]>]>
+          - ~webget <yaml[discord_response].read[Base_URLs.Identify]> headers:<[Headers]> save:response
+          - inject Web_Debug.Webget_Response
+
+        # % ██ [ Save User Data                  ] ██
           - define UserData <util.parse_yaml[<entry[response].result>]>
           - define UserID <[UserData].get[id]>
           - define Avatar https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>
 
-          - ~webget <yaml[discord_response].read[Scope_URLs.Connections]> headers:<[Headers]> save:response
+        # % ██ [ Obtain User Connections         ] ██
+          - ~webget <yaml[discord_response].read[Base_URLs.Connections]> headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
           - define UserData <util.parse_yaml[<entry[response].result>]>
 
