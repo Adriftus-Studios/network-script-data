@@ -20,7 +20,7 @@ Discord_Command:
             - define Text "<proc[Colorize].context[Click for the Invite Link to:|yellow]> <&3><&n>D<&b><&n>iscord]>"
             - narrate <proc[msgUrl].context[<def[Hover]>|<def[Text]>|<def[URL]>]>
         - else:
-            - if <context.args.get[1]> != link:
+            - if <context.args.get[1]> != Connect:
                 - inject Command_Syntax
             - define url https://discord.com/api/oauth2/authorize?client_id=716381772610273430&redirect_uri=http<&pc>3A<&pc>2F<&pc>2F147.135.7.85<&pc>3A25580<&pc>2FoAuth<&pc>2FDiscord&response_type=code&scope=identify<&pc>20connections&state=<player.uuid>_<util.random.uuid>
             - define Hover "<proc[Colorize].context[Click Link to link Discord to Minecraft|green]><&nl><proc[Colorize].context[https://discord.com/oauth2/authorize|blue]>"
