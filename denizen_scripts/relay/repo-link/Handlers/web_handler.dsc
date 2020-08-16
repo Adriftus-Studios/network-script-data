@@ -85,8 +85,10 @@ web_handler:
           - define Expirey <[Access_Token_Response].get[expires_in]>
 
         # % ██ [ Obtain User Info                ] ██
+          - define URL <yaml[oAuth].read[URL_Scopes.Discord.Identify]>
           - define Headers <[Headers].include[<yaml[oAuth].parsed_key[Discord.Client_Credentials.Headers]>]>
-          - ~webget <yaml[discord_response].read[Base_URLs.Identify]> headers:<[Headers]> save:response
+
+          - ~webget <[URL]> headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
 
         # % ██ [ Save User Data                  ] ██
@@ -95,15 +97,14 @@ web_handler:
           - define Avatar https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>
 
         # % ██ [ Obtain User Connections         ] ██
-          - ~webget <yaml[discord_response].read[Base_URLs.Connections]> headers:<[Headers]> save:response
+          - define URL <yaml[oAuth].read[URL_Scopes.Discord.Connections]>
+          - ~webget <[URL]> headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
+
           - define UserData <util.parse_yaml[<entry[response].result>]>
 
     after post request:
-      - inject Web_Debug.Post_Request
-
       - define Domain <context.address>
-
       - if <[Domain].starts_with[<script.data_key[Domains.Github]>]>:
         - define Map <util.parse_yaml[<context.query>]>
         - if <[Map].get[ref]> != refs/heads/master && <[Map].get[repository].get[full_name]> != AuroraInteractive/network-script-data:
@@ -111,12 +112,7 @@ web_handler:
 
         - define Request <context.request.after[github/]>
         - define Script ../network-script-data/system_scripts/github/git-pull
-
         - shell <[Script]> <[Request]>
-        - announce to_console "Webhook received!"
-        - announce to_console "Script ran: <[script]>"
-        - announce to_console "Request received: <[request]>"
-
         - define Hook <script[DDTBCTY].data_key[WebHooks.650016499502940170.hook]>
         - define data <yaml[webhook_template_git-pull].to_json>
         - define headers <list[User-Agent/really|Content-Type/application/json]>
@@ -128,6 +124,7 @@ web_handler:
         - wait 1t
         - reload
       - else:
+        - inject Web_Debug.Post_Request
         - announce to_console "Attempted request from <[Domain]>"
 
 Web_Debug:
