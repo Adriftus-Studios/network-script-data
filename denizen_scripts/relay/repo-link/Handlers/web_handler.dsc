@@ -8,6 +8,8 @@ web_handler:
     on server start:
       - yaml id:oAuth load:data/global/discord/oAuth_Data.yml
     after get request:
+      - if <context.request||invalid> == favicon.ico:
+        - stop
       - inject Web_Debug
       - inject Web_Debug.Get_Response
 
@@ -71,15 +73,12 @@ web_handler:
 
         # % ██ [ Token Exchange                  ] ██
           - define URL <yaml[oAuth].read[URL_Scopes.Discord.Token_Exchange]>
-          - define Data <list[oAuth_Parameters|Discord.Application|Discord.Token_Exchange.Parameters].merge_maps>
-          - define Data <[Data].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>
-          - announce to_console <&2><[Data]>
+          - define Data <list[oAuth_Parameters|Discord.Application|Discord.Token_Exchange.Parameters]>
+          - define Data <[Data].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>].merge_maps>
           - define Data <[Data].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
 
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
           - inject Web_Debug.Webget_Response
-          - if <entry[response].status> == 401:
-            - stop
 
         # % ██ [ Save Access Token Response Data ] ██
           - define Access_Token_Response <util.parse_yaml[<entry[response].result>]>
@@ -93,12 +92,10 @@ web_handler:
 
           - ~webget <[URL]> headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
-          - if <entry[response].status> == 401:
-            - stop
 
         # % ██ [ Save User Data                  ] ██
-          - define UserData <util.parse_yaml[<entry[response].result>]>
-          - define UserID <[UserData].get[id]>
+          - define User_Data <util.parse_yaml[<entry[response].result>]>
+          - define User_ID <[User_Data].get[id]>
           - define Avatar https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>
 
         # % ██ [ Obtain User Connections         ] ██
@@ -106,12 +103,15 @@ web_handler:
           - ~webget <[URL]> headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
 
-          - define UserData <util.parse_yaml[<entry[response].result>]>
+          - define User_Data <util.parse_yaml[{"Data":<entry[response].result>}].get[Data]>
+          - define Connections_Data <list>
+          - foreach <[User_Data]> as:Connections:
+            - define Connections_Data <[Connections_Data].include_single[<list[type|id|name|verified].parse_tag[<[Connections].get[<[Parse_Value]>]>]>]>
 
     after post request:
       - define Domain <context.address>
       - if <[Domain].starts_with[<script.data_key[Domains.Github]>]>:
-        - define Map <util.parse_yaml[<context.query>]>
+        - define Map <util.parse_yaml[{"Data":<context.query>}].get[Data]>
         - if <[Map].get[ref]> != refs/heads/master && <[Map].get[repository].get[full_name]> != AuroraInteractive/network-script-data:
           - stop
 
