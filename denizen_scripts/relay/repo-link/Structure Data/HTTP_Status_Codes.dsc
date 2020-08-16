@@ -1,9 +1,10 @@
 HTTP_Status_Codes:
   type: procedure
   definitions: Code
+  debug: true
   script:
-    - if <script.list_keys[codes].contains[<[Code]>]>:
-      - determine <script.data_key[<[Code]>]]>
+    - if <script.list_keys[Codes].contains[<[Code]>]>:
+      - determine <script.data_key[Codes.<[Code]>]>
     - choose <[Code].char_at[1]>:
       - case 1:
         - determine "**`1xx`**` - Informational Response`"
