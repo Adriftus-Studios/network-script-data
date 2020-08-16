@@ -30,13 +30,15 @@ web_handler:
           - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user Headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
+          - define UserData <util.parse_yaml[<entry[Response].result>]>
+          - narrate <&2><[UserData]>
 
         #| Obtain User Repository Info
           - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user/repos Headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
           - define UserData <util.parse_yaml[<entry[Response].result>]>
-          - define Repositories <[UserData].parse_tag[<[Parse_Value].get[full_name]>]>
+          - narrate <&2><[UserData]>
 
        #| Create Fork
 #^       - announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
