@@ -41,7 +41,7 @@ Webget_DCommand:
         - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Error: `No Active Queues.`]>]>"
       - else:
         - define QueueData "<[Queues].parse_tag[<&lb>Reference<&rb>(<[Parse_Value].definition[RefURL]||<[FallbackRefURL]>>): `<[Parse_Value].definition[URL]||(Invalid URL)>`].separated_by[<&nl>]>"
-        - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Webget Queues Cleared].with[description].as[Forcibly closed **<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>** queue(s) in process:<&nl><[QueueData]>]>]>"
+        - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Webget Queues Cleared].with[description].as[Webget queues forcibly closed **<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>** queue's in process:<&nl><[QueueData]>]>]>"
         - foreach <[Queues]> as:Queue:
           - queue <[Queue]> clear
       - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
@@ -67,7 +67,7 @@ Webget_DCommand:
         - define <[ArgDef]> <[Args].get[<[Args].find[<[Args].filter[starts_with[<[ArgDef]>:]].first>]>].after[<[ArgDef]>:]>
 
   # % ██ [ Verify Timeout                          ] ██
-    - if <[Timeout]||null> == null:
+    - if !<[Timeout].exists>:
       - define Timeout <duration[10s]>
     - else if <duration[<[Timeout]>]||invalid> == invalid:
         - define EntryResults "<[EntryResults].include[<&nl>**Warning**: `Invalid Duration, Defaulted to 10s.`]>"
@@ -83,28 +83,28 @@ Webget_DCommand:
       - ~webget <[Hook]> data:<[CData]> headers:<[RHeaders]>
 
   # % ██ [ Create Webget                           ] ██
-    - if <[Data]||null> == null && <[Headers]||null> == null && <[Method]||null> == null:
+    - if !<[Data].exists> && !<[Headers].exists> && !<[Method].exists>:
       - ~webget <[URL]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> != null && <[Headers]||null> == null && <[Method]||null> == null:
+    - else if <[Data].exists> && !<[Headers].exists> && !<[Method].exists>:
       - ~webget <[URL]> data:<[Data]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> != null && <[Headers]||null> != null && !<[Method]||null> == null:
+    - else if <[Data].exists> && <[Headers].exists> && !<[Method].exists>:
       - ~webget <[URL]> data:<[Data]> headers:<[Headers].parsed> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> != null  && <[Headers]||null> != null && <[Method]||null> != null:
+    - else if <[Data].exists>  && <[Headers].exists> && <[Method].exists>:
       - ~webget <[URL]> data:<[Data]> Headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> != null  && <[Headers]||null> == null && <[Method]||null> != null:
+    - else if <[Data].exists>  && !<[Headers].exists> && <[Method].exists>:
       - ~webget <[URL]> data:<[Data]> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> == null  && <[Headers]||null> == null && <[Method]||null> != null:
+    - else if !<[Data].exists>  && !<[Headers].exists> && <[Method].exists>:
       - ~webget <[URL]> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> == null  && <[Headers]||null> != null && <[Method]||null> == null:
+    - else if !<[Data].exists>  && <[Headers].exists> && !<[Method].exists>:
       - ~webget <[URL]> headers:<[Headers].parsed> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> == null  && <[Headers]||null> != null && <[Method]||null> != null:
+    - else if !<[Data].exists>  && <[Headers].exists> && <[Method].exists>:
       - ~webget <[URL]> headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
   # % ██ [ Listener Flags                          ] ██
@@ -124,8 +124,14 @@ Webget_DCommand:
       - define color Code
 
   # % ██ [ Return Results                          ] ██
+    - if <[EntryResults].unseparated.length> > 2000:
+      - define uuid <util.random.uuid>
+      - log <[EntryResults].unseparated> none "file:/home/minecraft/web/webget/<uuid>.html"
+      - define output http://147.135.7.85:25580/webget?name=<[uuid]>
+    - else:
+      - define output <[EntryResults].unseparated>
     - inject Embedded_Color_Formatting
-    - define Embeds "<list[<map.with[color].as[<[Color]>].with[description].as[Command ran: `/WebGet <[Args].space_separated>`<[EntryResults].unseparated>]>]>"
+    - define Embeds "<list[<map.with[color].as[<[Color]>].with[description].as[Command ran: `/WebGet <[Args].space_separated>`<[output]>]>]>"
     - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
 
     - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
