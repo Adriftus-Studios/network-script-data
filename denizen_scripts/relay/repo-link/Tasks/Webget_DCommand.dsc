@@ -126,7 +126,7 @@ Webget_DCommand:
   # % ██ [ Return Results                          ] ██
     - if <[EntryResults].unseparated.length> > 2000:
       - define uuid <util.random.uuid>
-      - log <[EntryResults].unseparated> none "file:/home/minecraft/web/webget/<uuid>.html"
+      - log <[EntryResults].unseparated> none "file:/home/minecraft/web/webget/<[uuid]>.html"
       - define output http://147.135.7.85:25580/webget?name=<[uuid]>
     - else:
       - define output <[EntryResults].unseparated>
