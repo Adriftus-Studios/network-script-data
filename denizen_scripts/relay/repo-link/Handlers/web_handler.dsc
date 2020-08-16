@@ -31,8 +31,9 @@ web_handler:
           - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user Headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
-          - define UserData <util.parse_yaml[{<entry[Response].result>}]>
-          - narrate User <&a><[UserData].keys>
+          - define UserData <util.parse_yaml[{"data":<entry[Response].result>}]>
+          - narrate <&2><[UserData]>
+          - narrate <&a><[UserData].get[data]>
 
         #| Obtain User Repository Info
         #^- define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
