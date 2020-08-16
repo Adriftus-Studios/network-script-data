@@ -107,8 +107,8 @@ web_handler:
 
           - define User_Data <util.parse_yaml[{<entry[response].result>]>
         - case /webget:
-          - if <server.has_file[/home/minecraft/web/webget/<context.query_map.get[name]||null>.html]>:
-            - determine FILE:/home/minecraft/web/webget/<context.query_map.get[name]>.html
+          - if <server.has_file[../../../../web/webget/<context.query_map.get[name]||null>.html]>:
+            - determine FILE:../../../../web/webget/<context.query_map.get[name]>.html
           - else:
             - determine CODE:404
 
