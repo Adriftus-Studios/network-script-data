@@ -20,7 +20,7 @@ web_handler:
 
         # % ██ [ Token Exchange                  ] ██
           - define URL <yaml[oAuth].read[URL_Scopes.GitHub.Token_Exchange]>
-          - define Data <list[oAuth_Parameters|GitHub.client_id|GitHub.client_secret|GitHub.Token_Exchange.Scopes.scope]>
+          - define Data <list[oAuth_Parameters|GitHub.Application|GitHub.Token_Exchange.Scopes.scope].merge_maps>
           - define Data <[Data].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>
           - define Data <[Data].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
 
@@ -71,7 +71,7 @@ web_handler:
 
         # % ██ [ Token Exchange                  ] ██
           - define URL <yaml[oAuth].read[URL_Scopes.Discord.Token_Exchange]>
-          - define Data <list[oAuth_Parameters|Discord.Token_Exchange.Parameters|Discord.client_id|Discord.client_secret]>
+          - define Data <list[oAuth_Parameters|Discord.Application|Discord.Token_Exchange.Parameters].merge_maps>
           - define Data <[Data].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>
           - announce to_console <&2><[Data]>
           - define Data <[Data].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
