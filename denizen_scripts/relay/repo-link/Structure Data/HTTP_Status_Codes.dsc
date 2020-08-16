@@ -39,7 +39,7 @@ HTTP_Status_Codes:
 # @ ██ [3xx - Redirection              ] ██
     300: "**`300`**` - Multiple Choices`"
     301: "**`301`**` - Moved Permanently`"
-    302: "**`302`**` - Found (Previously "Moved temporarily")`"
+    302: '**`302`**` - Found (Previously "Moved temporarily")`'
     303: "**`303`**` - See Other`"
     304: "**`304`**` - Not Modified`"
     305: "**`305`**` - Use Proxy`"
