@@ -70,6 +70,7 @@ graves_handler:
       - if <yaml[graves].read[grave.<[value]>.time]> < 1:
         - if !<[value].as_location.chunk.is_loaded>:
           - chunkload <[value].as_location.chunk> duration:20s
+          - waituntil rate:1s <[value].as_location.chunk.is_loaded||false>
         - if <yaml[graves].contains[grave.<[value]>.hologram1]>:
           - remove <yaml[graves].read[grave.<[value]>.hologram1]>
         - if <yaml[graves].contains[grave.<[value]>.hologram2]>:
