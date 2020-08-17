@@ -27,11 +27,7 @@ Error_Handler:
         - define Player_Map <map.with[Name].as[<queue.player.name>].with[UUID].as[<queue.player.uuid>]>
         - define Data <[Data].with[Player].as[<[Player_Map]>]>
       - if <context.script.name||Invalid> != invalid:
-        - if <context.script.filename.after[/plugins/Denizen/scripts/].starts_with[global]>:
-          - define File_Location https://github.com/AuroraInteractive/network-script-data/tree/master/denizen_scripts/global/<context.script.filename.after[/scripts/global/server/]>#L<context.line>
-        - else:
-          - define File_Location https://github.com/AuroraInteractive/network-script-data/tree/master/denizen_scripts/<bungee.server>/<context.script.filename.after[/plugins/Denizen/scripts/]||Invalid>#L<context.line>
-        - define Script_Map <map.with[Name].as[<context.script.name>].with[Line].as[<context.line||Invalid>].with[File_Location].as[<[File_Location]>].with[Error_Count].as[<[Error_Count]>]>
+        - define Script_Map <map.with[Name].as[<context.script.name>].with[Line].as[<context.line||Invalid>].with[File_Location].as[<context.script.filename||Invalid>].with[Error_Count].as[<[Error_Count]>]>
         - define Data <[Data].with[Script].as[<[Script_Map]>]>
       - define Data <[Data].with[Message].as[<context.message>]>
       - define Data <[Data].with[Definition_Map].as[<context.queue.definition_map>]>

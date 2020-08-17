@@ -31,8 +31,15 @@ Error_Response_Webhook:
             - define Script_Name <[Data].get[Script].get[Name]>
             - define Script_Line <[Data].get[Script].get[Line]>
             - define Script_File_Location <[Data].get[Script].get[File_Location]>
+            - if <[Script_File_Location].after[/plugins/Denizen/scripts/].starts_with[global]>:
+                - define File_Link https://github.com/AuroraInteractive/network-script-data/tree/master/denizen_scripts/global/<[Script_File_Location].after[/scripts/global/server/]>#L<context.line>
+                - define File_Directory global/<[Script_File_Location].after[/scripts/global/server/]>
+            - else:
+                - define File_Link https://github.com/AuroraInteractive/network-script-data/tree/master/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/]>#L<context.line>
+                - define File_Directory <[Server]>/./<[Script_File_Location].after[/plugins/Denizen/scripts/]>
             - define Field_List <[Field_List].include_single[<map.with[name].as[Script<&co>].with[value].as[`<[Script_Name]>`].with[inline].as[true]>]>
             - define Field_List <[Field_List].include_single[<map.with[name].as[Line<&co>].with[value].as[`(<[Script_Line]>)`].with[inline].as[true]>]>
+            - define Field_List <[Field_List].include_single[<map.with[name].as[File<&co>].with[value].as[<&lb>`<[File_Directory]>`<&rb>(<[File_Link]>)].with[inline].as[true]>]>
             - define Footer "<map.with[text].as[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>"
             - define Embed_Maps <[Embed_Maps].include[<map.with[footer].as[<[Footer]>]>]>
         - else:
@@ -48,8 +55,6 @@ Error_Response_Webhook:
                 - define Embed_Maps <[Embed_Maps].with[<[Key]>].as[<[Value]>]>
 
     # % ██ [ Verify Definition Fields  ] ██
-        - if <[Data].keys.contains[Script]>:
-            - define Field_List <[Field_List].include_single[<map.with[name].as[File<&co>].with[value].as[<[Script_File_Location]>].with[inline].as[false]>]>
         - if <[Data].keys.contains[Definition_Map]> && !<[Data].get[Definition_Map].is_empty>:
             - define Definition_Map <[Data].get[Definition_Map]>
             - define Definition_List <list>
