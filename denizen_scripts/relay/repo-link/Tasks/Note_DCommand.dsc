@@ -46,4 +46,5 @@ Note_DCommand:
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
     - define headers <list[User-Agent/really|Content-Type/application/json]>
-    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+    - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]>
+    - inject Web_Debug.Webget_Response
