@@ -75,7 +75,9 @@ web_handler:
           - if !<proc[discord_oauth_validate_state].context[<[state]>]>:
             - stop
           - run discord_oauth_remove_state def:<[state]>
+          - announce to_console "State Accepted"
           - determine passively FILE:../../../../web/pages/discord_linked.html
+          - announce to_console "Website Served"
 
         # % ██ [ Token Exchange                  ] ██
           - define URL <yaml[oAuth].read[URL_Scopes.Discord.Token_Exchange]>
