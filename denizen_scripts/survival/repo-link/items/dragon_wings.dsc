@@ -41,7 +41,7 @@ dragon_wings_liftoff:
   type: task
   debug: false
   script:
-    - if <player.location.material.name> == water:
+    - if <player.location.above.material.name> == water:
       - stop
     - if <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> gravity:false
@@ -67,7 +67,7 @@ dragon_wings_boost:
   type: task
   debug: false
   script:
-    - if <player.location.material.name> == water:
+    - if <player.location.above.material.name> == water:
       - stop
     - while <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> velocity:<player.location.direction.vector.mul[2]>
