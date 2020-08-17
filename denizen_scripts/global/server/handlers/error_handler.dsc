@@ -7,7 +7,7 @@ Error_Handler:
     on script generates error:
     # % ██ [ Verify Connection             ] ██
       - define Timeout <util.time_now.add[1m]>
-      - waituntil <bungee.connected> || <[Timeout].duration_since[<util.time_now>]> != 0:
+      - waituntil <bungee.connected> || <[Timeout].duration_since[<util.time_now>]> != 0
       - if !<bungee.connected> || <context.queue.id||invalid> == invalid || !<list[hub1|behrcraft|survival|relay|xeane].contains[<bungee.server>]>:
         - stop
 
