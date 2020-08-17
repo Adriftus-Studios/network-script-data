@@ -1241,7 +1241,7 @@ claiming_system_upgrade_events:
   debug: false
   events:
     on player enters claim*:
-    - define group <context.cuboids.filter[note_name.starts_with[claim]].parse[note_name.after[.].before[/]].first>
+    - define group <context.area.note_name.after[.].before[/]>
     - if <player.flag[claim_enter_ignore]||null> == <[group]>:
       - flag player claim_enter_ignore:!
       - stop
@@ -1255,7 +1255,7 @@ claiming_system_upgrade_events:
             - foreach next
         - inject claim_system_apply_upgrade_<[upgrade_name]>
     on player exits claim*:
-    - define group <context.cuboids.filter[note_name.starts_with[claim]].parse[note.after[.].before[/]].first>
+    - define group <context.area.note_name.after[.].before[/]>
     - flag player claim_enter_ignore:<[group]> duration:6t
     - wait 2t
     - if !<player.is_online>:
