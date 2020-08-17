@@ -105,7 +105,7 @@ web_handler:
           - ~webget <[URL]> headers:<[Headers]> save:response
           - inject Web_Debug.Webget_Response
 
-          - define User_Data <util.parse_yaml[{<entry[response].result>]>
+          - define User_Data <util.parse_yaml[{"Data":<entry[response].result>}].get[Data]>
         - case /webget:
           - if <server.has_file[../../../../web/webget/<context.query_map.get[name]||invalid>]>:
             - determine FILE:../../../../web/webget/<context.query_map.get[name]>
