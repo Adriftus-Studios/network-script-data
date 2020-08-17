@@ -127,7 +127,7 @@ dragon_wings_events:
       - if !<player.has_flag[Dragon_Wings_Recover]> && !<player.has_flag[Dragon_Wings_Fly]>:
         - inject dragon_wings_end
     after player unequips dragon_wings flagged:dragon_wings_recover:
-      - if <player.equipment_map.get[chestplate].script.name||null> == dragon_wings:
+      - if <player.equipment_map.get[chestplate].script.name||null> != dragon_wings:
         - flag player dragon_wings_recover:!
     on player unequips dragon_wings flagged:dragon_wings_glow:
       - flag player dragon_wings_glow:!
