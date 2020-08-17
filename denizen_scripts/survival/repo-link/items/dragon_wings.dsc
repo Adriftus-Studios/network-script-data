@@ -71,8 +71,8 @@ dragon_wings_boost:
     - while <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> velocity:<player.location.direction.vector.mul[2]>
       - inventory adjust slot:39 nbt:power/<player.equipment_map.get[chestplate].nbt[power].sub[0.02]>
-      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].div[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].div[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
-      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].div[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].div[100]><&b><&pc>"
+      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
+      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>"
       - if <player.equipment_map.get[chestplate].nbt[power]> <= 0:
         - inject dragon_wings_end
       - repeat 10:
