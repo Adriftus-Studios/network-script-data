@@ -27,6 +27,7 @@ Note_DCommand:
 
     - ~webget https://discordapp.com/api/users/<[UserID]> Headers:<[Headers]> save:Response
     - Define UserPFP https://cdn.discordapp.com/avatars/<[UserID]>/<util.parse_yaml[<entry[Response].result>].get[avatar]>
+    - inject Web_Debug.Webget_Response
 
     - define Message <&lt>:hambehrgeur:732716255567413309<&gt><&sp><[Message].after[/note<&sp>]>
     - define color Yellow
@@ -46,5 +47,4 @@ Note_DCommand:
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
     - define headers <list[User-Agent/really|Content-Type/application/json]>
-    - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]>
-    - inject Web_Debug.Webget_Response
+    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
