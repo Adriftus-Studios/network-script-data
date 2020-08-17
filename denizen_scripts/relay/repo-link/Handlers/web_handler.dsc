@@ -114,10 +114,10 @@ web_handler:
         - case /favicon.ico:
           - determine FILE:../../../../web/favicon.ico
         - case /css:
-          - if <server.has_file[../../../../web/css/<context.query_map.get[name].css||invalid>]>:
+          - if <server.has_file[../../../../web/css/<context.query_map.get[name]||invalid>.css]>:
             - determine FILE:../../../../web/css/<context.query_map.get[name]>.css
         - case /page:
-          - if <server.has_file[../../../../web/pages/<context.query_map.get[name].html||invalid>]>:
+          - if <server.has_file[../../../../web/pages/<context.query_map.get[name]||invalid>.html]>:
             - determine FILE:../../../../web/pages/<context.query_map.get[name]>.html
           
 
