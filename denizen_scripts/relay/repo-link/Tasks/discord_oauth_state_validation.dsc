@@ -35,6 +35,6 @@ discord_oauth_validate_state:
   type: procedure
   definitions: state
   script:
-    - if <yaml[discord_ouath].list_keys[accepted_states].contains[<[state]>]>:
+    - if <yaml[discord_ouath].list_keys[accepted_states].contains[<[state]>]||false>:
       - determine true
     - determine false
