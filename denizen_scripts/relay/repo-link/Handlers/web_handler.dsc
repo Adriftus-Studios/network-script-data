@@ -72,6 +72,7 @@ web_handler:
 
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
         
+          - announce to_console "Validation: <proc[discord_oauth_validate_state].context[<[state]>]>"
           - if !<proc[discord_oauth_validate_state].context[<[state]>]>:
             - stop
           - run discord_oauth_remove_state def:<[state]>
