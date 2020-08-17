@@ -41,9 +41,8 @@ dragon_wings_liftoff:
   type: task
   debug: false
   script:
-    - if <player.location.above[4].material.name.contains[water]>:
-      - adjust <player> velocity:0,10,0
-      - wait 10t
+    - if <player.location.material.name> == water:
+      - stop
     - if <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> gravity:false
     - while <player.has_flag[Dragon_Wings_Fly]>:
@@ -68,6 +67,8 @@ dragon_wings_boost:
   type: task
   debug: false
   script:
+    - if <player.location.material.name> == water:
+      - stop
     - while <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> velocity:<player.location.direction.vector.mul[2]>
       - inventory adjust slot:39 nbt:power/<player.equipment_map.get[chestplate].nbt[power].sub[0.02]>
