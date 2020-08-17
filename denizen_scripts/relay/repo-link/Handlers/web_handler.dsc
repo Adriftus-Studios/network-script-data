@@ -111,19 +111,24 @@ web_handler:
           - inject Web_Debug.Webget_Response
 
           - define User_Data <util.parse_yaml[{"Data":<entry[response].result>}].get[Data]>
+        # % ██ [ WebGet Hosting         ] ██
         - case /webget:
           - if <server.has_file[../../../../web/webget/<context.query_map.get[name]||invalid>]>:
             - determine FILE:../../../../web/webget/<context.query_map.get[name]>
           - else:
             - determine CODE:404
+        # % ██ [ FavIcon         ] ██
         - case /favicon.ico:
           - determine FILE:../../../../web/favicon.ico
+        # % ██ [ CSS Hosting         ] ██
         - case /css:
           - if <server.has_file[../../../../web/css/<context.query_map.get[name]||invalid>.css]>:
             - determine FILE:../../../../web/css/<context.query_map.get[name]>.css
+        # % ██ [ Webpages         ] ██
         - case /page:
           - if <server.has_file[../../../../web/pages/<context.query_map.get[name]||invalid>.html]>:
             - determine FILE:../../../../web/pages/<context.query_map.get[name]>.html
+        # % ██ [ Images         ] ██
         - case /image:
           - if <server.has_file[../../../../web/images/<context.query_map.get[name]||invalid>]>:
             - determine FILE:../../../../web/images/<context.query_map.get[name]>
