@@ -69,7 +69,7 @@ Error_Response_Webhook:
         - define Issue_URL_Base https://github.com/AuroraInteractive/network-script-data/issues/new?labels=Borked&
         - define Title_Text "<&lb>BORKED<&rb> <[Script_Name]> error on <[Server]>"
         - define Body_Text "<[Body_Text].include_single[<&lt>!--- Remove any sections that don't apply or you have inadequate information for. ---<&gt><&nl><&lt>!--- Add any other context about the problem below. ---<&gt><&nl><&nl>]>"
-        - define Issue_URL <[Issue_URL_Base]>Title=<[Title_Text].url_encode>&body=<[Body_Text].unseparated.url_encode>
+        - define Issue_URL <[Issue_URL_Base]>title=<[Title_Text].url_encode>&body=<[Body_Text].unseparated.url_encode>
         - define Field_List <[Field_List].include_single[<script.parsed_key[Control_Field]>]>
 
     # % ██ [ Construct Embed           ] ██
