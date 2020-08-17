@@ -124,12 +124,10 @@ dragon_wings_events:
     on player stops sneaking flagged:Dragon_Wings_Fly:
       - inject dragon_wings_end
     on player equips dragon_wings:
-      - if !<player.has_flag[Dragon_Wings_Recover]> && !<player.has_flag[Dragon_Wings_Fly]>:
+      - if !<player.has_flag[Dragon_Wings_Fly]>:
         - inject dragon_wings_end
     on player unequips dragon_wings flagged:dragon_wings_glow:
       - flag player dragon_wings_glow:!
-    on player unequips dragon_wings flagged:dragon_wings_recover:
-      - flag player dragon_wings_recover:!
     on player changes world from spawn flagged:dragon_wings_glow:
       - flag player dragon_wings_glow:!
     on player damaged by FALL:
