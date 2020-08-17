@@ -36,7 +36,9 @@ survival_rtp_portal:
   debug: false
   events:
     on player enters spawn_cuboid:
+      - narrate "before <server.flag[people_in_spawn]||null>"
       - flag server people_in_spawn:->:<player>
+      - narrate "after <server.flag[people_in_spawn]||null>"
       - time player reset
       - if !<server.has_flag[spawn_portal_running]>:
         - flag server spawn_portal_running:true
