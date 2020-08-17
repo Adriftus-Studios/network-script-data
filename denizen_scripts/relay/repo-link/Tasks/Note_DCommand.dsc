@@ -27,6 +27,7 @@ Note_DCommand:
 
     - ~webget https://discordapp.com/api/users/<[UserID]> Headers:<[Headers]> save:Response
     - Define UserPFP https://cdn.discordapp.com/avatars/<[UserID]>/<util.parse_yaml[<entry[Response].result>].get[avatar]>
+    - inject Web_Debug.Webget_Response
 
     - define Message <&lt>:hambehrgeur:732716255567413309<&gt><&sp><[Message].after[/note<&sp>]>
     - define color Yellow

@@ -11,7 +11,7 @@ Webget_DCommand:
     - Lead Developer
     - Developer
   definitions: Message|Channel|Author|Group|MessageID
-  debug: false
+  debug: true
   script:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject Role_Verification
@@ -41,7 +41,7 @@ Webget_DCommand:
         - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Error: `No Active Queues.`]>]>"
       - else:
         - define QueueData "<[Queues].parse_tag[<&lb>Reference<&rb>(<[Parse_Value].definition[RefURL]||<[FallbackRefURL]>>): `<[Parse_Value].definition[URL]||(Invalid URL)>`].separated_by[<&nl>]>"
-        - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Webget Queues Cleared].with[description].as[Forcibly closed **<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>** queue(s) in process:<&nl><[QueueData]>]>]>"
+        - define Embeds "<list[<map.with[color].as[<[Color]>].with[title].as[Webget Queues Cleared].with[description].as[Webget queues forcibly closed **<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>** queue's in process:<&nl><[QueueData]>]>]>"
         - foreach <[Queues]> as:Queue:
           - queue <[Queue]> clear
       - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
@@ -67,7 +67,7 @@ Webget_DCommand:
         - define <[ArgDef]> <[Args].get[<[Args].find[<[Args].filter[starts_with[<[ArgDef]>:]].first>]>].after[<[ArgDef]>:]>
 
   # % ██ [ Verify Timeout                          ] ██
-    - if <[Timeout]||null> == null:
+    - if !<[Timeout].exists>:
       - define Timeout <duration[10s]>
     - else if <duration[<[Timeout]>]||invalid> == invalid:
         - define EntryResults "<[EntryResults].include[<&nl>**Warning**: `Invalid Duration, Defaulted to 10s.`]>"
@@ -83,39 +83,75 @@ Webget_DCommand:
       - ~webget <[Hook]> data:<[CData]> headers:<[RHeaders]>
 
   # % ██ [ Create Webget                           ] ██
-    - if <[Data]||null> == null && <[Headers]||null> == null && <[Method]||null> == null:
+    - if !<[Data].exists> && !<[Headers].exists> && !<[Method].exists>:
       - ~webget <[URL]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> != null && <[Headers]||null> == null && <[Method]||null> == null:
+    - else if <[Data].exists> && !<[Headers].exists> && !<[Method].exists>:
       - ~webget <[URL]> data:<[Data]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> != null && <[Headers]||null> != null && !<[Method]||null> == null:
+    - else if <[Data].exists> && <[Headers].exists> && !<[Method].exists>:
       - ~webget <[URL]> data:<[Data]> headers:<[Headers].parsed> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> != null  && <[Headers]||null> != null && <[Method]||null> != null:
+    - else if <[Data].exists>  && <[Headers].exists> && <[Method].exists>:
       - ~webget <[URL]> data:<[Data]> Headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> != null  && <[Headers]||null> == null && <[Method]||null> != null:
+    - else if <[Data].exists>  && !<[Headers].exists> && <[Method].exists>:
       - ~webget <[URL]> data:<[Data]> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> == null  && <[Headers]||null> == null && <[Method]||null> != null:
+    - else if !<[Data].exists>  && !<[Headers].exists> && <[Method].exists>:
       - ~webget <[URL]> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> == null  && <[Headers]||null> != null && <[Method]||null> == null:
+    - else if !<[Data].exists>  && <[Headers].exists> && !<[Method].exists>:
       - ~webget <[URL]> headers:<[Headers].parsed> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data]||null> == null  && <[Headers]||null> != null && <[Method]||null> != null:
+    - else if !<[Data].exists>  && <[Headers].exists> && <[Method].exists>:
       - ~webget <[URL]> headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
   # % ██ [ Listener Flags                          ] ██
     - if <[Args].contains_any[-f|-failed]>:
       - define EntryResults "<[EntryResults].include[<&nl>**Failed Status**: `<entry[Response].failed||Invalid Save Entry>`]>"
+
     - if <[Args].contains_any[-s|-status]>:
-      - define EntryResults "<[EntryResults].include[<&nl>**HTTP Status**: `<entry[Response].status||Invalid Save Entry>`]>"
-    - if <[Args].contains_any[-r|-result]>:
+      - define EntryResults "<[EntryResults].include[<&nl>**HTTP Status**: <proc[HTTP_Status_Codes].context[<entry[Response].status||Invalid Save Entry>]>]>"
+
+    - if <[Args].contains_any[-r|-result]> || "<entry[Response].result||Invalid Save Entry>" < 2000:
       - define EntryResults "<[EntryResults].include[<&nl>**Result Status**: `<entry[Response].result||Invalid Save Entry>`]>"
+
     - if <[Args].contains_any[-t|-time|-timeran|-time-ran]>:
       - define EntryResults "<[EntryResults].include[<&nl>**Time Ran**: `<entry[Response].time_ran.formatted||Invalid Save Entry>`]>"
+
+    - if <[Args].contains_any[-l|-log|-logs]> || <[EntryResults].unseparated.length> > 2000:
+      - define UUID <util.random.duuid.after[_]>
+      - define File_Location ../../web/webget/
+
+#+    # % ██ [ Check for JSON format               ] ██
+#^    - if <util.parse_yaml[<entry[Response].result>]||invalid> != Invalid || <util.parse_yaml[{"Data":<[<entry[Response].result>]>}]||Invalid> != Invalid:
+#^      - define Ext .json
+#^    - else:
+#+    # % ██ [ Check for YAML / DSC format         ] ██
+#^      - define Temp_Locaton data/temp/<util.random.uuid>.txt
+#^      - ~log <entry[Response].result> type:none file:<[Temp_Locaton]>
+#^      - flag server WebGet.Log_Queue:<queue.id> duration:5s
+#^      - ~yaml id:TempLoad load:<[Temp_Locaton]>
+#^    - define Timeout <util.time_now.add[5s]>
+#^    - waituntil rate:1s <server.has_flag[WebGet.LogResponse]> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0:
+#^    - if <server.has_flag[WebGet.LogResponse]>:
+#^      - if <server.flag[WebGet.LogResponse]> != "Invalid Yaml":
+#^        - define Extension .yml
+#^    - if <[Extension]||invalid> == invalid:
+#+    # % ██ [ Check For HTML Format               ] ██
+#^      - if <entry[Response].result.contains_any_text[<&lt>html<&gt>]>:
+#^        - define Extension .html
+#^      - else:
+#+    # % ██ [ Determine Fallback Format           ] ██
+#^        - define Extension .txt
+#^    - if <server.has_flag[Temp_Locaton]>:
+#^      - adjust server delete_file:<[Temp_Locaton]>
+
+      - define Extension .txt
+      - define URL http://147.135.7.85:25580/webget?name=<[UUID]><[Extension]>
+      - log <entry[Response].result> type:none file:<[File_Location]><[UUID]><[Extension]>
+      - define EntryResults "<[EntryResults].include[<&nl>**Log Output**: [`<[UUID]><[Extension]>`](<[URL]>)]>"
 
   # % ██ [ Determine Color Display                 ] ██
     - if "<[EntryResults].contains_any_text[Invalid Save Entry|**Warning**:]>":

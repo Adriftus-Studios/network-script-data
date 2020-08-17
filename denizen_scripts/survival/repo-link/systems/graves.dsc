@@ -70,6 +70,7 @@ graves_handler:
       - if <yaml[graves].read[grave.<[value]>.time]> < 1:
         - if !<[value].as_location.chunk.is_loaded>:
           - chunkload <[value].as_location.chunk> duration:20s
+          - waituntil rate:1s <[value].as_location.chunk.is_loaded||false>
         - if <yaml[graves].contains[grave.<[value]>.hologram1]>:
           - remove <yaml[graves].read[grave.<[value]>.hologram1]>
         - if <yaml[graves].contains[grave.<[value]>.hologram2]>:
@@ -113,11 +114,11 @@ graves_handler:
       - yaml id:graves set grave.<[location].simple>.owner:<player.uuid>
       - if <script[graves_config].data_key[hologram.enabled]>:
         - spawn armor_stand[marker=true;visible=false;custom_name=<script[graves_config].data_key[hologram.display].parse_color.parsed>;custom_name_visible=true] <[location].center.above[0.75]> save:as
-        - yaml id:graves set grave.<[location].simple>.hologram1:<entry[as].spawned_entity.uuid>
+        - yaml id:graves set grave.<[location].simple>.hologram1:<entry[as].spawned_entity>
       - if <script[graves_config].data_key[hologram.timer]>:
         - define time <script[graves_config].data_key[grave_max_duration].as_duration.formatted>
         - spawn armor_stand[marker=true;visible=false;custom_name=<script[graves_config].data_key[hologram.timer_display].parse_color.parsed>;custom_name_visible=true] <[location].center.above[0.5]> save:as
-        - yaml id:graves set grave.<[location].simple>.hologram2:<entry[as].spawned_entity.uuid>
+        - yaml id:graves set grave.<[location].simple>.hologram2:<entry[as].spawned_entity>
     on player breaks player_head bukkit_priority:LOWEST:
       - if !<yaml[graves].contains[grave.<context.location.simple>]>:
         - stop

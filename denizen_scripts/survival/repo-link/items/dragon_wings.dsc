@@ -41,9 +41,8 @@ dragon_wings_liftoff:
   type: task
   debug: false
   script:
-    - if <player.location.above[4].material.name.contains[water]>:
-      - adjust <player> velocity:0,10,0
-      - wait 10t
+    - if <player.location.above.material.name> == water:
+      - stop
     - if <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> gravity:false
     - while <player.has_flag[Dragon_Wings_Fly]>:
@@ -68,13 +67,18 @@ dragon_wings_boost:
   type: task
   debug: false
   script:
+    - if <player.location.above.material.name> == water:
+      - stop
     - while <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> velocity:<player.location.direction.vector.mul[2]>
       - inventory adjust slot:39 nbt:power/<player.equipment_map.get[chestplate].nbt[power].sub[0.02]>
-      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].div[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].div[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
-      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].div[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].div[100]><&b><&pc>"
-      - if <player.equipment_map.get[chestplate].nbt[power]> <= 0:
+      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
+      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>"
+      - if <player.equipment_map.get[chestplate].nbt[power]> <= 0 || <player.location.material.name> == water:
         - inject dragon_wings_end
+      - if !<player.gliding>:
+        - run dragon_wings_liftoff
+        - stop
       - repeat 10:
         - playeffect dragon_breath at:<player.location.forward> offset:0.25 quantity:25 targets:<player.location.world.players>
         - playeffect dragon_breath at:<player.location.forward> offset:0.25 quantity:25 targets:<player.location.world.players>
@@ -122,6 +126,9 @@ dragon_wings_events:
     on player equips dragon_wings:
       - if !<player.has_flag[Dragon_Wings_Recover]> && !<player.has_flag[Dragon_Wings_Fly]>:
         - inject dragon_wings_end
+    after player unequips dragon_wings flagged:dragon_wings_recover:
+      - if <player.equipment_map.get[chestplate].script.name||null> != dragon_wings:
+        - flag player dragon_wings_recover:!
     on player unequips dragon_wings flagged:dragon_wings_glow:
       - flag player dragon_wings_glow:!
     on player changes world from spawn flagged:dragon_wings_glow:

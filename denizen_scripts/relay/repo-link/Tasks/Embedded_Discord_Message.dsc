@@ -12,24 +12,9 @@ Embedded_Discord_Message:
             - ~webget <[Token]> headers:<list[Content-Type/application/json|User-Agent/denizen]> data:<[Data]> save:test
             - narrate <entry[test].result>
 
-TestTask:
-    type: task
-    debug: true
-    definitions: data
-    script:
-        - define thumbnail <map.with[url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
-        - define image <map.with[url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
-
-        - define Data <map.with[embeds].as[<list[<map.with[thumbnail].as[<[thumbnail]>].with[image].as[<[Image]>]>]>]>
-        - define Data <[Data].to_json>
-        - define channel 626098849127071746
-        - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-        - define headers <list[User-Agent/really|Content-Type/application/json]>
-        - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
-
 Embedded_Discord_Message_New:
     type: task
-    debug: true
+    debug: false
     definitions: Channel|Definitions
     script:
     # - ██ [ Inject Dependencies                     ] ██
@@ -62,3 +47,12 @@ Embedded_Discord_Message_New:
         - define headers <list[User-Agent/really|Content-Type/application/json]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
+Embedded_Webhook:
+    type: task
+    debug: true
+    definitions: Channel|Data
+    script:
+        - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
+        - define headers <list[User-Agent/Adriftus|Content-Type/application/json]>
+        - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]> save:response
+        - inject Web_Debug.Webget_Response
