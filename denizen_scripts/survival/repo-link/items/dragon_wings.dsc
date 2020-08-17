@@ -76,7 +76,7 @@ dragon_wings_boost:
       - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>"
       - if <player.equipment_map.get[chestplate].nbt[power]> <= 0 || <player.location.material.name> == water:
         - inject dragon_wings_end
-      - if !<player.is_gliding>:
+      - if !<player.gliding>:
         - run dragon_wings_liftoff
         - stop
       - repeat 10:
@@ -124,8 +124,11 @@ dragon_wings_events:
     on player stops sneaking flagged:Dragon_Wings_Fly:
       - inject dragon_wings_end
     on player equips dragon_wings:
-      - if !<player.has_flag[Dragon_Wings_Fly]>:
+      - if !<player.has_flag[Dragon_Wings_Recover]> && !<player.has_flag[Dragon_Wings_Fly]>:
         - inject dragon_wings_end
+    after player unequips dragon_wings flagged:draggon_wings_recover:
+      - if <player.equipment_map.get[chestplate].script.name||null> == dragon_wings:
+        - flag player dragon_wings_recover:!
     on player unequips dragon_wings flagged:dragon_wings_glow:
       - flag player dragon_wings_glow:!
     on player changes world from spawn flagged:dragon_wings_glow:
