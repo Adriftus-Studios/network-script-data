@@ -71,6 +71,11 @@ web_handler:
           - define Platform Discord
 
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
+        
+          - if !<proc[discord_oauth_validate_state].context[<[state]>]>:
+            - stop
+          - run discord_oauth_remove_state def:<[state]>
+          - determine passively FILE:../../../../web/pages/discord_linked.html
 
         # % ██ [ Token Exchange                  ] ██
           - define URL <yaml[oAuth].read[URL_Scopes.Discord.Token_Exchange]>
