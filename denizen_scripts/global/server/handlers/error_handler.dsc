@@ -2,21 +2,25 @@ Error_Handler:
   type: world
   debug: false
   events:
+    on server start:
+      - yaml id:error_handler create
     on script generates error:
-  # % ██ [ it's like 3am why am i still awake doing this i work in a few hours] ██
+    # % ██ [ Verify Connection             ] ██
+      - define Timeout <util.time_now.add[1m]>
+      - waituntil <bungee.connected> || <[Timeout].duration_since[<util.time_now>]> != 0:
+      - if !<bungee.connected> || <context.queue.id||invalid> == invalid || !<script.list_keys[ChannelMap].contains[<bungee.server>]>:
+        - stop
 
-    - define group 626078288556851230
-    - define channel 626098849127071746
+    # % ██ [ Cache the Information Needed  ] ██
+      - define Data <map.with[Server].as[<bungee.server>]>
+      - define Data <[Data].with[Error_Count].as[0]>
+      - if <context.queue.player||invalid> != invalid:
+        - define Player_Map <map.with[Name].as[<queue.player.name>].with[UUID].as[<queue.player.uuid>]>
+        - define Data <[Data].with[Player].as[<[Player_Map]>]>
+      - if <context.script.name||Invalid> != invalid:
+        - define Script_Map <map.with[Name].as[<context.script>].with[<context.line||Invalid>].with[File_Location].as[<bungee.server>/./<context.script.filename.after[/plugins/Denizen/scripts/repo-link/]||Invalid>]>
+        - define Data <[Data].with[Script].as[<[Script_Map]>]>
+      - define Data <[Data].with[Message].as[<context.message>]>
 
-    - define Error_Count 0
-    - define File_Location
-    - define Player_UUID
-    - define Script_Name
-
-    - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define RHeaders <list[User-Agent/really|Content-Type/application/json]>
-    - define RefURL https://discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
-
-    - define Data <yaml[SDS_Error_Handler].to_json>
-    - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
-    - stop
+    # % ██ [ Send to Relay                 ] ██
+      - bungeerun relay Error_Response_Webhook def:<[Data]>
