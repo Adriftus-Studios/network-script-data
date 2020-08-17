@@ -111,6 +111,15 @@ web_handler:
             - determine FILE:../../../../web/webget/<context.query_map.get[name]>
           - else:
             - determine CODE:404
+        - case /favicon.ico:
+          - determine FILE:../../../../web/favicon.ico
+        - case /css:
+          - if <server.has_file[../../../../web/css/<context.query_map.get[name].css||invalid>]>:
+            - determine FILE:../../../../web/css/<context.query_map.get[name]>.css
+        - case /page:
+          - if <server.has_file[../../../../web/pages/<context.query_map.get[name].html||invalid>]>:
+            - determine FILE:../../../../web/pages/<context.query_map.get[name]>.html
+          
 
     on post request:
       - define Domain <context.address>
