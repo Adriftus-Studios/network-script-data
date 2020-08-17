@@ -15,6 +15,7 @@ Error_Response_Webhook:
         - define UUID <util.random.duuid.after[_]>
         - define File_Location ../../web/webget/
         - define Message <[Data].get[Message]>
+        - define Body_text "<list.include_single[<&lt> **Error Message**<&co><&nl>`<[Message]>`<&nl><&nl>]>"
 
     # % ██ [ Generate Log              ] ██
         - log <[Message]> type:none file:<[File_Location]><[UUID]>.txt
@@ -42,6 +43,7 @@ Error_Response_Webhook:
             - define Field_List <[Field_List].include_single[<map.with[name].as[File<&co>].with[value].as[<&lb>`<[File_Directory]>`<&rb>(<[File_Link]>)].with[inline].as[true]>]>
             - define Footer "<map.with[text].as[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>"
             - define Embed_Maps <[Embed_Maps].include[<map.with[footer].as[<[Footer]>]>]>
+            - define Body_Text "<[Body_Text].include_single[<&lt> **Script Information**<&co><&nl>Script Name<&co>`<[Script_Name]>`<&nl>Script Reference<&co><&lb><[File_Directory]><&rb>(<[File_Link]>)]>"
         - else:
             - define Field_List "<[Field_List].include_single[<map.with[name].as[Note:].with[value].as[Executed via `/ex`].with[inline].as[true]>]>"
 
@@ -53,6 +55,7 @@ Error_Response_Webhook:
             - define Field_List "<[Field_List].include_single[<map.with[name].as[Player UUID:].with[value].as[`<[Player_UUID]>`].with[inline].as[true]>]>"
             - foreach <script.parsed_key[Player_Input]>:
                 - define Embed_Maps <[Embed_Maps].with[<[Key]>].as[<[Value]>]>
+            - define Body_Text "<[Body_Text].include_single[<&lt> **Player Attached**<&co><&nl>`<[Player_Name]>` / `(<[Player_UUID]>`<&nl><&nl>]>"
 
     # % ██ [ Verify Definition Fields  ] ██
         - if <[Data].keys.contains[Definition_Map]> && !<[Data].get[Definition_Map].is_empty>:
@@ -61,6 +64,11 @@ Error_Response_Webhook:
             - foreach <[Definition_Map]> key:Definition as:Save:
                 - define Definition_List "<[Definition_List].include_single[- <[Definition]>: <[Save]>]>"
             - define Field_List <[Field_List].include_single[<map.with[name].as[Definitions:].with[value].as[```yml<&nl><[Definition_List].separated_by[<&nl>]><&nl>```]>]>
+    
+    # % ██ [ Create Issue Template Link ] ██
+        - define Issue_URL_Base https://github.com/AuroraInteractive/network-script-data/issues/new?labels=Borked&
+        - define Title_Text "<&lb>BORKED<&rb> <[Script_Name]> error on <[Server]>"
+        - define Issue_URL <[Issue_URL_Base]>Title=<[Title_Text].url_encode>&body=<[Body_text].unseparated.url_encode>
         - define Field_List <[Field_List].include_single[<script.parsed_key[Control_Field]>]>
 
     # % ██ [ Construct Embed           ] ██
@@ -76,8 +84,8 @@ Error_Response_Webhook:
         - define Webhook_Data <util.parse_yaml[<entry[response].result>]>
 
     Control_Field:
-        name: Controls
-        value: <&co>one<&co> Format Definitions<&nl><&co>two<&co> Create Issue<&nl><&co>three<&co> Delete
+        name: Create Issue
+        value: <&lb>`<&lb>Click to Generate Issue Template<&rb>`<&rb>(<[Issue_URL]>)for this error report.
     Hook_Body:
         embeds: <list_single[<[Embed_Maps]>]>
         username: <[Server]> Server
