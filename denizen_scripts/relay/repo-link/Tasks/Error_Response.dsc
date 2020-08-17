@@ -39,7 +39,7 @@ Error_Response_Webhook:
                 - define File_Link https://github.com/AuroraInteractive/network-script-data/tree/master/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/]>#L<[Script_Line]>
                 - define File_Directory <[Server]>/./<[Script_File_Location].after[/plugins/Denizen/scripts/]>
             - define Field_List <[Field_List].include_single[<map.with[name].as[Script<&co>].with[value].as[`<[Script_Name]>`].with[inline].as[true]>]>
-            - define Field_List <[Field_List].include_single[<map.with[name].as[Line<&co>].with[value].as[`(<[Script_Line]>)`].with[inline].as[true]>]>
+            - define Field_List <[Field_List].include_single[<map.with[name].as[Line<&co>].with[value].as[`#<[Script_Line]>`].with[inline].as[true]>]>
             - define Field_List <[Field_List].include_single[<map.with[name].as[File<&co>].with[value].as[<&lb>`<[File_Directory]>`<&rb>(<[File_Link]>)].with[inline].as[true]>]>
             - define Footer "<map.with[text].as[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>"
             - define Embed_Maps <[Embed_Maps].include[<map.with[footer].as[<[Footer]>]>]>
@@ -51,7 +51,7 @@ Error_Response_Webhook:
         - if <[Data].keys.contains[Player]>:
             - define Player_Name <[Data].get[Player].get[Name]>
             - define Player_UUID <[Data].get[Player].get[UUID]>
-            - define Field_List "<[Field_List].include_single[<map.with[name].as[Player Attached:].with[value].as[`<[Player_Name]>`].with[inline].as[true]>]>"
+            - define Field_List "<[Field_List].include_single[<map.with[name].as[Player Name:].with[value].as[`<[Player_Name]>`].with[inline].as[true]>]>"
             - define Field_List "<[Field_List].include_single[<map.with[name].as[Player UUID:].with[value].as[`<[Player_UUID]>`].with[inline].as[true]>]>"
             - foreach <script.parsed_key[Player_Input]>:
                 - define Embed_Maps <[Embed_Maps].with[<[Key]>].as[<[Value]>]>
