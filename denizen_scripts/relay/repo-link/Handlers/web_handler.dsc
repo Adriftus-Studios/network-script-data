@@ -119,6 +119,9 @@ web_handler:
         - case /page:
           - if <server.has_file[../../../../web/pages/<context.query_map.get[name]||invalid>.html]>:
             - determine FILE:../../../../web/pages/<context.query_map.get[name]>.html
+        - case /image:
+          - if <server.has_file[../../../../web/images/<context.query_map.get[name]||invalid>]>:
+            - determine FILE:../../../../web/images/<context.query_map.get[name]>
           
 
     on post request:
