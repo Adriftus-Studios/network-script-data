@@ -33,7 +33,6 @@ Error_Response_Webhook:
             - define Script_File_Location <[Data].get[Script].get[File_Location]>
             - define Field_List <[Field_List].include_single[<map.with[name].as[Script<&co>].with[value].as[`<[Script_Name]>`].with[inline].as[true]>]>
             - define Field_List <[Field_List].include_single[<map.with[name].as[Line<&co>].with[value].as[`(<[Script_Line]>)`].with[inline].as[true]>]>
-            - define Field_List <[Field_List].include_single[<map.with[name].as[File<&co>].with[value].as[`<[Script_File_Location]>`].with[inline].as[true]>]>
             - define Footer "<map.with[text].as[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>"
             - define Embed_Maps <[Embed_Maps].include[<map.with[footer].as[<[Footer]>]>]>
         - else:
@@ -49,6 +48,8 @@ Error_Response_Webhook:
                 - define Embed_Maps <[Embed_Maps].with[<[Key]>].as[<[Value]>]>
 
     # % ██ [ Verify Definition Fields  ] ██
+        - if <[Data].keys.contains[Script]>:
+            - define Field_List <[Field_List].include_single[<map.with[name].as[File<&co>].with[value].as[<[Script_File_Location]>].with[inline].as[false]>]>
         - if <[Data].keys.contains[Definition_Map]> && !<[Data].get[Definition_Map].is_empty>:
             - define Definition_Map <[Data].get[Definition_Map]>
             - define Definition_List <list>
