@@ -9,7 +9,7 @@ channels:
       channel: "<&7><&lb><server.flag[display_name]||<bungee.server>><&7><&rb> "
       name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.name>>"
       separator: "<&b>: "
-      message: "<&f><[msg]||<context.message>>"
+      message: "<&f><[msg]||<context.formatted_message>>"
     integrations:
       Discord:
         active: false
@@ -30,7 +30,7 @@ channels:
       channel: "<&7>[<&6>Global<&7>] "
       name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
       separator: "<&b>: "
-      message: "<&f><[msg]||<context.message>>"
+      message: "<&f><[msg]||<context.formatted_message>>"
     integrations:
       Discord:
         active: true
@@ -52,7 +52,7 @@ channels:
       channel: "<&7>[<&a>Staff<&7>] "
       name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
       separator: "<&b>: "
-      message: "<&a><[msg]||<context.message>>"
+      message: "<&a><[msg]||<context.formatted_message>>"
     integrations:
       Discord:
         active: true
@@ -74,7 +74,7 @@ channels:
       channel: "<&7>[<&4>Admin<&7>] "
       name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
       separator: "<&b>: "
-      message: "<&c><[msg]||<context.message>>"
+      message: "<&c><[msg]||<context.formatted_message>>"
     integrations:
       Discord:
         active: true
@@ -96,7 +96,7 @@ channels:
       channel: "<&7>[<&b>Dev<&7>] "
       name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
       separator: "<&f>: "
-      message: "<&b><[msg]||<context.message>>"
+      message: "<&b><[msg]||<context.formatted_message>>"
     integrations:
       Discord:
         active: true
