@@ -1397,7 +1397,7 @@ claim_system_upgrade_spawn_prevention:
   type: world
   debug: false
   events:
-    on entity spawns because natural BUKKIT_PRIORITY:HIGHEST:
+    on entity spawns BUKKIT_PRIORITY:HIGHEST:
     - announce "<context.entity.entity_type> spawning"
     - announce "Spawn Reason: <context.reason>"
     - if !<context.location.cuboids.filter[note_name.starts_with[claim]].is_empty>:
