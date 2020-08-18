@@ -1242,7 +1242,6 @@ claiming_system_upgrade_events:
   events:
     after player enters claim*:
     - define group <context.area.note_name.after[.].before[/]>
-    - narrate "enter: <[group]>""
     - if <player.flag[claim_enter_ignore]||null> == <[group]>:
       - flag player claim_enter_ignore:!
       - stop
@@ -1257,7 +1256,6 @@ claiming_system_upgrade_events:
         - inject claim_system_apply_upgrade_<[upgrade_name]>
     on player exits claim*:
     - define group <context.area.note_name.after[.].before[/]>
-    - narrate "exit: <[group]>""
     - flag player claim_enter_ignore:<[group]> duration:6t
     - wait 2t
     - if !<player.is_online>:
@@ -1399,7 +1397,7 @@ claim_system_upgrade_spawn_prevention:
   type: world
   debug: false
   events:
-    on entity spawns because natural:
+    on entity spawns because natural BUKKIT_PRIORITY:HIGHEST:
     - if !<context.location.cuboids.filter[note_name.starts_with[claim]].is_empty>:
       - define group <context.location.cuboids.filter[note_name.starts_with[claim]].parse[note_name.after[.].before[/]].first>
       - if <yaml[claims].read[groups.<[group]>.settings.disable-mob-spawn]> && <yaml[claims].read[groups.<[group]>.upgrades.disable-mob-spawn]>:
