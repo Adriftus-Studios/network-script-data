@@ -138,3 +138,16 @@ Error_Handler:
     - define Link "<entry[mylog].submitted||DEBUG FAILED>"
     - define Text "<&lt>@!626086306606350366<&gt> <&lt>a:blueweewoo:725197352645689435<&gt> I'm alerting you about the script setup for debugging a Bungee Event issue:<&nl> <[Link]><&nl><[Context].separated_by[<&nl>]>"
     - bungeerun Relay Simple_Discord_Embed def:<list_single[<[Text]>].include[626086306606350366]>
+
+modify_global_player_data_safe:
+  type: task
+  definitions: uuid|node|value
+  script:
+    - if <yaml[data_handler].contains[player.<[uuid]>]> && <yaml[data_handler].read[player.<[uuid]>.server]> != <bungee.server>:
+      - bungerun player_data_safe_modify def:<[uuid]>|<[node]>|<[value]>
+    - else if <yaml.list.contains[global.player.<[uuid]>]>:
+      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+    - else:
+      - yaml id:global.player.<[uuid]> load:data/players/<[uuid]>.yml
+      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+      - yaml id:global.player.<[uuid]> savefile:data/players/<[uuid]>.yml

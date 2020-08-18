@@ -90,3 +90,9 @@ Unload_Player_Data:
   # % ██ [ Unload Global Player Data ] ██
     - ~yaml id:global.player.<[UUID]> savefile:data/global/players/<[UUID]>.yml
     - yaml id:global.player.<[UUID]> unload
+
+player_data_safe_modify:
+  type: task
+  definitions: uuid|node|value
+  script:
+    - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
