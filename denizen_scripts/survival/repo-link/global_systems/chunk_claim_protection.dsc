@@ -1398,9 +1398,12 @@ claim_system_upgrade_spawn_prevention:
   debug: false
   events:
     on entity spawns because natural BUKKIT_PRIORITY:HIGHEST:
+    - announce "<context.entity.entity_type> spawning"
     - if !<context.location.cuboids.filter[note_name.starts_with[claim]].is_empty>:
       - define group <context.location.cuboids.filter[note_name.starts_with[claim]].parse[note_name.after[.].before[/]].first>
+      - announce "in group: <[group]>"
       - if <yaml[claims].read[groups.<[group]>.settings.disable-mob-spawn]> && <yaml[claims].read[groups.<[group]>.upgrades.disable-mob-spawn]>:
+        - announce "Cancelled"
         - determine cancelled
 
 # keep-inventory
