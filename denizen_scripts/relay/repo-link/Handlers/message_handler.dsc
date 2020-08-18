@@ -1,6 +1,6 @@
 Message_Handler:
   type: world
-  debug: true
+  debug: false
   events:
     on server generates exception:
       - if <context.message> == "no value present":
