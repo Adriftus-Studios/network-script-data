@@ -41,8 +41,8 @@ discord_watcher:
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message].replace[]>
         - define Insert <[Text]>
         - define MessageText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
-        - define Attachments <list[<empty>]>
-        - if <context.attachments||invalid> != invalid:
+        - define Attachments <list>
+        - if !<context.message.attachments.is_empty>:
           - foreach <context.attachments> as:Attachment:
             - define Hover "<&color[#F3FFAD]>Click to Open Link <&color[#26FFC9]>:<&nl><&color[#F3FFAD]><[Attachment]>"
             - define Text <&3>[<&b><&n>Link<&3>]<&r>
