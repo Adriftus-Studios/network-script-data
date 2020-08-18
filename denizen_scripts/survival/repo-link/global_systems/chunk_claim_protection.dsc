@@ -1399,6 +1399,7 @@ claim_system_upgrade_spawn_prevention:
   events:
     on entity spawns because natural BUKKIT_PRIORITY:HIGHEST:
     - announce "<context.entity.entity_type> spawning"
+    - announce "Spawn Reason: <context.cause>"
     - if !<context.location.cuboids.filter[note_name.starts_with[claim]].is_empty>:
       - define group <context.location.cuboids.filter[note_name.starts_with[claim]].parse[note_name.after[.].before[/]].first>
       - announce "in group: <[group]>"
