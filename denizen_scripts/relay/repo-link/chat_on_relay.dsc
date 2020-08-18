@@ -43,7 +43,7 @@ discord_watcher:
         - define MessageText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         - define Attachments <list>
         - if !<context.message.attachments.is_empty>:
-          - foreach <context.attachments> as:Attachment:
+          - foreach <context.message.attachments> as:Attachment:
             - define Hover "<&color[#F3FFAD]>Click to Open Link <&color[#26FFC9]>:<&nl><&color[#F3FFAD]><[Attachment]>"
             - define Text <&3>[<&b><&n>Link<&3>]<&r>
             - define Url <[Attachment]>
