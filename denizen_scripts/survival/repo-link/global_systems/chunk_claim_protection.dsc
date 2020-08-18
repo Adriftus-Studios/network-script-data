@@ -1240,7 +1240,7 @@ claiming_system_upgrade_events:
   type: world
   debug: false
   events:
-    on player enters claim*:
+    after player enters claim*:
     - define group <context.area.note_name.after[.].before[/]>
     - narrate "enter: <[group]>""
     - if <player.flag[claim_enter_ignore]||null> == <[group]>:
