@@ -4,12 +4,13 @@ grim_area_effects:
     on player enters spawn_grim_cuboid:
       - cast blindness duration:40t no_ambient hide_particles
       - time player 14000
-      - adjust <player> stop_sound:music
+      - execute as_server "stopsound <player.name> music" silent
       - wait 1t
-      - playsound <player> sound:MUSIC_DRAGON pitch:1 volume:150 sound_category:music
+      - playsound <player> sound:MUSIC_DRAGON pitch:1 volume:150 sound_category:master
+      - playsound <player> sound:custom.death_graveyard sound_category:master volume:0.4 custom
     on player exits spawn_grim_cuboid:
       - cast blindness duration:40t no_ambient hide_particles
       - time player reset
-      - adjust <player> stop_sound:music
+      - execute as_server "stopsound <player.name> music" silent
       - wait 1t
-      - playsound <player> sound:<script[spawn_sound_effects_handler].data_key[sounds].as_list.random> pitch:1 volume:150 sound_category:music
+    - playsound <player> sound:<list[MUSIC_DISC_STRAD|MUSIC_DISC_FAR|MUSIC_DISC_MALL].random> volume:150 sound_category:music
