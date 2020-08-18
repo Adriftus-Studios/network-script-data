@@ -6,7 +6,7 @@ mod_spectate_command:
   aliases:
     - spectate
   description: Moderator spectate
-  usage: /spec [username]
+  usage: /spec (username)
   tab completions:
     - define Blacklist <player||null>
     - inject Online_Player_Tabcomplete

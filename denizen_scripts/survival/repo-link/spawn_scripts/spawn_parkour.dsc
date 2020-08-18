@@ -3,6 +3,7 @@ Parkour_events:
   type: world
   events:
     on player enters parkour*:
+      - define note_name <context.area.note_name>
       - define level <[note_name].after[~]||null>
       - choose <[note_name].after[.].before[~]>:
         # parkour.SetWaypoint~#
@@ -24,7 +25,7 @@ Parkour_events:
         - case finish:
           - if <player.has_permission[adriftus.admin]>:
             - narrate "<&c>You can't play for real. But you made it to the top!"
-          - teleport <player> parkour_complete
+          - teleport parkour_complete
           - wait 1t
           - flag player parkour:!
           - run title_unlock def:Flashyjumper
@@ -38,7 +39,7 @@ parkour_master_interact_command:
   type: command
   name: parkour
   description: Starts the parkour
-  usage: /parkour
+  usage: /parkour [player]
   permission: custom.command.parkour
   script:
     - adjust <queue> linked_player:<server.match_player[<context.args.first>]>
@@ -62,10 +63,9 @@ parkour_quit_command:
       - if <player.has_flag[parkour]>:
         - narrate "<&a>You have been removed from the challenge!"
         - flag player parkour:!
-        - teleport <player> parkour_complete
+        - teleport parkour_complete
         - stop
-      - else:
-        - narrate "<&c>You are not currently participating in the parkour!"
+      - narrate "<&c>You are not currently participating in the parkour!"
 
 parkour_leave_handler:
   type: world
