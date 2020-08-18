@@ -12,7 +12,7 @@ manage_discord_oauth_records:
         - yaml id:discord_oauth load:data/discord_oauth.yml
       - else:
         - yaml id:discord_oauth create
-      - if <yaml[discoard_oauth].contains[accepted_states]>:
+      - if <yaml[discord_oauth].contains[accepted_states]>:
         - foreach <yaml[discord_oauth].list_keys[accepted_states]>:
           - if <yaml[discord_oauth].read[accepted_states.<[value]>.time]> > <server.current_time_millis>:
             - yaml id:discord_oauth set accepted_states.<[value]>:!
