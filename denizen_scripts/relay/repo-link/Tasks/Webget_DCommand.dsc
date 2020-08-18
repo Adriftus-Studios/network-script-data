@@ -83,28 +83,28 @@ Webget_DCommand:
       - ~webget <[Hook]> data:<[CData]> headers:<[RHeaders]>
 
   # % ██ [ Create Webget                           ] ██
-    - if !<[Data].exists> && !<[Headers].exists> && !<[Method].exists>:
+    - if <[Data]||invalid> == invalid && <[Headers]||invalid> == invalid && <[Method]||invalid> == invalid:
       - ~webget <[URL]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data].exists> && !<[Headers].exists> && !<[Method].exists>:
+    - else if <[Data]||invalid> != invalid && <[Headers]||invalid> == invalid && <[Method]||invalid> == invalid:
       - ~webget <[URL]> data:<[Data]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data].exists> && <[Headers].exists> && !<[Method].exists>:
+    - else if <[Data]||invalid> != invalid && <[Headers]||invalid> != invalid && <[Method]||invalid> == invalid:
       - ~webget <[URL]> data:<[Data]> headers:<[Headers].parsed> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data].exists>  && <[Headers].exists> && <[Method].exists>:
+    - else if <[Data]||invalid> != invalid  && <[Headers]||invalid> != invalid && <[Method]||invalid> != invalid:
       - ~webget <[URL]> data:<[Data]> Headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
-    - else if <[Data].exists>  && !<[Headers].exists> && <[Method].exists>:
+    - else if <[Data]||invalid> != invalid  && <[Headers]||invalid> == invalid && <[Method]||invalid> != invalid:
       - ~webget <[URL]> data:<[Data]> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
-    - else if !<[Data].exists>  && !<[Headers].exists> && <[Method].exists>:
+    - else if <[Data]||invalid> == invalid  && <[Headers]||invalid> == invalid && <[Method]||invalid> != invalid:
       - ~webget <[URL]> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
-    - else if !<[Data].exists>  && <[Headers].exists> && !<[Method].exists>:
+    - else if <[Data]||invalid> == invalid  && <[Headers]||invalid> != invalid && <[Method]||invalid> == invalid:
       - ~webget <[URL]> headers:<[Headers].parsed> Timeout:<[Timeout]> save:Response
 
-    - else if !<[Data].exists>  && <[Headers].exists> && <[Method].exists>:
+    - else if <[Data]||invalid> == invalid  && <[Headers]||invalid> != invalid && <[Method]||invalid> != invalid:
       - ~webget <[URL]> headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
   # % ██ [ Listener Flags                          ] ██
