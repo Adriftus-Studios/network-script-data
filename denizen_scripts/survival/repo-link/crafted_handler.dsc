@@ -19,7 +19,7 @@ crafted_hub_events:
     on server start:
       - if <server.has_file[data/crafted.yml]>:
         - yaml id:crafted load:data/crafted.yml
-      - waituntil <server.flag[crafted_npc].as_npc.is_spawned>
+      - waituntil rate:1s <server.flag[crafted_npc].as_npc.is_spawned>
       - adjust <server.flag[crafted_npc]> hide_from_players
     on player join:
       - wait 2s
