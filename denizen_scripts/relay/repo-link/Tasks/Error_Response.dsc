@@ -6,6 +6,10 @@ Error_Response_Webhook:
         Content-Type: application/json
     definitions: Data
     script:
+    # $ ██ [ Verify Server             ] ██
+        - if !<script.list_keys[Channel_Map].contains[<[Data].get[Server]>]>:
+            - stop
+
     # % ██ [ Organize Definitions      ] ██
         - define Server <[Data].get[Server]>
         - define Group <script.data_key[AGDev]>
