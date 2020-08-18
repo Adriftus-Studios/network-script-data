@@ -1242,6 +1242,7 @@ claiming_system_upgrade_events:
   events:
     on player enters claim*:
     - define group <context.area.note_name.after[.].before[/]>
+    - narrate <[group]>
     - if <player.flag[claim_enter_ignore]||null> == <[group]>:
       - flag player claim_enter_ignore:!
       - stop
@@ -1256,6 +1257,7 @@ claiming_system_upgrade_events:
         - inject claim_system_apply_upgrade_<[upgrade_name]>
     on player exits claim*:
     - define group <context.area.note_name.after[.].before[/]>
+    - narrate <[group]>
     - flag player claim_enter_ignore:<[group]> duration:6t
     - wait 2t
     - if !<player.is_online>:
