@@ -32,7 +32,7 @@ discord_watcher:
         - define Name <context.author.name>
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
         - define Text <&7><[Name]>
-        - define Insert <&lt>@!<context.author.id><&gt>
+        - define Insert @<context.author.nickname[<context.group>]||<context.author.name>>
         - define NameText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         
         - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
