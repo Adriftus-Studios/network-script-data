@@ -144,10 +144,11 @@ modify_global_player_data_safe:
   definitions: uuid|node|value
   script:
     - if <yaml[data_handler].contains[player.<[uuid]>]> && <yaml[data_handler].read[player.<[uuid]>.server]> != <bungee.server>:
-      - bungerun player_data_safe_modify def:<[uuid]>|<[node]>|<[value]>
+      - bungeerun player_data_safe_modify def:<[uuid]>|<[node]>|<[value]>
     - else if <yaml.list.contains[global.player.<[uuid]>]>:
       - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
     - else:
       - yaml id:global.player.<[uuid]> load:data/players/<[uuid]>.yml
       - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
       - yaml id:global.player.<[uuid]> savefile:data/players/<[uuid]>.yml
+      - yaml id:global.player.<[uuid]> unload
