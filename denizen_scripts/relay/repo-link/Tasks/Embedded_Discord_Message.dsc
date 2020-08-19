@@ -9,7 +9,7 @@ Embedded_Discord_Message:
         - if <script[DDTBCTY].list_keys[WebHooks].contains[<[Channel]>]>:
             - define Token <script[DDTBCTY].data_key[WebHooks.<[Channel]>.Hook]>
             - define Data <yaml[webhook_template_<[Template]>].to_json.parsed>
-            - ~webget <[Token]> headers:<list[Content-Type/application/json|User-Agent/denizen]> data:<[Data]> save:test
+            - ~webget <[Token]> headers:<yaml[Saved_Headers].read[Discord.Webhook_Message]> data:<[Data]> save:test
             - narrate <entry[test].result>
 
 Embedded_Discord_Message_New:
@@ -53,6 +53,6 @@ Embedded_Webhook:
     definitions: Channel|Data
     script:
         - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-        - define headers <list[User-Agent/Adriftus|Content-Type/application/json]>
+        - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
         - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]> save:response
         - inject Web_Debug.Webget_Response
