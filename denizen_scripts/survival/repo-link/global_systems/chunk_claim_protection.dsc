@@ -1397,7 +1397,7 @@ claim_system_upgrade_spawn_prevention:
   type: world
   debug: false
   events:
-    on entity spawns because natural BUKKIT_PRIORITY:HIGHEST:
+    on entity spawns because natural BUKKIT_PRIORITY:LOWEST:
     - if !<context.location.cuboids.filter[note_name.starts_with[claim]].is_empty>:
       - define group <context.location.cuboids.filter[note_name.starts_with[claim]].parse[note_name.after[.].before[/]].first>
       - if <yaml[claims].read[groups.<[group]>.settings.disable-mob-spawn]> && <yaml[claims].read[groups.<[group]>.upgrades.disable-mob-spawn]>:
