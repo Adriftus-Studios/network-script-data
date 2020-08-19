@@ -44,7 +44,7 @@ Embedded_Discord_Message_New:
         - define Data <[Data].with[embeds].as[<list[<[Embeds]>]>].to_json>
 
         - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-        - define headers <list[User-Agent/really|Content-Type/application/json]>
+        - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
 Embedded_Webhook:

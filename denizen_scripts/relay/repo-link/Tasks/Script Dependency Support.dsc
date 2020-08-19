@@ -66,7 +66,7 @@ Script_Dependency_Support_DCommand:
         - stop
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define headers <list[User-Agent/really|Content-Type/application/json]>
+    - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
         #- run Embedded_Discord_Message_New defs:<[Definitions]>
 

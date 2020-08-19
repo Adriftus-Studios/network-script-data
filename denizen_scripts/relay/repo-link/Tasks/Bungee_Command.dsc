@@ -62,5 +62,5 @@ discord_bungeeCommand_execute:
     - define Data <map[username/<[Server]><&sp>Server|avatar_url/https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define headers <list[User-Agent/really|Content-Type/application/json]>
+    - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>

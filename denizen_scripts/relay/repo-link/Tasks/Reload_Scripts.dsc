@@ -61,7 +61,7 @@ Reload_Scripts_Queue:
         - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
         - define Data "<map[username/<[Server]> Server|avatar_url/https://img.icons8.com/nolan/64/source-code.png].with[embeds].as[<[Embeds]>].to_json>"
         - define Hook <[Hook]>
-        - define headers <list[User-Agent/really|Content-Type/application/json]>
+        - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
       - default:
         #$ This should be a transcribed embedded message
@@ -81,7 +81,7 @@ Reload_Scripts_Queue:
         - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
         - define Data "<map[username/<[Server]> Server|avatar_url/https://img.icons8.com/nolan/64/source-code.png].with[embeds].as[<[Embeds]>].to_json>"
         - define Hook <[Hook]>
-        - define headers <list[User-Agent/really|Content-Type/application/json]>
+        - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
 
@@ -120,5 +120,5 @@ Reload_Response:
     - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
     - define Data "<map[username/<[Server]> Server|avatar_url/https://img.icons8.com/nolan/64/source-code.png].with[embeds].as[<[Embeds]>].to_json>"
     - define Hook <[Hook]>
-    - define headers <list[User-Agent/really|Content-Type/application/json]>
+    - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>

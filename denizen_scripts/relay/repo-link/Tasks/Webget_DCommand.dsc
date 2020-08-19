@@ -18,7 +18,7 @@ Webget_DCommand:
     - inject Command_Arg_Registry
     - define EntryResults <list>
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define RHeaders <list[User-Agent/really|Content-Type/application/json]>
+    - define RHeaders <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - define RefURL https://discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
 
   # % ██ [ Verify Arguments                        ] ██

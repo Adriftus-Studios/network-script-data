@@ -14,7 +14,7 @@ RFood_DCommand:
     - Define UserPFP https://cdn.discordapp.com/avatars/<[UserID]>/<util.parse_yaml[<entry[Response].result>].get[avatar]>
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define headers <list[User-Agent/really|Content-Type/application/json]>
+    - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
   # % ██ [ Verify Arguments            ] ██
     - if !<script[DDTBCTY].list_keys[WebHooks].contains[<[Channel]>]>:
       - stop

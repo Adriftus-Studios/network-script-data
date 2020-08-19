@@ -189,7 +189,7 @@ web_handler:
         - shell <[Script]> <[Request]>
         - define Hook <script[DDTBCTY].data_key[WebHooks.650016499502940170.hook]>
         - define data <yaml[webhook_template_git-pull].to_json>
-        - define headers <list[User-Agent/really|Content-Type/application/json]>
+        - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
       - else if <[domain]> == <script.data_key[Domains.self]>:
