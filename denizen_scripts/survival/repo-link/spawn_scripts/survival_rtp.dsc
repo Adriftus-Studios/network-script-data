@@ -77,7 +77,6 @@ spawn_sound_effects_handler:
   type: task
   debug: false
   script:
-    #- adjust <player> stop_sound:music
-    - execute as_server "stopsound <player.name> music" silent
+    - adjust <player> stop_sound
     - wait 1t
     - playsound <player> sound:<list[MUSIC_DISC_STRAD|MUSIC_DISC_FAR|MUSIC_DISC_MALL].random> volume:150 sound_category:music
