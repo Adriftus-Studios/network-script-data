@@ -12,6 +12,7 @@ manage_discord_oauth_records:
         - yaml id:discord_oauth load:data/discord_oauth.yml
       - else:
         - yaml id:discord_oauth create
+<<<<<<< HEAD
       - run discord_oauth_cleanup
 
 discord_oauth_cleanup:
@@ -21,6 +22,12 @@ discord_oauth_cleanup:
       - foreach <yaml[discord_oauth].list_keys[accepted_states]>:
         - if <yaml[discord_oauth].read[accepted_states.<[value]>.time]> > <server.current_time_millis>:
           - yaml id:discord_oauth set accepted_states.<[value]>:!
+=======
+      - if <yaml[discord_oauth].contains[accepted_states]>:
+        - foreach <yaml[discord_oauth].list_keys[accepted_states]>:
+          - if <yaml[discord_oauth].read[accepted_states.<[value]>.time]> > <server.current_time_millis>:
+            - yaml id:discord_oauth set accepted_states.<[value]>:!
+>>>>>>> 3a79e4199f77faec37e5c0f2d5689168a1356313
 
 discord_oauth_remove_state:
   type: task

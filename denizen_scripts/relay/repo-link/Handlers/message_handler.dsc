@@ -1,5 +1,6 @@
 Message_Handler:
   type: world
+  debug: false
   events:
     on server generates exception:
       - if <context.message> == "no value present":
@@ -12,9 +13,9 @@ Message_Handler:
         - stop
       - define Author <context.Author>
 
-      - if <context.Message||WebHook> == WebHook:
+      - if <context.message.message||WebHook> == WebHook:
         - stop
-      - define Message <context.Message>
+      - define Message <context.Message.message>
 
       - if <context.Bot> == <[Author]>:
         - stop
