@@ -1,0 +1,4 @@
+Discord:
+  Webhook_Message:
+    User-Agent: Adriftus
+    Content-Type: application/json
