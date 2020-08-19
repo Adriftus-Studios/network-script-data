@@ -37,10 +37,10 @@ Error_Response_Webhook:
             - define Script_Line <[Data].get[Script].get[Line]>
             - define Script_File_Location <[Data].get[Script].get[File_Location]>
             - if <[Script_File_Location].after[/plugins/Denizen/scripts/].starts_with[global]>:
-                - define File_Link https://github.com/AuroraInteractive/network-script-data/tree/master/denizen_scripts/global/server/<[Script_File_Location].after[/scripts/global/server/]>#L<[Script_Line]>
+                - define File_Link https://github.com/Adriftus-Studios/network-script-data/tree/master/denizen_scripts/global/server/<[Script_File_Location].after[/scripts/global/server/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
                 - define File_Directory global/<[Script_File_Location].after[/scripts/global/server/]>
             - else:
-                - define File_Link https://github.com/AuroraInteractive/network-script-data/tree/master/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/]>#L<[Script_Line]>
+                - define File_Link https://github.com/Adriftus-Studios/network-script-data/tree/master/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
                 - define File_Directory <[Server]>/./<[Script_File_Location].after[/plugins/Denizen/scripts/]>
             - define Field_List <[Field_List].include_single[<map.with[name].as[Script<&co>].with[value].as[`<[Script_Name]>`].with[inline].as[true]>]>
             - define Field_List <[Field_List].include_single[<map.with[name].as[Line<&co>].with[value].as[`#<[Script_Line]>`].with[inline].as[true]>]>
