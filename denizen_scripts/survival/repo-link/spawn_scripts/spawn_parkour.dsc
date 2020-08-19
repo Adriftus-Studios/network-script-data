@@ -28,7 +28,8 @@ Parkour_events:
           - teleport parkour_complete
           - wait 1t
           - flag player parkour:!
-          - run title_unlock def:Flashyjumper
+          - define tagID Flashyjumper
+          - inject title_unlock
           - title title:<&a>Complete!
           - playsound <player> sound:entity_level_up volume:1.0 pitch:0.8
           - firework <player.location> power:0.2 star primary:yellow fade:white flicker
