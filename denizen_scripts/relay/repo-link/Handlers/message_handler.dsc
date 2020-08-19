@@ -36,6 +36,8 @@ Message_Handler:
     # % ██ [ Command  Based Scripts          ] ██
       - if <[Message].starts_with[/]>:
         - choose <[Message].before[<&sp>].after[/]>:
+          - case repository repo git github:
+            - ~Run Repository_DCommand def:<[Channel]>
           - case reload:
             - ~Run Reload_Scripts_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case tag parse t:

@@ -27,6 +27,7 @@ grim_interact_handler:
 grim_death_menu:
   type: inventory
   inventory: chest
+  title: <&4>Grim Servant
   debug: false
   size: 27
   definitions:
