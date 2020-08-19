@@ -93,8 +93,8 @@ mob_death_event:
   whitelist: zombie|creeper|skeleton|spider|drowned|witch|husk|withers|evoker|ravager|pillager|vex|illusioner|silverfish|stray|vindicator|cave_spider|enderman
   events:
     on entity dies in:mainland:
-      - if <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]>:
-        - define mob_level <context.entity.custom_name.after[Level<&sp>].before[)]>
+      - if <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]> && <context.entity.is_mythicmob>:
+        - define mob_level <context.entity.mythicmob.level>
         - inject drop_table
         - if <[drop]||null> != null:
           - determine <context.drops.include[<[drop]>]>
