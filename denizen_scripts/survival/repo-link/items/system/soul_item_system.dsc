@@ -364,8 +364,8 @@ get_random_soul:
       - define NBT <[NBT].include_single[debuffs/<[debuffs]>]>
     - define flavor "<&d>Soul Item<&nl><&e>Combine with Armor or Weapons"
     - define NBT <[NBT].include_single[flavor/<[flavor]>]>
-    - define Context <list_single[<item[Soul]>].include_single[<[NBT]>]>
-    - determine <proc[item_system_build_item].context[<[Context]>]>
+    - define Item <[Item].with[nbt=<[NBT]>]>
+    - determine <proc[item_system_build_item].context[<[Item]>]>
 
 item_with_soul_create:
   type: procedure
