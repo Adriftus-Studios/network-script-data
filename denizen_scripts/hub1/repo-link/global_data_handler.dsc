@@ -114,7 +114,7 @@ External_Player_Data_Join_Event:
       - else:
         - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap]>]>
 
-Error_Handler:
+Error_Handler_PlayerData:
   type: task
   debug: true
   Record:
