@@ -63,8 +63,8 @@ web_handler:
             - stop
           - flag server Test.GitHub.ObtainUserRepoData:<util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
 
-          - define Main_Repo <[Login]>/Webizen
-          - define From_Repo Adriftus-Studios/Webizen
+          - define Main_Repo <[Login]>/network-script-data
+          - define From_Repo BehrRiley/network-script-data
           - define Repositories <util.parse_yaml[{"Data":<entry[Response].result>}].get[Data].parse_tag[<[Parse_Value].get[full_name]>]>
 
         # % ██ [ Manage Fork                   ] ██
