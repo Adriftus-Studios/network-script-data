@@ -2,11 +2,11 @@
 chat_send_message:
   type: task
   debug: false
-  definitions: game_channel|name|game_message|server
+  definitions: game_message|game_channel|server|name|display_name
   script:
       - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.channel]>
       - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-      - define Data <map[content/<[game_message].parse_color.strip_color>|username/<[Name]><&sp>[<[Server]>]|avatar_url/https://minotar.net/cube/<[Name]>/100.png].to_json>
+      - define Data <map[content/<[game_message].parse_color.strip_color>|username/<[display_name]><&sp>[<[Server]>]|avatar_url/https://minotar.net/cube/<[name]>/100.png].to_json>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 

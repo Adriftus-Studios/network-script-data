@@ -39,7 +39,7 @@ chat_system_events:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
         - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include[<[message]>]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
-          - bungeerun relay chat_send_message def:<list_single[<[Channel]>].include[<player.display_name.strip_color>].include[<context.message>].include[<bungee.server>]>
+          - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.name>|<player.display_name.strip_color>]>
         - inject chat_history_save
 
 chat_history_save:
