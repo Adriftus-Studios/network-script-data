@@ -146,7 +146,7 @@ Status_DCommand:
       nodes:
         - tps
     Scripts:
-      tag: "Total Scripts<&co> `(<server.scripts.size>)`<&nl>Yaml Files<&co> `(<yaml.list.size>)`<&nl><server.scripts.parse[data_key[type]].deduplicate.parse_tag[<[Parse_Value]> Scripts<&co> `(<server.scripts.filter[data_key[type].is[==].to[<[Parse_Value]>]].size>)`].separated_by[<&nl>]>"
+      tag: Total Scripts<&co> `(<server.scripts.size>)`<&nl>Yaml Files<&co> `(<yaml.list.size>)`<&nl><server.scripts.parse[data_key[type]].deduplicate.parse_tag[<[Parse_Value].to_titlecase> Scripts<&co> `(<server.scripts.filter[data_key[type].is[==].to[<[Parse_Value]>]].size>)`].separated_by[<&nl>]>"
       nodes:
         - s
         - scripts
