@@ -120,6 +120,9 @@ Home_GUI:
 
     - choose <[Action]>:
         - case Main_Menu:
+            - if !<player.has_flag[Behr.Essentials.Homes]>:
+                - define reason "You have no homes!"
+                - inject error_response
             - define Homes <player.flag[Behr.Essentials.Homes]>
             - define Title "My Homes"
             - define WorldList <server.worlds.parse[name]>

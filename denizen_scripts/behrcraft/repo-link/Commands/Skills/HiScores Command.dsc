@@ -28,7 +28,7 @@ Hiscores_Command:
 
         - define Players <server.players_flagged[behrry.skill.<[Skill]>.Level]>
         - define PlayersOrdered <[Players].sort_by_number[flag[behrry.skill.<[Skill]>.Level]].reverse>
-        - define PlayerGet <[PlayersOrdered].first.to[8]>
+        - define PlayerGet <[PlayersOrdered].get[1].to[8]>
         - narrate "<&2>+<&a>-------<&6>[<&e> hiscores <&6>] <&b>| <&6>[<&e> <[Skill]> <&6>]<&a>-------<&2>+"
         - foreach <[PlayerGet]> as:Player:
             - narrate "<proc[User_Display_Simple].context[<[Player]>]> <&b>| <&e> Level<&6>: <&a><[Player].flag[behrry.skill.<[Skill]>.Level]> <&b>| <&e> Exp<&6>: <&a><[Player].flag[behrry.skill.<[Skill]>.Exp].round>"

@@ -15,7 +15,7 @@ DeathTop_Hiscores_Command:
 
         - define Players <server.players>
         - define PlayersOrdered <[Players].filter[statistic[deaths].is[!=].to[0]].sort_by_number[statistic[deaths]].reverse>
-        - define PlayerGet <[PlayersOrdered].first.to[8]>
+        - define PlayerGet <[PlayersOrdered].get[1].to[8]>
         - narrate "<&2>+<&a>-------<&6>[<&e> Hiscores <&6>] <&b>| <&6>[<&e> Deaths <&6>]<&a>-------<&2>+"
         - foreach <[PlayerGet]> as:Player:
             - narrate "<proc[User_Display_Simple].context[<[Player]>]> <&b>| <&e> Deaths<&6>: <&a><[Player].statistic[deaths]>"

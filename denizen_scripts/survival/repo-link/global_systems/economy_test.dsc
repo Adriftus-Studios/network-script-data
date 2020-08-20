@@ -60,7 +60,7 @@ economy_balance_top:
     - narrate <&a>-----------------------------
     - narrate "<&a>----    Top Balances    -----"
     - narrate <&a>-----------------------------
-    - foreach <server.players.filter[flag[money].is[!=].to[null]].sort_by_number[money].reverse.first.to[10]>:
+    - foreach <server.players.filter[flag[money].is[!=].to[null]].sort_by_number[money].reverse.get[1].to[10]>:
       - narrate "<&e><[loop_index]>. <[value].name><&co> <&b><[value].flag[money]>"
 
 economy_bank_note:
