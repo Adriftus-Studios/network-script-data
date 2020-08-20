@@ -89,6 +89,7 @@ Error_Response_Webhook:
         - ~webget <[Hook]>?wait=true data:<[Map]> headers:<[Headers]> save:response
         - inject Web_Debug.Webget_Response
         - define Webhook_Data <util.parse_yaml[<entry[response].result>]>
+        - yaml id:<[DUUID]> unload
 
     Control_Field:
         name: Create Issue
