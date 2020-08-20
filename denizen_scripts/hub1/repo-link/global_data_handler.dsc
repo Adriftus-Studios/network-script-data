@@ -6,7 +6,6 @@ global_data_handler:
       - yaml id:data_handler create
 
     on bungee player joins network:
-      - inject Error_Handler_PlayerData.Record
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
@@ -26,10 +25,8 @@ global_data_handler:
 
         - yaml id:<[GlobalYaml]> create
         - yaml id:<[GlobalYaml]> savefile:<[Directory]>
-        - inject Error_Handler_PlayerData
 
     on bungee player switches to server:
-      - inject Error_Handler_PlayerData.Record
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
@@ -53,10 +50,8 @@ global_data_handler:
         - yaml id:global.player.<[UUID]> load:data/global/players/<[UUID]>.yml
         - define PlayerData <yaml[global.player.<[UUID]>].read[]>
         - run External_Player_Data_Join_Event def:<list_single[<[PlayerMap]>].include_single[<[PlayerData]>].include[<[Server]>|<[Event]>]>
-        - inject Error_Handler_PlayerData
 
     on bungee player leaves network:
-      - inject Error_Handler_PlayerData.Record
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
@@ -70,7 +65,6 @@ global_data_handler:
 
     # % ██ [ Fire Player Quit Events ] ██
       - bungeerun <[Server]> Player_Data_Quit_Event def:<[UUID]>
-      - inject Error_Handler_PlayerData
 
 External_Player_Data_Join_Event:
   type: task

@@ -44,7 +44,7 @@ Error_Response_Webhook:
                 - define File_Directory <[Server]>/./<[Script_File_Location].after[/plugins/Denizen/scripts/]>
             - define Field_List <[Field_List].include_single[<map.with[name].as[Script<&co>].with[value].as[`<[Script_Name]>`].with[inline].as[true]>]>
             - define Field_List <[Field_List].include_single[<map.with[name].as[Line<&co>].with[value].as[`#<[Script_Line]>`].with[inline].as[true]>]>
-            - define Field_List <[Field_List].include_single[<map.with[name].as[File<&co>].with[value].as[<&lb>`<[File_Directory]>`<&rb>(<[File_Link]>)].with[inline].as[true]>]>
+            - define Field_List <[Field_List].include_single[<map.with[name].as[File<&co>].with[value].as[<&lb>`<&lb><[File_Directory]><&rb>`<&rb>(<[File_Link]>)].with[inline].as[true]>]>
             - define Footer "<map.with[text].as[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>"
             - define Embed_Maps <[Embed_Maps].include[<map.with[footer].as[<[Footer]>]>]>
             
