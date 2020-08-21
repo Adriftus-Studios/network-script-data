@@ -27,7 +27,7 @@ Message_Handler:
     #^- define No_Mention_Message <context.No_Mention_Message.escaped||WebHook>
       - define Message_ID <context.Message_ID||WebHook>
     #^- define Mentions <context.Mentions||WebHook>
-    #^- define Is_Direct <context.Is_Direct>
+      - define Is_Direct <context.Is_Direct>
 
     # % ██ [ DM       Based Scripts          ] ██
       - if <[Is_Direct]>:
