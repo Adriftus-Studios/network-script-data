@@ -30,18 +30,22 @@ Message_Handler:
     #^- define Is_Direct <context.Is_Direct>
 
     # % ██ [ DM       Based Scripts          ] ██
+      - if <[Is_Direct]>:
+        - choose <[Message].before[<&sp>].after[/]>:
+          - case tag parse t:
+            - ~Run Tag_Parser_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Is_Direct]>]>
 
     # % ██ [ @Mention Based Scripts          ] ██
 
     # % ██ [ Command  Based Scripts          ] ██
-      - if <[Message].starts_with[/]>:
+      - else if <[Message].starts_with[/]>:
         - choose <[Message].before[<&sp>].after[/]>:
           - case repository repo git github:
             - ~Run Repository_DCommand def:<[Channel]>
           - case reload:
             - ~Run Reload_Scripts_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case tag parse t:
-            - ~Run Tag_Parser_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
+            - ~Run Tag_Parser_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Is_Direct]>]>
           - case ex execute:
             - ~Run Ex_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case bungee:
