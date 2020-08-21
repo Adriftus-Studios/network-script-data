@@ -3,7 +3,7 @@
 # - MAKE COMMAND DEFINITIONS CONSISTENT BETWEEN COMMANDS. (Definition name, value, usage, etc.)
 # - EXPAND CHAT (UN)MUTE FUNCTION.
 # - Use <context.args.is_empty> instead of `<context.args.first||null> == null`.
-# - Add report commands, that will notify staff and a Discord channel.
+# -> Add report commands, that will notify staff and a Discord channel.
 # - Replace nested foreach loop in mod_get_infractions procedure in mod_infractions.
 # - Split panel scripts up into a folder.
 

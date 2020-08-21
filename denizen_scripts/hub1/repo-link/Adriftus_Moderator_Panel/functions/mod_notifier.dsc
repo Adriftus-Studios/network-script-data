@@ -42,6 +42,20 @@ mod_notify_action:
     - else:
       - run mod_message_staff def:<[message]>
 
+# -- Notify online staff about reports.
+mod_notify_report:
+  type: task
+  debug: true
+  definitions: reporter|uuid|reason|server
+  script:
+    - define reporter <[reporter].as_player.name>
+    - define name <[uuid].as_player.name>
+    - define message "<&6>[<&a><&l><[server]><&6>] <&e><[reporter]> <&a>has reported <&c><[name]> <&a>for <&6><[reason]>."
+    - if <bungee.connected>:
+      - bungeerun <bungee.list_servers> mod_message_staff def:<[message]>
+    - else:
+      - run mod_message_staff def:<[message]>
+
 # -- Notify online staff about unbans.
 mod_notify_unban:
   type: task
