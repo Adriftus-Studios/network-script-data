@@ -20,7 +20,7 @@ Tag_Parser_DCommand:
   # % ██ [ Verify Blacklists           ] ██
     - if <server.has_flag[Discord.Blacklist]> && <server.flag[Discord.Blacklist].contains[<[Author]>]>:
       - if <server.has_flag[Discord.Ratelimit]>:
-        - define User_Ratelimit_Cache <server.flag[Discord.Ratelimit].filter[get[Discord_User]].contains[<[Author]>]>
+        - define User_Ratelimit_Cache <server.flag[Discord.Ratelimit].filter[get[Discord_User].contains[<[Author]>]]>
         - if !<[User_Ratelimit_Cache].is_empty>:
           - if <[User_Ratelimit_Cache].get[Timeout].duration_since[<util.time_now>].in_seconds> != 0:
             - stop
