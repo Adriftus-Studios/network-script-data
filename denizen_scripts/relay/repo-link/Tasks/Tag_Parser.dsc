@@ -66,10 +66,11 @@ Tag_Parser_DCommand:
     #^  - discord id:AdriftusBot message user:<[Author]> "You have been blacklisted from this command for unethical tag parsing. This incident will be reported."
     #^  - flag server Discord.Blacklist:->:<[Author]>
     #^  - discord id:AdriftusBot message channel:746416381112877147 "<&lt>a:weewoo:619323397880676363<&gt> Attention:<discorduser[adriftusbot,194619362223718400].mention> **Warning**: "
-      - discord id:AdriftusBot message channel:746416381112877147 "```ini<n># Parsed on: <[Server]> From user: <[Author].name> (<[Author].id>) for:<n> <[tag]><n>```"
-      #| Potentially add when restricting Channel: :<n><[TagData].unescaped><n>
-      - announce to_console "<&7># <&8>Parsed on: <&6><[Server]><&8> for<&7>: <&6><[tag]> <&8>From user<&8>: <&6><[Author].name> <&e>(<&6><[Author].id><&e>)<&7>"
-      #| Potentially add when restricting Logs: <n> <&3><[TagData].unescaped>
+      - if <[Author]> != <discorduser[adriftusbot,194619362223718400]>:
+        - discord id:AdriftusBot message channel:746416381112877147 "```ini<n># Parsed on: <[Server]> From user: <[Author].name> (<[Author].id>) for:<n> <[tag]><n>```"
+        #| Potentially add when restricting Channel: :<n><[TagData].unescaped><n>
+        - announce to_console "<&7># <&8>Parsed on: <&6><[Server]><&8> for<&7>: <&6><[tag]> <&8>From user<&8>: <&6><[Author].name> <&e>(<&6><[Author].id><&e>)<&7>"
+        #| Potentially add when restricting Logs: <n> <&3><[TagData].unescaped>
     - else:
       - define color Code
       - inject Embedded_Color_Formatting
