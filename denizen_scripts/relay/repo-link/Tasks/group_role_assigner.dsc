@@ -17,11 +17,11 @@ Group_Role_Assigner:
                 - if <[EmojiID]> == 732707020884410558 && <[Action]> == Add:
                     - foreach <[AvailableRoles]> as:Role:
                         - if !<[UserRoles].contains[<[Role]>]>:
-                            - discord id:AdriftusBot add_role user:<[Author].ID> role:<[Role]> group:<[Group]>
+                            - discord id:AdriftusBot add_role user:<[Author]> role:<[Role]> group:<[Group]>
                 - else:
                     - foreach <[AvailableRoles]> as:Role:
                         - if <[UserRoles].contains[<[Role]>]>:
-                            - discord id:AdriftusBot remove_role user:<[Author].ID> role:<[Role]> group:<[Group]>
+                            - discord id:AdriftusBot remove_role user:<[Author]> role:<[Role]> group:<[Group]>
                 - stop
             - case 733087302057984000:
                 - define Role <script.data_key[Emojis.Channels.<[EmojiID]>]>
@@ -34,9 +34,9 @@ Group_Role_Assigner:
     RoleAdjust:
         - Choose <[Action]>:
             - case Add:
-                - discord id:AdriftusBot add_role user:<[Author].ID> role:<[Role]> group:<[Group]>
+                - discord id:AdriftusBot add_role user:<[Author]> role:<[Role]> group:<[Group]>
             - case Remove:
-                - discord id:AdriftusBot remove_role user:<[Author].ID> role:<[Role]> group:<[Group]>
+                - discord id:AdriftusBot remove_role user:<[Author]> role:<[Role]> group:<[Group]>
             - case Spam:
                 - stop
 

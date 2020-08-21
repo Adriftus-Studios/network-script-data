@@ -22,7 +22,7 @@ Tag_Parser_DCommand:
       - if <server.has_flag[Discord.Ratelimit]>:
         - define User_Ratelimit_Cache <server.flag[Discord.Ratelimit].filter[get[Discord_User].contains[<[Author]>]]>
         - if !<[User_Ratelimit_Cache].is_empty>:
-          - if <[User_Ratelimit_Cache].get[Timeout].duration_since[<util.time_now>].in_seconds> != 0:
+          - if <[User_Ratelimit_Cache].first.get[Timeout].duration_since[<util.time_now>].in_seconds> != 0:
             - stop
           - flag server Discord.Ratelimit:<-:<[User_Ratelimit_Cache]>
       - flag server Discord.Ratelimit:->:<map.with[Discord_User].as[<[Author]>].with[Timeout].as[<util.time_now.add[5m]>]>
