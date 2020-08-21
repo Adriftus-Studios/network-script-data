@@ -4,7 +4,7 @@ mod_report_command:
   name: report
   description: Report a player for chat & in-game behaviour.
   usage: /report [username] [reason]
-  tab completions:
+  tab complete:
     - define players <server.online_players.parse[name].exclude[<player.name>]>
     - if <context.args.is_empty>:
       - determine <[players]>
@@ -28,3 +28,20 @@ mod_report_command:
     - else:
       - narrate "<&c>Invalid player name entered."
       - narrate "<&c>Use /report [username] [reason]."
+
+mod_bugreport_command:
+  type: command
+  debug: true
+  name: bugreport
+  description: Report a bug to staff members.
+  usage: /bugreport [username] [reason]
+  script:
+    - if <context.args.is_empty>:
+      - narrate "<&c>Adriftus Bug Reporter"
+      - narrate "<&6>/bugreport [reason]"
+    - else:
+      - define reason <context.args.get[1].to[<context.args.size>].space_separated>
+      - run mod_notify_bugreport def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
+      # -- TODO: Send a webhook embed message to the bug reports channel in the public Discord server.
+      # -- >>>>: A webhook integration has to be set up for this to work.
+      - narrate "<&e>You have successfully reported a bug: <[reason]>."
