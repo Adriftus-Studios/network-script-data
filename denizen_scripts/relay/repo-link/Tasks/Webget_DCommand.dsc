@@ -22,7 +22,7 @@ Webget_DCommand:
     - define Reference_URL https://discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
 
   # % ██ [ Verify Arguments                        ] ██
-    - if <[Args].is_empty> || <[Args].size> > 9:
+    - if <[Args].is_empty> || <[Args].size> > 12:
       - stop
 
   # % ██ [ Check for Help Argument                 ] ██
@@ -31,8 +31,33 @@ Webget_DCommand:
       - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
       - stop
 
-  # % ██ [ Check for Queue Management Arguments    ] ██
-    - if <[Args].size> == 2 && <list[cancel|-cancel].contains[<[Args.first]>]>:
+  # % ██ [ Check for Queue List                    ] ██
+    - if <[Args].first> == list:
+      - if <[Args].size> > 1:
+        - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[title].as[Error: `Invalid Usage`].with[description].as[The `List` argument only accepts this syntax:`/webget list`<&nl>Refer to `/webget help` for command help.]>]>"
+        - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
+        - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
+        - stop
+      - define Queues <queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>]>
+      - define Fallback_URL https<&co>//discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
+      - define color Code
+      - inject Embedded_Color_Formatting
+      - if <[Queues].is_empty>:
+        - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[title].as[Error: `No Active Queues.`]>]>"
+      - else:
+        - define QueueData "<[Queues].parse_tag[<&lb>`<&lb>Reference<&rb>`<&rb>(<[Parse_Value].definition[Reference_URL]||<[Fallback_URL]>>): `<[Parse_Value].definition[URL]||(Invalid URL)>`].separated_by[<&nl>]>"
+        - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[title].as[Webget Queues Cleared].with[description].as[Webget queues forcibly closed: `<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>` queue's in process:<&nl><[QueueData]>]>]>"
+      - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
+      - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
+      - stop
+
+  # % ██ [ Check for Queue Remove Arguments         ] ██
+    - if <list[cancel|-cancel|remove|-remove].contains[<[Args.first]>]>:
+      - if <[Args].size> != 2:
+        - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[title].as[Error: `Invalid Usage`].with[description].as[The `Cancel` argument only accepts this syntax:<&nl>`/webget (cancel|-cancel|remove|-remove) (Queue)`<&nl>Refer to `/webget help` for command help.]>]>"
+        - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
+        - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
+        - stop
       - define Queues <queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>]>
       - define Fallback_URL https<&co>//discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
       - if <[Queues].parse[ID].contains[<[Args].get[2]>]> && <queue.exists[<[Args].get[2]>]>:
@@ -53,7 +78,13 @@ Webget_DCommand:
       - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
       - stop
     
+  # % ██ [ Check for Queue Clear Arguments         ] ██
     - if <list[clear|-clear|cancel|-cancel].contains[<[Args].first>]>:
+      - if <[Args].size> == 1 || <[Args].get[2]> != All:
+        - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[title].as[Error: `Invalid Usage`].with[description].as[The `Cancel` argument only accepts this syntax:<&nl>`/webget (cancel|-cancel|remove|-remove) (Queue)`<&nl>Refer to `/webget help` for command help.]>]>"
+        - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
+        - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
+        - stop
       - define Queues <queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>]>
       - define Fallback_URL https<&co>//discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
       - define Color Red
@@ -129,7 +160,7 @@ Webget_DCommand:
       - ~webget <[URL]> headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
   # % ██ [ Listener Flags                          ] ██
-    - if <[Args].contains_any[-f|-failed]>:
+    - if <[Args].contains_any[-f|-fail|-failed]>:
       - define Entry_Results "<[Entry_Results].include[<&nl>**Failed Status**: `<entry[Response].failed||Invalid Save Entry>`]>"
 
     - if <[Args].contains_any[-s|-status]>:
