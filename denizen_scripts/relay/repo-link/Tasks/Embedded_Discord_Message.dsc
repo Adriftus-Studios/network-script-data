@@ -49,7 +49,7 @@ Embedded_Discord_Message_New:
 
 Embedded_Webhook:
     type: task
-    debug: true
+    debug: false
     definitions: Channel|Data
     script:
         - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>

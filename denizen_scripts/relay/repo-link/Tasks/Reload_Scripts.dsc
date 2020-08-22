@@ -11,7 +11,6 @@ Reload_Scripts_DCommand:
     - Developer
   definitions: Message|Channel|Author|Group
   Context: Color
-  speed: 0
   script:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject Role_Verification
@@ -36,7 +35,6 @@ Reload_Scripts_Queue:
   type: task
   version: 1.2
   definitions: Channel|Definitions
-  speed: 0
   script:
   # % ██ [ Inject Dependencies           ] ██
     - inject Definition_Registry

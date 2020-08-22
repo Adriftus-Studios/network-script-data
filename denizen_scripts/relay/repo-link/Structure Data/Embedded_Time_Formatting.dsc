@@ -1,7 +1,6 @@
 Embedded_Time_Formatting:
     type: task
     debug: false
-    speed: 0
     script:
         #- define Hour <util.date.time.hour.add[4].pad_left[2].with[0]>
         #- if <[Hour]> < 24:

@@ -3,7 +3,6 @@ Embedded_Error_Response:
   definitions: Message|Channel|Author|Group
   debug: false
   Context: Color
-  speed: 0
   script:
     - define Description "Command: `/Reload` | Reloads a server's scripts."
     - define Syntax "/Reload <&lt>Server<&gt>/All"

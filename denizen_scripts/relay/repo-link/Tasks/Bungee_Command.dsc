@@ -11,8 +11,6 @@ Bungee_DCommand:
         - Developer
     definitions: Message|Channel|Author|Group
     debug: false
-    ContBungeet: Color
-    speed: 0
     script:
 # - ██ [ Clean Definitions & Inject Dependencies ] ██
         - define Message <[Message].unescaped>

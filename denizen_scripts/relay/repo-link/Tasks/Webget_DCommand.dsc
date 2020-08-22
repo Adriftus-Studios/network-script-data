@@ -11,7 +11,7 @@ Webget_DCommand:
     - Lead Developer
     - Developer
   definitions: Message|Channel|Author|Group|MessageID
-  debug: true
+  debug: false
   script:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject Role_Verification

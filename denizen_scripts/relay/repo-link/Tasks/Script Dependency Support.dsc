@@ -10,8 +10,7 @@ Script_Dependency_Support_DCommand:
     - Lead Developer
     - Developer
   definitions: Message|Channel|Author|Group
-  debug: true
-  speed: 0
+  debug: false
   script:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject Role_Verification
