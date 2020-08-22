@@ -86,9 +86,9 @@ Unload_Player_Data:
     - yaml id:player.<[UUID]> unload
 
   # % ██ [ Verify Global Player Data ] ██
-    - if !<server.list.contains[global.player.<[UUID]>]>:
+    - if !<yaml.list.contains[global.player.<[UUID]>]>:
       - define timeout <util.time_now.add[5s]>
-      - waituntil rate:1s <server.list.contains[global.player.<[UUID]>]> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0:
+      - waituntil rate:1s <yaml.list.contains[global.player.<[UUID]>]> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0:
       - if !<yaml.list.contains[global.player.<[UUID]>]>:
         - stop
 
