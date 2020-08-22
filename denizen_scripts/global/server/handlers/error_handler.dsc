@@ -27,7 +27,7 @@ Error_Handler:
         - define Error_Count <yaml[error_handler].read[<context.script.name>].size>
 
     # % ██ [ Cache the Information Needed  ] ██
-      - define Data <[Data].with[Server].as[<bungee.server.to_titlecase>]>
+      - define Data <[Data].with[Server].as[<bungee.server>]>
       - if <context.queue.player||invalid> != invalid:
         - define Player_Map <map.with[Name].as[<queue.player.name>].with[UUID].as[<queue.player.uuid>]>
         - define Data <[Data].with[Player].as[<[Player_Map]>]>
