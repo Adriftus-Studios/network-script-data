@@ -11,7 +11,8 @@ web_handler:
     on get request:
       - if <context.request||invalid> == favicon.ico:
         - stop
-      - inject Web_Debug
+    #^- inject Web_Debug
+      - announce to_console "<&c>--- get request ----------------------------------------------------------"
       - inject Web_Debug.Get_Response
 
       - choose <context.request>:
@@ -29,7 +30,8 @@ web_handler:
           - define Data <[Data].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
 
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
-        #^- inject Web_Debug.Webget_Response
+          - announce to_console "<&c>--- Token Exchange ----------------------------------------------------------"
+          - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
             - stop
           - flag server Test.GitHub.TokenExchange:<util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
@@ -43,7 +45,8 @@ web_handler:
         # % ██ [ Obtain User Info                ] ██
           - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user Headers:<[Headers]> save:response
-        #^- inject Web_Debug.Webget_Response
+          - announce to_console "<&c>--- Obtain User Info ----------------------------------------------------------"
+          - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
             - stop
           - flag server Test.GitHub.ObtainUserData:<util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
@@ -58,7 +61,8 @@ web_handler:
         # % ██ [ Obtain User Repository Data     ] ██
           - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user/repos Headers:<[Headers]> save:response
-        #^- inject Web_Debug.Webget_Response
+          - announce to_console "<&c>--- Obtain User Repo Data ----------------------------------------------------------"
+          - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
             - stop
           - flag server Test.GitHub.ObtainUserRepoData:<util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
@@ -71,7 +75,8 @@ web_handler:
           - if <[Login]||invalid> != Invalid && !<[Repositories].contains[<[Main_Repo]>]>:
             - announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
             - ~webget https://api.github.com/repos/<[From_Repo]>/forks Headers:<[Headers]> method:POST save:response
-        #^  - inject Web_Debug.Webget_Response
+            - announce to_console "<&c>--- Manage Fork ----------------------------------------------------------"
+            - inject Web_Debug.Webget_Response
             - if <entry[response].failed>:
               - stop
           - else:
@@ -79,14 +84,16 @@ web_handler:
 
           # % ██ [ Obtain Branch Information     ] ██
           - ~webget https://api.github.com/repos/<[Main_Repo]>/branches headers:<[Headers]> save:response method:GET
-        #^- inject Web_Debug.Webget_Response
+          - announce to_console "<&c>--- Obtain Branch Information ----------------------------------------------------------"
+          - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
             - stop
           - announce to_console '<&3>Branches<&6>: <&3><util.parse_yaml[{"Data":<entry[Response].result>}].get[Data].parse_tag[<[Parse_Value].get[name]>]>'
 
           # % ██ [ Obtain Webhook Information    ] ██
           - ~webget https://api.github.com/repos/<[Main_Repo]>/hooks headers:<[Headers]> save:response method:GET
-        #^- inject Web_Debug.Webget_Response
+          - announce to_console "<&c>--- Obtain Webhook Information ----------------------------------------------------------"
+          - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
             - stop
           - announce to_console '<&3>Webhooks<&6>: <&3><util.parse_yaml[{"Data":<entry[Response].result>}].get[Data].parse_tag[<[Parse_Value].get[name]>]>'
@@ -102,7 +109,8 @@ web_handler:
             - define Data '{"config": {"url": "http://76.119.243.194:25580/github/<[Main_Repo]>","content_type": "json"}}'
             - announce to_console "<&4>Connecting: https://api.github.com/repos/<[Main_Repo]>/hooks with a hook to: http://76.119.243.194:25580/github/<[Main_Repo]>"
             - ~webget https://api.github.com/repos/<[Main_Repo]>/hooks Headers:<[Headers]> method:POST data:<[Data]> save:response
-        #^  - inject Web_Debug.Webget_Response
+            - announce to_console "<&c>--- Create Webhook ----------------------------------------------------------"
+            - inject Web_Debug.Webget_Response
         #| Notable Error: Exists already: {"message":"Validation Failed","errors":[{"resource":"Hook","code":"custom","message":"Hook already exists on this repository"}],"documentation_url":"https://docs.github.com/rest/reference/repos#create-a-repository-webhook"}
         #| occurs when the webhook exists already
           
@@ -127,6 +135,7 @@ web_handler:
           - define Data <[Data].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
 
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
+          - announce to_console "<&c>--- Token Exchange ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
 
         # % ██ [ Save Access Token Response Data ] ██
@@ -140,6 +149,7 @@ web_handler:
           - define Headers <[Headers].include[<yaml[oAuth].parsed_key[Discord.Client_Credentials.Headers]>]>
 
           - ~webget <[URL]> headers:<[Headers]> save:response
+          - announce to_console "<&c>--- Obtain User Info ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
 
         # % ██ [ Save User Data                  ] ██
@@ -151,6 +161,7 @@ web_handler:
         # % ██ [ Obtain User Connections         ] ██
           - define URL <yaml[oAuth].read[URL_Scopes.Discord.Connections]>
           - ~webget <[URL]> headers:<[Headers]> save:response
+          - announce to_console "<&c>--- Obtain User Connections ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
 
           - define User_Data <util.parse_yaml[{"Data":<entry[response].result>}].get[Data]>
@@ -198,6 +209,7 @@ web_handler:
         - wait 1t
         - reload
       - else:
+        - announce to_console "<&c>--- post request ----------------------------------------------------------"
         - inject Web_Debug.Post_Request
         - announce to_console "Attempted request from <[Domain]>"
 
