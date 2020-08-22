@@ -1,3 +1,4 @@
+# -- /report - Player Reporter
 mod_report_command:
   type: command
   debug: true
@@ -19,7 +20,8 @@ mod_report_command:
       - if <[target]> != <player>:
         - if <context.args.get[2]||null> != null:
           - define reason <context.args.get[2].to[<context.args.size>].space_separated>
-          - run mod_notify_report def:<list[<player>|<[target]>].include_single[<[reason]>].include[<bungee.server||Server>]>
+          - run mod_notify_report def:<list[<player>|<[target].uuid>].include_single[<[reason]>].include[<bungee.server||Server>]>
+          - run mod_message_discord_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>|<[target]>]>
           - narrate "<&e>You have successfully reported <[target].name> for <[reason]>."
         - else:
           - narrate "<&c>A reason must be provided in order to report this player."
@@ -29,6 +31,7 @@ mod_report_command:
       - narrate "<&c>Invalid player name entered."
       - narrate "<&c>Use /report [username] [reason]."
 
+# -- /bugreport - Bug Reporter
 mod_bugreport_command:
   type: command
   debug: true
@@ -42,6 +45,51 @@ mod_bugreport_command:
     - else:
       - define reason <context.args.get[1].to[<context.args.size>].space_separated>
       - run mod_notify_bugreport def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
-      # -- TODO: Send a webhook embed message to the bug reports channel in the public Discord server.
-      # -- >>>>: A webhook integration has to be set up for this to work.
+      - run mod_message_discord_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
       - narrate "<&e>You have successfully reported a bug: <[reason]>."
+
+mod_message_discord_report:
+  type: task
+  debug: false
+  definitions: reporter|reason|server|player
+  script:
+    - define reporter <[reporter].as_player.name>
+
+    - if <[player]||null> == null:
+      # -- Messages #🐛bug-reports on the Adriftus server. (601677205445279744/697206135421141152).
+      - define channel 697206135421141152
+      - define webhook_username <&lb><[server]><&rb><&sp>Bug<&sp>Report
+      - define title User<&co><&sp><[reporter]>
+      - define title_icon_url https://minotar.net/helm/<[reporter]>
+      - define author <map.with[name].as[<[title]>].with[icon_url].as[<[title_icon_url]>]>
+    - else:
+      - define player <[player].as_player.name>
+      # -- Messages #action-log on the Adriftus Staff server. (626078288556851230/715731482978812014).
+      - define channel 715731482978812014
+      - define webhook_username <&lb><[server]><&rb><&sp>Player<&sp>Report
+      - define title User<&co><&sp><[player]>
+      - define title_icon_url https://minotar.net/helm/<[player]>
+      - define author <map.with[name].as[<[title]>].with[icon_url].as[<[title_icon_url]>]>
+
+    - define webhook_icon_url https://img.icons8.com/nolan/64/inspection.png
+    - define embeds <list>
+
+    - define fields <list>
+    - define color 8781824
+
+    - define field_name Reason<&co>
+    - define field_value <[reason]>
+    - define field_inline false
+    - define fields:|:<map.with[name].as[<[field_name]>].with[value].as[<[field_value]>].with[inline].as[<[field_inline]>]>
+
+    - define footer_text Reported<&sp>by<&co><&sp><[reporter]>
+    - define footer_icon_url https://minotar.net/helm/<[reporter]>
+    - define footer <map.with[text].as[<[footer_text]>].with[icon_url].as[<[footer_icon_url]>]>
+
+    - define timestamp <util.time_now.format[yyyy-MM-dd]>T<util.time_now.format[HH:mm:ss.SS]>Z
+
+    - define embeds <[embeds].include[<map.with[color].as[<[color]>].with[fields].as[<[fields]>].with[author].as[<[author]>].with[footer].as[<[footer]>].with[timestamp].as[<[timestamp]>]>]>
+
+    - define data <map.with[username].as[<[webhook_username]>].with[avatar_url].as[<[webhook_icon_url]>].with[embeds].as[<[embeds]>].to_json>
+    - define context <list[<[channel]>].include[<[data]>]>
+    - bungeerun relay embedded_discord_message_new def:<[context]>
