@@ -11,7 +11,6 @@ web_handler:
     on get request:
       - if <context.request||invalid> == favicon.ico:
         - stop
-    #^- inject Web_Debug
       - announce to_console "<&c>--- get request ----------------------------------------------------------"
       - inject Web_Debug.Get_Response
 
@@ -124,6 +123,8 @@ web_handler:
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
         
           - if !<proc[discord_oauth_validate_state].context[<[state]>]>:
+            # | this should be replaced with a confirmation that they have already linked
+            - determine passively FILE:../../../../web/pages/discord_linked.html
             - stop
           - run discord_oauth_remove_state def:<[state]>
           - determine passively FILE:../../../../web/pages/discord_linked.html
