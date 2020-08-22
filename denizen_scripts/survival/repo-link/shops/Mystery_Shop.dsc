@@ -56,7 +56,7 @@ store_hub_mysteryShop_boxes:
 
 store_hub_mysteryShop_boxes_inventory:
     type: inventory
-    debug: true
+    debug: false
     size: 45
     inventory: chest
     title: <&a>Buying <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.

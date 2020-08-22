@@ -1,7 +1,7 @@
 #Listens for when players right click on a cauldron
 disposal_inventory_listener:
   type: world
-  debug: true
+  debug: false
   blacklist: water_bucket|glass_bottle|potion
   events:
     on player right clicks cauldron:

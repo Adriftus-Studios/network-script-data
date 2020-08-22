@@ -17,7 +17,7 @@ click_on_horse_assignment:
 # Interaction handler
 horse_trainer_interact_handler:
   type: interact
-  debug: true
+  debug: false
   steps:
     1:
       Click trigger:
