@@ -52,7 +52,7 @@ RFood_DCommand:
     - inject Embedded_Color_Formatting
     - define Author <map.with[name].as[<[Author].name>].with[icon_url].as[<[UserPFP]>]>
     - define Embeds <list[<map.with[color].as[<[Color]>].with[description].as[<[Message]>].with[author].as[<[Author]>]>]>
-    - define Data <map.with[username].as[NoteHook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[embeds].as[<[Embeds]>].to_json>
+    - define Data <map.with[username].as[Food<&sp>Support].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>
 
     # normal webget
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
