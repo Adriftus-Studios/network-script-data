@@ -351,5 +351,5 @@ IcecapadePreChunk:
             - announce to_console "<[a]>/<[loops]> rows loaded!"
         - announce to_console "<&3>[PreChunk] Generation finished in <queue.time_ran.formatted>! Have a good day!"
     - else:
-        - narrate "<&3>[PreChunk] Usage: <&7>/prechunk [size] [world] <&nl><&3>The size is measured in chunks. A size of 64 would be a map with 128x128 Chunks. (2048x2048 blocks)."
+        - narrate "<&3>[PreChunk] Usage: <&7>/prechunk [size] [world] <n><&3>The size is measured in chunks. A size of 64 would be a map with 128x128 Chunks. (2048x2048 blocks)."
 
