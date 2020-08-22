@@ -1,4 +1,3 @@
-# -- Move to mod_functions.dsc, later.
 mod_message_discord:
   type: task
   debug: false
