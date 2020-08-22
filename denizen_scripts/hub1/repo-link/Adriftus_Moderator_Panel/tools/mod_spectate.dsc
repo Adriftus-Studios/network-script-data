@@ -7,7 +7,7 @@ mod_spectate_command:
     - spectate
   description: Moderator spectate
   usage: /spec (username)
-  tab completions:
+  tab complete:
     - define Blacklist <player||null>
     - inject Online_Player_Tabcomplete
     # 1: <server.online_players.parse[name].exclude[<player.name>]>
