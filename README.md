@@ -105,9 +105,6 @@
 - [resource_packs]() | :x: gitignored
 
 - [scriptdata](scriptdata) | 
-    - [chat](scriptdata/chat) | Global chat data
-	- [discord]() | :x: gitignored
-  - [twitch]() | :x: gitignored
 	
 - [system_scripts](system_scripts) | Shell, Bash, Batch and System Script Directory
 	- bash
