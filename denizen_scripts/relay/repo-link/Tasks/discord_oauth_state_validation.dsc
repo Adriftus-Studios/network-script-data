@@ -1,11 +1,13 @@
 authorize_discord_connection:
   type: task
+  debug: false
   definitions: state
   script:
     - flag server <[state]>
 
 manage_discord_oauth_records:
   type: world
+  debug: false
   events:
     on server start:
       - if <server.has_file[data/discord_oauth.yml]>:
@@ -16,6 +18,7 @@ manage_discord_oauth_records:
 
 discord_oauth_cleanup:
   type: task
+  debug: false
   script:
     - if <yaml[discord_oauth].contains[accepted_states]>:
       - foreach <yaml[discord_oauth].list_keys[accepted_states]>:
@@ -24,6 +27,7 @@ discord_oauth_cleanup:
 
 discord_oauth_remove_state:
   type: task
+  debug: false
   definitions: state
   script:
       - yaml id:discord_oauth set accepted_states.<[state]>:!
@@ -31,6 +35,7 @@ discord_oauth_remove_state:
 
 discord_oauth_add_state:
   type: task
+  debug: false
   definitions: state
   script:
       - yaml id:discord_oauth set accepted_states.<[state]>.time:<util.time_now.add[5m].epoch_millis>
@@ -38,6 +43,7 @@ discord_oauth_add_state:
 
 discord_oauth_validate_state:
   type: procedure
+  debug: false
   definitions: state
   script:
     - if <yaml[discord_oauth].contains[accepted_states.<[state]>]>:
@@ -46,6 +52,7 @@ discord_oauth_validate_state:
 
 discord_oauth_events:
   type: world
+  debug: false
   events:
     on delta time minutely:
       - run discord_oauth_cleanup
