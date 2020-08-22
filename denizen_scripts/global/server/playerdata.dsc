@@ -83,7 +83,7 @@ Unload_Player_Data:
     - define PlayerMap <map.with[Player].as[<[Player]>].with[UUID].as[<[UUID]>].with[Server].as[<bungee.server>].with[Name].as[<[Name]>]>
 
   # % ██ [ Unload Server Player Data ] ██
-    - waituntil rate:1s <yaml.list.contains[player.<[UUID]>]> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0:
+    - waituntil rate:1s <yaml.list.contains[player.<[UUID]>]> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0
     - if <yaml.list.contains[player.<[UUID]>]>:
       - ~yaml id:player.<[UUID]> savefile:data/players/<[UUID]>.yml
       - yaml id:player.<[UUID]> unload
@@ -91,7 +91,7 @@ Unload_Player_Data:
   # % ██ [ Verify Global Player Data ] ██
     - if !<yaml.list.contains[global.player.<[UUID]>]>:
       - define timeout <util.time_now.add[5s]>
-      - waituntil rate:1s <yaml.list.contains[global.player.<[UUID]>]> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0:
+      - waituntil rate:1s <yaml.list.contains[global.player.<[UUID]>]> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0
       - if !<yaml.list.contains[global.player.<[UUID]>]>:
         - stop
 
