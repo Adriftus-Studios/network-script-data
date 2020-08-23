@@ -36,7 +36,7 @@ BehrEdit_Command:
                 - foreach <script.list_keys[Commands]> as:Command:
                     - define D <script.data_key[Commands.<[Command]>]>
                     - define Text <&6>/<&e><[Command]>
-                    - define Hover "<&2>S<&a>hift<&e>-<&2>C<&a>lick <&2>t<&a>o <&2>I<&a>nsert<&e>:<&nl><[Text]>"
+                    - define Hover "<&2>S<&a>hift<&e>-<&2>C<&a>lick <&2>t<&a>o <&2>I<&a>nsert<&e>:<n><[Text]>"
                     - define Insert /<[Command]><&sp>
                     - define C <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
                     - narrate "<&8><&M>+-<&l>}<&6>/<&e><[C]> <&b>| <&3><[D]>"
