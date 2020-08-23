@@ -193,11 +193,57 @@ web_handler:
       - define Domain <context.address>
       - if <[Domain].starts_with[<script.data_key[Domains.Github]>]>:
         - define Map <util.parse_yaml[{"Data":<context.query>}].get[Data]>
-        - if <[Map].get[ref]> != refs/heads/master && <[Map].get[repository].get[full_name]> != AuroraInteractive/network-script-data:
-          - stop
-
         - define Request <context.request.after[github/]>
         - define Script ../network-script-data/system_scripts/github/git-pull
+
+        - flag server testindex:++
+        - yaml id:testindex<server.flag[testindex]> create
+        - yaml id:testindex<server.flag[testindex]> set data:<[Map]>
+        - yaml id:testindex<server.flag[testindex]> savefile:testindex<server.flag[testindex]>.yml
+
+        #| ACTION key: The action that was performed.
+        - if <[Map].contains[action]>:
+          #| pull requests can be any of:
+          #| opened|edited|closed|assigned|unassigned|review_requested|review_request_removed|ready_for_review|labeled|unlabeled|synchronize|locked|unlocked|reopened
+          #| If the action is closed and the pull_request.merged key is true, the pull request was merged.
+          #| If the action is closed and the pull_request.merged key is false, the pull request was closed with unmerged commits.
+          - if <[Map].contains[pull_request]>:
+            - if <[Map].get[action]> == opened:
+              - announce to_console "<&a>---- Pull request was created. ---------------------------------------"
+              - stop
+            - else if <[Map].get[action]> == closed && <[Map].get[pull_request].get[merged]> == true:
+              - announce to_console "<&a>---- Pull request was closed with ummerged commits. ------------------"
+              - stop
+            - else if <[Map].get[action]> == closed && <[Map].get[pull_request].get[merged]> == true:
+              - announce to_console "<&a>---- Pull request was merged. ----------------------------------------"
+            #| pull request reviews:
+            - else if <[Map].get[Action]> == submitted:
+              - announce to_console "<&a>---- A pull request review is submitted into a non-pending state. ----"
+              - stop
+            - else if <[Map].get[Action]> == edited:
+              - announce to_console "<&a>---- The body of a review has been edited. ---------------------------"
+              - stop
+            - else if <[Map].get[Action]> == dismissed:
+              - announce to_console "<&a>---- A review has been dismissed. ------------------------------------"
+              - stop
+
+          #| Issues:
+          #| opened|edited|deleted|pinned|unpinned|closed|reopened|assigned|unassigned|labeled|unlabeled|locked|unlocked|transferred|milestoned|demilestoned.
+            - else if <[Map].contains[issue]>:
+              - choose <[Map].get[action]>:
+                - case opened:
+                  - announce to_console "<&a>---- New issued was created. -------------------------------------"
+                - case closed:
+                  - announce to_console "<&a>---- New issued was closed. --------------------------------------"
+              - stop
+
+          - else if <[Map].contains[ref|ref_type]> && <[Map].get[ref_type]> == branch:
+            - if <[Map].contains[master_branch]>:
+              - announce to_console "<&a>---- New branch was created. -----------------------------------------"
+            - else:
+              - announce to_console "<&a>---- Branch was deleted. ---------------------------------------------"
+            - stop
+
         - shell <[Script]> <[Request]>
         - define Hook <script[DDTBCTY].data_key[WebHooks.650016499502940170.hook]>
         - define data <yaml[webhook_template_git-pull].to_json>
@@ -243,6 +289,7 @@ Web_Debug:
     - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>result<&6><&gt> <&b>| <&3><entry[response].result||<&c>Invalid> <&b>| <&a>returns the result of the webget. This is null only if webget failed to connect to the url."
     - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>status<&6><&gt> <&b>| <proc[http_status_codes].context[<&3><entry[response].status||<&c>Invalid>]> <&b>| <&a>returns the HTTP status code of the webget. This is null only if webget failed to connect to the url."
     - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>time_ran<&6><&gt> <&b>| <&3><entry[response].time_ran||<&c>Invalid> <&b>| <&a>returns a DurationTag indicating how long the web connection processing took."
+    - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>result_headers<&6><&gt> <&b>| <&3><entry[response].result_headers||<&c>Invalid> <&b>| <&a>returns a MapTag of the headers returned from the webserver. Every value in the result is a list."
     - announce to_console <&3>-----------------------------------------------
   Submit:
     - ~debug record submit save:mylog
