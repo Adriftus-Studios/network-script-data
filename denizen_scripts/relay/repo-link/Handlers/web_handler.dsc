@@ -213,6 +213,7 @@ web_handler:
           #| opened|edited|closed|assigned|unassigned|review_requested|review_request_removed|ready_for_review|labeled|unlabeled|synchronize|locked|unlocked|reopened
           #| If the action is closed and the pull_request.merged key is true, the pull request was merged.
           #| If the action is closed and the pull_request.merged key is false, the pull request was closed with unmerged commits.
+
           - if <[Map].contains[pull_request]>:
             - if <[Map].get[action]> == opened:
               - announce to_console "<&a>---- Pull request was created. ---------------------------------------"
