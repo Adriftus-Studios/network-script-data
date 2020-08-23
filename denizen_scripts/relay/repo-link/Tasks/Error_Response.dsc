@@ -52,7 +52,7 @@ Error_Response_Webhook:
             - define Body_Text "<[Body_Text].include_single[<&gt> **Script Information**<&co><&nl><&nl>Script Name<&co>  `<[Script_Name]>`<&nl><&nl>Script Reference<&co>  <&lb>`<[File_Directory]>`<&rb>(<[File_Link]>)<&nl><&nl>Script Line<&co> <[Script_Line]><&nl><&nl>]>"
         - else:
             - define Title_Text "<&lb>BORKED<&rb> Error on <[Server].to_titlecase>"
-            - define Field_List "<[Field_List].include_single[<map.with[name].as[Note:].with[value].as[Executed via `/ex`].with[inline].as[true]>]>"
+            - define Field_List "<[Field_List].include_single[<map.with[name].as[Note:].with[value].as[`Different Queue Callback`].with[inline].as[true]>]>"
 
     # % ██ [ Verify Player Fields      ] ██
         - if <[Data].keys.contains[Player]>:

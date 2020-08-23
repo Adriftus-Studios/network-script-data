@@ -1,4 +1,4 @@
-Restart_Handler:
+Restart_Handler_BehrCraft:
     type: world
     debug: false
     events:
