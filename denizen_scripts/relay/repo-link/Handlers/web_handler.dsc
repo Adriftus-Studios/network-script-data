@@ -195,6 +195,7 @@ web_handler:
 
     on post request:
       - define Domain <context.address>
+      - inject Web_Debug.Post_Request
       - if <[Domain].starts_with[<script.data_key[Domains.Github]>]>:
         - define Map <util.parse_yaml[{"Data":<context.query>}].get[Data]>
         - define Request <context.request.after[github/]>
@@ -261,7 +262,6 @@ web_handler:
         - reload
       - else:
         - announce to_console "<&c>--- post request ----------------------------------------------------------"
-        - inject Web_Debug.Post_Request
         - announce to_console "Attempted request from <[Domain]>"
 
 Web_Debug:
