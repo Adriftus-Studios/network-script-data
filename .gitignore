@@ -24,6 +24,7 @@ scriptdata/global/bans
 # ██ [ Scriptdata Files           ] ██
 scriptdata/global/Behr_Essentials
 scriptdata/global/discord/token.yml
+scriptdata/global/discord/channels.yml
 scriptdata/global/discord/webhooks.yml
 scriptdata/global/discord/oAuth_Data.yml
 scriptdata/global/players
