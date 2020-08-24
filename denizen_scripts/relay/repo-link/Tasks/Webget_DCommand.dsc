@@ -166,7 +166,7 @@ Webget_DCommand:
     - if <[Args].contains_any[-s|-status]>:
       - define Entry_Results "<[Entry_Results].include[<&nl>**HTTP Status**: <proc[HTTP_Status_Codes].context[<entry[Response].status||Invalid Save Entry>]>]>"
 
-    - if <[Args].contains_any[-r|-result|-results]> && "<entry[Response].result||Invalid Save Entry>" && <entry[Response].result.length> < 2000:
+    - if <[Args].contains_any[-r|-result|-results]> && <entry[Response].result.length> < 2000:
       - define Entry_Results "<[Entry_Results].include[<&nl>**Result Status**: `<entry[Response].result||Invalid Save Entry>`]>"
 
     - if <[Args].contains_any[-t|-time|-timeran|-time-ran]>:
