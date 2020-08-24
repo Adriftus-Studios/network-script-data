@@ -52,7 +52,7 @@ Webget_DCommand:
       - stop
 
   # % ██ [ Check for Queue Remove Arguments         ] ██
-    - if <list[cancel|-cancel|remove|-remove].contains[<[Args.first]>]>:
+    - if <list[cancel|-cancel|remove|-remove].contains[<[Args].first>]>:
       - if <[Args].size> != 2:
         - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[title].as[Error: `Invalid Usage`].with[description].as[The `Cancel` argument only accepts this syntax:<&nl>`/webget (cancel|-cancel|remove|-remove) (Queue)`<&nl>Refer to `/webget help` for command help.]>]>"
         - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
