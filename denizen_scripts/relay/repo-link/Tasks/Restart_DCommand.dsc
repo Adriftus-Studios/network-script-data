@@ -3,7 +3,6 @@ Restart_DCommand:
   PermissionRoles:
   # % ██ [ Staff Roles  ] ██
     - Lead Developer
-    - External Developer
     - Developer
 
   # % ██ [ Public Roles ] ██

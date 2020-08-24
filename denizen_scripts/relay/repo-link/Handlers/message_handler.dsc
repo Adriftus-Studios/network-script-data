@@ -60,6 +60,8 @@ Message_Handler:
             - ~Run Webget_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
           - case food foodget foodgit gitfood getfood wheretoeat whereshouldieat wheredoieat whereeat whereieat whereeat eatwhere randomfood foodrandom:
             - ~Run RFood_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
+          - case Restart:
+            - ~Run Restart_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
 
     # % ██ [ General Plaintext Scripts       ] ██
       - else if <[Message].starts_with[yay]> || <[Message].contains[<&sp>yay<&sp>]>:
