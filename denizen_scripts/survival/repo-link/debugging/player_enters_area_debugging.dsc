@@ -1,5 +1,5 @@
 player_enters_area_debugging:
-    type: task
+    type: data
     debug: false
     definitions: area|cause|to|from|cancelled|event_header|event_name|script|queue
     wrapper:
@@ -23,8 +23,8 @@ player_enters_area_error_handler:
     type: world
     events:
         on script generates error:
-            - if <context.script.name> == player_enters_area_debugging:
+            - if <context.script.name||invalid> == player_enters_area_debugging:
                 - determine cancelled
         on server generates exception:
-            - if <context.script.name> == player_enters_area_debugging:
+            - if <context.script.name||invalid> == player_enters_area_debugging:
                 - determine cancelled
