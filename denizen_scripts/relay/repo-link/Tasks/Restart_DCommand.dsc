@@ -95,5 +95,5 @@ Restart_DCommand:
   # % ██ [ Execute Restart Queues           ] ██
     - foreach <[Servers]> as:Server:
       - define DUUID <util.random.duuid.after[_]>
-      - bungeerun Discord_Server_Restart def:<[DUUID]>|<[Delay]>|<[Args].contains_any[-l|-log|-logs]>|<[Args].contains_any[-c|-conf|-confirmation]>
+      - bungeerun <[Server]> Discord_Server_Restart def:<[DUUID]>|<[Delay]>|<[Args].contains_any[-l|-log|-logs]>|<[Args].contains_any[-c|-conf|-confirmation]>
       - flag server Queue.Restart:->:<map.with[Server].as[<[Server]>].with[Schedule].as[<util.time_now.add[<[Delay]>]>].with[DUUID].as[<[DUUID]>].with[Channel].as[<[Channel]>]>
