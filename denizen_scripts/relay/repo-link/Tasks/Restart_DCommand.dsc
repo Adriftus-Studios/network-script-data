@@ -17,7 +17,7 @@ Restart_DCommand:
     - waituntil rate:1s <bungee.connected>
 
   # % ██ [ Verify Arguments                 ] ██
-    - if <[Args].size> > <bungee.list.size.>:
+    - if <[Args].size> > <bungee.list.size.add[3]>:
       - stop
 
     - else if <[Args].is_empty>:
@@ -35,7 +35,8 @@ Restart_DCommand:
         - else if !<bungee.list_servers.contains[<[Server]>]>:
           - narrate "Server is not online."
           - stop
-        - if <server.has_flag[Queue.Restart]> && <server.flag[Queue.Restart].>
+        - if <server.has_flag[Queue.Restart]>:
+          - narrate "Verify if the flag contains the server, if it's within the schedule period, and if it's already in progress."
 
   # % ██ [ Check for Help Argument          ] ██
     - else if <[Args].first> == Help:
