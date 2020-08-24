@@ -27,7 +27,7 @@ Restart_DCommand:
     - if <[Args].contains_any[all|network]>:
       - define Servers <bungee.list_servers>
     - else:
-      - define Servers <[Args].filter[contains_any[help|cancel|stop|-l|-log|-logs|-c|-conf|-confirmation].not].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>]>]>
+      - define Servers <[Args].filter[contains_any[help|cancel|stop|-l|-log|-logs|-c|-conf|-confirmation].not].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>].not>]>
       - foreach <[Servers]> as:Server:
         - if !<yaml[bungee.config].contains[servers.<[Server]>]>:
           - narrate "Invalid server."
@@ -89,7 +89,7 @@ Restart_DCommand:
     - define Data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define Headers <yaml[Saved_Headers].read[Discord.Webhooks]>
+    - define Headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
   # % ██ [ Execute Restart Queues           ] ██
