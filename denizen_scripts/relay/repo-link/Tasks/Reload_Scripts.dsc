@@ -26,7 +26,22 @@ Reload_Scripts_DCommand:
         - foreach <bungee.list_servers> as:Server:
           - run Reload_Scripts_Queue def:<list[<[Channel]>].include_single[<map.with[Color].as[Code].with[Server].as[<[Server]>]>]>
       - else if !<bungee.list_servers.contains[<[Args].first>]>:
-        - inject Embedded_Error_Response
+        - define Description "Command: `/Reload` | Reloads a server's scripts."
+        - define Syntax "/Reload <&lt>Server<&gt>/All"
+        - define Context <bungee.list_servers.parse[To_Titlecase].include[All].comma_separated>
+        - define Footer "You typed: <[Message]>"
+        - define map <map.with[Color].as[red].with[Description].as[<[Description]>].with[Syntax].as[<[Syntax]>].with[Context].as[<[Context]>].with[Footer].as[<[Footer]>]>
+      #^- run Embedded_Discord_Message def:<list[Command_Error_Support_Syntax_Context1|<[Channel]>].include_single[<[Map]>]>
+        - define Definitions <[Map]>
+        - inject Definition_Registry
+        - inject Embedded_Color_Formatting
+        - inject Embedded_Time_Formatting
+        - if <script[DDTBCTY].list_keys[WebHooks].contains[<[Channel]>]>:
+            - define Token <script[DDTBCTY].data_key[WebHooks.<[Channel]>.Hook]>
+            - define Data <yaml[webhook_template_<[Template]>].to_json.parsed>
+            - ~webget <[Token]> headers:<yaml[Saved_Headers].read[Discord.Webhook_Message]> data:<[Data]> save:test
+            - narrate <entry[test].result>
+        - stop
       - else:
         - define Server <[Args].first>
     - run Reload_Scripts_Queue def:<list[<[Channel]>].include[<map.with[Color].as[Code].with[Server].as[<[Server]>]>]>
