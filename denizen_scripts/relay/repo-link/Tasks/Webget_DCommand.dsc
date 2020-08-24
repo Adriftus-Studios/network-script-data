@@ -112,11 +112,17 @@ Webget_DCommand:
       - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
       - stop
 
-  # % ██ [ Main Arguments                          ] ██
+  # % ██ [ Preliminary Arguments                   ] ██
     - define URL <[Args].first>
     - foreach <list[Data|Headers|Method|Timeout]> as:ArgDef:
       - if !<[Args].filter[starts_with[<[ArgDef]>:]].is_empty>:
         - define <[ArgDef]> <[Args].get[<[Args].find[<[Args].filter[starts_with[<[ArgDef]>:]].first>]>].after[<[ArgDef]>:]>
+
+  # % ██ [ Check for Parsed Argument               ] ██
+    - if <[Args].contains_any[-p|-parse|-parsed]>:
+      - define URL <[URL].replace[<&pc>].with[<&chr[6969]>].parsed.replace[<&chr[6969]>].with[<&pc>]>
+      - if <[Data]||invalid> != invalid:
+        - define Data <[Data].parsed>
 
   # % ██ [ Verify Timeout                          ] ██
     - if <[Timeout]||null> == null:
@@ -164,13 +170,16 @@ Webget_DCommand:
       - define Entry_Results "<[Entry_Results].include[<&nl>**Failed Status**: `<entry[Response].failed||Invalid Save Entry>`]>"
 
     - if <[Args].contains_any[-s|-status]>:
-      - define Entry_Results "<[Entry_Results].include[<&nl>**HTTP Status**: <proc[HTTP_Status_Codes].context[<entry[Response].status||Invalid Save Entry>]>]>"
+      - define Entry_Results "<[Entry_Results].include[<&nl>**HTTP Status**: `<proc[HTTP_Status_Codes].context[<entry[Response].status||Invalid Save Entry>]>`]>"
 
     - if <[Args].contains_any[-r|-result|-results]> && <entry[Response].result.length> < 2000:
-      - define Entry_Results "<[Entry_Results].include[<&nl>**Result Status**: `<entry[Response].result||Invalid Save Entry>`]>"
+      - define Entry_Results "<[Entry_Results].include[<&nl>**Result Status**: `<entry[Response].result||Invalid Save Entry> `]>"
 
     - if <[Args].contains_any[-t|-time|-timeran|-time-ran]>:
       - define Entry_Results "<[Entry_Results].include[<&nl>**Time Ran**: `<entry[Response].time_ran.formatted||Invalid Save Entry>`]>"
+
+    - if <[Args].contains_any[-h|-head|-headers]>:
+      - define Entry_Results "<[Entry_Results].include[<&nl>**Result Headers**: `<entry[Response].result_headers.formatted||Invalid Save Entry>`]>"
 
     - if !<[Args].filter_tag[before[:].contains_any[e:/ext:/extension:/extensions:]].is_empty>:
       - if <[Args].contains_any[-r|-result|-results|-l|-log|-logs]>:
@@ -214,7 +223,7 @@ Webget_DCommand:
       - define File_Location ../../web/webget/
       - define URL http://147.135.7.85:25580/webget?name=<[UUID]><[Extension]>
       - log <entry[Response].result> type:none file:<[File_Location]><[UUID]><[Extension]>
-      - define Entry_Results "<[Entry_Results].include[<&nl>**Log Output**: [`<[UUID]><[Extension]>`](<[URL]>)]>"
+      - define Entry_Results "<[Entry_Results].include[<&nl>**Log Output**: [`[<[UUID]><[Extension]>]`](<[URL]>)]>"
 
   # % ██ [ Determine Color Display                 ] ██
     - if "<[Entry_Results].contains_any_text[Invalid Save Entry|**Warning**:]>":
@@ -226,7 +235,7 @@ Webget_DCommand:
 
   # % ██ [ Return Results                          ] ██
     - inject Embedded_Color_Formatting
-    - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[description].as[Command ran: `/WebGet <[Args].space_separated>`<[Entry_Results].unseparated>]>]>"
+    - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[description].as[**Command ran**: `/WebGet <[Args].space_separated>`<[Entry_Results].unseparated>]>]>"
     - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
 
     - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
