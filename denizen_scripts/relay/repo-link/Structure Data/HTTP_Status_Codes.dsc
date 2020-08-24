@@ -17,7 +17,7 @@ HTTP_Status_Codes:
       - case 5:
         - determine "**`1xx`**` - Server Errors`"
       - default:
-        - determine **`<[Code]>`**
+        - determine **<[Code]>**
   codes:
 # @ ██ [1xx - Informational response   ] ██
     100: "**`100`**` - Continue`"
