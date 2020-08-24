@@ -170,7 +170,7 @@ Webget_DCommand:
       - define Entry_Results "<[Entry_Results].include[<&nl>**Failed Status**: `<entry[Response].failed||Invalid Save Entry>`]>"
 
     - if <[Args].contains_any[-s|-status]>:
-      - define Entry_Results "<[Entry_Results].include[<&nl>**HTTP Status**: `<proc[HTTP_Status_Codes].context[<entry[Response].status||Invalid Save Entry>]>`]>"
+      - define Entry_Results "<[Entry_Results].include[<&nl>**HTTP Status**: <proc[HTTP_Status_Codes].context[<entry[Response].status||Invalid Save Entry>]>]>"
 
     - if <[Args].contains_any[-r|-result|-results]> && <entry[Response].result.length> < 2000:
       - define Entry_Results "<[Entry_Results].include[<&nl>**Result Status**: `<entry[Response].result||Invalid Save Entry> `]>"
