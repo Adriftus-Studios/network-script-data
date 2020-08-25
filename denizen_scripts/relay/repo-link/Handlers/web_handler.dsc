@@ -4,10 +4,34 @@ web_handler:
   Domains:
     Github: 140.82.115
     self: 0:0:0:0:0:0:0:1
+  temp:
+    - yaml id:movetohub create
+    - define Bear <map.with[UUID].as[d82da59b-44fc-4a72-a20d-a7f7ae5ef382]>
+    - define GitHub <map.with[login].as[BehrRiley]>
+    - define GitHub <[GitHub].with[id].as[46008563]>
+    - define GitHub <[GitHub].with[avatar_url].as[https://avatars3.githubusercontent.com/u/46008563?v=4]>
+    - define GitHub <[GitHub].with[url].as[https://github.com/BehrRiley]>
+    - define Bear <[Bear].with[GitHub].as[<[GitHub]>]>
+
+    - define Discord <map.with[id].as[194619362223718400]>
+    - define Discord <[Discord].with[username].as[Behr]>
+    - define Discord <[Discord].with[avatar].as[dee7262dd67443aec6bb90920625b2ba]>
+    - define Discord <[Discord].with[discriminator].as[5305]>
+    - define Discord <[Discord].with[mfa_enabled].as[true]>
+    - define Bear <[Bear].with[Discord].as[<[Discord]>]>
+    
+    - define Bear "<[Bear].with[Rank].as[rank: §x§f§f§0§c§0§0T§x§f§f§1§8§0§0h§x§f§f§2§4§0§0e§x§f§f§3§0§0§0 §x§f§f§3§c§0§0A§x§f§f§4§8§0§0n§x§f§f§5§4§0§0a§x§f§f§6§0§0§0r§x§f§f§6§c§0§0c§x§f§f§7§8§0§0h§x§f§f§8§4§0§0i§x§f§f§9§0§0§0c§x§f§f§9§c§0§0 §x§f§f§a§8§0§0A§x§f§f§b§4§0§0d§x§f§f§c§0§0§0m§x§f§f§c§c§0§0i§x§f§f§d§8§0§0n§x§f§f§e§4§0§0i§x§f§f§f§0§0§0s§x§f§f§f§c§0§0t§x§f§6§f§f§0§0r§x§e§a§f§f§0§0a§x§d§e§f§f§0§0t§x§d§2§f§f§0§0o§x§c§6§f§f§0§0r]>"
+    - define Bear "<[Bear].with[Role].as[Lead Developer]>"
+    - yaml id:movetohub set players:->:<[Bear]>
   events:
+    on reload scripts:
+      - if <yaml.list.contains[movetohub]>:
+        - yaml id:movetohub unload
+      - inject locally temp
     on server start:
       - web start port:25580
       - yaml id:oAuth load:data/global/discord/oAuth_Data.yml
+      - inject locally temp
     on get request:
       - if <context.request||invalid> == favicon.ico:
         - stop
@@ -252,10 +276,30 @@ web_handler:
             - stop
 
         - shell <[Script]> <[Request]>
-        - define Hook <script[DDTBCTY].data_key[WebHooks.650016499502940170.hook]>
-        - define data <yaml[webhook_template_git-pull].to_json>
-        - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-        - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+        - if <[Map].contains[ref|commits]>:
+          - define Author_Map <[Map].get[Sender]>
+          - define GitHub_User_ID <[Author_Map].get[ID]>
+          - define Player_Map <yaml[movetohub].filter[get[GitHub].get[id].is[==].to[<[GitHub_User_ID]>]].first>
+          - define Role <[Player_Map].get[Role]>
+  
+          - define User_Name "<[Author_Map].get[login]> - <[Role]>"
+          - define User_Link <[Author_Map].get[html_url]>
+          - define User_Avatar <[Author_Map].get[avatar_url]>
+
+          - define Body_Lines <list>
+          - define Commit_Emoji <discordemoji[adriftusbot,custom,746943945929523252,icons8commitgit641,false].formatted>
+          - foreach <[Map].get[commits]> as:Commit:
+            - define ID <[Commit].get[id]>
+            - define URL <[Commit].get[url]>
+            - define Author <[Commit].get[author].get[username]>
+            - define Message <[Commit].get[message].replace[`].with[']>
+            - define Line "[<[Commit_Emoji]>`[<[ID].substring[1,8]>]`](<[URL]>)`[<[Author]>]` | <[Message]>"
+            - define Body_Lines <[Body_Lines].include_single[<[Line]>]>
+
+        #^- define Hook <script[DDTBCTY].data_key[WebHooks.650016499502940170.hook]>
+        #^- define data
+        #^- define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
+        #^- ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
       - else if <[domain]> == <script.data_key[Domains.self]>:
         - bungee <bungee.list_servers.exclude[<bungee.server>]>:
