@@ -3,10 +3,10 @@
 # with caution, and make sure you know what each option does before configuring.
 # For a reference for any variable inside this file, check out the Spigot wiki at
 # http://www.spigotmc.org/wiki/spigot-configuration/
-# 
+#
 # If you need help with the configuration or have any questions related to Spigot,
 # join us at the IRC or drop by our forums and leave a post.
-# 
+#
 # IRC: #spigot @ irc.spi.gt ( http://www.spigotmc.org/pages/irc/ )
 # Forums: http://www.spigotmc.org/
 
@@ -155,8 +155,8 @@ world-settings:
       sprint-multiplier: 0.1
       other-multiplier: 0.0
     max-tick-time:
-      tile: 50
-      entity: 50
+      tile: 1000
+      entity: 1000
     squid-spawn-range:
       min: 45.0
   worldeditregentempworld:

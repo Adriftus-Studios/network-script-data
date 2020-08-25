@@ -2,10 +2,10 @@
 # As you can see, there's actually not that much to configure without any plugins.
 # For a reference for any variable inside this file, check out the Bukkit Wiki at
 # https://www.spigotmc.org/go/bukkit-yml
-# 
+#
 # If you need help on this file, feel free to join us on irc or leave a message
 # on the forums asking for advice.
-# 
+#
 # IRC: #spigot @ irc.spi.gt
 #    (If this means nothing to you, just go to https://www.spigotmc.org/go/irc )
 # Forums: https://www.spigotmc.org/
@@ -27,8 +27,8 @@ spawn-limits:
   water-ambient: 20
   monsters: 50
   animals: 8
-  water-animals: 5
-  ambient: 5
+  water-animals: 3
+  ambient: 1
 chunk-gc:
   period-in-ticks: 400
 ticks-per:
@@ -36,7 +36,7 @@ ticks-per:
   water-spawns: 4
   ambient-spawns: 4
   animal-spawns: 400
-  monster-spawns: 20
+  monster-spawns: 4
   autosave: 6000
 aliases: now-in-commands.yml
 worlds:

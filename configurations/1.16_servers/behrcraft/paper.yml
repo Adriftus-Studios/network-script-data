@@ -1,14 +1,14 @@
 # This is the main configuration file for Paper.
 # As you can see, there's tons to configure. Some options may impact gameplay, so use
 # with caution, and make sure you know what each option does before configuring.
-# 
+#
 # If you need help with the configuration or have any questions related to Paper,
 # join us in our Discord or IRC channel.
-# 
+#
 # Discord: https://paperdiscord.emc.gs
 # IRC: #paper @ irc.spi.gt ( http://irc.spi.gt/iris/?channels=paper )
-# Website: https://papermc.io/ 
-# Docs: https://paper.readthedocs.org/ 
+# Website: https://papermc.io/
+# Docs: https://paper.readthedocs.org/
 
 allow-perm-block-break-exploits: false
 verbose: false
@@ -80,7 +80,7 @@ world-settings:
     treasure-maps-return-already-discovered: false
     experience-merge-max-value: -1
     prevent-moving-into-unloaded-chunks: true
-    max-auto-save-chunks-per-tick: 8
+    max-auto-save-chunks-per-tick: 6
     falling-block-height-nerf: 0
     tnt-entity-height-nerf: 0
     filter-nbt-data-from-spawn-eggs-and-related: true
@@ -112,7 +112,7 @@ world-settings:
     prevent-tnt-from-moving-in-water: false
     non-player-arrow-despawn-rate: 60
     creative-arrow-despawn-rate: 60
-    armor-stands-tick: true
+    armor-stands-tick: false
     entities-target-with-follow-range: false
     spawner-nerfed-mobs-should-jump: false
     allow-leashing-undead-horse: false
@@ -164,9 +164,11 @@ world-settings:
       refresh-min: 12h
       refresh-max: 2d
     alt-item-despawn-rate:
-      enabled: false
+      enabled: true
       items:
         COBBLESTONE: 300
+        NETHERRACK: 300
+        DIRT: 300
     hopper:
       cooldown-when-full: true
       disable-move-event: true
