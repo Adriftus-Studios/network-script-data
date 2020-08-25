@@ -10,7 +10,7 @@ world-settings:
     arrow-despawn-rate: 300
     trident-despawn-rate: 1200
     hanging-tick-frequency: 100
-    nerf-spawner-mobs: false
+    nerf-spawner-mobs: true
     max-entity-collisions: 8
     merge-radius:
       exp: 6
@@ -50,5 +50,5 @@ world-settings:
       hopper-transfer: 8
       hopper-check: 1
     max-tick-time:
-      tile: 50
-      entity: 50
+      tile: 1000
+      entity: 1000
