@@ -1,23 +1,23 @@
 Bungee_DCommand:
     type: task
     PermissionRoles:
-# - ██ [ Staff Roles  ] ██
-        - Lead Developer
-        - Bungeeternal Developer
-        - Developer
+    # % ██ [ Staff Roles  ] ██
+      - Lead Developer
+      - External Developer
+      - Developer
 
-# - ██ [ Public Roles ] ██
-        - Lead Developer
-        - Developer
+    # % ██ [ Public Roles ] ██
+      - Lead Developer
+      - Developer
     definitions: Message|Channel|Author|Group
     debug: false
     script:
-# - ██ [ Clean Definitions & Inject Dependencies ] ██
+    # % ██ [ Clean Definitions & Inject Dependencies ] ██
         - define Message <[Message].unescaped>
         - inject Role_Verification
         - inject Command_Arg_Registry
         
-# - ██ [ Verify Arguments                        ] ██
+    # % ██ [ Verify Arguments                        ] ██
         - if <[Args].is_empty>:
             - stop
         - define server <[Args].first>
