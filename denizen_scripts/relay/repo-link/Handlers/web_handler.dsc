@@ -30,7 +30,6 @@ web_handler:
       - inject locally temp
     on server start:
       - web start port:25580
-      - yaml id:oAuth load:data/global/discord/oAuth_Data.yml
       - inject locally temp
     on get request:
       - if <context.request||invalid> == favicon.ico:
@@ -224,7 +223,7 @@ web_handler:
       - if <[Domain].starts_with[<script.data_key[Domains.Github]>]>:
         - define Map <util.parse_yaml[{"Data":<context.query>}].get[Data]>
         - define Request <context.request.after[github/]>
-        - define Script ../network-script-data/system_scripts/github/git-pull
+        - define Script <yaml[shell].read[file.git_pull]>
 
         - flag server testindex:++
         - yaml id:testindex<server.flag[testindex]> create
