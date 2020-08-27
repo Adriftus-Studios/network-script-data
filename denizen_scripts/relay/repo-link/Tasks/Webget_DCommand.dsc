@@ -181,9 +181,9 @@ Webget_DCommand:
     - if <[Args].contains_any[-h|-head|-headers]>:
       - define Entry_Results "<[Entry_Results].include[<&nl>**Result Headers**: `<entry[Response].result_headers.formatted||Invalid Save Entry>`]>"
 
-    - if !<[Args].filter_tag[before[:].contains_any[e:|ext:|extension:|extensions:]].is_empty>:
+    - if !<[Args].filter_tag[before[:].contains_any[e|ext|extension|extensions]].is_empty>:
       - if <[Args].contains_any[-r|-result|-results|-l|-log|-logs]>:
-        - define Extension <[Args].filter[before[:].contains_any[e:|ext:|extension:|extensions:]].first.after[:]>
+        - define Extension <[Args].filter[before[:].contains_any[e|ext|extension|extensions]].first.after[:]>
         - if !<[Extension].starts_with[.]>:
           - define Extension .<[Extension]>
         - if <[Extension].contains_any[.exe|.jar|.bin|.csh|.ksh|.out|.run|.js|.com|.cmd|.bat|.sh]>:
