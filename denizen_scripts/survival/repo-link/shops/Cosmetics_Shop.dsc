@@ -57,7 +57,7 @@ store_hub_cosmeticShop_titles:
 store_hub_cosmeticShop_titles_inventory:
   type: inventory
   inventory: chest
-  debug: true
+  debug: false
   title: <&a>Buying <&6>Titles.
   size: 45
   definitions:
@@ -152,7 +152,7 @@ store_hub_cosmeticShop_bowTrails:
 store_hub_cosmeticShop_bowTrails_inventory:
     type: inventory
     inventory: chest
-    debug: true
+    debug: false
     title: <&a>Buying <&6>Bow Trails<&e>.
     size: 45
     definitions:
@@ -233,7 +233,7 @@ bowtrail_voucher_events:
 tempcmd:
   type: command
   name: tmpcmd
-  debug: true
+  debug: false
   permission: tsegdsgdsgdsfg
   script:
     - foreach <yaml[bbt].list_keys[Menu]> as:particleItem:

@@ -155,7 +155,7 @@ Draft_NPC:
     #            # % ██ | Raw Shop:    Meeseeks_Shop_<npc.id>       | ██
     #            - if <context.inventory.notable_name.contains[ManageShop]>:
     #                - define NpcID <context.inventory.notable_name.after_last[_]>
-    #                - define NewContents <context.inventory.list_contents.first.to[36]>
+    #                - define NewContents <context.inventory.list_contents.get[1].to[36]>
     #                - define ShopInventory <inventory[Meeseeks_Shop_<[NpcID]>]>
     #                - inventory clear d:<[ShopInventory]>
     #                - inventory set d:<[ShopInventory]> o:<[NewContents]>
@@ -164,7 +164,7 @@ Draft_NPC:
     #            # % ██ [ Trade Shop: Meeseeks_Trade_<[NpcID]> ] ██
     #            - if <context.inventory.notable_name.contains[Trade]>:
     #                - define NpcID <context.inventory.notable_name.after_last[_]>
-    #                - define NewContents <context.inventory.list_contents.first.to[36]>
+    #                - define NewContents <context.inventory.list_contents.get[1].to[36]>
     #                - define ShopInventory <inventory[Meeseeks_Shop_<[NpcID]>]>
     #                - inventory clear d:<[ShopInventory]>
     #                - note <[NewContents]> as:<[ShopInventory]>

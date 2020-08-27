@@ -14,6 +14,7 @@ system_scripts/system
 
 # ██ [ Server Directories         ] ██
 denizen_scripts/gielinordev
+denizen_scripts/ate_head
 
 # ██ [ Scriptdata Directories     ] ██
 scriptdata/global/twitch
@@ -24,6 +25,7 @@ scriptdata/global/bans
 # ██ [ Scriptdata Files           ] ██
 scriptdata/global/Behr_Essentials
 scriptdata/global/discord/token.yml
+scriptdata/global/discord/channels.yml
 scriptdata/global/discord/webhooks.yml
 scriptdata/global/discord/oAuth_Data.yml
 scriptdata/global/players

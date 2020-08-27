@@ -6,8 +6,8 @@ mod_spectate_command:
   aliases:
     - spectate
   description: Moderator spectate
-  usage: /spec [username]
-  tab completions:
+  usage: /spec (username)
+  tab complete:
     - define Blacklist <player||null>
     - inject Online_Player_Tabcomplete
     # 1: <server.online_players.parse[name].exclude[<player.name>]>

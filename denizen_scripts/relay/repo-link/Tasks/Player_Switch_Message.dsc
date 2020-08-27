@@ -18,5 +18,5 @@ Player_Switch_Message:
         - define Data <[Data].with[embeds].as[<[Embeds]>].to_json>
 
         - define Hook <script[DDTBCTY].data_key[WebHooks.651789860562272266.hook]>
-        - define headers <list[User-Agent/really|Content-Type/application/json]>
+        - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>

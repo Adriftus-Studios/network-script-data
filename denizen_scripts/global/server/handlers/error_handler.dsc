@@ -12,6 +12,11 @@ Error_Handler:
       - if !<bungee.connected> || <context.queue.id||invalid> == invalid || !<list[hub1|behrcraft|survival|relay|xeane].contains[<bungee.server>]>:
         - stop
 
+    # % ██ [ Disable /ex Error Handling     ] ██
+      - if <context.queue.id.starts_with[EXCommand]||false>:
+        - announce to_console "<context.queue.id||false> not pursuing error handler."
+        - determine <&4><context.message>
+
     # % ██ [ Track Errors                  ] ██
       - define data <map>
       - if <context.script||invalid> != invalid:

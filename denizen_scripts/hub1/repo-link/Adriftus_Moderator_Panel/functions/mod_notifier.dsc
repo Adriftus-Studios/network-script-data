@@ -37,7 +37,34 @@ mod_notify_action:
       - define message "<[message]> for <[length].as_duration.formatted>."
     - else:
       - define message <[message]>.
-    - if <bungee.list_servers.size||0> > 1:
+    - if <bungee.connected>:
+      - bungeerun <bungee.list_servers> mod_message_staff def:<[message]>
+    - else:
+      - run mod_message_staff def:<[message]>
+
+# -- Notify online staff about player reports.
+mod_notify_report:
+  type: task
+  debug: true
+  definitions: reporter|uuid|reason|server
+  script:
+    - define reporter <[reporter].as_player.name>
+    - define name <[uuid].as_player.name>
+    - define message "<&6>[<&a><&l><[server]><&6>] <&e><[reporter]> <&a>has reported <&c><[name]> <&a>for <&6><[reason]>."
+    - if <bungee.connected>:
+      - bungeerun <bungee.list_servers> mod_message_staff def:<[message]>
+    - else:
+      - run mod_message_staff def:<[message]>
+
+# -- Notify online staff about reports.
+mod_notify_bugreport:
+  type: task
+  debug: true
+  definitions: reporter|reason|server
+  script:
+    - define reporter <[reporter].as_player.name>
+    - define message "<&2>[<&a><&l><[server]><&2>] <&a><[reporter]> <&e>has reported a bug: <&2><[reason]>."
+    - if <bungee.connected>:
       - bungeerun <bungee.list_servers> mod_message_staff def:<[message]>
     - else:
       - run mod_message_staff def:<[message]>
@@ -50,7 +77,7 @@ mod_notify_unban:
   script:
     - define moderator <[moderator].as_player.name||Server>
     - define message "<&c>[!] <&b><[moderator]> has unbanned <[uuid].as_player.name>, who was <tern[<element[<[global]||null>].is[!=].to[null]>].pass[globally<&sp>].fail[]>banned for <[infraction]>, with the reason: <[reason]>"
-    - if <bungee.list_servers.size||0> > 1:
+    - if <bungee.connected>:
       - bungeerun <bungee.list_servers> mod_message_staff def:<[message]>
     - else:
       - run mod_message_staff def:<[message]>

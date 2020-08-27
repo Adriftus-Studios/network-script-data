@@ -1,0 +1,97 @@
+server_connect_timeout: 500000
+listeners:
+- query_port: 25577
+  motd: |-
+    &6Adriftus &eNetwork &2[1.16.2] &3>> &4Sur&avival!
+    &9Discord &3@ &9discord.Adriftus.com
+  tab_list: SERVER
+  query_enabled: false
+  proxy_protocol: false
+  forced_hosts:
+    helixmc.dh-serv.com: survival
+    play.auroragaming.org: build
+    build.adriftus.org: build
+    play.behrcraft.com: behrcraft
+    please.behrcraft.com: behrcraft
+    dev.behrcraft.com: gielinordev
+    test.adriftus.com: crafted
+  ping_passthrough: false
+  priorities:
+  - survival
+  bind_local_address: true
+  host: 0.0.0.0:25565
+  max_players: 1000
+  tab_size: 60
+  force_default_server: true
+remote_ping_cache: -1
+network_compression_threshold: 256
+permissions:
+  default:
+  - bungeecord.command.server
+  - bungeecord.server.survival
+  - bungeecord.command.list
+  admin:
+  - bungeecord.command.alert
+  - bungeecord.command.end
+  - bungeecord.command.ip
+  - bungeecord.command.reload
+log_pings: true
+server:
+  hub1:
+    motd: PMCbcd28f640343bef953e39632a63ac1b3
+connection_throttle_limit: 20
+prevent_proxy_connections: false
+timeout: 3000000
+player_limit: 1000
+ip_forward: true
+groups:
+  Xeane:
+  - admin
+remote_ping_timeout: 500000
+connection_throttle: 400000
+log_commands: false
+stats: 60b2456c-2947-4d13-969a-173c324a8e41
+online_mode: true
+forge_support: false
+disabled_commands:
+- disabledcommandhere
+servers:
+  relay:
+    motd: Aurora Relay1
+    address: localhost:25575
+    restricted: false
+    show_in_play_menu: false
+  hub1:
+    motd: |-
+      &6Adriftus &eNetwork &2[1.16.2] &3>> &4Sur&avival!
+      &9Discord &3@ &9discord.Adriftus.com
+    address: localhost:25566
+    restricted: false
+    restricted_check: null
+    show_in_play_menu: false
+    material: nether_star
+    display_name: <&a>Hub
+    description: <&e>General gathering place on Adriftus Network
+  survival:
+    motd: |-
+      &6Adriftus &eNetwork &2[1.16.2] &3>> &4Sur&avival!
+      &9Discord &3@ &9discord.Adriftus.com
+    address: localhost:25568
+    restricted: false
+    show_in_play_menu: true
+    material: grass_block
+    display_name: <&b>Survival
+    description: <&e>Aurora's Survival Server
+  behrcraft:
+    motd: |-
+      &eB&ae&ehrCr&aa&eft &b| &6O&enly &6o&ene &6r&eule&b:&r
+      &d&l~ &cC&6o&em&am&bo&dn &cS&6e&en&as&be&d&l ~
+    address: localhost:25572
+    restricted: false
+    restricted_check: null
+    show_in_play_menu: true
+    material: tnt
+    display_name: <&7>B<&e>e<&7>hrCr<&e>a<&7>ft
+    description: |-
+      <&6>S<&e>urvival<&6>, w<&e>ith <&6>a b<&e>it <&6>o<&e>f <&6>A<&e>narchy<&6>.
+      <&6>O<&e>nly <&6>o<&e>ne <&6>r<&e>ule<&b>: <&c>C<&6>o<&e>m<&a>m<&b>o<&d>n <&c>S<&6>e<&e>n<&a>s<&b>e

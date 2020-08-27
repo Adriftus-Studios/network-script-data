@@ -2,6 +2,8 @@ flower_removal_item:
     type: item
     material: wooden_hoe
     display name: <&a>Flower Remover
+    mechanisms:
+        nbt: size/3
 
 flower_removal_cmd:
     type: command

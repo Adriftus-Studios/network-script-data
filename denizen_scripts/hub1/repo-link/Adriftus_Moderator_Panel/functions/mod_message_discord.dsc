@@ -1,4 +1,3 @@
-# -- Move to mod_functions.dsc, later.
 mod_message_discord:
   type: task
   debug: false
@@ -56,7 +55,7 @@ mod_message_discord:
 
     # -- Localhost testing on Adriftus Staff #bot-spam
     #- define hook https://discordapp.com/api/webhooks/713089103276802058/91jFTo9mwSdCvxl9gE6lnG4YJXe9r3ZBfxpk5ZOzxuShcgCsyPqF4IC2TE4R5MaheUh_
-    #- define headers <list[User-Agent/really|Content-Type/application/json]>
+    #- define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     #- ~webget <[hook]> data:<[data]> headers:<[Headers]>
 
 mod_get_incidents_task:

@@ -1,0 +1,84 @@
+name_of_the_embed:
+  type: single
+  content: |-
+    This is the context of a message outside of the embeds - generally only use this for pings; formatting by Discord's mention syntax:
+    `<@user_id>`, `<@!user_id>`, `<@&role_id>`, or `<#channel_id`.
+  embed:
+  - title: This is where the title displays
+    color: 15859456
+    description: |-
+      When making blocks of text, you can avoid long lines of
+      text that would otherwise require text-wrapping by
+      typing a |- at the beginning, such as done here in this
+      description. Line breaks can be manually used using \n
+      or parsing the <n> tag.
+      There are a few basic styles you can take advantage of:
+      *Italics*, by surrounding text in asterisks (\*_text\*) or a single
+      set of underscores (\_text\_);
+      **Bold**, by surrounding text in double asterisks (\*\*text\*\*);
+      __Underline__, by using double underscores (\_\_text\_\_);
+      ~~Strikethrough~~, by using double tildes (\~\~text\~\~);
+      `Code`, by using backticks (\`code\`).
+    url: https://url.for.the.title.com
+    fields:
+    - name: Advanced formatting
+      value: |-
+        Beyond these basic styles, you can also start a blockquote with a right-pointing angle bracket (>):
+        > Hello.
+        Or mark sensitive content behind a spoiler using two pipes (\||):
+        ||This is hidden until clicked||
+        there's also code-blocks you can create within embeds:
+        ```yml
+        my_script:
+          type: task
+          script:
+          - narrate "Hello, <player.name>."
+        ```
+    - name: Using server emoji
+      value: |-
+        While default emoji work like you would expect them to, we use DiscordEmoji objects to
+        format our objects, for example: `<discordemoji[adriftusbot,custom,676335667571326988,discodog,true].formatted>`
+        would format a formatted discodog. or, you can just use <a:discodog:676335667571326988> for an animated emoji;
+        or <:nimsysdog:739972704119029894> for an unanimated emoji. Note that if you parse this, you must escape the tagmarks.
+    author:
+      name: This is the author display text.
+      url: https://url.for.the.author.text.com
+      icon_url: https://url.for.the.author.icon.com
+    footer:
+      text: This is the footer display text.
+      icon_url: https://url.for.the.footer.icon.com
+    timestamp: '2020-08-27T02:50:00.000Z'
+    image:
+      url: https://url.for.the.picture.at.the.bottom.com
+    thumbnail:
+      url: https://url.for.the.picture.at.the.top.right.com
+
+name_of_another_embed:
+  type: paginated
+  embed:
+    constant:
+      title: this will be the same for every page sent as embeds.
+      color: 15859456
+    page:
+      1:
+      - description: |-
+          **Page Control Information**:
+          This would be displayed on the first page. 
+          for good consistency, the set of control arrows with the page numbers:
+          <:left:747195307900796938> `( 1 / 2 )` <:other_left:747195307925831710>
+          is good for displaying the page; and to the right of that, notable page names
+          would be ideal, formatting the present page in bold.
+        fields:
+        - name: Controls
+          value: "<:left:747195307900796938> `( 1 / 2 )` <:other_left:747195307925831710>
+            \ | <:deepdot:748353112602968094> **Page Control Information** | <:dot:748353112607031486> Field Information"
+      2:
+      - description: |-
+          **Field Information**:
+          Fields have two required keys and one optional key. `name` and `value` are required, 
+          and the `inline` key is an optional key that can be specified to arrange fields in pairs of three.
+          be mindful of how information looks; you can get quick easy layouts on sites like [`[DiscoHook]`](https://discohook.org).
+        fields:
+          - name: Controls
+            value: "<:left:747195307900796938> `( 2 / 2 )` <:other_left:747195307925831710>
+              \ | <:dot:748353112607031486> Page Control Information | <:deepdot:748353112602968094> **Field Information**"

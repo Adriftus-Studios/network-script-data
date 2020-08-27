@@ -23,7 +23,8 @@ Suicide_Command:
             - stop
 
     # % ██ [ Kill Self ] ██
-        - while <player.health> > 0:
+        - define Gamemode <player.gamemode>
+        - while ( <player.health> > 0 || <player.is_online> ) && <player.gamemode> == <[Gamemode]>:
             - adjust <player> no_damage_duration:1t
             - hurt <player> 1
             - wait 2t

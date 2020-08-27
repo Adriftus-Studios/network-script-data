@@ -1,0 +1,34 @@
+help:
+  type: single
+  embed:
+  - title: Discord Command | `/restart (args)`
+    color: 15859456
+    description: |-
+      **Description**: Stops the server entirely and then starts it again. Specifying flags can return the startup log, a confirmation or delay the restart.
+      **Command Usage:** `/Restart (Server/All) (flags)`
+      **Misc Args**: `/restart help/list`
+
+      **Available Flags**:
+    fields:
+    - name: "**`(-l|-log)`**"
+      value: 'Returns a link for the startup log after restart. **Note**: These are frequently deleted.'
+      inline: true
+    - name: "**`((w:|wait:|d:|delay:)<DurationTag>)`**"
+      value: Delays the server restart for a specified amount of time.
+      inline: true
+    - name: "**`(-c|-conf| -confirmation)`**"
+      value: Returns confirmation of when the server restart is complete.
+      inline: true
+    - name: "**`(-v/-version)`**"
+      value: Returns the before-and-after version comparison after restart.
+      inline: true
+    - name: "**`(-pl/-plugins)`**"
+      value: Returns the before-and-after plugin comparison after restart.
+      inline: true
+list:
+  type: single
+  embed:
+  - title: Discord Command | `/restart list`
+    color: 15859456
+    description: |-
+      <bungee.list_servers.formatted>

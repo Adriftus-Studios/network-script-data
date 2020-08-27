@@ -51,7 +51,7 @@ Meeseeks_Box:
         - <&7>There<&8>'<&7>s a Meeseeks in here<&8>!
 General_Meeseeks_Handler:
     type: world
-    debug: true
+    debug: false
     events:
         on player places Meeseeks_Box:
             - define Loc <context.location>

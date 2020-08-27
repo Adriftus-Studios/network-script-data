@@ -2,12 +2,12 @@
 chat_send_message:
   type: task
   debug: false
-  definitions: game_channel|name|game_message|server
+  definitions: game_message|game_channel|server|name|display_name
   script:
       - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.channel]>
       - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-      - define Data <map[content/<[game_message].parse_color.strip_color>|username/<[Name]><&sp>[<[Server]>]|avatar_url/https://minotar.net/cube/<[Name]>/100.png].to_json>
-      - define headers <list[User-Agent/Behr|Content-Type/application/json]>
+      - define Data <map[content/<[game_message].parse_color.strip_color>|username/<[display_name]><&sp>[<[Server]>]|avatar_url/https://minotar.net/cube/<[name]>/100.png].to_json>
+      - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
 discord_watcher:
@@ -41,9 +41,9 @@ discord_watcher:
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message].replace[]>
         - define Insert <[Text]>
         - define MessageText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
-        - define Attachments <list[<empty>]>
-        - if <context.attachments||invalid> != invalid:
-          - foreach <context.attachments> as:Attachment:
+        - define Attachments <list>
+        - if !<context.message.attachments.is_empty>:
+          - foreach <context.message.attachments> as:Attachment:
             - define Hover "<&color[#F3FFAD]>Click to Open Link <&color[#26FFC9]>:<&nl><&color[#F3FFAD]><[Attachment]>"
             - define Text <&3>[<&b><&n>Link<&3>]<&r>
             - define Url <[Attachment]>

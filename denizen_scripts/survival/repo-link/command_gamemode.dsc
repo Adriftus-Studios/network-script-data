@@ -1,6 +1,6 @@
 gamemode_creative:
   type: command
-  debug: true
+  debug: false
   gamemode: creative
   name: gmc
   description: Set yourself, or another player to Creative mode.
@@ -13,7 +13,7 @@ gamemode_creative:
 
 gamemode_adventure:
   type: command
-  debug: true
+  debug: false
   gamemode: adventure
   name: gma
   description: Set yourself, or another player to Adventure mode.
@@ -26,7 +26,7 @@ gamemode_adventure:
 
 gamemode_survival:
   type: command
-  debug: true
+  debug: false
   gamemode: survival
   name: gms
   description: Set yourself, or another player to Survival mode.
@@ -39,7 +39,7 @@ gamemode_survival:
 
 gamemode_spectator:
   type: command
-  debug: true
+  debug: false
   gamemode: spectator
   name: gmsp
   description: Set yourself, or another player to Spectator mode.

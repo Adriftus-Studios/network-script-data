@@ -16,7 +16,7 @@ click_on_beekeeper_assignment:
 # Interaction handler
 bee_keeper_interact_handler:
   type: interact
-  debug: true
+  debug: false
   steps:
     1:
       Click trigger:

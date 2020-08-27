@@ -90,17 +90,18 @@ title_inventory_open:
   definitions: page
   debug: false
   script:
+    - stop
     - define page <[page]||1>
     - define inventory <inventory[title_inventory]>
     - define unlocked_tags <yaml[global.player.<player.uuid>].read[titles.unlocked].as_list||<list[Default]>>
     - foreach <[unlocked_tags]> as:tagID:
       - inject build_title_select_item
       - define list:|:<[item]>
-    - give <[list].get[<[page].-[1].*[21].+[1]>].to[<[page].-[1].*[21].+[21]>]> to:<[inventory]>
+    - give <[list].get[<[page].sub[1].mul[21].add[1]>].to[<[page].sub[1].mul[21].add[21]>]> to:<[inventory]>
     - foreach <script[title_inventory].list_keys[custom.mapping]>:
       - choose <[value]>:
         - case next_page:
-          - if <[unlocked_tags].size> > <[page].-[1].*[21].+[21]>:
+          - if <[unlocked_tags].size> > <[page].sub[1].mul[21].add[21]>:
             - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.next_page]> o:<script[title_inventory].parsed_key[definitions.next_page]>
         - case previous_page:
           - if <[page]> > 1:

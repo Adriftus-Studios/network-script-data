@@ -275,7 +275,7 @@ warps_GUI_player_warps_menu_top:
     page_marker: <item[white_stained_glass_pane].with[display_name=<&a>;nbt=page/1]>
   procedural items:
     - define type personal
-    - foreach <server.flag[warp_votes].as_map.to_list.sort_by_number[after[/]].reverse.first.to[9].parse[before[/]]> as:identifier:
+    - foreach <server.flag[warp_votes].as_map.to_list.sort_by_number[after[/]].reverse.get[1].to[9].parse[before[/]]> as:identifier:
       - inject build_warp_item
       - define "list:|:<[item].with[nbt=action/warp;lore=<[item].lore.include[<&e>--------------------|<&b>Shift Left Click<&sp>To<&sp>Toggle<&sp>Vote!|<&a>Shift Right Click<&sp>To<&sp>Favorite]>]>"
     - determine <[list]>
