@@ -33,7 +33,7 @@ array_lookup:
 # - ██ | Usage: <proc[array_lookup_multi].context[Yaml|Parent|Key|Value]>
 # ^ ██ | Yaml: The yaml file we search   | Parent: The key containing a ListTag to search
 # ^ ██ | Key: The mapping value to match | Value: The value searched and returned
-# + ██ | Compare to: <yaml[Yaml].read[Parent].filter_tag[<[filter_value].get[Key].is[==].to[Value]>]>
+# + ██ | Compare to: <yaml[Yaml].read[Parent].filter_tag[<[filter_value].contains_any[Value]>]>
 array_lookup_multi:
     type: procedure
     definitions: yaml|parent|key|value
@@ -42,4 +42,4 @@ array_lookup_multi:
             - determine invalid
         - if !<yaml[<[yaml]>].read[<[parent]>].is_empty>:
             - determine <list>
-        - determine <yaml[<[yaml]>].read[<[parent]>].filter[get[<[key]>].is[==].to[<[value]>]]>
+        - determine <yaml[<[yaml]>].read[<[parent]>].filter[get[<[key]>].contains_any[<[value]>]]>
