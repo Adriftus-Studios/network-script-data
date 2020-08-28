@@ -14,7 +14,7 @@ system_scripts/system
 
 # ██ [ Server Directories         ] ██
 denizen_scripts/gielinordev
-denizen_scripts/ate_head
+denizen_scripts/head
 
 # ██ [ Scriptdata Directories     ] ██
 scriptdata/global/twitch
