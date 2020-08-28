@@ -27,4 +27,4 @@ Discord_Command:
             - define Hover "<proc[Colorize].context[Click Link to link Discord to Minecraft|green]><&nl><proc[Colorize].context[https://discord.com/oauth2/authorize|blue]>"
             - define Text "<proc[Colorize].context[Click Link to link Discord to Minecraft|yellow]>"
             - narrate <proc[MsgURL].context[<[Hover]>|<[Text]>|<[URL]>]>
-            - bungeerun relay discord_oauth_add_state def:<player.uuid>_<[uuid]>
+            - bungeerun relay discord_oauth def:<player.uuid>_<[uuid]>|add

@@ -149,7 +149,7 @@ web_handler:
             # | this should be replaced with a confirmation that they have already linked
             - determine passively FILE:../../../../web/pages/discord_linked.html
             - stop
-          - run discord_oauth_remove_state def:<[state]>
+          - run discord_oauth def:<[state]>|remove
           - determine passively FILE:../../../../web/pages/discord_linked.html
 
         # % ██ [ Token Exchange                  ] ██
