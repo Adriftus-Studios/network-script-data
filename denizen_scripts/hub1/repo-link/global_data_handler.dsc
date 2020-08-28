@@ -41,11 +41,11 @@ global_data_handler:
 
     # % ██ [ Fire Player Login Events ] ██
       - if <[LocalServers].contains[<[Server]>]>:
-        - bungeerun <[Server]> Player_Data_Join_Event def:<[UUID]>|<[Event]>
+        - bungeerun <[Server]> Player_Data_Join_Event def:<[UUID]>|Switched
       - else:
         - yaml id:global.player.<[UUID]> load:data/global/players/<[UUID]>.yml
         - define PlayerData <yaml[global.player.<[UUID]>].read[]>
-        - run External_Player_Data_Join_Event def:<list_single[<[PlayerMap]>].include_single[<[PlayerData]>].include[<[Server]>|<[Event]>]>
+        - run External_Player_Data_Join_Event def:<list_single[<[PlayerMap]>].include_single[<[PlayerData]>].include[<[Server]>|Joined]>
 
     on bungee player leaves network:
     # % ██ [ Cache Player Info ] ██
