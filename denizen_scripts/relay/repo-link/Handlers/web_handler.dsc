@@ -140,12 +140,12 @@ web_handler:
         - case /oAuth/Discord:
         # % ██ [ Cache Data                      ] ██
           - define Query <context.query_map>
-          - if <[Query].contains[error]> && <[Query].get[error]> == acces_denied:
+          - if <[Query].contains[error]> && <[Query].get[error]> == access_denied:
             - announce to_console "<&c>The resource owner or authorization server denied the request"
-            - stop
+            - determine passively CODE:300
+            - determine FILE:../../../../web/redirects/discord_decline.html
           - if !<[Query].contains[code|state]>
-            - announce to_console "<&c>This is likely URL engineered."
-            - stop
+            - determine CODE:406
 
           - define Code <context.query_map.get[code]>
           - define State <context.query_map.get[state]>
@@ -154,9 +154,7 @@ web_handler:
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
         
           - if !<proc[discord_oauth_validate_state].context[<[state]>]>:
-            # | this should be replaced with a confirmation that they have already linked
-            - determine passively FILE:../../../../web/pages/discord_linked.html
-            - stop
+            - determine CODE:406
           - run discord_oauth def:<[state]>|remove
           - determine passively FILE:../../../../web/pages/discord_linked.html
 
