@@ -225,21 +225,25 @@ web_handler:
 
         # % ██ [ FavIcon         ] ██
         - case /favicon.ico:
+          - determine passively CODE:200
           - determine FILE:../../../../web/favicon.ico
 
         # % ██ [ CSS Hosting         ] ██
         - case /css:
           - if <server.has_file[../../../../web/css/<context.query_map.get[name]||invalid>.css]>:
+            - determine passively CODE:200
             - determine FILE:../../../../web/css/<context.query_map.get[name]>.css
 
         # % ██ [ Webpages         ] ██
         - case /page:
           - if <server.has_file[../../../../web/pages/<context.query_map.get[name]||invalid>.html]>:
+            - determine passively CODE:200
             - determine FILE:../../../../web/pages/<context.query_map.get[name]>.html
 
         # % ██ [ Images         ] ██
         - case /image:
           - if <server.has_file[../../../../web/images/<context.query_map.get[name]||invalid>]>:
+            - determine passively CODE:200
             - determine FILE:../../../../web/images/<context.query_map.get[name]>
 
     on post request:
