@@ -7,7 +7,7 @@ global_data_handler:
 
     on bungee player joins network:
     # % ██ [ Cache Player Info ] ██
-    #^- define Name <context.name>
+      - define Name <context.name>
       - define UUID <context.uuid>
       - define GlobalYaml global.player.<[UUID]>
 
@@ -24,20 +24,26 @@ global_data_handler:
 
         - yaml id:<[GlobalYaml]> create
         - yaml id:<[GlobalYaml]> savefile:<[Directory]>
-
+    # % ██ [ Track Player ] ██
+      - yaml id:data_handler set network.names:->:<[Name]>
+      - yaml id:data_handler set network.uuids:->:<[UUID]>
     on bungee player switches to server:
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
       - define Server <context.server>
+      - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
+        - define Old_Server <yaml[data_handler].read[players.<[UUID]>.server]>
       - define PlayerMap <map.with[Name].as[<[Name]>].with[UUID].as[<[UUID]>].with[Server].as[<[Server]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
     # % ██ [ Track Player ] ██
-      - if <proc[array_validate].context[data_handler|players|uuid|<[UUID]>]>:
-        - yaml id:data_Handler set players:<-:<proc[array_lookup].context[data_handler|players|uuid|<[UUID]>]>
-      - yaml id:data_handler set players:->:<[PlayerMap]>
-      - yaml id:data_handler set server.<[Server]>:->:<[UUID]>
+      - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
+        - yaml id:data_handler set servers.<[Old_Server]>:<-:<[UUID]>
+      - yaml id:data_handler set players.<[UUID]>.name:<[name]>
+      - yaml id:data_handler set players.<[UUID]>.server:<[server]>
+      - yaml id:data_handler set servers.<[server]>:->:<[UUID]>
+
 
     # % ██ [ Fire Player Login Events ] ██
       - if <[LocalServers].contains[<[Server]>]>:
@@ -56,9 +62,12 @@ global_data_handler:
       - define PlayerMap <map.with[Name].as[<[Name]>].with[UUID].as[<[UUID]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
-    # % ██ [ Track Player ] ██
-      - yaml id:data_handler set server.<[Server]>:<-:<[UUID]>
-      - yaml id:data_handler set players:<-:<[PlayerMap]>
+    # % ██ [ Remove Player Data ] ██
+      - yaml id:data_handler set players.<[UUID]>:!
+      - yaml id:data_handler set servers.<[server]>:<-:<[UUID]>
+
+      - yaml id:data_handler set network.names:<-:<[Name]>
+      - yaml id:data_handler set network.uuids:<-:<[UUID]>
 
     # % ██ [ Fire Player Quit Events ] ██
       - bungeerun <[Server]> Player_Data_Quit_Event def:<[UUID]>
@@ -104,31 +113,6 @@ External_Player_Data_Join_Event:
         - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap]>]>
       - else:
         - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap]>]>
-
-Error_Handler_PlayerData:
-  type: task
-  debug: true
-  Record:
-    - debug record start
-  script:
-    - define WeirdList <list>
-    - foreach Name|UUID|Server as:Tag:
-      - if <[<[Tag]>]||invalid> == invalid:
-        - foreach next
-      - else:
-        - if <[<[Tag]>]> == null:
-          - foreach next
-      - define WeirdList:->:<[Tag]>
-    - if <[WeirdList].is_empty>:
-      - stop
-    - define Context <list>
-    - foreach <[WeirdList]> as:Tag:
-      - define Context "<[Context].include_single[`**<&lt>context.<[Tag]><&gt>`** returned: `<[<[Tag]>]>`]>"
-    - define Context "<[Context].include_single[`**<&lt>context.<[Tag]><&gt>`** returned: `<[<[Tag]>]>`]>"
-    - ~debug record submit save:mylog
-    - define Link "<entry[mylog].submitted||DEBUG FAILED>"
-    - define Text "<&lt>@!626086306606350366<&gt> <&lt>a:blueweewoo:725197352645689435<&gt> I'm alerting you about the script setup for debugging a Bungee Event issue:<&nl> <[Link]><&nl><[Context].separated_by[<&nl>]>"
-    - bungeerun Relay Simple_Discord_Embed def:<list_single[<[Text]>].include[631492353059717131]>
 
 #@modify_global_player_data_safe:
 #@  type: task
