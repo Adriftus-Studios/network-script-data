@@ -139,6 +139,14 @@ web_handler:
 
         - case /oAuth/Discord:
         # % ██ [ Cache Data                      ] ██
+          - define Query <context.query_map>
+          - if <[Query].contains[error]> && <[Query].get[error]> == acces_denied:
+            - announce to_console "<&c>The resource owner or authorization server denied the request"
+            - stop
+          - if !<[Query].contains[code|state]>
+            - announce to_console "<&c>This is likely URL engineered."
+            - stop
+
           - define Code <context.query_map.get[code]>
           - define State <context.query_map.get[state]>
           - define Platform Discord
@@ -161,12 +169,14 @@ web_handler:
           - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
           - announce to_console "<&c>--- Token Exchange ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
+          - if <entry[response].failed>:
+            - announce to_console "<&c>failure; ending queue."
 
         # % ██ [ Save Access Token Response Data ] ██
-          - define Access_Token_Response <util.parse_yaml[<entry[response].result>]>
-          - define Access_Token <[Access_Token_Response].get[access_token]>
-          - define Refresh_Token <[Access_Token_Response].get[refresh_token]>
-          - define Expirey <[Access_Token_Response].get[expires_in]>
+          - define access_token_response <util.parse_yaml[<entry[response].result>]>
+          - define access_token <[access_token_response].get[access_token]>
+          - define refresh_token <[access_token_response].get[refresh_token]>
+          - define expires_in <[access_token_response].get[expires_in]>
 
         # % ██ [ Obtain User Info                ] ██
           - define URL <yaml[oAuth].read[URL_Scopes.Discord.Identify]>
@@ -175,6 +185,8 @@ web_handler:
           - ~webget <[URL]> headers:<[Headers]> save:response
           - announce to_console "<&c>--- Obtain User Info ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
+          - if <entry[response].failed>:
+            - announce to_console "<&c>failure; ending queue."
 
         # % ██ [ Save User Data                  ] ██
           - define User_Data <util.parse_yaml[<entry[response].result>]>
@@ -182,11 +194,27 @@ web_handler:
           - define User_ID <[User_Data].get[id]>
           - define Avatar https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>
 
+        # % ██ [ Send to The-Network             ] ██
+          - define url http://76.119.243.194:25580
+          - define request relay/discorduser
+          - define query <map.with[uuid].as[<[state].after[_]>]>
+          - define query <[query].with[refresh_token].as[<[refresh_token]>]>
+          - define query <[query].with[expires_in].as[<[expires_in]>]>
+          - define query <[query].with[id].as[<[User_Data].get[id]>]>
+          - define query <[query].with[username].as[<[User_Data].get[username]>]>
+          - define query <[query].with[avatar].as[https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>]>
+          - define query <[query].with[discriminator].as[<[User_Data].get[discriminator]>]>
+          - define query <[query].with[mfa_enabled].as[<[User_Data].get[mfa_enabled]>]>
+          - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value]>].values.separated_by[&]>
+          - ~webget <[url]>/<[request]>?<[query]>
+
         # % ██ [ Obtain User Connections         ] ██
           - define URL <yaml[oAuth].read[URL_Scopes.Discord.Connections]>
           - ~webget <[URL]> headers:<[Headers]> save:response
           - announce to_console "<&c>--- Obtain User Connections ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
+          - if <entry[response].failed>:
+            - announce to_console "<&c>failure; ending queue."
 
           - define User_Data <util.parse_yaml[{"Data":<entry[response].result>}].get[Data]>
 
