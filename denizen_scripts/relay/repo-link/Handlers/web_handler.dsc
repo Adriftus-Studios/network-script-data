@@ -82,7 +82,7 @@ web_handler:
           - define From_Repo BehrRiley/network-script-data
           - define Repositories <util.parse_yaml[{"Data":<entry[Response].result>}].get[Data].parse_tag[<[Parse_Value].get[full_name]>]>
 
-        # % ██ [ Manage Fork                   ] ██
+        # % ██ [ Manage Fork                     ] ██
           - if <[Login]||invalid> != Invalid && !<[Repositories].contains[<[Main_Repo]>]>:
             - announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
             - ~webget https://api.github.com/repos/<[From_Repo]>/forks Headers:<[Headers]> method:POST save:response
@@ -114,10 +114,10 @@ web_handler:
           - define Webhook_Data <util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
           - define Webhook_IDs <[Webhook_Data].parse_tag[<[Parse_Value].get[id]>]>
           - define Webhooks_Content_Types <[Webooks].parse_tag[<map.with[id].as[<[Parse_Value]>].with[content_type].as[<[Webhook_Data].filter[get[ID].is[==].to[<[Parse_Value]>]].first.get[config].get[content_type]>]>]>
-        #| Notable Error: Mapped within each webhook list contains a previous response: {"last_response":[{"code":"200","status":"active","message": "OK"}]
-        #| erroneous currently unknown but could use to re-verify DNS records as well as verify port stability
+          #| Notable Error: Mapped within each webhook list contains a previous response: {"last_response":[{"code":"200","status":"active","message": "OK"}]
+          #| erroneous currently unknown but could use to re-verify DNS records as well as verify port stability
 
-        # % ██ [ Create Webhook                   ] ██
+        # % ██ [ Create Webhook                  ] ██
           - if <[Webhooks].is_empty>:
             - announce to_console "<&c>-WebHook Creation --------------------------------------------------------------"
             - define Data '{"config": {"url": "http://76.119.243.194:25580/github/<[Main_Repo]>","content_type": "json"}}'
@@ -125,8 +125,8 @@ web_handler:
             - ~webget https://api.github.com/repos/<[Main_Repo]>/hooks Headers:<[Headers]> method:POST data:<[Data]> save:response
             - announce to_console "<&c>--- Create Webhook ----------------------------------------------------------"
             - inject Web_Debug.Webget_Response
-        #| Notable Error: Exists already: {"message":"Validation Failed","errors":[{"resource":"Hook","code":"custom","message":"Hook already exists on this repository"}],"documentation_url":"https://docs.github.com/rest/reference/repos#create-a-repository-webhook"}
-        #| occurs when the webhook exists already
+          #| Notable Error: Exists already: {"message":"Validation Failed","errors":[{"resource":"Hook","code":"custom","message":"Hook already exists on this repository"}],"documentation_url":"https://docs.github.com/rest/reference/repos#create-a-repository-webhook"}
+          #| occurs when the webhook exists already
           
 
         - case /oAuth/Discord:
@@ -211,7 +211,7 @@ web_handler:
           - yaml id:discord_links set minecraft_uuids.<[uuid]>:<[query].exclude[uuid]>
           - yaml id:discord_links set discord_ids.<[query].get[id]>:<[query].exclude[id]>
           - yaml id:discord_links savefile:data/global/discord/discord_links.yml
-          
+
           - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
           - ~webget <[url]>/<[request]>?<[query]>
 
