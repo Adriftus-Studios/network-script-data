@@ -70,6 +70,7 @@ web_handler:
           - announce to_console "<&c>--- Obtain User Info ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
+            - announce to_console "<&c>Failure to Obtain User Info"
             - stop
           - flag server Test.GitHub.ObtainUserData:<util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
 
@@ -86,6 +87,7 @@ web_handler:
           - announce to_console "<&c>--- Obtain User Repo Data ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
+            - announce to_console "<&c>Failure to Obtain User Repo Data"
             - stop
           - flag server Test.GitHub.ObtainUserRepoData:<util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
 
@@ -100,6 +102,7 @@ web_handler:
             - announce to_console "<&c>--- Manage Fork ----------------------------------------------------------"
             - inject Web_Debug.Webget_Response
             - if <entry[response].failed>:
+              - announce to_console "<&c>Failure to manage the fork."
               - stop
           - else:
             - announce to_console "<&c>-No Fork Being Made ---------------------------------------------------------"
@@ -109,6 +112,7 @@ web_handler:
           - announce to_console "<&c>--- Obtain Branch Information ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
+            - announce to_console "<&c>Failure to obtain Branch Information."
             - stop
           - announce to_console '<&3>Branches<&6>: <&3><util.parse_yaml[{"Data":<entry[Response].result>}].get[Data].parse_tag[<[Parse_Value].get[name]>]>'
 
@@ -117,6 +121,7 @@ web_handler:
           - announce to_console "<&c>--- Obtain Webhook Information ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
+            - announce to_console "<&c>Failure to obtain Webhook Information."
             - stop
           - announce to_console '<&3>Webhooks<&6>: <&3><util.parse_yaml[{"Data":<entry[Response].result>}].get[Data].parse_tag[<[Parse_Value].get[name]>]>'
           - define Webhook_Data <util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
@@ -145,7 +150,8 @@ web_handler:
             - determine passively CODE:300
             - determine FILE:../../../../web/redirects/discord_decline.html
           - if !<[Query].contains[code|state]>:
-            - determine CODE:406
+            - announce to_console "<&c>State and Code are missing."
+            - determine CODE:<list[418|406].random>
 
           - define code <context.query_map.get[code]>
           - define state <context.query_map.get[state]>
@@ -155,7 +161,8 @@ web_handler:
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
         
           - if !<proc[discord_oauth_validate_state].context[<[state]>]>:
-            - determine CODE:406
+            - announce to_console "<&c>"
+            - determine CODE:<list[418|406].random>
           - run discord_oauth def:<[state]>|remove
           - determine passively FILE:../../../../web/pages/discord_linked.html
 
@@ -211,7 +218,7 @@ web_handler:
 
           - if <server.has_file[data/global/players/<[uuid]>.yml]>:
             - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
-            - define query <[query].include[<yaml[global.player.<[uuid]>].get_subset[Tab_Display_name|Display_Name|rank]>]>
+            - define query <[query].include[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
             - yaml id:global.player.<[uuid]> unload
 
           - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
