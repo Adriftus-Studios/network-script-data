@@ -147,8 +147,9 @@ web_handler:
           - if !<[Query].contains[code|state]>
             - determine CODE:406
 
-          - define Code <context.query_map.get[code]>
-          - define State <context.query_map.get[state]>
+          - define code <context.query_map.get[code]>
+          - define state <context.query_map.get[state]>
+          - define uuid <[state].after[_]>
           - define Platform Discord
 
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
@@ -169,6 +170,7 @@ web_handler:
           - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
             - announce to_console "<&c>failure; ending queue."
+            - stop
 
         # % ██ [ Save Access Token Response Data ] ██
           - define access_token_response <util.parse_yaml[<entry[response].result>]>
@@ -185,25 +187,51 @@ web_handler:
           - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
             - announce to_console "<&c>failure; ending queue."
+            - stop
 
         # % ██ [ Save User Data                  ] ██
           - define User_Data <util.parse_yaml[<entry[response].result>]>
           - narrate "<&c>User_Data: <&2><[User_Data]>"
           - define User_ID <[User_Data].get[id]>
-          - define Avatar https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>
+          - define avatar https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>
 
         # % ██ [ Send to The-Network             ] ██
           - define url http://76.119.243.194:25580
           - define request relay/discorduser
-          - define query <map.with[uuid].as[<[state].after[_]>]>
+
+          - define query <map.with[uuid].as[<[uuid]>]>
+          - define query <[query].with[access_token].as[<[access_token]>]>
           - define query <[query].with[refresh_token].as[<[refresh_token]>]>
           - define query <[query].with[expires_in].as[<[expires_in]>]>
           - define query <[query].with[id].as[<[User_Data].get[id]>]>
           - define query <[query].with[username].as[<[User_Data].get[username]>]>
-          - define query <[query].with[avatar].as[https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>]>
+          - define query <[query].with[avatar].as[<[avatar]>]>
           - define query <[query].with[discriminator].as[<[User_Data].get[discriminator]>]>
           - define query <[query].with[mfa_enabled].as[<[User_Data].get[mfa_enabled]>]>
-          - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value]>].values.separated_by[&]>
+
+          - ~bungeetag server:hub1 <yaml[data_handler].read[players.<[uuid]>.server]||invalid> save:response
+          - if <entry[response].result> == invalid:
+            - if <server.has_file[data/global/players/<[uuid]>.yml]>:
+              - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
+              - define global_player_data <yaml[global.player.<[uuid]>].read[]>
+              - yaml id:global.player.<[uuid]> unload
+            - else:
+              - defiine global_player_data <map>
+          - else:
+            - ~bungeetag server:<entry[response].result> <yaml[global.player.<[uuid]>].read[]||invalid> save:response
+            - if <entry[response].result> == invalid:
+              - if <server.has_file[data/global/players/<[uuid]>.yml]>:
+                - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
+                - define global_player_data <yaml[global.player.<[uuid]>].read[]>
+                - yaml id:global.player.<[uuid]> unload
+              - else:
+                - defiine global_player_data <map>
+            - else:
+              - define global_player_data <entry[response].result>
+          - if !<[global_player_data].is_empty>:
+            - define query <[query].with[global_player_data].as[<[global_player_data]>]>
+
+          - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
           - ~webget <[url]>/<[request]>?<[query]>
 
         # % ██ [ Obtain User Connections         ] ██
