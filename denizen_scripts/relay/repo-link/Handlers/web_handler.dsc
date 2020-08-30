@@ -149,7 +149,7 @@ web_handler:
 
           - define code <context.query_map.get[code]>
           - define state <context.query_map.get[state]>
-          - define uuid <[state].after[_]>
+          - define uuid <[state].before[_]>
           - define Platform Discord
 
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
