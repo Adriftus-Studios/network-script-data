@@ -29,6 +29,7 @@ web_handler:
         # % ██ [ Cache Data                      ] ██
           - define Code <context.query_map.get[code]>
           - define State <context.query_map.get[state]>
+          - define discord_id <[state].before[_]>
           - define Platform GitHub
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[GitHub.Token_Exchange.Headers]>]>
 
@@ -42,6 +43,7 @@ web_handler:
           - announce to_console "<&c>--- Token Exchange ----------------------------------------------------------"
           - inject Web_Debug.Webget_Response
           - if <entry[response].failed>:
+            - announce to_console "<&c>failed to token exchange"
             - stop
           - flag server Test.GitHub.TokenExchange:<util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
         #| notable error: error=bad_verification_code&error_description=The+code+passed+is+incorrect+or+expired.&error_uri=https%3A%2F%2Fdocs.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-oauth-app-access-token-request-errors%2F%23bad-verification-code
@@ -59,15 +61,42 @@ web_handler:
           - if <entry[response].failed>:
             - announce to_console "<&c>Failure to Obtain User Info"
             - stop
-          - flag server Test.GitHub.ObtainUserData:<util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
+          
+        # % ██ [ Verify Discord Link             ] ██
+          - if !<yaml[discord_links].contains[discord_ids.<[discord_id]>]>:
+            - announce to_console "User does not have discord linked."
+            - stop
 
         # % ██ [ Save User Data                  ] ██
           - define UserData <util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
-          - define Login <[UserData].get[login]>
-          - define Avatar <[UserData].get[avatar_url]>
-          - define ID <[UserData].get[id]>
-          - define Creation_Data <time[<[UserData].get[created_at].replace[-].with[/].before[Z].split[T].separated_by[_]>]>
+          - define login <[UserData].get[login]>
+          - define avatar_url <[UserData].get[avatar_url]>
+          - define id <[UserData].get[id]>
+          - define created_at <time[<[UserData].get[created_at].replace[-].with[/].before[Z].split[T].separated_by[_]>]>
 
+        # % ██ [ Send to The-Network             ] ██
+          - define url http://76.119.243.194:25580
+          - define request relay/githubuser
+
+          - define query <map.with[login].as[<[login]>]>
+          - define query <[query].with[avatar_url].as[<[avatar_url]>]>
+          - define query <[query].with[id].as[<[id]>]>
+          - define query <[query].with[created_at].as[<[created_at]>]>
+          - define query <[query].with[discord_id].as[<[discord_id]>]>
+
+        #^- if <server.has_file[data/global/players/<[uuid]>.yml]>:
+        #^  - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
+        #^  - define query <[query].include[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
+        #^  - yaml id:global.player.<[uuid]> unload
+
+          - yaml id:github_links set discord_ids.<[discord_id]>:<[query].exclude[discord_id]>
+          - yaml id:github_links savefile:data/global/discord/github_links.yml
+
+          - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
+          - ~webget <[url]>/<[request]>?<[query]>
+          #$$$$$$$$$$$$$$$$
+          - stop
+          #$$$$$$$$$$$$
         # % ██ [ Obtain User Repository Data     ] ██
           - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user/repos Headers:<[Headers]> save:response
