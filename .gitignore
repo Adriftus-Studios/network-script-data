@@ -28,6 +28,7 @@ scriptdata/global/discord/token.yml
 scriptdata/global/discord/channels.yml
 scriptdata/global/discord/webhooks.yml
 scriptdata/global/discord/oAuth_Data.yml
+scriptdata/global/discord/github_links.yml
 scriptdata/global/discord/discord_links.yml
 scriptdata/global/discord/saved_headers.yml
 scriptdata/global/discord/shell_directories.yml
