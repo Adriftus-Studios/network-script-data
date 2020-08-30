@@ -209,27 +209,10 @@ web_handler:
           - define query <[query].with[discriminator].as[<[User_Data].get[discriminator]>]>
           - define query <[query].with[mfa_enabled].as[<[User_Data].get[mfa_enabled]>]>
 
-          - ~bungeetag server:hub1 <yaml[data_handler].read[players.<[uuid]>.server]||invalid> save:response
-          - if <entry[response].result> == invalid:
-            - if <server.has_file[data/global/players/<[uuid]>.yml]>:
-              - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
-              - define global_player_data <yaml[global.player.<[uuid]>].read[]>
-              - yaml id:global.player.<[uuid]> unload
-            - else:
-              - defiine global_player_data <map>
-          - else:
-            - ~bungeetag server:<entry[response].result> <yaml[global.player.<[uuid]>].read[]||invalid> save:response
-            - if <entry[response].result> == invalid:
-              - if <server.has_file[data/global/players/<[uuid]>.yml]>:
-                - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
-                - define global_player_data <yaml[global.player.<[uuid]>].read[]>
-                - yaml id:global.player.<[uuid]> unload
-              - else:
-                - defiine global_player_data <map>
-            - else:
-              - define global_player_data <entry[response].result>
-          - if !<[global_player_data].is_empty>:
-            - define query <[query].with[global_player_data].as[<[global_player_data]>]>
+          - if <server.has_file[data/global/players/<[uuid]>.yml]>:
+            - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
+            - define query <[query].include[<yaml[global.player.<[uuid]>].get_subset[Tab_Display_name|Display_Name|rank]>]>
+            - yaml id:global.player.<[uuid]> unload
 
           - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
           - ~webget <[url]>/<[request]>?<[query]>
