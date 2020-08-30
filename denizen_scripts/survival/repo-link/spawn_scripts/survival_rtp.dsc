@@ -26,10 +26,8 @@ survival_falloff_rtp:
   type: world
   debug: false
   events:
-    on player enters spawn_below:
-      - wait 1t
-      - if <player.is_online>:
-        - inject survival_rtp
+    after player enters spawn_below:
+      - inject survival_rtp
 
 survival_rtp_portal:
   type: world
@@ -44,11 +42,12 @@ survival_rtp_portal:
         - run spawn_speed_handler
       - wait 5t
       - inject spawn_sound_effects_handler
-    on player exits spawn_cuboid:
+    after player exits spawn_cuboid:
       - flag server people_in_spawn:<-:<player>
-      - wait 1s
       - if <server.has_flag[spawn_portal_running]> && <cuboid[spawn_cuboid].players.is_empty>:
         - flag server spawn_portal_running:!
+    on player quits:
+      - flag server people_in_spawn:<-:<player>
     on server start:
       - flag server spawn_portal_running:!
       - flag server people_in_spawn:!
@@ -69,7 +68,6 @@ spawn_speed_handler:
   debug: false
   script:
     - while <server.has_flag[spawn_portal_running]> && <server.has_flag[people_in_spawn]>:
-      - adjust <queue> linked_player:<server.flag[people_in_spawn].random>
       - cast speed duration:3s <server.flag[people_in_spawn].filter[is_online]> hide_particles
       - wait 2s
 
