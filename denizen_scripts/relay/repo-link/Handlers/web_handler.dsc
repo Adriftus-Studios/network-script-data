@@ -144,7 +144,7 @@ web_handler:
             - announce to_console "<&c>The resource owner or authorization server denied the request"
             - determine passively CODE:300
             - determine FILE:../../../../web/redirects/discord_decline.html
-          - if !<[Query].contains[code|state]>
+          - if !<[Query].contains[code|state]>:
             - determine CODE:406
 
           - define code <context.query_map.get[code]>
