@@ -5,28 +5,15 @@ web_handler:
     Github: 140.82.115
     self: 0:0:0:0:0:0:0:1
   temp:
-    - yaml id:movetohub create
-    - define Bear <map.with[UUID].as[d82da59b-44fc-4a72-a20d-a7f7ae5ef382]>
-    - define GitHub <map.with[login].as[BehrRiley]>
-    - define GitHub <[GitHub].with[id].as[46008563]>
-    - define GitHub <[GitHub].with[avatar_url].as[https://avatars3.githubusercontent.com/u/46008563?v=4]>
-    - define GitHub <[GitHub].with[url].as[https://github.com/BehrRiley]>
-    - define Bear <[Bear].with[GitHub].as[<[GitHub]>]>
-
-    - define Discord <map.with[id].as[194619362223718400]>
-    - define Discord <[Discord].with[username].as[Behr]>
-    - define Discord <[Discord].with[avatar].as[dee7262dd67443aec6bb90920625b2ba]>
-    - define Discord <[Discord].with[discriminator].as[5305]>
-    - define Discord <[Discord].with[mfa_enabled].as[true]>
-    - define Bear <[Bear].with[Discord].as[<[Discord]>]>
-    
-    - define Bear "<[Bear].with[Rank].as[rank: §x§f§f§0§c§0§0T§x§f§f§1§8§0§0h§x§f§f§2§4§0§0e§x§f§f§3§0§0§0 §x§f§f§3§c§0§0A§x§f§f§4§8§0§0n§x§f§f§5§4§0§0a§x§f§f§6§0§0§0r§x§f§f§6§c§0§0c§x§f§f§7§8§0§0h§x§f§f§8§4§0§0i§x§f§f§9§0§0§0c§x§f§f§9§c§0§0 §x§f§f§a§8§0§0A§x§f§f§b§4§0§0d§x§f§f§c§0§0§0m§x§f§f§c§c§0§0i§x§f§f§d§8§0§0n§x§f§f§e§4§0§0i§x§f§f§f§0§0§0s§x§f§f§f§c§0§0t§x§f§6§f§f§0§0r§x§e§a§f§f§0§0a§x§d§e§f§f§0§0t§x§d§2§f§f§0§0o§x§c§6§f§f§0§0r]>"
-    - define Bear "<[Bear].with[Role].as[Lead Developer]>"
-    - yaml id:movetohub set players:->:<[Bear]>
+    - if <yaml.list.contains[discord_links]>:
+      - yaml id:discord_links unload
+    - if !<server.has_file[data/global/discord/discord_links.yml]>:
+      - yaml id:discord_links create
+      - yaml id:discord_links savefile:data/global/discord/discord_links.yml
+    - else:
+      - yaml id:discord_links load:data/global/discord/discord_links.yml
   events:
     on reload scripts:
-      - if <yaml.list.contains[movetohub]>:
-        - yaml id:movetohub unload
       - inject locally temp
     on server start:
       - web start port:25580
@@ -221,6 +208,10 @@ web_handler:
             - define query <[query].include[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
             - yaml id:global.player.<[uuid]> unload
 
+          - yaml id:discord_links set minecraft_uuids.<[uuid]>:<[query].exclude[uuid]>
+          - yaml id:discord_links set discord_ids.<[query].get[id]>:<[query].exclude[id]>
+          - yaml id:discord_links savefile:data/global/discord/discord_links.yml
+          
           - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
           - ~webget <[url]>/<[request]>?<[query]>
 
