@@ -43,6 +43,8 @@ global_data_handler:
       - yaml id:data_handler set players.<[UUID]>.name:<[name]>
       - yaml id:data_handler set players.<[UUID]>.server:<[server]>
       - yaml id:data_handler set servers.<[server]>:->:<[UUID]>
+      - yaml id:data_handler set players.<[name]>.UUID:<[UUID]>
+      - yaml id:data_handler set players.<[name]>.server:<[server]>
 
 
     # % ██ [ Fire Player Login Events ] ██
@@ -65,6 +67,7 @@ global_data_handler:
     # % ██ [ Remove Player Data ] ██
       - yaml id:data_handler set players.<[UUID]>:!
       - yaml id:data_handler set servers.<[server]>:<-:<[UUID]>
+      - yaml id:data_handler set players.<[Name]>:!
 
       - yaml id:data_handler set network.names:<-:<[Name]>
       - yaml id:data_handler set network.uuids:<-:<[UUID]>
@@ -140,7 +143,7 @@ player_info_map:
     definitions: input
     script:
     - if <yaml[data_handler].contains[players.<[input]>]>:
-      - determine <map.include[<yaml[data_handler].read[players.<[input]>]>
+      - determine <yaml[data_handler].read[players.<[input]>].with[name].as[<[input]>]>
     - determine null
     
 # % ██  [ Retrieves a map of the player's information, with the keys 'name, uuid, server' based on the player's uuid ] ██
