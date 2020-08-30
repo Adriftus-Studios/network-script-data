@@ -127,3 +127,33 @@ External_Player_Data_Join_Event:
 #^      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
 #^      - yaml id:global.player.<[uuid]> savefile:data/players/<[uuid]>.yml
 #^      - yaml id:global.player.<[uuid]> unload
+
+# % ██  [ Retrieves a map of the player's information, with the keys 'name, uuid, server' based on the player's name ] ██
+# % ██  [ Returns 'null' if the player name is invalid (or not online) ] ██
+# - ██  [ Usage ]  Retrieves the player's information (in map form) from 'hub1' and stores it in <entry[player_map].result>.
+# - ██  [       ]  - ~bungeetag server:hub1 <proc[player_info_map].context[<[player_input]>]> save:player_map
+# - ██  [       ]  Retrieves the player's infortmation (in map form) and stores it in the `player_map` definition. (only works on 'hub1')
+# - ██  [       ]  - define player_map <proc[player_info_map].context[<[player_input]>]>
+
+player_info_map:
+    type: procedure
+    definitions: input
+    script:
+    - if <yaml[data_handler].contains[players.<[input]>]>:
+      - determine <map.include[<yaml[data_handler].read[players.<[input]>]>
+    - determine null
+    
+# % ██  [ Retrieves a map of the player's information, with the keys 'name, uuid, server' based on the player's uuid ] ██
+# % ██  [ Returns 'null' if the player uuid is invalid (or not online) ] ██
+# - ██  [ Usage ]  Retrieves the player's information (in map form) from 'hub1' and stores it in <entry[player_map].result>.
+# - ██  [       ]  - ~bungeetag server:hub1 <proc[player_info_map_uuid].context[<[player_uuid]>]> save:player_map
+# - ██  [       ]  Retrieves the player's infortmation (in map form) and stores it in the `player_map` definition. (only works on 'hub1')
+# - ██  [       ]  - define player_map <proc[player_info_map_uuid].context[<[player_uuid]>]>
+
+player_info_map_uuid:
+    type: procedure
+    definitions: input
+    script:
+    - if <yaml[data_handler].contains[players.<[input]>]>:
+      - determine <yaml[data_handler].read[players.<[input]>].with[uuid].as[<[input]>]>
+    - determine null

@@ -59,7 +59,7 @@ teleport_cancel_global_command:
         # % ██ [  Syntax Check (Arg Count)  ] ██
         - if <context.args.is_empty> || <context.args.size> > 2:
             - inject Command_Syntax
-        - bungeerun hub1 networkteleport_cancel def:<list_single[context.args.first>].include[<player>|<bungee.server>|<player.display_name>]>
+        - bungeerun hub1 networkteleport_cancel def:<list_single[<context.args.first>].include[<player>|<bungee.server>|<player.display_name>]>
 
 networkteleport_cancel:
     type: task
@@ -361,11 +361,11 @@ teleport_accept_global_command:
         - if <context.args.is_empty> || <context.args.size> > 2:
             - inject Command_Syntax
         - define player_name <context.args.filter_tag[<list[-l|-local|-locally|-s|-server].contains[<[filter_value]>].not>].first>
-        - ~bungeetag hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<[player_name]>]]> save:player_1_map
-        - if <entry[player_1_map].result.is_empty>:
+        - ~bungeetag hub1 <proc[player_info_map].context[<[player_name]>]> save:player_1_map
+        - if <entry[player_1_map].result> == null:
             - define Reason "The specified player is invalid."
             - inject Command_Error
-        - bungeerun hub1 networkteleport_request def:<list_single[<entry[player_1_map].result.first>].include[<player>|<bungee.server>]>
+        - bungeerun hub1 networkteleport_request def:<list_single[<entry[player_1_map].result>].include[<player>|<bungee.server>]>
 
 networkteleport_timeout_accept:
     type: task
@@ -509,22 +509,22 @@ teleporthere_global_command:
             - else if <context.args.first.contains[,]>:
                 - define player_arg <context.args.first>
                 - repeat <[player_arg].to_list.count[,].add[1]>:
-                    - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<[player_arg].before[,]>]]> save:network_player
-                    - if <entry[network_player].result.is_empty> || <[player_arg].before[,]> == <player.name>:
+                    - ~bungeetag server:hub1 <proc[player_info_map].context[<[player_arg].before[,]>]> save:network_player
+                    - if <entry[network_player].result> == null || <[player_arg].before[,]> == <player.name>:
                         - define Reason "At least one of the specified players is invalid."
                         - inject Command_Error
-                    - define uuid_list:->:<entry[network_player].result.first.get[uuid]>
+                    - define uuid_list:->:<entry[network_player].result.get[uuid]>
                     - define player_arg <[player_arg].after[,]>
-                - bungeerun hub1 multiple_networkteleporthere_request def:<list_single[<[uuid_list]>].include_single[<player>|<player.display_name>]>
+                - bungeerun hub1 multiple_networkteleporthere_request def:<list_single[<[uuid_list]>].include[<player>|<player.display_name>]>
             - else:
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<player.name>]]> save:player_map_1
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.first>]]> save:player_map_2
-                - if <entry[player_map_2].result.is_empty> || <entry[player_map_2].result.first.get[uuid]> == <player.uuid>:
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<player.name>]> save:player_map_1
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.first>]> save:player_map_2
+                - if <entry[player_map_2].result> == null || <entry[player_map_2].result.get[uuid]> == <player.uuid>:
                     - define Reason "The specified player is invalid."
                     - inject Command_Error
-                - define player_map_2 <entry[player_map_2].result.first>
+                - define player_map_2 <entry[player_map_2].result>
                 - if <player.has_permission[adriftus.staff].not>:
-                    - bungeerun hub1 networkteleporthere_request def:<list_single[<[player_map_2]>].include_single[<entry[player_map_1].result.first>]>
+                    - bungeerun hub1 networkteleporthere_request def:<list_single[<[player_map_2]>].include_single[<entry[player_map_1].result>]>
                 - else:
                     - if <[player_map_2].get[server]> != <bungee.server>:
                         - define server <bungee.server>
@@ -542,28 +542,31 @@ teleporthere_global_command:
         - else if <player.has_permission[adrifuts.staff].not>:
             - define Reason "You can only teleport to a player."
             - inject Permission_Error
-        # % ██ [  Two Arguments wtih Request  ] ██
+        # % ██ [  Two Arguments with Request  ] ██
         - else:
             - if <list[everyone|all].contains[<context.args.first>]>:
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<player.name>]]> save:player_map_2
-                - bungeerun hub1 everyone_networkteleporthere_request def:<list_single[<entry[player_map_2].result.first>].include[<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>]>
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<player.name>]> save:player_map_2
+                - if <entry[player_map_2].result> == null:
+                    - define Reason "The specified player is invalid."
+                    - inject Command_Error
+                - bungeerun hub1 everyone_networkteleporthere_request def:<list_single[<entry[player_map_2].result>].include[<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>]>
             - else if <context.args.first.contains[,]>:
                 - define player_arg <context.args.first>
                 - repeat <[player_arg].to_list.count[,].add[1]>:
-                    - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<[player_arg].before[,]>]]> save:network_player
-                    - if <entry[network_player].result.is_empty> || <[player_arg].before[,]> == <player.name>:
+                    - ~bungeetag server:hub1 <proc[player_info_map].context[<[player_arg].before[,]>]> save:network_player
+                    - if <entry[network_player].result> == null || <[player_arg].before[,]> == <player.name>:
                         - define Reason "At least one of the specified players is invalid."
                         - inject Command_Error
-                    - define uuid_list:->:<entry[network_player].result.first.get[uuid]>
+                    - define uuid_list:->:<entry[network_player].result.get[uuid]>
                     - define player_arg <[player_arg].after[,]>
                 - bungeerun hub1 multiple_networkteleporthere_request def:<list_single[<[uuid_list]>].include[<player>|<player.display_name>]>
             - else:
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<player.name>]]> save:player_map_1
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.first>]]> save:player_map_2
-                - if <entry[player_map_2].result.is_empty> || <entry[player_map_2].result.first.get[uuid]> == <player.uuid>:
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<player.name>]> save:player_map_1
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.first>]> save:player_map_2
+                - if <entry[player_map_2].result> == null || <entry[player_map_2].result.get[uuid]> == <player.uuid>:
                     - define Reason "The specified player is invalid."
                     - inject Command_Error
-                - bungeerun hub1 networkteleporthere_request def:<list_single[<entry[player_map_2].result.first>].include_single[<entry[player_map_1].result.first>]>
+                - bungeerun hub1 networkteleporthere_request def:<list_single[<entry[player_map_2].result>].include_single[<entry[player_map_1].result>]>
 
 teleport_global_command:
     type: command
@@ -581,6 +584,20 @@ teleport_global_command:
     - define Arg2 <server.online_players.parse[name]>
     - inject MultiArg_Command_Tabcomplete
     script:
+    # % ██ [  Inject Teleport Script  ] ██
+    - inject teleport_global_command_inject
+
+teleport_global_handler:
+    type: world
+    events:
+        on teleport|tp|minecraft&coteleport|minecraft&cotp command:
+        - determine passively FULFILLED
+        # % ██ [  Inject Teleport Script  ] ██
+        - inject teleport_global_command_inject
+
+teleport_global_command_inject:
+    type: task
+    script:
     # % ██ [  Check for local flag  ] ██
     - if <context.args.filter_tag[<list[-l|-local|-locally|-s|-server].contains[<[filter_value]>]>].is_empty.not>:
         # % ██ [  Syntax Check (Arg Count)  ] ██
@@ -595,10 +612,11 @@ teleport_global_command:
                 - inject Command_Error
             - if <player.has_permission[adriftus.staff]>:
                 - teleport <[player_2].location.left[<util.random.decimal[-0.01].to[0.01]>]>
-                - narrate "<&a>You have teleported to <[player_2].display_name>."
+                - narrate "<&a>You have teleported to <[player_2].display_name><&a>."
                 - narrate "<player.display_name><&a> has teleported to you." targets:<[player_2]>
             - else:
                 - run teleport_request def:<player>|<[player_2]>|<player>
+            - stop
         # % ██ [  Staff-Only Check  ] ██
         - if <player.has_permission[adrifuts.staff].not>:
             - define Reason "You can only teleport to a player."
@@ -658,11 +676,11 @@ teleport_global_command:
             - inject Command_Syntax
         # % ██ [  One Argument  ] ██
         - if <context.args.size> == 1:
-            - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.first>]]> save:player_map_2
-            - if <entry[player_map_2].result.is_empty> || <entry[player_map_2].result.first.get[uuid]> == <player.uuid>:
+            - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.first>]> save:player_map_2
+            - if <entry[player_map_2].result> == null || <entry[player_map_2].result.get[uuid]> == <player.uuid>:
                 - define Reason "The specified player is invalid."
                 - inject Command_Error
-            - define player_map_2 <entry[player_map_2].result.first>
+            - define player_map_2 <entry[player_map_2].result>
             - if <player.has_permission[adriftus.staff].not>:
                 - bungeerun hub1 networkteleport_request def:<player>|<[player_2]>|<player>
             - else:
@@ -679,6 +697,7 @@ teleport_global_command:
                     - teleport <player[<[player_map_2].get[uuid]>].location.left[<util.random.decimal[-0.01].to[0.01]>]>
                     - narrate "<&5>You have teleported to <player[<[player_map_2].get[uuid]>].display_name><&a>."
                     - narrate "<&5><player.display_name> has teleported themself to you." targets:<player[<[player_map_2].get[uuid]>]>
+            - stop
         # % ██ [  Staff-Only Check  ] ██
         - if <player.has_permission[adrifuts.staff].not>:
             - define Reason "You can only teleport to a player."
@@ -686,11 +705,11 @@ teleport_global_command:
         # % ██ [  Two Arguments without Request  ] ██
         - if <context.args.size> == 2 && <list[-r|-request].contains[<context.args.get[2]>].not>:
             - if <list[everyone|all].contains[<context.args.first>]>:
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.get[2]>]]> save:player_map_2
-                - if <entry[player_map_2].result.is_empty>:
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.get[2]>]> save:player_map_2
+                - if <entry[player_map_2].result> == null:
                     - define Reason "The specified player is invalid."
                     - inject Command_Error
-                - define player_map_2 <entry[player_map_2].result.first>
+                - define player_map_2 <entry[player_map_2].result>
                 - define dest_server <[player_map_2].get[server]>
                 - bungee <[dest_server]>:
                     - teleport <server.online_players.exclude[<player[<[player_map_2].get[uuid]>]>]> <player[<[player_map_2].get[uuid]>].location.left[<util.random.decimal[-0.01].to[0.01]>]>
@@ -705,41 +724,41 @@ teleport_global_command:
                         - teleport <entry[online_players].result> <player[<[player_map_2].get[uuid]>].location.left[<util.random.decimal[-0.01].to[0.01]>]>
                 - narrate "<&a>You have teleported everyone across the network to <context.args.get[2]>."
             - else:
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.first>]]> save:player_map_1
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.get[2]>]]> save:player_map_2
-                - if <entry[player_map_1].result.is_empty> || <entry[player_map_2].result.is_empty>:
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.first>]> save:player_map_1
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.get[2]>]> save:player_map_2
+                - if <entry[player_map_1].result> == null || <entry[player_map_2].result> == null:
                     - define Reason "The specified player is invalid."
                     - inject Command_Error
-                - define player_map_1 <entry[player_map_1].result.first>
-                - define player_map_2 <entry[player_map_2].result.first>
+                - define player_map_1 <entry[player_map_1].result>
+                - define player_map_2 <entry[player_map_2].result>
                 - bungeerun <[player_map_2].get[server]> networkteleport_send_timeout_check def:<list_single[<[player_map_1]>].include_single[<[player_map_2]>].include[<player>|<bungee.server>|<player.display_name>]>
         # % ██ [  Three Arguments  ] ██
         - else if <[Arg].size> == 3:
             - if <list[everyone|all].contains[<context.args.first>]>:
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.get[2]>]]> save:player_map_2
-                - if <entry[player_map_2].result.is_empty>:
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.get[2]>]> save:player_map_2
+                - if <entry[player_map_2].result> == null:
                     - define Reason "The specified player is invalid."
                     - inject Command_Error
-                - bungeerun hub1 everyone_networkteleport_request def:<list_single[<entry[player_map_2].result.first>].include[<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>]>
+                - bungeerun hub1 everyone_networkteleport_request def:<list_single[<entry[player_map_2].result>].include[<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>]>
             - else:
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.first>]]> save:player_map_1
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.get[2]>]]> save:player_map_2
-                - if <entry[player_map_1].result.is_empty> || <entry[player_map_2].result.is_empty>:
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.first>]> save:player_map_1
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.get[2]>]> save:player_map_2
+                - if <entry[player_map_1].result> == null || <entry[player_map_2].result> == null:
                     - define Reason "The specified player is invalid."
                     - inject Command_Error
-                - bungeerun hub1 networkteleport_request def:<list_single[<entry[player_map_1].result.first>].include_single[<entry[player_map_2].result.first>].include[<player>]>
-        # % ██ [  Two Arguments wtih Request  ] ██
+                - bungeerun hub1 networkteleport_request def:<list_single[<entry[player_map_1].result>].include_single[<entry[player_map_2].result>].include[<player>]>
+        # % ██ [  Two Arguments with Request  ] ██
         - else:
             - if <list[everyone|all].contains[<context.args.first>]>:
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<player.name>]]> save:player_map_2
-                - bungeerun hub1 everyone_networkteleport_request def:<list_single[<entry[player_map_2].result.first>].include[<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>]>
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<player.name>]> save:player_map_2
+                - bungeerun hub1 everyone_networkteleport_request def:<list_single[<entry[player_map_2].result>].include[<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>]>
             - else:
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<player.name>]]> save:player_map_1
-                - ~bungeetag server:hub1 <yaml[data_handler].read[].filter[get[name].is[==].to[<context.args.first>]]> save:player_map_2
-                - if <entry[player_map_2].result.is_empty>:
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<player.name>]> save:player_map_1
+                - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.get[2]>]> save:player_map_2
+                - if <entry[player_map_2].result> == null:
                     - define Reason "The specified player is invalid."
                     - inject Command_Error
-                - bungeerun hub1 networkteleport_request def:<list_single[<entry[player_map_1].result.first>].include_single[<entry[player_map_2].result.first>].include[<player>]>
+                - bungeerun hub1 networkteleport_request def:<list_single[<entry[player_map_1].result>].include_single[<entry[player_map_2].result>].include[<player>]>
 
 networkteleport_send_timeout_check:
     type: task
