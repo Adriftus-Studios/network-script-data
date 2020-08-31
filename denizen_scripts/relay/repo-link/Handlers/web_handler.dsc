@@ -381,7 +381,7 @@ Web_Debug:
   type: task
   debug: false
   script:
-    - debug record start
+    - debug debug start
   Get_Response:
     - announce to_console "<&3>-- <queue.script.name> - Get_Response ---------"
     - announce to_console "<&6><&lt><&e>context<&6>.<&e>address<&6><&gt> <&b>| <&3><context.address||<&4>Invalid> <&b>| <&a>Returns the IP address of the device that sent the request."
@@ -408,6 +408,3 @@ Web_Debug:
     - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>time_ran<&6><&gt> <&b>| <&3><entry[response].time_ran||<&c>Invalid> <&b>| <&a>returns a DurationTag indicating how long the web connection processing took."
     - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>result_headers<&6><&gt> <&b>| <&3><entry[response].result_headers||<&c>Invalid> <&b>| <&a>returns a MapTag of the headers returned from the webserver. Every value in the result is a list."
     - announce to_console <&3>-----------------------------------------------
-  Submit:
-    - ~debug record submit save:mylog
-    - announce to_console <entry[mylog].submitted||<&4>Debug_Failure>
