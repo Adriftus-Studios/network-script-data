@@ -59,7 +59,7 @@ global_data_handler:
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
-      - define Server <[PlayerMap].get[Server]>
+      - define Server <yaml[data_handler].read[players.<[uuid]>.server]>
       - define PlayerMap <map.with[name].as[<[name]>].with[uuid].as[<[uuid]>].with[server].as[<[server]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
