@@ -10,7 +10,7 @@ TabOffline_Command:
         - tomode
         - offlinetab
     tab complete:
-        - if <player.groups.in_group[Moderation]>:
+        - if <player.in_group[Moderation]>:
             - inject Online_Player_Tabcomplete
     script:
     # % ██ [ Check Args ] ██
@@ -29,7 +29,7 @@ TabOffline_Command:
         - else:
             - define User <context.args.first>
             - inject Player_Verification_Offline
-            - if <player.groups.in_group[Moderation]>:
+            - if <player.in_group[Moderation]>:
                 - if <player.has_flag[Behr.Essentials.tabofflinemode]>:
                     - flag <[User]> Behr.Essentials.tabofflinemode:!
                 - else:
