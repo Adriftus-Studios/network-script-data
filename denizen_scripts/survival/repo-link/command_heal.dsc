@@ -8,15 +8,12 @@ heal_command:
     permission: adriftus.staff
     script:
     - if <context.args.size> > 1:
-        - narrate "<&c>More than one argument was specified, correct usage is /heal (player)"
-        - stop
+        - inject command_syntax
     - if <context.args.is_empty>:
-        - heal 20 <player>
+        - heal <player>
         - feed 20 <player>
     - else:
-        - define player <server.match_player[<context.args.first>]||null>
-        - if <[player]> == null:
-            - narrate "<&c>Invalid player, correct usage is /heal (player)"
-            - stop
-        - heal 20 <[player]>
-        - feed 20 <[player]>
+        - define user <context.args.first>
+        - inject player_verification
+        - heal <[user]>
+        - feed 20 <[user]>
