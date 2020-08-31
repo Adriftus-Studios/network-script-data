@@ -59,9 +59,8 @@ global_data_handler:
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
-      - define PlayerMap <proc[array_lookup].context[data_handler|players|uuid|<[UUID]>]>
       - define Server <[PlayerMap].get[Server]>
-      - define PlayerMap <map.with[Name].as[<[Name]>].with[UUID].as[<[UUID]>]>
+      - define PlayerMap <map.with[name].as[<[name]>].with[uuid].as[<[uuid]>].with[server].as[<[server]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
     # % ██ [ Remove Player Data ] ██
