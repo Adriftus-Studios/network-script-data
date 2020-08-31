@@ -10,7 +10,7 @@ RunSpeed_Command:
         - fs
     permission: Behr.Essentials.RunSpeed
     tab complete:
-        - if <player.groups.in_group[Moderation]>:
+        - if <player.in_group[Moderation]>:
             - define Arg2 <list[Lightspeed|ludicrous|Plaid]>
             - if <context.args.size||0> == 0:
                 - determine <server.players.parse[name].exclude[<player.name>]>
