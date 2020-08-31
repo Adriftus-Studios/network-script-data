@@ -31,4 +31,4 @@ bookshelves_inventory:
   inventory: chest
   size: 9
   slots:
-  - "[] [] [] [] [] [] [] [] []"
+  - [] [] [] [] [] [] [] [] []
