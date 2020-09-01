@@ -39,6 +39,6 @@ mod_kick_inv_events:
   events:
     on player right clicks mod_level*_item in mod_kick_inv:
       - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|Kick
-      - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|Kick
+      - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[INFRACTION]>|Kick
       - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid].as_player.name>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|Kick
       - kick <player.flag[amp_map].as_map.get[uuid].as_player> reason:<proc[mod_kick_message].context[<player.uuid>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>]>

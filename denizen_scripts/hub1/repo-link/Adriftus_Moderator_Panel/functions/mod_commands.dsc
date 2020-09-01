@@ -17,7 +17,7 @@ mod_server_kick_task:
     - define level <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].before[.]>].fail[1]>
     - define reason <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].after[.]>].fail[<[reason]>]>
     - run mod_log_action def:<[moderator]>|<[player].uuid>|<[level]>|<[reason]>|Kick
-    - run mod_notify_action def:<[moderator]>|<[player].uuid>|<[level]>|<[reason]>|Kick
+    - run mod_notify_action def:<[moderator]>|<[player].uuid>|<[reason]>|Kick
     - run mod_message_discord def:<[moderator]>|<[player].name>|<[level]>|<[reason]>|Kick
     - kick <server.match_player[<context.args.first>]> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[reason]>]>
 
@@ -49,7 +49,7 @@ mod_server_ban_task:
         - define level 3
       - run mod_log_action def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|60d
       - run mod_log_ban def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|60d
-      - run mod_notify_action def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|60d
+      - run mod_notify_action def:<[moderator]>|<[target].uuid>|<[reason]>|Ban|60d
       - run mod_message_discord def:<[moderator]>|<[target].as_player.name>|<[level]>|<[reason]>|Ban|60d
       - run mod_ban_player def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|60d
     - else:
@@ -110,7 +110,7 @@ mod_server_ban_command:
         - define reason <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].after[.]>].fail[<[reason]>]>
         - run mod_log_action def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|<[length]>
         - run mod_log_ban def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|<[length]>
-        - run mod_notify_action def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|<[length]>
+        - run mod_notify_action def:<[moderator]>|<[target].uuid>|<[reason]>|Ban|<[length]>
         - run mod_message_discord def:<[moderator]>|<[target].name>|<[level]>|<[reason]>|Ban|<[length]>
         - run mod_ban_player def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|<[length]>
       - else:
@@ -205,7 +205,7 @@ mod_server_unban_task:
       - ~yaml id:<[id]> load:<[dir]>
       - define level <yaml[<[id]>].read[banned.level]||1>
       - define infraction <yaml[<[id]>].read[banned.infraction]||Banned>
-      - run mod_notify_unban def:<[moderator]>|<[uuid]>|<[infraction]>|<[reason]>
+      - run mod_notify_action def:<[moderator]>|<[uuid]>|<[infraction]>|Unban|<[reason]>
       - run mod_message_discord def:<[moderator]>|<[uuid].as_player.name>|<[level]>|<[infraction]>|Unban
       - yaml id:<[id]> set banned:!
       - ~yaml id:<[id]> savefile:<[dir]>
@@ -253,7 +253,7 @@ mod_server_unban_command:
       - ~yaml id:<[id]> load:<[dir]>
       - define level <yaml[<[id]>].read[banned.level]||3>
       - define infraction <yaml[<[id]>].read[banned.infraction]||Banned>
-      - run mod_notify_unban def:<[moderator]>|<[uuid]>|<[infraction]>|<[reason]>
+      - run mod_notify_action def:<[moderator]>|<[uuid]>|<[infraction]>|Unban|<[reason]>
       - run mod_message_discord def:<[moderator]>|<[uuid].as_player.name>|<[level]>|<[infraction]>|Unban
       - yaml id:<[id]> set banned:!
       - ~yaml id:<[id]> savefile:<[dir]>
@@ -301,7 +301,7 @@ mod_global_unban_command:
       - ~yaml id:<[id]> load:<[dir]>
       - define level <yaml[<[id]>].read[banned.level]||3>
       - define infraction <yaml[<[id]>].read[banned.infraction]||Banned>
-      - run mod_notify_unban def:<[moderator]>|<[uuid]>|<[infraction]>|<[reason]>|global
+      - run mod_notify_action def:<[moderator]>|<[uuid]>|<[infraction]>|Unban|<[reason]>|global
       - run mod_message_discord def:<[moderator]>|<[uuid].as_player.name>|<[level]>|<[infraction]>|Unban
       - yaml id:<[id]> set banned:!
       - ~yaml id:<[id]> savefile:<[dir]>
