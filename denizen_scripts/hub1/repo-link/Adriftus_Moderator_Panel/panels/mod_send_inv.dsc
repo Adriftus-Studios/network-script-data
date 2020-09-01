@@ -37,5 +37,5 @@ mod_send_inv_events:
       - if <context.item.has_nbt[SERVER]>:
         - define origintodest <bungee.server><&sp>to<&sp><context.item.nbt[SERVER]>
         - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|0|<[origintodest]>|Send
-        - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|0|<[origintodest]>|Send
+        - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<[origintodest]>|Send
         - adjust <player.flag[amp_map].as_map.get[uuid].as_player> send_to:<context.item.nbt[SERVER]>
