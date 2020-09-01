@@ -66,5 +66,5 @@ Message_Handler:
             - ~Run Add_Developer_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
 
     # % ██ [ General Plaintext Scripts       ] ██
-      - else if <[Message].starts_with[yay]> || <[Message].contains_any[<&sp>yay<&sp>|<&sp>yay!**|<&sp>yay!<&sp>|**yay**]>:
+      - else if <[Message].starts_with[yay]> || <[Message].contains_any[<&sp>yay<&sp>|<&sp>yay!**|**yay**]>:
         - ~run Yayap_DCommand def:<[Channel]>
