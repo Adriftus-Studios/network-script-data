@@ -62,9 +62,9 @@ Message_Handler:
             - ~Run RFood_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case Restart:
             - ~Run Restart_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
-          - case test adddev adddeveloper add_dev add_developer devup devadd developeradd dev_add developer_add promotedev addgit gitadd add_git git_add:
+          - case adddev adddeveloper add_dev add_developer devup devadd developeradd dev_add developer_add promotedev addgit gitadd add_git git_add:
             - ~Run Add_Developer_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
 
     # % ██ [ General Plaintext Scripts       ] ██
-      - else if <[Message].starts_with[yay]> || <[Message].contains[<&sp>yay<&sp>]>:
+      - else if <[Message].starts_with[yay]> || <[Message].contains_any[<&sp>yay<&sp>|<&sp>yay!**|<&sp>yay!<&sp>|**yay**]>:
         - ~run Yayap_DCommand def:<[Channel]>

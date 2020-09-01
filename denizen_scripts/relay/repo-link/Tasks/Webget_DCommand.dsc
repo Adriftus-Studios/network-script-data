@@ -80,6 +80,8 @@ Webget_DCommand:
     
   # % ██ [ Check for Queue Clear Arguments         ] ██
     - if <list[clear|-clear|cancel|-cancel].contains[<[Args].first>]>:
+      - define Color Red
+      - inject Embedded_Color_Formatting
       - if <[Args].size> == 1 || <[Args].get[2]> != All:
         - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[title].as[Error: `Invalid Usage`].with[description].as[The `Cancel` argument only accepts this syntax:<&nl>`/webget (cancel|-cancel|remove|-remove) (Queue)`<&nl>Refer to `/webget help` for command help.]>]>"
         - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
@@ -87,8 +89,6 @@ Webget_DCommand:
         - stop
       - define Queues <queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>]>
       - define Fallback_URL https<&co>//discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
-      - define Color Red
-      - inject Embedded_Color_Formatting
       - if <[Queues].is_empty>:
         - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[title].as[Error: `No Active Queues.`]>]>"
       - else:
@@ -107,7 +107,7 @@ Webget_DCommand:
       - define QueueData "<[Queues].parse_tag[<&lb>`<&lb>Reference<&rb>`<&rb>(<[Parse_Value].definition[Reference_URL]||<[Fallback_URL]>>): `<[Parse_Value].definition[URL]||(Invalid URL)>`].separated_by[<&nl>]>"
       - define Color Red
       - inject Embedded_Color_Formatting
-      - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[title].as[Too Many Active Requests].with[description].as[Webget declined. There are currently **<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>** queue's in process:<&nl><[QueueData]><&nl>Use `/webget clear` to clear active requests.]>]>"
+      - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[title].as[Too Many Active Requests].with[description].as[Webget declined. There are currently **<queue.list.filter[id.contains_any_text[<script.name>]].exclude[<queue>].size>** queue's in process:<&nl><[QueueData]><&nl>Use `/webget clear all` to clear active requests.]>]>"
       - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
       - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
       - stop
