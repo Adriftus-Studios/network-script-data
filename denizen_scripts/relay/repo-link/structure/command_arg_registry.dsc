@@ -20,6 +20,3 @@ command_arg_registry:
 
         # % ██ [ Unique return - <[flag_args]>    | Returns a ListTag of flag arguments.      ] ██
             - define flag_args <[args].filter[starts_with[-]]>
-
-        # % ██ [ Unique return - <[map_args]>    | Returns a ListTag of mapped arguments.     ] ██
-            - define flag_args <[args].filter[contains[:]].split[:].limit[2].parse_tag[<map.with[<[parse_value].before[:]>/<[parse_value].after[:]>]>].merge_maps||invalid>
