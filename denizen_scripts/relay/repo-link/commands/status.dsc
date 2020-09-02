@@ -104,10 +104,7 @@ Status_DCommand:
     
   # % ██ [ Build Data
   #^- define Data "<map.with[title].as[<[Server]> Status]>"
-    - define Data <map.with[color].as[code]>
-    - define Data <[Data].with[fields].as[<[Fields]>]>
-    - define data "<[Data].with[username].as[<[Server]> Server]>"
-    - define Data <[Data].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
+    - define Data "<map.with[color].as[code].with[fields].as[<[Fields]>].with[username].as[<[Server]> Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>"
     - if !<[Duplicates].exclude[Online].is_empty>:
       - define Data "<[Data].with[description].as[**Flags Used**: `<[Duplicates].comma_separated>`]>"
     - define Data <[Data].with[time].as[Default]>
