@@ -1,7 +1,7 @@
-Definition_Registry:
+definition_registry:
     type: task
     debug: false
-    definitions: Definitions
+    definitions: definitions
     script:
-        - foreach <[Definitions]>:
-            - define <[Key]> <[Value]>
+        - foreach <[definitions]>:
+            - define <[key]> <[value]>
