@@ -70,6 +70,22 @@ Embedded_Discord_Message:
         # % ██ [ Send Finalized Message             ] ██
         - ~webget <[Hook]> headers:<yaml[Saved_Headers].read[Discord.Webhook_Message]> data:<[Embed_Message]>
 
+webhook_generic:
+    type: task
+    debug: false
+    definitions: type|definitions
+    script:
+        - inject definition_registry
+        - inject embedded_color_formatting
+        - define hook <script[DDTBCTY].data_key[WebHooks.<[channel]>.hook]>
+        - define headers <yaml[saved_headers].read[discord.webhook_message]>
+        - choose <[type]>:
+            - case title_description:
+                - define data <yaml[generic_webhooks].parsed_key[title_description].to_json>
+            - default:
+                - stop
+        - ~webget <[hook]> data:<[data]> headers:<[headers]>
+
 Embedded_Discord_Message_New:
     type: task
     debug: false
