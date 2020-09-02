@@ -13,7 +13,7 @@ discord_server_restart:
 
     - foreach <server.online_players> as:Player:
       - adjust <[player]> send_to:hub1
-      - bungeerun relay restart_player_retrieve def:<[Player]>|<bungee.server>
+      - bungeerun hub1 restart_player_retrieve def:<[Player]>|<bungee.server>
 
     - if <[Log]> || <[Confirmation]>:
       - flag server queue.startup_logger_response:<bungee.server>|<[duuid]>|<[log]>|<[confirmation]>
