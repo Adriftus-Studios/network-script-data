@@ -23,7 +23,7 @@ note_dcommand:
     - if !<script[ddtbcty].list_keys[webhooks].contains[<[channel]>]>:
       - stop
     - define user_id <[author].id>
-    - define headers <yaml[saved_headers].parsed_key[bot_auth]>
+    - define headers <yaml[saved_headers].parsed_key[discord.bot_auth]>
 
     - ~webget https://discordapp.com/api/users/<[user_id]> headers:<[headers]> save:response
     - define user_avatar https://cdn.discordapp.com/avatars/<[userid]>/<util.parse_yaml[<entry[response].result>].get[avatar]>
