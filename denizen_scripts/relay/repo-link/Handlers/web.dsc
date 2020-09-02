@@ -343,25 +343,25 @@ web_handler:
             - stop
 
         - shell <[Script]> <[Request]>
-        - if <[Map].contains[ref|commits]>:
-          - define Author_Map <[Map].get[Sender]>
-          - define GitHub_User_ID <[Author_Map].get[ID]>
-          - define Player_Map <yaml[movetohub].filter[get[GitHub].get[id].is[==].to[<[GitHub_User_ID]>]].first>
-          - define Role <[Player_Map].get[Role]>
+      #^- if <[Map].contains[ref|commits]>:
+      #^  - define Author_Map <[Map].get[Sender]>
+      #^  - define GitHub_User_ID <[Author_Map].get[ID]>
+      #^  - define Player_Map <yaml[movetohub].filter[get[GitHub].get[id].is[==].to[<[GitHub_User_ID]>]].first>
+      #^  - define Role <[Player_Map].get[Role]>
   
-          - define User_Name "<[Author_Map].get[login]> - <[Role]>"
-          - define User_Link <[Author_Map].get[html_url]>
-          - define User_Avatar <[Author_Map].get[avatar_url]>
+      #^  - define User_Name "<[Author_Map].get[login]> - <[Role]>"
+      #^  - define User_Link <[Author_Map].get[html_url]>
+      #^  - define User_Avatar <[Author_Map].get[avatar_url]>
 
-          - define Body_Lines <list>
-          - define Commit_Emoji <discordemoji[adriftusbot,custom,746943945929523252,icons8commitgit641,false].formatted>
-          - foreach <[Map].get[commits]> as:Commit:
-            - define ID <[Commit].get[id]>
-            - define URL <[Commit].get[url]>
-            - define Author <[Commit].get[author].get[username]>
-            - define Message <[Commit].get[message].replace[`].with[']>
-            - define Line "[<[Commit_Emoji]>`[<[ID].substring[1,8]>]`](<[URL]>)`[<[Author]>]` | <[Message]>"
-            - define Body_Lines <[Body_Lines].include_single[<[Line]>]>
+      #^  - define Body_Lines <list>
+      #^  - define Commit_Emoji <discordemoji[adriftusbot,custom,746943945929523252,icons8commitgit641,false].formatted>
+      #^  - foreach <[Map].get[commits]> as:Commit:
+      #^    - define ID <[Commit].get[id]>
+      #^    - define URL <[Commit].get[url]>
+      #^    - define Author <[Commit].get[author].get[username]>
+      #^    - define Message <[Commit].get[message].replace[`].with[']>
+      #^    - define Line "[<[Commit_Emoji]>`[<[ID].substring[1,8]>]`](<[URL]>)`[<[Author]>]` | <[Message]>"
+      #^    - define Body_Lines <[Body_Lines].include_single[<[Line]>]>
 
         #^- define Hook <script[DDTBCTY].data_key[WebHooks.650016499502940170.hook]>
         #^- define data
