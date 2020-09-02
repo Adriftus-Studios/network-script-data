@@ -18,4 +18,6 @@ Discord_Server_Restart:
     - if <[Log]> || <[Confirmation]>:
       - flag server Queue.Startup_Logger_Response:<bungee.server>|<[DUUID]>|<[Log]>|<[Confirmation]>
 
+    - execute as_server "save-all"
+    - wait 2s
     - adjust server restart
