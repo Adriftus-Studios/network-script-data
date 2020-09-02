@@ -1,50 +1,50 @@
-Note_DCommand:
+note_dcommand:
   type: task
-  PermissionRoles:
-  # % ██ [ Staff Roles  ] ██
+  permissionroles:
+  # % ██ [ staff roles  ] ██
     - Lead Developer
     - External Developer
     - Developer
 
-  # % ██ [ Public Roles ] ██
-    - Lead Developer
+  # % ██ [ public roles ] ██
+    - lead Developer
     - Developer
-  definitions: Message|Channel|Author|Group
+  definitions: message|channel|author|group
   debug: false
   script:
-  # % ██ [ Clean Definitions & Inject Dependencies ] ██
-    - inject Role_Verification
-    - inject Command_Arg_Registry
+  # % ██ [ clean definitions & inject dependencies ] ██
+    - inject role_verification
+    - inject command_arg_registry
     
-  # % ██ [ Verify Arguments            ] ██
-    - if <[Args].size> == 0:
+  # % ██ [ verify arguments            ] ██
+    - if <[args].size> == 0:
       - stop
 
-    - if !<script[DDTBCTY].list_keys[WebHooks].contains[<[Channel]>]>:
+    - if !<script[ddtbcty].list_keys[webhooks].contains[<[channel]>]>:
       - stop
-    - define UserID <[Author].ID>
-    - define Headers <list[User-Agent/really|Authorization/Bot<&sp><yaml[AdriftusBot_temp].read[AdriftusBotToken]>]>
+    - define user_id <[author].id>
+    - define headers <yaml[saved_headers].parsed_key[bot_auth]>
 
-    - ~webget https://discordapp.com/api/users/<[UserID]> Headers:<[Headers]> save:Response
-    - Define UserPFP https://cdn.discordapp.com/avatars/<[UserID]>/<util.parse_yaml[<entry[Response].result>].get[avatar]>
-    - inject Web_Debug.Webget_Response
+    - ~webget https://discordapp.com/api/users/<[user_id]> headers:<[headers]> save:response
+    - define user_avatar https://cdn.discordapp.com/avatars/<[userid]>/<util.parse_yaml[<entry[response].result>].get[avatar]>
+    - inject web_debug.webget_response
 
-    - define Message <&lt>:hambehrgeur:732716255567413309<&gt><&sp><[Message].after[/note<&sp>]>
-    - define color Yellow
-    - inject Embedded_Color_Formatting
-    - define Author <map.with[name].as[<[Author].name>].with[icon_url].as[<[UserPFP]>]>
-    - define Embeds <list[<map.with[color].as[<[Color]>].with[description].as[<[Message]>].with[author].as[<[Author]>]>]>
-    - define Data <map.with[username].as[NoteHook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[embeds].as[<[Embeds]>].to_json>
+    - define message <&lt>:hambehrgeur:732716255567413309<&gt><&sp><[message].after[/note<&sp>]>
+    - define color yellow
+    - inject embedded_color_formatting
+    - define author <map.with[name].as[<[author].name>].with[icon_url].as[<[user_avatar]>]>
+    - define embeds <list[<map.with[color].as[<[color]>].with[description].as[<[message]>].with[author].as[<[author]>]>]>
+    - define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[author].as[<[author]>].to_json>
 
-    - define Hook <script[DDTBCTY].data_key[WebHooks.731607719165034538.hook]>
-    - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+    - define hook <script[ddtbcty].data_key[webhooks.731607719165034538.hook]>
+    - define headers <yaml[saved_headers].read[discord.webhook_message]>
+    - ~webget <[hook]> data:<[data]> headers:<[headers]>
 
 
-    - define Message "Note saved to: <&lt>#731607719165034538<&gt><&nl><&gt> `<[Message].after[<&lt>:hambehrgeur:732716255567413309<&gt><&sp>]>`"
-    - define Embeds <list[<map.with[color].as[<[Color]>].with[description].as[<[Message]>].with[author].as[<[Author]>]>]>
-    - define Data <map.with[username].as[NoteHook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[embeds].as[<[Embeds]>].to_json>
+    - define message "note saved to: <&lt>#731607719165034538<&gt><&nl><&gt> `<[message].after[<&lt>:hambehrgeur:732716255567413309<&gt><&sp>]>`"
+    - define embeds <list[<map.with[color].as[<[color]>].with[description].as[<[message]>].with[author].as[<[author]>]>]>
+    - define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[author].as[<[author]>].to_json>
 
-    - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+    - define hook <script[ddtbcty].data_key[webhooks.<[channel]>.hook]>
+    - define headers <yaml[saved_headers].read[discord.webhook_message]>
+    - ~webget <[hook]> data:<[data]> headers:<[headers]>
