@@ -16,4 +16,4 @@ shield_degradation:
           - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:shield offset:0.2 quantity:15
           - take slot:<[slot]>
         - else:
-          - inventory adjust slot:<[slot]> durability:<[shield].durability.add[<context.damager.mythicmob.level>]> 
+          - inventory adjust slot:<[slot]> durability:<[shield].durability.add[<context.damager.mythicmob.level>]>
