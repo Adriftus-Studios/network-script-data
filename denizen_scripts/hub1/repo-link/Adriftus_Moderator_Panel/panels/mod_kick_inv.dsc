@@ -18,12 +18,12 @@ mod_kick_inv:
         - define item <item[mod_level<[level]>_item]>
         - define name <[item].script.parsed_key[tag]><&sp><[infraction]>
         - define lore <list[<&b>Level<&co><&sp><[item].script.parsed_key[colour]><[level]>]>
-        - define lore:|:<&e>Right<&sp>Click<&sp>to<&sp>kick<&co>
-        - define lore:|:<player.flag[amp_map].as_map.get[uuid].as_player.name>
-        - define lore:|:<&e>Clic<&sp>Droit<&sp>pour<&sp>un<&sp>coup<&co>
+        - define lore:->:<&e>Right<&sp>Click<&sp>to<&sp>kick<&co>
+        - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
+        - define lore:->:<&e>Clic<&sp>Droit<&sp>pour<&sp>un<&sp>coup<&co>
         - define nbt <list[LEVEL/<[level]>|INFRACTION/<[infraction]>]>
         - define item <[item].with[display_name=<[name]>;lore=<[lore]>;nbt=<[nbt]>]>
-        - define inventory:|:<[item]>
+        - define inventory:->:<[item]>
     - determine <[inventory]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
