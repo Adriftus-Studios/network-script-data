@@ -8,6 +8,14 @@ teleportation_crystal:
     - <&3>Right Click to open up the teleportation menu.
   mechanisms:
     hides: ALL
+  recipes:
+    1:
+      type: shaped
+      output_quantity: 1
+      input:
+        - air|teleportation_shard|air
+        - teleportation_shard|diamond|teleportation_shard
+        - air|teleportation_shard|air
 
 # -- Teleportation Crystal Menu
 teleportation_crystal_menu:
