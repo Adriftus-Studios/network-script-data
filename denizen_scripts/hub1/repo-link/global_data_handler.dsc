@@ -110,7 +110,7 @@ External_Player_Data_Join_Event:
       # % ██ [ Fire Player Login Tasks ] ██
       - define PlayerMap <map.with[Name].as[<[Name]>].with[Server].as[<bungee.server>]>
       - if <yaml[<[GlobalYaml]>].contains[Rank]>:
-        - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[global.player.<[UUID]>].read[rank].strip_color>]>
+        - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[<[GlobalYaml]>].read[rank].strip_color>]>
       - if <[Event]> == Joined:
         - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap]>]>
       - else:

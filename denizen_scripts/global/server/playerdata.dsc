@@ -3,103 +3,110 @@ player_data_handler:
   debug: false
   events:
     on player logs in:
-    # % ██ [ Load Server Player Data ] ██
-      - define ServerYaml data/players/<player.uuid>.yml
-      - if <server.has_file[<[ServerYaml]>]>:
-        - ~yaml id:player.<player.uuid> load:<[ServerYaml]>
+    # % ██ [ Load Server player Data ] ██
+      - define server_yaml data/players/<player.uuid>.yml
+      - if <server.has_file[<[server_yaml]>]>:
+        - ~yaml id:player.<player.uuid> load:<[server_yaml]>
       - else:
         - yaml id:player.<player.uuid> create
-        - ~yaml id:player.<player.uuid> savefile:<[ServerYaml]>
+        - ~yaml id:player.<player.uuid> savefile:<[server_yaml]>
 
     on delta time minutely every:5:
-      - foreach <server.online_players> as:Player:
-        - ~yaml id:player.<[Player].uuid> savefile:data/players/<[Player].uuid>.yml
-        - ~yaml id:global.player.<[Player].uuid> savefile:data/global/players/<[Player].uuid>.yml
+      - define list <yaml.list>
+      - foreach <server.online_players> as:player:
+        - if !<[list].contains[player.<[player].uuid>]>:
+          - ~yaml id:player.<[player].uuid> load:data/players/<[player].uuid>.yml
+        - else:
+          - ~yaml id:player.<[player].uuid> savefile:data/players/<[player].uuid>.yml
+        - if !<[list].contains[pglobal.player.<[player].uuid>]>:
+          - ~yaml id:player.<[player].uuid> load:data/global/players/<[player].uuid>.yml
+        - else:
+          - ~yaml id:global.player.<[player].uuid> savefile:data/global/players/<[player].uuid>.yml
 
-Player_Data_Join_Event:
+player_Data_Join_Event:
   type: task
   debug: false
-  definitions: UUID|Event
+  definitions: uuid|Event
   script:
-  # % ██ [ Cache Player Info ] ██
-    - define Timeout <util.time_now.add[5m]>
-    - define GlobalYaml global.player.<[UUID]>
+  # % ██ [ Cache player Info ] ██
+    - define timeout <util.time_now.add[5m]>
+    - define global_yaml global.player.<[uuid]>
 
-  # % ██ [ Verify Player ] ██
-    - waituntil rate:2t <player[<[UUID]>].is_online> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0
-    - if !<player[<[UUID]>].is_online||false>:
+  # % ██ [ Verify player ] ██
+    - waituntil rate:2t <player[<[uuid]>].is_online> || <[timeout].duration_since[<util.time_now>].in_seconds> == 0
+    - if !<player[<[uuid]>].is_online||false>:
       - stop
 
-  # % ██ [ Load Global Player Data ] ██
-    - yaml id:<[GlobalYaml]> load:data/global/players/<[UUID]>.yml
+  # % ██ [ Load Global player Data ] ██
+    - yaml id:<[global_yaml]> load:data/global/players/<[uuid]>.yml
 
-    # % ██ [ Load and Set Display_Name ] ██
-    - define Name <player[<[UUID]>].name>
-    - if !<yaml[<[GlobalYaml]>].contains[Display_Name]>:
-      - yaml id:<[GlobalYaml]> set Display_Name:<[Name]>
-    - adjust <player[<[UUID]>]> Display_Name:<yaml[<[GlobalYaml]>].read[Display_Name]>
+    # % ██ [ Load and Set display_name ] ██
+    - define name <player[<[uuid]>].name>
+    - if !<yaml[<[global_yaml]>].contains[display_name]>:
+      - yaml id:<[global_yaml]> set display_name:<[name]>
+    - adjust <player[<[uuid]>]> display_name:<yaml[<[global_yaml]>].read[display_name]>
 
-  # % ██ [ Load Tab_Display_Name ] ██
-    - if !<yaml[<[GlobalYaml]>].contains[Tab_Display_name]>:
-      - yaml id:<[GlobalYaml]> set Tab_Display_name:<[Name]>
+  # % ██ [ Load Tab_display_name ] ██
+    - if !<yaml[<[global_yaml]>].contains[Tab_display_name]>:
+      - yaml id:<[global_yaml]> set Tab_display_name:<[name]>
 
-    # % ██ [ Fire Player Login Tasks ] ██
-    - define PlayerMap <map.with[Name].as[<[Name]>].with[Server].as[<bungee.server>]>
-    - if <yaml[<[GlobalYaml]>].contains[Rank]>:
-      - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[global.player.<[UUID]>].read[rank].strip_color>]>
+    # % ██ [ Fire player Login Tasks ] ██
+    - define player_map <map.with[name].as[<[name]>].with[Server].as[<bungee.server>]>
+    - if <yaml[<[global_yaml]>].contains[rank]>:
+      - define player_map <[player_map].with[rank].as[<yaml[global.player.<[uuid]>].read[rank].strip_color>]>
       
     - waituntil rate:1s <bungee.connected>
     - if <[Event]> == Joined:
-      - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap]>]>
+      - bungeerun relay player_Join_Message def:<list_single[<[player_map]>]>
     - else:
-      - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap]>]>
+      - bungeerun relay player_Switch_Message def:<list_single[<[player_map]>]>
 
-Player_Data_Quit_Event:
+player_data_quit_event:
   type: task
   debug: false
-  definitions: UUID
+  definitions: uuid
   script:
-    - inject Unload_Player_Data
-    - bungeerun Relay Player_Quit_Message def:<list_single[<[PlayerMap]>]>
+    - inject unload_player_data
+    - bungeerun relay player_quit_message def:<list_single[<[player_map]>]>
 
-Player_Data_Switch_Event:
+player_data_switch_event:
   type: task
   debug: false
-  definitions: UUID
+  definitions: uuid
   script:
-    - inject Unload_Player_Data
-    - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap]>]>
+    - inject unload_player_data
+    - bungeerun relay player_switch_message def:<list_single[<[player_map]>]>
 
-Unload_Player_Data:
+unload_player_data:
   type: task
   debug: false
-  definitions: UUID
+  definitions: uuid
   script:
-  # % ██ [ Cache Player Info ] ██
+  # % ██ [ Cache player Info ] ██
     - waituntil rate:1s <bungee.connected>
-    - define Timeout <util.time_now.add[5s]>
-    - define Player <player[<[UUID]>]>
-    - define Name <[Player].name>
-    - define PlayerMap <map.with[Player].as[<[Player]>].with[UUID].as[<[UUID]>].with[Server].as[<bungee.server>].with[Name].as[<[Name]>]>
+    - define timeout <util.time_now.add[5s]>
+    - define player <player[<[uuid]>]>
+    - define name <[player].name>
+    - define player_map <map.with[player].as[<[player]>].with[uuid].as[<[uuid]>].with[Server].as[<bungee.server>].with[name].as[<[name]>]>
 
-  # % ██ [ Unload Server Player Data ] ██
-    - waituntil rate:1s <yaml.list.contains[player.<[UUID]>]> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0
-    - if <yaml.list.contains[player.<[UUID]>]>:
-      - ~yaml id:player.<[UUID]> savefile:data/players/<[UUID]>.yml
-      - yaml id:player.<[UUID]> unload
+  # % ██ [ Unload Server player Data ] ██
+    - waituntil rate:1s <yaml.list.contains[player.<[uuid]>]> || <[timeout].duration_since[<util.time_now>].in_seconds> == 0
+    - if <yaml.list.contains[player.<[uuid]>]>:
+      - ~yaml id:player.<[uuid]> savefile:data/players/<[uuid]>.yml
+      - yaml id:player.<[uuid]> unload
 
-  # % ██ [ Verify Global Player Data ] ██
-    - if !<yaml.list.contains[global.player.<[UUID]>]>:
+  # % ██ [ Verify Global player Data ] ██
+    - if !<yaml.list.contains[global.player.<[uuid]>]>:
       - define timeout <util.time_now.add[5s]>
-      - waituntil rate:1s <yaml.list.contains[global.player.<[UUID]>]> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0
-      - if !<yaml.list.contains[global.player.<[UUID]>]>:
+      - waituntil rate:1s <yaml.list.contains[global.player.<[uuid]>]> || <[timeout].duration_since[<util.time_now>].in_seconds> == 0
+      - if !<yaml.list.contains[global.player.<[uuid]>]>:
         - stop
 
-  # % ██ [ Unload Global Player Data ] ██
-    - if <yaml[global.player.<[UUID]>].contains[Rank]>:
-      - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[global.player.<[UUID]>].read[rank].strip_color>]>
-    - ~yaml id:global.player.<[UUID]> savefile:data/global/players/<[UUID]>.yml
-    - yaml id:global.player.<[UUID]> unload
+  # % ██ [ Unload Global player Data ] ██
+    - if <yaml[global.player.<[uuid]>].contains[rank]>:
+      - define player_map <[player_map].with[rank].as[<yaml[global.player.<[uuid]>].read[rank].strip_color>]>
+    - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
+    - yaml id:global.player.<[uuid]> unload
 
 player_data_safe_modify:
   type: task
