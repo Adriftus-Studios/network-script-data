@@ -45,6 +45,7 @@ hub_settings_item:
 
 network_item_events:
   type: world
+  debug: false
   events:
     on player right clicks with:network_item:
       - determine passively cancelled
@@ -77,6 +78,7 @@ network_item_inventory:
 
 network_item_inventory_events:
   type: world
+  debug: false
   events:
     on player clicks item in network_item_inventory:
       - determine passively cancelled
