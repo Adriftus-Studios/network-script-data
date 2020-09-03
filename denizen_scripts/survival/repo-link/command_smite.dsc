@@ -1,17 +1,15 @@
-drown_command:
+smite_command:
     type: command
-    name: drown
-    usage: /drown (player)
-    description: plays a drown animation
+    name: smite
+    usage: /smite (player)
+    description: hits a player with lightning
     permission: adriftus.staff
     script:
     - if <context.args.size> > 1:
         - inject command_syntax
     - else if <context.args.is_empty>:
-        - animate animation:HURT_DROWN <player>
+        - strike no_damage <player.curson_on>
     - else:
         - define user <context.args.first>
         - inject player_verification
-        - repeat 3:
-            - animate animation:HURT_DROWN <[user]>
-            - wait 14t
+        - strike no_damage <[user].location>
