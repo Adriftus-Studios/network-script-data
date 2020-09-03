@@ -39,6 +39,7 @@ graves_config:
 
 graves_data:
   type: world
+  debug: false
   load:
     - if <server.has_file[data/graves.yml]>:
       - yaml id:graves load:data/graves.yml
@@ -55,6 +56,7 @@ graves_data:
 
 graves_handler:
   type: world
+  debug: false
   debug: false
   load:
     - if <server.has_file[data/graves.yml]>:
