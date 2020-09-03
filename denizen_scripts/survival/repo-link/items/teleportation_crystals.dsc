@@ -99,3 +99,9 @@ teleportation_crystal_menu_events:
       - narrate targets:<[other_player]> "<&b>Use a teleportation crystal to confirm their request. <&3>(Teleport to: <player.name>)"
       - narrate "<&b>You requested <&3><[other_player].name> <&b>teleport to you."
 
+teleportation_crystal_events:
+  type: world
+  debug: false
+  events:
+    on player right clicks block with:teleportation_crystal:
+	  - inventory open d:teleportation_crystal_menu
