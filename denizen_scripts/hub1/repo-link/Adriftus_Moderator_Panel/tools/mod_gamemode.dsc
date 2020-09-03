@@ -65,7 +65,7 @@ gamemode_handle_command:
   type: task
   debug: false
   script:
-    - if <context.args.is_empty||true> && !<context.server>:
+    - if <context.args.is_empty> && !<context.server>:
       - define target_list:<player>
     - else if <context.server>:
       - announce to_console "<&c>You must specify a player when using this command from Console."
@@ -89,4 +89,4 @@ gamemode_handle_command:
         - else:
           - adjust <[target]> gamemode:<[gamemode]>
           - narrate "<&e>You have set <&b><[target].name><&6>(<&7>OFFLINE<&6>)<&e> to <&6><[gamemode].to_titlecase> Mode<&e>."
-        - define completed:|:<[target]>
+        - define completed:->:<[target]>

@@ -17,12 +17,12 @@ mod_send_inv:
       - if <yaml[bungee.config].read[servers.<[server]>.show_in_play_menu]>:
         - define name <[server]>
         - define lore <list.include[<yaml[bungee.config].parsed_key[servers.<[server]>.description]>]>
-        - define lore:|:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
-        - define lore:|:<player.flag[amp_map].as_map.get[uuid].as_player.name>
-        - define lore:|:<&d>Clic<&sp>Droit<&sp>pour<&sp>envoyer<&co>
+        - define lore:->:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
+        - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
+        - define lore:->:<&d>Clic<&sp>Droit<&sp>pour<&sp>envoyer<&co>
         - define nbt <list[SERVER/<[server]>]>
         - define item <yaml[bungee.config].read[servers.<[server]>.material].as_item.with[display_name=<[name]>;lore=<[lore]>]>
-        - define inventory:|:<[item]>
+        - define inventory:->:<[item]>
     - determine <[inventory]>
   slots:
     - [b2] [b1] [b1] [b2] [b1] [b2] [b1] [b1] [b2]

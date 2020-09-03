@@ -102,5 +102,5 @@ mod_get_infractions:
     - define result <list>
     - foreach <script[<[script]>].list_keys[].exclude[type]> as:level:
       - foreach <script[<[script]>].list_keys[<[level]>]> as:infraction:
-        - define result:|:<[level]>.<[infraction]>
+        - define result:->:<[level]>.<[infraction]>
     - determine <[result]>
