@@ -30,16 +30,16 @@ array_lookup:
 
 # % ██ [ Determines the values of a mapped key within a list of mappings ] ██
 # $ ██ | Note: This is intended for multiple result returns as a ListTag. See [array_lookup] for an exact match.
-# - ██ | Usage: <proc[array_lookup_multi].context[Yaml|Parent|Key|Value]>
-# ^ ██ | Yaml: The yaml file we search   | Parent: The key containing a ListTag to search
-# ^ ██ | Key: The mapping value to match | Value: The value searched and returned
-# + ██ | Compare to: <yaml[Yaml].read[Parent].filter_tag[<[filter_value].get[Key].is[==].to[Value]>]>
+# - ██ | Usage: <proc[array_lookup_multi].context[Yaml|Parent|Key|Values]>
+# ^ ██ | Yaml: The yaml file we search    | Parent: The key containing a ListTag to search
+# ^ ██ | Key: The mapping values to match | values: The values searched and returned
+# + ██ | Compare to: <yaml[Yaml].read[Parent].filter_tag[<[filter_value].contains_any[Value]>]>
 array_lookup_multi:
     type: procedure
-    definitions: yaml|parent|key|value
+    definitions: yaml|parent|key|values
     script:
         - if !<yaml[<[yaml]>].contains[<[parent]>]>:
             - determine invalid
-        - if !<yaml[<[yaml]>].read[<[parent]>].is_empty>:
+        - if <yaml[<[yaml]>].read[<[parent]>].is_empty>:
             - determine <list>
-        - determine <yaml[<[yaml]>].read[<[parent]>].filter[get[<[key]>].is[==].to[<[value]>]]>
+        - determine <yaml[<[yaml]>].read[<[parent]>].filter[get[<[key]>].contains_any[<[values]>]]>

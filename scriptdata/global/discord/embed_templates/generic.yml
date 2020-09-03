@@ -1,0 +1,8 @@
+title_description:
+  type: single
+  embed:
+  - title: <[title]>
+    color: <[color]>
+    description: <[text]>
+  avatar_url: https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png
+  username: <[username]>

@@ -19,11 +19,12 @@ survivalistInventory:
         backpack_45: <item[Backpack_45].with[nbt=item/Backpack_45;lore=<&e>Slots:<&sp><&a>45|<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Backpack_45.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Backpack_45.Prices].after[/]>]>
         backpack_54: <item[Backpack_54].with[nbt=item/Backpack_54;lore=<&e>Slots:<&sp><&a>54|<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Backpack_54.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Backpack_54.Prices].after[/]>]>
         grappling_hook: <item[grappling_hook].with[nbt=item/Grappling_Hook;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Grappling_Hook.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Grappling_Hook.Prices].after[/]>]>
+        teleportation_shard: <item[teleportation_shard].with[nbt=item/Teleportation_Shard;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Teleportation_Shard.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Teleportation_Shard.Prices].after[/]>]>
         mushroom_home: <item[mushroom_home].with[nbt=item/Mushroom_Home;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Mushroom_Home.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Mushroom_Home.Prices].after[/]>]>
     slots:
     - [filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]
     - [filler] [backpack_9] [backpack_18] [backpack_27] [backpack_36] [backpack_45] [backpack_54] [grappling_hook] [filler]
-    - [filler] [mushroom_home] [] [] [] [] [] [] [filler]
+    - [filler] [teleportation_shard] [mushroom_home] [] [] [] [] [] [filler]
     - [filler] [] [] [] [] [] [] [] [filler]
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
@@ -91,6 +92,9 @@ survivalistData:
         Grappling_Hook:
             Item: <item[grappling_hook]>
             Prices: 100/50
+        Teleportation_Shard:
+            Item: <item[teleportation_shard]>
+            Prices: 500/250
         Mushroom_Home:
             Item: <item[mushroom_home].with[nbt=owner/<player.uuid>]>
             Prices: 2000/1500

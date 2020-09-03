@@ -20,7 +20,7 @@ mod_report_command:
       - if <[target]> != <player>:
         - if <context.args.get[2]||null> != null:
           - define reason <context.args.get[2].to[<context.args.size>].space_separated>
-          - run mod_notify_report def:<list[<player>|<[target].uuid>].include_single[<[reason]>].include[<bungee.server||Server>]>
+          - run mod_notify_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>|<[target].uuid>]>
           - run mod_message_discord_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>|<[target]>]>
           - narrate "<&e>You have successfully reported <[target].name> for <[reason]>."
         - else:
@@ -44,7 +44,7 @@ mod_bugreport_command:
       - narrate "<&6>/bugreport [reason]"
     - else:
       - define reason <context.args.get[1].to[<context.args.size>].space_separated>
-      - run mod_notify_bugreport def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
+      - run mod_notify_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
       - run mod_message_discord_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
       - narrate "<&e>You have successfully reported a bug: <[reason]>."
 

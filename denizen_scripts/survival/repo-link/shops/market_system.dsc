@@ -18,7 +18,7 @@ market_command:
 # - Market System Data - #
 # ---------------------- #
 # The below data script container is for adding/removing/categorizing/pricing items
-## IMPORTANT
+# -- IMPORTANT -- #
 ## WHEN ADDING A NEW CATEGORY, MODIFY THE market_system_main_GUI SCRIPT TO MAKE ROOM FOR IT
 ## THIS CAN BE DONE BY DELETING ONE OF THE FILLER SPOTS
 
@@ -26,8 +26,8 @@ market_system_data:
   type: data
   settings:
     adjustment_amount: 2
-    ## IMPORTANT
-    ## THE sell_buy_difference (BELOW) SHOULD ALWAYS BE HIGHER THAN adjustment_amount (ABOVE).
+    # -- IMPORTANT -- #
+    ## THE sell_buy_difference (BELOW) SHOULD ALWAYS BE GREATER THAN adjustment_amount (ABOVE).
     ## THIS AVOIDS INFINITE MONEY GLITCHES.
     sell_buy_difference: 5
   categories:
@@ -49,11 +49,19 @@ market_system_data:
       lore: <&a>Trade Goods!
   items:
     # Crafting
+    netherite_ingot:
+      category: crafting
+      minimum_value: 2200
+
+    ancient_debris:
+      category: crafting
+      minimum_value: 500
+
     diamond:
       category: crafting
       minimum_value: 300
 
-#    Emeralds can be gotten waayyy to easy from villagers.
+#    -- Emeralds can be obtained easily from villagers.
 #    emerald:
 #      category: crafting
 #      minimum_value: 20.0
