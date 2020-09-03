@@ -112,7 +112,7 @@ Status_DCommand:
 
   Flags:
     Players:
-      tag: "Online<&co> `(<server.online_players.size>)`<&nl>```md<&nl>- <server.online_players.parse[name].separated_by[<&nl>- ]>```"
+      tag: "Online<&co> `(<server.online_players.size>)`<n>```md<n>- <server.online_players.parse[name].separated_by[<n>- ]>```"
       nodes:
         - p
         - players
@@ -123,18 +123,23 @@ Status_DCommand:
         - world
         - worlds
     Plugins:
-      tag: "<server.list_plugins.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].version>`].separated_by[<&nl>]>"
+      tag: "<server.list_plugins.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].version>`].separated_by[<n>]>"
       nodes:
         - pl
+        - plugin
         - plugins
-        - versions
     Version:
-      tag: "Version<&co> `<server.version>`<&nl>Denizen Version: `<server.denizen_version>`"
+      tag: "Version<&co> `<server.version>`<n>Denizen Version: `<server.denizen_version>`"
       nodes:
         - v
         - version
+    Versions:
+      tag: "Version<&co> `<server.version>`<n><server.list_plugins.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].version>`].separated_by[<n>]>"
+      nodes:
+        - versions
+        - stats
     Chunks:
-      tag: <server.worlds.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].loaded_chunks.size>`].separated_by[<&nl>]>
+      tag: <server.worlds.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].loaded_chunks.size>`].separated_by[<n>]>
       nodes:
         - ch
         - chunks
@@ -143,7 +148,7 @@ Status_DCommand:
       nodes:
         - tps
     Scripts:
-      tag: "Total Scripts<&co> `(<server.scripts.size>)`<&nl>Yaml Files<&co> `(<yaml.list.size>)`<&nl><server.scripts.parse[data_key[type]].deduplicate.parse_tag[<[Parse_Value].to_titlecase> Scripts<&co> `(<server.scripts.filter[data_key[type].is[==].to[<[Parse_Value]>]].size>)`].separated_by[<&nl>]>"
+      tag: "Total Scripts<&co> `(<server.scripts.size>)`<n>Yaml Files<&co> `(<yaml.list.size>)`<n><server.scripts.parse[data_key[type]].deduplicate.parse_tag[<[Parse_Value].to_titlecase> Scripts<&co> `(<server.scripts.filter[data_key[type].is[==].to[<[Parse_Value]>]].size>)`].separated_by[<n>]>"
       nodes:
         - s
         - scripts
