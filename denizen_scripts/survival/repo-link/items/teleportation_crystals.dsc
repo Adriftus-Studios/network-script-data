@@ -13,9 +13,9 @@ teleportation_crystal:
       type: shaped
       output_quantity: 1
       input:
-        - air|teleportation_shard|air
-        - teleportation_shard|diamond|teleportation_shard
-        - air|teleportation_shard|air
+      - air|teleportation_shard|air
+      - teleportation_shard|diamond|teleportation_shard
+      - air|teleportation_shard|air
 
 # -- Teleportation Crystal Menu
 teleportation_crystal_menu:
@@ -31,7 +31,7 @@ teleportation_crystal_menu:
     close: <item[red_stained_glass_pane].with[display_name=<&c>Cancel]>
   procedural items:
     - define inventory <list>
-    - foreach <server.online_players> as:player:
+    - foreach <server.online_players.exclude[<player>]> as:player:
       - define lore <list[<&b>Left<&sp>Click<&sp>to<&sp>teleport<&sp>to<&co><&sp><&e><[player].name>]>
       - define lore:->:<&3>Right<&sp>Click<&sp>to<&sp>request<&sp>to<&sp>teleport<&sp>here
       - define item <item[player_head].with[display_name=<&e><[player].name>;lore=<[lore]>;skull_skin=<[player].name>;nbt=<list[name/<[player].name>]>]>
@@ -54,6 +54,9 @@ teleportation_crystal_menu_events:
   events:
     on player clicks in teleportation_crystal_menu priority:10:
       - determine cancelled
+	
+    on player clicks red_stained_glass_pane in teleportation_crystal_menu:
+      - inventory close
     
     on player left clicks player_head in teleportation_crystal_menu:
       - define other_player <server.match_offline_player[<context.item.nbt[name]>]>
@@ -65,7 +68,7 @@ teleportation_crystal_menu_events:
             - if <[inner_map].get[request_type]> == teleport_here:
               - teleport <player> <[inner_map].get[location].as_location>
               - flag <[other_player]> teleportation_crystal:<-:<[map]>
-              - flag <player> teleportation_crystal:<-:<[map].with[<[other_player]>].as[<[inner_map].with[request_type].as[teleport_to]>]>
+              - flag <player> teleportation_crystal:<-:<map.with[<[other_player]>].as[<[inner_map].with[request_type].as[teleport_to]>]>
               - take scriptname:teleportation_crystal from:<[other_player].inventory>
               - take scriptname:teleportation_crystal from:<player.inventory>
               - stop
@@ -87,13 +90,13 @@ teleportation_crystal_menu_events:
             - if <[inner_map].get[request_type]> == teleport_to:
               - teleport <[other_player]> <[inner_map].get[location].as_location>
               - flag <[other_player]> teleportation_crystal:<-:<[map]>
-              - flag <player> teleportation_crystal:<-:<[map].with[<[other_player]>].as[<[inner_map].with[request_type].as[teleport_here]>]>
+              - flag <player> teleportation_crystal:<-:<map.with[<[other_player]>].as[<[inner_map].with[request_type].as[teleport_here]>]>
               - take scriptname:teleportation_crystal from:<[other_player].inventory>
               - take scriptname:teleportation_crystal from:<player.inventory>
               - stop
       # Request to teleport a player to you.
       - define teleport_map <map.with[<player>].as[<map.with[request_type].as[teleport_here].with[location].as[<player.location>]>]>
-      - flag <[other_player]> teleportation_crystal:->:<[teleport_nap]> duration:3m
+      - flag <[other_player]> teleportation_crystal:->:<[teleport_map]> duration:3m
       - flag <player> teleportation_crystal:->:<map.with[<[other_player]>].as[<[teleport_map].with[request_type].as[teleport_to]>]> duration:3m
       - narrate targets:<[other_player]> "<&3><player.name> <&b>requests you to teleport to them!"
       - narrate targets:<[other_player]> "<&b>Use a teleportation crystal to confirm their request. <&3>(Teleport to: <player.name>)"
