@@ -6,3 +6,4 @@ networkteleport_yaml_load:
         - yaml create id:networkteleporthere_requests
         - yaml create id:networkteleport_cooldowns
         - yaml create id:networkteleporthere_cooldowns
+        - createworld 4_buildings
