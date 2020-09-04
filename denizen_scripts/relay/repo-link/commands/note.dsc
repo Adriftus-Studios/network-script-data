@@ -16,15 +16,15 @@ note_dcommand:
     - inject role_verification
     - inject command_arg_registry
 
-  # % ██ [ verify arguments            ] ██
+  # % ██ [ verify arguments             ] ██
     - if <[args].size> == 0:
       - stop
 
-  # % ██ [ verify webhook              ] ██
+  # % ██ [ verify webhook               ] ██
     - if !<script[ddtbcty].list_keys[webhooks].contains[<[channel]>]>:
       - stop
 
-  # % ██ [ obtain user info            ] ██
+  # % ██ [ obtain user info             ] ██
     - define user_id <[author].id>
     - define headers <yaml[saved_headers].parsed_key[discord.bot_auth]>
     - ~webget https://discordapp.com/api/users/<[user_id]> headers:<[headers]> save:response
@@ -39,7 +39,8 @@ note_dcommand:
     - define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[author].as[<[author]>].to_json>
 
   # % ██ [ reply with note verification ] ██
-    - define hook <script[ddtbcty].data_key[webhooks.731607719165034538.hook]>
+    - define channel_id 731607719165034538
+    - inject get_webhooks
     - define headers <yaml[saved_headers].read[discord.webhook_message]>
     - ~webget <[hook]> data:<[data]> headers:<[headers]>
 
@@ -49,6 +50,7 @@ note_dcommand:
     - define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[author].as[<[author]>].to_json>
 
   # % ██ [ save message note            ] ██
-    - define hook <script[ddtbcty].data_key[webhooks.<[channel]>.hook]>
+    - define channel_id <[channel]>
+    - inject get_webhooks
     - define headers <yaml[saved_headers].read[discord.webhook_message]>
     - ~webget <[hook]> data:<[data]> headers:<[headers]>
