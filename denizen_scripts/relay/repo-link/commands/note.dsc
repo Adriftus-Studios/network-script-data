@@ -28,7 +28,7 @@ note_dcommand:
     - define user_id <[author].id>
     - define headers <yaml[saved_headers].parsed_key[discord.bot_auth]>
     - ~webget https://discordapp.com/api/users/<[user_id]> headers:<[headers]> save:response
-    - define user_avatar https://cdn.discordapp.com/avatars/<[userid]>/<util.parse_yaml[<entry[response].result>].get[avatar]>
+    - define user_avatar https://cdn.discordapp.com/avatars/<[user_id]>/<util.parse_yaml[<entry[response].result>].get[avatar]>
 
   # % ██ [ build note message           ] ██
     - define message <&lt>:hambehrgeur:732716255567413309<&gt><&sp><[message].after[/note<&sp>]>
