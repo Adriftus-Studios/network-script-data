@@ -79,7 +79,7 @@ note_embed:
 #@title:
   description: <[message]>
 #@embed_type:
-  color: <[color]>
+  color: 13544704
 #@url:
 
 #@send_embed_message:
