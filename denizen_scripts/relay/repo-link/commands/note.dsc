@@ -34,28 +34,28 @@ note_dcommand:
     - define message <&lt>:hambehrgeur:732716255567413309<&gt><&sp><[message].after[/note<&sp>]>
     - define color yellow
     - inject embedded_color_formatting
-  #^- define author <map.with[name].as[<[author].name>].with[icon_url].as[<[user_avatar]>]>
-  #^- define embeds <list[<map.with[color].as[<[color]>].with[description].as[<[message]>].with[author].as[<[author]>]>]>
-  #^- define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[author].as[<[author]>].to_json>
+    - define author <map.with[name].as[<[author].name>].with[icon_url].as[<[user_avatar]>]>
+    - define embeds <list[<map.with[description].as[<[message]>].with[author].as[<[author]>]>]>
+    - define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[author].as[<[author]>].to_json>
 
   # % ██ [ reply with note verification ] ██
     - define channel_id 731607719165034538
-  #^- inject get_webhooks
-  #^- define headers <yaml[saved_headers].read[discord.webhook_message]>
-  #^- ~webget <[hook]> data:<[data]> headers:<[headers]>
-    - discord id:AdriftusBot channel:<[channel_id]> send_embed embed:<discordembed[note_embed]>
+    - inject get_webhooks
+    - define headers <yaml[saved_headers].read[discord.webhook_message]>
+    - ~webget <[hook]> data:<[data]> headers:<[headers]>
+  #^- discord id:AdriftusBot channel:<[channel_id]> send_embed embed:<discordembed[note_embed]>
 
   # % ██ [ build note message           ] ██
     - define message "note saved to: <&lt>#731607719165034538<&gt><&nl><&gt> `<[message].after[<&lt>:hambehrgeur:732716255567413309<&gt><&sp>]>`"
-  #^- define embeds <list[<map.with[color].as[<[color]>].with[description].as[<[message]>].with[author].as[<[author]>]>]>
-  #^- define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[author].as[<[author]>].to_json>
+    - define embeds <list[<map.with[description].as[<[message]>].with[author].as[<[author]>]>]>
+    - define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[author].as[<[author]>].to_json>
 
   # % ██ [ save message note            ] ██
-  #^- define channel_id <[channel]>
-  #^- inject get_webhooks
-  #^- define headers <yaml[saved_headers].read[discord.webhook_message]>
-  #^- ~webget <[hook]> data:<[data]> headers:<[headers]>
-    - discord id:AdriftusBot channel:<[channel]> send_embed embed:<discordembed[note_embed]>
+    - define channel_id <[channel]>
+    - inject get_webhooks
+    - define headers <yaml[saved_headers].read[discord.webhook_message]>
+    - ~webget <[hook]> data:<[data]> headers:<[headers]>
+  #^- discord id:AdriftusBot channel:<[channel]> send_embed embed:<discordembed[note_embed]>
 
 note_embed:
   type: discord_embed
