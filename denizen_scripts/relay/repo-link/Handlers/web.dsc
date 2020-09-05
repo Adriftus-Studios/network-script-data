@@ -91,6 +91,8 @@ web_handler:
           - define query <[query].with[created_at].as[<[created_at]>]>
           - define query <[query].with[discord_id].as[<[discord_id]>]>
 
+          - define query <[query].with[discord].as[<yaml[discord_links].read[discord_ids.<[discord_id]>]>]>
+
           - define player_data_yaml global.player.<[minecraft_uuid]>
           - define player_data_file data/global/players/<[minecraft_uuid]>.yml
           - if <server.has_file[<[player_data_file]>]>:
