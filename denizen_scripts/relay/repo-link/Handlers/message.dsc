@@ -41,7 +41,7 @@ Message_Handler:
       - else if <[Message].starts_with[/]>:
         - choose <[Message].before[<&sp>].after[/]>:
           - case adddev adddeveloper add_dev add_developer devup devadd developeradd dev_add developer_add promotedev addgit gitadd add_git git_add:
-            - ~Run Add_Developer_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
+            - ~Run Add_Developer_DCommand def:<list_single[<context.message>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case bungee:
             - ~Run Bungee_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case check onlinestatus status online:
