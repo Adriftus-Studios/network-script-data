@@ -51,8 +51,8 @@ web_handler:
             - announce to_console "<&c>failed to token exchange"
             - stop
           - flag server Test.GitHub.TokenExchange:<util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
-        #| notable error: error=bad_verification_code&error_description=The+code+passed+is+incorrect+or+expired.&error_uri=https%3A%2F%2Fdocs.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-oauth-app-access-token-request-errors%2F%23bad-verification-code
-        #| occurs when refreshing the page / using a bad token
+          #| notable error: error=bad_verification_code&error_description=The+code+passed+is+incorrect+or+expired.&error_uri=https%3A%2F%2Fdocs.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-oauth-app-access-token-request-errors%2F%23bad-verification-code
+          #| occurs when refreshing the page / using a bad token
 
         # % ██ [ Save Access Token Response Data ] ██
           - define oAuth_Data <entry[response].result.split[&].parse[split[=].limit[2].separated_by[/]].to_map>
@@ -95,7 +95,7 @@ web_handler:
           - define player_data_file data/global/players/<[minecraft_uuid]>.yml
           - if <server.has_file[<[player_data_file]>]>:
             - yaml id:<[player_data_yaml]> load:<[player_data_file]>
-            - define query <[query].include[<yaml[<[player_data_yaml]>].read[].get_subset[tab_display_name|display_name|rank]>]>
+            - define query <[query].with[minecraft].as[<yaml[<[player_data_yaml]>].read[].get_subset[tab_display_name|display_name|rank]>]>
             - yaml id:<[player_data_yaml]> unload
 
           - yaml id:github_links set discord_ids.<[discord_id]>:<[query].exclude[discord_id]>
@@ -243,7 +243,7 @@ web_handler:
 
           - if <server.has_file[data/global/players/<[uuid]>.yml]>:
             - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
-            - define query <[query].include[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
+            - define query <[query].with[minecraft].as[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
             - yaml id:global.player.<[uuid]> unload
 
           - yaml id:discord_links set minecraft_uuids.<[uuid]>:<[query].exclude[uuid]>
