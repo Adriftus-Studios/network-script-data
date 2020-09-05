@@ -21,8 +21,8 @@ note_dcommand:
       - stop
 
   # % ██ [ verify webhook               ] ██
-    - if !<script[ddtbcty].list_keys[webhooks].contains[<[channel]>]>:
-      - stop
+  #^- if !<script[ddtbcty].list_keys[webhooks].contains[<[channel]>]>:
+  #^  - stop
 
   # % ██ [ obtain user info             ] ██
     - define user_id <[author].id>

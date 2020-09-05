@@ -8,6 +8,7 @@ get_channel:
         - ~webget <[url]> headers:<[headers]> save:response
         - if <entry[response].failed>:
             - stop
+        - inject web_debug.webget_response
         - define channel_map <entry[response].result>
         - define channel_id <[channel_map].get[id]>
         - define channel_name <[channel_map].get[name]>
