@@ -91,22 +91,23 @@ web_handler:
           - define query <[query].with[created_at].as[<[created_at]>]>
           - define query <[query].with[discord_id].as[<[discord_id]>]>
 
-          - define query <[query].with[discord].as[<yaml[discord_links].read[discord_ids.<[discord_id]>]>]>
+        #^- define query <[query].with[discord].as[<yaml[discord_links].read[discord_ids.<[discord_id]>]>]>
 
-          - define player_data_yaml global.player.<[minecraft_uuid]>
-          - define player_data_file data/global/players/<[minecraft_uuid]>.yml
-          - if <server.has_file[<[player_data_file]>]>:
-            - yaml id:<[player_data_yaml]> load:<[player_data_file]>
-            - define query <[query].with[minecraft].as[<yaml[<[player_data_yaml]>].read[].get_subset[tab_display_name|display_name|rank]>]>
-            - yaml id:<[player_data_yaml]> unload
+         #- define player_data_yaml global.player.<[minecraft_uuid]>
+         #- define player_data_file data/global/players/<[minecraft_uuid]>.yml
+         #- if <server.has_file[<[player_data_file]>]>:
+         #  - yaml id:<[player_data_yaml]> load:<[player_data_file]>
+         #  - define query <[query].with[minecraft].as[<yaml[<[player_data_yaml]>].read[].get_subset[tab_display_name|display_name|rank]>]>
+         #  - yaml id:<[player_data_yaml]> unload
+          - define query <[query].with[minecraft_uuid].as[<map.with[uuid].as[<[minecraft_uuid]>]>]>
 
           - yaml id:discord_links set discord_ids.<[discord_id]>.github:<[query]>
           - yaml id:github_links set discord_ids.<[discord_id]>:<[query]>
           - yaml id:github_links savefile:data/global/discord/github_links.yml
 
-        #^- define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
-        #^- ~webget <[url]>/<[request]>?<[query]>
-          - ~webget <[url]>/<[request]> data:<[query].to_json>
+          - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
+          - ~webget <[url]>/<[request]>?<[query]>
+        #^- ~webget <[url]>/<[request]> data:<[query].to_json>
           #$$$$$$$$$$$$$$$$
           - stop
           #$$$$$$$$$$$$
