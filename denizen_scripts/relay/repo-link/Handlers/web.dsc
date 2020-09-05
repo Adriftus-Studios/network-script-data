@@ -89,16 +89,17 @@ web_handler:
           - define query <[query].with[avatar_url].as[<[avatar_url]>]>
           - define query <[query].with[id].as[<[id]>]>
           - define query <[query].with[created_at].as[<[created_at]>]>
+          - define query <[query].with[access_token].as[<[access_token]>]>
           - define query <[query].with[discord_id].as[<[discord_id]>]>
 
-        #^- define query <[query].with[discord].as[<yaml[discord_links].read[discord_ids.<[discord_id]>]>]>
+          - define query <[query].with[discord].as[<yaml[discord_links].read[discord_ids.<[discord_id]>]>]>
 
-         #- define player_data_yaml global.player.<[minecraft_uuid]>
-         #- define player_data_file data/global/players/<[minecraft_uuid]>.yml
-         #- if <server.has_file[<[player_data_file]>]>:
-         #  - yaml id:<[player_data_yaml]> load:<[player_data_file]>
-         #  - define query <[query].with[minecraft].as[<yaml[<[player_data_yaml]>].read[].get_subset[tab_display_name|display_name|rank]>]>
-         #  - yaml id:<[player_data_yaml]> unload
+          - define player_data_yaml global.player.<[minecraft_uuid]>
+          - define player_data_file data/global/players/<[minecraft_uuid]>.yml
+          - if <server.has_file[<[player_data_file]>]>:
+            - yaml id:<[player_data_yaml]> load:<[player_data_file]>
+            - define query <[query].with[minecraft].as[<yaml[<[player_data_yaml]>].read[].get_subset[tab_display_name|display_name|rank]>]>
+            - yaml id:<[player_data_yaml]> unload
           - define query <[query].with[minecraft_uuid].as[<map.with[uuid].as[<[minecraft_uuid]>]>]>
 
           - yaml id:discord_links set discord_ids.<[discord_id]>.github:<[query]>
