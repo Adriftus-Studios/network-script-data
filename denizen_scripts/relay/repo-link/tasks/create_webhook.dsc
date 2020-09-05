@@ -1,6 +1,6 @@
 create_webhook:
     type: task
-    debug: true
+    debug: false
     definitions: channel_id|channel_name
     script:
         - define url https://discord.com/api/channels/<[channel_id]>/webhooks

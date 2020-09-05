@@ -1,6 +1,6 @@
 get_channel:
     type: task
-    debug: true
+    debug: false
     definitions: channel_id
     script:
         - define url https://discord.com/api/channels/<[channel_id]>
