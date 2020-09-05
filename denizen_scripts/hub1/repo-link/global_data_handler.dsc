@@ -23,7 +23,7 @@ global_data_handler:
       - define UUID <context.uuid>
       - define Server <context.server>
       - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
-        - define Old_Server <yaml[data_handler].read[players.<[UUID]>.server]>
+        - define Old_Server <yaml[data_handler].read[players.uuids.<[UUID]>.server]>
       - define PlayerMap <map.with[Name].as[<[Name]>].with[UUID].as[<[UUID]>].with[Server].as[<[Server]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
@@ -48,7 +48,7 @@ global_data_handler:
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
-      - define Server <yaml[data_handler].read[players.<[uuid]>.server]>
+      - define Server <yaml[data_handler].read[players.uuids.<[uuid]>.server]>
       - define PlayerMap <map.with[name].as[<[name]>].with[uuid].as[<[uuid]>].with[server].as[<[server]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
@@ -128,7 +128,7 @@ player_info_map:
     definitions: input
     script:
     - if <yaml[data_handler].contains[players.<[input]>]>:
-      - determine <yaml[data_handler].read[players.<[input]>].with[name].as[<[input]>]>
+      - determine <yaml[data_handler].read[players.names.<[input]>].with[name].as[<[input]>]>
     - determine null
     
 # % ██  [ Retrieves a map of the player's information, with the keys 'name, uuid, server' based on the player's uuid ] ██
@@ -143,5 +143,5 @@ player_info_map_uuid:
     definitions: input
     script:
     - if <yaml[data_handler].contains[players.<[input]>]>:
-      - determine <yaml[data_handler].read[players.<[input]>].with[uuid].as[<[input]>]>
+      - determine <yaml[data_handler].read[players.uuids.<[input]>].with[uuid].as[<[input]>]>
     - determine null
