@@ -1,6 +1,6 @@
 web_handler:
   type: world
-  debug: false
+  debug: true
   Domains:
     Github: 140.82.115
     self: 0:0:0:0:0:0:0:1
@@ -12,6 +12,11 @@ web_handler:
       - yaml id:discord_links savefile:data/global/discord/discord_links.yml
     - else:
       - yaml id:discord_links load:data/global/discord/discord_links.yml
+    - if !<server.has_file[data/global/discord/github_links.yml]>:
+      - yaml id:github_links create
+      - yaml id:github_links savefile:data/global/discord/github_links.yml
+    - else:
+      - yaml id:github_links load:data/global/discord/github_links.yml
   events:
     on reload scripts:
       - inject locally temp
@@ -46,18 +51,18 @@ web_handler:
             - announce to_console "<&c>failed to token exchange"
             - stop
           - flag server Test.GitHub.TokenExchange:<util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
-        #| notable error: error=bad_verification_code&error_description=The+code+passed+is+incorrect+or+expired.&error_uri=https%3A%2F%2Fdocs.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-oauth-app-access-token-request-errors%2F%23bad-verification-code
-        #| occurs when refreshing the page / using a bad token
+          #| notable error: error=bad_verification_code&error_description=The+code+passed+is+incorrect+or+expired.&error_uri=https%3A%2F%2Fdocs.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-oauth-app-access-token-request-errors%2F%23bad-verification-code
+          #| occurs when refreshing the page / using a bad token
 
         # % ██ [ Save Access Token Response Data ] ██
           - define oAuth_Data <entry[response].result.split[&].parse[split[=].limit[2].separated_by[/]].to_map>
           - define Access_Token <[oAuth_Data].get[access_token]>
 
         # % ██ [ Obtain User Info                ] ██
-          - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
+          - define headers "<[headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user Headers:<[Headers]> save:response
           - announce to_console "<&c>--- Obtain User Info ----------------------------------------------------------"
-          - inject Web_Debug.Webget_Response
+          - inject web_debug.webget_response
           - if <entry[response].failed>:
             - announce to_console "<&c>Failure to Obtain User Info"
             - stop
@@ -68,11 +73,11 @@ web_handler:
             - stop
 
         # % ██ [ Save User Data                  ] ██
-          - define UserData <util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
-          - define login <[UserData].get[login]>
-          - define avatar_url <[UserData].get[avatar_url]>
-          - define id <[UserData].get[id]>
-          - define created_at <time[<[UserData].get[created_at].replace[-].with[/].before[Z].split[T].separated_by[_]>]>
+          - define user_data <util.parse_yaml[{"data":<entry[response].result>}].get[data]>
+          - define login <[user_data].get[login]>
+          - define avatar_url <[user_data].get[avatar_url]>
+          - define id <[user_data].get[id]>
+          - define created_at <time[<[user_data].get[created_at].replace[-].with[/].before[Z].split[T].separated_by[_]>]>
 
         # % ██ [ Send to The-Network             ] ██
           - define url http://76.119.243.194:25580
@@ -82,18 +87,26 @@ web_handler:
           - define query <[query].with[avatar_url].as[<[avatar_url]>]>
           - define query <[query].with[id].as[<[id]>]>
           - define query <[query].with[created_at].as[<[created_at]>]>
+          - define query <[query].with[access_token].as[<[access_token]>]>
           - define query <[query].with[discord_id].as[<[discord_id]>]>
 
-        #^- if <server.has_file[data/global/players/<[uuid]>.yml]>:
-        #^  - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
-        #^  - define query <[query].include[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
-        #^  - yaml id:global.player.<[uuid]> unload
+        #^- define query <[query].with[discord].as[<yaml[discord_links].read[discord_ids.<[discord_id]>]>]>
+          - define minecraft_uuid <yaml[discord_links].read[discord_ids.<[discord_id]>.uuid]>
+          - define query <[query].with[minecraft_uuid].as[<[minecraft_uuid]>]>
 
-          - yaml id:github_links set discord_ids.<[discord_id]>:<[query].exclude[discord_id]>
+        #^- define player_data_yaml global.player.<[minecraft_uuid]>
+        #^- define player_data_file data/global/players/<[minecraft_uuid]>.yml
+        #^- if <server.has_file[<[player_data_file]>]>:
+        #^  - yaml id:<[player_data_yaml]> load:<[player_data_file]>
+        #^  - define query <[query].with[minecraft].as[<yaml[<[player_data_yaml]>].read[].get_subset[tab_display_name|display_name|rank]>]>
+        #^  - yaml id:<[player_data_yaml]> unload
+
+          - yaml id:github_links set discord_ids.<[discord_id]>:<[query]>
           - yaml id:github_links savefile:data/global/discord/github_links.yml
 
           - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
           - ~webget <[url]>/<[request]>?<[query]>
+        #^- ~webget <[url]>/<[request]> data:<[query].to_json>
           #$$$$$$$$$$$$$$$$
           - stop
           #$$$$$$$$$$$$
@@ -234,11 +247,11 @@ web_handler:
 
           - if <server.has_file[data/global/players/<[uuid]>.yml]>:
             - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
-            - define query <[query].include[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
+            - define query <[query].with[minecraft].as[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
             - yaml id:global.player.<[uuid]> unload
 
-          - yaml id:discord_links set minecraft_uuids.<[uuid]>:<[query].exclude[uuid]>
-          - yaml id:discord_links set discord_ids.<[query].get[id]>:<[query].exclude[id]>
+          - yaml id:discord_links set minecraft_uuids.<[uuid]>:<[query]>
+          - yaml id:discord_links set discord_ids.<[query].get[id]>:<[query]>
           - yaml id:discord_links savefile:data/global/discord/discord_links.yml
 
           - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>

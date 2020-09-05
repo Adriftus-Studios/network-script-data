@@ -9,6 +9,7 @@ Template_Handler:
     - yaml id:saved_headers load:data/global/discord/saved_headers.yml
     - yaml id:shell load:data/global/discord/shell_directories.yml
     - yaml id:oAuth load:data/global/discord/oAuth_Data.yml
+    - yaml id:generic_webhooks load:data/global/discord/embed_templates/generic.yml
         
   events:
     on server start:

@@ -50,7 +50,7 @@ Players_DCommand:
                 - else:
                     - define player "- <[nickname]> (<[name]>)"
                 - define players <[players].include_single[<[player]>]>
-            - define servers <[servers].with[<[server]>].as[<[players]>]>
+            - define servers <[servers].with[<[server].to_titlecase>].as[<[players]>]>
     - if <[servers].is_empty>:
         - define "text:->:No Players Online."
     - else:

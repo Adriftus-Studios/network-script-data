@@ -1,17 +1,25 @@
 drown_command:
     type: command
-    name: drown
+    name: Drown
     usage: /drown (player)
-    description: plays a drown animation
+    description: Plays a drown animation
     permission: adriftus.staff
+    tab complete:
+        - if <player.groups.contains[Moderation]>:
+            - define Blacklist <[<player>]>
+            - inject Online_Player_Tabcomplete
     script:
-    - if <context.args.size> > 1:
-        - inject command_syntax
-    - else if <context.args.is_empty>:
-        - animate animation:HURT_DROWN <player>
+    # % ██ [  Verify argumentss ] ██
+    - if <context.args.is_empty>:
+        - define User <player>
+    - else if <context.args.size> == 1:
+        - define User <context.args.first>
+        - inject Player_Verification
     - else:
-        - define user <context.args.first>
-        - inject player_verification
-        - repeat 3:
-            - animate animation:HURT_DROWN <[user]>
-            - wait 14t
+        - inject Command_Syntax
+
+    # % ██ [  Drown Player ] ██
+    - narrate Drowning <[user].display_name>
+    - repeat 3:
+        - animate animation:HURT_DROWN <[user]>
+        - wait 14t

@@ -80,7 +80,7 @@ mod_message_discord_report:
     - define field_name Reason<&co>
     - define field_value <[reason]>
     - define field_inline false
-    - define fields:|:<map.with[name].as[<[field_name]>].with[value].as[<[field_value]>].with[inline].as[<[field_inline]>]>
+    - define fields:->:<map.with[name].as[<[field_name]>].with[value].as[<[field_value]>].with[inline].as[<[field_inline]>]>
 
     - define footer_text Reported<&sp>by<&co><&sp><[reporter]>
     - define footer_icon_url https://minotar.net/helm/<[reporter]>

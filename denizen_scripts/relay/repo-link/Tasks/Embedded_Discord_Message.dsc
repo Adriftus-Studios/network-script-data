@@ -81,7 +81,7 @@ webhook_generic:
         - define headers <yaml[saved_headers].read[discord.webhook_message]>
         - choose <[type]>:
             - case title_description:
-                - define data <yaml[generic_webhooks].parsed_key[title_description].to_json>
+                - define data <yaml[generic_webhooks].parsed_key[title_description].exclude[type].to_json>
             - default:
                 - stop
         - ~webget <[hook]> data:<[data]> headers:<[headers]>

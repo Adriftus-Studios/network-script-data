@@ -4,6 +4,8 @@ Suicide_Command:
     debug: false
     description: Kills yourself.
     usage: /suicide
+    alias:
+    - anhero
     permission: adriftus
     script:
     # % ██ [ Check Args ] ██

@@ -15,15 +15,15 @@ mod_online_inv:
       # Match item display name and lore to information about the online player.
       - define name:<[player].name>
       - define skin:<[player].name>
-      - define lore:|:<&2>Nickname<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Display_Name]||None>
-      - define lore:|:<&2>Rank<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Rank]||None>
-      - define lore:|:<&a>Current<&sp>Channel<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[chat.channels.current].to_titlecase||None>
-      - define lore:|:<&a>Active<&sp>Channels<&co>
-      - define lore:|:<&e><&gt><&r><&sp><yaml[global.player.<[player].uuid>].read[chat.channels.active].separated_by[<&nl><&e><&gt><&r><&sp>].to_titlecase||None>
+      - define lore:->:<&2>Nickname<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Display_Name]||None>
+      - define lore:->:<&2>Rank<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Rank]||None>
+      - define lore:->:<&a>Current<&sp>Channel<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[chat.channels.current].to_titlecase||None>
+      - define lore:->:<&a>Active<&sp>Channels<&co>
+      - define lore:->:<&e><&gt><&r><&sp><yaml[global.player.<[player].uuid>].read[chat.channels.active].separated_by[<&nl><&e><&gt><&r><&sp>].to_titlecase||None>
       # Build the final item.
       - define item:<item[player_head].with[display_name=<&a><[name]>;lore=<[lore]>;skull_skin=<[skin]>]>
       # Add the defined item to inventory list.
-      - define inventory:|:<[item]>
+      - define inventory:->:<[item]>
     # Replace empty slots in inventory with player heads.
     - determine <[inventory]>
   slots:

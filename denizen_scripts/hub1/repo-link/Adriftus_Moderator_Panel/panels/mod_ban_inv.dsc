@@ -18,12 +18,12 @@ mod_ban_inv:
         - define item <item[mod_level<[level]>_item]>
         - define name <[item].script.parsed_key[tag]><&sp><[infraction]>
         - define lore <list[<&b>Level<&co><&sp><[item].script.parsed_key[colour]><[level]>]>
-        - define lore:|:<&c>Right<&sp>Click<&sp>to<&sp>ban<&co>
-        - define lore:|:<player.flag[amp_map].as_map.get[uuid].as_player.name>
-        - define lore:|:<&c>Clic<&sp>Droit<&sp>pour<&sp>bannir<&co>
+        - define lore:->:<&c>Right<&sp>Click<&sp>to<&sp>ban<&co>
+        - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
+        - define lore:->:<&c>Clic<&sp>Droit<&sp>pour<&sp>bannir<&co>
         - define nbt <list[LEVEL/<[level]>|INFRACTION/<[infraction]>|LENGTH/<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.length]>]>
         - define item <[item].with[display_name=<[name]>;lore=<[lore]>;nbt=<[nbt]>]>
-        - define inventory:|:<[item]>
+        - define inventory:->:<[item]>
     - determine <[inventory]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]

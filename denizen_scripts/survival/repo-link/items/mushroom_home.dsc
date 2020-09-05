@@ -1,16 +1,19 @@
 mushroom_home:
   type: item
   debug: false
+  debug: false
   material: red_mushroom
   display name: <&a>Miraculous Mushroom
 
 mushroom_home_give:
   type: task
+  debug: false
   script:
     - give <item[mushroom_home].with[nbt=owner/<player.uuid>]>
 
 miraculous_mushroom_events:
   type: world
+  debug: false
   debug: false
   events:
     on player right clicks block with:mushroom_home bukkit_priority:HIGHEST:
@@ -87,6 +90,7 @@ miraculous_mushroom_events:
 
 mushroom_home_config_manager:
   type: world
+  debug: false
   load:
     - ~yaml id:mushroom_config load:data/mushroom_config.yml
     - if <schematic.list.filter[starts_with[mushroom_home]].is_empty>:

@@ -1,6 +1,6 @@
 title_description:
   type: single
-  embed:
+  embeds:
   - title: <[title]>
     color: <[color]>
     description: <[text]>
