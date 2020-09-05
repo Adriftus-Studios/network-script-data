@@ -9,7 +9,7 @@ get_channel:
         - if <entry[response].failed>:
             - stop
         - inject web_debug.webget_response
-        - define channel_map <entry[response].result>
+        - define channel_map <util.parse_yaml[<entry[response].result>]>
         - define channel_id <[channel_map].get[id]>
         - define channel_name <[channel_map].get[name]>
 
