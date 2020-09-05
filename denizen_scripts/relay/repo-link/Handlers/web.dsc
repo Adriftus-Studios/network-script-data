@@ -72,8 +72,6 @@ web_handler:
             - announce to_console "User does not have discord linked."
             - stop
 
-          - define minecraft_uuid <yaml[discord_links].read[discord_ids.<[discord_id]>.uuid]>
-
         # % ██ [ Save User Data                  ] ██
           - define user_data <util.parse_yaml[{"data":<entry[response].result>}].get[data]>
           - define login <[user_data].get[login]>
@@ -93,14 +91,15 @@ web_handler:
           - define query <[query].with[discord_id].as[<[discord_id]>]>
 
           - define query <[query].with[discord].as[<yaml[discord_links].read[discord_ids.<[discord_id]>]>]>
+          - define minecraft_uuid <yaml[discord_links].read[discord_ids.<[discord_id]>.uuid]>
+          - define query <[query].with[minecraft_uuid].as[<[minecraft_uuid]>]>
 
-          - define player_data_yaml global.player.<[minecraft_uuid]>
-          - define player_data_file data/global/players/<[minecraft_uuid]>.yml
-          - if <server.has_file[<[player_data_file]>]>:
-            - yaml id:<[player_data_yaml]> load:<[player_data_file]>
-            - define query <[query].with[minecraft].as[<yaml[<[player_data_yaml]>].read[].get_subset[tab_display_name|display_name|rank]>]>
-            - yaml id:<[player_data_yaml]> unload
-          - define query <[query].with[minecraft_uuid].as[<map.with[uuid].as[<[minecraft_uuid]>]>]>
+        #^- define player_data_yaml global.player.<[minecraft_uuid]>
+        #^- define player_data_file data/global/players/<[minecraft_uuid]>.yml
+        #^- if <server.has_file[<[player_data_file]>]>:
+        #^  - yaml id:<[player_data_yaml]> load:<[player_data_file]>
+        #^  - define query <[query].with[minecraft].as[<yaml[<[player_data_yaml]>].read[].get_subset[tab_display_name|display_name|rank]>]>
+        #^  - yaml id:<[player_data_yaml]> unload
 
           - yaml id:discord_links set discord_ids.<[discord_id]>.github:<[query]>
           - yaml id:github_links set discord_ids.<[discord_id]>:<[query]>
