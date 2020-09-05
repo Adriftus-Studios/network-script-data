@@ -12,6 +12,11 @@ web_handler:
       - yaml id:discord_links savefile:data/global/discord/discord_links.yml
     - else:
       - yaml id:discord_links load:data/global/discord/discord_links.yml
+    - if !<server.has_file[data/global/discord/github_links.yml]>:
+      - yaml id:github_links create
+      - yaml id:github_links savefile:data/global/discord/github_links.yml
+    - else:
+      - yaml id:github_links load:data/global/discord/github_links.yml
   events:
     on reload scripts:
       - inject locally temp
@@ -54,10 +59,10 @@ web_handler:
           - define Access_Token <[oAuth_Data].get[access_token]>
 
         # % ██ [ Obtain User Info                ] ██
-          - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
+          - define headers "<[headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user Headers:<[Headers]> save:response
           - announce to_console "<&c>--- Obtain User Info ----------------------------------------------------------"
-          - inject Web_Debug.Webget_Response
+          - inject web_debug.webget_response
           - if <entry[response].failed>:
             - announce to_console "<&c>Failure to Obtain User Info"
             - stop
@@ -67,12 +72,14 @@ web_handler:
             - announce to_console "User does not have discord linked."
             - stop
 
+          - define minecraft_uuid <yaml[discord_links].read[discord_ids.<[discord_id]>.uuid]>
+
         # % ██ [ Save User Data                  ] ██
-          - define UserData <util.parse_yaml[{"Data":<entry[Response].result>}].get[Data]>
-          - define login <[UserData].get[login]>
-          - define avatar_url <[UserData].get[avatar_url]>
-          - define id <[UserData].get[id]>
-          - define created_at <time[<[UserData].get[created_at].replace[-].with[/].before[Z].split[T].separated_by[_]>]>
+          - define user_data <util.parse_yaml[{"data":<entry[response].result>}].get[data]>
+          - define login <[user_data].get[login]>
+          - define avatar_url <[user_data].get[avatar_url]>
+          - define id <[user_data].get[id]>
+          - define created_at <time[<[user_data].get[created_at].replace[-].with[/].before[Z].split[T].separated_by[_]>]>
 
         # % ██ [ Send to The-Network             ] ██
           - define url http://76.119.243.194:25580
@@ -84,10 +91,12 @@ web_handler:
           - define query <[query].with[created_at].as[<[created_at]>]>
           - define query <[query].with[discord_id].as[<[discord_id]>]>
 
-        #^- if <server.has_file[data/global/players/<[uuid]>.yml]>:
-        #^  - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
-        #^  - define query <[query].include[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
-        #^  - yaml id:global.player.<[uuid]> unload
+          - define player_data_yaml global.player.<[minecraft_uuid]>
+          - define player_data_file data/global/players/<[minecraft_uuid]>.yml
+          - if <server.has_file[<[player_data_file]>]>:
+            - yaml id:<[player_data_yaml]> load:<[player_data_file]>
+            - define query <[query].include[<yaml[<[player_data_yaml]>].read[].get_subset[tab_display_name|display_name|rank]>]>
+            - yaml id:<[player_data_yaml]> unload
 
           - yaml id:github_links set discord_ids.<[discord_id]>:<[query].exclude[discord_id]>
           - yaml id:github_links savefile:data/global/discord/github_links.yml
