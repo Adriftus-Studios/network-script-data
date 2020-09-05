@@ -24,9 +24,6 @@ global_data_handler:
 
         - yaml id:<[GlobalYaml]> create
         - yaml id:<[GlobalYaml]> savefile:<[Directory]>
-    # % ██ [ Track Player ] ██
-      - yaml id:data_handler set network.names:->:<[Name]>
-      - yaml id:data_handler set network.uuids:->:<[UUID]>
     on bungee player switches to server:
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
@@ -40,11 +37,11 @@ global_data_handler:
     # % ██ [ Track Player ] ██
       - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
         - yaml id:data_handler set servers.<[Old_Server]>:<-:<[UUID]>
-      - yaml id:data_handler set players.<[UUID]>.name:<[name]>
-      - yaml id:data_handler set players.<[UUID]>.server:<[server]>
+      - yaml id:data_handler set players.uuids.<[UUID]>.name:<[name]>
+      - yaml id:data_handler set players.uuids.<[UUID]>.server:<[server]>
       - yaml id:data_handler set servers.<[server]>:->:<[UUID]>
-      - yaml id:data_handler set players.<[name]>.UUID:<[UUID]>
-      - yaml id:data_handler set players.<[name]>.server:<[server]>
+      - yaml id:data_handler set players.names.<[name]>.UUID:<[UUID]>
+      - yaml id:data_handler set players.names.<[name]>.server:<[server]>
 
 
     # % ██ [ Fire Player Login Events ] ██
@@ -64,12 +61,9 @@ global_data_handler:
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
     # % ██ [ Remove Player Data ] ██
-      - yaml id:data_handler set players.<[UUID]>:!
+      - yaml id:data_handler set players.uuids.<[UUID]>:!
       - yaml id:data_handler set servers.<[server]>:<-:<[UUID]>
-      - yaml id:data_handler set players.<[Name]>:!
-
-      - yaml id:data_handler set network.names:<-:<[Name]>
-      - yaml id:data_handler set network.uuids:<-:<[UUID]>
+      - yaml id:data_handler set players.names.<[Name]>:!
 
     # % ██ [ Fire Player Quit Events ] ██
       - bungeerun <[Server]> Player_Data_Quit_Event def:<[UUID]>
