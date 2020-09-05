@@ -4,17 +4,25 @@ heal_command:
     usage: /heal (player)
     description: Heals a player
     permission: adriftus.staff
+    tab complete:
+        - if <player.groups.contains[Moderation]>:
+            - define Blacklist <[<player>]>
+            - inject Online_Player_Tabcomplete
     script:
-    - if <context.args.size> > 1:
-        - inject command_syntax
-    - if <context.args.is_empty>:
-        - heal <player>
-        - feed amount:20 <player>
-        - narrate "You have been healed"
-    - else:
-        - define user <context.args.first>
-        - inject player_verification
-        - heal <[user]>
-        - feed amount:20 <[user]>
-        - narrate "<[user].name> has been healed"
-        - narrate "<player.name> has healed you" targets:<[user]>
+    # % ██ [  Verify arguments ] ██
+        - if <context.args.is_empty>:
+            - define User <player>
+        - else if <context.args.size> == 1:
+            - define User <context.args.first>
+            - inject Player_Verification
+        - else:
+            - inject Command_Syntax
+
+    # % ██ [  Heal Player ] ██
+        - heal <[User]>
+        - adjust <[User]> food_level:20
+        - if <[User]> != <player>:
+            - narrate "<[user].display_name><&e> has been healed."
+            - narrate "<player.display_name><&e> has healed you" targets:<[user]>
+        - else:
+            - narrate targets:<[User]>  "<&e>You have been healed."
