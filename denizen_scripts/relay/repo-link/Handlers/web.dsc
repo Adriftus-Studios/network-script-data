@@ -248,8 +248,8 @@ web_handler:
             - define query <[query].with[minecraft].as[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
             - yaml id:global.player.<[uuid]> unload
 
-          - yaml id:discord_links set minecraft_uuids.<[uuid]>:<[query].exclude[uuid]>
-          - yaml id:discord_links set discord_ids.<[query].get[id]>:<[query].exclude[id]>
+          - yaml id:discord_links set minecraft_uuids.<[uuid]>:<[query]>
+          - yaml id:discord_links set discord_ids.<[query].get[id]>:<[query]>
           - yaml id:discord_links savefile:data/global/discord/discord_links.yml
 
           - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
