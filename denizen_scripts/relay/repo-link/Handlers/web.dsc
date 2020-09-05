@@ -1,6 +1,6 @@
 web_handler:
   type: world
-  debug: false
+  debug: true
   Domains:
     Github: 140.82.115
     self: 0:0:0:0:0:0:0:1
