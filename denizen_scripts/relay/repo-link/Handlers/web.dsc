@@ -90,7 +90,7 @@ web_handler:
           - define query <[query].with[access_token].as[<[access_token]>]>
           - define query <[query].with[discord_id].as[<[discord_id]>]>
 
-          - define query <[query].with[discord].as[<yaml[discord_links].read[discord_ids.<[discord_id]>]>]>
+        #^- define query <[query].with[discord].as[<yaml[discord_links].read[discord_ids.<[discord_id]>]>]>
           - define minecraft_uuid <yaml[discord_links].read[discord_ids.<[discord_id]>.uuid]>
           - define query <[query].with[minecraft_uuid].as[<[minecraft_uuid]>]>
 
