@@ -13,8 +13,9 @@ command_arg_registry:
             - define args <[message].split_args.remove[first]>
 
         # % ██ [ Equivalent of <context.raw_args> | Returns any args used as an ElementTag.   ] ██
-
+        - if !<[args].is_empty>:
             - define raw_args "<[message].after[ ]>"
+            
         # % ██ [ Unique return - <[args].first>   | Returns the first argument.               ] ██
             - define first_arg <[args].first>
 
