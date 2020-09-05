@@ -10,3 +10,4 @@ Sun_command:
     permission: adriftus.staff
     script:
     - weather sunny mainland reset:10m
+    - Announce "<&e>Weather set to <&dq>Clear<&dq> by <player.display_name>"
