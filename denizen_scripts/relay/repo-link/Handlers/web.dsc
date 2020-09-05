@@ -253,8 +253,9 @@ web_handler:
           - yaml id:discord_links set discord_ids.<[query].get[id]>:<[query]>
           - yaml id:discord_links savefile:data/global/discord/discord_links.yml
 
-          - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
-          - ~webget <[url]>/<[request]>?<[query]> method:post
+        #^- define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
+        #^- ~webget <[url]>/<[request]>?<[query]>
+          - ~webget <[url]>/<[request]> data:<[query].to_json>
 
         # % ██ [ Obtain User Connections         ] ██
           - define URL <yaml[oAuth].read[URL_Scopes.Discord.Connections]>
