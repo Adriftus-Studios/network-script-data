@@ -107,9 +107,7 @@ web_handler:
           - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
           - ~webget <[url]>/<[request]>?<[query]>
         #^- ~webget <[url]>/<[request]> data:<[query].to_json>
-          #$$$$$$$$$$$$$$$$
-          - stop
-          #$$$$$$$$$$$$
+
         # % ██ [ Obtain User Repository Data     ] ██
           - define Headers "<[Headers].include[Authorization/token <[Access_Token]>]>"
           - ~webget https://api.github.com/user/repos Headers:<[Headers]> save:response
@@ -125,25 +123,25 @@ web_handler:
           - define Repositories <util.parse_yaml[{"Data":<entry[Response].result>}].get[Data].parse_tag[<[Parse_Value].get[full_name]>]>
 
         # % ██ [ Manage Fork                     ] ██
-          - if <[Login]||invalid> != Invalid && !<[Repositories].contains[<[Main_Repo]>]>:
-            - announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
-            - ~webget https://api.github.com/repos/<[From_Repo]>/forks Headers:<[Headers]> method:POST save:response
-            - announce to_console "<&c>--- Manage Fork ----------------------------------------------------------"
-            - inject Web_Debug.Webget_Response
-            - if <entry[response].failed>:
-              - announce to_console "<&c>Failure to manage the fork."
-              - stop
-          - else:
-            - announce to_console "<&c>-No Fork Being Made ---------------------------------------------------------"
+        #^- if <[Login]||invalid> != Invalid && !<[Repositories].contains[<[Main_Repo]>]>:
+        #^  - announce to_console "<&c>-Fork Creation --------------------------------------------------------------"
+        #^  - ~webget https://api.github.com/repos/<[From_Repo]>/forks Headers:<[Headers]> method:POST save:response
+        #^  - announce to_console "<&c>--- Manage Fork ----------------------------------------------------------"
+        #^  - inject Web_Debug.Webget_Response
+        #^  - if <entry[response].failed>:
+        #^    - announce to_console "<&c>Failure to manage the fork."
+        #^    - stop
+        #^- else:
+        #^  - announce to_console "<&c>-No Fork Being Made ---------------------------------------------------------"
 
           # % ██ [ Obtain Branch Information     ] ██
-          - ~webget https://api.github.com/repos/<[Main_Repo]>/branches headers:<[Headers]> save:response method:GET
-          - announce to_console "<&c>--- Obtain Branch Information ----------------------------------------------------------"
-          - inject Web_Debug.Webget_Response
-          - if <entry[response].failed>:
-            - announce to_console "<&c>Failure to obtain Branch Information."
-            - stop
-          - announce to_console '<&3>Branches<&6>: <&3><util.parse_yaml[{"Data":<entry[Response].result>}].get[Data].parse_tag[<[Parse_Value].get[name]>]>'
+        #^- ~webget https://api.github.com/repos/<[Main_Repo]>/branches headers:<[Headers]> save:response method:GET
+        #^- announce to_console "<&c>--- Obtain Branch Information ----------------------------------------------------------"
+        #^- inject Web_Debug.Webget_Response
+        #^- if <entry[response].failed>:
+        #^  - announce to_console "<&c>Failure to obtain Branch Information."
+        #^  - stop
+        #^- announce to_console '<&3>Branches<&6>: <&3><util.parse_yaml[{"Data":<entry[Response].result>}].get[Data].parse_tag[<[Parse_Value].get[name]>]>'
 
           # % ██ [ Obtain Webhook Information    ] ██
           - ~webget https://api.github.com/repos/<[Main_Repo]>/hooks headers:<[Headers]> save:response method:GET
