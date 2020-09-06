@@ -7,7 +7,6 @@ A quick summary: this document explains:
 * how long we retain that information; and
 * your rights in relation to that information.
 
-
 _______________________________________________________
 
 ## 1. Who we are and what this privacy policy governs

@@ -1,4 +1,5 @@
 1. DEFINITIONS
+
 (a) Adriftus - Adriftus Studios, [INSERT_PHYSICAL_ADDRESS_HERE/INSERT_EMAIL_ADDRESS_HERE\*], [APPLICABLE_CONTACT_INFORMATION\*].
 
 (b) Game(s) - Minecraft: The Game [(,_)LIST_OTHER_GAME_NETWORKS\*].
@@ -15,23 +16,27 @@
 
 
 2. DURATION
+
 (a) Duration - Unless modified or amended by Adriftus, this agreement and its provisions shall remain in effect. Termination of any license granted by Adriftus under this agreement does not affect any other provisions of this agreement.
 
 
 3. PRIVACY
+
 (a) It is Your responsibility to read, understand and accept the Privacy Policy in effect each and every time You use the Service. You acknowledge that Adriftus may make changes to the Privacy Policy at any time. You also acknowledge that each and every time You click "ACCEPT" You warrant and represent that You did read, understand and accept the most recent version of the Privacy Policy in effect at that time.
 
 
 4. CONDUCT
+
 (a) It is Your responsibility to read, understand and accept the Code of Conduct in effect each and every time You use the Service. You acknowledge that Adriftus may make changes to the Code of Conduct at any time. You also acknowledge that each and every time You click "ACCEPT" You warrant and represent that You did read, understand and accept the most recent version of the Code of Conduct in effect at that time.
 
 
 5. ACCOUNT ACCESS AND PERMISSIBLE ASSIGNMENT
+
 (a) By clicking "ACCEPT" You warrant and represent that you:
 
-1. are at least 18 years of age and otherwise legally competent to read, understand and - accept the provisions of this agreement on behalf of yourself;
-2. are at least 18 years of age and otherwise legally competent to read, understand and - accept the provisions of this agreement on behalf of yourself and a minor age 13-17 for whom - you are legally permitted to allow access to the Game; or
-3. are a minor age 13-17 that has been authorized to click "ACCEPT" under the provisions of Section 5(b) below. YOU ARE HEREBY FOREWARNED THAT ADRIFTUS MAY, IN ITS SOLE AND ABSOLUTE DISCRETION, EXERCISE ITS RIGHT TO TERMINATE BASED ON FAILURE TO COMPLY WITH THE CRITERIA ABOVE.
+- (i) are at least 18 years of age and otherwise legally competent to read, understand and - accept the provisions of this agreement on behalf of yourself;
+- (ii) are at least 18 years of age and otherwise legally competent to read, understand and - accept the provisions of this agreement on behalf of yourself and a minor age 13-17 for whom - you are legally permitted to allow access to the Game; or
+- (iii) are a minor age 13-17 that has been authorized to click "ACCEPT" under the provisions of Section 5(b) below. YOU ARE HEREBY FOREWARNED THAT ADRIFTUS MAY, IN ITS SOLE AND ABSOLUTE DISCRETION, EXERCISE ITS RIGHT TO TERMINATE BASED ON FAILURE TO COMPLY WITH THE CRITERIA ABOVE.
 
 (b) If you are at least 18 years of age and otherwise legally competent to read, understand and accept the provisions of this agreement on behalf of yourself and a minor age 13-17 for whom you are legally permitted to allow access to the Game, you can choose to allow use of Adriftus Account by that minor subject to the following provisions:
 
