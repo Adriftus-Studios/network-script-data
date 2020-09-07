@@ -19,7 +19,7 @@ behrs_discord_toolbox:
       - define message "<[message].include_single[**GroupTag:** `<context.message.channel.group.as_element.replace[discordgroup@].with[<&lt>discordgroup<&lb>]><&rb><&gt>`]>"
 
       - define embed1 "<[embed].title[Message Contents].description[<[message].separated_by[<n>]>]>"
-      - if !<context.is_direct>:
+      - if !<context.is_direct||false>:
         - discord id:adriftusbot send_embed channel:<context.channel> embed:<[embed1]>
       - else:
         - discord id:adriftusbot send_embed user:<context.author> embed:<[embed1]>
@@ -39,7 +39,7 @@ behrs_discord_toolbox:
 
       - define embed2 "<[embed].title[Roles and Emojis].description[<[message].separated_by[<n>]>]>"
 
-      - if !<context.is_direct>:
+      - if !<context.is_direct||false>:
         - discord id:adriftusbot send_embed channel:<context.channel> embed:<[embed2]>
       - else:
         - discord id:adriftusbot send_embed user:<context.author> embed:<[embed2]>
