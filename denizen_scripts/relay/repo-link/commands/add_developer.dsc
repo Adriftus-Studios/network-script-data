@@ -13,7 +13,7 @@ Add_Developer_DCommand:
     - inject Role_Verification
     - inject Command_Arg_Registry
 
-    - if <[message].formatted_mentions.is_empty>:
+    - if <[message_object].formatted_mentions.is_empty>:
       - announce to_console "Invalid Syntax. No users specified."
       - stop
 
@@ -21,7 +21,7 @@ Add_Developer_DCommand:
     - define baddies <list>
     - define developer_role <discordrole[adriftusbot,626078288556851230,626082447347679243]>
     - define title "`[Adriftus Test Environment Invitation]`"
-    - foreach <[message].formatted_mentions> key:discord_user_name as:discord_user:
+    - foreach <[message_object].formatted_mentions> key:discord_user_name as:discord_user:
       - if !<yaml[discord_links].contains[discord_ids.<[discord_user].id>]>:
         - define baddies <[baddies].include_single[<[discord_user]>]>
         - announce to_console "User does not have discord linked."
