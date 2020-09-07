@@ -187,7 +187,7 @@ web_handler:
 
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
         
-          - if !<proc[discord_oauth_validate_state].context[<[state]>]>:
+          - if !<yaml[discord_oauth].contains[accepted_states.<[state]>]>:
             - announce to_console "<&c>invalid_state"
             - determine CODE:<list[418|406].random>
           - run discord_oauth def:<[state]>|remove
