@@ -1,6 +1,9 @@
 ###########-------- DEBUG COMMAND --------########
 market_command:
   type: command
+  debug: false
+  usage: /open_market
+  description: opens
   name: open_market
   permission: adriftus.admin
   script:
@@ -24,6 +27,7 @@ market_command:
 
 market_system_data:
   type: data
+  debug: false
   settings:
     adjustment_amount: 2
     ## IMPORTANT
@@ -200,6 +204,7 @@ market_system_data:
 
 market_system_main_GUI:
   type: inventory
+  debug: false
   inventory: chest
   title: <&e>Market
   definitions:
@@ -222,6 +227,7 @@ market_system_main_GUI:
 
 market_system_main_GUI_events:
   type: world
+  debug: false
   events:
     on player clicks item in market_system_main_GUI:
       - determine passively cancelled
@@ -239,16 +245,19 @@ market_system_main_GUI_events:
 
 market_system_category_next_page_button:
   type: item
+  debug: false
   material: green_wool
   display name: <&a>Next Page
 
 market_system_category_previous_page_button:
   type: item
+  debug: false
   material: red_wool
   display name: <&c>Previous Page
 
 market_system_category_GUI:
   type: inventory
+  debug: false
   inventory: chest
   title: <&e>Market
   custom_slots_map:
@@ -281,6 +290,7 @@ market_system_category_GUI:
 
 market_system_category_events:
   type: world
+  debug: false
   events:
     on player clicks item in market_system_category_GUI:
       - determine passively cancelled
@@ -310,6 +320,7 @@ market_system_category_events:
 #---------------#
 market_system_category_setup:
   type: task
+  debug: false
   definitions: inventory|category|page
   script:
     - inject market_system_category_set_market_items
@@ -319,6 +330,8 @@ market_system_category_setup:
 
 market_system_get_price_of_multiple:
   type: procedure
+  
+  debug: false
   definitions: item|amount|buy_or_sell
   script:
     - define current_value <yaml[current_market].read[items.<[item]>.value]>
@@ -333,6 +346,7 @@ market_system_get_price_of_multiple:
 
 market_system_categories_buy_item:
   type: task
+  debug: false
   script:
     - if <player.money> < <[cost]>:
       - narrate "<&c>You don't have enough money"
@@ -346,6 +360,7 @@ market_system_categories_buy_item:
 
 market_system_categories_sell_item:
   type: task
+  debug: false
   script:
     - if !<player.inventory.contains[<[item].as_item>].quantity[<[quantity]>]>:
       - if <[quantity]> == 1:
@@ -361,6 +376,7 @@ market_system_categories_sell_item:
 
 market_system_category_set_buy_sell_items:
   type: task
+  debug: false
   script:
     - define slot <script[market_system_category_GUI].data_key[custom_slots_map.buy_sell_item]>
     - define buy_price <yaml[current_market].read[items.<[item]>.value]>
@@ -399,6 +415,7 @@ market_system_category_set_buy_sell_items:
       
 market_system_category_set_market_next_page:
   type: task
+  debug: false
   script:
     - if <yaml[market].list_keys[categories.<[category]>].size> > <script[market_system_category_GUI].data_key[custom_slots_map.market_items].as_list.size>:
       - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.next_page]> d:<[inventory]> o:<item[market_system_category_next_page_button].with[nbt=action/next_page]>
@@ -407,6 +424,7 @@ market_system_category_set_market_next_page:
 
 market_system_category_set_market_previous_page:
   type: task
+  debug: false
   script:
     - if <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.hidden_marker]>].nbt[page]> > 1:
       - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.previous_page]> d:<[inventory]> o:<item[market_system_category_previous_page_button].with[nbt=action/previous_page]>
@@ -415,6 +433,7 @@ market_system_category_set_market_previous_page:
 
 market_system_category_set_market_items:
   type: task
+  debug: false
   script:
     - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.hidden_marker]> d:<[inventory]> o:<script[market_system_category_GUI].parsed_key[definitions.filler].with[nbt=page/<[page]>|category/<[category]>]>
     - foreach <script[market_system_category_GUI].data_key[custom_slots_map.market_items]> as:slot:
@@ -431,6 +450,7 @@ market_system_category_set_market_items:
 
 market_system_category_set_player_head:
   type: task
+  debug: false
   script:
     - define player_head:<item[player_head].with[display_name=<player.display_name>;lore=<&a>Money<&co><&sp><&e><player.money>;skull_skin=<player.uuid>]>
     - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.player_info]> d:<[inventory]> o:<[player_head]>
@@ -475,6 +495,7 @@ market_system_yaml_builder:
 
 market_system_changeover:
   type: task
+  debug: false
   script:
     - inject market_system_shutdown
     - inject market_system_save_async
@@ -484,6 +505,7 @@ market_system_changeover:
 
 market_system_shutdown:
   type: task
+  debug: false
   script:
     - announce "<&c>The Market will be closing for an update in 1 minute."
     - playsound <server.online_players> sound:ENTITY_EXPERIENCE_ORB_PICKUP volume:0.6 pitch:1.8
@@ -504,6 +526,7 @@ market_system_shutdown:
 
 market_system_save_async:
   type: task
+  debug: false
   script:
     - if !<server.has_flag[market_saving]>:
       - flag server market_saving:true duration:1m
@@ -512,6 +535,7 @@ market_system_save_async:
 
 market_system_transfer_yaml_hourly:
   type: task
+  debug: false
   script:
     - foreach <script[market_system_data].list_keys[items]> as:item:
       - define min_value <script[market_system_data].data_key[items.<[item]>.minimum_value]>
@@ -520,6 +544,7 @@ market_system_transfer_yaml_hourly:
 
 market_system_open:
   type: task
+  debug: false
   script:
     - waituntil rate:5t <server.has_flag[market_timer].not>
     - flag server market_open:true
