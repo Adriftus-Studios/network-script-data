@@ -7,7 +7,7 @@ behrs_discord_toolbox:
         - stop
       
       - define embed <discordembed.color[16774656]>
-      - define direct_message <[direct_message]>
+      - define direct_message <context.is_direct||false>
       - define message <context.message>
       - define author <context.author>
 
