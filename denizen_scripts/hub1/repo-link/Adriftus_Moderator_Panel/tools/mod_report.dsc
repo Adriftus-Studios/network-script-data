@@ -20,7 +20,7 @@ mod_report_command:
       - if <[target]> != <player>:
         - if <context.args.get[2]||null> != null:
           - define reason <context.args.get[2].to[<context.args.size>].space_separated>
-          - run mod_notify_report def:<list[<player>|<[target].uuid>].include_single[<[reason]>].include[<bungee.server||Server>]>
+          - run mod_notify_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>|<[target].uuid>]>
           - run mod_message_discord_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>|<[target]>]>
           - narrate "<&e>You have successfully reported <[target].name> for <[reason]>."
         - else:
@@ -44,7 +44,7 @@ mod_bugreport_command:
       - narrate "<&6>/bugreport [reason]"
     - else:
       - define reason <context.args.get[1].to[<context.args.size>].space_separated>
-      - run mod_notify_bugreport def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
+      - run mod_notify_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
       - run mod_message_discord_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
       - narrate "<&e>You have successfully reported a bug: <[reason]>."
 
@@ -80,7 +80,7 @@ mod_message_discord_report:
     - define field_name Reason<&co>
     - define field_value <[reason]>
     - define field_inline false
-    - define fields:|:<map.with[name].as[<[field_name]>].with[value].as[<[field_value]>].with[inline].as[<[field_inline]>]>
+    - define fields:->:<map.with[name].as[<[field_name]>].with[value].as[<[field_value]>].with[inline].as[<[field_inline]>]>
 
     - define footer_text Reported<&sp>by<&co><&sp><[reporter]>
     - define footer_icon_url https://minotar.net/helm/<[reporter]>

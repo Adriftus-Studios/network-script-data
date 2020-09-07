@@ -1,5 +1,6 @@
 help_override:
   type: world
+  debug: false
   events:
     on help command:
       - if <context.args.first||null> == null:
@@ -26,6 +27,7 @@ help_override:
 
 help_management:
   type: world
+  debug: false
   load_data:
     - foreach <yaml.list.filter[starts_with[help]]>:
       - yaml unload id:<[value]>

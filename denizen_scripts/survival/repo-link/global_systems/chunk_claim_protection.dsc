@@ -53,6 +53,7 @@ claiming_system_upgrade_data:
 
 claiming_help:
   type: command
+  debug: false
   name: claimhelp
   permission: adriftus.admin
   script:
@@ -94,12 +95,14 @@ claiming_command:
 
 claiming_command_chunk_map:
   type: command
+  debug: false
   name: claimmap
   script:
   - inject claiming_claimmap_script
 
 claiming_claimmap_script:
   type: task
+  debug: false
   script:
     - if !<script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.location.world.name>]>:
       - narrate "<&c>Claims are not allowed in this world."
@@ -111,6 +114,7 @@ claiming_claimmap_script:
 
 claiming_command_guide_to_chunk:
   type: command
+  debug: false
   name: chunkguide
   script:
     - run claim_system_guide_to_chunk_main def:<chunk[<context.args.first>,<context.args.get[2]>,<player.location.world>]>
@@ -275,6 +279,7 @@ claiming_inventory_events:
 
 claiming_multi_chunk_GUI:
   type: inventory
+  debug: false
   inventory: chest
   size: 36
   definitions:
@@ -308,6 +313,7 @@ claiming_multi_chunk_GUI_events:
 
 claiming_multi_chunk_GUI_open:
   type: task
+  debug: false
   script:
   - define x <player.location.chunk.x>
   - define z <player.location.chunk.z>
@@ -1319,6 +1325,7 @@ claiming_system_bossBar_Stop:
 
 claiming_system_bossbar_initialize:
   type: world
+  debug: false
   events:
     on player changes world to mainland:
     - wait 5t
@@ -1347,6 +1354,7 @@ claiming_system_bossbar_initialize:
 
 claiming_system_bossBar_OuterRealms:
   type: task
+  debug: false
   script:
   - title "title:<&2>Outer Realms" "subtitle:Safe Zone"
   - if <server.has_flag[outerRealms_bossbar_flags]>:
@@ -1356,6 +1364,7 @@ claiming_system_bossBar_OuterRealms:
 
 claiming_system_bossBar_SavageLands:
   type: task
+  debug: false
   script:
       - title "title:<&4>Savage Lands" "subtitle:Here be monsters."
       - if <server.has_flag[SavageLands_bossbar_flags]>:
@@ -1365,6 +1374,7 @@ claiming_system_bossBar_SavageLands:
 
 claiming_system_bossBar_Biome:
   type: task
+  debug: false
   script:
   - foreach <script[claim_system_yaml_settings].list_keys[biomes]>:
     - if <player.location.biome.name.contains_any[<[value].as_list>]>
@@ -1515,6 +1525,7 @@ claim_system_remove_upgrade_weather-control:
 
 claim_system_build_chunkmap:
   type: procedure
+  debug: false
   definitions: chunk|json
   script:
   - define world <[chunk].world>
@@ -1553,6 +1564,7 @@ claim_system_build_chunkmap:
 
 claim_system_guide_to_chunk_main:
   type: task
+  debug: false
   definitions: chunk
   script:
   - if <player.has_flag[chunk_guide]>:
@@ -1573,6 +1585,7 @@ claim_system_guide_to_chunk_main:
 
 claim_system_guide_to_chunk_draw_line:
   type: task
+  debug: false
   script:
   - while <player.location.distance[<[center]>]> > 20 && <player.is_online>:
     - define locs <player.location.points_between[<[center]>].get[5].to[35]>
@@ -1588,6 +1601,7 @@ claim_system_guide_to_chunk_draw_line:
 
 claim_system_guide_to_outline_chunk:
   type: task
+  debug: false
   script:
   - define y <player.location.y>
   - repeat 20:
@@ -1597,6 +1611,7 @@ claim_system_guide_to_outline_chunk:
 
 claiming_settings_update:
   type: task
+  debug: false
   definitions: group
   script:
   - ratelimit <[group]> 10t

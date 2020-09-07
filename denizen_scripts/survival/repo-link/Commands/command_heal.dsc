@@ -1,16 +1,15 @@
-Heal_Command:
+heal_command:
     type: command
     name: heal
-    debug: false
-    description: Heals a player
     usage: /heal (player)
-    permission: Behr.Essentials.Heal
+    description: Heals a player
+    permission: adriftus.staff
     tab complete:
         - if <player.groups.contains[Moderation]>:
-            - define Blacklist <player>
+            - define Blacklist <[<player>]>
             - inject Online_Player_Tabcomplete
     script:
-    # % ██ [  Verify args ] ██
+    # % ██ [  Verify arguments ] ██
         - if <context.args.is_empty>:
             - define User <player>
         - else if <context.args.size> == 1:
@@ -23,5 +22,7 @@ Heal_Command:
         - heal <[User]>
         - adjust <[User]> food_level:20
         - if <[User]> != <player>:
-            - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[was healed.|green]>"
-        - narrate targets:<[User]> format:Colorize_Green "You were healed."
+            - narrate "<[user].display_name><&e> has been healed."
+            - narrate "<player.display_name><&e> has healed you" targets:<[user]>
+        - else:
+            - narrate targets:<[User]>  "<&e>You have been healed."

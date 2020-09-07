@@ -8,10 +8,11 @@ teleport_cancel_global_command:
     tab complete:
     - inject Online_Player_Tabcomplete
     script:
+    - flag player "teleport_command:<list_single[<&4>/<&c><context.alias||<context.command>> <context.raw_args>].include[<queue.script.parsed_key[Usage]>|<queue.script.data_key[aliases].first||<context.alias||<context.command>>>]>" duration:75s
     # % ██ [  Check for local flag  ] ██
     - if <context.args.filter_tag[<list[-l|-local|-locally|-s|-server].contains[<[filter_value]>]>].is_empty.not>:
         # % ██ [  Syntax Check (Arg Count)  ] ██
-        - if <context.args.size> != 1:
+        - if <context.args.is_empty> || <context.args.size> > 2:
             - inject Command_Syntax
         - if <list[everyone|all].contains[<context.args.first>]>:
             - define uuid_list <yaml[teleport_requests].read[<player.uuid>]||<list>>
@@ -57,7 +58,7 @@ teleport_cancel_global_command:
                 - inject Command_Error
     - else:
         # % ██ [  Syntax Check (Arg Count)  ] ██
-        - if <context.args.is_empty> || <context.args.size> > 2:
+        - if <context.args.size> != 1:
             - inject Command_Syntax
         - bungeerun hub1 networkteleport_cancel def:<list_single[<context.args.first>].include[<player>|<bungee.server>|<player.display_name>]>
 
@@ -72,7 +73,7 @@ networkteleport_cancel:
             - bungee <[attached_server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "You do not have any outgoing teleport requests."
-                - inject Command_Error
+                - inject Command_Error_Bungee
         - yaml id:networkteleport_requests set <[attached_player].uuid>:!
         - foreach <[uuid_here_list]> as:u:
             - yaml id:networkteleporthere_requests set <[u]>:<yaml[networkteleporthere_requests].read[<[u]>].exclude[<[attached_player].uuid>]>
@@ -89,7 +90,7 @@ networkteleport_cancel:
                 - bungee <[attached_server]>:
                     - adjust <queue> linked_player:<[attached_player]>
                     - define Reason "At least one of the specified players is invalid."
-                    - inject Command_Error
+                    - inject Command_Error_Bungee
             - define player_maps:->:<yaml[data_handler].read[].filter[get[name].is[==].to[<[player_arg].before[,]>]].first>
             - define player_arg <[player_arg].after[,]>
         - define uuid_list <yaml[networkteleport_requests].read[<[attached_player].uuid>].filter_tag[<[player_maps].parse[get[uuid]].contains[<[filter_value]>]>]||<list>>
@@ -98,7 +99,7 @@ networkteleport_cancel:
             - bungee <[attached_server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "You do not have any outgoing teleport requests to the specified people."
-                - inject Command_Error
+                - inject Command_Error_Bungee
         - yaml id:networkteleport_requests set <[attached_player].uuid>:<yaml[networkteleport_requests].read[<[attached_player].uuid>].exclude[<[uuid_list]>]>
         - foreach <[uuid_here_list]> as:u:
             - yaml id:networkteleporthere_requests set <[u]>:<-:<[attached_player].uuid>
@@ -113,7 +114,7 @@ networkteleport_cancel:
             - bungee <[attached_server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "The specified player is invalid."
-                - inject Command_Error
+                - inject Command_Error_Bungee
         - define player_map <yaml[data_handler].read[].filter[get[name].is[==].to[<[player_1_input]>]].first>
         - if <yaml[networkteleport_requests].contains[<[attached_player].uuid>]> && <yaml[networkteleport_requests].read[<[attached_player].uuid>].contains[<[player_map].get[uuid]>]>:
             - yaml id:networkteleport_requests <[attached_player].uuid>:<-:<[player_map].get[uuid]>
@@ -133,7 +134,7 @@ networkteleport_cancel:
             - bungee <[attached_server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "You do not have an outgoing teleport request to that person"
-                - inject Command_Error
+                - inject Command_Error_Bungee
 
 teleport_deny_global_command:
     type: command
@@ -147,10 +148,11 @@ teleport_deny_global_command:
     tab complete:
     - inject Online_Player_Tabcomplete
     script:
+    - flag player "teleport_command:<list_single[<&4>/<&c><context.alias||<context.command>> <context.raw_args>].include[<queue.script.parsed_key[Usage]>|<queue.script.data_key[aliases].first||<context.alias||<context.command>>>]>" duration:75s
     # % ██ [  Check for local flag  ] ██
     - if <context.args.filter_tag[<list[-l|-local|-locally|-s|-server].contains[<[filter_value]>]>].is_empty.not>:
         # % ██ [  Syntax Check (Arg Count)  ] ██
-        - if <context.args.size> != 1:
+        - if <context.args.is_empty> || <context.args.size> > 2:
             - inject Command_Syntax
         - if <list[everyone|all].contains[<context.args.first>]>:
             - define uuid_list <yaml[teleport_requests].read[].filter[values.contains[<player.uuid>]].parse[keys.first]>
@@ -222,7 +224,7 @@ teleport_deny_global_command:
                 - inject Command_Error
     - else:
         # % ██ [  Syntax Check (Arg Count)  ] ██
-        - if <context.args.is_empty> || <context.args.size> > 2:
+        - if <context.args.size> != 1:
             - inject Command_Syntax
         - bungeerun hub1 networkteleport_deny def:<list_single[<context.args.first>].include[<player>|<bungee.server>|<player.display_name>]>
 
@@ -237,7 +239,7 @@ networkteleport_deny:
             - bungee <[attached_server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "You do not have a teleport request from anyone."
-                - inject Command_Error
+                - inject Command_Error_Bungee
         - foreach <[uuid_list]> as:u:
             - yaml id:networkteleport_requests set <[u]>:<-:<[attached_player].uuid>
             - if <yaml[networkteleport_cooldowns].contains[<[u]>]>:
@@ -263,7 +265,7 @@ networkteleport_deny:
                 - bungee <[attached_server]>:
                     - adjust <queue> linked_player:<[attached_player]>
                     - define Reason "At least one of the specified players is invalid."
-                    - inject Command_Error
+                    - inject Command_Error_Bungee
             - define player_maps:->:<yaml[data_handler].read[].filter[get[name].is[==].to[<[player_arg].before[,]>]].first>
             - define player_arg <[player_arg].after[,]>
         - define uuid_list <yaml[networkteleport_requests].read[].filter[values.contains[<[attached_player].uuid>]].parse[keys.first].filter_tag[<[player_maps].parse[get[uuid]].contains[<[filter_value]>]>]>
@@ -272,7 +274,7 @@ networkteleport_deny:
             - bungee <[attached_server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "You do not have a teleport request from anyone."
-                - inject Command_Error
+                - inject Command_Error_Bungee
         - foreach <[uuid_list]> as:u:
             - yaml id:networkteleport_requests set <[u]>:<-:<[attached_player].uuid>
             - if <yaml[networkteleport_cooldowns].contains[<[u]>]>:
@@ -294,7 +296,7 @@ networkteleport_deny:
             - bungee <[attached_server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "The specified player is invalid."
-                - inject Command_Error
+                - inject Command_Error_Bungee
         - define player_map <yaml[data_handler].read[].filter[get[name].is[==].to[<[player_1_input]>]].first>
         - if <yaml[networkteleport_requests].contains[<[player_map].get[uuid]>]> && <yaml[networkteleport_requests].read[<[player_map].get[uuid]>].contains[<[attached_player].uuid>]>:
             - yaml id:networkteleport_requests set <[player_map].get[uuid]>:<-:<[attached_player].uuid>
@@ -320,7 +322,7 @@ networkteleport_deny:
             - bungee <[attached_server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "You do not have a teleport request from the specified player."
-                - inject Command_Error
+                - inject Command_Error_Bungee
 
 teleport_accept_global_command:
     type: command
@@ -332,10 +334,11 @@ teleport_accept_global_command:
     tab complete:
     - inject Online_Player_Tabcomplete
     script:
+    - flag player "teleport_command:<list_single[<&4>/<&c><context.alias||<context.command>> <context.raw_args>].include[<queue.script.parsed_key[Usage]>|<queue.script.data_key[aliases].first||<context.alias||<context.command>>>]>" duration:75s
     # % ██ [  Check for local flag  ] ██
     - if <context.args.filter_tag[<list[-l|-local|-locally|-s|-server].contains[<[filter_value]>]>].is_empty.not>:
         # % ██ [  Syntax Check (Arg Count)  ] ██
-        - if <context.args.size> != 1:
+        - if <context.args.is_empty> || <context.args.size> > 2:
             - inject Command_Syntax
         - define player <server.match_player[<context.args.first>]||null>
         - if <[player]> == null || <[player].uuid> == <player.uuid>:
@@ -358,7 +361,7 @@ teleport_accept_global_command:
             - inject Command_Error
     - else:
         # % ██ [  Syntax Check (Arg Count)  ] ██
-        - if <context.args.is_empty> || <context.args.size> > 2:
+        - if <context.args.size> != 1:
             - inject Command_Syntax
         - define player_name <context.args.filter_tag[<list[-l|-local|-locally|-s|-server].contains[<[filter_value]>].not>].first>
         - ~bungeetag hub1 <proc[player_info_map].context[<[player_name]>]> save:player_1_map
@@ -379,7 +382,7 @@ networkteleport_timeout_accept:
         - if <player[<[player_1_map].get[uuid]>].is_online.not>:
             - adjust <queue> linked_player:<[attached_player]>
             - define Reason "Timeout error."
-            - inject Command_Error
+            - inject Command_Error_Bungee
     - teleport <player[<[player_1_map].get[uuid]>]> <[attached_player].location.left[<util.random.decimal[-0.01].to[0.01]>]>
     - narrate "<&a>You have accepted <player[<[player_1_map].get[uuid]>].display_name><&a>'s teleport request!" targets:<[attached_player]>
     - narrate "<[attached_player].display_name><&a> has accepted your teleport request!" targets:<player[<[player_1_map].get[uuid]>]>
@@ -397,7 +400,7 @@ networkteleporthere_timeout_accept:
             - bungee <[attached_server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "Timeout error."
-                - inject Command_Error
+                - inject Command_Error_Bungee
     - teleport <[attached_player]> <player[<[player_1_map].get[uuid]>].location.left[<util.random.decimal[-0.01].to[0.01]>]>
     - narrate "<&a>You have accepted <player[<[player_1_map].get[uuid]>].display_name><&a>'s teleport request!" targets:<[attached_player]>
     - narrate "<[attached_player].display_name><&a> has accepted your teleport request!" targets:<player[<[player_1_map].get[uuid]>]>
@@ -416,7 +419,7 @@ networkteleport_accept:
         - bungee <[attached_server]>:
             - adjust <queue> linked_player:<[attached_player]>
             - define Reason "You do not have a teleport request from the specified person!"
-            - inject Command_Error
+            - inject Command_Error_Bungee
 
 teleporthere_global_command:
     type: command
@@ -435,6 +438,7 @@ teleporthere_global_command:
     - define Arg2 <server.online_players.parse[name]>
     - inject MultiArg_Command_Tabcomplete
     script:
+    - flag player "teleport_command:<list_single[<&4>/<&c><context.alias||<context.command>> <context.raw_args>].include[<queue.script.parsed_key[Usage]>|<queue.script.data_key[aliases].first||<context.alias||<context.command>>>]>" duration:75s
     # % ██ [  Check for local flag  ] ██
     - if <context.args.filter_tag[<list[-l|-local|-locally|-s|-server].contains[<[filter_value]>]>].is_empty.not>:
         # % ██ [  Syntax Check (Arg Count)  ] ██
@@ -548,7 +552,7 @@ teleporthere_global_command:
                 - ~bungeetag server:hub1 <proc[player_info_map].context[<player.name>]> save:player_map_2
                 - if <entry[player_map_2].result> == null:
                     - define Reason "The specified player is invalid."
-                    - inject Command_Error
+                    - inject Command_Error_Bungee
                 - bungeerun hub1 everyone_networkteleporthere_request def:<list_single[<entry[player_map_2].result>].include[<player>|<bungee.server>|<proc[User_Display_Simple].context[<player>]>]>
             - else if <context.args.first.contains[,]>:
                 - define player_arg <context.args.first>
@@ -556,7 +560,7 @@ teleporthere_global_command:
                     - ~bungeetag server:hub1 <proc[player_info_map].context[<[player_arg].before[,]>]> save:network_player
                     - if <entry[network_player].result> == null || <[player_arg].before[,]> == <player.name>:
                         - define Reason "At least one of the specified players is invalid."
-                        - inject Command_Error
+                        - inject Command_Error_Bungee
                     - define uuid_list:->:<entry[network_player].result.get[uuid]>
                     - define player_arg <[player_arg].after[,]>
                 - bungeerun hub1 multiple_networkteleporthere_request def:<list_single[<[uuid_list]>].include[<player>|<player.display_name>]>
@@ -565,7 +569,7 @@ teleporthere_global_command:
                 - ~bungeetag server:hub1 <proc[player_info_map].context[<context.args.first>]> save:player_map_2
                 - if <entry[player_map_2].result> == null || <entry[player_map_2].result.get[uuid]> == <player.uuid>:
                     - define Reason "The specified player is invalid."
-                    - inject Command_Error
+                    - inject Command_Error_Bungee
                 - bungeerun hub1 networkteleporthere_request def:<list_single[<entry[player_map_2].result>].include_single[<entry[player_map_1].result>]>
 
 teleport_global_command:
@@ -589,6 +593,7 @@ teleport_global_command:
 
 teleport_global_handler:
     type: world
+    usage: /teleport (<&lt>Player<&gt> (<&lt>Player<&gt>)/(everyone/all) <&lt>Player<&gt>) (-r/-request/request) (-l/-local/-locally/-s/-server)
     events:
         on teleport|tp|minecraft&coteleport|minecraft&cotp command:
         - determine passively FULFILLED
@@ -598,6 +603,7 @@ teleport_global_handler:
 teleport_global_command_inject:
     type: task
     script:
+    - flag player "teleport_command:<list_single[<&4>/<&c><context.alias||<context.command>> <context.raw_args>].include[<queue.script.parsed_key[Usage]>|<queue.script.data_key[aliases].first||<context.alias||<context.command>>>]>" duration:75s
     # % ██ [  Check for local flag  ] ██
     - if <context.args.filter_tag[<list[-l|-local|-locally|-s|-server].contains[<[filter_value]>]>].is_empty.not>:
         # % ██ [  Syntax Check (Arg Count)  ] ██
@@ -613,7 +619,7 @@ teleport_global_command_inject:
             - if <player.has_permission[adriftus.staff]>:
                 - teleport <[player_2].location.left[<util.random.decimal[-0.01].to[0.01]>]>
                 - narrate "<&a>You have teleported to <[player_2].display_name><&a>."
-                - narrate "<player.display_name><&a> has teleported to you." targets:<[player_2]>
+                # - narrate "<player.display_name><&a> has teleported to you." targets:<[player_2]>
             - else:
                 - run teleport_request def:<player>|<[player_2]>|<player>
             - stop
@@ -696,7 +702,7 @@ teleport_global_command_inject:
                 - bungee <[player_map_2].get[server]>:
                     - teleport <player[<[player_map_2].get[uuid]>].location.left[<util.random.decimal[-0.01].to[0.01]>]>
                     - narrate "<&5>You have teleported to <player[<[player_map_2].get[uuid]>].display_name><&a>."
-                    - narrate "<&5><player.display_name> has teleported themself to you." targets:<player[<[player_map_2].get[uuid]>]>
+                    # - narrate "<&5><player.display_name> has teleported themself to you." targets:<player[<[player_map_2].get[uuid]>]>
             - stop
         # % ██ [  Staff-Only Check  ] ██
         - if <player.has_permission[adrifuts.staff].not>:
@@ -773,10 +779,10 @@ networkteleport_send_timeout_check:
             - bungee <[attached_server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "Timeout error."
-                - inject Command_Error
+                - inject Command_Error_Bungee
     - teleport <player[<[player_map_1].get[uuid]>]> <player[<[player_map_2].get[uuid]>].location.left[<util.random.decimal[-0.01].to[0.01]>]>
-    - narrate "<[attached_displayname]><&5> has teleported you to <player[<[player_map_2].get[uuid]>].display_name>." targets:<player[<[player_map_1].get[uuid]>]>
-    - narrate "<[attached_displayname]><&5> has teleported <player[<[player_map_1].get[uuid]>].display_name> to you." targets:<player[<[player_map_2].get[uuid]>]>
+    - narrate "<&a><[attached_displayname]><&5> has teleported you to <player[<[player_map_2].get[uuid]>].display_name>." targets:<player[<[player_map_1].get[uuid]>]>
+    - narrate "<&a><[attached_displayname]><&5> has teleported <player[<[player_map_1].get[uuid]>].display_name> to you." targets:<player[<[player_map_2].get[uuid]>]>
 
 everyone_teleporthere_request:
     type: task
@@ -813,14 +819,14 @@ multiple_teleporthere_request:
         - if <yaml[teleporthere_requests].contains[<[p].uuid>]> && <yaml[teleporthere_requests].read[<[p].uuid>].contains[<[player_2].uuid>]>:
             - adjust <queue> linked_player:<[player_2]>
             - define Reason "You have already sent a request at least one of the people!"
-            - inject Command_Error
+            - inject Command_Error_Bungee
         - else if <yaml[teleporthere_cooldowns].contains[<[p].uuid>]> && <yaml[teleporthere_cooldowns].read[<[p].uuid>].keys.contains[<[player_2].uuid>]>:
             - if <yaml[teleporthere_cooldowns].read[<[p].uuid>].get[<[player_2].uuid>].duration_since[<util.time_now>].in_minutes> >= 3:
                 - yaml id:teleporthere_cooldowns set <[p].uuid>:<yaml[teleporthere_cooldowns].read[<[p].uuid>].exclude[<[player_2].uuid>]>
             - else:
                 - adjust <queue> linked_player:<[player_2]>
                 - define Reason "At least one of the players specified is on cooldown!"
-                - inject Command_Error
+                - inject Command_Error_Bungee
     - foreach <[player_list]> as:p:
         - yaml set id:teleporthere_requests <[p].uuid>:->:<[player_2].uuid>
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<[player_2]>]>"
@@ -851,14 +857,14 @@ teleporthere_request:
     - if <yaml[teleporthere_requests].contains[<[player_1].uuid>]> && <yaml[teleporthere_requests].read[<[player_1].uuid>].contains[<[attached_player].uuid>]>:
         - adjust <queue> linked_player:<[attached_player]>
         - define Reason "You have already sent a request to that person!"
-        - inject Command_Error
+        - inject Command_Error_Bungee
     - else if <yaml[teleporthere_cooldowns].contains[<[player_1].uuid>]> && <yaml[teleporthere_cooldowns].read[<[player_1].uuid>].keys.contains[<[attached_player].uuid>]>:
         - if <util.time_now.duration_since[<yaml[teleporthere_cooldowns].read[<[player_1].uuid>].get[<[attached_player].uuid>]>].in_minutes> >= 3:
             - yaml id:teleporthere_cooldowns set <[player_1].uuid>:<yaml[teleporthere_cooldowns].read[<[player_1].uuid>].exclude[<[attached_player].uuid>]>
         - else:
             - adjust <queue> linked_player:<[attached_player]>
             - define Reason "The player specified is on cooldown!"
-            - inject Command_Error
+            - inject Command_Error_Bungee
     - yaml set id:teleporthere_requests <[player_1].uuid>:->:<[attached_player].uuid>
 
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<[attached_player]>]>"
@@ -917,14 +923,14 @@ teleport_request:
     - if <yaml[teleport_requests].contains[<[player_1].uuid>]> && <yaml[teleport_requests].read[<[player_1].uuid>].contains[<[player_2].uuid>]>:
         - adjust <queue> linked_player:<[attached_player]>
         - define Reason "You have already sent a request to that person!"
-        - inject Command_Error
+        - inject Command_Error_Bungee
     - else if <yaml[teleport_cooldowns].contains[<[player_1].uuid>]> && <yaml[teleport_cooldowns].read[<[player_1].uuid>].keys.contains[<[player_2].uuid>]>:
         - if <util.time_now.duration_since[<yaml[teleport_cooldowns].read[<[player_1].uuid>].get[<[player_2].uuid>]>].in_minutes> >= 3:
             - yaml id:teleport_cooldowns set <[player_1].uuid>:<yaml[teleport_cooldowns].read[<[player_1].uuid>].exclude[<[player_2].uuid>]>
         - else:
             - adjust <queue> linked_player:<[attached_player]>
             - define Reason "The player specified is on cooldown!"
-            - inject Command_Error
+            - inject Command_Error_Bungee
     - yaml set id:teleport_requests <[player_1].uuid>:->:<[player_2].uuid>
 
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<[player_2]>]>"
@@ -995,7 +1001,7 @@ networkteleport_request:
         - bungee <yaml[data_handler].read[].filter[get[uuid].is[==].to[<[attached_player].uuid>]].first.get[server]>:
             - adjust <queue> linked_player:<[attached_player]>
             - define Reason "You have already sent a request to that person!"
-            - inject Command_Error
+            - inject Command_Error_Bungee
     - else if <yaml[networkteleport_cooldowns].contains[<[player_uuid_1]>]> && <yaml[networkteleport_requests].read[<[player_uuid_1]>].keys.contains[<[player_uuid_2]>]>:
         - if <util.time_now.duration_since[<yaml[networteleport_cooldowns].read[<[player_uuid_1]>].get[<[player_uuid_2]>]>].in_minutes> >= 3:
             - yaml id:networkteleport_cooldowns set <[player_uuid_1]>:<yaml[networkteleport_cooldowns].read[<[player_uuid_1]>].exclude[<[player_uuid_2]>]>
@@ -1003,7 +1009,7 @@ networkteleport_request:
             - bungee <yaml[data_handler].read[].filter[get[uuid].is[==].to[<[attached_player].uuid>]].first.get[server]>:
                 - adjust <queue> linked_player:<[attached_player]>
                 - define Reason "The player specified is on cooldown!"
-                - inject Command_Error
+                - inject Command_Error_Bungee
     - yaml set id:networkteleport_requests <[player_uuid_1]>:->:<[player_uuid_2]>
     - ~bungeetag server:<[player_map_1].get[server]> <player[<[player_uuid_1]>].display_name> save:displayname_1
     - ~bungeetag server:<[player_map_2].get[server]> <player[<[player_uuid_2]>].display_name> save:displayname_2
@@ -1041,7 +1047,7 @@ networkteleporthere_request:
         - bungee <[player_map_2].get[server]>:
             - adjust <queue> linked_player:<player[<[player_uuid_2]>]>
             - define Reason "You have already sent a request to that person!"
-            - inject Command_Error
+            - inject Command_Error_Bungee
     - else if <yaml[networkteleporthere_cooldowns].contains[<[player_uuid_1]>]> && <yaml[networkteleporthere_cooldowns].read[<[player_uuid_1]>].keys.contains[<[player_uuid_2]>]>:
         - if <util.time_now.duration_since[<yaml[networkteleporthere_cooldowns].read[<[player_uuid_1]>].get[<[player_uuid_2]>]>].in_minutes> >= 3:
             - yaml id:networkteleporthere_cooldowns set <[player_uuid_1]>:<yaml[networkteleporthere_cooldowns].read[<[player_uuid_1]>].exclude[<[player_uuid_2]>]>
@@ -1049,7 +1055,7 @@ networkteleporthere_request:
             - bungee <[player_map_2].get[server]>:
                 - adjust <queue> linked_player:<player[<[player_uuid_2]>]>
                 - define Reason "The player specified is on cooldown!"
-                - inject Command_Error
+                - inject Command_Error_Bungee
     - yaml set id:networkteleporthere_requests <[player_uuid_1]>:->:<[player_uuid_2]>
     - ~bungeetag server:<[player_map_1].get[server]> <player[<[player_uuid_1]>].display_name> save:displayname_1
     - ~bungeetag server:<[player_map_2].get[server]> <player[<[player_uuid_2]>].display_name> save:displayname_2
@@ -1084,7 +1090,7 @@ multiple_networkteleporthere_request:
             - bungee <yaml[data_handler].read[].filter[get[uuid].is[==].to[<[player_2].uuid>]].first.get[server]>:
                 - adjust <queue> linked_player:<[player_2]>
                 - define Reason "You have already sent a request to at least one of the specified people!"
-                - inject Command_Error
+                - inject Command_Error_Bungee
         - else if <yaml[networkteleporthere_cooldowns].contains[<[u]>]> && <yaml[networkteleporthere_cooldowns].read[<[u]>].keys.contains[<[player_2].uuid>]>:
             - if <util.time_now.duration_since[<yaml[networkteleporthere_cooldowns].read[<[u]>].get[<[player_2].uuid>]>]>:
                 - yaml id:networkteleporthere_cooldowns set <[u]>:<yaml[networkteleporthere_cooldowns].read[<[u]>].exclude[<[player_2].uuid>]>
@@ -1092,7 +1098,7 @@ multiple_networkteleporthere_request:
                 - bungee <yaml[data_handler].read[].filter[get[uuid].is[==].to[<[player_2].uuid>]].first.get[server]>:
                     - adjust <queue> linked_player:<[player_2]>
                     - define Reason "One of the players specified is on cooldown!"
-                    - inject Command_Error
+                    - inject Command_Error_Bungee
     - foreach <[uuid_list]> as:u:
         - yaml set id:networkteleport_requests <[u]>:->:<[player_2].uuid>
 
@@ -1161,3 +1167,19 @@ teleport_yaml_load:
         - yaml create id:teleporthere_requests
         - yaml create id:teleport_cooldowns
         - yaml create id:teleporthere_cooldowns
+
+# % ██  [ Used a command wrongly, provide reason (used without the arguments available) ] ██
+# - ██  [ Usage ] - define Reason "The specified player is invalid"
+# - ██  [       ] - inject Command_Error_Bungee
+Command_Error_Bungee:
+    type: task
+    # Do not use this: inject with defining before
+    definitions: Reason
+    script:
+    - if <[Reason]||null> == null:
+        - define Reason "No reason was specified. Report to a developer."
+    - define Hover "<proc[Colorize].context[You Typed:|red]><&r><&nl><player.flag[teleport_command].first><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <proc[Colorize].context[<player.flag[teleport_command].get[2]>|yellow]>"
+    - define Text <proc[Colorize].context[<[Reason]>|red]>
+    - define Command "<player.flag[teleport_command].get[3]> "
+    - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+    - stop

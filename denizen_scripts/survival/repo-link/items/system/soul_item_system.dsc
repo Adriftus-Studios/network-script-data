@@ -408,12 +408,9 @@ item_create_soul_item:
 # This is some AJ level shit....
 item_system_build_item:
   type: procedure
-  definitions: item|NBT
+  definitions: item
   debug: false
   script:
-    - define Item <[Item].with[nbt=<[NBT]>]>
-    - debug debug <[NBT]>
-
   # % ██ [ Determine the amount of Stars  ] ██
     - if <[item].has_nbt[soul_level]>:
       - define level <[item].nbt[soul_level]>

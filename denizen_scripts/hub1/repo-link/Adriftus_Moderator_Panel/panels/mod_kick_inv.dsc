@@ -18,12 +18,12 @@ mod_kick_inv:
         - define item <item[mod_level<[level]>_item]>
         - define name <[item].script.parsed_key[tag]><&sp><[infraction]>
         - define lore <list[<&b>Level<&co><&sp><[item].script.parsed_key[colour]><[level]>]>
-        - define lore:|:<&e>Right<&sp>Click<&sp>to<&sp>kick<&co>
-        - define lore:|:<player.flag[amp_map].as_map.get[uuid].as_player.name>
-        - define lore:|:<&e>Clic<&sp>Droit<&sp>pour<&sp>un<&sp>coup<&co>
+        - define lore:->:<&e>Right<&sp>Click<&sp>to<&sp>kick<&co>
+        - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
+        - define lore:->:<&e>Clic<&sp>Droit<&sp>pour<&sp>un<&sp>coup<&co>
         - define nbt <list[LEVEL/<[level]>|INFRACTION/<[infraction]>]>
         - define item <[item].with[display_name=<[name]>;lore=<[lore]>;nbt=<[nbt]>]>
-        - define inventory:|:<[item]>
+        - define inventory:->:<[item]>
     - determine <[inventory]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
@@ -39,6 +39,6 @@ mod_kick_inv_events:
   events:
     on player right clicks mod_level*_item in mod_kick_inv:
       - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|Kick
-      - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|Kick
+      - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[INFRACTION]>|Kick
       - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid].as_player.name>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|Kick
       - kick <player.flag[amp_map].as_map.get[uuid].as_player> reason:<proc[mod_kick_message].context[<player.uuid>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>]>

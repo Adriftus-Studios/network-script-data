@@ -12,7 +12,7 @@ mod_ban_player:
       - yaml id:<[id]> set banned.length:<[length]>
       - yaml id:<[id]> set banned.date:<util.time_now>
       - yaml id:<[id]> set banned.moderator:<[moderator]>
-      - kick <[uuid].as_player> reason:<proc[mod_ban_message].context[<[moderator]>|<[level]>|<[infraction]>|<[length]>|<util.time_now>]>
+      - kick <[uuid].as_player> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[infraction]>|<[length]>|<util.time_now>]>
     - else:
       - define dir data/<tern[<element[<[global]||null>].is[!=].to[null]>].pass[global/].fail[]>players/<[uuid]>.yml
       - define id amp.banned.<[uuid]>
@@ -46,4 +46,4 @@ mod_ban_check:
         - yaml id:<[id]> set banned:!
       # Else, kick 'em.
       - else:
-        - kick <player> reason:<proc[mod_ban_message].context[<yaml[<[id]>.read[banned.moderator]>|<yaml[<[id]>].read[banned.level]>|<yaml[<[id]>].read[banned.infraction]>|<yaml[<[id]>].read[banned.length]>|<yaml[<[id]>].read[banned.date]>]>
+        - kick <player> reason:<proc[mod_kick_message].context[<yaml[<[id]>.read[banned.moderator]>|<yaml[<[id]>].read[banned.level]>|<yaml[<[id]>].read[banned.infraction]>|<yaml[<[id]>].read[banned.length]>|<yaml[<[id]>].read[banned.date]>]>

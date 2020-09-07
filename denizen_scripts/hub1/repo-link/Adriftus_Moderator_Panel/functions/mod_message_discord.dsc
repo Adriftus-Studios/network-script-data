@@ -27,23 +27,23 @@ mod_message_discord:
     - define field1_name Reason<&co>
     - define field1_value <[infraction]>
     - define field1_inline false
-    - define fields:|:<map.with[name].as[<[field1_name]>].with[value].as[<[field1_value]>].with[inline].as[<[field1_inline]>]>
+    - define fields:->:<map.with[name].as[<[field1_name]>].with[value].as[<[field1_value]>].with[inline].as[<[field1_inline]>]>
 
     - define field2_name Action<&co>
     - define field2_value <[action]>
     - define field2_inline true
-    - define fields:|:<map.with[name].as[<[field2_name]>].with[value].as[<[field2_value]>].with[inline].as[<[field2_inline]>]>
+    - define fields:->:<map.with[name].as[<[field2_name]>].with[value].as[<[field2_value]>].with[inline].as[<[field2_inline]>]>
 
     - if <[length]||null> != null:
       - define fieldD_name Duration<&co>
       - define fieldD_value <[length].as_duration.formatted>
       - define fieldD_inline true
-      - define fields:|:<map.with[name].as[<[fieldD_name]>].with[value].as[<[fieldD_value]>].with[inline].as[<[fieldD_inline]>]>
+      - define fields:->:<map.with[name].as[<[fieldD_name]>].with[value].as[<[fieldD_value]>].with[inline].as[<[fieldD_inline]>]>
 
     - define field3_name Incident<&sp>#<&co>
     - define field3_value <[incidents]>
     - define field3_inline true
-    - define fields:|:<map.with[name].as[<[field3_name]>].with[value].as[<[field3_value]>].with[inline].as[<[field3_inline]>]>
+    - define fields:->:<map.with[name].as[<[field3_name]>].with[value].as[<[field3_value]>].with[inline].as[<[field3_inline]>]>
 
     - define timestamp <util.time_now.format[yyyy-MM-dd]>T<util.time_now.format[HH:mm:ss.SS]>Z
 

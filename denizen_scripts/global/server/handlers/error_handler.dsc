@@ -1,4 +1,4 @@
-Error_Handler:
+error_handler:
   type: world
   debug: false
   events:
@@ -6,36 +6,37 @@ Error_Handler:
       - yaml id:error_handler create
     on script generates error:
       - determine passively cancelled
-    # % ██ [ Verify Connection             ] ██
-      - define Timeout <util.time_now.add[1m]>
-      - waituntil <bungee.connected> || <[Timeout].duration_since[<util.time_now>]> != 0
+    # % ██ [ verify connection             ] ██
+      - define timeout <util.time_now.add[1m]>
+      - waituntil <bungee.connected> || <[timeout].duration_since[<util.time_now>]> != 0
       - if !<bungee.connected> || <context.queue.id||invalid> == invalid || !<list[hub1|behrcraft|survival|relay|xeane].contains[<bungee.server>]>:
         - stop
 
-    # % ██ [ Disable /ex Error Handling     ] ██
-      - if <context.queue.id.starts_with[EXCommand]||false>:
+    # % ██ [ disable /ex error handling     ] ██
+      - if <context.queue.id.starts_with[excommand]||false>:
         - announce to_console "<context.queue.id||false> not pursuing error handler."
         - determine <&4><context.message>
 
-    # % ██ [ Track Errors                  ] ██
+    # % ██ [ track errors                  ] ██
       - define data <map>
       - if <context.script||invalid> != invalid:
-        - define Rate_Limit <util.time_now.duration_since[<yaml[error_handler].read[<context.script.name>].highest[epoch_millis]>].in_seconds>
+        - if <yaml[error_handler].contains[<context.script.name>]>:
+          - define rate_limit <util.time_now.duration_since[<yaml[error_handler].read[<context.script.name>].highest[epoch_millis]>].in_seconds>
         - yaml id:error_handler set <context.script.name>:->:<util.time_now>
-        - if <[Rate_Limit]> < 5:
+        - if <[rate_limit]||invalid> != invalid && <[rate_limit]> < 5:
           - stop
-        - define Error_Count <yaml[error_handler].read[<context.script.name>].size>
+        - define error_count <yaml[error_handler].read[<context.script.name>].size>
 
-    # % ██ [ Cache the Information Needed  ] ██
-      - define Data <[Data].with[Server].as[<bungee.server>]>
+    # % ██ [ cache the information needed  ] ██
+      - define data <[data].with[server].as[<bungee.server>]>
       - if <context.queue.player||invalid> != invalid:
-        - define Player_Map <map.with[Name].as[<queue.player.name>].with[UUID].as[<queue.player.uuid>]>
-        - define Data <[Data].with[Player].as[<[Player_Map]>]>
-      - if <context.script.name||Invalid> != invalid:
-        - define Script_Map <map.with[Name].as[<context.script.name>].with[Line].as[<context.line||Invalid>].with[File_Location].as[<context.script.filename||Invalid>].with[Error_Count].as[<[Error_Count]>]>
-        - define Data <[Data].with[Script].as[<[Script_Map]>]>
-      - define Data <[Data].with[Message].as[<context.message>]>
-      - define Data <[Data].with[Definition_Map].as[<context.queue.definition_map>]>
+        - define player_map <map.with[name].as[<queue.player.name>].with[uuid].as[<queue.player.uuid>]>
+        - define data <[data].with[player].as[<[player_map]>]>
+      - if <context.script.name||invalid> != invalid:
+        - define script_map <map.with[name].as[<context.script.name>].with[line].as[<context.line||invalid>].with[file_location].as[<context.script.filename||invalid>].with[error_count].as[<[error_count]>]>
+        - define data <[data].with[script].as[<[script_map]>]>
+      - define data <[data].with[message].as[<context.message>]>
+      - define data <[data].with[definition_map].as[<context.queue.definition_map>]>
 
-    # % ██ [ Send to Relay                 ] ██
-      - bungeerun relay Error_Response_Webhook def:<[Data]>
+    # % ██ [ send to relay                 ] ██
+      - bungeerun relay error_response_webhook def:<[data]>

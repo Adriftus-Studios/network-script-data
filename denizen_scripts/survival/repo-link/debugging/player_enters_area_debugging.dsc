@@ -20,7 +20,8 @@ player_enters_area_debugging:
             - narrate <&hover[<[Hover]>]><[Text]><&end_hover>
 
 player_enters_area_error_handler:
-    type: world
+    type: data
+    debug: false
     events:
         on script generates error:
             - if <context.script.name||invalid> == player_enters_area_debugging:

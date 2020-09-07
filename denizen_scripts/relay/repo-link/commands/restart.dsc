@@ -39,7 +39,7 @@ Restart_DCommand:
           - narrate "Verify if the flag contains the server, if it's within the schedule period, and if it's already in progress."
 
   # % ██ [ Check for Help Argument          ] ██
-    - else if <[Args].first> == Help:
+    - if <[Args].first> == Help:
       - choose <context.args.size>:
         - case 1:
           - narrate "Helpful information."
