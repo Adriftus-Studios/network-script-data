@@ -188,7 +188,7 @@ web_handler:
           - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
         
           - if !<proc[discord_oauth_validate_state].context[<[state]>]>:
-            - announce to_console "<&c>"
+            - announce to_console "<&c>invalid_state"
             - determine CODE:<list[418|406].random>
           - run discord_oauth def:<[state]>|remove
           - determine passively FILE:../../../../web/pages/discord_linked.html
@@ -294,6 +294,8 @@ web_handler:
           - if <server.has_file[../../../../web/images/<context.query_map.get[name]||invalid>]>:
             - determine passively CODE:200
             - determine FILE:../../../../web/images/<context.query_map.get[name]>
+        - default:
+          - determine CODE:<list[406|418].random>
 
     on post request:
       - define Domain <context.address>
