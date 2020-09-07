@@ -4,7 +4,8 @@ command_arg_registry:
     definitions: message
     script:
         - if <[message].type> == DiscordMessage:
-            - define message_contents <[message].message>
+            - define message_object <[message]>
+            - define message <[message].message>
 
         # % ██ [ Equivalent of <context.command> | Returns the command name as an ElementTag. ] ██
         - define command "<[message].before[ ]>"
