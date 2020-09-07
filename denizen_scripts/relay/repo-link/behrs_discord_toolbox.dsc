@@ -7,7 +7,7 @@ behrs_discord_toolbox:
         - stop
 
       - define msg_url https://discordapp.com/channels/<context.group.id>/<context.channel.id>/<context.message.id>
-      - define embed <discordembed.url[<[url]>].color[16774656]>
+      - define embed <discordembed.url[<[msg_url]>].color[16774656]>
       - if !<context.author.roles[<context.message.channel.group.id>].parse[id].contains[731591651142926456]> && !<context.author.roles[<context.message.channel.group.id>].parse[id].contains[679101171201474571]>:
         - stop
 
