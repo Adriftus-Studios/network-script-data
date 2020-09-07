@@ -1,5 +1,6 @@
 armor_stand_editor_tool:
   type: item
+  debug: false
   material: flint
   display name: <&a>Armor Stand Editor
   lore:

@@ -1,5 +1,6 @@
 its_a_trap:
   type: command
+  debug: false
   name: pig_trap
   permission: adriftus.admin
   usage: /pig_trap <&l>player<&gt>
