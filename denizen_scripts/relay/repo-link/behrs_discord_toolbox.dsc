@@ -6,8 +6,10 @@ behrs_discord_toolbox:
       - if <context.emoji.name> != settings:
         - stop
 
-      - define msg_url https://discordapp.com/channels/<context.group.id>/<context.channel.id>/<context.message.id>
-      - define embed <discordembed.url[<[msg_url]>].color[16774656]>
+      - define embed <discordembed.color[16774656]>
+      - if !<context.is_direct||false>:
+        - define msg_url https://discordapp.com/channels/<context.group.id>/<context.channel.id>/<context.message.id>
+        - define embed <[embed].url[<[msg_url]>]>
       - if !<context.author.roles[<context.message.channel.group.id>].parse[id].contains[731591651142926456]> && !<context.author.roles[<context.message.channel.group.id>].parse[id].contains[679101171201474571]>:
         - stop
 
@@ -20,12 +22,13 @@ behrs_discord_toolbox:
 
       - define embed1 "<[embed].title[Message Contents].description[<[message].separated_by[<n>]>]>"
       - if !<context.is_direct||false>:
-        - discord id:adriftusbot send_embed channel:<context.channel> embed:<[embed1]>
+        - ~discord id:adriftusbot send_embed channel:<context.channel> embed:<[embed1]>
       - else:
-        - discord id:adriftusbot send_embed user:<context.author> embed:<[embed1]>
+        - ~discord id:adriftusbot send_embed user:<context.author> embed:<[embed1]>
 
       - if <context.message.reactions.is_empty> && <context.author.roles[<context.message.channel.group.id>].is_empty>:
         - stop
+      - wait 5t
 
       - define message <list>
       - if !<context.message.reactions.is_empty>:
@@ -40,6 +43,6 @@ behrs_discord_toolbox:
       - define embed2 "<[embed].title[Roles and Emojis].description[<[message].separated_by[<n>]>]>"
 
       - if !<context.is_direct||false>:
-        - discord id:adriftusbot send_embed channel:<context.channel> embed:<[embed2]>
+        - ~discord id:adriftusbot send_embed channel:<context.channel> embed:<[embed2]>
       - else:
-        - discord id:adriftusbot send_embed user:<context.author> embed:<[embed2]>
+        - ~discord id:adriftusbot send_embed user:<context.author> embed:<[embed2]>
