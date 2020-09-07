@@ -14,7 +14,7 @@ help:
             **Queue Controls**: `/webget (list/clear/cancel (Queue))`
             **Aliases**: `(webget/wget)`
             **Misc Args**: `/webget help`
-        - name: Controls
+        - name: Controls & Page Index
           value: "<:left:747195307900796938> `( 1 / 3 )` <:other_left:747195307925831710>
             \ | <:deepdot:748353112602968094> **Description** | <:dot:748353112607031486>
             Arguments (1/2) | <:dot:748353112607031486> Arguments (2/2)"
@@ -50,7 +50,7 @@ help:
           value: Returns a `MapTag` of the headers returned from the webserver. Every `MapTag`
             returns a `ListTag` of headers.
           inline: true
-        - name: Controls
+        - name: Controls & Page Index
           value: "<:left:747195307900796938> `( 2 / 3 )` <:other_left:747195307925831710>
             \ | <:dot:748353112607031486> Description | <:deepdot:748353112602968094> **Arguments
             (1/2)** | <:dot:748353112607031486> Arguments (2/2)"
