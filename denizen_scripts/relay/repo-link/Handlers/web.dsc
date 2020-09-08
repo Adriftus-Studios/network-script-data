@@ -389,6 +389,8 @@ web_handler:
       - else:
         - announce to_console "<&c>--- post request ----------------------------------------------------------"
         - announce to_console "Attempted request from <[Domain]>"
+        - determine passively "received"
+        - determine passively code:200
 
 Web_Debug:
   type: task
