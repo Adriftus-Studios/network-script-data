@@ -124,6 +124,8 @@ survival_command:
   type: command
   debug: false
   name: survival
+  description: Sends a player to the Survival server
+  usage: /survival
   script:
   - adjust <player> send_to:survival
    
@@ -131,5 +133,18 @@ hub_command:
   type: command
   debug: false
   name: hub
+  description: Sends a player to the Hub server
+  usage: /hub
   script:
   - adjust <player> send_to:hub1
+
+BehrCraft_Command:
+  type: command
+  debug: false
+  description: Sends a player to the BehrCraft server
+  usage: /behrcraft
+  name: BehrCraft
+  aliases:
+  - bc
+  script:
+  - adjust <player> send_to:behrcraft

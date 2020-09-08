@@ -1,4 +1,4 @@
-slime_mob_handler:
+slime_damage_handler:
   type: world
   debug: false
   events:
@@ -34,9 +34,20 @@ slime_mob_handler:
       - if <[item].repairable>:
         - if <[Durrbillty]> >= <[item].max_durability>:
           - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:<[item]> offset:0.2 quantity:15
+          - playsound <context.location> sound:ENTITY_ITEM_BREAK
           - take slot:<[slot]>
 #Item Durability Damage
         - else:
           - inventory adjust slot:<[slot]> durability:<[Durrbillty]>
 #Damage player
       - determine <context.damager.mythicmob.level.mul[3]>
+
+slime_puddle_creator:
+  type: task
+  debug: false
+  script:
+  - if <context.entity.is_mythicmob> && <context.entity.mythicmob.internal_name> == slime1:
+    - define Puddlesize <context.entity.size.div[2]>
+    - define Puddle_Location <context.entity.location.find.surface_blocks.within[<[Puddlesize]>].filter[material.is_solid]>
+    - showfake slime_block <[Puddle_Location]> d:10 players:<context.entity.location.find.players.within[20]>
+
