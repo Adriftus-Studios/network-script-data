@@ -46,22 +46,19 @@ tiered_potions_events:
     # -- When the player crafts a tiered potion, the items don't have any NBT data.
     # -- This is because `<item[grass_block]> != <item[grass_block].with[nbt=<list[has/nbt]>]>`.
     # -- We fallback to `1` when adding one to the defined item's NBT.
-    on player consumes tiered_potion_*:
-      # Heal and add one to the usage counter.
-      - determine passively cancelled
-      - define item <context.item>
+    after player consumes tiered_potion_*:
+      # Heal and check if potion is completely used.
       - heal <script[tiered_potions_data].data_key[<context.item.script.name>.heals].mul[2]>
-      - adjust <[item]> nbt:<list[uses/<[item].nbt[uses].add[1]||1>]> save:item
-      - if <entry[item].result.nbt[uses]> >= <script[tiered_potions_data].data_key[<context.item.script.name>.uses]>:
-        # -- If `- determine <[item]>` doesn't work, try `- determine <entry[item].result>` or `- determine cancelled:false`.
+      - if <context.item.nbt[uses]||1> >= <script[tiered_potions_data].data_key[<context.item.script.name>.uses]>:
         - playsound <player> sound:ENTITY_ITEM_BREAK
-        - determine cancelled:false
-      # Wait one tick, then update the potion's NBT.
-      - wait 1t
+        - stop
+      # If potion isn't completely used, add 1 to the item's use counter.
+      - determine passively cancelled
+      - define usage <context.item.nbt[uses].add[1]||1>
       - if <player.item_in_hand> == <context.item>:
-        - inventory adjust slot:<player.held_item_slot> nbt:<list[uses/<entry[item].result.nbt[uses]>]>
+        - inventory adjust slot:<player.held_item_slot> nbt:uses/<[usage]>
       - else:
-        - inventory adjust slot:<player.inventory.find[<player.item_in_offhand>]> nbt:<list[uses/<entry[item].result.nbt[uses]>]>
+        - inventory adjust slot:41 nbt:uses/<[usage]>
 
 
 # -- Tiered Potions
