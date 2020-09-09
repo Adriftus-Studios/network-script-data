@@ -46,7 +46,7 @@ tiered_potions_events:
     # -- When the player crafts a tiered potion, the items don't have any NBT data.
     # -- This is because `<item[grass_block]> != <item[grass_block].with[nbt=<list[has/nbt]>]>`.
     # -- We fallback to `1` when adding one to the defined item's NBT.
-    after player consumes tiered_potion_*:
+    on player consumes tiered_potion_*:
       # Heal and check if potion is completely used.
       - heal <script[tiered_potions_data].data_key[<context.item.script.name>.heals].mul[2]>
       - if <context.item.nbt[uses]||1> >= <script[tiered_potions_data].data_key[<context.item.script.name>.uses]>:
