@@ -12,6 +12,8 @@ specialtyInventory:
     type: inventory
     inventory: chest
     title: Specialty Shop
+    definitions:
+        filler: <item[white_stained_glass_pane].with[display_name=<&f>]>
     procedural items:
     - if <player.has_flag[teleportation_recipe]>:
         - define item <item[teleportation_shard].with[nbt=item/Teleportation_Shard;lore=<&a>Buy<&sp>Price:<&sp><&e><script[specialtyData].data_key[Items.Teleportation_Shard.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[specialtyData].data_key[Items.Teleportation_Shard.Prices].after[/]>]>
