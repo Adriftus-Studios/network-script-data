@@ -1,6 +1,7 @@
 
 bookshelves_events:
   type: world
+  debug: false
   events:
     on player clicks bookshelf:
       - if <context.click_type.starts_with[RIGHT]> && !<player.is_sneaking>:
@@ -27,6 +28,7 @@ bookshelves_events:
 
 bookshelves_inventory:
   type: inventory
+  debug: false
   title: <&6>◆ <&a><&n><&l>Bookshelf<&r> <&6>◆
   inventory: chest
   size: 9
