@@ -2,7 +2,7 @@ Sun_command:
     type: command
     name: sun
     usage: /sun
-    alias:
+    aliases:
     - sunny
     - ihaterain
     - effthunder
