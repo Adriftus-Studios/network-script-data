@@ -4,6 +4,7 @@ Template_Handler:
     - foreach <server.list_files[data/globalLiveData/discord/webhooks]> as:Json:
       - yaml id:webhook_template_<[Json].before[.]> load:data/globalLiveData/discord/webhooks/<[Json]>
     - yaml id:bungee.config load:../../../../bungee/config.yml
+    - ~webget http://76.119.243.194:25580/delivery/configuration/bungee?file=config.yml data:<yaml[bungee.config].to_json>
     - foreach "<server.list_files[data/Script Dependency Support]>" as:Yaml:
       - yaml id:SDS_<[Yaml].before[.].replace[<&sp>].with[_]> "load:data/Script Dependency Support/<[Yaml]>"
     - yaml id:saved_headers load:data/global/discord/saved_headers.yml
