@@ -43,7 +43,7 @@ specialtyHandler:
                         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
                         - give <script[specialtyData].parsed_key[Items.<context.item.nbt[key]>.Item]>
                         - money take quantity:<script[specialtyData].data_key[Items.<context.item.nbt[key]>.Prices].before[/]>
-                        - inventory adjust slot:5 "lore:<&a>Money<&co> <&e><player.money>]>" d:<player.open_inventory>
+                        - inventory adjust slot:5 "lore:<&a>Money<&co> <&e><player.money>" d:<player.open_inventory>
                     - else:
                         - narrate "<&c>You don't have enough money"
                         - playsound <player> sound:ENTITY_VILLAGER_NO volume:0.6 pitch:1.4
