@@ -55,7 +55,7 @@ tiered_potions_events:
       - if <entry[item].result.nbt[uses]> >= <script[tiered_potions_data].data_key[<context.item.script.name>.uses]>:
         # -- If `- determine <[item]>` doesn't work, try `- determine <entry[item].result>` or `- determine cancelled:false`.
         - playsound <player> sound:ENTITY_ITEM_BREAK
-        - determine <[item]>
+        - determine cancelled:false
       # Wait one tick, then update the potion's NBT.
       - wait 1t
       - if <player.item_in_hand> == <context.item>:
