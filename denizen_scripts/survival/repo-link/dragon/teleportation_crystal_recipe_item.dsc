@@ -1,7 +1,7 @@
 teleportation_crystal_recipe_item:
     type: item
     material: paper
-    display name: <&a>Recipe: Teleportation Crystal
+    display name: <&a>Recipe<&co> Teleportation Crystal
     mechanisms:
         nbt: teleportgoesweeeee
 
