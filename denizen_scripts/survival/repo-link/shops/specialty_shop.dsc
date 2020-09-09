@@ -5,7 +5,6 @@ specialty_shop_assignment:
         - trigger name:click state:true
         on click:
         - define inventory <inventory[specialtyInventory]>
-        - give "<item[player_head].with[skull_skin=<player.skull_skin>;display_name=<&e><&o><player.display_name>;lore=<&a>Money: <&e><player.money>]>" to:<[inventory]> slot:5
         - inventory open d:<[inventory]>
 
 specialtyInventory:
@@ -14,12 +13,13 @@ specialtyInventory:
     title: Specialty Shop
     definitions:
         filler: <item[white_stained_glass_pane].with[display_name=<&f>]>
+        head: <item[player_head].with[skull_skin=<player.skull_skin>;display_name=<&e><&o><player.display_name>;lore=<&a>Money: <&e><player.money>]>
     procedural items:
     - if <player.has_flag[teleportation_recipe]>:
         - define item <item[teleportation_shard].with[nbt=item/Teleportation_Shard;lore=<&a>Buy<&sp>Price:<&sp><&e><script[specialtyData].data_key[Items.Teleportation_Shard.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[specialtyData].data_key[Items.Teleportation_Shard.Prices].after[/]>]>
         - determine <list[<[item]>]>
     slots:
-    - [filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]
+    - [filler] [filler] [filler] [filler] [head] [filler] [filler] [filler] [filler]
     - [filler] [] [] [] [] [] [] [] [filler]
     - [filler] [] [] [] [] [] [] [] [filler]
     - [filler] [] [] [] [] [] [] [] [filler]
