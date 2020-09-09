@@ -51,14 +51,17 @@ tiered_potions_events:
       - determine passively cancelled
       - define item <context.item>
       - heal <script[tiered_potions_data].data_key[<context.item.script.name>.heals].mul[2]>
-      - adjust <[item]> nbt:<list[uses/<[item].nbt[uses].add[1]||1>]>
-      - if <[item].nbt[uses]> >= <script[tiered_potions_data].data_key[<context.item.script.name>.uses]>:
-        # -- If `- determine <[item]>` doesn't work, try `- determine <context.item>` or `- determine cancelled:false`.
+      - adjust <[item]> nbt:<list[uses/<[item].nbt[uses].add[1]||1>]> save:item
+      - if <entry[item].result.nbt[uses]> >= <script[tiered_potions_data].data_key[<context.item.script.name>.uses]>:
+        # -- If `- determine <[item]>` doesn't work, try `- determine <entry[item].result>` or `- determine cancelled:false`.
         - playsound <player> sound:ENTITY_ITEM_BREAK
         - determine <[item]>
       # Wait one tick, then update the potion's NBT.
       - wait 1t
-      - inventory adjust slot:<player.held_item_slot> nbt:<list[uses/<[item].nbt[uses]>]>
+      - if <player.item_in_hand> == <context.item>:
+        - inventory adjust slot:<player.held_item_slot> nbt:<list[uses/<entry[item].result.nbt[uses]>]>
+      - else:
+        - inventory adjust slot:<player.inventory.find[<player.item_in_offhand>]> nbt:<list[uses/<entry[item].result.nbt[uses]>]>
 
 
 # -- Tiered Potions
@@ -82,12 +85,12 @@ tiered_potion_2:
       type: shaped
       output_quantity: 1
       input:
-      - <item[potion].with[potion_effects=<list[INSTANT_HEAL,false,false]>]>|<script[tiered_potions_data].data_key[<script.name>.item]>|<item[potion].with[potion_effects=<list[INSTANT_HEAL,false,false]>]>
+      - potion[potion_effects=INSTANT_HEAL,false,false]|<script[tiered_potions_data].data_key[<script.name>.item]>|potion[potion_effects=INSTANT_HEAL,false,false]
     2:
       type: shaped
       output_quantity: 1
       input:
-      - <item[potion].with[potion_effects=<list[INSTANT_HEAL,true,false]>]>|<script[tiered_potions_data].data_key[<script.name>.item]>|<item[potion].with[potion_effects=<list[INSTANT_HEAL,true,false]>]>
+      - potion[potion_effects=INSTANT_HEAL,true,false]|<script[tiered_potions_data].data_key[<script.name>.item]>|potion[potion_effects=INSTANT_HEAL,true,false]
 
 # - 3
 tiered_potion_3:
