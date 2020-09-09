@@ -49,12 +49,13 @@ tiered_potions_events:
     on player consumes tiered_potion_*:
       # Heal and check if potion is completely used.
       - heal <script[tiered_potions_data].data_key[<context.item.script.name>.heals].mul[2]>
-      - if <context.item.nbt[uses]||1> >= <script[tiered_potions_data].data_key[<context.item.script.name>.uses]>:
+      - if <context.item.nbt[uses]||1> >= <script[tiered_potions_data].data_key[<context.item.script.name>.uses].sub[1]>:
         - playsound <player> sound:ENTITY_ITEM_BREAK
         - stop
       # If potion isn't completely used, add 1 to the item's use counter.
       - determine passively cancelled
       - define usage <context.item.nbt[uses].add[1]||1>
+      - wait 1t
       - if <player.item_in_hand> == <context.item>:
         - inventory adjust slot:<player.held_item_slot> nbt:uses/<[usage]>
       - else:
