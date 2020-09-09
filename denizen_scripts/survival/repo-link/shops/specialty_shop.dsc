@@ -12,7 +12,7 @@ specialtyInventory:
     inventory: chest
     title: Specialty Shop
     definitions:
-        filler: <item[white_stained_glass_pane].with[display_name=<&f>]>
+        filler: white_stained_glass_pane[display_name=<&f>]
         head: <item[player_head].with[skull_skin=<player.skull_skin>;display_name=<&e><&o><player.display_name>;lore=<&a>Money:<&sp><&e><player.money>]>
     procedural items:
     - if <player.has_flag[teleportation_recipe]>:
@@ -43,7 +43,7 @@ specialtyHandler:
                         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
                         - give <script[specialtyData].parsed_key[Items.<context.item.nbt[key]>.Item]>
                         - money take quantity:<script[specialtyData].data_key[Items.<context.item.nbt[key]>.Prices].before[/]>
-                        - give "<item[player_head].with[skull_skin=<player.skull_skin>;display_name=<&e><&o><player.name>;lore=<&a>Money: <&e><player.money>]>" to:<player.open_inventory> slot:5
+                        - inventory adjust slot:5 "lore:<&a>Money<&co> <&e><player.money>]>" d:<player.open_inventory>
                     - else:
                         - narrate "<&c>You don't have enough money"
                         - playsound <player> sound:ENTITY_VILLAGER_NO volume:0.6 pitch:1.4
@@ -52,7 +52,7 @@ specialtyHandler:
                         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
                         - take slot:<player.inventory.find.scriptname[<context.item.nbt[key]>]>
                         - money give quantity:<script[specialtyData].data_key[Items.<context.item.nbt[key]>.Prices].after[/]>
-                        - give "<item[player_head].with[skull_skin=<player.skull_skin>;display_name=<&e><&o><player.display_name>;lore=<&a>Money: <&e><player.money>]>" to:<player.open_inventory> slot:5
+                        - inventory adjust slot:5 "lore:<&a>Money<&co> <&e><player.money>" d:<player.open_inventory>
                     - else:
                         - narrate "<&c>You don't have the specified item!"
 
