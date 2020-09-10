@@ -14,13 +14,14 @@ channel_cache:
                     - yaml id:discord_channels set <[group_name]>.by_id.<[channel_id]>.name:<[channel_name].escaped>
                     - yaml id:discord_channels set <[group_name]>.by_id.<[channel_id]>.position:<[channel].position>
                     - yaml id:discord_channels set <[group_name]>.by_id.<[channel_id]>.channel_type:<[channel].channel_type>
-                    - yaml id:discord_channels set <[group_name]>.by_id.<[channel_id]>.topic:<[channel].topic>
+                #^  - yaml id:discord_channels set <[group_name]>.by_id.<[channel_id]>.topic:<[channel].topic>
+
                 # % Save by Names
                 - if !<yaml[discord_channels].contains[<[group_name]>.by_name.<[channel_name].escaped>]>:
                     - yaml id:discord_channels set <[group_name]>.by_name.<[channel_name].escaped>.id:<[channel_id]>
                     - yaml id:discord_channels set <[group_name]>.by_name.<[channel_name].escaped>.position:<[channel].position>
                     - yaml id:discord_channels set <[group_name]>.by_name.<[channel_name].escaped>.channel_type:<[channel].channel_type>
-                    - yaml id:discord_channels set <[group_name]>.by_name.<[channel_name].escaped>.topic:<[channel].topic>
+                #^  - yaml id:discord_channels set <[group_name]>.by_name.<[channel_name].escaped>.topic:<[channel].topic>
 
             - if !<yaml[discord_channels].list_keys[<[group_name]>.by_id].exclude[<[channels].parse[id]>].is_empty>:
                 - foreach <yaml[discord_channels].list_keys[<[group_name]>.by_id].exclude[<[channels].parse[id]>]> as:deprecated_channel_id:
