@@ -46,7 +46,7 @@ note_dcommand:
   #^- discord id:AdriftusBot channel:<[channel_id]> send_embed embed:<discordembed[note_embed]>
 
   # % ██ [ build note message           ] ██
-    - define message "note saved to: <&lt>#731607719165034538<&gt><&nl><&gt> `<[message].after[<&lt>:hambehrgeur:732716255567413309<&gt><&sp>]>`"
+    - define message "note saved to: <&lt>#731607719165034538<&gt><&nl><&gt> <[message].after[<&lt>:hambehrgeur:732716255567413309<&gt><&sp>]>"
     - define embeds <list[<map.with[color].as[<[color]>].with[description].as[<[message]>].with[author].as[<[author]>]>]>
     - define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[embeds].as[<[embeds]>].to_json>
 
