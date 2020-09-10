@@ -19,7 +19,7 @@ denizen_scripts/head
 # ██ [ Scriptdata Directories     ] ██
 script-data/global/admin
 script-data/global/bans
-script-data/global/behr-essentials
+script-data/global/behr_essentials
 script-data/global/bungee
 script-data/global/players
 script-data/global/twitch
