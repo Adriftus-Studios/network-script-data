@@ -3,3 +3,5 @@ package_deliveries:
   debug: false
   script:
     - ~webget <yaml[network_configuration].read[hosts.the_network]> headers:<yaml[saved_headers].read[behrs_post_office]> data:<yaml[packages].parsed_key[bungee_config].to_json>
+    - if <entry[response].failed>:
+        - inject web_debug.webget_response

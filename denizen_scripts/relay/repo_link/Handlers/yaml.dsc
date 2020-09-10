@@ -1,7 +1,7 @@
 yaml_handler:
   type: world
   load:
-    - foreach <yaml[network_configuration].parsed_key[configurations]> key:yaml as:file_path:
+    - foreach <yaml[network_configuration].read[configurations]> key:yaml as:file_path:
       - ~run load_yaml def:<[yaml]>|<[file_path]>|false|false
     - inject package_deliveries
 
