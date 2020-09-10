@@ -12,7 +12,7 @@ channel_cache:
                 - yaml id:discord_channels set <[group_name]>.<[channel_id]>.name:<[channel].name>
                 - yaml id:discord_channels set <[group_name]>.<[channel_id]>.position:<[channel].position>
                 - yaml id:discord_channels set <[group_name]>.<[channel_id]>.channel_type:<[channel].channel_type>
-                - if <[channel].channel_type> == GUILD_TEXT || <[channel].topic||invalid> != invalid:
+                - if <[channel].channel_type> == GUILD_TEXT || <[channel].topic> != <empty>:
                     - yaml id:discord_channels set <[group_name]>.<[channel_id]>.topic:<[channel].topic>
 
             - if !<yaml[discord_channels].list_keys[<[group_name]>].exclude[<[channels].parse[id]>].is_empty>:
