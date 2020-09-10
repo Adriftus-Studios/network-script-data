@@ -1,0 +1,1109 @@
+gui:
+  title: '&aTitles Menu'
+  tag_select_item:
+    material: NAME_TAG
+    data: 0
+    displayname: '&e'
+    lore:
+    - '&b&m---&r&8&m|-&r  &8&m+--------------------------+&r  &8&m-|&b&m---'
+    - '&7* &eName: &7<[tagID]>'
+    - '&7* &ePreview: &r<[tag].parsed>'
+    - '&7* &eDescription: &7<[description]>'
+    - '&r'
+    - '&7* Want more cool titles? let us know!'
+    - '&7  Buy more titles available at the shops!'
+    - '&r'
+    - '&aClick to use this title.'
+    - '&b&m---&r&8&m|-&r  &8&m+--------------------------+&r  &8&m-|&b&m---'
+    - '&r'
+  current_title:
+    material: BOOK
+    data: 0
+    displayname: '&aCurrent title: <[tag].parsed>'
+    lore:
+    - '&r'
+    - '&cClick to remove your current title.'
+  no_current_title:
+    material: BOOK
+    data: 0
+    displayname: '&aCurrent title: <[tag].parsed>'
+    lore:
+    - '&r'
+    - '&cYou have no title selected.'
+shop_blacklist:
+  - "Miner"
+  - "PvPGod"
+  - "Naughty"
+titles:
+  Default:
+    order: 0
+    tag: '&8|&7No Title&8|'
+    description: Osu!, anyone?
+  Miner:
+    order: 1
+    tag: '&8|&4&k/&cMiner&4&k/&8|'
+    description: Perfect title for players who mine a lot.
+  Rich:
+    order: 2
+    tag: '&8|&2&k/&a&n$&2&k/&8|'
+    description: Wealthy? This is the title for you!
+  PvPGod:
+    order: 3
+    tag: '&8|&3&k/&bPvP God&3&k/&8|'
+    description: Players who win almost every PvP match!
+  TooGood:
+    order: 4
+    tag: '&8|&b&k/&aToo Good&b&k/&8|'
+    description: Are you too good for the game?
+  Ez:
+    order: 5
+    tag: '&8|&c&k/&eEz&c&k/&8|'
+    description: You everything 'ez' for you?
+  Heart:
+    order: 6
+    tag: '&8|&e&k/&c&l<3&e&k/&8|'
+    description: Players that love something too much use this.
+  Grinder:
+    order: 7
+    tag: '&8|&e&k/&aGrinder&e&k/&8|'
+    description: Do you love exp that much?
+  Savage:
+    order: 8
+    tag: '&8|&5&k/&d&k/&e&nSavage&r&d&k/&5&k/&8|'
+    description: Wow, you're just a savage.
+  MoneyMaker:
+    order: 9
+    tag: '&8|&2&k/&a&k/&dMoney Maker&a&k/&2&k/&8|'
+    description: Love making money? Everyone does!
+  Abuser:
+    order: 10
+    tag: '&8|&d&k/&5Abuser&d&k/&8|'
+    description: Please report bugs using /bugreport.
+  QuickDrop:
+    order: 11
+    tag: '&8|&9&k//&3Quick Drop&9&k//&8|'
+    description: Like quick dropping players and gaining their items?
+  Stealth:
+    order: 12
+    tag: '&8|&e&k/&dStealth&e&k/&8|'
+    description: Time to play sneaky!
+  Bae:
+    order: 13
+    tag: '&8|&d&k/&cBae&d&k/&8|'
+    description: How cute. :)
+  Killstreak:
+    order: 14
+    tag: '&8|&6&k/&eKillstreak&6&k/&8|'
+    description: Kill a lot of players in a row!
+  OG:
+    order: 15
+    tag: '&8|&f&k//&e&lOG&f&k//&8|'
+    description: Players who have been here since the start!
+  OP:
+    order: 16
+    tag: '&8|&e&k//&b&nOP&e&k//&8|'
+    description: Too overpowered!
+  Powerful:
+    order: 17
+    tag: '&8|&b&k//&ePower&6ful&b&k//&8|'
+    description: Oh my... you're too powerful.
+  Halloween2019:
+    order: 18
+    tag: '&8|&e&k/&f&k/&6&nHalloween 2019&f&k/&e&k/&8|'
+    description: Halloween 2019.
+  TrickOrTreat:
+    order: 19
+    tag: '&8|&e&k/&6Trick or Treat&e&k/&8|'
+    description: Halloween 2019.
+  Spooky:
+    order: 20
+    tag: '&8|&6&k/&e&k/&fSp00ky&e&k/&6&k/&8|'
+    description: Halloween 2019.
+  Awesome:
+    order: 21
+    tag: '&8|&c&k/&eAwesome&c&k/&8|'
+    description: Perfect for awesome people!
+  TNT:
+    order: 22
+    tag: '&8|&d&k/&c&lTNT&d&k/&8|'
+    description: Do you like playing with TNT?
+  RedstoneMaster:
+    order: 23
+    tag: '&8|&4&k/&cRedsone Master&4&k/&8|'
+    description: Master at making stuff with redstone.
+  Tank:
+    order: 24
+    tag: '&8|&4&k/&2Tank&4&k/&8|'
+    description: Never get killed? You must be a tank.
+  Camper:
+    order: 25
+    tag: '&8|&2&k/&aCamper&2&k/&8|'
+    description: Camping is fun, sometimes.
+  Explorer:
+    order: 26
+    tag: '&8|&5&k/&dExplorer&5&k/&8|'
+    description: Explore the world!
+  Combo:
+    order: 27
+    tag: '&8|&6&k/&eCombo&6&k/&8|'
+    description: Combo and you are dead.
+  Farmer:
+    order: 28
+    tag: '&8|&3&k/&eFarmer&3&k/&8|'
+    description: Grow wheat, carrots and more!
+  Witch:
+    order: 29
+    tag: '&8|&d&k//&5Witch&d&k//&8|'
+    description: Witches are nifty!
+  Banker:
+    order: 30
+    tag: '&8|&2&l$&aBanker&2&l$&8|'
+    description: Money! Money! Money!
+  Lord:
+    order: 31
+    tag: '&8|&c&k/&4Lord&c&k/&8|'
+    description: Are you a Lord?
+  Enchanter:
+    order: 32
+    tag: '&8|&3&k//&bEnchanter&3&k//&8|'
+    description: Enchanting items gives you an advantage.
+  Tinkerer:
+    order: 33
+    tag: '&8|&3&k//&bTinkerer&3&k//&8|'
+    description: Tinkerering items for other stuff?
+  Prisoner:
+    order: 34
+    tag: '&8|&2&k//&aPrisoner&2&k//&8|'
+    description: Welp, now you are a prisoner.
+  2Cool4School:
+    order: 35
+    tag: '&8|&9&k/&b2Cool4School&9&k/&8|'
+    description: I don't think so.
+  2Cool4U:
+    order: 36
+    tag: '&8|&b&k/&32Cool4U&b&k/&8|'
+    description: That's more like it!
+  2Good4U:
+    order: 37
+    tag: '&8|&b&k/&62Good4U&b&k/&8|'
+    description: Probably are.
+  Planes:
+    order: 38
+    tag: '&8|&4&k/&cPlanes&4&k/&8|'
+    description: You better not be afraid of heights.
+  Boom:
+    order: 39
+    tag: '&8|&a&k//&c&lBOOM&a&k//&8|'
+    description: BOOM! Was that TNT?
+  Archer:
+    order: 40
+    tag: '&8|&c&k/&aArcher&c&k/&8|'
+    description: One shot, one head shot!
+  Builder:
+    order: 41
+    tag: '&8|&5&k/&dBuilder&5&k/&8|'
+    description: Build the greatest things in Minecraft!
+  PvPer:
+    order: 42
+    tag: '&8|&3PvPer&8|'
+    description: Do you like PvPing?
+  Axeman:
+    order: 43
+    tag: '&8|&6&k/&eAxeman&6&k/&8|'
+    description: Use your axe to kill your enemy!
+  Excavator:
+    order: 44
+    tag: '&8|&c&k/&eExcavator&c&k/&8|'
+    description: Mine, mine, mine!
+  GoodGame:
+    order: 45
+    tag: '&8|&4&k/&c&lGG&4&k/&8|'
+    description: That must have been a good game.
+  GoodFight:
+    order: 46
+    tag: '&8|&4&k/&d&lGF&4&k/&8|'
+    description: That was a good fight!
+  GoodLuck:
+    order: 47
+    tag: '&8|&4&k/&e&lGL&4&k/&8|'
+    description: I wish you luck!
+  HaveFun:
+    order: 48
+    tag: '&8|&4&k/&f&lHF&4&k/&8|'
+    description: Yea! Have fun.
+  Tough:
+    order: 49
+    tag: '&8|&4&k*&c&lTOUGH&4&k*&8|'
+    description: Everyone is harmless to you?
+  Zeus:
+    order: 50
+    tag: '&8|&3&k//&b&lZEUS&3&k//&8|'
+    description: Lighning!
+  Dolphin:
+    order: 51
+    tag: '&8|&b&nDolphin&8|'
+    description: Swim in the ocean!
+  Pow:
+    order: 52
+    tag: '&8|&6POW&8|'
+    description: POW!
+  Creative:
+    order: 53
+    tag: '&8|&e&k/&c/gmc&e&k/&8|'
+    description: No perms.
+  Creative2:
+    order: 54
+    tag: '&8|&e&k/&cCreative&e&k/&8|'
+    description: Good for you.
+  Blaze:
+    order: 55
+    tag: '&8|&6Blaze&8|'
+    description: Do you like blazes?
+  Zombie:
+    order: 56
+    tag: '&8|&2Zombie&8|'
+    description: Do you like zombies?
+  Skeleton:
+    order: 57
+    tag: '&8|&7Skeleton&8|'
+    description: Do you like skeletons?
+  Slime:
+    order: 58
+    tag: '&8|&aSlime&8|'
+    description: Do you like slime?
+  Spider:
+    order: 59
+    tag: '&8|&cSpider&8|'
+    description: Do you like spiders?
+  WoodCutter:
+    order: 60
+    tag: '&8|&dWood Cutter&8|'
+    description: Cut wood and make blocks!
+  Diamonds:
+    order: 61
+    tag: '&8|&bDiamonds&8|'
+    description: DIAMONDSSS!
+  Gold:
+    order: 62
+    tag: '&8|&6Gold&8|'
+    description: Gold is valuable.
+  Emeralds:
+    order: 63
+    tag: '&8|&aEmerlads&8|'
+    description: Emeralds are shiny and cool.
+  Iron:
+    order: 64
+    tag: '&8|&7Iron&8|'
+    description: Iron Man?
+  Coal:
+    order: 65
+    tag: '&8|&0Coal&8|'
+    description: Put it in a furnace or something.
+  DungeonExplorer:
+    order: 66
+    tag: '&8|&aDungeon Explorer&8|'
+    description: Woah! You're brave.
+  CaveExplorer:
+    order: 67
+    tag: '&8|&cCave Explorer&8|'
+    description: That must be spooky.
+  SavageLandsExplorer:
+    order: 68
+    tag: '&8|&dSavage Lands Explorer&8|'
+    description: Don't die!
+  CapeLover:
+    order: 69
+    tag: '&8|&cI Love Capes&8|'
+    description: Ok
+  GrindingMachine:
+    order: 70
+    tag: '&8|&4&k/&6Grinding Machine&4&k/&8|'
+    description: Kill blazes 24/7?
+  Brewer:
+    order: 71
+    tag: '&8|&d&k//&5Brewer&d&k//&8|'
+    description: Brewing powerful potions is cool.
+  Alchemist:
+    order: 72
+    tag: '&8|&d&k//&5Alchemist&d&k//&8|'
+    description: Are you a brewer?
+  Gapple:
+    order: 73
+    tag: '&8|&eGapple&8|'
+    description: Eat those golden apples.
+  OneShot:
+    order: 74
+    tag: '&8|&e&k//&4One&cShot&4One&cKill&e&k//&8|'
+    description: Pretty cool.
+  Hype:
+    order: 75
+    tag: '&8|&b&k/&e&lHYPE&b&k/&8|'
+    description: HYPE HYPE HYPE!
+  Bedrock:
+    order: 76
+    tag: '&8|&6&k/&0Bedrock&6&k/&8|'
+    description: Good luck trying to get it.
+  MasterBuilder:
+    order: 77
+    tag: '&8|&dMaster Builder&8|'
+    description: Do you like building?
+  AFK:
+    order: 78
+    tag: '&8|&4&k/&c&lAFK&4&k/&8|'
+    description: Away From Keyboard.
+  Cool:
+    order: 79
+    tag: '&8|&5&k/&dC00L&5&k/&8|'
+    description: I know right.
+  Sky:
+    order: 80
+    tag: '&8|&3&k/&9Sky&3&k/&8|'
+    description: The sky is blue, like this tag.
+  Nether:
+    order: 81
+    tag: '&8|&6&k/&4Nether&6&k/&8|'
+    description: Hot and dangerous.
+  End:
+    order: 82
+    tag: '&8|&6&k/&dEnd&6&k/&8|'
+    description: Is it the end?
+  Chicken:
+    order: 83
+    tag: '&8|&e&k/&6Chicken&e&k/&8|'
+    description: Run!
+  Gamer:
+    order: 84
+    tag: '&8|&dGamer™️&8|'
+    description: Do you like playing games?
+  Summer:
+    order: 85
+    tag: '&8|&6&k//&c&lSummer&6&k//&8|'
+    description: Summer is here!
+  Brutal:
+    order: 86
+    tag: '&8|&6&k//&d&lBrutal&6&k//&8|'
+    description: You must be brutal.
+  Fearless:
+    order: 87
+    tag: '&8|&e&k//&d&lFearless&e&k//&8|'
+    description: Fearless like me!
+  Dangerous:
+    order: 88
+    tag: '&8|&e&k//&4Dangerous&e&k//&8|'
+    description: You are pretty dangerous.
+  Revenge:
+    order: 89
+    tag: '&8|&e&k//&2Revenge&e&k//&8|'
+    description: Time to get revenge.
+  Karma:
+    order: 90
+    tag: '&8|&e&k//&dKarma&e&k//&8|'
+    description: Karma!
+  Mythical:
+    order: 91
+    tag: '&8|&6&k/&cMythical&6&k/&8|'
+    description: Old?
+  Autumn:
+    order: 92
+    tag: '&8|&d&k/&cAutumn&d&k/&8|'
+    description: Yay! Autumn is here.
+  Perfect:
+    order: 93
+    tag: '&8|&a&k/&2&k/&bPerfect&2&k/&a&k/&8|'
+    description: Perfect, you are perfect.
+  Wow:
+    order: 94
+    tag: '&8|&a&k/&2&k/&cWOW&2&k/&a&k/&8|'
+    description: Wow!
+  Lol:
+    order: 95
+    tag: '&8|&eLOL&8|'
+    description: Funny!
+  Conqueror:
+    order: 96
+    tag: '&8|&e&k//&4Conqueror&e&k//&8|'
+    description: Don't invade me!
+  '420':
+    order: 97
+    tag: '&8|&6&k/&b&l420&6&k/&8|'
+    description: 420!
+  420BlazeIt:
+    order: 98
+    tag: '&8|&e420BlazeIt&8|'
+    description: Blaze it?
+  ParkourPro:
+    order: 99
+    tag: '&8|&bParkour&3Pro&8|'
+    description: You must be good at parkour!
+  Rose:
+    order: 100
+    tag: '&8|&cRose&8|'
+    description: Roses are red...
+  Daisy:
+    order: 101
+    tag: '&8|&fDaisy&8|'
+    description: Make a daisy chain!
+  Dandelion:
+    order: 102
+    tag: '&8|&eDandelion&8|'
+    description: Dandelions are yellow.
+  Tulip:
+    order: 103
+    tag: '&8|&bTulip&8|'
+    description: Tulips are nice.
+  Allium:
+    order: 104
+    tag: '&8|&dAllium&8|'
+    description: Another flower.
+  Lilac:
+    order: 105
+    tag: '&8|&dLilac&8|'
+    description: Another flower.
+  Sunflower:
+    order: 106
+    tag: '&8|&6Sunflower&8|'
+    description: And another flower.
+  Legend:
+    order: 107
+    tag: '&8|&6Legend&8|'
+    description: You are a legend!
+  Undead:
+    order: 108
+    tag: '&8|&c&k/&4Undead&c&k/&8|'
+    description: Undead, like a zombie?
+  Divine:
+    order: 109
+    tag: '&8|&b&k/&3Divine&b&k/&8|'
+    description: Powerful? But even more.
+  Warrior:
+    order: 110
+    tag: '&8|&2&k/&cWarrior&2&k/&8|'
+    description: Battle other warriors.
+  Undefeated:
+    order: 111
+    tag: '&8|&4&k/&eUndefeated&4&k/&8|'
+    description: Too good.
+  Adorable:
+    order: 112
+    tag: '&8|&cAdorable&8|'
+    description: Cute!
+  Happy:
+    order: 113
+    tag: '&8|&eHappy&8|'
+    description: Happy because of you.
+  Sad:
+    order: 114
+    tag: '&8|&cSad&8|'
+    description: Sad you got raided?
+  Pleased:
+    order: 115
+    tag: '&8|&dPleased&8|'
+    description: Found something good?
+  Angry:
+    order: 116
+    tag: '&8|&6Angry&8|'
+    description: Angry you died?
+  Good:
+    order: 117
+    tag: '&8|&aGood&8|'
+    description: Good.
+  Mermaid:
+    order: 118
+    tag: '&8|&bMermaid&8|'
+    description: Swim in the sea.
+  Squid:
+    order: 119
+    tag: '&8|&3Squid&8|'
+    description: Swin in the ocean.
+  Pig:
+    order: 120
+    tag: '&8|&cPig&8|'
+    description: Oink.
+  Spartan:
+    order: 121
+    tag: '&8|&2Spartan&8|'
+    description: Better than a warrior, or the same?
+  Assassin:
+    order: 122
+    tag: '&8|&3Assassin&8|'
+    description: Kill your enemies from the shadows.
+  Creeper:
+    order: 123
+    tag: '&8|&aCreeper&8|'
+    description: '...Boom'
+  Tamer:
+    order: 124
+    tag: '&8|&3Tamer&8|'
+    description: Get the beast to fight with you.
+  Rider:
+    order: 125
+    tag: '&8|&cRider&8|'
+    description: Ride that horse.
+  Lumberjack:
+    order: 126
+    tag: '&8|&bLumberjack&8|'
+    description: Chop them trees down.
+  Forest:
+    order: 127
+    tag: '&8|&aForest&8|'
+    description: The forest biome.
+  Plains:
+    order: 128
+    tag: '&8|&aPlains&8|'
+    description: The plains biome.
+  Jungle:
+    order: 129
+    tag: '&8|&2Jungle&8|'
+    description: The jungle biome.
+  Donator:
+    order: 130
+    tag: '&8|&2&k/&aDonator&2&k/&8|'
+    description: You bought this title, didn't you?
+  Supporter:
+    order: 131
+    tag: '&8|&2&k/&aSupporter&2&k/&8|'
+    description: Support the server.
+  SideKick:
+    order: 132
+    tag: '&8|&2&k/&3Side Kick&2&k/&8|'
+    description: Your turn to fight.
+  Backup:
+    order: 133
+    tag: '&8|&2&k/&4Backup&2&k/&8|'
+    description: Better protect your mate.
+  PlanB:
+    order: 134
+    tag: '&8|&2&k/&5Plan B&2&k/&8|'
+    description: Plan A failed... time for Plan B.
+  PlanC:
+    order: 135
+    tag: '&8|&2&k/&6Plan C&2&k/&8|'
+    description: Plan C!
+  Skilled:
+    order: 136
+    tag: '&8|&6&k/&eSkilled&6&k/&8|'
+    description: You are too skilled.
+  Master:
+    order: 137
+    tag: '&8|&6&k/&9Master&6&k/&8|'
+    description: Minecraft Master.
+  Engineer:
+    order: 138
+    tag: '&8|&6&k/&dEngineer&6&k/&8|'
+    description: Invent the best things.
+  Pilot:
+    order: 139
+    tag: '&8|&6&k/&fPilot&6&k/&8|'
+    description: Fly the planes.
+  Mechanic:
+    order: 140
+    tag: '&8|&6&k/&2Mechanic&6&k/&8|'
+    description: Repair everything.
+  Submarine:
+    order: 141
+    tag: '&8|&d&k/&9Submarine&d&k/&8|'
+    description: Dive underwater and explore.
+  Boat:
+    order: 142
+    tag: '&8|&d&k/&3Boat&d&k/&8|'
+    description: Sail the seas!
+  Ship:
+    order: 143
+    tag: '&8|&d&k/&eShip&d&k/&8|'
+    description: Sail the seas on the ship!
+  Plane:
+    order: 144
+    tag: '&8|&d&k/&4Plane&d&k/&8|'
+    description: Fly it!
+  King:
+    order: 145
+    tag: '&8|&e&k/&dKing&e&k/&8|'
+    description: King of the country.
+  Queen:
+    order: 146
+    tag: '&8|&e&k/&dQueen&e&k/&8|'
+    description: Queen of the country.
+  Prince:
+    order: 147
+    tag: '&8|&e&k/&5Prince&e&k/&8|'
+    description: Son of the King/Queen.
+  Princess:
+    order: 148
+    tag: '&8|&e&k/&5Princess&e&k/&8|'
+    description: Daughter of the King/Queen.
+  Guard:
+    order: 149
+    tag: '&8|&e&k/&2Guard&e&k/&8|'
+    description: Protect them!
+  Noble:
+    order: 150
+    tag: '&8|&e&k/&3Noble&e&k/&8|'
+    description: Are you like a noble knight?
+  Royal:
+    order: 151
+    tag: '&8|&e&k/&4Royal&e&k/&8|'
+    description: Like the royal family.
+  Chief:
+    order: 152
+    tag: '&8|&e&k/&cChief&e&k/&8|'
+    description: Chief commander of the clan.
+  Chef:
+    order: 153
+    tag: '&8|&e&k/&dChef&e&k/&8|'
+    description: Just like Mama used to make.
+  Protector:
+    order: 154
+    tag: '&8|&e&k/&aProtector&e&k/&8|'
+    description: Protect them like a guard.
+  Knight:
+    order: 155
+    tag: '&8|&e&k/&bKnight&e&k/&8|'
+    description: Brotherhood of Knights.
+  Angelic:
+    order: 156
+    tag: '&8|&e&k/&bAngelic&e&k/&8|'
+    description: Look at that angel.
+  Fighter:
+    order: 157
+    tag: '&8|&e&k/&3Fighter&e&k/&8|'
+    description: Do you like fighting people?
+  Worker:
+    order: 158
+    tag: '&8|&b&k/&3Worker&b&k/&8|'
+    description: Working for something is good.
+  KK:
+    order: 159
+    tag: '&8|&b&k/&5K.K.&b&k/&8|'
+    description: K.K. Slider.
+  WomboCombo:
+    order: 160
+    tag: '&8|&c&k/&eWombo Combo&c&k/&8|'
+    description: Get that combo.
+  January:
+    order: 161
+    tag: '&8|&6January&8|'
+    description: Month.
+  February:
+    order: 162
+    tag: '&8|&3February&8|'
+    description: Month.
+  March:
+    order: 163
+    tag: '&8|&2March&8|'
+    description: Month.
+  April:
+    order: 164
+    tag: '&8|&aApril&8|'
+    description: Month.
+  May:
+    order: 165
+    tag: '&8|&bMay&8|'
+    description: Month.
+  June:
+    order: 166
+    tag: '&8|&cJune&8|'
+    description: Pride Month!
+  July:
+    order: 167
+    tag: '&8|&dJuly&8|'
+    description: Month.
+  August:
+    order: 168
+    tag: '&8|&eAugust&8|'
+    description: Month.
+  September:
+    order: 169
+    tag: '&8|&2September&8|'
+    description: Do you remember the 21st night of September?
+  October:
+    order: 170
+    tag: '&8|&4October&8|'
+    description: Month.
+  November:
+    order: 171
+    tag: '&8|&9November&8|'
+    description: Month.
+  December:
+    order: 172
+    tag: '&8|&bDecember&8|'
+    description: Month.
+  Horror:
+    order: 173
+    tag: '&8|&4&k/&bHorror&4&k/&8|'
+    description: Is this a dream or reality?
+  Burger:
+    order: 174
+    tag: '&8|&6Burger&8|'
+    description: They're nice!
+  Chips:
+    order: 175
+    tag: '&8|&eChips&8|'
+    description: Good with fish.
+  Nonstop:
+    order: 176
+    tag: '&8|&c&k/&624/7&c&k/&8|'
+    description: Do you spend 24/7 on the server?
+  Nonstop2:
+    order: 177
+    tag: '&8|&c&k/&6Nonstop&c&k/&8|'
+    description: Nonstop on the server.
+  Bus:
+    order: 178
+    tag: '&8|&c&k/&3Bus&c&k/&8|'
+    description: Public transport.
+  Taxi:
+    order: 179
+    tag: '&8|&c&k/&4Taxi&c&k/&8|'
+    description: A Big Yellow Taxi.
+  Tryhard:
+    order: 180
+    tag: '&8|&e&k/&dTryhard&e&k/&8|'
+    description: You try too hard.
+  DoubleKill:
+    order: 181
+    tag: '&8|&e&k/&3Double Kill&e&k/&8|'
+    description: Nice!
+  Sunny:
+    order: 182
+    tag: '&8|&6Sunny&8|'
+    description: Good weather.
+  Rainy:
+    order: 183
+    tag: '&8|&7Rainy&8|'
+    description: Bad weather.
+  Stormy:
+    order: 184
+    tag: '&8|&eStormy&8|'
+    description: Also bad weather.
+  Snowy:
+    order: 185
+    tag: '&8|&fSnowy&8|'
+    description: LET IT SNOW!
+  Scary:
+    order: 186
+    tag: '&8|&4&k/&cScary&4&k/&8|'
+    description: Scary... run!
+  Haunted:
+    order: 187
+    tag: '&8|&4&k/&6Haunted&4&k/&8|'
+    description: Are ghosts here?
+  Java:
+    order: 188
+    tag: '&8|&a&k/&cJava&a&k/&8|'
+    description: Programing language.
+  Python:
+    order: 189
+    tag: '&8|&a&k/&cPython&a&k/&8|'
+    description: Programing language.
+  HTML:
+    order: 190
+    tag: '&8|&a&k/&cHTML&a&k/&8|'
+    description: Programing language.
+  BurgerKing:
+    order: 191
+    tag: '&8|&d&k/&cBurger King&d&k/&8|'
+    description: They make good food.
+  MacDonalds:
+    order: 192
+    tag: '&8|&d&k/&6Mac&eDonalds&d&k/&8|'
+    description: Best of all.
+  KFC:
+    order: 193
+    tag: '&8|&d&k/&dKFC&d&k/&8|'
+    description: Good chicken.
+  IceSkater:
+    order: 194
+    tag: '&8|&d&k/&bIce Skater&d&k/&8|'
+    description: Be careful you do not slip.
+  Swimmer:
+    order: 195
+    tag: '&8|&e&k/&bSwimmer&e&k/&8|'
+    description: Swim fast.
+  Runner:
+    order: 196
+    tag: '&8|&e&k/&cRunner&e&k/&8|'
+    description: Run!
+  Champion:
+    order: 197
+    tag: '&8|&e&k/&dChampion&e&k/&8|'
+    description: Champion of all.
+  Hero:
+    order: 198
+    tag: '&8|&e&k/&eHero&e&k/&8|'
+    description: You are my hero.
+  Thanksgiving:
+    order: 199
+    tag: '&8|&e&k/&6Thanksgiving 2019&e&k/&8|'
+    description: Food time.
+  Turkey:
+    order: 200
+    tag: '&8|&e&k/&cTurkey&e&k/&8|'
+    description: Taste nice but it is a bit dry.
+  Jolly:
+    order: 201
+    tag: '&8|&b&k/&3Jolly&b&k/&8|'
+    description: Have a jolly time!
+  XD:
+    order: 202
+    tag: '&8|&a&k/&c&lXD&a&k/&8|'
+    description: xdddddde
+  OwO:
+    order: 203
+    tag: '&8|&a&k/&f&lOwO&a&k/&8|'
+    description: What's this?
+  '1':
+    order: 204
+    tag: '&8|&e#1&8|'
+    description: Number 1.
+  '2':
+    order: 205
+    tag: '&8|&b#2&8|'
+    description: Number 2.
+  '3':
+    order: 206
+    tag: '&8|&c#3&8|'
+    description: Number 3.
+  '4':
+    order: 207
+    tag: '&8|&d#4&8|'
+    description: Number 4.
+  '5':
+    order: 208
+    tag: '&8|&9#5&8|'
+    description: Number 5.
+  Bed:
+    order: 209
+    tag: '&8|&cBed&8|'
+    description: You may not rest now, there are monsters nearby.
+  Clock:
+    order: 210
+    tag: '&8|&eClock&8|'
+    description: Tick tock.
+  TV:
+    order: 211
+    tag: '&8|&6TV&8|'
+    description: They are good.
+  Sunset:
+    order: 212
+    tag: '&8|&6Sunset&8|'
+    description: Time for night time.
+  Sunrise:
+    order: 213
+    tag: '&8|&eSunrise&8|'
+    description: Time for day time.
+  BossSlayer:
+    order: 214
+    tag: '&8|&e&k/&cBoss Slayer&e&k/&8|'
+    description: Do you like the bosses?
+  BossHunter:
+    order: 215
+    tag: '&8|&e&k/&cBoss Hunter&e&k/&8|'
+    description: Do you like the bosses?
+  BossFighter:
+    order: 216
+    tag: '&8|&e&k/&cBoss Fighter&e&k/&8|'
+    description: Do you like the bosses?
+  BossCamper:
+    order: 217
+    tag: '&8|&e&k/&cBoss Camper&e&k/&8|'
+    description: Do you like the bosses?
+  MerryChristmas:
+    order: 218
+    tag: '&8|&f&k/&4&lMerry Christmas&f&k/&8|'
+    description: Christmas 2019
+  XMAS:
+    order: 219
+    tag: '&8|&f&k/&c&lXMAS&f&k/&8|'
+    description: Christmas 2019
+  HappyChristmas:
+    order: 220
+    tag: '&8|&c&k/&e&lHappy Christmas&c&k/&8|'
+    description: Christmas 2019
+  Santa:
+    order: 221
+    tag: '&8|&c&lS&f&lA&c&lN&f&lT&c&lA&8|'
+    description: Christmas 2019
+  XMAS2019:
+    order: 222
+    tag: '&8|&c&k/&6X&eMAS &c2019&c&k/&8|'
+    description: Christmas 2019
+  LetItSnow:
+    order: 223
+    tag: '&8|&f&k/&b&lLET&f&lIT&b&lSNOW&f&k/&8|'
+    description: Christmas 2019
+  LetItSnow2:
+    order: 224
+    tag: '&8|&f&k/&b&l&nLET&f&l&nIT&b&l&nSNOW&f&k/&8|'
+    description: Christmas 2019
+  HappyNewYear:
+    order: 225
+    tag: '&8|&e&k/&6Happy New Year&e&k/&8|'
+    description: Is it 2020 yet?
+  '2020':
+    order: 226
+    tag: '&8|&e&k/&42020&e&k/&8|'
+    description: It is 2020!
+  Valentines:
+    order: 227
+    tag: '&8|&c&k/&c&nValentines&r&c&k/&8|'
+    description: Valentines Day 2020
+  BeMyValentine:
+    order: 228
+    tag: '&8|&c&k/&c&nBe My Valentine&r&c&k/&8|'
+    description: Valentines Day 2020
+  Voyager:
+    order: 229
+    tag: '&8|&7&k/&c&nVoyager&r&7&k/&8|'
+    description: Fancy an adventure?
+  Viper:
+    order: 230
+    tag: '&8|&2&k/&a&nViper&r&2&k/&8|'
+    description: A very scary snake.
+  StPatricksDay:
+    order: 231
+    tag: '&8|&a&k/&2&nSt Patrick''s Day&r&a&k/&8|'
+    description: It is a special say! :)
+  Not4Me:
+    order: 232
+    tag: '&8|&eNot&6For&eMe&8|'
+    description: I know, now go.
+  Banned:
+    order: 233
+    tag: '&8|&4BANNED&8|'
+    description: Get banned!
+  iRun:
+    order: 234
+    tag: '&8|&diRun&8|'
+    description: Runnnnn awayyyy!!
+  Creative3:
+    order: 235
+    tag: '&8(&5&k/&9Creative&5&k/&8)'
+    description: with World Edit?
+  Easter2020:
+    order: 236
+    tag: '&8|&6&k/&eEaster&6&k/&8|'
+    description: It is Easter!
+  EasterHunt:
+    order: 237
+    tag: '&8|&e&k/&6Easter Hunt&e&k/&8|'
+    description: How many eggs did you find?
+  Spring:
+    order: 238
+    tag: '&8|&2&k/&aSpring&2&k/&8|'
+    description: The winter is over and here comes the spring.
+  Banana:
+    order: 239
+    tag: '&8|&e&k/&6Banana&e&k/&8|'
+    description: Who does not like bananas??
+  Juice:
+    order: 240
+    tag: '&8|&4&k/&cJuice&4&k/&8|'
+    description: Yummy juice!
+  Sweden:
+    order: 241
+    tag: '&8|&b&k/&eSweden&e&k/&8|'
+    description: Brrr, Why is it so cold?
+  Cactus:
+    order: 242
+    tag: '&8|&2&k/&aCactus&2&k/&8|'
+    description: I think that player got the point!
+  3D:
+    order: 243
+    tag: '&8|&e&k/&b3&cD&e&k/&8|'
+    description: Three Dimensional!
+  TooGoodForDis:
+    order: 244
+    tag: '&8|&b&k/&eToooo&6Good&eFor&6Dis&b&k/&8|'
+    description: Ikr...
+  Sushi:
+    order: 245
+    tag: '&8|&b&k/&dSushi&b&k/&8|'
+    description: Goes well with wasabi.
+  Subway:
+    order: 246
+    tag: '&8|&a&k/&eSub&aWay&a&k/&8|'
+    description: Like the public transportation system?
+  Brain:
+    order: 247
+    tag: '&8|&e&k/&fBrain&e&k/&8|'
+    description: Did you know that a brain is in your skull?
+  Blaster:
+    order: 248
+    tag: '&8|&3&k/&dBlaster&3&k/&8|'
+    description: Blast! Blast! Blast!
+  Pizza:
+    order: 249
+    tag: '&8|&d&k/&cPizza&d&k/&8|'
+    description: Yummy!
+  Pasta:
+    order: 250
+    tag: '&8|&e&k/&cPasta&e&k/&8|'
+    description: Pasta is very nice.
+  Cheese:
+    order: 251
+    tag: '&8|&e&k/&r&eCheese&e&k/&8|'
+    description: I love cheese!
+  Ham:
+    order: 252
+    tag: '&8|&e&k/&r&dHam&e&k/&8|'
+    description: This meat is nice on bread.
+  Goliath:
+    order: 253
+    tag: '&8|&4&k/&r&c&nGoliath&r&4&k/&8|'
+    description: Strong... very strong.
+  Excalibur:
+    order: 254
+    tag: '&8|&e&k/&r&6&nExcalibur&r&e&k/&8|'
+    description: You better not mess with that.
+  Pi:
+    order: 255
+    tag: '&8|&d&k/&r&bPi&r&d&k/&8|'
+    description: The life of Pi or the Maths thing?
+  GirlPower:
+    order: 256
+    tag: '&8|&d&k/&r&cGirl&bPower&r&d&k/&8|'
+    description: Girls are better than boys.
+  Ghastly:
+    order: 257
+    tag: '&5&k|&r&5|&5&k| &r&dGhastly &5&k|&r&5|&5&k|'
+    description: '&eTrick or Treat Prize &6Halloween 2019&e'
+  IronKing:
+    order: 258
+    tag: '&6&k|&r&6|&7&k| &r&7Iron &6King &7&k|&r&6|&6&k|'
+    description: '&eThe &7Iron &6King &econtrols the Realm.'
+  Irish:
+    order: 259
+    tag: '&2&k|&r&2|&2&k| &r&2Irish &2&k|&r&2|&2&k|'
+    description: '&2Luck of the Irish.'
+  MyName:
+    order: 260
+    tag: '&2&k|&r&2|&2&k| &r&2<player.name> &2&k|&r&2|&2&k|'
+    description: '&7Sometimes we repeat things to get the message across. Sometimes we repeat things to get the message across.'
+  AJPHEY:
+    order: 261
+    tag: '&e|&d❤&e| &aMarried to pheyyyy &e|&d❤&e|'
+    description: '&6[&7B&ee&7hrcr&ea&7ft&7 Sp&ee&7cial&6]&9 Congrats on your marriage!'
+  PHEYAJ:
+    order: 262
+    tag: '&e|&d❤&e| &aMarried to AJ_4real &e|&d❤&e|'
+    description: '&6[&7B&ee&7hrcr&ea&7ft&7 Sp&ee&7cial&6]&9 Congrats on your marriage!'
+  MarriedToJesus:
+    order: 263
+    tag: '&e|&d&k|&d❤&k|&r&e| &aMarried to &bJesus &a&e|&d&k|&d❤&k|&r&e|'
+    description: '&6[&7B&ee&7hrcr&ea&7ft&7 Sp&ee&7cial&6]&9 stay pure girl'
+  StraightButWithMoreOptions:
+    order: 264
+    tag: '&e|&d&k|&d❤&k|&e| &4S&6t&er&aa&bi&dg&5h&4t &6b&eu&at &bw&di&5t&4h &6m&eo&ar&be &do&5p&4t&6i&eo&an&bs &e|&d&k|&r&d❤&k|&r&e|'
+    description: '&6[&7B&ee&7hrcr&ea&7ft&7 Sp&ee&7cial&6]&9 Closet Bi-Sexual'
+  AdminFaience:
+    order: 265
+    tag: '&d&lAdmin Faience'
+    description: '&6[&7B&ee&7hrcr&ea&7ft&7 Sp&ee&7cial&6]&9 THE admin faience'
+  Hiss:
+    order: 266
+    tag: '&c|&4&k|&r&c| &4Hiss &c|&4&k|&r&c| '
+    description: '&6[&7B&ee&7hrcr&ea&7ft&7 Sp&ee&7cial&6]&9 Fox is one hell of a character'
+  Flashyjumper:
+    order: 267
+    tag: '&b&k|&r&b|&b&k| &r&bFlashy&6Jumper &b&k|&r&b|&b&k|'
+    description: '&6You have what it takes to complete the spawn parkour!'
