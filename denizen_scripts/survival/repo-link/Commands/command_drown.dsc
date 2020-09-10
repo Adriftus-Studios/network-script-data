@@ -19,7 +19,7 @@ drown_command:
         - inject Command_Syntax
 
     # % ██ [  Drown Player ] ██
-    - narrate Drowning <[user].display_name>
+    - narrate <&e>Drowning <[user].display_name>... <&o>you monster.
     - repeat 3:
         - animate animation:HURT_DROWN <[user]>
         - wait 14t

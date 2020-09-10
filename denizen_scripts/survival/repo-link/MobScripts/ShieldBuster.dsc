@@ -14,7 +14,7 @@ shield_degradation:
           - define shield <player.item_in_offhand>
         - if <[shield].durability.add[<context.damager.mythicmob.level>]> >= <[shield].max_durability>:
           - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:shield offset:0.2 quantity:15
-          - playsound <context.location> sound:ITEM_SHIELD_BREAK
+          - playsound <player> sound:ITEM_SHIELD_BREAK
           - take slot:<[slot]>
         - else:
           - inventory adjust slot:<[slot]> durability:<[shield].durability.add[<context.damager.mythicmob.level>]>
