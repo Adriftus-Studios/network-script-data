@@ -13,15 +13,15 @@ mod_send_inv:
     head: <item[mod_player_item]>
   procedural items:
     - define inventory:<list>
-    - foreach <yaml[bungee.config].list_keys[servers]> as:server:
-      - if <yaml[bungee.config].read[servers.<[server]>.show_in_play_menu]>:
+    - foreach <yaml[bungee_config].list_keys[servers]> as:server:
+      - if <yaml[bungee_config].read[servers.<[server]>.show_in_play_menu]>:
         - define name <[server]>
-        - define lore <list.include[<yaml[bungee.config].parsed_key[servers.<[server]>.description]>]>
+        - define lore <list.include[<yaml[bungee_config].parsed_key[servers.<[server]>.description]>]>
         - define lore:->:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
         - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
         - define lore:->:<&d>Clic<&sp>Droit<&sp>pour<&sp>envoyer<&co>
         - define nbt <list[SERVER/<[server]>]>
-        - define item <yaml[bungee.config].read[servers.<[server]>.material].as_item.with[display_name=<[name]>;lore=<[lore]>]>
+        - define item <yaml[bungee_config].read[servers.<[server]>.material].as_item.with[display_name=<[name]>;lore=<[lore]>]>
         - define inventory:->:<[item]>
     - determine <[inventory]>
   slots:

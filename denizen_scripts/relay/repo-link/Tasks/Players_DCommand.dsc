@@ -22,7 +22,7 @@ Players_DCommand:
             - define text "**Invalid Server Specified**.<n>Command syntax: `/players (<&lt>server<&gt>(|...))`"
             - inject locally error
         - foreach <[args].first.split[|]> as:server:
-            - if !<yaml[bungee.config].contains[servers.<[Server]>]>:
+            - if !<yaml[bungee_config].contains[servers.<[Server]>]>:
                 - define text "**Invalid Server Specified**.<n>Command syntax: `/players (<&lt>server<&gt>(|...))`"
                 - inject locally error
             - else if !<bungee.list_servers.contains[<[server]>]>:

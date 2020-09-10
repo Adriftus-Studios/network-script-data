@@ -25,7 +25,7 @@ global_data_handler:
       - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
         - define Old_Server <yaml[data_handler].read[players.uuids.<[UUID]>.server]>
       - define PlayerMap <map.with[Name].as[<[Name]>].with[UUID].as[<[UUID]>].with[Server].as[<[Server]>]>
-      - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
+      - define LocalServers <yaml[bungee_config].list_keys[servers].filter_tag[<yaml[bungee_config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
     # % ██ [ Track Player ] ██
       - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
@@ -50,7 +50,7 @@ global_data_handler:
       - define UUID <context.uuid>
       - define Server <yaml[data_handler].read[players.uuids.<[uuid]>.server]>
       - define PlayerMap <map.with[name].as[<[name]>].with[uuid].as[<[uuid]>].with[server].as[<[server]>]>
-      - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
+      - define LocalServers <yaml[bungee_config].list_keys[servers].filter_tag[<yaml[bungee_config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
     # % ██ [ Remove Player Data ] ██
       - yaml id:data_handler set players.uuids.<[UUID]>:!

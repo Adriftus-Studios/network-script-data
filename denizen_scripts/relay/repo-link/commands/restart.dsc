@@ -29,7 +29,7 @@ Restart_DCommand:
     - else:
       - define Servers <[Args].filter[contains_any[help|cancel|stop|-l|-log|-logs|-c|-conf|-confirmation].not].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>].not>]>
       - foreach <[Servers]> as:Server:
-        - if !<yaml[bungee.config].contains[servers.<[Server]>]>:
+        - if !<yaml[bungee_config].contains[servers.<[Server]>]>:
           - narrate "Invalid server."
           - stop
         - else if !<bungee.list_servers.contains[<[Server]>]>:
