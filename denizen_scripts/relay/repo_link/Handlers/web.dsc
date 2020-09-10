@@ -2,8 +2,8 @@ web_handler:
   type: world
   debug: true
   Domains:
-    Github: 140.82.115
-    self: 0:0:0:0:0:0:0:1
+    Github: /140.82.115
+    self: /0:0:0:0:0:0:0:1
   temp:
     - if <yaml.list.contains[discord_links]>:
       - yaml id:discord_links unload
