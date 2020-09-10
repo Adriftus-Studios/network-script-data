@@ -96,77 +96,77 @@
     - [proxy](configurations/proxy)
 - [denizen_scripts](denizen_scripts)
     - [behrcraft](denizen_scripts/behrcraft)
-        - [repo-link](denizen_scripts/behrcraft/repo-link) | Root Directory for Scripts on the BehrCraft server
-            - [Commands](denizen_scripts/behrcraft/repo-link/Commands) | Commands used on BehrCraft
-                - [Developmental](denizen_scripts/behrcraft/repo-link/Commands/Developmental) | Developmental & Draft Scripts for BehrCraft
-                    - [Furnished](denizen_scripts/behrcraft/repo-link/Commands/Developmental/Furnished) | Furnished Developmental Scripts
-                - [Economy](denizen_scripts/behrcraft/repo-link/Commands/Economy) | Economy Based Scripts for BehrCraft
-                - [Essentials](denizen_scripts/behrcraft/repo-link/Commands/Essentials) | Essential Commands for BehrCraft
-                - [Moderation](denizen_scripts/behrcraft/repo-link/Commands/Moderation) | Moderation Commands for BehrCraft
-                - [NPCs](denizen_scripts/behrcraft/repo-link/Commands/NPCs) | NPC Based Command Scripts for BehrCraft
-                - [Skills](denizen_scripts/behrcraft/repo-link/Commands/Skills) | Skill Related Commands
-            - [Data](denizen_scripts/behrcraft/repo-link/Data) | Item & Misc Script Data
-            - [NPCs](denizen_scripts/behrcraft/repo-link/NPCs) | NPC Based Scripts for BehrCraft
-                - [Structure](denizen_scripts/behrcraft/repo-link/NPCs/Structure) | NPC Structure & Dependency Scripts for BehrCraft NPCs
-            - [ServerSpecific](denizen_scripts/behrcraft/repo-link/ServerSpecific) | Server Specific and Unshared Ccripts
-            - [Structure](denizen_scripts/behrcraft/repo-link/Structure) | Structure & Dependency Scripts for BehrCraft
-                - [Formatting and Script Addons](denizen_scripts/behrcraft/repo-link/Structure/Formatting%20and%20Script%20Addons) | Format & Etc Scripts for BehrCraft
-                - [Handlers](denizen_scripts/behrcraft/repo-link/Structure/Handlers) | Script Handlers for BehrCraft
-                - [Skill Handlers](denizen_scripts/behrcraft/repo-link/Structure/Skill%20Handlers) | Skill Handlers for BehrCraft
+        - [repo_link](denizen_scripts/behrcraft/repo_link) | Root Directory for Scripts on the BehrCraft server
+            - [Commands](denizen_scripts/behrcraft/repo_link/Commands) | Commands used on BehrCraft
+                - [Developmental](denizen_scripts/behrcraft/repo_link/Commands/Developmental) | Developmental & Draft Scripts for BehrCraft
+                    - [Furnished](denizen_scripts/behrcraft/repo_link/Commands/Developmental/Furnished) | Furnished Developmental Scripts
+                - [Economy](denizen_scripts/behrcraft/repo_link/Commands/Economy) | Economy Based Scripts for BehrCraft
+                - [Essentials](denizen_scripts/behrcraft/repo_link/Commands/Essentials) | Essential Commands for BehrCraft
+                - [Moderation](denizen_scripts/behrcraft/repo_link/Commands/Moderation) | Moderation Commands for BehrCraft
+                - [NPCs](denizen_scripts/behrcraft/repo_link/Commands/NPCs) | NPC Based Command Scripts for BehrCraft
+                - [Skills](denizen_scripts/behrcraft/repo_link/Commands/Skills) | Skill Related Commands
+            - [Data](denizen_scripts/behrcraft/repo_link/Data) | Item & Misc Script Data
+            - [NPCs](denizen_scripts/behrcraft/repo_link/NPCs) | NPC Based Scripts for BehrCraft
+                - [Structure](denizen_scripts/behrcraft/repo_link/NPCs/Structure) | NPC Structure & Dependency Scripts for BehrCraft NPCs
+            - [ServerSpecific](denizen_scripts/behrcraft/repo_link/ServerSpecific) | Server Specific and Unshared Ccripts
+            - [Structure](denizen_scripts/behrcraft/repo_link/Structure) | Structure & Dependency Scripts for BehrCraft
+                - [Formatting and Script Addons](denizen_scripts/behrcraft/repo_link/Structure/Formatting%20and%20Script%20Addons) | Format & Etc Scripts for BehrCraft
+                - [Handlers](denizen_scripts/behrcraft/repo_link/Structure/Handlers) | Script Handlers for BehrCraft
+                - [Skill Handlers](denizen_scripts/behrcraft/repo_link/Structure/Skill%20Handlers) | Skill Handlers for BehrCraft
     - [global](denizen_scripts/global)
         - [server](denizen_scripts/global/server) | Denizen Scripts used globally across Adriftus
             - [commands](denizen_scripts/global/server/commands)
             - [dependencies](denizen_scripts/global/server/dependencies)
             - [handlers](denizen_scripts/global/server/handlers)
     - [hub1](denizen_scripts/hub1)
-        - [repo-link](denizen_scripts/hub1/repo-link) | Denizen Scripts used on the Hub server
-            - [Adriftus_Moderator_Panel](denizen_scripts/hub1/repo-link/Adriftus_Moderator_Panel)
-                - [functions](denizen_scripts/hub1/repo-link/Adriftus_Moderator_Panel/functions)
-                - [panels](denizen_scripts/hub1/repo-link/Adriftus_Moderator_Panel/panels)
-                - [tools](denizen_scripts/hub1/repo-link/Adriftus_Moderator_Panel/tools)
-            - [Handlers](denizen_scripts/hub1/repo-link/Handlers)
-            - [Shops](denizen_scripts/hub1/repo-link/Shops)
-            - [systems](denizen_scripts/hub1/repo-link/systems)
+        - [repo_link](denizen_scripts/hub1/repo_link) | Denizen Scripts used on the Hub server
+            - [Adriftus_Moderator_Panel](denizen_scripts/hub1/repo_link/Adriftus_Moderator_Panel)
+                - [functions](denizen_scripts/hub1/repo_link/Adriftus_Moderator_Panel/functions)
+                - [panels](denizen_scripts/hub1/repo_link/Adriftus_Moderator_Panel/panels)
+                - [tools](denizen_scripts/hub1/repo_link/Adriftus_Moderator_Panel/tools)
+            - [Handlers](denizen_scripts/hub1/repo_link/Handlers)
+            - [Shops](denizen_scripts/hub1/repo_link/Shops)
+            - [systems](denizen_scripts/hub1/repo_link/systems)
     - [relay](denizen_scripts/relay)
-        - [repo-link](denizen_scripts/relay/repo-link) | Denizen Scripts used to relay to Discord chat
-            - [Handlers](denizen_scripts/relay/repo-link/Handlers)
-            - [Tasks](denizen_scripts/relay/repo-link/Tasks)
-            - [commands](denizen_scripts/relay/repo-link/commands)
-            - [structure](denizen_scripts/relay/repo-link/structure)
-                - [RemoteDependencies](denizen_scripts/relay/repo-link/structure/RemoteDependencies)
-            - [tasks](denizen_scripts/relay/repo-link/tasks)
+        - [repo_link](denizen_scripts/relay/repo_link) | Denizen Scripts used to relay to Discord chat
+            - [Handlers](denizen_scripts/relay/repo_link/Handlers)
+            - [Tasks](denizen_scripts/relay/repo_link/Tasks)
+            - [commands](denizen_scripts/relay/repo_link/commands)
+            - [structure](denizen_scripts/relay/repo_link/structure)
+                - [RemoteDependencies](denizen_scripts/relay/repo_link/structure/RemoteDependencies)
+            - [tasks](denizen_scripts/relay/repo_link/tasks)
     - [survival](denizen_scripts/survival)
-        - [repo-link](denizen_scripts/survival/repo-link) | Denizen Scripts used on the Survival server.
-            - [Commands](denizen_scripts/survival/repo-link/Commands)
-            - [MobScripts](denizen_scripts/survival/repo-link/MobScripts)
-            - [data](denizen_scripts/survival/repo-link/data)
-            - [debugging](denizen_scripts/survival/repo-link/debugging)
-            - [dragon](denizen_scripts/survival/repo-link/dragon)
-            - [fun](denizen_scripts/survival/repo-link/fun)
-            - [global_systems](denizen_scripts/survival/repo-link/global_systems)
-                - [jobs](denizen_scripts/survival/repo-link/global_systems/jobs)
-            - [items](denizen_scripts/survival/repo-link/items)
-                - [system](denizen_scripts/survival/repo-link/items/system)
-            - [libs](denizen_scripts/survival/repo-link/libs)
-            - [qol](denizen_scripts/survival/repo-link/qol)
-            - [shops](denizen_scripts/survival/repo-link/shops)
-            - [spawn_scripts](denizen_scripts/survival/repo-link/spawn_scripts)
-            - [startup_systems](denizen_scripts/survival/repo-link/startup_systems)
-            - [systems](denizen_scripts/survival/repo-link/systems)
-            - [temporary](denizen_scripts/survival/repo-link/temporary)
+        - [repo_link](denizen_scripts/survival/repo_link) | Denizen Scripts used on the Survival server.
+            - [Commands](denizen_scripts/survival/repo_link/Commands)
+            - [MobScripts](denizen_scripts/survival/repo_link/MobScripts)
+            - [data](denizen_scripts/survival/repo_link/data)
+            - [debugging](denizen_scripts/survival/repo_link/debugging)
+            - [dragon](denizen_scripts/survival/repo_link/dragon)
+            - [fun](denizen_scripts/survival/repo_link/fun)
+            - [global_systems](denizen_scripts/survival/repo_link/global_systems)
+                - [jobs](denizen_scripts/survival/repo_link/global_systems/jobs)
+            - [items](denizen_scripts/survival/repo_link/items)
+                - [system](denizen_scripts/survival/repo_link/items/system)
+            - [libs](denizen_scripts/survival/repo_link/libs)
+            - [qol](denizen_scripts/survival/repo_link/qol)
+            - [shops](denizen_scripts/survival/repo_link/shops)
+            - [spawn_scripts](denizen_scripts/survival/repo_link/spawn_scripts)
+            - [startup_systems](denizen_scripts/survival/repo_link/startup_systems)
+            - [systems](denizen_scripts/survival/repo_link/systems)
+            - [temporary](denizen_scripts/survival/repo_link/temporary)
 - [docs](docs)
     - [contribution_docs](docs/contribution_docs)
     - [guides](docs/guides)
 - [images](images)
     - [logos](images/logos)
 - [misc_scripts](misc_scripts)
-- [scriptdata](scriptdata)
-    - [global](scriptdata/global)
-        - [bungee](scriptdata/global/bungee)
-        - [chat](scriptdata/global/chat)
-        - [discord](scriptdata/global/discord)
-            - [dcommands](scriptdata/global/discord/dcommands)
-            - [embed_templates](scriptdata/global/discord/embed_templates)
-        - [network](scriptdata/global/network)
+- [script_data](script_data)
+    - [global](script_data/global)
+        - [bungee](script_data/global/bungee)
+        - [chat](script_data/global/chat)
+        - [discord](script_data/global/discord)
+            - [dcommands](script_data/global/discord/dcommands)
+            - [embed_templates](script_data/global/discord/embed_templates)
+        - [network](script_data/global/network)
 - [system_scripts](system_scripts)
     - [repository](system_scripts/repository)
