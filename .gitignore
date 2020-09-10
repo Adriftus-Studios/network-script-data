@@ -17,23 +17,23 @@ denizen_scripts/gielinordev
 denizen_scripts/head
 
 # ██ [ Scriptdata Directories     ] ██
-scriptdata/global/admin
-scriptdata/global/bans
-scriptdata/global/behr-essentials
-scriptdata/global/bungee
-scriptdata/global/players
-scriptdata/global/twitch
+script-data/global/admin
+script-data/global/bans
+script-data/global/behr-essentials
+script-data/global/bungee
+script-data/global/players
+script-data/global/twitch
 
 # ██ [ Scriptdata Files           ] ██
-scriptdata/global/Behr_Essentials
-scriptdata/global/discord/token.yml
-scriptdata/global/discord/channels.yml
-scriptdata/global/discord/webhooks.yml
-scriptdata/global/discord/oAuth_Data.yml
-scriptdata/global/discord/github_links.yml
-scriptdata/global/discord/discord_links.yml
-scriptdata/global/discord/saved_headers.yml
-scriptdata/global/discord/shell_directories.yml
+script-data/global/Behr_Essentials
+script-data/global/discord/token.yml
+script-data/global/discord/channels.yml
+script-data/global/discord/webhooks.yml
+script-data/global/discord/oAuth_Data.yml
+script-data/global/discord/github_links.yml
+script-data/global/discord/discord_links.yml
+script-data/global/discord/saved_headers.yml
+script-data/global/discord/shell_directories.yml
 denizen_scripts/relay/repo-link/Handlers/message_handler.dsc
 
 # ██ [ System Script Directories  ] ██
