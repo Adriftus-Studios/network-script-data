@@ -34,6 +34,7 @@ script_data/global/discord/github_links.yml
 script_data/global/discord/discord_links.yml
 script_data/global/discord/saved_headers.yml
 script_data/global/discord/shell_directories.yml
+script_data/global/network/configuration.yml
 denizen_scripts/relay/repo_link/Handlers/message_handler.dsc
 
 # ██ [ System Script Directories  ] ██
