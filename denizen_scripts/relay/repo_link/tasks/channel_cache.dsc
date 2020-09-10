@@ -1,7 +1,6 @@
 channel_cache:
     type: task
     debug: false
-    definitions: clean
     speed: 0.2
     script:
         - foreach <yaml[discord_configuration].read[groups]> key:group_name as:group_id:
@@ -13,7 +12,7 @@ channel_cache:
                 - yaml id:discord_channels set <[group_name]>.<[channel_id]>.name:<[channel].name.escaped>
                 - yaml id:discord_channels set <[group_name]>.<[channel_id]>.position:<[channel].position>
                 - yaml id:discord_channels set <[group_name]>.<[channel_id]>.channel_type:<[channel].channel_type>
-                #^  - yaml id:discord_channels set <[group_name]>.<[channel_id]>.topic:<[channel].topic>
+                - yaml id:discord_channels set <[group_name]>.<[channel_id]>.topic:<[channel].topic>
 
             - if !<yaml[discord_channels].list_keys[<[group_name]>].exclude[<[channels].parse[id]>].is_empty>:
                 - foreach <yaml[discord_channels].list_keys[<[group_name]>].exclude[<[channels].parse[id]>]> as:deprecated_channel_id:
