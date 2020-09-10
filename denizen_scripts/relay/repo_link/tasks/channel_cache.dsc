@@ -2,6 +2,7 @@ channel_cache:
     type: task
     debug: false
     definitions: clean
+    speed: 0.05
     script:
         - foreach <yaml[discord_configuration].read[groups]> key:group_name as:group_id:
             - define channels <discordgroup[adriftusbot,<[group_id]>].channels>
