@@ -17,10 +17,12 @@ denizen_scripts/gielinordev
 denizen_scripts/head
 
 # ██ [ Scriptdata Directories     ] ██
-scriptdata/global/twitch
-scriptdata/global/bungee
 scriptdata/global/admin
 scriptdata/global/bans
+scriptdata/global/behressentials
+scriptdata/global/bungee
+scriptdata/global/players
+scriptdata/global/twitch
 
 # ██ [ Scriptdata Files           ] ██
 scriptdata/global/Behr_Essentials
@@ -32,7 +34,6 @@ scriptdata/global/discord/github_links.yml
 scriptdata/global/discord/discord_links.yml
 scriptdata/global/discord/saved_headers.yml
 scriptdata/global/discord/shell_directories.yml
-scriptdata/global/players
 denizen_scripts/relay/repo-link/Handlers/message_handler.dsc
 
 # ██ [ System Script Directories  ] ██
