@@ -22,11 +22,11 @@ RFood_DCommand:
     - ~webget https://discordapp.com/api/users/<[UserID]> Headers:<[Headers]> save:Response
     - Define UserPFP https://cdn.discordapp.com/avatars/<[UserID]>/<util.parse_yaml[<entry[Response].result>].get[avatar]>
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
-    - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
+    - define channel_id <[channel]>
+    - inject get_webhooks
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
+
   # % ██ [ Verify Arguments            ] ██
-    - if !<script[DDTBCTY].list_keys[WebHooks].contains[<[Channel]>]>:
-      - stop
     - if <[Args].size> == 0:
       - define Food <server.flag[Data.Lists.Foods].random>
       - define Message "<&lt>:hambehrgeur:732716255567413309<&gt><&sp>Your random food selection<&co><&nl><[Food]>!"
