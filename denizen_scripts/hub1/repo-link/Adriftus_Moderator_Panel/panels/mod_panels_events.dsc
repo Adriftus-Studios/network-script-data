@@ -13,8 +13,8 @@ mod_global_inv_events:
       - if <context.item.has_nbt[to]>:
         - choose <context.item.nbt[to]>:
           - case actions:
-            - inventory open d:mod_actions_inv
+            - run mod_actions_inv_open
           - case online:
-            - inventory open d:mod_online_inv
+            - run mod_online_inv_open
           - default:
             - inventory close
