@@ -90,7 +90,6 @@ title_inventory_open:
   definitions: page
   debug: false
   script:
-    - stop
     - define page <[page]||1>
     - define inventory <inventory[title_inventory]>
     - define unlocked_tags <yaml[global.player.<player.uuid>].read[titles.unlocked].as_list||<list[Default]>>
