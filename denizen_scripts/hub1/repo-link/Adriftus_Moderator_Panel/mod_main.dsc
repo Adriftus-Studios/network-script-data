@@ -26,7 +26,7 @@ mod_command:
   script:
     # -- Hopefully this logic will work & make sense in a few weeks.
     - if <context.args.is_empty>:
-      - inventory open d:mod_online_inv
+      - inject mod_online_inv_open
     - else if <context.args.first> == version:
       - narrate "<&6>Adriftus <&e>Moderator Panel"
       - narrate "<&f>Version 2.0.0 - 2020-07-31"
@@ -63,7 +63,7 @@ mod_command:
           - yaml unload id:amp.target.<[uuid]>
         # Flag moderator with map of target player's information
         - flag <player> amp_map:<[map]>
-        - inventory open d:<inventory[mod_actions_inv]>
+        - inject mod_actions_inv_open
     - else:
       - narrate "<&c>Invalid player name entered!"
 
