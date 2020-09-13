@@ -14,7 +14,7 @@ discord_watcher:
   type: world
   debug: false
   events:
-    on discord message received:
+    on discord message received for:adriftusbot:
       - if <context.author||invalid> == invalid || <context.message||invalid> == invalid:
         - stop
       - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null && !<context.author.name.contains[Adriftus]>:
