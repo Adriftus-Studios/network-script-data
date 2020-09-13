@@ -343,7 +343,6 @@ item_with_soul:
   debug: false
   material: diamond_sword
   display name: <&c>ERROR - REPORT THIS
-
 get_random_soul:
   type: procedure
   debug: false
@@ -366,8 +365,8 @@ get_random_soul:
       - define NBT <[NBT].include_single[debuffs/<[debuffs]>]>
     - define flavor "<&d>Soul Item<&nl><&e>Combine with Armor or Weapons"
     - define NBT <[NBT].include_single[flavor/<[flavor]>]>
-    - define Item <[Item].with[nbt=<[NBT]>]>
-    - determine <proc[item_system_build_item].context[<[Item]>]>
+    - define item <item[soul].with[nbt=<[NBT]>]>
+    - determine <proc[item_system_build_item].context[<list_single[<[item]>]>]>
 
 item_with_soul_create:
   type: procedure
@@ -376,7 +375,7 @@ item_with_soul_create:
   script:
     - if <[item1].material.name> == air || <[item2].material.name> == air:
       - determine gray_stained_glass_pane
-    - if <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].is_empty>:
+    - if !<list[<[item1]>].include[<[item2]>].filter[material.name.is[==].to[<script[soul].data_key[material]>]].first.has_nbt[soul]>:
       - determine gray_stained_glass_pane
     - define soul_item <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].first>
     - define contexts <list.include[<list[<[item1]>|<[item2]>].filter[has_nbt[soul].not].first.material.name>]>
@@ -412,6 +411,7 @@ item_system_build_item:
   definitions: item
   debug: false
   script:
+    - define item <[item].as_item>
   # % ██ [ Determine the amount of Stars  ] ██
     - if <[item].has_nbt[soul_level]>:
       - define level <[item].nbt[soul_level]>
@@ -487,7 +487,7 @@ item_system_build_item:
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.flavor]>]>
     - define lore <[lore].include[<script[item_system_global_data].parsed_key[settings.lore.bottom]>]>
 
-    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;flags=HIDE_ALL]>
+    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;hides=all]>
     - if !<[nbt].is_empty>:
       - define NewItem <[NewItem].with[nbt=<[nbt]>]>
     - else:
