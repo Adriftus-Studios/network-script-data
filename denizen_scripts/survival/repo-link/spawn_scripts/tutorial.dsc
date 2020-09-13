@@ -183,6 +183,14 @@ tutorial_spawn_finale:
 ## INTERNALS ##
 ###############
 
+first_time_tutorial:
+  type: world
+  debug: false
+  events:
+    after player joins:
+      - if !<player.has_flag[tutorial]> && !<player.has_flag[tutorial_status]>:
+        - inject tutorial_start
+
 tutorial_command:
   type: command
   name: tutorial

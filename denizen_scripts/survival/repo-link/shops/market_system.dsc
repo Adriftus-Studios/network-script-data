@@ -33,7 +33,7 @@ market_system_data:
     # -- IMPORTANT -- #
     ## THE sell_buy_difference (BELOW) SHOULD ALWAYS BE GREATER THAN adjustment_amount (ABOVE).
     ## THIS AVOIDS INFINITE MONEY GLITCHES.
-    sell_buy_difference: 5
+    sell_buy_difference: 0.3
   categories:
     crafting:
       material: diamond_ore
@@ -344,7 +344,7 @@ market_system_get_price_of_multiple:
   script:
     - define current_value <yaml[current_market].read[items.<[item]>.value]>
     - if <[buy_or_sell]> == sell:
-      - define current_value <[current_value].-[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
+      - define current_value <[current_value].*[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
     ## OLD
     #- repeat <[amount]>:
     #  - define list:|:<[current_value]>
@@ -388,7 +388,7 @@ market_system_category_set_buy_sell_items:
   script:
     - define slot <script[market_system_category_GUI].data_key[custom_slots_map.buy_sell_item]>
     - define buy_price <yaml[current_market].read[items.<[item]>.value]>
-    - define sell_price <[buy_price].-[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
+    - define sell_price <[buy_price].*[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
     - define "lore:<&a>Buy Price<&co> <&e><[buy_price]>|<&c>Sell Price<&co> <[sell_price]>"
     - define name <&a><[item].replace[_].with[<&sp>].to_titlecase>
     - inventory set slot:<[slot]> d:<[inventory]> o:<[item].as_item.with[display_name=<[name]>;lore=<[lore]>;nbt=item/<[item]>]>
@@ -451,7 +451,7 @@ market_system_category_set_market_items:
         - foreach stop
       - define item <yaml[market].list_keys[categories.<[category]>].get[<[index_to_pull]>]>
       - define buy_price <yaml[current_market].read[items.<[item]>.value]>
-      - define sell_price <[buy_price].-[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
+      - define sell_price <[buy_price].*[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
       - define "lore:<&a>Buy Price<&co><&sp><&e><[buy_price]>|<&c>Sell Price<&co><&sp><[sell_price]>"
       - define name <&a><[item].replace[_].with[<&sp>].to_titlecase>
       - inventory set slot:<[slot]> d:<[inventory]> o:<[item].as_item.with[lore=<[lore]>;nbt=market_item/<[item]>;display_name=<[name]>]>
@@ -547,7 +547,7 @@ market_system_transfer_yaml_hourly:
   script:
     - foreach <script[market_system_data].list_keys[items]> as:item:
       - define min_value <script[market_system_data].data_key[items.<[item]>.minimum_value]>
-      - yaml id:current_market set items.<[item]>.value:<util.random.int[<[min_value]>].to[<[min_value].*[5]>]>
+      - yaml id:current_market set items.<[item]>.value:<[min_value].*[<util.random.decimal[1].to[<list[1|1|1|1|1|2|2|2|2|2|3|3|3|4|4|5].random>]>].round_up>
       
 
 market_system_open:

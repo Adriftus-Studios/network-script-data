@@ -26,10 +26,10 @@ claiming_protection_group_upgrades:
       - define cost <script[claiming_system_upgrade_data].data_key[upgrades.<[upgrade]>.cost]>
       - define material <script[claiming_system_upgrade_data].data_key[upgrades.<[upgrade]>.material]>
       - define "lore:<&a>---------------------|<&e>Price<&co><&sp><&a><[cost]>|<&b>Use this item in a claim.|<&b>This will unlock <[name]>|<&a>---------------------"
-      - define list:|:<item[claiming_group_upgrade_item].with[material=<[material]>;display_name=<[name]>;lore=<[lore]>;nbt=upgrade/<[upgrade]>]>
-    - define cost <script[claiming_system_upgrade_data].data_key[upgrades.claim_limit.cost]>
+      - define list:|:<item[claiming_group_upgrade_item].with[material=<[material]>;display_name=<[name]>;lore=<[lore]>;nbt=upgrade/<[upgrade]>|cost/<[cost]>]>
+    - define cost <script[claiming_system_upgrade_data].data_key[upgrades.claim_limit.cost].parsed>
     - define "lore:<&a>---------------------|<&e>Price<&co><&sp><&a><[cost]>|<&b>Right click while holding.|<&b>This will unlock <&a>10 <&b>more claims.|<&a>---------------------
-    - define list:|:<item[claiming_group_upgrade_item].with[material=gold_block;display_name=<&b>Upgrade<&sp>Claim<&sp>Limit;lore=<[lore]>;nbt=upgrade/claim_limit]>
+    - define list:|:<item[claiming_group_upgrade_item].with[material=gold_block;display_name=<&b>Upgrade<&sp>Claim<&sp>Limit;lore=<[lore]>;nbt=upgrade/claim_limit|cost/<[cost]>]>
     - determine <[list]>
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
@@ -52,12 +52,14 @@ claiming_protection_group_upgrades_events:
       - determine passively cancelled
       - wait 1t
       - if <context.item.has_nbt[upgrade]>:
-        - define cost <script[claiming_system_upgrade_data].data_key[upgrades.<context.item.nbt[upgrade]>.cost]>
+        - define cost <context.item.nbt[cost]>
         - if <player.money> < <[cost]>:
           - narrate "<&c>You don't have the cash for that."
           - stop
         - take money quantity:<[cost]>
         - give <context.item.with[lore=<context.item.lore.get[3].to[last]>]>
+        - if <context.item.nbt[upgrade]> == claim_limit:
+          - flag player claim_upgrades:++
       - else if <context.item.has_nbt[back]>:
         - inventory open d:claiming_inventory
     on player right clicks with:claiming_group_upgrade_item:
