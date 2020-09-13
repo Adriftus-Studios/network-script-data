@@ -11,19 +11,6 @@ mod_send_inv:
     b2: <item[purple_stained_glass_pane].with[display_name=<&r>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;nbt=<list[to/actions]>]>
     head: <item[mod_player_item]>
-  procedural items:
-    - define inventory:<list>
-    - foreach <yaml[bungee_config].list_keys[servers]> as:server:
-      - if <yaml[bungee_config].read[servers.<[server]>.show_in_play_menu]>:
-        - define name <[server]>
-        - define lore <list.include[<yaml[bungee_config].parsed_key[servers.<[server]>.description]>]>
-        - define lore:->:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
-        - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
-        - define lore:->:<&d>Clic<&sp>Droit<&sp>pour<&sp>envoyer<&co>
-        - define nbt <list[SERVER/<[server]>]>
-        - define item <yaml[bungee_config].read[servers.<[server]>.material].as_item.with[display_name=<[name]>;lore=<[lore]>]>
-        - define inventory:->:<[item]>
-    - determine <[inventory]>
   slots:
     - [b2] [b1] [b1] [b2] [b1] [b2] [b1] [b1] [b2]
     - [x] [] [] [] [] [] [] [] [x]
@@ -39,3 +26,21 @@ mod_send_inv_events:
         - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|0|<[origintodest]>|Send
         - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<[origintodest]>|Send
         - adjust <player.flag[amp_map].as_map.get[uuid].as_player> send_to:<context.item.nbt[SERVER]>
+
+mod_send_inv_open:
+  type: task
+  debug: false
+  script:
+    - define items <list>
+    - define inventory <inventory[mod_send_inv]>
+    - foreach <yaml[bungee_config].list_keys[servers]> as:server:
+      - if <yaml[bungee_config].read[servers.<[server]>.show_in_play_menu]>:
+        - define lore <list.include[<yaml[bungee_config].parsed_key[servers.<[server]>.description]>]>
+        - define lore:->:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
+        - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
+        - define lore:->:<&d>Clic<&sp>Droit<&sp>pour<&sp>envoyer<&co>
+        - define nbt <list[SERVER/<[server]>]>
+        - define item <yaml[bungee_config].read[servers.<[server]>.material].as_item.with[display_name=<[server]>;lore=<[lore]>;nbt=<[nbt]>]>
+        - define items:->:<[item]>
+    - give <[items]> to:<[inventory]>
+    - inventory open d:<[inventory]>
