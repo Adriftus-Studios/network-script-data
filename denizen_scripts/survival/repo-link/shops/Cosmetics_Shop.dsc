@@ -109,7 +109,7 @@ store_hub_cosmeticShop_titles_events:
 title_changeover:
   type: task
   script:
-    - flag server cosmetics_titles_today:!|:<yaml[titles].list_keys[titles].exclude[<yaml[titles].read[shop_blacklist]>].random[18]>
+    - flag server cosmetics_titles_today:!|:<yaml[titles].list_keys[titles].filter_tag[<yaml[titles].read[titles.<[filter_value]>.in_shop]||false>].random[18]>
 
 title_voucher:
   type: item

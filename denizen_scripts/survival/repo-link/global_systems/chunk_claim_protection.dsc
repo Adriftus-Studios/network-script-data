@@ -43,7 +43,7 @@ claiming_system_upgrade_data:
       material: black_dye
       CMD: 1
     claim_limit:
-      cost: 25000
+      cost: <player.flag[claim_upgrades].*[25000]>
       material: gold_block
       CMD: 1
 
@@ -1009,13 +1009,13 @@ claiming_initialize_group:
     display_name: true
     color: true
     fly: false
-    auto-plant: true
-    disable-mob-spawn: true
-    keep-inventory: true
-    time-control: true
-    weather-control: true
-    create_fog: true
-    darken_sky: true
+    auto-plant: false
+    disable-mob-spawn: false
+    keep-inventory: false
+    time-control: false
+    weather-control: false
+    create_fog: false
+    darken_sky: false
   script:
   - yaml id:claims set groups.<player.uuid>~<[name]>.settings:<script.parsed_key[settings]>
   - yaml id:claims set groups.<player.uuid>~<[name]>.upgrades:<script.parsed_key[upgrades]>

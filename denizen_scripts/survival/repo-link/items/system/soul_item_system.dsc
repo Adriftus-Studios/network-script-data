@@ -374,9 +374,8 @@ item_with_soul_create:
   script:
     - if <[item1].material.name> == air || <[item2].material.name> == air:
       - determine gray_stained_glass_pane
-    - if !<list[<[item1]>].include[<[item2]>].filter[material.name.is[==].to[<script[soul].data_key[material]>]].first.has_nbt[soul]>:
+    - if <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].is_empty>:
       - determine gray_stained_glass_pane
-
     - define soul_item <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].first>
     - define contexts <list.include[<list[<[item1]>|<[item2]>].filter[has_nbt[soul].not].first.material.name>]>
     - define contexts <[contexts].include[<[soul_item].nbt[soul].get[type]>]>
