@@ -2,7 +2,7 @@
 mod_ban_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f>› <&c>Ban <&6><player.flag[amp_map].as_map.get[uuid].as_player.name> from <player.flag[amp_map].as_map.get[from].to_titlecase>.
+  title: <&6>A<&e>MP <&f>› <&c>Ban
   inventory: CHEST
   size: 54
   definitions:
@@ -42,6 +42,7 @@ mod_ban_inv_open:
   script:
     - define items <list>
     - define inventory <inventory[mod_ban_inv]>
+    - adjust def:inventory "title:<&6>A<&e>MP <&f>› <&c>Ban <&6><player.flag[amp_map].as_map.get[uuid].as_player.name> from <player.flag[amp_map].as_map.get[from].to_titlecase>."
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_ban_infractions].list_keys[<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>

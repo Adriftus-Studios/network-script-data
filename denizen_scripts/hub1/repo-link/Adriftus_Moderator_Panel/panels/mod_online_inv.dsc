@@ -2,7 +2,7 @@
 mod_online_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f>– <&a><server.online_players.size> online.
+  title: <&6>A<&e>MP <&f>– <&a>Online Players
   inventory: CHEST
   size: 54
   definitions:
@@ -40,6 +40,7 @@ mod_online_inv_open:
   script:
     - define items <list>
     - define inventory <inventory[mod_online_inv]>
+    - adjust def:inventory "title:<&6>A<&e>MP <&f>– <&a><server.online_players.size> online."
     - foreach <server.online_players> as:player:
       # Match item display name and lore to information about the online player.
       - define name <[player].name>

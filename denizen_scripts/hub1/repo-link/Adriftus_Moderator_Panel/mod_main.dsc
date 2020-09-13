@@ -2,9 +2,8 @@
 # - REPLACE TAB COMPLETES WITH NEW TAB COMPLETIONS SYSTEM.
 # - MAKE COMMAND DEFINITIONS CONSISTENT BETWEEN COMMANDS. (Definition name, value, usage, etc.)
 # - EXPAND CHAT (UN)MUTE FUNCTION.
-# - Use <context.args.is_empty> instead of `<context.args.first||null> == null`.
 # - Replace nested foreach loop in mod_get_infractions procedure in mod_infractions.
-# - Split panel scripts up into a folder.
+# - Move player verification into its own injectable task. (Online, Has Permission, etc.)
 
 # -- /mod - Adriftus Moderator Panel
 mod_command:
@@ -13,11 +12,11 @@ mod_command:
   permission: adriftus.staff
   name: mod
   description: Adriftus Moderator Panel
-  usage: /mod [username]
+  usage: /mod (username)
   tab complete:
     # -- One Argument Tab Complete
-    - define Blacklist <player||null>
-    - inject Online_Player_Tabcomplete
+    - define blacklist <player||null>
+    - inject online_player_tabcomplete
     # - define arguments <server.online_players.parse[name].exclude[<player.name>]>
     # - if <context.args.is_empty>:
     #   - determine <[arguments]>

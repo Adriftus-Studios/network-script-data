@@ -2,7 +2,7 @@
 mod_send_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f>› <&5>Send <&e><player.flag[amp_map].as_map.get[uuid].as_player.name> <&5>to Server.
+  title: <&6>A<&e>MP <&f>› <&5>Send
   inventory: CHEST
   size: 27
   definitions:
@@ -33,6 +33,7 @@ mod_send_inv_open:
   script:
     - define items <list>
     - define inventory <inventory[mod_send_inv]>
+    - adjust def:inventory "title:<&6>A<&e>MP <&f>› <&5>Send <&e><player.flag[amp_map].as_map.get[uuid].as_player.name> <&5>to Server."
     - foreach <yaml[bungee_config].list_keys[servers]> as:server:
       - if <yaml[bungee_config].read[servers.<[server]>.show_in_play_menu]>:
         - define lore <list.include[<yaml[bungee_config].parsed_key[servers.<[server]>.description]>]>
