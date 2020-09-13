@@ -7,7 +7,7 @@ Day_command:
     description: Sets to daytime
     permission: adriftus.staff
     script:
-    - time global 1000t mainland
+    - time global 1000t <player.world>
     - Announce "<&e>Time set to <&dq>Day<&dq> by <player.display_name>"
 
 Night_command:
@@ -17,5 +17,5 @@ Night_command:
     description: Sets to nighttime
     permission: adriftus.staff
     script:
-    - time global 13000t mainland
+    - time global 13000t <player.world>
     - Announce "<&e>Time set to <&dq>Night<&dq> by <player.display_name>"
