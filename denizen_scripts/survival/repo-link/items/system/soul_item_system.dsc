@@ -480,7 +480,7 @@ item_system_build_item:
           - foreach <[Modifiers]> key:alt as:final_value:
             - if <[alt]> == none:
                 - foreach next
-            - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.buffs.<[alt]>]>]>
+            - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.<[modifier]>.<[alt]>]>]>
 
     - if <[item].has_nbt[flavor]>:
       - define flavor <[item].nbt[flavor]>
