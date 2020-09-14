@@ -4,4 +4,4 @@ Creeper_Prime_Signal:
   events:
     on entity explosion primes:
       - If <context.entity.is_mythicmob>:
-        - mythicsignal <context.entity> PrimetimeShowtime
+        - mythicsignal <context.entity> PrimetimeShowtime source:<context.entity>
