@@ -11,10 +11,10 @@ Error_Response_Webhook:
             - stop
 
     # % ██ [ Organize Definitions      ] ██
+        - define channel_id <script.data_key[Channel_Map.<[Data].get[Server]>]>=
+        - inject get_webhooks
         - define Server <[Data].get[Server]>
         - define Group <script.data_key[AGDev]>
-        - define Channel <script.data_key[Channel_Map.<[Data].get[Server]>]>
-        - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
         - define Headers <script.data_key[Headers]>
         - define UUID <util.random.duuid.after[_]>
         - define File_Location ../../web/webget/
