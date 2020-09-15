@@ -17,6 +17,7 @@ error_handler:
       - waituntil <bungee.connected> || <[timeout].duration_since[<util.time_now>]> != 0
       - if !<bungee.connected> || <context.queue.id||invalid> == invalid || !<list[hub1|behrcraft|survival|relay|xeane].contains[<bungee.server>]>:
         - stop
+
     # % ██ [ track errors                  ] ██
       - define data <map>
       - if <context.script||invalid> != invalid:

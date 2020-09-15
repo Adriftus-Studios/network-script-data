@@ -1211,7 +1211,7 @@ claiming_protection_events:
     - if <[group2]> != null:
       - determine cancelled
     on entity changes block:
-      - if <yaml[claims].read[<context.location.world>.<context.location.chunk.x>.<context.location.chunk.z>]||null> != null && <context.entity.entity_type> == SILVERFISH:
+      - if <yaml[claims].contains[<context.location.world>.<context.location.chunk.x>.<context.location.chunk.z>]> && <context.entity.entity_type> == SILVERFISH:
         - determine cancelled
     on block spreads:
     - if <context.location.chunk> == <context.source_location.chunk>:
