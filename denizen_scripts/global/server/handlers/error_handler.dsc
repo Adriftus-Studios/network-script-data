@@ -21,8 +21,8 @@ error_handler:
     # % ██ [ track errors                  ] ██
       - if <context.script||invalid> != invalid:
         - if <yaml[error_handler].contains[<context.script.name>]>:
-          - define rate_limit <util.time_now.duration_since[<yaml[error_handler].read[<context.script.name>]>].in_seconds>
-        - yaml id:error_handler set <context.script.name>:->:<util.time_now.epoch_millis>
+          - define rate_limit <util.time_now.duration_since[<yaml[error_handler].read[<context.script.name>].highest[epoch_millis]>].in_seconds>
+        - yaml id:error_handler set <context.script.name>:->:<util.time_now>
         - if <[rate_limit]||invalid> != invalid && <[rate_limit]> < 5:
           - stop
         - define error_count <yaml[error_handler].read[<context.script.name>].size>
