@@ -1,16 +1,16 @@
 error_handler:
   type: world
-  debug: true
+  debug: false
   events:
     on server start:
       - yaml id:error_handler create
     on script generates error:
-      - determine passively cancelled
-
     # % ██ [ disable /ex error handling     ] ██
       - if <context.queue.id.starts_with[excommand]||false>:
         - announce to_console "<context.queue.id||false> not pursuing error handler."
-        - determine cancelled:false
+        - stop
+
+      - determine passively cancelled
 
     # % ██ [ verify connection             ] ██
       - define timeout <util.time_now.add[1m]>
@@ -19,17 +19,16 @@ error_handler:
         - stop
 
     # % ██ [ track errors                  ] ██
-      - define data <map>
       - if <context.script||invalid> != invalid:
         - if <yaml[error_handler].contains[<context.script.name>]>:
-          - define rate_limit <util.time_now.duration_since[<yaml[error_handler].read[<context.script.name>]>].in_seconds>
-        - yaml id:error_handler set <context.script.name>:->:<util.time_now.epoch_millis>
+          - define rate_limit <util.time_now.duration_since[<yaml[error_handler].read[<context.script.name>].highest[epoch_millis]>].in_seconds>
+        - yaml id:error_handler set <context.script.name>:->:<util.time_now>
         - if <[rate_limit]||invalid> != invalid && <[rate_limit]> < 5:
           - stop
         - define error_count <yaml[error_handler].read[<context.script.name>].size>
 
     # % ██ [ cache the information needed  ] ██
-      - define data <[data].with[server].as[<bungee.server>]>
+      - define data <map.with[server].as[<bungee.server>]>
       - if <context.queue.player||invalid> != invalid:
         - define player_map <map.with[name].as[<queue.player.name>].with[uuid].as[<queue.player.uuid>]>
         - define data <[data].with[player].as[<[player_map]>]>
