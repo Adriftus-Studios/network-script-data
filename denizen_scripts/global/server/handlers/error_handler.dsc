@@ -1,6 +1,6 @@
 error_handler:
   type: world
-  debug: true
+  debug: false
   events:
     on server start:
       - yaml id:error_handler create

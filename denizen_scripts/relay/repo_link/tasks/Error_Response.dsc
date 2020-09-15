@@ -11,7 +11,7 @@ Error_Response_Webhook:
             - stop
 
     # % ██ [ Organize Definitions      ] ██
-        - define channel_id <script.data_key[Channel_Map.<[Data].get[Server]>]>=
+        - define channel_id <script.data_key[Channel_Map.<[Data].get[Server]>]>
         - inject get_webhooks
         - define Server <[Data].get[Server]>
         - define Group <script.data_key[AGDev]>
