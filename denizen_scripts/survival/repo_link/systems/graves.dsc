@@ -101,6 +101,8 @@ graves_handler:
         - stop
       - if <context.drops.is_empty>:
         - stop
+      - if <player.location.y> <= 0:
+        - stop
       - define items <context.drops>
       - determine passively NO_DROPS
       - define location <player.location>

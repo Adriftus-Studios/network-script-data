@@ -15,8 +15,8 @@ survival_rtp:
     - narrate "<&a>You have 1 minute of no fall damage."
     - teleport <location[<[x]>,300,<[z]>,<[world]>]>
     - flag player no_fall:true duration:1m
-    - if !<yaml[global.player.<player.uuid>].contains[titles.unlocked.explorer]>:
-  #^- if !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[Explorer]||false>:
+  #^  - if !<yaml[global.player.<player.uuid>].contains[titles.unlocked.explorer]>:
+    - if !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[Explorer]||false>:
       - define id First_RTP
       - inject Achievement_give
     - wait 1m

@@ -1149,6 +1149,13 @@ claiming_protection_events:
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.kill-animals]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
       - narrate "<&c>You do not have permission to kill animals here."
       - determine cancelled
+    on player right clicks cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
+    - define group <yaml[claims].read[<context.entity.location.chunk.world>.<context.entity.location.chunk.x>.<context.entity.location.chunk.z>]||null>
+    - if <[group]> == null:
+      - stop
+    - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.kill-animals]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
+      - narrate "<&c>You do not have permission to interact with animals here."
+      - determine cancelled
     on player places block:
     - define group <yaml[claims].read[<context.location.chunk.world>.<context.location.chunk.x>.<context.location.chunk.z>]||null>
     - if <[group]> == null:
@@ -1203,6 +1210,9 @@ claiming_protection_events:
       - stop
     - if <[group2]> != null:
       - determine cancelled
+    on entity changes block:
+      - if <yaml[claims].contains[<context.location.world>.<context.location.chunk.x>.<context.location.chunk.z>]> && <context.entity.entity_type> == SILVERFISH:
+        - determine cancelled
     on block spreads:
     - if <context.location.chunk> == <context.source_location.chunk>:
       - stop

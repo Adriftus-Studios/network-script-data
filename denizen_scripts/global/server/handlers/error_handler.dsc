@@ -6,16 +6,17 @@ error_handler:
       - yaml id:error_handler create
     on script generates error:
       - determine passively cancelled
+
+    # % ██ [ disable /ex error handling     ] ██
+      - if <context.queue.id.starts_with[excommand]||false>:
+        - announce to_console "<context.queue.id||false> not pursuing error handler."
+        - determine cancelled:false
+
     # % ██ [ verify connection             ] ██
       - define timeout <util.time_now.add[1m]>
       - waituntil <bungee.connected> || <[timeout].duration_since[<util.time_now>]> != 0
       - if !<bungee.connected> || <context.queue.id||invalid> == invalid || !<list[hub1|behrcraft|survival|relay|xeane].contains[<bungee.server>]>:
         - stop
-
-    # % ██ [ disable /ex error handling     ] ██
-      - if <context.queue.id.starts_with[excommand]||false>:
-        - announce to_console "<context.queue.id||false> not pursuing error handler."
-        - determine <&4><context.message>
 
     # % ██ [ track errors                  ] ██
       - define data <map>
