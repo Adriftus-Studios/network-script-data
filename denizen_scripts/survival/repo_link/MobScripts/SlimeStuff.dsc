@@ -39,7 +39,7 @@ slime_damage_handler:
         - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:<[item]> offset:0.2 quantity:15
         - playsound <context.location> sound:ENTITY_ITEM_BREAK
         - take slot:<[slot]>
-        - ex narrate "Your armor has melted from the acid!"
+        - narrate "Your armor has melted from the acid!"
     # % Item Durability Damage
       - else:
         - inventory adjust slot:<[slot]> durability:<[Durrbillty]>
@@ -51,6 +51,6 @@ slime_puddle_creator:
   debug: false
   script:
   - if <context.entity.is_mythicmob> && <context.entity.mythicmob.internal_name> == slime1:
-    - define Puddlesize <context.entity.size.div[2]>
+    - define Puddlesize <context.entity.size.div[2].add[1]>
     - define Puddle_Location <context.entity.location.find.surface_blocks.within[<[Puddlesize]>].filter[material.is_solid]>
     - showfake slime_block <[Puddle_Location]> d:10 players:<context.entity.location.find.players.within[20]>
