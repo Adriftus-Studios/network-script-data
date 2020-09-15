@@ -50,6 +50,13 @@ item_system_global_data:
       3: <&5>
       4: <&6>
       5: <&4>
+    rarity_colors_named:
+      0: Gray
+      1: Lime
+      2: Blue
+      3: Purple
+      4: Yellow
+      5: Red
   soul_names:
     ####### COMMON #######
     ######## buff ########
@@ -331,7 +338,7 @@ soul_forge_command:
 soul:
   type: item
   debug: false
-  material: clay_ball
+  material: firework_star
   display_name: <&c>ERROR - REPORT THIS
   mechanisms:
     enchantments: luck,1
@@ -365,7 +372,7 @@ get_random_soul:
       - define NBT <[NBT].include_single[debuffs/<[debuffs]>]>
     - define flavor "<&d>Soul Item<&nl><&e>Combine with Armor or Weapons"
     - define NBT <[NBT].include_single[flavor/<[flavor]>]>
-    - define item <item[soul].with[nbt=<[NBT]>]>
+    - define item <item[soul].with[nbt=<[NBT]>;color=<script[item_system_global_data].data_key[settings.rarity_colors_named.<[rarity]>]>]>
     - determine <proc[item_system_build_item].context[<list_single[<[item]>]>]>
 
 item_with_soul_create:
@@ -375,15 +382,15 @@ item_with_soul_create:
   script:
     - if <[item1].material.name> == air || <[item2].material.name> == air:
       - determine gray_stained_glass_pane
-    - if !<list[<[item1]>].include[<[item2]>].filter[material.name.is[==].to[<script[soul].data_key[material]>]].first.has_nbt[soul]>:
+    - if <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].is_empty>:
       - determine gray_stained_glass_pane
     - define soul_item <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].first>
     - define contexts <list.include[<list[<[item1]>|<[item2]>].filter[has_nbt[soul].not].first.material.name>]>
     - define contexts <[contexts].include[<[soul_item].nbt[soul].get[type]>]>
     - define contexts <[contexts].include[<[soul_item].nbt[soul].get[level]>]>
     - define contexts <[contexts].include[<[soul_item].nbt[rarity]>]>
-    - define contexts <[context].include[<list_single[<list[<[item1]>|<[item2]>].parse_tag[<[parse_value].enchantments.with_levels>].combined.deduplicate>]>]>
-    - determine <proc[item_create_soul_item].context[<[Contexts]>]>
+    - define contexts <[contexts].include[<list_single[<list[<[item1]>|<[item2]>].parse_tag[<[parse_value].enchantments.with_levels>].combined.deduplicate>]>]>
+    - determine <proc[item_create_soul_item].context[<[contexts]>]>
 
 item_create_soul_item:
   type: procedure
