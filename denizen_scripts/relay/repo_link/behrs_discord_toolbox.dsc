@@ -2,7 +2,7 @@ behrs_discord_toolbox:
   type: world
   debug: false
   events:
-    on discord reaction added:
+    on discord reaction added for:adriftusbot:
       - if <context.emoji.name> != settings:
         - stop
       

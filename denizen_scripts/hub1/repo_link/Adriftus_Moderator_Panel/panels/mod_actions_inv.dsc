@@ -2,7 +2,7 @@
 mod_actions_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f>· <&5>Actions on <&d><player.flag[amp_map].as_map.get[uuid].as_player.name>.
+  title: <&6>A<&e>MP <&f>· <&5>Actions
   inventory: CHEST
   size: 27
   definitions:
@@ -45,9 +45,10 @@ mod_actions_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_actions_inv]>
+    - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&5>Actions on <&d><player.flag[amp_map].as_map.get[uuid].as_player.name>."
     - define muteItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.has_flag[muted]>].pass[<item[mod_unmute_item]>].fail[<item[mod_mute_item]>]>
-    - define sendItem <item[mod_send_item]>
-    - define kickItem <tern[<player.has_permission[mod.moderator]>].pass[<item[mod_kick_item]>].fail[<item[air]>]>
+    - define sendItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>].pass[<item[mod_send_item]>].fail[<item[air]>]>
+    - define kickItem <tern[<player.has_permission[mod.moderator].and[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>]>].pass[<item[mod_kick_item]>].fail[<item[air]>]>
     - define banItem <tern[<player.has_permission[mod.moderator]>].pass[<item[mod_ban_item]>].fail[<item[air]>]>
     - give <[muteItem]>|<[sendItem]>|<[kickItem]>|<[banItem]> to:<[inventory]>
     - inventory open d:<[inventory]>

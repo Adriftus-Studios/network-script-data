@@ -8,8 +8,8 @@ mod_spectate_command:
   description: Moderator spectate
   usage: /spec (username)
   tab complete:
-    - define Blacklist <player||null>
-    - inject Online_Player_Tabcomplete
+    - define blacklist <player||null>
+    - inject online_player_tabcomplete
     # 1: <server.online_players.parse[name].exclude[<player.name>]>
   script:
     - if <player.has_flag[spectateEnabled]> && <context.args.is_empty>:
