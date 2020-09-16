@@ -25,7 +25,7 @@ slime_damage_handler:
           - define slot 37
           - define body_part feet
     # % Check for empty slot or invalid item
-      - if !<player.equipment_map.contains[<[equipment]>]> || !<player.equipment_map.get[<[equipment]>].ends_with[_helmet]>:
+      - if !<player.equipment_map.contains[<[equipment]>]> || !<player.equipment_map.get[<[equipment]>].material.name.ends_with[_helmet]>:
         - actionbar "<&e>Acid splashes on you, burning your <[body_part]>."
         # % Damage player without armor
         - determine <context.damager.mythicmob.level.mul[5]>
@@ -51,6 +51,7 @@ slime_puddle_creator:
   debug: false
   script:
   - if <context.entity.is_mythicmob> && <context.entity.mythicmob.internal_name> == slime1:
-    - define Puddlesize <context.entity.size.div[2].add[1]>
+    - define Puddlesize <context.entity.size.add[1].div[2]>
     - define Puddle_Location <context.entity.location.find.surface_blocks.within[<[Puddlesize]>].filter[material.is_solid]>
     - showfake slime_block <[Puddle_Location]> d:10 players:<context.entity.location.find.players.within[20]>
+    - playeffect effect:block_crack at:<context.entity.location.add[0,1,0]> quantity:<<[Puddle_Location]>.mul[5]>  offset:<<[Puddle_Location]>.div[4]> special_data:SLIME_BLOCK
