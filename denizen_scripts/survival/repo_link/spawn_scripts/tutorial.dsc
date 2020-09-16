@@ -172,11 +172,11 @@ tutorial_data:
 tutorial_spawn_finale:
   type: task
   script:
+    - fakespawn ender_dragon <location[tutorial_dragon]> duration:10m
     - repeat 20:
       - wait 1t
       - playeffect redstone at:<location[tutorial_dragon]> special_data:1|black quantity:<[value].mul[2]> offset:<[value].mul[0.2]>
       - playeffect dragon_breath at:<location[tutorial_dragon]> data:0.5 quantity:10 offset:0
-      - fakespawn ender_dragon <location[tutorial_dragon]> duration:10m
 
 
 ###############
