@@ -6,7 +6,10 @@ mod_ban_player:
   script:
     # -- Check if player is online, set YAML ID to edit accordingly.
     - if <[uuid].as_player.is_online>:
-      - define id <tern[<element[<[global]||null>].is[!=].to[null]>].pass[global.].fail[]>player.<[uuid]>
+      - if <[global]||null> != null:
+        - define id global.player.<[uuid]>
+      - else:
+        - define id player.<[uuid]>
       - yaml id:<[id]> set banned.level:<[level]>
       - yaml id:<[id]> set banned.infraction:<[infraction]>
       - yaml id:<[id]> set banned.length:<[length]>
@@ -46,4 +49,4 @@ mod_ban_check:
         - yaml id:<[id]> set banned:!
       # Else, kick 'em.
       - else:
-        - kick <player> reason:<proc[mod_kick_message].context[<yaml[<[id]>.read[banned.moderator]>|<yaml[<[id]>].read[banned.level]>|<yaml[<[id]>].read[banned.infraction]>|<yaml[<[id]>].read[banned.length]>|<yaml[<[id]>].read[banned.date]>]>
+        - kick <player> reason:<proc[mod_kick_message].context[<yaml[<[id]>].read[banned.moderator]>|<yaml[<[id]>].read[banned.level]>|<yaml[<[id]>].read[banned.infraction]>|<yaml[<[id]>].read[banned.length]>|<yaml[<[id]>].read[banned.date]>]>
