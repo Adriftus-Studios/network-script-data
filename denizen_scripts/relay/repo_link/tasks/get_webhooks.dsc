@@ -3,7 +3,7 @@ get_webhooks:
     debug: false
     definitions: channel_id
     script:
-        - if <[channel]||invalid> != invalid && <[channel_id]||invalid> != invalid:
+        - if <[channel]||invalid> != invalid && <[channel_id]||invalid> == invalid:
             - if <[channel].type> == discordchannel:
                 - define channel_id <[channel].id>
             - else:
