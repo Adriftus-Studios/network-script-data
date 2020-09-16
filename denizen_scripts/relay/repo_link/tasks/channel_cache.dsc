@@ -8,12 +8,19 @@ channel_cache:
 
             - foreach <[channels]> as:channel:
                 - define channel_id <[channel].id>
+                - define channel_type <[channel].channel_type>
 
                 - yaml id:discord_channels set <[group_name]>.<[channel_id]>.name:<[channel].name>
                 - yaml id:discord_channels set <[group_name]>.<[channel_id]>.position:<[channel].position>
-                - yaml id:discord_channels set <[group_name]>.<[channel_id]>.channel_type:<[channel].channel_type>
-                - if <[channel].channel_type> == GUILD_TEXT && <[channel].topic> != <empty>:
+                - yaml id:discord_channels set <[group_name]>.<[channel_id]>.channel_type:<[channel_type]>
+                - yaml id:discord_channels set channels.<[channel_id]>.name:<[channel].name>
+                - yaml id:discord_channels set channels.<[channel_id]>.position:<[channel].position>
+                - yaml id:discord_channels set channels.<[channel_id]>.channel_type:<[channel_type]>
+                - yaml id:discord_channels set channels.<[channel_id]>.group_id:<[group_id]>
+                - yaml id:discord_channels set channels.<[channel_id]>.group_name:<[group_name]>
+                - if <[channel_type]> == GUILD_TEXT && <[channel].topic> != <empty>:
                     - yaml id:discord_channels set <[group_name]>.<[channel_id]>.topic:<[channel].topic>
+                    - yaml id:discord_channels set channels.<[channel_id]>.topic:<[channel].topic>
 
             - if !<yaml[discord_channels].list_keys[<[group_name]>].exclude[<[channels].parse[id]>].is_empty>:
                 - foreach <yaml[discord_channels].list_keys[<[group_name]>].exclude[<[channels].parse[id]>]> as:deprecated_channel_id:
@@ -21,5 +28,6 @@ channel_cache:
                     - foreach <yaml[discord_channels].read[<[group_name]>.<[deprecated_channel_id]>]>:
                         - yaml id:discord_channels set archived.<util.time_now.epoch_millis>.<[group_name]>.<[deprecated_channel_id]>.<[key]>:<[value].escaped>
                     - yaml id:discord_channels set <[group_name]>.<[deprecated_channel_id]>:!
+                    - yaml id:discord_channels set channels.<[deprecated_channel_id]>:!
 
         - yaml id:discord_channels savefile:<yaml[network_configuration].read[configurations.discord_channels]>

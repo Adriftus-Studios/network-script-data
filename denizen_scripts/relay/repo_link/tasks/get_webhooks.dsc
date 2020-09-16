@@ -3,19 +3,29 @@ get_webhooks:
     debug: false
     definitions: channel_id
     script:
-        - define url https://discord.com/api/channels/<[channel_id]>/webhooks
-        - define headers <yaml[saved_headers].parsed_key[discord.bot_auth]>
-        - ~webget <[url]> headers:<[headers]> save:response
-        - if <entry[response].failed>:
-            - stop
-        - inject web_debug.webget_response
-        - define result <util.parse_yaml[{"data":<entry[response].result>}].get[data]>
+        - if <[channel]||invalid> != invalid:
+            - if <[channel].type> == discordchannel:
+                - define channel_id <[channel].id>
+            - else:
+                - define channel_id <[channel]>
 
-        - if <[result].is_empty>:
-            - inject get_channel
-            - inject create_webhook
+        - if <yaml[discord_channels].contains[channels.<[channel_id]>.hook]>:
+            - define hook <yaml[discord_channels].read[channels.<[channel_id]>.hook]>
         - else:
-            - define hook https://discordapp.com/api/webhooks/<[result].first.get[id]>/<[result].first.get[token]>
+            - define url https://discord.com/api/channels/<[channel_id]>/webhooks
+            - define headers <yaml[saved_headers].parsed_key[discord.bot_auth]>
+            - ~webget <[url]> headers:<[headers]> save:response
+            - if <entry[response].failed>:
+                - stop
+            - inject web_debug.webget_response
+            - define result <util.parse_yaml[{"data":<entry[response].result>}].get[data]>
+
+            - if <[result].is_empty>:
+                - inject get_channel
+                - inject create_webhook
+            - else:
+                - define hook https://discordapp.com/api/webhooks/<[result].first.get[id]>/<[result].first.get[token]>
+                - yaml id:discord_channels set channels.<[channel_id]>.hook:<[hook]>
     
     #| Response is an arrayList object needed converted from a Map object
 
