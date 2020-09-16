@@ -26,6 +26,7 @@ get_webhooks:
             - else:
                 - define hook https://discordapp.com/api/webhooks/<[result].first.get[id]>/<[result].first.get[token]>
                 - yaml id:discord_channels set channels.<[channel_id]>.hook:<[hook]>
+                - yaml id:discord_channels savefile:<yaml[network_configuration].read[configurations.discord_channels]>
     
     #| Response is an arrayList object needed converted from a Map object
 
