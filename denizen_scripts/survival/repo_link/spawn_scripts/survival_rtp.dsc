@@ -18,7 +18,7 @@ survival_rtp:
   #^  - if !<yaml[global.player.<player.uuid>].contains[titles.unlocked.explorer]>:
     - if !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[Explorer]||false>:
       - define id First_RTP
-      - inject Achievement_give
+      - inject achievement_give
     - wait 1m
     - narrate "<&c>You now take fall damage as normal."
 
