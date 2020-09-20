@@ -32,7 +32,7 @@ Teleport_Command:
                 - define User2 <[User]>
                 - define User <context.args.get[2]>
                 - inject Player_Verification_Offline
-                - flag <[User2]> Behr.Essentials.Teleport.Back:<[User2].location>
+                - flag <[User2]> behr.essentials.teleport.back:<map.with[location].as[<[User2].location>].with[world].as[<[User2].location.world.name>]>
                 - teleport <[User2]> <[User].location>
             - else:
                 - define reason "Not enough permission"
@@ -42,7 +42,7 @@ Teleport_Command:
         - if !<player.in_group[Moderation]> || <context.args.contains_any[-r|-req|-request]>:
             - inject Locally Teleport_Prompt
         - else:
-            - flag player Behr.Essentials.Teleport.Back:<player.location>
+            - flag player behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.location.world.name>]>
             - teleport <player> <[User].location>
     Teleport_Prompt:
         - if <[User].has_flag[Behr.Essentials.Teleport.Requests]>:

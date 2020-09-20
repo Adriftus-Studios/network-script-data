@@ -59,7 +59,7 @@ World_Command:
     script:
     # % ██ [  Check Args ] ██
         - if <context.args.is_empty>:
-            - flag player Behr.Essentials.Teleport.Back:<player.location>
+            - flag player behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.location.world.name>]>
             - teleport <player> <world[world].spawn_location>
             - stop
 
@@ -96,7 +96,7 @@ World_Command:
                 - stop
 
             # % ██ [  Teleport player to the world ] ██
-            - flag <Player> Behr.Essentials.teleport.back:<player.location>
+            - flag <Player> behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.location.world.name>]>
             - teleport <player> <world[<[World]>].spawn_location>
             - narrate "<proc[Colorize].context[You were teleported to world:|green]> <[World]>"
             - stop
@@ -227,7 +227,7 @@ World_Command:
                     - stop
 
                 # % ██ [  Teleport player to the world ] ██
-                - flag <[User]> Behr.Essentials.teleport.back:<player.location>
+                - flag <[User]> behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.location.world.name>]>
                 - teleport <[User]> <world[<[World]>].spawn_location>
                 - narrate targets:<[User]> "<proc[Colorize].context[You were teleported to world:|green]> <[World]>"
                 - if <[User]> != <player>:

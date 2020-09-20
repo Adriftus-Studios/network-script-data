@@ -98,7 +98,7 @@ Home_Command:
             - stop
 
     # % ██ [ Teleport to Home ] ██
-        - flag <player> Behr.Essentials.Teleport.Back:<player.location>
+        - flag <player> behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.location.world.name>]>
         - if !<[Location].chunk.is_loaded>:
             - chunkload <[Location].chunk> duration:20s
         - teleport <player> <[Location]>

@@ -15,6 +15,6 @@ Top_Command:
             - narrate "<proc[Colorize].context[Nothing Interesting Happens.|yellow]>"
             - stop
         - else:
-            - flag player Behr.Essentials.teleport.back:<player.location>
+            - flag player behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.location.world.name>]>
             - narrate "<proc[Colorize].context[Taking you to the top.|green]>"
             - teleport <player> <player.location.highest.add[0,2,0]>
