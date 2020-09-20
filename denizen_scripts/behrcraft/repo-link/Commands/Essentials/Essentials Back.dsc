@@ -4,23 +4,24 @@ Back_Command:
     debug: false
     description: Returns you back to your last location.
     usage: /back
-    permission: Behr.Essentials.Back
+    permission: behr.essentials.back
     script:
     # % ██ [ Check Args ] ██
         - if !<context.args.is_empty>:
             - inject Command_Syntax
 
     # % ██ [ check if they have a back location ] ██
-        - if !<player.has_flag[Behr.Essentials.Teleport.Back]>:
+        - if !<player.has_flag[behr.essentials.teleport.back]>:
             - narrate format:Colorize_Red "No back location to return to"
             - stop
 
     # % ██ [  Teleport Player ] ██
-        - define BackLoc <player.flag[Behr.Essentials.Teleport.Back].as_location>
+        - define back_location <player.flag[behr.essentials.teleport.back].as_location>
+        - if !<[back_location].chunk.is_loaded>:
+            - chunkload <[back_location].chunk>
         - narrate format:Colorize_Green "Returning to last location"
-        - flag <player> Behr.Essentials.Teleport.Back:<player.location>
-        - chunkload <[BackLoc].chunk>
-        - if <[BackLoc].below.points_between[<[BackLoc].highest.above>].filter[material.is_solid.not].is_empty>:
-            - teleport <player> <[BackLoc]>
+        - flag <player> behr.essentials.teleport.back:<player.location>
+        - if <[back_location].below.points_between[<[back_location].highest.above>].filter[material.is_solid.not].is_empty>:
+            - teleport <player> <[back_location]>
         - else:
-            - teleport <player> <[BackLoc].below.points_between[<[BackLoc].highest.above>].filter[material.is_solid.not].first>
+            - teleport <player> <[back_location].below.points_between[<[back_location].highest.above>].filter[material.is_solid.not].first>

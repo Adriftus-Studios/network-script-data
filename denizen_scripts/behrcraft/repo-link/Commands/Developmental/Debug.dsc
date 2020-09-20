@@ -3,10 +3,10 @@ player_enters_area_error_handler:
     debug: false
     events:
         on script generates error:
-            - if <context.script.name> == debug_wrapper:
+            - if <context.script.name||invalid> == debug_wrapper:
                 - determine cancelled
         on server generates exception:
-            - if <context.script.name> == debug_wrapper:
+            - if <context.script.name||invalid> == debug_wrapper:
                 - determine cancelled
 debug_wrapper:
     type: task
