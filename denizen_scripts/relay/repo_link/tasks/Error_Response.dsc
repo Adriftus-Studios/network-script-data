@@ -1,9 +1,6 @@
 Error_Response_Webhook:
     type: task
     debug: false
-    Headers:
-        User-Agent: Adriftus
-        Content-Type: application/json
     definitions: Data
     script:
     # $ ██ [ Verify Server             ] ██
@@ -12,24 +9,16 @@ Error_Response_Webhook:
 
     # % ██ [ Organize Definitions      ] ██
         - define channel_id <script.data_key[Channel_Map.<[Data].get[Server]>]>
-        - inject get_webhooks
         - define Server <[Data].get[Server]>
-        - define Group <script.data_key[AGDev]>
-        - define Headers <script.data_key[Headers]>
         - define UUID <util.random.duuid.after[_]>
         - define File_Location ../../web/webget/
         - define Message <[Data].get[Message]>
         - define Body_text "<list.include_single[<&gt> **Error Message**<&co><&nl><&nl>`<[Message]>`<&nl><&nl>]>"
+        - define embed <discordembed>
 
     # % ██ [ Generate Log              ] ██
         - log <[Message]> type:none file:<[File_Location]><[UUID]>.txt
         - define Log_URL http://147.135.7.85:25580/webget?name=<[UUID]>.txt
-
-    # % ██ [ Organize Fields           ] ██
-        - define Embed_Maps <map>
-        - define Field_List <list>
-        - define DUUID <util.random.duuid>
-        - yaml id:<[DUUID]> create
 
     # % ██ [ Verify Script Fields      ] ██
         - if <[Data].keys.contains[Script]>:
@@ -42,26 +31,26 @@ Error_Response_Webhook:
             - else:
                 - define File_Link https://github.com/Adriftus-Studios/network-script-data/blob/master/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
                 - define File_Directory <[Server]>/./<[Script_File_Location].after[/plugins/Denizen/scripts/]>
-            - define Field_List <[Field_List].include_single[<map.with[name].as[Script<&co>].with[value].as[`<[Script_Name]>`].with[inline].as[true]>]>
-            - define Field_List <[Field_List].include_single[<map.with[name].as[Line<&co>].with[value].as[`#<[Script_Line]>`].with[inline].as[true]>]>
-            - define Field_List <[Field_List].include_single[<map.with[name].as[File<&co>].with[value].as[<&lb>`<&lb><[File_Directory]><&rb>`<&rb>(<[File_Link]>)].with[inline].as[true]>]>
-            - define Footer "<map.with[text].as[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>"
-            - define Embed_Maps <[Embed_Maps].include[<map.with[footer].as[<[Footer]>]>]>
+            - define embed <[embed].inline_fields[<map.with[Script<&co>].as[`<[Script_Name]>`]>]>
+            - define embed <[embed].inline_fields[<map.with[Line<&co>].as[`#<[Script_Line]>`]>]>
+            - define embed <[embed].inline_fields[<map.with[File<&co>].as[<&lb>`<&lb><[File_Directory]><&rb>`<&rb>(<[File_Link]>)]>]>
+            - define embed "<[embed].footer_text[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>"
             
             - define Title_Text "<&lb>BORKED<&rb><[Script_Name]> error on <[Server].to_titlecase>"
             - define Body_Text "<[Body_Text].include_single[<&gt> **Script Information**<&co><&nl><&nl>Script Name<&co>  `<[Script_Name]>`<&nl><&nl>Script Reference<&co>  <&lb>`<[File_Directory]>`<&rb>(<[File_Link]>)<&nl><&nl>Script Line<&co> <[Script_Line]><&nl><&nl>]>"
         - else:
             - define Title_Text "<&lb>BORKED<&rb> Error on <[Server].to_titlecase>"
-            - define Field_List "<[Field_List].include_single[<map.with[name].as[Note:].with[value].as[`Different Queue Callback`].with[inline].as[true]>]>"
+            - define embed "<[embed].inline_fields[<map.with[Note<&co>].as[`Different Queue Callback`]>]>"
 
     # % ██ [ Verify Player Fields      ] ██
         - if <[Data].keys.contains[Player]>:
             - define Player_Name <[Data].get[Player].get[Name]>
             - define Player_UUID <[Data].get[Player].get[UUID]>
-            - define Field_List "<[Field_List].include_single[<map.with[name].as[Player Name:].with[value].as[`<[Player_Name]>`].with[inline].as[true]>]>"
-            - define Field_List "<[Field_List].include_single[<map.with[name].as[Player UUID:].with[value].as[`<[Player_UUID]>`].with[inline].as[true]>]>"
-            - foreach <script.parsed_key[Player_Input]>:
-                - define Embed_Maps <[Embed_Maps].with[<[Key]>].as[<[Value]>]>
+            - define embed "<[embed].inline_fields[<map.with[Player Name<&co>].as[`<[Player_Name]>`]>]>"
+            - define embed "<[embed].inline_fields[<map.with[Player UUID<&co>].as[`<[Player_UUID]>`]>]>"
+            - define embed "<[embed].author_name[Player Attached<&co> <[Player_Name]>]>"
+            - define embed "<[embed].thumbnail_url[https://minotar.net/avatar/<[Player_Name]>/32.png]>"
+
             - define Body_Text "<[Body_Text].include_single[<&gt> **Player Attached**<&co><&nl><&nl>`<[Player_Name]>` / `(<[Player_UUID]>`<&nl><&nl>]>"
 
     # % ██ [ Verify Definition Fields  ] ██
@@ -70,41 +59,22 @@ Error_Response_Webhook:
             - define Definition_List <list>
             - foreach <[Definition_Map]> key:Definition as:Save:
                 - define Definition_List "<[Definition_List].include_single[- <[Definition]>: <[Save]>]>"
-            - define Field_List <[Field_List].include_single[<map.with[name].as[Definitions:].with[value].as[```yml<&nl><[Definition_List].separated_by[<&nl>]><&nl>```]>]>
+            - define embed "<[embed].fields[<map.with[Definitions<&co>].as[```yml<&nl><[Definition_List].separated_by[<&nl>]><&nl>```]>]>"
     
     # % ██ [ Create Issue Template Link ] ██
         - define Issue_URL_Base https://github.com/Adriftus-Studios/network-script-data/issues/new?labels=Borked&
         - define Body_Text "<[Body_Text].include_single[<&lt>!--- Remove any sections that don't apply or you have inadequate information for. ---<&gt><&nl><&lt>!--- Add any other context about the problem below. ---<&gt><&nl><&nl>]>"
         - define Issue_URL <[Issue_URL_Base]>title=<[Title_Text].url_encode>&body=<[Body_Text].unseparated.url_encode>
-        - define Field_List <[Field_List].include_single[<script.parsed_key[Control_Field]>]>
+        - define embed "<[embed].fields[<map.with[Create Issue].as[<&lb>`<&lb>Click to Generate Issue Template<&rb>`<&rb>(<[Issue_URL]>)for this error report.]>]>"
 
     # % ██ [ Construct Embed           ] ██
-        - foreach <script.parsed_key[Message_Context]>:
-            - define Embed_Maps <[Embed_Maps].with[<[key]>].as[<[value]>]>
+        - define embed "<[embed].title[`[Click for Log]` <[Server].to_titlecase> Error Response:]>"
+        - define embed <[embed].url[<[Log_URL]>]>
+        - define embed <[embed].description[<[Message]>]>
+        - define embed <[embed].color[5820671]>
 
-        - define Embed_Maps <[Embed_Maps].with[fields].as[<[Field_List]>]>
-        - define Map <map.include[<script.parsed_Key[Hook_Body]>].to_json>
-
-    # % ██ [ Submit Webhook            ] ██
-        - ~webget <[Hook]> data:<[Map]> headers:<[Headers]> save:response
-        - inject Web_Debug.Webget_Response
-        - yaml id:<[DUUID]> unload
-
-    Control_Field:
-        name: Create Issue
-        value: <&lb>`<&lb>Click to Generate Issue Template<&rb>`<&rb>(<[Issue_URL]>)for this error report.
-    Hook_Body:
-        embeds: <list_single[<[Embed_Maps]>]>
-        username: <[Server].to_titlecase> Server
-        avatar_url: https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png
-    Message_Context:
-        title: "`[Click for Log]` Error Response:"
-        url: <[Log_URL]>
-        description: <[Message]>
-        color: 5820671
-        username: <[Server].to_titlecase> Error Response
-        avatar_url: https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png
-    AGDev: 631199819817549825
+    # % ██ [ Submit Message            ] ██
+        - discord id:adriftusbot send_embed channel:<[channel_id]> embed:<[embed]>
     Channel_Map:
         hub1: 744711708077064203
         behrcraft: 744711666142543953
@@ -112,8 +82,3 @@ Error_Response_Webhook:
         relay: 744711732433387602
     #$  xeane: 744713622642491433
         test: 757180343244816454
-    Player_Input:
-        author:
-            name: "Player Attached<&co> <[Player_Name]>"
-        thumbnail:
-            url: https://minotar.net/avatar/<[Player_Name]>/32.png
