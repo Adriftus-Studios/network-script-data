@@ -602,6 +602,7 @@ teleport_global_handler:
 
 teleport_global_command_inject:
     type: task
+    name: teleport
     script:
     - flag player "teleport_command:<list_single[<&4>/<&c><context.alias||<context.command>> <context.raw_args>].include[<queue.script.parsed_key[Usage]>|<queue.script.data_key[aliases].first||<context.alias||<context.command>>>]>" duration:75s
     # % ██ [  Check for local flag  ] ██
