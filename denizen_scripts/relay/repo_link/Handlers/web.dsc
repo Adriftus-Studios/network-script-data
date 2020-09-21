@@ -26,6 +26,7 @@ web_handler:
     on get request:
       - announce to_console "<&c>--- get request ----------------------------------------------------------"
       - inject Web_Debug.Get_Response
+      - define query <context.query_map>
 
       - choose <context.request>:
         - case /oAuth/GitHub:
@@ -167,131 +168,41 @@ web_handler:
           #| occurs when the webhook exists already
           
 
+      # % ██ [ Discord oAuth Token Ex ] ██
         - case /oAuth/Discord:
-        # % ██ [ Cache Data                      ] ██
-          - define Query <context.query_map>
-          - if <[Query].contains[error]> && <[Query].get[error]> == access_denied:
-            - announce to_console "<&c>The resource owner or authorization server denied the request"
-            - determine passively CODE:300
-            - determine FILE:../../../../web/redirects/discord_decline.html
-          - if !<[Query].contains[code|state]>:
-            - announce to_console "<&c>State and Code are missing."
-            - determine CODE:<list[418|406].random>
+          - inject discord_oauth_token_exchange
 
-          - define code <context.query_map.get[code]>
-          - define state <context.query_map.get[state]>
-          - define uuid <[state].before[_]>
-          - define Platform Discord
-
-          - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
-        
-          - if !<yaml[discord_oauth].contains[accepted_states.<[state]>]>:
-            - announce to_console "<&c>invalid_state"
-            - determine CODE:<list[418|406].random>
-          - run discord_oauth def:<[state]>|remove
-          - determine passively FILE:../../../../web/pages/discord_linked.html
-
-        # % ██ [ Token Exchange                  ] ██
-          - define URL <yaml[oAuth].read[URL_Scopes.Discord.Token_Exchange]>
-          - define Data <list[oAuth_Parameters|Discord.Application|Discord.Token_Exchange.Parameters]>
-          - define Data <[Data].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>].merge_maps>
-          - define Data <[Data].to_list.parse_tag[<[Parse_Value].before[/]>=<[Parse_Value].after[/]>].separated_by[&]>
-
-          - ~webget <[URL]> Headers:<[Headers]> Data:<[Data]> save:response
-          - announce to_console "<&c>--- Token Exchange ----------------------------------------------------------"
-          - inject Web_Debug.Webget_Response
-          - if <entry[response].failed>:
-            - announce to_console "<&c>failure; ending queue."
-            - stop
-
-        # % ██ [ Save Access Token Response Data ] ██
-          - define access_token_response <util.parse_yaml[<entry[response].result>]>
-          - define access_token <[access_token_response].get[access_token]>
-          - define refresh_token <[access_token_response].get[refresh_token]>
-          - define expires_in <[access_token_response].get[expires_in]>
-
-        # % ██ [ Obtain User Info                ] ██
-          - define URL <yaml[oAuth].read[URL_Scopes.Discord.Identify]>
-          - define Headers <[Headers].include[<yaml[oAuth].parsed_key[Discord.Client_Credentials.Headers]>]>
-
-          - ~webget <[URL]> headers:<[Headers]> save:response
-          - announce to_console "<&c>--- Obtain User Info ----------------------------------------------------------"
-          - inject Web_Debug.Webget_Response
-          - if <entry[response].failed>:
-            - announce to_console "<&c>failure; ending queue."
-            - stop
-
-        # % ██ [ Save User Data                  ] ██
-          - define User_Data <util.parse_yaml[<entry[response].result>]>
-          - narrate "<&c>User_Data: <&2><[User_Data]>"
-          - define User_ID <[User_Data].get[id]>
-          - define avatar https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>
-
-        # % ██ [ Send to The-Network             ] ██
-          - define url http://76.119.243.194:25580
-          - define request relay/discorduser
-
-          - define query <map.with[uuid].as[<[uuid]>]>
-          - define query <[query].with[access_token].as[<[access_token]>]>
-          - define query <[query].with[refresh_token].as[<[refresh_token]>]>
-          - define query <[query].with[expires_in].as[<[expires_in]>]>
-          - define query <[query].with[id].as[<[User_Data].get[id]>]>
-          - define query <[query].with[username].as[<[User_Data].get[username]>]>
-          - define query <[query].with[avatar].as[<[avatar]>]>
-          - define query <[query].with[discriminator].as[<[User_Data].get[discriminator]>]>
-          - define query <[query].with[mfa_enabled].as[<[User_Data].get[mfa_enabled]>]>
-
-          - if <server.has_file[data/global/players/<[uuid]>.yml]>:
-            - yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
-            - define query <[query].with[minecraft].as[<yaml[global.player.<[uuid]>].read[].get_subset[Tab_Display_name|Display_Name|rank]>]>
-            - yaml id:global.player.<[uuid]> unload
-
-          - yaml id:discord_links set minecraft_uuids.<[uuid]>:<[query]>
-          - yaml id:discord_links set discord_ids.<[query].get[id]>:<[query]>
-          - yaml id:discord_links savefile:data/global/discord/discord_links.yml
-
-          - define query <[query].parse_value_tag[<[parse_key]>=<[parse_value].url_encode>].values.separated_by[&]>
-          - ~webget <[url]>/<[request]>?<[query]>
-
-        # % ██ [ Obtain User Connections         ] ██
-          - define URL <yaml[oAuth].read[URL_Scopes.Discord.Connections]>
-          - ~webget <[URL]> headers:<[Headers]> save:response
-          - announce to_console "<&c>--- Obtain User Connections ----------------------------------------------------------"
-          - inject Web_Debug.Webget_Response
-          - if <entry[response].failed>:
-            - announce to_console "<&c>failure; ending queue."
-
-          - define User_Data <util.parse_yaml[{"Data":<entry[response].result>}].get[Data]>
-
-        # % ██ [ WebGet Hosting         ] ██
+      # % ██ [ WebGet Hosting         ] ██
         - case /webget:
           - if <server.has_file[../../../../web/webget/<context.query_map.get[name]||invalid>]>:
             - determine FILE:../../../../web/webget/<context.query_map.get[name]>
           - else:
             - determine CODE:404
 
-        # % ██ [ FavIcon         ] ██
+      # % ██ [ FavIcon                ] ██
         - case /favicon.ico:
           - determine passively CODE:200
           - determine FILE:../../../../web/favicon.ico
 
-        # % ██ [ CSS Hosting         ] ██
+      # % ██ [ CSS Hosting            ] ██
         - case /css:
           - if <server.has_file[../../../../web/css/<context.query_map.get[name]||invalid>.css]>:
             - determine passively CODE:200
             - determine FILE:../../../../web/css/<context.query_map.get[name]>.css
 
-        # % ██ [ Webpages         ] ██
+      # % ██ [ Webpages               ] ██
         - case /page:
           - if <server.has_file[../../../../web/pages/<context.query_map.get[name]||invalid>.html]>:
             - determine passively CODE:200
             - determine FILE:../../../../web/pages/<context.query_map.get[name]>.html
 
-        # % ██ [ Images         ] ██
+      # % ██ [ Images                 ] ██
         - case /image:
           - if <server.has_file[../../../../web/images/<context.query_map.get[name]||invalid>]>:
             - determine passively CODE:200
             - determine FILE:../../../../web/images/<context.query_map.get[name]>
+
+      # % ██ [ Bad Get Request        ] ██
         - default:
           - determine CODE:<list[406|418].random>
 
@@ -354,30 +265,7 @@ web_handler:
             - stop
 
         - shell <[Script]> <[Request]>
-      #^- if <[Map].contains[ref|commits]>:
-      #^  - define Author_Map <[Map].get[Sender]>
-      #^  - define GitHub_User_ID <[Author_Map].get[ID]>
-      #^  - define Player_Map <yaml[movetohub].filter[get[GitHub].get[id].is[==].to[<[GitHub_User_ID]>]].first>
-      #^  - define Role <[Player_Map].get[Role]>
-  
-      #^  - define User_Name "<[Author_Map].get[login]> - <[Role]>"
-      #^  - define User_Link <[Author_Map].get[html_url]>
-      #^  - define User_Avatar <[Author_Map].get[avatar_url]>
 
-      #^  - define Body_Lines <list>
-      #^  - define Commit_Emoji <discordemoji[adriftusbot,custom,746943945929523252,icons8commitgit641,false].formatted>
-      #^  - foreach <[Map].get[commits]> as:Commit:
-      #^    - define ID <[Commit].get[id]>
-      #^    - define URL <[Commit].get[url]>
-      #^    - define Author <[Commit].get[author].get[username]>
-      #^    - define Message <[Commit].get[message].replace[`].with[']>
-      #^    - define Line "[<[Commit_Emoji]>`[<[ID].substring[1,8]>]`](<[URL]>)`[<[Author]>]` | <[Message]>"
-      #^    - define Body_Lines <[Body_Lines].include_single[<[Line]>]>
-
-        #^- define Hook <script[DDTBCTY].data_key[WebHooks.650016499502940170.hook]>
-        #^- define data
-        #^- define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-        #^- ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
       - else if <[domain]> == <script.data_key[Domains.self]>:
         - bungee <bungee.list_servers.exclude[<bungee.server>]>:
@@ -389,35 +277,3 @@ web_handler:
         - announce to_console "Attempted request from <[Domain]>"
         - determine passively "received"
         - determine passively code:200
-
-Web_Debug:
-  type: task
-  debug: false
-  script:
-    - debug debug start
-  Get_Response:
-    - announce to_console "<&3>-- <queue.script.name> - Get_Response ---------"
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>address<&6><&gt> <&b>| <&3><context.address||<&4>Invalid> <&b>| <&a>Returns the IP address of the device that sent the request."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>request<&6><&gt> <&b>| <&3><context.request||<&4>Invalid> <&b>| <&a>Returns the path that was requested."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>query<&6><&gt> <&b>| <&3><context.query||<&4>Invalid> <&b>| <&a>Returns an ElementTag of the raw query included with the request."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>query_map<&6><&gt> <&b>| <&3><context.query_map||<&4>Invalid> <&b>| <&a>Returns a map of the query."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>user_info<&6><&gt> <&b>| <&3><context.user_info||<&4>Invalid> <&b>| <&a>Returns info about the authenticated user sending the request, if any."
-    - announce to_console <&3>-----------------------------------------------
-  Post_Request:
-    - announce to_console "<&3>-- <queue.script.name> - Post_Request ---------"
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>address<&6><&gt> <&b>| <&3><context.address||<&c>Invalid> <&b>| <&a>Returns the IP address of the device that sent the request."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>request<&6><&gt> <&b>| <&3><context.request||<&c>Invalid> <&b>| <&a>Returns the path that was requested."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>query<&6><&gt> <&b>| <&3><context.query||<&c>Invalid> <&b>| <&a>Returns a ElementTag of the raw query included with the request."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>query_map<&6><&gt> <&b>| <&3><context.query_map||<&c>Invalid> <&b>| <&a>Returns a map of the query."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>user_info<&6><&gt> <&b>| <&3><context.user_info||<&c>Invalid> <&b>| <&a>Returns info about the authenticated user sending the request, if any."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>upload_name<&6><&gt> <&b>| <&3><context.upload_name||<&c>Invalid> <&b>| <&a>returns the name of the file posted."
-  #^- announce to_console "<&6><&lt><&e>context<&6>.<&e>upload_size_mb<&6><&gt> <&b>| <&3><context.upload_size_mb||<&c>Invalid> <&b>| <&a>returns the size of the upload in MegaBytes (where 1 MegaByte = 1 000 000 Bytes)."
-    - announce to_console <&3>-----------------------------------------------
-  Webget_Response:
-    - announce to_console "<&3>-- <queue.script.name> - WebGet_Response ------"
-    - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>failed<&6><&gt> <&b>| <&3><entry[response].failed||<&c>Invalid> <&b>| <&a>returns whether the webget failed. A failure occurs when the status is no..."
-    - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>result<&6><&gt> <&b>| <&3><entry[response].result||<&c>Invalid> <&b>| <&a>returns the result of the webget. This is null only if webget failed to connect to the url."
-    - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>status<&6><&gt> <&b>| <proc[http_status_codes].context[<&3><entry[response].status||<&c>Invalid>]> <&b>| <&a>returns the HTTP status code of the webget. This is null only if webget failed to connect to the url."
-    - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>time_ran<&6><&gt> <&b>| <&3><entry[response].time_ran||<&c>Invalid> <&b>| <&a>returns a DurationTag indicating how long the web connection processing took."
-    - announce to_console "<&6><&lt><&e>entry<&6>[<&e>response<&6>].<&e>result_headers<&6><&gt> <&b>| <&3><entry[response].result_headers||<&c>Invalid> <&b>| <&a>returns a MapTag of the headers returned from the webserver. Every value in the result is a list."
-    - announce to_console <&3>-----------------------------------------------
