@@ -32,8 +32,7 @@ github_updates:
     - define owner_type <[owner_data].get[type]>
     - define owner_id <[owner_data].get[id]>
     - define owner_name <[owner_data].get[login]>
-    - define channel 650016499502940170
-  #$- define channel <script.read[channel_map.organization.Adriftus-Studios.<[repository_name]>]>
+    - define channel <script.data_key[channel_map.organization.Adriftus-Studios.<[repository_name]>]>
 
   # % ██ [ Determine the listening event            ] ██
     - choose <context.headers.get[X-github-event]>:
