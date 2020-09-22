@@ -167,7 +167,7 @@ github_updates:
                 - repeat next
               - else:
                 - define new_embed <[embed].description[<[context].get[1].to[<[i]>].separated_by[<[line]>]>]>
-                - ~Discord ID:Champagne send_embed channel:756180429630865648 embed:<[new_embed]> save:msg
+                - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
                 - define context <[context].remove[<util.list_numbers_to[<[i]>]>]>
                 - define messages:++
           - if <[messages]> == 0:
