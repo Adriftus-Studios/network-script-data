@@ -10,9 +10,9 @@ dragon_wings:
   material: elytra
   display name: <&5>Dragon Wings
   lore:
-    - "<&d>Power<&co> <&a>100<&pc>"
+    - <&d>Power<&co> <&a>100<&pc>
     - <&a>
-    - "<&6>Taken from the <&d>Ender Dragon<&6>!"
+    - <&6>Taken from the <&d>Ender Dragon<&6>!
   mechanisms:
     nbt: power/1
     unbreakable: true
@@ -35,7 +35,6 @@ dragon_wings_end:
       - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
       - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>"
       - wait 10t
-
 
 dragon_wings_liftoff:
   type: task

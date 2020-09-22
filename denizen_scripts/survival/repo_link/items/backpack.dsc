@@ -145,4 +145,3 @@ Backpack_open:
     - if !<[item].nbt[backpack_contents].as_list.is_empty||true>:
       - inventory set o:<[item].nbt[backpack_contents]> d:<[inventory]>
     - inventory open d:<[inventory]>
-    
