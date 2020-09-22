@@ -29,9 +29,9 @@ github_updates:
     - define repository_name <[repository_data].get[name]>
     - define repository_full_name <[repository_data].get[full_name]>
     - define owner_data <[repository_data].get[owner]>
-    - define owner_type <[repository_data].get[type]>
-    - define owner_id <[repository_data].get[id]>
-    - define owner_name <[repository_data].get[login]>
+    - define owner_type <[owner_data].get[type]>
+    - define owner_id <[owner_data].get[id]>
+    - define owner_name <[owner_data].get[login]>
     - define channel 650016499502940170
   #$- define channel <script.read[channel_map.organization.Adriftus-Studios.<[repository_name]>]>
 
