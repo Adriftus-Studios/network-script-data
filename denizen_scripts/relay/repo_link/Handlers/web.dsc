@@ -66,7 +66,7 @@ web_handler:
         - inject github_updates
 
     # % ██ [ Self Pings               ] ██
-      - else if <[domain]> == <script.data_key[domain.self]>:
+      - else if <[domain]> == <script.data_key[domains.self]>:
         - bungee <bungee.list_servers.exclude[<bungee.server>]>:
           - reload
         - wait 1t
