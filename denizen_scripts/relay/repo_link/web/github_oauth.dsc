@@ -1,4 +1,4 @@
-discord_oauth_token_exchange:
+github_oauth_token_exchange:
   type: task
   debug: false
   definitions: query
