@@ -6,8 +6,12 @@ github_updates:
     - define embed <discordembed>
     - define emoji <&lt>:icons8commitgit641:746943945929523252<&gt>
     - define data <util.parse_yaml[{"data":<context.query>}].get[data]||invalid>
+
+  # % ██ [ Queue-stopping actions                 ] ██
     - if <[data]> == invalid:
         - stop
+    - if <[data].contains[action]> && <[data].get[action]> == member_invited:
+      - stop
 
   # % ██ [ Format the color, thumbnail of the Embed ] ██
     - define embed <[embed].color[2815384]>
