@@ -4,7 +4,6 @@ store_hub_cosmeticShop_command:
   script:
     - inventory open d:store_hub_cosmeticShop player:<server.match_player[<context.args.first>]||<player>>
 
-
 store_hub_cosmeticShop:
   type: inventory
   inventory: chest
@@ -18,10 +17,9 @@ store_hub_cosmeticShop:
       - define list:|:<item[store_hub_cosmeticShop_<[value]>]>
     - determine <[list]>
   slots:
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [] [filler] [] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [] [filler] [] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
 
 store_hub_cosmeticShop_filler:
  type: item
@@ -32,13 +30,11 @@ store_hub_cosmeticShop_filler:
  mechanisms:
    flags: HIDE_ENCHANTS|HIDE_ATTRIBUTES
 
-
 store_hub_cosmeticShop_filler_events:
   type: world
   events:
     on player clicks store_hub_cosmeticShop_filler in inventory bukkit_priority:LOWEST:
       - determine cancelled
-
 
 store_hub_cosmeticShop_titles:
   type: item
@@ -47,10 +43,10 @@ store_hub_cosmeticShop_titles:
   enchantments:
   - damage_all:1
   lore:
-  - "<&e>Buy some fancy <&6>Titles<&e> to show off."
-  - "<&e>Claim these anywhere, they go above your nameplate."
-  - "<&e>Titles are network wide, and can be accessed anywhere."
-  - "<&e>You can access your available titles with <&b>/titles"
+  - <&e>Buy some fancy <&6>Titles<&e> to show off.
+  - <&e>Claim these anywhere, they go above your nameplate.
+  - <&e>Titles are network wide, and can be accessed anywhere.
+  - <&e>You can access your available titles with <&b>/titles
   mechanisms:
     flags: HIDE_ENCHANTS|HIDE_ATTRIBUTES
 
@@ -98,11 +94,12 @@ store_hub_cosmeticShop_titles_events:
       - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<context.item.nbt[tag]>]||false>:
         - narrate "<&c>You already have unlocked this title."
         - stop
-      #- define newBal <proc[getGlobalPlayerData].context[economy.AuroraCoins.current].-[<context.item.nbt[price]>]>
+      - if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
+        - define newBal <proc[getGlobalPlayerData].context[economy.AuroraCoins.current].-[<context.item.nbt[price]>]>
       - define tagID <context.item.nbt[tag]>
       - inject title_unlock
-      ## ENABLE FOR RELEASE
-      #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<context.item.nbt[tag]>]>"
+      - if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
+        - give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<context.item.nbt[tag]>]>"
       - narrate "<&a>You have succesfully purchased the Title: <yaml[titles].read[titles.<[tagID]>.tag].parse_color><&e>."
       - inject store_hub_cosmeticShop_title_open
 
@@ -142,10 +139,10 @@ store_hub_cosmeticShop_bowTrails:
  enchantments:
  - damage_all:1
  lore:
- - "<&e>Buy some fancy <&6>Bow Trails<&e> to show off."
- - "<&e>Bow Trails are immediately redeemed upon purchase."
- - "<&6>Bow Trails <&e>are network wide, and can be accessed anywhere."
- - "<&e>You can access your available <&6>Bow Trails<&e> in the <&b>/bowtrails <&e>menu"
+ - <&e>Buy some fancy <&6>Bow Trails<&e> to show off.
+ - <&e>Bow Trails are immediately redeemed upon purchase.
+ - <&6>Bow Trails <&e>are network wide, and can be accessed anywhere.
+ - <&e>You can access your available <&6>Bow Trails<&e> in the <&b>/bowtrails <&e>menu
  mechanisms:
    flags: HIDE_ENCHANTS|HIDE_ATTRIBUTES
 
@@ -193,11 +190,12 @@ store_hub_cosmeticShop_bowtrails_events:
       - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<context.item.nbt[trail]>]||false>:
         - narrate "<&c>You already have unlocked this bow trail."
         - stop
-      #- define newBal <proc[getGlobalPlayerData].context[economy.AuroraCoins.current].-[<context.item.nbt[price]>]>
+      - if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
+        - define newBal <proc[getGlobalPlayerData].context[economy.AuroraCoins.current].-[<context.item.nbt[price]>]>
       - define bowtrail <context.item.nbt[trail]>
       - inject bowtrail_unlock
-      ## ENABLE FOR RELEASE
-      #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<context.item.nbt[tag]>]>"
+      - if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
+        - give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<context.item.nbt[tag]>]>"
       - narrate "<&a>You have succesfully purchased the bow trail: <yaml[bowtrails].read[bowtrails.<[bowtrail]>.name].parse_color><&e>."
       - inject store_hub_cosmeticShop_bowtrails_open
 

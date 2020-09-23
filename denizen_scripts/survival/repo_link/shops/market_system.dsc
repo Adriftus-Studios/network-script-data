@@ -12,7 +12,6 @@ market_command:
     - else:
       - narrate "<&c>The Market is currently closed to update it's pricing."
 
-
 #################
 ## INFORMATION ##
 #################
@@ -69,15 +68,15 @@ market_system_data:
 #    emerald:
 #      category: crafting
 #      minimum_value: 20.0
-      
+
     iron_ingot:
       category: crafting
       minimum_value: 30
-      
+
     gold_ingot:
       category: crafting
       minimum_value: 30
-      
+
     leather:
       category: crafting
       minimum_value: 10
@@ -86,7 +85,7 @@ market_system_data:
     oak_planks:
       category: building
       minimum_value: 15
-    
+
     spruce_planks:
       category: building
       minimum_value: 15
@@ -102,7 +101,7 @@ market_system_data:
     jungle_planks:
       category: building
       minimum_value: 15
-    
+
     white_wool:
       category: building
       minimum_value: 50
@@ -112,96 +111,96 @@ market_system_data:
     blaze_powder:
       category: potion_ingredients
       minimum_value: 20
-      
+
     nether_wart:
       category: potion_ingredients
       minimum_value: 20
-      
+
     glowstone_dust:
       category: potion_ingredients
       minimum_value: 20
-      
+
     fermented_spider_eye:
       category: potion_ingredients
       minimum_value: 20
-      
+
     gunpowder:
       category: potion_ingredients
       minimum_value: 20
-      
+
     dragon_breath:
       category: potion_ingredients
       minimum_value: 20
-      
+
     sugar:
       category: potion_ingredients
       minimum_value: 20
-      
+
     rabbit_foot:
       category: potion_ingredients
       minimum_value: 20
-      
+
     glistering_melon_slice:
       category: potion_ingredients
       minimum_value: 20
-      
+
     spider_eye:
       category: potion_ingredients
       minimum_value: 20
-      
+
     pufferfish:
       category: potion_ingredients
       minimum_value: 20
-      
+
     magma_cream:
       category: potion_ingredients
       minimum_value: 20
-      
+
     golden_carrot:
       category: potion_ingredients
       minimum_value: 20
-      
+
     blaze_powder:
       category: potion_ingredients
       minimum_value: 20
-      
+
     ghast_tear:
       category: potion_ingredients
       minimum_value: 20
-      
+
     scute:
       category: potion_ingredients
       minimum_value: 20
-      
+
     phantom_membrane:
       category: potion_ingredients
       minimum_value: 20
-      
+
     glass_bottle:
       category: potion_ingredients
       minimum_value: 20
-    
+
     #Commodities
     milk_bucket:
       category: commodities
       minimum_value: 10
-    
+
     paper:
       category: commodities
       minimum_value: 10
-    
+
     egg:
       category: commodities
       minimum_value: 10
-    
+
     blue_ice:
       category: commodities
       minimum_value: 10
-    
+
     cocoa_beans:
       category: commodities
       minimum_value: 10
-    
+
     wheat:
       category: commodities
       minimum_value: 10
@@ -295,7 +294,6 @@ market_system_category_GUI:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
 
-
 market_system_category_events:
   type: world
   debug: false
@@ -320,8 +318,6 @@ market_system_category_events:
         - inject market_system_categories_sell_item
       - if <context.item.has_nbt[back]>:
         - inventory open d:market_system_main_GUI
-      
-
 
 #---------------#
 # - FUNCTIONS - #
@@ -509,7 +505,6 @@ market_system_changeover:
     - inject market_system_save_async
     - run market_system_open
     - inject market_system_transfer_yaml_hourly
-    
 
 market_system_shutdown:
   type: task
@@ -531,7 +526,6 @@ market_system_shutdown:
     - narrate "<&c>The Market is updating, and will be available again within a few moments." targets:<[player_list]>
     - playsound <server.online_players> sound:ENTITY_EXPERIENCE_ORB_PICKUP volume:1.0 pitch:1.0
 
-
 market_system_save_async:
   type: task
   debug: false
@@ -548,7 +542,6 @@ market_system_transfer_yaml_hourly:
     - foreach <script[market_system_data].list_keys[items]> as:item:
       - define min_value <script[market_system_data].data_key[items.<[item]>.minimum_value]>
       - yaml id:current_market set items.<[item]>.value:<[min_value].*[<util.random.decimal[1].to[<list[1|1|1|1|1|2|2|2|2|2|3|3|3|4|4|5].random>]>].round_up>
-      
 
 market_system_open:
   type: task

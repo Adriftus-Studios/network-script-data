@@ -86,6 +86,3 @@ claiming_protection_group_upgrades_events:
           - flag player upgrade_confirmation:!
           - wait 1t
           - take <context.item>
-        
-          
-      

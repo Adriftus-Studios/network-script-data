@@ -1,7 +1,6 @@
 mushroom_home:
   type: item
   debug: false
-  debug: false
   material: red_mushroom
   display name: <&a>Miraculous Mushroom
 
@@ -9,11 +8,10 @@ mushroom_home_give:
   type: task
   debug: false
   script:
-    - give <item[mushroom_home].with[nbt=owner/<player.uuid>]>
+    - give mushroom_home[nbt=owner/<player.uuid>]
 
 miraculous_mushroom_events:
   type: world
-  debug: false
   debug: false
   events:
     on player right clicks block with:mushroom_home bukkit_priority:HIGHEST:

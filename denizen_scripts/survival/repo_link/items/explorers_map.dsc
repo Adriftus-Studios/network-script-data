@@ -25,7 +25,6 @@ explorer_map_update:
       - while <player.item_in_offhand.script.name||null> == explorers_map:
         - map <player.item_in_offhand.map> reset:<player.location>
         - wait 5t
-      
 
 explorers_map_events:
   type: world
