@@ -121,7 +121,7 @@ github_updates:
         - if <[action]> == closed && !<[pull_data].get[merged]>:
           - define description "<[emoji]>[`[Closed without merging.]`](https://github.com/bAlcoholics/<[data].get[repository].get[name]>/compare/<[pull_data].get[head].get[ref]>)"
         - else:
-          - define description "<[emoji]>[`[<proc[GCF].context[<[pull_data].get[additions]>|+]>/<proc[GCF].context[<[pull_data].get[deletions]>|-]> (<[pull_data].get[changed_files]> file changes)]`](https://github.com/bAlcoholics/<[data].get[repository].get[name]>/compare/<[pull_data].get[head].get[ref]>)<n><proc[Emoji_Bullets].context[<[title_context]>]>"
+          - define description "<[emoji]>[`[<proc[GCF].context[<[pull_data].get[additions]>|+]>/<proc[GCF].context[<[pull_data].get[deletions]>|-]> (<[pull_data].get[changed_files]> file changes)]`](https://github.com/bAlcoholics/<[data].get[repository].get[name]>/compare/<[pull_data].get[head].get[ref]>)<n><proc[Emoji_Bullets].context[<[description_context]>]>"
         - define embed <[embed].description[<[description]>]>
 
       # % ██ [ Send the message                       ] ██
