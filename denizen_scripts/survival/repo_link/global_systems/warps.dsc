@@ -137,9 +137,9 @@ warps_my_warps_GUI_open:
   - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].include[<yaml[player.<player.uuid].read[warps.has_access]>]||<list>>]> as:identifier:
     - inject build_warp_item
     - if <[identifier].before[~]> == <player.uuid>:
-      - define list:|:<[item].with[nbt=action/warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
+      - define list:->:<[item].with[nbt=action/warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
     - else:
-      - define list:|:<[item].with[nbt=action/warp]>
+      - define list:->:<[item].with[nbt=action/warp]>
   - if <[list].is_empty.not>:
     - give <[list]> to:<[inventory]>
   - inventory open d:<[inventory]>
@@ -167,7 +167,7 @@ warps_GUI_server_warps_menu:
   size: 45
   procedural items:
     - foreach <script[server_warps_yaml].list_keys[warps]> as:ID:
-      - define list:|:<item[<script[server_warps_yaml].data_key[warps.<[ID]>.material]>].with[display_name=<script[server_warps_yaml].parsed_key[warps.<[ID]>.display]>;lore=<script[server_warps_yaml].parsed_key[warps.<[ID]>.lore]>;nbt=action/warp|location/<script[server_warps_yaml].data_key[warps.<[ID]>.location]>]>
+      - define list:->:<item[<script[server_warps_yaml].data_key[warps.<[ID]>.material]>].with[display_name=<script[server_warps_yaml].parsed_key[warps.<[ID]>.display]>;lore=<script[server_warps_yaml].parsed_key[warps.<[ID]>.lore]>;nbt=action/warp|location/<script[server_warps_yaml].data_key[warps.<[ID]>.location]>]>
     - determine <[list]>
   definitions:
     back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/back]>
@@ -413,7 +413,7 @@ warp_management_GUI_populate:
       - define lore:!|:<&e>ID<&co><&sp><[ID].after[~]>
       - define lore:|:<yaml[warps].read[warps.personal.<[ID]>.lore]>
       - if <[lore].separated_by[|]||null> != null:
-        - define list:|:<[material].as_item.with[display_name=<[name]>;lore=<[lore]>|;nbt=id/<[ID]>|action/manage_warp]>
+        - define list:->:<[material].as_item.with[display_name=<[name]>;lore=<[lore]>|;nbt=id/<[ID]>|action/manage_warp]>
     - if <[list]||null> != null:
       - give <[list]> to:<[inventory]>
 
@@ -496,9 +496,9 @@ warp_management_GUI_panel_populate:
     - else:
       - define lore <&e>Access<&co><&sp><&c>False
     - define lore:!|:<&e>Click<&sp>to<&sp>toggle
-    - define list:|:<item[player_head].with[display_name=<&a>Everyone;lore=<[lore]>;skull_skin=0qt;nbt=owner/everyone|action/toggle_everyone]>
+    - define list:->:<item[player_head].with[display_name=<&a>Everyone;lore=<[lore]>;skull_skin=0qt;nbt=owner/everyone|action/toggle_everyone]>
     - foreach <yaml[warps].list_keys[warps.personal.<[identifier]>.can_use].exclude[everyone|<player.uuid>]> as:target:
-      - define list:|:<item[player_head].with[display_name=<&a><[target].as_player.name>;skull_skin=<[target].as_player.name>;nbt=owner/<[target]>]>
+      - define list:->:<item[player_head].with[display_name=<&a><[target].as_player.name>;skull_skin=<[target].as_player.name>;nbt=owner/<[target]>]>
     - give <[list]> to:<[inventory]>
 
 warp_management_GUI_panel_events:

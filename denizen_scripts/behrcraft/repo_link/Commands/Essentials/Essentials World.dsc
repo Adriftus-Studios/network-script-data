@@ -114,7 +114,7 @@ World_Command:
         - define ValidFolders "<server.list_files[../../].exclude[<script[WorldFileList].data_key[Blacklist]>]>"
         - foreach <[ValidFolders]> as:Folder:
             - if <server.list_files[../../<[Folder]>].contains[level.dat]||false>:
-                - define ValidWorlds:|:<[Folder]>
+                - define ValidWorlds:->:<[Folder]>
         - define LoadedWorlds <server.worlds.parse[name]>
         - define ValidWorlds:!|:<[ValidWorlds].exclude[<[LoadedWorlds]>]>
         - define World <context.args.get[2]>

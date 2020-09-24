@@ -222,7 +222,7 @@ market_system_main_GUI:
       - define lore <script[market_system_data].parsed_key[categories.<[category]>.lore]>
       - define material <script[market_system_data].data_key[categories.<[category]>.material]>
       - define CMD <script[market_system_data].data_key[categories.<[category]>.CMD]>
-      - define list:|:<item[<[material]>].with[custom_model_data=<[CMD]>;display_name=<[name]>;lore=<[lore]>;nbt=category/<[category]>]>
+      - define list:->:<item[<[material]>].with[custom_model_data=<[CMD]>;display_name=<[name]>;lore=<[lore]>;nbt=category/<[category]>]>
     - determine <[list]>
   slots:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]

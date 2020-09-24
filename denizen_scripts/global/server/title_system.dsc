@@ -95,7 +95,7 @@ title_inventory_open:
     - define unlocked_tags <yaml[global.player.<player.uuid>].read[titles.unlocked]||<list[Default]>>
     - foreach <[unlocked_tags]> as:tagID:
       - inject build_title_select_item
-      - define list:|:<[item]>
+      - define list:->:<[item]>
     - give <[list].get[<[page].sub[1].mul[21].add[1]>].to[<[page].sub[1].mul[21].add[21]>]> to:<[inventory]>
     - foreach <script[title_inventory].list_keys[custom.mapping]>:
       - choose <[value]>:

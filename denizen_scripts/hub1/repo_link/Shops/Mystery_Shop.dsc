@@ -17,7 +17,7 @@ store_hub_mysteryShop:
     filler: <item[store_hub_mysteryShop_filler]>
   procedural items:
     - foreach <list[boxes]>:
-      - define list:|:<item[store_hub_mysteryShop_<[value]>]>
+      - define list:->:<item[store_hub_mysteryShop_<[value]>]>
     - determine <[list]>
   slots:
   - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]

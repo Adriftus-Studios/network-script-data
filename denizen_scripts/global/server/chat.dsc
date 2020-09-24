@@ -204,20 +204,20 @@ chat_settings_open:
         - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<[channel]>]>:
           - define icon <item[green_wool]>
           - define "lore:!|:<&a>You are listening to this channel."
-          - define lore:|:<&a>-----------------------------
+          - define lore:->:<&a>-----------------------------
           - define "lore:|:<&b>Left click to stop listening."
         - else:
           - define icon <item[red_wool]>
           - define "lore:!|:<&c>You are not listening to this channel."
-          - define lore:|:<&a>-----------------------------
+          - define lore:->:<&a>-----------------------------
           - define "lore:|:<&b>Left click to start listening."
         - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <[channel]>:
           - define icon <item[yellow_wool]>
           - define lore "<[lore].insert[<&e>You are talking in this channel.].at[2]>"
         - else:
           - define "lore:|:<&b>right click to start speaking."
-        - define list:|:<[icon].with[display_name=<[name]>;lore=<[lore]>;nbt=action/<[channel]>]>
+        - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>;nbt=action/<[channel]>]>
     - repeat <[list].size.-[8].abs>:
-      - define list:|:<script[chat_settings].parsed_key[definitions.filler].with[nbt=unique/<util.random.uuid>]>
+      - define list:->:<script[chat_settings].parsed_key[definitions.filler].with[nbt=unique/<util.random.uuid>]>
     - give <[list]> to:<[inventory]>
     - inventory open d:<[inventory]>

@@ -122,7 +122,7 @@ SoundBoard:
         - define Inventory "<inventory[Generic[Size=<[InvSize]>;title=<[Page]>/<[MaxPage]> Sounds w/:<[Query]>]]>"
         - if <element[9].sub[<element[<[Sounds].Size>].mod[9]>]> != 0:
           - repeat <element[9].sub[<element[<[Sounds].Size>].mod[9]>]>:
-            - define Items:|:<item[Blank]>
+            - define Items:->:<item[Blank]>
 
         - define SoftMenu:|:<[Left].first>|<[Left].get[2]>|<[MainMenu]>|<[Favorites]>|<[StopSound]>|<[Search]>|<item[Blank]>|<[Right].first>|<[Right].get[2]>
         
@@ -150,7 +150,7 @@ SoundBoard:
           - define Inventory "<inventory[Generic[Size=<[InvSize]>;title=Favorites <[Page]>/<[MaxPage]>]]>"
           - if <element[9].sub[<element[<[Sounds].Size>].mod[9]>]> != 0:
             - repeat <element[9].sub[<element[<[Sounds].Size>].mod[9]>]>:
-              - define Items:|:Blank
+              - define Items:->:Blank
 
           - define SoftMenu:|:<[Left].first>|<[Left].get[2]>|<[MainMenu]>|Blank|<[StopSound]>|Blank|Blank|<[Right].first>|<[Right].get[2]>
           
@@ -279,7 +279,7 @@ SoundBoard:
       - define "Lore:|:<&3>Shift<&b>+<&3>Click<&b>: <&7>Script Copy|<&3>Click<&b>: <&7>Play sound"
       - define NBT:!|:Menu/SoundBoard|Action/PlaySound|Sound/<[Sound]>
       - define Item <item[Action_Item].with[material=<[Material]>;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;enchantments=silk_touch,1;flags=hide_all]>
-      - define Items:|:<[Item]>
+      - define Items:->:<[Item]>
   SearchButton:
     - define Display "<&6>S<&e>earch"
     - define "Lore:!|:<empty>|<&7>Search for Sounds"

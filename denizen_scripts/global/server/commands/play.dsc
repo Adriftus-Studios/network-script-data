@@ -97,16 +97,16 @@ command_play_inventory:
         - define lore:<&e>---------------------
         # Next is the server status
         - if <bungee.list_servers.contains[<[server]>]>:
-          - define lore:|:<&a>Server<&sp>Status<&co><&sp>Online
+          - define lore:->:<&a>Server<&sp>Status<&co><&sp>Online
         - else:
-          - define lore:|:<&c>Server<&sp>Status<&co><&sp>Offline
+          - define lore:->:<&c>Server<&sp>Status<&co><&sp>Offline
         # Then the server's description
         - define lore:|:<yaml[bungee_config].parsed_key[servers.<[server]>.description]>
         # Bottom border
-        - define lore:|:<&e>---------------------
+        - define lore:->:<&e>---------------------
         - adjust <entry[item].result> lore:<[lore]> save:item
         - adjust <entry[item].result> nbt:server/<[server]> save:item
-        - define list:|:<entry[item].result>
+        - define list:->:<entry[item].result>
     - determine <[list]>
   slots:
     - [filler] [filler] [filler] [filler] [player] [filler] [filler] [filler] [filler]

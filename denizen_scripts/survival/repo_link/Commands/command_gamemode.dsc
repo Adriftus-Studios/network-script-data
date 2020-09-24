@@ -89,4 +89,4 @@ gamemode_handle_command:
         - else:
           - adjust <[target]> gamemode:<[gamemode]>
           - narrate "<&e>You have set <&b><[target].name><&6>(<&7>OFFLINE<&6>)<&e> to <&6><[gamemode].to_titlecase> Mode<&e>."
-        - define completed:|:<[target]>
+        - define completed:->:<[target]>

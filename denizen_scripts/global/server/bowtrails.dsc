@@ -275,7 +275,7 @@ bowtrails_inventory_open:
     - define unlocked_trails <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].as_list||<list[Default]>>
     - foreach <[unlocked_trails]> as:trailID:
       - inject build_trail_select_item
-      - define list:|:<[item]>
+      - define list:->:<[item]>
     - give <[list].get[<[page].-[1].*[21].+[1]>].to[<[page].-[1].*[21].+[21]>]> to:<[inventory]>
     - foreach <script[bowtrails_inventory].list_keys[custom.mapping]>:
       - choose <[value]>:

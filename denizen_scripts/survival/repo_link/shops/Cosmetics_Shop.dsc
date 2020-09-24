@@ -14,7 +14,7 @@ store_hub_cosmeticShop:
     filler: <item[store_hub_cosmeticShop_filler]>
   procedural items:
     - foreach <list[titles|bowTrails]>:
-      - define list:|:<item[store_hub_cosmeticShop_<[value]>]>
+      - define list:->:<item[store_hub_cosmeticShop_<[value]>]>
     - determine <[list]>
   slots:
   - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
@@ -76,7 +76,7 @@ store_hub_cosmeticShop_title_open:
         - define lore <&a>Price<&co><&sp>300<&sp><&b>ⓐ
       - define item <item[name_tag]>[nbt=<list[price/300|tag/<[tag]>]>;lore=<[lore]>]
       - adjust <[item]> display_name:<yaml[titles].read[titles.<[tag]>.tag].parse_color> save:new
-      - define list:|:<entry[new].result>
+      - define list:->:<entry[new].result>
     - give <[list]> to:<[inventory]>
     - inventory open d:<[inventory]>
 
@@ -172,7 +172,7 @@ store_hub_cosmeticShop_bowtrails_open:
         - define lore <&a>Price<&co><&sp>300<&sp><&b>ⓐ
       - define item <item[<yaml[bowtrails].read[bowtrails.<[trail]>.icon]>].with[nbt=<list[price/300|trail/<[trail]>]>;lore=<[lore]>]>
       - adjust <[item]> display_name:<yaml[bowtrails].read[bowtrails.<[trail]>.name].parse_color> save:new
-      - define list:|:<entry[new].result>
+      - define list:->:<entry[new].result>
     - give <[list]> to:<[inventory]>
     - inventory open d:<[inventory]>
 

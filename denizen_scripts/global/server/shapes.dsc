@@ -222,7 +222,7 @@ test_effects_command:
       - playeffect <[particle]> at:<[points].get[<[value]>]> quantity:5 offset:0 visibility:100
       - wait 1t
   - if <context.args.get[1]> == star2:
-    - define num:5
+    - define num 5
     - define points <proc[define_star2].context[<player.location.forward[4]>|3|90|<[num]>]>
     - repeat <[points].size.div[<[num]>]>:
       - repeat <[num]>:

@@ -58,7 +58,7 @@ MagicSwordHandler:
                 - else:
                     - define PVel <player.velocity.mul[1.1]>
                 - define Vector <player.location.sub[<[TLoc]>].normalize.mul[0.5]>
-                - define BVel:<[Vector].x>,0.4,<[Vector].z>
+                - define BVel <[Vector].x>,0.4,<[Vector].z>
 
                 - playeffect <[DLoc]> offset:0 flash targets:<player.location.find.players.within[20].exclude[<player.location.find.players.within[3]>]>
                 - if <[Points].size> > 7:

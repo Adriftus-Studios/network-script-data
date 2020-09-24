@@ -172,13 +172,13 @@ testcmdr:
 
           #% Find the Center
           - if <[X].is_odd> && <[Z].is_odd>:
-            - define CenterTile:<[Center]>
+            - define CenterTile <[Center]>
           - else if <[X].is_odd> && <[Z].is_even>:
-            - define CenterTile:<[Center].sub[0,0,1]>
+            - define CenterTile <[Center].sub[0,0,1]>
           - else if <[X].is_even> && <[Z].is_even>:
-            - define CenterTile:<[Center].sub[1,0,1]>
+            - define CenterTile <[Center].sub[1,0,1]>
           - else if <[X].is_even> && <[Z].is_odd>:
-            - define CenterTile:<[Center].sub[1,0,0]>
+            - define CenterTile <[Center].sub[1,0,0]>
 
           #% Create the Grid
           - define Grid <cuboid[<[CenterTile].add[<[Size]>,0,<[Size]>]>|<[CenterTile].sub[<[Size]>,0,<[Size]>]>]>
@@ -190,9 +190,9 @@ testcmdr:
               - if <list[air|grass|fern|large_fern|tall_grass].contains[<[Tile].above[<[yOffset]>].material.name>]>:
                 - define yOffset:--
                 - if <[Value]> == 10:
-                  - define RedTiles:|:<[Tile].above[<[yOffset]>]>
+                  - define RedTiles:->:<[Tile].above[<[yOffset]>]>
                 - repeat next
-              - define RedTiles:|:<[Tile].above[<[yOffset]>].above[1]>
+              - define RedTiles:->:<[Tile].above[<[yOffset]>].above[1]>
               - repeat stop
 
           - foreach <[RedTiles]> as:Tile:
@@ -452,7 +452,7 @@ testcmdr:
             - foreach <list[red_wool|stone|iron_block]> as:BaseBlock:
               - foreach <player.we_selection.blocks.filter[material.name.is[==].to[<[BaseBlock]>]]> as:block:
                 - define wait:++
-                - define d:0
+                - define d 0
                 - repeat 3:
                   - if <list[fern|grass].contains[<[Block].below[<[d]>].material.name>]>:
                     - modifyblock <[Block].below[<[d]>]> <[BaseBlock]>
@@ -486,7 +486,7 @@ testcmdr:
         - foreach <list[red_wool|stone|iron_block|brown_wool]> as:BaseBlock:
           - foreach <player.we_selection.blocks.filter[material.name.is[==].to[<[BaseBlock]>]]> as:block:
             - define wait:++
-            - define d:0
+            - define d 0
             - repeat 3:
               - if <list[fern|grass].contains[<[Block].below[<[d]>].material.name>]>:
                 - modifyblock <[Block].below[<[d]>]> <[BaseBlock]>

@@ -319,7 +319,7 @@ claiming_multi_chunk_GUI_open:
   - define z <player.location.chunk.z>
   - define chunk <player.location.chunk>
   - define group <yaml[claims].read[<[chunk].world>.<[chunk].x>.<[chunk].z>]||null>
-  - define okay:|:1
+  - define okay:->:1
   - foreach 3|5 as:claim_size:
     - define count 0
     - define offset -<[claim_size]./[2].round_up>
@@ -328,18 +328,18 @@ claiming_multi_chunk_GUI_open:
       - repeat <[claim_size]> as:z_loop:
         - define this_z <[z].+[<[z_loop].+[<[offset]>]>]>
         - if <yaml[claims].read[<[chunk].world>.<[this_x]>.<[this_z]>]||null> != null && !<yaml[claims].read[<[chunk].world>.<[this_x]>.<[this_z]>].starts_with[<player.uuid>]||true>:
-          - define items:|:<item[red_wool].with[quantity=<[claim_size]>;display_name=<&c>Cannot<&sp>Claim<&sp><[claim_size]>x<[claim_size]>;lore=<&e>Other<&sp>claims<&sp>are<&sp>in<&sp>the<&sp>way.;nbt=order/<[claim_size]>]>
+          - define items:->:<item[red_wool].with[quantity=<[claim_size]>;display_name=<&c>Cannot<&sp>Claim<&sp><[claim_size]>x<[claim_size]>;lore=<&e>Other<&sp>claims<&sp>are<&sp>in<&sp>the<&sp>way.;nbt=order/<[claim_size]>]>
           - foreach next
         - if !<yaml[claims].read[<[chunk].world>.<[this_x]>.<[this_z]>].starts_with[<player.uuid>]||true>:
           - define count:++
         - if <yaml[claims].read[limits.current.<player.uuid>].+[<[count]>]||<[count]>> >= <yaml[claims].read[limits.max.<player.uuid>]||30>:
-          - define items:|:<item[red_wool].with[quantity=<[claim_size]>;display_name=<&c>Cannot<&sp>Claim<&sp><[claim_size]>x<[claim_size]>;lore=<&e>You<&sp>are<&sp>at<&sp>your<&sp>claim<&sp>limit.;nbt=order/<[claim_size]>]>
+          - define items:->:<item[red_wool].with[quantity=<[claim_size]>;display_name=<&c>Cannot<&sp>Claim<&sp><[claim_size]>x<[claim_size]>;lore=<&e>You<&sp>are<&sp>at<&sp>your<&sp>claim<&sp>limit.;nbt=order/<[claim_size]>]>
           - foreach next
-    - define okay:|:<[claim_size]>
-  - define items:|:<item[green_wool].with[display_name=<&a>Claim<&sp>This<&sp>Chunk;lore=<&e>Claim<&sp>the<&sp>chunk<&sp>you<&sp>are<&sp>in.;nbt=action/claim1|order/1]>
+    - define okay:->:<[claim_size]>
+  - define items:->:<item[green_wool].with[display_name=<&a>Claim<&sp>This<&sp>Chunk;lore=<&e>Claim<&sp>the<&sp>chunk<&sp>you<&sp>are<&sp>in.;nbt=action/claim1|order/1]>
   - foreach 3|5:
     - if <[okay].contains[<[value]>]>:
-      - define items:|:<item[green_wool].with[quantity=<[value]>;display_name=<&a>Claim<&sp><[value]>;lore=<&e>Claim<&sp>chunks<&sp>in<&sp>a<&sp><[value]>x<[value]><&sp>area.;nbt=action/claim<[value]>|order/<[value]>]>
+      - define items:->:<item[green_wool].with[quantity=<[value]>;display_name=<&a>Claim<&sp><[value]>;lore=<&e>Claim<&sp>chunks<&sp>in<&sp>a<&sp><[value]>x<[value]><&sp>area.;nbt=action/claim<[value]>|order/<[value]>]>
   - define inventory <inventory[claiming_multi_chunk_GUI]>
   - give <[items].sort_by_number[nbt[order]]> to:<[inventory]>
   - inventory open d:<[inventory]>
@@ -388,7 +388,7 @@ claiming_group_selection_inventory_events:
           - define lore <&c>No<&sp>Members
         - else:
           - define lore "<&c>ID: <&e><[name]>|<&b>Members<&co>|<[members].parse[as_player.name].separated_by[|]>"
-        - define list:|:<item[claiming_group_selection_icon].with[display_name=<&e><yaml[claims].read[groups.<[group]>.settings.display_name]>;lore=<[lore]>;nbt=group_name/<[name]>]>
+        - define list:->:<item[claiming_group_selection_icon].with[display_name=<&e><yaml[claims].read[groups.<[group]>.settings.display_name]>;lore=<[lore]>;nbt=group_name/<[name]>]>
       - give <[list]> to:<context.inventory>
     on player clicks item in claiming_group_selection_inventory:
     - determine passively cancelled
@@ -421,11 +421,11 @@ claiming_group_management_member_generation:
   debug: false
   definitions: group
   script:
-  - define list:|:<item[claiming_group_management_everyone_icon].with[nbt=target/everyone]>
+  - define list:->:<item[claiming_group_management_everyone_icon].with[nbt=target/everyone]>
   - foreach <yaml[claims].list_keys[groups.<[group]>.members].exclude[everyone|<player.uuid>]> as:member:
     - define name <[member].as_player.name>
     - define lore <list[<&e>Modify<&sp>permissions<&sp>for<&sp><[name]>]>
-    - define list:|:<item[player_head].with[skull_skin=<[member]>;display_name=<[name]>;lore=<[lore]>;nbt=target/<[member]>]>
+    - define list:->:<item[player_head].with[skull_skin=<[member]>;display_name=<[name]>;lore=<[lore]>;nbt=target/<[member]>]>
   - determine <[list]>
 
 # Permission Button Generation
@@ -477,11 +477,11 @@ claiming_group_management_permission_generation:
     - foreach <yaml[claims].list_keys[groups.<[groupName]>.members.everyone].alphabetical> as:permission:
       - if <[permission]> == fly && !<yaml[claims].read[groups.<[groupName]>.upgrades.fly]>:
         - foreach next
-        #- define permission_buttons:|:<item[barrier].with[display_name=<&c>Fly<&sp>not<&sp>unlocked]>
+        #- define permission_buttons:->:<item[barrier].with[display_name=<&c>Fly<&sp>not<&sp>unlocked]>
       - if <yaml[claims].read[groups.<[groupName]>.members.<[target]>.<[permission]>]||false>:
-        - define permission_buttons:|:<item[claiming_group_management_permission_icon_enabled].with[display_name=<&e><[permission].to_titlecase>;nbt=permission/<[permission]>]>
+        - define permission_buttons:->:<item[claiming_group_management_permission_icon_enabled].with[display_name=<&e><[permission].to_titlecase>;nbt=permission/<[permission]>]>
       - else:
-        - define permission_buttons:|:<item[claiming_group_management_permission_icon_disabled].with[display_name=<&e><[permission].to_titlecase>;nbt=permission/<[permission]>]>
+        - define permission_buttons:->:<item[claiming_group_management_permission_icon_disabled].with[display_name=<&e><[permission].to_titlecase>;nbt=permission/<[permission]>]>
     - define permission_buttons <[permission_buttons].pad_right[6].with[<item[white_stained_glass_pane].with[display_name=<&a>]>]>
     - foreach <script[claiming_group_management_inventory].data_key[permission_button_slots]> as:slot:
       - inventory set d:<player.open_inventory> slot:<[slot]> o:<[permission_buttons].get[<[loop_index]>]>
@@ -732,26 +732,26 @@ claiming_protection_settings_generate_settings_buttons:
   - foreach <yaml[claims].list_keys[groups.<[group]>.settings].alphabetical> as:setting:
     - define display <[setting].replace[_].with[<&sp>].replace[-].with[<&sp>].to_titlecase>
     - if !<yaml[claims].read[groups.<[group]>.upgrades.<[setting]>]>:
-      - define list:|:<item[barrier].with[display_name=<&c><[display]><&sp>Not<&sp>Unlocked.]>
+      - define list:->:<item[barrier].with[display_name=<&c><[display]><&sp>Not<&sp>Unlocked.]>
       - foreach next
     - define setting_value <yaml[claims].read[groups.<[group]>.settings.<[setting]>]>
     - if <[setting]> == display_name:
       - define "lore:<&e><[display]> is currently set to <[setting_value].to_titlecase>"
-      - define list:|:<item[claiming_group_management_<[setting]>_icon].with[lore=<[lore]>;display_name=<[display]><&co><&sp><[setting_value].to_titlecase>;nbt=setting/<[setting]>]>
+      - define list:->:<item[claiming_group_management_<[setting]>_icon].with[lore=<[lore]>;display_name=<[display]><&co><&sp><[setting_value].to_titlecase>;nbt=setting/<[setting]>]>
     - else if <[setting]> == color:
       - define "lore:<&e><[display]> is currently set to <[setting_value].to_titlecase>"
-      - define list:|:<item[<[setting_value]>_wool].with[lore=<[lore]>;display_name=<[display]><&co><&sp><[setting_value].to_titlecase>;nbt=setting/<[setting]>]>
+      - define list:->:<item[<[setting_value]>_wool].with[lore=<[lore]>;display_name=<[display]><&co><&sp><[setting_value].to_titlecase>;nbt=setting/<[setting]>]>
     - else if <list[weather-control|time-control].contains[<[setting]>]>:
       - define "lore:<&e><[display]> is currently set to <[setting_value].to_titlecase>"
       - define CMD <script[claiming_group_management_<[setting]>_icon].data_key[CMD.<[setting_value]>]>
-      - define list:|:<item[claiming_group_management_<[setting]>_icon].with[custom_model_data=<[CMD]>;lore=<[lore]>;display_name=<[display]><&co><&sp><[setting_value].to_titlecase>;nbt=setting/<[setting]>]>
+      - define list:->:<item[claiming_group_management_<[setting]>_icon].with[custom_model_data=<[CMD]>;lore=<[lore]>;display_name=<[display]><&co><&sp><[setting_value].to_titlecase>;nbt=setting/<[setting]>]>
     - else:
       - if <[setting_value]>:
         - define "lore:<&a><[display]> is currently enabled"
-        - define list:|:<item[claiming_group_management_<[setting]>_icon_enabled].with[display_name=<&a><[display]>;lore=<[lore]>;nbt=setting/<[setting]>|set_to/disabled]>
+        - define list:->:<item[claiming_group_management_<[setting]>_icon_enabled].with[display_name=<&a><[display]>;lore=<[lore]>;nbt=setting/<[setting]>|set_to/disabled]>
       - else:
         - define "lore:<&c><[display]> is currently disabled"
-        - define list:|:<item[claiming_group_management_<[setting]>_icon_disabled].with[display_name=<&c><[display]>;lore=<[lore]>;nbt=setting/<[setting]>|set_to/enabled]>
+        - define list:->:<item[claiming_group_management_<[setting]>_icon_disabled].with[display_name=<&c><[display]>;lore=<[lore]>;nbt=setting/<[setting]>|set_to/enabled]>
   - determine <[list]>
 
 claiming_protection_settings_process_click:
@@ -815,11 +815,11 @@ claiming_protection_settings_build_bottom_settings:
     - define weathers <list[off|sunny|storm|thunder]>
     - repeat 7:
       - if <list[1|2|7].contains[<[value]>]>:
-        - define list:|:<script[claiming_protection_settings].parsed_key[definitions.filler]>
+        - define list:->:<script[claiming_protection_settings].parsed_key[definitions.filler]>
       - else:
         - define CMD <script[claiming_group_management_weather-control_icon].data_key[CMD.<[weathers].get[<[value].-[2]>]>]>
         - define display:<&e>Set<&sp>To<&co><&sp><[weathers].get[<[value].-[2]>]>
-        - define list:|:<item[claiming_group_management_time-control_icon].with[custom_model_data=<[CMD]>;display_name=<[display]>;nbt=set_to/<[weathers].get[<[value].-[2]>]>]>
+        - define list:->:<item[claiming_group_management_time-control_icon].with[custom_model_data=<[CMD]>;display_name=<[display]>;nbt=set_to/<[weathers].get[<[value].-[2]>]>]>
     - foreach <script[claiming_protection_settings].data_key[setting_optional_buttons_slots]> as:slot:
       - inventory set slot:<[slot]> d:<player.open_inventory> o:<[list].get[<[loop_index]>]>
   - else:
@@ -1302,7 +1302,7 @@ claiming_system_bossBar_Start:
   - define group_color <proc[getColorCode].context[<yaml[claims].read[groups.<[group]>.settings.color]>]>
   - foreach create_fog|darken_sky as:flag:
     - if <yaml[claims].read[groups.<[group]>.settings.<[flag]>]> && <yaml[claims].read[groups.<[group]>.upgrades.<[flag]>]>:
-      - define flag_list:|:<[flag]>
+      - define flag_list:->:<[flag]>
   - if <server.current_bossbars.contains[<player.uuid>.in_claim]>:
     - bossbar remove <player.uuid>.in_claim
   # APOSTROPHE BS
