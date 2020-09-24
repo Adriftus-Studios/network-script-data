@@ -71,8 +71,8 @@ Reload_Scripts_Queue:
         - inject Embedded_Color_Formatting
         - define Title "Script Reload Pushed"
         - define Footer "<map.with[text].as[Scripts: <entry[ScriptCount].result> (No Error Response)]>"
-        - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
-        - define Data "<map[username/<[Server]> Server|avatar_url/https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
+        - define Embeds <list[<map.with[title].as[<[Title]>].with[color].as[<[Color]>].with[footer].as[<[Footer]>]>]>
+        - define Data "<map.with[username].as[<[Server]> Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
         - define Hook <[Hook]>
         - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
@@ -91,7 +91,7 @@ Reload_Scripts_Queue:
           - define Title "Script Reload Pushed (No Response)"
           - define Footer "<map.with[text].as[Scripts: <entry[ScriptCount].result> (No Error Response)]>"
         - inject Embedded_Color_Formatting
-        - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
+        - define Embeds <list[<map.with[title].as[<[Title]>].with[color].as[<[Color]>].with[footer].as[<[Footer]>]>]>
         - define Data "<map.with[username].as[<[Server].to_titlecase> Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
         - define Hook <[Hook]>
         - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
@@ -130,8 +130,8 @@ Reload_Response:
     - inject Embedded_Color_Formatting
 
     - define Footer <map.with[text].as[Scripts:<&sp><[ScriptCount]>]>
-    - define Embeds <list[<map[title/<[Title]>|color/<[Color]>|footer/<[Footer]>]>]>
-    - define Data "<map[username/<[Server]> Server|avatar_url/https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
+    - define Embeds <list[<map.with[title].as[<[Title]>].with[color].as[<[Color]>].with[footer].as[<[Footer]>]>]>
+    - define Data "<map.with[username].as[<[Server]> Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png].with[embeds].as[<[Embeds]>].to_json>"
     - define Hook <[Hook]>
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>

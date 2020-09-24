@@ -805,7 +805,7 @@ warp_everyone_add:
     - if <server.has_flag[warp_votes]>:
       - flag server warp_votes:<server.flag[warp_votes].as_map.with[<[ID]>].as[<[votes]>]>
     - else:
-      - flag server warp_votes:<map[<[ID]>/<[votes]>]>
+      - flag server warp_votes:<map.with[<[ID]>].as[<[votes]>]>
       
 
 warp_everyone_remove:

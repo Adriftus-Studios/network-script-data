@@ -38,7 +38,7 @@ Ex_DCommand:
   
     - define color Code
     - inject Embedded_Color_Formatting
-    - define Embeds "<list_single[<map[color/<[Color]>].with[description].as[Command ran: `/<[Command]>`]>]>"
+    - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[description].as[Command ran: `/<[Command]>`]>]>"
     - define Data <map.with[username].as[<[Server].to_titlecase><&sp>Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>

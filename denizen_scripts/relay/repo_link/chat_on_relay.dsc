@@ -6,9 +6,13 @@ chat_send_message:
   script:
       - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.channel]>
       - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-      - define Data <map[content/<[game_message].parse_color.strip_color>|username/<[display_name]><&sp>[<[Server]>]|avatar_url/https://minotar.net/cube/<[name]>/100.png].to_json>
+      - define Data <script.parsed_key[webhook].to_json>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+  webhook:
+    content: <[game_message].parse_color.strip_color>
+    username: <[display_name]><&sp><&lb><[Server]><&rb>
+    avatar_url: https://minotar.net/cube/<[name]>/100.png
 
 discord_watcher:
   type: world

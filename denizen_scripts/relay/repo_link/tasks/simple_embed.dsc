@@ -11,7 +11,7 @@ Simple_Discord_Embed:
 
     - define color Code
     - inject Embedded_Color_Formatting
-    - define Embeds <list[<map[color/<[Color]>].with[description].as[<[Text]>]>]>
+    - define Embeds <list[<map.with[color].as[<[Color]>].with[description].as[<[Text]>]>]>
     - define Data <map.with[username].as[<[Username]>].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
 
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>

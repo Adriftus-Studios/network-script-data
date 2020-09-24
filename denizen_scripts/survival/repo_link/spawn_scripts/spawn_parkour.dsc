@@ -19,7 +19,7 @@ Parkour_events:
         - case floor:
           - if <player.has_flag[parkour]>:
             # parkour.respawn~#
-            - define parkour_map <map[0/parkour_complete|1/parkour.respawn~1|2/parkour.respawn~2|3/parkour.respawn~3]>
+            - define parkour_map <map.with[0].as[parkour_complete].with[1].as[parkour.respawn~1].with[2].as[parkour.respawn~2].with[3].as[parkour.respawn~3]>
             - teleport <[parkour_map].get[<player.flag[parkour]>]>
         # parkour.finish
         - case finish:
