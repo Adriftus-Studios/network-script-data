@@ -1,7 +1,5 @@
 RFood_DCommand:
   type: task
-  PermissionRoles:
-    - Everyone
   definitions: Message|Channel|Author|Group
   debug: false
   icons:
@@ -15,7 +13,6 @@ RFood_DCommand:
     - https://cdn.discordapp.com/attachments/625076684558958638/746849962515759136/icons8-kawaii-milk-96.png
   script:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
-  #^- inject Role_Verification
     - inject Command_Arg_Registry
     - define UserID <[Author].ID>
     - define Headers <list[User-Agent/really|Authorization/Bot<&sp><yaml[AdriftusBot_temp].read[AdriftusBotToken]>]>
