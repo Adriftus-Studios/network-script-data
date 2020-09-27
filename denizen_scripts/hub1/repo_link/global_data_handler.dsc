@@ -127,7 +127,7 @@ player_info_map:
     type: procedure
     definitions: input
     script:
-    - if <yaml[data_handler].contains[players.<[input]>]>:
+    - if <yaml[data_handler].contains[players.names.<[input]>]>:
       - determine <yaml[data_handler].read[players.names.<[input]>].with[name].as[<[input]>]>
     - determine null
     
@@ -142,6 +142,6 @@ player_info_map_uuid:
     type: procedure
     definitions: input
     script:
-    - if <yaml[data_handler].contains[players.<[input]>]>:
+    - if <yaml[data_handler].contains[players.uuids.<[input]>]>:
       - determine <yaml[data_handler].read[players.uuids.<[input]>].with[uuid].as[<[input]>]>
     - determine null
