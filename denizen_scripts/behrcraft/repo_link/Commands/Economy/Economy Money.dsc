@@ -1,167 +1,164 @@
-Coins_Command:
+coins_command:
     type: command
     name: coins
     debug: false
-    description: Tells you how many coins you or another player has.
-    usage: /coins (Player)
-    permission: Behrry.Economy.Coins
+    description: tells you how many coins you or another player has.
+    usage: /coins (player)
+    permission: behrry.economy.coins
     aliases:
         - coin
         - money
         - bal
         - balance
     script:
-    # % ██ [  Check for args ] ██
+    # % ██ [  check for args ] ██
         - if <context.args.size> > 1:
-            - inject Command_Syntax Instantly
+            - inject command_syntax
 
         - if <context.args.size> == 0:
-            - if !<Player.has_flag[Behrry.Economy.Coins]>:
-                - flag player Behrry.Economy.Coins:1
-            - narrate "<&e>Coin Balance<&6>: <&a><player.flag[Behrry.Economy.Coins].format_number>"
+            - if !<player.has_flag[behrry.economy.coins]>:
+                - flag player behrry.economy.coins:1
+            - narrate "<&e>Coin balance<&6>: <&a><player.flag[behrry.economy.coins].format_number>"
         - else:
-            - define User <context.args.first>
-            - inject Player_Verification_Offline Instantly
+            - define user <context.args.first>
+            - inject player_verification_offline
         
-            - if !<[User].has_flag[Behrry.Economy.Coins]>:
-                - flag <[User]> Behrry.Economy.Coins:1
-            - narrate "<proc[User_Display_Simple].context[<[User]>]><&e>'s Coin Balance<&6>: <&a><[User].flag[Behrry.Economy.Coins].format_number>"
+            - if !<[user].has_flag[behrry.economy.coins]>:
+                - flag <[user]> behrry.economy.coins:1
+            - narrate "<proc[user_display_simple].context[<[user]>]><&e>'s coin balance<&6>: <&a><[user].flag[behrry.economy.coins].format_number>"
 
-Pay_Command:
+pay_command:
     type: command
     name: pay
     debug: false
-    description: Gives a player some coin.
-    usage: /pay <&lt>Player<&gt> <&lt>#<&gt>
-    permission: Behrry.Economy.Pay
+    description: gives a player some coin.
+    usage: /pay <&lt>player<&gt> <&lt>#<&gt>
+    permission: behrry.economy.pay
     aliases:
         - moneygive
         - givemoney
         - payto
     script:
         - if <context.args.size> != 2:
-            - inject Command_Syntax Instantly
+            - inject command_syntax
 
-        - define User <context.args.first>
-        - inject Player_Verification Instantly
+        - define user <context.args.first>
+        - inject player_verification
 
-        - if <[User]> == <player>:
-            - narrate format:Colorize_Red "You cannot send yourself coin."
+        - if <[user]> == <player>:
+            - narrate format:colorize_red "You cannot send yourself coin."
             - stop
 
         - if <context.args.get[2].contains[$]>:
             - if !<context.args.get[2].after[$].replace[,].is_integer>:
-                - narrate format:Colorize_Red "Coins must be a value."
+                - narrate format:colorize_red "Coins must be a value."
                 - stop
             - else:
-                - define Money <context.args.get[2].after[$].replace[,]>
+                - define money <context.args.get[2].after[$].replace[,]>
         - else if !<context.args.get[2].is_integer>:
-            - narrate format:Colorize_Red "Coins must be a value."
+            - narrate format:colorize_red "Coins must be a value."
             - stop
         - else:
-            - define Money <context.args.get[2].replace[,]>
+            - define money <context.args.get[2].replace[,]>
 
-        - if <[Money].contains[.]>:
-            - narrate format:Colorize_Red "Coins cannot be decimals."
+        - if <[money].contains[.]>:
+            - narrate format:colorize_red "Coins cannot be decimals."
             - stop
 
-        - if !<player.has_flag[Behrry.Economy.Coins]>:
-            - flag player Behrry.Economy.Coins:1
+        - if !<player.has_flag[behrry.economy.coins]>:
+            - flag player behrry.economy.coins:1
         
-        - if <player.flag[Behrry.Economy.Coins]> < <[Money]>:
-            - narrate format:Colorize_Red "Not enough coin."
+        - if <player.flag[behrry.economy.coins]> < <[money]>:
+            - narrate format:colorize_red "Not enough coin."
             - stop
         
         - if <[money]> == <&chr[221e]>:
-            - narrate format:Colorize_Red "You don't have that much coin!? The maximum is 2,147,483,647!"
+            - narrate format:colorize_red "You don't have that much coin!? the maximum is 2,147,483,647!"
         
-        - if <[Money]> < 1:
-            - narrate format:Colorize_Red "Must enter a valid number."
+        - if <[money]> < 1:
+            - narrate format:colorize_red "Must enter a valid number."
             - stop
 
-        - if <[Money]> == 1:
-            - define Format "coin"
+        - if <[money]> == 1:
+            - define format "coin"
         - else:
-            - define Format "coins"
+            - define format "coins"
 
-        - narrate "<&a>You sent <proc[User_Display_Simple].context[<[User]>]> <&e><[Money].format_number.replace[,].with[<&6>,<&e>]> <&a><[Format]>!"
-        - if <[User].is_online>:
-            - narrate targets:<[User]> "<proc[User_Display_Simple].context[<player>]> <&e>sent you <&e><[Money].format_number.replace[,].with[<&6>,<&e>]> <&a><[Format]>!"
+        - narrate "<&a>You sent <proc[user_display_simple].context[<[user]>]> <&e><[money].format_number.replace[,].with[<&6>,<&e>]> <&a><[format]>!"
+        - if <[user].is_online>:
+            - narrate targets:<[user]> "<proc[user_display_simple].context[<player>]> <&e>sent you <&e><[money].format_number.replace[,].with[<&6>,<&e>]> <&a><[format]>!"
         
 
 
-        - flag player Behrry.Economy.Coins:-:<[Money]>
-        - flag <[User]> Behrry.Economy.Coins:+:<[Money]>
+        - flag player behrry.economy.coins:-:<[money]>
+        - flag <[user]> behrry.economy.coins:+:<[money]>
 
 
-CoinTop_Command:
+cointop_command:
     type: command
     name: cointop
     debug: false
-    description: Shows you the players with the most coins.
+    description: shows you the players with the most coins.
     usage: /cointop (#)
-    permission: Behrry.Economy.CoinTop
+    permission: behrry.economy.cointop
     aliases:
         - baltop
         - balancetop
         - moneytop
         - coinstop
     script:
-        - define Players <server.players_flagged[Behrry.Economy.Coins]>
-        - define PlayersOrdered <[Players].sort_by_number[flag[Behrry.Economy.Coins]].reverse>
-        - define PrintCount 8
-        - define TotalPages <[PlayersOrdered].size.div[<[PrintCount]>].round_up>
+        - define players <server.players_flagged[behrry.economy.coins]>
+        - define players_ordered <[players].sort_by_number[flag[behrry.economy.coins]].reverse>
+        - define print_count 8
+        - define total_pages <[players_ordered].size.div[<[print_count]>].round_up>
 
         - if <context.args.size> == 0:
-            - define Page 1
+            - define page 1
         - else if <context.args.first.is_integer>:
             - if <context.args.first> < 0:
-                - narrate format:Colorize_Red "Page must be a valid number."
+                - narrate format:colorize_red "Page must be a valid number."
                 - stop
             - else if <context.args.first.contains[.]>:
-                - narrate format:Colorize_Red "Page cannot be a decimal."
+                - narrate format:colorize_red "Page cannot be a decimal."
                 - stop
-            - else if <context.args.first> > <[TotalPages]>:
-                - narrate format:Colorize_Red "Invalid Page."
+            - else if <context.args.first> > <[total_pages]>:
+                - narrate format:colorize_red "Invalid page."
                 - stop
-            - define Page <context.args.first>
+            - define page <context.args.first>
         - else:
-            - inject Command_Syntax Instantly
+            - inject command_syntax
 
-        - define Math1 <[PrintCount].mul[<[Page].sub[1]>].add[1]>
-        - define Math2 <[PrintCount].mul[<[Page].sub[1]>].add[<[PrintCount]>]>
-
-        - define PlayerGet <[PlayersOrdered].get[<[Math1]>].to[<[Math2]>]>
+        - define player_get <[players_ordered].sub_lists[<[print_count]>].get[<[page]>]>
         - narrate "<&2><&m>+<&a><&m>---------------<&2>[<&e> Highest Value Players <&2>]<&a><&m>--------------<&2><&m>+"
-        - foreach <[PlayerGet]> as:Player:
-            - narrate "<&6>[<&e><[Math1].add[<[Loop_Index]>].sub[1]><&6>]<&r> <proc[User_Display_Simple].context[<[Player]>]> <&b>| <&a><[Player].flag[Behrry.Economy.Coins].format_number> coins"
+        - foreach <[player_get]> as:player:
+            - narrate "<&6>[<&e><[print_count].mul[<[page]>].add[<[loop_index]>]><&6>]<&r> <proc[user_display_simple].context[<[player]>]> <&b>| <&a><[player].flag[behrry.economy.coins].format_number> coins"
         
         #- backward  <&chr[25c0]>
         #- forward <&chr[25b6]>
-        - if <[Page]> == 1:
-            - define Previous "<&2>[<&8><&chr[25c0]><&2>]"
+        - if <[page]> == 1:
+            - define previous <&2>[<&8><&chr[25c0]><&2>]
 
-            - define Hover "<proc[Colorize].context[Click for Page:|green]><&nl><&6>[<&e>-<&chr[25b6]><&6>] <proc[Colorize].context[(<[Page].add[1]>/<[TotalPages]>)|yellow]> <&6>[<&e>-<&chr[25b6]><&6>]"
-            - define Text "<&2>[<&e><&chr[25b6]><&2>]"
-            - define Command "cointop <[Page].add[1]>"
-            - define Next "<proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
-        - else if <[Page]> > 1 && <[Page]> < <[TotalPages]>:
-            - define Hover1 "<proc[Colorize].context[Click for Page:|green]><&nl><&6>[<&e><&chr[25c0]>-<&6>] <proc[Colorize].context[(<[Page].sub[1]>/<[TotalPages]>)|yellow]> <&6>[<&e><&chr[25c0]>-<&6>]"
-            - define Text1 "<&2>[<&e><&chr[25c0]><&2>]"
-            - define Command1 "cointop <[Page].sub[1]>"
-            - define Previous "<proc[MsgCmd].context[<[Hover1]>|<[Text1]>|<[Command1]>]>"
+            - define hover "<proc[colorize].context[click for page:|green]><&nl><&6>[<&e>-<&chr[25b6]><&6>] <proc[colorize].context[(<[page].add[1]>/<[total_pages]>)|yellow]> <&6>[<&e>-<&chr[25b6]><&6>]"
+            - define text <&2>[<&e><&chr[25b6]><&2>]
+            - define command "cointop <[page].add[1]>"
+            - define next <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
+        - else if <[page]> > 1 && <[page]> < <[total_pages]>:
+            - define hover1 "<proc[colorize].context[click for page:|green]><&nl><&6>[<&e><&chr[25c0]>-<&6>] <proc[colorize].context[(<[page].sub[1]>/<[total_pages]>)|yellow]> <&6>[<&e><&chr[25c0]>-<&6>]"
+            - define text1 <&2>[<&e><&chr[25c0]><&2>]
+            - define command1 "cointop <[page].sub[1]>"
+            - define previous <proc[msgcmd].context[<[hover1]>|<[text1]>|<[command1]>]>
 
-            - define Hover2 "<proc[Colorize].context[Click for Page:|green]><&nl><&6>[<&e>-<&chr[25b6]><&6>] <proc[Colorize].context[(<[Page].add[1]>/<[TotalPages]>)|yellow]> <&6>[<&e>-<&chr[25b6]><&6>]"
-            - define Text2 "<&2>[<&e><&chr[25b6]><&2>]"
-            - define Command2 "cointop <[Page].add[1]>"
-            - define Next "<proc[MsgCmd].context[<[Hover2]>|<[Text2]>|<[Command2]>]>"
-        - else if <[Page]> == <[TotalPages]>:
-            - define Hover "<proc[Colorize].context[Click for Page:|green]><&nl><&6>[<&e><&chr[25c0]>-<&6>] <proc[Colorize].context[(<[Page].sub[1]>/<[TotalPages]>)|yellow]> <&6>[<&e><&chr[25c0]>-<&6>]"
-            - define Text "<&2>[<&e><&chr[25c0]><&2>]"
-            - define Command "cointop <[Page].sub[1]>"
-            - define Previous "<proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
+            - define hover2 "<proc[colorize].context[click for page:|green]><&nl><&6>[<&e>-<&chr[25b6]><&6>] <proc[colorize].context[(<[page].add[1]>/<[total_pages]>)|yellow]> <&6>[<&e>-<&chr[25b6]><&6>]"
+            - define text2 <&2>[<&e><&chr[25b6]><&2>]
+            - define command2 "cointop <[page].add[1]>"
+            - define next <proc[msgcmd].context[<[hover2]>|<[text2]>|<[command2]>]>
+        - else if <[page]> == <[total_pages]>:
+            - define hover "<proc[colorize].context[click for page:|green]><&nl><&6>[<&e><&chr[25c0]>-<&6>] <proc[colorize].context[(<[page].sub[1]>/<[total_pages]>)|yellow]> <&6>[<&e><&chr[25c0]>-<&6>]"
+            - define text <&2>[<&e><&chr[25c0]><&2>]
+            - define command "cointop <[page].sub[1]>"
+            - define previous <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
 
-            - define Next "<&2>[<&8><&chr[25b6]><&2>]"
+            - define next <&2>[<&8><&chr[25b6]><&2>]
 
 
-        - narrate "<&2><&m>+<&a><&m>----------------<[Previous]><&a><&m>-<&2>[<&e>Page<&2>]<&a><&m>-<&2>[<&e><[Page]><&2>/<&e><[TotalPages]><&2>]<&a><&m>-<[Next]><&a><&m>----------------<&2><&m>+"
+        - narrate "<&2><&m>+<&a><&m>----------------<[previous]><&a><&m>-<&2>[<&e>page<&2>]<&a><&m>-<&2>[<&e><[page]><&2>/<&e><[total_pages]><&2>]<&a><&m>-<[next]><&a><&m>----------------<&2><&m>+"
