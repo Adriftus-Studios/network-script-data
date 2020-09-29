@@ -1,14 +1,13 @@
 Repository_DCommand:
-    type: task
-    definitions: Channel
-    debug: false
-    Context: Color
-    script:
-# - ██ [ Clean Definitions & Inject Dependencies ] ██
+  type: task
+  definitions: Channel
+  debug: false
+  script:
+  # - ██ [ Clean Definitions & Inject Dependencies ] ██
     - define color Code
-    - inject Embedded_Color_Formatting
-    - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define Headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
+    - inject embedded_color_formatting
+    - define hook <script[DDTBCTY].data_key[webhooks.<[channel]>.hook]>
+    - define headers <yaml[saved_headers].read[discord.webhook_message]>
 
-    - define Data <yaml[SDS_Repository].to_json>
-    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+    - define data <yaml[SDS_Repository].to_json>
+    - ~webget <[hook]> data:<[data]> headers:<[headers]>

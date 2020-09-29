@@ -11,35 +11,35 @@ Restart_DCommand:
   definitions: Message|Channel|Author|Group
   debug: true
   script:
-  # % ██ [ Clean Definitions & Inject Dependencies ] ██
-    - inject Role_Verification
-    - inject Command_Arg_Registry
+  # % ██ [ Clean Definitions & Inject dependencies ] ██
+    - inject role_verification
+    - inject command_arg_registry
     - waituntil rate:1s <bungee.connected>
 
   # % ██ [ Verify Arguments                 ] ██
-    - if <[Args].size> > <bungee.list.size.add[3]>:
+    - if <[args].size> > <bungee.list.size.add[3]>:
       - stop
 
-    - else if <[Args].is_empty>:
-      - define Args:->:Relay
+    - else if <[args].is_empty>:
+      - define args:->:relay
 
   # % ██ [ Server Argument Check ] ██
-    - if <[Args].contains_any[all|network]>:
-      - define Servers <bungee.list_servers>
+    - if <[args].contains_any[all|network]>:
+      - define servers <bungee.list_servers>
     - else:
-      - define Servers <[Args].filter[contains_any[help|cancel|stop|-l|-log|-logs|-c|-conf|-confirmation].not].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>].not>]>
-      - foreach <[Servers]> as:Server:
-        - if !<yaml[bungee_config].contains[servers.<[Server]>]>:
+      - define servers <[args].filter[contains_any[help|cancel|stop|-l|-log|-logs|-c|-conf|-confirmation].not].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>].not>]>
+      - foreach <[servers]> as:Server:
+        - if !<yaml[bungee_config].contains[servers.<[server]>]>:
           - narrate "Invalid server."
           - stop
-        - else if !<bungee.list_servers.contains[<[Server]>]>:
+        - else if !<bungee.list_servers.contains[<[server]>]>:
           - narrate "Server is not online."
           - stop
-        - if <server.has_flag[Queue.Restart]>:
+        - if <server.has_flag[queue.restart]>:
           - narrate "Verify if the flag contains the server, if it's within the schedule period, and if it's already in progress."
 
   # % ██ [ Check for Help Argument          ] ██
-    - if <[Args].first> == Help:
+    - if <[args].first> == Help:
       - choose <context.args.size>:
         - case 1:
           - narrate "Helpful information."
@@ -50,15 +50,15 @@ Restart_DCommand:
       - stop
 
   # % ██ [ Check for Cancel Argument        ] ██
-    - else if <[Args].first.contains_any[Cancel|Stop]>:
-      - if <server.has_flag[Queue.Restart]> || <server.flag[Queue.Restart].is_empty>:
-      - foreach <[Servers]> as:Server:
-        - if !<server.flag[Queue.Restart].parse[get[Server]].contains[<[Server]>]>:
+    - else if <[args].first.contains_any[cancel|stop]>:
+      - if <server.has_flag[queue.restart]> || <server.flag[queue.restart].is_empty>:
+      - foreach <[servers]> as:Server:
+        - if !<server.flag[queue.restart].parse[get[server]].contains[<[server]>]>:
           #$ Verify this server is scheduled to restart
           - narrate "This server is not restarting."
           - stop
         - else:
-          - define Map_Data <server.flag[Queue.Restart].filter[get[<[Server]>].is[==].to[<[Server]>]].first>
+          - define map_data <server.flag[queue.restart].filter[get[<[server]>].is[==].to[<[server]>]].first>
           - narrate "Restart stopped."
           #$ Bungeerun a task that:
           #% Verifies the server is queued to restart
@@ -69,32 +69,32 @@ Restart_DCommand:
         - stop
 
   # % ██ [ Check for Delay Argument         ] ██
-    - if <[Args].parse[before[:]].contains_any[d|delay|w|wait]>:
-      - if <[Args].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>]>].size> > 1:
+    - if <[args].parse[before[:]].contains_any[d|delay|w|wait]>:
+      - if <[args].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>]>].size> > 1:
         - narrate "this is likely an error, display delay help"
         - stop
-      - define DelayArg <[Args].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>]>].first.after[:]>
-      - if <duration[<[DelayArg]>]||null> == null:
-        - define Entry_Results "<[Entry_Results].include[<&nl>**Warning**: `Invalid Duration, Defaulted to fallback: 1 minute.`]>"
-        - define Delay 1m
-      - if <duration[<[DelayArg]>].in_minutes> > 5:
-        - define Entry_Results "<[Entry_Results].include[<&nl>**Warning**: `Invalid Duration, Defaulted to the maximum: 5 minutes.`]>"
-        - define Delay 5m
+      - define delayarg <[args].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>]>].first.after[:]>
+      - if <duration[<[delayarg]>]||null> == null:
+        - define entry_results "<[entry_results].include[<&nl>**Warning**: `Invalid Duration, Defaulted to fallback: 1 minute.`]>"
+        - define delay 1m
+      - if <duration[<[delayarg]>].in_minutes> > 5:
+        - define entry_results "<[entry_results].include[<&nl>**Warning**: `Invalid Duration, Defaulted to the maximum: 5 minutes.`]>"
+        - define delay 5m
     - else:
-      - define Delay 2s
+      - define delay 2s
 
   # % ██ [ Send Message                     ] ██
     - define color Code
-    - inject Embedded_Color_Formatting
-    - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[description].as[Restarting Servers: <[Servers].parse[replace[_].with[<&sp>].to_titlecase].formatted>]>]>"
-    - define Data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
+    - inject embedded_color_formatting
+    - define embeds "<list_single[<map.with[color].as[<[color]>].with[description].as[Restarting Servers: <[servers].parse[replace[_].with[<&sp>].to_titlecase].formatted>]>]>"
+    - define data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[embeds]>].to_json>
 
-    - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define Headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+    - define hook <script[ddtbcty].data_key[WebHooks.<[channel]>.hook]>
+    - define headers <yaml[saved_headers].read[discord.webhook_message]>
+    - ~webget <[hook]> data:<[data]> headers:<[headers]>
 
   # % ██ [ Execute Restart Queues           ] ██
-    - foreach <[Servers]> as:Server:
-      - define DUUID <util.random.duuid.after[_]>
-      - bungeerun <[Server]> Discord_Server_Restart def:<[DUUID]>|<[Delay]>|<[Args].contains_any[-l|-log|-logs]>|<[Args].contains_any[-c|-conf|-confirmation]>
-      - flag server Queue.Restart:->:<map.with[Server].as[<[Server]>].with[Schedule].as[<util.time_now.add[<[Delay]>]>].with[DUUID].as[<[DUUID]>].with[Channel].as[<[Channel]>]>
+    - foreach <[servers]> as:Server:
+      - define duuid <util.random.duuid.after[_]>
+      - bungeerun <[server]> Discord_Server_Restart def:<[duuid]>|<[delay]>|<[args].contains_any[-l|-log|-logs]>|<[args].contains_any[-c|-conf|-confirmation]>
+      - flag server Queue.Restart:->:<map.with[server].as[<[server]>].with[schedule].as[<util.time_now.add[<[delay]>]>].with[duuid].as[<[duuid]>].with[channel].as[<[channel]>]>
