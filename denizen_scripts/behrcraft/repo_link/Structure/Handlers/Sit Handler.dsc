@@ -2,7 +2,7 @@ Player_Sitting:
     type: world
     debug: false
     events:
-        on player right clicks *stairs with air:
+        on player right clicks *stairs with:air:
             - if <player.has_flag[Behrry.Essentials.Sitting]> || <context.location.material.half> == TOP || <player.world.name> == Creative:
                 - stop
             - define Location <context.location>
@@ -15,6 +15,7 @@ Player_Sitting:
                     - teleport <player.location.add[0,0,0]>
                 - remove <context.entity>
                 - flag player Behrry.Essentials.Sitting:!
+
 Sit_Command:
     type: command
     name: sit

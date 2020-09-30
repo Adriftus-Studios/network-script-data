@@ -13,7 +13,7 @@ Silk_Spawners:
     type: world
     debug: false
     events:
-        on player breaks spawner with *pickaxe:
+        on player breaks spawner with:*pickaxe:
             - if !<player.item_in_hand.enchantments.contains[silk_touch]>:
                 - stop
             - define Type <context.location.spawner_type.entity_type.to_titlecase>
