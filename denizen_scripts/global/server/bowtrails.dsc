@@ -166,11 +166,6 @@ bow_trail_block_2_color:
       - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|<[color2]> targets:<player.location.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
 
-
-
-
-
-
 ###################
 ## ACCESSOR TASK ##
 ###################
@@ -182,8 +177,9 @@ bowtrail_unlock:
     - if <yaml[bowtrails].read[bowtrails.<[bowtrail]>]||null> != null && !<yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<[bowtrail]>]||false>:
       - yaml id:global.player.<player.uuid> set bowtrails.unlocked:|:<[bowtrail]>
     - else:
-      - error
-
+      - define checks:->:`<&lt>yaml[bowtrails].read[bowtrails.<&lt>[bowtrail]<&gt>]||null<&gt>`
+      - define checks:->:`!<&lt>yaml[global.player.<&lt>player.uuid<&gt>].read[bowtrails.unlocked].contains[<&lt>[bowtrail]<&gt>]||false<&gt>`
+      - debug error "The The if statement above errored with the check(s): <[checks].separated_by[ | ]>"
 
 bowtrail_remove:
   type: task
@@ -193,7 +189,7 @@ bowtrail_remove:
     - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<[bowtrail]>]||false>:
       - yaml id:global.player.<player.uuid> set bowtrails.unlocked:<-:<[bowtrail]>
     - else:
-      - error
+      - debug error "The The if statement in `bowtrail_remove` errored with the check: `<&lt>yaml[global.player.<&lt>player.uuid<&gt>].read[bowtrails.unlocked].contains[<&lt>[bowtrail]<&gt>]||false<&gt>`"
 
 ##################
 ## Open Command ##

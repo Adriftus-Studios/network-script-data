@@ -733,7 +733,7 @@ create_warp:
           - stop
       - inject create_warp_personal
     - else:
-      - error
+      - debug error "The definition <&gt>[type]<&gt> was not set as `server` or `personal` or was not set at all as the second definition in `create_warp` in `warps.dsc`."
 
 create_warp_server:
   type: task
