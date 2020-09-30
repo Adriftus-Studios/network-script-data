@@ -15,7 +15,7 @@ Nickname_Command:
             - inject Online_Player_Tabcomplete Instantly
     script:
     # % ██ [ correct syntax? ] ██
-        - if <context.args.first||null> == null || <context.args.get[3]||null> != null:
+        - if <context.args.is_empty> || <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
     # % ██ [ one or two args? ] ██
         - if <context.args.get[2]||null> == null:

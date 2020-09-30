@@ -7,7 +7,7 @@ Head_Command:
     permission: Behrry.Essentials.Head
     script:
     # % ██ [ Check Args ] ██
-        - if <context.args.first||null> == null || <context.args.get[3]||null> != null:
+        - if <context.args.is_empty> || <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
 
     # % ██ [ Check if specifying UUID ] ██

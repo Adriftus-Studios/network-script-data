@@ -18,7 +18,7 @@ RenameHome_Command:
             - inject Command_Syntax
 
     # % ██ [ Open GUI without args ] ██
-        - if <context.args.first||null> == null:
+        - if <context.args.is_empty>:
             - run Home_GUI def:Rename
             - stop
 

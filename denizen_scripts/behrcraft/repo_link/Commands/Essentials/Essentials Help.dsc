@@ -23,7 +23,7 @@ Help_Handler:
             - determine passively fulfilled
             - if <context.args.get[2]||null> != null:
                 - inject Command_Syntax
-            - if <context.args.first||null> == null:
+            - if <context.args.is_empty>:
                 - define HelpPage 1
             - else if <context.args.first.is_integer>:
                 - define HelpPage <context.args.first>

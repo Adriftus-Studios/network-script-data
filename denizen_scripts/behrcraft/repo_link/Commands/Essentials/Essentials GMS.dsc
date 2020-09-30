@@ -16,7 +16,7 @@ gms_Command:
             - inject Command_Syntax Instantly
         
     # % ██ [   Check if specifying Player ] ██
-        - if <context.args.first||null> == null:
+        - if <context.args.is_empty>:
             - define User <player>
         - else:
         # % ██ [   Check if player is a moderator ] ██

@@ -24,7 +24,7 @@ murdermobs_Command:
             - inject Command_Syntax
     
     # % ██ [ Check for Default ] ██
-        - if <context.args.first||null> == null:
+        - if <context.args.is_empty>:
             - define Radius 50
             - define Mobs Hostiles
         

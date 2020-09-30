@@ -16,7 +16,7 @@ gmc_Command:
             - inject Command_Syntax Instantly
             
     # % ██ [   Check for self or named player ] ██
-        - if <context.args.first||null> == null:
+        - if <context.args.is_empty>:
             - define User <player>
         - else:
             - if <player.groups.contains[Moderation]>:
@@ -112,7 +112,7 @@ gmc_Command:
 #                    - inject Command_Syntax Instantly
 #            - else:
 #                - inject Command_Syntax Instantly
-#        - if <context.args.first||null> == null:
+#        - if <context.args.is_empty>:
 #            - define Rank 5
 #            - if <player.flag[Behrry.Essentials.Rank]> > <[Rank]>:
 #                - if <player.has_flag[behrry.essentials.gamemode.request]>:
