@@ -7,7 +7,7 @@ Hat_Command:
     permission: Behr.Essentials.Hat
     script:
     # % ██ [  Check Args ] ██
-        - if !<context.args.first.is_empty>:
+        - if !<context.args.is_empty>:
             - inject Command_Syntax
         
     # % ██ [  Check item ] ██
