@@ -15,7 +15,7 @@ Command_Syntax:
 
 
 # % ██  [ Used a command wrongly, provide reason ] ██
-# - ██  [ Usage ] - define Reason "no"
+# - ██  [ Usage ] - define Reason no
 # - ██  [       ] - inject Command_Error
 Command_Error:
     type: task
@@ -29,7 +29,7 @@ Command_Error:
 
 
 # % ██  [ U ] ██
-# - ██  [ Usage ] - define Reason "no"
+# - ██  [ Usage ] - define Reason no
 # - ██  [       ] - inject Permission_Error
 Permission_Error:
     type: task
@@ -42,7 +42,7 @@ Permission_Error:
 
 
 # % ██  [ U ] ██
-# - ██  [ Usage ] - define Reason "no"
+# - ██  [ Usage ] - define Reason no
 # - ██  [       ] - inject Command_Error
 Admin_Verification:
     type: task
@@ -148,15 +148,15 @@ Chat_Logger:
 # % ██  [       ]
 # % ██  [       ]   tab completes all players online by their name for the first arg, blacklisting yourself
 # - ██  [  # 3  ] - determine <proc[Online_Player_Tabcomplete].context[1|<player>]>
-# % ██  [       ]   tab completes all players online by their name for the first arg, blacklisting players flagged "Admin"
+# % ██  [       ]   tab completes all players online by their name for the first arg, blacklisting players flagged Admin
 # % ██  [       ]   the Blacklist must be escaped if it is a list of players
 # - ██  [ # 4.1 ] - determine <proc[Online_Player_Tabcomplete].context[1|<server.players_flagged[Admin].escaped>]>
 # % ██  [       ]   OR you can inject the script directly as opposed to using the procedure tag:
-# % ██  [       ]   tab completes all players by their name for the first arg, blacklisting online players flagged "Admin"
+# % ██  [       ]   tab completes all players by their name for the first arg, blacklisting online players flagged Admin
 # - ██  [  #4.2 ] - define blacklist <server.online_players_flagged[Admin]>
 # - ██  [       ] - inject Online_Player_Tabcomplete
 # % ██  [       ]
-# % ██  [       ]   tab completes all players by their name for the second arg, and blacklisting online players flagged "Admin"
+# % ██  [       ]   tab completes all players by their name for the second arg, and blacklisting online players flagged Admin
 # - ██  [  # 5  ] - define iArg 2
 # - ██  [       ] - define blacklist <server.online_players_flagged[Admin]>
 # - ██  [       ] - inject Online_Player_Tabcomplete
@@ -183,15 +183,15 @@ Online_Player_Tabcomplete:
 # % ██  [       ]   tab completes all players by their name for the first arg, blacklisting yourself
 # - ██  [  # 3  ] - determine <proc[All_Player_Tabcomplete].context[1|<player>]>
 # % ██  [       ]
-# % ██  [       ]   tab completes all players by their name for the first arg, blacklisting players flagged "Admin"
+# % ██  [       ]   tab completes all players by their name for the first arg, blacklisting players flagged Admin
 # % ██  [       ]   the Blacklist must be escaped if it is a list of players
 # - ██  [ # 4.1 ] - determine <proc[All_Player_Tabcomplete].context[1|<server.players_flagged[Admin].escaped>]>
 # % ██  [       ]   OR you can inject the script directly as opposed to using the procedure tag:
-# % ██  [       ]   tab completes all players by their name for the first arg, blacklisting players flagged "Admin"
+# % ██  [       ]   tab completes all players by their name for the first arg, blacklisting players flagged Admin
 # - ██  [  #4.2 ] - define blacklist <server.players_flagged[Admin]>
 # - ██  [       ] - inject All_Player_Tabcomplete
 # % ██  [       ]
-# % ██  [       ]   tab completes all players by their name for the second arg, and blacklisting players flagged "Admin"
+# % ██  [       ]   tab completes all players by their name for the second arg, and blacklisting players flagged Admin
 # - ██  [  # 5  ] - define iArg 2
 # - ██  [       ] - define blacklist <server.players_flagged[Admin]>
 # - ██  [       ] - inject All_Player_Tabcomplete
@@ -389,7 +389,7 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
 # % ██
 # @ ██  [ Activates or Deactivates a toggle command ] ██
 # @ ██  [ Usage ] - define Arg <context.args.first||null>
-# @ ██  [       ] - define ModeFlag "Behr.Essentials.Example"
+# @ ██  [       ] - define ModeFlag Behr.Essentials.Example
 # @ ██  [       ] - define ModeName "Mode Name"
 # @ ██  [       ] - inject Activation_Arg_Command
 # @ ██  [       ]

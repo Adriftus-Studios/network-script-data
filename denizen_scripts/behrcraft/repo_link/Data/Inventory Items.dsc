@@ -2,7 +2,7 @@ Blank:
     type: item
     debug: false
     material: black_stained_glass_pane
-    display name: "<&f>"
+    display name: <&f>
   #<&a>◀ <&2>L<&a>ast <&2>P<&a>age <&2>◀
 LastPageArrow:
     type: item
@@ -10,7 +10,7 @@ LastPageArrow:
     material: music_disc_11
     mechanisms:
         custom_model_data: 131
-    #potion_effects: "INSTANT_HEAL,false,false"
+    #potion_effects: INSTANT_HEAL,false,false
     #hides: all
     display name: <&2><&chr[25c0]> <&2>L<&a>ast <&2>P<&a>age <&2><&chr[25c0]>
   #<&a>◀ <&2>L<&a>ast <&2>P<&a>age <&2>◀
@@ -20,7 +20,7 @@ NextPageArrow:
     material: music_disc_11
     mechanisms:
         custom_model_data: 132
-      #potion_effects: "INSTANT_HEAL,false,false"
+      #potion_effects: INSTANT_HEAL,false,false
         hides: all
     display name: <&a><&chr[27a4]> <&2>N<&a>ext <&2>P<&a>age <&2><&chr[27a4]>
   #display name: <&a><&chr[25b6]> <&2>N<&a>ext <&2>P<&a>age <&2><&chr[25b6]>

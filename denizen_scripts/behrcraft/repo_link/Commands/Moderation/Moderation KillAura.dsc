@@ -18,11 +18,11 @@ KillAura_Command:
         
         - if <[User].has_flag[Behrry.Moderation.KillAura]>:
             - flag <[User]> Behrry.Moderation.KillAura:!
-            - narrate "Deactivated"
+            - narrate Deactivated
             - stop
         - else:
             - flag <[User]> Behrry.Moderation.KillAura
-            - narrate "Activated"
+            - narrate Activated
         - while <[User].has_flag[Behrry.Moderation.KillAura]> || <[player].is_online>:
             - define Mobs <[User].location.find.entities[Zombie|Vex|Creeper|Witch|Spider|cave_spider|Phantom|Drowned|Slime|Skeleton|Pillager].within[35]>
             - remove <[Mobs]>

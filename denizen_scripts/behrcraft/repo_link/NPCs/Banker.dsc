@@ -134,9 +134,9 @@ PlayerBank_Handler:
     Inventory_Save:
         - define BankID <context.inventory.after[_]>
         - define dvlist <context.inventory.list_contents.get[1].to[45]>
-        - yaml set id:pBankKey "<player.uuid>.<[BankID]>:<[dvlist]>"
+        - yaml set id:pBankKey <player.uuid>.<[BankID]>:<[dvlist]>
         - yaml savefile:data/pBank/pBankKey.yml id:pBankKey
-        - define id "<player.uuid>pBank_<[BankID]>"
+        - define id <player.uuid>pBank_<[BankID]>
         - note remove as:<[id]>
     events:
         on server start:
@@ -207,10 +207,10 @@ Grand_Exchange_Clerk_Interact:
                     trigger: hi
                     hide trigger message: true
                     script:
-                    - narrate format:npc "hi"
+                    - narrate format:npc hi
                     - wait 2s
                     - define Options_List "<list[And what do you do?|didn't you used to be called the Bank of Varrock?]>"
-                    - define Trigger_List "<list[what|Varrock]>"
+                    - define Trigger_List <list[what|Varrock]>
 
 
 npctest:

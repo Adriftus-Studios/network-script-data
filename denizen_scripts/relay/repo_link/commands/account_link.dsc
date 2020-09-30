@@ -31,7 +31,7 @@ Discord_Connect_DCommand:
         - define channel_id <[channel]>
         - inject get_webhooks
 
-        - define embeds "<list_single[<map.with[title].as[<[title]>].with[color].as[16766976].with[description].as[<[context].separated_by[<n>]>]>]>"
+        - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[16766976].with[description].as[<[context].separated_by[<n>]>]>]>
         - define data "<map.with[username].as[Discord Handler].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[embeds].as[<[embeds]>].to_json>"
 
         - define headers <yaml[saved_headers].read[discord.webhook_message]>
@@ -48,7 +48,7 @@ Discord_Connect_DCommand:
         - define channel_id <[channel]>
         - inject get_webhooks
 
-        - define embeds "<list_single[<map.with[title].as[<[title]>].with[color].as[16766976].with[description].as[<[context].separated_by[<n>]>]>]>"
+        - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[16766976].with[description].as[<[context].separated_by[<n>]>]>]>
         - define data "<map.with[username].as[Discord Handler].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[embeds].as[<[embeds]>].to_json>"
 
         - define headers <yaml[saved_headers].read[discord.webhook_message]>
@@ -81,7 +81,7 @@ Discord_Connect_DCommand:
     - define channel_id <[channel]>
     - inject get_webhooks
 
-    - define embeds "<list_single[<map.with[title].as[<[title]>].with[color].as[16766976].with[description].as[<[context].separated_by[<n>]>]>]>"
+    - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[16766976].with[description].as[<[context].separated_by[<n>]>]>]>
     - define data "<map.with[username].as[Discord Handler].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[embeds].as[<[embeds]>].to_json>"
 
     - define headers <yaml[saved_headers].read[discord.webhook_message]>

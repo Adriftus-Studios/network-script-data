@@ -25,7 +25,7 @@ World_Command:
             - if <context.args.size> == 0:
                 - determine <[SubCommands].include[<[LoadedWorlds]>]>
 
-            - define ValidFolders "<server.list_files[../../].exclude[<script[WorldFileList].data_key[Blacklist]>]>"
+            - define ValidFolders <server.list_files[../../].exclude[<script[WorldFileList].data_key[Blacklist]>]>
             - foreach <[ValidFolders]> as:Folder:
                 - if <server.list_files[../../<[Folder]>].contains[level.dat]||false>:
                     - define ValidWorlds:->:<[Folder]>
@@ -78,7 +78,7 @@ World_Command:
                 - narrate "<&e><[World].to_titlecase> <proc[Colorize].context[is not currently loaded.|Red]>"
                 - if <player.groups.contains_any[Coordinator|Administrator|Developer]>:
                     - define Hover "<proc[Colorize].context[Click to Create:|green]><&nl><&e><[World]>"
-                    - define Text "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
+                    - define Text <&a>[<&2><&l><&chr[2714]><&r><&a>]
                     - define Command "world Create <[World]>"
                     - define Accept <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
                     - narrate "<&b>| <[Accept]> <&b>| <proc[Colorize].context[Create World instead?:|green]> <[World]>"
@@ -111,7 +111,7 @@ World_Command:
         - else if <context.args.size> > 4:
             - inject Command_Syntax
 
-        - define ValidFolders "<server.list_files[../../].exclude[<script[WorldFileList].data_key[Blacklist]>]>"
+        - define ValidFolders <server.list_files[../../].exclude[<script[WorldFileList].data_key[Blacklist]>]>
         - foreach <[ValidFolders]> as:Folder:
             - if <server.list_files[../../<[Folder]>].contains[level.dat]||false>:
                 - define ValidWorlds:->:<[Folder]>
@@ -206,7 +206,7 @@ World_Command:
                 - if !<server.worlds.parse[name].contains[<[World]>]>:
                     - narrate "<&e><[World].to_titlecase> <proc[Colorize].context[is not currently loaded.|Red]>"
                     - define Hover "<proc[Colorize].context[Click to Create:|green]><&nl><&e><[World]>"
-                    - define Text "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
+                    - define Text <&a>[<&2><&l><&chr[2714]><&r><&a>]
                     - define Command "world Create <[World]>"
                     - define Accept <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
                     - narrate "<&b>| <[Accept]> <&b>| <proc[Colorize].context[Create World instead?:|green]> <[World]>"
@@ -239,7 +239,7 @@ World_Command:
         - if !<player.has_flag[Behrry.Constructor.WorldPrompt.Load]>:
             - flag player Behrry.Constructor.WorldPrompt.Load duration:10s
             - define Hover "<proc[Colorize].context[Click to Load:|green]><&nl><&e><[World]>"
-            - define Text "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
+            - define Text <&a>[<&2><&l><&chr[2714]><&r><&a>]
             - define Command "world load <[World]>"
             - define Accept <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
             - narrate "<&b>| <[Accept]> <&b>| <proc[Colorize].context[Load World?:|green]> <&e><[World]>"
@@ -255,7 +255,7 @@ World_Command:
         - if !<player.has_flag[Behrry.Constructor.WorldPrompt.Create]>:
             - flag player Behrry.Constructor.WorldPrompt.Create duration:10s
             - define Hover "<proc[Colorize].context[Click to Create:|green]><&nl><&e><[World]>"
-            - define Text "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
+            - define Text <&a>[<&2><&l><&chr[2714]><&r><&a>]
             - define Command "world Create <[World]>"
             - define Accept <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
             - narrate "<&b>| <[Accept]> <&b>| <proc[Colorize].context[Create World?:|green]> <&e><[World]>"
@@ -271,7 +271,7 @@ World_Command:
         - if !<player.has_flag[Behrry.Constructor.WorldPrompt.Destroy0]>:
             - flag player Behrry.Constructor.WorldPrompt.Destroy0 duration:10s
             - define Hover "<proc[Colorize].context[Click to Destroy:|red]><&nl><&e><[World]>"
-            - define Text "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
+            - define Text <&a>[<&2><&l><&chr[2714]><&r><&a>]
             - define Command "world Destroy <[World]>"
             - define Accept <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
             - narrate "<&b>| <[Accept]> <&b>| <proc[Colorize].context[Destroy World?:|green]> <&e><[World]>"
@@ -279,7 +279,7 @@ World_Command:
         - if !<player.has_flag[Behrry.Constructor.WorldPrompt.Destroy1]>:
             - flag player Behrry.Constructor.WorldPrompt.Destroy1 duration:10s
             - define Hover "<proc[Colorize].context[Click to Destroy:|red]><&nl><&e><[World]>"
-            - define Text "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
+            - define Text <&a>[<&2><&l><&chr[2714]><&r><&a>]
             - define Command "world Destroy <[World]>"
             - define Accept <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
             - narrate "<&b>| <[Accept]> <&b>| <proc[Colorize].context[Really Really Destroy World?:|green]> <&e><[World]>"
@@ -295,7 +295,7 @@ World_Command:
         - if !<player.has_flag[Behrry.Constructor.WorldPrompt.Unload]>:
             - flag player Behrry.Constructor.WorldPrompt.Unload duration:10s
             - define Hover "<proc[Colorize].context[Click to Unload:|green]><&nl><&e><[World]>"
-            - define Text "<&a>[<&2><&l><&chr[2714]><&r><&a>]"
+            - define Text <&a>[<&2><&l><&chr[2714]><&r><&a>]
             - define Command "world Unload <[World]>"
             - define Accept <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
             - narrate "<&b>| <[Accept]> <&b>| <proc[Colorize].context[Unload World?:|green]> <[World]>"

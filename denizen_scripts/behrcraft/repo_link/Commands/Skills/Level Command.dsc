@@ -44,4 +44,4 @@ Level_Command:
         - define TotalExperience "<&e>Total Experience<&6>: <&a><[TotalExp]>"
 
         - narrate "<[SkillLevel]> <&b>| <[TotalExperience]>"
-        - narrate "<[Progress]>"
+        - narrate <[Progress]>

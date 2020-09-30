@@ -97,7 +97,7 @@ pronk:
         - "Think again, fucker."
         - "As we speak I am contacting my secret network of spies across the USA"
         - "and your IP is being traced right now so you better prepare for the storm"
-        - "maggot."
+        - maggot.
         - "The storm that wipes out the pathetic little thing you call your life."
         - "You're fucking dead, kid."
         - "I can be anywhere, anytime,"

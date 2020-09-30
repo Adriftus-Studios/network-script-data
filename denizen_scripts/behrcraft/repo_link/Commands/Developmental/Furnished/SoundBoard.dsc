@@ -275,13 +275,13 @@ SoundBoard:
       - else:
         - define Material White_stained_glass
         - define "Lore:!|:<empty>|<&3>Q Key<&b>:<&7> Add to Favorites"
-      - define Display "<&e><[Sound].replace[_].with[<&sp>].to_titlecase>"
+      - define Display <&e><[Sound].replace[_].with[<&sp>].to_titlecase>
       - define "Lore:|:<&3>Shift<&b>+<&3>Click<&b>: <&7>Script Copy|<&3>Click<&b>: <&7>Play sound"
       - define NBT:!|:Menu/SoundBoard|Action/PlaySound|Sound/<[Sound]>
       - define Item <item[Action_Item].with[material=<[Material]>;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;enchantments=silk_touch,1;flags=hide_all]>
       - define Items:->:<[Item]>
   SearchButton:
-    - define Display "<&6>S<&e>earch"
+    - define Display <&6>S<&e>earch
     - define "Lore:!|:<empty>|<&7>Search for Sounds"
     - define NBT:!|:Menu/SoundBoard|Action/Search
     - define skin <script[Letters].data_key[Misc.Question]>

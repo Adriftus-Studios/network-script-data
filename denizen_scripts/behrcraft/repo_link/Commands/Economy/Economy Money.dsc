@@ -80,9 +80,9 @@ pay_command:
             - stop
 
         - if <[money]> == 1:
-            - define format "coin"
+            - define format coin
         - else:
-            - define format "coins"
+            - define format coins
 
         - narrate "<&a>You sent <proc[user_display_simple].context[<[user]>]> <&e><[money].format_number.replace[,].with[<&6>,<&e>]> <&a><[format]>!"
         - if <[user].is_online>:
@@ -161,4 +161,4 @@ cointop_command:
             - define next <&2>[<&8><&chr[25b6]><&2>]
 
 
-        - narrate "<&2><&m>+<&a><&m>----------------<[previous]><&a><&m>-<&2>[<&e>page<&2>]<&a><&m>-<&2>[<&e><[page]><&2>/<&e><[total_pages]><&2>]<&a><&m>-<[next]><&a><&m>----------------<&2><&m>+"
+        - narrate <&2><&m>+<&a><&m>----------------<[previous]><&a><&m>-<&2>[<&e>page<&2>]<&a><&m>-<&2>[<&e><[page]><&2>/<&e><[total_pages]><&2>]<&a><&m>-<[next]><&a><&m>----------------<&2><&m>+

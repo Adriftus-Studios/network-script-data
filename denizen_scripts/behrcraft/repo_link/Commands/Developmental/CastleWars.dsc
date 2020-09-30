@@ -129,7 +129,7 @@ CastleWars_Event:
     - Choose <[Behrry.Event.CastleWars.Status]>:
       - case Starting:
         - define Hover "click to join game"
-        - define Text "[chek]"
+        - define Text [chek]
         - define Command "event join"
         - define Accept <proc[CmdMsg].context[<[Hover]>|<[Text]>|<[Command]>]>
         - narrate "<[Accept]> <&b>| game starting aa errbody join"
@@ -196,9 +196,9 @@ Event_Commandy:
       - case Pause Stop:
         - flag server Behrry.Event.<[Event]>.Status:<[Command]>
       - case Manage:
-        - narrate "hello"
+        - narrate hello
       - default:
-        - narrate "<proc[Colorize_Red].context[|red]>"
+        - narrate <proc[Colorize_Red].context[|red]>
 
 
 

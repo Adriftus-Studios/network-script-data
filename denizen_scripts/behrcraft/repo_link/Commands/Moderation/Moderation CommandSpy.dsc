@@ -71,7 +71,7 @@ command_listener:
               - narrate targets:<[Moderator]> <proc[MsgHover].context[<[Hover1]>|<[Text1]>]><&7><proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
           - else:
             - if <[Permission]> == Invalid:
-              - define Hover "<&a>Permission"<&2>: <&e>N<&6>/<&e>a"
+              - define Hover "<&a>Permission<&2>: <&e>N<&6>/<&e>a"
             - else if <player.has_flag[OpExecuted]>:
               - define Hover "<&a>Granted Permission<&2>: <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
             - else:

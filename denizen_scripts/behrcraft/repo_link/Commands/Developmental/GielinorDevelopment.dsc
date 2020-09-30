@@ -285,7 +285,7 @@ testcmdr:
                 - stop
               - define Hover "<&e>Click to Insert:<&nl><&a><player.flag[GielinorDevelopment.Selection]>"
               - define Text "<&a>Shift-Click to Insert:<&a> <&6>[<&e>Selection<&6>]"
-              - define Insert "<&lt>player.flag[GielinorDevelopment.Selection]<&gt>"
+              - define Insert <&lt>player.flag[GielinorDevelopment.Selection]<&gt>
               - narrate <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
             - else:
               - define SelIndex 1
@@ -334,7 +334,7 @@ testcmdr:
       - case CuboidCopy tcopy:
         - execute as_op "/pos1 <player.flag[GielinorDevelopment.Selection].as_cuboid.min.xyz.replace[.0].with[]>" silent
         - execute as_op "/pos2 <player.flag[GielinorDevelopment.Selection].as_cuboid.max.xyz.replace[.0].with[]>" silent
-        - execute as_op "/copy"
+        - execute as_op /copy
       #- Used for selecting expanding cuboids
       - case CuboidExpandsiveSelector:
         - if <player.flag[GielinorDevelopment.AxeMode]> != CuboidExpandsiveSelector:
@@ -354,7 +354,7 @@ testcmdr:
                 - stop
               - define Hover "<&e>Click to Insert:<&nl><&a><player.flag[GielinorDevelopment.Selection]>"
               - define Text "<&a>Shift-Click to Insert:<&a> <&6>[<&e>Selection<&6>]"
-              - define Insert "<&lt>player.flag[GielinorDevelopment.Selection]<&gt>"
+              - define Insert <&lt>player.flag[GielinorDevelopment.Selection]<&gt>
               - narrate <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
             - else:
               - define SelIndex 1

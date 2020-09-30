@@ -103,7 +103,7 @@ github_updates:
       # % ██ [ Format the message                     ] ██
         - define description_context <list_single[<[content_data].get[body]>].include_single[<[emoji]>]>
         - define description <proc[Emoji_Bullets].context[<[description_context]>]>
-        - define embed "<[embed].description[<[description]>]>"
+        - define embed <[embed].description[<[description]>]>
 
       # % ██ [ Send the message                       ] ██
         - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>

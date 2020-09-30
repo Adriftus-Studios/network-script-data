@@ -15,9 +15,9 @@ Home_Command:
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
             - determine <player.flag[Behr.Essentials.Homes].parse[before[/]].filter[starts_with[<context.args.first>]]||>
         - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
-            - determine "remove"
+            - determine remove
         - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine "remove"
+            - determine remove
     script:
     # % ██ [ Open Home GUI ] ██
         - if <context.args.is_empty>:
@@ -238,6 +238,6 @@ Home_GUI:
 HomeGUI_Handler:
     type: data
     t:
-    - case "menuAddHome":
+    - case menuAddHome:
         - execute as_player "sethome Home<player.flag[Behr.Essentials.Homes].size.add[1]||>"
         - run Home_GUI def:Teleport

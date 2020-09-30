@@ -49,7 +49,7 @@ Error_Response_Webhook:
       - define embed "<[embed].inline_fields[<map.with[Player Name<&co>].as[`<[Player_Name]>`]>]>"
       - define embed "<[embed].inline_fields[<map.with[Player UUID<&co>].as[`<[Player_UUID]>`]>]>"
       - define embed "<[embed].author_name[Player Attached<&co> <[Player_Name]>]>"
-      - define embed "<[embed].thumbnail_url[https://minotar.net/avatar/<[Player_Name]>/32.png]>"
+      - define embed <[embed].thumbnail_url[https://minotar.net/avatar/<[Player_Name]>/32.png]>
 
       - define Body_Text "<[Body_Text].include_single[<&gt> **Player Attached**<&co><&nl><&nl>`<[Player_Name]>` / `(<[Player_UUID]>`<&nl><&nl>]>"
 
@@ -59,7 +59,7 @@ Error_Response_Webhook:
       - define Definition_List <list>
       - foreach <[Definition_Map]> key:Definition as:Save:
         - define Definition_List "<[Definition_List].include_single[- <[Definition]>: <[Save]>]>"
-      - define embed "<[embed].fields[<map.with[Definitions<&co>].as[```yml<&nl><[Definition_List].separated_by[<&nl>]><&nl>```]>]>"
+      - define embed <[embed].fields[<map.with[Definitions<&co>].as[```yml<&nl><[Definition_List].separated_by[<&nl>]><&nl>```]>]>
   
   # % ██ [ Create Issue Template Link ] ██
     - define Issue_URL_Base https://github.com/Adriftus-Studios/network-script-data/issues/new?labels=Borked&

@@ -260,16 +260,16 @@ ReplaceMaterials_Command:
                     - inject CommanD_Syntax Instantly
                 - foreach <list[north|south|east|west]> as:Direction:
                     - foreach <list[top|bottom]> as:Half:
-                        - define arg1 "<[ReplaceFrom]>_stairs[facing=<[Direction]>,half=<[Half]>]"
-                        - define arg2 "<[ReplaceTo]>_stairs[facing=<[Direction]>,half=<[Half]>]"
+                        - define arg1 <[ReplaceFrom]>_stairs[facing=<[Direction]>,half=<[Half]>]
+                        - define arg2 <[ReplaceTo]>_stairs[facing=<[Direction]>,half=<[Half]>]
                         - execute as_op "/replace <[arg1]> <[arg2]>"
 
             - case slabs slab:
                 - if !<server.material_types.parse[name].filter[contains[_slab]].contains[<[ReplaceFrom]>_slab|<[Replaceto]>_slab]>:
                     - narrate format:Colorize_Red "Invalid material."
                 - foreach <list[top|bottom|double]> as:Half:
-                    - define arg1 "<[ReplaceFrom]>_slab[type=<[Half]>]"
-                    - define arg2 "<[ReplaceTo]>_slab[type=<[Half]>]"
+                    - define arg1 <[ReplaceFrom]>_slab[type=<[Half]>]
+                    - define arg2 <[ReplaceTo]>_slab[type=<[Half]>]
                     - execute as_op "/replace <[arg1]> <[arg2]>"
             
             - case fence:
@@ -294,8 +294,8 @@ ReplaceMaterials_Command:
                     - foreach <list[top|bottom]> as:Half:
                         - foreach <list[true|false]> as:Boolean:
                             - foreach <list[true|false]> as:Powered:
-                                - define arg1 "<[ReplaceFrom]>_trapdoor[facing=<[Direction]>,half=<[Half]>,open=<[Boolean]>,powered=<[Powered]>]"
-                                - define arg2 "<[ReplaceTo]>_trapdoor[facing=<[Direction]>,half=<[Half]>,open=<[Boolean]>,powered=<[Powered]>]"
+                                - define arg1 <[ReplaceFrom]>_trapdoor[facing=<[Direction]>,half=<[Half]>,open=<[Boolean]>,powered=<[Powered]>]
+                                - define arg2 <[ReplaceTo]>_trapdoor[facing=<[Direction]>,half=<[Half]>,open=<[Boolean]>,powered=<[Powered]>]
                                 - execute as_op "/replace <[arg1]> <[arg2]>"
 
             - default:

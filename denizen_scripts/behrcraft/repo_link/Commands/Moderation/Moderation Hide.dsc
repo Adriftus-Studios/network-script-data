@@ -12,7 +12,7 @@ Hide_Command:
     
 # % ██ [ Define definitions ] ██
     - define Arg <context.args.first||null>
-    - define ModeFlag "behrry.moderation.hide"
+    - define ModeFlag behrry.moderation.hide
     - define ModeName "Invisibility mode"
     - inject Activation_Arg Instantly
     - define Moderators <server.online_players.filter[in_group[Moderation]]>

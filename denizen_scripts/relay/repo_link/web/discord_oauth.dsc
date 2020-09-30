@@ -20,7 +20,7 @@ discord_oauth_token_exchange:
     - define Headers <yaml[oAuth].read[Headers].include[<yaml[oAuth].read[Discord.Token_Exchange.Headers]>]>
   
     - if !<yaml[discord_oauth].contains[accepted_states.<[state]>]>:
-      - announce to_console "<&c>invalid_state"
+      - announce to_console <&c>invalid_state
       - determine CODE:<list[418|406].random>
     - run discord_oauth def:<[state]>|remove
     - determine passively FILE:../../../../web/pages/discord_linked.html

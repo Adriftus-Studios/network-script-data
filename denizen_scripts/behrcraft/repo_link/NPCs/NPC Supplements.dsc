@@ -38,7 +38,7 @@ NPC_Interaction:
 
         # % ██ [ Define Hover and Text Messages                          ] ██
             - define Hover0 "<&6>[<&e>Insert<&6>]<&3> Select Dialogue with chat"
-            - define Message0 "<&3>[<&b><[Loop_Index]><&3>]"
+            - define Message0 <&3>[<&b><[Loop_Index]><&3>]
             - define Command0 "d <[Loop_Index]>"
             - define Hover1 "<&6>[<&e>Select<&6>]<&a> <[Option].split[/].limit[2].get[2]>"
             - define Message1 "<&6>[<&e>Click<&6>]<&a> <[Option].split[/].limit[2].get[2]>"

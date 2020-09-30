@@ -56,8 +56,8 @@ Bawb:
         o1:
             - "SelectionOne/What's a 'Meeseeks'?"
             - "SelectionTwo/Where are we?"
-            - "SelectionThree/Yes"
-            - "SelectionFour/No"
+            - SelectionThree/Yes
+            - SelectionFour/No
         o2:
-            - "SelectionFive/Anti-depressants?"
+            - SelectionFive/Anti-depressants?
             - "SelectionSix/What did they do before the 'tweak'? explode?"
