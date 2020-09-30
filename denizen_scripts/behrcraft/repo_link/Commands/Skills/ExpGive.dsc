@@ -6,8 +6,8 @@ ExperienceAdjust_Command:
     usage: /experience <&lt>Player<&gt> <&lt>Skill<&gt> <&lt>Set/Add/Reset<&gt> <&lt>#<&gt>
     permission: behrry.skill.experienceadjust
     script:
-        - if <context.args.size||0> != 4:
-            - if <context.args.get[3]||null> != reset || <context.args.size||0> != 3:
+        - if <context.args.size> != 4:
+            - if <context.args.get[3]||null> != reset || <context.args.size> != 3:
                 - inject Command_Syntax Instantly
         - define User <context.args.first||null>
         - inject Player_Verification_Offline Instantly

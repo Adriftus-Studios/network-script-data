@@ -12,7 +12,7 @@ FlySpeed_Command:
     tab complete:
         - if <player.in_group[Moderation]>:
             - define Arg2 <list[Lightspeed|ludicrous|Plaid]>
-            - if <context.args.size||0> == 0:
+            - if <context.args.is_empty>:
                 - determine <server.players.parse[name].exclude[<player.name>]>
             - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
                 - determine <server.players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.first>]]>

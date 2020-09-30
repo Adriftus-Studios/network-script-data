@@ -10,7 +10,7 @@ Home_Command:
     usage: /home <&lt>HomeName<&gt> (Remove/Relocate)
     adminusage: /home <&lt>player<&gt> <&lt>HomeName<&gt> (Remove)
     tab complete:
-        - if <context.args.size||0> == 0:
+        - if <context.args.is_empty>:
           - determine <player.flag[Behr.Essentials.Homes].parse[before[/]]||>
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
             - determine <player.flag[Behr.Essentials.Homes].parse[before[/]].filter[starts_with[<context.args.first>]]||>

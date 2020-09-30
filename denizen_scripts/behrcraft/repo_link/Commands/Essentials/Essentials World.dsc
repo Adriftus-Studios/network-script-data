@@ -14,7 +14,7 @@ World_Command:
         #- define blacklist <list[World_Nether|World_The_End|Runescape50px1|Bandit-Craft]>
         - define Worlds <list[World|Creative|SkyBlock]>
         - if !<player.groups.contains_any[Coordinator|Administrator|Developer]> || <context.alias> == spawn:
-            - if <context.args.size||0> == 0:
+            - if <context.args.is_empty>:
                 - determine <[Worlds]>
             - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
                 - determine <[Worlds].filter[starts_with[<context.args.first>]]>

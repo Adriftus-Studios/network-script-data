@@ -8,7 +8,7 @@ RenameHome_Command:
       - h
     usage: /home <&lt>HomeName<&gt> (NewHomeName)
     tab complete:
-        - if <context.args.size||0> == 0:
+        - if <context.args.is_empty>:
           - determine <player.flag[Behr.Essentials.homes].parse[before[/]]||>
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
             - determine <player.flag[Behr.Essentials.homes].parse[before[/]].filter[starts_with[<context.args.first>]]||>

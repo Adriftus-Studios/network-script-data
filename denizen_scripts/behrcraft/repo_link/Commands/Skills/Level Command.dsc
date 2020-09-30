@@ -10,7 +10,7 @@ Level_Command:
         - inject OneArg_Command_Tabcomplete
     script:
     # % ██ [ Verify args ] ██
-        - if <context.args.size||0> > 1:
+        - if <context.args.size> > 1:
             - inject Command_Syntax Instantly
         
     # % ██ [ Check if blank ] ██

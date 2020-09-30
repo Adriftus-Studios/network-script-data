@@ -43,7 +43,7 @@ Attack_Style:
         - define Args <list[Accurate|Aggressive|Defensive].escaped>
         - determine <proc[OneArg_Command_Tabcomplete].context[1|<[Args]>]>
     script:
-        - if <context.args.size||0> != 1:
+        - if <context.args.size> != 1:
             - inject Command_Syntax Instantly
         
         - define Style <context.args.first>

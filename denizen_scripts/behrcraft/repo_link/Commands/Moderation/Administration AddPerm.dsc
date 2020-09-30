@@ -9,7 +9,7 @@ addperm_Command:
         - define Arg1 <list[Silent|Visitor|Patron|Sponsor|Builder|Constructor|Architect|Developer|Support|Moderator|Administrator|Coordinator|CMeme]>
         - define Arg2 <list[behrry.essentials.|behrry.moderation.]>
         #/command█
-        - if <context.args.size||0> == 0:
+        - if <context.args.is_empty>:
             - determine <[Arg1]>
         #/command█X
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:

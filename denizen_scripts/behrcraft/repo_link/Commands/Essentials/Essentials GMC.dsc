@@ -66,7 +66,7 @@ gmc_Command:
 #    permission: behrry.essentials.gmc
 #    tab complete:
 #        - if <player.flag[Behrry.Essentials.Rank]> < 3:
-#            - if <context.args.size||0> == 0:
+#            - if <context.args.is_empty>:
 #                - determine <server.online_players.parse[name]>
 #            - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
 #                - determine <server.online_players.parse[name].filter[starts_with[<context.args.first>]]>

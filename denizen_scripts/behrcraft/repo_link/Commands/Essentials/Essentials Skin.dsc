@@ -9,7 +9,7 @@ Skin_Command:
         - define Arg1 <list[Reset|Set|Save|Delete|List|Rename]>
         - define Arg2 <list[Set|Delete|Rename]>
         - define Whitespace <context.raw_args.ends_with[<&sp>]>
-        - if <context.args.size||0> == 0:
+        - if <context.args.is_empty>:
             - determine <[Arg1]>
 
         - else if <context.args.size> == 1 && !<[Whitespace]>:

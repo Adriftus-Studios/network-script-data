@@ -530,8 +530,8 @@ testcmdr:
               - narrate "<&c>No Selection Made."
               - stop
             #- right clicking will cycle betweene very chunk in contained in the selection
-            - define MaxCount <player.we_selection.list_partial_chunks.size>
-            - foreach <player.we_selection.list_partial_chunks> as:Chunk:
+            - define MaxCount <player.we_selection.partial_chunks.size>
+            - foreach <player.we_selection.partial_chunks> as:Chunk:
               - define Center <[Chunk].cuboid.center>
               - define Loc1 <[Center].chunk.cuboid.with_world[<[World]>]>
               - define Loc2 <[Center].with_world[<[World]>]>
