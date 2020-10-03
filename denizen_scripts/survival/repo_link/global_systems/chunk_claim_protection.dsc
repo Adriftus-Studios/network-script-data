@@ -1,5 +1,5 @@
 claim_system_yaml_settings:
-  type: yaml data
+  type: data
   settings:
     allowed_worlds: mainland
 
@@ -7,7 +7,7 @@ claim_system_yaml_settings:
 ## YAML DATA FOR UPGRADE PRICES ##
 ##################################
 claiming_system_upgrade_data:
-  type: yaml data
+  type: data
   debug: false
   upgrades:
     fly:
