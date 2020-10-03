@@ -90,6 +90,19 @@ MsgURL:
 
 
 
+# $ ██  [ Message Script ] ██
+# - ██  [ Usage ] - define Hover "Text in hoverbox"
+# - ██  [       ] - define Text "Text in chat"
+# - ██  [       ] - define Script script_name
+# - ██  [       ] - narrate <proc[MsgScript].context[<[Hover]>|<[Text]>|<[Script]>]>
+MsgScript:
+    type: procedure
+    debug: false
+    definitions: hover|text|script
+    script:
+        - clickable <[script]> save:script
+        - determine <element[<&hover[<[hover]>]><[text]><&end_hover>].on_click[<entry[script].command>]>
+
 
 
 # @ ███████████████████████████████████████████████████████████
