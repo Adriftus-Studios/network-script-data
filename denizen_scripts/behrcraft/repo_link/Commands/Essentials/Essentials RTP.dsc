@@ -38,7 +38,7 @@ RTP_Command:
     #^          - repeat next
     #^      - else:
         - narrate "<proc[Colorize].context[Teleporting you randomly!|Green]>"
-        - flag player behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.location.world.name>]>
+        - flag player behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.world.name>]>
         - teleport <player> <[Loc].add[0,50,0].with_pitch[90]>
         - cast SLOW_FALLING duration:20s power:1
     #^          - repeat stop

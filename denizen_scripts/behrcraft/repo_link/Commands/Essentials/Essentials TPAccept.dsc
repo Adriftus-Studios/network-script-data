@@ -38,5 +38,5 @@ TPAccept_Command:
                 - flag <[User]> behr.essentials.teleport.back:<map.with[location].as[<[user].location>].with[world].as[<[user].location.world.name>]>
                 - teleport <[User]> <[Loc]>
             - case TeleportHere:
-                - flag <player> behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.location.world.name>]>
+                - flag <player> behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.world.name>]>
                 - teleport <player> <[Loc]>

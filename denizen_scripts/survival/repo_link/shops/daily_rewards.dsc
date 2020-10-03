@@ -11,7 +11,7 @@ daily_rewards_test:
       - stop
     - flag server daily_rewarding:true
     - flag player daily_rewarded:true duration:<util.time_now.add[1d].start_of_day.duration_since[<util.time_now>]>
-    - animatechest <location[spawn_daily_chest]> open <player.location.world.players>
+    - animatechest <location[spawn_daily_chest]> open <player.world.players>
     - wait 10t
     - spawn dropped_item[item=diamond_sword;pickup_delay=10s;gravity=false;velocity=0,0,0;custom_name_visible=true;custom_name=<&b><player.name>'s<&sp><&a>Daily<&sp><&d>Reward...] <location[spawn_daily_item]> save:item
     - define list:!|:<yaml[daily_reward].read[rotating_items]>
@@ -51,7 +51,7 @@ daily_rewards_test:
         - narrate "<&e>You won a bow trail<&co> <&b><yaml[bowtrails].read[bowtrails.<[bow_trail]>.name].parse_color.parsed><&e>!"
     - wait 3s
     - remove <entry[item].spawned_entity>
-    - animatechest <location[spawn_daily_chest]> close <player.location.world.players>
+    - animatechest <location[spawn_daily_chest]> close <player.world.players>
     - wait 20t
     - flag server daily_rewarding:!
 

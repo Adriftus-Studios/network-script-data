@@ -6,7 +6,7 @@ sethome_command:
   description: Sets your home to your current location
   usage: /sethome
   script:
-  - if <player.location.world.environment> != end:
+  - if <player.world.environment> != end:
     - note <player.location> as:home_<player.uuid>
     - narrate "<&a>You have set your home at <&2>X: <&b><player.location.center.x><&a>, <&2>Y: <&b><player.location.center.y><&a>, <&2>Z: <&b><player.location.center.z><&a>!"
   - else:

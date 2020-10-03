@@ -104,7 +104,7 @@ claiming_claimmap_script:
   type: task
   debug: false
   script:
-    - if !<script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.location.world.name>]>:
+    - if !<script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.world.name>]>:
       - narrate "<&c>Claims are not allowed in this world."
       - stop
     - foreach <proc[claim_system_build_chunkmap].context[<player.location.chunk>|true]>:
@@ -117,7 +117,7 @@ claiming_command_guide_to_chunk:
   debug: false
   name: chunkguide
   script:
-    - run claim_system_guide_to_chunk_main def:<chunk[<context.args.first>,<context.args.get[2]>,<player.location.world>]>
+    - run claim_system_guide_to_chunk_main def:<chunk[<context.args.first>,<context.args.get[2]>,<player.world>]>
 
 #########################
 ## GLOBALLY USED ITEMS ##
@@ -152,7 +152,7 @@ claiming_claim_button:
   debug: false
   script:
   - define chunk <player.location.chunk>
-  - if !<script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.location.world.name>]>:
+  - if !<script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.world.name>]>:
       - determine <item[claiming_action_unavailable]>
   - if <yaml[claims].read[limits.current.<player.uuid>]||0> >= <yaml[claims].read[limits.max.<player.uuid>]||30>:
       - determine <item[claiming_action_unavailable_limit]>
@@ -269,7 +269,7 @@ claiming_inventory_events:
           - inventory close
           - inject claiming_claimmap_script
     on player opens claiming_inventory:
-    - if <script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.location.world.name>]>:
+    - if <script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.world.name>]>:
       - define claim_map_icon <item[map].with[flags=HIDE_ALL;display_name=<&b>Claim<&sp>Map;lore=<proc[claim_system_build_chunkmap].context[<player.location.chunk>|false].include[<&a>|<&a>Relevent<&sp>Command<&co><&sp><&e>/ClaimMap]>;nbt=action/claim_map]>
       - inventory set slot:<script[claiming_inventory].data_key[custom_slots_map.claim_map_icon]> d:<context.inventory> o:<[claim_map_icon]>
 
@@ -1326,7 +1326,7 @@ claiming_system_bossBar_Stop:
       - bossbar remove <player.uuid>.in_claim
     - if !<player.is_online>:
       - stop
-    - if <player.location.world.name> == spawn:
+    - if <player.world.name> == spawn:
       - stop
     - if <player.location.cuboids.parse[note_name].contains[savage_lands_cuboids]>:
       - inject claiming_system_bossBar_SavageLands

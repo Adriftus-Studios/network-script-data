@@ -53,8 +53,8 @@ dragon_wings_liftoff:
       - if <player.equipment_map.get[chestplate].nbt[power]> <= 0:
         - inject dragon_wings_end
       - repeat 5:
-        - playeffect dragon_breath at:<player.eye_location.below[0.4].backward[0.4].left[0.25]> offset:0.25 quantity:15 targets:<player.location.world.players>
-        - playeffect dragon_breath at:<player.eye_location.below[0.4].backward[0.4].right[0.25]> offset:0.25 quantity:15 targets:<player.location.world.players>
+        - playeffect dragon_breath at:<player.eye_location.below[0.4].backward[0.4].left[0.25]> offset:0.25 quantity:15 targets:<player.world.players>
+        - playeffect dragon_breath at:<player.eye_location.below[0.4].backward[0.4].right[0.25]> offset:0.25 quantity:15 targets:<player.world.players>
         - if !<player.has_flag[Dragon_Wings_Fly]>:
           - inject dragon_wings_end
         - if <player.gliding>:
@@ -80,8 +80,8 @@ dragon_wings_boost:
         - run dragon_wings_liftoff
         - stop
       - repeat 10:
-        - playeffect dragon_breath at:<player.location.forward> offset:0.25 quantity:25 targets:<player.location.world.players>
-        - playeffect dragon_breath at:<player.location.forward> offset:0.25 quantity:25 targets:<player.location.world.players>
+        - playeffect dragon_breath at:<player.location.forward> offset:0.25 quantity:25 targets:<player.world.players>
+        - playeffect dragon_breath at:<player.location.forward> offset:0.25 quantity:25 targets:<player.world.players>
         - if !<player.has_flag[Dragon_Wings_Fly]>:
           - inject dragon_wings_end
         - wait 1t
@@ -95,8 +95,8 @@ dragon_wings_toggle_glow:
     - else:
       - flag player dragon_wings_glow:yeeeee
       - while <player.has_flag[dragon_wings_glow]>:
-        - playeffect portal at:<player.eye_location.with_pitch[0].below[1.25].backward[0.5].left[0.25]> offset:0.25 quantity:15 targets:<player.location.world.players>
-        - playeffect portal at:<player.eye_location.with_pitch[0].below[1.25].backward[0.5].right[0.25]> offset:0.25 quantity:15 targets:<player.location.world.players>
+        - playeffect portal at:<player.eye_location.with_pitch[0].below[1.25].backward[0.5].left[0.25]> offset:0.25 quantity:15 targets:<player.world.players>
+        - playeffect portal at:<player.eye_location.with_pitch[0].below[1.25].backward[0.5].right[0.25]> offset:0.25 quantity:15 targets:<player.world.players>
         - wait 2t
 
 dragon_wings_events:
@@ -107,7 +107,7 @@ dragon_wings_events:
       - if <player.is_flying>:
         - stop
       - if <player.equipment_map.get[chestplate].scriptname||null> == dragon_wings:
-        - if !<script[dragon_wings_settings].data_key[settings.worlds].contains[<player.location.world.name>]>:
+        - if !<script[dragon_wings_settings].data_key[settings.worlds].contains[<player.world.name>]>:
           - inject dragon_wings_toggle_glow
           - stop
         - if <player.equipment_map.get[chestplate].nbt[power]> <= 0:

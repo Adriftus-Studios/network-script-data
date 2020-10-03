@@ -97,7 +97,7 @@ graves_handler:
     on player dies bukkit_priority:HIGHEST:
       - if <script[graves_config].data_key[excluded_causes].contains[<context.cause>]||false>:
         - stop
-      - if <script[graves_config].data_key[excluded_worlds].contains[<player.location.world.name>]||false>:
+      - if <script[graves_config].data_key[excluded_worlds].contains[<player.world.name>]||false>:
         - stop
       - if <context.drops.is_empty>:
         - stop

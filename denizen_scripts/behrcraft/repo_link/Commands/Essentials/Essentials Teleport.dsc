@@ -42,7 +42,7 @@ Teleport_Command:
         - if !<player.in_group[Moderation]> || <context.args.contains_any[-r|-req|-request]>:
             - inject Locally Teleport_Prompt
         - else:
-            - flag player behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.location.world.name>]>
+            - flag player behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.world.name>]>
             - teleport <player> <[User].location>
     Teleport_Prompt:
         - if <[User].has_flag[Behr.Essentials.Teleport.Requests]>:

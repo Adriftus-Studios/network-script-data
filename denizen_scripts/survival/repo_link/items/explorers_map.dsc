@@ -8,7 +8,7 @@ explorers_map_give:
   type: task
   debug: false
   script:
-    - map new:<player.location.world> reset:<player.location> scale:CLOSEST tracking:true save:map
+    - map new:<player.world> reset:<player.location> scale:CLOSEST tracking:true save:map
     - give <item[explorers_map].with[map=<entry[map].created_map>]>
 
 explorer_map_update:

@@ -14,7 +14,7 @@ grappling_hook_events:
   events:
     on player right clicks block with:grappling_hook:
       - determine passively cancelled
-      - if !<script[grappling_hook_events].data_key[worlds].contains[<player.location.world.name>]>:
+      - if !<script[grappling_hook_events].data_key[worlds].contains[<player.world.name>]>:
         - narrate "<&c>You cannot use that here."
         - stop
       - if <player.has_flag[grappling]>:
