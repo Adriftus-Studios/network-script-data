@@ -72,7 +72,7 @@ Nickname_Command:
       - define Hover "<proc[Colorize].context[Click to reset to:|green]><&nl> <&r><[User].display_name>"
       - define Text "<proc[Colorize].context[Your nickname has been changed to:|green]> <&r><[Nickname].parse_color>"
       - define Command "nick <[User].display_name.escaped.replace[&ss].with[&]>"
-      - narrate targets:<[User]> <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+      - narrate targets:<[User]> <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
       - if <[User]> != <player>:
         - narrate "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s nickname changed to:|green]> <&r><[Nickname].parse_color>"
       - adjust <[User]> display_name:<[Nickname].parse_color>
@@ -98,7 +98,7 @@ Nickname_Command:
       - define Hover "<proc[Colorize].context[Click to change nickname.|green]><&nl> <&r><[User].name>"
       - define Text "<proc[Colorize].context[Nickname Reset to:|yellow]> <&r><[User].name><&e>."
       - define Command "nick "
-      - narrate targets:<[User]> <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+      - narrate targets:<[User]> <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Command]>]>
       - adjust <[User]> display_name:<[User].name>
     #% ██ [ Local Server Usage   ] ██
     #^  - flag <[User]> Behr.Essentials.Display_Name:!
@@ -111,7 +111,7 @@ Nickname_Command:
     - define Hover "<proc[Colorize].context[Click to reset to:|green]><&nl> <&r><[User].display_name>"
     - define Text "<proc[Colorize].context[Your nickname has been changed to:|green]> <&r><[Nickname].parse_color>"
     - define Command "nick <[User].display_name.escaped.replace[&ss].with[&]>"
-    - narrate targets:<[User]> <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+    - narrate targets:<[User]> <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
     - if <[User]> != <player>:
       - narrate "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s nickname changed to:|green]> <&r><[Nickname].parse_color>"
     - adjust <[User]> display_name:<[Nickname].parse_color>

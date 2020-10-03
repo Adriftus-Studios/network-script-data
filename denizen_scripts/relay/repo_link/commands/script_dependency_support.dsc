@@ -32,32 +32,32 @@ Script_Dependency_Support_DCommand:
           - define Data <yaml[SDS_MsgHover].to_json>
       - case msgcmd messagecmd msgcommand messagecommand cmdmsg cmdmessage commandmsg commandmessage:
         - if <[Args].size> == 1:
-          - define Data <yaml[SDS_MsgCmd].to_json>
+          - define Data <yaml[SDS_msg_cmd].to_json>
       - case msgchat messagechat chatmessage chatmsg:
         - if <[Args].size> == 1:
-          - define Data <yaml[SDS_msgchat].to_json>
+          - define Data <yaml[SDS_msg_chat].to_json>
 
       - case CmdHint cmdhnt commandhnt commandhint hintcommand hntcommand hntcmd hintcmd:
         - if <[Args].size> == 1:
-          - define Data <yaml[SDS_CmdHint].to_json>
+          - define Data <yaml[SDS_cmd_hint].to_json>
       - case MsgHint messagehint messagehnt hntmessage hintmessage hintmsg:
         - if <[Args].size> == 1:
-          - define Data <yaml[SDS_MsgHint].to_json>
+          - define Data <yaml[SDS_msg_hint].to_json>
       - case MsgURL messageurl messagelink msglink linkmsg linkmessage urlmessage urlmsg:
         - if <[Args].size> == 1:
-          - define Data <yaml[SDS_MsgURL].to_json>
+          - define Data <yaml[SDS_msg_url].to_json>
       - case Msghvrins Msghvrinsert Msghoverins Msghoverinsert messagehvrins messagehvrinsert messagehoverins messagehoverinsert hvrmsgins hvrmessageins hvrmsginsert hvrmessageinsert hovermsgins hovermessageins hovermsginsert hovermessageinsert inshvrmsg inshovermsg inshvrmessage inshovermessage inserthvrmsg inserthovermsg inserthvrmessage inserthovermessage:
         - if <[Args].size> == 1:
-          - define Data <yaml[SDS_MsgHoverIns].to_json>
+          - define Data <yaml[SDS_msg_hover_ins].to_json>
       - case Msgcmdins Msgcmdinsert Msg commandins Msg commandinsert messagecmdins messagecmdinsert message commandins message commandinsert cmdmsgins cmdmessageins cmdmsginsert cmdmessageinsert  commandmsgins  commandmessageins  commandmsginsert  commandmessageinsert inscmdmsg ins commandmsg inscmdmessage ins commandmessage insertcmdmsg insert commandmsg insertcmdmessage insert commandmessage:
         - if <[Args].size> == 1:
-          - define Data <yaml[SDS_MsgCmdIns].to_json>
+          - define Data <yaml[SDS_msg_cmd_ins].to_json>
       - case MsgCmdHintIns MsgHintCmdIns:
         - if <[Args].size> == 1:
-          - define Data <yaml[SDS_MsgCmdHintIns].to_json>
+          - define Data <yaml[SDS_msg_cmd_hint_ins].to_json>
       - case msgchathintins msgchatinshint msghintchatins msghintinschat msginschathint msginshintchat chatmsghintins chatmsginshint chathintmsgins chathintinsmsg chatinsmsghint chatinshintmsg hintmsgchatins hintmsginschat hintchatmsgins hintchatinsmsg hintinsmsgchat hintinschatmsg insmsgchathint insmsghintchat inschatmsghint inschathintmsg inshintmsgchat inshintchatmsg:
         - if <[Args].size> == 1:
-          - define Data <yaml[SDS_MsgChatHintIns].to_json>
+          - define Data <yaml[SDS_msg_chat_hint_ins].to_json>
     #^- case default:
     #^  - if <[Args].size> == 1:
     #^    - define Data <yaml[SDS_default].to_json>

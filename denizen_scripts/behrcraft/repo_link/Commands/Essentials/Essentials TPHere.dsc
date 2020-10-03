@@ -29,17 +29,17 @@ TPHere_Command:
         - define HoverA "<proc[Colorize].context[Teleport To:|Green]><&nl><proc[User_Display_Simple].context[<player>]>"
         - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
         - define CommandA "tpaccept <player.name>"
-        - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+        - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
     
         - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
         - define DisplayB <&c>[<&4><&chr[2716]><&c>]
         - define CommandB "tpdecline <player.name>"
-        - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+        - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
     
         - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
         - define DisplayC <&c>[<&4><&chr[2716]><&c>]
         - define CommandC "tphere <[User].name> Cancel"
-        - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+        - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
     
         - flag <[User]> Behr.Essentials.Teleport.Request:<[TeleportMap].with[<player>].as[<map.with[RequestType].as[TeleportHere].with[Location].as[<player.location>]>]> duration:3m
 

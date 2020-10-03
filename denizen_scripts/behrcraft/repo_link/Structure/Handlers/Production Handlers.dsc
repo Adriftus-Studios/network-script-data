@@ -38,6 +38,6 @@ SelectionDisplay:
                 - define Mechanisms <&nl><&3>[<&b>Mechanisms<&3>]<&e><&nl><&a>[<&e><[MechanismList].separated_by[<&a><&rb><&nl><&a><&lb><&e>]><&a>]
             - define Text "<[LocText]> <[Size]>"
             - define Hover "<&3>[<&b>Material<&3>] <&e><[Loc].material.name><[Mechanisms].replace[|].with[<&a>|<&e>]||>"
-            - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
+            - narrate <proc[msg_hover].context[<[Hover]>|<[Text]>]>
         - else:
             - narrate <[LocText]>

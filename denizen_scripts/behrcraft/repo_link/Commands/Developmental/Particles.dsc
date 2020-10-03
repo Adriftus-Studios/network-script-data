@@ -361,8 +361,8 @@ particlefluctuatetest:
         - define Text1 <&7>[<&c><&l>-<&7>]
         - define Command0 "ptester add a"
         - define Command1 "ptester sub a"
-        - define Add0 <proc[MsgCmd].context[<[Hover0]>|<[Text0]>|<[Command0]>]>
-        - define Sub0 <proc[MsgCmd].context[<[Hover1]>|<[Text1]>|<[Command1]>]>
+        - define Add0 <proc[msg_cmd].context[<[Hover0]>|<[Text0]>|<[Command0]>]>
+        - define Sub0 <proc[msg_cmd].context[<[Hover1]>|<[Text1]>|<[Command1]>]>
         
         - define Hover0 "<&a>Add 1"
         - define Hover1 "<&c>Sub 1"
@@ -370,8 +370,8 @@ particlefluctuatetest:
         - define Text1 <&7>[<&c><&l>-<&7>]
         - define Command0 "ptester add b"
         - define Command1 "ptester sub b"
-        - define Add1 <proc[MsgCmd].context[<[Hover0]>|<[Text0]>|<[Command0]>]>
-        - define Sub1 <proc[MsgCmd].context[<[Hover1]>|<[Text1]>|<[Command1]>]>
+        - define Add1 <proc[msg_cmd].context[<[Hover0]>|<[Text0]>|<[Command0]>]>
+        - define Sub1 <proc[msg_cmd].context[<[Hover1]>|<[Text1]>|<[Command1]>]>
         - narrate "<[Add0]> <&e>A<&6>: <&a><server.flag[test.a]> <[Sub0]> <&b>| <[Add1]> <&e>B<&6>: <&a><server.flag[test.b]> <[Sub1]>"
 
 

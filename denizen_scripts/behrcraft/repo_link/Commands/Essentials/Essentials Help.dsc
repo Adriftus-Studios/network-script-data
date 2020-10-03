@@ -81,24 +81,24 @@ Help_Handler:
                 - define Hover "<proc[Colorize].context[Click for Page:|green]><&nl><&6>[<&e>-<&chr[27a4]><&6>] <proc[Colorize].context[(<[HelpPage].add[1]>/<[PageCount]>)|yellow]> <&6>[<&e>-<&chr[27a4]><&6>]"
                 - define Text <&6>[<&e><&chr[27a4]><&6>]
                 - define Command "Help <[HelpPage].add[1]>"
-                - define Next <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+                - define Next <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
 
             - else if <[HelpPage]> > 1 && <[HelpPage]> < <[PageCount]>:
                 - define Hover1 "<proc[Colorize].context[Click for Page:|green]><&nl><&6>[<&e><&chr[25c0]>-<&6>] <proc[Colorize].context[(<[HelpPage].sub[1]>/<[PageCount]>)|yellow]> <&6>[<&e><&chr[25c0]>-<&6>]"
                 - define Text1 <&6>[<&e><&chr[25c0]><&6>]
                 - define Command1 "Help <[HelpPage].sub[1]>"
-                - define Previous <proc[MsgCmd].context[<[Hover1]>|<[Text1]>|<[Command1]>]>
+                - define Previous <proc[msg_cmd].context[<[Hover1]>|<[Text1]>|<[Command1]>]>
 
                 - define Hover2 "<proc[Colorize].context[Click for Page:|green]><&nl><&6>[<&e>-<&chr[27a4]><&6>] <proc[Colorize].context[(<[HelpPage].add[1]>/<[PageCount]>)|yellow]> <&6>[<&e>-<&chr[27a4]><&6>]"
                 - define Text2 <&6>[<&e><&chr[27a4]><&6>]
                 - define Command2 "Help <[HelpPage].add[1]>"
-                - define Next <proc[MsgCmd].context[<[Hover2]>|<[Text2]>|<[Command2]>]>
+                - define Next <proc[msg_cmd].context[<[Hover2]>|<[Text2]>|<[Command2]>]>
 
             - else if <[HelpPage]> == <[PageCount]>:
                 - define Hover "<proc[Colorize].context[Click for Page:|green]><&nl><&6>[<&e><&chr[25c0]>-<&6>] <proc[Colorize].context[(<[HelpPage].sub[1]>/<[PageCount]>)|yellow]> <&6>[<&e><&chr[25c0]>-<&6>]"
                 - define Text <&6>[<&e><&chr[25c0]><&6>]
                 - define Command "Help <[HelpPage].sub[1]>"
-                - define Previous <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+                - define Previous <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
 
                 - define Next <&7>[<&8><&chr[27a4]><&7>]
 
@@ -113,5 +113,5 @@ Help_Handler:
                 - define Hover "<proc[Colorize].context[Click to Insert:|green]><&nl><proc[Colorize].context[<script[<[Command]>].parsed_key[Usage]>|Yellow]>"
                 - define Text "<proc[Colorize].context[<script[<[Command]>].parsed_key[Usage]>|Yellow]> <&b>&pipe <&3><script[<[Command]>].data_key[description]>"
                 - define Command "<script[<[Command]>].data_key[name]> "
-                - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+                - narrate <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Command]>]>
             - narrate <[Footer]>

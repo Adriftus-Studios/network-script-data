@@ -141,22 +141,22 @@ cointop_command:
             - define hover "<proc[colorize].context[click for page:|green]><&nl><&6>[<&e>-<&chr[25b6]><&6>] <proc[colorize].context[(<[page].add[1]>/<[total_pages]>)|yellow]> <&6>[<&e>-<&chr[25b6]><&6>]"
             - define text <&2>[<&e><&chr[25b6]><&2>]
             - define command "cointop <[page].add[1]>"
-            - define next <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
+            - define next <proc[msg_cmd].context[<[hover]>|<[text]>|<[command]>]>
         - else if <[page]> > 1 && <[page]> < <[total_pages]>:
             - define hover1 "<proc[colorize].context[click for page:|green]><&nl><&6>[<&e><&chr[25c0]>-<&6>] <proc[colorize].context[(<[page].sub[1]>/<[total_pages]>)|yellow]> <&6>[<&e><&chr[25c0]>-<&6>]"
             - define text1 <&2>[<&e><&chr[25c0]><&2>]
             - define command1 "cointop <[page].sub[1]>"
-            - define previous <proc[msgcmd].context[<[hover1]>|<[text1]>|<[command1]>]>
+            - define previous <proc[msg_cmd].context[<[hover1]>|<[text1]>|<[command1]>]>
 
             - define hover2 "<proc[colorize].context[click for page:|green]><&nl><&6>[<&e>-<&chr[25b6]><&6>] <proc[colorize].context[(<[page].add[1]>/<[total_pages]>)|yellow]> <&6>[<&e>-<&chr[25b6]><&6>]"
             - define text2 <&2>[<&e><&chr[25b6]><&2>]
             - define command2 "cointop <[page].add[1]>"
-            - define next <proc[msgcmd].context[<[hover2]>|<[text2]>|<[command2]>]>
+            - define next <proc[msg_cmd].context[<[hover2]>|<[text2]>|<[command2]>]>
         - else if <[page]> == <[total_pages]>:
             - define hover "<proc[colorize].context[click for page:|green]><&nl><&6>[<&e><&chr[25c0]>-<&6>] <proc[colorize].context[(<[page].sub[1]>/<[total_pages]>)|yellow]> <&6>[<&e><&chr[25c0]>-<&6>]"
             - define text <&2>[<&e><&chr[25c0]><&2>]
             - define command "cointop <[page].sub[1]>"
-            - define previous <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
+            - define previous <proc[msg_cmd].context[<[hover]>|<[text]>|<[command]>]>
 
             - define next <&2>[<&8><&chr[25b6]><&2>]
 

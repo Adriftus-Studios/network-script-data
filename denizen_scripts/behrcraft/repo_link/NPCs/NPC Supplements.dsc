@@ -50,7 +50,7 @@ NPC_Interaction:
             - flag Behrry.Interaction.ActiveOptions:|:<[Loop_Index]>/<[UUID]>/<queue.split[/].get[2]>/<[Option].split[/].limit[2].first>/<[NPC]> duration:10s
 
         # % ██ [ Print Messages                                          ] ██
-            - narrate <proc[MsgHint].context[<[Hover0]>|<[Message0]>|<[Command0]>]><proc[MsgCmd].context[<[Hover1]>|<[Message1]>|<[Command1]>]>
+            - narrate <proc[msg_hint].context[<[Hover0]>|<[Message0]>|<[Command0]>]><proc[msg_cmd].context[<[Hover1]>|<[Message1]>|<[Command1]>]>
     Disengage:
     # % ██ [ Check if player is talking to NPCs                          ] ██
         - if <player.has_flag[Behrry.Interaction.ActiveNPC]>:

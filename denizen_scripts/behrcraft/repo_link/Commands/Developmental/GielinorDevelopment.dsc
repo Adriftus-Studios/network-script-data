@@ -286,7 +286,7 @@ testcmdr:
               - define Hover "<&e>Click to Insert:<&nl><&a><player.flag[GielinorDevelopment.Selection]>"
               - define Text "<&a>Shift-Click to Insert:<&a> <&6>[<&e>Selection<&6>]"
               - define Insert <&lt>player.flag[GielinorDevelopment.Selection]<&gt>
-              - narrate <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
+              - narrate <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
             - else:
               - define SelIndex 1
               - define Selection <cuboid[<[Loc]>|<[Loc]>]>
@@ -355,7 +355,7 @@ testcmdr:
               - define Hover "<&e>Click to Insert:<&nl><&a><player.flag[GielinorDevelopment.Selection]>"
               - define Text "<&a>Shift-Click to Insert:<&a> <&6>[<&e>Selection<&6>]"
               - define Insert <&lt>player.flag[GielinorDevelopment.Selection]<&gt>
-              - narrate <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
+              - narrate <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
             - else:
               - define SelIndex 1
               - define Selection <cuboid[<[Loc]>|<[Loc]>]>

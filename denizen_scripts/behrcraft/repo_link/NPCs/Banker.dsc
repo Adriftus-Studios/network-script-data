@@ -92,7 +92,7 @@ Open_Bank_Admin:
     definitions: BankID|Player
     ErrorObjection:
         - define key "<&4>invalid character<&co><&nl><&c><[Player]||null>"
-        - narrate format:bbf "Internal error <&pipe> <&c><proc[msgHover].context[<&c>Invalid Character|<[key]>]>"
+        - narrate format:bbf "Internal error <&pipe> <&c><proc[msg_hover].context[<&c>Invalid Character|<[key]>]>"
         - stop
     script:
     - define User <[Player]>

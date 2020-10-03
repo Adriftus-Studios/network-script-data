@@ -19,7 +19,7 @@ Colors_Command:
                 - define Hover "<proc[Colorize].context[Shift-Click to Insert:|green]><&nl><[Color].parse_color>This Color!"
                 - define Text <[Color].parse_color><[Color]>
                 - define Insert <[Color]>
-                - define Key<[Loop_Index]> <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
+                - define Key<[Loop_Index]> <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
                 - define List<[Line]>:->:<[Key<[Loop_Index]>]>
                 
     # % ██ [ Create format lists ] ██
@@ -31,7 +31,7 @@ Colors_Command:
                 - define Hover "<proc[Colorize].context[Shift-Click to Insert:|green]><&nl><&e><[Format].before[/].parse_color><[Format].after[/]>!"
                 - define Text <[Format].before[/].parse_color><[Format].after[/]><&sp><&sp><&sp>
                 - define Insert <[Format].before[/]>
-                - define Key<[Loop_Index]> <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
+                - define Key<[Loop_Index]> <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
                 - define List<[Line]>:->:<[Key<[Loop_Index]>]>
         
     # % ██ [ Narrate ] ██

@@ -14,4 +14,4 @@ Donate_Command:
         - define Hover "<proc[Colorize].context[Click to follow Link:|green]><&nl><proc[Colorize].context[https://www.paypal.com/paypalme2/BearRiley|blue]>"
         - define Text "<proc[Colorize].context[Click for the Link to:|yellow]> <&3><&n>P<&b><&n>ay<&3><&n>P<&b><&n>al"
         - define URL https://www.paypal.com/paypalme2/BearRiley
-        - narrate <proc[msgUrl].context[<[Hover]>|<[Text]>|<[URL]>]>
+        - narrate <proc[msg_url].context[<[Hover]>|<[Text]>|<[URL]>]>

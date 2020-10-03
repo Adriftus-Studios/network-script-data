@@ -26,32 +26,32 @@ discord_watcher:
         
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
         - define Text <&7><&lb><&color[#738adb]>D<&7><&rb>
-        - define DiscIcon <proc[MsgHover].context[<[Hover]>|<[Text]>]>
+        - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 
         - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
         - define Command "chat <[channel]>"
-        - define ChannelText <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+        - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
 
         - define Name <context.author.name>
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
         - define Text <&7><[Name]>
         - define Insert @<context.author.nickname[<context.group>]||<context.author.name>>
-        - define NameText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
+        - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         
         - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
 
         - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message].replace[]>
         - define Insert <[Text]>
-        - define MessageText <proc[MsgHoverIns].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
+        - define MessageText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         - define Attachments <list>
         - if !<context.message.attachments.is_empty>:
           - foreach <context.message.attachments> as:Attachment:
             - define Hover "<&color[#F3FFAD]>Click to Open Link <&color[#26FFC9]>:<&nl><&color[#F3FFAD]><[Attachment]>"
             - define Text <&3>[<&b><&n>Link<&3>]<&r>
             - define Url <[Attachment]>
-            - define Attachments <[Attachments].include[<proc[MsgURL].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
+            - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
         - define Message <[DiscIcon]><[ChannelText]><[NameText]><[Separator]><[Attachments]><[MessageText]>
         - define Definitions <list_single[<[Channel]>].include[<[Message]>]>

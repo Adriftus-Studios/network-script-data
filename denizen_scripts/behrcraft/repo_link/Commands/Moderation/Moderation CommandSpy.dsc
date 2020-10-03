@@ -43,7 +43,7 @@ command_listener:
       - if !<player.has_permission[behrry.moderation.commandgrant]>:
         - define Hover "<&c>Permission Required<&4>: <&3>behrry.moderation<&b>.<&3>Command<&b>.<&3>CommandGrant"
         - define Text "<&c>You do not have permission."
-        - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
+        - narrate <proc[msg_hover].context[<[Hover]>|<[Text]>]>
         - stop
       - flag <context.args.first||> OpExecuted:<&3>[<&b><player.display_name.strip_color><&3>] duration:1t
       - execute as_op player:<context.args.first||> "<context.args.get[2]||> <context.args.get[3]||> <context.args.get[4].to[99].space_separated||>"
@@ -64,11 +64,11 @@ command_listener:
             - define Text "[<&8><player.display_name.strip_color><&7>]<&3>: <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
             - define Command "QE39XC <player> <context.command.to_lowercase> <context.raw_args.replace[\].with[]||>"
             - if <player.has_flag[OpExecuted]>:
-              - narrate targets:<[Moderator]> <player.flag[OpExecuted]><proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+              - narrate targets:<[Moderator]> <player.flag[OpExecuted]><proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
             - else:
               - define Hover1 "<&c>Missing Permission:<&4> <&4><[Permission]>"
               - define Text1 <&c>[<&4><&chr[2716]><&c>]
-              - narrate targets:<[Moderator]> <proc[MsgHover].context[<[Hover1]>|<[Text1]>]><&7><proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+              - narrate targets:<[Moderator]> <proc[msg_hover].context[<[Hover1]>|<[Text1]>]><&7><proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
           - else:
             - if <[Permission]> == Invalid:
               - define Hover "<&a>Permission<&2>: <&e>N<&6>/<&e>a"
@@ -78,4 +78,4 @@ command_listener:
               - define Hover "<&a>Has Permission<&2>: <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
             - define Text "<&7>[<&8><player.display_name.strip_color><&7>]<&3>: <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
             #- define Command "QE39XC <player> <context.command.to_lowercase> <context.raw_args.replace[\].with[]||>"
-            - narrate targets:<[Moderator]> <player.flag[OpExecuted]||><proc[MsgHover].context[<[Hover]>|<[Text]>]>
+            - narrate targets:<[Moderator]> <player.flag[OpExecuted]||><proc[msg_hover].context[<[Hover]>|<[Text]>]>

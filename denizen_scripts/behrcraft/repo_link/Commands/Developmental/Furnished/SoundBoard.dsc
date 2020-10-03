@@ -206,7 +206,7 @@ SoundBoard:
             - define Hover "<&2>Shift Click to Insert<&2>:<&nl><&e><[Insert]>"
             - define Text "<&e><[Sound]>"
             - playsound sound:ENTITY_ENDER_EYE_DEATH <player> pitch:0
-            - narrate "<&a>Shift Click for Copy<&2>: <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>"
+            - narrate "<&a>Shift Click for Copy<&2>: <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>"
           - default:
             - playsound <player> sound:<[Sound]>
       - case StopSound:

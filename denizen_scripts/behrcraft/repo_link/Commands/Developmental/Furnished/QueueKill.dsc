@@ -23,7 +23,7 @@ QueueKill_command:
                 - define Hover "<&c>Click to kill Queue<&4>:<&nl><&a><[Queue].id><&nl><&e>Script<&6>: <&a><queue.script><&nl><&e>File<&6>: <&a><queue.script.filename>"
                 - define Text "<&c>[<&4><&chr[2716]><&c>]<&e> <[Queue].id>"
                 - define Command "QueueKill <[Queue].id>"
-                - narrate <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+                - narrate <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
         - else:
             - if !<queue.exists[<context.args.first>]>:
                 - narrate "<&c>Queue has ended or does not exist."

@@ -10,7 +10,7 @@ Command_Syntax:
         - define Command "<queue.script.data_key[aliases].first||<queue.script.data_key[Name]>> "
         - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.parsed_key[Usage]>|Yellow]>"
         - define Text "<proc[Colorize].context[Syntax: <queue.script.parsed_key[Usage]>|Yellow]>"
-        - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+        - narrate <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
 
@@ -24,7 +24,7 @@ Command_Error:
         - define Hover "<proc[Colorize].context[You Typed:|red]><&r><&nl><&4>/<&c><context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <proc[Colorize].context[<queue.script.parsed_key[Usage]>|yellow]>"
         - define Text <proc[Colorize].context[<[Reason]>|red]>
         - define Command "<queue.script.data_key[aliases].first||<context.alias||<context.command>>> "
-        - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+        - narrate <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
 
@@ -37,7 +37,7 @@ Permission_Error:
     script:
         - define Text "<proc[Colorize].context[You don't have permission to do that.|red]>"
         - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.data_key[adminpermission]>"
-        - narrate <proc[HoverMsg].context[<[Hover]>|<[Text]>]>
+        - narrate <proc[msg_hover].context[<[Hover]>|<[Text]>]>
         - stop
 
 
@@ -59,7 +59,7 @@ Admin_Verification:
 #$    script:
 #$        - define Text "<proc[Colorize].context[You don't have permission to do that.|red]>"
 #$        - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6>Moderation"
-#$        - narrate <proc[HoverMsg].context[<[Hover]>|<[Text]>]>
+#$        - narrate <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 #$        - stop
 
 # % ██  [ Verifies a player online ] ██
@@ -71,7 +71,7 @@ Player_Verification:
     ErrorProcess:
         - define Hover "<&6>Y<&e>ou <&6>E<&e>ntered<&co><&nl><&c>/<context.alias.to_lowercase> <context.raw_args>"
         - define Text "<proc[Colorize].context[Player is not online or does not exist.|red]>"
-        - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
+        - narrate <proc[msg_hover].context[<[Hover]>|<[Text]>]>
         - stop
     script:
         - if <[User].length> < 4:
@@ -89,7 +89,7 @@ Player_Verification_Offline:
     ErrorProcess:
         - define Hover "<&6>Y<&e>ou <&6>E<&e>ntered<&e>:<&nl><&c>/<context.command.to_lowercase> <context.raw_args>"
         - define Text "<proc[Colorize].context[Player does not exist.|red]>"
-        - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
+        - narrate <proc[msg_hover].context[<[Hover]>|<[Text]>]>
         - stop
     script:
         - if <[User].length> < 4:

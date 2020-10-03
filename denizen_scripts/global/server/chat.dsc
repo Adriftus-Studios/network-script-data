@@ -15,7 +15,7 @@ chat_system_events:
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - define Command "chat <[channel]>"
-      - define ChannelText <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+      - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
       
       - if <yaml[global.player.<player.uuid>].contains[rank]>:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
@@ -23,14 +23,14 @@ chat_system_events:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
       - define Hint "msg <player.name> "
-      - define NameText <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Hint]>]>
+      - define NameText <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Hint]>]>
 
       - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
 
       - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message]>
       - define Insert <[Text]>
-      - define MessageText <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
+      - define MessageText <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
 
       - define Message <[ChannelText]><[NameText]><[Separator]><[MessageText]>
       

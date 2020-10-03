@@ -16,7 +16,7 @@ Restart_Player_Retrieve:
     - clickable Cancel_Player_Return def:<[Player]>|<[Server]> usages:1 until:10s save:Cancel_Player_Return
     - define Hover "<proc[Colorize].context[Cancel Server Return.|Red]>"
     - define Text <&c>[<&4><&chr[2716]><&c>]
-    - define Decline <proc[MsgHover].context[<[Hover]>|<[Text]>].on_click[<entry[Cancel_Player_Return].command>]>
+    - define Decline <proc[msg_hover].context[<[Hover]>|<[Text]>].on_click[<entry[Cancel_Player_Return].command>]>
 
     - narrate targets:<[Player]> "<[Decline]> <&b>| <&6>[<&e><[Server]><&6>] <&a>is restarting! You've been transferred to the Hub and will be sent back when the server is online."
 
@@ -28,7 +28,7 @@ Restart_Player_Return:
     - clickable Cancel_Player_Return def:<[Player]>|<[Server]> usages:1 until:10s save:Cancel_Player_Return
     - define Hover "<proc[Colorize].context[Cancel Server Return.|Red]>"
     - define Text <&c>[<&4><&chr[2716]><&c>]
-    - define Decline <proc[MsgHover].context[<[Hover]>|<[Text]>].on_click[<entry[Cancel_Player_Return].command>]>
+    - define Decline <proc[msg_hover].context[<[Hover]>|<[Text]>].on_click[<entry[Cancel_Player_Return].command>]>
     - narrate targets:<[Player]> "<[Decline]> <&b>| <&6>[<&e><[Server]><&6>] <&a>is back online! Sending you back in <&e>10 seconds<&a>."
 
   # % ██ [ Delay & Return Player to Server  ] ██

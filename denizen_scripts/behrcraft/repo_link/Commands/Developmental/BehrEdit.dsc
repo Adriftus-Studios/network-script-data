@@ -28,7 +28,7 @@ BehrEdit_Command:
         - define Hover "<&2>C<&a>lick <&2>f<&a>or <&2>H<&a>elp"
         - define Text "<&b>C<&3>lick <&b>f<&3>or <&b>h<&3>elp<&b>."
         - define Command "be help"
-        - narrate "<&4>I<&c>nvalid <&4>U<&c>sage<&4>. <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
+        - narrate "<&4>I<&c>nvalid <&4>U<&c>sage<&4>. <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
     script:
         - choose <context.args.first||<context.alias||null>>:
             - case Help be:
@@ -38,7 +38,7 @@ BehrEdit_Command:
                     - define Text <&6>/<&e><[Command]>
                     - define Hover "<&2>S<&a>hift<&e>-<&2>C<&a>lick <&2>t<&a>o <&2>I<&a>nsert<&e>:<n><[Text]>"
                     - define Insert /<[Command]><&sp>
-                    - define C <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
+                    - define C <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
                     - narrate "<&8><&M>+-<&l>}<&6>/<&e><[C]> <&b>| <&3><[D]>"
                 - narrate "<&8><&M>+-------<&2><&M>-----<&a><&M>----<&2>[ <&a>L <&2>]<&a><&M>---<&2><&M>--<&8><&M>-<&2><&M>--<&a><&M>---<&2>[ <&a>R <&2>]<&a><&M>----<&2><&M>-----<&8><&M>-------+"
             - case BStaff:

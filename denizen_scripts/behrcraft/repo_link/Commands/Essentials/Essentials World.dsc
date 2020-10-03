@@ -80,7 +80,7 @@ world_command:
                     - define hover "<proc[colorize].context[click to create:|green]><&nl><&e><[world]>"
                     - define text <&a>[<&2><&l><&chr[2714]><&r><&a>]
                     - define command "world create <[world]>"
-                    - define accept <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
+                    - define accept <proc[msg_cmd].context[<[hover]>|<[text]>|<[command]>]>
                     - narrate "<&b>| <[accept]> <&b>| <proc[colorize].context[create world instead?:|green]> <[world]>"
                 - stop
 
@@ -208,7 +208,7 @@ world_command:
                     - define hover "<proc[colorize].context[click to create:|green]><&nl><&e><[world]>"
                     - define text <&a>[<&2><&l><&chr[2714]><&r><&a>]
                     - define command "world create <[world]>"
-                    - define accept <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
+                    - define accept <proc[msg_cmd].context[<[hover]>|<[text]>|<[command]>]>
                     - narrate "<&b>| <[accept]> <&b>| <proc[colorize].context[create world instead?:|green]> <[world]>"
                     - stop
 
@@ -241,7 +241,7 @@ world_command:
             - define hover "<proc[colorize].context[click to load:|green]><&nl><&e><[world]>"
             - define text <&a>[<&2><&l><&chr[2714]><&r><&a>]
             - define command "world load <[world]>"
-            - define accept <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
+            - define accept <proc[msg_cmd].context[<[hover]>|<[text]>|<[command]>]>
             - narrate "<&b>| <[accept]> <&b>| <proc[colorize].context[load world?:|green]> <&e><[world]>"
             - stop
         - flag player behrry.constructor.worldprompt.load:!
@@ -257,7 +257,7 @@ world_command:
             - define hover "<proc[colorize].context[click to create:|green]><&nl><&e><[world]>"
             - define text <&a>[<&2><&l><&chr[2714]><&r><&a>]
             - define command "world create <[world]>"
-            - define accept <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
+            - define accept <proc[msg_cmd].context[<[hover]>|<[text]>|<[command]>]>
             - narrate "<&b>| <[accept]> <&b>| <proc[colorize].context[create world?:|green]> <&e><[world]>"
             - stop
         - flag player behrry.constructor.worldprompt.create:!
@@ -273,7 +273,7 @@ world_command:
             - define hover "<proc[colorize].context[click to destroy:|red]><&nl><&e><[world]>"
             - define text <&a>[<&2><&l><&chr[2714]><&r><&a>]
             - define command "world destroy <[world]>"
-            - define accept <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
+            - define accept <proc[msg_cmd].context[<[hover]>|<[text]>|<[command]>]>
             - narrate "<&b>| <[accept]> <&b>| <proc[colorize].context[destroy world?:|green]> <&e><[world]>"
             - stop
         - if !<player.has_flag[behrry.constructor.worldprompt.destroy1]>:
@@ -281,7 +281,7 @@ world_command:
             - define hover "<proc[colorize].context[click to destroy:|red]><&nl><&e><[world]>"
             - define text <&a>[<&2><&l><&chr[2714]><&r><&a>]
             - define command "world destroy <[world]>"
-            - define accept <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
+            - define accept <proc[msg_cmd].context[<[hover]>|<[text]>|<[command]>]>
             - narrate "<&b>| <[accept]> <&b>| <proc[colorize].context[really really destroy world?:|green]> <&e><[world]>"
             - stop
         - flag player behrry.constructor.worldprompt.destroy0:!
@@ -297,7 +297,7 @@ world_command:
             - define hover "<proc[colorize].context[click to unload:|green]><&nl><&e><[world]>"
             - define text <&a>[<&2><&l><&chr[2714]><&r><&a>]
             - define command "world unload <[world]>"
-            - define accept <proc[msgcmd].context[<[hover]>|<[text]>|<[command]>]>
+            - define accept <proc[msg_cmd].context[<[hover]>|<[text]>|<[command]>]>
             - narrate "<&b>| <[accept]> <&b>| <proc[colorize].context[unload world?:|green]> <[world]>"
             - stop
         - flag player behrry.constructor.worldprompt.destroy0:!

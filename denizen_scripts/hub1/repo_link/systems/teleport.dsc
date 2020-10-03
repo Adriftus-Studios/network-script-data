@@ -792,17 +792,17 @@ everyone_teleporthere_request:
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<[player]>]>"
     - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
     - define CommandA "tpaccept <[player].name> -s"
-    - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+    - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
 
     - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
     - define DisplayB <&c>[<&4><&chr[2716]><&c>]
     - define CommandB "tpdecline <[player].name> -s"
-    - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+    - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
 
     - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
     - define DisplayC <&c>[<&4><&chr[2716]><&c>]
     - define CommandC "tpcancel everyone -s"
-    - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+    - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
     - define online_players <server.online_players.exclude[<[player]>]>
     - foreach <[online_players]> as:p:
         - yaml set id:teleporthere_requests <[p].uuid>:->:<[player].uuid>
@@ -833,17 +833,17 @@ multiple_teleporthere_request:
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<[player_2]>]>"
     - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
     - define CommandA "tpaccept <[player_2].name> -s"
-    - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+    - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
 
     - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
     - define DisplayB <&c>[<&4><&chr[2716]><&c>]
     - define CommandB "tpdecline <[player_2].name> -s"
-    - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+    - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
 
     - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
     - define DisplayC <&c>[<&4><&chr[2716]><&c>]
     - define CommandC "tpcancel <[player_list].parse[name].separated_by[,]>"
-    - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+    - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
 
     - narrate targets:<[player_list]> "<&b>| <[Accept]> <&b>| <[Decline]> <&b>| <proc[User_Display_Simple].context[<[player_2]>]> <proc[Colorize].context[is requesting you to teleport to them.|green]>"
     - narrate targets:<[player_2]> "<&b>| <[Cancel]> <&b>| <proc[Colorize].context[Teleport request sent to:|green]> <[player_list].parse[display_name].formatted> <&2>."
@@ -871,17 +871,17 @@ teleporthere_request:
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<[attached_player]>]>"
     - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
     - define CommandA "tpaccept <[attached_player].name> -s"
-    - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+    - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
 
     - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
     - define DisplayB <&c>[<&4><&chr[2716]><&c>]
     - define CommandB "tpdecline <[attached_player].name> -s"
-    - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+    - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
 
     - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
     - define DisplayC <&c>[<&4><&chr[2716]><&c>]
     - define CommandC "tpcancel <[player_1].name> -s"
-    - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+    - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
 
     - narrate targets:<[player_1]> "<&b>| <[Accept]> <&b>| <[Decline]> <&b>| <proc[User_Display_Simple].context[<[attached_player]>]> <proc[Colorize].context[is requesting you to teleport to them.|green]>"
     - narrate targets:<[attached_player]> "<&b>| <[Cancel]> <&b>| <proc[Colorize].context[Teleport request sent to:|green]> <proc[User_Display_Simple].context[<[player_1]>]><&2>."
@@ -895,17 +895,17 @@ everyone_teleport_request:
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<[player_2]>]>"
     - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
     - define CommandA "tpaccept <[player_2].name> -s"
-    - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+    - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
 
     - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
     - define DisplayB <&c>[<&4><&chr[2716]><&c>]
     - define CommandB "tpdecline <[player_2].name> -s"
-    - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+    - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
 
     - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
     - define DisplayC <&c>[<&4><&chr[2716]><&c>]
     - define CommandC "tpcancel everyone -s"
-    - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+    - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
     - define online_players <server.online_players.exclude[<[attached_player]>|<[player_2]>]>
     - foreach <[online_players]> as:p:
         - yaml set id:teleport_requests <[p].uuid>:->:<[player_2].uuid>
@@ -937,17 +937,17 @@ teleport_request:
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<[player_2]>]>"
     - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
     - define CommandA "tpaccept <[player_2].name> -s"
-    - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+    - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
 
     - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
     - define DisplayB <&c>[<&4><&chr[2716]><&c>]
     - define CommandB "tpdecline <[player_2].name> -s"
-    - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+    - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
 
     - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
     - define DisplayC <&c>[<&4><&chr[2716]><&c>]
     - define CommandC "tpcancel <[player_1].name> -s"
-    - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+    - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
 
     - if <list[<[player_1]>|<[player_2]>].contains[<[attached_player]>].not>:
         - narrate targets:<[attached_player]> "<proc[Colorize].context[Teleport request sent from <[player_1].display_name> to:|green]> <proc[User_Display_Simple].context[<[player_2]>]><&2>."
@@ -968,17 +968,17 @@ everyone_networkteleport_request:
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><entry[displayname_2].result>"
     - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
     - define CommandA "tpaccept <[player_map_2].get[name]>"
-    - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+    - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
 
     - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
     - define DisplayB <&c>[<&4><&chr[2716]><&c>]
     - define CommandB "tpdecline <[player_map_2].get[name]>"
-    - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+    - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
 
     - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
     - define DisplayC <&c>[<&4><&chr[2716]><&c>]
     - define CommandC "tpcancel everyone"
-    - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+    - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
     - if <list[<player[<[player_map_2].get[uuid]>]>].contains[<[attached_player]>].not>:
         - bungee <[attached_server]>:
             - narrate "<&b>| <[Cancel]> <&b>| <proc[Colorize].context[Teleport request sent from everyone to:|green]> <entry[displayname_2].result><&2>." to:<[attached_player]>
@@ -1017,17 +1017,17 @@ networkteleport_request:
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><entry[displayname_2].result>"
     - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
     - define CommandA "tpaccept <[player_map_2].get[name]>"
-    - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+    - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
 
     - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
     - define DisplayB <&c>[<&4><&chr[2716]><&c>]
     - define CommandB "tpdecline <[player_map_2].get[name]>"
-    - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+    - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
 
     - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
     - define DisplayC <&c>[<&4><&chr[2716]><&c>]
     - define CommandC "tpcancel <[player_map_2].get[name]>"
-    - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+    - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
 
     - if <list[<player[<[player_map_1].get[uuid]>]>|<player[<[player_map_2].get[uuid]>]>].contains[<[attached_player]>].not>:
         - narrate "<&b>| <[Cancel]> <&b>| <proc[Colorize].context[Teleport request sent from <entry[displayname_1].result> to:|green]> <entry[displayname_2].result><&2>." to:<[attached_player]>
@@ -1063,17 +1063,17 @@ networkteleporthere_request:
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><entry[displayname_1].result>"
     - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
     - define CommandA "tpaccept <[player_map_2].get[name]>"
-    - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+    - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
 
     - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
     - define DisplayB <&c>[<&4><&chr[2716]><&c>]
     - define CommandB "tpdecline <[player_map_2].get[name]>"
-    - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+    - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
 
     - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
     - define DisplayC <&c>[<&4><&chr[2716]><&c>]
     - define CommandC "tpcancel <[player_map_1].get[name]>"
-    - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+    - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
 
     - bungee <[player_map_2].get[server]>:
         - narrate "<&b>| <[Cancel]> <&b>| <proc[Colorize].context[Teleport request sent to:|green]> <entry[displayname_1].result><&2>." to:<player[<[player_map_2].get[uuid]>]>
@@ -1108,17 +1108,17 @@ multiple_networkteleporthere_request:
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><[player_2_displayname]>"
     - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
     - define CommandA "tpaccept <[player_2_name]>"
-    - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+    - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
 
     - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
     - define DisplayB <&c>[<&4><&chr[2716]><&c>]
     - define CommandB "tpdecline <[player_2_name]>"
-    - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+    - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
 
     - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
     - define DisplayC <&c>[<&4><&chr[2716]><&c>]
     - define CommandC "tpcancel <[player_maps].parse[get[name]].separated_by[,]>"
-    - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+    - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
 
     - foreach <[player_maps].parse[get[server]].deduplicate> as:s:
         - bungee <[s]>:
@@ -1139,17 +1139,17 @@ everyone_networkteleporthere_request:
     - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><[attached_displayname]>"
     - define DisplayA <&a>[<&2><&l><&chr[2714]><&r><&a>]
     - define CommandA "tpaccept <[attached_name]>"
-    - define Accept <proc[MsgCmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
+    - define Accept <proc[msg_cmd].context[<[hoverA]>|<[displayA]>|<[commandA]>]>
 
     - define HoverB "<proc[Colorize].context[Decline Teleport Request|Red]>"
     - define DisplayB <&c>[<&4><&chr[2716]><&c>]
     - define CommandB "tpdecline <[attached_name]>"
-    - define Decline <proc[MsgCmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
+    - define Decline <proc[msg_cmd].context[<[hoverB]>|<[displayB]>|<[commandB]>]>
 
     - define HoverC "<proc[Colorize].context[Cancel Teleport Request|Red]>"
     - define DisplayC <&c>[<&4><&chr[2716]><&c>]
     - define CommandC "tpcancel everyone"
-    - define Cancel <proc[MsgCmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
+    - define Cancel <proc[msg_cmd].context[<[hoverC]>|<[displayC]>|<[commandC]>]>
 
     - foreach <bungee.list_servers.exclude[relay]> as:s:
         - bungee <[s]>:
@@ -1182,5 +1182,5 @@ Command_Error_Bungee:
     - define Hover "<proc[Colorize].context[You Typed:|red]><&r><&nl><player.flag[teleport_command].first><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <proc[Colorize].context[<player.flag[teleport_command].get[2]>|yellow]>"
     - define Text <proc[Colorize].context[<[Reason]>|red]>
     - define Command "<player.flag[teleport_command].get[3]> "
-    - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+    - narrate <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Command]>]>
     - stop
