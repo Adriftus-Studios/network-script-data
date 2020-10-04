@@ -5,7 +5,7 @@
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
-MsgHover:
+msg_hover:
     type: procedure
     debug: false
     definitions: Hover|Text
