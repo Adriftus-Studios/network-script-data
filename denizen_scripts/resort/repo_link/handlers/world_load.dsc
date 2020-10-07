@@ -3,4 +3,4 @@ world_handler:
   debug: false
   events:
     on server start:
-      - adjust <world[resort_the_end]> unload
+      - adjust <world[the_resort_the_end]> unload
