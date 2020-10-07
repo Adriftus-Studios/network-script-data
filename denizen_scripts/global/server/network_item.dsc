@@ -47,7 +47,7 @@ network_item_events:
   type: world
   debug: false
   events:
-    on player right clicks with:network_item:
+    on player right clicks block with:network_item:
       - determine passively cancelled
       - inventory open d:network_item_inventory
     on player joins:
