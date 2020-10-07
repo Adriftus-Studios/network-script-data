@@ -3,6 +3,4 @@ world_handler:
   debug: false
   script:
     on server start:
-      - createworld the_resort
-      - foreach world|world_the_end as:world:
-        - adjust <world[<[world]>]> unload
+      - adjust <world[resort_the_end]> unload
