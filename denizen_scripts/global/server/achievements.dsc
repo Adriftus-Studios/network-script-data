@@ -33,7 +33,7 @@ achievement_give:
   type: task
   definitions: id
   script:
-    - if <script[achievement_data].data_key[achievements.<[id]>]||invalid> != invalid:
+    - if <script[achievement_data].data_key[achievements.<[id]>]||invalid> == invalid:
       - debug error "Invalid ID from achievement_give script in achievements.dsc. Ideally, scripts that read manual input **should never error.**"
       - stop
 
