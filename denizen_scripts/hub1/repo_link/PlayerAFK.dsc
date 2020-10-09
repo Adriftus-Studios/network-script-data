@@ -10,4 +10,3 @@ AFK_Functions:
       - flag <[Player]> <[FlagNode]>:<[Player].location>
     on player quit flagged:AFKCheck.LastLocation:
     - flag player AFKCheck.LastLocation:!
-  
