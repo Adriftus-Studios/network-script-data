@@ -85,11 +85,6 @@ titles:
     tag: '&8|&2&k/&a&k/&dMoney Maker&a&k/&2&k/&8|'
     description: Love making money? Everyone does!
     in_shop: true
-  Abuser:
-    order: 10
-    tag: '&8|&d&k/&5Abuser&d&k/&8|'
-    description: Please report bugs using /bugreport.
-    in_shop: true
   QuickDrop:
     order: 11
     tag: '&8|&9&k//&3Quick Drop&9&k//&8|'
