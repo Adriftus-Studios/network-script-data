@@ -437,7 +437,6 @@ item_system_build_item:
     - define nbt <list>
     - define nbt_attributes <list>
     - foreach buffs|debuffs as:modifier:
-      - debug debug <[item].nbt>
       - if <[item].has_nbt[<[modifier]>]> && <[item].material.name> != <script[soul].data_key[material]> && <[Item].nbt[<[modifier]>]> != none:
         - foreach <[item].nbt[<[modifier]>].merge_maps> key:alt as:stat:
           - if <script[item_system_global_data].data_key[nbt_attributes].contains[<[alt]>]>:
