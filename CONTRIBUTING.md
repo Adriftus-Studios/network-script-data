@@ -62,11 +62,12 @@ Adriftus is a growing organization; You can find our repositories on our [organi
 
 - **Adriftus-Studios/network-script-data** - This is the core of our server's development and script repository. All of our open-source content towards the production of our servers are established here.
 - **BehrRiley/network-script-data** - This is the directed upstream repository used for contributing to the above repository. When contributing scripts for the server, you should fork this repository.
-- **Adriftus-Studios/dDiscordBot** -
+- **Adriftus-Studios/dDiscordBot** - This is our server's fork of dDiscordBot. Open source for references for custom Discord scripts.
 - **Adriftus-Studios/Webizen** - This is the core of our server's global resource pack. All of our open-source resource pack made for our live server is hosted as a direct link here.
 - **Mutim/adriftus-resources** - This is the directed upstream repository used for contributing to the above repository. When contributing resource pack content for the server, you should fork this 
-- **Adriftus-Studios/adriftus-resources** -
+- **Adriftus-Studios/adriftus-resources** - This is the core upstream directory for the Adriftus Server's primary resource pack.
 - **Adriftus-Studios/Adriftizen** - This is the repository primed for adding any content not valid to any of the other repositories.
+- **BehrRiley/Gielinor-Resources** - This is the repository designed for the Gielinor Project's general assets for the internal resource pack used.
 
 
 
