@@ -3,21 +3,15 @@ settings:
   win_display: "&eYou won &b<[name]>&e!"
 items_to_win:
   titles:
-    - PvP
-    - BaseBuilder
-    - Salty
     - TooGood
     - Ez
     - Heart
     - Grinder
-    - Toxic
     - Savage
     - Abuser
     - Stealth
-    - Rekt
     - OP
     - Powerful
-    - DeadMeme
     - Awesome
   bow_trail:
     - Totem
