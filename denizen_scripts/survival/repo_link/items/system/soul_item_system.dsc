@@ -18,8 +18,8 @@ item_system_global_data:
         global:
         - <&e>Level<&co> <[level_stars]>
         - <empty>
-        weapons: <&e>Base Damage<&co> <&b><[bonus]>
-        armors: <&e>Base Armor<&co> <&b><[bonus]>
+        weapons: <&e>Base Damage<&co> <&b><[base]>
+        armors: <&e>Base Armor<&co> <&b><[base]>
         unique_buffs:
           sunfire: <&6>Sets attackers on fire.
           life_saving: <&6>Prevents death, and heals you (10 minute CD)
