@@ -493,7 +493,7 @@ item_system_build_item:
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.flavor]>]>
     - define lore <[lore].include[<script[item_system_global_data].parsed_key[settings.lore.bottom]>]>
 
-    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;hides=all]>
+    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;hides=ATTRIBUTES]>
     - if !<[nbt].is_empty>:
       - define NewItem <[NewItem].with[nbt=<[nbt]>]>
     - else:

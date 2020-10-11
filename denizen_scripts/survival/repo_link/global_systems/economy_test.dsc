@@ -45,7 +45,7 @@ economy_balance_check_command:
     - money
   script:
     - narrate <&2>----------------------------
-    - narrate "<&a>Coins: <&e><player.money>"
+    - narrate "<&a>Coins: <&e><player.money.round_down_to_precision[0.01]>"
     - narrate "<&a>Adriftus Coins: <&e>0"
     - narrate <&2>----------------------------
   
