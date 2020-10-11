@@ -1,44 +1,44 @@
-RTP_Command:
+rtp_command:
     type: command
     name: rtp
     debug: false
-    description: Randomly teleports you
+    description: randomly teleports you
     usage: /rtp
-    permission: Behr.Essentials.Rtp
+    permission: behr.essentials.rtp
     script:
-    # % ██ [ Check for args ] ██
+    # % ██ [ check for args ] ██
         - if !<context.args.is_empty>:
-            - inject Command_Syntax
+            - inject command_syntax
 
-    # % ██ [ Define integers ] ██
+    # % ██ [ define integers ] ██
         - define distance 6000
 
-    # % ██ [ Check world ] ██
-        - if <player.world.name> != World:
-            - narrate "<proc[Colorize].context[This cannot be done in this world.|red]>"
+    # % ██ [ check world ] ██
+        - if <player.world.name> != world:
+            - narrate format:colorize_red "this cannot be done in this world."
             - stop
         
-    # % ██ [ Check for cooldown ] ██
-        - if <player.has_flag[Behr.Essentials.rtpcooldown]>:
-            - narrate "<proc[Colorize].context[You must wait:|red]> <player.flag[Behr.Essentials.rtpcooldown].expiration.formatted>> <proc[Colorize].context[to RTP again.|red]>"
+    # % ██ [ check for cooldown ] ██
+        - if <player.has_flag[behr.essentials.rtpcooldown]>:
+            - narrate "<proc[colorize].context[you must wait:|red]> <&6><player.flag[behr.essentials.rtpcooldown].expiration.formatted> <proc[colorize].context[to rtp again.|red]>"
             - stop
             
-        - flag player Behr.Essentials.rtpcooldown duration:1m
+        - flag player behr.essentials.rtpcooldown duration:1m
         - cast levitation power:30 duration:1s
         - wait .8s
-    # % ██ [ Define bad areas ] ██
-    #^  - define Blacklist <list[Lava|Water|Leaves|ice]>
+    # % ██ [ define bad areas ] ██
+    #^  - define blacklist <list[lava|water|leaves|ice]>
     #^  - repeat 100:
-        - define x <util.random.int[-<[Distance]>].to[<[Distance]>]>
-        - define z <util.random.int[-<[Distance]>].to[<[Distance]>]>
+        - define x <util.random.int[-<[distance]>].to[<[distance]>]>
+        - define z <util.random.int[-<[distance]>].to[<[distance]>]>
         - chunkload <location[<[x]>,0,<[z]>,<player.world.name>].chunk> duration:1t
-        - define Loc <location[<[x]>,0,<[z]>,<player.world.name>].highest>
-    #^      - if <[Loc].material.name.contains_any[<[Blacklist]>]>:
-    #^          #- narrate "Bad RTP, retrying... <[Loc].material.name>"
+        - define loc <location[<[x]>,0,<[z]>,<player.world.name>].highest>
+    #^      - if <[loc].material.name.contains_any[<[blacklist]>]>:
+    #^          #- narrate "bad rtp, retrying... <[loc].material.name>"
     #^          - repeat next
     #^      - else:
-        - narrate "<proc[Colorize].context[Teleporting you randomly!|Green]>"
+        - narrate "<proc[colorize].context[teleporting you randomly!|green]>"
         - flag player behr.essentials.teleport.back:<map.with[location].as[<player.location>].with[world].as[<player.world.name>]>
-        - teleport <player> <[Loc].add[0,50,0].with_pitch[90]>
-        - cast SLOW_FALLING duration:20s power:1
+        - teleport <player> <[loc].with_y[300].with_pitch[90]>
+        - cast slow_falling duration:20s power:1
     #^          - repeat stop
