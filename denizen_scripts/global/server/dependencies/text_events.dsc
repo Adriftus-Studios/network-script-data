@@ -5,13 +5,7 @@
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
-MsgHover:
-    type: procedure
-    debug: false
-    definitions: Hover|Text
-    script:
-        - determine <&hover[<[Hover]>]><[Text]><&end_hover>
-HoverMsg:
+msg_hover:
     type: procedure
     debug: false
     definitions: Hover|Text
@@ -24,8 +18,8 @@ HoverMsg:
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - define Command help
-# - ██  [       ] - narrate <proc[MsgChat].context[<[Hover]>|<[Text]>|<[Command]>]>
-MsgCmd:
+# - ██  [       ] - narrate <proc[msg_chat].context[<[Hover]>|<[Text]>|<[Command]>]>
+msg_cmd:
     type: procedure
     debug: false
     definitions: Hover|Text|Command
@@ -38,8 +32,8 @@ MsgCmd:
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - define Chat "Text a player's forced to speak"
-# - ██  [       ] - narrate <proc[MsgChat].context[<[Hover]>|<[Text]>|<[Chat]>]>
-MsgChat:
+# - ██  [       ] - narrate <proc[msg_chat].context[<[Hover]>|<[Text]>|<[Chat]>]>
+msg_chat:
     type: procedure
     debug: false
     definitions: Hover|Text|Chat
@@ -52,8 +46,8 @@ MsgChat:
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - define Command help
-# - ██  [       ] - narrate <proc[CmdHint].context[<[Hover]>|<[Text]>|<[Command]>]>
-CmdHint:
+# - ██  [       ] - narrate <proc[cmd_hint].context[<[Hover]>|<[Text]>|<[Command]>]>
+cmd_hint:
     type: procedure
     debug: false
     definitions: Hover|Text|Command
@@ -66,8 +60,8 @@ CmdHint:
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - define Hint help
-# - ██  [       ] - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Hint]>]>
-MsgHint:
+# - ██  [       ] - narrate <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Hint]>]>
+msg_hint:
     type: procedure
     debug: false
     definitions: Hover|Text|Command
@@ -80,8 +74,8 @@ MsgHint:
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - define URL http://banditcraft.pro
-# - ██  [       ] - narrate <proc[MsgURL].context[<[Hover]>|<[Text]>|<[URL]>]>
-MsgURL:
+# - ██  [       ] - narrate <proc[msg_url].context[<[Hover]>|<[Text]>|<[URL]>]>
+msg_url:
     type: procedure
     debug: false
     definitions: Hover|Text|URL
@@ -89,6 +83,19 @@ MsgURL:
         - determine <&hover[<[Hover]>]><&click[<[URL]>].type[OPEN_URL]><[Text]><&end_click><&end_hover>
 
 
+
+# $ ██  [ Message Script ] ██
+# - ██  [ Usage ] - define Hover "Text in hoverbox"
+# - ██  [       ] - define Text "Text in chat"
+# - ██  [       ] - define Script script_name
+# - ██  [       ] - narrate <proc[msg_script].context[<[Hover]>|<[Text]>|<[Script]>]>
+msg_script:
+    type: procedure
+    debug: false
+    definitions: hover|text|script
+    script:
+        - clickable <[script]> save:script
+        - determine <element[<&hover[<[hover]>]><[text]><&end_hover>].on_click[<entry[script].command>]>
 
 
 
@@ -99,8 +106,8 @@ MsgURL:
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - define Insert "Text inserted into chat"
-# - ██  [       ] - narrate <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>
-MsgHoverIns:
+# - ██  [       ] - narrate <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
+msg_hover_ins:
     type: procedure
     debug: false
     definitions: Hover|Text|Insert
@@ -114,8 +121,8 @@ MsgHoverIns:
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - define Command "Text inserted into chat"
 # - ██  [       ] - define Insert help
-# - ██  [       ] - narrate <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Command]>|<[Insert]>]>
-MsgCmdIns:
+# - ██  [       ] - narrate <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Command]>|<[Insert]>]>
+msg_cmd_ins:
     type: procedure
     debug: false
     definitions: Hover|Text|Command|Insert
@@ -129,8 +136,8 @@ MsgCmdIns:
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - define Command "Text inserted into chat"
 # - ██  [       ] - define Insert help
-# - ██  [       ] - narrate <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Command]>|<[Insert]>]>
-MsgCmdHintIns:
+# - ██  [       ] - narrate <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Command]>|<[Insert]>]>
+msg_cmd_hint_ins:
     type: procedure
     debug: false
     definitions: Hover|Text|Command|Insert
@@ -144,8 +151,8 @@ MsgCmdHintIns:
 # - ██  [       ] - define Text "Text in chat"
 # - ██  [       ] - define Command "Text inserted into chat"
 # - ██  [       ] - define Insert help
-# - ██  [       ] - narrate <proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Command]>|<[Insert]>]>
-MsgChatHintIns:
+# - ██  [       ] - narrate <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Command]>|<[Insert]>]>
+msg_chat_hint_ins:
     type: procedure
     debug: false
     definitions: Hover|Text|Command|Insert

@@ -1,0 +1,265 @@
+help:
+  type: paginated
+  embed:
+    constant:
+    - title: Embedded Discord Message
+      color: 15859456
+      description: Syntax for the following Embedded Object Types are `Key`/`Value` pairs added to a single `MapTag` passed as the definition for the task ran."
+    page:
+      1:
+      - fields:
+        - name: "(Description)"
+          value: |-
+            Character Limit: `2048`
+            `Description`**/**`<Text>`
+          inline: true
+        - name: "<Username>"
+          value: |-
+            Character Limit: `80`
+            `Username`**/**`<URL>`
+          inline: true
+        - name: "(Avatar)"
+          value: |-
+            Default: `Adriftus`
+            `Avatar`**/**`<URL>`
+          inline: true
+
+        - name: "(Author_Name)"
+          value: |
+            Character Limit: `256`
+            `Avatar`**/**`<Text>`
+          inline: true
+        - name: "(Author_Icon)"
+          value: |-
+            Requires: `Author_Name`
+            Character Limit: `1024`
+            `Author_Icon`**/**`<URL>`
+          inline: true
+        - name: "(Author_URL)"
+          value: |-
+            Requires: `Author_Name`
+            `Author_URL`**/**`<URL>`
+          inline: true
+
+        - name: Controls & Page Index
+          value: "<:left:747195307900796938> `( 3 / 3 )` <:other_left:747195307925831710>
+            \ | <:dot:748353112607031486> **Keys (1/3)** | <:dot:748353112607031486> Keys
+            (2/3) | <:deepdot:748353112602968094> Keys (1/3)"
+
+      2:
+      - fields:
+        - name: "(Title)"
+          value: |-
+            Character Limit: `256`
+            `Title`**/**`<Text>`
+          inline: true
+        - name: "(Thumbnail/Image)"
+          value: "`Thumbnail/Image`**/**`<URL>`"
+          inline: true
+        - name: "(Color)"
+          value: "`Color`**/**`<Decimal/Name>`"
+          inline: true
+  
+        - name: "(Footer_Text)"
+          value: |-
+            Character Limit: `2048`
+            `Avatar`**/**`<Text>`
+          inline: true
+        - name: "(Footer_Icon)"
+          value: |-
+            Requires: `Footer_Text`
+            `Footer_Icon`**/**`<URL>`
+          inline: true
+        - name: TimeStamp
+          value: "`TimeStamp`**/**`<TimeTag>`"
+          inline: true
+
+        - name: Controls & Page Index
+          value: "<:left:747195307900796938> `( 3 / 3 )` <:other_left:747195307925831710>
+            \ | <:dot:748353112607031486> Keys (1/3) | <:dot:748353112607031486> **Keys
+            (2/3)** | <:deepdot:748353112602968094> Keys (1/3)"
+
+      3:
+      - fields:
+        - name: "(Fields)"
+          value: |-
+            `Fields`**/**`<ListTag[MapTag|...]>`
+            Each `MapTag` requires the `Name` and `Value` field maps***\****, optionally the `Inline` field map to specify if it is inline, or not.
+          inline: true
+        - name: "<Channel>"
+          value: "`Channel`**/**`<ID/Name>`"
+          inline: true
+        - {}
+
+        - name: "`Field*` <Name>"
+          value: |-
+            Character Limit: `256`
+            `Name`**/**`<text>`
+          inline: true
+        - name: "`Field*` <Value>"
+          value: |-
+            Character Limit: `1024`
+            `Value`**/**`<text>`
+          inline: true
+        - name: "`Field*` (Inline)"
+          value: "`Inline`**/**`<boolean>`"
+          inline: true
+
+        - name: Controls & Page Index
+          value: "<:left:747195307900796938> `( 3 / 3 )` <:other_left:747195307925831710>
+            \ | <:dot:748353112607031486> Keys (1/3) | <:dot:748353112607031486> Keys
+            (2/3) | <:deepdot:748353112602968094> **Keys (1/3)**"
+examples:
+  type: paginated
+  embed:
+    constant:
+    - color: 15859456
+    page:
+      1:
+      - title: 'Your Friendly Neighborhood Data_Key: `ScriptTag.data_key`'
+        description: |-
+          Using your data keys is an incredibly easy way to organize your maptags clearly and without having to worry about large map constructor tags. In the below example, `Embed` is a custom key defined as `<script.data_key[Embed].merge_maps>` properly formatting the entire message, and then adding the Channel definition into the `MapTag`.
+          ```yml
+          Utilizing_Your_Keys:
+            type: task
+            Embed:
+              Title: Hello World!
+              Description: This is my embedded message.
+              Username: Friendly Neighborhood Data_key
+              Avatar: https://cdn.discordapp.com/attachments/626080540638052382/747198549791342673/discordLogo.png
+              Color: Green
+            definitions: Channel
+            script:
+            - define Data <script.data_key[Embed].merge_maps>
+            - define Data <[Data].with[Channel].as[<[Channel]>]>
+            - bungeerun Relay def:<list_single[<[Data]>]>
+          ```
+        color: 16318208
+        fields:
+        - name: Click for Examples
+          value: "<:left:747195307900796938> `( 1 / 4 )` <:other_left:747195307925831710>"
+      2:
+      - title: 'Tag Parser To Parse Tags: `ScriptTag.parsed_key`'
+        description: |-
+          Alternative to `ScriptTag.Data_Key`, you can specify `.parsed_key` instead of to parse the tags in the mapping to alleviate constructing onto the `<[Data]>` definition's MapTag. In the example below, instead of specifying the avatar URL and the channel ID, we'll pass the definitions into the task that uses the dependency which allows the `Using_Definitions_sParsingly` task to be ran with different Channel and Icons dynamically.
+          ```yml
+          Using_Definitions_sParsingly:
+            type: task
+            Embed:
+              Title: Hello World!
+              Description: Embeds are easy as <list[pie|cake|getting into bed with me|filing my taxes with TurboTax because my dad left when I was joined the quire team and refuses to answer my calls and Ill never have a father figure in my life to teach me important life skills].random>
+              Username: Friendlier Neighborhood Parsed_key
+              Avatar: <[Icon]>
+              Channel: <[Channel]>
+              Color: <list[Green|Red|Blue|Code|Yellow].random>
+            definitions: Channel|Icon
+            script:
+            - define Data <script.parsed_key[Embed].merge_maps>
+            - bungeerun Relay def:<list_single[<[Data]>]>
+          ```
+        color: 16318208
+        fields:
+        - name: Click for Examples
+          value: "<:left:747195307900796938> `( 2 / 4 )` <:other_left:747195307925831710>"
+      3:
+      - title: Long and Concise, Dynamic with Dice! `<map.with[].as[]>`
+        description: |-
+          Sometimes, static keys are not ideal for creating a message that may be formatted two completely different ways; this most commonly is the case for dynamically sized Field usage. Below is a full example of a completely dynamic embedded message that could conditionally change in various ways.
+          ```yml
+          Venti_Mocha_Frap_With_Extra_Sugar_and_No_Cream:
+            type: task
+            definitions: User|UUID
+            script:
+            - inject Player_Verification_Null_Return
+            - define Data <map>
+            - define Field_List <list>
+            - define Data "<[Data].with[Title].as[Player Checker]>"
+            - if <[User]> == null:
+              - define Data "<[Data].with[Description].as[User input returned null.]>"
+            - else:
+              - define Data "<[Data].with[Description].as[`<[User].name>` is a valid player!]>"
+              - define Data <[Data].with[Author_Name].as[<[User].name>]>
+              - define Player_Face https://minotar.net/avatar/<[User].name>/64
+              - define Player_Face_ISO https://minotar.net/cube/<[User].name>/64.png
+              - define Data <[Data].with[Author_Icon].as[<[Player_Face]>]>
+              - define Thumbnail <[Data].with[Author_Icon].as[<[Player_Face_ISO]>]>
+              - foreach "<map.with[Server].as[<bungee.server>].with[Favorite Food].as[<[User].flag[Favorite_Food]>].with[Spirit Animal].as[<[User].flag[Spirit_Animal]>]>" key:Field_Name as:Field_Value:
+                - define Field_Map <map.with[Field_Name].as[<[Field_Name]>].with[Field_Value].as[<[Field_Value]>].with[Inline].as[True]>
+                - define Field_List <[Field_List].include_single[<[Field_Map]>]>
+              - define Field_List <[Field_List].include_single[<map.with[Field_Name].as[UUID].with[Field_Value].as[`<[UUID]>`]>]>
+              - bungeerun Relay def:<list_single[<[Data]>]>
+          ```
+        color: 16318208
+        fields:
+        - name: 'Dependencies Used In This Script:'
+          value: "<:icons8sourcecode96:746945325293502476>[`[Player_Verification_Null_Return]`](https://github.com/Adriftus-Studios/network-script-data/blob/1bfc072fc445b93def7d09322c52797850ba35e3/denizen_scripts/global/server/dependencies/command_dependencies.dsc)"
+        - name: Click for Examples
+          value: "<:left:747195307900796938> `( 3 / 4 )` <:other_left:747195307925831710>"
+          inline: true
+      4:
+      - title: 'The Milk and Cigarette run: `<yaml[].read[]>`'
+        description: "One of the simplest ways to format embeds is just loading a Yaml and
+          dropping it in!\nThis method can also parse tags from the files; where just replace
+          `read[]` with `parsed_key[]` to achieve the same effect.\n```yml\nWhere_Is_My_Dad:\n
+          \ type: task\n  script:\n  - define Data <yaml[My_Template].read[]>\n  - bungeerun
+          Relay def:<list_single[<[Data]>]>\n```\nThe yaml loaded above `My_Template` could
+          be saved in `YAML` or `JSON` formatting. When formatting in Yaml, remember:\n<:icons8pushpin64:747233200660545569>
+          key value pairs are separated by colon\n<:icons8pushpin64:747233200660545569>
+          lists begin with a hyphen\n<:icons8pushpin64:747233200660545569> Multi-Lines can
+          be separated with `|-` map as opposed to one-lining giant strings of text\n```yml\nTitle:
+          Hello world!\nDescription: |-\n  This is my file I loaded on start, \n  and now
+          I can send it whenever!\nColor: 16711680\n```\nWhen formatting JSON files, note::\n<:icons8pushpin64:747233200660545569>
+          Data is stored in name/value pairs\n<:icons8pushpin64:747233200660545569> Records
+          are separated by commas\n<:icons8pushpin64:747233200660545569> Field names & strings
+          are wrapped by double quotes\n```json\n{\n  \"Title\": \"Hello world!\",\n  \"Description\":
+          \"This is my file I loaded on start, \\nand now I can send it whenever!\",\n  \"Color\":
+          16711680\n}\n```"
+        color: 16318208
+        fields:
+        - name: Click for Examples
+          value: "<:left:747195307900796938> `( 4 / 4 )` <:other_left:747195307925831710>"
+
+example_1:
+  type: single
+  embed:
+  - title: Hello World!
+    description: This is my embedded message.
+    color: 6291200
+
+example_2:
+  type: single
+  embed:
+  - title: Hello World!
+    description: Embeds are easy as pie!
+    color: 4980480
+
+example_3:
+  type: single
+  embed:
+  - title: Player Checker
+    description: "`_Behr` is a valid player!"
+    color: 2293504
+    fields:
+    - name: 'Server:'
+      value: BehrCraft
+      inline: true
+    - name: 'Favorite Food:'
+      value: Lasagna
+      inline: true
+    - name: Spirit Animal
+      value: Toaster Oven
+      inline: true
+    - name: 'UUID:'
+      value: "`d82da59b-44fc-4a72-a20d-a7f7ae5ef382`"
+    author:
+      name: _Behr
+      icon_url: https://minotar.net/avatar/_Behr/64
+    thumbnail:
+      url: https://minotar.net/cube/_Behr/64.png
+
+example_4:
+  type: single
+  embed:
+  - title: Hello world!
+    description: "This is my file I loaded on start, \nand now I can send it whenever!"
+    color: 16711680

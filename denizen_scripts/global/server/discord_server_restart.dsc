@@ -16,7 +16,7 @@ discord_server_restart:
       - bungeerun hub1 restart_player_retrieve def:<[Player]>|<bungee.server>
 
     - if <[Log]> || <[Confirmation]>:
-      - flag server queue.startup_logger_response:<bungee.server>|<[duuid]>|<[log]>|<[confirmation]>
+      - flag server queue.startup_logger_response:!|:<bungee.server>|<[duuid]>|<[log]>|<[confirmation]>
 
     - execute as_server save-all
     - wait 2s
