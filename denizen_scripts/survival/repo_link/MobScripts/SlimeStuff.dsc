@@ -25,24 +25,24 @@ slime_damage_handler:
           - define slot 37
           - define body_part feet
     # % Check for empty slot or invalid item
-      - if !<player.equipment_map.contains[<[equipment]>]> || !<player.equipment_map.get[<[equipment]>].material.name.ends_with[_helmet]>:
+      - if !<player.equipment_map.contains[<[equipment]>]> || !<player.equipment_map.get[<[equipment]>].material.name.ends_with[_<[equipment]>]>:
         - actionbar "<&e>Acid splashes on you, burning your <[body_part]>."
         # % Damage player without armor
         - determine <context.damager.mythicmob.level.mul[5]>
     # % Define variables
       - define item <player.equipment_map.get[<[equipment]>]>
-      - define Durrbillty <[item].durability.add[<context.damager.mythicmob.level.sub.[6].mul[<context.damager.size.div[2].round_up>]>]>
+      - define durability <[item].durability.add[<context.damager.mythicmob.level.sub.[6].mul[<context.damager.size.div[2].round_up>]>]>
     # % Item break check
       - if !<[item].repairable>:
         - stop
-      - if <[Durrbillty]> >= <[item].max_durability>:
+      - if <[durability]> >= <[item].max_durability>:
         - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:<[item]> offset:0.2 quantity:15
         - playsound <context.location> sound:ENTITY_ITEM_BREAK
         - take slot:<[slot]>
         - narrate "Your armor has melted from the acid!"
     # % Item Durability Damage
       - else:
-        - inventory adjust slot:<[slot]> durability:<[Durrbillty]>
+        - inventory adjust slot:<[slot]> durability:<[durability]>
       # % Damage player with armor
         - determine <context.damager.mythicmob.level.mul[3]>
 
