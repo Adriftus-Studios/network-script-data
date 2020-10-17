@@ -52,7 +52,7 @@ slime_puddle_creator:
   script:
   - if <context.entity.is_mythicmob> && <context.entity.mythicmob.internal_name> == slime1:
     - if <context.entity.size> == 1:
-      - showfake slime_block <context.entity.location,sub[0,1,0]> d:10 players:<context.entity.location.find.players.within[20]>
+      - showfake slime_block <context.entity.location.sub[0,1,0]> d:10 players:<context.entity.location.find.players.within[20]>
       - playeffect effect:block_crack at:<context.entity.location.add[0,1,0]> quantity:2  offset:0.5 special_data:SLIME_BLOCK
       - stop
     - if <context.entity.size> == 4:
