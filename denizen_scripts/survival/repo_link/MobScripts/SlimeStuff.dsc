@@ -31,7 +31,7 @@ slime_damage_handler:
         - determine <context.damager.mythicmob.level.mul[5]>
     # % Define variables
       - define item <player.equipment_map.get[<[equipment]>]>
-      - define durability <[item].durability.add[<context.damager.mythicmob.level.sub.[6].mul[<context.damager.size.div[2].round_up>]>]>
+      - define durability <[item].durability.add[<context.damager.mythicmob.level.sub[6].mul[<context.damager.size.div[2].round_up>]>]>
     # % Item break check
       - if !<[item].repairable>:
         - stop
