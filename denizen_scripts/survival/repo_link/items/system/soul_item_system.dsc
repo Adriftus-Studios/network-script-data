@@ -405,10 +405,9 @@ item_create_soul_item:
       - else:
         - define debuffs:->:<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>
     - if !<[enchantments].is_empty>:
-      - define nbt <list_single[buffs/<[buffs]||none>].include_single[debuffs/<[debuffs]||none>].include_single[rarity/<[rarity]>].include_single[soul_level/<[level]>].include_single[active_soul/<[soul_type]>]>
-      - define item_to_build <item[<[material]>].with[enchantments=<[enchantments]>;nbt=<[nbt]>]>
+      - define item_to_build <item[<[material]>].with[enchantments=<[enchantments]>;nbt=<list_single[buffs/<[buffs]||none>].include_single[debuffs/<[debuffs]||none>].include_single[rarity/<[rarity]>].include_single[soul_level/<[level]>].include_single[active_soul/<[soul_type]>]>]>
     - else:
-      - define item_to_build <item[<[material]>].with[nbt=buffs/<[buffs]||none>|debuffs/<[debuffs]||none>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>]>
+      - define item_to_build <item[<[material]>].with[nbt=buffs/<[buffs].merge_maps||none>|debuffs/<[debuffs].merge_maps||none>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>]>
     - determine <proc[item_system_build_item].context[<[item_to_build]>]>
 
 # TODO - Make This WAY less fucking stupid.
@@ -439,7 +438,7 @@ item_system_build_item:
     - define nbt_attributes <list>
     - foreach buffs|debuffs as:modifier:
       - if <[item].has_nbt[<[modifier]>]> && <[item].material.name> != <script[soul].data_key[material]> && <[Item].nbt[<[modifier]>]> != none:
-        - foreach <[item].nbt[<[modifier]>].parse[as_map].merge_maps> key:alt as:stat:
+        - foreach <[item].nbt[<[modifier]>].as_list.merge_maps> key:alt as:stat:
           - if <script[item_system_global_data].data_key[nbt_attributes].contains[<[alt]>]>:
             - define attribute <script[item_system_global_data].data_key[nbt_attributes.<[alt]>]>
             - define slot <script[item_system_global_data].data_key[nbt_slots.<[item].material.name>]>
