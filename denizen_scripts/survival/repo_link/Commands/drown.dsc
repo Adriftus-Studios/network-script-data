@@ -4,10 +4,6 @@ drown_command:
     usage: /drown (player)
     description: Plays a drown animation
     permission: adriftus.staff
-    tab complete:
-        - if <player.groups.contains[Moderation]>:
-            - define Blacklist <[<player>]>
-            - inject Online_Player_Tabcomplete
     script:
     # % ██ [  Verify argumentss ] ██
     - if <context.args.is_empty>:
@@ -19,7 +15,7 @@ drown_command:
         - inject Command_Syntax
 
     # % ██ [  Drown Player ] ██
-    - narrate <&e>Drowning <[user].display_name>... <&o>you monster.
+    - narrate "<&e>Drowning <[user].display_name>... <&o>you monster."
     - repeat 3:
         - animate animation:HURT_DROWN <[user]>
         - wait 14t
