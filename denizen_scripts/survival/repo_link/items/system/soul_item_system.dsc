@@ -372,7 +372,7 @@ get_random_soul:
       - define NBT <[NBT].include_single[debuffs/<[debuffs]>]>
     - define flavor "<&d>Soul Item<&nl><&e>Combine with Armor or Weapons"
     - define NBT <[NBT].include_single[flavor/<[flavor]>]>
-    - define item <item[soul].with[nbt=<[NBT]>;color=<script[item_system_global_data].data_key[settings.rarity_colors_named.<[rarity]>]>]>
+    - define item <item[soul].with[nbt=<[NBT]>]>
     - determine <proc[item_system_build_item].context[<list_single[<[item]>]>]>
 
 item_with_soul_create:
