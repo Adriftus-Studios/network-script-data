@@ -12,13 +12,17 @@ command_play:
     - if <context.args.is_empty>:
       - inventory open d:command_play_inventory
       - stop
-    - else if <context.args.size> > 1:
-      - inject Command_Syntax
+    - else if <context.args.size> != 1:
+      - inject command_syntax
+    # % ██ [ Verify Survival release ] ██
+    - else if <context.args.first> == Survival:
+      - define reason "Server is not released yet!"
+      - inject command_error
       
     # % ██ [ Verify Valid Server for Network ] ██
     - else if !<yaml[bungee_config].contains[servers.<context.args.first.to_lowercase>]>:
       - define Reason "Invalid Server."
-      - inject Command_Error
+      - inject command_error
 
     # % ██ [ Verify Valid Online Server ] ██
     - else if !<bungee.list_servers.contains[<context.args.first.to_lowercase>]>:
@@ -28,7 +32,7 @@ command_play:
     # % ██ [ Check for Same Server ] ██
     - else if <bungee.server> == <context.args.first.to_lowercase>:
       - define Reason "You're already on <yaml[bungee_config].parsed_key[servers.<context.args.first.to_lowercase>.display_name]>."
-      - inject Command_Error
+      - inject command_error
       
     # % ██ [ Transfer Server ] ██
     - narrate "<&e>Joining Server<&co> <yaml[bungee_config].parsed_key[servers.<context.args.first.to_lowercase>.display_name]>"
