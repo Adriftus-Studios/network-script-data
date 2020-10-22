@@ -21,6 +21,10 @@ Colorize:
         - define 1 <&color[#ff3333]>
         - define 2 <&c>
         - define 3 <&4>
+      - case Red_Bold:
+        - define 1 <&color[#ff3333]><&l>
+        - define 2 <&c><&l>
+        - define 3 <&4><&l>
       - case Orange:
         - define 1 <&color[#ff9933]>
         - define 2 <&color[#ffb366]>
