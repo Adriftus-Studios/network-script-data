@@ -43,7 +43,7 @@ claiming_protection_group_upgrades_events:
   type: world
   debug: false
   events:
-    on player opens claiming_protection_groyp_upgrades:
+    on player opens claiming_protection_group_upgrades:
       - define cost <script[claiming_system_upgrade_data].parsed_key[upgrades.claim_limit.cost]>
       - define "lore:<&a>---------------------|<&e>Price<&co><&sp><&a><[cost]>|<&b>Right click while holding.|<&b>This will unlock <&a>10 <&b>more claims.|<&a>---------------------"
       - give <item[claiming_group_upgrade_item].with[material=gold_block;display_name=<&b>Upgrade<&sp>Claim<&sp>Limit;lore=<[lore]>;nbt=upgrade/claim_limit|cost/<[cost]>]> to:<context.inventory>
