@@ -46,6 +46,7 @@ Hide_Handler:
         - determine passively cancelled
         - narrate format:Colorize_Red "You cannot attack while hidden."
     on player logs in:
+      - define Moderators <server.online_players.filter[in_group[Moderation]]>
       - define HiddenModerators <server.online_players.filter[has_flag[behrry.moderation.hide]]>
       - if <[HiddenModerators].size> > 0:
         - foreach <[HiddenModerators]> as:Mod:
