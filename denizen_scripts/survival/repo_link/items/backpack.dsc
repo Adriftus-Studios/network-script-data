@@ -73,7 +73,7 @@ Backpack_54:
 Backpack_events:
   type: world
   events:
-    on player right clicks block with:Backpack_*:
+    on player right clicks block with:Backpack_* ignorecancelled:true:
       - determine passively cancelled
       - wait 1t
       - inject Backpack_open
