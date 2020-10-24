@@ -32,7 +32,7 @@ market_system_data:
     # -- IMPORTANT -- #
     ## THE sell_buy_difference (BELOW) SHOULD ALWAYS BE GREATER THAN adjustment_amount (ABOVE).
     ## THIS AVOIDS INFINITE MONEY GLITCHES.
-    sell_buy_difference: 0.3
+    sell_buy_difference: 0.1
   categories:
     crafting:
       material: diamond_ore

@@ -94,13 +94,17 @@ store_hub_cosmeticShop_titles_events:
       - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<context.item.nbt[tag]>]||false>:
         - narrate "<&c>You already have unlocked this title."
         - stop
-      - if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
-        - define newBal <proc[getGlobalPlayerData].context[economy.AuroraCoins.current].-[<context.item.nbt[price]>]>
+      - if <yaml[global.player.<player.uuid>].read[economy.premium.current]> < <context.item.nbt[price]>:
+        - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
+        - stop
+      #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
+        #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].-[<context.item.nbt[price]>]>
       - define tagID <context.item.nbt[tag]>
       - inject title_unlock
-      - if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
-        - give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<context.item.nbt[tag]>]>"
+      #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
+        #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<context.item.nbt[tag]>]>"
       - narrate "<&a>You have succesfully purchased the Title: <yaml[titles].read[titles.<[tagID]>.tag].parse_color><&e>."
+      - yaml id:global.player.<player.uuid> set economy.premium.current:-:<context.item.nbt[price]>
       - inject store_hub_cosmeticShop_title_open
 
 title_changeover:
@@ -190,13 +194,17 @@ store_hub_cosmeticShop_bowtrails_events:
       - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<context.item.nbt[trail]>]||false>:
         - narrate "<&c>You already have unlocked this bow trail."
         - stop
-      - if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
-        - define newBal <proc[getGlobalPlayerData].context[economy.AuroraCoins.current].-[<context.item.nbt[price]>]>
+      - if <yaml[global.player.<player.uuid>].read[economy.premium.current]> < <context.item.nbt[price]>:
+        - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
+        - stop
+      #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
+        #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].-[<context.item.nbt[price]>]>
       - define bowtrail <context.item.nbt[trail]>
       - inject bowtrail_unlock
-      - if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
-        - give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<context.item.nbt[tag]>]>"
+      #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
+        #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<context.item.nbt[tag]>]>"
       - narrate "<&a>You have succesfully purchased the bow trail: <yaml[bowtrails].read[bowtrails.<[bowtrail]>.name].parse_color><&e>."
+      - yaml id:global.player.<player.uuid> set economy.premium.current:-:<context.item.nbt[price]>
       - inject store_hub_cosmeticShop_bowtrails_open
 
 bowtrail_changeover:

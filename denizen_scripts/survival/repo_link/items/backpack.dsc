@@ -86,7 +86,7 @@ Backpack_events:
     on player clicks Backpack_* in Backpack_inventory_*:
       - determine cancelled
     on player clicks in Backpack_inventory_*:
-      - if <player.inventory.slot[<context.hotbar_button>].scriptname.starts_with[Backpack_]||false>:
+      - if <context.item.scriptname.starts_with[Backpack_]||false>:
         - determine cancelled
 
 Backpack_inventory_9:

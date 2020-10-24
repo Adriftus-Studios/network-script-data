@@ -1139,7 +1139,7 @@ claiming_protection_setMemberPermission:
 claiming_protection_events:
   type: world
   debug: false
-  farmables: pumpkins|carrots|wheat|beetroots|potatoes|cocoa|sugar_cane|kelp_plant|melon
+  farmables: pumpkin|carrots|wheat|beetroots|potatoes|cocoa|sugar_cane|kelp_plant|melon
   no_break_bottom: sugar_cane|kelp_plant
   events:
     on player damages cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
@@ -1184,7 +1184,7 @@ claiming_protection_events:
         - if <context.location.below.material.name> != <context.material.name>:
           - narrate "<&c>You cannot farm the bottom of this, without break permission."
           - determine cancelled
-      - else if <context.location.material.age> < 7 && !<yaml[claims].read[groups.<[group]>.members.everyone.break]> && !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false>:
+      - else if <context.location.material.age||7> < 7 && !<yaml[claims].read[groups.<[group]>.members.everyone.break]> && !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false>:
         - narrate "<&c>This plant hasn't matured yet."
         - determine cancelled
       - else:
