@@ -372,7 +372,7 @@ get_random_soul:
       - define NBT <[NBT].include_single[debuffs/<[debuffs]>]>
     - define flavor "<&d>Soul Item<&nl><&e>Combine with Armor or Weapons"
     - define NBT <[NBT].include_single[flavor/<[flavor]>]>
-    - define item <item[soul].with[nbt=<[NBT]>;color=<script[item_system_global_data].data_key[settings.rarity_colors_named.<[rarity]>]>]>
+    - define item <item[soul].with[nbt=<[NBT]>]>
     - determine <proc[item_system_build_item].context[<list_single[<[item]>]>]>
 
 item_with_soul_create:
@@ -385,11 +385,11 @@ item_with_soul_create:
     - if <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].is_empty>:
       - determine gray_stained_glass_pane
     - define soul_item <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].first>
-    - define contexts <list.include[<list[<[item1]>|<[item2]>].filter[has_nbt[soul].not].first.material.name>]>
-    - define contexts <[contexts].include[<[soul_item].nbt[soul].get[type]>]>
-    - define contexts <[contexts].include[<[soul_item].nbt[soul].get[level]>]>
-    - define contexts <[contexts].include[<[soul_item].nbt[rarity]>]>
-    - define contexts <[contexts].include[<list_single[<list[<[item1]>|<[item2]>].parse_tag[<[parse_value].enchantments.with_levels>].combined.deduplicate>]>]>
+    - define contexts <list.include_single[<list[<[item1]>|<[item2]>].filter[has_nbt[soul].not].first.material.name>]>
+    - define contexts <[contexts].include_single[<[soul_item].nbt[soul].as_map.get[type]>]>
+    - define contexts <[contexts].include_single[<[soul_item].nbt[soul].as_map.get[level]>]>
+    - define contexts <[contexts].include_single[<[soul_item].nbt[rarity]>]>
+    - define contexts <[contexts].include_single[<list_single[<[item1]>].include_single[<[item2]>].parse_tag[<[parse_value].enchantments.with_levels>].combine.deduplicate>]>
     - determine <proc[item_create_soul_item].context[<[contexts]>]>
 
 item_create_soul_item:
@@ -405,9 +405,9 @@ item_create_soul_item:
       - else:
         - define debuffs:->:<map.with[<[stat]>].as[<script[item_system_global_data].parsed_key[calculations.<[stat]>]>]>
     - if !<[enchantments].is_empty>:
-      - define item_to_build <item[<[material]>].with[enchantments=<[enchantments]>;nbt=buffs/<[buffs]||none>|debuffs/<[debuffs]||none>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>]>
+      - define item_to_build <item[<[material]>].with[enchantments=<[enchantments]>;nbt=<list_single[buffs/<[buffs]||none>].include_single[debuffs/<[debuffs]||none>].include_single[rarity/<[rarity]>].include_single[soul_level/<[level]>].include_single[active_soul/<[soul_type]>]>]>
     - else:
-      - define item_to_build <item[<[material]>].with[nbt=buffs/<[buffs]||none>|debuffs/<[debuffs]||none>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>]>
+      - define item_to_build <item[<[material]>].with[nbt=buffs/<[buffs].merge_maps||none>|debuffs/<[debuffs].merge_maps||none>|rarity/<[rarity]>|soul_level/<[level]>|active_soul/<[soul_type]>]>
     - determine <proc[item_system_build_item].context[<[item_to_build]>]>
 
 # TODO - Make This WAY less fucking stupid.
@@ -438,7 +438,7 @@ item_system_build_item:
     - define nbt_attributes <list>
     - foreach buffs|debuffs as:modifier:
       - if <[item].has_nbt[<[modifier]>]> && <[item].material.name> != <script[soul].data_key[material]> && <[Item].nbt[<[modifier]>]> != none:
-        - foreach <[item].nbt[<[modifier]>].merge_maps> key:alt as:stat:
+        - foreach <[item].nbt[<[modifier]>].as_list.merge_maps> key:alt as:stat:
           - if <script[item_system_global_data].data_key[nbt_attributes].contains[<[alt]>]>:
             - define attribute <script[item_system_global_data].data_key[nbt_attributes.<[alt]>]>
             - define slot <script[item_system_global_data].data_key[nbt_slots.<[item].material.name>]>
@@ -486,7 +486,7 @@ item_system_build_item:
           - foreach <[Modifiers]> key:alt as:final_value:
             - if <[alt]> == none:
                 - foreach next
-            - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.<[modifier]>.<[alt]>]>]>
+            - define lore <[Lore].include_single[<script[item_system_global_data].parsed_key[settings.lore.middle.<[modifier]>.<[alt]>]>]>
 
     - if <[item].has_nbt[flavor]>:
       - define flavor <[item].nbt[flavor]>

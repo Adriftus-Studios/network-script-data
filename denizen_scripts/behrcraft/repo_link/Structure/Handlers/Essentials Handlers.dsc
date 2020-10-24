@@ -2,14 +2,6 @@ Essentials:
     type: world
     debug: false
     events:
-        on system time hourly:
-            - execute as_server "acball 100"
-        #on player clicks block in:golden_shovel:
-        #    - if <player.inventory.list_contents.parse[material.name].contains[golden_shovel]>:
-        #        - stop
-        #    - else:
-        #        - give golden_shovel
-        #        - execute as_op "claimbook <player.name>"
         on hanging breaks because obstruction:
                 - determine cancelled
         on player right clicks Composter:
@@ -77,4 +69,3 @@ VillageLeasher:
         #            - flag <context.entity> smacked duration:0.45s
         #        - playeffect effect:EXPLOSION_NORMAL at:<context.entity.location.add[0,1,0]> visibility:50 quantity:10 offset:0.5
         #        - playeffect effect:EXPLOSION_LARGE at:<context.entity.location.add[0,1,0]> visibility:50 quantity:1 offset:0.5
-
