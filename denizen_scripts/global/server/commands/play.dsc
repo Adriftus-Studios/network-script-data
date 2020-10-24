@@ -14,10 +14,6 @@ command_play:
       - stop
     - else if <context.args.size> != 1:
       - inject command_syntax
-    # % ██ [ Verify Survival release ] ██
-    - else if <context.args.first> == Survival:
-      - define reason "Server is not released yet!"
-      - inject command_error
       
     # % ██ [ Verify Valid Server for Network ] ██
     - else if !<yaml[bungee_config].contains[servers.<context.args.first.to_lowercase>]>:
