@@ -95,7 +95,9 @@ mob_death_event:
   events:
     on entity dies in:mainland:
       - if <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]> && <context.entity.is_mythicmob>:
-        - define mob_level <context.entity.mythicmob.level>
+        - define mob_level <context.entity.mythicmob.level||0>
+        - if <[mob_level]> == 0:
+          - stop
         - inject drop_table
         - if <[drop]||null> != null:
           - determine <context.drops.include[<[drop]>]>
