@@ -384,7 +384,9 @@ item_with_soul_create:
       - determine gray_stained_glass_pane
     - if <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].is_empty>:
       - determine gray_stained_glass_pane
-    - define soul_item <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].first>
+    - define soul_item <list[<[item1]>].include[<[item2]>].filter[has_nbt[soul]].first||nerp>
+    - if <[soul_item]> == nerp:
+      - determine gray_stained_glass_pane
     - define contexts <list.include[<list[<[item1]>|<[item2]>].filter[has_nbt[soul].not].first.material.name>]>
     - define contexts <[contexts].include[<[soul_item].nbt[soul].get[type]>]>
     - define contexts <[contexts].include[<[soul_item].nbt[soul].get[level]>]>
