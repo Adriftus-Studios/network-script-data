@@ -1139,7 +1139,7 @@ claiming_protection_setMemberPermission:
 claiming_protection_events:
   type: world
   debug: false
-  farmables: pumpkins|carrots|wheat|beetroots|potatoes|cocoa|sugar_cane|kelp_plant|melon
+  farmables: pumpkin|carrots|wheat|beetroots|potatoes|cocoa|sugar_cane|kelp_plant|melon
   no_break_bottom: sugar_cane|kelp_plant
   events:
     on player damages cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
