@@ -98,6 +98,7 @@ tutorial_data:
       - <&a>--------------------------
       - "<&e>Use <&b>/warps <&e>and go to Grim to continue."
     particle_guide: true
+    subtitle: "<&e>Go to the server warp: <&4>Grim"
   14:
     hologram:
       - <&6><&l>Grim
@@ -105,7 +106,6 @@ tutorial_data:
       - "<&c>... For a cost."
     particle_guide: false
     title: "<&6>Use <&b>/warps"
-    subtitle: "<&e>Go to the server warp: <&4>Grim"
   15:
     hologram:
       - <&6><&l>Claims
