@@ -43,7 +43,7 @@ claiming_system_upgrade_data:
       material: black_dye
       CMD: 1
     claim_limit:
-      cost: <player.flag[claim_upgrades].*[25000]>
+      cost: <player.flag[claim_upgrades].*[25000]||25000>
       material: gold_block
       CMD: 1
 
