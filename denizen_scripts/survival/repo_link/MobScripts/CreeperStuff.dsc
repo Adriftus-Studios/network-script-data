@@ -1,5 +1,6 @@
 Creeper_Prime_Signal:
-  type: world
+  # $ [ converted until MythicMobs is added ]
+  type: data
   debug: false
   events:
     on entity explosion primes:

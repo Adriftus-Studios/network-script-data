@@ -1,7 +1,8 @@
 #Used to make Mythicmobs break shields faster. Shoutout to Pjochillin for making this for me.
 
 shield_degradation:
-  type: world
+  # $ [ converted until MythicMobs is added ]
+  type: data
   debug: false
   events:
     on player damaged by entity:

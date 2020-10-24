@@ -1,5 +1,6 @@
 slime_damage_handler:
-  type: world
+  # $ [ converted until MythicMobs is added ]
+  type: data
   debug: false
   events:
     on player damaged by slime:

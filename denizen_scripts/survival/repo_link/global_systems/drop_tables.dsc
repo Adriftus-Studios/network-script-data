@@ -88,7 +88,8 @@ drop_table:
         - foreach stop
 
 mob_death_event:
-  type: world
+  # $ [ converted until MythicMobs is added ]
+  type: data
   debug: false
   whitelist: zombie|creeper|skeleton|spider|drowned|witch|husk|withers|evoker|ravager|pillager|vex|illusioner|silverfish|stray|vindicator|cave_spider|enderman
   events:

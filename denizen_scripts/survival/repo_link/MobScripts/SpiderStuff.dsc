@@ -1,5 +1,6 @@
 Paranoia_poison_canceller:
-  type: world
+  # $ [ converted until MythicMobs is added ]
+  type: data
   debug: false
   events:
     on player damaged by cave_spider:
