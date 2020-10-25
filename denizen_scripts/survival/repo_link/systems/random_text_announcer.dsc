@@ -2,7 +2,7 @@ random_text_announcer:
   type: world
   debug: false
   events:
-    on system time minutely every 30:
+    on system time minutely every:30:
       - choose <util.random.int[1].to[8]>:
         - case 1:
           - narrate "<&c>When was the last time you had a glass of delicious, delicious water?"
