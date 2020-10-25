@@ -74,7 +74,7 @@ Error_Response_Webhook:
     - define embed <[embed].color[5820671]>
 
   # % ██ [ Submit Message      ] ██
-    - narrate "channel id: <[cannel_id]>"
+    - narrate "channel id: <[channel_id]>"
     - narrate "embed: <[embed]>"
     - discord id:adriftusbot send_embed channel:<[channel_id]> embed:<[embed]>
   Channel_Map:
