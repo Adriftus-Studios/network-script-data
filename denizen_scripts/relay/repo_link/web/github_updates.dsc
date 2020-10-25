@@ -131,7 +131,7 @@ github_updates:
       # % ██ [ Cache data                             ] ██
         - define action <[data].get[action]>
         - define review_data <[data].get[review]>
-        - define pull_data <[data].get[pull_request>
+        - define pull_data <[data].get[pull_request]>
 
       # % ██ [ Queue-stopping actions                 ] ██
         - if <[review_data].get[body]> == null || <[data].get[action].contains_any[edited]>:
@@ -181,6 +181,12 @@ github_updates:
       - case pull_request_review_comment:
       # % ██ [ Cache data                             ] ██
         - define comment_data <[data].get[comment]>
+        - if <[data].contains[review_data]>:
+          - define review_data <[data].get[review_data]>
+          - define ID <[review_data].get[id]>
+        - else if <[data].contains[pull_request]>:
+          - define pull_data <[data].get[review_data]>
+          - define ID <[pull_data].get[id]>
 
       # % ██ [ Format the message                     ] ██
         - define context <list_single[<[comment_data].get[body]>].include_single[<[emoji]>]>
