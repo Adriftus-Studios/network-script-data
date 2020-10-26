@@ -31,7 +31,7 @@ random_text_announcer:
         - case 7:
           - define Hover "<proc[Colorize].context[I've heard 3 potatoes and an onion make a delicious soup|green]>"
           - define Text "<&c>Have you found any <&b>Custom Recipes<&c>?"
-          - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
+          - narrate <proc[Msg_Hover].context[<[Hover]>|<[Text]>]>
         - case 8:
           - narrate "<&c>You have been online for <&b><util.time_now.duration_since[<player.flag[LoginTime]>].formatted><&b>. Time for a posture check!"
         - case 9:
