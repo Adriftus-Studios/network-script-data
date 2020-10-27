@@ -13,7 +13,7 @@ Error_Response_Webhook:
     - define UUID <util.random.duuid.after[_]>
     - define File_Location ../../web/webget/
     - define Message <[Data].get[Message]>
-    - define Body_text "<list.include_single[<&gt> **Error Message**<&co><&nl><&nl>`<[Message]>`<&nl><&nl>]>"
+    - define Body_text "<list.include_single[<&gt> **Error Message**<&co> `<[Message]>`<&nl>]>"
     - define embed <discordembed>
 
   # % ██ [ Generate Log        ] ██
@@ -36,8 +36,11 @@ Error_Response_Webhook:
       - define embed <[embed].inline_fields[<map.with[File<&co>].as[<&lb>`<&lb><[File_Directory]><&rb>`<&rb>(<[File_Link]>)]>]>
       - define embed "<[embed].footer_text[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>"
       
-      - define Title_Text "<&lb>BORKED<&rb><[Script_Name]> error on <[Server].to_titlecase>"
-      - define Body_Text "<[Body_Text].include_single[<&gt> **Script Information**<&co><&nl><&nl>Script Name<&co>  `<[Script_Name]>`<&nl><&nl>Script Reference<&co>  <&lb>`<[File_Directory]>`<&rb>(<[File_Link]>)<&nl><&nl>Script Line<&co> <[Script_Line]><&nl><&nl>]>"
+      - define Title_Text "<&lb>BORKED<&rb> <[Script_Name]> error on <[Server].to_titlecase>"
+      - define Raw_Link  https://raw.githubusercontent.com/Adriftus-Studios/network-script-data/master/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/].replace[<&sp>].with[<&pc>20]>
+      - ~webget <[raw_link]> headers:User-Agent/Adriftus save:script
+    #^- define Line_Insert_Link https://github.com/Adriftus-Studios/network-script-data/blob/SHA_GOES_HERE/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
+      - define Body_Text "<[Body_Text].include_single[<&gt> **Script Name**<&co> `<[Script_Name]>`<&nl><&gt> **Script Reference**<&co>  <&lb>`<[File_Directory]>`<&rb>(<[File_Link]>)<&nl><&gt> **Script Line**<&co> `<[Script_Line]>`<&nl>`<entry[script].result.split[<&nl>].get[<[Script_Line]>].trim>`<&nl>]>"
     - else:
       - define Title_Text "<&lb>BORKED<&rb> Error on <[Server].to_titlecase>"
       - define embed "<[embed].inline_fields[<map.with[Note<&co>].as[`Different Queue Callback`]>]>"
@@ -51,7 +54,7 @@ Error_Response_Webhook:
       - define embed "<[embed].author_name[Player Attached<&co> <[Player_Name]>]>"
       - define embed <[embed].thumbnail_url[https://minotar.net/avatar/<[Player_Name]>/32.png]>
 
-      - define Body_Text "<[Body_Text].include_single[<&gt> **Player Attached**<&co><&nl><&nl>`<[Player_Name]>` / `(<[Player_UUID]>`<&nl><&nl>]>"
+      - define Body_Text "<[Body_Text].include_single[<&gt> **Player Attached**<&co> `<[Player_Name]>` / `<[Player_UUID]>`<&nl>]>"
 
   # % ██ [ Verify Definition Fields  ] ██
     - if <[Data].keys.contains[Definition_Map]> && !<[Data].get[Definition_Map].is_empty>:
