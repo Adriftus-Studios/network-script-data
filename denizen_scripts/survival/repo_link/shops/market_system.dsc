@@ -52,13 +52,7 @@ market_system_data:
       lore: <&a>Trade Goods!
   items:
     # Crafting
-    netherite_ingot:
-      category: crafting
-      minimum_value: 2200
 
-    ancient_debris:
-      category: crafting
-      minimum_value: 500
 
     diamond:
       category: crafting
