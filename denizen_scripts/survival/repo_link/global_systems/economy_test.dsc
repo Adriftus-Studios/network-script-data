@@ -45,7 +45,7 @@ economy_balance_check_command:
     - money
   script:
     - narrate <&2>----------------------------
-    - narrate "<&a>Coins: <&e><player.money.round_down_to_precision[0.01]>"
+    - narrate "<&a>Coins: <&e><player.money.round_to[2]>"
     - narrate "<&a>Adriftus Coins: <&e>0"
     - narrate <&2>----------------------------
   
@@ -61,7 +61,7 @@ economy_balance_top:
     - narrate "<&a>----    Top Balances    -----"
     - narrate <&a>-----------------------------
     - foreach <server.players.filter[flag[money].is[!=].to[null]].sort_by_number[money].reverse.get[1].to[10]>:
-      - narrate "<&e><[loop_index]>. <[value].name><&co> <&b><[value].flag[money]>"
+      - narrate "<&e><[loop_index]>. <[value].name><&co> <&b><[value].flag[money].round_to[2]>"
 
 economy_bank_note:
   type: item
@@ -91,6 +91,28 @@ economy_withdraw:
     - else if <player.money> < <[amount]>:
       - narrate "<&c>You don't have enough money."
       - stop
+    - money take quantity:<[amount]>
     - give "<item[economy_bank_note].with[nbt=value/<[amount]>|lore=<&a>------------------------|<&e>Value<&co> <&a><[amount]>|<&e>Right click while holding to deposit.|<&a>------------------------]>"
     - narrate "<&b>You have withdrawn <&a><[amount].economy.formatted><&b> from your account."
     - narrate "<&b>Check your inventory for the bank note."
+
+economy_pay:
+  type: command
+  name: pay
+  script:
+    - if <context.args.size> != 2:
+      - inject command_syntax
+    - define amount <context.args.get[2]>
+    - define payee <context.args.first>
+    - if !<[amount].is_integer>:
+      - narrate "<&c>You must specify how much you want to pay."
+      - stop
+    - else if <player.money> < <[amount]>:
+      - narrate "<&c>You don't have enough money for that."
+      - stop
+        - define User <context.args.first>
+        - inject Player_Verification
+    - money take quantity:<[amount]> from:<player>
+    - money give quantity:<[amount]> to:<[user]>
+    - narrate "<&c>You have paid <[user].display_name> <&a>$<[amount].economy.formatted><&c> from your account."
+    
