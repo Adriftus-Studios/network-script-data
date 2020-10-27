@@ -9,6 +9,10 @@ combat_log_events:
   debug: false
   events:
     on player damages player bukkit_priority:HIGHEST:
+      - if !<context.damager.has_flag[combat]>:
+        - narrate "<&b>You have entered combat, do not log out." targets:<context.damager>
+      - if !<context.entity.has_flag[combat]>:
+        - narrate "<&b>You have entered combat, do not log out." targets:<context.entity>
       - flag <context.damager> combat duration:45s
       - flag <context.entity> combat duration:45s
     on player quits:
