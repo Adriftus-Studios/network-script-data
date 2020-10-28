@@ -61,7 +61,7 @@ economy_balance_top:
     - narrate "<&a>----    Top Balances    -----"
     - narrate <&a>-----------------------------
     - foreach <server.players.filter[flag[money].is[!=].to[null]].sort_by_number[money].reverse.get[1].to[10]>:
-      - narrate "<&e><[loop_index]>. <[value].name><&co> <&b><[value].flag[money].round_to[2]>"
+      - narrate "<&e><[loop_index]>. <[value].name><&co> <&b><server.economy.format[<[value].flag[money].round_to[2]>]>"
 
 economy_bank_note:
   type: item
@@ -75,7 +75,7 @@ economy_bank_note_events:
   events:
     on player right clicks with:economy_bank_note:
     - ratelimit 2t
-    - narrate "<&b>You have deposited <&a><context.item.nbt[value].economy.formatted> into your account!"
+    - narrate "<&b>You have deposited <&a><server.economy.format[<context.item.nbt[value]>]> into your account!"
     - give money quantity:<context.item.nbt[value]>
     - wait 1t
     - take <context.item>
@@ -92,8 +92,8 @@ economy_withdraw:
       - narrate "<&c>You don't have enough money."
       - stop
     - money take quantity:<[amount]>
-    - give "<item[economy_bank_note].with[nbt=value/<[amount]>|lore=<&a>------------------------|<&e>Value<&co> <&a><[amount]>|<&e>Right click while holding to deposit.|<&a>------------------------]>"
-    - narrate "<&b>You have withdrawn <&a><[amount].economy.formatted><&b> from your account."
+    - give "<item[economy_bank_note].with[nbt=value/<[amount]>;lore=<&a>------------------------|<&e>Value<&co> <&a><server.economy.format[<[amount]>]>|<&e>Right click while holding to deposit.|<&a>------------------------]>"
+    - narrate "<&b>You have withdrawn <&a><server.economy.format[<[amount]>]><&b> from your account."
     - narrate "<&b>Check your inventory for the bank note."
 
 economy_pay:
@@ -114,5 +114,5 @@ economy_pay:
     - inject Player_Verification
     - money take quantity:<[amount]> from:<player>
     - money give quantity:<[amount]> to:<[user]>
-    - narrate "<&c>You have paid <[user].display_name> <&a>$<[amount]><&c> from your account."
-    # <[amount].economy.formatted> isnt a thing
+    - narrate "<&c>You have paid <[user].display_name> <&a><server.economy.format[<[amount]>]><&c> from your account." targets:<player>
+    - narrate "<&c>You have been paid <&a><server.economy.format[<[amount]>]><&c> from <[user].display_name>." targets:<[user]>
