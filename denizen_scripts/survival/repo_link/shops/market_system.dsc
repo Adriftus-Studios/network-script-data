@@ -96,6 +96,10 @@ market_system_data:
       category: building
       minimum_value: 15
 
+    birch_planks:
+      category: building
+      minimum_value: 15
+
     white_wool:
       category: building
       minimum_value: 50

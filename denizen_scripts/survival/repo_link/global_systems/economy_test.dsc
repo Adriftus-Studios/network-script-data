@@ -110,7 +110,7 @@ economy_pay:
     - else if <player.money> < <[amount]>:
       - narrate "<&c>You don't have enough money for that."
       - stop
-        - define User <context.args.first>
+        - define user <context.args.first>
         - inject Player_Verification
     - money take quantity:<[amount]> from:<player>
     - money give quantity:<[amount]> to:<[user]>
