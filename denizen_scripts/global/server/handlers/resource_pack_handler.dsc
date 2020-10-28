@@ -8,7 +8,7 @@ rp_command:
   script:
   # The resource pack line.
     - define rp_url <server.flag[resourcepackurl]>
-    - if <[rp_url]||null> != null:
+    - if <server.flag[resourcepackurl]||null> != null:
       - if <context.args.size> >= 1:
         - narrate "<&c>Simply type <&a>/rp<&c>"
       - else:
@@ -18,15 +18,13 @@ system_override:
   type: world
   events:
     on player joins:
-      - define rp_url <server.flag[resourcepackurl]>
-      - if <[rp_url]||null> != null:
+      - if <server.flag[resourcepackurl]||null> != null:
         - wait 60t
-        - adjust <player> resource_pack:<[rp_url]>
+        - adjust <player> resource_pack:<server.flag[resourcepackurl]>
         - adjust <player> quietly_discover_recipe:<server.list_recipe_ids>
         - adjust <player> resend_discovered_recipes
     on resource pack status:
-      - define rp_url <server.flag[resourcepackurl]>
-      - if <[rp_url]||null> != null:
+      - if <server.flag[resourcepackurl]||null> != null:
         - if <context.status> == FAILED_DOWNLOAD:
           - narrate "<&6>Please accept the resource pack."
           - narrate "<&6>While our server is playable without it, it makes more sense when you have the resource pack enabled."
