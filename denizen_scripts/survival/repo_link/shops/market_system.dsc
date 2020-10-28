@@ -539,6 +539,8 @@ market_system_transfer_yaml_hourly:
   script:
     - foreach <script[market_system_data].list_keys[items]> as:item:
       - define min_value <script[market_system_data].data_key[items.<[item]>.minimum_value]>
+      - yaml id:current_market unload
+      - yaml id:current_market create
       - yaml id:current_market set items.<[item]>.value:<[min_value].*[<util.random.decimal[1].to[<list[1|1|1|1|1|2|2|2|2|2|3|3|3|4|4|5].random>]>].round_up>
 
 market_system_open:
