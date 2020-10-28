@@ -27,7 +27,20 @@ survival_falloff_rtp:
   debug: false
   events:
     after player enters spawn_below:
+    - if !<player.has_flag[RecentRTP]>:
       - inject survival_rtp
+      - if <location[home_<player.uuid>]||null> != null:
+        - flag <player> RecentRTP duration:10m
+      - flag <player> RecentRTP duration:60s
+      - stop
+
+    - else if <location[home_<player.uuid>]||null> != null:
+      - teleport <location[home_<player.uuid>]>
+      - narrate "<&a>You have been teleported home! Please wait <player.flag[RecentRTP].expiration.formatted> more before teleportation!"
+      - stop
+
+    - teleport spawn
+    - narrate "Please wait <player.flag[RecentRTP].expiration.formatted> seconds before teleporting again"
 
 survival_rtp_portal:
   type: world

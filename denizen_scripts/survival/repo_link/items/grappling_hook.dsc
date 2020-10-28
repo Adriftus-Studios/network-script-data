@@ -21,7 +21,7 @@ grappling_hook_events:
         - narrate "<&c>You can only fire one grappling hook at a time."
         - stop
       - shoot arrow shooter:<player> speed:3 script:grappling_hook_pull save:hook
-      - flag player grappling:true duration:10s
+      - flag player grappling:true duration:3s
       - wait 1t
       - flag <entry[hook].shot_entity> no_trail:true duration:30s
       - repeat 999:

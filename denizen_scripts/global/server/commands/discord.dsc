@@ -17,7 +17,7 @@ Discord_Command:
     - if <context.args.is_empty> || ( <context.args.size> == 1 && <list[link|invite].contains[<context.args.first>]> ):
       - define URL https://discord.adriftus.com
       - define Hover "<proc[Colorize].context[Click to follow Link:|green]><&nl><proc[Colorize].context[<[URL]>|blue]>"
-      - define Text "<proc[Colorize].context[Click for the Invite Link to:|yellow]> <&3><&n>D<&b><&n>iscord]>"
+      - define Text "<proc[Colorize].context[Click for the Invite Link to:|yellow]> <&3><&n>D<&b><&n>iscord"
       - narrate <proc[msg_url].context[<def[Hover]>|<def[Text]>|<def[URL]>]>
     - else:
       - if !<list[Connect|SignMeUpCoach].contains_any[<context.args.first>]>:

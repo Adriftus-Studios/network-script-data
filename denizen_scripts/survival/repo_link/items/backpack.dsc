@@ -76,7 +76,8 @@ Backpack_events:
     on player right clicks block with:Backpack_* ignorecancelled:true:
       - determine passively cancelled
       - wait 1t
-      - inject Backpack_open
+      - if <player.item_in_hand.scriptname.starts_with[Backpack_]>:
+        - inject Backpack_open
     on player places backpack_*:
       - determine passively cancelled
       - wait 1t
