@@ -67,7 +67,7 @@ web_handler:
 
     # % ██ [ Self Pings               ] ██
       - else if <[domain]> == <script.data_key[domains.self]>:
-        - bungee <bungee.list_servers.exclude[<bungee.server>|survival]>:
+        - bungee <bungee.list_servers.exclude[<bungee.server>]>:
           - reload
         - wait 1t
         - reload

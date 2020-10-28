@@ -18,10 +18,11 @@ combat_log_events:
     on player quits:
       - if <player.has_flag[combat]>:
         - hurt <player.health> <player>
-    on delta time secondly:
+    on delta time secondly every:1:
       - foreach <server.online_players_flagged[combat]> as:player:
         - adjust <queue> linked_player:<[player]>
-        - if <player.has_flag[combat]> &&<player.flag[combat].expiration.in_seconds> <= 1:
+        - if <player.flag[combat].expiration.in_seconds> <= 1:
+          - wait 1s
           - narrate "<&b>You are no longer in combat."
 
 # can use earth, fire, ender, air, or water
