@@ -114,5 +114,5 @@ economy_pay:
     - inject Player_Verification
     - money take quantity:<[amount]> from:<player>
     - money give quantity:<[amount]> to:<[user]>
-    - narrate "<&c>You have paid <[user].display_name> <&a>$<[amount]><&c> from your account."
+    - narrate "<&c>You have paid <[user].display_name> <&a>$<server.economy.formatted[<[amount]>]><&c> from your account."
     # <[amount].economy.formatted> isnt a thing
