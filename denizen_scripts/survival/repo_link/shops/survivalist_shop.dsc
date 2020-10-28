@@ -90,7 +90,7 @@ survivalistData:
             Prices: 1500/1300
         Grappling_Hook:
             Item: <item[grappling_hook]>
-            Prices: 100/50
+            Prices: 5000/1500
         Teleportation_Shard:
             Item: <item[teleportation_shard]>
             Prices: 500/250

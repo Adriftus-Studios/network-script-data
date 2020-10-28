@@ -82,7 +82,7 @@ chat_command:
       - stop
 
     - else if <context.args.size> > 1:
-      - define "Invalid Chat Channel."
+      - define reason "Invalid Chat Channel."
       - inject Command_Error
 
     - define Channel <context.args.first.to_lowercase>
