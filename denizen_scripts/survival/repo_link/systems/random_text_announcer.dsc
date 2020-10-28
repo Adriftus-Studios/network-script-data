@@ -9,17 +9,17 @@ random_text_announcer:
         - case 2:
           - define URL https://discord.adriftus.com
           - define Hover "<proc[Colorize].context[Click to follow Link:|green]><&nl><proc[Colorize].context[<[URL]>|blue]>"
-          - define Text "<&e>Have you joined our community on <&2>D<&b>iscord?"
+          - define Text "<&e>Have you joined our community on <&3>D<&b>iscord?"
           - announce <proc[msg_url].context[<[Hover]>|<[Text]>|<[URL]>]>
         - case 3:
           - define URL https://github.com/Adriftus-Studios/network-script-data/issues
           - define Hover "<proc[Colorize].context[Click to follow Link:|green]><&nl><proc[Colorize].context[<[URL]>|blue]>"
-          - define Text "<&e>Got a feature request? Open an issue on our <&2>G<&b>it<&2>H<&b>ub!!"
+          - define Text "<&e>Got a feature request? Open an issue on our <&3>G<&b>it<&3>H<&b>ub!!"
           - announce <proc[msg_url].context[<[Hover]>|<[Text]>|<[URL]>]>
         - case 4:
           - define URL https://github.com/Adriftus-Studios/network-script-data/issues
           - define Hover "<proc[Colorize].context[Click to follow Link:|green]><&nl><proc[Colorize].context[<[URL]>|blue]>"
-          - define Text "<&e>Got a feature request? Open an issue on our <&2>G<&b>it<&2>H<&b>ub!!"
+          - define Text "<&e>Got a feature request? Open an issue on our <&3>G<&b>it<&3>H<&b>ub!!"
           - announce <proc[msg_url].context[<[Hover]>|<[Text]>|<[URL]>]>
         - case 5:
           - define URL https://www.adriftus.com/
@@ -35,4 +35,4 @@ random_text_announcer:
         - case 8:
           - narrate targets:<server.online_players> per_player "<&e>You have been online for <&b><util.time_now.duration_since[<player.flag[LoginTime]>].formatted><&b>. Time for a posture check!"
         - case 9:
-          - announce "<&e>Did you just hear a <&a>creeper <&e>behind you?"
+          - announce "<&e>Did you just hear a <&c>creeper <&e>behind you?"

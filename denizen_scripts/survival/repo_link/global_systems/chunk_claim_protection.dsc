@@ -1193,7 +1193,11 @@ claiming_protection_events:
     - else if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.break]>:
       - narrate "<&c>You do not have permission to break blocks here."
       - determine cancelled
-    on player clicks *door|*_button|lever|chest|ender_chest|*_gate|crafting_table|anvil|furnace|brewing_stand|enchanting_table|*_bed|barrel|bookshelf priority:100:
+    on player changes farmland into dirt:
+    - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.break]>:
+      - narrate "<&c>You do not have permission to trample crops here."
+      - determine cancelled
+    on player clicks *door|*_button|lever|chest|ender_chest|*_gate|crafting_table|anvil|furnace|brewing_stand|enchanting_table|*_bed|barrel|hopper|bookshelf priority:100:
     - define location <context.location||<player.location>>
     - define group <yaml[claims].read[<[location].chunk.world>.<[location].chunk.x>.<[location].chunk.z>]||null>
     - if <[group]> == null:
