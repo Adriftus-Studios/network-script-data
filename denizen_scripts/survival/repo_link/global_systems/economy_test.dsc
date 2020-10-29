@@ -74,7 +74,7 @@ economy_bank_note_events:
   type: world
   events:
     on player right clicks with:economy_bank_note:
-    - ratelimit 2t
+    - ratelimit <player> 2t
     - narrate "<&b>You have deposited <&a><server.economy.format[<context.item.nbt[value]>]> into your account!"
     - give money quantity:<context.item.nbt[value]>
     - wait 1t
