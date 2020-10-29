@@ -39,6 +39,10 @@ grappling_hook_pull:
    - if !<[hit_entities].is_empty||true>:
      - wait 1t
      - if <player.can_see[<[hit_entities].first>]||false>:
+     - define group <yaml[claims].read[<[hit_entities].first.location.chunk.world>.<[hit_entities].first.location.chunk.x>.<[hit_entities].first.location.chunk.z>]||null>
+       - if <[group]> != null && !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.kill-animals]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
+         - narrate "<&c>You do not have permission to interact with animals here."
+         - stop
        - push <[hit_entities]> d:<player.location> script:grappling_hook_sanity def:false
      - else:
        - if <server.entity_is_spawned[<[hit_entities].first>]>:
