@@ -6,75 +6,61 @@ repair_command:
   usage: /repair
   adminusage: /repair
   permission: behr.essentials.repair
-  equipment:
-    - foreach 37|38|39|40|41 as:slot:
-      - if <player.inventory.slot[<[slot]>].repairable>:
-        - inventory adjust slot:<[slot]> durability:0
-        - define count:++
-  inventory:
-    - foreach <player.inventory.list_contents> as:slot:
-      - if <player.inventory.slot[<[slot]>].repairable>:
-        - inventory adjust slot:<[slot]> durability:0
-        - define count:++
-  chest:
-    - define inventory <player.cursor_on.inventory>
-    - foreach <[inventory].list_contents> as:slot:
-      - if <[inventory].slot[<[slot]>].repairable>:
-        - inventory adjust slot:<[slot]> durability:0 d:<[inventory]>
-        - define count:++
   script:
-  # % ██ [ check for args ] ██
+  # % ██ [ check for args         ] ██
     - if <context.args.size> > 1:
 
-      # % ██ [ run as moderator ] ██
       - if <context.args.size> > 2:
         - inject command_syntax
 
+      # % ██ [ run as moderator   ] ██
       - if !<player.in_group[moderator]>:
         - inject admin_permission_denied
 
-      # % ██ [ repair everyything ] ██
-      - if <context.args.first.contains_any[all|everything|full]>:
-        - run locally inventory
-        - run locally equipment
-        - if <[count]||invalid> == invalid:
-          - narrate format:colorize_yellow "No items to repair."
-        - else:
-          - narrate format:colorize_green "Repaired <[count]> items."
+      # % ██ [ repair equipped    ] ██
+      - if <context.args.first.contains_any[equipment|equipped]>:
+        - define list <player.inventorys.slot[37|38|39|40|41]>
+        - define inventory <player.inventory>
 
-      # % ██ [ repair just the inventory ] ██
-      - else if <context.args.first.contains_any[inventory|inv|player]>
-        - run locally inventory
-        - if <[count]||invalid> == invalid:
-          - narrate format:colorize_yellow "No items to repair."
-        - else:
-          - narrate format:colorize_green "Repaired <[count]> items."
+      # % ██ [ repair everything  ] ██
+      - else if <context.args.first.contains_any[all|everything|full|inventory|inv|player]>
+        - define list <player.inventorys.list_contents>
+        - define inventory <player.inventory>
 
-      # % ██ [ repair a chest ] ██
+      # % ██ [ repair a chest     ] ██
       - else if <context.args.first.contains_any[chest]>
         - if <player.cursor_on.inventory||invalid> == invalid:
           - define reason "You must look at a chest to use this."
           - inject command_error
-        - run locally chest
-        - if <[count]||invalid> == invalid:
-          - narrate format:colorize_yellow "No items to repair."
-        - else:
-          - narrate format:colorize_green "Repaired <[count]> items."
+        - define list <player.cursor_on.inventory.list_contents>
+        - define inventory <player.cursor_on.inventory>
 
       - else:
         - inject command_syntax
+      
+    # % ██ [ repair items         ] ██
+      - define count 0
+      - foreach <[list]> as:slot:
+        - if <[inventory].slot[<[slot]>].repairable>:
+          - inventory adjust slot:<[slot]> durability:0 d:<[inventory]>
+          - define count:++
 
-    # % ██ [ run as self ] ██
+      - if <[count]> == 0:
+        - narrate format:colorize_yellow "No items to repair."
+      - else:
+        - narrate format:colorize_green "Repaired <[count]> items."
+
+    # % ██ [ run as self          ] ██
     - else:
       
-    # % ██ [ check item ] ██
+    # % ██ [ check item           ] ██
       - if !<player.item_in_hand.repairable>:
         - define reason "item cannot be repaired."
         - inject command_error
       
-    # % ██ [ repair item ] ██
+    # % ██ [ repair item          ] ██
       - inventory adjust slot:<player.held_item_slot> durability:0
       - if <player.item_in_hand.has_display>:
-        - narrate format:colorize_green "You repaired your <player.item_in_hand.material.display_name>"
+        - narrate "<proc[colorize].context[You repaired your|green]> <player.item_in_hand.material.display_name><&2>."
       - else:
-        - narrate format:colorize_green "You repaired your <player.item_in_hand.material.name>"
+        - narrate format:colorize_green "You repaired your <player.item_in_hand.material.name>."
