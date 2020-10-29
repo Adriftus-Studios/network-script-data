@@ -1104,6 +1104,9 @@ claiming_protection_settings_change_name:
   debug: false
   definitions: NewName|group
   script:
+  - if <[NewName]> == <player.name>:
+    - narrate "<&c>You cannot add yourself to your own claim."
+    - stop
   - yaml id:claims set groups.<[group]>.settings.display_name:<[NewName]>
   - narrate "<&e>You have changed your group's display name to <proc[getColorCode].context[<yaml[claims].read[groups.<[group]>.settings.color]>]><[NewName]>"
   - inject text_input_complete
