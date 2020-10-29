@@ -494,6 +494,7 @@ market_system_yaml_builder:
     on delta time hourly:
       - inject locally save_market_data_async
       - inject market_system_changeover
+      - inject locally make_market_data
 
 market_system_changeover:
   type: task

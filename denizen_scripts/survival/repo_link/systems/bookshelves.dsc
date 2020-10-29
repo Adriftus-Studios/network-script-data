@@ -3,13 +3,13 @@ bookshelves_events:
   type: world
   debug: false
   events:
-    on player clicks bookshelf:
+    on player clicks bookshelf priority:150:
       - if <context.click_type.starts_with[RIGHT]> && !<player.is_sneaking>:
         - if <inventory[bookshelf_<context.location.simple>]||null> == null:
           - note <inventory[bookshelves_inventory]> as:bookshelf_<context.location.simple>
         - inventory open d:<inventory[bookshelf_<context.location.simple>]>
         - determine passively cancelled
-    on player breaks bookshelf:
+    on player breaks bookshelf priority:150:
       - if <inventory[bookshelf_<context.location.simple>]||null> != null:
         - foreach <inventory[bookshelf_<context.location.simple>].list_contents> as:item:
           - drop <[item]> <context.location>
