@@ -89,6 +89,8 @@ Backpack_events:
     on player clicks in Backpack_inventory_*:
       - if <context.item.scriptname.starts_with[Backpack_]||false>:
         - determine cancelled
+    on player drops backpack_*:
+    - determine cancelled
 
 Backpack_inventory_9:
   type: inventory
