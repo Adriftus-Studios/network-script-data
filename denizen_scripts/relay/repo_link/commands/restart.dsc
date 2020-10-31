@@ -21,10 +21,11 @@ Restart_DCommand:
     - waituntil rate:1s <bungee.connected>
 
   # % ██ [ Verify Arguments                 ] ██
-    - if (<[args].size> > <bungee.list.size.add[3]>) || (<[args].size> > 1 && <[args].get[1]> == help):
+    - if ( <[args].size> > <bungee.list.size.add[3]> ) || ( !<[args].is_empty> && <[args].first> == help ):
       - define title "Syntax Error"
       - define message "Use `/restart help` for help with this command."
-      - define color 8650752
+      - define color red
+      - inject embedded_color_formatting
       - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[<[color]>].with[description].as[<[message]>]>]>
       - define data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[embeds]>].to_json>
       - define hook <script[ddtbcty].data_key[WebHooks.<[channel]>.hook]>
@@ -32,9 +33,9 @@ Restart_DCommand:
       - ~webget <[hook]> data:<[data]> headers:<[headers]>
       - stop
     
-    - else if <[args].size> == 1 && <[args].get[1]>:
+    - else if <[args].size> == 1 && <[args].first>:
       - define title "Discord Command | `/status <&lt>Server<&gt>"
-      - define message "**Description:** Restarts a specific server, or all servers.<&nl>**Server Usage:** `/restart <&lt>Server/All<&gt>`<&nl>**Misc Args:** `/restart help`"
+      - define message "**Description**: Restarts a specific server, or all servers.<&nl>**Server Usage**: `/restart <&lt>Server/All<&gt>`<&nl>**Misc Args**: `/restart help`"
       - define color 8650752
       - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[<[color]>].with[description].as[<[message]>]>]>
       - define data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[embeds]>].to_json>
