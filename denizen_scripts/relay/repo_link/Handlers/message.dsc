@@ -61,7 +61,7 @@ Message_Handler:
           - case Restart:
             - ~Run Restart_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case repository repo git github:
-            - ~Run Repository_DCommand def:<[Channel]>
+            - ~Run Repository_DCommand def:<list_single[<[Message]>].include[<[Channel]>]>
           - case script sds scripthelp:
             - ~Run Script_Dependency_Support_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
           - case tag parse t:
