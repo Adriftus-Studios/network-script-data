@@ -10,7 +10,7 @@ Repository_DCommand:
     - define hook <script[DDTBCTY].data_key[webhooks.<[channel]>.hook]>
     - define headers <yaml[saved_headers].read[discord.webhook_message]>
 
-    - if <[args].first> == Gielinor:
+    - if !<[args].is_empty> && <[args].first> == Gielinor:
       - define data <yaml[SDS_Repository_Gielinor].to_json>
     - else:
       - define data <yaml[SDS_Repository].to_json>
