@@ -41,18 +41,21 @@ bowtrails:
     icon: enchanted_golden_apple
     name: '&cR&6a&ei&an&bb&5o&dw'
     description: '&eShoot the &cR&6a&ei&an&bb&5o&dw...'
+    Price: 300
   Diamond_Block_Dust:
     trail_type: dust
     material_dust: diamond_block
     icon: diamond_block
     name: '&bDiamond Dust'
     description: '&eYikes... pointy...'
+    Price: 300
   Totem:
     trail_type: particle
     particle: totem
     icon: totem_of_undying
     name: '&aTotem Trail'
     description: '&eLike the leaves!'
+    Price: 300
   Ender:
     trail_type: moving_particle
     particle: dragon_breath
@@ -60,18 +63,21 @@ bowtrails:
     icon: ender_chest
     name: '&dEnder Portal'
     description: '&eWhich side are you fighting for?!'
+    Price: 300
   Diamond_Sword:
     trail_type: item_crack
     item_trail_type: diamond_sword
     icon: diamond_sword
     name: '&bDiamond &7Sword Bits'
     description: '&eGenius! Crushed up diamond swords!'
+    Price: 300
   Gold_Block_Dust:
     trail_type: dust
     material_dust: gold_block
     icon: gold_block
     name: '&bGold Dust'
     description: '&eSooo Shiny......'
+    Price: 300
   The_Drew:
     trail_type: block_2_color
     color1: red
@@ -80,29 +86,34 @@ bowtrails:
     icon: player_head[skull_skin=Mutim_endymion]
     name: '&7The &4Drew'
     description: '&eDo the Drew.'
+    Price: 300
   Cobweb:
     trail_type: item_crack
     item_trail_type: cobweb
     icon: cobweb
     name: '&fCobweb'
     description: '&fSpoooooky.....'
+    Price: 300
   Fire:
     trail_type: particle
     particle: flame
     icon: magma_block
     name: '&cFire'
     description: '&cBurn, baby, burn....'
+    Price: 300
   Ice:
     trail_type: custom
     icon: ice
     name: '&bIce'
     description: '&eSo...Cold...'
+    Price: 300
   Ender_Crystal:
     trail_type: item_crack
     item_trail_type: end_crystal
     icon: end_crystal
     name: '&dEnd &7Crystal'
     description: "&bI'm not even gunna ask where we got this..."
+    Price: 300
   The_AJ:
     trail_type: block_2_color
     color1: purple
@@ -111,6 +122,7 @@ bowtrails:
     icon: player_head[skull_skin=AJ_4real]
     name: '&7The &dA&5J'
     description: "&dYea, he exists.... somewhere."
+    Price: 300
   Ice_Block:
     trail_type: block_with_dust
     material_dust: ice
@@ -118,6 +130,7 @@ bowtrails:
     icon: Ice
     name: '&bIce Block'
     description: "&bYea, don't ask how we managed this."
+    Price: 300
   Dragon:
     trail_type: block_with_particle
     particle: dragon_breath
@@ -125,6 +138,7 @@ bowtrails:
     icon: dragon_head
     name: '&dDragon Breath'
     description: "&dYou have no idea how hard it was to get this."
+    Price: 300
   TnT_Scare:
     trail_type: block_with_particle
     particle: smoke
@@ -132,3 +146,4 @@ bowtrails:
     icon: tnt
     name: '&cT&7N&cT Scare'
     description: "&cScare the crap out of your foes!"
+    Price: 300
