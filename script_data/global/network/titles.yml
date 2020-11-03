@@ -40,1141 +40,1369 @@ titles:
     tag: '&8|&7No Title&8|'
     description: Osu!, anyone?
     in_shop: false
+    Price: 300
   Miner:
     order: 1
     tag: '&8|&4&k/&cMiner&4&k/&8|'
     description: Perfect title for players who mine a lot.
     in_shop: false
+    Price: 300
   Rich:
     order: 2
     tag: '&8|&2&k/&a&n$&2&k/&8|'
     description: Wealthy? This is the title for you!
     in_shop: false
+    Price: 300
   PvPGod:
     order: 3
     tag: '&8|&3&k/&bPvP God&3&k/&8|'
     description: Players who win almost every PvP match!
     in_shop: false
+    Price: 300
   TooGood:
     order: 4
     tag: '&8|&b&k/&aToo Good&b&k/&8|'
     description: Are you too good for the game?
     in_shop: true
+    Price: 300
   Ez:
     order: 5
     tag: '&8|&c&k/&eEz&c&k/&8|'
     description: You everything 'ez' for you?
     in_shop: true
+    Price: 300
   Heart:
     order: 6
     tag: '&8|&e&k/&c&l<3&e&k/&8|'
     description: Players that love something too much use this.
     in_shop: true
+    Price: 300
   Grinder:
     order: 7
     tag: '&8|&e&k/&aGrinder&e&k/&8|'
     description: Do you love exp that much?
     in_shop: true
+    Price: 300
   Savage:
     order: 8
     tag: '&8|&5&k/&d&k/&e&nSavage&r&d&k/&5&k/&8|'
     description: Wow, you're just a savage.
     in_shop: true
+    Price: 300
   MoneyMaker:
     order: 9
     tag: '&8|&2&k/&a&k/&dMoney Maker&a&k/&2&k/&8|'
     description: Love making money? Everyone does!
     in_shop: true
+    Price: 300
   QuickDrop:
     order: 11
     tag: '&8|&9&k//&3Quick Drop&9&k//&8|'
     description: Like quick dropping players and gaining their items?
     in_shop: true
+    Price: 300
   Stealth:
     order: 12
     tag: '&8|&e&k/&dStealth&e&k/&8|'
     description: Time to play sneaky!
     in_shop: true
+    Price: 300
   Bae:
     order: 13
     tag: '&8|&d&k/&cBae&d&k/&8|'
     description: How cute. :)
     in_shop: true
+    Price: 300
   Killstreak:
     order: 14
     tag: '&8|&6&k/&eKillstreak&6&k/&8|'
     description: Kill a lot of players in a row!
     in_shop: true
+    Price: 300
   OG:
     order: 15
     tag: '&8|&f&k//&e&lOG&f&k//&8|'
     description: Players who have been here since the start!
     in_shop: true
+    Price: 300
   OP:
     order: 16
     tag: '&8|&e&k//&b&nOP&e&k//&8|'
     description: Too overpowered!
     in_shop: true
+    Price: 300
   Powerful:
     order: 17
     tag: '&8|&b&k//&ePower&6ful&b&k//&8|'
     description: Oh my... you're too powerful.
     in_shop: true
+    Price: 300
   Halloween2019:
     order: 18
     tag: '&8|&e&k/&f&k/&6&nHalloween 2019&f&k/&e&k/&8|'
     description: Halloween 2019.
     in_shop: true
+    Price: 300
   TrickOrTreat:
     order: 19
     tag: '&8|&e&k/&6Trick or Treat&e&k/&8|'
     description: Halloween 2019.
     in_shop: true
+    Price: 300
   Spooky:
     order: 20
     tag: '&8|&6&k/&e&k/&fSp00ky&e&k/&6&k/&8|'
     description: Halloween 2019.
     in_shop: true
+    Price: 300
   Awesome:
     order: 21
     tag: '&8|&c&k/&eAwesome&c&k/&8|'
     description: Perfect for awesome people!
     in_shop: true
+    Price: 300
   TNT:
     order: 22
     tag: '&8|&d&k/&c&lTNT&d&k/&8|'
     description: Do you like playing with TNT?
     in_shop: true
+    Price: 300
   RedstoneMaster:
     order: 23
     tag: '&8|&4&k/&cRedsone Master&4&k/&8|'
     description: Master at making stuff with redstone.
     in_shop: true
+    Price: 300
   Tank:
     order: 24
     tag: '&8|&4&k/&2Tank&4&k/&8|'
     description: Never get killed? You must be a tank.
     in_shop: true
+    Price: 300
   Camper:
     order: 25
     tag: '&8|&2&k/&aCamper&2&k/&8|'
     description: Camping is fun, sometimes.
     in_shop: true
+    Price: 300
   Explorer:
     order: 26
     tag: '&8|&5&k/&dExplorer&5&k/&8|'
     description: Explore the world!
     in_shop: true
+    Price: 300
   Combo:
     order: 27
     tag: '&8|&6&k/&eCombo&6&k/&8|'
     description: Combo and you are dead.
     in_shop: true
+    Price: 300
   Farmer:
     order: 28
     tag: '&8|&3&k/&eFarmer&3&k/&8|'
     description: Grow wheat, carrots and more!
     in_shop: true
+    Price: 300
   Witch:
     order: 29
     tag: '&8|&d&k//&5Witch&d&k//&8|'
     description: Witches are nifty!
     in_shop: true
+    Price: 300
   Banker:
     order: 30
     tag: '&8|&2&l$&aBanker&2&l$&8|'
     description: Money! Money! Money!
     in_shop: true
+    Price: 300
   Lord:
     order: 31
     tag: '&8|&c&k/&4Lord&c&k/&8|'
     description: Are you a Lord?
     in_shop: true
+    Price: 300
   Enchanter:
     order: 32
     tag: '&8|&3&k//&bEnchanter&3&k//&8|'
     description: Enchanting items gives you an advantage.
     in_shop: true
+    Price: 300
   Tinkerer:
     order: 33
     tag: '&8|&3&k//&bTinkerer&3&k//&8|'
     description: Tinkerering items for other stuff?
     in_shop: true
+    Price: 300
   Prisoner:
     order: 34
     tag: '&8|&2&k//&aPrisoner&2&k//&8|'
     description: Welp, now you are a prisoner.
     in_shop: true
+    Price: 300
   2Cool4School:
     order: 35
     tag: '&8|&9&k/&b2Cool4School&9&k/&8|'
     description: I don't think so.
     in_shop: true
+    Price: 300
   2Cool4U:
     order: 36
     tag: '&8|&b&k/&32Cool4U&b&k/&8|'
     description: That's more like it!
     in_shop: true
+    Price: 300
   2Good4U:
     order: 37
     tag: '&8|&b&k/&62Good4U&b&k/&8|'
     description: Probably are.
     in_shop: true
+    Price: 300
   Planes:
     order: 38
     tag: '&8|&4&k/&cPlanes&4&k/&8|'
     description: You better not be afraid of heights.
     in_shop: true
+    Price: 300
   Boom:
     order: 39
     tag: '&8|&a&k//&c&lBOOM&a&k//&8|'
     description: BOOM! Was that TNT?
     in_shop: true
+    Price: 300
   Archer:
     order: 40
     tag: '&8|&c&k/&aArcher&c&k/&8|'
     description: One shot, one head shot!
     in_shop: true
+    Price: 300
   Builder:
     order: 41
     tag: '&8|&5&k/&dBuilder&5&k/&8|'
     description: Build the greatest things in Minecraft!
     in_shop: true
+    Price: 300
   PvPer:
     order: 42
     tag: '&8|&3PvPer&8|'
     description: Do you like PvPing?
     in_shop: true
+    Price: 300
   Axeman:
     order: 43
     tag: '&8|&6&k/&eAxeman&6&k/&8|'
     description: Use your axe to kill your enemy!
     in_shop: true
+    Price: 300
   Excavator:
     order: 44
     tag: '&8|&c&k/&eExcavator&c&k/&8|'
     description: Mine, mine, mine!
     in_shop: true
+    Price: 300
   GoodGame:
     order: 45
     tag: '&8|&4&k/&c&lGG&4&k/&8|'
     description: That must have been a good game.
     in_shop: true
+    Price: 300
   GoodFight:
     order: 46
     tag: '&8|&4&k/&d&lGF&4&k/&8|'
     description: That was a good fight!
     in_shop: true
+    Price: 300
   GoodLuck:
     order: 47
     tag: '&8|&4&k/&e&lGL&4&k/&8|'
     description: I wish you luck!
     in_shop: true
+    Price: 300
   HaveFun:
     order: 48
     tag: '&8|&4&k/&f&lHF&4&k/&8|'
     description: Yea! Have fun.
     in_shop: true
+    Price: 300
   Tough:
     order: 49
     tag: '&8|&4&k*&c&lTOUGH&4&k*&8|'
     description: Everyone is harmless to you?
     in_shop: true
+    Price: 300
   Zeus:
     order: 50
     tag: '&8|&3&k//&b&lZEUS&3&k//&8|'
     description: Lighning!
     in_shop: true
+    Price: 300
   Dolphin:
     order: 51
     tag: '&8|&b&nDolphin&8|'
     description: Swim in the ocean!
     in_shop: true
+    Price: 300
   Pow:
     order: 52
     tag: '&8|&6POW&8|'
     description: POW!
     in_shop: true
+    Price: 300
   Creative:
     order: 53
     tag: '&8|&e&k/&c/gmc&e&k/&8|'
     description: No perms.
     in_shop: true
+    Price: 300
   Creative2:
     order: 54
     tag: '&8|&e&k/&cCreative&e&k/&8|'
     description: Good for you.
     in_shop: true
+    Price: 300
   Blaze:
     order: 55
     tag: '&8|&6Blaze&8|'
     description: Do you like blazes?
     in_shop: true
+    Price: 300
   Zombie:
     order: 56
     tag: '&8|&2Zombie&8|'
     description: Do you like zombies?
     in_shop: true
+    Price: 300
   Skeleton:
     order: 57
     tag: '&8|&7Skeleton&8|'
     description: Do you like skeletons?
     in_shop: true
+    Price: 300
   Slime:
     order: 58
     tag: '&8|&aSlime&8|'
     description: Do you like slime?
     in_shop: true
+    Price: 300
   Spider:
     order: 59
     tag: '&8|&cSpider&8|'
     description: Do you like spiders?
     in_shop: true
+    Price: 300
   WoodCutter:
     order: 60
     tag: '&8|&dWood Cutter&8|'
     description: Cut wood and make blocks!
     in_shop: true
+    Price: 300
   Diamonds:
     order: 61
     tag: '&8|&bDiamonds&8|'
     description: DIAMONDSSS!
     in_shop: true
+    Price: 300
   Gold:
     order: 62
     tag: '&8|&6Gold&8|'
     description: Gold is valuable.
     in_shop: true
+    Price: 300
   Emeralds:
     order: 63
     tag: '&8|&aEmerlads&8|'
     description: Emeralds are shiny and cool.
     in_shop: true
+    Price: 300
   Iron:
     order: 64
     tag: '&8|&7Iron&8|'
     description: Iron Man?
     in_shop: true
+    Price: 300
   Coal:
     order: 65
     tag: '&8|&0Coal&8|'
     description: Put it in a furnace or something.
     in_shop: true
+    Price: 300
   DungeonExplorer:
     order: 66
     tag: '&8|&aDungeon Explorer&8|'
     description: Woah! You're brave.
     in_shop: true
+    Price: 300
   CaveExplorer:
     order: 67
     tag: '&8|&cCave Explorer&8|'
     description: That must be spooky.
     in_shop: true
+    Price: 300
   SavageLandsExplorer:
     order: 68
     tag: '&8|&dSavage Lands Explorer&8|'
     description: Don't die!
     in_shop: true
+    Price: 300
   CapeLover:
     order: 69
     tag: '&8|&cI Love Capes&8|'
     description: Ok
     in_shop: true
+    Price: 300
   GrindingMachine:
     order: 70
     tag: '&8|&4&k/&6Grinding Machine&4&k/&8|'
     description: Kill blazes 24/7?
     in_shop: true
+    Price: 300
   Brewer:
     order: 71
     tag: '&8|&d&k//&5Brewer&d&k//&8|'
     description: Brewing powerful potions is cool.
     in_shop: true
+    Price: 300
   Alchemist:
     order: 72
     tag: '&8|&d&k//&5Alchemist&d&k//&8|'
     description: Are you a brewer?
     in_shop: true
+    Price: 300
   Gapple:
     order: 73
     tag: '&8|&eGapple&8|'
     description: Eat those golden apples.
     in_shop: true
+    Price: 300
   OneShot:
     order: 74
     tag: '&8|&e&k//&4One&cShot&4One&cKill&e&k//&8|'
     description: Pretty cool.
     in_shop: true
+    Price: 300
   Hype:
     order: 75
     tag: '&8|&b&k/&e&lHYPE&b&k/&8|'
     description: HYPE HYPE HYPE!
     in_shop: true
+    Price: 300
   Bedrock:
     order: 76
     tag: '&8|&6&k/&0Bedrock&6&k/&8|'
     description: Good luck trying to get it.
     in_shop: true
+    Price: 300
   MasterBuilder:
     order: 77
     tag: '&8|&dMaster Builder&8|'
     description: Do you like building?
     in_shop: true
+    Price: 300
   AFK:
     order: 78
     tag: '&8|&4&k/&c&lAFK&4&k/&8|'
     description: Away From Keyboard.
     in_shop: true
+    Price: 300
   Cool:
     order: 79
     tag: '&8|&5&k/&dC00L&5&k/&8|'
     description: I know right.
     in_shop: true
+    Price: 300
   Sky:
     order: 80
     tag: '&8|&3&k/&9Sky&3&k/&8|'
     description: The sky is blue, like this tag.
     in_shop: true
+    Price: 300
   Nether:
     order: 81
     tag: '&8|&6&k/&4Nether&6&k/&8|'
     description: Hot and dangerous.
     in_shop: true
+    Price: 300
   End:
     order: 82
     tag: '&8|&6&k/&dEnd&6&k/&8|'
     description: Is it the end?
     in_shop: true
+    Price: 300
   Chicken:
     order: 83
     tag: '&8|&e&k/&6Chicken&e&k/&8|'
     description: Run!
     in_shop: true
+    Price: 300
   Gamer:
     order: 84
     tag: '&8|&dGamer™️&8|'
     description: Do you like playing games?
     in_shop: true
+    Price: 300
   Summer:
     order: 85
     tag: '&8|&6&k//&c&lSummer&6&k//&8|'
     description: Summer is here!
     in_shop: true
+    Price: 300
   Brutal:
     order: 86
     tag: '&8|&6&k//&d&lBrutal&6&k//&8|'
     description: You must be brutal.
     in_shop: true
+    Price: 300
   Fearless:
     order: 87
     tag: '&8|&e&k//&d&lFearless&e&k//&8|'
     description: Fearless like me!
     in_shop: true
+    Price: 300
   Dangerous:
     order: 88
     tag: '&8|&e&k//&4Dangerous&e&k//&8|'
     description: You are pretty dangerous.
     in_shop: true
+    Price: 300
   Revenge:
     order: 89
     tag: '&8|&e&k//&2Revenge&e&k//&8|'
     description: Time to get revenge.
     in_shop: true
+    Price: 300
   Karma:
     order: 90
     tag: '&8|&e&k//&dKarma&e&k//&8|'
     description: Karma!
     in_shop: true
+    Price: 300
   Mythical:
     order: 91
     tag: '&8|&6&k/&cMythical&6&k/&8|'
     description: Old?
     in_shop: true
+    Price: 300
   Autumn:
     order: 92
     tag: '&8|&d&k/&cAutumn&d&k/&8|'
     description: Yay! Autumn is here.
     in_shop: true
+    Price: 300
   Perfect:
     order: 93
     tag: '&8|&a&k/&2&k/&bPerfect&2&k/&a&k/&8|'
     description: Perfect, you are perfect.
     in_shop: true
+    Price: 300
   Wow:
     order: 94
     tag: '&8|&a&k/&2&k/&cWOW&2&k/&a&k/&8|'
     description: Wow!
     in_shop: true
+    Price: 300
   Lol:
     order: 95
     tag: '&8|&eLOL&8|'
     description: Funny!
     in_shop: true
+    Price: 300
   Conqueror:
     order: 96
     tag: '&8|&e&k//&4Conqueror&e&k//&8|'
     description: Don't invade me!
     in_shop: true
+    Price: 300
   '420':
     order: 97
     tag: '&8|&6&k/&b&l420&6&k/&8|'
     description: 420!
     in_shop: true
+    Price: 300
   420BlazeIt:
     order: 98
     tag: '&8|&e420BlazeIt&8|'
     description: Blaze it?
     in_shop: true
+    Price: 300
   ParkourPro:
     order: 99
     tag: '&8|&bParkour&3Pro&8|'
     description: You must be good at parkour!
     in_shop: true
+    Price: 300
   Rose:
     order: 100
     tag: '&8|&cRose&8|'
     description: Roses are red...
     in_shop: true
+    Price: 300
   Daisy:
     order: 101
     tag: '&8|&fDaisy&8|'
     description: Make a daisy chain!
     in_shop: true
+    Price: 300
   Dandelion:
     order: 102
     tag: '&8|&eDandelion&8|'
     description: Dandelions are yellow.
     in_shop: true
+    Price: 300
   Tulip:
     order: 103
     tag: '&8|&bTulip&8|'
     description: Tulips are nice.
     in_shop: true
+    Price: 300
   Allium:
     order: 104
     tag: '&8|&dAllium&8|'
     description: Another flower.
     in_shop: true
+    Price: 300
   Lilac:
     order: 105
     tag: '&8|&dLilac&8|'
     description: Another flower.
     in_shop: true
+    Price: 300
   Sunflower:
     order: 106
     tag: '&8|&6Sunflower&8|'
     description: And another flower.
     in_shop: true
+    Price: 300
   Legend:
     order: 107
     tag: '&8|&6Legend&8|'
     description: You are a legend!
     in_shop: true
+    Price: 300
   Undead:
     order: 108
     tag: '&8|&c&k/&4Undead&c&k/&8|'
     description: Undead, like a zombie?
     in_shop: true
+    Price: 300
   Divine:
     order: 109
     tag: '&8|&b&k/&3Divine&b&k/&8|'
     description: Powerful? But even more.
     in_shop: true
+    Price: 300
   Warrior:
     order: 110
     tag: '&8|&2&k/&cWarrior&2&k/&8|'
     description: Battle other warriors.
     in_shop: true
+    Price: 300
   Undefeated:
     order: 111
     tag: '&8|&4&k/&eUndefeated&4&k/&8|'
     description: Too good.
     in_shop: true
+    Price: 300
   Adorable:
     order: 112
     tag: '&8|&cAdorable&8|'
     description: Cute!
     in_shop: true
+    Price: 300
   Happy:
     order: 113
     tag: '&8|&eHappy&8|'
     description: Happy because of you.
     in_shop: true
+    Price: 300
   Sad:
     order: 114
     tag: '&8|&cSad&8|'
     description: Sad you got raided?
     in_shop: true
+    Price: 300
   Pleased:
     order: 115
     tag: '&8|&dPleased&8|'
     description: Found something good?
     in_shop: true
+    Price: 300
   Angry:
     order: 116
     tag: '&8|&6Angry&8|'
     description: Angry you died?
     in_shop: true
+    Price: 300
   Good:
     order: 117
     tag: '&8|&aGood&8|'
     description: Good.
     in_shop: true
+    Price: 300
   Mermaid:
     order: 118
     tag: '&8|&bMermaid&8|'
     description: Swim in the sea.
     in_shop: true
+    Price: 300
   Squid:
     order: 119
     tag: '&8|&3Squid&8|'
     description: Swin in the ocean.
     in_shop: true
+    Price: 300
   Pig:
     order: 120
     tag: '&8|&cPig&8|'
     description: Oink.
     in_shop: true
+    Price: 300
   Spartan:
     order: 121
     tag: '&8|&2Spartan&8|'
     description: Better than a warrior, or the same?
     in_shop: true
+    Price: 300
   Assassin:
     order: 122
     tag: '&8|&3Assassin&8|'
     description: Kill your enemies from the shadows.
     in_shop: true
+    Price: 300
   Creeper:
     order: 123
     tag: '&8|&aCreeper&8|'
     description: '...Boom'
     in_shop: true
+    Price: 300
   Tamer:
     order: 124
     tag: '&8|&3Tamer&8|'
     description: Get the beast to fight with you.
     in_shop: true
+    Price: 300
   Rider:
     order: 125
     tag: '&8|&cRider&8|'
     description: Ride that horse.
     in_shop: true
+    Price: 300
   Lumberjack:
     order: 126
     tag: '&8|&bLumberjack&8|'
     description: Chop them trees down.
     in_shop: true
+    Price: 300
   Forest:
     order: 127
     tag: '&8|&aForest&8|'
     description: The forest biome.
     in_shop: true
+    Price: 300
   Plains:
     order: 128
     tag: '&8|&aPlains&8|'
     description: The plains biome.
     in_shop: true
+    Price: 300
   Jungle:
     order: 129
     tag: '&8|&2Jungle&8|'
     description: The jungle biome.
     in_shop: true
+    Price: 300
   Donator:
     order: 130
     tag: '&8|&2&k/&aDonator&2&k/&8|'
     description: You bought this title, didn't you?
     in_shop: true
+    Price: 300
   Supporter:
     order: 131
     tag: '&8|&2&k/&aSupporter&2&k/&8|'
     description: Support the server.
     in_shop: true
+    Price: 300
   SideKick:
     order: 132
     tag: '&8|&2&k/&3Side Kick&2&k/&8|'
     description: Your turn to fight.
     in_shop: true
+    Price: 300
   Backup:
     order: 133
     tag: '&8|&2&k/&4Backup&2&k/&8|'
     description: Better protect your mate.
     in_shop: true
+    Price: 300
   PlanB:
     order: 134
     tag: '&8|&2&k/&5Plan B&2&k/&8|'
     description: Plan A failed... time for Plan B.
     in_shop: true
+    Price: 300
   PlanC:
     order: 135
     tag: '&8|&2&k/&6Plan C&2&k/&8|'
     description: Plan C!
     in_shop: true
+    Price: 300
   Skilled:
     order: 136
     tag: '&8|&6&k/&eSkilled&6&k/&8|'
     description: You are too skilled.
     in_shop: true
+    Price: 300
   Master:
     order: 137
     tag: '&8|&6&k/&9Master&6&k/&8|'
     description: Minecraft Master.
     in_shop: true
+    Price: 300
   Engineer:
     order: 138
     tag: '&8|&6&k/&dEngineer&6&k/&8|'
     description: Invent the best things.
     in_shop: true
+    Price: 300
   Pilot:
     order: 139
     tag: '&8|&6&k/&fPilot&6&k/&8|'
     description: Fly the planes.
     in_shop: true
+    Price: 300
   Mechanic:
     order: 140
     tag: '&8|&6&k/&2Mechanic&6&k/&8|'
     description: Repair everything.
     in_shop: true
+    Price: 300
   Submarine:
     order: 141
     tag: '&8|&d&k/&9Submarine&d&k/&8|'
     description: Dive underwater and explore.
     in_shop: true
+    Price: 300
   Boat:
     order: 142
     tag: '&8|&d&k/&3Boat&d&k/&8|'
     description: Sail the seas!
     in_shop: true
+    Price: 300
   Ship:
     order: 143
     tag: '&8|&d&k/&eShip&d&k/&8|'
     description: Sail the seas on the ship!
     in_shop: true
+    Price: 300
   Plane:
     order: 144
     tag: '&8|&d&k/&4Plane&d&k/&8|'
     description: Fly it!
     in_shop: true
+    Price: 300
   King:
     order: 145
     tag: '&8|&e&k/&dKing&e&k/&8|'
     description: King of the country.
     in_shop: true
+    Price: 300
   Queen:
     order: 146
     tag: '&8|&e&k/&dQueen&e&k/&8|'
     description: Queen of the country.
     in_shop: true
+    Price: 300
   Prince:
     order: 147
     tag: '&8|&e&k/&5Prince&e&k/&8|'
     description: Son of the King/Queen.
     in_shop: true
+    Price: 300
   Princess:
     order: 148
     tag: '&8|&e&k/&5Princess&e&k/&8|'
     description: Daughter of the King/Queen.
     in_shop: true
+    Price: 300
   Guard:
     order: 149
     tag: '&8|&e&k/&2Guard&e&k/&8|'
     description: Protect them!
     in_shop: true
+    Price: 300
   Noble:
     order: 150
     tag: '&8|&e&k/&3Noble&e&k/&8|'
     description: Are you like a noble knight?
     in_shop: true
+    Price: 300
   Royal:
     order: 151
     tag: '&8|&e&k/&4Royal&e&k/&8|'
     description: Like the royal family.
     in_shop: true
+    Price: 300
   Chief:
     order: 152
     tag: '&8|&e&k/&cChief&e&k/&8|'
     description: Chief commander of the clan.
     in_shop: true
+    Price: 300
   Chef:
     order: 153
     tag: '&8|&e&k/&dChef&e&k/&8|'
     description: Just like Mama used to make.
     in_shop: true
+    Price: 300
   Protector:
     order: 154
     tag: '&8|&e&k/&aProtector&e&k/&8|'
     description: Protect them like a guard.
     in_shop: true
+    Price: 300
   Knight:
     order: 155
     tag: '&8|&e&k/&bKnight&e&k/&8|'
     description: Brotherhood of Knights.
     in_shop: true
+    Price: 300
   Angelic:
     order: 156
     tag: '&8|&e&k/&bAngelic&e&k/&8|'
     description: Look at that angel.
     in_shop: true
+    Price: 300
   Fighter:
     order: 157
     tag: '&8|&e&k/&3Fighter&e&k/&8|'
     description: Do you like fighting people?
     in_shop: true
+    Price: 300
   Worker:
     order: 158
     tag: '&8|&b&k/&3Worker&b&k/&8|'
     description: Working for something is good.
     in_shop: true
+    Price: 300
   KK:
     order: 159
     tag: '&8|&b&k/&5K.K.&b&k/&8|'
     description: K.K. Slider.
     in_shop: true
+    Price: 300
   WomboCombo:
     order: 160
     tag: '&8|&c&k/&eWombo Combo&c&k/&8|'
     description: Get that combo.
     in_shop: true
+    Price: 300
   January:
     order: 161
     tag: '&8|&6January&8|'
     description: Month.
     in_shop: true
+    Price: 300
   February:
     order: 162
     tag: '&8|&3February&8|'
     description: Month.
     in_shop: true
+    Price: 300
   March:
     order: 163
     tag: '&8|&2March&8|'
     description: Month.
     in_shop: true
+    Price: 300
   April:
     order: 164
     tag: '&8|&aApril&8|'
     description: Month.
     in_shop: true
+    Price: 300
   May:
     order: 165
     tag: '&8|&bMay&8|'
     description: Month.
     in_shop: true
+    Price: 300
   June:
     order: 166
     tag: '&8|&cJune&8|'
     description: Pride Month!
     in_shop: true
+    Price: 300
   July:
     order: 167
     tag: '&8|&dJuly&8|'
     description: Month.
     in_shop: true
+    Price: 300
   August:
     order: 168
     tag: '&8|&eAugust&8|'
     description: Month.
     in_shop: true
+    Price: 300
   September:
     order: 169
     tag: '&8|&2September&8|'
     description: Do you remember the 21st night of September?
     in_shop: true
+    Price: 300
   October:
     order: 170
     tag: '&8|&4October&8|'
     description: Month.
+    Price: 300
     in_shop: true
   November:
     order: 171
     tag: '&8|&9November&8|'
     description: Month.
+    Price: 300
     in_shop: true
   December:
     order: 172
     tag: '&8|&bDecember&8|'
     description: Month.
     in_shop: true
+    Price: 300
   Horror:
     order: 173
     tag: '&8|&4&k/&bHorror&4&k/&8|'
     description: Is this a dream or reality?
     in_shop: true
+    Price: 300
   Burger:
     order: 174
     tag: '&8|&6Burger&8|'
     description: They're nice!
     in_shop: true
+    Price: 300
   Chips:
     order: 175
     tag: '&8|&eChips&8|'
     description: Good with fish.
     in_shop: true
+    Price: 300
   Nonstop:
     order: 176
     tag: '&8|&c&k/&624/7&c&k/&8|'
     description: Do you spend 24/7 on the server?
     in_shop: true
+    Price: 300
   Nonstop2:
     order: 177
     tag: '&8|&c&k/&6Nonstop&c&k/&8|'
     description: Nonstop on the server.
     in_shop: true
+    Price: 300
   Bus:
     order: 178
     tag: '&8|&c&k/&3Bus&c&k/&8|'
     description: Public transport.
     in_shop: true
+    Price: 300
   Taxi:
     order: 179
     tag: '&8|&c&k/&4Taxi&c&k/&8|'
     description: A Big Yellow Taxi.
     in_shop: true
+    Price: 300
   Tryhard:
     order: 180
     tag: '&8|&e&k/&dTryhard&e&k/&8|'
     description: You try too hard.
     in_shop: true
+    Price: 300
   DoubleKill:
     order: 181
     tag: '&8|&e&k/&3Double Kill&e&k/&8|'
     description: Nice!
     in_shop: true
+    Price: 300
   Sunny:
     order: 182
     tag: '&8|&6Sunny&8|'
     description: Good weather.
     in_shop: true
+    Price: 300
   Rainy:
     order: 183
     tag: '&8|&7Rainy&8|'
     description: Bad weather.
     in_shop: true
+    Price: 300
   Stormy:
     order: 184
     tag: '&8|&eStormy&8|'
     description: Also bad weather.
     in_shop: true
+    Price: 300
   Snowy:
     order: 185
     tag: '&8|&fSnowy&8|'
     description: LET IT SNOW!
     in_shop: true
+    Price: 300
   Scary:
     order: 186
     tag: '&8|&4&k/&cScary&4&k/&8|'
     description: Scary... run!
     in_shop: true
+    Price: 300
   Haunted:
     order: 187
     tag: '&8|&4&k/&6Haunted&4&k/&8|'
     description: Are ghosts here?
     in_shop: true
+    Price: 300
   Java:
     order: 188
     tag: '&8|&a&k/&cJava&a&k/&8|'
     description: Programing language.
     in_shop: true
+    Price: 300
   Python:
     order: 189
     tag: '&8|&a&k/&cPython&a&k/&8|'
     description: Programing language.
     in_shop: true
+    Price: 300
   HTML:
     order: 190
     tag: '&8|&a&k/&cHTML&a&k/&8|'
     description: Programing language.
     in_shop: true
+    Price: 300
   BurgerKing:
     order: 191
     tag: '&8|&d&k/&cBurger King&d&k/&8|'
     description: They make good food.
     in_shop: true
-  MacDonalds:
+    Price: 300
+  McDonalds:
     order: 192
-    tag: '&8|&d&k/&6Mac&eDonalds&d&k/&8|'
+    tag: '&8|&d&k/&6Mc&eDonalds&d&k/&8|'
     description: Best of all.
     in_shop: true
+    Price: 300
   KFC:
     order: 193
     tag: '&8|&d&k/&dKFC&d&k/&8|'
     description: Good chicken.
     in_shop: true
+    Price: 300
   IceSkater:
     order: 194
     tag: '&8|&d&k/&bIce Skater&d&k/&8|'
     description: Be careful you do not slip.
     in_shop: true
+    Price: 300
   Swimmer:
     order: 195
     tag: '&8|&e&k/&bSwimmer&e&k/&8|'
     description: Swim fast.
     in_shop: true
+    Price: 300
   Runner:
     order: 196
     tag: '&8|&e&k/&cRunner&e&k/&8|'
     description: Run!
     in_shop: true
+    Price: 300
   Champion:
     order: 197
     tag: '&8|&e&k/&dChampion&e&k/&8|'
     description: Champion of all.
     in_shop: true
+    Price: 300
   Hero:
     order: 198
     tag: '&8|&e&k/&eHero&e&k/&8|'
     description: You are my hero.
     in_shop: true
+    Price: 300
   Thanksgiving:
     order: 199
     tag: '&8|&e&k/&6Thanksgiving 2019&e&k/&8|'
     description: Food time.
     in_shop: true
+    Price: 300
   Turkey:
     order: 200
     tag: '&8|&e&k/&cTurkey&e&k/&8|'
     description: Taste nice but it is a bit dry.
     in_shop: true
+    Price: 300
   Jolly:
     order: 201
     tag: '&8|&b&k/&3Jolly&b&k/&8|'
     description: Have a jolly time!
     in_shop: true
+    Price: 300
   XD:
     order: 202
     tag: '&8|&a&k/&c&lXD&a&k/&8|'
     description: xdddddde
     in_shop: true
+    Price: 300
   OwO:
     order: 203
     tag: '&8|&a&k/&f&lOwO&a&k/&8|'
     description: What's this?
     in_shop: true
+    Price: 300
   '1':
     order: 204
     tag: '&8|&e#1&8|'
     description: Number 1.
     in_shop: true
+    Price: 300
   '2':
     order: 205
     tag: '&8|&b#2&8|'
     description: Number 2.
     in_shop: true
+    Price: 300
   '3':
     order: 206
     tag: '&8|&c#3&8|'
     description: Number 3.
     in_shop: true
+    Price: 300
   '4':
     order: 207
     tag: '&8|&d#4&8|'
     description: Number 4.
     in_shop: true
+    Price: 300
   '5':
     order: 208
     tag: '&8|&9#5&8|'
     description: Number 5.
     in_shop: true
+    Price: 300
   Bed:
     order: 209
     tag: '&8|&cBed&8|'
     description: You may not rest now, there are monsters nearby.
     in_shop: true
+    Price: 300
   Clock:
     order: 210
     tag: '&8|&eClock&8|'
     description: Tick tock.
     in_shop: true
+    Price: 300
   TV:
     order: 211
     tag: '&8|&6TV&8|'
     description: They are good.
     in_shop: true
+    Price: 300
   Sunset:
     order: 212
     tag: '&8|&6Sunset&8|'
     description: Time for night time.
     in_shop: true
+    Price: 300
   Sunrise:
     order: 213
     tag: '&8|&eSunrise&8|'
     description: Time for day time.
     in_shop: true
+    Price: 300
   BossSlayer:
     order: 214
     tag: '&8|&e&k/&cBoss Slayer&e&k/&8|'
     description: Do you like the bosses?
     in_shop: true
+    Price: 300
   BossHunter:
     order: 215
     tag: '&8|&e&k/&cBoss Hunter&e&k/&8|'
     description: Do you like the bosses?
     in_shop: true
+    Price: 300
   BossFighter:
     order: 216
     tag: '&8|&e&k/&cBoss Fighter&e&k/&8|'
     description: Do you like the bosses?
     in_shop: true
+    Price: 300
   BossCamper:
     order: 217
     tag: '&8|&e&k/&cBoss Camper&e&k/&8|'
     description: Do you like the bosses?
     in_shop: true
+    Price: 300
   MerryChristmas:
     order: 218
     tag: '&8|&f&k/&4&lMerry Christmas&f&k/&8|'
     description: Christmas 2019
     in_shop: true
+    Price: 300
   XMAS:
     order: 219
     tag: '&8|&f&k/&c&lXMAS&f&k/&8|'
     description: Christmas 2019
     in_shop: true
+    Price: 300
   HappyChristmas:
     order: 220
     tag: '&8|&c&k/&e&lHappy Christmas&c&k/&8|'
     description: Christmas 2019
     in_shop: true
+    Price: 300
   Santa:
     order: 221
     tag: '&8|&c&lS&f&lA&c&lN&f&lT&c&lA&8|'
     description: Christmas 2019
     in_shop: true
+    Price: 300
   XMAS2019:
     order: 222
     tag: '&8|&c&k/&6X&eMAS &c2019&c&k/&8|'
     description: Christmas 2019
     in_shop: true
+    Price: 300
   LetItSnow:
     order: 223
     tag: '&8|&f&k/&b&lLET&f&lIT&b&lSNOW&f&k/&8|'
     description: Christmas 2019
     in_shop: true
+    Price: 300
   LetItSnow2:
     order: 224
     tag: '&8|&f&k/&b&l&nLET&f&l&nIT&b&l&nSNOW&f&k/&8|'
     description: Christmas 2019
     in_shop: true
+    Price: 300
   HappyNewYear:
     order: 225
     tag: '&8|&e&k/&6Happy New Year&e&k/&8|'
     description: Is it 2020 yet?
     in_shop: true
+    Price: 300
   '2020':
     order: 226
     tag: '&8|&e&k/&42020&e&k/&8|'
     description: It is 2020!
     in_shop: true
+    Price: 300
   Valentines:
     order: 227
     tag: '&8|&c&k/&c&nValentines&r&c&k/&8|'
     description: Valentines Day 2020
     in_shop: true
+    Price: 300
   BeMyValentine:
     order: 228
     tag: '&8|&c&k/&c&nBe My Valentine&r&c&k/&8|'
     description: Valentines Day 2020
     in_shop: true
+    Price: 300
   Voyager:
     order: 229
     tag: '&8|&7&k/&c&nVoyager&r&7&k/&8|'
@@ -1185,156 +1413,187 @@ titles:
     tag: '&8|&2&k/&a&nViper&r&2&k/&8|'
     description: A very scary snake.
     in_shop: true
+    Price: 300
   StPatricksDay:
     order: 231
     tag: '&8|&a&k/&2&nSt Patrick''s Day&r&a&k/&8|'
     description: It is a special say! :)
     in_shop: true
+    Price: 300
   Not4Me:
     order: 232
     tag: '&8|&eNot&6For&eMe&8|'
     description: I know, now go.
     in_shop: true
+    Price: 300
   Banned:
     order: 233
     tag: '&8|&4BANNED&8|'
     description: Get banned!
     in_shop: true
+    Price: 300
   iRun:
     order: 234
     tag: '&8|&diRun&8|'
     description: Runnnnn awayyyy!!
     in_shop: true
+    Price: 300
   Creative3:
     order: 235
     tag: '&8(&5&k/&9Creative&5&k/&8)'
     description: with World Edit?
     in_shop: true
+    Price: 300
   Easter2020:
     order: 236
     tag: '&8|&6&k/&eEaster&6&k/&8|'
     description: It is Easter!
     in_shop: true
+    Price: 300
   EasterHunt:
     order: 237
     tag: '&8|&e&k/&6Easter Hunt&e&k/&8|'
     description: How many eggs did you find?
     in_shop: true
+    Price: 300
   Spring:
     order: 238
     tag: '&8|&2&k/&aSpring&2&k/&8|'
     description: The winter is over and here comes the spring.
     in_shop: true
+    Price: 300
   Banana:
     order: 239
     tag: '&8|&e&k/&6Banana&e&k/&8|'
     description: Who does not like bananas??
     in_shop: true
+    Price: 300
   Juice:
     order: 240
     tag: '&8|&4&k/&cJuice&4&k/&8|'
     description: Yummy juice!
     in_shop: true
+    Price: 300
   Sweden:
     order: 241
     tag: '&8|&b&k/&eSweden&e&k/&8|'
     description: Brrr, Why is it so cold?
     in_shop: true
+    Price: 300
   Cactus:
     order: 242
     tag: '&8|&2&k/&aCactus&2&k/&8|'
     description: I think that player got the point!
     in_shop: true
+    Price: 300
   3D:
     order: 243
     tag: '&8|&e&k/&b3&cD&e&k/&8|'
     description: Three Dimensional!
     in_shop: true
+    Price: 300
   TooGoodForDis:
     order: 244
     tag: '&8|&b&k/&eToooo&6Good&eFor&6Dis&b&k/&8|'
     description: Ikr...
     in_shop: true
+    Price: 300
   Sushi:
     order: 245
     tag: '&8|&b&k/&dSushi&b&k/&8|'
     description: Goes well with wasabi.
     in_shop: true
+    Price: 300
   Subway:
     order: 246
     tag: '&8|&a&k/&eSub&aWay&a&k/&8|'
     description: Like the public transportation system?
     in_shop: true
+    Price: 300
   Brain:
     order: 247
     tag: '&8|&e&k/&fBrain&e&k/&8|'
     description: Did you know that a brain is in your skull?
     in_shop: true
+    Price: 300
   Blaster:
     order: 248
     tag: '&8|&3&k/&dBlaster&3&k/&8|'
     description: Blast! Blast! Blast!
     in_shop: true
+    Price: 300
   Pizza:
     order: 249
     tag: '&8|&d&k/&cPizza&d&k/&8|'
     description: Yummy!
     in_shop: true
+    Price: 300
   Pasta:
     order: 250
     tag: '&8|&e&k/&cPasta&e&k/&8|'
     description: Pasta is very nice.
     in_shop: true
+    Price: 300
   Cheese:
     order: 251
     tag: '&8|&e&k/&r&eCheese&e&k/&8|'
     description: I love cheese!
     in_shop: true
+    Price: 300
   Ham:
     order: 252
     tag: '&8|&e&k/&r&dHam&e&k/&8|'
     description: This meat is nice on bread.
     in_shop: true
+    Price: 300
   Goliath:
     order: 253
     tag: '&8|&4&k/&r&c&nGoliath&r&4&k/&8|'
     description: Strong... very strong.
     in_shop: true
+    Price: 300
   Excalibur:
     order: 254
     tag: '&8|&e&k/&r&6&nExcalibur&r&e&k/&8|'
     description: You better not mess with that.
     in_shop: true
+    Price: 300
   Pi:
     order: 255
     tag: '&8|&d&k/&r&bPi&r&d&k/&8|'
     description: The life of Pi or the Maths thing?
     in_shop: true
+    Price: 300
   GirlPower:
     order: 256
     tag: '&8|&d&k/&r&cGirl&bPower&r&d&k/&8|'
     description: Girls are better than boys.
     in_shop: true
+    Price: 300
   Ghastly:
     order: 257
     tag: '&5&k|&r&5|&5&k| &r&dGhastly &5&k|&r&5|&5&k|'
     description: '&eTrick or Treat Prize &6Halloween 2019&e'
     in_shop: true
+    Price: 300
   IronKing:
     order: 258
     tag: '&6&k|&r&6|&7&k| &r&7Iron &6King &7&k|&r&6|&6&k|'
     description: '&eThe &7Iron &6King &econtrols the Realm.'
     in_shop: true
+    Price: 300
   Irish:
     order: 259
     tag: '&2&k|&r&2|&2&k| &r&2Irish &2&k|&r&2|&2&k|'
     description: '&2Luck of the Irish.'
     in_shop: true
+    Price: 300
   MyName:
     order: 260
     tag: '&2&k|&r&2|&2&k| &r&2<player.name> &2&k|&r&2|&2&k|'
     description: '&7Sometimes we repeat things to get the message across. Sometimes we repeat things to get the message across.'
     in_shop: true
+    Price: 300
   AJPHEY:
     order: 261
     tag: '&e|&d❤&e| &aMarried to pheyyyy &e|&d❤&e|'

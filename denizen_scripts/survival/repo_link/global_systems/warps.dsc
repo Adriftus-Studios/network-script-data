@@ -470,7 +470,7 @@ warp_management_GUI_panel:
     add_member: <item[green_wool].with[display_name=<&a>Add<&sp>Member;nbt=action/add_member]>
     remove_member: <item[red_wool].with[display_name=<&c>Remove<&sp>Member;nbt=action/remove_member]>
     choose_material: <item[dirt].with[display_name=<&b>Choose<&sp>Material;nbt=action/choose_material]>
-    display_name: <item[sign].with[display_name=<&b>Set<&sp>Display<&sp>Name;nbt=action/display_name]>
+    display_name: <item[oak_sign].with[display_name=<&b>Set<&sp>Display<&sp>Name;nbt=action/display_name]>
     set_lore: <item[redstone_torch].with[display_name=<&b>Set<&sp>Lore;nbt=action/set_lore]>
     current_window_marker: <item[white_stained_glass_pane].with[display_name=<&e>;nbt=current_window/members]>
     delete_warp: <item[redstone_block].with[display_name=<&c>Delete<&sp>Warp;nbt=action/delete_warp]>

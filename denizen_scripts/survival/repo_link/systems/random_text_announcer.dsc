@@ -3,7 +3,7 @@ random_text_announcer:
   debug: false
   events:
     on system time minutely every:30:
-      - choose <util.random.int[1].to[9]>:
+      - choose <util.random.int[1].to[10]>:
         - case 1:
           - announce "<&e>When was the last time you had a glass of delicious, delicious water?"
         - case 2:
@@ -36,3 +36,5 @@ random_text_announcer:
           - narrate targets:<server.online_players> per_player "<&e>You have been online for <&b><util.time_now.duration_since[<player.flag[LoginTime]>].formatted><&b>. Time for a posture check!"
         - case 9:
           - announce "<&e>Did you just hear a <&c>creeper <&e>behind you?"
+        - case 10:
+          - announce "<&e>Did you know you can vote while offline, and still get rewards?"

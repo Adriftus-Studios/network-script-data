@@ -35,6 +35,7 @@ survival_falloff_rtp:
       - stop
 
     - else if <location[home_<player.uuid>]||null> != null:
+      - adjust <player> velocity:0
       - teleport <location[home_<player.uuid>]>
       - narrate "<&a>You have been teleported home! Please wait <player.flag[RecentRTP].expiration.formatted> more before teleportation!"
       - stop

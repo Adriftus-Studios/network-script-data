@@ -12,6 +12,9 @@ chat_system_events:
       - else:
         - define msg <context.message.parse_color.strip_color>
 
+      - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_flag[chat_item.send]>:
+        - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&lb><player.item_in_hand.display||<player.item_in_hand.material.name.to_titlecase.replace[_].with[<&sp>]>><&rb><&end_hover>]>
+        
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - define Command "chat <[channel]>"
