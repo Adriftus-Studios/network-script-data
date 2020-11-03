@@ -72,6 +72,7 @@ Backpack_54:
 
 Backpack_events:
   type: world
+  debug: false
   events:
     on player right clicks block with:Backpack_* ignorecancelled:true:
       - determine passively cancelled
@@ -130,6 +131,7 @@ Backpack_inventory_54:
 
 Backpack_save:
   type: task
+  debug: false
   script:
     - if <player.item_in_hand.scriptname.starts_with[Backpack]||false>:
       - define slot <player.held_item_slot>
@@ -139,6 +141,7 @@ Backpack_save:
 
 Backpack_open:
   type: task
+  debug: false
   script:
     - if <player.item_in_hand.scriptname.starts_with[Backpack]||false>:
       - define item <player.item_in_hand>

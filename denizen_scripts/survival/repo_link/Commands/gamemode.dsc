@@ -71,11 +71,11 @@ gamemode_handle_command:
       - announce to_console "<&c>You must specify a player when using this command from Console."
       - stop
     - else:
-      - define target_list:!|:<context.args>
+      - define target_list:!|:<context.args.parse[as_player]>
     - define gamemode:<queue.script.data_key[gamemode]>
     - foreach <[target_list]> as:target:
-      - if !<[target].is_player>:
-        - define target:<server.match_player[<[target]>]||null>
+      - if <[target]> == null:
+        - foreach next
       - if <[completed].contains[<[target]>]||false>:
         - foreach next
       - if <[target]> != null:

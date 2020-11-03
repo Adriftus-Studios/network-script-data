@@ -1145,14 +1145,14 @@ claiming_protection_events:
   farmables: pumpkin|carrots|wheat|beetroots|potatoes|cocoa|sugar_cane|kelp_plant|melon
   no_break_bottom: sugar_cane|kelp_plant
   events:
-    on player damages cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
+    on player damages cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|*minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
     - define group <yaml[claims].read[<context.entity.location.chunk.world>.<context.entity.location.chunk.x>.<context.entity.location.chunk.z>]||null>
     - if <[group]> == null:
       - stop
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.kill-animals]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
       - narrate "<&c>You do not have permission to kill animals here."
       - determine cancelled
-    on player right clicks cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
+    on player right clicks cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|*minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
     - define group <yaml[claims].read[<context.entity.location.chunk.world>.<context.entity.location.chunk.x>.<context.entity.location.chunk.z>]||null>
     - if <[group]> == null:
       - stop
@@ -1200,13 +1200,30 @@ claiming_protection_events:
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.break]>:
       - narrate "<&c>You do not have permission to trample crops here."
       - determine cancelled
-    on player clicks *door|*_button|lever|chest|ender_chest|*_gate|crafting_table|anvil|furnace|brewing_stand|enchanting_table|*_bed|bookshelf|barrel|hopper priority:100:
+    on player clicks *door|*_button|lever|chest|ender_chest|*_gate|crafting_table|anvil|furnace|brewing_stand|enchanting_table|*_bed|bookshelf|barrel|hopper|*rail priority:100:
     - define location <context.location||<player.location>>
     - define group <yaml[claims].read[<[location].chunk.world>.<[location].chunk.x>.<[location].chunk.z>]||null>
     - if <[group]> == null:
       - stop
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.interact]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.interact]>:
       - narrate "<&c>You do not have permission to interact with blocks here."
+      - determine cancelled
+    on player breaks hanging priority:100:
+    - define location <context.hanging.location.block>
+    - define group <yaml[claims].read[<[location].chunk.world>.<[location].chunk.x>.<[location].chunk.z>]||null>
+    - if <[group]> == null:
+      - stop
+    - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.interact]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.interact]>:
+      - narrate "<&c>You do not have permission to interact with blocks here."
+      - determine cancelled
+    on entity breaks hanging priority:100:
+    - if <player||null> != null:
+      - stop
+    - define location <context.hanging.location.block>
+    - define group <yaml[claims].read[<[location].chunk.world>.<[location].chunk.x>.<[location].chunk.z>]||null>
+    - if <[group]> == null:
+      - stop
+    - if !<yaml[claims].read[groups.<[group]>.members.everyone.interact]>:
       - determine cancelled
     on liquid spreads:
     - if <context.location.chunk> == <context.destination.chunk>:

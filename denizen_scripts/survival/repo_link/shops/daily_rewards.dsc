@@ -18,18 +18,18 @@ daily_rewards_test:
     - run daily_rewards_particles
     - repeat 20:
       - adjust <entry[item].spawned_entity> item:<[list].random>
-      - playsound <location[spawn_daily_chest]> sound:BLOCK_NOTE_BLOCK_SNARE volume:0.6 pitch:1.5 sound_category:player
-      - playsound <location[spawn_daily_chest]> sound:BLOCK_NOTE_BLOCK_HARP volume:0.8 pitch:1.1 sound_category:player
+      - playsound <location[spawn_daily_chest]> sound:BLOCK_NOTE_BLOCK_SNARE volume:0.6 pitch:1.5
+      - playsound <location[spawn_daily_chest]> sound:BLOCK_NOTE_BLOCK_HARP volume:0.8 pitch:1.1
       
       - wait 2t
     - repeat 12:
       - adjust <entry[item].spawned_entity> item:<[list].random>
-      - playsound <location[spawn_daily_chest]> sound:BLOCK_NOTE_BLOCK_SNARE volume:0.6 pitch:1.4 sound_category:player
-      - playsound <location[spawn_daily_chest]> sound:BLOCK_NOTE_BLOCK_HARP volume:0.7 pitch:1.0 sound_category:player
+      - playsound <location[spawn_daily_chest]> sound:BLOCK_NOTE_BLOCK_SNARE volume:0.6 pitch:1.4
+      - playsound <location[spawn_daily_chest]> sound:BLOCK_NOTE_BLOCK_HARP volume:0.7 pitch:1.0
       
       - wait 5t
     - define reward_type <list[item|item|item|title|bow_trail].get[<util.random.decimal[0.01].to[1.4].*[3].round_up>]>
-    - playsound <location[spawn_daily_chest]> sound:ENTITY_DRAGON_FIREBALL_EXPLODE volume:0.8 pitch:1.6 sound_category:player
+    - playsound <location[spawn_daily_chest]> sound:ENTITY_DRAGON_FIREBALL_EXPLODE volume:0.8 pitch:1.6
     - playeffect dragon_breath at:<location[spawn_daily_item].above[.4]> quantity:60 offset:0.1 data:0.15
     - choose <[reward_type]>:
       - case item:

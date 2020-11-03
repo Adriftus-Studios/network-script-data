@@ -21,8 +21,10 @@ combat_log_events:
     on delta time secondly:
       - foreach <server.online_players_flagged[combat]> as:player:
         - adjust <queue> linked_player:<[player]>
-        - if <player.has_flag[combat]> &&<player.flag[combat].expiration.in_seconds> <= 1:
-          - narrate "<&b>You are no longer in combat."
+        - if <player.has_flag[combat]>:
+          - if <player.flag[combat].expiration.in_seconds> <= 1:
+            - flag <player> combat:!
+            - narrate "<&b>You are no longer in combat."
 
 # can use earth, fire, ender, air, or water
 calculate_damage:
