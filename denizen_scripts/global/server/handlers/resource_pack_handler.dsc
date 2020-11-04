@@ -38,4 +38,4 @@ system_override:
             - narrate "<&6>Resource pack successfully loaded"
           - case ACCEPTED:
             - narrate "<&6>Thank you for using our resource pack."
-            - narrate "<&6>If you are enjoying the server then remember to vote with <&click[/vote]><&a><&l>/vote<&end_click><&6>!"
+#            - narrate "<&6>If you are enjoying the server then remember to vote with <&click[/vote]><&a><&l>/vote<&end_click><&6>!"
