@@ -154,13 +154,13 @@ claiming_claim_button:
   - define chunk <player.location.chunk>
   - if !<script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.world.name>]>:
       - determine <item[claiming_action_unavailable]>
-  - if <yaml[claims].read[limits.current.<player.uuid>]||0> >= <yaml[claims].read[limits.max.<player.uuid>]||30>:
-      - determine <item[claiming_action_unavailable_limit]>
   - if <yaml[claims].read[<[chunk].world>.<[chunk].x>.<[chunk].z>]||null> != null:
     - if <yaml[claims].read[<[chunk].world>.<[chunk].x>.<[chunk].z>].before[~]> == <player.uuid>:
       - determine <item[claiming_unclaim_this_chunk_button].with[nbt=action/unclaim_chunk]>
     - else:
       - determine <item[claiming_action_unavailable]>
+  - if <yaml[claims].read[limits.current.<player.uuid>]||0> >= <yaml[claims].read[limits.max.<player.uuid>]||30>:
+      - determine <item[claiming_action_unavailable_limit]>
   - else:
     - determine <item[claiming_claim_this_chunk_button].with[nbt=action/claim_chunk]>
 
