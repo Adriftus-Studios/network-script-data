@@ -7,5 +7,5 @@ sheep_sheared_listener:
   type: world
   events:
     on player right clicks sheep with:shears:
-    - if <context.entity.is_sheared>:
+    - if <context.entity.is_spawned> && <context.entity.is_sheared>:
       - hurt 1 <context.entity> source:<player>

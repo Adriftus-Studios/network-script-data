@@ -930,12 +930,17 @@ claiming_protection_group_disband:
   debug: false
   definitions: group
   script:
+  - if !<player.has_flag[disband_group]> || !<player.flag[disband_group]> == <[group]>:
+  	- clickable claiming_protection_group_disband def:<[group]> usages:1 for:<player> save:disband
+    - narrate "<&e><element[Click here to confirm disbanding your <[group].after[~]> <&e>group.].on_click[<entry[disband].command>]>" format:confirm_format
+    - flag player disband_group:<[group]> duration:30s
+    - stop
   - yaml id:claims set groups.<[group]>:!
+  - yaml id:claims set limits.current.<player.uuid>:-:<server.notables[cuboids].filter[note_name.starts_with[claim.<[group]>]].size>
   - foreach <server.notables[cuboids].filter[note_name.starts_with[claim.<[group]>]]> as:cuboid:
-    - define chunk <[cuboid].as_cuboid.center.chunk>
+    - define chunk <[cuboid].center.chunk>
     - yaml id:claims set <[chunk].world>.<[chunk].x>.<[chunk].z>:!
-    - yaml id:claims set limits.current.<player.uuid>:--
-    - foreach <[cuboid].as_cuboid.players> as:target:
+    - foreach <[cuboid].players> as:target:
       - inject claiming_system_bossBar_Stop player:<[target]>
     - note remove as:<[cuboid].note_name>
   - narrate "<&7>Group Disbanded!"
@@ -1145,12 +1150,21 @@ claiming_protection_events:
   farmables: pumpkin|carrots|wheat|beetroots|potatoes|cocoa|sugar_cane|kelp_plant|melon|nether_wart
   no_break_bottom: sugar_cane|kelp_plant
   events:
+    on projectile collides with cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|*minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
+      - define group <yaml[claims].read[<context.entity.location.chunk.world>.<context.entity.location.chunk.x>.<context.entity.location.chunk.z>]||null>
+    - if <[group]> == null:
+      - stop
+    - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.kill-animals]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
+      - narrate "<&c>You do not have permission to harm animals here."
+      - determine cancelled
     on player damages cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|*minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
+    - if !<context.entity.is_spawned>:
+      - stop
     - define group <yaml[claims].read[<context.entity.location.chunk.world>.<context.entity.location.chunk.x>.<context.entity.location.chunk.z>]||null>
     - if <[group]> == null:
       - stop
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.kill-animals]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
-      - narrate "<&c>You do not have permission to kill animals here."
+      - narrate "<&c>You do not have permission to harm animals here."
       - determine cancelled
     on player right clicks cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|*minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
     - define group <yaml[claims].read[<context.entity.location.chunk.world>.<context.entity.location.chunk.x>.<context.entity.location.chunk.z>]||null>
@@ -1197,7 +1211,9 @@ claiming_protection_events:
       - narrate "<&c>You do not have permission to break blocks here."
       - determine cancelled
     on player changes farmland into dirt:
-    - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.break]>:
+    - define location <context.location>
+    - define group <yaml[claims].read[<[location].chunk.world>.<[location].chunk.x>.<[location].chunk.z>]||null>
+    - if <[group]> != null && !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.break]>:
       - narrate "<&c>You do not have permission to trample crops here."
       - determine cancelled
     on player clicks *door|*_button|lever|chest|ender_chest|*_gate|crafting_table|anvil|furnace|brewing_stand|enchanting_table|*_bed|bookshelf|barrel|hopper|tnt|dispenser|dropper|stonecutter|lodeston|beehive|smithing_table|lectern|grindstone|flethcing_table|cartography_table|blast_furnace|smoker|composter|loom|trappged_chest|*_shulker_box|cauldron|cake|bell|jukebox|note_block|beacon|respawn-anchor|repeater|redstone_dust|comparator|daylight_detector|tripwire_hook|end_portal_frame|flower_pot|bee_nest|armor_stand|item_frame|*minecart|*boat|*rail priority:100:
