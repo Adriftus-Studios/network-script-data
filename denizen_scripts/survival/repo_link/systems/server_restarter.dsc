@@ -3,31 +3,24 @@ server_restart_handler_survival-plus:
   debug: false
   events:
     on restart command:
-      - determine passively fulfilled
-      - if <context.source_type> == server:
+      - if <context.source_type> == server || <player.has_permission[adriftus.admin]>:
         - inject survival_restart_timer
-        - stop
-      - if <player.has_permission[*]>:
-        - inject survival_restart_timer
+      - determine fulfilled
     on system time 02:55:
       - inject survival_restart_timer
 
 
-survival_restart_announcer:
+survival_restart_timer:
     type: task
     debug: false
-    survival_restarter:
-      - bungeeexecute "send survival behrcraft"
-      - wait 3s
-      - adjust server restart
-    survival_restart_timer:
+    script:
       - announce <&b> "The server will be performing a scheduled restart in 5 minutes. Please reach a safe location."
       - flag server restart_in_process duration:5m
-      - wait 4m 30s
+      - wait 4.5m
       - announce <&b> "The server will be performing a scheduled restart in 30 seconds. Please reach a safe location."
-      - repeat 15
-        - actionbar "<&c>The server will be restarting in <server.flag[restart_in_process].expiration.seconds.round_down[1]> seconds."
+      - repeat 29:
+        - actionbar "<&c>The server will be restarting in <element[31].-[<[value]>]> seconds."
         - wait 1s
-        - actionbar "<&a>The server will be restarting in <server.flag[restart_in_process].expiration.seconds.round_down[1]> seconds."
-        - wait 1s
-      - inject survival_restarter locally
+      - bungeeexecute "send survival hub1"
+      - wait 3s
+      - adjust server restart
