@@ -930,21 +930,21 @@ claiming_protection_group_disband:
   debug: false
   definitions: group
   script:
-  - if !<player.has_flag[disband_group]> || <player.flag[disband_group]> != <[group]>:
-  	- clickable claiming_protection_group_disband def:<[group]> usages:1 for:<player> save:disband
-    - narrate "<element[<&e>Click here to confirm disbanding your <&b><[group].after[~]> <&e>group.].on_click[<entry[disband].command>]>" format:confirm_format
-    - flag player disband_group:<[group]> duration:30s
-    - stop
-  - yaml id:claims set groups.<[group]>:!
-  - yaml id:claims set limits.current.<player.uuid>:-:<server.notables[cuboids].filter[note_name.starts_with[claim.<[group]>]].size>
-  - foreach <server.notables[cuboids].filter[note_name.starts_with[claim.<[group]>]]> as:cuboid:
-    - define chunk <[cuboid].center.chunk>
-    - yaml id:claims set <[chunk].world>.<[chunk].x>.<[chunk].z>:!
-    - foreach <[cuboid].players> as:target:
-      - inject claiming_system_bossBar_Stop player:<[target]>
-    - note remove as:<[cuboid].note_name>
-  - narrate "<&7>Group Disbanded!"
-  - narrate "<&7>Claim Limit<&co> <&e><yaml[claims].read[limits.current.<player.uuid>]><&7>/<&e><yaml[claims].read[limits.max.<player.uuid>]||30>"
+    - if !<player.has_flag[disband_group]> || <player.flag[disband_group]> != <[group]>:
+      - clickable claiming_protection_group_disband def:<[group]> usages:1 save:disband
+      - narrate "<element[<&e>Click here to confirm disbanding your <&b><[group].after[~]> <&e>group.].on_click[<entry[disband].command>]>"
+      - flag player disband_group:<[group]> duration:30s
+      - stop
+    - yaml id:claims set groups.<[group]>:!
+    - yaml id:claims set limits.current.<player.uuid>:-:<server.notables[cuboids].filter[note_name.starts_with[claim.<[group]>]].size>
+    - foreach <server.notables[cuboids].filter[note_name.starts_with[claim.<[group]>]]> as:cuboid:
+      - define chunk <[cuboid].center.chunk>
+      - yaml id:claims set <[chunk].world>.<[chunk].x>.<[chunk].z>:!
+      - foreach <[cuboid].players> as:target:
+        - inject claiming_system_bossBar_Stop player:<[target]>
+      - note remove as:<[cuboid].note_name>
+    - narrate "<&7>Group Disbanded!"
+    - narrate "<&7>Claim Limit<&co> <&e><yaml[claims].read[limits.current.<player.uuid>]><&7>/<&e><yaml[claims].read[limits.max.<player.uuid>]||30>"
 
 claiming_protection_claim:
   type: task
@@ -1151,7 +1151,7 @@ claiming_protection_events:
   no_break_bottom: sugar_cane|kelp_plant
   events:
     on projectile collides with cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|*minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep:
-      - define group <yaml[claims].read[<context.entity.location.chunk.world>.<context.entity.location.chunk.x>.<context.entity.location.chunk.z>]||null>
+    - define group <yaml[claims].read[<context.entity.location.chunk.world>.<context.entity.location.chunk.x>.<context.entity.location.chunk.z>]||null>
     - if <[group]> == null:
       - stop
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.kill-animals]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
