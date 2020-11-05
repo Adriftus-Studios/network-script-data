@@ -77,7 +77,7 @@ Backpack_events:
     on player right clicks block with:Backpack_* ignorecancelled:true:
       - determine passively cancelled
       - wait 1t
-      - if <player.item_in_hand.scriptname.starts_with[Backpack_]>:
+      - if <player.item_in_hand.has_script> && <player.item_in_hand.scriptname.starts_with[Backpack_]>:
         - inject Backpack_open
     on player places backpack_*:
       - determine passively cancelled
@@ -93,7 +93,7 @@ Backpack_events:
     on player drops backpack_*:
     - determine cancelled
     on player prepares anvil craft backpack_*:
-    - determine 9001
+    - determine air
 
 Backpack_inventory_9:
   type: inventory

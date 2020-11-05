@@ -94,7 +94,7 @@ store_hub_cosmeticShop_titles_events:
       - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<context.item.nbt[tag]>]||false>:
         - narrate "<&c>You already have unlocked this title."
         - stop
-      - if <yaml[global.player.<player.uuid>].read[economy.premium.current]> < <context.item.nbt[price]>:
+      - if !<yaml[global.player.<player.uuid>].contains[economy.premium.current]> || <yaml[global.player.<player.uuid>].read[economy.premium.current]||0> < <context.item.nbt[price]>:
         - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
         - stop
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
@@ -194,7 +194,7 @@ store_hub_cosmeticShop_bowtrails_events:
       - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<context.item.nbt[trail]>]||false>:
         - narrate "<&c>You already have unlocked this bow trail."
         - stop
-      - if <yaml[global.player.<player.uuid>].read[economy.premium.current]> < <context.item.nbt[price]>:
+      - if !<yaml[global.player.<player.uuid>].contains[economy.premium.current]> || <yaml[global.player.<player.uuid>].read[economy.premium.current]> < <context.item.nbt[price]>:
         - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
         - stop
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
