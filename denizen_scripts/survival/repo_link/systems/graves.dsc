@@ -133,9 +133,10 @@ graves_handler:
           - narrate <script[graves_config].data_key[messages.claim_head].parse_color>
           - give player_head[skull_skin=<context.location.skull_skin>]
           - yaml id:graves grave.<context.location.simple>.claimed:<-:<player.uuid>
+          - stop
         else:
           - narrate <script[graves_config].data_key[messages.already_claimed_head].parse_color>
-        - stop
+          - stop
       - if <yaml[graves].contains[grave.<context.location.simple>.hologram1]> && <server.entity_is_spawned[<yaml[graves].read[grave.<context.location.simple>.hologram1]>]>:
         - remove <entity[<yaml[graves].read[grave.<context.location.simple>.hologram1]>]>
       - if <yaml[graves].contains[grave.<context.location.simple>.hologram2]> && <server.entity_is_spawned[<yaml[graves].read[grave.<context.location.simple>.hologram2]>]>:
