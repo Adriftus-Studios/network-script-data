@@ -930,9 +930,9 @@ claiming_protection_group_disband:
   debug: false
   definitions: group
   script:
-  - if !<player.has_flag[disband_group]> || !<player.flag[disband_group]> == <[group]>:
+  - if !<player.has_flag[disband_group]> || <player.flag[disband_group]> != <[group]>:
   	- clickable claiming_protection_group_disband def:<[group]> usages:1 for:<player> save:disband
-    - narrate "<&e><element[Click here to confirm disbanding your <[group].after[~]> <&e>group.].on_click[<entry[disband].command>]>" format:confirm_format
+    - narrate "<element[<&e>Click here to confirm disbanding your <&b><[group].after[~]> <&e>group.].on_click[<entry[disband].command>]>" format:confirm_format
     - flag player disband_group:<[group]> duration:30s
     - stop
   - yaml id:claims set groups.<[group]>:!
