@@ -1429,10 +1429,10 @@ claiming_system_bossBar_Biome:
 claim_system_upgrade_auto-replant:
   type: task
   debug: false
-  replantables: wheat|carrots|beetroots|potatoes|cocoa
+  replantables: wheat|carrots|beetroots|potatoes|cocoa|nether_wart
   script:
   - if <yaml[claims].read[groups.<[group]>.settings.auto-plant]> && <yaml[claims].read[groups.<[group]>.upgrades.auto-plant]>:
-    - if <context.location.material.age> == 7:
+    - if <context.location.material.age> == <context.location.material.maximum_age>:
       - wait 1t
       - modifyblock <context.location> <context.material.with[age=0]>
 
