@@ -27,6 +27,8 @@ grappling_hook_events:
       - repeat 999:
         - if !<server.entity_is_spawned[<entry[hook].shot_entity>]> || !<player.has_flag[grappling]>:
           - stop
+        - if <player.location.world.name> != <entry[hook].shot_entity.location.world.name>:
+          - stop
         - playeffect redstone at:<player.location.points_between[<entry[hook].shot_entity.location>].distance[0.5]> quantity:5 special_data:1|gray offset:0.1
         - wait 2t
     on player shoots block flagged:grappling bukkit_priority:LOWEST:
