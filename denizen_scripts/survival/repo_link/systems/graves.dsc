@@ -109,8 +109,12 @@ graves_handler:
       - define location <player.location>
       - wait 5t
       - while <[location].below.material.name> == air:
+        - if <[location].below.y> < 1:
+          - while stop
         - define location <[location].below>
       - while <[location].material.name> != air:
+        - if <[location].above.y> > 255:
+          - while stop
         - define location <[location].above>
       - modifyblock <[location]> player_head
       - adjust <[location]> skull_skin:<player.skull_skin>
