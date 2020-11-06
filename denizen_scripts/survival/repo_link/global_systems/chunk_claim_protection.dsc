@@ -1109,7 +1109,7 @@ claiming_protection_settings_change_name:
   debug: false
   definitions: NewName|group
   script:
-  - if <[NewName]> == <player.name>:
+  - if <[NewName].to_lowercase> == <player.name.to_lowercase>:
     - narrate "<&c>You cannot add yourself to your own claim."
     - stop
   - yaml id:claims set groups.<[group]>.settings.display_name:<[NewName]>
