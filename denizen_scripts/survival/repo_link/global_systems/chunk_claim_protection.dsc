@@ -1069,6 +1069,9 @@ claiming_protection_addMember:
   - if <[player]> == null:
     - narrate "Unknown Player: <[player_in]>"
     - stop
+  - if <[player].name.to_lowercase> == <player.name.to_lowercase>:
+    - narrate "<&c>You cannot add yourself to your own claim."
+    - stop
   - define group_limit <yaml[claims].list_keys[groups.<[groupName]>.member_limit]||22>
   - if <yaml[claims].list_keys[groups.<[groupName]>.members].size||0> >= <[group_limit]>:
     - narrate "<&c>You cannot add any more members to this group."
