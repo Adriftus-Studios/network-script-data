@@ -296,6 +296,8 @@ tutorial_events:
   events:
     on player clicks fake entity flagged:tutorial:
       - playsound <player> sound:ui_button_click volume:0.5
+      - if <context.entity||null> == null:
+        - stop
       - if <context.entity.name> == ContinueTutorial:
         - foreach <player.fake_entities>:
           - fakespawn <[value]> cancel

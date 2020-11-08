@@ -33,7 +33,8 @@ graves_config:
     timer_display: "&eTime Left: &b<[time]>"
   # Below are the messages output by the script
   messages:
-    not_your_grave: "&cYou cannot break someone else's gravestone."
+    claim_head: "&cYou claim a replica of this player's head."
+    already_claim_head: "&cYou have already claimed this head."
     retrieved_grave: "&aYou have retrieved your gravestone."
 
 
@@ -108,8 +109,12 @@ graves_handler:
       - define location <player.location>
       - wait 5t
       - while <[location].below.material.name> == air:
+        - if <[location].below.y> < 1:
+          - while stop
         - define location <[location].below>
       - while <[location].material.name> != air:
+        - if <[location].above.y> > 255:
+          - while stop
         - define location <[location].above>
       - modifyblock <[location]> player_head
       - adjust <[location]> skull_skin:<player.skull_skin>
@@ -128,8 +133,14 @@ graves_handler:
         - stop
       - determine passively cancelled
       - if <yaml[graves].read[grave.<context.location.simple>.owner]> != <player.uuid>:
-        - narrate <script[graves_config].data_key[messages.not_your_grave].parse_color>
-        - stop
+        - if !<yaml[graves].contains[grave.<context.location.simple>.claimed]> || !<yaml[graves].read[grave.<context.location.simple>.claimed].contains[<player.uuid>]>:
+          - narrate <script[graves_config].data_key[messages.claim_head].parse_color>
+          - give player_head[skull_skin=<context.location.skull_skin>]
+          - yaml id:graves grave.<context.location.simple>.claimed:<-:<player.uuid>
+          - stop
+        else:
+          - narrate <script[graves_config].data_key[messages.already_claimed_head].parse_color>
+          - stop
       - if <yaml[graves].contains[grave.<context.location.simple>.hologram1]> && <server.entity_is_spawned[<yaml[graves].read[grave.<context.location.simple>.hologram1]>]>:
         - remove <entity[<yaml[graves].read[grave.<context.location.simple>.hologram1]>]>
       - if <yaml[graves].contains[grave.<context.location.simple>.hologram2]> && <server.entity_is_spawned[<yaml[graves].read[grave.<context.location.simple>.hologram2]>]>:
