@@ -2,7 +2,10 @@ World_Handler:
     type: world
     debug: false
     events:
-        on player places wither_skeleton_skull|tnt|bedrock|end_crystal|ender_chest:
+        on player places ender_chest in:creative:
+            - if !<player.is_op>:
+                - determine cancelled
+        on player places wither_skeleton_skull|tnt|bedrock|end_crystal:
             - if !<player.is_op>:
                 - determine cancelled
         on player changes world to creative:
