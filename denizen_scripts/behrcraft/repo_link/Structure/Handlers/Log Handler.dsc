@@ -67,7 +67,7 @@ Chat_Event_Messages:
     - else:
       - define display_name <yaml[<[global_yaml]>].read[display_name]>
 
-    - define Message "<[Name]> <proc[Colorize].context[joined the game.|yellow]>"
+    - define Message "<[display_name]> <proc[Colorize].context[joined the game.|yellow]>"
 
   # % ██ [ Print the message ] ██
     - wait 1.5s
@@ -90,7 +90,7 @@ Chat_Event_Messages:
     - else:
       - define display_name <yaml[<[global_yaml]>].read[display_name]>
 
-    - define Message "<[Name]> <proc[Colorize].context[left the game.|yellow]>"
+    - define Message "<[display_name]> <proc[Colorize].context[left the game.|yellow]>"
 
   # % ██ [ Print the message ] ██
     - wait 1.5s
