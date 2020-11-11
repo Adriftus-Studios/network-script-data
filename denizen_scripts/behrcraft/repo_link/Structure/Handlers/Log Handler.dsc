@@ -72,7 +72,7 @@ Chat_Event_Messages:
   # % ██ [ Print the message ] ██
     - wait 1.5s
     - announce <[Message]>
-    - if <bungee.connected> && <bungee.list.contains[Gielinor]>:
+    - if <bungee.connected> && <bungee.list_servers.contains[Gielinor]>:
       - bungee Gielinor:
         - announce <[Message]>
 
@@ -81,7 +81,7 @@ Chat_Event_Messages:
 
     # % ██ [ Load and define display_name ] ██
     - define timeout <util.time_now.add[5m]>
-    - waituntil rate:2t <yaml.list_servers.contains[<[global_yaml]>]> || !<player.is_online> || <[timeout].duration_since[<util.time_now>].in_seconds> == 0
+    - waituntil rate:2t <yaml.list.contains[<[global_yaml]>]> || !<player.is_online> || <[timeout].duration_since[<util.time_now>].in_seconds> == 0
     - if !<player.is_online>:
       - stop
 
