@@ -17,14 +17,18 @@ vote_receiver:
         - if <player.flag[enderchest_daily_key_offline]> > 0:
           - if <player.flag[enderchest_daily_key_offline]> > 1:
           - narrate "<&e>Your inventory was full and <&a><player.flag[enderchest_daily_key_offline]> <item[daily_vote_key].display>s<&e> were deposited into your enderchest!"
+          - flag <player> enderchest_daily_key_offline:!
         - else:
           - narrate "<&e>Your inventory was full and <&a>a <item[daily_vote_key].display>s<&e> was deposited into your enderchest!"
+          - flag <player> enderchest_daily_key_offline:!
       - if <player.has_flag[inventory_daily_key_offline]>:
         - if <player.flag[inventory_daily_key_offline]> > 0:
           - if <player.flag[inventory_daily_key_offline]> > 1:
           - narrate "<&e>You received <player.flag[inventory_daily_key]> <item[daily_vote_key].display>s<&e> while offline!"
+          - flag <player> inventory_daily_key:!
         - else:
           - narrate "<&e>You received <&a>a <item[daily_vote_key].display><&e> while you were offline!"
+          - flag <player> inventory_daily_key:!
       - if <player.has_flag[daily_key_pending]>:
         - if <player.flag[daily_key_pending]> > 0:
           - if <player.flag[daily_key_pending]> > 1:
@@ -113,20 +117,17 @@ recoverkeys:
   description: rewards players with their their daily vote keys they were ineligible to claim for some other reason.
   script:
   - if <player.flag[daily_key_pending]> > 0:
-    - if <[voter].inventory.is_full>:
-      - if <[voter].enderchest.is_full>:
+    - if <player.inventory.is_full>:
+      - if <player.enderchest.is_full>:
         - narrate "<&c>Your inventory and enderchest are full. Please make some room and try again later to claim your <item[daily_vote_crate_key].display>!"
       - else:
         - give to:<player.enderchest> daily_vote_crate_key quantity:<player.flag[daily_key_pending]>
         - flag <player> daily_key_pending:!
-        - announce "<&a><[voter].display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
+        - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
     - else:
-      - give <player> daily_vote_crate_key quantiy:<player.flag[daily_key_pending]>
+      - give <player> daily_vote_crate_key quantity:<player.flag[daily_key_pending]>
       - flag <player> daily_key_pending:!
-      - announce "<&a><[voter].display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
-      - else:
-        - flag <[voter]> inventory_daily_key_offline counter:++
-        - flag <[voter]> offline_daily_keys counter:++
+      - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
   - else:
     - narrate "<&c>You do not have any pending keys at this time."
 
