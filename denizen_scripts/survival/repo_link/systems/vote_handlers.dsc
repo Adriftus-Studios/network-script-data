@@ -11,28 +11,32 @@ vote_receiver:
         - inject locally weekly_vote_counter
   #Check for offline keys and award/announce
       on player joins:
-      - if <player.flag[weekly_crate_pending]>:
+      - if <player.has_flag[weekly_crate_pending]>:
         - narrate: "<&e>You have a <item[weekly_vote_key].display> <&e>pending. Do <&3>/<&b>weeklykeys <&e>to claim it.!"
-      - if <player.flag[enderchest_daily_key_offline]> > 0:
-        - if <player.flag[enderchest_daily_key_offline]> > 1:
-        - narrate "<&e>Your inventory was full and <&a><player.flag[enderchest_daily_key_offline]> <item[daily_vote_key].display>s<&e> were deposited into your enderchest!"
-      - else:
-        - narrate "<&e>Your inventory was full and <&a>a <item[daily_vote_key].display>s<&e> was deposited into your enderchest!"
-      - if <player.flag[inventory_daily_key_offline]> > 0:
-        - if <player.flag[inventory_daily_key_offline]> > 1:
-        - narrate "<&e>You received <player.flag[inventory_daily_key]> <item[daily_vote_key].display>s<&e> while offline!"
-      - else:
-        - narrate "<&e>You received <&a>a <item[daily_vote_key].display><&e> while you were offline!"
-      - if <player.flag[daily_key_pending]> > 0:
-        - if <player.flag[daily_key_pending]> > 1:
-          - narrate "<&c>You have <player.flag[daily_key_pending]> <item[daily_vote_key].display>s<&c> waiting for you at <&3>/<&b>recoverkeys."
+      - if <player.has_flag[nderchest_daily_key_offline]>:
+        - if <player.flag[enderchest_daily_key_offline]> > 0:
+          - if <player.flag[enderchest_daily_key_offline]> > 1:
+          - narrate "<&e>Your inventory was full and <&a><player.flag[enderchest_daily_key_offline]> <item[daily_vote_key].display>s<&e> were deposited into your enderchest!"
         - else:
-          - narrate "<&c>You have a <item[daily_vote_key].display><&c> waiting for you at <&3>/<&b>recoverkeys."
-      - if <player.flag[enderchest_daily_key_offline].add[<player.flag[inventory_daily_key_offline]>]> > 0:
-        - if <player.flag[enderchest_daily_key_offline].add[<player.flag[inventory_daily_key_offline]>]> > 1:
-          - announce "<&c><player.display_name> has received <&a><player.flag[enderchest_daily_key_offline].add[<player.flag[inventory_daily_key]>]> <item[daily_vote_key].display>s<&c> for voting while offline!<&nl><&c>Do <&3>/<&b>vote<&c> to recieve yours now!"
+          - narrate "<&e>Your inventory was full and <&a>a <item[daily_vote_key].display>s<&e> was deposited into your enderchest!"
+      - if <player.has_flag[inventory_daily_key_offline]>:
+        - if <player.flag[inventory_daily_key_offline]> > 0:
+          - if <player.flag[inventory_daily_key_offline]> > 1:
+          - narrate "<&e>You received <player.flag[inventory_daily_key]> <item[daily_vote_key].display>s<&e> while offline!"
         - else:
-          - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
+          - narrate "<&e>You received <&a>a <item[daily_vote_key].display><&e> while you were offline!"
+      - if <player.has_flag[daily_key_pending]>:
+        - if <player.flag[daily_key_pending]> > 0:
+          - if <player.flag[daily_key_pending]> > 1:
+            - narrate "<&c>You have <player.flag[daily_key_pending]> <item[daily_vote_key].display>s<&c> waiting for you at <&3>/<&b>recoverkeys."
+          - else:
+            - narrate "<&c>You have a <item[daily_vote_key].display><&c> waiting for you at <&3>/<&b>recoverkeys."
+      - if <player.has_flag[enderchest_daily_key_offline]> && <player.has_flag[inventory_daily_key_offline]>:
+        - if <player.flag[enderchest_daily_key_offline].add[<player.flag[inventory_daily_key_offline]>]> > 0:
+          - if <player.flag[enderchest_daily_key_offline].add[<player.flag[inventory_daily_key_offline]>]> > 1:
+            - announce "<&c><player.display_name> has received <&a><player.flag[enderchest_daily_key_offline].add[<player.flag[inventory_daily_key]>]> <item[daily_vote_key].display>s<&c> for voting while offline!<&nl><&c>Do <&3>/<&b>vote<&c> to recieve yours now!"
+          - else:
+            - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
 
   daily_vote_counter:
     - flag <[voter]> daily_votes_reward counter:++
