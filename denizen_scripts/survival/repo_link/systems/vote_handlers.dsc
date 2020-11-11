@@ -16,8 +16,8 @@ vote_receiver:
       - if <player.has_flag[nderchest_daily_key_offline]>:
         - if <player.flag[enderchest_daily_key_offline]> > 0:
           - if <player.flag[enderchest_daily_key_offline]> > 1:
-          - narrate "<&e>Your inventory was full and <&a><player.flag[enderchest_daily_key_offline]> <item[daily_vote_key].display>s<&e> were deposited into your enderchest!"
-          - flag <player> enderchest_daily_key_offline:!
+            - narrate "<&e>Your inventory was full and <&a><player.flag[enderchest_daily_key_offline]> <item[daily_vote_key].display>s<&e> were deposited into your enderchest!"
+            - flag <player> enderchest_daily_key_offline:!
         - else:
           - narrate "<&e>Your inventory was full and <&a>a <item[daily_vote_key].display>s<&e> was deposited into your enderchest!"
           - flag <player> enderchest_daily_key_offline:!
