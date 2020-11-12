@@ -19,7 +19,7 @@ survival_restart_timer:
       - wait 4.5m
       - announce "<&b>The server will be performing a scheduled restart in 30 seconds. Please reach a safe location."
       - repeat 29:
-        - actionbar "<&e>The server will be restarting in <&c><element[31].-[value]> <&e>seconds."
+        - actionbar "<&e>The server will be restarting in <&c><element[31].-[<[value]>]> <&e>seconds." targets:<server.online_players>
         - wait 1s
       - bungeeexecute "send survival hub1"
       - wait 3s
