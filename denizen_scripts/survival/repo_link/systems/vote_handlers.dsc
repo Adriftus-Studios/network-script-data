@@ -12,15 +12,15 @@ vote_receiver:
   #Check for offline keys and award/announce
       on player joins:
       - if <player.flag[weekly_crate_pending]>:
-        - narrate: "<&e>You have a <item[weekly_vote_key].display> <&e>pending. Do <&3>/<&b>weeklykeys <&e>to claim it.!"
+        - narrate "<&e>You have a <item[weekly_vote_key].display> <&e>pending. Do <&3>/<&b>weeklykeys <&e>to claim it.!"
       - if <player.flag[enderchest_daily_key_offline]> > 0:
         - if <player.flag[enderchest_daily_key_offline]> > 1:
-        - narrate "<&e>Your inventory was full and <&a><player.flag[enderchest_daily_key_offline]> <item[daily_vote_key].display>s<&e> were deposited into your enderchest!"
+          - narrate "<&e>Your inventory was full and <&a><player.flag[enderchest_daily_key_offline]> <item[daily_vote_key].display>s<&e> were deposited into your enderchest!"
       - else:
         - narrate "<&e>Your inventory was full and <&a>a <item[daily_vote_key].display>s<&e> was deposited into your enderchest!"
       - if <player.flag[inventory_daily_key_offline]> > 0:
         - if <player.flag[inventory_daily_key_offline]> > 1:
-        - narrate "<&e>You received <player.flag[inventory_daily_key]> <item[daily_vote_key].display>s<&e> while offline!"
+          - narrate "<&e>You received <player.flag[inventory_daily_key]> <item[daily_vote_key].display>s<&e> while offline!"
       - else:
         - narrate "<&e>You received <&a>a <item[daily_vote_key].display><&e> while you were offline!"
       - if <player.flag[daily_key_pending]> > 0:
