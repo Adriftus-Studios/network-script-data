@@ -5,15 +5,15 @@ Restart_Player_Retrieve:
   script:
   # % ██ [ Verify Player by Timeout         ] ██
     - define Timeout <util.time_now.add[1m]>
-    - waituntil <[Player].is_online> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0:
-    - if !<[Player].is_online>:
+    - waituntil <[Player].is_online||false> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0:
+    - if !<[Player].is_online||false>:
       - stop
 
     - wait 1s
     - flag <[Player]> Server_Return:<map.with[Server].as[<[Server]>].with[Queue].as[<Queue.ID>]>
 
   # % ██ [ Message Player with Option       ] ██
-    - clickable Cancel_Player_Return def:<[Player]>|<[Server]> usages:1 until:10s save:Cancel_Player_Return
+    - clickable Cancel_Player_Return def:<[Player]>|<[Server]> usages:1 save:Cancel_Player_Return
     - define Hover "<proc[Colorize].context[Cancel Server Return.|Red]>"
     - define Text <&c>[<&4><&chr[2716]><&c>]
     - define Decline <proc[msg_hover].context[<[Hover]>|<[Text]>].on_click[<entry[Cancel_Player_Return].command>]>
@@ -25,7 +25,10 @@ Restart_Player_Return:
   debug: true
   definitions: Player|Server
   script:
-    - clickable Cancel_Player_Return def:<[Player]>|<[Server]> usages:1 until:10s save:Cancel_Player_Return
+    - if !<[player].is_online||false> || !<[player].has_flag[Server_Return]>:
+      - stop
+
+    - clickable Cancel_Player_Return def:<[Player]>|<[Server]> usages:1 save:Cancel_Player_Return
     - define Hover "<proc[Colorize].context[Cancel Server Return.|Red]>"
     - define Text <&c>[<&4><&chr[2716]><&c>]
     - define Decline <proc[msg_hover].context[<[Hover]>|<[Text]>].on_click[<entry[Cancel_Player_Return].command>]>

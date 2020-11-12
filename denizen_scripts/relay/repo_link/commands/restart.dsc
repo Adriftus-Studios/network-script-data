@@ -32,7 +32,7 @@ Restart_DCommand:
       - define headers <yaml[saved_headers].read[discord.webhook_message]>
       - ~webget <[hook]> data:<[data]> headers:<[headers]>
       - stop
-    
+
     - else if <[args].size> == 1 && <[args].first>:
       - define title "Discord Command | `/status <&lt>Server<&gt>"
       - define message "**Description**: Restarts a specific server, or all servers.<&nl>**Server Usage**: `/restart <&lt>Server/All<&gt>`<&nl>**Misc Args**: `/restart help`"
