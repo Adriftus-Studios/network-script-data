@@ -1,6 +1,6 @@
 Restart_Player_Retrieve:
   type: task
-  debug: true
+  debug: false
   definitions: Player|Server
   script:
   # % ██ [ Verify Player by Timeout         ] ██
@@ -22,7 +22,7 @@ Restart_Player_Retrieve:
 
 Restart_Player_Return:
   type: task
-  debug: true
+  debug: false
   definitions: Player|Server
   script:
     - if !<[player].is_online||false> || !<[player].has_flag[Server_Return]>:
@@ -46,7 +46,7 @@ Restart_Player_Return:
 
 Cancel_Player_Return:
   type: task
-  debug: true
+  debug: false
   definitions: Player|Server
   script:
   # % ██ [ Verify if marked for return      ] ██
