@@ -1183,7 +1183,7 @@ claiming_protection_events:
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.place]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.place]>:
       - narrate "<&c>You do not have permission to place blocks here."
       - determine cancelled
-    on player right clicks with:water_bucket|lava_bucket|bone_meal:
+    on player right clicks block with:water_bucket|lava_bucket|bone_meal:
     - if <context.relative||null> == null:
       - stop
     - define group <yaml[claims].read[<context.relative.chunk.world>.<context.relative.chunk.x>.<context.relative.chunk.z>]||null>
