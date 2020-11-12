@@ -21,6 +21,5 @@ survival_restart_timer:
       - repeat 29:
         - actionbar "<&c>The server will be restarting in <element[31].-[<[value]>]> seconds."
         - wait 1s
-      - bungeeexecute "send survival hub1"
-      - wait 3s
-      - adjust server restart
+      - define duuid <util.random.duuid.after[_]>
+      - run Discord_Server_Restart def:<[duuid]>|0|false|false
