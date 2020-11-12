@@ -5,7 +5,7 @@ Restart_Player_Retrieve:
   script:
   # % ██ [ Verify Player by Timeout         ] ██
     - define Timeout <util.time_now.add[1m]>
-    - waituntil <[Player].is_online||false> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0:
+    - waituntil <[Player].is_online||false> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0
     - if !<[Player].is_online||false>:
       - stop
 
