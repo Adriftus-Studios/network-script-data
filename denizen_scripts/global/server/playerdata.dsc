@@ -110,6 +110,7 @@ unload_player_data:
 
 player_data_safe_modify:
   type: task
+  debug: false
   definitions: uuid|node|value
   script:
     - yaml id:global.player.<[uuid]> set <[node]>:<[value]>

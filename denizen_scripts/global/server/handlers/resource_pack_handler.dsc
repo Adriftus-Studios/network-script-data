@@ -1,10 +1,12 @@
 
 rp_command:
   type: command
+  debug: false
   name: rp
   description: Immediately sets your current Resource Pack to the servers resources.
   usage: /rp
-  aliases: resourcepack
+  aliases:
+    - resourcepack
   script:
   # The resource pack line.
     - if <server.has_flag[resourcepackurl]>:
@@ -15,12 +17,13 @@ rp_command:
 
 system_override:
   type: world
+  debug: false
   events:
     on player joins:
       - if <server.has_flag[resourcepackurl]> && !<player.has_flag[bypass_resourcepack]>:
         - wait 60t
         - adjust <player> resource_pack:<server.flag[resourcepackurl]>
-        - adjust <player> quietly_discover_recipe:<server.list_recipe_ids>
+        - adjust <player> quietly_discover_recipe:<server.recipe_ids>
         - adjust <player> resend_discovered_recipes
     on resource pack status:
       - if <server.has_flag[resourcepackurl]>:

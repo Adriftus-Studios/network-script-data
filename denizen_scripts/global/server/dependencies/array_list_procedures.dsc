@@ -5,6 +5,7 @@
 # + ██ | Compare to: <yaml[Yaml].read[Parent].filter_tag[<[filter_value].get[Key].is[==].to[Value]>].is_empty.not>
 array_validate:
     type: procedure
+    debug: false
     definitions: yaml|parent|key|value
     script:
         - if !<yaml[<[yaml]>].contains[<[parent]>]>:
@@ -22,6 +23,7 @@ array_validate:
 # + ██ | Compare to: <yaml[Yaml].read[Parent].filter_tag[<[filter_value].get[Key].is[==].to[Value]>].first||invalid>
 array_lookup:
     type: procedure
+    debug: false
     definitions: yaml|parent|key|value
     script:
         - if !<yaml[<[yaml]>].contains[<[parent]>]>:
@@ -36,6 +38,7 @@ array_lookup:
 # + ██ | Compare to: <yaml[Yaml].read[Parent].filter_tag[<[filter_value].contains_any[Value]>]>
 array_lookup_multi:
     type: procedure
+    debug: false
     definitions: yaml|parent|key|values
     script:
         - if !<yaml[<[yaml]>].contains[<[parent]>]>:

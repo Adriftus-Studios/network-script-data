@@ -1,5 +1,6 @@
 negative_spacing:
   type: procedure
+  debug: false
   definitions: int
   script:
     - if !<[int].is_integer>:
@@ -55,6 +56,7 @@ negative_spacing:
 
 positive_spacing:
   type: procedure
+  debug: false
   definitions: int
   script:
     - if !<[int].is_integer>:

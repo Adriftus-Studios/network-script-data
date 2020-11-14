@@ -1,5 +1,6 @@
 cycle_hue:
     type: procedure
+    debug: false
     definitions: color|int
     script:
         - define r <[color].red>

@@ -113,13 +113,6 @@ command_play_inventory:
     - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
     - [filler] [filler] [filler] [filler] [hub] [filler] [filler] [filler] [filler]
 
-telix_command:
-  type: command
-  debug: false
-  name: telix
-  script:
-  - adjust <player> send_to:telix
-
 survival_command:
   type: command
   debug: false

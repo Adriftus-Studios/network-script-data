@@ -115,7 +115,7 @@ chat_system_flag_manager:
   type: world
   debug: false
   events:
-    on player joins server:
+    on player joins:
       - waituntil rate:10t <yaml.list.contains[global.player.<player.uuid>].or[<player.is_online.not>]>
       - if !<player.is_online>:
         - stop
@@ -159,7 +159,7 @@ chat_settings:
   debug: false
   inventory: chest
   title: <&6>Chat Settings
-  slots: 45
+  size: 45
   definitions:
     filler: <item[white_Stained_glass_pane].with[display_name=<&1>]>
   slots:

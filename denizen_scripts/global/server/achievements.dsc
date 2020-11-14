@@ -31,6 +31,7 @@ achievement_data:
 
 achievement_give:
   type: task
+  debug: false
   definitions: id
   script:
     - if <script[achievement_data].data_key[achievements.<[id]>]||invalid> == invalid:
