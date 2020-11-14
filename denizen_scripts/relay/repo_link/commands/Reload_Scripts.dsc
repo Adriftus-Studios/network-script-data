@@ -15,7 +15,7 @@ Reload_Scripts_DCommand:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject role_verification
     - inject command_arg_registry
-    
+
   # % ██ [ Verify Arguments            ] ██
     - if <[args].size> == 0:
       - reload
@@ -48,6 +48,7 @@ Reload_Scripts_DCommand:
 
 Reload_Scripts_Queue:
   type: task
+  debug: false
   version: 1.3
   definitions: channel|definitions
   script:
@@ -96,7 +97,6 @@ Reload_Scripts_Queue:
         - define hook <[hook]>
         - define headers <yaml[saved_headers].read[discord.webhook_message]>
         - ~webget <[hook]> data:<[data]> headers:<[headers]>
-
 
 # % ██ [ Relay Induced Reload Task           ] ██
 Reload_Task:

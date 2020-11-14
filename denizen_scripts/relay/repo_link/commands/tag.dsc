@@ -96,7 +96,6 @@ Tag_ParseFrom:
     - flag server TagUnparsed:<[Tag].escaped> duration:1s
     - bungeerun <[Server]> Tag_Parse def:<[Tag].escaped>
 
-
 # $ ██ [ Run on Server induced by Relay ] ██
 Tag_Parse:
   type: task
@@ -108,7 +107,6 @@ Tag_Parse:
       - bungeerun Relay Tag_Receive def:<list_single[<[TagData]>].include[<server.flag[TagError]>]>
     - else:
       - bungeerun Relay Tag_Receive def:<list_single[<[TagData]>]>
-
 
 # $ ██ [ Run on Relay induced by Server ] ██
 Tag_Receive:
@@ -122,7 +120,6 @@ Tag_Receive:
     - else:
       - define Color Code
     - define TagUnparsed:<server.flag[TagUnparsed]>
-
 
   # % ██ [ Send Embedded Message           ] ██
     - define color Code

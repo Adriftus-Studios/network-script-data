@@ -6,7 +6,7 @@ Player_Quit_Message:
     - define color red
     - inject Embedded_Color_Formatting
     - inject Definition_Registry
-    
+
     - if <[Rank]||null> != null:
       - define Footer "<map.with[text].as[<[Rank]> ★ Left the network]>"
     - else:

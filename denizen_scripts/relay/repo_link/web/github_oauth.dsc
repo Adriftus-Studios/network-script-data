@@ -38,7 +38,7 @@ github_oauth_token_exchange:
     - if <entry[response].failed>:
       - announce to_console "<&c>Failure to Obtain User Info"
       - stop
-    
+
   # % ██ [ Verify Discord Link             ] ██
     - if !<yaml[discord_links].contains[discord_ids.<[discord_id]>]>:
       - announce to_console "User does not have discord linked."
@@ -139,4 +139,4 @@ github_oauth_token_exchange:
       - inject Web_Debug.Webget_Response
     #| Notable Error: Exists already: {"message":"Validation Failed","errors":[{"resource":"Hook","code":"custom","message":"Hook already exists on this repository"}],"documentation_url":"https://docs.github.com/rest/reference/repos#create-a-repository-webhook"}
     #| occurs when the webhook exists already
-    
+

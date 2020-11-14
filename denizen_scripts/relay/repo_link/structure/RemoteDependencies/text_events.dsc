@@ -12,8 +12,6 @@ msg_hover:
     script:
         - determine <&hover[<[Hover].unescaped>]><[Text].unescaped><&end_hover>
 
-
-
 # $ ██  [ Message Command ] ██
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
@@ -25,8 +23,6 @@ msg_cmd:
     definitions: Hover|Text|Command
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>]><[Text].unescaped><&end_click><&end_hover>
-
-
 
 # $ ██  [ Message Chat ] ██
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
@@ -40,8 +36,6 @@ msg_chat:
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[<[Command]>]><[Text].unescaped><&end_click><&end_hover>
 
-
-
 # $ ██  [ Command Hint ] ██
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
@@ -53,8 +47,6 @@ cmd_hint:
     definitions: Hover|Text|Command
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>].type[suggest_command]><[Text].unescaped><&end_click><&end_hover>
-
-
 
 # $ ██  [ Message Hint ] ██
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
@@ -68,8 +60,6 @@ msg_hint:
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>].type[suggest_command]><[Text].unescaped><&end_click><&end_hover>
 
-
-
 # $ ██  [ Message URL ] ██
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
@@ -81,10 +71,6 @@ msg_url:
     definitions: Hover|Text|URL
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[<[URL]>].type[OPEN_URL]><[Text].unescaped><&end_click><&end_hover>
-
-
-
-
 
 # @ ███████████████████████████████████████████████████████████
 # @ ██    Standard 3+ Chat Events | + Insert
@@ -101,8 +87,6 @@ msg_hover_ins:
     script:
         - determine <&hover[<[Hover]>]><&insertion[<[Insert]>]><[Text]><&end_insertion><&end_hover>
 
-
-
 # $ ██  [ Message Command Insert ] ██
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
@@ -116,8 +100,6 @@ msg_cmd_ins:
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>]><&insertion[<[Insert].unescaped>]><[Text].unescaped><&end_insertion><&end_click><&end_hover>
 
-
-
 # $ ██  [ Message Command Hint Insert ] ██
 # - ██  [ Usage ] - define Hover "Text in hoverbox"
 # - ██  [       ] - define Text "Text in chat"
@@ -130,8 +112,6 @@ msg_cmd_hint_ins:
     definitions: Hover|Text|Command|Insert
     script:
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>].type[suggest_command]><&insertion[<[Insert].unescaped>]><[Text].unescaped><&end_insertion><&end_click><&end_hover>
-
-
 
 # $ ██  [ Message Chat Hint Insert ] ██
 # - ██  [ Usage ] - define Hover "Text in hoverbox"

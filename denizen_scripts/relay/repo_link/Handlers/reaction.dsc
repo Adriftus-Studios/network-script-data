@@ -25,7 +25,7 @@ Reaction_Handler:
   VerifyEmoji:
     - if !<context.custom>:
       - stop
-    
+
   ReactionCache:
     - define User <context.author>
     - define EmojiID <context.emoji_id>

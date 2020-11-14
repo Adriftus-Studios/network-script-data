@@ -16,7 +16,7 @@ Bungee_DCommand:
     - define Message <[Message].unescaped>
     - inject Role_Verification
     - inject Command_Arg_Registry
-    
+
   # % ██ [ Verify Arguments            ] ██
     - if <[Args].is_empty>:
       - stop
@@ -25,7 +25,7 @@ Bungee_DCommand:
       - define Reason "Invalid Server"
       - discord id:AdriftusBot message channel:<[Channel]> <[Reason]>
       - stop
-      
+
     - run discord_bungeeCommand_execute def:<[Message].after[<&sp>].before[<&sp>]>|<[Message].after[<&sp>].after[<&sp>].replace[<&sp>].with[<&ns>]>|<[Channel]>
 
 discord_bungeeCommand_execute:
@@ -52,7 +52,6 @@ discord_bungeeCommand_execute:
     - execute as_server "ex bungee <[server]> { <[command]> }"
   #^- discord id:AdriftusBot message channel:<[channel]> "Executed Commands on <[server]>:<n>```ini<n><[Command].split[<n>].separated_by[<n>]>```"
 
-    
   - define color Code
   - inject Embedded_Color_Formatting
   - define Text "Executed Commands on <[server]>:<n>```ini<n><[Command].split[<n>].separated_by[<n>]>```"

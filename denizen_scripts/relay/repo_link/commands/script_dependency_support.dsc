@@ -15,7 +15,7 @@ Script_Dependency_Support_DCommand:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject Role_Verification
     - inject Command_Arg_Registry
-    
+
   # % ██ [ Verify Arguments            ] ██
     - if <[Args].size> == 0:
       - define Args <[Args].include[Help]>
@@ -68,5 +68,4 @@ Script_Dependency_Support_DCommand:
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
         #- run Embedded_Discord_Message_New defs:<[Definitions]>
-
 

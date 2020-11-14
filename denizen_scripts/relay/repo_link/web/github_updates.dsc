@@ -1,6 +1,7 @@
 github_updates:
   type: task
   definitions: domain
+  debug: false
   script:
   # % ██ [ Cache Data                  ] ██
     - define embed <discordembed>

@@ -1,5 +1,6 @@
 WebGet_Handler:
   type: world
+  debug: false
   events:
     on script generates error:
       - if <context.script.name||invalid> == Webget_DCommand && <server.has_flag[WebGet.Log_Queue]> && <server.flag[WebGet.Log_Queue]> == <context.queue||invalid>:

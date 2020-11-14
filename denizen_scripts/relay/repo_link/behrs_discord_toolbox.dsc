@@ -5,7 +5,7 @@ behrs_discord_toolbox:
     on discord reaction added for:adriftusbot:
       - if <context.emoji.name> != settings:
         - stop
-      
+
       - define embed <discordembed.color[16774656]>
       - define direct_message <context.is_direct||false>
       - define message <context.message>

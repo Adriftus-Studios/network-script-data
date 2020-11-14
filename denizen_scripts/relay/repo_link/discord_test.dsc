@@ -19,7 +19,6 @@
 #    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 #    #- discord id:AdriftusBot channel:<[Fchannel]> message <[messageEscaped].unescaped>
 
-
 discord_sendMessage:
   type: task
   debug: false
@@ -28,7 +27,6 @@ discord_sendMessage:
     - announce to_console "<[group]> - <[channel]>"
     - define Fchannel <discord[AdriftusBot].group[<[group]>].channel[<[channel]>]>
     - discord id:AdriftusBot channel:<[Fchannel]> message <[messageEscaped].unescaped>
-
 
 discord_editMessage:
   type: task

@@ -1,6 +1,7 @@
 hex:
   type: procedure
   definitions: rgb
+  debug: false
   script:
     - define hexgraph <script.data_key[hex]>
     - foreach <[rgb].split[,]> as:c:

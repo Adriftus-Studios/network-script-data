@@ -10,11 +10,12 @@ Status_DCommand:
     - Lead Developer
     - Developer
   definitions: Message|Channel|Author|Group
+  debug: false
   script:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject Role_Verification
     - inject Command_Arg_Registry
-    
+
   # % ██ [ Verify Arguments ] ██
     - if <[Args].is_empty>:
       - define Args:->:Relay
@@ -58,7 +59,7 @@ Status_DCommand:
       - define Data <[Data].with[fields].as[<[Fields]>]>
       - bungeerun Relay Embedded_Discord_Message_New def:<list[<[Channel]>].include[<[Data]>]>
       - stop
-      
+
   # % ██ [ Server Argument Check ] ██
     - if !<yaml[bungee_config].contains[servers.<[Server]>]>:
       - stop
@@ -72,7 +73,7 @@ Status_DCommand:
       - define Flags <list[-o|-p|-w|-pl|-v|-ch|-tps|-s|-u]>
     - else:
       - define Flags <[Args].remove[first]>
-    
+
   # % ██ [ Define Empty Defintions ] ██
     - define Fields <list>
     - define Duplicates <list>
@@ -101,7 +102,7 @@ Status_DCommand:
         - ~bungeetag server:<[Server]> <[Tag].unescaped.parsed> save:Data
         - define Field <[Field].with[value].as[<entry[Data].result>]>
         - define Fields <[Fields].include[<[Field]>]>
-    
+
   # % ██ [ Build Data ] ██
   #^- define Data "<map.with[title].as[<[Server]> Status]>"
     - define Data "<map.with[color].as[code].with[fields].as[<[Fields]>].with[username].as[<[Server]> Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>"

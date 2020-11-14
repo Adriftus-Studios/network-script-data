@@ -35,7 +35,7 @@ Error_Response_Webhook:
       - define embed <[embed].inline_fields[<map.with[Line<&co>].as[`#<[Script_Line]>`]>]>
       - define embed <[embed].inline_fields[<map.with[File<&co>].as[<&lb>`<&lb><[File_Directory]><&rb>`<&rb>(<[File_Link]>)]>]>
       - define embed "<[embed].footer_text[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>"
-      
+
       - define Title_Text "<&lb>BORKED<&rb> <[Script_Name]> error on <[Server].to_titlecase>"
       - define Body_Text "<[Body_Text].include_single[<&gt> **Script Name**<&co> `<[Script_Name]>`<&nl><&gt> **Script Reference**<&co>  <&lb>`<[File_Directory]>`<&rb>(<[File_Link]>)<&nl><&gt> **Script Line**<&co> `<[Script_Line]>`<&nl>]>"
     - else:
@@ -60,7 +60,7 @@ Error_Response_Webhook:
       - foreach <[Definition_Map]> key:Definition as:Save:
         - define Definition_List "<[Definition_List].include_single[- <[Definition]>: <[Save]>]>"
       - define embed <[embed].fields[<map.with[Definitions<&co>].as[```yml<&nl><[Definition_List].separated_by[<&nl>]><&nl>```]>]>
-  
+
   # % ██ [ Create Issue Template Link ] ██
     - define Issue_URL_Base https://github.com/Adriftus-Studios/network-script-data/issues/new?labels=Borked&
     - define Body_Text "<[Body_Text].include_single[<&lt>!--- Remove any sections that don't apply or you have inadequate information for. ---<&gt><&nl><&lt>!--- Add any other context about the problem below. ---<&gt><&nl><&nl>]>"

@@ -23,7 +23,7 @@ discord_watcher:
         - stop
       - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null && !<context.author.name.contains[Adriftus]>:
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
-        
+
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
         - define Text <&7><&lb><&color[#738adb]>D<&7><&rb>
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
@@ -38,7 +38,7 @@ discord_watcher:
         - define Text <&7><[Name]>
         - define Insert @<context.author.nickname[<context.group>]||<context.author.name>>
         - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
-        
+
         - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
 
         - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"

@@ -16,7 +16,7 @@ Ex_DCommand:
   # - ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject Role_Verification
     - inject Command_Arg_Registry
-    
+
   # - ██ [ Verify Arguments                        ] ██
     - if <[Args].is_empty>:
       - stop
@@ -35,7 +35,7 @@ Ex_DCommand:
           - define Command "ex <[Args].remove[1].space_separated>"
           - bungee <[Server]>:
             - execute as_server <[Command]>
-  
+
     - define color Code
     - inject Embedded_Color_Formatting
     - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[description].as[Command ran: `/<[Command]>`]>]>"

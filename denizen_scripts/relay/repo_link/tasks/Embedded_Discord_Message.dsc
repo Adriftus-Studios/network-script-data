@@ -1,6 +1,6 @@
 Embedded_Discord_Message:
   type: task
-  debug: true
+  debug: false
   definitions: Data
   script:
   # % ██ [ Create Empty Maps            ] ██
@@ -9,7 +9,6 @@ Embedded_Discord_Message:
     - foreach Author|Footer:
       - if !<[Data].keys.filter[contains_text[<[Value]>]].is_empty>:
         - define <[Value]>_Map <map>
-
 
   # % ██ [ Format Maps                  ] ██
     - foreach <[Data]>:
