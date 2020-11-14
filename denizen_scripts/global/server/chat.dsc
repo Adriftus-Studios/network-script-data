@@ -14,12 +14,12 @@ chat_system_events:
 
       - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_flag[chat_item.send]>:
         - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&lb><player.item_in_hand.display||<player.item_in_hand.material.name.to_titlecase.replace[_].with[<&sp>]>><&rb><&end_hover>]>
-        
+
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - define Command "chat <[channel]>"
       - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
-      
+
       - if <yaml[global.player.<player.uuid>].contains[rank]>:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
       - else:
@@ -36,7 +36,7 @@ chat_system_events:
       - define MessageText <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
 
       - define Message <[ChannelText]><[NameText]><[Separator]><[MessageText]>
-      
+
       - narrate <[message]> targets:<server.online_players_flagged[chat_channel_<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>

@@ -12,7 +12,7 @@ Discord_Command:
   # % ██ [ Check Args ] ██
     - if <context.args.size> > 1:
       - inject Command_Syntax
-    
+
   # % ██ [ Print Discord Link ] ██
     - if <context.args.is_empty> || ( <context.args.size> == 1 && <list[link|invite].contains[<context.args.first>]> ):
       - define URL https://discord.adriftus.com

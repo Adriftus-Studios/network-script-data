@@ -50,7 +50,7 @@ negative_spacing:
       - else:
         - define int:-:1
         - define spacing <[spacing].include[<&chr[F801]>]>
-      
+
     - determine <[spacing].unseparated>
 
 positive_spacing:
@@ -105,5 +105,5 @@ positive_spacing:
       - else:
         - define int:-:1
         - define spacing <[spacing].include[<&chr[F821]>]>
-      
+
     - determine <[spacing].unseparated>

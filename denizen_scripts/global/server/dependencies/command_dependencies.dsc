@@ -13,7 +13,6 @@ Command_Syntax:
         - narrate <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
-
 # % ██  [ Used a command wrongly, provide reason ] ██
 # - ██  [ Usage ] - define Reason no
 # - ██  [       ] - inject Command_Error
@@ -27,7 +26,6 @@ Command_Error:
         - narrate <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
-
 # % ██  [ U ] ██
 # - ██  [ Usage ] - define Reason no
 # - ██  [       ] - inject Permission_Error
@@ -39,7 +37,6 @@ Permission_Error:
         - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.data_key[adminpermission]>"
         - narrate <proc[msg_hover].context[<[Hover]>|<[Text]>]>
         - stop
-
 
 # % ██  [ U ] ██
 # - ██  [ Usage ] - define Reason no
@@ -157,8 +154,6 @@ Online_Player_Tabcomplete:
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
             - determine <server.online_players.exclude[<[Blacklist]||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
-
-
 # % ██  [ Usage ]   tab-completes all players by their name, filters as you type:
 # - ██  [  # 1  ] - determine <proc[All_Player_Tabcomplete]>
 # % ██  [       ]
@@ -192,8 +187,6 @@ All_Player_Tabcomplete:
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
             - determine <server.players.exclude[<[Blacklist]||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
-
-
 # % ██  [ Usage ]   Tab-completes a list of a values from an escaped ListTag - List must be escaped
 # - ██  [  #1   ] - determine <proc[OneArg_Command_Tabcomplete].context[1|<list[Option1|Option2|Option3].escaped>]>
 # % ██  [       ]
@@ -214,8 +207,6 @@ OneArg_Command_Tabcomplete:
             - determine <[Args]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
             - determine <[Args].filter[starts_with[<context.args.get[<[iArg]>]>]]>
-
-
 
 # % ██  [ Notes ] Tab-completes a list of options for a numbered list of args
 # % ██  [       ] Note: definitions must be numbered "Arg1, Arg2, ..." - Skips if undefined
@@ -240,7 +231,6 @@ MultiArg_Command_Tabcomplete:
                     - determine <[Arg<[Loop_Index].add[1]>]>
             - else:
                 - foreach next
-
 
 # % ██  [ Notes ] Tab-completes a list of options for any list of args, including sub-args
 # % ██  [       ] First arg is required, every arg afterwards is optional, including deciding between args, or sub-args from the previous arg
@@ -281,7 +271,6 @@ MultiArg_With_MultiArgs_Command_Tabcomplete:
             - else:
                 - foreach next
 
-
 # % ██  [ Notes ] Tab-completes a list of options for any list of args, including sub-args
 # % ██  [       ] First arg is required, every arg afterwards is optional, including deciding between args, or sub-args from the previous arg
 # % ██  [       ] Sub-Args are defined as Arg#<ARGNAME>Args - where the # is the arg number and <ARGNAME> is the name from Arg# you want to have sub-args
@@ -313,11 +302,11 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
                                 - define Option <context.args.get[<[ArgRef]>]>
                                 - if <[Arg<[loop_index]><[Option]>Args]> != null:
                                     - determine <[Arg<[Loop_Index]><[Option]>Args].filter[starts_with[<context.args.last>]]>
-                                    
+
                 #@ Player is typing a new arg - check for Arg#
                 - else if <[Arg<[Loop_Index].add[1]>]||null> != null:
                     - determine <[Arg<[Loop_Index].add[1]>]>
-                
+
                 #@ Player is typing a new arg - check for Arg#ArgArgs
                 - else:
                     - repeat <[ArgSize]>:

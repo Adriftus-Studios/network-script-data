@@ -14,7 +14,7 @@ command_play:
       - stop
     - else if <context.args.size> != 1:
       - inject command_syntax
-      
+
     # % ██ [ Verify Valid Server for Network ] ██
     - else if !<yaml[bungee_config].contains[servers.<context.args.first.to_lowercase>]>:
       - define Reason "Invalid Server."
@@ -24,12 +24,12 @@ command_play:
     - else if !<bungee.list_servers.contains[<context.args.first.to_lowercase>]>:
       - define Reason "Server is not currently available."
       - stop
-      
+
     # % ██ [ Check for Same Server ] ██
     - else if <bungee.server> == <context.args.first.to_lowercase>:
       - define Reason "You're already on <yaml[bungee_config].parsed_key[servers.<context.args.first.to_lowercase>.display_name]>."
       - inject command_error
-      
+
     # % ██ [ Transfer Server ] ██
     - narrate "<&e>Joining Server<&co> <yaml[bungee_config].parsed_key[servers.<context.args.first.to_lowercase>.display_name]>"
     - adjust <player> send_to:<context.args.first.to_lowercase>
@@ -48,7 +48,7 @@ command_play_events:
 
     on script reload:
       - ~run pull_bungee_config
-    
+
     on player clicks item in command_play_inventory:
       - determine passively cancelled
       - if <context.item.has_nbt[server]>:
@@ -119,7 +119,7 @@ telix_command:
   name: telix
   script:
   - adjust <player> send_to:telix
-  
+
 survival_command:
   type: command
   debug: false
@@ -128,7 +128,7 @@ survival_command:
   usage: /survival
   script:
   - adjust <player> send_to:survival
-   
+
 hub_command:
   type: command
   debug: false

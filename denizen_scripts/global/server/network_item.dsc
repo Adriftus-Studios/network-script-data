@@ -13,7 +13,6 @@ hub_server_item:
     - <&a>Choose a server to play on!
   mechanisms:
     skull_skin: Dipicrylamine
-    
 
 hub_warp_item:
   type: item
@@ -41,7 +40,6 @@ hub_settings_item:
     - <&c>Not Yet Implemented!
   mechanisms:
     skull_skin: Aa
-
 
 network_item_events:
   type: world

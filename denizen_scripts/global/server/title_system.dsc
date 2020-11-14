@@ -9,7 +9,6 @@ title_unlock:
     - if <yaml[titles].read[titles.<[tagID]>]||null> != null && !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tagID]>]||false>:
       - yaml id:global.player.<player.uuid> set titles.unlocked:->:<[tagID]>
 
-
 title_remove:
   type: task
   definitions: tagID
