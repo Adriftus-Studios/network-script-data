@@ -90,6 +90,9 @@ Backpack_events:
     on player clicks in Backpack_inventory_*:
       - if <context.item.scriptname.starts_with[Backpack_]||false>:
         - determine cancelled
+      - if <context.click> == NUMBER_KEY:
+        - if <context.cursor_item.scriptname.starts_with[Backpack_]||false>:
+          - determine cancelled
     on player drops backpack_*:
     - determine cancelled
     on player prepares anvil craft backpack_*:
