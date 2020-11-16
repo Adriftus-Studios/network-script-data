@@ -91,7 +91,7 @@ Backpack_events:
       - if <context.item.scriptname.starts_with[Backpack_]||false>:
         - determine cancelled
       - if <context.click> == NUMBER_KEY:
-        - if <context.cursor_item.scriptname.starts_with[Backpack_]||false>:
+        - if <player.inventory.slot[<context.hotbar_button>].scriptname.starts_with[Backpack_]||false>:
           - determine cancelled
     on player drops backpack_*:
     - determine cancelled
