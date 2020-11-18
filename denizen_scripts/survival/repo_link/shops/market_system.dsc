@@ -298,7 +298,6 @@ market_system_category_events:
   events:
     on player clicks item in market_system_category_GUI:
       - determine passively cancelled
-      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - ratelimit <player> 5t
       - define inventory <context.inventory>
       - if <context.item.has_nbt[market_item]>:
