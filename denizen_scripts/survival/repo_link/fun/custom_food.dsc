@@ -1,7 +1,6 @@
 custom_food_potato_soup:
   material: mushroom_stew
   debug: false
-  debug: false
   display name: <&7>Potato Soup
   type: item
   recipes:
@@ -13,7 +12,6 @@ custom_food_potato_soup:
 
 custom_food_onion:
   material: beetroot
-  debug: false
   debug: false
   display name: <&7>Onion
   type: item
