@@ -2,7 +2,7 @@ vote_receiver:
   type: world
   debug: false
   listed_sites:
-    number_of_sites_listed_on: 
+    number_of_sites_listed_on: 50
   events:
     #Vote received:
       on votifier vote:
