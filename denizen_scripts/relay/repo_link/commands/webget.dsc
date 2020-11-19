@@ -78,7 +78,7 @@ Webget_DCommand:
       - define Data "<map.with[username].as[WebGet Command Response].with[avatar_url].as[<[avatar_url]>].with[embeds].as[<[Embeds]>].to_json>"
       - ~webget <[Hook]> data:<[Data]> headers:<[RHeaders]>
       - stop
-    
+
   # % ██ [ Check for Queue Clear Arguments         ] ██
     - if <list[clear|-clear|cancel|-cancel].contains[<[Args].first>]>:
       - define Color Red

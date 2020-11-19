@@ -29,7 +29,7 @@ Add_Developer_DCommand:
       - define new_developers <[new_developers].include_single[<[discord_user]>]>
       - if !<[discord_user].roles[<[group]>].contains[<[developer_role]>]>:
         - discord id:adriftusbot add_role user:<[discord_user]> role:<[developer_role]> group:<[group]>
-        
+
       - define user_id <[discord_user].id>
       - define uuid <util.random.uuid.before[-]>
     #^- bungeerun relay github_oauth def:<[author].id>_<[uuid]>|add

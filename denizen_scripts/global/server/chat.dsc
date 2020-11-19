@@ -14,12 +14,12 @@ chat_system_events:
 
       - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_flag[chat_item.send]>:
         - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&lb><player.item_in_hand.display||<player.item_in_hand.material.name.to_titlecase.replace[_].with[<&sp>]>><&rb><&end_hover>]>
-        
+
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - define Command "chat <[channel]>"
       - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
-      
+
       - if <yaml[global.player.<player.uuid>].contains[rank]>:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
       - else:
@@ -36,13 +36,13 @@ chat_system_events:
       - define MessageText <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
 
       - define Message <[ChannelText]><[NameText]><[Separator]><[MessageText]>
-      
+
       - narrate <[message]> targets:<server.online_players_flagged[chat_channel_<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
-        - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include[<[message]>]>
+        - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include_single[<[message]>]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
-          - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.name>|<player.display_name.strip_color>]>
+          - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.name>].include_single[<player.display_name.strip_color>]>
         - inject chat_history_save
 
 chat_history_save:
@@ -115,7 +115,7 @@ chat_system_flag_manager:
   type: world
   debug: false
   events:
-    on player joins server:
+    on player joins:
       - waituntil rate:10t <yaml.list.contains[global.player.<player.uuid>].or[<player.is_online.not>]>
       - if !<player.is_online>:
         - stop
@@ -159,7 +159,7 @@ chat_settings:
   debug: false
   inventory: chest
   title: <&6>Chat Settings
-  slots: 45
+  size: 45
   definitions:
     filler: <item[white_Stained_glass_pane].with[display_name=<&1>]>
   slots:

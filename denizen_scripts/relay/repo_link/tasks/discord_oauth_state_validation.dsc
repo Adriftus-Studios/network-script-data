@@ -28,6 +28,7 @@ discord_oauth_validate_state:
 
 discord_oauth:
   type: task
+  debug: false
   definitions: state|action
   script:
     - choose <[action]>:

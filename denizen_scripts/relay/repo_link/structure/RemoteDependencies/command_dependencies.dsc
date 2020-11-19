@@ -13,7 +13,6 @@ Command_Syntax:
         - narrate <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
-
 # % ██  [ Used a command wrongly, provide reason ] ██
 # - ██  [ Usage ] - define Reason no
 # - ██  [       ] - inject Command_Error
@@ -27,7 +26,6 @@ Command_Error:
         - narrate <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
-
 # % ██  [ U ] ██
 # - ██  [ Usage ] - define Reason no
 # - ██  [       ] - inject Permission_Error
@@ -39,7 +37,6 @@ Permission_Error:
         - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.data_key[adminpermission]>"
         - narrate <proc[msg_hover].context[<[Hover]>|<[Text]>]>
         - stop
-
 
 # % ██  [ U ] ██
 # - ██  [ Usage ] - define Reason no
@@ -167,8 +164,6 @@ Online_Player_Tabcomplete:
             - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
             - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
-
-
 
 # % ██  [ Usage ]   tab-completes all players by their name, filters as you type:
 # - ██  [  # 1  ] - determine <proc[All_Player_Tabcomplete]>
@@ -318,11 +313,11 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
                                 - define Option <context.args.get[<[ArgRef]>]>
                                 - if <[Arg<[loop_index]><[Option]>Args]||null> != null:
                                     - determine <[Arg<[Loop_Index]><[Option]>Args].filter[starts_with[<context.args.last>]]>
-                                    
+
                 #@ Player is typing a new arg - check for Arg#
                 - else if <[Arg<[Loop_Index].add[1]>]||null> != null:
                     - determine <[Arg<[Loop_Index].add[1]>]>
-                
+
                 #@ Player is typing a new arg - check for Arg#ArgArgs
                 - else:
                     - repeat <[ArgSize]>:

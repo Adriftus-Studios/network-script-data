@@ -1,6 +1,7 @@
 Players_DCommand:
   type: task
   definitions: Message|Channel|Author|Group
+  debug: false
   error:
     - define definitions <map.with[text].as[<[text]>].with[color].as[red].with[title].as[Invalid<&sp>Usage].with[channel].as[<[channel]>].with[username].as[<[username]>]>
     - run webhook_generic def:<list[title_description].include_single[<[definitions]>]>
@@ -63,4 +64,4 @@ Players_DCommand:
       - define text <[text].include[```md<n>].include_single[<[players].separated_by[<n>]>].include[<n>```]>
   - define definitions <map.with[text].as[<[text].separated_by[<n>]>].with[color].as[<[color]>].with[title].as[<[title]>].with[channel].as[<[channel]>].with[username].as[<[username]>]>
   - run webhook_generic def:<list[title_description].include_single[<[definitions]>]>
-  
+

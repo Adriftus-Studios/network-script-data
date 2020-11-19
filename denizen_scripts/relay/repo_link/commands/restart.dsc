@@ -21,22 +21,11 @@ Restart_DCommand:
     - waituntil rate:1s <bungee.connected>
 
   # % ██ [ Verify Arguments                 ] ██
-    - if ( <[args].size> > <bungee.list.size.add[3]> ) || ( !<[args].is_empty> && <[args].first> == help ):
+    - if <[args].size> > <bungee.list_servers.size.add[3]>:
       - define title "Syntax Error"
       - define message "Use `/restart help` for help with this command."
       - define color red
       - inject embedded_color_formatting
-      - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[<[color]>].with[description].as[<[message]>]>]>
-      - define data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[embeds]>].to_json>
-      - define hook <script[ddtbcty].data_key[WebHooks.<[channel]>.hook]>
-      - define headers <yaml[saved_headers].read[discord.webhook_message]>
-      - ~webget <[hook]> data:<[data]> headers:<[headers]>
-      - stop
-    
-    - else if <[args].size> == 1 && <[args].first>:
-      - define title "Discord Command | `/status <&lt>Server<&gt>"
-      - define message "**Description**: Restarts a specific server, or all servers.<&nl>**Server Usage**: `/restart <&lt>Server/All<&gt>`<&nl>**Misc Args**: `/restart help`"
-      - define color 8650752
       - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[<[color]>].with[description].as[<[message]>]>]>
       - define data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[embeds]>].to_json>
       - define hook <script[ddtbcty].data_key[WebHooks.<[channel]>.hook]>
@@ -51,7 +40,7 @@ Restart_DCommand:
     - if <[args].contains_any[all|network]>:
       - define servers <bungee.list_servers>
     - else:
-      - define servers <[args].filter[contains_any[help|cancel|stop|-l|-log|-logs|-c|-conf|-confirmation].not].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>].not>]>
+      - define servers <[args].filter[contains_any[help|cancel|stop|-l|-log|-logs|-c|-conf|-confirm|-confirmation].not].filter_tag[<list[d|delay|w|wait].contains[<[filter_value].before[:]>].not>]>
       - foreach <[servers]> as:Server:
         - if !<yaml[bungee_config].contains[servers.<[server]>]>:
           - narrate "Invalid server."
@@ -64,13 +53,32 @@ Restart_DCommand:
 
   # % ██ [ Check for Help Argument          ] ██
     - if <[args].first> == Help:
-      - choose <context.args.size>:
+      - choose <[args].size>:
         - case 1:
-          - narrate "Helpful information."
+          - define title "Discord Command | `/Restart <&lt>Server<&gt>`"
+          - define message "**Description**: Restarts a specific server, or all servers.<&nl>**Command Usage**: `/restart <&lt>Server/All<&gt> (-c/-l)`<&nl>**Misc Args**: `/restart help`<&nl>**Available Arguments**:"
+          - define color 8650752
+          - define fields "<list_single[<map.with[name].as[**`(-l|-log|-logs)`**].with[value].as[Returns a confirmation as well as the startup log the server when the server has completely restarted].with[inline].as[true]>]>"
+          - define fields "<[fields].include_single[<map.with[name].as[**`(-c|-confirm)`**].with[value].as[Returns a confirmation when the server has completely restarted].with[inline].as[true]>]>"
+          - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[<[color]>].with[description].as[<[message]>].with[fields].as[<[fields]>]>]>
+          - define data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[embeds]>].to_json>
+          - define hook <script[ddtbcty].data_key[WebHooks.<[channel]>.hook]>
+          - define headers <yaml[saved_headers].read[discord.webhook_message]>
+          - ~webget <[hook]> data:<[data]> headers:<[headers]>
+          - stop
         - case 2:
           - narrate "Depends on the sub-command or flag."
         - default:
-          - narrate "There's no helping stupid."
+          - define title "Syntax Error"
+          - define message "Use `/restart help` for help with this command."
+          - define color red
+          - inject embedded_color_formatting
+          - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[<[color]>].with[description].as[<[message]>]>]>
+          - define data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[embeds]>].to_json>
+          - define hook <script[ddtbcty].data_key[WebHooks.<[channel]>.hook]>
+          - define headers <yaml[saved_headers].read[discord.webhook_message]>
+          - ~webget <[hook]> data:<[data]> headers:<[headers]>
+          - stop
       - stop
 
   # % ██ [ Check for Cancel Argument        ] ██
@@ -101,9 +109,11 @@ Restart_DCommand:
       - if <duration[<[delayarg]>]||null> == null:
         - define entry_results "<[entry_results].include[<&nl>**Warning**: `Invalid Duration, Defaulted to fallback: 1 minute.`]>"
         - define delay 1m
-      - if <duration[<[delayarg]>].in_minutes> > 5:
+      - else if <duration[<[delayarg]>].in_minutes> > 5:
         - define entry_results "<[entry_results].include[<&nl>**Warning**: `Invalid Duration, Defaulted to the maximum: 5 minutes.`]>"
         - define delay 5m
+      - else:
+        - define delay <duration[<[delayarg]>]>
     - else:
       - define delay 2s
 
@@ -120,5 +130,5 @@ Restart_DCommand:
   # % ██ [ Execute Restart Queues           ] ██
     - foreach <[servers]> as:Server:
       - define duuid <util.random.duuid.after[_]>
-      - bungeerun <[server]> Discord_Server_Restart def:<[duuid]>|<[delay]>|<[args].contains_any[-l|-log|-logs]>|<[args].contains_any[-c|-conf|-confirmation]>
+      - bungeerun <[server]> Discord_Server_Restart def:<[duuid]>|<[delay]>|<[args].contains_any[-l|-log|-logs]>|<[args].contains_any[-c|-conf|-confirm|-confirmation]>
       - flag server Queue.Restart:->:<map.with[server].as[<[server]>].with[schedule].as[<util.time_now.add[<[delay]>]>].with[duuid].as[<[duuid]>].with[channel].as[<[channel]>]>

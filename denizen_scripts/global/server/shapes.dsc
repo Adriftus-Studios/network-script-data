@@ -1,6 +1,7 @@
 
 define_curve1:
   type: procedure
+  debug: false
   definitions: start|end|intensity|angle|between
   script:
   - define a <[start].face[<[end]>].points_between[<[end]>].distance[<[between]>]>
@@ -14,6 +15,7 @@ define_curve1:
 
 define_curve2:
   type: procedure
+  debug: false
   definitions: start|end|intensity|angle|between
   script:
   - define a <[start].face[<[end]>].points_between[<[end]>].distance[<[between]>]>
@@ -27,6 +29,7 @@ define_curve2:
 
 define_cone1:
   type: procedure
+  debug: false
   definitions: start|end|angle|blocks_between
   script:
   - define points1 <[start].points_between[<[end]>].distance[<[blocks_between]>]>
@@ -42,6 +45,7 @@ define_cone1:
 
 define_cone2:
   type: procedure
+  debug: false
   definitions: start|end|angle|blocks_between
   script:
   - define points1 <[start].points_between[<[end]>].distance[<[blocks_between]>]>
@@ -59,6 +63,7 @@ define_cone2:
 
 define_sphere1:
   type: procedure
+  debug: false
   definitions: location|radius|blocks_between
   script:
   - define blocks_between <[blocks_between]||0.4>
@@ -84,6 +89,7 @@ define_sphere1:
 
 define_sphere2:
   type: procedure
+  debug: false
   definitions: location|radius|blocks_between
   script:
   - define blocks_between <[blocks_between]||0.4>
@@ -111,6 +117,7 @@ define_sphere2:
 
 define_circle:
   type: procedure
+  debug: false
   definitions: location|radius
   script:
   - define cir <[radius].mul[<util.pi>].mul[2]>
@@ -123,6 +130,7 @@ define_circle:
 
 define_star2:
   type: procedure
+  debug: false
   definitions: location|radius|rotation|num
   script:
   - define points <list>
@@ -140,6 +148,7 @@ define_star2:
 
 define_star:
   type: procedure
+  debug: false
   definitions: location|radius|rotation|num
   script:
   - define points <list>
@@ -155,6 +164,7 @@ define_star:
 
 define_spiral:
   type: procedure
+  debug: false
   definitions: start|end|radius|angle_offset
   script:
   - define start <[start].face[<[end]>]>
@@ -168,6 +178,7 @@ define_spiral:
 
 define_zigzag:
   type: procedure
+  debug: false
   definitions: start|end|radius
   script:
   - define start <[start].face[<[end]>]>
@@ -270,6 +281,7 @@ test_effects_command:
 
 find_offset:
   type: procedure
+  debug: false
   definitions: C|degrees
   script:
   - while <[degrees]> > 360:
@@ -282,6 +294,7 @@ find_offset:
 
 play_animation:
   type: task
+  debug: false
   definitions: points|particle
   script:
   - define points <[points]>

@@ -1,6 +1,6 @@
 discord_server_restart:
   type: task
-  debug: true
+  debug: false
   definitions: duuid|delay|log|confirmation
   script:
     - announce "<&e>Server restart in<&6>: <&2>[<&a><duration[<[delay]>].formatted><&2>]"

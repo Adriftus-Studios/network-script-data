@@ -1,10 +1,14 @@
 Restart_Confirmation_Response:
   type: task
-  debug: true
+  debug: false
   definitions: Server|DUUID|Log|Confirmation
   script:
   # % ██ [ Check for Cancelled Log Request ] ██
-    - if !<server.has_flag[Queue.Restart]> || <server.flag[Queue.Restart].is_empty> || <server.flag[Queue.Restart].parse[get[Server]].contains[<[Server]>]>:
+    - if !<server.has_flag[Queue.Restart]>:
+      - stop
+
+    - define server_data <server.flag[Queue.Restart]>
+    - if !<[server_data].parse[get[Server]].contains[<[Server]>]>:
       - stop
 
   # % ██ [ Cache & Verify Data             ] ██
@@ -13,6 +17,7 @@ Restart_Confirmation_Response:
     - define Channel <[Data_Map].get[Channel]>
     - if <[Data_Map].get[DUUID]> != <[DUUID]>:
       - stop
+    - flag server Queue.Restart:<-:<[Data_Map]>
     - if !<script[DDTBCTY].list_keys[WebHooks].contains[<[Channel]>]>:
       - stop
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
@@ -20,11 +25,11 @@ Restart_Confirmation_Response:
 
   # % ██ [ Check for Log Request           ] ██
     - if <[Log]>:
-      - define LogDir ../../logs/latest.log
-      - define WebDir ../../../../web/webget/<[DUUID]>.log
-      - define URL http://147.135.7.85:25580/webget?name=<[DUUID]>.log
+      - define LogDir ../../../<[server]>/logs/latest.log
+      - define WebDir ../../../../web/webget/<[DUUID]>.txt
+      - define URL http://147.135.7.85:25580/webget?name=<[DUUID]>.txt
       - ~filecopy origin:<[LogDir]> destination:<[WebDir]>
-      - define Message_Context "<[Message_Context].include_single[<&nl>**Log Output**: <&lb>`<&lb><[DUUID]>.log<&rb>`<&rb>(<[URL]>)]>"
+      - define Message_Context "<[Message_Context].include_single[<&nl>**Log Output**: <&lb>`<&lb><[DUUID]>.txt<&rb>`<&rb>(<[URL]>)]>"
 
   # % ██ [ Return Results                          ] ██
     - define color Code

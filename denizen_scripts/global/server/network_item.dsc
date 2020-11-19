@@ -1,5 +1,6 @@
 network_item:
   type: item
+  debug: false
   material: player_head
   display name: <&b>Menu
   mechanisms:
@@ -7,16 +8,17 @@ network_item:
 
 hub_server_item:
   type: item
+  debug: false
   material: player_head
   display name: <&a>Servers
   lore:
     - <&a>Choose a server to play on!
   mechanisms:
     skull_skin: Dipicrylamine
-    
 
 hub_warp_item:
   type: item
+  debug: false
   material: player_head
   display name: <&b>Warps
   lore:
@@ -26,6 +28,7 @@ hub_warp_item:
 
 hub_cosmetics_item:
   type: item
+  debug: false
   material: player_head
   display name: <&5>Cosmetics
   lore:
@@ -35,13 +38,13 @@ hub_cosmetics_item:
 
 hub_settings_item:
   type: item
+  debug: false
   material: player_head
   display name: <&7>Settings
   lore:
     - <&c>Not Yet Implemented!
   mechanisms:
     skull_skin: Aa
-
 
 network_item_events:
   type: world
@@ -62,6 +65,7 @@ network_item_events:
 
 network_item_inventory:
   type: inventory
+  debug: false
   inventory: chest
   title: <&a>Play Menu
   definitions:

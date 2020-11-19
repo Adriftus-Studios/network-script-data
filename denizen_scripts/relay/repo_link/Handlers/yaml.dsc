@@ -1,15 +1,16 @@
 yaml_handler:
   type: world
+  debug: false
   load:
     - foreach <yaml[network_configuration].read[configurations]> key:yaml as:file_path:
       - ~run load_yaml def:<[yaml]>|<[file_path]>|false|false
-      
+
     - foreach <server.list_files[data/globalLiveData/discord/webhooks]> as:Json:
       - yaml id:webhook_template_<[Json].before[.]> load:data/globalLiveData/discord/webhooks/<[Json]>
 
     - foreach "<server.list_files[data/Script Dependency Support]>" as:Yaml:
       - yaml id:SDS_<[Yaml].before[.].replace[<&sp>].with[_]> "load:data/Script Dependency Support/<[Yaml]>"
-        
+
   events:
     on server start:
       - yaml id:network_configuration load:data/global/network/configuration.yml
@@ -20,6 +21,7 @@ yaml_handler:
 
 load_yaml:
   type: task
+  debug: false
   definitions: yaml|file_path|save|force
   script:
     - if <yaml.list.contains[<[yaml]>]>:

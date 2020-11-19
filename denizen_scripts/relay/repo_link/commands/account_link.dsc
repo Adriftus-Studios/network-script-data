@@ -10,7 +10,6 @@ Discord_Connect_DCommand:
     - Head Moderator
     - Moderator
 
-
   # % ██ [ Public Roles ] ██
     - Lead Developer
     - Developer
@@ -37,7 +36,7 @@ Discord_Connect_DCommand:
         - define headers <yaml[saved_headers].read[discord.webhook_message]>
         - ~webget <[hook]> data:<[data]> headers:<[headers]>
         - stop
-    
+
     - foreach <[message_object].formatted_mentions> key:discord_name as:discord_user:
         - define discord_name <[discord_name]>
         - define discord_user <[discord_user]>

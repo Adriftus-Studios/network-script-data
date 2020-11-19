@@ -54,7 +54,7 @@ player_Data_Join_Event:
     - define player_map <map.with[name].as[<[name]>].with[Server].as[<bungee.server>]>
     - if <yaml[<[global_yaml]>].contains[rank]>:
       - define player_map <[player_map].with[rank].as[<yaml[global.player.<[uuid]>].read[rank].strip_color>]>
-      
+
     - waituntil rate:1s <bungee.connected>
     - if <[Event]> == Joined:
       - bungeerun relay player_Join_Message def:<list_single[<[player_map]>]>
@@ -110,6 +110,7 @@ unload_player_data:
 
 player_data_safe_modify:
   type: task
+  debug: false
   definitions: uuid|node|value
   script:
     - yaml id:global.player.<[uuid]> set <[node]>:<[value]>

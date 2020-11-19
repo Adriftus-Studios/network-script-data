@@ -1,11 +1,12 @@
 cycle_hue:
     type: procedure
+    debug: false
     definitions: color|int
     script:
         - define r <[color].red>
         - define g <[color].green>
         - define b <[color].blue>
-        
+
         - if <[Int]||null> != null:
             - define i <element[1530].div[<[int]>].round_up>
         - else:
@@ -22,5 +23,5 @@ cycle_hue:
             - define r <[r].add[<[i]>].min[255]>
         - else if <[r]> == 255 && <[g]> == 0 && <[b]> != 0:
             - define b <[b].sub[<[i]>].max[0]>
-        
+
         - determine <color[<[r]>,<[g]>,<[b]>]>

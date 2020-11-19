@@ -1,6 +1,7 @@
 github_updates:
   type: task
   definitions: domain
+  debug: false
   script:
   # % ██ [ Cache Data                  ] ██
     - define embed <discordembed>
@@ -50,7 +51,7 @@ github_updates:
 
       # % ██ [ Format the embed message               ] ██
         - define embed <[embed].description[<[commits].separated_by[<n>]>]>
-        
+
       # % ██ [ Format the title                       ] ██
         - if <[commits].size> != 1:
           - define embed "<[embed].title[`<&lb><[data].get[repository].get[full_name]><&rb>` | <[commits].size> new commits]>"
@@ -86,7 +87,7 @@ github_updates:
       # % ██ [ Format the message                     ] ██
         - if <[action]> == created:
           - define embed "<[embed].description[<[issue_data].get[body].replace_text[\r<n>- ].with[<[emoji]> ].replace_text[<n>- ].with[<[emoji]> ]>]>"
-      
+
       # % ██ [ Send the message                       ] ██
         - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
 
@@ -110,6 +111,7 @@ github_updates:
 
       - case pull_request:
       # % ██ [ Cache data                             ] ██
+        - define action <[data].get[action]>
         - define pull_data <[data].get[pull_request]>
 
       # % ██ [ Format the title                       ] ██
@@ -199,7 +201,7 @@ github_updates:
         - define context [<[line_actions]>](<[comment_data].get[html_url]>)<&sp><[context]>
         - flag server review.id.<[id]>:->:<[context]>
         - flag server review.wait.<[id]> duration:1.5s
-        
+
       # % ██ [ Check if not a package review          ] ██
         - wait 4s
         - if <server.has_flag[review.id.<[id]>]>:

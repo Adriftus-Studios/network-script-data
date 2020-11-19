@@ -1,6 +1,7 @@
 Simple_Discord_Embed:
   type: task
   definitions: Text|Channel|Username
+  debug: false
   script:
     - if <[Username]||null> == null:
       - define Username "Dehr Network Bot"

@@ -3,7 +3,7 @@ mythicmobs_levelscale_patch:
   debug: true
   vanilla_replacements: SKELETON1|HUSK1|ZOMBIE1|SPIDER1|CAVE_SPIDER1|ENDERMAN1|CREEPER1|ENDERMAN1_VOIDWORM|HUSK1_BURNING|VINDICATOR1|PILLAGER1|HUSK1_MAGGOTS|SILVERFISH1|WOLF1|POLAR_BEAR1|PANDA1|STRAY1|STRAYWOLF1|DROWNED1|PHANTOM1|EVOKER1|CAVE_SPIDER1|SLIME1|VEX1|GUARDIAN1|ELDER_GUARDIAN1
   events:
-    on player damaged by skeleton|drowned bukkit_priority:highest:
+    on player damaged by skeleton|drowned|stray bukkit_priority:highest:
       - if <context.damager.is_mythicmob>:
         - if <script.data_key[vanilla_replacements].contains[<context.damager.mythicmob.internal_name>]>:
           - determine <context.damager.mythicmob.level.mul[4]>

@@ -131,7 +131,7 @@ player_info_map:
     - if <yaml[data_handler].contains[players.names.<[input]>]>:
       - determine <yaml[data_handler].read[players.names.<[input]>].with[name].as[<[input]>]>
     - determine null
-    
+
 # % ██  [ Retrieves a map of the player's information, with the keys 'name, uuid, server' based on the player's uuid ] ██
 # % ██  [ Returns 'null' if the player uuid is invalid (or not online) ] ██
 # - ██  [ Usage ]  Retrieves the player's information (in map form) from 'hub1' and stores it in <entry[player_map].result>.

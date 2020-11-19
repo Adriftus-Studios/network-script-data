@@ -1,5 +1,6 @@
 negative_spacing:
   type: procedure
+  debug: false
   definitions: int
   script:
     - if !<[int].is_integer>:
@@ -50,11 +51,12 @@ negative_spacing:
       - else:
         - define int:-:1
         - define spacing <[spacing].include[<&chr[F801]>]>
-      
+
     - determine <[spacing].unseparated>
 
 positive_spacing:
   type: procedure
+  debug: false
   definitions: int
   script:
     - if !<[int].is_integer>:
@@ -105,5 +107,5 @@ positive_spacing:
       - else:
         - define int:-:1
         - define spacing <[spacing].include[<&chr[F821]>]>
-      
+
     - determine <[spacing].unseparated>

@@ -14,7 +14,7 @@ Connection_Handler:
     - ~discord id:AdriftusBot connect code:<yaml[AdriftusBot_temp].read[AdriftusBotToken]>
     - wait 3s
     - ~run channel_cache
-    
+
 # % ██ [ Server Shutdown      ] ██
     on shutdown:
       - discord id:AdriftusBot disconnect

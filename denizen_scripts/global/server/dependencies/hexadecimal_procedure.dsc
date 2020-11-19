@@ -1,5 +1,6 @@
 hex:
   type: procedure
+  debug: false
   definitions: rgb
   script:
     - define hexgraph <script.data_key[hex]>
