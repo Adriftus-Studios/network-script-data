@@ -2,10 +2,11 @@ server_restart_handler_survival-plus:
   type: world
   debug: false
   events:
-    on restart command:
+    on restart command bukkit_priority:highest:
+      - determine passively fulfilled
       - if <context.source_type> == server || <player.has_permission[adriftus.admin]>:
         - inject survival_restart_timer
-      - determine fulfilled
+
     on system time 02:55:
       - inject survival_restart_timer
 
