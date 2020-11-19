@@ -5,7 +5,7 @@ butler_summon:
     - repeat 20:
       - playeffect redstone <[loc]> visibility:40 quantity:40 special_data:3|orange offset:<[value].mul[0.05]>
       - wait 1t
-    - teleport <server.flag[butler_npc]> <[loc].with_yaw[<[loc].yaw.sub[180]>]>
+    - teleport <server.flag[butler_npc].as_npc> <[loc].with_yaw[<[loc].yaw.sub[180]>]>
     - playeffect redstone <[loc]> visibility:40 quantity:40 special_data:3|orange offset:<[value].mul[0.1]>
     - wait 1t
     - narrate "<&6>Adriftus Butler<&co> <&e>How can I help you?"
@@ -15,7 +15,7 @@ butler_summon:
 butler_return_home:
   type: task
   script:
-    - teleport <server.flag[butler_npc]> <location[spawn_butler_location]>
+    - teleport <server.flag[butler_npc].as_npc> <location[spawn_butler_location]>
 
 butler_events:
   type: world
