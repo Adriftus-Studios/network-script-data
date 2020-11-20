@@ -16,7 +16,7 @@ player_data_handler:
 
       - foreach <server.online_players> as:player:
         - if !<[list].contains[player.<[player].uuid>]>:
-          - if !<server.has_file[data/global/players/<[player].uuid>]>:
+          - if !<server.has_file[data/global/players/<[player].uuid>.yml]>:
             - yaml id:global.player.<[player].uuid> create
             - yaml id:global.player.<[player].uuid> savefile:data/global/players/<[player].uuid>.yml
           - ~yaml id:player.<[player].uuid> load:data/players/<[player].uuid>.yml
@@ -24,7 +24,7 @@ player_data_handler:
           - ~yaml id:player.<[player].uuid> savefile:data/players/<[player].uuid>.yml
 
         - if !<[list].contains[global.player.<[player].uuid>]>:
-          - if !<server.has_file[data/global/players/<[player].uuid>]>:
+          - if !<server.has_file[data/global/players/<[player].uuid>.yml]>:
             - yaml id:global.player.<[player].uuid> create
             - yaml id:global.player.<[player].uuid> savefile:data/global/players/<[player].uuid>.yml
           - ~yaml id:global.player.<[player].uuid> load:data/global/players/<[player].uuid>.yml
