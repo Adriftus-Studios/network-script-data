@@ -1,5 +1,6 @@
 store_hub_cosmeticShop_command:
   type: command
+  description: Opens the cosmetic shop
   name: opencosmeticShop
   script:
     - inventory open d:store_hub_cosmeticShop player:<server.match_player[<context.args.first>]||<player>>
@@ -119,7 +120,7 @@ title_voucher:
 title_voucher_events:
   type: world
   events:
-    on player right clicks with:title_voucher bukkit_priority:LOWEST:
+    on player right clicks block with:title_voucher bukkit_priority:LOWEST:
       - determine passively cancelled
       - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<context.item.nbt[title]>]||false>:
         - narrate "<&c>You already have unlocked this title."
@@ -129,7 +130,7 @@ title_voucher_events:
         - if <player.item_in_hand> == <context.item>:
           - define tagID <context.item.nbt[title]>
           - inject title_unlock
-          - take <context.item> quantity:1
+          - take iteminhand quantity:1
           - narrate "<&b>You have redeemed the <yaml[titles].read[titles.<context.item.nbt[title]>.tag].parse_color><&b> title!"
           - flag player title_confirm:!
       - else:
@@ -219,7 +220,7 @@ bowtrail_voucher:
 bowtrail_voucher_events:
   type: world
   events:
-    on player right clicks with:bowtrail_voucher bukkit_priority:LOWEST:
+    on player right clicks block with:bowtrail_voucher bukkit_priority:LOWEST:
       - determine passively cancelled
       - if <yaml[global.player.<player.uuid>].read[bowtrail.unlocked].contains[<context.item.nbt[trail]>]||false>:
         - narrate "<&c>You already have unlocked this bow trail."
@@ -229,7 +230,7 @@ bowtrail_voucher_events:
         - if <player.item_in_hand> == <context.item>:
           - define bowtrail <context.item.nbt[trail]>
           - inject bowtrail_unlock
-          - take <context.item> quantity:1
+          - take iteminhand quantity:1
           - narrate "<&b>You have redeemed the <yaml[bowtrails].read[bowtrails.<context.item.nbt[trail]>.name].parse_color><&b> title!"
           - flag player bowtrail_confirm:!
       - else:
