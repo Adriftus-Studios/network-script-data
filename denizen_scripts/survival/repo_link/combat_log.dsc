@@ -49,7 +49,7 @@ calculate_damage:
     - if <[final_damage]> < 0.5:
       - define final_damage 0.5
     - determine <[final_damage]>
-  
+
 # initial in seconds, reduction (percent subtracted) in integers
 calculate_burn:
   type: procedure

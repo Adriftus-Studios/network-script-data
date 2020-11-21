@@ -3,7 +3,6 @@ SoundBoard_Command:
   debug: false
   name: SoundBoard
   permissions: test
-  
   usage: /Soundboard (Favorites/Page <&lt>#<&gt>/Search <&lt>Sound<&gt>/play <&lt>Sound<&gt>)
   description: Plays sounds or opens the Sound Board.
   tab complete:
@@ -12,7 +11,6 @@ SoundBoard_Command:
       - determine <[List]>
     - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
       - determine <[List].filter[starts_with[<context.args.last>]]>
-    
     - define Sounds <server.sound_types.parse[replace[_].with[<&sp>].to_titlecase.replace[<&sp>].with[_]]>
     - if <context.raw_args.ends_with[<&sp>]>:
       - choose <context.args.first>:
@@ -83,7 +81,6 @@ SoundBoard:
         - define <[Data].before[/]> <[Data].after[/]>
     - else:
       - define Action Main_Menu
-    
     - choose <[Action]>:
       - case Main_Menu:
         - playsound sound:ENTITY_ENDER_EYE_DEATH <player> pitch:<util.random.decimal[1.8].to[2]>
@@ -125,7 +122,7 @@ SoundBoard:
             - define Items:->:<item[Blank]>
 
         - define SoftMenu:|:<[Left].first>|<[Left].get[2]>|<[MainMenu]>|<[Favorites]>|<[StopSound]>|<[Search]>|<item[Blank]>|<[Right].first>|<[Right].get[2]>
-        
+
         - inventory set d:<[Inventory]> o:<[Items].parse[with[nbt=<list[Query/<[Query]>]>]]>
         - inventory set d:<[Inventory]> o:<[SoftMenu].parse[with[nbt=<list[Query/<[Query]>]>]]> slot:<[InvSize].sub[8]>
         - inventory open d:<[Inventory]>
@@ -153,7 +150,7 @@ SoundBoard:
               - define Items:->:Blank
 
           - define SoftMenu:|:<[Left].first>|<[Left].get[2]>|<[MainMenu]>|Blank|<[StopSound]>|Blank|Blank|<[Right].first>|<[Right].get[2]>
-          
+
           - inventory set d:<[Inventory]> o:<[Items]>
         - inventory set d:<[Inventory]> o:<[SoftMenu]> slot:<[InvSize].sub[8]>
         - inventory open d:<[Inventory]>
@@ -204,7 +201,7 @@ SoundBoard:
           - case Shift_Left Shift_Right:
             - define Insert "- playsound sound:<[Sound]> <&lt>player<&gt>"
             - define Hover "<&2>Shift Click to Insert<&2>:<&nl><&e><[Insert]>"
-            - define Text "<&e><[Sound]>"
+            - define Text <&e><[Sound]>
             - playsound sound:ENTITY_ENDER_EYE_DEATH <player> pitch:0
             - narrate "<&a>Shift Click for Copy<&2>: <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>"
           - default:
@@ -245,7 +242,7 @@ SoundBoard:
       - define NBT:!|:Menu/SoundBoard|Action/<[ActiveMenu]>|Page/<[Page].add[1]>
       - define Skin <script[Letters].data_key[Misc.Right]>
       - define Next <item[Action_Item].with[material=player_head;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;skull_skin=a|<[Skin]>]>
-      
+
       - if <[Page].add[1]> == <[MaxPage]>:
         - define Right <list[<item[Blank]>|<[Next]>]>
       - else:
@@ -299,8 +296,6 @@ PageNumbers:
     - define i1 <[Size].mul[<[Page].sub[1]>].add[1]>
     - define i2 <[Size].mul[<[Page].sub[1]>].add[<[Size]>]>
     - determine <list[<[i1]>|<[i2]>]>
-    
-
 
 Letters:
   type: data
