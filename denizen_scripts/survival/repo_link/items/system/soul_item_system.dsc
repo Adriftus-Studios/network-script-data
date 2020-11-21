@@ -342,7 +342,7 @@ soul:
   display_name: <&c>ERROR - REPORT THIS
   mechanisms:
     enchantments: luck,1
-    flags: ENCHANTS
+    hides: all
   lore_type: <&d>Soul Item
 
 item_with_soul:
@@ -503,7 +503,7 @@ item_system_build_item:
       - define NewItem <[NewItem].with[nbt_attributes=<[nbt_attributes]>]>
 
     - determine <[NewItem]>
-    
+
 vanilla_craft_item_build:
   type: world
   debug: false
@@ -511,7 +511,7 @@ vanilla_craft_item_build:
     on player crafts *_(sword|axe|chestplate|leggings|boots|helmet) bukkit_priority:HIGHEST:
       - if !<context.item.has_display>:
         - determine <proc[item_system_build_item].context[<context.item>]>
-    
+
 vanilla_craft_item_build2:
   type: world
   debug: false
