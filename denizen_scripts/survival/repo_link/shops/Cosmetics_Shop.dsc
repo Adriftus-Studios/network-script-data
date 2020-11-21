@@ -22,13 +22,13 @@ store_hub_cosmeticShop:
   - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
 
 store_hub_cosmeticShop_filler:
- type: item
- material: glass_pane
- display name: <&b>
- enchantments:
- - damage_all:1
- mechanisms:
-   flags: HIDE_ENCHANTS|HIDE_ATTRIBUTES
+  type: item
+  material: glass_pane
+  display name: <&b>
+  enchantments:
+  - damage_all:1
+  mechanisms:
+    hides: all
 
 store_hub_cosmeticShop_filler_events:
   type: world
@@ -48,7 +48,7 @@ store_hub_cosmeticShop_titles:
   - <&e>Titles are network wide, and can be accessed anywhere.
   - <&e>You can access your available titles with <&b>/titles
   mechanisms:
-    flags: HIDE_ENCHANTS|HIDE_ATTRIBUTES
+    hides: all
 
 store_hub_cosmeticShop_titles_inventory:
   type: inventory
@@ -137,18 +137,18 @@ title_voucher_events:
         - narrate "<&e>Right click again to confirm claiming this title."
 
 store_hub_cosmeticShop_bowTrails:
- type: item
- material: bow
- display name: <&6>Bow Trails
- enchantments:
- - damage_all:1
- lore:
- - <&e>Buy some fancy <&6>Bow Trails<&e> to show off.
- - <&e>Bow Trails are immediately redeemed upon purchase.
- - <&6>Bow Trails <&e>are network wide, and can be accessed anywhere.
- - <&e>You can access your available <&6>Bow Trails<&e> in the <&b>/bowtrails <&e>menu
- mechanisms:
-   flags: HIDE_ENCHANTS|HIDE_ATTRIBUTES
+  type: item
+  material: bow
+  display name: <&6>Bow Trails
+  enchantments:
+  - damage_all:1
+  lore:
+  - <&e>Buy some fancy <&6>Bow Trails<&e> to show off.
+  - <&e>Bow Trails are immediately redeemed upon purchase.
+  - <&6>Bow Trails <&e>are network wide, and can be accessed anywhere.
+  - <&e>You can access your available <&6>Bow Trails<&e> in the <&b>/bowtrails <&e>menu
+  mechanisms:
+   hides: all
 
 store_hub_cosmeticShop_bowTrails_inventory:
     type: inventory

@@ -278,7 +278,7 @@ SoundBoard:
       - define Display <&e><[Sound].replace[_].with[<&sp>].to_titlecase>
       - define "Lore:|:<&3>Shift<&b>+<&3>Click<&b>: <&7>Script Copy|<&3>Click<&b>: <&7>Play sound"
       - define NBT:!|:Menu/SoundBoard|Action/PlaySound|Sound/<[Sound]>
-      - define Item <item[Action_Item].with[material=<[Material]>;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;enchantments=silk_touch,1;flags=hide_all]>
+      - define Item <item[Action_Item].with[material=<[Material]>;display_name=<[Display]>;lore=<[Lore]>;NBT=<[NBT]>;enchantments=silk_touch,1;hides=all]>
       - define Items:->:<[Item]>
   SearchButton:
     - define Display <&6>S<&e>earch
