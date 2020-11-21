@@ -26,8 +26,8 @@ teleportation_crystal_menu:
   size: 54
   definitions:
     x: <item[air]>
-    b1: <item[light_blue_stained_glass_pane].with[display_name=<&r>]>
-    b2: <item[cyan_stained_glass_pane].with[display_name=<&r>]>
+    b1: <item[light_blue_stained_glass_pane].with[display_name=<&e>]>
+    b2: <item[cyan_stained_glass_pane].with[display_name=<&e>]>
     close: <item[red_stained_glass_pane].with[display_name=<&c>Cancel]>
   procedural items:
     - define inventory <list>
