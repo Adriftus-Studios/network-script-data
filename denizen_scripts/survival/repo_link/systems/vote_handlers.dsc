@@ -43,6 +43,7 @@ vote_receiver:
           - else:
             - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
 
+
   daily_vote_counter:
     - flag <[voter]> daily_votes_reward counter:++
     - flag <[voter]> DailyVotesTotal counter:++
@@ -121,6 +122,7 @@ recoverkeys:
   usage: /recoverkeys
   description: rewards players with their their daily vote keys they were ineligible to claim for some other reason.
   script:
+    - define listed_sites <script[vote_reciever].data_key[listed_sites.number_of_sites_listed_on]>
     - if <player.has_flag[daily_key_pending]>:
       - if <player.flag[daily_key_pending]> > 0:
         - if <player.inventory.is_full>:
@@ -131,7 +133,7 @@ recoverkeys:
             - flag <player> daily_key_pending:!
             - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
         - else:
-          - give  daily_vote_key quantity:<player.flag[daily_key_pending]>
+          - give daily_vote_key quantity:<player.flag[daily_key_pending]>
           - flag <player> daily_key_pending:!
           - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
     - else:
