@@ -166,9 +166,9 @@ market_system_data:
       category: potion_ingredients
       minimum_value: 20
 
-    scute:
-      category: potion_ingredients
-      minimum_value: 20
+#    scute:
+#      category: potion_ingredients
+#      minimum_value: 20
 
     phantom_membrane:
       category: potion_ingredients
