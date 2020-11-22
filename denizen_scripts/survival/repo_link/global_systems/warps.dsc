@@ -252,7 +252,7 @@ warps_GUI_player_warps_menu_next_page_item:
   definitions: page
   script:
     - define page <[page]||1>
-    - if <server.flag[warp_votes].as_map.size||0> > <[page].-[1].*[21].+[9]>:
+    - if <server.flag[warp_votes].as_map.size||0> > <[page].sub[1].mul[21].add[9]>:
       - determine <item[arrow].with[display_name=<&e>Next<&sp>Page;nbt=action/next_page]>
     - else:
       - determine <script[warps_GUI_player_warps_menu_top].parsed_key[definitions.filler]>
@@ -332,7 +332,7 @@ warps_GUI_player_warps_menu_pages_events:
 Warps_GUI_player_warps_menu_next_page:
   type: task
   script:
-    - define page <context.inventory.slot[5].nbt[page].+[1]>
+    - define page <context.inventory.slot[5].nbt[page].add[1]>
     - define inventory <inventory[warps_GUI_player_warps_menu_pages]>
     - inventory set d:<[inventory]> slot:5 o:<item[white_stained_glass_pane].with[display_name=<&a>;nbt=page/<[page]>]>
     - inject warps_GUI_player_warps_menu_pages_populate
@@ -341,7 +341,7 @@ Warps_GUI_player_warps_menu_next_page:
 Warps_GUI_player_warps_menu_previous_page:
   type: task
   script:
-    - define page <context.inventory.slot[5].nbt[page].-[1]>
+    - define page <context.inventory.slot[5].nbt[page].sub[1]>
     - if <[page]> == 1:
       - inventory open d:warps_GUI_player_warps_menu_top
       - stop

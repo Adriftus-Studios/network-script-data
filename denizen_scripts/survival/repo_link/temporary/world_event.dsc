@@ -116,7 +116,7 @@ world_event_progress_inventory_open:
     - inventory set slot:42 "o:currency_display_item[display_name=<&6>Tokens<&co><&e> <player.flag[world_event.tokens.current]||0>;lore=<&7>Awarded at the end of the week|<&7>Incoming Tokens<&co> <&a><player.flag[world_event.progress].div[8].round_down||0>]" d:<[inventory]>
     - give "iron_ingot[display_name=<&a>Week 1;lore=<&e>- Iron Ingots|<&e>- Iron Blocks]" to:<[inventory]>
     - repeat 9:
-      - give "barrier[display_name=<&a>Week <[value].+[1]>;lore=<&b>Release Date<&co>|<&e><time[2020/11/03_02:20:31:123_-07:00].add[<[value].mul[7]>d].format[MM/dd/YYYY]>]" to:<[inventory]>
+      - give "barrier[display_name=<&a>Week <[value].add[1]>;lore=<&b>Release Date<&co>|<&e><time[2020/11/03_02:20:31:123_-07:00].add[<[value].mul[7]>d].format[MM/dd/YYYY]>]" to:<[inventory]>
     - inventory open d:<[inventory]>
 
 world_event_turn_in:

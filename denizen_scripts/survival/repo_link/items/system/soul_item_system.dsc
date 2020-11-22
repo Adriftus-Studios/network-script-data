@@ -27,16 +27,16 @@ item_system_global_data:
         buffs:
           melee_damage: <&7>Melee Damage <&a>+<[final_value]>
           ranged_damage: <&7>Ranged Damage <&a>+<[final_value]>
-          speed: <&7>Move Speed <&a>+<[final_value]./[0.1].round_to[3].mul[100]>%
+          speed: <&7>Move Speed <&a>+<[final_value].div[0.1].round_to[3].mul[100]>%
           armor: <&7>Armor <&a>+<[final_value]>
-          attack_speed: <&7>Attack Speed <&a>+<[final_value]./[4].round_to[2].mul[100]>%
+          attack_speed: <&7>Attack Speed <&a>+<[final_value].div[4].round_to[2].mul[100]>%
           health: <&7>Health <&a>+<[final_value]>
         debuffs:
           melee_damage: <&7>Melee Damage <&c>-<[final_value]>
           ranged_damage: <&7>Ranged Damage <&c>-<[final_value]>
-          speed: <&7>Move Speed <&c>-<[final_value]./[0.1].round_to[3].mul[100]>%
+          speed: <&7>Move Speed <&c>-<[final_value].div[0.1].round_to[3].mul[100]>%
           armor: <&7>Armor <&c>-<[final_value]>
-          attack_speed: <&7>Attack Speed <&c>-<[final_value]./[4].round_to[2].mul[100]>%
+          attack_speed: <&7>Attack Speed <&c>-<[final_value].div[4].round_to[2].mul[100]>%
           health: <&7>Health <&c>-<[final_value]>
         flavor:
           - <empty>
@@ -197,12 +197,12 @@ item_system_global_data:
         health: buff
   ## INTERNALS ##
   calculations:
-    melee_damage: <[level].*[3]>
-    ranged_damage: <[level].*[2]>
-    speed: <[level].*[0.005]>
+    melee_damage: <[level].mul[3]>
+    ranged_damage: <[level].mul[2]>
+    speed: <[level].mul[0.005]>
     armor: <[level]>
-    attack_speed: <[level].*[.15]>
-    health: <[level].+[4]>
+    attack_speed: <[level].mul[.15]>
+    health: <[level].add[4]>
   nbt_attributes:
     melee_damage: generic.attack_damage
     speed: generic.movement_speed
@@ -311,7 +311,7 @@ soul_forge_events:
           - if <context.inventory.slot[<[slot]>].quantity> == 1:
             - take <context.inventory.slot[<[slot]>]> from:<context.inventory>
           - else:
-            - inventory set slot:<[slot]> d:<context.inventory> o:<context.inventory.slot[<[slot]>].with[quantity=<context.inventory.slot[<[slot]>].quantity.-[1]>]>
+            - inventory set slot:<[slot]> d:<context.inventory> o:<context.inventory.slot[<[slot]>].with[quantity=<context.inventory.slot[<[slot]>].quantity.sub[1]>]>
         - inventory set slot:23 d:<context.inventory> o:<item[gray_stained_glass_pane].with[display_name=<&e>]>
     after player clicks in soul_forge_inventory:
       - ratelimit <player> 1t

@@ -99,7 +99,7 @@ store_hub_cosmeticShop_titles_events:
         - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
         - stop
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
-        #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].-[<context.item.nbt[price]>]>
+        #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].sub[<context.item.nbt[price]>]>
       - define tagID <context.item.nbt[tag]>
       - inject title_unlock
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
@@ -199,7 +199,7 @@ store_hub_cosmeticShop_bowtrails_events:
         - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
         - stop
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
-        #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].-[<context.item.nbt[price]>]>
+        #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].sub[<context.item.nbt[price]>]>
       - define bowtrail <context.item.nbt[trail]>
       - inject bowtrail_unlock
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
