@@ -1,12 +1,11 @@
 vote_receiver:
   type: world
   debug: false
-  listed_sites:
-    number_of_sites_listed_on: 50
+  sites_listed: 69
   events:
     #Vote received:
       on votifier vote:
-      - define listed_sites <script.data_key[listed_sites.number_of_sites_listed_on]>
+      - define listed_sites <script.data_key[sites_listed]>
       - define voter <server.match_offline_player[<context.username>]||invalid>
       - if <[voter]> != invalid:
         - inject locally daily_vote_counter
@@ -79,10 +78,10 @@ vote_receiver:
     - flag <[voter]> weekly_votes_reward:++ duration:7d
     - wait 1t
     - if <[voter].flag[weekly_votes_reward].sub[1].mul[7]> >= <[listed_sites]>:
-      - flag <[voter]> weekly_crate_pending counter:++
-      - flag <[voter> weekly_votes_reward:!
+      - flag <[voter]> weekly_crate_pending:++
+      - flag <[voter]> weekly_votes_reward:!
       - if <[voter].is_online>:
-        - narrate <[voter]> "You have enough votes to claim a <&b>Weekly Vote Crate Key<&c>! Do <&3>/<&b>weeklykeys <&e>to claim them!"
+        - narrate targets:<[voter]> "You have enough votes to claim a <&b>Weekly Vote Crate Key<&c>! Do <&3>/<&b>weeklykeys <&e>to claim them!"
 
 weeklykeys:
   type: command
@@ -91,7 +90,7 @@ weeklykeys:
   usage: /weeklykeys
   description: rewards players with their weekly vote crate keys and resets the flag if flagged. Has a 1 week cooldown. If not flagged/on cooldown it reports.
   script:
-    - define listed_sites <script[vote_reciever].data_key[listed_sites.number_of_sites_listed_on]>
+    - define listed_sites <script[vote_reciever].data_key[sites_listed]>
     - if <player.has_flag[weekly_crate_pending]> && !<player.has_flag[weekly_key_cooldown]>:
       - if <player.inventory.is_full>:
         - if <player.enderchest.is_full>:
