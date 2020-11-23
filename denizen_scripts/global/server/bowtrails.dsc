@@ -34,7 +34,7 @@ bow_trail_custom:
         - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
           - if !<context.projectile.is_spawned>:
             - stop
-          - playeffect redstone at:<context.projectile.location> quantity:5 offset:0.25 special_data:2|<[colors].get[<[value].mod[6].+[1]>]> targets:<player.world.players>
+          - playeffect redstone at:<context.projectile.location> quantity:5 offset:0.25 special_data:2|<[colors].get[<[value].mod[6].add[1]>]> targets:<player.world.players>
           - wait <yaml[bowtrails].read[settings.ticksBetween]>t
       - case The_Drew:
         - wait 1t
@@ -255,10 +255,10 @@ bowtrails_inventory_events:
             - narrate "<&r>You have removed your Bow Trail."
             - inject bowtrails_inventory_open
           - case next_page:
-            - define page <context.inventory.slot[<script[bowtrails_inventory].data_key[custom.mapping.page_marker]>].nbt[page].+[1]>
+            - define page <context.inventory.slot[<script[bowtrails_inventory].data_key[custom.mapping.page_marker]>].nbt[page].add[1]>
             - inject bowtrails_inventory_open
           - case previous_page:
-            - define page <context.inventory.slot[<script[bowtrails_inventory].data_key[custom.mapping.page_marker]>].nbt[page].-[1]>
+            - define page <context.inventory.slot[<script[bowtrails_inventory].data_key[custom.mapping.page_marker]>].nbt[page].sub[1]>
             - inject bowtrails_inventory_open
 
 bowtrails_inventory_open:
@@ -272,11 +272,11 @@ bowtrails_inventory_open:
     - foreach <[unlocked_trails]> as:trailID:
       - inject build_trail_select_item
       - define list:->:<[item]>
-    - give <[list].get[<[page].-[1].*[21].+[1]>].to[<[page].-[1].*[21].+[21]>]> to:<[inventory]>
+    - give <[list].get[<[page].sub[1].mul[21].add[1]>].to[<[page].sub[1].mul[21].add[21]>]> to:<[inventory]>
     - foreach <script[bowtrails_inventory].list_keys[custom.mapping]>:
       - choose <[value]>:
         - case next_page:
-          - if <[unlocked_trails].size> > <[page].-[1].*[21].+[21]>:
+          - if <[unlocked_trails].size> > <[page].sub[1].mul[21].add[21]>:
             - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.next_page]> o:<script[bowtrails_inventory].parsed_key[definitions.next_page]>
         - case previous_page:
           - if <[page]> > 1:

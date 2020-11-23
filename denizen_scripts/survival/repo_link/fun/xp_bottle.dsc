@@ -26,7 +26,7 @@ filled_xp_vessel_level_5:
 
 vessel_handler:
   type: world
-  debug: true
+  debug: false
   events:
     on player right clicks block with:empty_xp_vessel_level_*:
       - determine passively cancelled
@@ -39,7 +39,7 @@ vessel_handler:
         - actionbar "<&4>You need at least <[vessel_level]> levels of experience in order to use this item"
         - stop
       - take xp quantity:<[vessel_capacity]>
-      - take <context.item>
+      - take iteminhand
       - give filled_xp_vessel_level_<[vessel_level]>
       - playsound sound:BLOCK_BEACON_ACTIVATE <player>
       - itemcooldown glass_bottle duration:1s
@@ -52,7 +52,7 @@ vessel_handler:
         - stop
       - define vessel_capacity <context.item.nbt[vessel_capacity]>
       - define vessel_level <context.item.nbt[vessel_level]>
-      - take <context.item>
+      - take iteminhand
       - give xp quantity:<[vessel_capacity]>
       - playsound sound:entity_generic_drink <player>
       - itemcooldown experience_bottle duration:1s

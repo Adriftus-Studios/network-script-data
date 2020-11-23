@@ -30,15 +30,13 @@ server_warps_yaml:
 ## COMMANDS ##
 ##############
 
-warps_command:
-  type: command
-  name: warps
-  script:
-  - inventory open d:warps_GUI_main_menu
-
 warp_command:
   type: command
   name: warp
+  usage: /warp
+  aliases:
+  - warps
+  description: opens the warps menu
   tab complete:
     - if <context.args.is_empty>:
       - determine <script[server_warps_yaml].list_keys[warps].include[<yaml[player.<player.uuid>].list_keys[warps.favorite]||<list>>].include[<yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].parse[after[~]]>]>
@@ -134,7 +132,7 @@ warps_my_warps_GUI_open:
   script:
   - define inventory <inventory[warps_my_warps_GUI]>
   - define type personal
-  - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].include[<yaml[player.<player.uuid].read[warps.has_access]>]||<list>>]> as:identifier:
+  - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].include[<yaml[player.<player.uuid>].read[warps.has_access]>]||<list>]> as:identifier:
     - inject build_warp_item
     - if <[identifier].before[~]> == <player.uuid>:
       - define list:->:<[item].with[nbt=action/warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
@@ -222,7 +220,7 @@ favorite_warps_open:
     - inject build_warp_item
     - define "list:|:<[item].with[display_name=<&e><[value]>;nbt=name/<[value]>;lore=<[item].lore.remove[first].include[<&e>----------------|<&a>Left Click to Warp.|<&c>Right Click to Remove]>]>"
   - define inventory <inventory[favorite_warps]>
-  - if <[list].is_empty.not>
+  - if <[list].is_empty.not>:
     - give <[list]> to:<[inventory]>
   - inventory open d:<[inventory]>
 
@@ -254,7 +252,7 @@ warps_GUI_player_warps_menu_next_page_item:
   definitions: page
   script:
     - define page <[page]||1>
-    - if <server.flag[warp_votes].as_map.size||0> > <[page].-[1].*[21].+[9]>:
+    - if <server.flag[warp_votes].as_map.size||0> > <[page].sub[1].mul[21].add[9]>:
       - determine <item[arrow].with[display_name=<&e>Next<&sp>Page;nbt=action/next_page]>
     - else:
       - determine <script[warps_GUI_player_warps_menu_top].parsed_key[definitions.filler]>
@@ -334,7 +332,7 @@ warps_GUI_player_warps_menu_pages_events:
 Warps_GUI_player_warps_menu_next_page:
   type: task
   script:
-    - define page <context.inventory.slot[5].nbt[page].+[1]>
+    - define page <context.inventory.slot[5].nbt[page].add[1]>
     - define inventory <inventory[warps_GUI_player_warps_menu_pages]>
     - inventory set d:<[inventory]> slot:5 o:<item[white_stained_glass_pane].with[display_name=<&a>;nbt=page/<[page]>]>
     - inject warps_GUI_player_warps_menu_pages_populate
@@ -343,7 +341,7 @@ Warps_GUI_player_warps_menu_next_page:
 Warps_GUI_player_warps_menu_previous_page:
   type: task
   script:
-    - define page <context.inventory.slot[5].nbt[page].-[1]>
+    - define page <context.inventory.slot[5].nbt[page].sub[1]>
     - if <[page]> == 1:
       - inventory open d:warps_GUI_player_warps_menu_top
       - stop
@@ -356,8 +354,8 @@ warps_GUI_player_warps_menu_pages_populate:
   type: task
   definitions: page
   script:
-    - define min <[page].-[2].*[21].+[9]>
-    - define max <[min].+[21]>
+    - define min <[page].sub[2].mul[21].add[9]>
+    - define max <[min].add[21]>
     - define type personal
     - foreach <server.flag[warp_votes].as_map.to_list.sort_by_number[after[/]].reverse.get[<[min]>].to[<[max]>].parse[before[/]]> as:identifier:
       - inject build_warp_item
@@ -367,6 +365,7 @@ warps_GUI_player_warps_menu_pages_populate:
 warps_menu_add_vote:
   type: task
   script:
+    - define ID <context.item.nbt[warp]>
     - if <yaml[warps].read[personal.<[ID]>.voters].contains[<player>]>:
       - narrate "<&c>You've already voted for this warp."
       - stop
@@ -376,6 +375,7 @@ warps_menu_add_vote:
 warps_menu_remove_vote:
   type: task
   script:
+    - define ID <context.item.nbt[warp]>
     - if !<yaml[warps].read[personal.<[ID]>.voters].contains[<player>]>:
       - narrate "<&c>You have not voted for this warp."
       - stop
@@ -606,7 +606,7 @@ warps_handle_vote:
     - define identifier <context.item.nbt[warp]>
     - define type personal
     - inject build_warp_item
-    - inventory set slot:<context.slot> d:<context.inventory> "o:<[item].with[nbt=action/warp;lore=<[item].lore.include[<&b>Shift-Click<&sp>To<&sp>Toggle<&sp>Vote!|<&a>Shift Right Click<&sp>To<&sp>Favorite]>]>]>"
+    - inventory set slot:<context.slot> d:<context.inventory> "o:<[item].with[nbt=action/warp;lore=<[item].lore.include[<&b>Shift-Click<&sp>To<&sp>Toggle<&sp>Vote!|<&a>Shift Right Click<&sp>To<&sp>Favorite]>]>"
 
 
 
@@ -806,7 +806,6 @@ warp_everyone_add:
       - flag server warp_votes:<server.flag[warp_votes].as_map.with[<[ID]>].as[<[votes]>]>
     - else:
       - flag server warp_votes:<map.with[<[ID]>].as[<[votes]>]>
-      
 
 warp_everyone_remove:
   type: task

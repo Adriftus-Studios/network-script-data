@@ -7,13 +7,13 @@
 ##  scaling_values:
 ##    GENERIC_ATTACK_DAMAGE:
 ##      base: 3
-##      scaling_formula: <[base].*[<[difficulty]>]>
+##      scaling_formula: <[base].mul[<[difficulty]>]>
 ##    GENERIC_MAX_HEALTH:
 ##      base: 20
-##      scaling_formula: <[base].*[<[difficulty]>]>
+##      scaling_formula: <[base].mul[<[difficulty]>]>
 ##    GENERIC_ARMOR:
 ##      base: 3
-##      scaling_formula: <[base].*[<[difficulty]>]>
+##      scaling_formula: <[base].mul[<[difficulty]>]>
 ##TEMPLATE END##
 
 mob_spawning_system_events:
@@ -35,7 +35,7 @@ mob_spawning_system_events:
         - if <[value]> < <script[mob_spawning_system_events].data_key[settings.min]> || <[value]> > <script[mob_spawning_system_events].data_key[settings.max]>:
           - stop
       - define difficulty <element[11].sub[<list[<context.location.z>|<context.location.x>].highest.abs.div[2000].add[1]>].round_up>
-      - if !<context.location.find.entities[<context.entity.entity_type>].within[<element[25].-[<[difficulty]>]>].is_empty>:
+      - if !<context.location.find.entities[<context.entity.entity_type>].within[<element[25].sub[<[difficulty]>]>].is_empty>:
         - determine cancelled
       - flag server spawning_mob
       - mythicspawn <context.entity.entity_type.to_uppercase>1 <context.location> level:<[difficulty]> save:merp
