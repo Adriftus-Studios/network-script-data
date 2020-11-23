@@ -22,5 +22,5 @@ player_joins_server:
           - case 3:
             - define URL https://github.com/Adriftus-Studios/network-script-data/issues
             - define Hover "<proc[Colorize].context[Click to follow Link:|green]><&nl><proc[Colorize].context[<[URL]>|blue]>"
-            - define Text "<&e>Welcome back to the Adriftus survival server! Got any feedback, or feature requests? Open an issue on our <&2>G<&b>it<&2>H<&b>ub!"
+            - define Text "<&e>Welcome back to the Adriftus survival server! Got any feedback, or feature requests? Open an issue on our <&3>G<&b>it<&3>H<&b>ub!"
             - narrate <proc[msg_url].context[<[Hover]>|<[Text]>|<[URL]>]>
