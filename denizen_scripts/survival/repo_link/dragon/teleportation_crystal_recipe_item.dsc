@@ -8,10 +8,10 @@ teleportation_crystal_recipe_item:
 teleportation_crystal_recipe_handler:
     type: world
     events:
-        on player right clicks with:recipe_item_name:
+        on player right clicks block with:recipe_item_name:
         - if !<player.has_flag[teleportation_recipe]>:
             - flag teleportation_recipe
             - take scriptname:teleportation_crystal_recipe_item
-        - else
+        - else:
             - narrate "You can't use this item again"
             - determine cancelled
