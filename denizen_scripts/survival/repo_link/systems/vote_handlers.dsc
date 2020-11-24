@@ -24,8 +24,8 @@ vote_receiver:
       - if <player.has_flag[inventory_daily_key_offline]>:
         - if <player.flag[inventory_daily_key_offline]> > 0:
           - if <player.flag[inventory_daily_key_offline]> > 1:
-          - narrate "<&e>You received <player.flag[inventory_daily_key]> <item[daily_vote_key].display>s<&e> while offline!"
-          - flag <player> inventory_daily_key:!
+            - narrate "<&e>You received <player.flag[inventory_daily_key]> <item[daily_vote_key].display>s<&e> while offline!"
+            - flag <player> inventory_daily_key:!
         - else:
           - narrate "<&e>You received <&a>a <item[daily_vote_key].display><&e> while you were offline!"
           - flag <player> inventory_daily_key:!
