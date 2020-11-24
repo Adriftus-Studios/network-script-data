@@ -65,6 +65,23 @@ custom_food_carrot_cake:
       - carrot|egg|carrot
       - wheat|wheat|wheat
 
+custom_food_chocolate_cake:
+  material: cake
+  debug: false
+  display name: <&f>Chocolate Cake
+  mechanisms:
+    custom_model_data: 2
+  type: item
+  recipes:
+    1:
+      hide_in_recipebook: false
+      type: shaped
+      output_quantity: 1
+      input:
+      - milk_bucket|milk_bucket|milk_bucket
+      - cocoa_beans|egg|cocoa_beans
+      - wheat|wheat|wheat
+
 
 custom_food_honey_bun:
   material: bread
