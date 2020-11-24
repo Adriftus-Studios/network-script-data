@@ -164,24 +164,25 @@ weekly_vote_key:
 vote_crate_key_events:
   type: world
   events:
-    on player right clicks block with:daily_vote_key|weekly_vote_key ignorecancelled:true:
+    on player right clicks block with:daily_vote_key|weekly_vote_key:
+    - determine passively cancelled
     - if !<server.has_flag[<context.location.simple>.daily_crate]> && !<server.has_flag[<context.location.simple>.weekly_crate]>:
-      - determine passively cancelled
       - ratelimit player 20t
-      - narrate "<&c>You cannot use that here. Please go to the crates server warp. "
+      - narrate "<&c>You cannot use that here. Please go to the crates server warp."
     - if <server.has_flag[<context.location.simple>.daily_crate]>:
+      - if <player.inventory.is_full>:
+        - narrate "<&c>Your inventory is full. Please make some room!"
+        - stop
       - if <player.item_in_hand> == <item[daily_vote_key]>:
-        - determine passively cancelled
         - inject daily_crate_opener
-        - narrate "Opening daily crate"
       - if <player.item_in_hand> == <item[weekly_vote_key]>:
         - narrate "<&c>Please use a <item[daily_vote_key].display>."
-        - determine passively cancelled
     - if <server.has_flag[<context.location.simple>.weekly_crate]>:
       - if <player.item_in_hand> == <item[weekly_vote_key].display>:
-        - determine passively cancelled
+        - if <player.inventory.is_full>:
+          - narrate "<&c>Your inventory is full. Please make some room!"
+          - stop
         - inject weekly_crate_opener
         - narrate "Opening weekly crate"
       - if <player.item_in_hand> == <item[daily_vote_key]>:
         - narrate "<&c>Please use a <item[weekly_vote_key].display>."
-        - determine passively cancelled
