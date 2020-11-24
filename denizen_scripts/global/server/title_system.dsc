@@ -78,10 +78,10 @@ title_inventory_events:
             - yaml id:global.player.<player.uuid> set titles.current:!
             - inject title_inventory_open
           - case next_page:
-            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].nbt[page].+[1]>
+            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].nbt[page].add[1]>
             - inject title_inventory_open
           - case previous_page:
-            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].nbt[page].-[1]>
+            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].nbt[page].sub[1]>
             - inject title_inventory_open
 
 title_inventory_open:

@@ -43,7 +43,7 @@ claiming_system_upgrade_data:
       material: black_dye
       CMD: 1
     claim_limit:
-      cost: <player.flag[claim_upgrades].*[25000]||25000>
+      cost: <player.flag[claim_upgrades].mul[25000]||25000>
       material: gold_block
       CMD: 1
 
@@ -270,7 +270,7 @@ claiming_inventory_events:
           - inject claiming_claimmap_script
     on player opens claiming_inventory:
     - if <script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.world.name>]>:
-      - define claim_map_icon <item[map].with[flags=HIDE_ALL;display_name=<&b>Claim<&sp>Map;lore=<proc[claim_system_build_chunkmap].context[<player.location.chunk>|false].include[<&a>|<&a>Relevent<&sp>Command<&co><&sp><&e>/ClaimMap]>;nbt=action/claim_map]>
+      - define claim_map_icon <item[map].with[hides=all;display_name=<&b>Claim<&sp>Map;lore=<proc[claim_system_build_chunkmap].context[<player.location.chunk>|false].include[<&a>|<&a>Relevent<&sp>Command<&co><&sp><&e>/ClaimMap]>;nbt=action/claim_map]>
       - inventory set slot:<script[claiming_inventory].data_key[custom_slots_map.claim_map_icon]> d:<context.inventory> o:<[claim_map_icon]>
 
 #######################
@@ -322,17 +322,17 @@ claiming_multi_chunk_GUI_open:
   - define okay:->:1
   - foreach 3|5 as:claim_size:
     - define count 0
-    - define offset -<[claim_size]./[2].round_up>
+    - define offset -<[claim_size].div[2].round_up>
     - repeat <[claim_size]> as:x_loop:
-      - define this_x <[x].+[<[x_loop].+[<[offset]>]>]>
+      - define this_x <[x].add[<[x_loop].add[<[offset]>]>]>
       - repeat <[claim_size]> as:z_loop:
-        - define this_z <[z].+[<[z_loop].+[<[offset]>]>]>
+        - define this_z <[z].add[<[z_loop].add[<[offset]>]>]>
         - if <yaml[claims].read[<[chunk].world>.<[this_x]>.<[this_z]>]||null> != null && !<yaml[claims].read[<[chunk].world>.<[this_x]>.<[this_z]>].starts_with[<player.uuid>]||true>:
           - define items:->:<item[red_wool].with[quantity=<[claim_size]>;display_name=<&c>Cannot<&sp>Claim<&sp><[claim_size]>x<[claim_size]>;lore=<&e>Other<&sp>claims<&sp>are<&sp>in<&sp>the<&sp>way.;nbt=order/<[claim_size]>]>
           - foreach next
         - if !<yaml[claims].read[<[chunk].world>.<[this_x]>.<[this_z]>].starts_with[<player.uuid>]||true>:
           - define count:++
-        - if <yaml[claims].read[limits.current.<player.uuid>].+[<[count]>]||<[count]>> >= <yaml[claims].read[limits.max.<player.uuid>]||30>:
+        - if <yaml[claims].read[limits.current.<player.uuid>].add[<[count]>]||<[count]>> >= <yaml[claims].read[limits.max.<player.uuid>]||30>:
           - define items:->:<item[red_wool].with[quantity=<[claim_size]>;display_name=<&c>Cannot<&sp>Claim<&sp><[claim_size]>x<[claim_size]>;lore=<&e>You<&sp>are<&sp>at<&sp>your<&sp>claim<&sp>limit.;nbt=order/<[claim_size]>]>
           - foreach next
     - define okay:->:<[claim_size]>
@@ -817,9 +817,9 @@ claiming_protection_settings_build_bottom_settings:
       - if <list[1|2|7].contains[<[value]>]>:
         - define list:->:<script[claiming_protection_settings].parsed_key[definitions.filler]>
       - else:
-        - define CMD <script[claiming_group_management_weather-control_icon].data_key[CMD.<[weathers].get[<[value].-[2]>]>]>
-        - define display:<&e>Set<&sp>To<&co><&sp><[weathers].get[<[value].-[2]>]>
-        - define list:->:<item[claiming_group_management_time-control_icon].with[custom_model_data=<[CMD]>;display_name=<[display]>;nbt=set_to/<[weathers].get[<[value].-[2]>]>]>
+        - define CMD <script[claiming_group_management_weather-control_icon].data_key[CMD.<[weathers].get[<[value].sub[2]>]>]>
+        - define display:<&e>Set<&sp>To<&co><&sp><[weathers].get[<[value].sub[2]>]>
+        - define list:->:<item[claiming_group_management_time-control_icon].with[custom_model_data=<[CMD]>;display_name=<[display]>;nbt=set_to/<[weathers].get[<[value].sub[2]>]>]>
     - foreach <script[claiming_protection_settings].data_key[setting_optional_buttons_slots]> as:slot:
       - inventory set slot:<[slot]> d:<player.open_inventory> o:<[list].get[<[loop_index]>]>
   - else:
@@ -880,13 +880,13 @@ claiming_multiclaim:
     - else:
       - define chunk <[location].chunk>
     - define group <yaml[claims].read[<[chunk].world>.<[chunk].x>.<[chunk].z>]||null>
-    - define offset -<[area]./[2].round_up>
+    - define offset -<[area].div[2].round_up>
     - define x <[chunk].x>
     - define z <[chunk].z>
     - repeat <[area]> as:x_loop:
-      - define this_x <[x].+[<[x_loop].+[<[offset]>]>]>
+      - define this_x <[x].add[<[x_loop].add[<[offset]>]>]>
       - repeat <[area]> as:z_loop:
-        - define this_z <[z].+[<[z_loop].+[<[offset]>]>]>
+        - define this_z <[z].add[<[z_loop].add[<[offset]>]>]>
         - if <yaml[claims].read[<[chunk].world>.<[this_x]>.<[this_z]>]||null> != null && !<yaml[claims].read[<[chunk].world>.<[this_x]>.<[this_z]>].starts_with[<player.uuid>]||true>:
           - narrate "<&c>Unable to claim due to other nearby claims."
           - stop
@@ -894,9 +894,9 @@ claiming_multiclaim:
       - inject claiming_initialize_group
     - define claimed 0
     - repeat <[area]> as:x_loop:
-      - define this_x <[x].+[<[x_loop].+[<[offset]>]>]>
+      - define this_x <[x].add[<[x_loop].add[<[offset]>]>]>
       - repeat <[area]> as:z_loop:
-        - define this_z <[z].+[<[z_loop].+[<[offset]>]>]>
+        - define this_z <[z].add[<[z_loop].add[<[offset]>]>]>
         - define chunk <chunk[<[this_x]>,<[this_z]>,<[chunk].world>]>
         - if <yaml[claims].read[<[chunk].world>.<[chunk].x>.<[chunk].z>]||null> == null:
           - yaml id:claims set <[chunk].world>.<[chunk].x>.<[chunk].z>:<player.uuid>~<[name]>
@@ -1266,7 +1266,7 @@ claiming_protection_events:
     - if <[group1]> != null:
       - determine cancelled
     on piston extends:
-    - define target_chunk <context.location.add[<context.relative.sub[<context.location>].mul[<context.length.+[1]>]>].chunk>
+    - define target_chunk <context.location.add[<context.relative.sub[<context.location>].mul[<context.length.add[1]>]>].chunk>
     - define group1 <yaml[claims].read[<context.location.world>.<context.location.chunk.x>.<context.location.chunk.z>]||null>
     - define group2 <yaml[claims].read[<[target_chunk].world>.<[target_chunk].x>.<[target_chunk].z>]||<[group1]>>
     - if <[group1]> != <[group2]>:
@@ -1583,9 +1583,9 @@ claim_system_build_chunkmap:
   script:
   - define world <[chunk].world>
   - repeat 9 as:z:
-    - define z_to_use <[z].-[5].+[<[chunk].z>]>
+    - define z_to_use <[z].sub[5].add[<[chunk].z>]>
     - repeat 9 as:x:
-      - define x_to_use <[x].-[5].+[<[chunk].x>]>
+      - define x_to_use <[x].sub[5].add[<[chunk].x>]>
       - define group_owner <yaml[claims].read[<[world]>.<[x_to_use]>.<[z_to_use]>].before[~]||Wilderness>
       - define group_owner_name <[group_owner].as_player.name||Wilderness>
       - define group_name <yaml[claims].read[groups.<yaml[claims].read[<[world]>.<[x_to_use]>.<[z_to_use]>]||Wilderness>.settings.display_name]>
@@ -1642,14 +1642,14 @@ claim_system_guide_to_chunk_draw_line:
   script:
   - while <player.location.distance[<[center]>]> > 20 && <player.is_online>:
     - define locs <player.location.points_between[<[center]>].get[5].to[35]>
-    - if <[last_distance].+[5]> < <player.location.distance[<[center]>]>:
+    - if <[last_distance].add[5]> < <player.location.distance[<[center]>]>:
       - narrate "<&c>Chunk Guide has ended, due to walking away from the chunk."
       - flag player chunk_guide:!
       - stop
     - else if <[last_distance]> > <player.location.distance[<[center]>]>:
       - define last_distance <player.location.distance[<[center]>]>
     - repeat <[locs].size>:
-      - playeffect totem at:<[locs].get[<[value]>].with_y[<[locs].get[<[value]>].highest.y.+[3]>]> quantity:10 targets:<player>
+      - playeffect totem at:<[locs].get[<[value]>].with_y[<[locs].get[<[value]>].highest.y.add[3]>]> quantity:10 targets:<player>
       - wait 1t
 
 claim_system_guide_to_outline_chunk:
@@ -1659,7 +1659,7 @@ claim_system_guide_to_outline_chunk:
   - define y <player.location.y>
   - repeat 20:
     - if <player.is_online>:
-      - playeffect happy_villager at:<[chunk].cuboid.center.with_y[<[y]>].add[0,<[value].*[0.25]>,0]> quantity:30 offset:1 targets:<player>
+      - playeffect happy_villager at:<[chunk].cuboid.center.with_y[<[y]>].add[0,<[value].mul[0.25]>,0]> quantity:30 offset:1 targets:<player>
       - wait 1t
 
 claiming_settings_update:

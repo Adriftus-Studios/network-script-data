@@ -32,7 +32,7 @@ butler_command:
   description: Opens the Butler Menu for the specified player
   usage: /open_butler_menu <&lt>player<&gt>
   script:
-    - inventory open d:<inventory[butler_menu]> player:<server.match_player[<context.args.first>]>
+    - inventory open d:<inventory[butler_menu]> player:<server.match_player[<context.args.first||player>]>
 
 butler_menu:
   type: inventory

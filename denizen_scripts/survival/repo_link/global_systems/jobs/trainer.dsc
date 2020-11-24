@@ -13,7 +13,7 @@ click_on_horse_assignment:
     - narrate "<&c>This action will become available in an upcoming update!"
   interact scripts:
   - 1 horse_trainer_interact_handler
-  
+
 # Interaction handler
 horse_trainer_interact_handler:
   type: interact

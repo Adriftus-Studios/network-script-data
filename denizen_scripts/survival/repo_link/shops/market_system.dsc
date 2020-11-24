@@ -337,13 +337,13 @@ market_system_get_price_of_multiple:
   script:
     - define current_value <yaml[current_market].read[items.<[item]>.value]>
     - if <[buy_or_sell]> == sell:
-      - define current_value <[current_value].*[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
+      - define current_value <[current_value].mul[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
     ## OLD
     #- repeat <[amount]>:
     #  - define list:|:<[current_value]>
     #  - define current_value:+:<script[market_system_data].data_key[settings.adjustment_amount]>
     #- determine <[list].sum>
-    - determine <[current_value].*[<[amount]>]>
+    - determine <[current_value].mul[<[amount]>]>
 
 market_system_categories_buy_item:
   type: task
@@ -381,7 +381,7 @@ market_system_category_set_buy_sell_items:
   script:
     - define slot <script[market_system_category_GUI].data_key[custom_slots_map.buy_sell_item]>
     - define buy_price <yaml[current_market].read[items.<[item]>.value]>
-    - define sell_price <[buy_price].*[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
+    - define sell_price <[buy_price].mul[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
     - define "lore:<&a>Buy Price<&co> <&e><[buy_price]>|<&c>Sell Price<&co> <[sell_price]>"
     - define name <&a><[item].replace[_].with[<&sp>].to_titlecase>
     - inventory set slot:<[slot]> d:<[inventory]> o:<[item].as_item.with[display_name=<[name]>;lore=<[lore]>;nbt=item/<[item]>]>
@@ -402,12 +402,12 @@ market_system_category_set_buy_sell_items:
       - inventory set slot:<[slot]> d:<[inventory]> o:<item[green_wool].with[quantity=<[max_stack]>;display_name=<&c>Buy<&sp><[max_stack]>;nbt=buy/<[max_stack]>|price/<[this_buy_price]>;lore=<&c>Price<&co><&sp><&e><[this_buy_price]>]>
     # HALF STACK
     - if <[max_stack]> > 1 && <[max_stack].mod[2]> == 0:
-      - define this_sell_price <proc[market_system_get_price_of_multiple].context[<[item]>|<[max_stack]./[2]>|sell]>
-      - define this_buy_price <proc[market_system_get_price_of_multiple].context[<[item]>|<[max_stack]./[2]>|buy]>
+      - define this_sell_price <proc[market_system_get_price_of_multiple].context[<[item]>|<[max_stack].div[2]>|sell]>
+      - define this_buy_price <proc[market_system_get_price_of_multiple].context[<[item]>|<[max_stack].div[2]>|buy]>
       - define slot <script[market_system_category_GUI].data_key[custom_slots_map.sell.half_stack]>
-      - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[quantity=<[max_stack]./[2]>;display_name=<&c>Sell<&sp><[max_stack]./[2]>;nbt=sell/<[max_stack]./[2]>|price/<[this_sell_price]>;lore=<&a>Price<&co><&sp><&e><[this_sell_price]>]>
+      - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[quantity=<[max_stack].div[2]>;display_name=<&c>Sell<&sp><[max_stack].div[2]>;nbt=sell/<[max_stack].div[2]>|price/<[this_sell_price]>;lore=<&a>Price<&co><&sp><&e><[this_sell_price]>]>
       - define slot <script[market_system_category_GUI].data_key[custom_slots_map.buy.half_stack]>
-      - inventory set slot:<[slot]> d:<[inventory]> o:<item[green_wool].with[quantity=<[max_stack]./[2]>;display_name=<&c>Buy<&sp><[max_stack]./[2]>;nbt=buy/<[max_stack]./[2]>|price/<[this_buy_price]>;lore=<&c>Price<&co><&sp><&e><[this_buy_price]>]>
+      - inventory set slot:<[slot]> d:<[inventory]> o:<item[green_wool].with[quantity=<[max_stack].div[2]>;display_name=<&c>Buy<&sp><[max_stack].div[2]>;nbt=buy/<[max_stack].div[2]>|price/<[this_buy_price]>;lore=<&c>Price<&co><&sp><&e><[this_buy_price]>]>
     # ONLY ONE
     - define slot <script[market_system_category_GUI].data_key[custom_slots_map.sell.one]>
     - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[display_name=<&c>Sell<&sp>1;nbt=sell/1|price/<[sell_price]>;lore=<&a>Price<&co><&sp><&e><[sell_price]>]>
@@ -439,12 +439,12 @@ market_system_category_set_market_items:
     - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.hidden_marker]> d:<[inventory]> o:<script[market_system_category_GUI].parsed_key[definitions.filler].with[nbt=page/<[page]>|category/<[category]>]>
     - foreach <script[market_system_category_GUI].data_key[custom_slots_map.market_items]> as:slot:
       - define items_per_page <script[market_system_category_GUI].data_key[custom_slots_map.market_items].as_list.size>
-      - define index_to_pull <[loop_index].+[<[page].-[1].*[<[items_per_page]>]>]>
+      - define index_to_pull <[loop_index].add[<[page].sub[1].mul[<[items_per_page]>]>]>
       - if <yaml[market].list_keys[categories.<[category]>].get[<[index_to_pull]>]||null> == null:
         - foreach stop
       - define item <yaml[market].list_keys[categories.<[category]>].get[<[index_to_pull]>]>
       - define buy_price <yaml[current_market].read[items.<[item]>.value]>
-      - define sell_price <[buy_price].*[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
+      - define sell_price <[buy_price].mul[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
       - define "lore:<&a>Buy Price<&co><&sp><&e><[buy_price]>|<&c>Sell Price<&co><&sp><[sell_price]>"
       - define name <&a><[item].replace[_].with[<&sp>].to_titlecase>
       - inventory set slot:<[slot]> d:<[inventory]> o:<[item].as_item.with[lore=<[lore]>;nbt=market_item/<[item]>;display_name=<[name]>]>
@@ -541,7 +541,7 @@ market_system_transfer_yaml_hourly:
       - define min_value <script[market_system_data].data_key[items.<[item]>.minimum_value]>
       - yaml id:current_market unload
       - yaml id:current_market create
-      - yaml id:current_market set items.<[item]>.value:<[min_value].*[<util.random.decimal[1].to[<list[1|1|1|1|1|2|2|2|2|2|3|3|3|4|4|5].random>]>].round_up>
+      - yaml id:current_market set items.<[item]>.value:<[min_value].mul[<util.random.decimal[1].to[<list[1|1|1|1|1|2|2|2|2|2|3|3|3|4|4|5].random>]>].round_up>
 
 market_system_open:
   type: task

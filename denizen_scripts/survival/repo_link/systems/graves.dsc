@@ -58,7 +58,6 @@ graves_data:
 graves_handler:
   type: world
   debug: false
-  debug: false
   load:
     - if <server.has_file[data/graves.yml]>:
       - yaml id:graves load:data/graves.yml
@@ -138,7 +137,7 @@ graves_handler:
           - give player_head[skull_skin=<context.location.skull_skin>]
           - yaml id:graves grave.<context.location.simple>.claimed:<-:<player.uuid>
           - stop
-        else:
+        - else:
           - narrate <script[graves_config].data_key[messages.already_claimed_head].parse_color>
           - stop
       - if <yaml[graves].contains[grave.<context.location.simple>.hologram1]> && <server.entity_is_spawned[<yaml[graves].read[grave.<context.location.simple>.hologram1]>]>:
