@@ -64,7 +64,7 @@ custom_food_honey_bun:
   recipes:
     1:
       hide_in_recipebook: false
-      type: shapeless
+      type: shaped
       output_quantity: 1
       input:
       - air|honey_bottle|air
@@ -72,12 +72,29 @@ custom_food_honey_bun:
       - air|air|air
     2:
       hide_in_recipebook: false
-      type: shapeless
+      type: shaped
       output_quantity: 1
       input:
       - air|honey_bottle|air
       - air|bread|air
       - air|air|air
+    3:
+      hide_in_recipebook: false
+      type: shaped
+      output_quantity: 1
+      input:
+      - air|air|air
+      - air|honey_bottle|air
+      - air|bread|air
+    4:
+      hide_in_recipebook: false
+      type: shaped
+      output_quantity: 1
+      input:
+      - air|air|air
+      - air|honey_bottle|air
+      - wheat|wheat|wheat
+
 
 custom_food_beef_stew:
   material: mushroom_stew
