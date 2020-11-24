@@ -270,7 +270,7 @@ claiming_inventory_events:
           - inject claiming_claimmap_script
     on player opens claiming_inventory:
     - if <script[claim_system_yaml_settings].data_key[settings.allowed_worlds].contains[<player.world.name>]>:
-      - define claim_map_icon <item[map].with[flags=HIDE_ALL;display_name=<&b>Claim<&sp>Map;lore=<proc[claim_system_build_chunkmap].context[<player.location.chunk>|false].include[<&a>|<&a>Relevent<&sp>Command<&co><&sp><&e>/ClaimMap]>;nbt=action/claim_map]>
+      - define claim_map_icon <item[map].with[hides=all;display_name=<&b>Claim<&sp>Map;lore=<proc[claim_system_build_chunkmap].context[<player.location.chunk>|false].include[<&a>|<&a>Relevent<&sp>Command<&co><&sp><&e>/ClaimMap]>;nbt=action/claim_map]>
       - inventory set slot:<script[claiming_inventory].data_key[custom_slots_map.claim_map_icon]> d:<context.inventory> o:<[claim_map_icon]>
 
 #######################
