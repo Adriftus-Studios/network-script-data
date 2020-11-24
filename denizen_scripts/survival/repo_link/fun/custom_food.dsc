@@ -142,7 +142,7 @@ custom_food_beef_stew:
 custom_food_mutton_stew:
   material: rabbit_stew
   debug: false
-  display name: <&f>Beef Stew
+  display name: <&f>Mutton Stew
   mechanisms:
     custom_model_data: 3
   type: item
