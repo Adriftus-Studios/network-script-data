@@ -98,7 +98,7 @@ store_hub_mysteryShop_boxes_events:
       - determine passively cancelled
       - if <yaml[global.player.<player.uuid>].read[economy.premium.current]> >= <context.item.nbt[price]>:
         - yaml id:global.player.<player.uuid> set economy.premium.current:-:<context.item.nbt[price]>
-        - narrate "<&a>You have succesfully purchased: <&r><context.item.nbt[number]> <&e><list.pad_left[<context.item.nbt[stars]>].with[⭐].separated_by[]><&7><list.pad_right[<context.item.nbt[stars].-[5].abs>].with[✩].separated_by[]> <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>."
+        - narrate "<&a>You have succesfully purchased: <&r><context.item.nbt[number]> <&e><list.pad_left[<context.item.nbt[stars]>].with[⭐].separated_by[]><&7><list.pad_right[<context.item.nbt[stars].sub[5].abs>].with[✩].separated_by[]> <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>."
       - else:
         - narrate "<&c>You do not have enough <&b>Adriftus Coins<&c> for that."
       - inventory close

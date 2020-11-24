@@ -12,7 +12,7 @@ click_on_beekeeper_assignment:
     - narrate "<&c>This action will become available in an upcoming update!"
   interact scripts:
   - 1 bee_keeper_interact_handler
-  
+
 # Interaction handler
 bee_keeper_interact_handler:
   type: interact

@@ -7,6 +7,5 @@ armor_stand_editor_tool:
   - <&a>Right click to open your GUI
   recipes:
      tool:
-         
          type: shapeless
          input: armor_stand|writable_book
