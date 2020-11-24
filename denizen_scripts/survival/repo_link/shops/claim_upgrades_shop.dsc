@@ -63,7 +63,7 @@ claiming_protection_group_upgrades_events:
           - flag player claim_upgrades:++
       - else if <context.item.has_nbt[back]>:
         - inventory open d:claiming_inventory
-    on player right clicks with:claiming_group_upgrade_item:
+    on player right clicks block with:claiming_group_upgrade_item:
       - determine passively cancelled
       - ratelimit <player> 2t
       - if <context.item.nbt[upgrade]> == claim_limit:
@@ -73,7 +73,7 @@ claiming_protection_group_upgrades_events:
           - yaml id:claims set limits.max.<player.uuid>:+:40
         - narrate "<&7>You now have a max of <&a><yaml[claims].read[limits.max.<player.uuid>]> <&7>claims!"
         - wait 1t
-        - take <player.item_in_hand>
+        - take iteminhand
         - stop
       - define group <player.location.cuboids.filter[note_name.starts_with[claim]].first.note_name.after[.].before[/]||null>
       - if <[group]> != null:
@@ -86,4 +86,4 @@ claiming_protection_group_upgrades_events:
           - narrate "<&e>You have applied the <context.item.nbt[upgrade]> upgrade to <[name]><&e>."
           - flag player upgrade_confirmation:!
           - wait 1t
-          - take <context.item>
+          - take iteminhand
