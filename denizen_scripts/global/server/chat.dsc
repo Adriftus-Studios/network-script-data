@@ -220,7 +220,7 @@ chat_settings_open:
         - else:
           - define "lore:|:<&b>right click to start speaking."
         - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>;nbt=action/<[channel]>]>
-    - repeat <[list].size.-[8].abs>:
+    - repeat <[list].size.sub[8].abs>:
       - define list:->:<script[chat_settings].parsed_key[definitions.filler].with[nbt=unique/<util.random.uuid>]>
     - give <[list]> to:<[inventory]>
     - inventory open d:<[inventory]>

@@ -39,6 +39,8 @@ economy_initialize:
 
 economy_balance_check_command:
   type: command
+  usage: /balance
+  description: Outputs a players current balance
   name: balance
   aliases:
     - bal
@@ -48,9 +50,11 @@ economy_balance_check_command:
     - narrate "<&a>Coins: <&e><player.money.round_to[2]>"
     - narrate "<&a>Adriftus Coins: <&e>0"
     - narrate <&2>----------------------------
-  
+
 economy_balance_top:
   type: command
+  usage: /balance_top
+  description: Outputs the top balances on the server.
   name: balance_top
   aliases:
     - baltop
@@ -73,15 +77,17 @@ economy_bank_note:
 economy_bank_note_events:
   type: world
   events:
-    on player right clicks with:economy_bank_note:
+    on player right clicks block with:economy_bank_note:
     - ratelimit <player> 2t
-    - narrate "<&b>You have deposited <&a><server.economy.format[<context.item.nbt[value]>]> into your account!"
+    - narrate "<&b>You have deposited <&a><server.economy.format[<context.item.nbt[value]>]> <&b>into your account."
     - give money quantity:<context.item.nbt[value]>
     - wait 1t
-    - take <context.item>
+    - take iteminhand
 
 economy_withdraw:
   type: command
+  usage: /withdraw
+  description: Withdraws currency from a players balance.
   name: withdraw
   script:
     - define amount <context.args.first||null>
@@ -98,6 +104,8 @@ economy_withdraw:
 
 economy_pay:
   type: command
+  usage: /pay
+  description: pays a target user from the context users balance.
   name: pay
   tab complete:
     - determine <server.online_players.parse[name].filter[to_lowercase.starts_with[<context.raw_args.before_last[<&sp>].to_lowercase>]]>

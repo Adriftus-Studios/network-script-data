@@ -1,10 +1,11 @@
 vote_receiver:
   type: world
   debug: false
+  sites_listed: 69
   events:
     #Vote received:
       on votifier vote:
-      - define listed_sites <element[to_be_filled_in_when_listed_on_sites]>
+      - define listed_sites <script.data_key[sites_listed]>
       - define voter <server.match_offline_player[<context.username>]||invalid>
       - if <[voter]> != invalid:
         - inject locally daily_vote_counter
@@ -12,7 +13,7 @@ vote_receiver:
   #Check for offline keys and award/announce
       on player joins:
       - if <player.has_flag[weekly_crate_pending]>:
-        - narrate: "<&e>You have a <item[weekly_vote_key].display> <&e>pending. Do <&3>/<&b>weeklykeys <&e>to claim it.!"
+        - narrate "<&e>You have a <item[weekly_vote_key].display> <&e>pending. Do <&3>/<&b>weeklykeys <&e>to claim it.!"
       - if <player.has_flag[enderchest_daily_key_offline]>:
         - if <player.flag[enderchest_daily_key_offline]> > 0:
           - if <player.flag[enderchest_daily_key_offline]> > 1:
@@ -24,8 +25,8 @@ vote_receiver:
       - if <player.has_flag[inventory_daily_key_offline]>:
         - if <player.flag[inventory_daily_key_offline]> > 0:
           - if <player.flag[inventory_daily_key_offline]> > 1:
-          - narrate "<&e>You received <player.flag[inventory_daily_key]> <item[daily_vote_key].display>s<&e> while offline!"
-          - flag <player> inventory_daily_key:!
+            - narrate "<&e>You received <player.flag[inventory_daily_key]> <item[daily_vote_key].display>s<&e> while offline!"
+            - flag <player> inventory_daily_key:!
         - else:
           - narrate "<&e>You received <&a>a <item[daily_vote_key].display><&e> while you were offline!"
           - flag <player> inventory_daily_key:!
@@ -41,6 +42,7 @@ vote_receiver:
             - announce "<&c><player.display_name> has received <&a><player.flag[enderchest_daily_key_offline].add[<player.flag[inventory_daily_key]>]> <item[daily_vote_key].display>s<&c> for voting while offline!<&nl><&c>Do <&3>/<&b>vote<&c> to recieve yours now!"
           - else:
             - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
+
 
   daily_vote_counter:
     - flag <[voter]> daily_votes_reward counter:++
@@ -73,13 +75,13 @@ vote_receiver:
           - flag <[voter]> offline_daily_keys counter:++
 
   weekly_vote_counter:
-    - flag <[voter]> weekly_votes_reward counter:++ duration:7d
+    - flag <[voter]> weekly_votes_reward:++ duration:7d
     - wait 1t
     - if <[voter].flag[weekly_votes_reward].sub[1].mul[7]> >= <[listed_sites]>:
-      - flag <[voter]> weekly_crate_pending counter:++
-      - flag <[voter> weekly_votes_reward:!
-      - if <voter.is_online>:
-        - narrate <[voter]> "You have enough votes to claim a <&b>Weekly Vote Crate Key<&c>! Do <&3>/<&b>weeklykeys <&e>to claim them!"
+      - flag <[voter]> weekly_crate_pending:++
+      - flag <[voter]> weekly_votes_reward:!
+      - if <[voter].is_online>:
+        - narrate targets:<[voter]> "You have enough votes to claim a <&b>Weekly Vote Crate Key<&c>! Do <&3>/<&b>weeklykeys <&e>to claim them!"
 
 weeklykeys:
   type: command
@@ -88,6 +90,7 @@ weeklykeys:
   usage: /weeklykeys
   description: rewards players with their weekly vote crate keys and resets the flag if flagged. Has a 1 week cooldown. If not flagged/on cooldown it reports.
   script:
+    - define listed_sites <script[vote_reciever].data_key[sites_listed]>
     - if <player.has_flag[weekly_crate_pending]> && !<player.has_flag[weekly_key_cooldown]>:
       - if <player.inventory.is_full>:
         - if <player.enderchest.is_full>:
@@ -99,7 +102,7 @@ weeklykeys:
           - narrate <player> "<&c>Your inventory was full, your <item[weekly_vote_key].display> has been deposited into your enderchest inventory."
           - announce "<&a><player.display_name> <&c>has just received a <item[weekly_vote_key].display><&c> for voting every day this week!"
       - else:
-        - give <player> weekly_vote_key
+        - give  weekly_vote_key
         - flag <player> weekly_crate_pending:!
         - flag <player> weekly_key_cooldown duration:7d
         - narrate <player> "<&c>Your <item[weekly_vote_key].display> has been deposited into your inventory."
@@ -119,6 +122,7 @@ recoverkeys:
   usage: /recoverkeys
   description: rewards players with their their daily vote keys they were ineligible to claim for some other reason.
   script:
+    - define listed_sites <script[vote_reciever].data_key[listed_sites.number_of_sites_listed_on]>
     - if <player.has_flag[daily_key_pending]>:
       - if <player.flag[daily_key_pending]> > 0:
         - if <player.inventory.is_full>:
@@ -129,7 +133,7 @@ recoverkeys:
             - flag <player> daily_key_pending:!
             - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
         - else:
-          - give <player> daily_vote_key quantity:<player.flag[daily_key_pending]>
+          - give daily_vote_key quantity:<player.flag[daily_key_pending]>
           - flag <player> daily_key_pending:!
           - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
     - else:
@@ -160,24 +164,25 @@ weekly_vote_key:
 vote_crate_key_events:
   type: world
   events:
-    on player right clicks block with:daily_vote_key|weekly_vote_key ignorecancelled:true:
+    on player right clicks block with:daily_vote_key|weekly_vote_key:
+    - determine passively cancelled
     - if !<server.has_flag[<context.location.simple>.daily_crate]> && !<server.has_flag[<context.location.simple>.weekly_crate]>:
-      - determine passively cancelled
-      - ratelimit 20t
-      - narrate "<&c>You cannot use that here. Please go to the crates server warp. "
+      - ratelimit player 20t
+      - narrate "<&c>You cannot use that here. Please go to the crates server warp."
     - if <server.has_flag[<context.location.simple>.daily_crate]>:
+      - if <player.inventory.is_full>:
+        - narrate "<&c>Your inventory is full. Please make some room!"
+        - stop
       - if <player.item_in_hand> == <item[daily_vote_key]>:
-        - determine passively cancelled
         - inject daily_crate_opener
-        - narrate "Opening daily crate"
       - if <player.item_in_hand> == <item[weekly_vote_key]>:
         - narrate "<&c>Please use a <item[daily_vote_key].display>."
-        - determine passively cancelled
     - if <server.has_flag[<context.location.simple>.weekly_crate]>:
       - if <player.item_in_hand> == <item[weekly_vote_key].display>:
-        - determine passively cancelled
+        - if <player.inventory.is_full>:
+          - narrate "<&c>Your inventory is full. Please make some room!"
+          - stop
         - inject weekly_crate_opener
         - narrate "Opening weekly crate"
       - if <player.item_in_hand> == <item[daily_vote_key]>:
         - narrate "<&c>Please use a <item[weekly_vote_key].display>."
-        - determine passively cancelled

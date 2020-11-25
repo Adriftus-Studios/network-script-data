@@ -22,4 +22,3 @@ custom_block_potion_effects:
             - if <queue.time_ran.in_seconds> >= 15:
                 - cast poison duration:2s
             - wait 1s
-            
