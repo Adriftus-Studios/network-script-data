@@ -126,7 +126,7 @@ custom_food_honey_bun:
 
 
 custom_food_beef_stew:
-  material: mushroom_stew
+  material: rabbit_stew
   debug: false
   display name: <&f>Beef Stew
   mechanisms:
@@ -140,9 +140,9 @@ custom_food_beef_stew:
       input: potato|carrot|beef|custom_food_onion|bowl
 
 custom_food_mutton_stew:
-  material: mushroom_stew
+  material: rabbit_stew
   debug: false
-  display name: <&f>Beef Stew
+  display name: <&f>Mutton Stew
   mechanisms:
     custom_model_data: 3
   type: item
