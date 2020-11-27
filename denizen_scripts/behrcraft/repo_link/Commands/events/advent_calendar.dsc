@@ -1,7 +1,7 @@
 advent_calendar:
   type: command
-  name: advent
-  usage: /advent
+  name: i_demand_pRESENTS
+  usage: /i_demand_pRESENTS
   aliases:
     - give_me_presents_santa
     - pls_santa_ive_been_good
