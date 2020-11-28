@@ -152,6 +152,75 @@ custom_food_mutton_stew:
       output_quantity: 1
       hide_in_recipebook: false
       input: potato|carrot|mutton|custom_food_onion|bowl
+
+Custom_food_events:
+  type: world
+  events:
+    on player consumes custom_food_mutton_stew:
+      - determine passively cancelled
+      - take iteminhand
+      - feed amount:12 saturation:8
+    on player consumes custom_food_beef_stew:
+      - determine passively cancelled
+      - take iteminhand
+      - feed amount:8 saturation:12
+    on player consumes custom_food_honey_bun:
+      - determine passively cancelled
+      - take iteminhand
+      - feed amount:8 saturation:3
+    on player consumes custom_food_apple_pie:
+      - determine passively cancelled
+      - take iteminhand
+      - feed amount:6 saturation:7
+    on player consumes custom_food_berry_pie:
+      - determine passively cancelled
+      - take iteminhand
+      - feed amount:8 saturation:2
+    on player right clicks block with:food_crate:
+      - determine passively cancelled
+      - if <player.inventory.empty_slots> < 5:
+        - narrate "<&c>You must have at least 5 open inventory slots to unpack a food crate."
+        - stop
+      - take iteminhand
+      - repeat 5:
+        - define chance <util.random.int[1].to[8]>
+        - choose <[chance]>:
+          - case 1:
+            - give custom_food_potato_soup
+            - narrate "<&e>You unpacked a <item[custom_food_potato_soup].display><&e>."
+          - case 2:
+            - give custom_food_berry_pie
+            - narrate "<&e>You unpacked a <item[custom_food_berry_pie].display><&e>."
+          - case 3:
+            - give custom_food_apple_pie
+            - narrate "<&e>You unpacked a <item[custom_food_apple_pie].display><&e>."
+          - case 4:
+            - give custom_food_carrot_cake
+            - narrate "<&e>You unpacked a <item[custom_food_carrot_cake].display><&e>."
+          - case 5:
+            - give custom_food_chocolate_cake
+            - narrate "<&e>You unpacked a <item[custom_food_chocolate_cake].display><&e>."
+          - case 6:
+            - give custom_food_honey_bun
+            - narrate "<&e>You unpacked a <item[custom_food_honey_bun].display><&e>."
+          - case 7:
+            - give custom_food_beef_stew
+            - narrate "<&e>You unpacked a <item[custom_food_beef_stew].display><&e>."
+          - case 8:
+            - give custom_food_mutton_stew
+            - narrate "<&e>You unpacked a <item[custom_food_mutton_stew].display><&e>."
+        - playsound <player> sound:block_sand_hit sound_category:master pitch:0.5
+        - wait <util.random.int[8].to[15]>t
+
+food_crate:
+  type: item
+  material: player_head
+  mechanisms:
+    skull_skin: 23c5b3f8-6ab5-464e-85e5-5c28ab9b893c|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7ImlkIjoiZjk1NjQ0NTgwN2QwNDJjOWI0OThjMGQ1NzZkYmNkYjEiLCJ0eXBlIjoiU0tJTiIsInVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjRkYTgzMDYwOTJjYzU0YWNlZDYyY2UyNjNmZjFmNTc0YTFmODkwZWE1OGRjNDMwMzBiYTUwNzk3MjZiYWIzOSIsInByb2ZpbGVJZCI6IjY5YzUxMDg3ODAzYjQ4NDViZWYxMTZlMTJjN2VhMjI1IiwidGV4dHVyZUlkIjoiYjRkYTgzMDYwOTJjYzU0YWNlZDYyY2UyNjNmZjFmNTc0YTFmODkwZWE1OGRjNDMwMzBiYTUwNzk3MjZiYWIzOSJ9fSwic2tpbiI6eyJpZCI6ImY5NTY0NDU4MDdkMDQyYzliNDk4YzBkNTc2ZGJjZGIxIiwidHlwZSI6IlNLSU4iLCJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2I0ZGE4MzA2MDkyY2M1NGFjZWQ2MmNlMjYzZmYxZjU3NGExZjg5MGVhNThkYzQzMDMwYmE1MDc5NzI2YmFiMzkiLCJwcm9maWxlSWQiOiI2OWM1MTA4NzgwM2I0ODQ1YmVmMTE2ZTEyYzdlYTIyNSIsInRleHR1cmVJZCI6ImI0ZGE4MzA2MDkyY2M1NGFjZWQ2MmNlMjYzZmYxZjU3NGExZjg5MGVhNThkYzQzMDMwYmE1MDc5NzI2YmFiMzkifSwiY2FwZSI6bnVsbH0=
+  display name: <&b>Food Crate
+  lore:
+  - "<&e>Provides a heck of a meal!"
+
 # Things needed to add:
 #   Turn 20 rotten flesh into leather (Not food, but eh)
 #   Berry Juice. Gives the berries more of a use. This will be a potion. Maybe add something with honey too?
