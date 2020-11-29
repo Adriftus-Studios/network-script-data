@@ -177,40 +177,46 @@ Custom_food_events:
       - take iteminhand
       - feed amount:8 saturation:2
     on player right clicks block with:food_crate:
+      - flag <player> opening_food_crate
       - determine passively cancelled
       - if <player.inventory.empty_slots> < 5:
         - narrate "<&c>You must have at least 5 open inventory slots to unpack a food crate."
         - stop
-      - take iteminhand
-      - repeat 5:
-        - define chance <util.random.int[1].to[8]>
-        - choose <[chance]>:
-          - case 1:
-            - give custom_food_potato_soup
-            - narrate "<&e>You unpacked a <item[custom_food_potato_soup].display><&e>."
-          - case 2:
-            - give custom_food_berry_pie
-            - narrate "<&e>You unpacked a <item[custom_food_berry_pie].display><&e>."
-          - case 3:
-            - give custom_food_apple_pie
-            - narrate "<&e>You unpacked a <item[custom_food_apple_pie].display><&e>."
-          - case 4:
-            - give custom_food_carrot_cake
-            - narrate "<&e>You unpacked a <item[custom_food_carrot_cake].display><&e>."
-          - case 5:
-            - give custom_food_chocolate_cake
-            - narrate "<&e>You unpacked a <item[custom_food_chocolate_cake].display><&e>."
-          - case 6:
-            - give custom_food_honey_bun
-            - narrate "<&e>You unpacked a <item[custom_food_honey_bun].display><&e>."
-          - case 7:
-            - give custom_food_beef_stew
-            - narrate "<&e>You unpacked a <item[custom_food_beef_stew].display><&e>."
-          - case 8:
-            - give custom_food_mutton_stew
-            - narrate "<&e>You unpacked a <item[custom_food_mutton_stew].display><&e>."
-        - playsound <player> sound:block_sand_hit sound_category:master pitch:0.5
-        - wait <util.random.int[8].to[15]>t
+      - if <player.has_flag[opening_food_crate]>:
+        - narrate "<&c>Please finish opening your current Food Crate."
+        - stop
+      - else:
+        - take iteminhand
+        - repeat 5:
+          - define chance <util.random.int[1].to[8]>
+          - choose <[chance]>:
+            - case 1:
+              - give custom_food_potato_soup
+              - narrate "<&e>You unpacked a <item[custom_food_potato_soup].display><&e>."
+            - case 2:
+              - give custom_food_berry_pie
+              - narrate "<&e>You unpacked a <item[custom_food_berry_pie].display><&e>."
+            - case 3:
+              - give custom_food_apple_pie
+              - narrate "<&e>You unpacked a <item[custom_food_apple_pie].display><&e>."
+            - case 4:
+              - give custom_food_carrot_cake
+              - narrate "<&e>You unpacked a <item[custom_food_carrot_cake].display><&e>."
+            - case 5:
+              - give custom_food_chocolate_cake
+              - narrate "<&e>You unpacked a <item[custom_food_chocolate_cake].display><&e>."
+            - case 6:
+              - give custom_food_honey_bun
+              - narrate "<&e>You unpacked a <item[custom_food_honey_bun].display><&e>."
+            - case 7:
+              - give custom_food_beef_stew
+              - narrate "<&e>You unpacked a <item[custom_food_beef_stew].display><&e>."
+            - case 8:
+              - give custom_food_mutton_stew
+              - narrate "<&e>You unpacked a <item[custom_food_mutton_stew].display><&e>."
+          - playsound <player> sound:block_sand_hit sound_category:master pitch:0.5
+          - wait <util.random.int[8].to[15]>t
+        - flag <player> opening_food_crate:!
 
 food_crate:
   type: item
