@@ -32,7 +32,6 @@ legendary_item_devin_bucket:
     - <&a>
     - <&e>May impair vision.
 
-
 legendary_item_mending_cost_increase:
   type: world
   events:
@@ -83,4 +82,3 @@ legendary_item_non_head_equip_handler:
             - wait 1t
             - equip head:<[item_to_equip]>
             - stop
-
