@@ -14,7 +14,7 @@ dragon_wings:
     - <&a>
     - <&6>Taken from the <&d>Ender Dragon<&6>!
   mechanisms:
-	custom_model_data: 1
+    custom_model_data: 1
     nbt: power/1
     unbreakable: true
     hides: all

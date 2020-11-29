@@ -9,7 +9,7 @@ Backpack_9:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/9|backpack_contents/<list>|unique/<server.current_time_millis>
-    
+
 Backpack_18:
   type: item
   material: chest
@@ -21,7 +21,7 @@ Backpack_18:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/18|backpack_contents/<list>|unique/<server.current_time_millis>
-    
+
 Backpack_27:
   type: item
   material: chest
@@ -33,7 +33,7 @@ Backpack_27:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/27|backpack_contents/<list>|unique/<server.current_time_millis>
-    
+
 Backpack_36:
   type: item
   material: chest
@@ -45,7 +45,7 @@ Backpack_36:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/36|backpack_contents/<list>|unique/<server.current_time_millis>
-    
+
 Backpack_45:
   type: item
   material: chest
@@ -57,7 +57,7 @@ Backpack_45:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/18|backpack_contents/<list>|unique/<server.current_time_millis>
-    
+
 Backpack_54:
   type: item
   material: chest

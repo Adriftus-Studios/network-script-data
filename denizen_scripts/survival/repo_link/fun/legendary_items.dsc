@@ -50,7 +50,6 @@ legendary_effects_handler:
       - if <[chance]> == 1:
         - playsound <player.location> sound:entity_polar_bear_warning sound_category:master
 
-
 legendary_item_non_head_equip_handler:
   type: world
   events:
