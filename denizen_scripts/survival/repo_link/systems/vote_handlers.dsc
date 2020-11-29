@@ -174,7 +174,8 @@ vote_crate_key_events:
         - narrate "<&c>Your inventory is full. Please make some room!"
         - stop
       - if <player.item_in_hand> == <item[daily_vote_key]>:
-        - inject daily_crate_opener
+        - take iteminhand
+        - inject daily_gui_open
       - if <player.item_in_hand> == <item[weekly_vote_key]>:
         - narrate "<&c>Please use a <item[daily_vote_key].display>."
     - if <server.has_flag[<context.location.simple>.weekly_crate]>:
@@ -182,7 +183,8 @@ vote_crate_key_events:
         - if <player.inventory.is_full>:
           - narrate "<&c>Your inventory is full. Please make some room!"
           - stop
-        - inject weekly_crate_opener
+        - take iteminhand
+        - inject weekly_gui_open
         - narrate "Opening weekly crate"
       - if <player.item_in_hand> == <item[daily_vote_key]>:
         - narrate "<&c>Please use a <item[weekly_vote_key].display>."
