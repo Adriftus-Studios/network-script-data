@@ -331,7 +331,7 @@ market_system_category_setup:
 
 market_system_get_price_of_multiple:
   type: procedure
-  
+
   debug: false
   definitions: item|amount|buy_or_sell
   script:
@@ -413,7 +413,7 @@ market_system_category_set_buy_sell_items:
     - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[display_name=<&c>Sell<&sp>1;nbt=sell/1|price/<[sell_price]>;lore=<&a>Price<&co><&sp><&e><[sell_price]>]>
     - define slot <script[market_system_category_GUI].data_key[custom_slots_map.buy.one]>
     - inventory set slot:<[slot]> d:<[inventory]> o:<item[green_wool].with[display_name=<&c>Buy<&sp>1;nbt=buy/1|price/<[buy_price]>;lore=<&a>Price<&co><&sp><&e><[buy_price]>]>
-      
+
 market_system_category_set_market_next_page:
   type: task
   debug: false
@@ -488,7 +488,7 @@ market_system_yaml_builder:
       - flag server market_open:true
       - inject locally build_yaml_data
       - inject locally make_market_data
-    on server shutdown:
+    on shutdown:
       - inject locally save_market_data
     on delta time hourly:
       - inject locally save_market_data_async
