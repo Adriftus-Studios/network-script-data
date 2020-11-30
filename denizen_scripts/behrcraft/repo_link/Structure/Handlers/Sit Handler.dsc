@@ -9,6 +9,7 @@ Player_Sitting:
             - inject Sit_Task Instantly
         on player steers armor_stand flagged:Behrry.Essentials.Sitting:
             - if <context.dismount>:
+                - wait 1t
                 - if <player.has_flag[Behrry.Essentials.AwkwardlySitting]>:
                     - teleport <player.location.add[0,1.5,0]>
                 - else:
