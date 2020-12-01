@@ -6,26 +6,38 @@ Fakeit:
         #@ Origin/height?
         - if <[Origin]||null> == null:
             - define Origin 5
-        - if !<[Height]||null> == null:
+        - if <[Height]||null> == null:
             - define Height 6
-
+        - announce to_console "height: <[height]> origin: <[origin]>"
         #@ Main Definitions
         - define PreciousMaterials <list[iron_ore|coal_ore|diamond_ore|lapis_ore|emerald_ore|redstone_ore|gold_ore]>
+        - announce to_console "yay, line 14"
         - define Chunk <player.location.chunk>
+        - announce to_console "yay, line 16"
         - define Cuboid <[Chunk].cuboid>
+        - announce to_console "yay, line 18"
 
         #@ Main Room
         - define P1 <[Cuboid].min.with_y[<[Origin]>]>
+        - announce to_console "yay, line 22"
         - define P2 <[Cuboid].max.with_y[<[Origin].add[<[Height]>]>]>
+        - announce to_console "yay, line 24"
         - define PC <[P1].to_cuboid[<[P2]>]>
+        - announce to_console "yay, line 26"
         - define ClearList:|:<[PC].blocks>
-
+        - announce to_console "yay, line 28"
+        - announce to_console "PC: <[PC]>"
         #@ Floor
         - define F1 <[Cuboid].min.with_y[<[Origin]>]>
+        - announce to_console "yay, line 32"
         - define F2 <[Cuboid].max.with_y[<[Origin]>]>
+        - announce to_console "yay, line 34"
         - define FC <[F1].to_cuboid[<[F2]>]>
+        - announce to_console "yay, line 36"
         - define TL <[FC].blocks.filter[x.round_up.abs.mod[4].is[==].to[2]].filter[z.round_up.abs.mod[4].is[==].to[0]]>
+        - announce to_console "yay, line 38"
         - define FloorSpace:|:<[FC].blocks.exclude[<[TL]>]>
+        - announce to_console "yay, line 40"
 
         #@ OuterShell1
         - define L1 <[P1].sub[1,1,1]>
@@ -34,18 +46,28 @@ Fakeit:
         - define FLL <[LC].blocks.exclude[<[ClearList]>].filter[material.name.contains_any[water|lava]]>
         - define FLLL <[FLL].filter[material.name.contains[lava]]>
         - define MaterialClaimList:|:<[FLLL].parse[material.name]>
-        
+
+
+
         #@ OuterShell2
         - define S1 <[P1].sub[3,3,3]>
+        - announce to_console "yay, line 54"
         - define S2 <[p2].add[3,3,3]>
+        - announce to_console "yay, line 56"
         - define SC <[S1].to_cuboid[<[S2]>]>
+        - announce to_console "yay, line 58"
         - define CL <[SC].blocks.exclude[<[ClearList]>]>
+        - announce to_console "yay, line 60"
         - define FCL <[CL].filter[material.contains_any[<[PreciousMaterials]>]]>
+        - announce to_console "yay, line 62"
 
         #@ DOorways
         - define CC <[Cuboid].center.with_y[<[Origin]>]>
+        - announce to_console "yay, line 66"
         - define d1 <list[8,0,0|-9,0,0|0,0,8|0,0,-9]>
+        - announce to_console "yay, line 68"
         - define d2 <list[8,2,-1|-9,2,-1|-1,2,8|-1,2,-9]>
+        - announce to_console "yay, line 70"
         - repeat 4:
             - define C1 <[CC].add[<[d1].get[<[Value]>]>]>
             - define C2 <[CC].add[<[d2].get[<[value]>]>]>
@@ -54,12 +76,13 @@ Fakeit:
 
         #@ Build MaterialList
         - define MaterialClaimList:|:<[ClearList].parse[material.name]>
+        - announce to_console "yay, line 79"
         - define MaterialClaimList:|:<[FCL].parse[material.name]>
+        - announce to_console "yay, line 81"
 
         #@ Replace All
         - if <[PC].blocks.parse[material.name].contains_any[Chest|Torch]>:
-            - foreach <[PC].blocks.filter[material.name.contains[Chest]].parse[inventory]> as:Chest:
-                - define MaterialClaimList:|:<[Chest].list_contents>
+            - define MaterialClaimList:|:<[PC].blocks.filter[material.name.contains[Chest]].parse[inventory.list_contents].combine>
 
         ##@ Lets shove the dropped items in, too
         #^- if <[PC].list_entities.filter[entity_type.contains[dropped_item]].size> > 0:
@@ -67,25 +90,26 @@ Fakeit:
         #^- remove <[PC].list_entities.filter[entity_type.contains[dropped_item]]>
 
         - modifyblock <[PC]> air
-        - foreach <[Doorways]> as:Door:
-            - modifyblock <[Door]> air
-        - foreach <[TL]> as:Torch:
-            - modifyblock <[TL]> Torch
+        - announce to_console "yay, line 93"
+        - modifyblock <[Doorways]> air
+        - announce to_console "yay, line 95"
+        - modifyblock <[TL]> Torch
+        - announce to_console "yay, line 97"
         - foreach <[FCL]> as:Block:
             - repeat 5:
                 - define FallBlock <[Block].add[0,<[Value].sub[1]>,0]>
                 - if <[FallBlock].material.name.contains_any[sand|gravel]>:
                     - define GravelList:|:<[FallBlock]>
-                    - define MaterialClaimList:|:<[FallBlock].material.name]>
+                    - define MaterialClaimList:|:<[FallBlock].material.name>
                     - modifyblock <[FallBlock]> air
                 - else:
                     - repeat stop
             - modifyblock <[Block]> cobblestone
         - if !<[FLL].is_empty>:
-            - foreach <[FLL]> as:block:
-                - modifyblock <[block]> glass
+            - modifyblock <[FLL]> glass
         #- if <[GravelList]||null> != null:
 
+        - announce to_console "yay, line 112"
         #@ goodies
         - define item <item[torch].with[quantity=<util.random.int[1].to[20]>]>
         - inject Locally ChestStuff
@@ -208,7 +232,6 @@ DuoWuo:
         - execute as_op "/replace black_wool air"
         - execute as_op "/replace quartz_slab[type=top] polished_diorite_slab[type=top]"
         - execute as_op "/replace chiseled_quartz_block,quartz_pillar,quartz_slab[type=double] polished_diorite"
-    
 
 
 ReplaceMaterials_Command:
@@ -254,6 +277,23 @@ ReplaceMaterials_Command:
         - define ReplaceTo <context.args.get[3]>
 
         - choose <context.args.first>:
+            - case stairslabs:
+                - if !<server.material_types.parse[name].filter[contains[_stairs]].contains[<[ReplaceFrom]>_stairs|<[Replaceto]>_stairs]>:
+                    - narrate format:Colorize_Red "Invalid material."
+                    - inject CommanD_Syntax Instantly
+                - foreach <list[north|south|east|west]> as:Direction:
+                    - foreach <list[top|bottom]> as:Half:
+                        - define arg1 <[ReplaceFrom]>_stairs[facing=<[Direction]>,half=<[Half]>]
+                        - define arg2 <[ReplaceTo]>_stairs[facing=<[Direction]>,half=<[Half]>]
+                        - execute as_op "/replace <[arg1]> <[arg2]>"
+
+                - if !<server.material_types.parse[name].filter[contains[_slab]].contains[<[ReplaceFrom]>_slab|<[Replaceto]>_slab]>:
+                    - narrate format:Colorize_Red "Invalid material."
+                - foreach <list[top|bottom|double]> as:Half:
+                    - define arg1 <[ReplaceFrom]>_slab[type=<[Half]>]
+                    - define arg2 <[ReplaceTo]>_slab[type=<[Half]>]
+                    - execute as_op "/replace <[arg1]> <[arg2]>"
+
             - case stairs stair:
                 - if !<server.material_types.parse[name].filter[contains[_stairs]].contains[<[ReplaceFrom]>_stairs|<[Replaceto]>_stairs]>:
                     - narrate format:Colorize_Red "Invalid material."
@@ -271,7 +311,7 @@ ReplaceMaterials_Command:
                     - define arg1 <[ReplaceFrom]>_slab[type=<[Half]>]
                     - define arg2 <[ReplaceTo]>_slab[type=<[Half]>]
                     - execute as_op "/replace <[arg1]> <[arg2]>"
-            
+
             - case fence:
                 - if !<server.material_types.parse[name].filter[contains[_fence]].contains[<[ReplaceFrom]>_fence|<[Replaceto]>_fence]>:
                     - narrate format:Colorize_Red "Invalid material."
