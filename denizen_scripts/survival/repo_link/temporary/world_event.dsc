@@ -117,7 +117,7 @@ world_event_progress_inventory_open:
     - give "scute[display_name=<&a>Week 2;lore=<&e>- Scutes]" to:<[inventory]>
     - give "barrier[display_name=<&a>Week 3;lore=<&b>Release Date<&co>|<&e><time[2020/11/28_02:20:31:123_-07:00].format[MM/dd/YYYY]>|<&e> Why is this so sticky?]" to:<[inventory]>
     - repeat 7:
-      - give "barrier[display_name=<&a>Week <[value].+[2]>;lore=<&b>Release Date<&co>|<&e><time[2020/11/28_02:20:31:123_-07:00].add[<[value].*[7]>d].format[MM/dd/YYYY]>]" to:<[inventory]>
+      - give "barrier[display_name=<&a>Week <[value].add[2]>;lore=<&b>Release Date<&co>|<&e><time[2020/11/28_02:20:31:123_-07:00].add[<[value].mul[7]>d].format[MM/dd/YYYY]>]" to:<[inventory]>
     - inventory open d:<[inventory]>
 
 world_event_turn_in:
