@@ -140,7 +140,7 @@ head_list_inventory_open_task:
 
 head_list_world:
     type: world
-    debug: true
+    debug: false
     events:
         on server start:
         - yaml load:data/head_list.yml id:head_list
