@@ -177,7 +177,7 @@ Custom_food_events:
       - take iteminhand
       - feed amount:8 saturation:2
     on player right clicks block with:food_crate:
-      - flag <player> opening_food_crate
+      - flag <player> opening_food_crate duration:30s
       - determine passively cancelled
       - if <player.inventory.empty_slots> < 5:
         - narrate "<&c>You must have at least 5 open inventory slots to unpack a food crate."
