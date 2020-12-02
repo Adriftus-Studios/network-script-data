@@ -13,7 +13,7 @@ inventorysee_Command:
       - inject Online_Player_Tabcomplete Instantly
   script:
   # % ██ [ Verify args ] ██
-    - if <context.args.size> != 1
+    - if <context.args.size> != 1:
       - inject Command_syntax instantly
 
   # % ██ [ Verify player ] ██
