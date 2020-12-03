@@ -27,7 +27,6 @@ link_dcommand:
     - ~webget <[url]> data:<[data]> method:post headers:<[headers]> save:response
     - inject web_debug.webget_response
 
-
 link_dmessage:
   type: data
   embed:
