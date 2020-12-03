@@ -25,7 +25,7 @@ Message_Handler:
       - define Channel <context.Channel.id>
       - define Group <context.Group||Is_Direct>
     #^- define No_Mention_Message <context.No_Mention_Message.escaped||WebHook>
-      - define Message_ID <context.Message_ID||WebHook>
+      - define Message_ID <context.message.id||WebHook>
     #^- define Mentions <context.Mentions||WebHook>
       - define Is_Direct <context.Is_Direct>
 
