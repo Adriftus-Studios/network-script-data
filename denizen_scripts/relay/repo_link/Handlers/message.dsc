@@ -30,10 +30,20 @@ Message_Handler:
     # % ██ [ @Mention Based Scripts          ] ██
 
     # % ██ [ Command  Based Scripts          ] ██
-      - else if <[Message].starts_with[/]>:
+      - if <[Message].starts_with[/]>:
         - choose <[Message].before[<&sp>].after[/]>:
           - case link:
             - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
+
+          - case haste paste hast:
+            - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>|haste]>
+
+          - case note meetingnote meetingnotes meetingsnote meetingsnotes meatingnote meatingnotes meatingsnote meatingsnotes notemeeting notesmeeting snotemeeting snotesmeeting notemeating notesmeating snotemeating snotesmeating:
+            - ~Run Note_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
+
+    # % ██ [ General Plaintext Scripts       ] ██
+      - else if <[Message].starts_with[yay]> || <[Message].contains_any[<&sp>yay<&sp>|<&sp>yay!**|**yay**]>:
+        - ~run Yayap_DCommand def:<[Channel]>
 
     on discord message received for:AdriftusBot:
     # % ██ [ Queue Stopping Cache Data       ] ██
@@ -86,9 +96,6 @@ Message_Handler:
           - case food foodget foodgit gitfood getfood wheretoeat whereshouldieat wheredoieat whereeat whereieat whereeat eatwhere randomfood foodrandom:
             - ~Run RFood_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
 
-          - case note meetingnote meetingnotes meetingsnote meetingsnotes meatingnote meatingnotes meatingsnote meatingsnotes notemeeting notesmeeting snotemeeting snotesmeeting notemeating notesmeating snotemeating snotesmeating:
-            - ~Run Note_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
-
           - case player players:
             - ~Run Players_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
 
@@ -109,7 +116,3 @@ Message_Handler:
 
           - case webget wget:
             - ~Run Webget_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
-
-    # % ██ [ General Plaintext Scripts       ] ██
-      - else if <[Message].starts_with[yay]> || <[Message].contains_any[<&sp>yay<&sp>|<&sp>yay!**|**yay**]>:
-        - ~run Yayap_DCommand def:<[Channel]>

@@ -9,48 +9,52 @@ note_dcommand:
   # % ██ [ public roles ] ██
     - lead Developer
     - Developer
-  definitions: message|channel|author|group
+  definitions: message|channel_id|author|group
   debug: false
   script:
   # % ██ [ clean definitions & inject dependencies ] ██
     - inject role_verification
     - inject command_arg_registry
+    - define color code
+    - inject embedded_color_formatting
+    - define headers <yaml[saved_headers].parsed_key[discord.Bot_Auth]>
 
   # % ██ [ verify arguments             ] ██
     - if <[args].size> == 0:
       - stop
 
-  # % ██ [ verify webhook               ] ██
-  #^- if !<script[ddtbcty].list_keys[webhooks].contains[<[channel]>]>:
-  #^  - stop
-
   # % ██ [ obtain user info             ] ██
     - define user_id <[author].id>
-    - define headers <yaml[saved_headers].parsed_key[discord.bot_auth]>
     - ~webget https://discordapp.com/api/users/<[user_id]> headers:<[headers]> save:response
     - define user_avatar https://cdn.discordapp.com/avatars/<[user_id]>/<util.parse_yaml[<entry[response].result>].get[avatar]>
 
-  # % ██ [ build note message           ] ██
-    - define message <&lt>:hambehrgeur:732716255567413309<&gt><&sp><[message].after[/note<&sp>]>
-    - define color yellow
-    - inject embedded_color_formatting
-    - define author <map.with[name].as[<[author].name>].with[icon_url].as[<[user_avatar]>]>
-    - define embeds <list[<map.with[color].as[<[color]>].with[description].as[<[message]>].with[author].as[<[author]>]>]>
-    - define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[embeds].as[<[embeds]>].to_json>
-
   # % ██ [ reply with note verification ] ██
-    - define channel_id 731607719165034538
-    - inject get_webhooks
-    - define headers <yaml[saved_headers].read[discord.webhook_message]>
-    - ~webget <[hook]> data:<[data]> headers:<[headers]>
+    - define url https://discordapp.com/api/channels/731607719165034538/messages
+    - define message "<&lt>:hambehrgeur:732716255567413309<&gt> <[message].after[/note ]>"
+    - define data <script.parsed_key[response].to_json>
 
-  # % ██ [ build note message           ] ██
-    - define message "note saved to: <&lt>#731607719165034538<&gt><&nl><&gt> <[message].after[<&lt>:hambehrgeur:732716255567413309<&gt><&sp>]>"
-    - define embeds <list[<map.with[color].as[<[color]>].with[description].as[<[message]>].with[author].as[<[author]>]>]>
-    - define data <map.with[username].as[notehook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[embeds].as[<[embeds]>].to_json>
+    - ~webget <[url]> method:post data:<[data]> headers:<[headers]> save:verification_post
+    - inject web_debug.webget_response
 
   # % ██ [ save message note            ] ██
-    - define channel_id <[channel]>
-    - inject get_webhooks
-    - define headers <yaml[saved_headers].read[discord.webhook_message]>
-    - ~webget <[hook]> data:<[data]> headers:<[headers]>
+    - define url https://discordapp.com/api/channels/<[channel_id]>/messages
+    - define message "**Message note saved to**: <&lt>#731607719165034538<&gt><&nl><&gt> <[message].after[<&lt>:hambehrgeur:732716255567413309<&gt> ]>"
+    - define data <script.parsed_key[response].exclude[message_reference|allowed_mentions].to_json>
+
+    - ~webget <[url]> method:post data:<[data]> headers:<[headers]> save:verification_post
+    - inject web_debug.webget_response
+
+  response:
+    embed:
+    #^title: "**[`[Reference]`](https://discordapp.com/channels/{group.id}/{channel.id}/{message.id}) Message note saved to**: <#626098849127071746>"
+    #^url: https://discordapp.com/channels/{group.id}/{channel.id}/{message.id}
+      description: <[message]>
+      color: <[color]>
+      author:
+        name: <[author].name>
+        icon_url: <[user_avatar]>
+    message_reference:
+      message_id: <[message_id]>
+      guild_id: <[group].id>
+    allowed_mentions:
+      parse: <list>
