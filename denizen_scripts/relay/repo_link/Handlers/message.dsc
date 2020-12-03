@@ -39,7 +39,7 @@ Message_Handler:
             - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>|haste]>
 
           - case note meetingnote meetingnotes meetingsnote meetingsnotes meatingnote meatingnotes meatingsnote meatingsnotes notemeeting notesmeeting snotemeeting snotesmeeting notemeating notesmeating snotemeating snotesmeating:
-            - ~Run Note_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
+            - ~Run Note_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
 
     # % ██ [ General Plaintext Scripts       ] ██
       - else if <[Message].starts_with[yay]> || <[Message].contains_any[<&sp>yay<&sp>|<&sp>yay!**|**yay**]>:

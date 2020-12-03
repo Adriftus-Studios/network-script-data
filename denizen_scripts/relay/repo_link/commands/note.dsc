@@ -9,7 +9,7 @@ note_dcommand:
   # % ██ [ public roles ] ██
     - lead Developer
     - Developer
-  definitions: message|channel_id|author|group
+  definitions: message|channel_id|author|group|message_id
   debug: false
   script:
   # % ██ [ clean definitions & inject dependencies ] ██
