@@ -78,7 +78,7 @@ Error_Response_Webhook:
     - narrate "embed: <[embed]>"
     - discord id:adriftusbot send_embed channel:<[channel_id]> embed:<[embed]>
   Channel_Map:
-    hub1: 744711708077064203
+    hub: 744711708077064203
     behrcraft: 744711666142543953
     survival: 744711692570853467
     relay: 744711732433387602
