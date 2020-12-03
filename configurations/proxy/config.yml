@@ -37,7 +37,7 @@ permissions:
   - bungeecord.command.reload
 log_pings: true
 server:
-  hub1:
+  hub:
     motd: PMCbcd28f640343bef953e39632a63ac1b3
 connection_throttle_limit: 20
 prevent_proxy_connections: false
@@ -61,7 +61,7 @@ servers:
     address: localhost:25575
     restricted: false
     show_in_play_menu: false
-  hub1:
+  hub:
     motd: |-
       &6Adriftus &eNetwork &2[1.16.2] &3>> &4Sur&avival!
       &9Discord &3@ &9discord.Adriftus.com
