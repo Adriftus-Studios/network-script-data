@@ -1,7 +1,7 @@
 #$ note: rename fil
 link_dcommand:
   type: task
-  definitions: Message|Channel|author|group|message_id|command_alias
+  definitions: Message|channel_id|author|group|message_id|command_alias
   debug: false
   script:
   # - ██ [ Clean Definitions & Inject Dependencies ] ██
@@ -9,7 +9,6 @@ link_dcommand:
     - define color Code
     - inject embedded_color_formatting
     - define headers <yaml[saved_headers].read[discord.Bot_Auth]>
-    - define channel_id <[channel].id>
     - define hook https://discordapp.com/api/channels/<[channel_id]>/messages
 
   # - ██ [ Euth's Silly Trash ] ██
