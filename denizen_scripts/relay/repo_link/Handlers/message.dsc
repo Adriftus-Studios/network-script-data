@@ -5,9 +5,37 @@ Message_Handler:
     on server generates exception:
       - if <context.message> == "no value present":
         - determine cancelled
+    on discord message received for:champagne:
+    # % ██ [ Queue Stopping Cache Data       ] ██
+      - if <context.Author||WebHook> == WebHook:
+        - stop
+      - define Author <context.Author>
+
+      - if <context.message.message||WebHook> == WebHook:
+        - stop
+      - define Message <context.Message.message>
+
+      - if <context.Bot> == <[Author]>:
+        - stop
+      - define Bot <context.Bot>
+
+    # % ██ [ Cache Data                      ] ██
+      - define Channel <context.Channel.id>
+      - define Group <context.Group||Is_Direct>
+      - define Message_ID <context.message.id||WebHook>
+      - define Is_Direct <context.Is_Direct>
+
+    # % ██ [ DM       Based Scripts          ] ██
+
+    # % ██ [ @Mention Based Scripts          ] ██
+
+    # % ██ [ Command  Based Scripts          ] ██
+      - else if <[Message].starts_with[/]>:
+        - choose <[Message].before[<&sp>].after[/]>:
+          - case link:
+            - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
+
     on discord message received for:AdriftusBot:
-    #^- if <context.channel.id> != <script[DDTBCTY].yaml_key[testing]>:
-    #^    - stop
     # % ██ [ Queue Stopping Cache Data       ] ██
       - if <context.Author||WebHook> == WebHook:
         - stop
@@ -60,12 +88,6 @@ Message_Handler:
 
           - case note meetingnote meetingnotes meetingsnote meetingsnotes meatingnote meatingnotes meatingsnote meatingsnotes notemeeting notesmeeting snotemeeting snotesmeeting notemeating notesmeating snotemeating snotesmeating:
             - ~Run Note_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
-
-          - case link:
-            - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
-
-          - case paste haste:
-            - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>|haste]>
 
           - case player players:
             - ~Run Players_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
