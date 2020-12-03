@@ -57,7 +57,7 @@ note_dcommand:
       description: <[description]>
       color: <[color]>
       author:
-        name: <[author].name>
+        name: "<[author].nickname[<[group].id>]> (`<[author].name><&ns><[author].discriminator>`)"
         icon_url: <[user_avatar]>
     message_reference:
       message_id: <[message_id]>

@@ -25,7 +25,6 @@ link_dcommand:
 
     - define data <script[link_dmessage].parsed_key[embed].to_json>
     - ~webget <[url]> data:<[data]> method:post headers:<[headers]> save:response
-    - inject web_debug.webget_response
 
 link_dmessage:
   type: data
