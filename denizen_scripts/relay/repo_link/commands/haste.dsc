@@ -66,3 +66,5 @@ example:
   message_reference:
     message_id: <[message_id]>
     guild_id: <[group].id>
+  allowed_mentions:
+    parse: <list>
