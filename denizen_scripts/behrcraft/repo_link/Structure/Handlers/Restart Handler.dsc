@@ -23,7 +23,7 @@ Server_Restart_Task:
     debug: false
     definitions: time|speed
     Restart:
-        - bungeeexecute "Send BehrCraft Hub1"
+        - bungeeexecute "Send BehrCraft hub"
         - wait 3s
         - adjust server restart
     script:

@@ -54,7 +54,7 @@ network_item_events:
       - determine passively cancelled
       - inventory open d:network_item_inventory
     on player joins:
-      - if <bungee.server> == hub1:
+      - if <bungee.server> == hub:
         - wait 1t
         - inventory set d:<player.inventory> slot:5 o:network_item
         - adjust <player> item_slot:5

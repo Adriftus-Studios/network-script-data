@@ -14,5 +14,5 @@ Restart_Handler:
       - define Players <server.flag[Queue.Return_Players]>
       - if !<[Players].is_empty>:
         - foreach <[Players]> as:Player:
-          - bungeerun Hub1 Restart_Player_Return def:<[Player]>|<bungee.server>
+          - bungeerun hub Restart_Player_Return def:<[Player]>|<bungee.server>
       - flag server Queue.Return_Players:!

@@ -9,12 +9,12 @@ crafted_allow_command:
     - if <context.args.first||null> == null:
       - narrate "<&c>You must specify a player to induct."
       - stop
-    - if <bungee.server> == hub1:
+    - if <bungee.server> == hub:
       - define targetName <context.args.first>
       - define report_back false
       - inject crafted_allow
     - else:
-      - bungeerun hub1 crafted_allow def:<context.args.first>|true|<player>
+      - bungeerun hub crafted_allow def:<context.args.first>|true|<player>
 
 crafted_deny_command:
   type: command
@@ -27,12 +27,12 @@ crafted_deny_command:
     - if <context.args.first||null> == null:
       - narrate "<&c>You must specify a player to induct."
       - stop
-    - if <bungee.server> == hub1:
+    - if <bungee.server> == hub:
       - define targetName <context.args.first>
       - define report_back false
       - inject crafted_deny
     - else:
-      - bungeerun hub1 crafted_deny def:<context.args.first>|true|<player>
+      - bungeerun hub crafted_deny def:<context.args.first>|true|<player>
 
 crafted_allow:
   type: task
@@ -97,7 +97,7 @@ crafted_insurance:
   events:
     on player joins:
       - if <bungee.server> == crafted:
-        - ~bungeetag server:hub1 <player.has_flag[crafted]> save:flag
+        - ~bungeetag server:hub <player.has_flag[crafted]> save:flag
         - if !<entry[flag].result>:
           - kick <player> "reason:You have not been whitelisted on this server<&nl>If you believe this to be an error, contact a Crafted Admin"
       - else:
