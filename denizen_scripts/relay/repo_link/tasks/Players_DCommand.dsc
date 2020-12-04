@@ -16,7 +16,7 @@ Players_DCommand:
   - define username "Adriftus Network Info"
 
   - if <[args].is_empty> || ( <[args].size> == 1 && <list[all|network|everyone|everywhere].contains[<[args].first>]> ):
-    - define server_list <list[hub1|survival|behrcraft]>
+    - define server_list <list[hub|survival|behrcraft]>
   - else if <[args].size> == 1:
     - define text <list>
     - if <[args].first.split[|].is_empty>:
@@ -27,10 +27,10 @@ Players_DCommand:
         - define text "**Invalid Server Specified**.<n>Command syntax: `/players (<&lt>server<&gt>(|...))`"
         - inject locally error
       - else if !<bungee.list_servers.contains[<[server]>]>:
-        - if <bungee.list_servers.shared_contents[hub1|survival|behrcraft].is_empty>:
+        - if <bungee.list_servers.shared_contents[hub|survival|behrcraft].is_empty>:
           - define text "**No servers online.**"
         - else:
-          - define text "**Server is Offline**: `<[server]>`.<n> Available Live Servers: <bungee.list_servers.shared_contents[hub1|survival|behrcraft].formatted>"
+          - define text "**Server is Offline**: `<[server]>`.<n> Available Live Servers: <bungee.list_servers.shared_contents[hub|survival|behrcraft].formatted>"
         - inject locally error
       - else:
         - define server_list:->:<[server]>

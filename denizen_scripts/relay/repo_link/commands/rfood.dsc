@@ -15,7 +15,7 @@ RFood_DCommand:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - inject Command_Arg_Registry
     - define UserID <[Author].ID>
-    - define Headers <list[User-Agent/really|Authorization/Bot<&sp><yaml[AdriftusBot_temp].read[AdriftusBotToken]>]>
+    - define Headers <yaml[saved_headers].parsed_key[discord.Bot_Auth]>
     - ~webget https://discordapp.com/api/users/<[UserID]> Headers:<[Headers]> save:Response
     - Define UserPFP https://cdn.discordapp.com/avatars/<[UserID]>/<util.parse_yaml[<entry[Response].result>].get[avatar]>
   # % ██ [ Clean Definitions & Inject Dependencies ] ██

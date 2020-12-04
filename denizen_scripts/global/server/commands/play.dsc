@@ -16,6 +16,10 @@ command_play:
       - inject command_syntax
 
     # % ██ [ Verify Valid Server for Network ] ██
+    - define timeout <util.time_now.add[1m]>
+    - waituntil rate:1s <bungee.connected> && ( <bungee.list_servers.contains[hub]> || <[timeout].duration_since[<util.time_now>].in_seconds> == 0 ) rate:1s
+    - if <[timeout].duration_since[<util.time_now>].in_seconds> == 0:
+      - narrate "You timed out, or something like that. Nothing interesting happens please try again later"
     - else if !<yaml[bungee_config].contains[servers.<context.args.first.to_lowercase>]>:
       - define Reason "Invalid Server."
       - inject command_error
@@ -80,7 +84,7 @@ command_play_inventory:
   size: 27
   definitions:
     player: <item[player_head]||<item[human_skull]>>[display_name=<&b><player.name>;lore=<&3>Current<&sp>Server<&co><&sp><yaml[bungee_config].parsed_key[servers.<bungee.server>.display_name]>;skull_skin=<player.uuid>]
-    hub: <item[<yaml[bungee_config].read[servers.hub1.material]>]>[display_name=<&a>Return<&sp>To<&sp>Hub;nbt=server/hub1]
+    hub: <item[<yaml[bungee_config].read[servers.hub.material]>]>[display_name=<&a>Return<&sp>To<&sp>Hub;nbt=server/hub]
     filler: <item[white_stained_glass_pane].with[display_name=<&c>]>
   procedural items:
     - foreach <yaml[bungee_config].list_keys[servers]> as:server:
@@ -129,7 +133,7 @@ hub_command:
   description: Sends a player to the Hub server
   usage: /hub
   script:
-  - adjust <player> send_to:hub1
+  - adjust <player> send_to:hub
 
 BehrCraft_Command:
   type: command
