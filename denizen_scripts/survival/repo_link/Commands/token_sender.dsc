@@ -6,7 +6,7 @@ weekly_token_reset:
   permission: adriftus.staff
   description: resets the weekly progress for the current world event, and hands out player rewards/tokens. To be updated and filled out each time.
   script:
-    - define week <element[1]>
+    - define week <element[2]>
     - define event world_barrier
     - if <server.has_file[<[event]>.yml]>:
       - yaml load:<[event]>.yml id:<[event]>
@@ -22,39 +22,32 @@ weekly_token_reset:
       - define personal_percentage <element[<[rewardee].flag[world_event.progress]||0>].div[<script[world_event_config].data_key[personal_amount_needed]>].round_to[1]>
       - yaml id:<[event]> set <[rewardee].name>_week_<[week]>_progress_percent:<[personal_percentage]>
       - wait 2t
-      - if <[server_percentage]> >= 0.2 && <[personal_percentage]> >= 0.2:
+      - if <[personal_percentage]> >= 0.2:
         - define current_tokens world_event.tokens.current:<[rewardee].flag[world_event.progress].div[8].round_down||0>
         - wait 2t
-        - flag <[rewardee]> world_event.tokens.current:+:2000
-      - if <[server_percentage]> >= 0.4 && <[personal_percentage]> >= 0.4:
+        - flag <[rewardee]> world_event.tokens.current:+:1000
+      - if <[personal_percentage]> >= 0.4:
         - if <player.inventory.is_full>:
           - if <player.enderchest.is_full>:
             - flag <[rewardee]> 40_reward_due
           - else:
-            - give backpack_27 to:<[rewardee].enderchest>
+            - give food_crate to:<[rewardee].enderchest> quantity:3
         - else:
-          - give backpack_27 to:<[rewardee].inventory>
-      - if <[server_percentage]> >= 0.6 && <[personal_percentage]> >= 0.6:
+          - give food_crate to:<[rewardee].inventory> quantity:3
+      - if <[personal_percentage]> >= 0.6:
         - if <player.inventory.is_full>:
           - if <player.enderchest.is_full>:
             - flag <[rewardee]> 60_reward_due
           - else:
-            - give filled_xp_vessel_level_5 quantity:3 to:<[rewardee].enderchest>
-            - give empty_xp_vessel_level_5 quantity:3 to:<[rewardee].enderchest>
+            - give teleportation_crystal quantity:3 to:<[rewardee].enderchest>
         - else:
-          - give filled_xp_vessel_level_5 quantity:3 to:<[rewardee].inventory>
-          - give empty_xp_vessel_level_5 quantity:3 to:<[rewardee].inventory>
-      - if <[server_percentage]> >= 0.8 && <[personal_percentage]> >= 0.8:
-        - if <player.inventory.is_full>:
-          - if <player.enderchest.is_full>:
-            - flag <[rewardee]> 60_reward_due
-          - else:
-            - give teleportation_crystal quantity:5 to:<[rewardee].enderchest>
-        - else:
-          - give teleportation_crystal quantity:5 to:<[rewardee].inventory>
-      - if <[server_percentage]> >= 1.0 && <[personal_percentage]> >= 1.0::
+          - give teleportation_crystal quantity:3 to:<[rewardee].inventory>
+      - if <[personal_percentage]> >= 0.8:
         - if <yaml[claims].read[limits.max.<[rewardee].uuid>]||null> != null:
           - yaml id:claims set limits.max.<[rewardee].uuid>:+:10
+      - if <[server_percentage]> >= 1.0 && <[personal_percentage]> >= 1.0::
+        - if <yaml[claims].read[limits.max.<[rewardee].uuid>]||null> != null:
+#          - yaml id:claims set limits.max.<[rewardee].uuid>:+:10
       - wait 2t
       - yaml id:<[event]> set <[rewardee].name>_week_<[week]>_end_tokens:<player.flag[world_event.tokens.current]>
       - flag <[rewardee]> world_event.progress:!

@@ -416,7 +416,7 @@ item_create_soul_item:
 item_system_build_item:
   type: procedure
   definitions: item
-  debug: false
+  debug: true
   script:
     - define item <[item].as_item>
   # % ██ [ Determine the amount of Stars  ] ██
@@ -430,6 +430,8 @@ item_system_build_item:
   # % ██ [ Determine the base of the item?  ] ██
     - if <script[item_system_global_data].list_keys[defaults.damage].contains[<[item].material.name>]>:
       - define base <script[item_system_global_data].data_key[defaults.damage.<[item].material.name>]>
+    - if <script[item_system_global_data].list_keys[defaults.armor].contains[<[item].material.name>]>:
+      - define base <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]>
     - else:
       - define base 0
 
@@ -443,12 +445,22 @@ item_system_build_item:
             - define attribute <script[item_system_global_data].data_key[nbt_attributes.<[alt]>]>
             - define slot <script[item_system_global_data].data_key[nbt_slots.<[item].material.name>]>
             - if <[alt]> == melee_damage:
-              - if <[Modifier]> == buff:
-                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[stat].add[<[base]>]>]>
+              - define base <script[item_system_global_data].data_key[defaults.damage.<[item].material.name>]||0>
+              - if <[Modifier]> == buffs:
+                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[base].add[<[stat]>]>]>
               - else:
-                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[stat].sub[<[base]>]>]>
+                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[base].sub[<[stat]>]>]>
+            - if <[alt]> == armor:
+              - define base <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]||0>
+              - if <[Modifier]> == buffs:
+                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[base].add[<[stat]>]>]>
+              - else:
+                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[base].sub[<[stat]>]>]>
             - else:
-              - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[stat]>]>
+              - if <[Modifier]> == buffs:
+                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<element[0].add[<[stat]>]>]>
+              - else:
+                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<element[0].sub[<[stat]>]>]>
           - else:
             - define nbt <[nbt].include_single[<script[item_system_global_data].data_key[nbt_other.<[alt]>]>/<[alt]>]>
 
