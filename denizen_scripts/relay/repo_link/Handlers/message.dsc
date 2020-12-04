@@ -35,11 +35,15 @@ Message_Handler:
           - case link:
             - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
 
-          - case haste paste hast:
+          - case haste paste hast pastie pasties hasties hastie:
             - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>|haste]>
 
           - case note meetingnote meetingnotes meetingsnote meetingsnotes meatingnote meatingnotes meatingsnote meatingsnotes notemeeting notesmeeting snotemeeting snotesmeeting notemeating notesmeating snotemeating snotesmeating:
             - ~Run Note_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
+      - else if <[message].starts_with[!]>:
+        - choose <[message].before[<&sp>].after[!]>:
+          - case haste paste hast pastie pasties hasties hastie:
+            - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>|haste]>
 
     # % ██ [ General Plaintext Scripts       ] ██
       - else if <[Message].starts_with[yay]> || <[Message].contains_any[<&sp>yay<&sp>|<&sp>yay!**|**yay**]>:
