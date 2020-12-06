@@ -446,7 +446,7 @@ item_create_soul_item:
 item_system_build_item:
   type: procedure
   definitions: item
-  debug: false
+  debug: true
   script:
     - define item <[item].as_item>
   # % ██ [ Determine the amount of Stars  ] ██
@@ -500,7 +500,6 @@ item_system_build_item:
     - define vanilla_value <script[item_system_global_data].data_key[defaults.attack_speed.<[item].material.name>]||0>
     - define attribute generic.attack_speed
     - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[vanilla_value]>]>
-
 
   # % ██ [ Determine Misc Item Properties  ] ██
     - if <[Item].has_script>:

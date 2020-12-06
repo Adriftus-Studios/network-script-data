@@ -11,7 +11,7 @@ Seen_Command:
   # % ██ [ Check Args ] ██
     - if <context.args.is_empty> || <context.args.size> > 1:
       - inject Command_Syntax
-      
+
   # % ██ [ Check Player ] ██
     - define User <context.args.first>
     - inject Player_Verification_Offline

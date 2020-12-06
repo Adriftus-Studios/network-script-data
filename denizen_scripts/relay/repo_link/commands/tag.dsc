@@ -66,7 +66,7 @@ Tag_Parser_DCommand:
       - else:
         - announce to_console "<&7># <&8>Parsed on: <&6><[Server]><&8> for<&7>: <&6><[tag]> <&8>From user<&8>: <&6><[Author].name> <&e>(<&6><[Author].id><&e>)<&7>"
         #| Potentially add when restricting Logs: <n> <&3><[TagData].unescaped>
-        - if <[TagData].unescaped.contains_any_text[<list_single[<yaml[AdriftusBot_temp].read[AdriftusBotToken]>].include_single[<yaml[oAuth].list_deep_keys[].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>].exclude[Headers|User-Agent|redirect_uri|code|state|discord|application|client|token|parameters|scope|grand|hATE_Webhook|ATE|name|config|GitHub|Twitch|Repository|Repositories]>]>:
+        - if <[TagData].unescaped.contains_any_text[<list_single[<yaml[tokens].read[discord.champagne_token]>].include_single[<yaml[oAuth].list_deep_keys[].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>].exclude[Headers|User-Agent|redirect_uri|code|state|discord|application|client|token|parameters|scope|grand|hATE_Webhook|ATE|name|config|GitHub|Twitch|Repository|Repositories]>]>:
           - discord id:AdriftusBot message user:<[Author]> "You have been blacklisted from this command for unethical tag parsing. This incident will be reported."
           - flag server Discord.Blacklist:->:<[Author]>
           - Define Warning "<&lt>a:weewoo:619323397880676363<&gt> Attention:<discorduser[adriftusbot,194619362223718400].mention> **Warning**:<n>"
