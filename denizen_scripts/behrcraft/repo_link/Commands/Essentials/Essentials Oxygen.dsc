@@ -11,7 +11,7 @@ Oxygen_Command:
   # % ██ [ Check args ] ██
     - if <context.args.size> > 2:
       - inject Command_Syntax
-      
+
   # % ██ [ Check if using self or named player ] ██
     - if <context.args.size> == 1:
       - define User <player>
@@ -20,7 +20,7 @@ Oxygen_Command:
       - define User <context.args.first>
       - inject Player_Verification
       - define Level <context.args.get[2]>
-    
+
   # % ██ [ Verify number ] ██
     - if !<[Level].is_integer>:
       - narrate format:Colorize_Red "Oxygen must be a number."

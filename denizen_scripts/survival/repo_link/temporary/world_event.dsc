@@ -1,7 +1,12 @@
 world_event_config:
   type: data
   materials:
-    scute: 1
+    honey_bottle: 1
+    honey_block: 4
+    honeycomb: 3
+    honeycomb_block: 12
+    beehive: 9
+    bee_nest: 12
   server_amount_needed: 5000
   personal_amount_needed: 500
 
@@ -75,7 +80,7 @@ world_event_progress_inventory:
   title: <&a>World Event
   definitions:
     G: white_stained_glass_pane[display_name=<&a>]
-    T: "ender_chest[display_name=<&a>Turn in Materials;lore=<&e>- Scute;nbt=action/turn_in]"
+    T: "ender_chest[display_name=<&a>Turn in Materials;lore=<&e>- Honey Bottle (1)|<&e>- Honey Block (4)|<&e>- Honeycomb (3)|<&e>- Honeycomb Block (12)|<&e>- Bee Hive (9)|<&e>- Bee Nest (12)|;nbt=action/turn_in]"
     soon: "barrier[display_name=<&e>Coming Soon!]"
   slots:
     - [G] [G] [G] [G] [G] [G] [G] [G] [G]
@@ -115,9 +120,9 @@ world_event_progress_inventory_open:
     - inventory set slot:42 "o:currency_display_item[display_name=<&6>Tokens<&co><&e> <player.flag[world_event.tokens.current]||0>;lore=<&7>Awarded at the end of the week|<&7>Incoming Tokens<&co> <&a><player.flag[world_event.progress].div[4].round_down||0>]" d:<[inventory]>
     - give "iron_ingot[display_name=<&a>Week 1;lore=<&e>- Iron Ingots|<&e>- Iron Blocks]" to:<[inventory]>
     - give "scute[display_name=<&a>Week 2;lore=<&e>- Scutes]" to:<[inventory]>
-    - give "barrier[display_name=<&a>Week 3;lore=<&b>Release Date<&co>|<&e><time[2020/11/28_02:20:31:123_-07:00].format[MM/dd/YYYY]>|<&e> Why is this so sticky?]" to:<[inventory]>
-    - repeat 7:
-      - give "barrier[display_name=<&a>Week <[value].add[2]>;lore=<&b>Release Date<&co>|<&e><time[2020/11/28_02:20:31:123_-07:00].add[<[value].mul[7]>d].format[MM/dd/YYYY]>]" to:<[inventory]>
+    - give "bee_nest[display_name=<&a>Week 3;lore=<&e>- Honey Bottle|<&e>- Honey Block|<&e>- Honeycomb|<&e>- Honeycomb Block|<&e>- Bee Hive|<&e>- Bee Nest|]" to:<[inventory]>
+    - repeat 6:
+      - give "barrier[display_name=<&a>Week <[value].add[2]>;lore=<&b>Release Date<&co>|<&e><time[2020/12/04_02:20:31:123_-07:00].add[<[value].mul[7]>d].format[MM/dd/YYYY]>]" to:<[inventory]>
     - inventory open d:<[inventory]>
 
 world_event_turn_in:
