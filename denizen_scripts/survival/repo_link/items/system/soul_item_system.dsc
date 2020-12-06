@@ -18,8 +18,8 @@ item_system_global_data:
         global:
         - <&e>Level<&co> <[level_stars]>
         - <empty>
-        weapons: <&e>Base Damage<&co> <&b><[base]>
-        armors: <&e>Base Armor<&co> <&b><[base]>
+        weapons: <&e>Base Damage<&co> <&b><[base]>|<&e>Base Speed<&co> <&b><[base2]>
+        armors: <&e>Base Armor<&co> <&b><[base]>|<&e>Base Toughness<&co> <&b><[base2]>
         unique_buffs:
           sunfire: <&6>Sets attackers on fire.
           life_saving: <&6>Prevents death, and heals you (10 minute CD)
@@ -28,15 +28,15 @@ item_system_global_data:
           melee_damage: <&7>Melee Damage <&a>+<[final_value]>
           ranged_damage: <&7>Ranged Damage <&a>+<[final_value]>
           speed: <&7>Move Speed <&a>+<[final_value].div[0.1].round_to[3].mul[100]>%
-          armor: <&7>Armor <&a>+<[final_value]>
-          attack_speed: <&7>Attack Speed <&a>+<[final_value].div[4].round_to[2].mul[100]>%
+          armor_toughness: <&7>Armor Toughness <&a>+<[final_value]>
+          attack_speed: <&7>Attack Speed <&a>+<[final_value]>
           health: <&7>Health <&a>+<[final_value]>
         debuffs:
           melee_damage: <&7>Melee Damage <&c>-<[final_value]>
           ranged_damage: <&7>Ranged Damage <&c>-<[final_value]>
-          speed: <&7>Move Speed <&c>-<[final_value].div[0.1].round_to[3].mul[100]>%
-          armor: <&7>Armor <&c>-<[final_value]>
-          attack_speed: <&7>Attack Speed <&c>-<[final_value].div[4].round_to[2].mul[100]>%
+          speed: <&7>Move Speed <&c>-<[final_value].div[0.1].round_to[3].mul[100]>
+          armor_toughness: <&7>Armor Toughness <&c>-<[final_value]>
+          attack_speed: <&7>Attack Speed <&c>-<[final_value]>
           health: <&7>Health <&c>-<[final_value]>
         flavor:
           - <empty>
@@ -62,118 +62,118 @@ item_system_global_data:
     ######## buff ########
     0:
       armadillo:
-        armor: buff
+        armor_toughness: buff
       rusher:
         attack_speed: buff
       cow:
         health: buff
       basher:
         melee_damage: buff
-      hawk:
-        ranged_damage: buff
+#      hawk:
+#        ranged_damage: buff
       sprinter:
         speed: buff
     ###### UNCOMMON ######
     ## buff/buff/debuff ##
     1:
-      fighter:
-        armor: buff
-        attack_speed: buff
-        health: debuff
-      frontier:
-        armor: buff
-        attack_speed: buff
-        ranged_damage: debuff
-      wyvern:
-        armor: buff
-        health: buff
-        ranged_damage: debuff
+#      fighter:
+#        armor: buff
+#        attack_speed: buff
+#        health: debuff
+#      frontier:
+#        armor: buff
+#        attack_speed: buff
+#        ranged_damage: debuff
+#      wyvern:
+#        armor_toughness: buff
+#        health: buff
+#        ranged_damage: debuff
       turtle:
-        armor: buff
+        armor_toughness: buff
         health: buff
         speed: debuff
       journeyman:
-        armor: buff
+        armor_toughness: buff
         melee_damage: buff
         health: debuff
-      sniper:
-        armor: buff
-        ranged_damage: buff
-        speed: debuff
-      knight:
-        attack_speed: buff
-        health: buff
-        ranged_damage: debuff
-      naive:
-        attack_speed: buff
-        melee_damage: buff
-        armor: debuff
-      horse:
-        attack_speed: buff
-        speed: buff
-        melee_damage: debuff
-      bear:
-        health: buff
-        melee_damage: buff
-        attack_speed: debuff
-      cleric:
-        health: buff
-        ranged_damage: buff
-        armor: debuff
-      soldier:
-        health: buff
-        ranged_damage: buff
-        attack_speed: debuff
+#      sniper:
+#        armor_toughness: buff
+#        ranged_damage: buff
+#        speed: debuff
+#      knight:
+#        attack_speed: buff
+#        health: buff
+#        ranged_damage: debuff
+#      naive:
+#        attack_speed: buff
+#        melee_damage: buff
+#        armor: debuff
+#      horse:
+#        attack_speed: buff
+#        speed: buff
+#        melee_damage: debuff
+#      bear:
+#        health: buff
+#        melee_damage: buff
+#        attack_speed: debuff
+#      cleric:
+#        health: buff
+#        ranged_damage: buff
+#        armor_toughness: debuff
+#      soldier:
+#        health: buff
+#        ranged_damage: buff
+#        attack_speed: debuff
       scout:
         health: buff
         speed: buff
-        armor: debuff
-      beater:
-        melee_damage: buff
-        ranged_damage: buff
-        attack_speed: debuff
-      kamikaze:
-        melee_damage: buff
-        ranged_damage: buff
-        health: debuff
-      barbarian:
-        melee_damage: buff
-        ranged_damage: buff
-        speed: debuff
+        armor_toughness: debuff
+#      beater:
+#        melee_damage: buff
+#        ranged_damage: buff
+#        attack_speed: debuff
+#      kamikaze:
+#        melee_damage: buff
+#        ranged_damage: buff
+#        health: debuff
+#      barbarian:
+#        melee_damage: buff
+#        ranged_damage: buff
+#        speed: debuff
       pegasus:
         melee_damage: buff
         speed: buff
-        armor: debuff
+        armor_toughness: debuff
       silverstrike:
         melee_damage: buff
         speed: buff
         health: debuff
-      monkey:
-        ranged_damage: buff
-        speed: buff
-        health: debuff
-      valkyrie:
-        ranged_damage: buff
-        speed: buff
-        armor: debuff
+#      monkey:
+#        ranged_damage: buff
+#        speed: buff
+#        health: debuff
+#      valkyrie:
+#        ranged_damage: buff
+#        speed: buff
+#        armor_toughness: debuff
     ###### RARE ######
     #### buff/buff ###
     2:
       tortoise:
-        armor: buff
+        armor_toughness: buff
         health: buff
       paladin:
-        armor: buff
+        armor_toughness: buff
         melee_damage: buff
-      chief:
-        armor: buff
-        ranged_damage: buff
+#      chief:
+#        armor_toughness: buff
+#        ranged_damage: buff
       steamroller:
-        armor: buff
+        armor_toughness: buff
         speed: buff
       assassin:
         attack_speed: buff
-        armor: buff
+        armor_toughness: buff
       swordsman:
         attack_speed: buff
         health: buff
@@ -186,12 +186,12 @@ item_system_global_data:
       pirate:
         melee_damage: buff
         speed: buff
-      tank:
-        ranged_damage: buff
-        armor: buff
-      ranger:
-        ranged_damage: buff
-        health: buff
+#      tank:
+#        ranged_damage: buff
+#        armor_toughness: buff
+#      ranger:
+#        ranged_damage: buff
+#        health: buff
       quicksilver:
         speed: buff
         health: buff
@@ -200,13 +200,13 @@ item_system_global_data:
     melee_damage: <[level].mul[3]>
     ranged_damage: <[level].mul[2]>
     speed: <[level].mul[0.005]>
-    armor: <[level]>
-    attack_speed: <[level].mul[.15]>
+    armor_toughness: <[level]>
+    attack_speed: <[level].mul[.1]>
     health: <[level].add[4]>
   nbt_attributes:
     melee_damage: generic.attack_damage
     speed: generic.movement_speed
-    armor: generic.armor
+    armor_toughness: generic.armor_toughness
     attack_speed: generic.attack_speed
     health: generic.max_health
   nbt_other:
@@ -250,6 +250,12 @@ item_system_global_data:
       iron_sword: 6
       diamond_sword: 7
       netherite_sword: 8
+      wooden_axe: 7
+      golden_axe: 7
+      stone_axe: 9
+      iron_axe: 9
+      diamond_axe: 9
+      netherite_axe: 10
     armor:
       turtle_shell: 2
       leather_chestplate: 3
@@ -276,7 +282,28 @@ item_system_global_data:
       netherite_helmet: 3
       netherite_leggings: 6
       netherite_boots: 3
-
+    armor_toughness:
+      diamond_chestplate: 8
+      diamond_helmet: 3
+      diamond_leggings: 6
+      diamond_boots: 3
+      netherite_chestplate: 8
+      netherite_helmet: 3
+      netherite_leggings: 6
+      netherite_boots: 3
+    attack_speed:
+      wooden_sword: 1.6
+      golden_sword: 1.6
+      stone_sword: 1.6
+      iron_sword: 1.6
+      diamond_sword: 1.6
+      netherite_sword: 1.6
+      wooden_axe: 0.8
+      golden_axe: 1.0
+      stone_axe: 0.8
+      iron_axe: 0.9
+      diamond_axe: 1.0
+      netherite_axe: 1.0
 ################
 ## SOUL FORGE ##
 ################
@@ -315,7 +342,10 @@ soul_forge_events:
         - inventory set slot:23 d:<context.inventory> o:<item[gray_stained_glass_pane].with[display_name=<&e>]>
     after player clicks in soul_forge_inventory:
       - ratelimit <player> 1t
+      - wait 1t
       - inventory set slot:23 d:<context.inventory> o:<proc[item_with_soul_create].context[<context.inventory.slot[20]>|<context.inventory.slot[26]>]>
+      - wait 1t
+      - inventory update
     on player opens soul_forge_inventory:
       - inventory set d:<context.inventory> slot:5 "o:<item[player_head].with[skull_skin=<player.uuid>;display_name=<&d>        Soul Forge;lore=<&5>---------------------|<empty>|<&e>Place a <&b>soul<&e> on the left|<empty>|<&e>Place an <&a>item<&e> on the right]>"
     on player closes soul_forge_inventory:
@@ -352,7 +382,7 @@ item_with_soul:
   display name: <&c>ERROR - REPORT THIS
 get_random_soul:
   type: procedure
-  debug: false
+  debug: true
   definitions: rarity|level
   script:
     - define buffs <list>
@@ -430,6 +460,10 @@ item_system_build_item:
   # % ██ [ Determine the base of the item?  ] ██
     - if <script[item_system_global_data].list_keys[defaults.damage].contains[<[item].material.name>]>:
       - define base <script[item_system_global_data].data_key[defaults.damage.<[item].material.name>]>
+      - define base2 <script[item_system_global_data].data_key[defaults.attack_speed.<[item].material.name>]>
+    - else if <script[item_system_global_data].list_keys[defaults.armor].contains[<[item].material.name>]>:
+      - define base <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]>
+      - define base2 <script[item_system_global_data].data_key[defaults.armor_toughness.<[item].material.name>]>
     - else:
       - define base 0
 
@@ -442,15 +476,31 @@ item_system_build_item:
           - if <script[item_system_global_data].data_key[nbt_attributes].contains[<[alt]>]>:
             - define attribute <script[item_system_global_data].data_key[nbt_attributes.<[alt]>]>
             - define slot <script[item_system_global_data].data_key[nbt_slots.<[item].material.name>]>
-            - if <[alt]> == melee_damage:
-              - if <[Modifier]> == buff:
-                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[stat].add[<[base]>]>]>
-              - else:
-                - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[stat].sub[<[base]>]>]>
+            # % ██ [ Check for stat to add in base value of item ] ██
+            - if <[Modifier]> == buffs:
+              - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<element[0].add[<[stat]>]>]>
+            - if <[Modifier]> == debuffs:
+              - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<element[0].sub[<[stat]>]>]>
             - else:
-              - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[stat]>]>
-          - else:
-            - define nbt <[nbt].include_single[<script[item_system_global_data].data_key[nbt_other.<[alt]>]>/<[alt]>]>
+              - define nbt <[nbt].include_single[<script[item_system_global_data].data_key[nbt_other.<[alt]>]>/<[alt]>]>
+    # % ██ [ Apply vanilla stats to the item. ] ██
+    # % ██ [ Armor. ] ██
+    - define vanilla_value <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]||0>
+    - define attribute generic.armor
+    - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[vanilla_value]>]>
+    # % ██ [ Armor Toughness. ] ██
+    - define vanilla_value <script[item_system_global_data].data_key[defaults.armor_toughness.<[item].material.name>]||0>
+    - define attribute generic.armor_toughness
+    - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[vanilla_value]>]>
+    # % ██ [ Attack Damage. ] ██
+    - define vanilla_value <script[item_system_global_data].data_key[defaults.damage.<[item].material.name>]||0>
+    - define attribute generic.attack_damage
+    - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[vanilla_value]>]>
+    # % ██ [ Attack Speed. ] ██
+    - define vanilla_value <script[item_system_global_data].data_key[defaults.attack_speed.<[item].material.name>]||0>
+    - define attribute generic.attack_speed
+    - define nbt_attributes <[nbt_attributes].include[<[attribute]>/<[slot]>/0/<[vanilla_value]>]>
+
 
   # % ██ [ Determine Misc Item Properties  ] ██
     - if <[Item].has_script>:
@@ -493,7 +543,7 @@ item_system_build_item:
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.flavor]>]>
     - define lore <[lore].include[<script[item_system_global_data].parsed_key[settings.lore.bottom]>]>
 
-    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;hides=ATTRIBUTES]>
+    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;]>
     - if !<[nbt].is_empty>:
       - define NewItem <[NewItem].with[nbt=<[nbt]>]>
     - else:
