@@ -25,11 +25,10 @@ mob_spawning_system_events:
     min: 500
     max: 20000
   events:
-    on entity spawns in:world:
+    on entity spawns in:mainland:
       - if <script[mob_spawning_system_events].data_key[settings.whitelist].contains[<context.entity.entity_type>]>:
         - foreach <list[<context.location.z.abs>|<context.location.x.abs>]>:
           - if <[value]> < <script[mob_spawning_system_events].data_key[settings.min]> || <[value]> > <script[mob_spawning_system_events].data_key[settings.max]>:
-            - announce spawn_location_failed
             - stop
           - else:
             - determine passively cancelled
@@ -38,5 +37,4 @@ mob_spawning_system_events:
         - mythicspawn <context.entity.entity_type.to_uppercase>1 <context.location> level:<[difficulty]> save:merp
         - flag server spawning_mob:!
       - else:
-        - announce third_else_failed
         - stop
