@@ -66,11 +66,16 @@ world_event_bar_5:
   mechanisms:
     custom_model_data: 8
 
-world_event_progress_command:
-  type: command
-  name: open_world_event_window
-  permission: xeane.fuck_assignment_scripts_permission
-  script:
+world_event_progress_assignment:
+  type: assignment
+  debug: false
+  actions:
+    on assignment:
+    - trigger name:click state:true
+    - trigger name:damage state:true
+    on damage:
+    - run world_event_progress_inventory_open
+    on click:
     - run world_event_progress_inventory_open
 
 world_event_progress_inventory:

@@ -1,9 +1,14 @@
-claiming_upgrades_command:
-  type: command
-  name: claim_upgrades_open
-  permission: not.a.perm
-  script:
-    - inventory open d:claiming_protection_group_upgrades player:<server.match_player[<context.args.first>]>
+claiming_upgrades_assigntment:
+    type: assignment
+    debug: false
+    actions:
+        on assignment:
+        - trigger name:click state:true
+        - trigger name:damage state:true
+        on click:
+        - inventory open d:claiming_protection_group_upgrades
+        on damage:
+        - inventory open d:claiming_protection_group_upgrades
 
 ########################
 ## GROUP UPGRADES GUI ##
