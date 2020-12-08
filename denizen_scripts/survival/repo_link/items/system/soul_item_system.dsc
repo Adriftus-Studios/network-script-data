@@ -352,7 +352,7 @@ soul_forge_events:
       - foreach 20|26:
         - if <context.inventory.slot[<[value]>].material.name> != air:
           - give <context.inventory.slot[<[value]>]> to:<player.inventory>
-    on player right clicks block in:soul_forge:
+    on player clicks block in:soul_forge:
     - inventory open d:soul_forge_inventory
 soul_forge_assignment:
   type: assignment
