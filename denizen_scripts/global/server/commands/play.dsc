@@ -17,7 +17,7 @@ command_play:
 
     # % ██ [ Verify Valid Server for Network ] ██
     - define timeout <util.time_now.add[1m]>
-    - waituntil rate:1s <bungee.connected> && ( <bungee.list_servers.contains[hub]> || <[timeout].duration_since[<util.time_now>].in_seconds> == 0 ) rate:1s
+    - waituntil rate:1s <bungee.connected> || <[timeout].duration_since[<util.time_now>].in_seconds> == 0 rate:1s
     - if <[timeout].duration_since[<util.time_now>].in_seconds> == 0:
       - narrate "You timed out, or something like that. Nothing interesting happens please try again later"
     - else if !<yaml[bungee_config].contains[servers.<context.args.first.to_lowercase>]>:
