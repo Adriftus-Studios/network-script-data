@@ -8,7 +8,12 @@ market_assignment:
     - trigger name:damage state:true
     on damage:
     - if <server.flag[market_open]>:
-      - inventory open d:market_system_main_GUI player:<server.match_player[<context.args.first>]>
+      - inventory open d:market_system_main_GUI
+    - else:
+      - narrate "<&c>The Market is currently closed to update it's pricing."
+    on click:
+    - if <server.flag[market_open]>:
+      - inventory open d:market_system_main_GUI
     - else:
       - narrate "<&c>The Market is currently closed to update it's pricing."
     on click:
