@@ -450,7 +450,7 @@ item_create_soul_item:
 item_system_build_item:
   type: procedure
   definitions: item
-  debug: false
+  debug: true
   script:
     - define item <[item].as_item>
   # % ██ [ Determine the amount of Stars  ] ██
