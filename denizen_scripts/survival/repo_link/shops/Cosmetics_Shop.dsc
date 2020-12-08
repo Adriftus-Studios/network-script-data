@@ -1,9 +1,14 @@
-store_hub_cosmeticShop_command:
-  type: command
-  description: Opens the cosmetic shop
-  name: opencosmeticShop
-  script:
-    - inventory open d:store_hub_cosmeticShop player:<server.match_player[<context.args.first>]||<player>>
+store_hub_cosmeticShop_assignment:
+  type: assignment
+  debug: false
+  actions:
+    on assignment:
+    - trigger name:click state:true
+    - trigger name:damage state:true
+    on damage:
+    - inventory open d:store_hub_cosmeticShop
+    on click:
+    - inventory open d:store_hub_cosmeticShop
 
 store_hub_cosmeticShop:
   type: inventory

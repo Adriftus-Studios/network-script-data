@@ -13,6 +13,7 @@ Connection_Handler:
     - yaml load:data/tokens.yml id:tokens
     - ~discord id:AdriftusBot connect code:<yaml[tokens].read[discord.AdriftusBotToken]>
     - ~discord id:champagne connect code:<yaml[tokens].read[discord.champagne_token]>
+    - ~discord id:Rachela connect code:<yaml[tokens].read[discord.rachela_token]>
     - wait 3s
   #^- ~run channel_cache
 
@@ -20,3 +21,4 @@ Connection_Handler:
     on shutdown:
       - discord id:AdriftusBot disconnect
       - discord id:champagne disconnect
+      - discord id:rachela disconnect

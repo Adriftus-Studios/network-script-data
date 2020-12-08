@@ -5,4 +5,4 @@ Yayap_DCommand:
   script:
     - define Rando <util.random.int[2].to[12]>
     - define string <element[].pad_left[<[Rando]>].with[<&chr[6969]>].replace[<&chr[6969]>].with[<&lt>a:discodog:749108129400094781<&gt>]>
-    - discord id:champagne message channel:<discordchannel[champagne,<[Channel]>]> "<[String]> YAY! <[String]>"
+    - discord id:rachela message channel:<discordchannel[rachela,<[Channel]>]> "<[String]> YAY! <[String]>"

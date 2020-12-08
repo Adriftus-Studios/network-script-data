@@ -309,7 +309,6 @@ claiming_multi_chunk_GUI_events:
         - inventory close
         - narrate "<&a>Enter the name of the group you want to claim these chunks to."
 
-          
 
 claiming_multi_chunk_GUI_open:
   type: task
@@ -561,7 +560,7 @@ claiming_group_management_inventory_events:
           - wait 1t
           - give <proc[claiming_group_management_member_generation].context[<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[group]>]> to:<player.open_inventory>
           - run claiming_group_management_permission_generation def:everyone|<context.inventory.slot[<script[claiming_group_management_inventory].data_key[permission_head]>].nbt[group]>
-      
+
 ###################
 ## SETTINGS MENU ##
 ###################
@@ -781,7 +780,7 @@ claiming_protection_settings_process_click:
     - else:
       - yaml id:claims set groups.<[group]>.settings.<[setting]>:true
     - inject claiming_protection_setting_update_button
-        
+
 # Sub Functions of the above task
 claiming_protection_setting_update_button:
   type: task
@@ -791,7 +790,7 @@ claiming_protection_setting_update_button:
   - wait 1t
   - inventory set slot:<script[claiming_protection_settings].data_key[group_slot]> d:<player.open_inventory> o:<item[white_stained_glass_pane].with[display_name=<&e>;nbt=group/<[group]>]>
   - give <proc[claiming_protection_settings_generate_settings_buttons].context[<[group]>]> to:<player.open_inventory>
-    
+
 
 claiming_protection_settings_reset_bottom:
   type: task
@@ -908,7 +907,7 @@ claiming_multiclaim:
     - narrate "<&7>Claim Limit<&co> <&b><yaml[claims].read[limits.current.<player.uuid>]||0><&7>/<&b><yaml[claims].read[limits.max.<player.uuid>]||30>"
     - inject text_input_complete
 
-    
+
 claiming_protection_data_handler:
   type: world
   debug: false
@@ -1145,7 +1144,7 @@ claiming_protection_setMemberPermission:
   definitions: target|group|permission|value
   script:
   - yaml id:claims set groups.<player.uuid>~<[group]>.<[target].uuid>.<[permission]>:<[value]>
-    
+
 
 claiming_protection_events:
   type: world
@@ -1293,8 +1292,8 @@ claiming_protection_events:
       - stop
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.interact]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.interact]>:
       - determine cancelled
-      
-      
+
+
 claiming_system_upgrade_events:
   type: world
   debug: false
@@ -1383,15 +1382,15 @@ claiming_system_bossbar_initialize:
     on player changes world to mainland:
     - wait 5t
     - inject claiming_system_bossBar_Stop
-      
+
     on player changes world to spawn:
     - wait 5t
     - inject claiming_system_bossBar_Stop
-    
+
     on player enters savage_lands_cuboids:
     - wait 5t
     - inject claiming_system_bossBar_Stop
-    
+
     on player exits savage_lands_cuboids:
     - wait 5t
     - inject claiming_system_bossBar_Stop
@@ -1430,7 +1429,7 @@ claiming_system_bossBar_Biome:
   debug: false
   script:
   - foreach <script[claim_system_yaml_settings].list_keys[biomes]>:
-    - if <player.location.biome.name.contains_any[<[value].as_list>]>
+    - if <player.location.biome.name.contains_any[<[value].as_list>]>:
       - define title_color <script[claim_system_yaml_settings].parsed_key[biomes.<[value]>.title_color]>
       - define bossbar_color <script[claim_system_yaml_settings].parsed_key[biomes.<[value]>.bossbar_color]>
       - define bossbar_flags <script[claim_system_yaml_settings].data_key[biomes.<[value]>.bossbar_flags]||null>
@@ -1613,7 +1612,7 @@ claim_system_build_chunkmap:
     - define list:|:<[row_<[value]>].separated_by[<&sp><&sp>]>
   - define "list:|:<&b>                    SOUTH|<&e>--------------------------------"
   - determine <[list]>
-  
+
 
 claim_system_guide_to_chunk_main:
   type: task
@@ -1685,7 +1684,7 @@ claiming_settings_update:
             - inject claim_system_remove_upgrade_fly
             - foreach next
         - inject claim_system_remove_upgrade_<[upgrade_name]>
-          
+
 
 
 ##################
