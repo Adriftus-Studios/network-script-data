@@ -1,10 +1,14 @@
-store_hub_mysteryShop_command:
-  type: command
-  usage: /openmysteryShop (player)
-  description: Opens the mystery shop
-  name: openmysteryShop
-  script:
-    - inventory open d:store_hub_mysteryShop player:<server.match_player[<context.args.first>]||<player>>
+store_hub_mysteryShop_assignment:
+  type: assignment
+  debug: false
+  actions:
+    on assignment:
+    - trigger name:click state:true
+    - trigger name:damage state:true
+    on damage:
+    - inventory open d:store_hub_mysteryShop
+    on click:
+    - inventory open d:store_hub_mysteryShop
 
 
 store_hub_mysteryShop:
