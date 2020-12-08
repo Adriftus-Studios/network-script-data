@@ -8,12 +8,17 @@ market_assignment:
     - trigger name:damage state:true
     on damage:
     - if <server.flag[market_open]>:
-      - inventory open d:market_system_main_GUI player:<server.match_player[<context.args.first>]>
+      - inventory open d:market_system_main_GUI
     - else:
       - narrate "<&c>The Market is currently closed to update it's pricing."
     on click:
     - if <server.flag[market_open]>:
-      - inventory open d:market_system_main_GUI player:<server.match_player[<context.args.first>]>
+      - inventory open d:market_system_main_GUI
+    - else:
+      - narrate "<&c>The Market is currently closed to update it's pricing."
+    on click:
+    - if <server.flag[market_open]>:
+      - inventory open d:market_system_main_GUI
     - else:
       - narrate "<&c>The Market is currently closed to update it's pricing."
 
@@ -160,10 +165,6 @@ market_system_data:
       minimum_value: 20
 
     golden_carrot:
-      category: potion_ingredients
-      minimum_value: 20
-
-    blaze_powder:
       category: potion_ingredients
       minimum_value: 20
 
