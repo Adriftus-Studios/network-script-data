@@ -25,19 +25,19 @@ item_system_global_data:
           life_saving: <&6>Prevents death, and heals you (10 minute CD)
           survival: <&6>Prevents you from getting hungry.
         buffs:
-          melee_damage: <&7>Melee Damage <&a>+<[final_value]>
-          ranged_damage: <&7>Ranged Damage <&a>+<[final_value]>
-          speed: <&7>Move Speed <&a>+<[final_value].div[0.1].round_to[3].mul[100]>%
-          armor_toughness: <&7>Armor Toughness <&a>+<[final_value]>
-          attack_speed: <&7>Attack Speed <&a>+<[final_value]>
-          health: <&7>Health <&a>+<[final_value]>
+          melee_damage: <&e>Melee Damage <&a>+<[final_value]>
+          ranged_damage: <&e>Ranged Damage <&a>+<[final_value]>
+          speed: <&e>Move Speed <&a>+<[final_value].div[0.1].round_to[3].mul[100]>%
+          armor_toughness: <&e>Armor Toughness <&a>+<[final_value]>
+          attack_speed: <&e>Attack Speed <&a>+<[final_value]>
+          health: <&e>Health <&a>+<[final_value]>
         debuffs:
-          melee_damage: <&7>Melee Damage <&c>-<[final_value]>
-          ranged_damage: <&7>Ranged Damage <&c>-<[final_value]>
-          speed: <&7>Move Speed <&c>-<[final_value].div[0.1].round_to[3].mul[100]>
-          armor_toughness: <&7>Armor Toughness <&c>-<[final_value]>
-          attack_speed: <&7>Attack Speed <&c>-<[final_value]>
-          health: <&7>Health <&c>-<[final_value]>
+          melee_damage: <&e>Melee Damage <&c>-<[final_value]>
+          ranged_damage: <&e>Ranged Damage <&c>-<[final_value]>
+          speed: <&e>Move Speed <&c>-<[final_value].div[0.1].round_to[3].mul[100]>%
+          armor_toughness: <&e>Armor Toughness <&c>-<[final_value]>
+          attack_speed: <&e>Attack Speed <&c>-<[final_value]>
+          health: <&e>Health <&c>-<[final_value]>
         flavor:
           - <empty>
           - <&e><[flavor]>
@@ -63,8 +63,8 @@ item_system_global_data:
     0:
       armadillo:
         armor_toughness: buff
-      rusher:
-        attack_speed: buff
+#      rusher:
+#        attack_speed: buff
       cow:
         health: buff
       basher:
@@ -197,8 +197,8 @@ item_system_global_data:
         health: buff
   ## INTERNALS ##
   calculations:
-    melee_damage: <[level].mul[3]>
-    ranged_damage: <[level].mul[2]>
+    melee_damage: <[level].mul[2]>
+    ranged_damage: <[level].mul[1]>
     speed: <[level].mul[0.005]>
     armor_toughness: <[level]>
     attack_speed: <[level].mul[.1]>
@@ -352,15 +352,19 @@ soul_forge_events:
       - foreach 20|26:
         - if <context.inventory.slot[<[value]>].material.name> != air:
           - give <context.inventory.slot[<[value]>]> to:<player.inventory>
-    on player right clicks block in:soul_forge:
+    on player clicks block in:soul_forge:
     - inventory open d:soul_forge_inventory
-soul_forge_command:
-  type: command
+soul_forge_assignment:
+  type: assignment
   debug: false
-  name: open_soul_forge
-  permission: adriftus.admin
-  script:
-    - inventory open d:soul_forge_inventory player:<server.match_player[<context.args.first>]>
+  actions:
+    on assignment:
+    - trigger name:click state:true
+    on click:
+    - inventory open d:soul_forge_inventory
+    on damage:
+    - inventory open d:soul_forge_inventory
+
 #################
 ## SOUL SYSTEM ##
 #################
@@ -382,7 +386,7 @@ item_with_soul:
   display name: <&c>ERROR - REPORT THIS
 get_random_soul:
   type: procedure
-  debug: true
+  debug: false
   definitions: rarity|level
   script:
     - define buffs <list>
@@ -452,10 +456,10 @@ item_system_build_item:
   # % ██ [ Determine the amount of Stars  ] ██
     - if <[item].has_nbt[soul_level]>:
       - define level <[item].nbt[soul_level]>
-      - define level_stars <list.pad_right[<[level]>].with[<&e>✭].pad_right[5].with[<&7>✭].unseparated>
+      - define level_stars <list.pad_right[<[level]>].with[<&e>✭].pad_right[10].with[<&7>✭].unseparated>
     - else:
       - define level 0
-      - define level_stars <list.pad_right[5].with[<&7>✭].unseparated>
+      - define level_stars <list.pad_right[10].with[<&7>✭].unseparated>
 
   # % ██ [ Determine the base of the item?  ] ██
     - if <script[item_system_global_data].list_keys[defaults.damage].contains[<[item].material.name>]>:
@@ -529,20 +533,33 @@ item_system_build_item:
       - define armor <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]>
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.armors]>]>
 
-    - foreach buffs|debuffs as:modifier:
-      - if <[item].has_nbt[<[modifier]>]>:
-        - foreach <[item].nbt[<[modifier]>]> as:Modifiers:
-          - foreach <[Modifiers]> key:alt as:final_value:
-            - if <[alt]> == none:
-                - foreach next
-            - define lore <[Lore].include_single[<script[item_system_global_data].parsed_key[settings.lore.middle.<[modifier]>.<[alt]>]>]>
+    - if <[Item].nbt[rarity]> != 1:
+      - foreach buffs as:modifier:
+        - if <[item].has_nbt[<[modifier]>]>:
+          - foreach <[item].nbt[<[modifier]>]> as:Modifiers:
+            - foreach <[Modifiers]> key:alt as:final_value:
+              - if <[alt]> == none:
+                  - foreach next
+              - else:
+                - define lore <[Lore].include_single[<script[item_system_global_data].parsed_key[settings.lore.middle.<[modifier]>.<[alt]>]>]>
+
+    - if <[Item].nbt[rarity]> == 1:
+      - foreach buffs|debuffs as:modifier:
+        - if <[item].has_nbt[<[modifier]>]>:
+          - foreach <[item].nbt[<[modifier]>]> as:Modifiers:
+            - foreach <[Modifiers]> key:alt as:final_value:
+              - if <[alt]> == none:
+                  - foreach next
+              - else:
+                - define lore <[Lore].include_single[<script[item_system_global_data].parsed_key[settings.lore.middle.<[modifier]>.<[alt]>]>]>
+
 
     - if <[item].has_nbt[flavor]>:
       - define flavor <[item].nbt[flavor]>
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.flavor]>]>
     - define lore <[lore].include[<script[item_system_global_data].parsed_key[settings.lore.bottom]>]>
 
-    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;]>
+    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;hides=ATTRIBUTES]>
     - if !<[nbt].is_empty>:
       - define NewItem <[NewItem].with[nbt=<[nbt]>]>
     - else:

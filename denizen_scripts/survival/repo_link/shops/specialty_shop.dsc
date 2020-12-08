@@ -3,7 +3,14 @@ specialty_shop_assignment:
   actions:
     on assignment:
     - trigger name:click state:true
+    - trigger name:damage state:true
     on click:
+    - define inventory <inventory[specialtyInventory]>
+    - if <player.has_flag[teleportation_recipe]>:
+        - define item <item[teleportation_shard].with[nbt=item/Teleportation_Shard;lore=<&a>Buy<&sp>Price:<&sp><&e><script[specialtyData].data_key[Items.Teleportation_Shard.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[specialtyData].data_key[Items.Teleportation_Shard.Prices].after[/]>]>
+        - give <[item]> to:<[inventory]>
+    - inventory open d:<[inventory]>
+    on damage:
     - define inventory <inventory[specialtyInventory]>
     - if <player.has_flag[teleportation_recipe]>:
         - define item <item[teleportation_shard].with[nbt=item/Teleportation_Shard;lore=<&a>Buy<&sp>Price:<&sp><&e><script[specialtyData].data_key[Items.Teleportation_Shard.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[specialtyData].data_key[Items.Teleportation_Shard.Prices].after[/]>]>
