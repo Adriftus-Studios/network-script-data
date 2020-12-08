@@ -11,7 +11,8 @@ bowtrails_handler:
         - flag player bowtrail:!
     on player shoots bow flagged:bowtrail:
       - ratelimit <player> 1s
-      - inject bow_trail_<yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.trail_type]>
+      - if <yaml[bowtrails].contains[bowtrails.<player.flag[bowtrail]>.trail_type]> && <script[bow_trail_<yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.trail_type]>]||invalid> != invalid:
+        - inject bow_trail_<yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.trail_type]>
     after player shoots block with arrow flagged:bowtrail:
       - if <context.projectile.has_flag[no_trail]>:
         - stop
