@@ -425,10 +425,6 @@ weekly_gui_open:
         - wait 5t
     - flag player vote_spinner:!
 
-title_voucher:
-  type: item
-  material: name_tag
-
 weekly_loot_contents:
   type: task
   debug: true
