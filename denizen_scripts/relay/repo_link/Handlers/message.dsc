@@ -153,3 +153,8 @@ Message_Handler:
 
           - case paste haste:
             - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>|haste]>
+
+      - else if <[message].starts_with[!]>:
+        - choose <[message].before[<&sp>].after[!]>:
+          - case haste paste hast pastie pasties hasties hastie:
+            - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>|haste]>

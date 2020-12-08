@@ -8,7 +8,7 @@ link_dcommand:
     - inject command_arg_registry
     - define color Code
     - inject embedded_color_formatting
-    - define headers <yaml[saved_headers].parsed_key[discord.Bot_Auth]>
+    - define headers <yaml[saved_headers].parsed_key[discord.Rachela]>
     - define url https://discordapp.com/api/channels/<[channel_id]>/messages
 
   # - ██ [ Euth's Silly Trash ] ██
