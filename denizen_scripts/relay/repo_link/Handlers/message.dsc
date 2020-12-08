@@ -121,7 +121,6 @@ Message_Handler:
           - case webget wget:
             - ~Run Webget_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
 
-
     on discord message received for:Rachela:
     # % ██ [ Queue Stopping Cache Data       ] ██
       - if <context.Author||WebHook> == WebHook:
