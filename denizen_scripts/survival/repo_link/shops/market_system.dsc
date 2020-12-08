@@ -1,12 +1,17 @@
 ###########-------- DEBUG COMMAND --------########
-market_command:
-  type: command
+market_assignment:
+  type: assignment
   debug: false
-  usage: /open_market
-  description: opens
-  name: open_market
-  permission: adriftus.admin
-  script:
+  actions:
+    on assignment:
+    - trigger name:click state:true
+    - trigger name:damage state:true
+    on damage:
+    - if <server.flag[market_open]>:
+      - inventory open d:market_system_main_GUI player:<server.match_player[<context.args.first>]>
+    - else:
+      - narrate "<&c>The Market is currently closed to update it's pricing."
+    on click:
     - if <server.flag[market_open]>:
       - inventory open d:market_system_main_GUI
     - else:
@@ -162,9 +167,9 @@ market_system_data:
       category: potion_ingredients
       minimum_value: 20
 
-#    scute:
-#      category: potion_ingredients
-#      minimum_value: 20
+    scute:
+      category: potion_ingredients
+      minimum_value: 20
 
     phantom_membrane:
       category: potion_ingredients

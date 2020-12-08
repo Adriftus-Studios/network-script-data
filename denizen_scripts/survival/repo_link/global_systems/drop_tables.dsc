@@ -88,7 +88,7 @@ drop_table:
         - foreach stop
 
 mob_death_event:
-  type: data
+  type: world
   debug: false
   whitelist: zombie|creeper|skeleton|spider|drowned|witch|husk|withers|evoker|ravager|pillager|vex|illusioner|silverfish|stray|vindicator|cave_spider|enderman|phantom|slime
   blacklist: <&B>Maggots <&f>- <&E>Lv.*|<&b>Voidworm <&f>- <&E>Lv.*|

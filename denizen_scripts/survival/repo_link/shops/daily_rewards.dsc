@@ -63,11 +63,16 @@ daily_rewards_particles:
       - wait 1t
 
 daily_reward_command:
-  type: command
-  name: give_daily_reward
-  permission: not.a.perm
-  script:
-    - inject daily_rewards_test player:<server.match_player[<context.args.first>]>
+  type: assignment
+  debug: false
+  actions:
+    on assignment:
+    - trigger name:click state:true
+    - trigger name:damage state:true
+    on damage:
+    - inject daily_rewards_test
+    on click:
+    - inject daily_rewards_test
 
 daily_reward_config_manager:
   type: world

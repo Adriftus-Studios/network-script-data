@@ -1,11 +1,14 @@
 survivalistAssignment:
     type: assignment
+    debug: false
     actions:
         on assignment:
         - trigger name:click state:true
+        - trigger name:damage state:true
         on click:
         - inject survivalistInventoryInject
-
+        on damage:
+        - inject survivalistInventoryInject
 survivalistInventory:
     type: inventory
     inventory: chest

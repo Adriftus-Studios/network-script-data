@@ -1,12 +1,14 @@
-store_hub_mysteryShop_command:
-  type: command
-  name: openmysteryShop
-  description: Opens the Mystery Shop
-  usage: /openmysteryshop
-  permission: adriftus.admin
-  script:
-    - inventory open d:store_hub_mysteryShop player:<server.match_player[<context.args.first>]||<player>>
-
+store_hub_mysteryShop_assignment:
+    type: assignment
+    debug: false
+    actions:
+        on assignment:
+        - trigger name:click state:true
+        - trigger name:damage state:true
+        on click:
+        - inventory open d:store_hub_mysteryShop
+        on damage:
+        - inventory open d:store_hub_mysteryShop
 
 store_hub_mysteryShop:
   type: inventory
