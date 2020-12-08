@@ -7,7 +7,11 @@ click_on_grim_assignment:
   actions:
     on assignment:
     - trigger name:click state:true
+    - trigger name:damage state:true
     on click:
+    - inventory open d:grim_death_menu
+    - narrate "<&a>It seems that you have a question for me, <&2><player.display_name>"
+    on damage:
     - inventory open d:grim_death_menu
     - narrate "<&a>It seems that you have a question for me, <&2><player.display_name>"
   interact scripts:
