@@ -145,3 +145,12 @@ BehrCraft_Command:
   - bc
   script:
   - adjust <player> send_to:behrcraft
+
+test_Command:
+  type: command
+  debug: false
+  description: Sends a player to the test server
+  usage: /test
+  name: test
+  script:
+  - adjust <player> send_to:test
