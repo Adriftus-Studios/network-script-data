@@ -1173,6 +1173,7 @@ claiming_protection_events:
     - if <[group]> == null:
       - stop
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.kill-animals]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
+      - ratelimit <player> 1t
       - narrate "<&c>You do not have permission to interact with animals here."
       - determine cancelled
     on player places block:
@@ -1189,6 +1190,7 @@ claiming_protection_events:
     - if <[group]> == null:
       - stop
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.place]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.place]>:
+      - ratelimit <player> 1t
       - narrate "<&c>You do not have permission to place blocks here."
       - determine cancelled
     on player breaks block:
