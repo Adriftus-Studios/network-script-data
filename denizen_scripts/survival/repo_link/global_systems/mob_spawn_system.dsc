@@ -25,14 +25,13 @@ mob_spawning_system_events:
     min: 500
     max: 20000
   events:
-    on entity spawns in:mainland:
-      - if <script.data_key[settings.whitelist].contains[<context.entity.entity_type>]>:
-        - foreach <list[<context.location.z.abs>|<context.location.x.abs>]>:
-          - if <[value]> < <script[mob_spawning_system_events].data_key[settings.min]> || <[value]> > <script[mob_spawning_system_events].data_key[settings.max]>:
-            - stop
-          - else:
-            - determine passively cancelled
-        - define difficulty <element[11].sub[<list[<context.location.z>|<context.location.x>].highest.abs.div[2000].add[1]>].round_up>
-        - mythicspawn <context.entity.entity_type.to_uppercase>1 <context.location> level:<[difficulty]>
-      - else:
+    on zombie|skeleton|spider|creeper|enderman|husk|vindicator|pillager|silverfish|wolf|polar_bear|panda|stray|drowned|vex|evoker|cave_spider|slime|bee spawns in:mainland:
+      - if <context.entity.is_mythicmob>:
         - stop
+      - foreach <list[<context.location.z.abs>|<context.location.x.abs>]> as:axis:
+        - if <[axis]> > 500 && <[axis]> < 20000:
+          - determine passively cancelled
+          - define difficulty <element[11].sub[<list[<context.location.z>|<context.location.x>].highest.abs.div[2000].add[1]>].round_up>
+          - mythicspawn <context.entity.entity_type.to_uppercase>1 <context.location> level:<[difficulty]>
+        - else:
+          - stop
