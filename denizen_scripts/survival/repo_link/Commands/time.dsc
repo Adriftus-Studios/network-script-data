@@ -1,6 +1,7 @@
 Day_command:
     type: command
     name: Day
+    debug: false
     usage: /day
     aliases:
     - daymanfighterofthenightman
@@ -14,6 +15,7 @@ Night_command:
     type: command
     name: night
     usage: /night
+    debug: false
     description: Sets to nighttime
     permission: adriftus.staff
     script:

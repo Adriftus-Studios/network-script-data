@@ -15,7 +15,7 @@ store_hub_cosmeticShop:
   inventory: chest
   debug: false
   size: 27
-  title: <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&5>S<&d>h<&5>o<&d>p
+  title: <&6>C<&e>osmetic <&6>S<&e>hop
   definitions:
     filler: <item[store_hub_cosmeticShop_filler]>
   procedural items:
@@ -73,6 +73,7 @@ store_hub_cosmeticShop_titles_inventory:
 
 store_hub_cosmeticShop_title_open:
   type: task
+  debug: false
   script:
     - define inventory <inventory[store_hub_cosmeticShop_titles_inventory]>
     - foreach <server.flag[cosmetics_titles_today]> as:tag:
@@ -88,6 +89,7 @@ store_hub_cosmeticShop_title_open:
 
 store_hub_cosmeticShop_titles_events:
   type: world
+  debug: false
   events:
     on player clicks store_hub_cosmeticShop_titles in store_hub_cosmeticShop:
       - inject store_hub_cosmeticShop_title_open
@@ -124,6 +126,7 @@ title_voucher:
 
 title_voucher_events:
   type: world
+  debug: false
   events:
     on player right clicks block with:title_voucher bukkit_priority:LOWEST:
       - determine passively cancelled
@@ -145,6 +148,7 @@ title_voucher_events:
 store_hub_cosmeticShop_bowTrails:
   type: item
   material: bow
+  debug: false
   display name: <&6>Bow Trails
   enchantments:
   - damage_all:1
@@ -173,6 +177,7 @@ store_hub_cosmeticShop_bowTrails_inventory:
 
 store_hub_cosmeticShop_bowtrails_open:
   type: task
+  debug: false
   script:
     - define inventory <inventory[store_hub_cosmeticShop_bowTrails_inventory]>
     - foreach <server.flag[cosmetics_bowtrails_today]> as:trail:
@@ -188,6 +193,7 @@ store_hub_cosmeticShop_bowtrails_open:
 
 store_hub_cosmeticShop_bowtrails_events:
   type: world
+  debug: false
   events:
     on player clicks store_hub_cosmeticShop_bowTrails in store_hub_cosmeticShop:
       - inject store_hub_cosmeticShop_bowtrails_open
@@ -215,6 +221,7 @@ store_hub_cosmeticShop_bowtrails_events:
 
 bowtrail_changeover:
   type: task
+  debug: false
   script:
     - flag server cosmetics_bowtrails_today:!|:<yaml[bowtrails].list_keys[bowtrails].exclude[<yaml[bowtrails].read[shop_blacklist]>].random[18]>
 
@@ -224,6 +231,7 @@ bowtrail_voucher:
 
 bowtrail_voucher_events:
   type: world
+  debug: false
   events:
     on player right clicks block with:bowtrail_voucher bukkit_priority:LOWEST:
       - determine passively cancelled
@@ -245,6 +253,7 @@ bowtrail_voucher_events:
 tempcmd:
   type: command
   name: tmpcmd
+  debug: false
   debug: false
   permission: tsegdsgdsgdsfg
   script:
