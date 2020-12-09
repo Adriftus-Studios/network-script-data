@@ -1,5 +1,6 @@
 daily_rewards_test:
   type: task
+  debug: false
   script:
     - if <player.has_flag[daily_rewarded]>:
       - narrate "<&c>You have already claimed your daily reward."
@@ -57,6 +58,7 @@ daily_rewards_test:
 
 daily_rewards_particles:
   type: task
+  debug: false
   script:
     - repeat 70:
       - playeffect enchantment_table at:<location[spawn_daily_item].above[1]> quantity:10 offset:0.1 data:2

@@ -2,6 +2,7 @@ feed_command:
     type: command
     name: feed
     usage: /feed (player)
+    debug: false
     description: feeds a player
     permission: adriftus.staff
     tab complete:

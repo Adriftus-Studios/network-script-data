@@ -2,6 +2,7 @@ Sun_command:
     type: command
     name: sun
     usage: /sun
+    debug: false
     aliases:
     - sunny
     - ihaterain

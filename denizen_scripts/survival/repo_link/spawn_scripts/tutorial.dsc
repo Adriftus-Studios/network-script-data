@@ -1,5 +1,6 @@
 tutorial_data:
   type: data
+  debug: false
   distance_check: 14
   particle_trail:
     particle: totem
@@ -171,6 +172,7 @@ tutorial_data:
 
 tutorial_spawn_finale:
   type: task
+  debug: false
   script:
     - fakespawn ender_dragon <location[tutorial_dragon]> duration:10m
     - repeat 20:
@@ -205,6 +207,7 @@ tutorial_command:
 
 tutorial_start:
   type: task
+  debug: false
   script:
     - teleport <player> tutorial_start
     - playsound <player> sound:entity_ender_pearl_throw volume:0.5
@@ -218,6 +221,7 @@ tutorial_start:
 
 tutorial_next:
   type: task
+  debug: false
   script:
     - define stage <player.flag[tutorial]>
     - if <location[tutorial_<[stage]>]||null> != null:
@@ -272,6 +276,7 @@ tutorial_next:
 tutorial_timeout:
   type: task
   definitions: stage
+  debug: false
   script:
     - while <player.has_flag[tutorial]> && <player.flag[tutorial]> == <[stage]>:
       - if <queue.time_ran.in_seconds> > 600:
@@ -283,6 +288,7 @@ tutorial_timeout:
 
 tutorial_skipped:
   type: task
+  debug: false
   script:
     - foreach <player.fake_entities>:
       - fakespawn <[value]> cancel

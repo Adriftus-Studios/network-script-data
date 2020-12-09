@@ -2,6 +2,7 @@ heal_command:
     type: command
     name: heal
     usage: /heal (player)
+    debug: false
     description: Heals a player
     permission: adriftus.staff
     tab complete:
