@@ -71,7 +71,7 @@ daily_gui_open:
 
 daily_loot_contents:
   type: task
-  debug: true
+  debug: false
   script:
     - define chance <util.random.int[1].to[100]>
     - choose <[chance]>:
@@ -265,7 +265,7 @@ daily_loot_contents:
 
 gen_daily:
   type: procedure
-  debug: true
+  debug: false
   script:
   - define item_chosen <list[exp|dragons_breath|money|random_book|legendary_item|netherite_scrap|teleportation_crystal|spawner_fragment|backpack_9|backpack_18|random_food|golden_apple].random>
   - define item_base <script[daily_rewards_key].parsed_key[reward.<[item_chosen]>.item]>
@@ -336,6 +336,7 @@ daily_rewards_key:
 
 daily_vote_gui_events:
   type: world
+  debug: false
   events:
     on player closes weekly_vote_gui flagged:vote_roulette:
       - inventory open d:lotto_<player.uuid>
@@ -359,7 +360,7 @@ weekly_vote_gui:
 
 weekly_gui_open:
   type: task
-  debug: true
+  debug: false
   script:
     - define colorlist <list[red|orange|yellow|lime|light_blue|pink]>
     - define glass_item "<item[<[colorlist].first>_stained_glass_pane].with[display_name=<&e> ]>"
@@ -369,8 +370,6 @@ weekly_gui_open:
     - inject weekly_loot_contents
     - inventory open d:lotto_<player.uuid>
     - inventory set slot:34 d:<[inventory]> o:<[reward_slot]>
-    - narrate <[chance]>
-    - narrate <[reward]>
     - repeat 6 as:i:
       - repeat 10:
         - define slotsaver <[inventory].slot[11]>
@@ -427,7 +426,7 @@ weekly_gui_open:
 
 weekly_loot_contents:
   type: task
-  debug: true
+  debug: false
   script:
     - define chance <util.random.int[1].to[100]>
     - choose <[chance]>:
@@ -594,5 +593,3 @@ weekly_rewards_key:
       name: <&b>Spawner Fragment
       lore: <&e>A few more of these and maybe you can charge it up.
       model: 1
-
-

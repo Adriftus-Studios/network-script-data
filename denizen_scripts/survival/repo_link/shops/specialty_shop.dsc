@@ -1,5 +1,6 @@
 specialty_shop_assignment:
   type: assignment
+  debug: false
   actions:
     on assignment:
     - trigger name:click state:true
@@ -21,6 +22,7 @@ specialtyInventory:
   type: inventory
   inventory: chest
   title: Specialty Shop
+  debug: false
   definitions:
     filler: white_stained_glass_pane[display_name=<&f>]
     head: <item[player_head].with[skull_skin=<player.skull_skin>;display_name=<&e><&o><player.display_name>;lore=<&a>Money:<&sp><&e><player.money>]>
@@ -34,6 +36,7 @@ specialtyInventory:
 
 specialtyHandler:
   type: world
+  debug: false
   events:
     on player clicks item in specialtyInventory:
     - determine passively cancelled

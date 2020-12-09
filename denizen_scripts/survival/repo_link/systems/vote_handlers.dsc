@@ -163,6 +163,7 @@ weekly_vote_key:
 
 vote_crate_key_events:
   type: world
+  debug: false
   events:
     on player right clicks block with:daily_vote_key|weekly_vote_key:
     - determine passively cancelled
