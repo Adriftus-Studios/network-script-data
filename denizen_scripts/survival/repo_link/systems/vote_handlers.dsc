@@ -188,3 +188,13 @@ vote_crate_key_events:
         - narrate "Opening weekly crate"
       - if <player.item_in_hand> == <item[daily_vote_key]>:
         - narrate "<&c>Please use a <item[weekly_vote_key].display>."
+    on player right clicks chest in:spawn_cuboid:
+    - if !<server.has_flag[<context.location.simple>.daily_crate]> && !<server.has_flag[<context.location.simple>.weekly_crate]>:
+      - stop
+    - else if <server.has_flag[<context.location.simple>.daily_crate]> && <context.item> != daily_vote_key:
+      - ratelimit <player> 2s
+      - narrate "<&a>Please get a <item[daily_vote_key].display>."
+    - else if <server.has_flag[<context.location.simple>.weekly_crate]]> && <context.item> != weekly_vote_key:
+      - ratelimit <player> 2s
+      - narrate "<&a>Please get a <item[weekly_vote_key].display>."
+
