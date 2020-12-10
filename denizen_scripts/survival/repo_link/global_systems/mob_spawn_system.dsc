@@ -36,3 +36,10 @@ mob_spawning_system_events:
         - mythicspawn <context.entity.entity_type.to_uppercase>1 <context.location> level:<[difficulty]>
       - else:
         - stop
+      - foreach <list[<context.location.z.abs>|<context.location.x.abs>]> as:axis:
+        - if <[axis]> > 500 && <[axis]> < 20000:
+          - determine passively cancelled
+          - define difficulty <element[11].sub[<list[<context.location.z>|<context.location.x>].highest.abs.div[2000].add[1]>].round_up>
+          - mythicspawn <context.entity.entity_type.to_uppercase>1 <context.location> level:<[difficulty]>
+        - else:
+          - stop
