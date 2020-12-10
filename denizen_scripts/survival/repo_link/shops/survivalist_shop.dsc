@@ -13,6 +13,7 @@ survivalistInventory:
     type: inventory
     inventory: chest
     title: <&2>Sur<&a>viv<&2>al<&a>ist
+    debug: false
     definitions:
         filler: <item[white_stained_glass_pane].with[display_name=<&f>]>
         backpack_9: <item[Backpack_9].with[nbt=item/Backpack_9;lore=<&e>Slots:<&sp><&a>9|<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Backpack_9.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Backpack_9.Prices].after[/]>]>
@@ -33,6 +34,7 @@ survivalistInventory:
 
 survivalistInventoryInject:
     type: task
+    debug: false
     script:
     - define inventory <inventory[survivalistInventory]>
     - give "<item[player_head].with[skull_skin=<player.skull_skin>;display_name=<&e><&o><player.display_name>;lore=<&a>Money: <&e><player.money>]>" to:<[inventory]> slot:5
@@ -40,6 +42,7 @@ survivalistInventoryInject:
 
 survivalistHandler:
     type: world
+    debug: false
     events:
         on player clicks item in survivalistInventory:
         - determine passively cancelled

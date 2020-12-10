@@ -1,5 +1,6 @@
 test_economy:
   type: economy
+  debug: false
   priority: normal
   # The name of the currency in the singular (such as dollar or euro).
   name single: dollar
@@ -32,6 +33,7 @@ test_economy:
 
 economy_initialize:
   type: world
+  debug: false
   events:
     on player joins:
     - if !<player.has_flag[money]>:
@@ -42,6 +44,7 @@ economy_balance_check_command:
   usage: /balance
   description: Outputs a players current balance
   name: balance
+  debug: false
   aliases:
     - bal
     - money
@@ -54,6 +57,7 @@ economy_balance_check_command:
 economy_balance_top:
   type: command
   usage: /balance_top
+  debug: false
   description: Outputs the top balances on the server.
   name: balance_top
   aliases:
@@ -70,12 +74,14 @@ economy_balance_top:
 economy_bank_note:
   type: item
   material: paper
+  debug: false
   display name: <&a>Bank Note
   lore:
   - "<&e>Right click while holding to deposit."
 
 economy_bank_note_events:
   type: world
+  debug: false
   events:
     on player right clicks block with:economy_bank_note:
     - ratelimit <player> 2t
@@ -89,6 +95,7 @@ economy_withdraw:
   usage: /withdraw
   description: Withdraws currency from a players balance.
   name: withdraw
+  debug: false
   script:
     - define amount <context.args.first||null>
     - if <[amount]> == null:
@@ -105,6 +112,7 @@ economy_withdraw:
 economy_pay:
   type: command
   usage: /pay
+  debug: false
   description: pays a target user from the context users balance.
   name: pay
   tab complete:

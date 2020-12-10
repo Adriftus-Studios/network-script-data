@@ -23,7 +23,7 @@ KillAura_Command:
         - else:
             - flag <[User]> Behrry.Moderation.KillAura
             - narrate Activated
-        - while <[User].has_flag[Behrry.Moderation.KillAura]> || <[player].is_online>:
+        - while <[User].has_flag[Behrry.Moderation.KillAura]> || <[User].is_online>:
             - define Mobs <[User].location.find.entities[Zombie|Vex|Creeper|Witch|Spider|cave_spider|Phantom|Drowned|Slime|Skeleton|Pillager].within[35]>
             - remove <[Mobs]>
             - wait 3s

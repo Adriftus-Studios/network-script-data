@@ -1,6 +1,7 @@
 drown_command:
     type: command
     name: Drown
+    debug: false
     usage: /drown (player)
     description: Plays a drown animation
     permission: adriftus.staff
