@@ -27,7 +27,7 @@ server_warps_yaml:
       display: <&5>Soul Forge
     vote_crates:
       location: vote_crates
-      material: tripwire_hook
+      material: tripwire_hook[hides=all;enchantments=luck,1]
       lore: <&d>Vote for the server|<&b>Get rewards!|<&e>/Vote
       display: <&6>Vote Crates
 
