@@ -84,7 +84,6 @@ command_play_inventory:
   size: 27
   definitions:
     player: <item[player_head]||<item[human_skull]>>[display_name=<&b><player.name>;lore=<&3>Current<&sp>Server<&co><&sp><yaml[bungee_config].parsed_key[servers.<bungee.server>.display_name]>;skull_skin=<player.uuid>]
-    hub: <item[<yaml[bungee_config].read[servers.hub.material]>]>[display_name=<&a>Return<&sp>To<&sp>Hub;nbt=server/hub]
     filler: <item[white_stained_glass_pane].with[display_name=<&c>]>
   procedural items:
     - foreach <yaml[bungee_config].list_keys[servers]> as:server:
@@ -115,7 +114,7 @@ command_play_inventory:
   slots:
     - [filler] [filler] [filler] [filler] [player] [filler] [filler] [filler] [filler]
     - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-    - [filler] [filler] [filler] [filler] [hub] [filler] [filler] [filler] [filler]
+    - [filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]
 
 survival_command:
   type: command
