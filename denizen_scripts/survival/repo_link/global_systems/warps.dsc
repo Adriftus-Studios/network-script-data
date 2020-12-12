@@ -24,7 +24,15 @@ server_warps_yaml:
       location: spawn_soul_forge
       material: bubble_coral_block
       lore: <&d>Forge souls into your gear|<&b>Soul drop from mobs
-      display: <&5>Soul <&5>Forge
+      display: <&5>Soul Forge
+    vote_crates:
+      location: vote_crates
+      material: tripwire_hook[hides=all;enchantments=luck,1]
+      lore: <&d>Vote for the server|<&b>Get rewards!|<&e>/Vote
+      display: <&6>Vote Crates
+
+
+#-109 33  66
 
 ##############
 ## COMMANDS ##

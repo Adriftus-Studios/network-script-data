@@ -1,5 +1,6 @@
 grim_area_effects:
   type: world
+  debug: false
   events:
     on player enters spawn_grim_cuboid:
       - cast blindness duration:40t no_ambient hide_particles

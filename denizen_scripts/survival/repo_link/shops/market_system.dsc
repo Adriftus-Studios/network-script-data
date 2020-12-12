@@ -242,8 +242,8 @@ market_system_main_GUI_events:
   events:
     on player clicks item in market_system_main_GUI:
       - determine passively cancelled
-      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - if <context.item.has_nbt[category]>:
+        - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
         - define inventory <inventory[market_system_category_GUI]>
         - define category <context.item.nbt[category]>
         - define page 1
@@ -307,20 +307,24 @@ market_system_category_events:
       - ratelimit <player> 5t
       - define inventory <context.inventory>
       - if <context.item.has_nbt[market_item]>:
+        - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
         - define item <context.item.nbt[market_item]>
         - inject market_system_category_set_buy_sell_items
       - if <context.item.has_nbt[buy]>:
+        - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
         - define cost <context.item.nbt[price]>
         - define quantity <context.item.nbt[buy]>
         - define item <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.buy_sell_item]>].nbt[item]>
         - inject market_system_categories_buy_item
       - if <context.item.has_nbt[sell]>:
+        - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
         - define cost <context.item.nbt[price]>
         - define quantity <context.item.nbt[sell]>
         - define item <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.buy_sell_item]>].nbt[item]>
         - inject market_system_categories_sell_item
       - if <context.item.has_nbt[back]>:
         - inventory open d:market_system_main_GUI
+        - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
 
 #---------------#
 # - FUNCTIONS - #
