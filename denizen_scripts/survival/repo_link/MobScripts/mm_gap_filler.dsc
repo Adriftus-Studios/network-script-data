@@ -40,3 +40,9 @@ mythicmobs_levelscale_patch:
         - adjust <context.entity.mythicmob> level:<[mob_level]>
         - adjust <context.entity> speed:<[base_speed].add[<[speed_modifier]>]>
         - adjust <context.entity> armor_bonus:<[base_armor].add[<[armor_modifier]>]>
+    on mythicmob mob killed:
+      - if !<context.killer.is_player>:
+        - stop
+      - else:
+        - flag <context.killer> world_event.progress:+:<context.level>
+        - flag server world_event.progress:+:<context.level>

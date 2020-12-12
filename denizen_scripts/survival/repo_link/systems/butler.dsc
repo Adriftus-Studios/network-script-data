@@ -1,5 +1,6 @@
 butler_summon:
   type: task
+  debug: false
   script:
     - define loc <player.location.forward_flat[3]>
     - repeat 20:
@@ -14,11 +15,13 @@ butler_summon:
 
 butler_return_home:
   type: task
+  debug: false
   script:
     - teleport <server.flag[butler_npc].as_npc> <location[spawn_butler_location]>
 
 butler_events:
   type: world
+  debug: false
   events:
     on server start:
       - wait 10s
@@ -26,20 +29,30 @@ butler_events:
         - inject butler_return_home
 
 butler_command:
-  type: command
-  name: open_butler_menu
-  permission: adriftus.admin
-  description: Opens the Butler Menu for the specified player
-  usage: /open_butler_menu <&lt>player<&gt>
-  script:
-    - inventory open d:<inventory[butler_menu]> player:<server.match_player[<context.args.first||player>]>
+  type: assignment
+  debug: false
+  actions:
+    on assignment:
+    - trigger name:click state:true
+    - trigger name:damage state:true
+    on click:
+    - inventory open d:<inventory[butler_menu]>
+    on damage:
+    - inventory open d:<inventory[butler_menu]>
 
 butler_menu:
   type: inventory
   inventory: chest
-  size: 45
+  size: 7
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
   slots:
   # TODO: Finish inventory (seems to not be)
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+
+butler_inventory_handler:
+  type: world
+  debug: true
+  events:
+    on player clicks item in butler_menu:
+    - determine passively cancelled
