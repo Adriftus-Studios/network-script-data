@@ -39,6 +39,12 @@ mythicmobs_levelscale_patch:
         # ^ ████████ [ adjust the stats ] ████████
         - adjust <context.entity.mythicmob> level:<[mob_level]>
         - adjust <context.entity> speed:<[base_speed].add[<[speed_modifier]>]>
+        - if <[mob_level]> == 0:
+          - adjust <context.entity> max_health:20
+        - else:
+          - define base_hp <context.entity.health_max>
+          - define health_modifier <[mob_level].mul[20]>
+          - ajust <context.entity> max_health:<[base_hp].add[<[health_modifier]>]>
         - adjust <context.entity> armor_bonus:<[base_armor].add[<[armor_modifier]>]>
     on mythicmob mob killed:
       - if !<context.killer.is_player>:
