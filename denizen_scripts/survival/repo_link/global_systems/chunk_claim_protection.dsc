@@ -1,7 +1,7 @@
 claim_system_yaml_settings:
   type: data
   settings:
-    allowed_worlds: mainland
+    allowed_worlds: mainland|mainland_nether
 
 ##################################
 ## YAML DATA FOR UPGRADE PRICES ##
