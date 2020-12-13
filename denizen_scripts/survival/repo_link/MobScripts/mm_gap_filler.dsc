@@ -47,7 +47,7 @@ mythicmobs_levelscale_patch:
           - adjust <context.entity> max_health:<[base_hp].add[<[health_modifier]>]>
         - adjust <context.entity> armor_bonus:<[base_armor].add[<[armor_modifier]>]>
     on mythicmob mob killed:
-      - if !<context.killer.is_player>:
+      - if !<context.killer.is_player||false>:
         - stop
       - else:
         - flag <context.killer> world_event.progress:+:<context.level.add[1]>
