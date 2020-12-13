@@ -80,7 +80,7 @@ drop_table:
   debug: false
   definitions: mob_level
   script:
-    - define number <util.random.int[1].to[10000]>
+    - define number <util.random.int[1].to[100000]>
     - foreach <script[drop_table_data].list_keys[mob_level.<[mob_level]>].numerical>:
       - if <[value]> >= <[number]>:
         - define drop_data  <script[drop_table_data].data_key[mob_level.<[mob_level]>.<[value]>].random>
