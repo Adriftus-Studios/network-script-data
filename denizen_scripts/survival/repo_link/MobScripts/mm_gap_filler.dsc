@@ -50,5 +50,5 @@ mythicmobs_levelscale_patch:
       - if !<context.killer.is_player>:
         - stop
       - else:
-        - flag <context.killer> world_event.progress:+:<context.level>
-        - flag server world_event.progress:+:<context.level>
+        - flag <context.killer> world_event.progress:+:<context.level.add[1]>
+        - flag server world_event.progress:+:<context.level.add[1]>
