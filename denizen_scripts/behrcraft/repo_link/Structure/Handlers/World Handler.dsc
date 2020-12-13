@@ -3,7 +3,7 @@ World_Handler:
     debug: false
     events:
         on player places wither_skeleton_skull|tnt|bedrock|end_crystal:
-            - if !<player.is_op> || <player.world.name> == creative:
+            - if <player.world.name> == creative:
                 - determine cancelled
         on player changes world to creative:
             - if <player.has_flag[Behrry.Moderation.CreativeBan]>:
