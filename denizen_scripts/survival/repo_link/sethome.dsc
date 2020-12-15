@@ -37,6 +37,7 @@ home_command:
 
 home_respawn_event:
   type: world
+  debug: false
   events:
     on player respawns bukkit_priority:HIGHEST ignorecancelled:true:
     - determine passively <location[home_<player.uuid>]||spawn>
