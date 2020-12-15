@@ -6,7 +6,7 @@ daily_vote_gui:
   size: 27
   slots:
     - [red_stained_glass_pane[display_name=<&e>]] [blue_stained_glass_pane[display_name=<&e>]] [magenta_stained_glass_pane[display_name=<&e>]] [orange_stained_glass_pane[display_name=<&e>]] [purple_stained_glass_pane[display_name=<&e>]] [yellow_stained_glass_pane[display_name=<&e>]] [lime_stained_glass_pane[display_name=<&e>]] [pink_stained_glass_pane[display_name=<&e>]] [cyan_stained_glass_pane[display_name=<&e>]]
-    - [<proc[gen_daily]>] [reward] [<proc[gen_daily]>] [<proc[gen_daily]>] [<proc[gen_daily]>] [<proc[gen_daily]>] [<proc[gen_daily]>] [<proc[gen_daily]>] [<proc[gen_daily]>]
+    - [<proc[gen_daily]>] [] [<proc[gen_daily]>] [<proc[gen_daily]>] [<proc[gen_daily]>] [<proc[gen_daily]>] [<proc[gen_daily]>] [<proc[gen_daily]>] [<proc[gen_daily]>]
     - [red_stained_glass_pane[display_name=<&e>]] [blue_stained_glass_pane[display_name=<&e>]] [magenta_stained_glass_pane[display_name=<&e>]] [orange_stained_glass_pane[display_name=<&e>]] [purple_stained_glass_pane[display_name=<&e>]] [yellow_stained_glass_pane[display_name=<&e>]] [lime_stained_glass_pane[display_name=<&e>]] [pink_stained_glass_pane[display_name=<&e>]] [cyan_stained_glass_pane[display_name=<&e>]]
 
 daily_gui_open:
@@ -131,7 +131,7 @@ daily_loot_contents:
         - define reward mob_spawner_fragment
         - define win_message "<player.display_name><&e> just won 25 <item[<[reward]>].display><&e>!"
         - define quantity 5
-      - case 78 79 80 81 75 76 77:
+      - case 78 79 80 81:
         - define reward_slot "golden_apple[lore=<&e>Don't break a tooth!]"
         - define win_action narrate
         - define win_message "<&e>You won two <&b>Golden Apples<&e>!"
@@ -355,7 +355,7 @@ weekly_vote_gui:
     - [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]]
     - [black_stained_glass_pane[display_name=<&e> ]] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [black_stained_glass_pane[display_name=<&e> ]]
     - [black_stained_glass_pane[display_name=<&e> ]] [<proc[gen_weekly]>] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [<proc[gen_weekly]>] [black_stained_glass_pane[display_name=<&e> ]]
-    - [black_stained_glass_pane[display_name=<&e> ]] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [reward] [<proc[gen_weekly]>] [black_stained_glass_pane[display_name=<&e> ]]
+    - [black_stained_glass_pane[display_name=<&e> ]] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [] [<proc[gen_weekly]>] [black_stained_glass_pane[display_name=<&e> ]]
     - [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]]
 
 weekly_gui_open:

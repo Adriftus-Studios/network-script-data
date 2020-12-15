@@ -195,7 +195,7 @@ vote_crate_key_events:
     - else if <server.has_flag[<context.location.simple>.daily_crate]> && <context.item.scriptname> != daily_vote_key:
       - ratelimit <player> 2s
       - narrate "<&a>Please get a <item[daily_vote_key].display>."
-    - else if <server.has_flag[<context.location.simple>.weekly_crate]]> && <context.item.scriptname> != weekly_vote_key:
+    - else if <server.has_flag[<context.location.simple>.weekly_crate]> && <context.item.scriptname> != weekly_vote_key:
       - ratelimit <player> 2s
       - narrate "<&a>Please get a <item[weekly_vote_key].display>."
 
