@@ -199,7 +199,7 @@ item_system_global_data:
   calculations:
     melee_damage: <[level].mul[2]>
     ranged_damage: <[level].mul[1]>
-    speed: <[level].mul[0.005]>
+    speed: <[level].mul[0.0025]>
     armor_toughness: <[level]>
     attack_speed: <[level].mul[.1]>
     health: <[level].add[4]>
@@ -450,7 +450,7 @@ item_create_soul_item:
 item_system_build_item:
   type: procedure
   definitions: item
-  debug: true
+  debug: false
   script:
     - define item <[item].as_item>
   # % ██ [ Determine the amount of Stars  ] ██
