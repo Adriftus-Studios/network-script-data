@@ -2,8 +2,8 @@ world_event_config:
   type: data
   materials:
 #    honey_bottle: 1
-  server_amount_needed: 5000
-  personal_amount_needed: 500
+  server_amount_needed: 15000
+  personal_amount_needed: 1200
 
 currency_display_item:
   type: item
