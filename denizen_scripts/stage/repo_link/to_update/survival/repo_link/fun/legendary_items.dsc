@@ -1,6 +1,5 @@
 legendary_item_behr_claw:
   type: item
-  debug: false
   material: diamond_shovel
   mechanisms:
     custom_model_data: 1
@@ -18,7 +17,6 @@ legendary_item_behr_claw:
 legendary_item_devin_bucket:
   type: item
   material: diamond_boots
-  debug: false
   mechanisms:
     custom_model_data: 1
     nbt: legendary/devin
@@ -30,28 +28,12 @@ legendary_item_devin_bucket:
     - Unbreaking:3
   display name: <&6>Devin's Bucket
   lore:
-    - <&e>Would you like a bucket?
+    - <&e>Would you like a bucket?.
     - <&a>
     - <&e>May impair vision.
 
-legendary_item_bill_cane:
-  type: item
-  material: diamond_sword
-  mechanisms:
-    custom_model_data: 1
-    nbt: legendary/bill
-  enchantments:
-    - sweeping_edge:4
-    - looting:4
-    - Mending:1
-    - sharpness:3
-  display name: "<&6>Ole Bill's whoopin' stick"
-  lore:
-    - <&e>He's gonna have a hard time chasing you to get this back.
-
 legendary_item_mending_cost_increase:
   type: world
-  debug: false
   events:
     on player prepares anvil craft item:
       - if <context.item.has_nbt[legendary]>:
@@ -62,7 +44,6 @@ legendary_item_mending_cost_increase:
 
 legendary_effects_handler:
   type: world
-  debug: false
   events:
     on player breaks block with:legendary_item_behr_claw:
       - define chance <util.random.int[1].to[10]>
@@ -71,7 +52,6 @@ legendary_effects_handler:
 
 legendary_item_non_head_equip_handler:
   type: world
-  debug: false
   events:
     on player clicks in inventory with:legendary_item_devin_bucket:
       - if <context.slot> == 40 && <player.inventory.slot[<context.slot>].material.name> == air:
