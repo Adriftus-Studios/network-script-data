@@ -1,7 +1,7 @@
 claim_system_yaml_settings:
   type: data
   settings:
-    allowed_worlds: mainland
+    allowed_worlds: mainland|mainland_nether
 
 ##################################
 ## YAML DATA FOR UPGRADE PRICES ##
@@ -1156,7 +1156,7 @@ claiming_protection_events:
     - define group <yaml[claims].read[<context.entity.location.chunk.world>.<context.entity.location.chunk.x>.<context.entity.location.chunk.z>]||null>
     - if <[group]> == null:
       - stop
-    - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.kill-animals]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
+    - if !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
       - narrate "<&c>You do not have permission to harm animals here."
       - determine cancelled
     on player damages cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|*minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep|item_frame:

@@ -80,7 +80,7 @@ drop_table:
   debug: false
   definitions: mob_level
   script:
-    - define number <util.random.int[1].to[10000]>
+    - define number <util.random.int[1].to[30000]>
     - foreach <script[drop_table_data].list_keys[mob_level.<[mob_level]>].numerical>:
       - if <[value]> >= <[number]>:
         - define drop_data  <script[drop_table_data].data_key[mob_level.<[mob_level]>.<[value]>].random>
@@ -93,7 +93,7 @@ mob_death_event:
   whitelist: zombie|creeper|skeleton|spider|drowned|witch|husk|withers|evoker|ravager|pillager|vex|illusioner|silverfish|stray|vindicator|cave_spider|enderman|phantom|slime
   blacklist: <&B>Maggots <&f>- <&E>Lv.*|<&b>Voidworm <&f>- <&E>Lv.*|
   events:
-    on entity dies in:mainland:
+    on entity killed by player in:mainland:
       - if <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]> && <context.entity.is_mythicmob> && !<script[mob_death_event].data_key[blacklist].contains[<context.entity.name>]>:
         - define mob_level <context.entity.mythicmob.level||0>
         - if <[mob_level]> == 0:
