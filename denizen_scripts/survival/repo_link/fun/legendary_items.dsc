@@ -28,9 +28,24 @@ legendary_item_devin_bucket:
     - Unbreaking:3
   display name: <&6>Devin's Bucket
   lore:
-    - <&e>Would you like a bucket?.
+    - <&e>Would you like a bucket?
     - <&a>
     - <&e>May impair vision.
+
+legendary_item_bill_cane:
+  type: item
+  material: diamond_sword
+  mechanisms:
+    custom_model_data: 1
+    nbt: legendary/bill
+  enchantments:
+    - sweeping_edge:4
+    - looting:4
+    - Mending:1
+    - sharpness:3
+  display name: "<&6>Ole Bill's whoopin' stick"
+  lore:
+    - <&e>He's gonna have a hard time chasing you to get this back.
 
 legendary_item_mending_cost_increase:
   type: world
