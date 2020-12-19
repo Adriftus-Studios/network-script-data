@@ -8,6 +8,7 @@ world_event_config:
   server_amount_needed: 8000
   personal_amount_needed: 1000
 
+
 currency_display_item:
   type: item
   debug: false
