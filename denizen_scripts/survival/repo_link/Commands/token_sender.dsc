@@ -51,9 +51,9 @@ weekly_token_reset:
           - if <player.enderchest.is_full>:
             - flag <[rewardee]> 80_reward_due
           - else:
-            - give <proc[get_random_soul].context[2|4]> to:<[rewardee].enderchest>
+            - give <proc[get_random_soul].context[2|4].with[custom_model_data=3]> to:<[rewardee].enderchest>
         - else:
-            - give <proc[get_random_soul].context[2|4] to:<[rewardee].enderchest>
+            - give <proc[get_random_soul].context[2|4].with[custom_model_data=3]> to:<[rewardee].enderchest>
       - if <[server_percentage]> >= 1.0 && <[personal_percentage]> >= 1.0::
         - if <yaml[claims].read[limits.max.<[rewardee].uuid>]||null> != null:
 #          - yaml id:claims set limits.max.<[rewardee].uuid>:+:10
