@@ -1,9 +1,13 @@
 world_event_config:
   type: data
   materials:
-#    honey_bottle: 1
-  server_amount_needed: 15000
-  personal_amount_needed: 1200
+    snowball: 1
+    snow_block: 4
+    coal: 3
+    coal_block: 27
+  server_amount_needed: 8000
+  personal_amount_needed: 1000
+
 
 currency_display_item:
   type: item
@@ -80,7 +84,7 @@ world_event_progress_inventory:
   title: <&a>World Event
   definitions:
     G: white_stained_glass_pane[display_name=<&a>]
-#    T: "ender_chest[display_name=<&a>Turn in Materials;lore=<&e>- Honey Bottle (1)|<&e>- Honey Block (4)|<&e>- Honeycomb (3)|<&e>- Honeycomb Block (12)|<&e>- Bee Hive (9)|<&e>- Bee Nest (12)|;nbt=action/turn_in]"
+    T: "ender_chest[display_name=<&a>Turn in Materials;lore=<&e>- Snow (1)|<&e>- Snow Block (4)|<&e>- Coal (3)|<&e>- Coal Block (27);nbt=action/turn_in]"
     soon: "barrier[display_name=<&e>Coming Soon!]"
   slots:
     - [G] [G] [G] [G] [G] [G] [G] [G] [G]
@@ -121,9 +125,10 @@ world_event_progress_inventory_open:
     - give "iron_ingot[display_name=<&a>Week 1;lore=<&e>- Iron Ingots|<&e>- Iron Blocks]" to:<[inventory]>
     - give "scute[display_name=<&a>Week 2;lore=<&e>- Scutes]" to:<[inventory]>
     - give "bee_nest[display_name=<&a>Week 3;lore=<&e>- Honey Bottle|<&e>- Honey Block|<&e>- Honeycomb|<&e>- Honeycomb Block|<&e>- Bee Hive|<&e>- Bee Nest|]" to:<[inventory]>
-    - give "netherite_sword[display_name=<&a>Week 3;lore=<&e>- Mobs|<&e>1 point per level]" to:<[inventory]>
-    - repeat 6:
-      - give "barrier[display_name=<&a>Week <[value].add[5]>;lore=<&b>Release Date<&co>|<&e><time[2020/12/11_02:20:31:123_-07:00].add[<[value].mul[7]>d].format[MM/dd/YYYY]>]" to:<[inventory]>
+    - give "netherite_sword[display_name=<&a>Week 4;lore=<&e>- Mobs|<&e>1 point per level]" to:<[inventory]>
+    - give "snow_block[display_name=<&a>Week 5;lore=<&e>- Snow (1)|<&e>- Snow Block (4)|<&e>- Coal (3)|<&e>- Coal Block (27)|<&e>- Bee Hive (9)|<&e>- Bee Nest (12)|;nbt=action/turn_in]" to:<[inventory]>
+    - repeat 5:
+      - give "barrier[display_name=<&a>Week <[value].add[7]>;lore=<&b>Release Date<&co>|<&e><time[2020/12/11_02:20:31:123_-07:00].add[<[value].mul[7]>d].format[MM/dd/YYYY]>]" to:<[inventory]>
     - inventory open d:<[inventory]>
 
 world_event_turn_in:

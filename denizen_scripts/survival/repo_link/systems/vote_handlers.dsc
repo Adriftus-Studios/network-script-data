@@ -147,8 +147,7 @@ daily_vote_key:
   mechanisms:
     hides: enchants
     nbt: keytype/daily
-  enchantments:
-  - unbreaking:3
+    custom_model_data: 1
 
 weekly_vote_key:
   type: item
@@ -157,8 +156,7 @@ weekly_vote_key:
   mechanisms:
     hides: enchants
     nbt: keytype/weekly
-  enchantments:
-  - unbreaking:3
+    custom_model_data: 2
 
 vote_crate_key_events:
   type: world

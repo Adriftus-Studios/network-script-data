@@ -36,7 +36,7 @@ legendary_item_devin_bucket:
 
 legendary_item_bill_cane:
   type: item
-  material: diamond_sword
+  material: netherite_sword
   mechanisms:
     custom_model_data: 1
     nbt: legendary/bill
@@ -44,7 +44,7 @@ legendary_item_bill_cane:
     - sweeping_edge:4
     - looting:4
     - Mending:1
-    - sharpness:3
+    - sharpness:5
   display name: "<&6>Ole Bill's whoopin' stick"
   lore:
     - <&e>He's gonna have a hard time chasing you to get this back.

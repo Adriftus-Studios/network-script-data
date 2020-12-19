@@ -6,7 +6,7 @@ weekly_token_reset:
   permission: adriftus.staff
   description: resets the weekly progress for the current world event, and hands out player rewards/tokens. To be updated and filled out each time.
   script:
-    - define week <element[2]>
+    - define week <element[5]>
     - define event world_barrier
     - if <server.has_file[<[event]>.yml]>:
       - yaml load:<[event]>.yml id:<[event]>
@@ -31,20 +31,29 @@ weekly_token_reset:
           - if <player.enderchest.is_full>:
             - flag <[rewardee]> 40_reward_due
           - else:
-            - give food_crate to:<[rewardee].enderchest> quantity:3
+            - give food_crate to:<[rewardee].enderchest> quantity:2
+            - give filled_xp_vessel_level_10 to:<[rewardee].enderchest> quantity:1
         - else:
-          - give food_crate to:<[rewardee].inventory> quantity:3
+            - give food_crate to:<[rewardee].enderchest> quantity:2
+            - give filled_xp_vessel_level_10 to:<[rewardee].enderchest> quantity:1
       - if <[personal_percentage]> >= 0.6:
         - if <player.inventory.is_full>:
           - if <player.enderchest.is_full>:
             - flag <[rewardee]> 60_reward_due
           - else:
-            - give teleportation_crystal quantity:3 to:<[rewardee].enderchest>
+            - give daily_vote_key quantity:1 to:<[rewardee].enderchest>
+            - give weekly_vote_key quantity:1 to:<[rewardee].enderchest>
         - else:
-          - give teleportation_crystal quantity:3 to:<[rewardee].inventory>
+          - give daily_vote_key quantity:1 to:<[rewardee].inventory>
+          - give weekly_vote_key quantity:1 to:<[rewardee].enderchest>
       - if <[personal_percentage]> >= 0.8:
-        - if <yaml[claims].read[limits.max.<[rewardee].uuid>]||null> != null:
-          - yaml id:claims set limits.max.<[rewardee].uuid>:+:10
+        - if <player.inventory.is_full>:
+          - if <player.enderchest.is_full>:
+            - flag <[rewardee]> 80_reward_due
+          - else:
+            - give <proc[get_random_soul].context[2|4].with[custom_model_data=3]> to:<[rewardee].enderchest>
+        - else:
+            - give <proc[get_random_soul].context[2|4].with[custom_model_data=3]> to:<[rewardee].enderchest>
       - if <[server_percentage]> >= 1.0 && <[personal_percentage]> >= 1.0::
         - if <yaml[claims].read[limits.max.<[rewardee].uuid>]||null> != null:
 #          - yaml id:claims set limits.max.<[rewardee].uuid>:+:10
