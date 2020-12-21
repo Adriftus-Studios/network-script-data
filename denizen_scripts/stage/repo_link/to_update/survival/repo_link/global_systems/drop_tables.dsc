@@ -77,10 +77,10 @@ drop_table_data:
 
 drop_table:
   type: task
-  debug: false
+  debug: true
   definitions: mob_level
   script:
-    - define number <util.random.int[1].to[10000]>
+    - define number <util.random.int[1].to[15000]>
     - foreach <script[drop_table_data].list_keys[mob_level.<[mob_level]>].numerical>:
       - if <[value]> >= <[number]>:
         - define drop_data  <script[drop_table_data].data_key[mob_level.<[mob_level]>.<[value]>].random>
@@ -94,7 +94,9 @@ mob_death_event:
   blacklist: <&B>Maggots <&f>- <&E>Lv.*|<&b>Voidworm <&f>- <&E>Lv.*|
   events:
     on entity dies in:mainland:
-      - if <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]> && <context.entity.is_mythicmob> && !<script[mob_death_event].data_key[blacklist].contains[<context.entity.name>]>:
+      - if <context.damager.is_player||null> == null:
+        - stop
+      - else <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]> && <context.entity.is_mythicmob> && !<script[mob_death_event].data_key[blacklist].contains[<context.entity.name>]>:
         - define mob_level <context.entity.mythicmob.level||0>
         - if <[mob_level]> == 0:
           - stop

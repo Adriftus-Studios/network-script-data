@@ -125,7 +125,7 @@ world_event_progress_inventory_open:
     - give "scute[display_name=<&a>Week 2;lore=<&e>- Scutes]" to:<[inventory]>
     - give "bee_nest[display_name=<&a>Week 3;lore=<&e>- Honey Bottle|<&e>- Honey Block|<&e>- Honeycomb|<&e>- Honeycomb Block|<&e>- Bee Hive|<&e>- Bee Nest|]" to:<[inventory]>
     - give "netherite_sword[display_name=<&a>Week 4;lore=<&e>- Mobs|<&e>1 point per level]" to:<[inventory]>
-    - give "snow_block[display_name=<&a>Week 5;lore=<&e>- Snow (1)|<&e>- Snow Block (4)|<&e>- Coal (3)|<&e>- Coal Block (27)|<&e>- Bee Hive (9)|<&e>- Bee Nest (12)|;nbt=action/turn_in]" to:<[inventory]>
+    - give "snow_block[display_name=<&a>Week 5;lore=<&e>- Snow (1)|<&e>- Snow Block (4)|<&e>- Coal (3)|<&e>- Coal Block (27);nbt=action/turn_in]" to:<[inventory]>
     - repeat 5:
       - give "barrier[display_name=<&a>Week <[value].add[7]>;lore=<&b>Release Date<&co>|<&e><time[2020/12/11_02:20:31:123_-07:00].add[<[value].mul[7]>d].format[MM/dd/YYYY]>]" to:<[inventory]>
     - inventory open d:<[inventory]>

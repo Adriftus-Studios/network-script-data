@@ -170,18 +170,18 @@ vote_crate_key_events:
         - ratelimit <player> 2s
         - narrate "<&c>Your inventory is full. Please make some room!"
         - stop
-      - if <player.item_in_hand> == <item[daily_vote_key]>:
-        - take iteminhand
+      - if <player.item_in_hand.scriptname> == daily_vote_key:
         - wait 1t
+        - take iteminhand
         - inject daily_gui_open
     - if <server.has_flag[<context.location.simple>.weekly_crate]>:
-      - if <player.item_in_hand> == <item[weekly_vote_key]>:
+      - if <player.item_in_hand.scriptname> == weekly_vote_key:
         - if <player.inventory.is_full>:
           - ratelimit <player> 2s
           - narrate "<&c>Your inventory is full. Please make some room!"
           - stop
-        - take iteminhand
         - wait 1t
+        - take iteminhand
         - inject weekly_gui_open
     on player right clicks chest in:spawn_cuboid:
     - if !<server.has_flag[<context.location.simple>.daily_crate]> && !<server.has_flag[<context.location.simple>.weekly_crate]> && !<list[daily_vote_key|weekly_vote_key].contains[<player.item_in_hand.scriptname>]>:
