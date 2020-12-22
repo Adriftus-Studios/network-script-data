@@ -449,17 +449,18 @@ claiming_group_management_permission_icon_disabled:
 claiming_group_management_add_member:
   type: item
   debug: false
-  material: player_head
-  display name: <&a>Add Member
+  material: green_wool
   mechanisms:
-    skull_skin: GoOnReportMe
+    custom_model_data: 10001001
+
 
 claiming_group_management_remove_member:
   type: item
   debug: false
-  material: player_head
+  material: red_wool
   mechanisms:
-    skull_skin: GoOnReportMe
+    custom_model_data: 10001001
+
 
 claiming_group_management_settings:
   type: item
