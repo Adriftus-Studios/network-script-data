@@ -1,7 +1,7 @@
 claim_system_yaml_settings:
   type: data
   settings:
-    allowed_worlds: mainland
+    allowed_worlds: mainland|mainland_nether
 
 ##################################
 ## YAML DATA FOR UPGRADE PRICES ##
@@ -808,7 +808,7 @@ claiming_protection_settings_build_bottom_settings:
     - define times <list[off|sunrise|morning|noon|evening|sunset|midnight]>
     - foreach <script[claiming_protection_settings].data_key[setting_optional_buttons_slots]> as:slot:
       - define CMD <script[claiming_group_management_time-control_icon].data_key[CMD.<[times].get[<[loop_index]>]>]>
-      - define display:<&e>Set<&sp>To<&co><&sp><[times].get[<[loop_index]>]>
+      - define display:<&e>Set<&sp>To<&co><&sp><[times].get[<[loop_index]>].to_titlecase>
       - inventory set slot:<[slot]> d:<player.open_inventory> o:<item[claiming_group_management_time-control_icon].with[custom_model_data=<[CMD]>;display_name=<[display]>;nbt=set_to/<[times].get[<[loop_index]>]>]>
   - else if <[setting]> == weather-control:
     - define weathers <list[off|sunny|storm|thunder]>
@@ -817,7 +817,7 @@ claiming_protection_settings_build_bottom_settings:
         - define list:->:<script[claiming_protection_settings].parsed_key[definitions.filler]>
       - else:
         - define CMD <script[claiming_group_management_weather-control_icon].data_key[CMD.<[weathers].get[<[value].sub[2]>]>]>
-        - define display:<&e>Set<&sp>To<&co><&sp><[weathers].get[<[value].sub[2]>]>
+        - define display:<&e>Set<&sp>To<&co><&sp><[weathers].get[<[value].sub[2]>].to_titlecase>
         - define list:->:<item[claiming_group_management_time-control_icon].with[custom_model_data=<[CMD]>;display_name=<[display]>;nbt=set_to/<[weathers].get[<[value].sub[2]>]>]>
     - foreach <script[claiming_protection_settings].data_key[setting_optional_buttons_slots]> as:slot:
       - inventory set slot:<[slot]> d:<player.open_inventory> o:<[list].get[<[loop_index]>]>
@@ -1156,7 +1156,7 @@ claiming_protection_events:
     - define group <yaml[claims].read[<context.entity.location.chunk.world>.<context.entity.location.chunk.x>.<context.entity.location.chunk.z>]||null>
     - if <[group]> == null:
       - stop
-    - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.kill-animals]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
+    - if !<yaml[claims].read[groups.<[group]>.members.everyone.kill-animals]>:
       - narrate "<&c>You do not have permission to harm animals here."
       - determine cancelled
     on player damages cow|chicken|pig|llama|bee|cat|dolphin|donkey|fox|turtle|horse|*minecart|mushroom_cow|rabbit|polar_bear|wolf|villager|parrot|skeleton_horse|zombie_horse|sheep|item_frame:
