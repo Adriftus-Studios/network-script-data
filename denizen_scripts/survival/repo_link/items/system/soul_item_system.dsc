@@ -374,9 +374,6 @@ soul:
   debug: false
   material: firework_star
   display_name: <&c>ERROR - REPORT THIS
-  mechanisms:
-    enchantments: luck,1
-    hides: all
   lore_type: <&d>Soul Item
 
 item_with_soul:
@@ -406,7 +403,7 @@ get_random_soul:
       - define NBT <[NBT].include_single[debuffs/<[debuffs]>]>
     - define flavor "<&d>Soul Item<&nl><&e>Combine with Armor or Weapons"
     - define NBT <[NBT].include_single[flavor/<[flavor]>]>
-    - define item <item[soul].with[nbt=<[NBT]>]>
+    - define item <item[soul].with[nbt=<[NBT]>].with[custom_model_data=<[rarity].add[1]>]>
     - determine <proc[item_system_build_item].context[<list_single[<[item]>]>]>
 
 item_with_soul_create:
@@ -559,7 +556,7 @@ item_system_build_item:
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.flavor]>]>
     - define lore <[lore].include[<script[item_system_global_data].parsed_key[settings.lore.bottom]>]>
 
-    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;hides=ALL]>
+    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>]>
     - if !<[nbt].is_empty>:
       - define NewItem <[NewItem].with[nbt=<[nbt]>]>
     - else:

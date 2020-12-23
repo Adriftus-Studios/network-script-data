@@ -5,6 +5,7 @@ empty_xp_vessel_level_5:
   type: item
   mechanisms:
     nbt: vessel_capacity/55|vessel_level/5
+    custom_model_data: 1
   lore:
     - <&d>Will store 55 XP (level 0-5) when used.
   recipes:
@@ -21,8 +22,37 @@ filled_xp_vessel_level_5:
   type: item
   mechanisms:
     nbt: vessel_capacity/55|vessel_level/5
+    custom_model_data: 1
   lore:
     - <&d>Will give 55 XP (level 0-5) when used.
+
+empty_xp_vessel_level_10:
+  material: glass_bottle
+  debug: false
+  display name: <&f>Empty Experience Vessel
+  type: item
+  mechanisms:
+    nbt: vessel_capacity/160|vessel_level/10
+    custom_model_data: 2
+  lore:
+    - <&d>Will store 160 XP (level 0-10) when used.
+  recipes:
+    1:
+      type: shapeless
+      output_quantity: 1
+      hide_in_recipebook: false
+      input: diamond|glass_bottle|diamond|diamond|lapis_lazuli|lapis_lazuli
+
+filled_xp_vessel_level_10:
+  material: experience_bottle
+  debug: false
+  display name: <&f>Filled Experience Vessel
+  type: item
+  mechanisms:
+    nbt: vessel_capacity/160|vessel_level/10
+    custom_model_data: 2
+  lore:
+    - <&d>Will give 160 XP (level 0-10) when used.
 
 vessel_handler:
   type: world

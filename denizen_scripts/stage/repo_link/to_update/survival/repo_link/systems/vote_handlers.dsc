@@ -43,7 +43,6 @@ vote_receiver:
           - else:
             - announce "<&a><player.display_name> <&c>has just received a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to receive yours now!"
 
-
   daily_vote_counter:
     - flag <[voter]> daily_votes_reward counter:++
     - flag <[voter]> DailyVotesTotal counter:++
@@ -146,20 +145,16 @@ daily_vote_key:
   material: tripwire_hook
   display name: <&b>Daily Vote Crate Key
   mechanisms:
-    hides: enchants
     nbt: keytype/daily
-  enchantments:
-  - unbreaking:3
+    custom_model_data: 1
 
 weekly_vote_key:
   type: item
   material: tripwire_hook
   display name: <&b>Weekly Vote Crate Key
   mechanisms:
-    hides: enchants
     nbt: keytype/weekly
-  enchantments:
-  - unbreaking:3
+    custom_model_data: 2
 
 vote_crate_key_events:
   type: world
@@ -172,30 +167,30 @@ vote_crate_key_events:
       - narrate "<&c>You cannot use that here. Please go to the crates server warp."
     - if <server.has_flag[<context.location.simple>.daily_crate]>:
       - if <player.inventory.is_full>:
+        - ratelimit <player> 2s
         - narrate "<&c>Your inventory is full. Please make some room!"
         - stop
-      - if <player.item_in_hand> == <item[daily_vote_key]>:
+      - if <player.item_in_hand.scriptname> == daily_vote_key:
         - take iteminhand
+        - wait 1t
         - inject daily_gui_open
-      - if <player.item_in_hand> == <item[weekly_vote_key]>:
-        - narrate "<&c>Please use a <item[daily_vote_key].display>."
     - if <server.has_flag[<context.location.simple>.weekly_crate]>:
-      - if <player.item_in_hand> == <item[weekly_vote_key].display>:
+      - if <player.item_in_hand.scriptname> == weekly_vote_key:
         - if <player.inventory.is_full>:
+          - ratelimit <player> 2s
           - narrate "<&c>Your inventory is full. Please make some room!"
           - stop
         - take iteminhand
+        - wait 1t
         - inject weekly_gui_open
-        - narrate "Opening weekly crate"
-      - if <player.item_in_hand> == <item[daily_vote_key]>:
-        - narrate "<&c>Please use a <item[weekly_vote_key].display>."
     on player right clicks chest in:spawn_cuboid:
-    - if !<server.has_flag[<context.location.simple>.daily_crate]> && !<server.has_flag[<context.location.simple>.weekly_crate]>:
+    - if !<server.has_flag[<context.location.simple>.daily_crate]> && !<server.has_flag[<context.location.simple>.weekly_crate]> && !<list[daily_vote_key|weekly_vote_key].contains[<player.item_in_hand.scriptname>]>:
       - stop
-    - else if <server.has_flag[<context.location.simple>.daily_crate]> && <context.item.scriptname> != daily_vote_key:
+    - if <server.has_flag[<context.location.simple>.daily_crate]> && <context.item.scriptname> != daily_vote_key:
+      - determine passively cancelled
       - ratelimit <player> 2s
       - narrate "<&a>Please get a <item[daily_vote_key].display>."
-    - else if <server.has_flag[<context.location.simple>.weekly_crate]> && <context.item.scriptname> != weekly_vote_key:
+    - if <server.has_flag[<context.location.simple>.weekly_crate]> && <context.item.scriptname> != weekly_vote_key:
+      - determine passively cancelled
       - ratelimit <player> 2s
       - narrate "<&a>Please get a <item[weekly_vote_key].display>."
-
