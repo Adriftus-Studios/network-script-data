@@ -8,4 +8,4 @@ armor_stand_editor_tool:
   recipes:
      tool:
          type: shapeless
-         input: armor_stand|writable_book
+         input: armor_stand|writable_book|flint
