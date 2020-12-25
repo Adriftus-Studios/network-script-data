@@ -1,4 +1,4 @@
-Reload_Task:
+reload_task:
   type: task
   debug: false
   definitions: hook
@@ -6,7 +6,7 @@ Reload_Task:
     - flag server reload_hook:<[hook]> duration:1s
     - reload
 
-Reload_Error_Detection:
+reload_error_detection:
   type: world
   debug: false
   events:

@@ -1,4 +1,4 @@
-Restart_Handler:
+restart_handler:
   type: world
   debug: false
   events:

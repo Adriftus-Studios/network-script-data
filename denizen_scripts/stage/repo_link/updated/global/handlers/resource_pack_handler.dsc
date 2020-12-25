@@ -1,4 +1,3 @@
-
 rp_command:
   type: command
   debug: false
