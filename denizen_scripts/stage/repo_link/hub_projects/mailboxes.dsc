@@ -140,17 +140,17 @@ Mail_Behavior:
       - inject Player_Verification_Offline
       - determine passively fulfilled
       - define Recipient <[User]>
-      - if !<player.inventory.contains.nbt[<[Recipient].uuid>]>:
+      - if !<player.inventory.contains.flag[<[Recipient].uuid>]>:
         - narrate "<red>You already have a letter to <[Recipient].name> in your inventory."
       - else:
         - if !<player.inventory.empty_slots.is_empty>:
-          - give <player> "writable_book[book=<map.with[pages].as[Dear <[Recipient].name>,<p>]>;display_name=<aqua>New Letter to <[Recipient].name>;nbt=Player/<[Recipient].uuid>;lore=Letter to <[Recipient].name>]"
+          - give "writable_book[book=<map.with[pages].as[Dear <[Recipient].name>,<p>]>;display_name=<aqua>New Letter to <[Recipient].name>;nbt=Player/<[Recipient].uuid>;lore=Letter to <[Recipient].name>]"
           - narrate "<aqua>Check your inventory for your new blank letter to <[Recipient].name>."
         - else:
           - narrate "<red>Your inventory is full!"
     on player signs book:
     # When a player finishes writing a letter.
-      - if <context.book.has_nbt[Player]>:
+      - if <context.book.has_flag[Player]>:
         - narrate "<gold><&n><&hover[<aqua>Drag and drop an item from your inventory onto the letter to attach it.]>Attach items<&end_hover><&r> <aqua>if you wish, then place this letter in a mailbox to send it to <context.book.nbt[Player].as_player.name>!"
         - title subtitle "<aqua>Letter created with subject <white><context.title>"
         - define title <context.title>
@@ -158,19 +158,19 @@ Mail_Behavior:
         - inventory adjust display_name:<blue><[title]> origin:<player.inventory> slot:<player.held_item_slot>
     on player clicks written_book in inventory:
     # When a player attempts to attach an item to a letter.
-      - if <context.item.has_nbt[Player]> && <context.item.nbt[Player]> != <player.uuid> && <context.click> == RIGHT:
+      - if <context.item.has_flag[Player]> && <context.item.flag[Player]> != <player.uuid> && <context.click> == RIGHT:
         - determine passively cancelled
         - define Letter <context.item>
         - define Attachment <context.cursor_item>
         - adjust <player> item_on_cursor:air
-#            - inventory adjust nbt:->:Attachment/<[Attachment]> origin:<[Letter]>
-#      - else if <context.item.nbt[Player].is[==].to[<player.UUID>]||false>:
+#            - inventory adjust flag:->:Attachment/<[Attachment]> origin:<[Letter]>
+#      - else if <context.item.flag[Player].is[==].to[<player.UUID>]||false>:
 #        - if <context.click> == RIGHT:
 #          - if <context.cursor_item.material.name> == air:
 #            - determine passively cancelled
-#            - define Gift:<context.item.nbt[Attachment]>
+#            - define Gift:<context.item.flag[Attachment]>
 #            - adjust <player> item_on_cursor:<[Gift]>
-#            - inventory adjust nbt:<-:Attachment/<[Gift]> origin:<[Letter]>
+#            - inventory adjust flag:<-:Attachment/<[Gift]> origin:<[Letter]>
 
 New_Mail_Task:
   type: task
@@ -195,7 +195,7 @@ Mail_Delivery:
   events:
     on player closes inventory:
       - if <context.inventory.title> == Mailbox:
-        - define Outgoing <context.inventory.list_contents.filter[nbt[Player].is[!=].to[<player.UUID>]]>
+        - define Outgoing <context.inventory.list_contents.filter[flag[Player].is[!=].to[<player.UUID>]]>
         - if !<[Outgoing].is_empty>:
           - inject Mailbox_Task_Send
         - else:
@@ -207,7 +207,7 @@ Mailbox_Task_Send:
   debug: false
   script:
   - foreach <[Outgoing]> as:Letter:
-    - define Recipient <[Letter].nbt[Player]>
+    - define Recipient <[Letter].flag[Player]>
     - define Inbox <yaml[mailboxes].read[inventories.<[Recipient]>]>
     - if !<[Inbox].empty_slots.is_empty>:
       - define Inbox <[Inbox].set[<[Letter]>].at[<[Inbox].find[air]>]>
