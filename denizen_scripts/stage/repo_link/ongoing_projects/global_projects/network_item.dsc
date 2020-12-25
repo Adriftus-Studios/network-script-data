@@ -71,10 +71,10 @@ network_item_inventory:
   definitions:
     filler: white_stained_glass_pane
     this_player_head: player_head[skull_skin=<player.name>;display_name=<player.name>]
-    server_item: hub_server_item[nbt=item/server]
-    warp_item: hub_warp_item[nbt=item/warp]
-    cosmetics_item: hub_cosmetics_item[nbt=item/cosmetics]
-    settings_item: hub_settings_item[nbt=item/settings]
+    server_item: hub_server_item[flag=item:server]
+    warp_item: hub_warp_item[flag=item:warp]
+    cosmetics_item: hub_cosmetics_item[flag=item:cosmetics]
+    settings_item: hub_settings_item[flag=item:settings]
   slots:
     - [filler] [filler] [filler] [filler] [this_player_head] [filler] [filler] [filler] [filler]
     - [filler] [server_item] [filler] [warp_item] [filler] [cosmetics_item] [filler] [settings_item] [filler]
@@ -86,8 +86,8 @@ network_item_inventory_events:
   events:
     on player clicks item in network_item_inventory:
       - determine passively cancelled
-      - if <context.item.has_nbt[item]>:
-        - choose <context.item.nbt[item]>:
+      - if <context.item.has_flag[item]>:
+        - choose <context.item.flag[item]>:
           - case server:
             - inventory open d:command_play_inventory
           - case warp:

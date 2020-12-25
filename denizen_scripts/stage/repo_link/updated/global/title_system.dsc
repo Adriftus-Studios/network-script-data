@@ -50,8 +50,8 @@ title_inventory:
       page_marker: 1
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;nbt=action/next_page]>
-    previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;nbt=action/previous_page]>
+    next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;flag=action:next_page]>
+    previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;flag=action:previous_page]>
   slots:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     - [filler] [] [] [] [] [] [] [] [filler]
@@ -67,21 +67,21 @@ title_inventory_events:
     on player clicks item in title_inventory:
       - determine passively cancelled
       - wait 1t
-      - if <context.item.has_nbt[action]>:
-        - choose <context.item.nbt[action]>:
+      - if <context.item.has_flag[action]>:
+        - choose <context.item.flag[action]>:
           - case set_title:
-            - yaml id:global.player.<player.uuid> set titles.current:<context.item.nbt[title]>
-            - yaml id:global.player.<player.uuid> set titles.current_tag:<yaml[titles].read[titles.<context.item.nbt[title]>.tag].parse_color>
+            - yaml id:global.player.<player.uuid> set titles.current:<context.item.flag[title]>
+            - yaml id:global.player.<player.uuid> set titles.current_tag:<yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color>
             - inject title_inventory_open
-            - narrate "<&b>You have changed your active title to<&co> <yaml[titles].read[titles.<context.item.nbt[title]>.tag].parse_color.parsed>"
+            - narrate "<&b>You have changed your active title to<&co> <yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color.parsed>"
           - case remove_title:
             - yaml id:global.player.<player.uuid> set titles.current:!
             - inject title_inventory_open
           - case next_page:
-            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].nbt[page].add[1]>
+            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].flag[page].add[1]>
             - inject title_inventory_open
           - case previous_page:
-            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].nbt[page].sub[1]>
+            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].flag[page].sub[1]>
             - inject title_inventory_open
 
 title_inventory_open:
@@ -108,7 +108,7 @@ title_inventory_open:
           - inject build_current_title
           - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.current_title]> o:<[item]>
         - case page_marker:
-          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.page_marker]> o:<script[title_inventory].parsed_key[definitions.filler].with[nbt=page/<[page]>]>
+          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.page_marker]> o:<script[title_inventory].parsed_key[definitions.filler].with[flag=page:<[page]>]>
     - inventory open d:<[inventory]>
 
 build_title_select_item:
@@ -121,7 +121,7 @@ build_title_select_item:
     - define material <yaml[titles].read[gui.tag_select_item.material]>
     - define lore <yaml[titles].read[gui.tag_select_item.lore].parse[parse_color.parsed]>
     - define name <yaml[titles].read[gui.tag_select_item.displayname].parse_color.parsed>
-    - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;nbt=action/set_title|title/<[tagID]>]>
+    - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;flag=action:set_title|title:<[tagID]>]>
 
 build_current_title:
   type: task
@@ -137,7 +137,7 @@ build_current_title:
       - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>]>
     - else:
       - define lore <yaml[titles].read[gui.current_title.lore].parse[parse_color.parsed]>
-      - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;nbt=action/remove_title]>
+      - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;flag=action:remove_title]>
 
 titles_config_manager:
   type: world

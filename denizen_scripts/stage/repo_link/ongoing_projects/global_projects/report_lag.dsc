@@ -3,9 +3,12 @@ report_lag:
   name: report_lag
   debug: false
   description: Files a lag report in discord.
-  usage: /lag_report
+  usage: /report_lag
   aliases:
   - reportlag
+  - lagreport
+  - lag
+  - lag_report
   script:
     - if <player.has_flag[lag_reported]>:
       - narrate <&1>------------------------------------------------

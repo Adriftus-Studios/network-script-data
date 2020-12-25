@@ -17,6 +17,6 @@ flag_handler:
       - determine cancelled
     on player moves flagged:downpull:
       - ratelimit <player> 5t
-      - adjust <[player]> velocity:<[player].velocity.add[<location[0,<[player].flag[downpull]||-0.02>,0]>]>
+      - adjust <player> velocity:<player.velocity.add[<location[0,<player.flag[downpull]||-0.02>,0]>]>
     on player chats flagged:chat_mute bukkit_priority:LOWEST:
       - determine cancelled

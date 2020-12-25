@@ -13,7 +13,7 @@ bowtrails_handler:
       - ratelimit <player> 1s
       - if <yaml[bowtrails].contains[bowtrails.<player.flag[bowtrail]>.trail_type]> && <script[bow_trail_<yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.trail_type]>]||invalid> != invalid:
         - inject bow_trail_<yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.trail_type]>
-    after player shoots block with arrow flagged:bowtrail:
+    after player shoots block flagged:bowtrail:
       - if <context.projectile.has_flag[no_trail]>:
         - stop
       - if <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.trail_type].starts_with[block]>:
@@ -226,8 +226,8 @@ bowtrails_inventory:
       page_marker: 1
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;nbt=action/next_page]>
-    previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;nbt=action/previous_page]>
+    next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;flag=action:next_page]>
+    previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;flag=action:previous_page]>
   slots:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     - [filler] [] [] [] [] [] [] [] [filler]
@@ -243,23 +243,23 @@ bowtrails_inventory_events:
     on player clicks item in bowtrails_inventory:
       - determine passively cancelled
       - wait 1t
-      - if <context.item.has_nbt[action]>:
-        - choose <context.item.nbt[action]>:
+      - if <context.item.has_flag[action]>:
+        - choose <context.item.flag[action]>:
           - case set_bowtrail:
-            - yaml id:global.player.<player.uuid> set bowtrails.current:<context.item.nbt[bowtrail]>
-            - flag player bowtrail:<context.item.nbt[bowtrail]>
+            - yaml id:global.player.<player.uuid> set bowtrails.current:<context.item.flag[bowtrail]>
+            - flag player bowtrail:<context.item.flag[bowtrail]>
             - inject bowtrails_inventory_open
-            - narrate "<&b>You have changed your active bow trail to<&co> <yaml[bowtrails].read[bowtrails.<context.item.nbt[bowtrail]>.name].parse_color.parsed>"
+            - narrate "<&b>You have changed your active bow trail to<&co> <yaml[bowtrails].read[bowtrails.<context.item.flag[bowtrail]>.name].parse_color.parsed>"
           - case remove_bowtrail:
             - yaml id:global.player.<player.uuid> set bowtrails.current:!
             - flag player bowtrail:!
             - narrate "<&r>You have removed your Bow Trail."
             - inject bowtrails_inventory_open
           - case next_page:
-            - define page <context.inventory.slot[<script[bowtrails_inventory].data_key[custom.mapping.page_marker]>].nbt[page].add[1]>
+            - define page <context.inventory.slot[<script[bowtrails_inventory].data_key[custom.mapping.page_marker]>].flag[page].add[1]>
             - inject bowtrails_inventory_open
           - case previous_page:
-            - define page <context.inventory.slot[<script[bowtrails_inventory].data_key[custom.mapping.page_marker]>].nbt[page].sub[1]>
+            - define page <context.inventory.slot[<script[bowtrails_inventory].data_key[custom.mapping.page_marker]>].flag[page].sub[1]>
             - inject bowtrails_inventory_open
 
 bowtrails_inventory_open:
@@ -286,7 +286,7 @@ bowtrails_inventory_open:
           - inject build_current_trail
           - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.current_bowtrail]> o:<[item]>
         - case page_marker:
-          - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.page_marker]> o:<script[bowtrails_inventory].parsed_key[definitions.filler].with[nbt=page/<[page]>]>
+          - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.page_marker]> o:<script[bowtrails_inventory].parsed_key[definitions.filler].with[flag=page:<[page]>]>
     - inventory open d:<[inventory]>
 
 build_trail_select_item:
@@ -299,7 +299,7 @@ build_trail_select_item:
     - define display_name <yaml[bowtrails].parsed_key[bowtrails.<[trailID]>.name].parse_color>
     - define lore <yaml[bowtrails].parsed_key[gui.trail_select_item.lore].parse[parse_color]>
     - define name <yaml[bowtrails].parsed_key[gui.trail_select_item.displayname].parse_color>
-    - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;nbt=action/set_bowtrail|bowtrail/<[trailID]>]>
+    - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;flag=action:set_bowtrail|bowtrail:<[trailID]>]>
 
 build_current_trail:
   type: task
@@ -317,7 +317,7 @@ build_current_trail:
       - define name <yaml[bowtrails].parsed_key[gui.current_trail.displayname].parse_color>
       - define material <yaml[bowtrails].read[bowtrails.<[trailID]>.icon]>
       - define lore <yaml[bowtrails].parsed_key[gui.current_trail.lore].parse[parse_color]>
-      - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;nbt=action/remove_bowtrail]>
+      - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;flag=action:remove_bowtrail]>
 
 bowtrail_config_manager:
   type: world
