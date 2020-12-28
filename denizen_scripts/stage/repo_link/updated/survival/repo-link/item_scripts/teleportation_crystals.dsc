@@ -34,7 +34,7 @@ teleportation_crystal_menu:
     - foreach <server.online_players.exclude[<player>]> as:player:
       - define lore <list[<&b>Left<&sp>Click<&sp>to<&sp>teleport<&sp>to<&co><&sp><&e><[player].name>]>
       - define lore:->:<&3>Right<&sp>Click<&sp>to<&sp>request<&sp>to<&sp>teleport<&sp>here
-      - define item <item[player_head].with[display_name=<&e><[player].name>;lore=<[lore]>;skull_skin=<[player].name>;nbt=<list[name/<[player].name>]>]>
+      - define item <item[player_head].with[display_name=<&e><[player].name>;lore=<[lore]>;skull_skin=<[player].name>;flag=<list[name/<[player].name>]>]>
       - define inventory:->:<[item]>
     - determine <[inventory]>
   slots:
@@ -54,12 +54,12 @@ teleportation_crystal_menu_events:
   events:
     on player clicks in teleportation_crystal_menu priority:10:
       - determine cancelled
-	
+
     on player clicks red_stained_glass_pane in teleportation_crystal_menu:
       - inventory close
-    
+
     on player left clicks player_head in teleportation_crystal_menu:
-      - define other_player <server.match_offline_player[<context.item.nbt[name]>]>
+      - define other_player <server.match_offline_player[<context.item.flag[name]>]>
       # Check if the other player has a map with your player tag.
       - if <[other_player].has_flag[teleportation_crystal]> && <[other_player].is_online>:
         - foreach <[other_player].flag[teleportation_crystal]> as:map:
@@ -79,9 +79,9 @@ teleportation_crystal_menu_events:
       - narrate targets:<[other_player]> "<&3><player.name> <&b>requests to teleport to you!"
       - narrate targets:<[other_player]> "<&b>Use a teleportation crystal to confirm their request. <&3>(Teleport here: <player.name>)"
       - narrate "<&b>You requested to teleport to <&3><[other_player].name>."
-    
+
     on player right clicks player_head in teleportation_crystal_menu:
-      - define other_player <server.match_offline_player[<context.item.nbt[name]>]>
+      - define other_player <server.match_offline_player[<context.item.flag[name]>]>
       # Check if the other player has a map with your player tag.
       - if <[other_player].has_flag[teleportation_crystal]> && <[other_player].is_online>:
         - foreach <[other_player].flag[teleportation_crystal]> as:map:
@@ -107,4 +107,18 @@ teleportation_crystal_events:
   debug: false
   events:
     on player right clicks block with:teleportation_crystal:
-	  - inventory open d:teleportation_crystal_menu
+    - inventory open d:teleportation_crystal_menu
+
+# -- Teleportation Shard
+teleportation_shard:
+  type: item
+  debug: false
+  material: prismarine_shard
+  display name: <&b>Shard of Teleportation
+  lore:
+    - <&3>Use this to craft a Teleportation Crystal
+  enchantments:
+    - infinity:1
+  mechanisms:
+    hides: ALL
+

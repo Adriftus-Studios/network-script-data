@@ -15,9 +15,10 @@ dragon_wings:
     - <&6>Taken from the <&d>Ender Dragon<&6>!
   mechanisms:
     custom_model_data: 1
-    nbt: power/1
     unbreakable: true
     hides: all
+  flags:
+    power: 1
 
 dragon_wings_end:
   type: task
@@ -29,12 +30,12 @@ dragon_wings_end:
     - flag player Dragon_Wings_Recover:<queue>
     - adjust <player> gravity:true
     - while <player.has_flag[Dragon_Wings_Recover]> && <player.equipment_map.get[chestplate].scriptname||null> == dragon_wings && !<player.has_flag[Dragon_Wings_Fly]>:
-      - if <player.equipment_map.get[chestplate].nbt[power]> >= 1 || <player.has_flag[Dragon_Wings_Fly]>:
+      - if <player.equipment_map.get[chestplate].flag[power]> >= 1 || <player.has_flag[Dragon_Wings_Fly]>:
         - flag player Dragon_Wings_Recover:!
         - stop
-      - inventory adjust slot:39 nbt:power/<player.equipment_map.get[chestplate].nbt[power].add[0.01]>
-      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
-      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>"
+      - inventory adjust slot:39 flag:power:<player.equipment_map.get[chestplate].flag[power].add[0.01]>
+      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].flag[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].flag[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
+      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].flag[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].flag[power].mul[100]><&b><&pc>"
       - wait 10t
 
 dragon_wings_liftoff:
@@ -47,10 +48,10 @@ dragon_wings_liftoff:
       - adjust <player> gravity:false
     - while <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> velocity:0,0.5,0
-      - inventory adjust slot:39 nbt:power/<player.equipment_map.get[chestplate].nbt[power].sub[0.01]>
-      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
-      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>"
-      - if <player.equipment_map.get[chestplate].nbt[power]> <= 0:
+      - inventory adjust slot:39 flag:power:<player.equipment_map.get[chestplate].flag[power].sub[0.01]>
+      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].flag[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].flag[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
+      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].flag[power].mul[3].round_up>]><player.equipment_map.get[chestplate].flag[power].mul[100]><&b><&pc>"
+      - if <player.equipment_map.get[chestplate].flag[power]> <= 0:
         - inject dragon_wings_end
       - repeat 5:
         - playeffect dragon_breath at:<player.eye_location.below[0.4].backward[0.4].left[0.25]> offset:0.25 quantity:15 targets:<player.world.players>
@@ -71,10 +72,10 @@ dragon_wings_boost:
       - stop
     - while <player.has_flag[Dragon_Wings_Fly]>:
       - adjust <player> velocity:<player.location.direction.vector.mul[2]>
-      - inventory adjust slot:39 nbt:power/<player.equipment_map.get[chestplate].nbt[power].sub[0.02]>
-      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
-      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].nbt[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].nbt[power].mul[100]><&b><&pc>"
-      - if <player.equipment_map.get[chestplate].nbt[power]> <= 0 || <player.location.material.name> == water:
+      - inventory adjust slot:39 flag:power:<player.equipment_map.get[chestplate].flag[power].sub[0.02]>
+      - inventory adjust slot:39 "lore:<list[<&b>Power<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].flag[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].flag[power].mul[100]><&b><&pc>].include[<player.equipment_map.get[chestplate].lore.get[2].to[3]>]>"
+      - actionbar "<&d>Power Remaining<&co> <list[<&c>|<&e>|<&a>|<&a>].get[<player.equipment_map.get[chestplate].flag[power].abs.add[.001].mul[3].round_up>]><player.equipment_map.get[chestplate].flag[power].mul[100]><&b><&pc>"
+      - if <player.equipment_map.get[chestplate].flag[power]> <= 0 || <player.location.material.name> == water:
         - inject dragon_wings_end
       - if !<player.gliding>:
         - run dragon_wings_liftoff
@@ -110,7 +111,7 @@ dragon_wings_events:
         - if !<script[dragon_wings_settings].data_key[settings.worlds].contains[<player.world.name>]>:
           - inject dragon_wings_toggle_glow
           - stop
-        - if <player.equipment_map.get[chestplate].nbt[power]> <= 0:
+        - if <player.equipment_map.get[chestplate].flag[power]> <= 0:
           - inject dragon_wings_end
           - stop
         - if <player.has_flag[Dragon_Wings_Recover]>:
