@@ -85,8 +85,8 @@ economy_bank_note_events:
   events:
     on player right clicks block with:economy_bank_note:
     - ratelimit <player> 2t
-    - narrate "<&b>You have deposited <&a><server.economy.format[<context.item.nbt[value]>]> <&b>into your account."
-    - give money quantity:<context.item.nbt[value]>
+    - narrate "<&b>You have deposited <&a><server.economy.format[<context.item.flag[value]>]> <&b>into your account."
+    - give money quantity:<context.item.flag[value]>
     - wait 1t
     - take iteminhand
 
@@ -105,7 +105,7 @@ economy_withdraw:
       - narrate "<&c>You don't have enough money."
       - stop
     - money take quantity:<[amount]>
-    - give "<item[economy_bank_note].with[nbt=value/<[amount]>;lore=<&a>------------------------|<&e>Value<&co> <&a><server.economy.format[<[amount]>]>|<&e>Right click while holding to deposit.|<&a>------------------------]>"
+    - give "<item[economy_bank_note].with[flag=value:<[amount]>;lore=<&a>------------------------|<&e>Value<&co> <&a><server.economy.format[<[amount]>]>|<&e>Right click while holding to deposit.|<&a>------------------------]>"
     - narrate "<&b>You have withdrawn <&a><server.economy.format[<[amount]>]><&b> from your account."
     - narrate "<&b>Check your inventory for the bank note."
 
