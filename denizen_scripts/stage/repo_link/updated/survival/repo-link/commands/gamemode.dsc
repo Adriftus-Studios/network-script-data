@@ -18,6 +18,7 @@ gamemode_adventure:
   name: gma
   description: Set yourself, or another player to Adventure mode.
   usage: /gma
+  permission: adriftus.staff
   tab complete:
     - inject gamemode_tab_complete
   script:
@@ -27,6 +28,7 @@ gamemode_survival:
   type: command
   debug: false
   gamemode: survival
+  permission: adriftus.staff
   name: gms
   description: Set yourself, or another player to Survival mode.
   usage: /gms
