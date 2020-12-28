@@ -4,8 +4,10 @@ empty_xp_vessel_level_5:
   display name: <&f>Empty Experience Vessel
   type: item
   mechanisms:
-    nbt: vessel_capacity/55|vessel_level/5
     custom_model_data: 1
+  flags:
+    vessel_capacity: 55
+    vessel_level: 5
   lore:
     - <&d>Will store 55 XP (level 0-5) when used.
   recipes:
@@ -21,8 +23,10 @@ filled_xp_vessel_level_5:
   display name: <&f>Filled Experience Vessel
   type: item
   mechanisms:
-    nbt: vessel_capacity/55|vessel_level/5
     custom_model_data: 1
+  flags:
+    vessel_capacity: 55
+    vessel_level: 5
   lore:
     - <&d>Will give 55 XP (level 0-5) when used.
 
@@ -32,8 +36,10 @@ empty_xp_vessel_level_10:
   display name: <&f>Empty Experience Vessel
   type: item
   mechanisms:
-    nbt: vessel_capacity/160|vessel_level/10
     custom_model_data: 2
+  flags:
+    vessel_capacity: 160
+    vessel_level: 10
   lore:
     - <&d>Will store 160 XP (level 0-10) when used.
   recipes:
@@ -49,8 +55,10 @@ filled_xp_vessel_level_10:
   display name: <&f>Filled Experience Vessel
   type: item
   mechanisms:
-    nbt: vessel_capacity/160|vessel_level/10
     custom_model_data: 2
+  flags:
+    vessel_capacity: 160
+    vessel_level: 10
   lore:
     - <&d>Will give 160 XP (level 0-10) when used.
 
@@ -63,8 +71,8 @@ vessel_handler:
       - if <player.has_flag[bottle_fill_lockout]>:
         - actionbar "<&4>Please wait a moment before using this item."
         - stop
-      - define vessel_capacity <context.item.nbt[vessel_capacity]>
-      - define vessel_level <context.item.nbt[vessel_level]>
+      - define vessel_capacity <context.item.flag[vessel_capacity]>
+      - define vessel_level <context.item.flag[vessel_level]>
       - if <player.xp_total> < <[vessel_capacity]>:
         - actionbar "<&4>You need at least <[vessel_level]> levels of experience in order to use this item"
         - stop
@@ -80,8 +88,8 @@ vessel_handler:
       - if <player.has_flag[bottle_fill_lockout]>:
         - actionbar "<&4>Please wait a moment before using this item."
         - stop
-      - define vessel_capacity <context.item.nbt[vessel_capacity]>
-      - define vessel_level <context.item.nbt[vessel_level]>
+      - define vessel_capacity <context.item.flag[vessel_capacity]>
+      - define vessel_level <context.item.flag[vessel_level]>
       - take iteminhand
       - give xp quantity:<[vessel_capacity]>
       - playsound sound:entity_generic_drink <player>

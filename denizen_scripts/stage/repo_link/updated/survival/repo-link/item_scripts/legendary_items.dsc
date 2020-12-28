@@ -4,7 +4,8 @@ legendary_item_behr_claw:
   material: diamond_shovel
   mechanisms:
     custom_model_data: 1
-    nbt: legendary/behr
+  flags:
+    legendary: behr
   enchantments:
     - EFFICIENCY:6
     - Mending:1
@@ -21,8 +22,9 @@ legendary_item_devin_bucket:
   debug: false
   mechanisms:
     custom_model_data: 1
-    nbt: legendary/devin
     nbt_attributes: generic.armor/head/0/3|generic.armor_toughness/head/0/2
+  flags:
+    legendary: devin
   enchantments:
     - PROJECTILE_PROTECTION:5
     - BLAST_PROTECTION:5
@@ -39,7 +41,8 @@ legendary_item_bill_cane:
   material: netherite_sword
   mechanisms:
     custom_model_data: 1
-    nbt: legendary/bill
+  flags:
+    legendary: bill
   enchantments:
     - sweeping_edge:4
     - looting:4
@@ -54,10 +57,10 @@ legendary_item_mending_cost_increase:
   debug: false
   events:
     on player prepares anvil craft item:
-      - if <context.item.has_nbt[legendary]>:
+      - if <context.item.has_flag[legendary]>:
         - determine air
     on player mends item:
-      - if <context.item.has_nbt[legendary]>:
+      - if <context.item.has_flag[legendary]>:
         - determine <context.repair_amount.div[3].round_down>
 
 legendary_effects_handler:
