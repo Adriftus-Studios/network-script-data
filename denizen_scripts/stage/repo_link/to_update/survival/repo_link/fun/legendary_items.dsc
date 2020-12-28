@@ -45,7 +45,7 @@ legendary_item_bill_cane:
     - looting:4
     - Mending:1
     - sharpness:5
-  display name: "<&6>Ole Bill's whoopin' stick"
+  display name: "<&6>Ole Bill's Whoopin' Stick"
   lore:
     - <&e>He's gonna have a hard time chasing you to get this back.
 
