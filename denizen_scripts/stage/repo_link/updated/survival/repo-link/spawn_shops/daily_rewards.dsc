@@ -42,13 +42,13 @@ daily_rewards_test:
         - define title <yaml[daily_reward].read[items_to_win.titles].random>
         - adjust <entry[item].spawned_entity> item:name_tag
         - adjust <entry[item].spawned_entity> "custom_name:<&e>You won a title<&co> <&b><yaml[titles].read[titles.<[title]>.tag].parse_color.parsed><&e>!"
-        - give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[title]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<[title]>]>"
+        - give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[title]>.tag].parse_color>;lore=<&e>Right Click to Redeem;flag=title:<[title]>]>"
         - narrate "<&e>You won a title<&co> <&b><yaml[titles].read[titles.<[title]>.tag].parse_color.parsed><&e>!"
       - case bow_trail:
         - define bow_trail <yaml[daily_reward].read[items_to_win.bow_trail].random>
         - adjust <entry[item].spawned_entity> item:<yaml[bowtrails].read[bowtrails.<[bow_trail]>.icon]>
         - adjust <entry[item].spawned_entity> "custom_name:<&e>You won a bow trail<&co> <&b><yaml[bowtrails].read[bowtrails.<[bow_trail]>.name].parse_color.parsed><&e>!"
-        - give "<item[bowtrail_voucher].with[display_name=<&b>Bow Trail Voucher<&co> <yaml[bowtrails].read[bowtrails.<[bow_trail]>.name].parse_color>;lore=<&e>Right Click to Redeem;nbt=trail/<[bow_trail]>]>"
+        - give "<item[bowtrail_voucher].with[display_name=<&b>Bow Trail Voucher<&co> <yaml[bowtrails].read[bowtrails.<[bow_trail]>.name].parse_color>;lore=<&e>Right Click to Redeem;flag=trail:<[bow_trail]>]>"
         - narrate "<&e>You won a bow trail<&co> <&b><yaml[bowtrails].read[bowtrails.<[bow_trail]>.name].parse_color.parsed><&e>!"
     - wait 3s
     - remove <entry[item].spawned_entity>
