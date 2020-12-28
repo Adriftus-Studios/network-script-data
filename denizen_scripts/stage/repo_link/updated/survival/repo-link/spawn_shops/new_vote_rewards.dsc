@@ -436,14 +436,14 @@ weekly_loot_contents:
         - define title <yaml[daily_reward].read[items_to_win.titles].random>
         - narrate "<&e>You won a title<&co> <&b><yaml[titles].read[titles.<[title]>.tag].parse_color.parsed><&e>!"
         - define win_message "<player.display_name><&e> just won a <&b>Title Voucher <&e>(<yaml[titles].read[titles.<[title]>.tag].parse_color>)!"
-        - define reward "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[title]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<[title]>]>"
+        - define reward "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[title]>.tag].parse_color>;lore=<&e>Right Click to Redeem;flag=title:<[title]>]>"
         - define quantity 1
       - case 6 7 8 9 10:
         - define reward_slot "name_tag[display_name=<&b>Bowtrail Voucher;lore=<&d>I wonder which it will be!!]"
         - define win_action announce
         - define bow_trail <yaml[daily_reward].read[items_to_win.bow_trail].random>
         - define win_message "<player.display_name><&e> just won a <&b>Bowtrail Voucher <&e>(<yaml[bowtrails].read[bowtrails.<[bow_trail]>.name].parse_color.parsed>)!"
-        - define reward "<item[bowtrail_voucher].with[display_name=<&b>Bow Trail Voucher<&co> <yaml[bowtrails].read[bowtrails.<[bow_trail]>.name].parse_color>;lore=<&e>Right Click to Redeem;nbt=trail/<[bow_trail]>]>"
+        - define reward "<item[bowtrail_voucher].with[display_name=<&b>Bow Trail Voucher<&co> <yaml[bowtrails].read[bowtrails.<[bow_trail]>.name].parse_color>;lore=<&e>Right Click to Redeem;flag=trail:<[bow_trail]>]>"
         - define quantity 1
       - case 11 12 13 14 15:
         - define reward_slot "nether_star[display_name=<&6>Legendary item!;lore=<&e>Will you actually get this?]"
@@ -501,7 +501,7 @@ weekly_loot_contents:
         - define reward_slot "gold_block[display_name=<&b>Claim Expansion Token;lore=<&e>Good for 1 claim expansion!]"
         - define win_action announce
         - define win_message "<&e>You won a <&b>Claim Expansion Token<&e>!"
-        - define reward "<item[claiming_group_upgrade_item].with[material=gold_block;display_name=<&b>Upgrade<&sp>Claim<&sp>Limit;lore=<&a>---------------------|<&b>Right click while holding.|<&b>This will unlock <&a>10 <&b>more claim chunks.|<&a>---------------------";nbt=upgrade/claim_limit]>"
+        - define reward "<item[claiming_group_upgrade_item].with[material=gold_block;display_name=<&b>Upgrade<&sp>Claim<&sp>Limit;lore=<&a>---------------------|<&b>Right click while holding.|<&b>This will unlock <&a>10 <&b>more claim chunks.|<&a>---------------------";flag=upgrade:claim_limit]>"
         - define quantity 1
       - case 90 91 92 93 94 95:
         - define reward_slot "turtle_egg[display_name=<&6>Spawner Changer!;lore=<&e>I wonder which it will be!!]"
