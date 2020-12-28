@@ -81,7 +81,7 @@ store_hub_cosmeticShop_title_open:
         - define lore "<&c>You already own this title.|<&a>Price<&co><&sp>300<&sp><&b>ⓐ"
       - else:
         - define lore <&a>Price<&co><&sp>300<&sp><&b>ⓐ
-      - define item <item[name_tag]>[nbt=<list[price/300|tag/<[tag]>]>;lore=<[lore]>]
+      - define item <item[name_tag].with[flag=price:300;flag=tag:<[tag]>;lore=<[lore]>]>
       - adjust <[item]> display_name:<yaml[titles].read[titles.<[tag]>.tag].parse_color> save:new
       - define list:->:<entry[new].result>
     - give <[list]> to:<[inventory]>
@@ -93,26 +93,28 @@ store_hub_cosmeticShop_titles_events:
   events:
     on player clicks store_hub_cosmeticShop_titles in store_hub_cosmeticShop:
       - inject store_hub_cosmeticShop_title_open
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
 
     on system time 00:00:
       - inject title_changeover
 
     on player clicks name_tag in store_hub_cosmeticShop_titles_inventory:
       - determine passively cancelled
-      - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<context.item.nbt[tag]>]||false>:
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+      - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<context.item.flag[tag]>]||false>:
         - narrate "<&c>You already have unlocked this title."
         - stop
-      - if !<yaml[global.player.<player.uuid>].contains[economy.premium.current]> || <yaml[global.player.<player.uuid>].read[economy.premium.current]||0> < <context.item.nbt[price]>:
+      - if !<yaml[global.player.<player.uuid>].contains[economy.premium.current]> || <yaml[global.player.<player.uuid>].read[economy.premium.current]||0> < <context.item.flag[price]>:
         - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
         - stop
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
-        #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].sub[<context.item.nbt[price]>]>
-      - define tagID <context.item.nbt[tag]>
+        #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].sub[<context.item.flag[price]>]>
+      - define tagID <context.item.flag[tag]>
       - inject title_unlock
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
-        #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<context.item.nbt[tag]>]>"
+        #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;flag=title:<context.item.flag[tag]>]>"
       - narrate "<&a>You have succesfully purchased the Title: <yaml[titles].read[titles.<[tagID]>.tag].parse_color><&e>."
-      - yaml id:global.player.<player.uuid> set economy.premium.current:-:<context.item.nbt[price]>
+      - yaml id:global.player.<player.uuid> set economy.premium.current:-:<context.item.flag[price]>
       - inject store_hub_cosmeticShop_title_open
 
 title_changeover:
@@ -130,16 +132,16 @@ title_voucher_events:
   events:
     on player right clicks block with:title_voucher bukkit_priority:LOWEST:
       - determine passively cancelled
-      - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<context.item.nbt[title]>]||false>:
+      - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<context.item.flag[title]>]||false>:
         - narrate "<&c>You already have unlocked this title."
         - stop
       - if <player.has_flag[title_confirm]>:
         - wait 1t
         - if <player.item_in_hand> == <context.item>:
-          - define tagID <context.item.nbt[title]>
+          - define tagID <context.item.flag[title]>
           - inject title_unlock
           - take iteminhand quantity:1
-          - narrate "<&b>You have redeemed the <yaml[titles].read[titles.<context.item.nbt[title]>.tag].parse_color><&b> title!"
+          - narrate "<&b>You have redeemed the <yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color><&b> title!"
           - flag player title_confirm:!
       - else:
         - flag player title_confirm duration:10s
@@ -185,7 +187,7 @@ store_hub_cosmeticShop_bowtrails_open:
         - define lore "<&c>You already own this bow trail.|<&a>Price<&co><&sp>300<&sp><&b>ⓐ"
       - else:
         - define lore <&a>Price<&co><&sp>300<&sp><&b>ⓐ
-      - define item <item[<yaml[bowtrails].read[bowtrails.<[trail]>.icon]>].with[nbt=<list[price/300|trail/<[trail]>]>;lore=<[lore]>]>
+      - define item <item[<yaml[bowtrails].read[bowtrails.<[trail]>.icon]>].with[flag=price:300;flag=trail:<[trail]>;lore=<[lore]>]>
       - adjust <[item]> display_name:<yaml[bowtrails].read[bowtrails.<[trail]>.name].parse_color> save:new
       - define list:->:<entry[new].result>
     - give <[list]> to:<[inventory]>
@@ -197,26 +199,28 @@ store_hub_cosmeticShop_bowtrails_events:
   events:
     on player clicks store_hub_cosmeticShop_bowTrails in store_hub_cosmeticShop:
       - inject store_hub_cosmeticShop_bowtrails_open
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
 
     on system time 00:00:
       - inject bowtrail_changeover
 
     on player clicks item in store_hub_cosmeticShop_bowTrails_inventory:
       - determine passively cancelled
-      - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<context.item.nbt[trail]>]||false>:
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+      - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<context.item.flag[trail]>]||false>:
         - narrate "<&c>You already have unlocked this bow trail."
         - stop
-      - if !<yaml[global.player.<player.uuid>].contains[economy.premium.current]> || <yaml[global.player.<player.uuid>].read[economy.premium.current]> < <context.item.nbt[price]>:
+      - if !<yaml[global.player.<player.uuid>].contains[economy.premium.current]> || <yaml[global.player.<player.uuid>].read[economy.premium.current]> < <context.item.flag[price]>:
         - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
         - stop
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
-        #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].sub[<context.item.nbt[price]>]>
-      - define bowtrail <context.item.nbt[trail]>
+        #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].sub[<context.item.flag[price]>]>
+      - define bowtrail <context.item.flag[trail]>
       - inject bowtrail_unlock
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
-        #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;nbt=title/<context.item.nbt[tag]>]>"
+        #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;flag=title:<context.item.flag[tag]>]>"
       - narrate "<&a>You have succesfully purchased the bow trail: <yaml[bowtrails].read[bowtrails.<[bowtrail]>.name].parse_color><&e>."
-      - yaml id:global.player.<player.uuid> set economy.premium.current:-:<context.item.nbt[price]>
+      - yaml id:global.player.<player.uuid> set economy.premium.current:-:<context.item.flag[price]>
       - inject store_hub_cosmeticShop_bowtrails_open
 
 bowtrail_changeover:
@@ -235,16 +239,16 @@ bowtrail_voucher_events:
   events:
     on player right clicks block with:bowtrail_voucher bukkit_priority:LOWEST:
       - determine passively cancelled
-      - if <yaml[global.player.<player.uuid>].read[bowtrail.unlocked].contains[<context.item.nbt[trail]>]||false>:
+      - if <yaml[global.player.<player.uuid>].read[bowtrail.unlocked].contains[<context.item.flag[trail]>]||false>:
         - narrate "<&c>You already have unlocked this bow trail."
         - stop
       - if <player.has_flag[bowtrail_confirm]>:
         - wait 1t
         - if <player.item_in_hand> == <context.item>:
-          - define bowtrail <context.item.nbt[trail]>
+          - define bowtrail <context.item.flag[trail]>
           - inject bowtrail_unlock
           - take iteminhand quantity:1
-          - narrate "<&b>You have redeemed the <yaml[bowtrails].read[bowtrails.<context.item.nbt[trail]>.name].parse_color><&b> title!"
+          - narrate "<&b>You have redeemed the <yaml[bowtrails].read[bowtrails.<context.item.flag[trail]>.name].parse_color><&b> title!"
           - flag player bowtrail_confirm:!
       - else:
         - flag player bowtrail_confirm duration:10s
@@ -253,7 +257,6 @@ bowtrail_voucher_events:
 tempcmd:
   type: command
   name: tmpcmd
-  debug: false
   debug: false
   permission: tsegdsgdsgdsfg
   script:

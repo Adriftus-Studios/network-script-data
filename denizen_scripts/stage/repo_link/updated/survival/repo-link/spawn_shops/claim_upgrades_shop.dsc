@@ -31,11 +31,11 @@ claiming_protection_group_upgrades:
       - define cost <script[claiming_system_upgrade_data].data_key[upgrades.<[upgrade]>.cost]>
       - define material <script[claiming_system_upgrade_data].data_key[upgrades.<[upgrade]>.material]>
       - define "lore:<&a>---------------------|<&e>Price<&co><&sp><&a><[cost]>|<&b>Use this item in a claim.|<&b>This will unlock <[name]>|<&a>---------------------"
-      - define list:->:<item[claiming_group_upgrade_item].with[material=<[material]>;display_name=<[name]>;lore=<[lore]>;nbt=upgrade/<[upgrade]>|cost/<[cost]>]>
+      - define list:->:<item[claiming_group_upgrade_item].with[material=<[material]>;display_name=<[name]>;lore=<[lore]>;flag=upgrade:<[upgrade]>;flag=cost:<[cost]>]>
     - determine <[list]>
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
-    back_button: <item[claiming_back_button].with[nbt=back/back]>
+    back_button: <item[claiming_back_button].with[flag=back:back]>
   slots:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
@@ -51,27 +51,29 @@ claiming_protection_group_upgrades_events:
     on player opens claiming_protection_group_upgrades:
       - define cost <script[claiming_system_upgrade_data].parsed_key[upgrades.claim_limit.cost]>
       - define "lore:|:<&a>---------------------|<&e>Price<&co><&sp><&a><[cost]>|<&b>Right click while holding.|<&b>This will unlock <&a>10 <&b>more claims.|<&a>---------------------"
-      - give <item[claiming_group_upgrade_item].with[material=gold_block;display_name=<&b>Upgrade<&sp>Claim<&sp>Limit;lore=<[lore]>;nbt=upgrade/claim_limit|cost/<[cost]>]> to:<context.inventory>
+      - give <item[claiming_group_upgrade_item].with[material=gold_block;display_name=<&b>Upgrade<&sp>Claim<&sp>Limit;lore=<[lore]>;flag=upgrade:claim_limit;flag=cost:<[cost]>]> to:<context.inventory>
     on player clicks item in claiming_protection_group_upgrades:
       - if <context.raw_slot> > 54:
         - stop
       - determine passively cancelled
       - wait 1t
-      - if <context.item.has_nbt[upgrade]>:
-        - define cost <context.item.nbt[cost]>
+      - if <context.item.flag[upgrade]>:
+        - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+        - define cost <context.item.flag[cost]>
         - if <player.money> < <[cost]>:
           - narrate "<&c>You don't have the cash for that."
           - stop
         - take money quantity:<[cost]>
         - give <context.item.with[lore=<context.item.lore.get[3].to[last]>]>
-        - if <context.item.nbt[upgrade]> == claim_limit:
+        - if <context.item.flag[upgrade]> == claim_limit:
           - flag player claim_upgrades:++
-      - else if <context.item.has_nbt[back]>:
+      - else if <context.item.flag[back]>:
+        - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
         - inventory open d:claiming_inventory
     on player right clicks block with:claiming_group_upgrade_item:
       - determine passively cancelled
       - ratelimit <player> 2t
-      - if <context.item.nbt[upgrade]> == claim_limit:
+      - if <context.item.flag[upgrade]> == claim_limit:
         - if <yaml[claims].read[limits.max.<player.uuid>]||null> != null:
           - yaml id:claims set limits.max.<player.uuid>:+:10
         - else:
@@ -87,8 +89,8 @@ claiming_protection_group_upgrades_events:
           - narrate "<&e>Right click again, if you want to apply this upgrade to <[name]><&e>."
           - flag player upgrade_confirmation:<[group]> duration:10s
         - else:
-          - yaml id:claims set groups.<[group]>.upgrades.<context.item.nbt[upgrade]>:true
-          - narrate "<&e>You have applied the <context.item.nbt[upgrade]> upgrade to <[name]><&e>."
+          - yaml id:claims set groups.<[group]>.upgrades.<context.item.flag[upgrade]>:true
+          - narrate "<&e>You have applied the <context.item.flag[upgrade]> upgrade to <[name]><&e>."
           - flag player upgrade_confirmation:!
           - wait 1t
           - take iteminhand
