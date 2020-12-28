@@ -101,7 +101,7 @@ mob_spawner_completed:
 
 mob_spawner_events:
   type: world
-  debug: true
+  debug: false
   events:
     on player places mob_spawner_completed:
     # - [check if item is valid]
@@ -114,63 +114,74 @@ mob_spawner_events:
       - define type <context.item_in_hand.flag[mob]>
       - wait 1t
       - adjust <context.location> spawner_type:<[type]>
-      - flag server <context.location.simple>.spawner
+      - flag <context.location> spawner
 
     on player breaks spawner:
     # - [check for enchantment/item type]
     - if !<player.item_in_hand.enchantments.contains[silk_touch]> || !<player.item_in_hand.material.name.contains[pickaxe]>:
       - determine passively cancelled
       - ratelimit <player> 2s
-      - actionbar "<&4>You must have silk touch pickaxe to break this!"
+      - actionbar "<&4>You must a have silk touch pickaxe to break this!"
       - playsound <player.location> sound:entity_villager_no volume:2
     - else:
       # - [if vanilla spawner, give fragments]
-      - if !<server.has_flag[<context.location.simple>.spawner]>:
+      - if !<context.location.has_flag[spawner]>:
           - determine <item[mob_spawner_fragment].with[quantity=25]>
       # - [ if not, give spawner with entity type attached]
-      - else if <server.has_flag[<context.location.simple>.spawner]>:
+      - else if <context.location.has_flag[spawner]>:
         - define Type <context.location.spawner_type.entity_type.to_titlecase>
-        - determine "<item[mob_spawner_completed].with_flag[mob:<[type]>].with[display_name=<&a><[Type]><&b> Spawner]>"
-        - flag server <context.location.simple>.spawner:!
+        - flag <context.location> spawner:!
+        - flag <context.location> spawner_mob_tracker:!
+        - determine passively "<item[mob_spawner_completed].with_flag[mob:<[type]>].with[display_name=<&a><[Type]><&b> Spawner]>"
       - else:
       # - [ if neither, something bork and get halp]
         - determine passively cancelled
         - narrate "<&4>This location was not marked correctly when the spawner was placed. Contact staff to claim a spawner replacement please."
 
+
+mob_spawner_spawns:
+  type: world
+  debug: false
+  events:
     on spawner spawns entity:
     # - [check if vanilla spawner and stop if so]
-    - if !<server.has_flag[<context.spawner_location.simple>.spawner]>:
+    - if !<context.spawner_location.has_flag[spawner]>:
       - stop
     - else:
       # - [check if the counter mob exists already]
-      - if !<server.has_flag[<context.spawner_location.simple>.spawner_mob_tracker]>:
+      - if !<context.spawner_location.has_flag[spawner_mob_tracker]>:
         # # [flag the entity as 1 stack]
         - flag <context.entity> spawner_counter:1
         # # [flag the entity with the location it was spawned at to clear on death]
-        - flag <context.entity> spawned_by:<context.spawner_location.simple>
+        - flag <context.entity> spawned_by:<context.spawner_location>
         # # [flag the server with the mob's uuid to track it down later to add more stacks]
-        - flag server <context.spawner_location.simple>.spawner_mob_tracker:<context.entity.uuid>
+        - flag <context.spawner_location> spawner_mob_tracker:<context.entity>
         # # [ nuke mob ai and set name for server lag reduction]
         - adjust <context.entity> has_ai:false
-        - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> (<&e><context.entity.flag[spawner_counter]>)"
+        - adjust <context.entity> is_aware:true
+        - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
       - else:
         # - [if the mob already exists, we just want to add a stack to the counter, not spawn an additional entity]
         - determine passively cancelled
         # # [retrieve the UUID of the mob set previously, and increase the counter by 1 and then rename the mob]
-        - flag <server.flag[<context.spawner_location.simple>.spawner_mob_tracker]> spawner_counter:++
-        - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> (<&e><context.entity.flag[spawner_counter]>)"
+        - define spawn_mob <context.spawner_location.flag[spawner_mob_tracker]>
+        - if <[spawn_mob].flag[spawner_counter]> <= 99:
+          - flag <[spawn_mob]> spawner_counter:++
+          - adjust <[spawn_mob]> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> <&6>(<&e><[spawn_mob].flag[spawner_counter]><&6>)"
 
     on entity dies flagged:spawned_by:
+    - if !<context.entity.has_flag[spawned_by]>:
+      - stop
     # - [if the mob isn't flagged, or has 1 stack (less than 2) let it die]
     - if <context.entity.flag[spawner_counter]||0> < 2:
-      - flag server <context.spawner_location.simple>.spawner_mob_tracker:!
+      - flag <context.entity.flag[spawned_by]> spawner_mob_tracker:!
       - stop
     - else:
       # # [let the mob drop its drops]
-      - drop <context.drops>
+      - drop <context.drops> <context.entity.location>
       # # [stop the death]
       - determine passively cancelled
       # # [ decrease counter, heal to full, rename to update stacks on mob]
       - flag <context.entity> spawner_counter:--
       - heal <context.entity>
-      - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> (<&e><context.entity.flag[spawner_counter]>)"
+      - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
