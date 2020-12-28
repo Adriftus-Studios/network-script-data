@@ -15,7 +15,7 @@ cuboid_wand_command:
   name: wand
   description: Gives the WorldEdit wand
   usage: /wand
-  permission: worldedit.wand
+  permission: adriftus.admin
   script:
     - if <context.args.first||null> == null:
       - give cuboid_tool_item
@@ -30,7 +30,7 @@ cuboid_command:
   description: Modifies cuboids created with the WE wand
   aliases:
     - cuboid
-  permission: worldedit.command.cube
+  permission: adriftus.admin
   tab complete:
     - if <context.args.is_empty>:
       - determine <list[save|schem|clear]>
