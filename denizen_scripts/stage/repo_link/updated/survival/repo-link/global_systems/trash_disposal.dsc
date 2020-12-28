@@ -8,6 +8,7 @@ disposal_inventory_listener:
       - if <queue.script.data_key[blacklist].contains[<player.item_in_hand.material.name>]>:
         - stop
       - else if <context.location.material.level> == 0:
+        - determine cancelled
         - inventory open d:disposal_inventory
         - playsound <player> sound:BLOCK_WOODEN_DOOR_OPEN volume:1.0 pitch:2.0
         - flag player TrashCanLocation:<context.location.center>
@@ -16,7 +17,8 @@ disposal_inventory_listener:
 disposal_command:
   type: command
   name: disposal
-  permission: custom.command.dispose
+  debug: false
+  permission: adriftus.staff
   usage: /disposal
   description: Opens the disposal inventory
   permission message: <&c>Sorry, <&6><player.name><&c>, you can't use <&d><&l>/disposal<&r><&c> because you don't have permission!
@@ -26,11 +28,12 @@ disposal_command:
 disposal_inventory:
   type: inventory
   inventory: chest
+  debug: false
   title: <&6>◆ <&n><&l>Incinerator<&r> <&6>◆
   size: 45
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>;nbt=action/filler]>
-    trashconfirm: <item[lime_stained_glass_pane].with[display_name=<&a>Confirm?;nbt=action/trashconfirm]>
+    filler: <item[white_stained_glass_pane].with[display_name=<&e>;flag=action:filler]>
+    trashconfirm: <item[lime_stained_glass_pane].with[display_name=<&a>Confirm?;flag=action:trashconfirm]>
   slots:
   - "[] [] [] [] [] [] [] [] []"
   - "[] [] [] [] [] [] [] [] []"
@@ -42,10 +45,12 @@ disposal_inventory:
 trashinfo:
   type: item
   material: player_head
+  debug: false
   display name: <&6>Help
   mechanisms:
-    nbt: action/trashinfo
     skull_skin: d545a15d-96f6-4602-afb2-6cb0f0375ea6|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGVlZjc4ZWRkNDdhNzI1ZmJmOGMyN2JiNmE3N2Q3ZTE1ZThlYmFjZDY1Yzc3ODgxZWM5ZWJmNzY4NmY3YzgifX19=
+  flags:
+    action: trashinfo
   lore:
   - <&6><&n>______________________________
   - <&d>Items placed here are destroyed forever!
@@ -63,9 +68,9 @@ disposal_inventory_handler:
   debug: false
   events:
     on player clicks item in disposal_inventory:
-      - choose <context.item.nbt[action]||null>:
+      - choose <context.item.flag[action]||null>:
         - case trashconfirm:
-          - playsound <player> sound:UI_BUTTON_CLICK
+          - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
           - determine passively cancelled
           - inventory close
         - case filler:
@@ -80,9 +85,9 @@ disposal_inventory_handler:
         - flag player TrashCanLocation:!
       - else:
         - playsound <player> sound:ENTITY_BLAZE_SHOOT volume:1.0 pitch:0.5
-        - narrate "<&6>Items Destroyed!"
+        - actionbar "<&c>Items Destroyed!"
         - playeffect lava <player.flag[TrashCanLocation].as_location> targets:<player> quantity:10
-        - title "subtitle:<&c>Items Destroyed" fade_in:2s stay:1s fade_out:1s targets:<player>
+        - actionbar "<&c>Items Destroyed"
         - flag player TrashCanLocation:!
         - wait 1t
         - inventory update

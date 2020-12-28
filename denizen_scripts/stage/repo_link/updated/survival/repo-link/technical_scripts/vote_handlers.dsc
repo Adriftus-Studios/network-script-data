@@ -145,16 +145,18 @@ daily_vote_key:
   material: tripwire_hook
   display name: <&b>Daily Vote Crate Key
   mechanisms:
-    nbt: keytype/daily
     custom_model_data: 1
+  flags:
+    keytpe: daily
 
 weekly_vote_key:
   type: item
   material: tripwire_hook
   display name: <&b>Weekly Vote Crate Key
   mechanisms:
-    nbt: keytype/weekly
     custom_model_data: 2
+  flags:
+    keytpe: weekly
 
 vote_crate_key_events:
   type: world
