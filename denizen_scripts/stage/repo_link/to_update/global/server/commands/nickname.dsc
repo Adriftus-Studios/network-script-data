@@ -1,4 +1,4 @@
-Nickname_Command:
+nickname_command:
   type: command
   name: nickname
   debug: false
