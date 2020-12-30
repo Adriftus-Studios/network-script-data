@@ -44,5 +44,7 @@ mythicmobs_levelscale_patch:
         - else:
           - define base_hp <context.entity.health_max>
           - define health_modifier <[mob_level].mul[20]>
-          - ajust <context.entity> max_health:<[base_hp].add[<[health_modifier]>]>
+          - adjust <context.entity> max_health:<[base_hp].add[<[health_modifier]>]>
         - adjust <context.entity> armor_bonus:<[base_armor].add[<[armor_modifier]>]>
+        - wait 1t
+        - heal <context.entity>

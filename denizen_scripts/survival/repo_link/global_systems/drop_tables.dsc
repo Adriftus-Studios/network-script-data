@@ -96,7 +96,7 @@ mob_death_event:
     on entity dies in:mainland:
       - if <context.damager.is_player||null> == null:
         - stop
-      - else <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]> && <context.entity.is_mythicmob> && !<script[mob_death_event].data_key[blacklist].contains[<context.entity.name>]>:
+      - else if <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]> && <context.entity.is_mythicmob> && !<script[mob_death_event].data_key[blacklist].contains[<context.entity.name>]>:
         - define mob_level <context.entity.mythicmob.level||0>
         - if <[mob_level]> == 0:
           - stop
