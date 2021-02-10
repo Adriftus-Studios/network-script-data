@@ -209,7 +209,7 @@ github_updates:
           - define embed <[embed].url[<[comment_data].get[html_url]>]>
           - define embed <[embed].description[<[context]>]>
           - flag server review.id.<[id]>:!
-
+          
       # % ██ [ Send the message                       ] ██
         - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
 
@@ -217,7 +217,7 @@ github_updates:
     organization:
       Adriftus-Studios:
         Adriftizen: 650016499502940170
-        The-Alchemist: 808744210088853514
+        The-Alchemist: 808868061905551361
 
         network-script-data: 650016499502940170
         adriftus-resources: 754034672253665391
