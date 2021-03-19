@@ -144,7 +144,7 @@ warps_my_warps_GUI_open:
   script:
   - define inventory <inventory[warps_my_warps_GUI]>
   - define type personal
-  - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].include[<yaml[player.<player.uuid>].read[warps.has_access]||false>]||<list[]>]> as:identifier:
+  - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]]||<list[]>]> as:identifier:
     - inject build_warp_item
     - if <[identifier].before[~]> == <player.uuid>:
       - define list:->:<[item].with_flag[action:warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
