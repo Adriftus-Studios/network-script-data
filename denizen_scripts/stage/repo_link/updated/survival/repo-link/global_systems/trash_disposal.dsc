@@ -8,7 +8,7 @@ disposal_inventory_listener:
       - if <queue.script.data_key[blacklist].contains[<player.item_in_hand.material.name>]>:
         - stop
       - else if <context.location.material.level> == 0:
-        - determine cancelled
+        - determine passively cancelled
         - inventory open d:disposal_inventory
         - playsound <player> sound:BLOCK_WOODEN_DOOR_OPEN volume:1.0 pitch:2.0
         - flag player TrashCanLocation:<context.location.center>
@@ -74,20 +74,24 @@ disposal_inventory_handler:
           - determine passively cancelled
           - inventory close
         - case filler:
-          - determine cancelled
+          - determine passively cancelled
         - case trashinfo:
-          - determine cancelled
+          - determine passively cancelled
         - case default:
           - stop
     on player closes disposal_inventory:
-      - if <context.inventory.stacks> == 9:
+      - announce <context.inventory.stacks>
+      - if <context.inventory.stacks> > 9:
         - playeffect smoke <player.flag[TrashCanLocation].as_location> targets:<player> quantity:20
-        - flag player TrashCanLocation:!
-      - else:
+        - playsound <player> sound:BLOCK_CAMPFIRE_CRACKLE volume:1.0 pitch:0.5
+        - playsound <player> sound:BLOCK_FIRE_AMBIENT volume:1.0 pitch:0.5
+        - inventory update
+      - if <context.inventory.stacks> > 19:
         - playsound <player> sound:ENTITY_BLAZE_SHOOT volume:1.0 pitch:0.5
         - actionbar "<&c>Items Destroyed!"
         - playeffect lava <player.flag[TrashCanLocation].as_location> targets:<player> quantity:10
-        - actionbar "<&c>Items Destroyed"
-        - flag player TrashCanLocation:!
         - wait 1t
         - inventory update
+      - else:
+        - stop
+      - flag player TrashCanLocation:!

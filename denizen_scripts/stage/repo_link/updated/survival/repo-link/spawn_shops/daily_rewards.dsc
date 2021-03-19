@@ -4,7 +4,7 @@ daily_rewards_test:
   script:
     - if <player.has_flag[daily_rewarded]>:
       - narrate "<&c>You have already claimed your daily reward."
-      - narrate "<&e>You can claim another one in <&b><player.flag[daily_rewarded].expiration.formatted><&e>!"
+      - narrate "<&e>You can claim another one in <&b><player.flag_expiration[daily_rewarded].from_now.formatted><&e>!"
       - stop
     - if <server.has_flag[daily_rewarding]>:
       - narrate "<&c>Another player is claiming their daily reward."

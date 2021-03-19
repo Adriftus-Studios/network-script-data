@@ -1,4 +1,3 @@
-
 bookshelves_events:
   type: world
   debug: false
