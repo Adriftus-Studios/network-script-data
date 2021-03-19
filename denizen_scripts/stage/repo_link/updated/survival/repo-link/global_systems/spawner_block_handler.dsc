@@ -2,7 +2,7 @@ mob_spawner_fragment:
   type: item
   material: prismarine_shard
   display name: <&b>Spawner Fragment
-  debug: true
+  debug: false
   mechanisms:
     custom_model_data: 1
 
@@ -10,7 +10,7 @@ mob_spawner_reinforced_fragment:
   type: item
   material: fire_charge
   display name: <&b>Reinforced Spawner Fragment
-  debug: true
+  debug: false
   mechanisms:
     custom_model_data: 3
   lore:
@@ -24,7 +24,7 @@ mob_spawner_reinforced_fragment:
 
 mob_spawner_frame:
   type: item
-  debug: true
+  debug: false
   material: prismarine_shard
   display name: <&b>Spawner Frame
   mechanisms:
@@ -49,7 +49,7 @@ mob_spawner_core_uncharged:
     custom_model_data: 1
   lore:
   - <&c>This core seems dull and lifeless.
-  debug: true
+  debug: false
   recipes:
     1:
       hide_in_recipebook: false
@@ -141,7 +141,7 @@ mob_spawner_events:
 
 mob_spawner_spawns:
   type: world
-  debug: false
+  debug: true
   events:
     on spawner spawns entity:
     # - [check if vanilla spawner and stop if so]
@@ -157,15 +157,14 @@ mob_spawner_spawns:
         # # [flag the server with the mob's uuid to track it down later to add more stacks]
         - flag <context.spawner_location> spawner_mob_tracker:<context.entity>
         # # [ nuke mob ai and set name for server lag reduction]
-        - adjust <context.entity> has_ai:false
-        - adjust <context.entity> is_aware:true
+        - adjust <context.entity> is_aware:false
         - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
       - else:
         # - [if the mob already exists, we just want to add a stack to the counter, not spawn an additional entity]
         - determine passively cancelled
         # # [retrieve the UUID of the mob set previously, and increase the counter by 1 and then rename the mob]
         - define spawn_mob <context.spawner_location.flag[spawner_mob_tracker]>
-        - if <[spawn_mob].flag[spawner_counter]> <= 99:
+        - if <[spawn_mob].flag[spawner_counter]> <= <element[99]>:
           - flag <[spawn_mob]> spawner_counter:++
           - adjust <[spawn_mob]> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> <&6>(<&e><[spawn_mob].flag[spawner_counter]><&6>)"
 
@@ -173,7 +172,7 @@ mob_spawner_spawns:
     - if !<context.entity.has_flag[spawned_by]>:
       - stop
     # - [if the mob isn't flagged, or has 1 stack (less than 2) let it die]
-    - if <context.entity.flag[spawner_counter]||0> < 2:
+    - if <context.entity.flag[spawner_counter]||0> == <element[1]>:
       - flag <context.entity.flag[spawned_by]> spawner_mob_tracker:!
       - stop
     - else:

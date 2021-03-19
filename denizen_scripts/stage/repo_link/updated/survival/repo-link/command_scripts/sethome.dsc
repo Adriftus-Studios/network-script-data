@@ -25,9 +25,11 @@ delhome_command:
     - if !<player.has_flag[delete_confirmation]>:
       - narrate "<&e>Are you sure you want to delete your home? This <&c>cannot<&e> be undone!"
       - narrate "<&e>Type <&b>/Delhome<&e> to confirm."
+      - flag player home_delete_confirmation duration:30s
     - else:
       - flag player home:!
       - narrate "<&e>Your home location has been cleared."
+      - flag player home_delete_confirmation:!
 
 home_command:
   type: command
@@ -58,4 +60,5 @@ home_respawn_event:
     - if <player.has_flag[home]>:
       - stop
     - else:
-      - flag player home:player.location
+      - flag player home:<player.location>
+      - narrate "<&e>Your home has been set to this location. It can be removed with <&b>/Delhome<&e>."

@@ -18,6 +18,7 @@ store_hub_cosmeticShop:
   title: <&6>C<&e>osmetic <&6>S<&e>hop
   definitions:
     filler: <item[store_hub_cosmeticShop_filler]>
+    close: <item[store_hub_cosmeticShop_close]>
   procedural items:
     - foreach <list[titles|bowTrails]>:
       - define list:->:<item[store_hub_cosmeticShop_<[value]>]>
@@ -25,9 +26,10 @@ store_hub_cosmeticShop:
   slots:
   - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
   - [filler] [filler] [filler] [] [filler] [] [filler] [filler] [filler]
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [filler] [filler] [filler] [filler] [close] [filler] [filler] [filler] [filler]
 
 store_hub_cosmeticShop_filler:
+  debug: false
   type: item
   material: glass_pane
   display name: <&b>
@@ -38,12 +40,14 @@ store_hub_cosmeticShop_filler:
 
 store_hub_cosmeticShop_filler_events:
   type: world
+  debug: false
   events:
     on player clicks store_hub_cosmeticShop_filler in inventory bukkit_priority:LOWEST:
       - determine cancelled
 
 store_hub_cosmeticShop_titles:
   type: item
+  debug: false
   material: name_tag
   display name: <&6>Titles
   enchantments:
@@ -59,21 +63,22 @@ store_hub_cosmeticShop_titles:
 store_hub_cosmeticShop_titles_inventory:
   type: inventory
   inventory: chest
-  debug: false
+  debug: true
   title: <&a>Buying <&6>Titles.
   size: 45
   definitions:
     filler: <item[store_hub_cosmeticShop_filler]>
+    back: barrier[display_name=<&c>Back]
   slots:
     - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
     - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
     - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
     - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
-    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
+    - [filler] [] [filler] [] [back] [] [filler] [] [filler]
 
 store_hub_cosmeticShop_title_open:
   type: task
-  debug: false
+  debug: true
   script:
     - define inventory <inventory[store_hub_cosmeticShop_titles_inventory]>
     - foreach <server.flag[cosmetics_titles_today]> as:tag:
@@ -94,10 +99,15 @@ store_hub_cosmeticShop_titles_events:
     on player clicks store_hub_cosmeticShop_titles in store_hub_cosmeticShop:
       - inject store_hub_cosmeticShop_title_open
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-
+    on player clicks store_hub_cosmeticShop_close in store_hub_cosmeticShop:
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+      - inventory close
     on system time 00:00:
       - inject title_changeover
-
+    on player clicks barrier in store_hub_cosmeticShop_titles_inventory:
+      - determine passively cancelled
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+      - inventory open d:store_hub_cosmeticShop
     on player clicks name_tag in store_hub_cosmeticShop_titles_inventory:
       - determine passively cancelled
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
@@ -119,16 +129,18 @@ store_hub_cosmeticShop_titles_events:
 
 title_changeover:
   type: task
+  debug: false
   script:
     - flag server cosmetics_titles_today:!|:<yaml[titles].list_keys[titles].filter_tag[<yaml[titles].read[titles.<[filter_value]>.in_shop]||false>].random[18]>
 
 title_voucher:
   type: item
+  debug: false
   material: name_tag
 
 title_voucher_events:
   type: world
-  debug: false
+  debug: true
   events:
     on player right clicks block with:title_voucher bukkit_priority:LOWEST:
       - determine passively cancelled
@@ -146,6 +158,12 @@ title_voucher_events:
       - else:
         - flag player title_confirm duration:10s
         - narrate "<&e>Right click again to confirm claiming this title."
+
+store_hub_cosmeticShop_close:
+  type: item
+  material: barrier
+  debug: false
+  display name: <&c>Close
 
 store_hub_cosmeticShop_bowTrails:
   type: item
@@ -165,21 +183,22 @@ store_hub_cosmeticShop_bowTrails:
 store_hub_cosmeticShop_bowTrails_inventory:
     type: inventory
     inventory: chest
-    debug: false
+    debug: true
     title: <&a>Buying <&6>Bow Trails<&e>.
     size: 45
     definitions:
       filler: <item[store_hub_cosmeticShop_filler]>
+      back: barrier[display_name=<&c>Back]
     slots:
       - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
       - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
       - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
       - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
-      - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
+      - [filler] [] [filler] [] [back] [] [filler] [] [filler]
 
 store_hub_cosmeticShop_bowtrails_open:
   type: task
-  debug: false
+  debug: true
   script:
     - define inventory <inventory[store_hub_cosmeticShop_bowTrails_inventory]>
     - foreach <server.flag[cosmetics_bowtrails_today]> as:trail:
@@ -195,7 +214,7 @@ store_hub_cosmeticShop_bowtrails_open:
 
 store_hub_cosmeticShop_bowtrails_events:
   type: world
-  debug: false
+  debug: true
   events:
     on player clicks store_hub_cosmeticShop_bowTrails in store_hub_cosmeticShop:
       - inject store_hub_cosmeticShop_bowtrails_open
@@ -203,6 +222,11 @@ store_hub_cosmeticShop_bowtrails_events:
 
     on system time 00:00:
       - inject bowtrail_changeover
+
+    on player clicks barrier in store_hub_cosmeticShop_bowTrails_inventory:
+      - determine passively cancelled
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+      - inventory open d:store_hub_cosmeticShop
 
     on player clicks item in store_hub_cosmeticShop_bowTrails_inventory:
       - determine passively cancelled
@@ -225,17 +249,18 @@ store_hub_cosmeticShop_bowtrails_events:
 
 bowtrail_changeover:
   type: task
-  debug: false
+  debug: true
   script:
     - flag server cosmetics_bowtrails_today:!|:<yaml[bowtrails].list_keys[bowtrails].exclude[<yaml[bowtrails].read[shop_blacklist]>].random[18]>
 
 bowtrail_voucher:
   type: item
+  debug: false
   material: name_tag
 
 bowtrail_voucher_events:
   type: world
-  debug: false
+  debug: true
   events:
     on player right clicks block with:bowtrail_voucher bukkit_priority:LOWEST:
       - determine passively cancelled
@@ -257,7 +282,7 @@ bowtrail_voucher_events:
 tempcmd:
   type: command
   name: tmpcmd
-  debug: false
+  debug: true
   permission: tsegdsgdsgdsfg
   script:
     - foreach <yaml[bbt].list_keys[Menu]> as:particleItem:

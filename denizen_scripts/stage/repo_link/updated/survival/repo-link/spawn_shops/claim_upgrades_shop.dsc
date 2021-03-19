@@ -34,15 +34,15 @@ claiming_protection_group_upgrades:
       - define list:->:<item[claiming_group_upgrade_item].with[material=<[material]>;display_name=<[name]>;lore=<[lore]>;flag=upgrade:<[upgrade]>;flag=cost:<[cost]>]>
     - determine <[list]>
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
-    back_button: <item[claiming_back_button].with[flag=back:back]>
+    filler: white_stained_glass_pane[display_name=<&e>]
+    close_button: barrier[flag=close:close;display_name=<&c>Close]
   slots:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
+    - [] [filler] [filler] [filler] [close_button] [filler] [filler] [filler] [filler]
 
 claiming_protection_group_upgrades_events:
   type: world
@@ -57,7 +57,7 @@ claiming_protection_group_upgrades_events:
         - stop
       - determine passively cancelled
       - wait 1t
-      - if <context.item.flag[upgrade]>:
+      - if <context.item.has_flag[upgrade]>:
         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
         - define cost <context.item.flag[cost]>
         - if <player.money> < <[cost]>:
@@ -67,9 +67,9 @@ claiming_protection_group_upgrades_events:
         - give <context.item.with[lore=<context.item.lore.get[3].to[last]>]>
         - if <context.item.flag[upgrade]> == claim_limit:
           - flag player claim_upgrades:++
-      - else if <context.item.flag[back]>:
+      - else if <context.item.has_flag[close]>:
         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-        - inventory open d:claiming_inventory
+        - inventory close
     on player right clicks block with:claiming_group_upgrade_item:
       - determine passively cancelled
       - ratelimit <player> 2t

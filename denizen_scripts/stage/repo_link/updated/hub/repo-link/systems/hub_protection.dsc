@@ -40,5 +40,5 @@ hub_player_takes_damage:
 
     # - Save the bees! ヽ(￣ω￣(。。 )ゝ
     # - Save everything!
-    on entity damaged by player:
-      - determine cancelled
+#    on entity damaged by player:
+#      - determine cancelled
