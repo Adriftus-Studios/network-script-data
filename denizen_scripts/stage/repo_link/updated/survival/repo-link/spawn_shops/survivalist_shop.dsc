@@ -47,6 +47,7 @@ survivalistHandler:
         on player clicks item in survivalistInventory:
         - determine passively cancelled
         - if <context.item.has_flag[item]>:
+            - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
             - inventory set d:<player.open_inventory> o:<context.item> slot:41
             - inventory set d:<player.open_inventory> o:<item[green_wool].with[flag=action:buy;flag=key:<context.item.flag[item]>;display_name=<&c>Buy<&sp>1;lore=<&a>Price:<&sp><script[survivalistData].data_key[Items.<context.item.flag[item]>.Prices].before[/]>]> slot:51
             - inventory set d:<player.open_inventory> o:<item[red_wool].with[flag=action:sell;flag=key:<context.item.flag[item]>;display_name=<&c>Sell<&sp>1;lore=<&a>Price:<&sp><script[survivalistData].data_key[Items.<context.item.flag[item]>.Prices].after[/]>]> slot:49

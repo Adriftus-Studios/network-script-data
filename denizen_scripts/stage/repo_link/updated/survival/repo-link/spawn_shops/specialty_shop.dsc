@@ -41,6 +41,7 @@ specialtyHandler:
     on player clicks item in specialtyInventory:
     - determine passively cancelled
     - if <context.item.has_flag[item]>:
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - inventory set d:<player.open_inventory> o:<context.item> slot:41
       - inventory set d:<player.open_inventory> o:<item[green_wool].with[flag=action:buy;flag=key:<context.item.flag[item]>;display_name=<&c>Buy<&sp>1;lore=<&c>Price:<&sp><script[specialtyData].data_key[Items.<context.item.flag[item]>.Prices].before[/]>]> slot:51
       - inventory set d:<player.open_inventory> o:<item[green_wool].with[flag=action:buy;flag=key:<context.item.flag[item]>;display_name=<&c>Buy<&sp>32;lore=<&c>Price:<&sp><script[specialtyData].data_key[Items.<context.item.flag[item]>.Prices].before[/].mul[32]>;quantity=32]> slot:52
@@ -52,8 +53,8 @@ specialtyHandler:
     - else if <context.item.has_flag[action]>:
       - choose <context.item.flag[action]>:
         - case buy:
+          - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
           - if <player.money> >= <script[specialtyData].data_key[Items.<context.item.flag[key]>.Prices].before[/].mul[<context.item.quantity>]>:
-            - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
             - give <script[specialtyData].parsed_key[Items.<context.item.flag[key]>.Item]> quantity:<context.item.quantity>
             - money take quantity:<script[specialtyData].data_key[Items.<context.item.flag[key]>.Prices].before[/].mul[<context.item.quantity>]>
             - inventory adjust slot:5 "lore:<&a>Money<&co> <&e><player.money>" d:<player.open_inventory>
@@ -61,8 +62,8 @@ specialtyHandler:
             - narrate "<&c>You don't have enough money"
             - playsound <player> sound:ENTITY_VILLAGER_NO volume:0.6 pitch:1.4
         - case sell:
+          - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
           - if <player.inventory.contains.scriptname[<context.item.flag[key]>]>:
-            - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
             - take scriptname:<context.item.flag[key]> quantity:<context.item.quantity.min[<player.inventory.quantity[<context.item>]>]>
             - money give quantity:<script[specialtyData].data_key[Items.<context.item.flag[key]>.Prices].after[/].mul[<context.item.quantity>].min[<player.inventory.quantity[<context.item>]>]>
             - inventory adjust slot:5 "lore:<&a>Money<&co> <&e><player.money>" d:<player.open_inventory>

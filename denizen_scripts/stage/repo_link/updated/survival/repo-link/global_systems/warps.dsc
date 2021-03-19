@@ -76,7 +76,7 @@ warps_GUI_main_menu:
     close_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;flag=action:close]>
     Server_Warps: <item[nether_star].with[display_name=<&b>Server<&sp>Warps;flag=action:server_warps]>
     Public_Warps: <item[lantern].with[display_name=<&a>Player<&sp>Warps;lore=<&e>Public<&sp>Warp<&sp>Directory|<&b>Vote<&sp>for<&sp>your<&sp>favorites!;flag=action:player_warps]>
-    Manage_My_Warps: <item[gold_block].with[display_name=<&e>Manage<&sp>My<&sp>Warps;flag=action:manage_warps]>
+    Manage_My_Warps: <item[gold_block].with[display_name=<&b>Manage<&sp>My<&sp>Warps;flag=action:manage_warps]>
     My_Warps: <item[hopper].with[display_name=<&e>My<&sp>Warps;flag=action:my_warps]>
     Make_New_Warp: <item[green_wool].with[display_name=<&a>Make<&sp>New<&sp>Warp;flag=action:new_warp]>
     favorite_warps: <item[enchanted_book].with[display_name=<&a>Favorite<&sp>Warps;flag=action:favorite_warps]>
@@ -125,11 +125,12 @@ warps_GUI_main_menu_events:
 warps_my_warps_GUI:
   type: inventory
   inventory: chest
+  title: <&e>My Warps
   debug: false
   size: 54
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;flag=action:back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
   slots:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
@@ -147,10 +148,10 @@ warps_my_warps_GUI_open:
   - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].include[<yaml[player.<player.uuid>].read[warps.has_access]>]||<list>]> as:identifier:
     - inject build_warp_item
     - if <[identifier].before[~]> == <player.uuid>:
-      - define list:->:<[item].with[flag=action:warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
+      - define list:->:<[item].with_flag[action:warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
     - else:
       - define list:->:<[item].with[flag=action:warp]>
-  - if <[list].is_empty.not>:
+  - if !<[list].is_empty>:
     - give <[list]> to:<[inventory]>
   - inventory open d:<[inventory]>
 
@@ -184,7 +185,7 @@ warps_GUI_server_warps_menu:
       - define list:->:<item[<[warp].get[material]>].with[display_name=<[warp].get[display].parsed>;lore=<[warp].get[lore].parsed>;flag=action:warp;flag=location:<[warp].get[location]>]>
     - determine <[list]>
   definitions:
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;flag=action:back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
     next_page: <item[arrow].with[display_name=<&e>Next<&sp>Page;flag=action:next_page]>
     previous_page: <item[white_stained_glass_pane].with[display_name=<&a>;flag=action:next_page]>
@@ -217,11 +218,12 @@ warps_GUI_server_warps_menu_events:
 favorite_warps:
   type: inventory
   debug: false
+  title: <&a>Favorite Warps
   inventory: chest
   size: 54
   definitions:
     filler: white_stained_glass_pane[display_name=<&a>]
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;flag=action:back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
   slots:
   - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
   - [filler] [] [] [] [] [] [] [] [filler]
@@ -232,15 +234,15 @@ favorite_warps:
 
 favorite_warps_open:
   type: task
-  debug: false
+  debug: true
   script:
   - foreach <yaml[player.<player.uuid>].list_keys[warps.favorites]||<list>>:
     - define identifier <yaml[player.<player.uuid>].read[warps.favorites.<[value]>]>
     - define type personal
     - inject build_warp_item
-    - define "list:|:<[item].with[display_name=<&e><[value]>;flag=name:<[value]>;lore=<[item].lore.remove[first].include[<&e>----------------|<&a>Left Click to Warp.|<&c>Right Click to Remove]>]>"
+    - define list:->:<[item].with[display_name=<&e><[value]>;flag=name:<[value]>;lore=<[item].lore.remove[first].include[<&e>----------------|<&a>Left<&sp>Click<&sp>to<&sp>Warp.|<&c>Right<&sp>Click<&sp>to<&sp>Remove]>]>
   - define inventory <inventory[favorite_warps]>
-  - if <[list].is_empty.not>:
+  - if !<[list].is_empty>:
     - give <[list]> to:<[inventory]>
   - inventory open d:<[inventory]>
 
@@ -259,6 +261,8 @@ favorite_warps_events:
           - define name <context.item.flag[name]>
           - define inventory <context.inventory.script.name>
           - inject warps_handle_favorite
+          - wait 1t
+          - inject favorite_warps_open
         - case LEFT:
           - teleport <yaml[warps].read[warps.personal.<context.item.flag[warp]>.location]>
     - if <context.item.has_flag[action]>:
@@ -286,14 +290,14 @@ warps_GUI_player_warps_menu_top:
   debug: false
   inventory: chest
   size: 54
-  title: <&b>Warps Menu
+  title: <&a>Player Warps
   custom_mapped_keys:
     next_page: 45
     previous_page: 37
     page_marker: 5
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;flag=action:back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
     next_page: <proc[warps_GUI_player_warps_menu_next_page_item].context[1]>
     page_marker: <item[white_stained_glass_pane].with[display_name=<&a>;flag=page/1]>
   procedural items:
@@ -322,7 +326,7 @@ warps_GUI_player_warps_menu_pages:
     page_marker: 5
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;flag=action:back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
     next_page: <proc[warps_GUI_player_warps_menu_next_page_item]>
     previous_page: <item[arrow].with[display_name=<&e>Previous<&sp>Page;flag=action:previous_page]>
   slots:
@@ -429,7 +433,7 @@ warp_management_GUI:
   title: <&b>Warp Management
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;flag=action:back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
   slots:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
@@ -504,7 +508,7 @@ warp_management_GUI_panel:
     remove_member: 46
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;flag=action:back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
     add_member: <item[green_wool].with[display_name=<&a>Add<&sp>Member;flag=action:add_member]>
     remove_member: <item[red_wool].with[display_name=<&c>Remove<&sp>Member;flag=action:remove_member]>
     choose_material: <item[dirt].with[display_name=<&b>Choose<&sp>Material;flag=action:choose_material]>
@@ -805,7 +809,7 @@ build_warp_item:
     - define display_name <yaml[warps].read[warps.<[type]>.<[identifier]>.display_name]>
     - define lore:!|:<&e>Votes<&co><&sp><&f><yaml[warps].read[warps.<[type]>.<[identifier]>.votes]||0>
     - define lore:|:<yaml[warps].read[warps.<[type]>.<[identifier]>.lore]>
-    - define item <yaml[warps].read[warps.<[type]>.<[identifier]>.material].as_item.with[display_name=<[display_name]>;hides=all;lore=<[lore]>;flag=warp:<[identifier]>]>
+    - define item <yaml[warps].read[warps.<[type]>.<[identifier]>.material].as_item.with[display_name=<[display_name]>;hides=all;lore=<[lore]>].with_flag[warp:<[identifier]>]>
 
 create_warp_personal:
   type: task

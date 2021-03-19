@@ -1,6 +1,6 @@
 Onion_gathering_handler:
   type: world
-  debug: true
+  debug: false
   events:
     on player right clicks farmland with:custom_seed_onion:
     - flag <context.location.add[0,1,0]> onions_planted
@@ -20,7 +20,7 @@ Onion_gathering_handler:
 custom_seed_onion:
   type: item
   material: beetroot_seeds
-  debug: true
+  debug: false
   display name: <&f>Onion Seeds
   recipes:
     1:
