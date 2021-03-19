@@ -22,7 +22,7 @@ delhome_command:
   - if !<player.has_flag[home]>:
     - narrate "<&c>You do not currently have a home set to delete"
   - else:
-    - if !<player.has_flag[delete_confirmation]>:
+    - if !<player.has_flag[home_delete_confirmation]>:
       - narrate "<&e>Are you sure you want to delete your home? This <&c>cannot<&e> be undone!"
       - narrate "<&e>Type <&b>/Delhome<&e> to confirm."
       - flag player home_delete_confirmation duration:30s

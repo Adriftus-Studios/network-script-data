@@ -16,16 +16,14 @@ store_hub_mysteryShop:
   debug: false
   size: 27
   title: <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&5>S<&d>h<&5>o<&d>p
-  definitions:
-    filler: <item[store_hub_mysteryShop_filler]>
   procedural items:
     - foreach <list[boxes]>:
       - define list:->:<item[store_hub_mysteryShop_<[value]>]>
     - determine <[list]>
   slots:
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]"
-  - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
+  - "[standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]"
+  - "[standard_filler] [standard_filler] [standard_filler] [standard_filler] [] [standard_filler] [standard_filler] [standard_filler] [standard_filler]"
+  - "[standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]"
 
 
 store_hub_mysteryShop_filler:
@@ -42,8 +40,8 @@ store_hub_mysteryShop_filler_events:
   type: world
   debug: false
   events:
-    on player clicks store_hub_mysteryShop_filler in store_hub_mysteryShop:
-      - determine cancelled
+    on player clicks in store_hub_mysteryShop:
+      - determine passively cancelled
 
 
 store_hub_mysteryShop_boxes:
@@ -63,7 +61,7 @@ store_hub_mysteryShop_boxes_inventory:
     debug: false
     size: 45
     inventory: chest
-    title: <&a>Buying <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.
+    title: <&e>Buying <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.
     definitions:
       filler: <item[store_hub_mysteryShop_filler]>
       101: <item[ender_chest].with[quantity=1;flag=price:200;flag=number:10flag=stars:1;display_name=<&b>10<&sp><&e>⭐<&7>✩✩✩✩<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>200]>
@@ -87,21 +85,23 @@ store_hub_mysteryShop_boxes_inventory:
       505: <item[ender_chest].with[quantity=3;flag=price:11200;flag=number:50flag=stars:5;display_name=<&b>50<&sp><&e>⭐⭐⭐⭐⭐<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>11200]>
       1005: <item[ender_chest].with[quantity=4;flag=price:16000;flag=number:100flag=stars:5;display_name=<&b>100<&sp><&e>⭐⭐⭐⭐⭐<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>16000]>
     slots:
-      - [101] [251] [501] [1001] [filler] [filler] [filler] [filler] [filler]
-      - [102] [252] [502] [1002] [filler] [filler] [filler] [filler] [filler]
-      - [103] [253] [503] [1003] [filler] [filler] [filler] [filler] [filler]
-      - [104] [254] [504] [1004] [filler] [filler] [filler] [filler] [filler]
-      - [105] [255] [505] [1005] [filler] [filler] [filler] [filler] [filler]
+      - [standard_filler] [standard_filler] [101] [251] [501] [1001] [standard_filler] [standard_filler] [standard_filler]
+      - [standard_filler] [standard_filler] [102] [252] [502] [1002] [standard_filler] [standard_filler] [standard_filler]
+      - [standard_filler] [standard_filler] [103] [253] [503] [1003] [standard_filler] [standard_filler] [standard_filler]
+      - [standard_filler] [standard_filler] [104] [254] [504] [1004] [standard_filler] [standard_filler] [standard_filler]
+      - [standard_filler] [standard_filler] [105] [255] [505] [1005] [standard_filler] [standard_filler] [standard_filler]
 
 store_hub_mysteryShop_boxes_events:
   type: world
-  debug: false
+  debug: true
   events:
     on player clicks store_hub_mysteryShop_boxes in store_hub_mysteryShop:
       - inventory open d:store_hub_mysteryShop_boxes_inventory
-    on player clicks ender_chest in store_hub_mysteryShop_boxes_inventory:
+    on player clicks in store_hub_mysteryShop_boxes_inventory:
       - determine passively cancelled
-      - if <yaml[global.player.<player.uuid>].read[economy.premium.current]> >= <context.item.flag[price]>:
+      - if <context.item.has_flag[filler]>:
+        - stop
+      - if <yaml[global.player.<player.uuid>].read[economy.premium.current]||-1> >= <context.item.flag[price]>:
         - yaml id:global.player.<player.uuid> set economy.premium.current:-:<context.item.flag[price]>
         - narrate "<&a>You have succesfully purchased: <&r><context.item.flag[number]> <&e><list.pad_left[<context.item.flag[stars]>].with[⭐].separated_by[]><&7><list.pad_right[<context.item.flag[stars].sub[5].abs>].with[✩].separated_by[]> <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>."
       - else:
