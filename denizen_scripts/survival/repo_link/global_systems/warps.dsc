@@ -127,20 +127,17 @@ warps_my_warps_GUI:
   title: <&e>My Warps
   debug: false
   size: 54
-  definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
   slots:
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
     - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
     - [standard_filler] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [standard_filler]
     - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warps_my_warps_GUI_open:
   type: task
-  debug: true
+  debug: false
   script:
   - define inventory <inventory[warps_my_warps_GUI]>
   - define type personal
@@ -184,8 +181,6 @@ warps_GUI_server_warps_menu:
       - define list:->:<item[<[warp].get[material]>].with[display_name=<[warp].get[display].parsed>;lore=<[warp].get[lore].parsed>;flag=action:warp;flag=location:<[warp].get[location]>]>
     - determine <[list]>
   definitions:
-    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
-    filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
     next_page: <item[arrow].with[display_name=<&e>Next<&sp>Page;flag=action:next_page]>
     previous_page: <item[white_stained_glass_pane].with[display_name=<&a>;flag=action:next_page]>
   slots:
@@ -193,7 +188,7 @@ warps_GUI_server_warps_menu:
     - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
     - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warps_GUI_server_warps_menu_events:
   type: world
@@ -220,16 +215,13 @@ favorite_warps:
   title: <&a>Favorite Warps
   inventory: chest
   size: 54
-  definitions:
-    filler: white_stained_glass_pane[display_name=<&a>]
-    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
   slots:
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
   - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
   - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 favorite_warps_open:
   type: task
@@ -296,8 +288,6 @@ warps_GUI_player_warps_menu_top:
     previous_page: 37
     page_marker: 5
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
     next_page: <proc[warps_GUI_player_warps_menu_next_page_item].context[1]>
     page_marker: "<item[white_stained_glass_pane].with[flag=page/1;display_name=<&a> ]>"
   procedural items:
@@ -312,7 +302,7 @@ warps_GUI_player_warps_menu_top:
     - [standard_filler] [standard_filler] [standard_filler] [] [] [] [standard_filler] [standard_filler] [standard_filler]
     - [standard_filler] [standard_filler] [] [] [] [] [] [standard_filler] [standard_filler]
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [next_page]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warps_GUI_player_warps_menu_pages:
   type: inventory
@@ -325,8 +315,6 @@ warps_GUI_player_warps_menu_pages:
     previous_page: 37
     page_marker: 5
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
     next_page: <proc[warps_GUI_player_warps_menu_next_page_item]>
     previous_page: <item[arrow].with[display_name=<&e>Previous<&sp>Page;flag=action:previous_page]>
   slots:
@@ -335,11 +323,11 @@ warps_GUI_player_warps_menu_pages:
     - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
     - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
     - [previous_page] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warps_GUI_player_warps_menu_pages_events:
   type: world
-  debug: true
+  debug: false
   events:
     on player clicks item in warps_GUI_player_warps_menu_pages|warps_GUI_player_warps_menu_top:
     - determine passively cancelled
@@ -428,18 +416,15 @@ warps_menu_remove_vote:
 warp_management_GUI:
   type: inventory
   inventory: chest
-  debug: true
+  debug: false
   size: 45
   title: <&b>Warp Management
-  definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
-    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
   slots:
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
     - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
     - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warp_management_GUI_populate:
   type: task
@@ -507,8 +492,6 @@ warp_management_GUI_panel:
     add_member: 37
     remove_member: 46
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
-    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
     add_member: <item[green_wool].with[display_name=<&a>Add<&sp>Member;flag=action:add_member]>
     remove_member: <item[red_wool].with[display_name=<&c>Remove<&sp>Member;flag=action:remove_member]>
     choose_material: <item[dirt].with[display_name=<&b>Choose<&sp>Material;flag=action:choose_material]>
@@ -522,12 +505,12 @@ warp_management_GUI_panel:
     - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
     - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
     - [add_member] [standard_filler] [choose_material] [standard_filler] [display_name] [standard_filler] [set_lore] [standard_filler] [standard_filler]
-    - [remove_member] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [delete_warp]
+    - [remove_member] [standard_filler] [standard_filler] [standard_filler] [standard_back_button] [standard_filler] [standard_filler] [standard_filler] [delete_warp]
 
 
 warp_management_GUI_panel_populate:
   type: task
-  debug: true
+  debug: false
   script:
     - define inventory <inventory[warp_management_GUI_panel]>
     - define type personal
@@ -546,7 +529,7 @@ warp_management_GUI_panel_populate:
 
 warp_management_GUI_panel_events:
   type: world
-  debug: true
+  debug: false
   events:
     on player clicks item in warp_management_GUI_panel:
       - determine passively cancelled
@@ -792,7 +775,7 @@ create_warp:
 
 create_warp_server:
   type: task
-  debug: true
+  debug: false
   definitions: ID|location
   script:
     - define ID <[ID].replace[<&sp>].with[_]>
@@ -803,7 +786,7 @@ create_warp_server:
 
 build_warp_item:
   type: task
-  debug: true
+  debug: false
   definitions: type|identifier
   script:
     - define display_name <yaml[warps].read[warps.<[type]>.<[identifier]>.display_name]>
