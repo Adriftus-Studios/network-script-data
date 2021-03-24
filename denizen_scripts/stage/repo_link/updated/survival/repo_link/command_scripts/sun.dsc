@@ -1,0 +1,14 @@
+Sun_command:
+    type: command
+    name: sun
+    usage: /sun
+    debug: false
+    aliases:
+    - sunny
+    - ihaterain
+    - effthunder
+    description: Sets to weather to sunny
+    permission: adriftus.staff
+    script:
+    - weather sunny <player.world> reset:10m
+    - Announce "<&e>Weather set to <&dq>Clear<&dq> by <player.display_name>"

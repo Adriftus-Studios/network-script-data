@@ -226,7 +226,7 @@ market_system_main_GUI:
       - define lore <script[market_system_data].parsed_key[categories.<[category]>.lore]>
       - define material <script[market_system_data].data_key[categories.<[category]>.material]>
       - define CMD <script[market_system_data].data_key[categories.<[category]>.CMD]>
-      - define list:->:<item[<[material]>].with[custom_model_data=<[CMD]>;display_name=<[name]>;lore=<[lore]>;nbt=category/<[category]>]>
+      - define list:->:<item[<[material]>].with[custom_model_data=<[CMD]>;display_name=<[name]>;lore=<[lore]>;flag=category:<[category]>]>
     - determine <[list]>
   slots:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
@@ -242,10 +242,10 @@ market_system_main_GUI_events:
   events:
     on player clicks item in market_system_main_GUI:
       - determine passively cancelled
-      - if <context.item.has_nbt[category]>:
+      - if <context.item.has_flag[category]>:
         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
         - define inventory <inventory[market_system_category_GUI]>
-        - define category <context.item.nbt[category]>
+        - define category <context.item.flag[category]>
         - define page 1
         - inject market_system_category_setup
         - inventory open d:<[inventory]>
@@ -289,7 +289,7 @@ market_system_category_GUI:
       one: 51
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
-    back_button: <item[barrier].with[display_name=<&e>;nbt=back/back]>
+    back_button: <item[barrier].with[display_name=<&e>;flag=back:back]>
   slots:
     - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
     - [filler] [] [] [] [] [] [] [] [filler]
@@ -306,23 +306,23 @@ market_system_category_events:
       - determine passively cancelled
       - ratelimit <player> 5t
       - define inventory <context.inventory>
-      - if <context.item.has_nbt[market_item]>:
+      - if <context.item.has_flag[market_item]>:
         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-        - define item <context.item.nbt[market_item]>
+        - define item <context.item.flag[market_item]>
         - inject market_system_category_set_buy_sell_items
-      - if <context.item.has_nbt[buy]>:
+      - if <context.item.flag[buy]>:
         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-        - define cost <context.item.nbt[price]>
-        - define quantity <context.item.nbt[buy]>
-        - define item <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.buy_sell_item]>].nbt[item]>
+        - define cost <context.item.flag[price]>
+        - define quantity <context.item.flag[buy]>
+        - define item <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.buy_sell_item]>].flag[item]>
         - inject market_system_categories_buy_item
-      - if <context.item.has_nbt[sell]>:
+      - if <context.item.has_flag[sell]>:
         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-        - define cost <context.item.nbt[price]>
-        - define quantity <context.item.nbt[sell]>
-        - define item <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.buy_sell_item]>].nbt[item]>
+        - define cost <context.item.flag[price]>
+        - define quantity <context.item.flag[sell]>
+        - define item <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.buy_sell_item]>].flag[item]>
         - inject market_system_categories_sell_item
-      - if <context.item.has_nbt[back]>:
+      - if <context.item.has_flag[back]>:
         - inventory open d:market_system_main_GUI
         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
 
@@ -394,42 +394,42 @@ market_system_category_set_buy_sell_items:
     - define sell_price <[buy_price].mul[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
     - define "lore:<&a>Buy Price<&co> <&e><[buy_price]>|<&c>Sell Price<&co> <[sell_price]>"
     - define name <&a><[item].replace[_].with[<&sp>].to_titlecase>
-    - inventory set slot:<[slot]> d:<[inventory]> o:<[item].as_item.with[display_name=<[name]>;lore=<[lore]>;nbt=item/<[item]>]>
+    - inventory set slot:<[slot]> d:<[inventory]> o:<[item].as_item.with[display_name=<[name]>;lore=<[lore]>;flag=item:<[item]>]>
     # SELL ALL
     - define amount_in_inventory <player.inventory.quantity[<[item].as_item>]>
     - if <[amount_in_inventory]> > 1:
       - define this_sell_price <proc[market_system_get_price_of_multiple].context[<[item]>|<[amount_in_inventory]>|sell]>
       - define slot <script[market_system_category_GUI].data_key[custom_slots_map.sell.all]>
-      - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[display_name=<&c>Sell<&sp>All<&sp>(<[amount_in_inventory]>);nbt=sell/<[amount_in_inventory]>|price/<[this_sell_price]>;lore=<&a>Price<&co><&sp><&e><[this_sell_price]>]>
+      - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[display_name=<&c>Sell<&sp>All<&sp>(<[amount_in_inventory]>);flag=sell:<[amount_in_inventory]>;flag=price:<[this_sell_price]>;lore=<&a>Price<&co><&sp><&e><[this_sell_price]>]>
     # FULL STACK
     - define max_stack <[item].as_material.max_stack_size>
     - if <[max_stack]> > 1:
       - define this_buy_price <proc[market_system_get_price_of_multiple].context[<[item]>|<[max_stack]>|buy]>
       - define this_sell_price <proc[market_system_get_price_of_multiple].context[<[item]>|<[max_stack]>|sell]>
       - define slot <script[market_system_category_GUI].data_key[custom_slots_map.sell.stack]>
-      - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[quantity=<[max_stack]>;display_name=<&c>Sell<&sp><[max_stack]>;nbt=sell/<[max_stack]>|price/<[this_sell_price]>;lore=<&a>Price<&co><&sp><&e><[this_sell_price]>]>
+      - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[quantity=<[max_stack]>;display_name=<&c>Sell<&sp><[max_stack]>;flag=sell:<[max_stack]>;flag=price:<[this_sell_price]>;lore=<&a>Price<&co><&sp><&e><[this_sell_price]>]>
       - define slot <script[market_system_category_GUI].data_key[custom_slots_map.buy.stack]>
-      - inventory set slot:<[slot]> d:<[inventory]> o:<item[green_wool].with[quantity=<[max_stack]>;display_name=<&c>Buy<&sp><[max_stack]>;nbt=buy/<[max_stack]>|price/<[this_buy_price]>;lore=<&c>Price<&co><&sp><&e><[this_buy_price]>]>
+      - inventory set slot:<[slot]> d:<[inventory]> o:<item[green_wool].with[quantity=<[max_stack]>;display_name=<&c>Buy<&sp><[max_stack]>;flag=buy:<[max_stack]>;flag=price:<[this_buy_price]>;lore=<&c>Price<&co><&sp><&e><[this_buy_price]>]>
     # HALF STACK
     - if <[max_stack]> > 1 && <[max_stack].mod[2]> == 0:
       - define this_sell_price <proc[market_system_get_price_of_multiple].context[<[item]>|<[max_stack].div[2]>|sell]>
       - define this_buy_price <proc[market_system_get_price_of_multiple].context[<[item]>|<[max_stack].div[2]>|buy]>
       - define slot <script[market_system_category_GUI].data_key[custom_slots_map.sell.half_stack]>
-      - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[quantity=<[max_stack].div[2]>;display_name=<&c>Sell<&sp><[max_stack].div[2]>;nbt=sell/<[max_stack].div[2]>|price/<[this_sell_price]>;lore=<&a>Price<&co><&sp><&e><[this_sell_price]>]>
+      - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[quantity=<[max_stack].div[2]>;display_name=<&c>Sell<&sp><[max_stack].div[2]>;flag=sell:<[max_stack].div[2]>;flag=price:<[this_sell_price]>;lore=<&a>Price<&co><&sp><&e><[this_sell_price]>]>
       - define slot <script[market_system_category_GUI].data_key[custom_slots_map.buy.half_stack]>
-      - inventory set slot:<[slot]> d:<[inventory]> o:<item[green_wool].with[quantity=<[max_stack].div[2]>;display_name=<&c>Buy<&sp><[max_stack].div[2]>;nbt=buy/<[max_stack].div[2]>|price/<[this_buy_price]>;lore=<&c>Price<&co><&sp><&e><[this_buy_price]>]>
+      - inventory set slot:<[slot]> d:<[inventory]> o:<item[green_wool].with[quantity=<[max_stack].div[2]>;display_name=<&c>Buy<&sp><[max_stack].div[2]>;flag=buy:<[max_stack].div[2]>;flag=price:<[this_buy_price]>;lore=<&c>Price<&co><&sp><&e><[this_buy_price]>]>
     # ONLY ONE
     - define slot <script[market_system_category_GUI].data_key[custom_slots_map.sell.one]>
-    - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[display_name=<&c>Sell<&sp>1;nbt=sell/1|price/<[sell_price]>;lore=<&a>Price<&co><&sp><&e><[sell_price]>]>
+    - inventory set slot:<[slot]> d:<[inventory]> o:<item[red_wool].with[display_name=<&c>Sell<&sp>1;flag=sell:1;flag=price:<[sell_price]>;lore=<&a>Price<&co><&sp><&e><[sell_price]>]>
     - define slot <script[market_system_category_GUI].data_key[custom_slots_map.buy.one]>
-    - inventory set slot:<[slot]> d:<[inventory]> o:<item[green_wool].with[display_name=<&c>Buy<&sp>1;nbt=buy/1|price/<[buy_price]>;lore=<&a>Price<&co><&sp><&e><[buy_price]>]>
+    - inventory set slot:<[slot]> d:<[inventory]> o:<item[green_wool].with[display_name=<&c>Buy<&sp>1;flag=buy:1;flag=price:<[buy_price]>;lore=<&a>Price<&co><&sp><&e><[buy_price]>]>
 
 market_system_category_set_market_next_page:
   type: task
   debug: false
   script:
     - if <yaml[market].list_keys[categories.<[category]>].size> > <script[market_system_category_GUI].data_key[custom_slots_map.market_items].as_list.size>:
-      - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.next_page]> d:<[inventory]> o:<item[market_system_category_next_page_button].with[nbt=action/next_page]>
+      - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.next_page]> d:<[inventory]> o:<item[market_system_category_next_page_button].with[flag=action:next_page]>
     - else if <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.next_page]>].script.name||null> == market_system_category_next_page_button:
       - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.next_page]> d:<[inventory]> o:<script[market_system_category_GUI].parsed_key[definitions.filler]>
 
@@ -437,8 +437,8 @@ market_system_category_set_market_previous_page:
   type: task
   debug: false
   script:
-    - if <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.hidden_marker]>].nbt[page]> > 1:
-      - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.previous_page]> d:<[inventory]> o:<item[market_system_category_previous_page_button].with[nbt=action/previous_page]>
+    - if <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.hidden_marker]>].flag[page]> > 1:
+      - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.previous_page]> d:<[inventory]> o:<item[market_system_category_previous_page_button].with[flag=action:previous_page]>
     - else if <[inventory].slot[<script[market_system_category_GUI].data_key[custom_slots_map.previous_page]>].script.name||null> == market_system_category_previous_page_button:
       - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.previous_page]> d:<[inventory]> o:<script[market_system_category_GUI].parsed_key[definitions.filler]>
 
@@ -446,7 +446,7 @@ market_system_category_set_market_items:
   type: task
   debug: false
   script:
-    - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.hidden_marker]> d:<[inventory]> o:<script[market_system_category_GUI].parsed_key[definitions.filler].with[nbt=page/<[page]>|category/<[category]>]>
+    - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.hidden_marker]> d:<[inventory]> o:<script[market_system_category_GUI].parsed_key[definitions.filler].with[flag=page:<[page]>;flag=category:<[category]>]>
     - foreach <script[market_system_category_GUI].data_key[custom_slots_map.market_items]> as:slot:
       - define items_per_page <script[market_system_category_GUI].data_key[custom_slots_map.market_items].as_list.size>
       - define index_to_pull <[loop_index].add[<[page].sub[1].mul[<[items_per_page]>]>]>
@@ -457,7 +457,7 @@ market_system_category_set_market_items:
       - define sell_price <[buy_price].mul[<script[market_system_data].data_key[settings.sell_buy_difference]>]>
       - define "lore:<&a>Buy Price<&co><&sp><&e><[buy_price]>|<&c>Sell Price<&co><&sp><[sell_price]>"
       - define name <&a><[item].replace[_].with[<&sp>].to_titlecase>
-      - inventory set slot:<[slot]> d:<[inventory]> o:<[item].as_item.with[lore=<[lore]>;nbt=market_item/<[item]>;display_name=<[name]>]>
+      - inventory set slot:<[slot]> d:<[inventory]> o:<[item].as_item.with[lore=<[lore]>;flag=market_item:<[item]>;display_name=<[name]>]>
 
 market_system_category_set_player_head:
   type: task
@@ -557,7 +557,7 @@ market_system_open:
   type: task
   debug: false
   script:
-    - waituntil rate:5t <server.has_flag[market_timer].not>
+    - waituntil rate:5t !<server.has_flag[market_timer]>
     - flag server market_open:true
     - announce "<&a>The Market is now open, and has updated prices."
     - playsound <server.online_players> sound:ENTITY_EXPERIENCE_ORB_PICKUP volume:1.0 pitch:1.0
