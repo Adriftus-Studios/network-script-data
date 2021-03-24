@@ -43,7 +43,6 @@ Parkour_events:
           - narrate "<&a><&l>Your time was:"
           - narrate <&b><util.time_now.duration_since[<player.flag[parkour_timer]>].formatted>
           - give cookie
-          - announce "<player.display_name><&e> Has just finished the spawn parkour course in <util.time_now.duration_since[<player.flag[parkour_timer]>].formatted> !"
           - flag player parkour:!
           - flag player parkour_timer:!
 

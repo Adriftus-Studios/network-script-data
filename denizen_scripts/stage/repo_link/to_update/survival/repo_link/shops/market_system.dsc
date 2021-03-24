@@ -557,7 +557,7 @@ market_system_open:
   type: task
   debug: false
   script:
-    - waituntil rate:5t <server.has_flag[market_timer].not>
+    - waituntil rate:5t !<server.has_flag[market_timer]>
     - flag server market_open:true
     - announce "<&a>The Market is now open, and has updated prices."
     - playsound <server.online_players> sound:ENTITY_EXPERIENCE_ORB_PICKUP volume:1.0 pitch:1.0

@@ -199,7 +199,7 @@ item_system_global_data:
   calculations:
     melee_damage: <[level].mul[2]>
     ranged_damage: <[level].mul[1]>
-    speed: <[level].mul[0.0025]>
+    speed: <[level].mul[0.005]>
     armor_toughness: <[level]>
     attack_speed: <[level].mul[.1]>
     health: <[level].add[4]>
@@ -374,6 +374,9 @@ soul:
   debug: false
   material: firework_star
   display_name: <&c>ERROR - REPORT THIS
+  mechanisms:
+    enchantments: luck,1
+    hides: all
   lore_type: <&d>Soul Item
 
 item_with_soul:
@@ -447,7 +450,7 @@ item_create_soul_item:
 item_system_build_item:
   type: procedure
   definitions: item
-  debug: false
+  debug: true
   script:
     - define item <[item].as_item>
   # % ██ [ Determine the amount of Stars  ] ██
@@ -556,7 +559,7 @@ item_system_build_item:
       - define lore <[Lore].include[<script[item_system_global_data].parsed_key[settings.lore.middle.flavor]>]>
     - define lore <[lore].include[<script[item_system_global_data].parsed_key[settings.lore.bottom]>]>
 
-    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>]>
+    - define NewItem <[item].with[display_name=<[name]>;lore=<[lore]>;hides=ALL]>
     - if !<[nbt].is_empty>:
       - define NewItem <[NewItem].with[nbt=<[nbt]>]>
     - else:

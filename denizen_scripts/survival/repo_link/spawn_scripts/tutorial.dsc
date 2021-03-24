@@ -37,7 +37,6 @@ tutorial_data:
       - "<&6><&l>Vote Crates"
       - "<&e>Voting for our server will earn you rewards."
       - "<&e>Use <&b>/vote <&e>to find out how."
-      - "<&c>Coming Soon."
     particle_guide: true
   5:
     hologram:
@@ -106,8 +105,6 @@ tutorial_data:
       - <&6><&l>Grim
       - "<&e>Grim can help you return to your death location."
       - "<&c>... For a cost."
-      - "<&e>When you die a grave is left containing your items."
-      - "<&e>Break another players grave to claim their head!"
     particle_guide: false
     title: "<&6>Use <&b>/warps"
   15:
@@ -137,9 +134,9 @@ tutorial_data:
     hologram:
       - "<&6><&l>The World Part (2/2)"
       - "<&e>The <&c>Savage Lands <&e>have <&c>PvP Enabled."
-      - "<&e>Beware of encounters there as dangerous monsters will spawn."
+      - "<&e>Beware of encounters there as monsters will spawn."
       - "<&e>The <&2>Outer Realms <&e>are a safe haven."
-      - "<&e>Normal monsters will spawn, and PvP is disabled."
+      - "<&e>No monsters will spawn, and PvP is disabled."
     particle_guide: true
   19:
     hologram:
