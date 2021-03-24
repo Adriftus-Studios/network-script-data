@@ -218,7 +218,7 @@ github_updates:
       Adriftus-Studios:
         Adriftizen: 650016499502940170
         The-Alchemist: 808868061905551361
-
+        core-game-updates: 808868061905551361
         network-script-data: 650016499502940170
         adriftus-resources: 754034672253665391
 
