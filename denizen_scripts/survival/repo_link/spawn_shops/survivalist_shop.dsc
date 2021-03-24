@@ -15,7 +15,6 @@ survivalistInventory:
     title: <&2>Sur<&a>viv<&2>al<&a>ist
     debug: false
     definitions:
-        filler: <item[white_stained_glass_pane].with[display_name=<&f>]>
         backpack_9: <item[Backpack_9].with[flag=item:Backpack_9;lore=<&e>Slots:<&sp><&a>9|<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Backpack_9.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Backpack_9.Prices].after[/]>]>
         backpack_18: <item[Backpack_18].with[flag=item:Backpack_18;lore=<&e>Slots:<&sp><&a>18|<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Backpack_18.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Backpack_18.Prices].after[/]>]>
         backpack_27: <item[Backpack_27].with[flag=item:Backpack_27;lore=<&e>Slots:<&sp><&a>27|<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Backpack_27.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Backpack_27.Prices].after[/]>]>
@@ -25,12 +24,12 @@ survivalistInventory:
         grappling_hook: <item[grappling_hook].with[flag=item:Grappling_Hook;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Grappling_Hook.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Grappling_Hook.Prices].after[/]>]>
         mushroom_home: <item[mushroom_home].with[flag=item:Mushroom_Home;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Mushroom_Home.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Mushroom_Home.Prices].after[/]>]>
     slots:
-    - [filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]
-    - [filler] [backpack_9] [backpack_18] [backpack_27] [backpack_36] [backpack_45] [backpack_54] [grappling_hook] [filler]
-    - [filler] [mushroom_home] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [backpack_9] [backpack_18] [backpack_27] [backpack_36] [backpack_45] [backpack_54] [grappling_hook] [standard_filler]
+    - [standard_filler] [mushroom_home] [food_crate] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_close_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 survivalistInventoryInject:
     type: task
@@ -63,6 +62,10 @@ survivalistHandler:
                     - else:
                         - narrate "<&c>You don't have enough money"
                         - playsound <player> sound:ENTITY_VILLAGER_NO volume:0.6 pitch:1.4
+                - case close:
+                    - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+                    - inventory close
+
                 - case sell:
                     - if <player.inventory.contains.scriptname[<context.item.flag[key]>]>:
                     # - if <player.inventory.list_contents.filter[has_flag[backpack_slots]].filter[flag[backpack_slots].is[==].to[<context.item.flag[key].after[Backpack]>]].size||0> > 0 || <player.inventory.contains[<script[survivalistData].parsed_key[Items.<context.item.flag[key]>.Item]>]>:
@@ -104,3 +107,6 @@ survivalistData:
         Mushroom_Home:
             Item: <item[mushroom_home].with[flag=owner:<player.uuid>]>
             Prices: 2000/1500
+        Food_Crate:
+            Item: <item[Food_Crate]>
+            Prices: 500/200
