@@ -352,11 +352,11 @@ weekly_vote_gui:
   size: 45
   title: Weekly Vote Crate
   slots:
-    - [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]]
-    - [black_stained_glass_pane[display_name=<&e> ]] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [black_stained_glass_pane[display_name=<&e> ]]
-    - [black_stained_glass_pane[display_name=<&e> ]] [<proc[gen_weekly]>] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [<proc[gen_weekly]>] [black_stained_glass_pane[display_name=<&e> ]]
-    - [black_stained_glass_pane[display_name=<&e> ]] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [] [<proc[gen_weekly]>] [black_stained_glass_pane[display_name=<&e> ]]
-    - [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]] [black_stained_glass_pane[display_name=<&e> ]]
+    - standard_filler] standard_filler] standard_filler] standard_filler] standard_filler] standard_filler] standard_filler] standard_filler] standard_filler]
+    - standard_filler] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] standard_filler]
+    - standard_filler] [<proc[gen_weekly]>] standard_filler] standard_filler] standard_filler] standard_filler] standard_filler] [<proc[gen_weekly]>] standard_filler]
+    - standard_filler] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [<proc[gen_weekly]>] [] [<proc[gen_weekly]>] standard_filler]
+    - standard_filler] standard_filler] standard_filler] standard_filler] standard_filler] standard_filler] standard_filler] standard_filler] standard_filler]
 
 weekly_gui_open:
   type: task
