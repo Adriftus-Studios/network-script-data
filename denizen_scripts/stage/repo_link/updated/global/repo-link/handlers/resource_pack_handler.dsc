@@ -14,6 +14,23 @@ rp_command:
       - else:
         - adjust <player> resource_pack:<server.flag[resourcepackurl]>
 
+rpdecline_command:
+  type: command
+  debug: false
+  name: rpdecline
+  description: flags the player to skip Resource Pack loading
+  usage: /rpdecline
+  aliases:
+    - declineresourcepack
+    - declinerp
+  script:
+  - if <player.has_flag[bypass_resourcepack]>:
+    - flag player bypass_resourcepack:!
+    - narrate "<&6>Now loading the <&e>resource pack when you load the server."
+  - else:
+    - flag player bypass_resourcepack
+    - narrate "<&6>No longer loading the <&e>resource pack when you load the server."
+
 system_override:
   type: world
   debug: false

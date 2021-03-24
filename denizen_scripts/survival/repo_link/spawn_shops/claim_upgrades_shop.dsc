@@ -33,16 +33,13 @@ claiming_protection_group_upgrades:
       - define "lore:<&a>---------------------|<&e>Price<&co><&sp><&a><[cost]>|<&b>Use this item in a claim.|<&b>This will unlock <[name]>|<&a>---------------------"
       - define list:->:<item[claiming_group_upgrade_item].with[material=<[material]>;display_name=<[name]>;lore=<[lore]>;flag=upgrade:<[upgrade]>;flag=cost:<[cost]>]>
     - determine <[list]>
-  definitions:
-    filler: white_stained_glass_pane[display_name=<&e>]
-    close_button: barrier[flag=close:close;display_name=<&c>Close]
   slots:
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [] [filler] [filler] [filler] [close_button] [filler] [filler] [filler] [filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [] [standard_filler] [standard_filler] [standard_filler] [standard_close_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 claiming_protection_group_upgrades_events:
   type: world
@@ -67,9 +64,11 @@ claiming_protection_group_upgrades_events:
         - give <context.item.with[lore=<context.item.lore.get[3].to[last]>]>
         - if <context.item.flag[upgrade]> == claim_limit:
           - flag player claim_upgrades:++
-      - else if <context.item.has_flag[close]>:
-        - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-        - inventory close
+      - else if <context.item.has_flag[action]>:
+        - if <context.item.flag[action]> == close:
+          - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+          - inventory close
+
     on player right clicks block with:claiming_group_upgrade_item:
       - determine passively cancelled
       - ratelimit <player> 2t

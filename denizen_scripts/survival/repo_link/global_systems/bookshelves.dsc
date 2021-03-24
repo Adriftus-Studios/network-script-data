@@ -28,7 +28,7 @@ bookshelves_events:
 bookshelves_inventory:
   type: inventory
   debug: false
-  title: <&6>◆ <&a><&n><&l>Bookshelf<&r> <&6>◆
+  title: <&e>◆ <&6><&n><&l>Bookshelf<&r> <&e>◆
   inventory: chest
   size: 9
   slots:

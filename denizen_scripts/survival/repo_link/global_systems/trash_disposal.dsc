@@ -80,7 +80,6 @@ disposal_inventory_handler:
         - case default:
           - stop
     on player closes disposal_inventory:
-      - announce <context.inventory.stacks>
       - if <context.inventory.stacks> > 9:
         - playeffect smoke <player.flag[TrashCanLocation].as_location> targets:<player> quantity:20
         - playsound <player> sound:BLOCK_CAMPFIRE_CRACKLE volume:1.0 pitch:0.5

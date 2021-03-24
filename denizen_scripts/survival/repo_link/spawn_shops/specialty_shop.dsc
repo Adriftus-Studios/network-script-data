@@ -24,15 +24,14 @@ specialtyInventory:
   title: Specialty Shop
   debug: false
   definitions:
-    filler: white_stained_glass_pane[display_name=<&f>]
     head: <item[player_head].with[skull_skin=<player.skull_skin>;display_name=<&e><&o><player.display_name>;lore=<&a>Money:<&sp><&e><player.money>]>
   slots:
-  - [filler] [filler] [filler] [filler] [head] [filler] [filler] [filler] [filler]
-  - [filler] [] [] [] [] [] [] [] [filler]
-  - [filler] [] [] [] [] [] [] [] [filler]
-  - [filler] [] [] [] [] [] [] [] [filler]
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [head] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+  - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+  - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 specialtyHandler:
   type: world

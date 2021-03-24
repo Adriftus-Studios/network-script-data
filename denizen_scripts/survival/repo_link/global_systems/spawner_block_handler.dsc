@@ -168,7 +168,7 @@ mob_spawner_spawns:
           - flag <[spawn_mob]> spawner_counter:++
           - adjust <[spawn_mob]> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> <&6>(<&e><[spawn_mob].flag[spawner_counter]><&6>)"
 
-    on entity dies flagged:spawned_by:
+    on entity dies:
     - if !<context.entity.has_flag[spawned_by]>:
       - stop
     # - [if the mob isn't flagged, or has 1 stack (less than 2) let it die]
