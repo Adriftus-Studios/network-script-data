@@ -11,3 +11,9 @@ spawn_events:
         on entity spawns in:spawn:
             - if <context.reason> == natural:
                 - determine cancelled
+        on block explodes in:spawn:
+            - determine passively cancelled
+        on entity explodes in:spawn:
+            - determine passively cancelled
+        on block ignites in:spawn:
+            - determine passively cancelled

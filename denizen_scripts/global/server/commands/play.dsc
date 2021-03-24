@@ -55,18 +55,18 @@ command_play_events:
 
     on player clicks item in command_play_inventory:
       - determine passively cancelled
-      - if <context.item.has_nbt[server]>:
-        - if <context.item.nbt[server]> == survival:
-          - adjust <player> send_to:survival
+      - if <context.item.has_flag[server]>:
+        - if <bungee.server> != <context.item.flag[server]>:
+          - adjust <player> send_to:<context.item.flag[server]>
           - stop
-        - if <bungee.server> == <context.item.nbt[server]>:
-          - narrate "<&c>You are already on the <yaml[bungee_config].parsed_key[servers.<context.item.nbt[server]>.display_name]> <&c>server."
+        - if <bungee.server> == <context.item.flag[server]>:
+          - narrate "<&c>You are already on the <yaml[bungee_config].parsed_key[servers.<context.item.flag[server]>.display_name]> <&c>server."
           - stop
-        - if <bungee.list_servers.contains[<context.item.nbt[server]>]>:
-          - narrate "<&e>Joining Server<&co> <yaml[bungee_config].parsed_key[servers.<context.item.nbt[server]>.display_name]>"
-          - adjust <player> send_to:<context.item.nbt[server]>
+        - if <bungee.list_servers.contains[<context.item.flag[server]>]>:
+          - narrate "<&e>Joining Server<&co> <yaml[bungee_config].parsed_key[servers.<context.item.flag[server]>.display_name]>"
+          - adjust <player> send_to:<context.item.flag[server]>
         - else:
-          - narrate "<yaml[bungee_config].parsed_key[servers.<context.item.nbt[server]>.display_name]> <&c>server is currently offline."
+          - narrate "<yaml[bungee_config].parsed_key[servers.<context.item.flag[server]>.display_name]> <&c>server is currently offline."
 
 pull_bungee_config:
   type: task
@@ -108,7 +108,7 @@ command_play_inventory:
         # Bottom border
         - define lore:->:<&e>---------------------
         - adjust <entry[item].result> lore:<[lore]> save:item
-        - adjust <entry[item].result> nbt:server/<[server]> save:item
+        - adjust <entry[item].result> flag:server:<[server]> save:item
         - define list:->:<entry[item].result>
     - determine <[list]>
   slots:
@@ -153,3 +153,12 @@ test_Command:
   name: test
   script:
   - adjust <player> send_to:test
+
+stage_Command:
+  type: command
+  debug: false
+  description: Sends a player to the stage server
+  usage: /stage
+  name: stage
+  script:
+  - adjust <player> send_to:stage
