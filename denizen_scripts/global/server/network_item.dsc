@@ -69,16 +69,15 @@ network_item_inventory:
   inventory: chest
   title: <&a>Play Menu
   definitions:
-    filler: white_stained_glass_pane
     this_player_head: player_head[skull_skin=<player.name>;display_name=<player.name>]
     server_item: hub_server_item[nbt=item/server]
     warp_item: hub_warp_item[nbt=item/warp]
     cosmetics_item: hub_cosmetics_item[nbt=item/cosmetics]
     settings_item: hub_settings_item[nbt=item/settings]
   slots:
-    - [filler] [filler] [filler] [filler] [this_player_head] [filler] [filler] [filler] [filler]
-    - [filler] [server_item] [filler] [warp_item] [filler] [cosmetics_item] [filler] [settings_item] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [this_player_head] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [server_item] [standard_filler] [warp_item] [standard_filler] [cosmetics_item] [standard_filler] [settings_item] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 network_item_inventory_events:
   type: world

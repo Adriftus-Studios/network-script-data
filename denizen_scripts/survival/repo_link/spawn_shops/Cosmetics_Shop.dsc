@@ -93,9 +93,9 @@ store_hub_cosmeticShop_titles_events:
     on player clicks store_hub_cosmeticShop_titles in store_hub_cosmeticShop:
       - inject store_hub_cosmeticShop_title_open
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-    on player clicks standard_close_button in store_hub_cosmeticShop:
+    on player clicks standard_back_button in store_hub_cosmeticShop:
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-      - inventory close
+      - inventory open store_hub_cosmeticShop
     on system time 00:00:
       - inject title_changeover
     on player clicks barrier in store_hub_cosmeticShop_titles_inventory:

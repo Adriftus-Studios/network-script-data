@@ -218,8 +218,6 @@ market_system_main_GUI:
   debug: false
   inventory: chest
   title: <&e>Market
-  definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
   procedural items:
     - foreach <script[market_system_data].list_keys[categories]> as:category:
       - define name <&e><[category].replace_text[_].with[<&sp>].to_titlecase>
@@ -229,12 +227,12 @@ market_system_main_GUI:
       - define list:->:<item[<[material]>].with[custom_model_data=<[CMD]>;display_name=<[name]>;lore=<[lore]>;flag=category:<[category]>]>
     - determine <[list]>
   slots:
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-#    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
+    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
+    - [standadr_filler] [] [standadr_filler] [] [standadr_filler] [] [standadr_filler] [] [standadr_filler]
+    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
+    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
+#    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
 
 market_system_main_GUI_events:
   type: world
@@ -288,15 +286,14 @@ market_system_category_GUI:
       half_stack: 52
       one: 51
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
     back_button: <item[barrier].with[display_name=<&e>;flag=back:back]>
   slots:
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
+    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
+    - [standadr_filler] [] [] [] [] [] [] [] [standadr_filler]
+    - [standadr_filler] [] [] [] [] [] [] [] [standadr_filler]
+    - [standadr_filler] [] [] [] [] [] [] [] [standadr_filler]
+    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
+    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [back_button] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
 
 market_system_category_events:
   type: world

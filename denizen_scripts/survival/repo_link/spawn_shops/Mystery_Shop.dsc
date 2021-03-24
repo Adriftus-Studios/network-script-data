@@ -93,7 +93,7 @@ store_hub_mysteryShop_boxes_inventory:
 
 store_hub_mysteryShop_boxes_events:
   type: world
-  debug: true
+  debug: false
   events:
     on player clicks store_hub_mysteryShop_boxes in store_hub_mysteryShop:
       - inventory open d:store_hub_mysteryShop_boxes_inventory

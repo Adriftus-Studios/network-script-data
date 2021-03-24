@@ -23,6 +23,7 @@ survivalistInventory:
         backpack_54: <item[Backpack_54].with[flag=item:Backpack_54;lore=<&e>Slots:<&sp><&a>54|<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Backpack_54.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Backpack_54.Prices].after[/]>]>
         grappling_hook: <item[grappling_hook].with[flag=item:Grappling_Hook;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Grappling_Hook.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Grappling_Hook.Prices].after[/]>]>
         mushroom_home: <item[mushroom_home].with[flag=item:Mushroom_Home;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Mushroom_Home.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Mushroom_Home.Prices].after[/]>]>
+        food_crate: <item[food_crate].with[flag=item:food_crate;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.food_crate.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.food_crate.Prices].after[/]>]>
     slots:
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
     - [standard_filler] [backpack_9] [backpack_18] [backpack_27] [backpack_36] [backpack_45] [backpack_54] [grappling_hook] [standard_filler]
