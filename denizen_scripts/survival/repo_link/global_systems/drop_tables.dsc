@@ -77,7 +77,7 @@ drop_table_data:
 
 drop_table:
   type: task
-  debug: false
+  debug: true
   definitions: mob_level
   script:
     - define number <util.random.int[1].to[15000]>

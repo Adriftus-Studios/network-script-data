@@ -233,14 +233,14 @@ favorite_warps:
 
 favorite_warps_open:
   type: task
-  debug: false
+  debug: true
   script:
   - define list <list[]>
   - foreach <yaml[player.<player.uuid>].list_keys[warps.favorites]||<list[]>>:
     - define identifier <yaml[player.<player.uuid>].read[warps.favorites.<[value]>]>
     - define type personal
     - inject build_warp_item
-    - define list :->:<[item].with[display_name=<&e><[value]>;flag=name:<[value]>;lore=<[item].lore.remove[first].include[<&e>----------------|<&a>Left<&sp>Click<&sp>to<&sp>Warp.|<&c>Right<&sp>Click<&sp>to<&sp>Remove]>]||air>
+    - define list:->:<[item].with[display_name=<&e><[value]>;flag=name:<[value]>;lore=<[item].lore.remove[first].include[<&e>----------------|<&a>Left<&sp>Click<&sp>to<&sp>Warp.|<&c>Right<&sp>Click<&sp>to<&sp>Remove]>]>
   - define inventory <inventory[favorite_warps]>
   - if !<[list].is_empty>:
     - give <[list]> to:<[inventory]>
@@ -809,7 +809,7 @@ build_warp_item:
     - define display_name <yaml[warps].read[warps.<[type]>.<[identifier]>.display_name]>
     - define lore:!|:<&e>Votes<&co><&sp><&f><yaml[warps].read[warps.<[type]>.<[identifier]>.votes]||0>
     - define lore:|:<yaml[warps].read[warps.<[type]>.<[identifier]>.lore]>
-    - define item <yaml[warps].read[warps.<[type]>.<[identifier]>.material].as_item.with[display_name=<[display_name]||ERROR_PLEASE_REPORT>;hides=all;lore=<[lore]>].with_flag[warp:<[identifier]>]>
+    - define item <yaml[warps].read[warps.<[type]>.<[identifier]>.material].as_item.with[display_name=<[display_name]>;hides=all;lore=<[lore]>].with_flag[warp:<[identifier]>]>
 
 create_warp_personal:
   type: task
