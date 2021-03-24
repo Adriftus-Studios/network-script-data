@@ -37,4 +37,3 @@ gold_block_teleport_events:
         - playeffect effect:smoke at:<player.location> quantity:30
         - playsound <player.location> sound:entity_villager_no volume:2
         - flag player teleported_block duration:1s
-

@@ -101,7 +101,7 @@ mob_spawner_completed:
 
 mob_spawner_events:
   type: world
-  debug: true
+  debug: false
   events:
     on player places mob_spawner_completed:
     # - [check if item is valid]

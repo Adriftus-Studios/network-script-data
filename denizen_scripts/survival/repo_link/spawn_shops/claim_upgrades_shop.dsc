@@ -68,6 +68,7 @@ claiming_protection_group_upgrades_events:
         - if <context.item.flag[action]> == close:
           - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
           - inventory close
+
     on player right clicks block with:claiming_group_upgrade_item:
       - determine passively cancelled
       - ratelimit <player> 2t
