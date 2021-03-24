@@ -227,12 +227,12 @@ market_system_main_GUI:
       - define list:->:<item[<[material]>].with[custom_model_data=<[CMD]>;display_name=<[name]>;lore=<[lore]>;flag=category:<[category]>]>
     - determine <[list]>
   slots:
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-    - [standadr_filler] [] [standadr_filler] [] [standadr_filler] [] [standadr_filler] [] [standadr_filler]
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-#    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+#    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 market_system_main_GUI_events:
   type: world
@@ -288,12 +288,12 @@ market_system_category_GUI:
   definitions:
     back_button: <item[barrier].with[display_name=<&e>;flag=back:back]>
   slots:
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-    - [standadr_filler] [] [] [] [] [] [] [] [standadr_filler]
-    - [standadr_filler] [] [] [] [] [] [] [] [standadr_filler]
-    - [standadr_filler] [] [] [] [] [] [] [] [standadr_filler]
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [back_button] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 market_system_category_events:
   type: world
