@@ -263,4 +263,3 @@ bowtrail_voucher_events:
       - else:
         - flag player bowtrail_confirm duration:10s
         - narrate "<&e>Right click again to confirm claiming this bow trail."
-        

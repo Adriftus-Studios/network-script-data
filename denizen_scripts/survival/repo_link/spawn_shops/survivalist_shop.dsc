@@ -65,6 +65,7 @@ survivalistHandler:
                 - case close:
                     - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
                     - inventory close
+
                 - case sell:
                     - if <player.inventory.contains.scriptname[<context.item.flag[key]>]>:
                     # - if <player.inventory.list_contents.filter[has_flag[backpack_slots]].filter[flag[backpack_slots].is[==].to[<context.item.flag[key].after[Backpack]>]].size||0> > 0 || <player.inventory.contains[<script[survivalistData].parsed_key[Items.<context.item.flag[key]>.Item]>]>:

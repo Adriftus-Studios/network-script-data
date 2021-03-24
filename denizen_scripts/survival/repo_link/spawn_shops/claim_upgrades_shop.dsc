@@ -41,6 +41,7 @@ claiming_protection_group_upgrades:
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
     - [] [standard_filler] [standard_filler] [standard_filler] [standard_close_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
+
 claiming_protection_group_upgrades_events:
   type: world
   debug: false

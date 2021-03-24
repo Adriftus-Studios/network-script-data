@@ -21,6 +21,7 @@ gold_block_teleport_events:
       - playeffect effect:smoke at:<player.location> quantity:30
       - playsound <player.location> sound:entity_villager_no volume:2
       - flag player teleported_block duration:1s
+
     on player starts sneaking:
     # teleport players to first gold block within 25 blocks. If they are not standing on the block,
     - ratelimit <player> 10t
