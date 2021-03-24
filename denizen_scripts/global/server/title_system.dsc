@@ -49,16 +49,15 @@ title_inventory:
       current_title: 50
       page_marker: 1
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
     next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;nbt=action/next_page]>
     previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;nbt=action/previous_page]>
   slots:
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 title_inventory_events:
   type: world

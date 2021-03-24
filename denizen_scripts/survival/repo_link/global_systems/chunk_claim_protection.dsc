@@ -236,17 +236,16 @@ claiming_inventory:
   custom_slots_map:
     claim_map_icon: 12
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
     this_player_info: <item[player_info_head]>
     claim_this_chunk: <proc[claiming_claim_button]>
     unclaim_this_chunk: <item[claiming_unclaim_this_chunk_button].with[nbt=action/unclaim_chunk]>
     manage_my_groups: <item[claiming_manage_my_groups_button].with[nbt=action/manage_groups]>
     group_upgrades: <item[claiming_group_upgrades_button].with[nbt=action/group_upgrades]>
   slots:
-  - [filler] [filler] [filler] [filler] [this_player_info] [filler] [filler] [filler] [filler]
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-  - [filler] [claim_this_chunk] [filler] [filler] [manage_my_groups] [filler] [filler] [group_upgrades] [filler]
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [this_player_info] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [claim_this_chunk] [standard_filler] [standard_filler] [manage_my_groups] [standard_filler] [standard_filler] [group_upgrades] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 # GUI INVENTORY EVENTS
 claiming_inventory_events:
@@ -282,13 +281,11 @@ claiming_multi_chunk_GUI:
   debug: false
   inventory: chest
   size: 36
-  definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
   slots:
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-  - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-  - [filler] [filler] [filler] [filler] [claiming_back_button] [filler] [filler] [filler] [filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [claiming_back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 claiming_multi_chunk_GUI_events:
   type: world
@@ -361,15 +358,14 @@ claiming_group_selection_inventory:
   debug: false
   title: <&a>Group Management
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
     back_button: <item[claiming_back_button].with[nbt=back/back]>
   slots:
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-  - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-  - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-  - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-  - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+  - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+  - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 # THE EVENTS FOR THE GUI
 
@@ -506,7 +502,6 @@ claiming_group_management_inventory:
   permission_button_slots: 39|40|41|42|43|44
   remove_member_button: 46
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
     back_button: <item[claiming_back_button].with[nbt=back/back]>
     add_member: <item[claiming_group_management_add_member].with[nbt=action/add_member]>
     settings: <item[claiming_group_management_settings].with[nbt=action/settings]>
@@ -514,9 +509,9 @@ claiming_group_management_inventory:
   - [] [] [] [] [] [] [] [] []
   - [] [] [] [] [] [] [] [] []
   - [] [] [] [] [] [] [] [] []
-  - [filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]
-  - [add_member] [filler] [] [] [] [] [] [] [filler]
-  - [] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [settings]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [add_member] [standard_filler] [] [] [] [] [] [] [standard_filler]
+  - [] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [settings]
 
 claiming_group_management_inventory_events:
   type: world
@@ -712,16 +707,15 @@ claiming_protection_settings:
   setting_show_slot: 32
   setting_optional_buttons_slots: 38|39|40|41|42|43|44
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
     delete_group: <item[claiming_group_management_disband].with[nbt=action/disband]>
     back_button: <item[claiming_back_button].with[nbt=action/back]>
   slots:
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [delete_group]
-  - [filler] [filler] [] [] [] [] [] [filler] [filler]
-  - [filler] [filler] [] [] [] [] [] [filler] [filler]
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-  - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [delete_group]
+  - [standard_filler] [standard_filler] [] [] [] [] [] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [] [] [] [] [] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 # TASKS AND PROCEDURES FOR BUILDING THE DYNAMIC BUTTONS
 claiming_protection_settings_generate_settings_buttons:

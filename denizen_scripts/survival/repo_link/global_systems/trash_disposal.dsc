@@ -32,14 +32,13 @@ disposal_inventory:
   title: <&6>◆ <&n><&l>Incinerator<&r> <&6>◆
   size: 45
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&e>;flag=action:filler]>
     trashconfirm: <item[lime_stained_glass_pane].with[display_name=<&a>Confirm?;flag=action:trashconfirm]>
   slots:
   - "[] [] [] [] [] [] [] [] []"
   - "[] [] [] [] [] [] [] [] []"
   - "[] [] [] [] [] [] [] [] []"
   - "[] [] [] [] [] [] [] [] []"
-  - "[trashinfo] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [trashconfirm]"
+  - "[trashinfo] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [trashconfirm]"
 
 # Items
 trashinfo:

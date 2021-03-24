@@ -82,16 +82,15 @@ world_event_progress_inventory:
   inventory: chest
   title: <&a>World Event
   definitions:
-    G: white_stained_glass_pane[display_name=<&a>]
     T: "ender_chest[display_name=<&a>Turn in Materials;lore=<&e>- Snow (1)|<&e>- Snow Block (4)|<&e>- Coal (3)|<&e>- Coal Block (27);nbt=action/turn_in]"
     soon: "barrier[display_name=<&e>Coming Soon!]"
   slots:
-    - [G] [G] [G] [G] [G] [G] [G] [G] [G]
-    - [G] [G] [G] [G] [G] [G] [G] [G] [G]
-    - [G] [] [] [] [G] [] [] [] [G]
-    - [G] [] [] [G] [G] [G] [] [] [G]
-    - [G] [G] [G] [T] [G] [G] [G] [G] [G]
-    - [G] [G] [G] [G] [G] [G] [G] [G] [G]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [] [] [standard_filler] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [standard_filler] [standard_filler] [standard_filler] [] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [T] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 world_event_progress_inventory_events:
   type: world
@@ -136,16 +135,15 @@ world_event_turn_in:
   inventory: chest
   title: <&6>Turn Ins
   definitions:
-    filler: white_stained_glass_pane[display_name=<&a>]
     close: "barrier[display_name=<&c>Back;nbt=action/close]"
     turn_in: "green_stained_glass_pane[display_name=<&e>Place materials to turn them in]"
   slots:
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [turn_in] [filler] [filler] [filler] [close]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [turn_in] [standard_filler] [standard_filler] [standard_filler] [close]
 
 world_event_turn_in_update:
   type: task

@@ -31,7 +31,5 @@ lectern_inventory:
   title: <&e>◆ <&6><&n><&l>Lectern<&r> <&e>◆
   inventory: chest
   size: 9
-  definitions:
-    filler: gray_stained_glass_pane[display_name=<&a>]
   slots:
-  - [filler] [filler] [filler] [] [] [] [filler] [filler] [filler]
+  - [standard_filler] [standard_filler] [standard_filler] [] [] [] [standard_filler] [standard_filler] [standard_filler]
