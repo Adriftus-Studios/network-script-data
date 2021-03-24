@@ -4,35 +4,33 @@
 
 server_warps_yaml:
   type: data
+  debug: false
   warps:
     spawn:
       location: spawn
-      material: grass_block
+      material: spawner
       lore: <&a>Return To Spawn
       display: <&b>Spawn
     market:
       location: spawn_market
-      material: diamond_block
+      material: player_head[skull_skin=5ac97f90-daf0-40b2-b82d-228dca9233fc|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2I1NmU0OTA4NWY1NWQ1ZGUyMTVhZmQyNmZjNGYxYWZlOWMzNDMxM2VmZjk4ZTNlNTgyNDVkZWYwNmU1ODU4YyJ9fX0=]
       lore: <&e>Buy and Sell|<&b>Prices Change Hourly
       display: <&a>Marketplace
     grim:
       location: spawn_grim
-      material: blaze_powder
+      material: player_head[skull_skin=62be1484-7278-4b9c-9bed-e35eac06d753|ewogICJ0aW1lc3RhbXAiIDogMTU5NjkxODQ3NDM3OSwKICAicHJvZmlsZUlkIiA6ICJiMGQ3MzJmZTAwZjc0MDdlOWU3Zjc0NjMwMWNkOThjYSIsCiAgInByb2ZpbGVOYW1lIiA6ICJPUHBscyIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9hYzBmOWRhZjA4ODI0M2EwNTU4MGVkM2VkN2NhNzYxZDBkMjc5MGRkOGRiOTczNjJhMzFmY2U4YjQ1NTY4NjU3IiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0=]
       lore: <&d>Make a deal with Grim|<&b>It may cost you dearly...
       display: <&4>Grim
     soul_forge:
       location: spawn_soul_forge
-      material: bubble_coral_block
+      material: enchanting_table[custom_model_data=1]
       lore: <&d>Forge souls into your gear|<&b>Soul drop from mobs
       display: <&5>Soul Forge
     vote_crates:
       location: vote_crates
-      material: tripwire_hook[hides=all;enchantments=luck,1]
+      material: tripwire_hook[custom_model_data=2]
       lore: <&d>Vote for the server|<&b>Get rewards!|<&e>/Vote
       display: <&6>Vote Crates
-
-
-#-109 33  66
 
 ##############
 ## COMMANDS ##
@@ -41,6 +39,7 @@ server_warps_yaml:
 warp_command:
   type: command
   name: warp
+  debug: false
   usage: /warp
   aliases:
   - warps
@@ -69,32 +68,34 @@ warp_command:
 warps_GUI_main_menu:
   type: inventory
   inventory: chest
+  debug: false
   size: 54
   title: <&b>Warps Menu
   definitions:
-    filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    close_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/close]>
-    Server_Warps: <item[nether_star].with[display_name=<&b>Server<&sp>Warps;nbt=action/server_warps]>
-    Public_Warps: <item[lantern].with[display_name=<&a>Player<&sp>Warps;lore=<&e>Public<&sp>Warp<&sp>Directory|<&b>Vote<&sp>for<&sp>your<&sp>favorites!;nbt=action/player_warps]>
-    Manage_My_Warps: <item[gold_block].with[display_name=<&e>Manage<&sp>My<&sp>Warps;nbt=action/manage_warps]>
-    My_Warps: <item[hopper].with[display_name=<&e>My<&sp>Warps;nbt=action/my_warps]>
-    Make_New_Warp: <item[green_wool].with[display_name=<&a>Make<&sp>New<&sp>Warp;nbt=action/new_warp]>
-    favorite_warps: <item[enchanted_book].with[display_name=<&a>Favorite<&sp>Warps;nbt=action/favorite_warps]>
+    close_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;flag=action:close]>
+    Server_Warps: <item[nether_star].with[display_name=<&b>Server<&sp>Warps;flag=action:server_warps]>
+    Public_Warps: <item[lantern].with[display_name=<&a>Player<&sp>Warps;lore=<&e>Public<&sp>Warp<&sp>Directory|<&b>Vote<&sp>for<&sp>your<&sp>favorites!;flag=action:player_warps]>
+    Manage_My_Warps: <item[gold_block].with[display_name=<&b>Manage<&sp>My<&sp>Warps;flag=action:manage_warps]>
+    My_Warps: <item[hopper].with[display_name=<&e>My<&sp>Warps;flag=action:my_warps]>
+    Make_New_Warp: <item[green_wool].with[display_name=<&a>Make<&sp>New<&sp>Warp;flag=action:new_warp]>
+    favorite_warps: <item[enchanted_book].with[display_name=<&a>Favorite<&sp>Warps;flag=action:favorite_warps]>
   slots:
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [favorite_warps] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [Server_Warps] [filler] [Public_Warps] [filler] [filler] [filler]
-    - [filler] [filler] [Make_New_Warp] [filler] [My_Warps] [filler] [Manage_My_Warps] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [close_button] [filler] [filler] [filler] [filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [favorite_warps] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [Server_Warps] [standard_filler] [Public_Warps] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [Make_New_Warp] [standard_filler] [My_Warps] [standard_filler] [Manage_My_Warps] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [close_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warps_GUI_main_menu_events:
   type: world
+  debug: false
   events:
     on player clicks item in warps_GUI_main_menu:
     - determine passively cancelled
-    - if <context.item.has_nbt[action]>:
-      - choose <context.item.nbt[action]>:
+    - if <context.item.has_flag[action]>:
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+      - choose <context.item.flag[action]>:
         - case close:
           - inventory close
         - case server_warps:
@@ -123,42 +124,47 @@ warps_GUI_main_menu_events:
 warps_my_warps_GUI:
   type: inventory
   inventory: chest
+  title: <&e>My Warps
+  debug: false
   size: 54
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
   slots:
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-    - [filler] [filler] [] [filler] [] [filler] [] [filler] [filler]
-    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+    - [standard_filler] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [standard_filler]
+    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warps_my_warps_GUI_open:
   type: task
+  debug: true
   script:
   - define inventory <inventory[warps_my_warps_GUI]>
   - define type personal
-  - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]].include[<yaml[player.<player.uuid>].read[warps.has_access]>]||<list>]> as:identifier:
+  - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]]||<list[]>]> as:identifier:
     - inject build_warp_item
     - if <[identifier].before[~]> == <player.uuid>:
-      - define list:->:<[item].with[nbt=action/warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
+      - define list:->:<[item].with_flag[action:warp].with[lore=<[item].lore.insert[<&e>ID<&co><&sp><&b><[identifier].after[~]>].at[1]>]>
     - else:
-      - define list:->:<[item].with[nbt=action/warp]>
-  - if <[list].is_empty.not>:
+      - define list:->:<[item].with[flag=action:warp]>
+  - if !<[list].is_empty>:
     - give <[list]> to:<[inventory]>
   - inventory open d:<[inventory]>
 
 warps_my_warps_GUI_events:
   type: world
+  debug: false
   events:
     on player clicks item in warps_my_warps_GUI:
     - determine passively cancelled
-    - if <context.item.has_nbt[action]>:
-      - choose <context.item.nbt[action]>:
+    - if <context.item.has_flag[action]>:
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+      - choose <context.item.flag[action]>:
         - case warp:
-          - teleport <yaml[warps].read[warps.personal.<context.item.nbt[warp]>.location].as_location>
+          - teleport <yaml[warps].read[warps.personal.<context.item.flag[warp]>.location].as_location>
         - case back:
           - inventory open d:warps_GUI_main_menu
 
@@ -170,34 +176,38 @@ warps_GUI_server_warps_menu:
   type: inventory
   inventory: chest
   title: <&b>Server Warps
+  debug: false
   size: 45
   procedural items:
     - foreach <script[server_warps_yaml].list_keys[warps]> as:ID:
-      - define list:->:<item[<script[server_warps_yaml].data_key[warps.<[ID]>.material]>].with[display_name=<script[server_warps_yaml].parsed_key[warps.<[ID]>.display]>;lore=<script[server_warps_yaml].parsed_key[warps.<[ID]>.lore]>;nbt=action/warp|location/<script[server_warps_yaml].data_key[warps.<[ID]>.location]>]>
+      - define warp <script[server_warps_yaml].data_key[warps.<[ID]>]>
+      - define list:->:<item[<[warp].get[material]>].with[display_name=<[warp].get[display].parsed>;lore=<[warp].get[lore].parsed>;flag=action:warp;flag=location:<[warp].get[location]>]>
     - determine <[list]>
   definitions:
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    next_page: <item[arrow].with[display_name=<&e>Next<&sp>Page;nbt=action/next_page]>
-    previous_page: <item[white_stained_glass_pane].with[display_name=<&a>;nbt=action/next_page]>
+    next_page: <item[arrow].with[display_name=<&e>Next<&sp>Page;flag=action:next_page]>
+    previous_page: <item[white_stained_glass_pane].with[display_name=<&a>;flag=action:next_page]>
   slots:
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-    - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warps_GUI_server_warps_menu_events:
   type: world
+  debug: false
   events:
     on player clicks item in warps_GUI_server_warps_menu:
     - determine passively cancelled
-    - if <context.item.has_nbt[action]>:
-      - choose <context.item.nbt[action]>:
+    - if <context.item.has_flag[action]>:
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+      - choose <context.item.flag[action]>:
         - case back:
           - inventory open d:warps_GUI_main_menu
         - case warp:
-          - teleport <player> <context.item.nbt[location]>
+          - teleport <player> <context.item.flag[location]>
           - inventory close
 
 ####################
@@ -206,48 +216,57 @@ warps_GUI_server_warps_menu_events:
 
 favorite_warps:
   type: inventory
+  debug: false
+  title: <&a>Favorite Warps
   inventory: chest
   size: 54
   definitions:
     filler: white_stained_glass_pane[display_name=<&a>]
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
   slots:
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-  - [filler] [] [] [] [] [] [] [] [filler]
-  - [filler] [] [] [] [] [] [] [] [filler]
-  - [filler] [] [] [] [] [] [] [] [filler]
-  - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-  - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+  - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+  - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 favorite_warps_open:
   type: task
+  debug: false
   script:
-  - foreach <yaml[player.<player.uuid>].list_keys[warps.favorites]||<list>>:
+  - define list <list[]>
+  - foreach <yaml[player.<player.uuid>].list_keys[warps.favorites]||<list[]>>:
     - define identifier <yaml[player.<player.uuid>].read[warps.favorites.<[value]>]>
     - define type personal
     - inject build_warp_item
-    - define "list:|:<[item].with[display_name=<&e><[value]>;nbt=name/<[value]>;lore=<[item].lore.remove[first].include[<&e>----------------|<&a>Left Click to Warp.|<&c>Right Click to Remove]>]>"
+    - define list :->:<[item].with[display_name=<&e><[value]>;flag=name:<[value]>;lore=<[item].lore.remove[first].include[<&e>----------------|<&a>Left<&sp>Click<&sp>to<&sp>Warp.|<&c>Right<&sp>Click<&sp>to<&sp>Remove]>]||air>
   - define inventory <inventory[favorite_warps]>
-  - if <[list].is_empty.not>:
+  - if !<[list].is_empty>:
     - give <[list]> to:<[inventory]>
   - inventory open d:<[inventory]>
 
 favorite_warps_events:
   type: world
+  debug: false
   events:
     on player clicks item in favorite_warps:
     - determine passively cancelled
     - wait 1t
-    - if <context.item.has_nbt[warp]>:
+    - if <context.item.has_flag[warp]>:
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - choose <context.click>:
         - case RIGHT:
-          - define ID <context.item.nbt[warp]>
-          - define name <context.item.nbt[name]>
+          - define ID <context.item.flag[warp]>
+          - define name <context.item.flag[name]>
           - define inventory <context.inventory.script.name>
           - inject warps_handle_favorite
+          - wait 1t
+          - inject favorite_warps_open
         - case LEFT:
-          - teleport <yaml[warps].read[warps.personal.<context.item.nbt[warp]>.location]>
-    - if <context.item.has_nbt[action]>:
+          - teleport <yaml[warps].read[warps.personal.<context.item.flag[warp]>.location]>
+    - if <context.item.has_flag[action]>:
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - inventory open d:warps_GUI_main_menu
 
 ##################
@@ -257,44 +276,47 @@ favorite_warps_events:
 # ITEMS
 warps_GUI_player_warps_menu_next_page_item:
   type: procedure
+  debug: false
   definitions: page
   script:
     - define page <[page]||1>
     - if <server.flag[warp_votes].as_map.size||0> > <[page].sub[1].mul[21].add[9]>:
-      - determine <item[arrow].with[display_name=<&e>Next<&sp>Page;nbt=action/next_page]>
+      - determine <item[arrow].with[display_name=<&e>Next<&sp>Page;flag=action:next_page]>
     - else:
       - determine <script[warps_GUI_player_warps_menu_top].parsed_key[definitions.filler]>
 
 warps_GUI_player_warps_menu_top:
   type: inventory
+  debug: false
   inventory: chest
   size: 54
-  title: <&b>Warps Menu
+  title: <&a>Player Warps
   custom_mapped_keys:
     next_page: 45
     previous_page: 37
     page_marker: 5
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
     next_page: <proc[warps_GUI_player_warps_menu_next_page_item].context[1]>
-    page_marker: <item[white_stained_glass_pane].with[display_name=<&a>;nbt=page/1]>
+    page_marker: "<item[white_stained_glass_pane].with[flag=page/1;display_name=<&a> ]>"
   procedural items:
     - define type personal
     - foreach <server.flag[warp_votes].as_map.to_list.sort_by_number[after[/]].reverse.get[1].to[9].parse[before[/]]> as:identifier:
       - inject build_warp_item
-      - define "list:|:<[item].with[nbt=action/warp;lore=<[item].lore.include[<&e>--------------------|<&b>Shift Left Click<&sp>To<&sp>Toggle<&sp>Vote!|<&a>Shift Right Click<&sp>To<&sp>Favorite]>]>"
+      - define "list:|:<[item].with[flag=action:warp;lore=<[item].lore.include[<&e>--------------------|<&b>Shift Left Click<&sp>To<&sp>Toggle<&sp>Vote!|<&a>Shift Right Click<&sp>To<&sp>Favorite]>]>"
     - determine <[list]>
   slots:
-    - [filler] [filler] [filler] [filler] [page_marker] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [] [] [] [filler] [filler] [filler]
-    - [filler] [filler] [] [] [] [] [] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [next_page]
-    - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [page_marker] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [] [] [] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [] [] [] [] [] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [next_page]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warps_GUI_player_warps_menu_pages:
   type: inventory
+  debug: false
   inventory: chest
   size: 54
   title: <&b>Warps Menu
@@ -304,24 +326,26 @@ warps_GUI_player_warps_menu_pages:
     page_marker: 5
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
     next_page: <proc[warps_GUI_player_warps_menu_next_page_item]>
-    previous_page: <item[arrow].with[display_name=<&e>Previous<&sp>Page;nbt=action/previous_page]>
+    previous_page: <item[arrow].with[display_name=<&e>Previous<&sp>Page;flag=action:previous_page]>
   slots:
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [previous_page] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [previous_page] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warps_GUI_player_warps_menu_pages_events:
   type: world
+  debug: true
   events:
     on player clicks item in warps_GUI_player_warps_menu_pages|warps_GUI_player_warps_menu_top:
     - determine passively cancelled
-    - if <context.item.has_nbt[action]>:
-      - choose <context.item.nbt[action]>:
+    - if <context.item.has_flag[action]>:
+      - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+      - choose <context.item.flag[action]>:
         - case back:
           - inventory open d:warps_GUI_main_menu
         - case warp:
@@ -331,7 +355,7 @@ warps_GUI_player_warps_menu_pages_events:
             - case SHIFT_RIGHT:
               - inject warps_favorite
             - default:
-              - teleport <yaml[warps].read[warps.personal.<context.item.nbt[warp]>.location].as_location>
+              - teleport <yaml[warps].read[warps.personal.<context.item.flag[warp]>.location].as_location>
         - case next_page:
           - inject Warps_GUI_player_warps_menu_next_page
         - case previous_page:
@@ -339,27 +363,30 @@ warps_GUI_player_warps_menu_pages_events:
 
 Warps_GUI_player_warps_menu_next_page:
   type: task
+  debug: false
   script:
-    - define page <context.inventory.slot[5].nbt[page].add[1]>
+    - define page <context.inventory.slot[5].flag[page].add[1]>
     - define inventory <inventory[warps_GUI_player_warps_menu_pages]>
-    - inventory set d:<[inventory]> slot:5 o:<item[white_stained_glass_pane].with[display_name=<&a>;nbt=page/<[page]>]>
+    - inventory set d:<[inventory]> slot:5 o:<item[white_stained_glass_pane].with[display_name=<&a>;flag=page:<[page]>]>
     - inject warps_GUI_player_warps_menu_pages_populate
     - inventory open d:<[inventory]>
 
 Warps_GUI_player_warps_menu_previous_page:
   type: task
+  debug: false
   script:
-    - define page <context.inventory.slot[5].nbt[page].sub[1]>
+    - define page <context.inventory.slot[5].flag[page].sub[1]>
     - if <[page]> == 1:
       - inventory open d:warps_GUI_player_warps_menu_top
       - stop
     - define inventory <inventory[warps_GUI_player_warps_menu_pages]>
-    - inventory set d:<[inventory]> slot:5 o:<item[white_stained_glass_pane].with[display_name=<&a>;nbt=page/<[page]>]>
+    - inventory set d:<[inventory]> slot:5 o:<item[white_stained_glass_pane].with[display_name=<&a>;flag=page:<[page]>]>
     - inject warps_GUI_player_warps_menu_pages_populate
     - inventory open d:<[inventory]>
 
 warps_GUI_player_warps_menu_pages_populate:
   type: task
+  debug: false
   definitions: page
   script:
     - define min <[page].sub[2].mul[21].add[9]>
@@ -367,13 +394,14 @@ warps_GUI_player_warps_menu_pages_populate:
     - define type personal
     - foreach <server.flag[warp_votes].as_map.to_list.sort_by_number[after[/]].reverse.get[<[min]>].to[<[max]>].parse[before[/]]> as:identifier:
       - inject build_warp_item
-      - define "list:<[item].with[nbt=action/warp;lore=<[item].lore.include[<&b>Shift Left Click<&sp>To<&sp>Toggle<&sp>Vote!|<&a>Shift Right Click<&sp>To<&sp>Favorite]>]>"
+      - define "list:<[item].with[flag=action:warp;lore=<[item].lore.include[<&b>Shift Left Click<&sp>To<&sp>Toggle<&sp>Vote!|<&a>Shift Right Click<&sp>To<&sp>Favorite]>]>"
     - give <[list]> to:<[inventory]>
 
 warps_menu_add_vote:
   type: task
+  debug: false
   script:
-    - define ID <context.item.nbt[warp]>
+    - define ID <context.item.flag[warp]>
     - if <yaml[warps].read[personal.<[ID]>.voters].contains[<player>]>:
       - narrate "<&c>You've already voted for this warp."
       - stop
@@ -382,8 +410,9 @@ warps_menu_add_vote:
 
 warps_menu_remove_vote:
   type: task
+  debug: false
   script:
-    - define ID <context.item.nbt[warp]>
+    - define ID <context.item.flag[warp]>
     - if !<yaml[warps].read[personal.<[ID]>.voters].contains[<player>]>:
       - narrate "<&c>You have not voted for this warp."
       - stop
@@ -399,20 +428,22 @@ warps_menu_remove_vote:
 warp_management_GUI:
   type: inventory
   inventory: chest
+  debug: true
   size: 45
   title: <&b>Warp Management
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/back]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
   slots:
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
-    - [filler] [] [filler] [] [filler] [] [filler] [] [filler]
-    - [filler] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 warp_management_GUI_populate:
   type: task
+  debug: false
   script:
     - define inventory <inventory[warp_management_GUI]>
     - foreach <yaml[warps].list_keys[warps.personal].filter[starts_with[<player.uuid>]]> as:ID:
@@ -421,17 +452,19 @@ warp_management_GUI_populate:
       - define lore:!|:<&e>ID<&co><&sp><[ID].after[~]>
       - define lore:|:<yaml[warps].read[warps.personal.<[ID]>.lore]>
       - if <[lore].separated_by[|]||null> != null:
-        - define list:->:<[material].as_item.with[display_name=<[name]>;lore=<[lore]>|;nbt=id/<[ID]>|action/manage_warp]>
+        - define list:->:<[material].as_item.with[display_name=<[name]>;lore=<[lore]>|;flag=id:<[ID]>;flag=action:manage_warp]>
     - if <[list]||null> != null:
       - give <[list]> to:<[inventory]>
 
 warp_management_events:
   type: world
+  debug: false
   events:
     on player clicks item in warp_management_GUI:
       - determine passively cancelled
-      - if <context.item.has_nbt[action]>:
-        - choose <context.item.nbt[action]>:
+      - if <context.item.has_flag[action]>:
+        - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+        - choose <context.item.flag[action]>:
           - case back:
             - inventory open d:warps_GUI_main_menu
           - case manage_warp:
@@ -448,6 +481,7 @@ warp_management_GUI_panel:
   inventory: chest
   size: 54
   title: <&b>Warp Management
+  debug: false
   selectable_materials:
     - dirt
     - grass_block
@@ -474,108 +508,111 @@ warp_management_GUI_panel:
     remove_member: 46
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
-    back_button: <item[barrier].with[display_name=<&c>Close<&sp>GUI;nbt=action/back]>
-    add_member: <item[green_wool].with[display_name=<&a>Add<&sp>Member;nbt=action/add_member]>
-    remove_member: <item[red_wool].with[display_name=<&c>Remove<&sp>Member;nbt=action/remove_member]>
-    choose_material: <item[dirt].with[display_name=<&b>Choose<&sp>Material;nbt=action/choose_material]>
-    display_name: <item[oak_sign].with[display_name=<&b>Set<&sp>Display<&sp>Name;nbt=action/display_name]>
-    set_lore: <item[redstone_torch].with[display_name=<&b>Set<&sp>Lore;nbt=action/set_lore]>
-    current_window_marker: <item[white_stained_glass_pane].with[display_name=<&e>;nbt=current_window/members]>
-    delete_warp: <item[redstone_block].with[display_name=<&c>Delete<&sp>Warp;nbt=action/delete_warp]>
+    back_button: <item[barrier].with[display_name=<&c>Back;flag=action:back]>
+    add_member: <item[green_wool].with[display_name=<&a>Add<&sp>Member;flag=action:add_member]>
+    remove_member: <item[red_wool].with[display_name=<&c>Remove<&sp>Member;flag=action:remove_member]>
+    choose_material: <item[dirt].with[display_name=<&b>Choose<&sp>Material;flag=action:choose_material]>
+    display_name: <item[oak_sign].with[display_name=<&b>Set<&sp>Display<&sp>Name;flag=action:display_name]>
+    set_lore: <item[redstone_torch].with[display_name=<&b>Set<&sp>Lore;flag=action:set_lore]>
+    current_window_marker: <item[white_stained_glass_pane].with[display_name=<&e>;flag=current_window:members]>
+    delete_warp: <item[redstone_block].with[display_name=<&c>Delete<&sp>Warp;flag=action:delete_warp]>
   slots:
-    - [current_window_marker] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [filler] [] [] [] [] [] [] [] [filler]
-    - [add_member] [filler] [choose_material] [filler] [display_name] [filler] [set_lore] [filler] [filler]
-    - [remove_member] [filler] [filler] [filler] [back_button] [filler] [filler] [filler] [delete_warp]
+    - [current_window_marker] [standard_filler] [standard_filler] [standard_filler] [] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [add_member] [standard_filler] [choose_material] [standard_filler] [display_name] [standard_filler] [set_lore] [standard_filler] [standard_filler]
+    - [remove_member] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [delete_warp]
 
 
 warp_management_GUI_panel_populate:
   type: task
+  debug: true
   script:
     - define inventory <inventory[warp_management_GUI_panel]>
     - define type personal
-    - define identifier <context.item.nbt[id]||<[ID]>>
+    - define identifier <context.item.flag[id]||<[ID]>>
     - inject build_warp_item
-    - inventory set slot:5 d:<[inventory]> o:<[item].with[nbt=warp_id/<[identifier]>]>
+    - inventory set slot:5 d:<[inventory]> o:<[item].with[flag=warp_id:<[identifier]>]>
     - if <yaml[warps].read[warps.personal.<[identifier]>.can_use.everyone]>:
       - define lore <&e>Access<&co><&sp><&a>True
     - else:
       - define lore <&e>Access<&co><&sp><&c>False
     - define lore:!|:<&e>Click<&sp>to<&sp>toggle
-    - define list:->:<item[player_head].with[display_name=<&a>Everyone;lore=<[lore]>;skull_skin=0qt;nbt=owner/everyone|action/toggle_everyone]>
+    - define list:->:<item[player_head].with[display_name=<&a>Everyone;lore=<[lore]>;skull_skin=0qt;flag=owner:everyone|action:toggle_everyone]>
     - foreach <yaml[warps].list_keys[warps.personal.<[identifier]>.can_use].exclude[everyone|<player.uuid>]> as:target:
-      - define list:->:<item[player_head].with[display_name=<&a><[target].as_player.name>;skull_skin=<[target].as_player.name>;nbt=owner/<[target]>]>
+      - define list:->:<item[player_head].with[display_name=<&a><[target].as_player.name>;skull_skin=<[target].as_player.name>;flag=owner:<[target]>]>
     - give <[list]> to:<[inventory]>
 
 warp_management_GUI_panel_events:
   type: world
+  debug: true
   events:
     on player clicks item in warp_management_GUI_panel:
       - determine passively cancelled
-      - if <context.item.has_nbt[action]>:
-        - choose <context.item.nbt[action]>:
+      - if <context.item.has_flag[action]>:
+        - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+        - choose <context.item.flag[action]>:
           - case back:
             - define inventory <inventory[warp_management_GUI]>
             - inject warp_management_GUI_populate
             - inventory open d:<[inventory]>
           - case add_member:
-            - flag player text_input:warps_add_member/<context.inventory.slot[5].nbt[warp_id]>
+            - flag player text_input:warps_add_member/<context.inventory.slot[5].flag[warp_id]>
             - inventory close
           - case remove_member:
-            - flag player text_input:warps_remove_member/<context.inventory.slot[5].nbt[warp_id]>
+            - flag player text_input:warps_remove_member/<context.inventory.slot[5].flag[warp_id]>
             - inventory close
           - case set_lore:
-            - flag player text_input:warps_set_lore/<context.inventory.slot[5].nbt[warp_id]>
+            - flag player text_input:warps_set_lore/<context.inventory.slot[5].flag[warp_id]>
             - narrate "<&e>Enter the lore you want, color codes may be used."
             - narrate "<&e>Use <&b>; (semi-colon)<&e> to separate different lines."
             - inventory close
           - case display_name:
-            - flag player text_input:warps_set_name/<context.inventory.slot[5].nbt[warp_id]>
+            - flag player text_input:warps_set_name/<context.inventory.slot[5].flag[warp_id]>
             - narrate "<&e>Enter the display name you want, color codes may be used."
             - inventory close
           - case choose_material:
-            - if <context.inventory.slot[1].nbt[current_window]> != choose_material:
-              - inventory set d:<context.inventory> slot:1 o:<item[white_stained_glass_pane].with[display_name=<&e>;nbt=current_window/choose_material]>
-              - define player_head_item <item[player_head].with[display_name=<&e>Custom<&sp>Player<&sp>Head;nbt=action/custom_player_head;hides=all]>
-              - define custom_material <item[turtle_egg].with[display_name=<&e>Enter<&sp>Material<&sp>Name;nbt=action/custom_material;hides=all]>
-              - define materials:<script[warp_management_GUI_panel].data_key[selectable_materials].parse[as_item.with[nbt=action/set_material;hides=all]].include[<[player_head_item]>|<[custom_material]>]>
+            - if <context.inventory.slot[1].flag[current_window]> != choose_material:
+              - inventory set d:<context.inventory> slot:1 o:<item[white_stained_glass_pane].with[display_name=<&e>;flag=current_window/choose_material]>
+              - define player_head_item <item[player_head].with[display_name=<&e>Custom<&sp>Player<&sp>Head;flag=action:custom_player_head;hides=all]>
+              - define custom_material <item[turtle_egg].with[display_name=<&e>Enter<&sp>Material<&sp>Name;flag=action:custom_material;hides=all]>
+              - define materials:<script[warp_management_GUI_panel].data_key[selectable_materials].parse[as_item.with[flag=action:set_material;hides=all]].include[<[player_head_item]>|<[custom_material]>]>
               - foreach <script[warp_management_GUI_panel].data_key[custom_slots_map.window]> as:slot:
                 - inventory set slot:<[slot]> d:<context.inventory> o:<[materials].get[<[loop_index]>]>
               - foreach <list[37|46]> as:slot:
                 - inventory set slot:<[slot]> d:<context.inventory> o:<script[warp_management_GUI_panel].parsed_key[definitions.filler]>
           - case set_material:
-            - yaml id:warps set warps.personal.<context.inventory.slot[5].nbt[warp_id]>.material:<context.item.material.name>
-            - define ID <context.inventory.slot[5].nbt[warp_id]>
+            - yaml id:warps set warps.personal.<context.inventory.slot[5].flag[warp_id]>.material:<context.item.material.name>
+            - define ID <context.inventory.slot[5].flag[warp_id]>
             - define inventory <inventory[warp_management_GUI_panel]>
             - inject warp_management_GUI_panel_populate
             - inventory open d:<[inventory]>
           # - case set_members:
           #   - TODO
           - case delete_warp:
-            - define ID <context.inventory.slot[5].nbt[warp_id]>
+            - define ID <context.inventory.slot[5].flag[warp_id]>
             - inject remove_warp_personal
             - define inventory <inventory[warp_management_GUI]>
             - inject warp_management_GUI_populate
             - inventory open d:<[inventory]>
           - case toggle_everyone:
-            - define ID <context.inventory.slot[5].nbt[warp_id]>
-            - if <yaml[warps].read[warps.personal.<context.inventory.slot[5].nbt[warp_id]>.can_use.everyone]>:
-              - yaml id:warps set warps.personal.<context.inventory.slot[5].nbt[warp_id]>.can_use.everyone:false
-              - inventory set slot:<context.slot> d:<context.inventory> o:<item[player_head].with[display_name=<&a>Everyone;lore=<&e>Access<&co><&sp><&c>False|<&e>Click<&sp>to<&sp>toggle;skull_skin=0qt;nbt=owner/everyone|action/toggle_everyone]>
+            - define ID <context.inventory.slot[5].flag[warp_id]>
+            - if <yaml[warps].read[warps.personal.<context.inventory.slot[5].flag[warp_id]>.can_use.everyone]>:
+              - yaml id:warps set warps.personal.<context.inventory.slot[5].flag[warp_id]>.can_use.everyone:false
+              - inventory set slot:<context.slot> d:<context.inventory> o:<item[player_head].with[display_name=<&a>Everyone;lore=<&e>Access<&co><&sp><&c>False|<&e>Click<&sp>to<&sp>toggle;skull_skin=0qt;flag=owner/everyone|action:toggle_everyone]>
               - inject warp_everyone_remove
             - else:
-              - yaml id:warps set warps.personal.<context.inventory.slot[5].nbt[warp_id]>.can_use.everyone:true
-              - inventory set slot:<context.slot> d:<context.inventory> o:<item[player_head].with[display_name=<&a>Everyone;lore=<&e>Access<&co><&sp><&a>True|<&e>Click<&sp>to<&sp>toggle;skull_skin=0qt;nbt=owner/everyone|action/toggle_everyone]>
+              - yaml id:warps set warps.personal.<context.inventory.slot[5].flag[warp_id]>.can_use.everyone:true
+              - inventory set slot:<context.slot> d:<context.inventory> o:<item[player_head].with[display_name=<&a>Everyone;lore=<&e>Access<&co><&sp><&a>True|<&e>Click<&sp>to<&sp>toggle;skull_skin=0qt;flag=owner/everyone|action:toggle_everyone]>
               - inject warp_everyone_add
           - case custom_material:
-            - flag player text_input:warps_set_material/<context.inventory.slot[5].nbt[warp_id]>
+            - flag player text_input:warps_set_material/<context.inventory.slot[5].flag[warp_id]>
             - narrate "<&e>Enter the material you want."
             - narrate "<&e>Full list can be found here<&co> https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html"
             - inventory close
           - case custom_player_head:
-            - flag player text_input:warps_set_player_head/<context.inventory.slot[5].nbt[warp_id]>
+            - flag player text_input:warps_set_player_head/<context.inventory.slot[5].flag[warp_id]>
             - narrate "<&e>Enter the player name you want to use."
             - inventory close
           - default:
@@ -587,18 +624,20 @@ warp_management_GUI_panel_events:
 
 warps_favorite:
   type: task
+  debug: false
   script:
-    - if <player.uuid> == <context.item.nbt[warp].before[~]>:
+    - if <player.uuid> == <context.item.flag[warp].before[~]>:
       - narrate "<&c>You can't favorite your own warp"
       - stop
     - narrate "<&a>Enter the name for this favorite."
-    - flag player text_input:warps_handle_favorite/<context.item.nbt[warp]>|<context.inventory>
+    - flag player text_input:warps_handle_favorite/<context.item.flag[warp]>|<context.inventory>
     - inventory close
 
 warps_handle_vote:
   type: task
+  debug: false
   script:
-    - define ID <context.item.nbt[warp]>
+    - define ID <context.item.flag[warp]>
     - if <player.uuid> == <[ID].before[~]>:
       - narrate "<&c>You can't vote on your own warp!"
       - stop
@@ -611,15 +650,16 @@ warps_handle_vote:
       - yaml id:warps set warps.personal.<[ID]>.votes:++
       - narrate "<&e>You have voted for this warp!"
     - flag server warp_votes:<server.flag[warp_votes].as_map.with[<[ID]>].as[<yaml[warps].read[warps.personal.<[ID]>.votes]>]>
-    - define identifier <context.item.nbt[warp]>
+    - define identifier <context.item.flag[warp]>
     - define type personal
     - inject build_warp_item
-    - inventory set slot:<context.slot> d:<context.inventory> "o:<[item].with[nbt=action/warp;lore=<[item].lore.include[<&b>Shift-Click<&sp>To<&sp>Toggle<&sp>Vote!|<&a>Shift Right Click<&sp>To<&sp>Favorite]>]>"
+    - inventory set slot:<context.slot> d:<context.inventory> "o:<[item].with[flag=action:warp;lore=<[item].lore.include[<&b>Shift-Click<&sp>To<&sp>Toggle<&sp>Vote!|<&a>Shift Right Click<&sp>To<&sp>Favorite]>]>"
 
 
 
 warps_handle_favorite:
   type: task
+  debug: false
   definitions: name|ID|inventory
   script:
     - if <player.uuid> == <[ID].before[~]>:
@@ -636,6 +676,7 @@ warps_handle_favorite:
 
 warps_add_member:
   type: task
+  debug: false
   definitions: player|ID
   script:
     - define target <server.match_player[<[player]>]||null>
@@ -657,6 +698,7 @@ warps_add_member:
 
 warps_remove_member:
   type: task
+  debug: false
   definitions: player|ID
   script:
     - define target <server.match_player[<[player]>]||null>
@@ -675,6 +717,7 @@ warps_remove_member:
 
 warps_set_lore:
   type: task
+  debug: false
   definitions: lore|ID
   script:
     - if !<[lore].matches_character_set[1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>;&!<&sq><&dq>]>:
@@ -687,6 +730,7 @@ warps_set_lore:
 
 warps_set_name:
   type: task
+  debug: false
   definitions: name|ID
   script:
     - if !<[name].matches_character_set[&1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp><&sq>!]>:
@@ -699,6 +743,7 @@ warps_set_name:
 
 warps_set_material:
   type: task
+  debug: false
   definitions: material_name|ID
   script:
     - if !<[material_name].matches_character_set[&1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>_<&sq>!]>:
@@ -714,6 +759,7 @@ warps_set_material:
 
 warps_set_player_head:
   type: task
+  debug: false
   definitions: name|ID
   script:
     - if !<[name].matches_character_set[&1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<&sp>_<&sq>!]>:
@@ -726,6 +772,7 @@ warps_set_player_head:
 
 create_warp:
   type: task
+  debug: false
   definitions: ID|type|location
   script:
     - define location <[location]||<player.location>>
@@ -745,6 +792,7 @@ create_warp:
 
 create_warp_server:
   type: task
+  debug: true
   definitions: ID|location
   script:
     - define ID <[ID].replace[<&sp>].with[_]>
@@ -755,15 +803,17 @@ create_warp_server:
 
 build_warp_item:
   type: task
+  debug: true
   definitions: type|identifier
   script:
     - define display_name <yaml[warps].read[warps.<[type]>.<[identifier]>.display_name]>
     - define lore:!|:<&e>Votes<&co><&sp><&f><yaml[warps].read[warps.<[type]>.<[identifier]>.votes]||0>
     - define lore:|:<yaml[warps].read[warps.<[type]>.<[identifier]>.lore]>
-    - define item <yaml[warps].read[warps.<[type]>.<[identifier]>.material].as_item.with[display_name=<[display_name]>;hides=all;lore=<[lore]>;nbt=warp/<[identifier]>]>
+    - define item <yaml[warps].read[warps.<[type]>.<[identifier]>.material].as_item.with[display_name=<[display_name]||ERROR_PLEASE_REPORT>;hides=all;lore=<[lore]>].with_flag[warp:<[identifier]>]>
 
 create_warp_personal:
   type: task
+  debug: false
   definitions: ID|location
   script:
     - define chunk <[location].chunk>
@@ -791,6 +841,7 @@ create_warp_personal:
 
 remove_warp_personal:
   type: task
+  debug: false
   definitions: ID
   script:
     - define chunk <yaml[warps].read[warps.personal.<[ID]>.location].as_location.chunk>
@@ -799,6 +850,7 @@ remove_warp_personal:
 
 warps_remove_from_chunk:
   type: task
+  debug: false
   definitions: chunk
   script:
     - foreach <yaml[claims].read[<[chunk].world>.<[chunk].x>.<[chunk].z>]||<list>> as:ID:
@@ -807,6 +859,7 @@ warps_remove_from_chunk:
 
 warp_everyone_add:
   type: task
+  debug: false
   definitions: ID
   script:
     - define votes <yaml[warps].read[warps.personal.<[ID]>.votes]>
@@ -817,6 +870,7 @@ warp_everyone_add:
 
 warp_everyone_remove:
   type: task
+  debug: false
   definitions: ID
   script:
     - if <server.flag[warp_votes].as_map.size||0> <= 1:

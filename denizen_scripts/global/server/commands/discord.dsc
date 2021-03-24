@@ -4,7 +4,6 @@ Discord_Command:
   debug: false
   description: Gives you the discord link.
   usage: /discord
-  permission: Behr.Essentials.Discord
   tab complete:
     - define Args <list[Connect]>
     - inject OneArg_Command_Tabcomplete
