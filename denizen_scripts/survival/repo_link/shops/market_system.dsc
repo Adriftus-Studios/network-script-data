@@ -112,7 +112,7 @@ market_system_data:
 
     white_wool:
       category: building
-      minimum_value: 50
+      minimum_value: 20
 
     # Potions
     # https://minecraft.gamepedia.com/Brewing
@@ -227,12 +227,12 @@ market_system_main_GUI:
       - define list:->:<item[<[material]>].with[custom_model_data=<[CMD]>;display_name=<[name]>;lore=<[lore]>;flag=category:<[category]>]>
     - determine <[list]>
   slots:
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-    - [standadr_filler] [] [standadr_filler] [] [standadr_filler] [] [standadr_filler] [] [standadr_filler]
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-#    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+#    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 market_system_main_GUI_events:
   type: world
@@ -288,12 +288,12 @@ market_system_category_GUI:
   definitions:
     back_button: <item[barrier].with[display_name=<&e>;flag=back:back]>
   slots:
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-    - [standadr_filler] [] [] [] [] [] [] [] [standadr_filler]
-    - [standadr_filler] [] [] [] [] [] [] [] [standadr_filler]
-    - [standadr_filler] [] [] [] [] [] [] [] [standadr_filler]
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
-    - [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler] [back_button] [standadr_filler] [standadr_filler] [standadr_filler] [standadr_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [back_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 market_system_category_events:
   type: world
@@ -307,7 +307,7 @@ market_system_category_events:
         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
         - define item <context.item.flag[market_item]>
         - inject market_system_category_set_buy_sell_items
-      - if <context.item.flag[buy]>:
+      - if <context.item.has_flag[buy]>:
         - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
         - define cost <context.item.flag[price]>
         - define quantity <context.item.flag[buy]>
@@ -441,7 +441,7 @@ market_system_category_set_market_previous_page:
 
 market_system_category_set_market_items:
   type: task
-  debug: false
+  debug: true
   script:
     - inventory set slot:<script[market_system_category_GUI].data_key[custom_slots_map.hidden_marker]> d:<[inventory]> o:<script[market_system_category_GUI].parsed_key[definitions.filler].with[flag=page:<[page]>;flag=category:<[category]>]>
     - foreach <script[market_system_category_GUI].data_key[custom_slots_map.market_items]> as:slot:
