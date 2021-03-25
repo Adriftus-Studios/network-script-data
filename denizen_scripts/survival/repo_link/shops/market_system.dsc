@@ -112,7 +112,7 @@ market_system_data:
 
     white_wool:
       category: building
-      minimum_value: 20
+      minimum_value: 2
 
     # Potions
     # https://minecraft.gamepedia.com/Brewing

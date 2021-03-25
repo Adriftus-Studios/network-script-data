@@ -15,7 +15,7 @@ survival_rtp:
     - narrate "<&a>You have 1 minute of no fall damage."
     - teleport <location[<[x]>,300,<[z]>,<[world]>]>
     - flag player no_fall duration:1m
-    - flag player recent.rtp duration:1m
+    - flag player recent_rtp duration:1m
   #^  - if !<yaml[global.player.<player.uuid>].contains[titles.unlocked.explorer]>:
     - if !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[Explorer]||false>:
       - define id First_RTP
@@ -28,11 +28,12 @@ survival_falloff_rtp:
   debug: false
   events:
     after player enters spawn_below:
-      - if !<player.has_flag[recent.rtp]>:
+      - if !<player.has_flag[recent_rtp]>:
         - inject survival_rtp
+        - flag player recent_rtp duration:1m
       - else:
         - teleport spawn
-        - narrate "<&c>You must wait <player.flag[recent.rtp].expiration.formatted> to do that again."
+        - narrate "<&c>You must wait <player.flag[recent_rtp].expiration.formatted> to do that again."
 
 survival_rtp_portal:
   type: world
