@@ -99,7 +99,7 @@ mob_spawner_completed:
       - mob_spawner_frame|mob_spawner_core_charged|mob_spawner_frame
       - mob_spawner_frame|mob_spawner_frame|mob_spawner_frame
 
-mob_spawner_events:
+mob_spawner_placed:
   type: world
   debug: false
   events:
@@ -116,6 +116,10 @@ mob_spawner_events:
       - adjust <context.location> spawner_type:<[type]>
       - flag <context.location> spawner
 
+mob_spawner_broken:
+  type: world
+  debug: false
+  events:
     on player breaks spawner:
     # - [check for enchantment/item type]
     - if !<player.item_in_hand.enchantments.contains[silk_touch]> || !<player.item_in_hand.material.name.contains[pickaxe]>:
@@ -161,7 +165,7 @@ mob_spawner_spawns:
         - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.replace[_].with[<&sp>].to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
       - else:
         # # see if the entity is still spawned
-        - if <context.spawner.location.flag[spawner_mob_tracker].is_spawned>:
+        - if <context.spawner_location.flag[spawner_mob_tracker].is_spawned>:
           # - [if the mob already exists, we just want to add a stack to the counter, not spawn an additional entity]
           - determine passively cancelled
           # # [retrieve the UUID of the mob set previously, and increase the counter by 1 and then rename the mob]
@@ -181,19 +185,62 @@ mob_spawner_spawns:
           - adjust <context.entity> is_aware:false
           - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.replace[_].with[<&sp>].to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
 
+mob_spawner_mob_dies:
+  type: world
+  debug: false
+  events:
     on entity dies:
     - if !<context.entity.has_flag[spawned_by]>:
       - stop
     # - [if the mob isn't flagged, or has 1 stack (less than 2) let it die]
     - if <context.entity.flag[spawner_counter]||0> == <element[1]>:
       - flag <context.entity.flag[spawned_by]> spawner_mob_tracker:!
+      - if !<list[entity_attack|entity_sweep_attack|fire_tick|projectile].contains_any[<context.cause>]> && <util.random.int[1].to[100]> < 80:
+        - determine passively NO_DROPS
+        - determine passively NO_XP
       - stop
     - else:
-      # # [let the mob drop its drops]
-      - drop <context.drops> <context.entity.location>
+      - if <list[entity_attack|entity_sweep_attack|fire_tick|projectile].contains_any[<context.cause>]>:
+        # # [let the mob drop its drops]
+        - drop <context.drops> <context.entity.location>
+        - drop xp quantity:<context.xp.div[10].round_down||1> <context.entity.location>
+      - else if <util.random.int[1].to[100]> < 20:
+        - drop <context.drops> <context.entity.location>
+        - drop xp quantity:<context.xp.div[10].round_down||1> <context.entity.location>
       # # [stop the death]
       - determine passively cancelled
-      # # [ decrease counter, heal to full, rename to update stacks on mob]
+      # # [ decrease counter, heal to full, put out fires, rename to update stacks on mob]
+      - burn <context.entity> duration:0
       - flag <context.entity> spawner_counter:--
       - heal <context.entity>
       - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.replace[_].with[<&sp>].to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
+
+mob_spawner_mob_transforms:
+  type: world
+  debug: false
+  events:
+    on entity transforms:
+      - if !<context.entity.has_flag[spawned_by]>:
+        - stop
+      - else:
+        - determine passively cancelled
+
+mob_spawner_pig_zapped:
+  type: world
+  debug: false
+  events:
+    on pig zapped:
+      - if !<context.pig.has_flag[spawned_by]>:
+        - stop
+      - else:
+        - determine passively cancelled
+
+mob_spawner_creeper_powered:
+  type: world
+  debug: false
+  events:
+    on creeper powered:
+      - if !<context.entity.has_flag[spawned_by]>:
+        - stop
+      - else:
+        - determine passively cancelled

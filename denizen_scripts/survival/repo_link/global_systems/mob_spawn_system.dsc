@@ -18,7 +18,7 @@
 
 mob_spawning_system_events:
   type: world
-  debug: true
+  debug: false
   settings:
     blacklist: tropical_fish|salmon|cod|horse|donkey|cow|chicken|sheep|pig|pufferfish|llama|trader_llama|armor_stand|squid|bat
     whitelist: zombie|skeleton|spider|creeper|enderman|husk|vindicator|pillager|silverfish|wolf|polar_bear|panda|stray|drowned|vex|evoker|cave_spider|slime|bee
