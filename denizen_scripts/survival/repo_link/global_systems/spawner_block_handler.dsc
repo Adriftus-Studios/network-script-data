@@ -141,7 +141,7 @@ mob_spawner_events:
 
 mob_spawner_spawns:
   type: world
-  debug: true
+  debug: false
   events:
     on spawner spawns entity:
     # - [check if vanilla spawner and stop if so]
