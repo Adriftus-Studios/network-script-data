@@ -158,15 +158,28 @@ mob_spawner_spawns:
         - flag <context.spawner_location> spawner_mob_tracker:<context.entity>
         # # [ nuke mob ai and set name for server lag reduction]
         - adjust <context.entity> is_aware:false
-        - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
+        - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.replace[_].with[<&sp>].to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
       - else:
-        # - [if the mob already exists, we just want to add a stack to the counter, not spawn an additional entity]
-        - determine passively cancelled
-        # # [retrieve the UUID of the mob set previously, and increase the counter by 1 and then rename the mob]
-        - define spawn_mob <context.spawner_location.flag[spawner_mob_tracker]>
-        - if <[spawn_mob].flag[spawner_counter]> <= <element[99]>:
-          - flag <[spawn_mob]> spawner_counter:++
-          - adjust <[spawn_mob]> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> <&6>(<&e><[spawn_mob].flag[spawner_counter]><&6>)"
+        # # see if the entity is still spawned
+        - if <context.spawner.location.flag[spawner_mob_tracker].is_spawned>:
+          # - [if the mob already exists, we just want to add a stack to the counter, not spawn an additional entity]
+          - determine passively cancelled
+          # # [retrieve the UUID of the mob set previously, and increase the counter by 1 and then rename the mob]
+          - define spawn_mob <context.spawner_location.flag[spawner_mob_tracker]>
+          - if <[spawn_mob].flag[spawner_counter]> <= <element[99]>:
+            - flag <[spawn_mob]> spawner_counter:++
+            - adjust <[spawn_mob]> "custom_name:<&b>Pacified <context.entity.entity_type.replace[_].with[<&sp>].to_titlecase> <&6>(<&e><[spawn_mob].flag[spawner_counter]><&6>)"
+        - else:
+        # # this is all repeated from before, but should run in the event that the flagged entity is no longer spawned. Unexpected outcome, left as safety.
+          # # [flag the entity as 1 stack]
+          - flag <context.entity> spawner_counter:1
+          # # [flag the entity with the location it was spawned at to clear on death]
+          - flag <context.entity> spawned_by:<context.spawner_location>
+          # # [flag the server with the mob's uuid to track it down later to add more stacks]
+          - flag <context.spawner_location> spawner_mob_tracker:<context.entity>
+          # # [ nuke mob ai and set name for server lag reduction]
+          - adjust <context.entity> is_aware:false
+          - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.replace[_].with[<&sp>].to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
 
     on entity dies:
     - if !<context.entity.has_flag[spawned_by]>:
@@ -183,4 +196,4 @@ mob_spawner_spawns:
       # # [ decrease counter, heal to full, rename to update stacks on mob]
       - flag <context.entity> spawner_counter:--
       - heal <context.entity>
-      - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
+      - adjust <context.entity> "custom_name:<&b>Pacified <context.entity.entity_type.replace[_].with[<&sp>].to_titlecase> <&6>(<&e><context.entity.flag[spawner_counter]><&6>)"
