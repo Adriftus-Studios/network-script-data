@@ -569,19 +569,3 @@ item_system_build_item:
       - define NewItem <[NewItem].with[nbt_attributes=<[nbt_attributes]>]>
 
     - determine <[NewItem]>
-
-vanilla_craft_item_build:
-  type: world
-  debug: false
-  events:
-    on player crafts *_(sword|axe|chestplate|leggings|boots|helmet) bukkit_priority:HIGHEST:
-      - if !<context.item.has_display>:
-        - determine <proc[item_system_build_item].context[<context.item>]>
-
-vanilla_craft_item_build2:
-  type: world
-  debug: false
-  events:
-    on player crafts diamond_sword bukkit_priority:HIGHEST:
-      - if !<context.item.has_display>:
-        - determine <proc[item_system_build_item].context[<context.item>]>
