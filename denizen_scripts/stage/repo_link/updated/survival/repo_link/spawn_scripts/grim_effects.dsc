@@ -12,6 +12,6 @@ grim_area_effects:
     on player exits spawn_grim_cuboid:
       - cast blindness duration:40t no_ambient hide_particles
       - time player reset
-      - adjust <player> stop_sound:music
+      - adjust <player> stop_sound:master
       - wait 1t
       - playsound <player> sound:<list[MUSIC_DISC_STRAD|MUSIC_DISC_FAR|MUSIC_DISC_MALL].random> volume:150 sound_category:music
