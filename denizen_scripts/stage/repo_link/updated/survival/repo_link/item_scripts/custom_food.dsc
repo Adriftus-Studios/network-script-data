@@ -163,6 +163,10 @@ Custom_food_events:
       - determine passively cancelled
       - take iteminhand
       - feed amount:12 saturation:8
+    on player consumes custom_food_potato_soup:
+      - determine passively cancelled
+      - take iteminhand
+      - feed amount:7.2 saturation:6
     on player consumes custom_food_beef_stew:
       - determine passively cancelled
       - take iteminhand

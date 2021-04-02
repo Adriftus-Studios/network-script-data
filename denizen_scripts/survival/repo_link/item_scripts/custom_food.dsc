@@ -156,10 +156,17 @@ custom_food_mutton_stew:
 Custom_food_events:
   type: world
   events:
+    on player consumes custom_food_onion:
+      - determine passively cancelled
+      - actionbar "<&c>You can't eat a raw onion!"
     on player consumes custom_food_mutton_stew:
       - determine passively cancelled
       - take iteminhand
       - feed amount:12 saturation:8
+    on player consumes custom_food_potato_soup:
+      - determine passively cancelled
+      - take iteminhand
+      - feed amount:7.2 saturation:6
     on player consumes custom_food_beef_stew:
       - determine passively cancelled
       - take iteminhand
