@@ -50,7 +50,7 @@ home_respawn_event:
   events:
     on player respawns bukkit_priority:HIGHEST ignorecancelled:true:
     - determine passively <player.flag[home]||spawn>
-    - flag player fallImmunity d:10s
+    - flag player fallImmunity duration:10s
     - narrate "<&a>You have 10 seconds of spawn protection."
     - wait 10s
     - narrate "<&a>Your spawn protection has worn off."
