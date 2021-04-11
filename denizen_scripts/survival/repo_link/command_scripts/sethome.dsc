@@ -54,7 +54,7 @@ home_respawn_event:
     - narrate "<&a>You have 10 seconds of spawn protection."
     - wait 10s
     - narrate "<&a>Your spawn protection has worn off."
-    on player damaged flagged:fallImmunity:
+    on player damaged by FALL flagged:fallImmunity:
     - determine cancelled
     on player enters bed:
     - if <player.has_flag[home]>:

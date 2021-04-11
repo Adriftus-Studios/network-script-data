@@ -82,7 +82,6 @@ custom_food_chocolate_cake:
       - cocoa_beans|egg|cocoa_beans
       - wheat|wheat|wheat
 
-
 custom_food_honey_bun:
   material: bread
   debug: false
@@ -124,7 +123,6 @@ custom_food_honey_bun:
       - air|honey_bottle|air
       - wheat|wheat|wheat
 
-
 custom_food_beef_stew:
   material: rabbit_stew
   debug: false
@@ -138,6 +136,90 @@ custom_food_beef_stew:
       output_quantity: 1
       hide_in_recipebook: false
       input: potato|carrot|beef|custom_food_onion|bowl
+
+custom_food_sushi~cod:
+  material: dried_kelp
+  debug: false
+  display name: <&f>Cod Sushi
+  mechanisms:
+    custom_model_data: 2
+  type: item
+  recipes:
+    1:
+      type: shapeless
+      output_quantity: 1
+      hide_in_recipebook: false
+      input: rice|dried_kelp|cod
+
+custom_food_sushi~salmon:
+  material: dried_kelp
+  debug: false
+  display name: <&f>Salmon Sushi
+  mechanisms:
+    custom_model_data: 3
+  type: item
+  recipes:
+    1:
+      type: shapeless
+      output_quantity: 1
+      hide_in_recipebook: false
+      input: rice|dried_kelp|salmon
+
+custom_food_sushi~pufferfish:
+  material: dried_kelp
+  debug: false
+  display name: <&f>Puffer Sushi
+  mechanisms:
+    custom_model_data: 4
+  type: item
+  recipes:
+    1:
+      type: shapeless
+      output_quantity: 1
+      hide_in_recipebook: false
+      input: rice|dried_kelp|pufferfish
+
+custom_food_sushi~tropical:
+  material: dried_kelp
+  debug: false
+  display name: <&f>Tropical Sushi
+  mechanisms:
+    custom_model_data: 5
+  type: item
+  recipes:
+    1:
+      type: shapeless
+      output_quantity: 1
+      hide_in_recipebook: false
+      input: rice|dried_kelp|tropical_fish
+
+custom_food_sushi~mushroom_red:
+  material: dried_kelp
+  debug: false
+  display name: <&f>Red Mushroom Sushi
+  mechanisms:
+    custom_model_data: 6
+  type: item
+  recipes:
+    1:
+      type: shapeless
+      output_quantity: 1
+      hide_in_recipebook: false
+      input: rice|dried_kelp|red_mushroom
+
+custom_food_sushi~mushroom_brown:
+  material: dried_kelp
+  debug: false
+  display name: <&f>Cod Sushi
+  mechanisms:
+    custom_model_data: 7
+  type: item
+  recipes:
+    1:
+      type: shapeless
+      output_quantity: 1
+      hide_in_recipebook: false
+      input: rice|dried_kelp|brown_mushroom
 
 custom_food_mutton_stew:
   material: rabbit_stew
@@ -183,6 +265,29 @@ Custom_food_events:
       - determine passively cancelled
       - take iteminhand
       - feed amount:8 saturation:2
+    on player consumes custom_food_sushi*:
+      - determine passively cancelled
+      - define sushi_type <player.item_in_hand.script.name.after[~]>
+      - wait 1t
+      - take iteminhand
+      - choose <[sushi_type]>:
+        - case salmon:
+          - feed amount: saturation: 
+        - case cod:
+          - feed amount: saturation: 
+        - case puffer:
+          - feed amount: saturation: 
+        - case tropical:
+          - feed amount: saturation: 
+        - case mushroom_red:
+          - feed amount: saturation: 
+        - case mushroom_brown:
+          - feed amount: saturation: 
+
+food_crate_handler:
+  type: world
+  debug: true
+  events:
     on player right clicks block with:food_crate:
       - determine passively cancelled
       - if <player.inventory.empty_slots> < 5:
@@ -234,7 +339,7 @@ food_crate:
   lore:
   - "<&e>Provides a heck of a meal!"
 
-# Things needed to add:
-#   Turn 20 rotten flesh into leather (Not food, but eh)
-#   Berry Juice. Gives the berries more of a use. This will be a potion. Maybe add something with honey too?
-#   More soups. No one uses soups. But if there are more of them, then maybe they will.
+#TODO   Things needed to add:
+#TODO   Turn 20 rotten flesh into leather (Not food, but eh)
+#TODO   Berry Juice. Gives the berries more of a use. This will be a potion. Maybe add something with honey too?
+#TODO   Sushi, fish need more uses. Salmon Cod Tropical Pufferfish, mushroom (small chance of poison, feeds more than pufferfish normally does.)
