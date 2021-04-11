@@ -4,7 +4,7 @@ jobs_join_events:
   events:
     on player joins:
       - if !<player.has_flag[jobs.first_join]>:
-        - define jobs_list <list[weaponsmith|brewer|lumberjack|miner|farmer|enchanter|hunter|chef|archaeologist|armorsmith|fisher]>
+        - define jobs_list <script[Jobs_data_script].list_keys[jobs_list]>
         - foreach <[jobs_list]> as:job:
           - flag <player> jobs.<[job]>.level:1
           - flag <player> jobs.<[job]>.experience_earned:0

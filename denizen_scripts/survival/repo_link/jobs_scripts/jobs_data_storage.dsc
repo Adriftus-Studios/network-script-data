@@ -1,7 +1,18 @@
 Jobs_data_script:
   type: data
   debug: false
-
+  jobs_list:
+##Stored this way so we can use <script[Jobs_data_script].list_keys[jobs_list]> because im lazy.
+    Blacksmith: 1
+    Brewer: 1
+    Lumberjack: 1
+    Miner: 1
+    Farmer: 1
+    Enchanter: 1
+    Hunter: 1
+    Chef: 1
+    Archaeologist: 1
+    Fisher: 1
 #TODO Blacksmith
   blacksmith:
     icon: anvil

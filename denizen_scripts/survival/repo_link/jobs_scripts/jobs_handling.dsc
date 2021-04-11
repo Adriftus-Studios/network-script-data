@@ -209,18 +209,15 @@ jobs_break_block_handler:
             - if <context.location.has_flag[jobs.block_owned_by_player]>:
               - flag <context.location.flag[jobs.block_owned_by_player]> jobs.blocks_owned:<-:<context.material.name>~<context.location.xyz>~<context.location.world.name>
             - stop
-          - inject jobs_block_break_define_rewards
-
-
+          - run jobs_block_break_define_rewards def.job:<[job]> def.material:<context.material.name> def.player:<player> def.money:<[money]> def.location:<context.location>
 
 jobs_block_break_define_rewards:
   type: task
   debug: false
   script:
-    - define money <[money].add[<script[Jobs_data_script].data_key[<[job]>.block_break.<context.material.name>.money]>]>
-    - define experience <script[Jobs_data_script].data_key[<[job]>.block_break.<context.material.name>.experience]>
-    - define player <player>
-    - flag <context.location> jobs.player_placed:!
+    - define money <[money].add[<script[Jobs_data_script].data_key[<[job]>.block_break.<[material]>.money]>]>
+    - define experience <script[Jobs_data_script].data_key[<[job]>.block_break.<[material]>.experience]>
+    - flag <[location]> jobs.player_placed:!
     - inject jobs_reward_delay
 
 
@@ -249,67 +246,41 @@ jobs_breed_flag_handler:
 
 jobs_breed_event_handler:
   type: world
-  debug: false
+  debug: true
   events:
     # #animal breeding
     on entity breeds:
-      - define mob_type <context.child.entity_type>
       - if !<context.mother.has_flag[jobs.breeding]> || !<context.father.has_flag[jobs.breeding]>:
         - stop
       - else if <context.mother.flag[jobs.breeding]> != <context.father.flag[jobs.breeding]>:
         - foreach <context.father.flag[jobs.breeding].flag[jobs.current_list]> as:job:
-          - if !<script[Jobs_data_script].list_keys[<[job]>.breed].contains_any[<context.child.entity_type>]||false>:
+          - if !<script[Jobs_data_script].list_keys[<[job]>.breed_entity].contains_any[<context.child.entity_type>]||false>:
             - foreach next
-          - inject jobs_breed_father_check
+          - run animal_breed_define_rewards def.player:<context.father.flag[jobs.breeding]> def.entity_type:<context.child.entity_type> def.job:<[job]>
         - foreach <context.mother.flag[jobs.breeding].flag[jobs.current_list]> as:job:
-          - if !<script[Jobs_data_script].list_keys[<[job]>.breed].contains_any[<context.child.entity_type>]||false>:
+          - if !<script[Jobs_data_script].list_keys[<[job]>.breed_entity].contains_any[<context.child.entity_type>]||false>:
             - foreach next
-        - inject jobs_breed_mother_check
+          - run run animal_breed_define_rewards def.player:<context.mother.flag[jobs.breeding]> def.entity_type:<context.child.entity_type> def.job:<[job]>
       - else if <context.mother.flag[jobs.breeding]> == <context.father.flag[jobs.breeding]>:
         - foreach <context.mother.flag[jobs.breeding].flag[jobs.current_list]> as:job:
-          - if !<script[Jobs_data_script].list_keys[<[job]>.breed].contains_any[<context.child.entity_type>]||false>:
+          - if !<script[Jobs_data_script].list_keys[<[job]>.breed_entity].contains_any[<context.child.entity_type>]||false>:
             - foreach next
-        - inject jobs_breed_both_parents_check
-
-jobs_breed_father_check:
-  type: task
-  debug: false
-  script:
-    - if <context.father.flag[jobs.breeding].flag[jobs.current_list].contains_any[Farmer]>:
-      - define player <context.father.flag[jobs.breeding]>
-      - inject animal_breed_define_rewards
-
-jobs_breed_mother_check:
-  type: task
-  debug: false
-  script:
-    - if <context.mother.flag[jobs.breeding].flag[jobs.current_list].contains_any[Farmer]>:
-      - define player <context.mother.flag[jobs.breeding]>
-      - inject animal_breed_define_rewards
-
-jobs_breed_both_parents_check:
-  type: task
-  debug: false
-  script:
-    - if <context.mother.flag[jobs.breeding].flag[jobs.current_list].contains_any[Farmer]>:
-      - define player <context.mother.flag[jobs.breeding]>
-      - inject animal_breed_define_rewards_same_parents
-
+          - run animal_breed_define_rewards_same_parents def.player:<context.mother.flag[jobs.breeding]> def.entity_type:<context.child.entity_type> def.job:<[job]>
 
 animal_breed_define_rewards:
   type: task
-  debug: false
+  debug: true
   script:
-    - define money <script[Jobs_data_script].data_key[<[job]>.breed.<context.child.entity_type>.money]>
-    - define experience <script[Jobs_data_script].data_key[<[job]>.breed.<context.child.entity_type>.experience]>
+    - define money <script[Jobs_data_script].data_key[<[job]>.breed_entity.<[entity_type]>.money]>
+    - define experience <script[Jobs_data_script].data_key[<[job]>.breed_entity.<[entity_type]>.experience]>
     - inject jobs_reward_delay
 
 animal_breed_define_rewards_same_parents:
   type: task
-  debug: false
+  debug: true
   script:
-    - define money <script[Jobs_data_script].data_key[<[job]>.breed.<context.child.entity_type>.money].mul[2]>
-    - define experience <script[Jobs_data_script].data_key[<[job]>.breed.<context.child.entity_type>.experience].mul[2]>
+    - define money <script[Jobs_data_script].data_key[<[job]>.breed_entity.<[entity_type]>.money].mul[2]>
+    - define experience <script[Jobs_data_script].data_key[<[job]>.breed_entity.<[entity_type]>.experience].mul[2]>
     - inject jobs_reward_delay
 
 jobs_regular_kill_event_handler:
@@ -344,8 +315,8 @@ jobs_basic_entity_kill_define_rewards:
   type: task
   debug: false
   script:
-    - define money <script[Jobs_data_script].data_key[<[job]>.kill.<context.entity.entity_type>.money]>
-    - define experience <script[Jobs_data_script].data_key[<[job]>.kill.<context.entity.entity_type>.experience]>
+    - define money <script[Jobs_data_script].data_key[<[job]>.kill_entity.<context.entity.entity_type>.money]>
+    - define experience <script[Jobs_data_script].data_key[<[job]>.kill_entity.<context.entity.entity_type>.experience]>
     - define player <player>
     - inject jobs_reward_delay
 
@@ -366,8 +337,8 @@ jobs_basic_entity_kill_define_rewards:
 #  type: task
 #  debug: false
 #  script:
-#    - define money <script[Jobs_data_script].data_key[<[job]>.kill.<context.entity.entity_type>.money].mul[<context.level>]>
-#    - define experience <script[Jobs_data_script].data_key[<[job]>.kill.<context.entity.entity_type>.experience].mul[<context.level>]>
+#    - define money <script[Jobs_data_script].data_key[<[job]>.kill_entity.<context.entity.entity_type>.money].mul[<context.level>]>
+#    - define experience <script[Jobs_data_script].data_key[<[job]>.kill_entity.<context.entity.entity_type>.experience].mul[<context.level>]>
 #    - define player <player>
 #    - inject jobs_reward_delay
 
@@ -545,7 +516,7 @@ server_jobs_rarity_balancer:
   type: task
   debug: false
   script:
-  - define jobs_list <list[Brewer|Lumberjack|Tinkerer|Miner|Farmer|Enchanter|Hunter|Chef|Archaeologist|Blacksmith|Fisher]>
+  - define jobs_list <script[Jobs_data_script].list_keys[jobs_list]>
   - define total_jobs <server.flag[jobs.count.total]>
   - foreach <[jobs_list]> as:jobs:
     - define current_jobs_count <server.flag[jobs.count.<[jobs]>]||0>
@@ -558,7 +529,7 @@ server_jobs_reward_multiplier:
   debug: false
   script:
 # # Sets the server jobs boost value as a function of the rarity of a job, and the overall boosts of the server.
-  - define jobs_list <list[Brewer|Lumberjack|Tinkerer|Miner|Farmer|Enchanter|Hunter|Chef|Archaeologist|Blacksmith|Fisher]>
+  - define jobs_list <script[Jobs_data_script].list_keys[jobs_list]>
   - define jobs_weekend_booster <server.flag[jobs.weekend_boost]||1>
   - define jobs_special_booster <server.flag[jobs.special_boost]||1>
   - foreach <[jobs_list]> as:jobs:
@@ -584,11 +555,3 @@ jobs_work_station_finder:
   - else:
     - narrate "<&a>You do not own any work stations."
 
-jobs_command:
-  type: command
-  debug: false
-  usage: /jobs2
-  description: teleports the player to spawn
-  name: jobs2
-  script:
-  - inventory open d:jobs_info_gui
