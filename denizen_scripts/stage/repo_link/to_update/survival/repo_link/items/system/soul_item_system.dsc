@@ -463,11 +463,11 @@ item_system_build_item:
 
   # % ██ [ Determine the base of the item?  ] ██
     - if <script[item_system_global_data].list_keys[defaults.damage].contains[<[item].material.name>]>:
-      - define base <script[item_system_global_data].data_key[defaults.damage.<[item].material.name>]>
-      - define base2 <script[item_system_global_data].data_key[defaults.attack_speed.<[item].material.name>]>
+      - define base <script[item_system_global_data].data_key[defaults.damage.<[item].material.name>]||1>
+      - define base2 <script[item_system_global_data].data_key[defaults.attack_speed.<[item].material.name>]||1>
     - else if <script[item_system_global_data].list_keys[defaults.armor].contains[<[item].material.name>]>:
-      - define base <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]>
-      - define base2 <script[item_system_global_data].data_key[defaults.armor_toughness.<[item].material.name>]>
+      - define base <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]||0>
+      - define base2 <script[item_system_global_data].data_key[defaults.armor_toughness.<[item].material.name>]||0>
     - else:
       - define base 0
 
