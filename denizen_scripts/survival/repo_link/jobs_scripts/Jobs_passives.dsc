@@ -21,7 +21,35 @@ jobs_farmer_passive:
           - playeffect effect:ITEM_CRACK at:<player.eye_location> special_data:<[hoe_item].material> offset:0.25 quantity:15
           - playsound <player> sound:ENTITY_ITEM_BREAK
 
-jobs_lumberjack_passive:
+jobs_lumberjack_passive_wood:
+  type: world
+  debug: false
+  events:
+    on player damages *_log|*_stem|*_hyphae|*_wood with:*_axe:
+      - define lumberjack_level <player.flag[jobs.lumberjack.level]>
+      - define proc_rate <util.random.int[0].to[100].add[<[lumberjack_level].mul[5]>]>
+      - if <[proc_rate]> > 90:
+        - playsound sound:BLOCK_WOOD_FALL <context.location>
+        - playsound soung:block_wood_break <context.location>
+        - determine INSTABREAK
+
+jobs_lumberjack_passive_leaves:
+  type: world
+  debug: false
+  events:
+    on player damages *_leaves|*_mushroom_block|*_wart_block:
+      - define lumberjack_level <player.flag[jobs.lumberjack.level]>
+      - define proc_rate <util.random.int[0].to[100].add[<[lumberjack_level].mul[5]>]>
+      - if <[proc_rate]> > 90:
+        - if <list[nether_wart_block|warped_wart_block].contains_any[<context.location.material.name>]>:
+          - define sound BLOCK_WART_BLOCK
+        - else:
+          - define sound BLOCK_GRASS
+        - playsound sound:<[sound]>_FALL <context.location>
+        - playsound soung:<[sound]>_break <context.location>
+        - determine INSTABREAK
+
+jobs_lumberjack_passive_2:
   type: task
   debug: false
   events:
@@ -57,7 +85,7 @@ jobs_lumberjack_passive:
 
 jobs_miner_passive:
   type: world
-  debug: true
+  debug: false
   events:
     on iron_ore|gold_ore|nether_gold_ore|ancient_debris drops item from breaking:
       - if <context.location.has_flag[jobs.player_placed]> || <player.flag[jobs.miner.level]> < 10:
@@ -79,7 +107,7 @@ jobs_miner_passive:
 
 jobs_chef_passive:
   type: world
-  debug: true
+  debug: false
   events:
     on player consumes apple|mushroom_stew|chorus_fruit|beetroot|bread|golden_apple|golden_carrot|enchanted_golden_apple|cake|cookie|melon_slice|dried_kelp|cooked_*|*_soup|sweet_berries|honey_bottle|pumpkin_pie|potato|*_potato|pufferfish:
       - if <player.flag[jobs.chef.level]> < 10:
@@ -95,7 +123,7 @@ jobs_chef_passive:
 
 jobs_brewer_passive:
   type: world
-  debug: true
+  debug: false
   events:
     on brewing stand brews:
       - wait 5t
@@ -130,7 +158,7 @@ jobs_Archaeologist_passive:
 
 jobs_Blacksmith_passive:
   type: world
-  debug: true
+  debug: false
   events:
     on player crafts *_helmet|*_chestplate|*_sword|*_axe|*_boots:
       - if <player.flag[jobs.blacksmith.level]> < 10:
@@ -170,7 +198,7 @@ jobs_Fisher_passive:
 
 jobs_Hunter_passive:
   type: world
-  debug: true
+  debug: false
   events:
     on player damaged by entity:
       - if <player.flag[jobs.hunter.level]> < 10 || <player.has_flag[jobs.dodged_recently]>:
@@ -185,22 +213,25 @@ jobs_Hunter_passive:
 
 jobs_Enchanter_passive:
   type: world
-  debug: true
+  debug: false
   events:
     on item enchanted:
-      - if <player.flag[jobs.enchanter]> < 10:
+      - if <player.flag[jobs.enchanter.level]> < 10:
         - stop
-      - define enchantment_map <map[]>
+      - define enchantment_map <map>
       - define enchanter_level <player.flag[jobs.enchanter.level]>
       - foreach <context.enchants> as:enchant_level key:enchant_applied:
-        - narrate <[enchant_applied]>
-        - narrate LV:<[enchant_level]>
+        - narrate applied_<[enchant_applied]>_LV:<[enchant_level]>
         - define proc_rate <util.random.int[0].to[100].add[<[enchanter_level].div[10]>]>
         - if <[proc_rate]> > 90:
-          - define enchantment_map <[enchantment_map].with[<[enchant_applied]>].as[<[enchant_level].add[1]>]>
+          - narrate level_<[enchant_level]>
+          - define enchant_level <[enchant_level].add[1]>
+          - narrate new_level<[enchant_level]>
+          - define enchantment_map <[enchantment_map].with[<[enchant_applied]>].as[<[enchant_level]>]>
           - playeffect <context.location.add[1,1,1].to_cuboid[<context.location.sub[1,1,1]>].blocks> effect:dragon_breath quantity:5
           - playeffect <context.location.add[1,1,1].to_cuboid[<context.location.sub[1,1,1]>].blocks> effect:redstone quantity:5 special_data:3|250,0,250
           - playsound BLOCK_BELL_RESONATE <context.location>
+          - narrate <[enchantment_map]>
         - else:
-          - define enchantment_map <[enchantment_map].with[<[enchant_applied]>]>
+          - define enchantment_map <[enchantment_map].with[<[enchant_applied]>].as[<[enchant_level]>]>
       - determine enchants:<[enchantment_map]>

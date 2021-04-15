@@ -26,7 +26,7 @@ jobs_gui_handler:
             - inventory close
         - case quit:
           - if <player.has_flag[jobs.quit_cooldown]>:
-            - narrate "<&a>You have recently already quit a job. please wait <player.flag_expiration[jobs.quit_cooldown].from_now.formatted> before leaving another job."
+            - narrate "<&c>You have recently quit a job. please wait <&e><player.flag_expiration[jobs.quit_cooldown].from_now.formatted> before leaving another job."
             - stop
           - if <player.flag[jobs.current_list].contains_any[<context.inventory.note_name.before[_]>]>:
             - flag player jobs.active:<player.flag[jobs.current_list].size||0>
@@ -59,9 +59,6 @@ jobs_structure_grow_handler:
     on structure grows:
       - if !<context.location.has_flag[jobs.player_placed]>:
         - stop
-      - else if !<context.location.flag[jobs.player_placed.crop].flag[jobs.current_list].contains_any[Lumberjack]>:
-        - flag <context.location> jobs.player_placed:!
-        - stop
       - else:
         - foreach <context.location.flag[jobs.player_placed.crop].flag[jobs.current_list]> as:job:
           - if !<script[Jobs_data_script].list_keys[<[job]>.block_growth].contains_any[<context.location.material.name>]||false>:
@@ -70,20 +67,19 @@ jobs_structure_grow_handler:
             - define pre_material <context.location.material.name>
             - wait 5t
             - if <context.location.material.name> == <[pre_material]>:
-              - announce GROWTH_FAILED
               - stop
-            - inject jobs_structure_growth_define_rewards
+            - run jobs_structure_growth_define_rewards def.job:<[job]> def.pre_material:<[pre_material]> def.location:<context.location>
 
 jobs_structure_growth_define_rewards:
   type: task
   debug: false
+  definitions: job|pre_material|location
   script:
     - define money <script[Jobs_data_script].data_key[<[job]>.block_growth.<[pre_material]>.money]>
     - define experience <script[Jobs_data_script].data_key[<[job]>.block_growth.<[pre_material]>.experience]>
-    - define player <context.location.flag[jobs.player_placed.crop]>
-    - flag <context.location> jobs.player_placed:!
+    - define player <[location].flag[jobs.player_placed.crop]>
+    - flag <[location]> jobs.player_placed:!
     - inject jobs_reward_delay
-
 
 jobs_crop_grow_handler:
   type: world
@@ -92,26 +88,25 @@ jobs_crop_grow_handler:
     # #farm crops
     on block grows:
       - if !<context.location.has_flag[jobs.player_placed.crop]> || <context.material.age> != <context.material.maximum_age>:
+        - flag <context.location> jobs.player_placed:!
         - stop
-      - else if !<context.location.flag[jobs.player_placed.crop].flag[jobs.current_list].contains_any[Farmer]>:
-          - flag <context.location> jobs.player_placed:!
       - else:
         - foreach <context.location.flag[jobs.player_placed.crop].flag[jobs.current_list]> as:job:
           - if !<script[Jobs_data_script].list_keys[<[job]>.block_growth].contains_any[<context.material.name>]||false>:
             - foreach next
           - else if <list[wheat|beetroots|potato|carrot|nether_wart].contains_any[<context.material.name>]>:
-            - inject jobs_crop_growth_define_rewards
+            - run jobs_crop_growth_define_rewards def.job:<[job]> def.material:<context.location.material.name> def.player:<player> def.location:<context.location>
 
 jobs_crop_growth_define_rewards:
   type: task
   debug: false
+  definitions: job|player|material|location
   script:
-    - define money <script[Jobs_data_script].data_key[<[job]>.block_growth.<context.location.material.name>.money]>
-    - define experience <script[Jobs_data_script].data_key[<[job]>.block_growth.<context.location.material.name>.experience]>
-    - define player <context.location.flag[jobs.player_placed.crop]>
-    - flag <context.location> jobs.player_placed:!
+    - define money <script[Jobs_data_script].data_key[<[job]>.block_growth.<[material]>.money]>
+    - define experience <script[Jobs_data_script].data_key[<[job]>.block_growth.<[material]>.experience]>
+    - define player <[location].flag[jobs.player_placed.crop]>
+    - flag <[location]> jobs.player_placed:!
     - inject jobs_reward_delay
-
 
 jobs_fishing_handler:
   type: world
@@ -124,7 +119,7 @@ jobs_fishing_handler:
       - stop
     - else if <context.state> == CAUGHT_FISH:
       - if <script[Jobs_data_script].list_keys[Fisher.caught_item].contains_any[<context.item.material.name>]>:
-        - inject jobs_fishing_define_rewards
+        - run jobs_fishing_define_rewards def.player:<player> def.job:Fisher def.item:<context.item.material.name>
       - else:
         - actionbar "<&a>Ah man, this item is junk!"
         - stop
@@ -132,11 +127,10 @@ jobs_fishing_handler:
 jobs_fishing_define_rewards:
   type: task
   debug: false
+  definitions: player|fisher|item|job
   script:
-    - define money <script[Jobs_data_script].data_key[Fisher.caught_item.<context.item.material.name>.money]>
-    - define experience <script[Jobs_data_script].data_key[Fisher.caught_item.<context.item.material.name>.experience]>
-    - define player <player>
-    - define job Fisher
+    - define money <script[Jobs_data_script].data_key[Fisher.caught_item.<[item]>.money]>
+    - define experience <script[Jobs_data_script].data_key[Fisher.caught_item.<[item]>.experience]>
     - inject jobs_reward_delay
 
 jobs_enchanting_handler:
@@ -147,20 +141,18 @@ jobs_enchanting_handler:
     - if !<player.flag[jobs.current_list].contains_any[Enchanter]>:
       - stop
     - else:
-      - narrate <context.cost>
-      - inject jobs_enchanting_define_rewards
+      - run jobs_enchanting_define_rewards def.cost:<context.cost> def.enchants:<context.enchants> def.player:<player> def.job:Enchanter
 
 jobs_enchanting_define_rewards:
   type: task
   debug: false
+  definitions: job|player|enchants|cost
   script:
-  - define money <context.cost.div[3].round_down>
-  - define experience <context.cost.div[3].round_down>
-  - foreach <context.enchants> as:enchant_level key:enchant_applied:
+  - define money <[cost].div[3].round_down>
+  - define experience <[cost].div[3].round_down>
+  - foreach <[enchants]> as:enchant_level key:enchant_applied:
     - define money <script[Jobs_data_script].data_key[Enchanter.enchant_item.<[enchant_applied]>.money_per_level].mul[<[enchant_level]>].add[<[money]>]||1>
     - define experience <script[Jobs_data_script].data_key[Enchanter.enchant_item.<[enchant_applied]>.experience_per_level].mul[<[enchant_level]>].add[<[experience]>]||1>
-  - define player <player>
-  - define job Enchanter
   - inject jobs_reward_delay
 
 jobs_break_block_handler:
@@ -214,6 +206,7 @@ jobs_break_block_handler:
 jobs_block_break_define_rewards:
   type: task
   debug: false
+  definitions: job|material|player|money|location
   script:
     - define money <[money].add[<script[Jobs_data_script].data_key[<[job]>.block_break.<[material]>.money]>]>
     - define experience <script[Jobs_data_script].data_key[<[job]>.block_break.<[material]>.experience]>
@@ -230,19 +223,12 @@ jobs_breed_flag_handler:
       - ratelimit <player> 2t
       - if <context.entity.breeding> || !<context.entity.can_breed>:
         - stop
-      - choose <context.entity.entity_type>:
-        - case horse donkey cow mushroom_cow sheep pig chicken rabbit llama cat hoglin strider:
-          - if <player.flag[jobs.current_list].contains_any[Farmer]>:
-            - flag <context.entity> jobs.breeding:<player> duration:30s
-        - case cat wolf ocelot panda fox bee:
-          - if <player.flag[jobs.current_list].contains_any[Hunter]>:
-            - flag <context.entity> jobs.breeding:<player> duration:30s
-        - case turtle:
-          - if <player.flag[jobs.current_list].contains_any[Fisher]>:
-            - flag <context.entity> jobs.breeding:<player> duration:30s
       - else:
-        - ratelimit <player> 2t
-        - flag <context.entity> jobs.breeding:<player> duration:30s
+        - foreach <player.flag[jobs.current_list]> as:job:
+          - if !<script[Jobs_data_script].list_keys[<[job]>.breed_entity].contains_any[<context.entity.entity_type>]||false>:
+            - foreach next
+          - else:
+            - flag <context.entity> jobs.breeding:<player> duration:30s
 
 jobs_breed_event_handler:
   type: world
@@ -267,9 +253,34 @@ jobs_breed_event_handler:
             - foreach next
           - run animal_breed_define_rewards_same_parents def.player:<context.mother.flag[jobs.breeding]> def.entity_type:<context.child.entity_type> def.job:<[job]>
 
+jobs_turtle_breeding_handler:
+  type: world
+  debug: false
+  events:
+    on turtle changes block:
+    - if !<context.entity.has_flag[jobs.breeding]>:
+      - stop
+    - flag <context.location> jobs.breeding:<context.entity.flag[jobs.breeding]>
+
+jobs_turtle_spawn_handler:
+  type: world
+  debug: false
+  events:
+    on turtle spawns:
+      - if !<context.location.has_flag[jobs.breeding]>:
+        - stop
+      - run animal_breed_define_rewards def.player:<context.location.flag[jobs.breeding]> def.entity_type:turtle def.job:fisher
+      - wait 5t
+      - if <context.location.material.name> == air:
+        - flag <context.location> jobs.breeding:!
+      - else:
+        - stop
+
+
 animal_breed_define_rewards:
   type: task
   debug: true
+  definitions: player|entity_type|job
   script:
     - define money <script[Jobs_data_script].data_key[<[job]>.breed_entity.<[entity_type]>.money]>
     - define experience <script[Jobs_data_script].data_key[<[job]>.breed_entity.<[entity_type]>.experience]>
@@ -278,6 +289,7 @@ animal_breed_define_rewards:
 animal_breed_define_rewards_same_parents:
   type: task
   debug: true
+  definitions: player|entity_type|job
   script:
     - define money <script[Jobs_data_script].data_key[<[job]>.breed_entity.<[entity_type]>.money].mul[2]>
     - define experience <script[Jobs_data_script].data_key[<[job]>.breed_entity.<[entity_type]>.experience].mul[2]>
@@ -289,58 +301,54 @@ jobs_regular_kill_event_handler:
   events:
     # #killing regular non-mythicmobs
     on player kills entity:
-      - if !<player.flag[jobs.current_list].contains_any[Hunter|Fisher|Farmer]>:
-        - stop
       - else if <context.entity.is_mythicmob>:
         - stop
       - else if <context.entity.from_spawner>:
         - actionbar "<&a>Entities from a mob spawner are not eligible for pay."
         - stop
       - else:
-        - choose <context.entity.entity_type>:
-          - case horse donkey cow mushroom_cow sheep pig chicken rabbit llama hoglin strider:
-            - if <player.flag[jobs.current_list].contains_any[Farmer]>:
-              - define job Farmer
-              - inject jobs_basic_entity_kill_define_rewards
-          - case cat wolf ocelot panda fox hunter bee blaze cave_spider creeper drowned elder_guardian ender_dragon enderman endermite evoker ghast giant guardian hoglin husk illusioner iron_golem magma_cube phantom piglin piglin_brute pillager polar_bear ravager shulker silverfish skeleton slime snowman spider stray strider vex vindicator witch wither wither_skeleton zoglin zombie zombified_piglin:
-            - if <player.flag[jobs.current_list].contains_any[Hunter]>:
-              - define job Hunter
-              - inject jobs_basic_entity_kill_define_rewards
-          - case turtle cod dolphin elder_guardian guardian pufferfish salmon squid tropical_fish:
-            - if <player.flag[jobs.current_list].contains_any[Fisher]>:
-              - define job Fisher
-              - inject jobs_basic_entity_kill_define_rewards
+        - foreach <player.flag[jobs.current_list]> as:job:
+          - if !<script[Jobs_data_script].list_keys[<[job]>.kill_entity].contains_any[<context.entity.entity_type>]||false>:
+            - foreach next
+          - else:
+            - run jobs_basic_entity_kill_define_rewards def.job:<[job]> def.player:<player> def.entity_type:<context.entity.entity_type>
 
 jobs_basic_entity_kill_define_rewards:
   type: task
   debug: false
+  definitions: job|player|entity_type
   script:
-    - define money <script[Jobs_data_script].data_key[<[job]>.kill_entity.<context.entity.entity_type>.money]>
-    - define experience <script[Jobs_data_script].data_key[<[job]>.kill_entity.<context.entity.entity_type>.experience]>
-    - define player <player>
+    - define money <script[Jobs_data_script].data_key[<[job]>.kill_entity.<[entity_type]>.money]>
+    - define experience <script[Jobs_data_script].data_key[<[job]>.kill_entity.<[entity_type]>.experience]>
     - inject jobs_reward_delay
 
+jobs_mythic_kill_event_handler:
+  type: world
+  debug: false
+  events:
+    # #killing mythicmobs
+    on mythicmob mob killed:
+      - if !<context.entity.is_mythicmob>:
+        - stop
+      - else if <context.entity.from_spawner>:
+        - actionbar "<&a>Entities from a mob spawner are not eligible for pay."
+        - stop
+      - if <context.level> < 1:
+        - stop
+      - foreach <player.flag[jobs.current_list]> as:job:
+        - if !<script[Jobs_data_script].list_keys[<[job]>.kill_entity].contains_any[<context.entity.entity_type>]||false>:
+          - foreach next
+        - else:
+          - run jobs_mythicmob_kill_define_rewards def.job:<[job]> def.player:<player> def.entity_type:<context.entity.entity_type> def.level:<context.level>
 
-#jobs_mythic_kill_event_handler:
-#  type: world
-#  debug: false
-#  events:
-#    # #killing mythicmobs
-#    on mythicmob mob killed:
-#      - if !<context.killer.is_player> || <context.entity.from_spawner>:
-#        - stop
-#      - if <player.flag[jobs.current_list].contains_any[Hunter]>:
-#        - define job Hunter
-#        - inject jobs_mythicmob_kill_define_rewards
-
-#jobs_mythicmob_kill_define_rewards:
-#  type: task
-#  debug: false
-#  script:
-#    - define money <script[Jobs_data_script].data_key[<[job]>.kill_entity.<context.entity.entity_type>.money].mul[<context.level>]>
-#    - define experience <script[Jobs_data_script].data_key[<[job]>.kill_entity.<context.entity.entity_type>.experience].mul[<context.level>]>
-#    - define player <player>
-#    - inject jobs_reward_delay
+jobs_mythicmob_kill_define_rewards:
+  type: task
+  debug: false
+  definitions: job|player|entity_type|level
+  script:
+    - define money <script[Jobs_data_script].data_key[<[job]>.kill_entity.<[entity_type]>.money].add[<[level].mul[2]>]>
+    - define experience <script[Jobs_data_script].data_key[<[job]>.kill_entity.<[entity_type]>.experience].add[<[level].mul[2.5]>]>
+    - inject jobs_reward_delay
 
 jobs_block_place_flag_handler:
   type: world
@@ -357,6 +365,11 @@ jobs_block_place_flag_handler:
         - if <player.flag[jobs.blocks_owned].size||0> < <player.flag[jobs.blocks_allowed]||0>:
           - flag <context.location> jobs.block_owned_by_player:<player>
           - flag <player> jobs.blocks_owned:->:<context.material.name>~<context.location.xyz>~<context.location.world.name>
+          - actionbar "<&a>You have claimed this workstation."
+          - narrate "<&a>You have claimed this workstation. You have <&e><player.flag[jobs.blocks_allowed]> <&a>more work stations available."
+        - else:
+          - actionbar "<&c>You have reached your maximum workstation count"
+          - narrate "<&c>You have reached your maximum workstation count, (<&e><player.flag[jobs.blocks_allowed]><&c>) and will not recieve any rewards from this block's actions. "
 
 jobs_piston_push_handler:
   type: world
@@ -395,28 +408,27 @@ jobs_falling_block_handler:
       - flag <context.location> jobs.player_placed.block:falling_sand duration:24h
     - if <context.location.material.name> == air:
       - flag <context.location> jobs:!
+
 jobs_craft_event_handler:
   type: world
   debug: false
   events:
     # #Player crafting stuff, for tons of professions.
     on player crafts item:
-      - if !<player.flag[jobs.current_list].contains_any[Blacksmith|Chef|Tinkerer]>:
-          - stop
-      - else:
+      - if !<context.item.has_script>:
         - foreach <player.flag[jobs.current_list]> as:job:
           - if !<script[Jobs_data_script].list_keys[<[job]>.craft_item].contains_any[<context.item.material.name>]||false>:
             - foreach next
           - else:
-            - inject jobs_crafted_item_define_rewards
+            - run jobs_crafted_item_define_rewards def.player:<player> def.item:<context.item.material.name> def.job:<[job]>
 
 jobs_crafted_item_define_rewards:
   type: task
   debug: false
+  definitions: player|job|item
   script:
-    - define money <script[Jobs_data_script].data_key[<[job]>.craft_item.<context.item.material.name>.money]>
-    - define experience <script[Jobs_data_script].data_key[<[job]>.craft_item.<context.item.material.name>.experience]>
-    - define player <player>
+    - define money <script[Jobs_data_script].data_key[<[job]>.craft_item.<[item]>.money]>
+    - define experience <script[Jobs_data_script].data_key[<[job]>.craft_item.<[item]>.experience]>
     - inject jobs_reward_delay
 
 jobs_furnace_event_handler:
@@ -426,22 +438,20 @@ jobs_furnace_event_handler:
     on furnace smelts item:
       - if !<context.location.has_flag[jobs.block_owned_by_player]>:
         - stop
-      - else if !<context.location.flag[jobs.block_owned_by_player].flag[jobs.current_list].contains_any[Blacksmith|Chef]>:
-        - stop
       - else:
         - foreach <context.location.flag[jobs.block_owned_by_player].flag[jobs.current_list]> as:job:
           - if !<script[Jobs_data_script].list_keys[<[job]>.smelt_item].contains_any[<context.result_item.material.name>]||false>:
             - foreach next
           - else:
-            - inject jobs_smelted_item_define_rewards
+            - run jobs_smelted_item_define_rewards def.job:<[job]> def.player:<context.location.flag[jobs.block_owned_by_player]> def.item:<context.result_item.material.name>
 
 jobs_smelted_item_define_rewards:
   type: task
   debug: false
+  definitions: job|player|item
   script:
-  - define money <script[Jobs_data_script].data_key[<[job]>.smelt_item.<context.result_item.material.name>.money]>
-  - define experience <script[Jobs_data_script].data_key[<[job]>.smelt_item.<context.result_item.material.name>.experience]>
-  - define player <context.location.flag[jobs.block_owned_by_player]>
+  - define money <script[Jobs_data_script].data_key[<[job]>.smelt_item.<[item]>.money]>
+  - define experience <script[Jobs_data_script].data_key[<[job]>.smelt_item.<[item]>.experience]>
   - inject jobs_reward_delay
 
 jobs_brew_event_handler:
@@ -464,16 +474,19 @@ jobs_brew_event_handler:
             - if <[pre_event_inventory_contents].get[<[slot_number]>]> != <[post_event_inventory].slot[<[slot_number]>]> && <[post_event_inventory].slot[<[slot_number]>].material.name> != air && !<list[mundane|thick].contains_any[<[post_event_inventory].slot[<[slot_number]>].potion_base_type>]>:
               - define reward_counter <[reward_counter].add[1]>
           - if <[reward_counter]> > 0:
-            - define job Brewer
-            - inject jobs_brewed_item_define_rewards
+            - foreach <context.location.flag[jobs.block_owned_by_player].flag[jobs.current_list]> as:job:
+              - if !<script[Jobs_data_script].list_keys[<[job]>.brew_item].contains_any[<[item_consumed]>]||false>:
+                - foreach next
+              - else:
+                - run jobs_brewed_item_define_rewards def.job:<[job]> def.player:<context.location.flag[jobs.block_owned_by_player]> def.item_consumed:<[item_consumed]> def.reward_counter:<[reward_counter]>
 
 jobs_brewed_item_define_rewards:
   type: task
   debug: false
+  definitions: player|job|item_consumed|reward_counter
   script:
   - define money <script[Jobs_data_script].data_key[<[job]>.brew_item.<[item_consumed]>.money].mul[<[reward_counter]>]>
   - define experience <script[Jobs_data_script].data_key[<[job]>.brew_item.<[item_consumed]>.experience].mul[<[reward_counter]>]>
-  - define player <context.location.flag[jobs.block_owned_by_player]>
   - inject jobs_reward_delay
 
 jobs_reward_delay:
@@ -554,4 +567,3 @@ jobs_work_station_finder:
       - narrate "<&6>A <&e><[workstation].before[~].replace[_].with[ ].to_titlecase> <&6>located at<&co> <&e><[workstation].before_last[~].after[~].replace_text[,].with[ ]> <&6>in world<&co> <&e><[workstation].after_last[~]>"
   - else:
     - narrate "<&a>You do not own any work stations."
-

@@ -674,6 +674,9 @@ Jobs_data_script:
       guardian:
         money: 1.25
         experience: 1.5
+      turtle:
+        money: 1.25
+        experience: 1.5
 
     caught_item:
       cod:
@@ -1522,3 +1525,26 @@ Jobs_data_script:
       sabal_palm: 1.0-1.3
       large_acacia: 2.4-2.6
       large_sabal: 1.4-1.6
+
+
+    The Evil Sketch's Custom Trees:
+      large_jungle:
+        jtree: 003-005
+
+      small_jungle:
+        jtree: 007
+
+
+      dark_oak:
+        gtree: 002,003
+        btree: 004
+
+    Drumbledore's Tree collection:
+      savannah: all
+
+      dark_oak: last 4 willows
+
+    mythix pack:
+      brown_mushroom: MT-11-4-3,2,1
+
+      red_mushroom: MT-11-5-3,2,1

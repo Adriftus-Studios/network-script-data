@@ -7,9 +7,11 @@ jobs_exp_adding:
       - stop
   - if <script[Jobs_data_script].data_key[exp_per_level.<[player_job_level]>].sub[<[player].flag[jobs.<[job]>.experience_earned]>].sub[<[total_experience]>]> > 0:
     - flag <[player]> jobs.<[job]>.experience_earned:<[player].flag[jobs.<[job]>.experience_earned].add[<[total_experience]>]>
-    - bossbar create <[player]>_<[job]>_level_progress players:<[player]> progress:<[player].flag[jobs.<[job]>.experience_earned].div[<script[Jobs_data_script].data_key[exp_per_level.<[player_job_level]>]>]> "Title:<&e><[Job].to_titlecase> <&6>progress<&co> <&b><[player].flag[jobs.<[job]>.experience_earned].round_down><&6>/<&3><script[Jobs_data_script].data_key[exp_per_level.<[player_job_level]>]>" color:blue style:segmented_20
-    - wait 100t
-    - bossbar remove <[player]>_<[job]>_level_progress
+    - if <[player].is_online>:
+      - define bossbar_name <[player]>_<[job]>_level_progress_<util.random.duuid>
+      - bossbar create <[bossbar_name]> players:<[player]> progress:<[player].flag[jobs.<[job]>.experience_earned].div[<script[Jobs_data_script].data_key[exp_per_level.<[player_job_level]>]>]> "Title:<&e><[Job].to_titlecase> <&6>progress<&co> <&b><[player].flag[jobs.<[job]>.experience_earned].round_down><&6>/<&3><script[Jobs_data_script].data_key[exp_per_level.<[player_job_level]>]>" color:blue style:segmented_20
+      - wait 100t
+      - bossbar remove <[bossbar_name]>
   - else:
     - define total_experience <[total_experience].sub[<script[Jobs_data_script].data_key[exp_per_level.<[player_job_level]>].sub[<[player].flag[jobs.<[job]>.experience_earned]>]>]>
     - wait 1t
