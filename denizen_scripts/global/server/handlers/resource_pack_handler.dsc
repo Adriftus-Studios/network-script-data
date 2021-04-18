@@ -27,10 +27,10 @@ rpdecline_command:
   script:
   - if <player.has_flag[bypass_resourcepack]>:
     - flag player bypass_resourcepack:!
-    - narrate "<&6>Now loading the <&e>resource pack when you load the server."
+    - narrate "<&6>Now loading the <&e>resource pack <&6>when you join the server."
   - else:
     - flag player bypass_resourcepack
-    - narrate "<&6>No longer loading the <&e>resource pack when you load the server."
+    - narrate "<&6>No longer loading the <&e>resource pack <&6>when you join the server."
 
 system_override:
   type: world
