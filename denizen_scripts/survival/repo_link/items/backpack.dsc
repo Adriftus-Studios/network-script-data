@@ -1,6 +1,6 @@
 Backpack_9:
   type: item
-  material: chest
+  material: player_head
   display name: <&a>Backpack
   lore:
     - <&e>Slots<&co> <&a>9
@@ -9,10 +9,11 @@ Backpack_9:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/9|backpack_contents/<list>|unique/<server.current_time_millis>
+    skull_skin: b9eac001-a6a5-cf7d-7d87-a1904f88b4ef|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWZiNmEzZDdkYmE5N2JiNmU3Zjc5YTE1NjI3YWVjNjM2OTc5MTIzM2Y4MzNmYTc0OWVmMjFiZWQ3OWU1OWU5OCJ9fX0=
 
 Backpack_18:
   type: item
-  material: chest
+  material: player_head
   display name: <&a>Backpack
   lore:
     - <&e>Slots<&co> <&a>18
@@ -21,10 +22,11 @@ Backpack_18:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/18|backpack_contents/<list>|unique/<server.current_time_millis>
+    skull_skin: 67f93558-defe-3842-7c5e-dfc2a2e95184|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGY3MGZhYjMyNDZmZTAyN2NlMGJiYTg4NWE3M2M2ZTgyZDhmZjhmMzU4MjMxZTg0NjFmOTU2NTYwY2ZhNThmIn19fQ==
 
 Backpack_27:
   type: item
-  material: chest
+  material: player_head
   display name: <&a>Backpack
   lore:
     - <&e>Slots<&co> <&a>27
@@ -33,10 +35,11 @@ Backpack_27:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/27|backpack_contents/<list>|unique/<server.current_time_millis>
+    skull_skin: 80bf8295-f158-d4ac-19bd-561923bbe9b8|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTk5MDlhOTc3OWI5NDZiOTc4NzQ0MmZhNDgzYWY0ZGU0YjJmMTlmZDQwZGMyMzcwZjdhOWI4ZjUyMWYyMWRkYyJ9fX0=
 
 Backpack_36:
   type: item
-  material: chest
+  material: player_head
   display name: <&a>Backpack
   lore:
     - <&e>Slots<&co> <&a>36
@@ -45,10 +48,11 @@ Backpack_36:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/36|backpack_contents/<list>|unique/<server.current_time_millis>
+    skull_skin: c161c548-3dee-f25c-04b4-8eae38d5c861|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTI1NGFhY2JmNjIzMTc1ZmY5OGRmN2FlMzY2ZTBiODllOTE3MTM0NDE3NTJmM2NkZjk2NWYwMzhiMTc0YjUifX19
 
 Backpack_45:
   type: item
-  material: chest
+  material: player_head
   display name: <&a>Backpack
   lore:
     - <&e>Slots<&co> <&a>45
@@ -57,10 +61,11 @@ Backpack_45:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/18|backpack_contents/<list>|unique/<server.current_time_millis>
+    skull_skin: f577e5c9-bd41-c61d-35f7-39f5881e8c0d|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmRkYWZkY2IxYThkZjQyNjIyOWQ3ODc5YjFlNGEzMzZmYzlhYjNiZGMxNDZiYjRlZDNiZTRiYmY3YjViODM1In19fQ==
 
 Backpack_54:
   type: item
-  material: chest
+  material: player_head
   display name: <&a>Backpack
   lore:
     - <&e>Slots<&co> <&a>54
@@ -69,6 +74,7 @@ Backpack_54:
     - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/54|backpack_contents/<list>|unique/<server.current_time_millis>
+    skull_skin: 5b699579-5444-a846-b7f9-dc0693b09586|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWJkZjhkNTNiZGI5MzJjMjIzYzYyN2JiYjhjMWUwYzVlMzUxYTYxNmNkODA1NjkyOWM2NmU2ZGNlNDQ0MzNkYiJ9fX0=
 
 Backpack_events:
   type: world
