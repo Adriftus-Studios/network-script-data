@@ -9,7 +9,8 @@ grappling_hook:
   - <&e>Uses remaining: 75
   flags:
     durability: 75
-
+  mechanisms:
+    custom_model_data: 3
 
 grappling_hook_events:
   type: world
@@ -30,7 +31,7 @@ grappling_hook_events:
         - narrate "<&4>ERROR, PLEASE REPORT WITH <&B>/GITHUB<&4> AND SAY GHOOK30"
         - stop
       - inventory flag slot:<player.held_item_slot> grappleInUse
-      - shoot arrow shooter:<player> speed:3 script:grappling_hook_pull save:hook def:<[durability]>
+      - shoot arrow shooter:<player> speed:3 script:grappling_hook_pull save:hook
       - run grappling_hook_remover def.hook:<entry[hook].shot_entity>
       - playsound sound:ENTITY_ARROW_SHOOT <player.location>
       - flag player grappling:true duration:5s
@@ -72,6 +73,7 @@ grappling_hook_pull:
       - remove <[hook]>
   - else if <player.has_flag[grappling]>:
     - push <player> d:<player.flag[grappling]>
+    - playsound sound:ENTITY_PHANTOM_flap pitch:1 targets:<player>
     - wait 1t
     - inject grappling_hook_durability_task
     - flag <player> grappling:!
@@ -157,26 +159,23 @@ grappling_hook_durability_exploit_prevention:
 
 grappling_hook_durability_task:
   type: task
-  debug: true
+  debug: false
   script:
     - define player <player.if_null[<context.projectile.shooter>]>
     - define hook_slot <player.inventory.find_item[item_flagged:grappleInUse]>
-    - narrate <[hook_slot]>
     - wait 1t
     - define durability <[player].inventory.slot[<[hook_slot]>].flag[durability]||0>
-    - narrate <[durability]>
     - wait 1t
     - if <[failed]||false>:
       - inventory flag slot:<[hook_slot]> grappleInUse:!
       - stop
     - else if <[durability]> > 1:
-      - narrate pre_<[player].inventory.slot[<[hook_slot]>].flag[durability]>
       - inventory flag slot:<[hook_slot]> durability:--
       - wait 1t
-      - narrate post_<[player].inventory.slot[<[hook_slot]>].flag[durability]>
       - inventory flag slot:<[hook_slot]> grappleInUse:!
       - inventory adjust slot:<[hook_slot]> "lore:<&6>Use this to grapple a block|<&6>and pull yourself to it.|<&6>Uses remaining: <&e><[player].inventory.slot[<[hook_slot]>].flag[durability]>"
     - else:
-      - narrate "<&4>FAILED PLEASE REPORT WITH <&B>/GITHUB<&4> AND SAY GHOOK180"
       - inventory flag slot:<[hook_slot]> grappleInUse:!
       - take slot:<[hook_slot]>
+      - playsound sound:ITEM_SHIELD_BREAK <player.location>
+      - playeffect effect:ITEM_CRACK special_data:tripwire_hook <player.eye_location.below[1].forward[1]> offset:0.25 quantity:10
