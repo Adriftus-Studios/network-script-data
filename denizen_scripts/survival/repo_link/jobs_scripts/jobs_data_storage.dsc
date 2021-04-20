@@ -1,6 +1,8 @@
 Jobs_data_script:
   type: data
   debug: false
+
+#TODO Jobs List
   jobs_list:
 ##Stored this way so we can use <script[Jobs_data_script].list_keys[jobs_list]> because im lazy.
     Blacksmith: 1
@@ -11,8 +13,10 @@ Jobs_data_script:
     Enchanter: 1
     Hunter: 1
     Chef: 1
-    Archaeologist: 1
+    Excavation: 1
     Fisher: 1
+
+
 #TODO Blacksmith
   blacksmith:
     icon: anvil
@@ -323,107 +327,107 @@ Jobs_data_script:
         money: 10
         experience: 10
       Creeper:
-          money: 10
-          experience: 10
+        money: 10
+        experience: 10
       Skeleton:
-          money: 10
-          experience: 15
+        money: 10
+        experience: 15
       zombie:
-          money: 10
-          experience: 15
+        money: 10
+        experience: 15
       spider:
-          money: 10
-          experience: 15
+        money: 10
+        experience: 15
       blaze:
-          money: 20
-          experience: 20
+        money: 20
+        experience: 20
       cave_spider:
-          money: 15
-          experience: 15
+        money: 15
+        experience: 15
       enderman:
-          money: 5
-          experience: 10
+        money: 5
+        experience: 10
       ghast:
-          money: 30
-          experience: 30
+        money: 30
+        experience: 30
       silverfish:
-          money: 3
-          experience: 5
+        money: 3
+        experience: 5
       snowman:
-          money: 2
-          experience: 2
+        money: 2
+        experience: 2
       iron_golem:
-          money: 2
-          experience: 5
+        money: 2
+        experience: 5
       shulker:
-          money: 10
-          experience: 15
+        money: 10
+        experience: 15
       phantom:
-          money: 10
-          experience: 15
+        money: 10
+        experience: 15
       guardian:
-          money: 5
-          experience: 10
+        money: 5
+        experience: 10
       drowned:
-          money: 10
-          experience: 15
+        money: 10
+        experience: 15
       husk:
-          money: 10
-          experience: 10
+        money: 10
+        experience: 10
       wither:
-          money: 100
-          experience: 150
+        money: 100
+        experience: 150
       wither_skeleton:
-          money: 42.5
-          experience: 42.5
+        money: 42.5
+        experience: 42.5
       ender_dragon:
-          money: 250
-          experience: 250
+        money: 250
+        experience: 250
       hoglin:
-          money: 10
-          experience: 15
+        money: 10
+        experience: 15
       piglin:
-          money: 15
-          experience: 25
+        money: 15
+        experience: 25
       zombified_piglin:
-          money: 15
-          experience: 25
+        money: 15
+        experience: 25
       piglin_brute:
-          money: 30
-          experience: 30
+        money: 30
+        experience: 30
       pillager:
-          money: 10
-          experience: 25
+        money: 10
+        experience: 25
       vindicator:
-          money: 15
-          experience: 20
+        money: 15
+        experience: 20
       evoker:
-          money: 30
-          experience: 30
+        money: 30
+        experience: 30
       ravager:
-          money: 20
-          experience: 20
+        money: 20
+        experience: 20
       polar_bear:
-          money: 15
-          experience: 10
+        money: 15
+        experience: 10
       stray:
-          money: 10
-          experience: 15
+        money: 10
+        experience: 15
       witch:
-          money: 20
-          experience: 20
+        money: 20
+        experience: 20
       slime:
-          money: 2.5
-          experience: 5
+        money: 2.5
+        experience: 5
       magma_cube:
-          money: 5
-          experience: 7.5
+        money: 5
+        experience: 7.5
       elder_guardian:
-          money: 25
-          experience: 30
+        money: 25
+        experience: 30
       endermite:
-          money: 3
-          experience: 5
+        money: 3
+        experience: 5
       fox:
         money: 5
         experience: 5
@@ -464,6 +468,7 @@ Jobs_data_script:
         custom_food_potato_soup:
           amount: 7.2
           saturation: 6
+
       vanilla:
         apple:
           amount: 4
@@ -606,8 +611,8 @@ Jobs_data_script:
         money: 6
         experience: 8
 
-#TODO Archaeologist
-  archaeologist:
+#TODO Excavation
+  Excavation:
     icon: diamond_shovel
     difficulty_level: 1
 
@@ -635,9 +640,114 @@ Jobs_data_script:
         experience: 1
 
     treasure_chance:
+      lesser_reward: 83 in 100
       glowstone: 1 in 10
-      diamond: 1 in 250
-      emerald: 1 in 500
+      diamond: 4 in 100
+      emerald: 2 in 100
+      netherite: 1 in 100
+
+    passive_drop:
+      1: air
+      2: air
+      3: air
+      4: air
+      5: air
+      6: air
+      7: air
+      8: air
+      9: air
+      10: air
+      11: air
+      12: air
+      13: air
+      14: air
+      15: air
+      16: air
+      17: air
+      18: air
+      19: air
+      20: air
+      21: air
+      22: air
+      23: air
+      24: air
+      25: air
+      26: air
+      27: air
+      28: air
+      29: air
+      30: air
+      31: air
+      32: air
+      33: air
+      34: air
+      35: air
+      36: air
+      37: air
+      38: air
+      39: air
+      40: air
+      41: air
+      42: air
+      43: air
+      44: air
+      45: air
+      46: air
+      47: air
+      48: air
+      49: air
+      50: air
+      51: air
+      52: air
+      53: air
+      54: air
+      55: air
+      56: air
+      57: air
+      58: air
+      59: air
+      60: air
+      61: air
+      62: air
+      63: air
+      64: air
+      65: air
+      66: air
+      67: air
+      68: air
+      69: air
+      70: air
+      71: air
+      72: air
+      73: air
+      74: air
+      75: air
+      76: air
+      77: air
+      78: air
+      79: air
+      80: air
+      81: air
+      82: air
+      83: netherite
+      84: glowstone
+      85: glowstone
+      86: glowstone
+      87: glowstone
+      88: glowstone
+      89: glowstone
+      90: glowstone
+      91: glowstone
+      92: glowstone
+      93: glowstone
+      94: glowstone
+      98: diamond
+      95: diamond
+      96: diamond
+      97: diamond
+      99: emerald
+      100: emerald
+
 
 #TODO Fisher
   fisher:
@@ -848,68 +958,7 @@ Jobs_data_script:
   Lumberjack:
     icon: iron_axe
     difficulty_level: 1
-    tree_growth_passive:
-    #TODO RULES: OAK 5x5X7 MAX
-      TREE:
-        tree1:
-          obstructed_location:
-            1:
-              z: 1
-              x: -1
-              y1: 0
-              y2: 3
-            2:
-              z: -1
-              x: 1
-              y1: 0
-              y2: 1
-            3:
-              z: 1
-              x: 1
-              y1: 0
-              y2: 0
-        tree2:
-          obstructed_location:
-            1:
-              z: 0
-              x: 0
-              y1: 0
-              y2: 3
-        tree3:
-          obstructed_location:
-            1:
-              z: 0
-              x: 0
-              y1: 0
-              y2: 3
-        tree4:
-          obstructed_location:
-            1:
-              z: 0
-              x: 0
-              y1: 0
-              y2: 4
-        tree5:
-          obstructed_location:
-            1:
-              z: 0
-              x: 0
-              y1: 0
-              y2: 4
-        tree6:
-          obstructed_location:
-            1:
-              z: 0
-              x: 0
-              y1: 0
-              y2: 4
-        tree7:
-          obstructed_location:
-            1:
-              z: 0
-              x: 0
-              y1: 0
-              y2: 6
+
     block_growth:
       oak_sapling:
         money: 1
@@ -1318,18 +1367,12 @@ Jobs_data_script:
         money: 0.4
         experience: 0.8
 
-#TODO Tinkerer (Planned crafting job)
-  tinkerer:
-    difficulty_level: 1
-
-#TODO Builder (Planned block placement job)
-  builder:
-    difficulty_level: 1
-
   exp_per_level:
   ## Exp is listed in amount needed to earn the next level
   ## Example: level 1->2 takes 50 exp, so it would be `1: 50`
   ## This is to support the jobs_exp_adding script functions.
+  ## Can be altered any time because it's stored as a flag of progress
+  ## When a reload is done, all calculations will use the new value.
     1: 40
     2: 77
     3: 129
@@ -1430,121 +1473,3 @@ Jobs_data_script:
     98: 179764
     99: 181398
     100: 1830080
-
-  TREES_TO_USE:
-    MrWiz:
-      small_oak:
-        city_oak: 1-6
-        oak_small: 1-3
-        oak_tiny: 1-18
-
-
-      large_oak:
-        oak_tiny: 19-24
-        oak_medium: 0-6, 8-12
-
-      giant_oak:
-        oal_large: 1-4
-
-      small_birch:
-        birch_tiny: 1-15
-
-      large_birch:
-        birch_small: 1-2
-        birch_medium: 1-2
-
-      small_spruce:
-        pine_tiny: 1-13
-        pine_small: 1-5,8-12
-        pine_small_thin: 1-5
-        pine_medium: 4
-        snowy_pine: small
-
-      tall_spruce:
-        pine_high: 1-15
-        pine_medium: 5-8
-        pine_high_large: 3
-        pine_airy: 1-12
-
-      large_spruce:
-        pine_large_fat: 1-4
-        pine_medium: 1-4
-        pine_high_large: 2
-        snowy_pine: medium, large
-
-        large_jungle:
-        ##replace wood as needed
-          swamp_large: 1,2
-          swamp_medium: 1-3
-
-    LemonFox:
-
-      large_oak:
-        n: 1-7
-
-      large_birch:
-        sb: sb1-3
-        b: b7
-
-
-      small_spruce:
-        p: 1-7
-
-      large_spruce:
-        sp: 2-4
-
-      acacia:
-        sv: 1-4
-
-      dark_oak: 0
-
-      small_jungle:
-        sn: 3-4
-        j: 1
-        s: 1,2,5-9
-
-      big_jungle:
-        sn: 1-2
-        c: 3-7
-        j: 2-7,10
-        s: 3-4
-
-      Brown:
-        m: 1-2
-      Red:
-        m: 3-4
-
-    Custom Jungle repository:
-      jungle_small: mid, old
-      jungle_large: palm, massive, 3
-
-    Savanna Tree Pack:
-      wide_tree: 10.0-10.6
-      large_levelled_acacia: 6.0-6.6
-      acacia: 2.0-2.3
-      sabal_palm: 1.0-1.3
-      large_acacia: 2.4-2.6
-      large_sabal: 1.4-1.6
-
-
-    The Evil Sketch's Custom Trees:
-      large_jungle:
-        jtree: 003-005
-
-      small_jungle:
-        jtree: 007
-
-
-      dark_oak:
-        gtree: 002,003
-        btree: 004
-
-    Drumbledore's Tree collection:
-      savannah: all
-
-      dark_oak: last 4 willows
-
-    mythix pack:
-      brown_mushroom: MT-11-4-3,2,1
-
-      red_mushroom: MT-11-5-3,2,1

@@ -3,7 +3,6 @@ jobs_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: Jobs Browsing Menu
   size: 45
   definitions:
@@ -11,7 +10,7 @@ jobs_info_gui:
   slots:
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [standard_filler] [jobs_item_farmer] [jobs_item_lumberjack] [jobs_item_miner] [standard_filler] [standard_filler] [standard_filler]
-  - [server_jobs_info_head] [standard_filler] [jobs_item_chef] [jobs_item_brewer] [jobs_item_Archaeologist] [jobs_item_blacksmith] [jobs_item_special_explainer] [standard_filler] [standard_close_button]
+  - [server_jobs_info_head] [standard_filler] [jobs_item_chef] [jobs_item_brewer] [jobs_item_Excavation] [jobs_item_blacksmith] [jobs_item_special_explainer] [standard_filler] [standard_close_button]
   - [standard_filler] [standard_filler] [standard_filler] [jobs_item_fisher] [jobs_item_hunter] [jobs_item_enchanter] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
@@ -20,7 +19,6 @@ personal_jobs_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <Player.name>'s Jobs Statistics
   size: 45
   definitions:
@@ -28,7 +26,7 @@ personal_jobs_info_gui:
   slots:
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [standard_filler] [player_info_farmer] [player_info_lumberjack] [player_info_miner] [standard_filler] [standard_filler] [standard_filler]
-  - [player_jobs_info_head] [standard_filler] [player_info_chef] [player_info_brewer] [player_info_Archaeologist] [player_info_blacksmith] [jobs_item_special_explainer] [standard_filler] [standard_close_button]
+  - [player_jobs_info_head] [standard_filler] [player_info_chef] [player_info_brewer] [player_info_Excavation] [player_info_blacksmith] [jobs_item_special_explainer] [standard_filler] [standard_close_button]
   - [standard_filler] [standard_filler] [standard_filler] [player_info_fisher] [player_info_hunter] [player_info_enchanter] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
@@ -37,7 +35,6 @@ chef_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&f>Chef Job Information
   size: 18
   definitions:
@@ -51,7 +48,6 @@ enchanter_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&b>Enchanter Job Information
   size: 18
   definitions:
@@ -60,18 +56,17 @@ enchanter_info_gui:
   - [standard_filler] [standard_filler] [jobs_item_enchanter_info_1] [standard_filler] [jobs_item_enchanter_info_3] [standard_filler] [jobs_item_enchanter_info_5] [standard_filler] [standard_filler]
   - [] [standard_filler] [standard_filler] [jobs_item_enchanter_info_2]  [standard_filler] [jobs_item_enchanter_info_4] [standard_filler] [standard_filler] [standard_back_button]
 
-archaeologist_info_gui:
+Excavation_info_gui:
   type: inventory
   debug: false
   gui: true
   inventory: chest
-  gui: true
-  title: <&e>Archaeologist Job Information
+  title: <&e>Excavation Job Information
   size: 18
   definitions:
     filler: gray_stained_glass_pane[display_name=<&a>]
   slots:
-  - [standard_filler] [standard_filler] [standard_filler] [jobs_item_archaeologist_info_1] [standard_filler] [jobs_item_archaeologist_info_2] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [jobs_item_Excavation_info_1] [standard_filler] [jobs_item_Excavation_info_2] [standard_filler] [standard_filler] [standard_filler]
   - [] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_back_button]
 
 blacksmith_info_gui:
@@ -79,7 +74,6 @@ blacksmith_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&8>Blacksmith Job Information
   size: 18
   definitions:
@@ -93,7 +87,6 @@ brewer_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&d>Brewer Job Information
   size: 18
   definitions:
@@ -107,7 +100,6 @@ lumberjack_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&6>Lumberjack Job Information
   size: 18
   definitions:
@@ -121,7 +113,6 @@ Tinkerer_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&a>Tinkerer Job Information
   size: 18
   definitions:
@@ -136,7 +127,6 @@ miner_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&e>Miner Job Information
   size: 18
   definitions:
@@ -150,7 +140,6 @@ fisher_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&9>Fisher Job Information
   size: 18
   definitions:
@@ -164,7 +153,6 @@ Builder_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&3>Builder Job Information
   size: 18
   definitions:
@@ -179,7 +167,6 @@ farmer_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&2>Farmer Job Information
   size: 18
   definitions:
@@ -193,7 +180,6 @@ hunter_info_gui:
   debug: false
   gui: true
   inventory: chest
-  gui: true
   title: <&c>Hunter Job Information
   size: 18
   definitions:

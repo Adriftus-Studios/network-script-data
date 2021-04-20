@@ -2,7 +2,7 @@ jobs_command:
   type: command
   debug: false
   name: jobs2
-  usage: /jobs2
+  usage: /jobs2 (player) (level|experience) (add|set) (job name)
   description: used for any jobs command related things
   tab completions:
     1: <player.has_permission[jobs.moderator].if_true[<server.online_players.parse[name]>].if_false[]>
@@ -11,31 +11,42 @@ jobs_command:
     4: <player.has_permission[jobs.administrator].if_true[<script[Jobs_data_script].list_keys[jobs_list]>].if_false[]>
   script:
   - choose <context.args.size>:
+      ##If not specified, opens jobs ui. meant for players
       - case 0:
         - inventory open d:jobs_info_gui
+      ##If player has moderator permission, it will let them open the jobs window for other players, may be an edge case but players need help sometimes.
       - case 1:
+
         - if !<player.has_permission[jobs.moderator]>:
           - narrate "<&c>You do not have permission for this command."
           - determine cancelled
+
         - if <server.match_player[<context.args.get[1]>].if_null[true]>:
           - narrate "<&c>This player is offline, or does not exist"
           - stop
         - inventory open d:jobs_info_gui player:<server.match_player[<context.args.get[1]>]>
+
+      ##These all require admin permission, and are all for manually leveling or setting a players experience.
+      ##Its configed to still fire level up and achievements when adding.
+      ##Use set to do it without firing the event.
       - case 2:
         - if !<player.has_permission[jobs.administrator]>:
           - narrate "<&c>You do not have permission for this command."
           - stop
         - narrate "<&c>Please specify <&e>add<&6>/<&e>set<&c>, a <&e>job<&c>, and an <&e>amount<&c>."
+
       - case 3:
         - if !<player.has_permission[jobs.administrator]>:
           - narrate "<&c>You do not have permission for this command."
           - stop
         - narrate "<&c>Please specify a <&e>job<&c>, and an <&e>amount<&c>."
+
       - case 4:
         - if !<player.has_permission[jobs.administrator]>:
           - narrate "<&c>You do not have permission for this command."
           - stop
         - narrate "<&c>Please specify an <&e>amount<&c>."
+
       - case 5:
         - if !<player.has_permission[jobs.administrator]>:
           - narrate "<&c>You do not have permission for this command."
@@ -48,9 +59,11 @@ jobs_command:
         - if !<list[add|set].contains_any[<context.args.get[3]>]>:
           - narrate "<&c>Please choose a valid operation."
           - stop
-        - if !<list[Brewer|Lumberjack|Tinkerer|Miner|Farmer|Enchanter|Hunter|Chef|Archaeologist|Blacksmith|Fisher].contains_any[<context.args.get[4]>]>:
+        - if !<script[Jobs_data_script].list_keys[jobs_list].contains_any[<context.args.get[4]>]>:
           - narrate "<&c>Please choose a valid profession."
           - stop
+
+        ##sets the operation type (add|set) then performs the various operations based off the other arguments
         - choose <context.args.get[3]>:
           - case add:
             - choose <context.args.get[2]>:
@@ -78,3 +91,5 @@ jobs_command:
                 - flag <server.match_player[<context.args.get[1]>]> jobs.<context.args.get[4]>.experience_earned:<context.args.get[5]>
                 - narrate "<&a>Set <&e><context.args.get[1]> <&e><context.args.get[4]><&a> experience earned this level to <&e><context.args.get[5]><&a>."
                 - narrate "<&e><player.name><&a> set your <&e><context.args.get[4]><&a> experience earned this level to <&e><context.args.get[5]><&a>."
+
+#TODO /jobs_Top|/top_jobs command handling

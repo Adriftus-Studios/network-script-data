@@ -46,12 +46,12 @@ jobs_item_special_explainer:
   - ''
   - <&6>Most jobs come with <&e>special abilities<&6>.
   - <&6>The chance of it happening improves as you level.
-  - <&2>Farmer<&co> <&e>Crops may auto-plant when harvested.
-  - <&6>Lumberjack<&co> <&e>Special trees may grow from your saplings.
+  - <&2>Farmer<&co> <&e>Crops may auto-plant when harvested with a hoe.
+  - <&6>Lumberjack<&co> <&e>Trees will be chopped faster.
   - <&e>Miner<&co> <&e>Ores may spontaneously smelt.
   - <&f>Chef<&co> <&e>Food may saturate more.
   - <&d>Brewer<&co> <&e>Potions may double-brew.
-  - <&a>Archaeologist<&co> <&e>Rare items can be found buried.
+  - <&a>Excavation<&co> <&e>Rare items can be found buried.
   - <&7>Blacksmith<&co> <&e>Items may doublecraft.
   - <&9>Fisher<&co> <&e>Items may be ripped from monsters.
   - <&c>Hunter<&co> <&e>You might dodge an attack.
@@ -122,20 +122,20 @@ player_info_enchanter:
   flags:
     jobs: Enchanter
 
-player_info_Archaeologist:
+player_info_Excavation:
   type: item
   debug: false
   material: diamond_shovel
-  display name: <&a>Archaeologist<&co>
+  display name: <&a>Excavation<&co>
   lore:
   - ''
-  - <&6>Current level<&co> <&e><player.flag[jobs.Archaeologist.level]>
+  - <&6>Current level<&co> <&e><player.flag[jobs.Excavation.level]>
   - ''
   - <&6>Current Rank<&co> <&e>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
-    jobs: Archaeologist
+    jobs: Excavation
 
 player_info_Blacksmith:
   type: item
@@ -441,11 +441,11 @@ jobs_item_enchanter_info_5:
   - ''
 
 
-jobs_item_Archaeologist:
+jobs_item_Excavation:
   type: item
   debug: false
   material: diamond_shovel
-  display name: <&a>Archaeologist<&co>
+  display name: <&a>Excavation<&co>
   lore:
   - <&6>Gains <&a>money <&6>from<&co>
   - <&e>- Digging up blocks.
@@ -453,40 +453,43 @@ jobs_item_Archaeologist:
   - ''
   - <&6>Click for amounts earned per action.
   - ''
-  - <&6>Current Workers<&co><&e> <server.flag[jobs.count.Archaeologist]||0>
-  - <&6>Current Employment Modifier<&co><&e> <server.flag[jobs.rarity.balancer.Archaeologist]>
+  - <&6>Current Workers<&co><&e> <server.flag[jobs.count.Excavation]||0>
+  - <&6>Current Employment Modifier<&co><&e> <server.flag[jobs.rarity.balancer.Excavation]>
   flags:
-    jobs: archaeologist
+    jobs: Excavation
 
-jobs_item_archaeologist_info_1:
+jobs_item_Excavation_info_1:
   type: item
   debug: false
   material: Sand
   display name: <&6>Block breaking<&co>
   lore:
   - ''
-  - <&6>Sand<&co> <&a>$<script[Jobs_data_script].data_key[Archaeologist.block_break.Sand.money].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Archaeologist.block_break.Sand.experience].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]>XP
-  - <&6>Red Sand<&co> <&a>$<script[Jobs_data_script].data_key[Archaeologist.block_break.Red_Sand.money].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Archaeologist.block_break.Red_Sand.experience].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]>XP
-  - <&6>Dirt<&co> <&a>$<script[Jobs_data_script].data_key[Archaeologist.block_break.Dirt.money].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Archaeologist.block_break.Dirt.experience].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]>XP
-  - <&6>Grass Block<&co> <&a>$<script[Jobs_data_script].data_key[Archaeologist.block_break.Grass_Block.money].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Archaeologist.block_break.Grass_Block.experience].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]>XP
-  - <&6>Gravel<&co> <&a>$<script[Jobs_data_script].data_key[Archaeologist.block_break.Gravel.money].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Archaeologist.block_break.Gravel.experience].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]>XP
-  - <&6>Soul Sand<&co> <&a>$<script[Jobs_data_script].data_key[Archaeologist.block_break.Soul_Sand.money].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Archaeologist.block_break.Soul_Sand.experience].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]>XP
-  - <&6>Soul Soil<&co> <&a>$<script[Jobs_data_script].data_key[Archaeologist.block_break.Soul_Soil.money].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Archaeologist.block_break.Soul_Soil.experience].mul[<script[Jobs_data_script].data_key[Archaeologist.difficulty_level]>]>XP
+  - <&6>Sand<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Sand.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Sand.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
+  - <&6>Red Sand<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Red_Sand.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Red_Sand.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
+  - <&6>Dirt<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Dirt.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Dirt.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
+  - <&6>Grass Block<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Grass_Block.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Grass_Block.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
+  - <&6>Gravel<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Gravel.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Gravel.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
+  - <&6>Soul Sand<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Soul_Sand.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Soul_Sand.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
+  - <&6>Soul Soil<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Soul_Soil.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Soul_Soil.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
   - ''
 
 
-jobs_item_archaeologist_info_2:
+jobs_item_Excavation_info_2:
   type: item
   debug: false
   material: filled_map
   display name: <&6>Treasure Finding<&co>
   lore:
   - ''
-  - <&6>Glowstone<&co> <&a><script[Jobs_data_script].data_key[Archaeologist.treasure_chance.Glowstone]>
-  - <&6>Diamonds<&co> <&a><script[Jobs_data_script].data_key[Archaeologist.treasure_chance.Diamond]>
-  - <&6>Emeralds<&co> <&a><script[Jobs_data_script].data_key[Archaeologist.treasure_chance.Emerald]>
+  - <&6>Glowstone<&co> <&a><script[Jobs_data_script].data_key[Excavation.treasure_chance.Glowstone]>
+  - <&6>Diamonds<&co> <&a><script[Jobs_data_script].data_key[Excavation.treasure_chance.Diamond]>
+  - <&6>Emeralds<&co> <&a><script[Jobs_data_script].data_key[Excavation.treasure_chance.Emerald]>
+  - <&6>Netherice<&co> <&a><script[Jobs_data_script].data_key[Excavation.treasure_chance.netherite]>
+  - <&6>Other Reward<&co> <&a><script[Jobs_data_script].data_key[Excavation.treasure_chance.lesser_reward]>
   - ''
-  - <&6><&o>Drop rates increase with your Archaeology level.
+  - <&6><&o>Drop rates increase with your Excavation level.
+  - <&6><&o>Each block rolls a chance at the item off a reward table.
 
 jobs_item_Blacksmith:
   type: item
