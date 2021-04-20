@@ -43,6 +43,7 @@ butler_command:
 butler_menu:
   type: inventory
   inventory: chest
+  gui: true
   size: 7
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&a>]>

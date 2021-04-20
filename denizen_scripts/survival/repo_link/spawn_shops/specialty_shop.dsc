@@ -21,6 +21,7 @@ specialty_shop_assignment:
 specialtyInventory:
   type: inventory
   inventory: chest
+  gui: true
   title: Specialty Shop
   debug: false
   definitions:

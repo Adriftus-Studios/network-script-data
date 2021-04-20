@@ -4,6 +4,7 @@ mod_online_inv:
   debug: false
   title: <&6>A<&e>MP <&f>– <&a>Online Players
   inventory: CHEST
+  gui: true
   size: 54
   definitions:
     border: <item[light_blue_stained_glass_pane].with[display_name=<&r>]>

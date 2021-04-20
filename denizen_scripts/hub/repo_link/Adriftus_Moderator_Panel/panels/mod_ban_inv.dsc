@@ -4,6 +4,7 @@ mod_ban_inv:
   debug: false
   title: <&6>A<&e>MP <&f>› <&c>Ban
   inventory: CHEST
+  gui: true
   size: 54
   definitions:
     x: <item[air]>

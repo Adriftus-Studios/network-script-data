@@ -158,6 +158,7 @@ chat_settings:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&6>Chat Settings
   size: 45
   definitions:

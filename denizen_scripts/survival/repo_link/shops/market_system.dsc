@@ -217,6 +217,7 @@ market_system_main_GUI:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&e>Market
   procedural items:
     - foreach <script[market_system_data].list_keys[categories]> as:category:
@@ -268,6 +269,7 @@ market_system_category_GUI:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&e>Market
   custom_slots_map:
     hidden_marker: 1

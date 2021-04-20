@@ -124,6 +124,7 @@ warps_GUI_main_menu_events:
 warps_my_warps_GUI:
   type: inventory
   inventory: chest
+  gui: true
   title: <&e>My Warps
   debug: false
   size: 54
@@ -172,6 +173,7 @@ warps_my_warps_GUI_events:
 warps_GUI_server_warps_menu:
   type: inventory
   inventory: chest
+  gui: true
   title: <&b>Server Warps
   debug: false
   size: 45
@@ -214,6 +216,7 @@ favorite_warps:
   debug: false
   title: <&a>Favorite Warps
   inventory: chest
+  gui: true
   size: 54
   slots:
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
@@ -281,6 +284,7 @@ warps_GUI_player_warps_menu_top:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   size: 54
   title: <&a>Player Warps
   custom_mapped_keys:
@@ -308,6 +312,7 @@ warps_GUI_player_warps_menu_pages:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   size: 54
   title: <&b>Warps Menu
   custom_mapped_keys:
@@ -464,6 +469,7 @@ warp_management_events:
 warp_management_GUI_panel:
   type: inventory
   inventory: chest
+  gui: true
   size: 54
   title: <&b>Warp Management
   debug: false

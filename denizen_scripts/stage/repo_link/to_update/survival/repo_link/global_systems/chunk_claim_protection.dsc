@@ -281,6 +281,7 @@ claiming_multi_chunk_GUI:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   size: 36
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>

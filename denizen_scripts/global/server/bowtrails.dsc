@@ -215,6 +215,7 @@ bowtrails_gui_command:
 bowtrails_inventory:
   type: inventory
   inventory: chest
+  gui: true
   debug: false
   size: 54
   title: <yaml[bowtrails].read[gui.title].parse_color>

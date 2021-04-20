@@ -76,6 +76,7 @@ command_play_inventory:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&a>Play Menu
   size: 27
   definitions:

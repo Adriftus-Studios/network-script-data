@@ -15,6 +15,7 @@ store_hub_mysteryShop:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   size: 27
   title: <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&5>S<&d>h<&5>o<&d>p
   definitions:
@@ -63,6 +64,7 @@ store_hub_mysteryShop_boxes_inventory:
     type: inventory
     debug: true
     inventory: chest
+    gui: true
     title: <&a>Buying <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.
     size: 45
     definitions:

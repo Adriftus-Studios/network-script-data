@@ -3,6 +3,7 @@ jobs_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: Jobs Browsing Menu
   size: 45
   definitions:
@@ -19,6 +20,7 @@ personal_jobs_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <Player.name>'s Jobs Statistics
   size: 45
   definitions:
@@ -35,6 +37,7 @@ chef_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&f>Chef Job Information
   size: 18
   definitions:
@@ -48,6 +51,7 @@ enchanter_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&b>Enchanter Job Information
   size: 18
   definitions:
@@ -61,6 +65,7 @@ archaeologist_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&e>Archaeologist Job Information
   size: 18
   definitions:
@@ -74,6 +79,7 @@ blacksmith_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&8>Blacksmith Job Information
   size: 18
   definitions:
@@ -87,6 +93,7 @@ brewer_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&d>Brewer Job Information
   size: 18
   definitions:
@@ -100,6 +107,7 @@ lumberjack_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&6>Lumberjack Job Information
   size: 18
   definitions:
@@ -113,6 +121,7 @@ Tinkerer_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&a>Tinkerer Job Information
   size: 18
   definitions:
@@ -127,6 +136,7 @@ miner_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&e>Miner Job Information
   size: 18
   definitions:
@@ -140,6 +150,7 @@ fisher_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&9>Fisher Job Information
   size: 18
   definitions:
@@ -153,6 +164,7 @@ Builder_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&3>Builder Job Information
   size: 18
   definitions:
@@ -167,6 +179,7 @@ farmer_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&2>Farmer Job Information
   size: 18
   definitions:
@@ -180,6 +193,7 @@ hunter_info_gui:
   debug: false
   gui: true
   inventory: chest
+  gui: true
   title: <&c>Hunter Job Information
   size: 18
   definitions:

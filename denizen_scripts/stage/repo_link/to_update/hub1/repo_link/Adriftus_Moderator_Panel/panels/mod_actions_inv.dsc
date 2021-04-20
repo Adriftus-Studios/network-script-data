@@ -4,6 +4,7 @@ mod_actions_inv:
   debug: false
   title: <&6>A<&e>MP <&f>· <&5>Actions
   inventory: CHEST
+  gui: true
   size: 27
   definitions:
     x: <item[air]>
