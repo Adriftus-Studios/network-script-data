@@ -154,14 +154,16 @@ jobs_Excavation_passive:
       ##Checks the player level is over the minimum, and that the player has not recently placed the block.
       - if <context.location.has_flag[jobs.player_placed]> || <player.flag[jobs.Excavation.level]> < 10:
         - stop
-      - define arch_level <player.flag[jobs.Excavation].level>
+      - define exc_level <player.flag[jobs.Excavation.level]>
       ##boosts the proc rate per item at .2% per excavation level, up to 20% at max level
-      - define proc_rate <util.random.int[0].to[100].add[<[arch_level].div[5]>]>
+      - define proc_rate <util.random.int[0].to[100].add[<[exc_level].div[5]>]>
       - narrate <[proc_rate]>
       - if <[proc_rate]> > 90:
         - define drop_slot <script[Jobs_data_script].list_keys[excavation.passive_drop].random>
-        - define drop <script[Jobs_data_script].list_keys[excavation.passive_drop.<[drop_slot]>]>
-      - determine passively <list[<[drop]>|<context.material.name>]>
+        - narrate <[drop_slot]>
+        - define drop <script[Jobs_data_script].data_key[excavation.passive_drop.<[drop_slot]>].parsed>
+        - narrate <[drop]>
+        - determine passively <list[<[drop]>|<context.material.name>]>
 
 jobs_Blacksmith_passive:
   type: world
@@ -178,7 +180,7 @@ jobs_Blacksmith_passive:
 
 jobs_Fisher_passive:
   type: world
-  debug: false
+  debug: true
   events:
     on player fishes:
       ##clears invalid catch states
@@ -186,29 +188,36 @@ jobs_Fisher_passive:
         - stop
       ##sets a cooldown for the passive, and checks if the mob is from a spawner
       - if !<player.has_flag[ripped_recently]> && !<context.entity.from_spawner>:
-        - hurt <context.entity> <player.flag[jobs.fisher].mul[0.1].sub[0.1].add[1]>
+        - define entity_type <context.entity.entity_type>
+        - hurt <context.entity> <player.flag[jobs.fisher.level].mul[0.1].sub[0.1].add[1]>
         - wait 1t
-        - flag player ripped_recently duration:30s
+#        - flag player ripped_recently duration:30s
         ##Checks to see if the entity is eligible for a drop
-        - if <script[Jobs_data_script].list_keys[Fisher.caught_entity].contains_any[<context.entity.entity_type>]>:
+        - if <script[Jobs_data_script].list_keys[Fisher.caught_entity].contains_any[<[entity_type]>]>:
           - define fisher_level <player.flag[jobs.fisher.level]>
-          ##boosts the proc rate per item at .5% per blacksmith level, up to 50% at max level
-          - define proc_rate <util.random.int[0].to[1000].add[<[fisher_level].mul[5]>]>
-          - if <[proc_rate]> > 900:
-            - define item_tier common
-            - define tier_color <&f>
-          - if <[proc_rate]> > 996:
-            - define item_tier rare
-            - define tier_color <&b>
-          - if <[proc_rate]> > 998:
-            - define item_tier legendary
-            - define tier_color <&6>
+          ##boosts the proc rate per item at .3% per fisher level, up to 30% at max level
+          - define proc_rate <util.random.int[0].to[100].add[<[fisher_level].div[3]>]>
+          - if <[proc_rate]> > 90:
+            ##Checks the item's tier independently of level, to keep legendaries somewhat rare still.
+            - define tier <util.random.int[1].to[100]>
+            - narrate <[tier]>
+            - if <[tier]> < 80:
+              - define item_tier common
+              - define tier_color <&f>
+            - if <[tier]> >= 80:
+              - define item_tier rare
+              - define tier_color <&b>
+            - if <[tier]> > 99:
+              - define item_tier legendary
+              - define tier_color <&6>
           ##Drops the item and sends a message to the player that they triggered it.
           - if <[item_tier]||null> != null:
             ##pulls the item from the data key
-            - define item_dropped <script[Jobs_data_script].data_key[Fisher.caught_entity.<context.entity.entity_type>.<[item_tier]>].parsed>
-            - drop location:<context.entity.location> <[item_dropped]> quantity:<script[Jobs_data_script].data_key[Fisher.caught_entity.<context.entity.entity_type>.<[item_tier]>_quantity]>
-            - actionbar "<&a>You have ripped a <[tier_color]><item[<[item_dropped]>].display||<item[<[item_dropped]>].material.name>><&a> free from the <context.entity.name.replace[_].with[ ].to_titlecase>!"
+            - define item_dropped <script[Jobs_data_script].data_key[Fisher.caught_entity.<[entity_type]>.<[item_tier]>].parsed>
+            - drop location:<context.entity.location> <[item_dropped]> quantity:<script[Jobs_data_script].data_key[Fisher.caught_entity.<[entity_type]>.<[item_tier]>_quantity].parsed>
+            - actionbar "<&a>You have ripped a <[tier_color]><item[<[item_dropped]>].display||<item[<[item_dropped]>].material.name.replace[_].with[ ].to_titlecase>><&a> free from the <context.entity.name.replace[_].with[ ].to_titlecase>!"
+        - else:
+          - narrate "<&c>This entity type does not have any drops, please suggest it to be added on our github. (/github)"
 
 jobs_Hunter_passive:
   type: world

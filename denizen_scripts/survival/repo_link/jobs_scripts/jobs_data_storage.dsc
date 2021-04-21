@@ -647,100 +647,100 @@ Jobs_data_script:
       netherite: 1 in 100
 
     passive_drop:
-      1: air
-      2: air
-      3: air
-      4: air
-      5: air
-      6: air
-      7: air
-      8: air
-      9: air
-      10: air
-      11: air
-      12: air
-      13: air
-      14: air
-      15: air
-      16: air
-      17: air
-      18: air
-      19: air
-      20: air
-      21: air
-      22: air
-      23: air
-      24: air
-      25: air
-      26: air
-      27: air
-      28: air
-      29: air
-      30: air
-      31: air
-      32: air
-      33: air
-      34: air
-      35: air
-      36: air
-      37: air
-      38: air
-      39: air
-      40: air
-      41: air
-      42: air
-      43: air
-      44: air
-      45: air
-      46: air
-      47: air
-      48: air
-      49: air
-      50: air
-      51: air
-      52: air
-      53: air
-      54: air
-      55: air
-      56: air
-      57: air
-      58: air
-      59: air
-      60: air
-      61: air
-      62: air
-      63: air
-      64: air
-      65: air
-      66: air
-      67: air
-      68: air
-      69: air
-      70: air
-      71: air
-      72: air
-      73: air
-      74: air
-      75: air
-      76: air
-      77: air
-      78: air
-      79: air
-      80: air
-      81: air
-      82: air
-      83: netherite
-      84: glowstone
-      85: glowstone
-      86: glowstone
-      87: glowstone
-      88: glowstone
-      89: glowstone
-      90: glowstone
-      91: glowstone
-      92: glowstone
-      93: glowstone
-      94: glowstone
+      1: bone_meal
+      2: bone_meal
+      3: bone_meal
+      4: bone_meal
+      5: bone_meal
+      6: bone_meal
+      7: bone_meal
+      8: bone_meal
+      9: bone_meal
+      10: bone_meal
+      11: bone_meal
+      12: leather_boots[durability=<util.random.int[0].to[64]>]
+      13: leather_leggings[durability=<util.random.int[0].to[74]>]
+      14: leather_chestplate[durability=<util.random.int[0].to[80]>]
+      15: leather_helmet[durability=<util.random.int[0].to[54]>]
+      16: stone_hoe[durability=<util.random.int[0].to[100]>]
+      17: stone_hoe[durability=<util.random.int[50].to[130]>]
+      18: bowl
+      19: bowl
+      20: bowl
+      21: stone_pickaxe[durability=<util.random.int[0].to[100]>]
+      22: stone_pickaxe[durability=<util.random.int[50].to[130]>]
+      23: stone_shovel[durability=<util.random.int[0].to[100]>]
+      24: stone_shovel[durability=<util.random.int[50].to[130]>]
+      25: stone_axe[durability=<util.random.int[0].to[100]>]
+      26: stone_axe[durability=<util.random.int[50].to[130]>]
+      27: bone_meal
+      28: bone_meal
+      29: bone_meal
+      30: bone_meal
+      31: bone_meal
+      32: bone_meal
+      33: bone_meal
+      34: bone_meal
+      35: bone_meal
+      36: bone_meal
+      37: bone_meal
+      38: skeleton_skull
+      39: compass
+      40: bone
+      41: bone
+      42: bone
+      43: bone
+      44: bone
+      45: bone
+      46: bone
+      47: bone
+      48: bone
+      49: bone
+      50: bone
+      51: bone
+      52: bone
+      53: bone
+      54: bone
+      55: bone
+      56: bone
+      57: bone
+      58: bone
+      59: bone
+      60: bone
+      61: bone
+      62: bone
+      63: bone
+      64: bone
+      65: bone
+      66: bone
+      67: bone
+      68: bone
+      69: bone
+      70: redstone
+      71: redstone
+      72: redstone
+      73: redstone
+      74: redstone
+      75: redstone
+      76: redstone
+      77: redstone
+      78: redstone
+      79: redstone
+      80: redstone
+      81: redstone
+      82: redstone
+      83: netherite_scrap
+      84: glowstone_dust
+      85: glowstone_dust
+      86: glowstone_dust
+      87: glowstone_dust
+      88: glowstone_dust
+      89: glowstone_dust
+      90: glowstone_dust
+      91: glowstone_dust
+      92: glowstone_dust
+      93: glowstone_dust
+      94: glowstone_dust
       98: diamond
       95: diamond
       96: diamond
@@ -823,63 +823,63 @@ Jobs_data_script:
     caught_entity:
       creeper:
         common: gunpowder
-        common_quantity: 1
-        rare: <&4>ERROR
+        common_quantity: <util.random.int[1].to[2]>
+        rare: TNT
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: creeper_head
         legendary_quantity: 1
       drowned:
         common: rotten_flesh
-        commonm_quantity: 1
-        rare: <&4>ERROR
+        common_quantity: <util.random.int[1].to[2]>
+        rare: trident[durability=<util.random.int[0].to[249]>;display_name=<&b>Trident;enchantments=<list[loyalty,1;enchantments=riptide,<util.random.int[1].to[2]>|mending,1;enchantments=impaling,<util.random.int[4].to[6]>;enchantments=vanishing_curse,1|mending,1;enchantments=riptide,3|impaling,<util.random.int[3].to[6]>].random>]
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: nautilus_shell
         legendary_quantity: 1
       hoglin:
         common: rotten_flesh
         common_quantity: 1
-        rare: <&4>ERROR
-        rare_quantity: 1
-        legendary: <&4>ERROR
-        legendary_quantity: 1
+        rare: bone
+        rare_quantity: <util.random.int[4].to[6]>
+        legendary: tipped_arrow[potion_effects=FIRE_RESISTANCE,false,true]
+        legendary_quantity: <util.random.int[3].to[8]>
       pig:
         common: leather
         common_quantity: 1
-        rare: <&4>ERROR
+        rare: lead
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: "player_head[display_name=<&b>Pig Head;skull_skin=e1e1c2e4-1ed2-473d-bde2-3ec718535399|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjIxNjY4ZWY3Y2I3OWRkOWMyMmNlM2QxZjNmNGNiNmUyNTU5ODkzYjZkZjRhNDY5NTE0ZTY2N2MxNmFhNCJ9fX0=]"
         legendary_quantity: 1
       cow:
         common: leather
         common_quantity: 1
-        rare: <&4>ERROR
-        rare_quantity: 1
-        legendary: <&4>ERROR
+        rare: beef
+        rare_quantity: <util.random.int[1].to[2]>
+        legendary: legendary_item_devin_bucket
         legendary_quantity: 1
       husk:
         common: rotten_flesh
         common_quantity: 1
-        rare: <&4>ERROR
+        rare: fire_charge
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: legendary_item_noble_chestplate
         legendary_quantity: 1
       phantom:
         common: phantom_membrane
         common_quantity: 1
-        rare: <&4>ERROR
+        rare: custom_item_phantom_breath
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: legendary_item_behr_claw
         legendary_quantity: 1
       piglin_brute:
         common: gold_ingot
         common_quantity: 1
         rare: golden_axe[durability=<util.random.int[0].to[31]>]
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: head_chooser_token
         legendary_quantity: 1
       skeleton:
         common: bone
-        common_quantity: 1
+        common_quantity: <util.random.int[1].to[8]>
         rare: arrow
         rare_quantity: 1
         legendary: bow[durability=<util.random.int[0].to[384]>;display_name=<&b>Bow;enchantments=<list[flame,1;enchantments=power,<util.random.int[1].to[3]>|infinity,1;enchantments=mending,1;enchantments=vanishing_curse,1|mending,1;enchantments=punch,3|power,<util.random.int[3].to[6]>|punch,<util.random.int[2].to[3]>|unbreaking,<util.random.int[1].to[4]>].random>]
@@ -887,71 +887,72 @@ Jobs_data_script:
       slime:
         common: slime_ball
         common_quantity: 1
-        rare: <&4>ERROR
+        rare: 
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: legendary_item_noble_helmet
         legendary_quantity: 1
       stray:
         common: bone
         common_quantity: 1
         rare: tipped_arrow[potion_effects=SLOWNESS,false,true]
-        rare_quantity: <util.random_int[1].to[3]>
+        rare_quantity: <util.random.int[1].to[3]>
         legendary: bow[durability=<util.random.int[0].to[384]>;display_name=<&b>Bow;enchantments=<list[flame,1;enchantments=power,<util.random.int[1].to[3]>|infinity,1;enchantments=mending,1;enchantments=vanishing_curse,1|mending,1;enchantments=punch,3|power,<util.random.int[3].to[6]>|punch,<util.random.int[2].to[3]>|unbreaking,<util.random.int[1].to[4]>].random>]
         legendary_quantity: 1
       vex:
         common: iron_sword
         common_quantity: 1
-        rare: <&4>ERROR
-        rare_quantity: 1
-        legendary: <&4>ERROR
+        rare: tipped_arrow[potion_effects=@INVISIBILITY,false,true]
+        rare_quantity: <util.random.int[1].to[3]>
+        legendary: legendary_item_noble_boots
         legendary_quantity: 1
       zombie:
-        item: rotten_flesh
-        rare: <&4>ERROR
+        common: rotten_flesh
+        common_quantity: <util.random.int[1].to[2]>
+        rare: 
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: 
         legendary_quantity: 1
       spider:
         common: string
         common_quantity: 1
         rare: spider_eye
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: 
         legendary_quantity: 1
       cave_spider:
         common: string
         common_quantity: 2
         rare: fermented_spider_eye
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: 
         legendary_quantity: 1
       bee:
-        common: <&4>ERROR
+        common: 
         common_quantity: 1
-        rare: <&4>ERROR
+        rare: 
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: 
         legendary_quantity: 1
       piglin:
         common: gold_ingot
         common_quantity: 1
-        rare: <&4>ERROR
+        rare: 
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: 
         legendary_quantity: 1
       zombified_piglin:
-        common: <&4>ERROR
+        common: 
         common_quantity: 1
-        rare: <&4>ERROR
+        rare: 
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: legendary_item_noble_helmet
         legendary_quantity: 1
       zoglin:
         common: leather
-        common_quantity: <util.random_int[1].to[3]>
-        rare: <&4>ERROR
+        common_quantity: <util.random.int[1].to[3]>
+        rare: 
         rare_quantity: 1
-        legendary: <&4>ERROR
+        legendary: 
         legendary_quantity: 1
 
 #TODO Lumberjack
