@@ -886,8 +886,8 @@ Jobs_data_script:
         legendary_quantity: 1
       slime:
         common: slime_ball
-        common_quantity: 1
-        rare: 
+        common_quantity: <util.random.int[1].to[5]>
+        rare: enchanted_book[enchantments=<server.enchantment_types.random>,1]
         rare_quantity: 1
         legendary: legendary_item_noble_helmet
         legendary_quantity: 1
@@ -908,52 +908,52 @@ Jobs_data_script:
       zombie:
         common: rotten_flesh
         common_quantity: <util.random.int[1].to[2]>
-        rare: 
+        rare: potion[potion_effects=JUMP,true,false]
         rare_quantity: 1
-        legendary: 
+        legendary: legendary_item_bill_cane
         legendary_quantity: 1
       spider:
         common: string
         common_quantity: 1
         rare: spider_eye
         rare_quantity: 1
-        legendary: 
+        legendary: potion[potion_effects=NIGHT_VISION,false,false]
         legendary_quantity: 1
       cave_spider:
         common: string
         common_quantity: 2
         rare: fermented_spider_eye
         rare_quantity: 1
-        legendary: 
+        legendary: tipped_arrow[potion_effects=SLOW_FALLING,false,true]
         legendary_quantity: 1
       bee:
-        common: 
+        common: honey_bottle
         common_quantity: 1
-        rare: 
+        rare: beehive
         rare_quantity: 1
-        legendary: 
+        legendary: legendary_item_bee_stinger
         legendary_quantity: 1
       piglin:
         common: gold_ingot
         common_quantity: 1
-        rare: 
-        rare_quantity: 1
-        legendary: 
-        legendary_quantity: 1
-      zombified_piglin:
-        common: 
-        common_quantity: 1
-        rare: 
+        rare: crying_obsidian
         rare_quantity: 1
         legendary: legendary_item_noble_helmet
         legendary_quantity: 1
-      zoglin:
-        common: leather
-        common_quantity: <util.random.int[1].to[3]>
-        rare: 
+      zombified_piglin:
+        common: gold_ingot
+        common_quantity: 1
+        rare: crying_obsidian
         rare_quantity: 1
-        legendary: 
+        legendary: spectral_arrow
         legendary_quantity: 1
+      zoglin:
+        common: rotten_flesh
+        common_quantity: <util.random.int[1].to[3]>
+        rare: bone
+        rare_quantity: <util.random.int[4].to[6]>
+        legendary: tipped_arrow[potion_effects=FIRE_RESISTANCE,false,true]
+        legendary_quantity: <util.random.int[3].to[8]>
 
 #TODO Lumberjack
   Lumberjack:

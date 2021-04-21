@@ -16,6 +16,19 @@ legendary_item_behr_claw:
     - <&a>
     - <&e>I'm not even gonna ask where this came from.
 
+legendary_item_bee_stinger:
+  type: item
+  material: netherite_sword
+  flags:
+    legendary: bee_stinger
+    legendary_passive: venom
+  mechanisms:
+    custom_model_data: 2
+  enchantments:
+    - looting:4
+    - sharpness:6
+    - unbreaking:4
+
 legendary_item_devin_bucket:
   type: item
   material: diamond_boots
@@ -71,6 +84,13 @@ legendary_effects_handler:
       - define chance <util.random.int[1].to[10]>
       - if <[chance]> == 1:
         - playsound <player.location> sound:entity_polar_bear_warning sound_category:master
+    on player damages entity with:legendary_item_bee_stinger:
+      - if <player.has_flag[bee_stinger_cooldown]>:
+        - stop
+      - define chance <util.random.int[1].to[10]>
+      - if <[chance]> == 1:
+        - cast POISON duration:100t <context.entity> amplifier:3
+        - flag <player> bee_stinger_cooldown duration:10s
 
 legendary_item_non_head_equip_handler:
   type: world
