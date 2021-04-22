@@ -1,8 +1,8 @@
 jobs_command:
   type: command
   debug: false
-  name: jobs2
-  usage: /jobs2 (player) (level|experience) (add|set) (job name)
+  name: jobs
+  usage: /jobs (player) (level|experience) (add|set) (job name)
   description: used for any jobs command related things
   tab completions:
     1: <player.has_permission[jobs.moderator].if_true[<server.online_players.parse[name]>].if_false[]>
@@ -92,4 +92,39 @@ jobs_command:
                 - narrate "<&a>Set <&e><context.args.get[1]> <&e><context.args.get[4]><&a> experience earned this level to <&e><context.args.get[5]><&a>."
                 - narrate "<&e><player.name><&a> set your <&e><context.args.get[4]><&a> experience earned this level to <&e><context.args.get[5]><&a>."
 
-#TODO /jobs_Top|/top_jobs command handling
+jobs_top_command:
+  type: command
+  debug: false
+  name: jobstop
+  usage: /jobstop profession
+  description: used for any jobs command related things
+  aliases:
+  - topjobs
+  - jobs_top
+  - top_jobs
+  tab completions:
+    1: <script[Jobs_data_script].list_keys[jobs_list]>|total
+  script:
+  - define job <context.args.get[1]>
+  - define top_list_players <server.players_flagged[jobs.<[job]>.level].highest[flag[jobs.<[job]>.level]].count[10]>
+  - define top_list <list[]>
+  - foreach <[top_list_players]> as:player:
+    - define top_list:->:<&6><[player].name><&6><&co><&sp><&e><[player].flag[jobs.<[job]>.level]>
+    - define top_list_names:->:<&6><[player].name><&6><&co>
+    - define top_list_values:->:<[player].flag[jobs.<[job]>.level]>
+  - if <[top_list].size> != 0:
+    - if <player.sidebar_title||null> != null:
+      - narrate "<&6>Top <&e><[job].to_titlecase>s<&6><&co>"
+      - narrate <[top_list].separated_by[<&nl>]>
+    - else:
+      - sidebar set "Title:<&6>Top <&e><[job].to_titlecase>s<&6><&co>" "values:<[top_list_names]>" "scores:<[top_list_values]>"
+      - wait 100t
+      - sidebar remove
+
+no_breaking_stuff:
+  type: world
+  debug: false
+  events:
+    on player breaks block:
+      - if <list[sponge|wet_sponge].contains_any[<context.material.name>]> || <player.item_in_hand.flag[hardness]||0> < <script[item_configs].data_key[items.<context.location.material.name>.hardness]>:
+        - determine passively cancelled

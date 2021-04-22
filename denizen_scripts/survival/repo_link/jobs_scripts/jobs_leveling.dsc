@@ -1,6 +1,6 @@
 jobs_exp_adding:
   type: task
-  debug: false
+  debug: true
   script:
   - define player_job_level <[player].flag[jobs.<[job]>.level]>
   ##Stops exp gain over level 100
@@ -23,12 +23,15 @@ jobs_exp_adding:
     - wait 1t
     - flag <[player]> jobs.<[job]>.level:++
     - flag <[player]> jobs.<[job]>.experience_earned:0
-    - inject jobs_level_up_event
+    - run jobs_level_up_event def.player:<[player]> def.job:<[job]>
+    - wait 20t
     - inject jobs_exp_adding
+  - run jobs_total_level_calculator def.player:<[player]>
 
 jobs_level_up_event:
   type: task
   debug: false
+  definitions: player|job
   script:
     ##if the player is online, narrates/toasts, plays a firework effect around them
     - if <[player].is_online>:
@@ -52,3 +55,12 @@ jobs_level_up_event:
     - if <[player].flag[jobs.<[job]>.level].mod[50]> == 0:
       - flag <[player]> jobs.blocks_allowed:++
 
+jobs_total_level_calculator:
+  type: task
+  debug: false
+  definitions: player
+  script:
+  - define total_level 0
+  - foreach <script[Jobs_data_script].list_keys[jobs_list]> as:job:
+    - define total_level:+:<[player].flag[jobs.<[job]>.level]||1>
+  - flag <[player]> jobs.total.level:<[total_level]>

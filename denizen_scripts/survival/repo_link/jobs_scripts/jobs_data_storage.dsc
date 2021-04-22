@@ -13,7 +13,7 @@ Jobs_data_script:
     Enchanter: 1
     Hunter: 1
     Chef: 1
-    Excavation: 1
+    Excavator: 1
     Fisher: 1
 
 
@@ -611,8 +611,8 @@ Jobs_data_script:
         money: 6
         experience: 8
 
-#TODO Excavation
-  Excavation:
+#TODO Excavator
+  Excavator:
     icon: diamond_shovel
     difficulty_level: 1
 

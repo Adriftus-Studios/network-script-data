@@ -165,7 +165,7 @@ jobs_break_block_handler:
       - flag <context.location.flag[jobs.block_owned_by_player]> jobs.blocks_owned:<-:<context.material.name>~<context.location.xyz>~<context.location.world.name>
     - if <context.location.has_flag[jobs.just_broken]>:
       - determine cancelled
-    - if !<player.flag[jobs.current_list].contains_any[Lumberjack|Miner|Farmer|Excavation]>:
+    - if !<player.flag[jobs.current_list].contains_any[Lumberjack|Miner|Farmer|Excavator]>:
       - flag <context.location> jobs.player_placed:!
       - if <context.location.has_flag[jobs.block_owned_by_player]>:
         - flag <context.location.flag[jobs.block_owned_by_player]> jobs.blocks_owned:<-:<context.material.name>~<context.location.xyz>~<context.location.world.name>

@@ -10,7 +10,7 @@ jobs_info_gui:
   slots:
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [standard_filler] [jobs_item_farmer] [jobs_item_lumberjack] [jobs_item_miner] [standard_filler] [standard_filler] [standard_filler]
-  - [server_jobs_info_head] [standard_filler] [jobs_item_chef] [jobs_item_brewer] [jobs_item_Excavation] [jobs_item_blacksmith] [jobs_item_special_explainer] [standard_filler] [standard_close_button]
+  - [server_jobs_info_head] [standard_filler] [jobs_item_chef] [jobs_item_brewer] [jobs_item_Excavator] [jobs_item_blacksmith] [jobs_item_special_explainer] [standard_filler] [standard_close_button]
   - [standard_filler] [standard_filler] [standard_filler] [jobs_item_fisher] [jobs_item_hunter] [jobs_item_enchanter] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
@@ -26,7 +26,7 @@ personal_jobs_info_gui:
   slots:
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [standard_filler] [player_info_farmer] [player_info_lumberjack] [player_info_miner] [standard_filler] [standard_filler] [standard_filler]
-  - [player_jobs_info_head] [standard_filler] [player_info_chef] [player_info_brewer] [player_info_Excavation] [player_info_blacksmith] [jobs_item_special_explainer] [standard_filler] [standard_close_button]
+  - [player_jobs_info_head] [standard_filler] [player_info_chef] [player_info_brewer] [player_info_Excavator] [player_info_blacksmith] [jobs_item_special_explainer] [standard_filler] [standard_close_button]
   - [standard_filler] [standard_filler] [standard_filler] [player_info_fisher] [player_info_hunter] [player_info_enchanter] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
@@ -56,17 +56,17 @@ enchanter_info_gui:
   - [standard_filler] [standard_filler] [jobs_item_enchanter_info_1] [standard_filler] [jobs_item_enchanter_info_3] [standard_filler] [jobs_item_enchanter_info_5] [standard_filler] [standard_filler]
   - [] [standard_filler] [standard_filler] [jobs_item_enchanter_info_2]  [standard_filler] [jobs_item_enchanter_info_4] [standard_filler] [standard_filler] [standard_back_button]
 
-Excavation_info_gui:
+Excavator_info_gui:
   type: inventory
   debug: false
   gui: true
   inventory: chest
-  title: <&e>Excavation Job Information
+  title: <&e>Excavator Job Information
   size: 18
   definitions:
     filler: gray_stained_glass_pane[display_name=<&a>]
   slots:
-  - [standard_filler] [standard_filler] [standard_filler] [jobs_item_Excavation_info_1] [standard_filler] [jobs_item_Excavation_info_2] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [standard_filler] [jobs_item_Excavator_info_1] [standard_filler] [jobs_item_Excavator_info_2] [standard_filler] [standard_filler] [standard_filler]
   - [] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_back_button]
 
 blacksmith_info_gui:

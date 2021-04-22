@@ -51,11 +51,19 @@ jobs_item_special_explainer:
   - <&e>Miner<&co> <&e>Ores may spontaneously smelt.
   - <&f>Chef<&co> <&e>Food may saturate more.
   - <&d>Brewer<&co> <&e>Potions may double-brew.
-  - <&a>Excavation<&co> <&e>Rare items can be found buried.
+  - <&a>Excavator<&co> <&e>Rare items can be found buried.
   - <&7>Blacksmith<&co> <&e>Items may doublecraft.
   - <&9>Fisher<&co> <&e>Items may be ripped from monsters.
   - <&c>Hunter<&co> <&e>You might dodge an attack.
   - <&b>Enchanter<&co> <&e>Items may enchant a level higher.
+
+itemtest:
+  type: item
+  material: stone
+  lore:
+  - <list[1|2]>
+  - <list[3|4]>
+
 server_jobs_info_head:
   type: item
   debug: false
@@ -101,7 +109,7 @@ player_info_chef:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Chef.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Chef.level].highest[flag[jobs.Chef.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
@@ -116,26 +124,26 @@ player_info_enchanter:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Enchanter.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Enchanter.level].highest[flag[jobs.Enchanter.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
     jobs: Enchanter
 
-player_info_Excavation:
+player_info_Excavator:
   type: item
   debug: false
   material: diamond_shovel
-  display name: <&a>Excavation<&co>
+  display name: <&a>Excavator<&co>
   lore:
   - ''
-  - <&6>Current level<&co> <&e><player.flag[jobs.Excavation.level]>
+  - <&6>Current level<&co> <&e><player.flag[jobs.Excavator.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Excavator.level].highest[flag[jobs.Excavator.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
-    jobs: Excavation
+    jobs: Excavator
 
 player_info_Blacksmith:
   type: item
@@ -146,7 +154,7 @@ player_info_Blacksmith:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Blacksmith.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Blacksmith.level].highest[flag[jobs.Blacksmith.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
@@ -161,7 +169,7 @@ player_info_brewer:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Brewer.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Brewer.level].highest[flag[jobs.Brewer.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
@@ -176,7 +184,7 @@ player_info_lumberjack:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Lumberjack.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Lumberjack.level].highest[flag[jobs.Lumberjack.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
@@ -191,7 +199,7 @@ player_info_tinkerer:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Tinkerer.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Tinkerer.level].highest[flag[jobs.Tinkerer.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
@@ -206,7 +214,7 @@ player_info_miner:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Miner.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Miner.level].highest[flag[jobs.Miner.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
@@ -221,7 +229,7 @@ player_info_fisher:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Fisher.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Fisher.level].highest[flag[jobs.Fisher.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
@@ -236,7 +244,7 @@ player_info_Builder:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Builder.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Builder.level].highest[flag[jobs.Builder.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
@@ -251,7 +259,7 @@ player_info_farmer:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Farmer.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Farmer.level].highest[flag[jobs.Farmer.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
@@ -266,7 +274,7 @@ player_info_hunter:
   - ''
   - <&6>Current level<&co> <&e><player.flag[jobs.Hunter.level]>
   - ''
-  - <&6>Current Rank<&co> <&e>
+  - <&6>Current Rank<&co> <&e><server.players_flagged[jobs.Hunter.level].highest[flag[jobs.Hunter.level]].count[1000].find[<player>]>
   - ''
   - <&6>Click for amounts earned per action.
   flags:
@@ -441,11 +449,11 @@ jobs_item_enchanter_info_5:
   - ''
 
 
-jobs_item_Excavation:
+jobs_item_Excavator:
   type: item
   debug: false
   material: diamond_shovel
-  display name: <&a>Excavation<&co>
+  display name: <&a>Excavator<&co>
   lore:
   - <&6>Gains <&a>money <&6>from<&co>
   - <&e>- Digging up blocks.
@@ -453,42 +461,42 @@ jobs_item_Excavation:
   - ''
   - <&6>Click for amounts earned per action.
   - ''
-  - <&6>Current Workers<&co><&e> <server.flag[jobs.count.Excavation]||0>
-  - <&6>Current Employment Modifier<&co><&e> <server.flag[jobs.rarity.balancer.Excavation]>
+  - <&6>Current Workers<&co><&e> <server.flag[jobs.count.Excavator]||0>
+  - <&6>Current Employment Modifier<&co><&e> <server.flag[jobs.rarity.balancer.Excavator]>
   flags:
-    jobs: Excavation
+    jobs: Excavator
 
-jobs_item_Excavation_info_1:
+jobs_item_Excavator_info_1:
   type: item
   debug: false
   material: Sand
   display name: <&6>Block breaking<&co>
   lore:
   - ''
-  - <&6>Sand<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Sand.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Sand.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
-  - <&6>Red Sand<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Red_Sand.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Red_Sand.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
-  - <&6>Dirt<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Dirt.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Dirt.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
-  - <&6>Grass Block<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Grass_Block.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Grass_Block.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
-  - <&6>Gravel<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Gravel.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Gravel.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
-  - <&6>Soul Sand<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Soul_Sand.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Soul_Sand.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
-  - <&6>Soul Soil<&co> <&a>$<script[Jobs_data_script].data_key[Excavation.block_break.Soul_Soil.money].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavation.block_break.Soul_Soil.experience].mul[<script[Jobs_data_script].data_key[Excavation.difficulty_level]>]>XP
+  - <&6>Sand<&co> <&a>$<script[Jobs_data_script].data_key[Excavator.block_break.Sand.money].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavator.block_break.Sand.experience].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]>XP
+  - <&6>Red Sand<&co> <&a>$<script[Jobs_data_script].data_key[Excavator.block_break.Red_Sand.money].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavator.block_break.Red_Sand.experience].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]>XP
+  - <&6>Dirt<&co> <&a>$<script[Jobs_data_script].data_key[Excavator.block_break.Dirt.money].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavator.block_break.Dirt.experience].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]>XP
+  - <&6>Grass Block<&co> <&a>$<script[Jobs_data_script].data_key[Excavator.block_break.Grass_Block.money].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavator.block_break.Grass_Block.experience].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]>XP
+  - <&6>Gravel<&co> <&a>$<script[Jobs_data_script].data_key[Excavator.block_break.Gravel.money].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavator.block_break.Gravel.experience].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]>XP
+  - <&6>Soul Sand<&co> <&a>$<script[Jobs_data_script].data_key[Excavator.block_break.Soul_Sand.money].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavator.block_break.Soul_Sand.experience].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]>XP
+  - <&6>Soul Soil<&co> <&a>$<script[Jobs_data_script].data_key[Excavator.block_break.Soul_Soil.money].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Excavator.block_break.Soul_Soil.experience].mul[<script[Jobs_data_script].data_key[Excavator.difficulty_level]>]>XP
   - ''
 
 
-jobs_item_Excavation_info_2:
+jobs_item_Excavator_info_2:
   type: item
   debug: false
   material: filled_map
   display name: <&6>Treasure Finding<&co>
   lore:
   - ''
-  - <&6>Glowstone<&co> <&a><script[Jobs_data_script].data_key[Excavation.treasure_chance.Glowstone]>
-  - <&6>Diamonds<&co> <&a><script[Jobs_data_script].data_key[Excavation.treasure_chance.Diamond]>
-  - <&6>Emeralds<&co> <&a><script[Jobs_data_script].data_key[Excavation.treasure_chance.Emerald]>
-  - <&6>Netherice<&co> <&a><script[Jobs_data_script].data_key[Excavation.treasure_chance.netherite]>
-  - <&6>Other Reward<&co> <&a><script[Jobs_data_script].data_key[Excavation.treasure_chance.lesser_reward]>
+  - <&6>Glowstone<&co> <&a><script[Jobs_data_script].data_key[Excavator.treasure_chance.Glowstone]>
+  - <&6>Diamonds<&co> <&a><script[Jobs_data_script].data_key[Excavator.treasure_chance.Diamond]>
+  - <&6>Emeralds<&co> <&a><script[Jobs_data_script].data_key[Excavator.treasure_chance.Emerald]>
+  - <&6>Netherice<&co> <&a><script[Jobs_data_script].data_key[Excavator.treasure_chance.netherite]>
+  - <&6>Other Reward<&co> <&a><script[Jobs_data_script].data_key[Excavator.treasure_chance.lesser_reward]>
   - ''
-  - <&6><&o>Drop rates increase with your Excavation level.
+  - <&6><&o>Drop rates increase with your Excavator level.
   - <&6><&o>Each block rolls a chance at the item off a reward table.
 
 jobs_item_Blacksmith:
@@ -1015,7 +1023,7 @@ jobs_item_farmer_info_2:
   - <&6>Pumpkin<&co> <&a>$<script[Jobs_data_script].data_key[farmer.block_break.Pumpkin.money].mul[<script[Jobs_data_script].data_key[farmer.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[farmer.block_break.Pumpkin.experience].mul[<script[Jobs_data_script].data_key[farmer.difficulty_level]>]>XP
   - <&6>Sugar Cane<&co> <&a>$<script[Jobs_data_script].data_key[farmer.block_break.Sugar_Cane.money].mul[<script[Jobs_data_script].data_key[farmer.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[farmer.block_break.Sugar_Cane.experience].mul[<script[Jobs_data_script].data_key[farmer.difficulty_level]>]>XP
   - <&6>Brown Mushroom<&co> <&a>$<script[Jobs_data_script].data_key[farmer.block_break.brown_mushroom.money].mul[<script[Jobs_data_script].data_key[farmer.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[farmer.block_break.brown_mushroom.experience].mul[<script[Jobs_data_script].data_key[farmer.difficulty_level]>]>XP
-  - <&6>red Mushroom<&co> <&a>$<script[Jobs_data_script].data_key[farmer.block_break.red_mushroom.money].mul[<script[Jobs_data_script].data_key[farmer.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[farmer.block_break.red_mushroom.experience].mul[<script[Jobs_data_script].data_key[farmer.difficulty_level]>]>XP
+  - <&6>Red Mushroom<&co> <&a>$<script[Jobs_data_script].data_key[farmer.block_break.red_mushroom.money].mul[<script[Jobs_data_script].data_key[farmer.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[farmer.block_break.red_mushroom.experience].mul[<script[Jobs_data_script].data_key[farmer.difficulty_level]>]>XP
   - ''
   - <&6><&o>Wages are independent from the items dropped.
 

@@ -10,11 +10,12 @@ jobs_join_events:
           - flag <player> jobs.<[job]>.level:1
           - flag <player> jobs.<[job]>.experience_earned:0
         - flag <player> jobs.active:0
-        - flag <player> jobs.allowed:<&6>Complete<&sp><&e>Tutorial<&sp><&6>to<&sp>unlock.
-        - flag <player> jobs.blocks_allowed:<&6>Complete<&sp><&e>Tutorial<&sp><&6>to<&sp>unlock.
+        - flag <player> jobs.allowed:1
+        - flag <player> jobs.blocks_allowed:2
         - flag <player> jobs.blocks_owned:<list[]>
         - flag <player> jobs.current_list:<list[]>
         - flag <player> jobs.first_join
+        - advancement grant:<player> id:jobs_master_advancement
         - wait 1t
 
       ##Gives the player money that they earned offline from crops/etc
