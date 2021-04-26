@@ -23,6 +23,7 @@ teleportation_crystal_menu:
   debug: true
   title: <&b>Teleportation Crystal
   inventory: CHEST
+  gui: true
   size: 54
   definitions:
     x: <item[air]>

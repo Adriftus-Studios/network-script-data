@@ -67,6 +67,7 @@ network_item_inventory:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&a>Play Menu
   definitions:
     this_player_head: player_head[skull_skin=<player.name>;display_name=<player.name>]

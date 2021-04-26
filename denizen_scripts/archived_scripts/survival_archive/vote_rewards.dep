@@ -2,6 +2,7 @@ vote_GUI_test:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   size: 45
   custom:
     lotto_slots: 13|14|15|22|23|24|31|32|33

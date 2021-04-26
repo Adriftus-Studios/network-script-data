@@ -463,11 +463,11 @@ item_system_build_item:
 
   # % ██ [ Determine the base of the item?  ] ██
     - if <script[item_system_global_data].list_keys[defaults.damage].contains[<[item].material.name>]>:
-      - define base <script[item_system_global_data].data_key[defaults.damage.<[item].material.name>]>
-      - define base2 <script[item_system_global_data].data_key[defaults.attack_speed.<[item].material.name>]>
+      - define base <script[item_system_global_data].data_key[defaults.damage.<[item].material.name>]||1>
+      - define base2 <script[item_system_global_data].data_key[defaults.attack_speed.<[item].material.name>]||1>
     - else if <script[item_system_global_data].list_keys[defaults.armor].contains[<[item].material.name>]>:
-      - define base <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]>
-      - define base2 <script[item_system_global_data].data_key[defaults.armor_toughness.<[item].material.name>]>
+      - define base <script[item_system_global_data].data_key[defaults.armor.<[item].material.name>]||0>
+      - define base2 <script[item_system_global_data].data_key[defaults.armor_toughness.<[item].material.name>]||0>
     - else:
       - define base 0
 
@@ -569,19 +569,3 @@ item_system_build_item:
       - define NewItem <[NewItem].with[nbt_attributes=<[nbt_attributes]>]>
 
     - determine <[NewItem]>
-
-vanilla_craft_item_build:
-  type: world
-  debug: false
-  events:
-    on player crafts *_(sword|axe|chestplate|leggings|boots|helmet) bukkit_priority:HIGHEST:
-      - if !<context.item.has_display>:
-        - determine <proc[item_system_build_item].context[<context.item>]>
-
-vanilla_craft_item_build2:
-  type: world
-  debug: false
-  events:
-    on player crafts diamond_sword bukkit_priority:HIGHEST:
-      - if !<context.item.has_display>:
-        - determine <proc[item_system_build_item].context[<context.item>]>

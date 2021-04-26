@@ -217,6 +217,7 @@ market_system_main_GUI:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&e>Market
   definitions:
     filler: <item[white_stained_glass_pane].with[display_name=<&e>]>
@@ -270,6 +271,7 @@ market_system_category_GUI:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&e>Market
   custom_slots_map:
     hidden_marker: 1

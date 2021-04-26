@@ -40,6 +40,7 @@ title_inventory:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   size: 54
   title: <yaml[titles].read[gui.title].parse_color>
   custom:

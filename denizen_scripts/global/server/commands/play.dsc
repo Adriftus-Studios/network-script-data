@@ -42,10 +42,6 @@ command_play_events:
   type: world
   debug: false
   events:
-    on player clicks server_selector_item in inventory:
-      - determine passively cancelled
-    on player drops server_selector_item:
-      - determine passively cancelled
 
     on server start:
       - ~run pull_bungee_config
@@ -80,6 +76,7 @@ command_play_inventory:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&a>Play Menu
   size: 27
   definitions:

@@ -27,10 +27,10 @@ rpdecline_command:
   script:
   - if <player.has_flag[bypass_resourcepack]>:
     - flag player bypass_resourcepack:!
-    - narrate "<&6>Now loading the <&e>resource pack when you load the server."
+    - narrate "<&6>Now loading the <&e>resource pack <&6>when you join the server."
   - else:
     - flag player bypass_resourcepack
-    - narrate "<&6>No longer loading the <&e>resource pack when you load the server."
+    - narrate "<&6>No longer loading the <&e>resource pack <&6>when you join the server."
 
 system_override:
   type: world
@@ -39,9 +39,9 @@ system_override:
     on player joins:
       - if <server.has_flag[resourcepackurl]> && !<player.has_flag[bypass_resourcepack]>:
         - wait 60t
-        - adjust <player> resource_pack:<server.flag[resourcepackurl]>
-#        - adjust <player> quietly_discover_recipe:<server.recipe_ids>
-        - adjust <player> resend_discovered_recipes
+        - if <player.is_online>:
+          - adjust <player> resource_pack:<server.flag[resourcepackurl]>
+          - adjust <player> resend_discovered_recipes
     on resource pack status:
       - if <server.has_flag[resourcepackurl]>:
         - choose <context.status>:

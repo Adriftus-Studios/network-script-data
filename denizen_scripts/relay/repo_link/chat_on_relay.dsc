@@ -10,7 +10,7 @@ chat_send_message:
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
   webhook:
-    content: <[game_message].parse_color.strip_color>
+    content: <[game_message].parse_color.strip_color.replace[@].with[(a)]>
     username: <[display_name]><&sp><&lb><[Server]><&rb>
     avatar_url: https://minotar.net/cube/<[name]>/100.png
 

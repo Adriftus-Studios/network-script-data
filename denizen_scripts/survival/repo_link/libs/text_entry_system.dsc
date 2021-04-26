@@ -19,7 +19,7 @@ text_input_handler:
         - stop
       - run <player.flag[text_input].before[/]> def:<context.message>|<player.flag[text_input].after[/]>
     on player walks flagged:text_input:
-      - narrate "<&c>You are entering text, use <&b>/cancel<&c> to end this, or click <&a><element[here].on_click[/cancel]><&c>."
+      - narrate "<&c>You are entering text, use <&e>/cancel<&c> to end this, or click <&e><element[here].on_click[/cancel]><&c>."
       - determine cancelled
 
 text_input_cancel:

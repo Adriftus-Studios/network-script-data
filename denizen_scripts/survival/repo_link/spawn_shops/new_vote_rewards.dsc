@@ -2,6 +2,7 @@ daily_vote_gui:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: Daily Vote Crate
   size: 27
   slots:
@@ -349,6 +350,7 @@ weekly_vote_gui:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   size: 45
   title: Weekly Vote Crate
   slots:
