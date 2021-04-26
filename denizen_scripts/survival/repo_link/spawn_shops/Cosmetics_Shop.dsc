@@ -15,6 +15,7 @@ store_hub_cosmeticShop:
   inventory: chest
   debug: false
   size: 27
+  gui: true
   title: <&6>C<&e>osmetic <&6>S<&e>hop
   procedural items:
     - foreach <list[titles|bowTrails]>:
