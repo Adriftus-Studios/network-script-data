@@ -229,6 +229,20 @@ custom_food_sushi_mushroombrown:
       hide_in_recipebook: false
       input: rice|dried_kelp|brown_mushroom
 
+custom_food_sushi_Veggie:
+  material: dried_kelp
+  debug: false
+  display name: <&f>Veggie Sushi
+  mechanisms:
+    custom_model_data: 8
+  type: item
+  recipes:
+    1:
+      type: shapeless
+      output_quantity: 1
+      hide_in_recipebook: false
+      input: rice|dried_kelp|egg|carrot
+
 custom_food_mutton_stew:
   material: rabbit_stew
   debug: false
