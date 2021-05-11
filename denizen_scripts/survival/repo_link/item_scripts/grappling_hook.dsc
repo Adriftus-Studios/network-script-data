@@ -15,7 +15,7 @@ grappling_hook:
 grappling_hook_events:
   type: world
   debug: false
-  worlds: mainland|mainland_nether|world
+  worlds: mainland|mainland_nether
   events:
     on player right clicks block with:grappling_hook:
       - determine passively cancelled
