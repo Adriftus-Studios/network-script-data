@@ -4,6 +4,7 @@ mod_kick_inv:
   debug: false
   title: <&6>A<&e>MP <&f>› <&d>Kick
   inventory: CHEST
+  gui: true
   size: 54
   definitions:
     x: <item[air]>

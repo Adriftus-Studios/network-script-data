@@ -15,6 +15,7 @@ store_hub_mysteryShop:
   inventory: chest
   debug: false
   size: 27
+  gui: true
   title: <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&5>S<&d>h<&5>o<&d>p
   procedural items:
     - foreach <list[boxes]>:

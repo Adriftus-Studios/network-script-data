@@ -80,6 +80,7 @@ world_event_progress_inventory:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&a>World Event
   definitions:
     T: "ender_chest[display_name=<&a>Turn in Materials;lore=<&e>- Snow (1)|<&e>- Snow Block (4)|<&e>- Coal (3)|<&e>- Coal Block (27);nbt=action/turn_in]"
@@ -133,6 +134,7 @@ world_event_turn_in:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&6>Turn Ins
   definitions:
     close: "barrier[display_name=<&c>Back;nbt=action/close]"

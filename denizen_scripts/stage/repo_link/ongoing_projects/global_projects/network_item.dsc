@@ -67,6 +67,7 @@ network_item_inventory:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   title: <&a>Play Menu
   definitions:
     filler: white_stained_glass_pane

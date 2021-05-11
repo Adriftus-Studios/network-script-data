@@ -280,6 +280,7 @@ claiming_multi_chunk_GUI:
   type: inventory
   debug: false
   inventory: chest
+  gui: true
   size: 36
   slots:
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]

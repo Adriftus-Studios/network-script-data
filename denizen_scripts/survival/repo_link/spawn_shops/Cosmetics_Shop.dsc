@@ -15,6 +15,7 @@ store_hub_cosmeticShop:
   inventory: chest
   debug: false
   size: 27
+  gui: true
   title: <&6>C<&e>osmetic <&6>S<&e>hop
   procedural items:
     - foreach <list[titles|bowTrails]>:
@@ -88,20 +89,21 @@ store_hub_cosmeticShop_title_open:
 
 store_hub_cosmeticShop_titles_events:
   type: world
-  debug: false
+  debug: true
   events:
     on player clicks store_hub_cosmeticShop_titles in store_hub_cosmeticShop:
       - inject store_hub_cosmeticShop_title_open
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-    on player clicks standard_back_button in store_hub_cosmeticShop:
+    on player clicks standard_close_button in store_hub_cosmeticShop:
+      - determine passively cancelled
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-      - inventory open store_hub_cosmeticShop
-    on system time 00:00:
-      - inject title_changeover
-    on player clicks barrier in store_hub_cosmeticShop_titles_inventory:
+      - inventory close
+    on player clicks standard_back_button in store_hub_cosmeticShop_titles_inventory:
       - determine passively cancelled
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - inventory open d:store_hub_cosmeticShop
+    on system time 00:00:
+      - inject title_changeover
     on player clicks name_tag in store_hub_cosmeticShop_titles_inventory:
       - determine passively cancelled
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
@@ -208,7 +210,7 @@ store_hub_cosmeticShop_bowtrails_events:
     on system time 00:00:
       - inject bowtrail_changeover
 
-    on player clicks barrier in store_hub_cosmeticShop_bowTrails_inventory:
+    on player clicks standard_back_button|standard_close_button in store_hub_cosmeticShop_bowTrails_inventory:
       - determine passively cancelled
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - inventory open d:store_hub_cosmeticShop
@@ -216,6 +218,8 @@ store_hub_cosmeticShop_bowtrails_events:
     on player clicks item in store_hub_cosmeticShop_bowTrails_inventory:
       - determine passively cancelled
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
+      - if <context.item> == standard_back_button:
+        - inventory open d:store_hub_cosmeticShop
       - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<context.item.flag[trail]>]||false>:
         - narrate "<&c>You already have unlocked this bow trail."
         - stop

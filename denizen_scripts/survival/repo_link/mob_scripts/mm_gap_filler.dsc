@@ -21,6 +21,8 @@ mythicmobs_levelscale_patch:
         - determine cancelled
 
     after mythicmob mob spawns:
+      - if <context.entity.is_mythicmob>:
+        - stop
       - if <script[mythicmobs_levelscale_patch].data_key[vanilla_replacements].contains[<context.mob.internal_name>]>:
         - define x <context.location.x.abs>
         - define z <context.location.z.abs>

@@ -2,7 +2,7 @@
 
 shield_degradation:
   # $ [ converted until MythicMobs is added ]
-  type: data
+  type: world
   debug: false
   events:
     on player damaged by entity:
@@ -15,7 +15,7 @@ shield_degradation:
         - define slot 41
         - define shield <player.item_in_offhand>
       - if <[shield].durability.add[<context.damager.mythicmob.level>]> >= <[shield].max_durability>:
-        - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:shield offset:0.2 quantity:15
+        - playeffect effect:ITEM_CRACK at:<player.eye_location> special_data:shield offset:0.25 quantity:20
         - playsound <player> sound:ITEM_SHIELD_BREAK
         - take slot:<[slot]>
       - else:

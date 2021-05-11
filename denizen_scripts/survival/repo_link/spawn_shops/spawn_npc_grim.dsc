@@ -31,6 +31,7 @@ grim_interact_handler:
 grim_death_menu:
   type: inventory
   inventory: chest
+  gui: true
   title: <&4>Grim Servant
   debug: false
   size: 27
@@ -46,6 +47,7 @@ grim_death_menu:
 grim_death_confirm:
   type: inventory
   inventory: chest
+  gui: true
   title: <&4>Grim Servant
   debug: false
   size: 27
