@@ -19,6 +19,7 @@ legendary_item_behr_claw:
 legendary_item_bee_stinger:
   type: item
   material: netherite_sword
+  display name: <&6>Bee Stinger
   flags:
     legendary: bee_stinger
     legendary_passive: venom

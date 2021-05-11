@@ -137,7 +137,7 @@ custom_food_beef_stew:
       hide_in_recipebook: false
       input: potato|carrot|beef|custom_food_onion|bowl
 
-custom_food_sushi~cod:
+custom_food_sushi_cod:
   material: dried_kelp
   debug: false
   display name: <&f>Cod Sushi
@@ -151,7 +151,7 @@ custom_food_sushi~cod:
       hide_in_recipebook: false
       input: rice|dried_kelp|cod
 
-custom_food_sushi~salmon:
+custom_food_sushi_salmon:
   material: dried_kelp
   debug: false
   display name: <&f>Salmon Sushi
@@ -165,7 +165,7 @@ custom_food_sushi~salmon:
       hide_in_recipebook: false
       input: rice|dried_kelp|salmon
 
-custom_food_sushi~pufferfish:
+custom_food_sushi_pufferfish:
   material: dried_kelp
   debug: false
   display name: <&f>Puffer Sushi
@@ -179,7 +179,7 @@ custom_food_sushi~pufferfish:
       hide_in_recipebook: false
       input: rice|dried_kelp|pufferfish
 
-custom_food_sushi~tropical:
+custom_food_sushi_tropical:
   material: dried_kelp
   debug: false
   display name: <&f>Tropical Sushi
@@ -193,7 +193,7 @@ custom_food_sushi~tropical:
       hide_in_recipebook: false
       input: rice|dried_kelp|tropical_fish
 
-custom_food_sushi~mushroom_red:
+custom_food_sushi_mushroomred:
   material: dried_kelp
   debug: false
   display name: <&f>Red Mushroom Sushi
@@ -207,7 +207,7 @@ custom_food_sushi~mushroom_red:
       hide_in_recipebook: false
       input: rice|dried_kelp|red_mushroom
 
-custom_food_sushi~mushroom_brown:
+custom_food_sushi_mushroombrown:
   material: dried_kelp
   debug: false
   display name: <&f>Cod Sushi
@@ -267,22 +267,23 @@ Custom_food_events:
       - feed amount:8 saturation:2
     on player consumes custom_food_sushi*:
       - determine passively cancelled
-      - define sushi_type <player.item_in_hand.script.name.after[~]>
+      - define sushi_type <player.item_in_hand.script.name.after_last[_]>
       - wait 1t
       - take iteminhand
       - choose <[sushi_type]>:
+#TODO create food saturation values
         - case salmon:
-          - feed amount: saturation: 
+          - feed amount:1 saturation: 1
         - case cod:
-          - feed amount: saturation: 
+          - feed amount:1 saturation:1
         - case puffer:
-          - feed amount: saturation: 
+          - feed amount:1 saturation:1
         - case tropical:
-          - feed amount: saturation: 
-        - case mushroom_red:
-          - feed amount: saturation: 
-        - case mushroom_brown:
-          - feed amount: saturation: 
+          - feed amount:1 saturation:1
+        - case mushroomred:
+          - feed amount:1 saturation:1
+        - case mushroombrown:
+          - feed amount:1 saturation:1
 
 food_crate_handler:
   type: world
