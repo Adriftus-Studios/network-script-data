@@ -20,6 +20,14 @@ custom_food_onion:
     custom_model_data: 1
   type: item
 
+custom_food_rice:
+  material: wheat
+  debug: false
+  display name: <&f>Rice
+  mechanisms:
+    custom_model_data: 1
+  type: item
+
 custom_food_berry_pie:
   material: pumpkin_pie
   debug: false
@@ -273,17 +281,22 @@ Custom_food_events:
       - choose <[sushi_type]>:
 #TODO create food saturation values
         - case salmon:
-          - feed amount:1 saturation: 1
+          - feed amount:2 saturation:0.3
         - case cod:
-          - feed amount:1 saturation:1
+          - feed amount:3 saturation:0.5
         - case puffer:
-          - feed amount:1 saturation:1
+          - feed amount:2 saturation:0.6
+          - define chance <util.random.int[0].to[10]>
+          - if <[chance]> == 10:
+            - cast HUNGER d:15s amplifier:2
+            - cast POISON d:30s amplifier:<util.random.int[1].to[3]>
+            - cast CONFUSION d:15s
         - case tropical:
-          - feed amount:1 saturation:1
+          - feed amount:2 saturation:0.4
         - case mushroomred:
-          - feed amount:1 saturation:1
+          - feed amount:3 saturation:0.6
         - case mushroombrown:
-          - feed amount:1 saturation:1
+          - feed amount:2 saturation:0.9
 
 food_crate_handler:
   type: world
@@ -300,33 +313,11 @@ food_crate_handler:
       - else:
         - flag <player> opening_food_crate duration:30s
         - take iteminhand
+        - define food_list <list[custom_food_mutton_stew|custom_food_potato_soup|custom_food_beef_stew|custom_food_honey_bun|custom_food_apple_pie|custom_food_berry_pie|custom_food_sushi_salmon|custom_food_sushi_cod|custom_food_sushi_puffer|custom_food_sushi_tropical|custom_food_sushi_mushroomred|custom_food_sushi_mushroombrown|custom_food_chocolate_cakecustom_food_carrot_cake|]>
         - repeat 5:
-          - define chance <util.random.int[1].to[8]>
-          - choose <[chance]>:
-            - case 1:
-              - give custom_food_potato_soup
-              - narrate "<&e>You unpacked a <item[custom_food_potato_soup].display><&e>."
-            - case 2:
-              - give custom_food_berry_pie
-              - narrate "<&e>You unpacked a <item[custom_food_berry_pie].display><&e>."
-            - case 3:
-              - give custom_food_apple_pie
-              - narrate "<&e>You unpacked a <item[custom_food_apple_pie].display><&e>."
-            - case 4:
-              - give custom_food_carrot_cake
-              - narrate "<&e>You unpacked a <item[custom_food_carrot_cake].display><&e>."
-            - case 5:
-              - give custom_food_chocolate_cake
-              - narrate "<&e>You unpacked a <item[custom_food_chocolate_cake].display><&e>."
-            - case 6:
-              - give custom_food_honey_bun
-              - narrate "<&e>You unpacked a <item[custom_food_honey_bun].display><&e>."
-            - case 7:
-              - give custom_food_beef_stew
-              - narrate "<&e>You unpacked a <item[custom_food_beef_stew].display><&e>."
-            - case 8:
-              - give custom_food_mutton_stew
-              - narrate "<&e>You unpacked a <item[custom_food_mutton_stew].display><&e>."
+          - define food <[food_list].random>
+          - give <[food]>
+          - narrate "<&e>You unpacked a <item[custom_food_potato_soup].display><&e>."
           - playsound <player> sound:block_sand_hit sound_category:master pitch:0.5
           - wait <util.random.int[8].to[15]>t
         - flag <player> opening_food_crate:!
