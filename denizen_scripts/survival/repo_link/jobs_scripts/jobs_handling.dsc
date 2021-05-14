@@ -330,6 +330,8 @@ jobs_mythic_kill_event_handler:
     on mythicmob mob killed:
       - if !<context.entity.is_mythicmob>:
         - stop
+      - if !<context.killer.is_player||false>:
+        - stop
       - else if <context.entity.from_spawner>:
         - actionbar "<&a>Entities from a mob spawner are not eligible for pay."
         - stop
