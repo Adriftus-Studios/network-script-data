@@ -229,7 +229,7 @@ custom_food_sushi_mushroombrown:
       hide_in_recipebook: false
       input: rice|dried_kelp|brown_mushroom
 
-custom_food_sushi_Veggie:
+custom_food_sushi_veggie:
   material: dried_kelp
   debug: false
   display name: <&f>Veggie Sushi
@@ -311,6 +311,8 @@ Custom_food_events:
           - feed amount:3 saturation:0.6
         - case mushroombrown:
           - feed amount:2 saturation:0.9
+        - case veggie:
+          - feed amount:4 saturation:4
 
 food_crate_handler:
   type: world
