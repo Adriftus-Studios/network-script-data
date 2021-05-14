@@ -7,6 +7,8 @@ jobs_farmer_passive:
       ##Checks the player level is over the minimum, and that they arent just breaking un-grown crops
       - if <context.material.age> != <context.material.maximum_age> || <player.flag[jobs.farmer.level]> < 10:
         - stop
+      - if <context.location.add[0,1,0].has_flag[custom_planted]>:
+        - define custom_crop <context.location.add[0,1,0].flag[custom_planted]>
       - define farmer_level <player.flag[jobs.farmer.level]>
 
       ##boosts the chances for the passive, in this case each level adds 0.2% per player level, up to 20% at max level
@@ -21,6 +23,8 @@ jobs_farmer_passive:
         - flag <context.location> jobs.just_broken duration:1s
         ##flags the crop for the player to earn their cash
         - flag <context.location> jobs.player_placed.crop:<player>
+        - if <[custom_crop]||null> != null:
+          - flag <context.location.add[0,1,0]> <[custom_crop]>
 
         ##Checks and removes a bit more hoe durability, or breaks the item
         - define hoe_item <player.item_in_hand>
