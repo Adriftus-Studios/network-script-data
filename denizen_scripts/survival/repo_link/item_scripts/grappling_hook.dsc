@@ -30,7 +30,7 @@ grappling_hook_events:
       - if <context.item.has_flag[grappleInUse]>:
         - narrate "<&4>ERROR, PLEASE REPORT WITH <&B>/GITHUB<&4> AND SAY GHOOK30"
         - stop
-      - inventory flag slot:<player.held_item_slot> grappleInUse
+      - inventory flag slot:<player.held_item_slot> grappleInUse duration:10s
       - shoot arrow shooter:<player> speed:3 script:grappling_hook_pull save:hook
       - run grappling_hook_remover def.hook:<entry[hook].shot_entity>
       - playsound sound:ENTITY_ARROW_SHOOT <player.location>
@@ -42,7 +42,7 @@ grappling_hook_events:
           - playeffect redstone at:<player.eye_location.above[0.4].points_between[<entry[hook].shot_entity.location>].distance[0.5]> quantity:5 special_data:0.5|white offset:0.01
           - wait 2t
     on player shoots block flagged:grappling bukkit_priority:LOWEST:
-      - flag player grappling:<context.location.add[<context.hit_face>].center>
+      - flag player grappling:<context.location.add[<context.hit_face>].center> duration:10s
 
 grappling_hook_remover:
   type: task
