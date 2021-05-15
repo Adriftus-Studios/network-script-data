@@ -5,7 +5,7 @@ about: Suggest or Request a feature, command or something of interest to a serve
   Feature Requests for more information.
 title: "(Feature Request) "
 labels: ''
-assignees: BehrRiley
+assignees: Eutherin
 
 ---
 
