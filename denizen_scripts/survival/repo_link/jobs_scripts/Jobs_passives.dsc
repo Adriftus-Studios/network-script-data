@@ -26,6 +26,7 @@ jobs_farmer_passive:
         - if <[custom_crop]||null> != null:
           - flag <context.location.add[0,1,0]> <[custom_crop]>
 
+
         ##Checks and removes a bit more hoe durability, or breaks the item
         - define hoe_item <player.item_in_hand>
         - if <[hoe_item].durability.add[5]> < <[hoe_item].max_durability>:

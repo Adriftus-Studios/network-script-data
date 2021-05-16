@@ -4,19 +4,23 @@ mob_death_event:
   whitelist: zombie|creeper|skeleton|spider|drowned|witch|husk|withers|evoker|ravager|pillager|vex|illusioner|silverfish|stray|vindicator|cave_spider|enderman|phantom|slime
   blacklist: <&B>Maggots <&f>- <&E>Lv.*|<&b>Voidworm <&f>- <&E>Lv.*
   events:
-    on entity dies in:mainland|spawn:
+    on entity dies in:mainland|spawn by:player:
       - if !<context.damager.is_player||false>:
         - stop
-      - else if <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]> && <context.entity.is_mythicmob> && !<script[mob_death_event].data_key[blacklist].contains[<context.entity.name>]>:
+      - if <script[mob_death_event].data_key[whitelist].contains[<context.entity.entity_type>]> && <context.entity.is_mythicmob> && !<script[mob_death_event].data_key[blacklist].contains[<context.entity.name>]>:
         - define mob_level <context.entity.mythicmob.level||0>
         - if <[mob_level]> == 0:
           - stop
+      - if <context.entity.has_flag[not_from_spawner]>:
         - inject soul_drop_table
         - inject legendary_drop_table
         - if <[soul_drop]||null> != null:
           - determine <context.drops.include[<[soul_drop]>]>
         - if <[legendary_drop]||null> != null:
           - determine <context.drops.include[<[legendary_drop]>]>
+      - else:
+        - if <context.entity.is_mythicmob>:
+          - actionbar "<&c>Entities from a mob spawner are not eligible for custom drops." targets:<context.damager>
 
 
 
@@ -25,13 +29,14 @@ soul_drop_table:
   debug: false
   definitions: mob_level
   script:
-    - define chance <util.random.int[1].to[15000]>
-    - if <[chance]> < 1000 && <[chance]> >= 500:
-      - define soul_drop <proc[get_random_soul].context[0|<[mob_level]>]>
-    - else if <[chance]> < 500 && <[chance]> >= 50:
-      - define soul_drop <proc[get_random_soul].context[1|<[mob_level]>]>
-    - else if <[chance]> < 50:
-      - define drop <proc[get_random_soul].context[2|<[mob_level]>]>
+    - if <context.entity.has_flag[not_from_spawner]>:
+      - define chance <util.random.int[1].to[15000]>
+      - if <[chance]> < 1000 && <[chance]> >= 500:
+        - define soul_drop <proc[get_random_soul].context[0|<[mob_level]>]>
+      - else if <[chance]> < 500 && <[chance]> >= 50:
+        - define soul_drop <proc[get_random_soul].context[1|<[mob_level]>]>
+      - else if <[chance]> < 50:
+        - define drop <proc[get_random_soul].context[2|<[mob_level]>]>
 
 
 legendary_drop_table:
