@@ -146,5 +146,6 @@ graves_handler:
         - remove <entity[<yaml[graves].read[grave.<context.location.simple>.hologram2]>]>
       - give <yaml[graves].read[grave.<context.location.simple>.items]>
       - narrate <script[graves_config].data_key[messages.retrieved_grave].parse_color>
+      - modifyblock <context.location> air
       - yaml id:graves set grave.<context.location.simple>:!
       - determine NOTHING

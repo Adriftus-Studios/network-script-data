@@ -107,7 +107,7 @@ weeklykeys:
         - narrate <player> "<&c>Your <item[weekly_vote_key].display> has been deposited into your inventory."
         - announce "<&a><player.display_name> <&c>has just received a <item[weekly_vote_key].display><&c> for voting every day this week!"
     - if <player.has_flag[weekly_key_cooldown]>:
-      - narrate "<&c>You cannot claim another <item[weekly_vote_key].display> <&c>for <player.flag[weekly_key_cooldown].expiration.formatted>"
+      - narrate "<&c>You cannot claim another <item[weekly_vote_key].display> <&c>for <player.flag_expiration[weekly_key_cooldown].from_now.formatted>"
     - if !<player.has_flag[weekly_crate_pending]>:
       - if <player.has_flag[weekly_votes_reward]>:
         - narrate "<&c>You are not currently eligible to claim a <item[weekly_vote_key].display><&c> at this time. <&nl><&e>Current Progress<&co><&c><player.flag[weekly_votes_reward]><&e>/<&a><[listed_sites].sub[1].mul[7]>"
@@ -164,35 +164,26 @@ vote_crate_key_events:
   events:
     on player right clicks block with:daily_vote_key|weekly_vote_key:
     - determine passively cancelled
-    - if !<server.has_flag[<context.location.simple>.daily_crate]> && !<server.has_flag[<context.location.simple>.weekly_crate]>:
+    - if !<context.location.has_flag[vote_crate]>:
       - ratelimit player 20t
       - narrate "<&c>You cannot use that here. Please go to the crates server warp."
-    - if <server.has_flag[<context.location.simple>.daily_crate]>:
-      - if <player.inventory.is_full>:
-        - ratelimit <player> 2s
-        - narrate "<&c>Your inventory is full. Please make some room!"
-        - stop
-      - if <player.item_in_hand.scriptname> == daily_vote_key:
+    - if <player.inventory.is_full>:
+      - ratelimit <player> 2s
+      - narrate "<&c>Your inventory is full. Please make some room!"
+      - stop
+    - if <context.location.flag[vote_crate]> == daily:
+      - if <player.item_in_hand.script.name> == daily_vote_key:
         - take iteminhand
         - wait 1t
         - inject daily_gui_open
-    - if <server.has_flag[<context.location.simple>.weekly_crate]>:
-      - if <player.item_in_hand.scriptname> == weekly_vote_key:
-        - if <player.inventory.is_full>:
-          - ratelimit <player> 2s
-          - narrate "<&c>Your inventory is full. Please make some room!"
-          - stop
+      - else:
+        - ratelimit <player> 2s
+        - narrate "<&a>Please get a <item[daily_vote_key].display>."
+    - if <context.location.flag[vote_crate]> == weekly:
+      - if <player.item_in_hand.script.name> == weekly_vote_key:
         - take iteminhand
         - wait 1t
         - inject weekly_gui_open
-    on player right clicks chest in:spawn_cuboid:
-    - if !<server.has_flag[<context.location.simple>.daily_crate]> && !<server.has_flag[<context.location.simple>.weekly_crate]> && !<list[daily_vote_key|weekly_vote_key].contains[<player.item_in_hand.scriptname>]>:
-      - stop
-    - if <server.has_flag[<context.location.simple>.daily_crate]> && <context.item.scriptname> != daily_vote_key:
-      - determine passively cancelled
-      - ratelimit <player> 2s
-      - narrate "<&a>Please get a <item[daily_vote_key].display>."
-    - if <server.has_flag[<context.location.simple>.weekly_crate]> && <context.item.scriptname> != weekly_vote_key:
-      - determine passively cancelled
-      - ratelimit <player> 2s
-      - narrate "<&a>Please get a <item[weekly_vote_key].display>."
+      - else:
+        - ratelimit <player> 2s
+        - narrate "<&a>Please get a <item[weekly_vote_key].display>."

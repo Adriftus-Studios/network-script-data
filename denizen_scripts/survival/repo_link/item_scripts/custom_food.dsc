@@ -20,6 +20,14 @@ custom_food_onion:
     custom_model_data: 1
   type: item
 
+custom_food_rice:
+  material: wheat
+  debug: false
+  display name: <&f>Rice
+  mechanisms:
+    custom_model_data: 1
+  type: item
+
 custom_food_berry_pie:
   material: pumpkin_pie
   debug: false
@@ -137,7 +145,7 @@ custom_food_beef_stew:
       hide_in_recipebook: false
       input: potato|carrot|beef|custom_food_onion|bowl
 
-custom_food_sushi~cod:
+custom_food_sushi_cod:
   material: dried_kelp
   debug: false
   display name: <&f>Cod Sushi
@@ -151,7 +159,7 @@ custom_food_sushi~cod:
       hide_in_recipebook: false
       input: rice|dried_kelp|cod
 
-custom_food_sushi~salmon:
+custom_food_sushi_salmon:
   material: dried_kelp
   debug: false
   display name: <&f>Salmon Sushi
@@ -165,7 +173,7 @@ custom_food_sushi~salmon:
       hide_in_recipebook: false
       input: rice|dried_kelp|salmon
 
-custom_food_sushi~pufferfish:
+custom_food_sushi_pufferfish:
   material: dried_kelp
   debug: false
   display name: <&f>Puffer Sushi
@@ -179,7 +187,7 @@ custom_food_sushi~pufferfish:
       hide_in_recipebook: false
       input: rice|dried_kelp|pufferfish
 
-custom_food_sushi~tropical:
+custom_food_sushi_tropical:
   material: dried_kelp
   debug: false
   display name: <&f>Tropical Sushi
@@ -193,7 +201,7 @@ custom_food_sushi~tropical:
       hide_in_recipebook: false
       input: rice|dried_kelp|tropical_fish
 
-custom_food_sushi~mushroom_red:
+custom_food_sushi_mushroomred:
   material: dried_kelp
   debug: false
   display name: <&f>Red Mushroom Sushi
@@ -207,7 +215,7 @@ custom_food_sushi~mushroom_red:
       hide_in_recipebook: false
       input: rice|dried_kelp|red_mushroom
 
-custom_food_sushi~mushroom_brown:
+custom_food_sushi_mushroombrown:
   material: dried_kelp
   debug: false
   display name: <&f>Cod Sushi
@@ -220,6 +228,20 @@ custom_food_sushi~mushroom_brown:
       output_quantity: 1
       hide_in_recipebook: false
       input: rice|dried_kelp|brown_mushroom
+
+custom_food_sushi_veggie:
+  material: dried_kelp
+  debug: false
+  display name: <&f>Veggie Sushi
+  mechanisms:
+    custom_model_data: 8
+  type: item
+  recipes:
+    1:
+      type: shapeless
+      output_quantity: 1
+      hide_in_recipebook: false
+      input: rice|dried_kelp|egg|carrot
 
 custom_food_mutton_stew:
   material: rabbit_stew
@@ -267,22 +289,30 @@ Custom_food_events:
       - feed amount:8 saturation:2
     on player consumes custom_food_sushi*:
       - determine passively cancelled
-      - define sushi_type <player.item_in_hand.script.name.after[~]>
+      - define sushi_type <player.item_in_hand.script.name.after_last[_]>
       - wait 1t
       - take iteminhand
       - choose <[sushi_type]>:
+#TODO create food saturation values
         - case salmon:
-          - feed amount: saturation: 
+          - feed amount:2 saturation:0.3
         - case cod:
-          - feed amount: saturation: 
+          - feed amount:3 saturation:0.5
         - case puffer:
-          - feed amount: saturation: 
+          - feed amount:2 saturation:0.6
+          - define chance <util.random.int[0].to[10]>
+          - if <[chance]> == 10:
+            - cast HUNGER d:15s amplifier:2
+            - cast POISON d:30s amplifier:<util.random.int[1].to[3]>
+            - cast CONFUSION d:15s
         - case tropical:
-          - feed amount: saturation: 
-        - case mushroom_red:
-          - feed amount: saturation: 
-        - case mushroom_brown:
-          - feed amount: saturation: 
+          - feed amount:2 saturation:0.4
+        - case mushroomred:
+          - feed amount:3 saturation:0.6
+        - case mushroombrown:
+          - feed amount:2 saturation:0.9
+        - case veggie:
+          - feed amount:4 saturation:4
 
 food_crate_handler:
   type: world
@@ -299,33 +329,11 @@ food_crate_handler:
       - else:
         - flag <player> opening_food_crate duration:30s
         - take iteminhand
+        - define food_list <list[custom_food_mutton_stew|custom_food_potato_soup|custom_food_beef_stew|custom_food_honey_bun|custom_food_apple_pie|custom_food_berry_pie|custom_food_sushi_salmon|custom_food_sushi_cod|custom_food_sushi_puffer|custom_food_sushi_tropical|custom_food_sushi_mushroomred|custom_food_sushi_mushroombrown|custom_food_chocolate_cakecustom_food_carrot_cake|]>
         - repeat 5:
-          - define chance <util.random.int[1].to[8]>
-          - choose <[chance]>:
-            - case 1:
-              - give custom_food_potato_soup
-              - narrate "<&e>You unpacked a <item[custom_food_potato_soup].display><&e>."
-            - case 2:
-              - give custom_food_berry_pie
-              - narrate "<&e>You unpacked a <item[custom_food_berry_pie].display><&e>."
-            - case 3:
-              - give custom_food_apple_pie
-              - narrate "<&e>You unpacked a <item[custom_food_apple_pie].display><&e>."
-            - case 4:
-              - give custom_food_carrot_cake
-              - narrate "<&e>You unpacked a <item[custom_food_carrot_cake].display><&e>."
-            - case 5:
-              - give custom_food_chocolate_cake
-              - narrate "<&e>You unpacked a <item[custom_food_chocolate_cake].display><&e>."
-            - case 6:
-              - give custom_food_honey_bun
-              - narrate "<&e>You unpacked a <item[custom_food_honey_bun].display><&e>."
-            - case 7:
-              - give custom_food_beef_stew
-              - narrate "<&e>You unpacked a <item[custom_food_beef_stew].display><&e>."
-            - case 8:
-              - give custom_food_mutton_stew
-              - narrate "<&e>You unpacked a <item[custom_food_mutton_stew].display><&e>."
+          - define food <[food_list].random>
+          - give <[food]>
+          - narrate "<&e>You unpacked a <item[custom_food_potato_soup].display><&e>."
           - playsound <player> sound:block_sand_hit sound_category:master pitch:0.5
           - wait <util.random.int[8].to[15]>t
         - flag <player> opening_food_crate:!

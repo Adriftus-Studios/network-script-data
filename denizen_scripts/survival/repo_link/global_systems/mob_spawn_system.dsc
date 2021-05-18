@@ -34,8 +34,14 @@ mob_spawning_system_events:
       - if <[x]> > 500 && <[x]> < 20000 && <[z]> > 500 && <[z]> < 20000:
         - remove <context.entity>
         - define difficulty <element[11].sub[<list[<[x]>|<[z]>].highest.abs.div[2000].add[1]>].round_up>
-        - mythicspawn <context.entity.entity_type.to_uppercase>1 <context.location> level:<[difficulty]>
-        - stop
+        - if <context.reason> == spawner:
+          - mythicspawn <context.entity.entity_type.to_uppercase>1 <context.location> level:<[difficulty]>
+        - else:
+          - mythicspawn <context.entity.entity_type.to_uppercase>1 <context.location> level:<[difficulty]> save:mythicmob
+          - wait 10t
+          - define mob <entry[mythicmob].spawned_mythicmob.entity>
+          - flag <[mob]> not_from_spawner
+          - stop
       - else:
         - stop
       - foreach <list[<context.location.z.abs>|<context.location.x.abs>]> as:axis:
