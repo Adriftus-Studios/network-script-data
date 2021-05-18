@@ -45,9 +45,9 @@ jobs_gui_handler:
       - note <[inventory]> as:<context.item.flag[jobs]>_<player.uuid>
       - if <player.flag[jobs.current_list].contains_any[<context.item.flag[jobs]>]>:
         - inventory set destination:<context.item.flag[jobs]>_<player.uuid> o:jobs_quit_button slot:10
-      - if <player.flag[jobs.current_list].size||0> < <player.flag[jobs.allowed]>:
+      - else if <player.flag[jobs.current_list].size||0> < <player.flag[jobs.allowed]>:
         - inventory set destination:<context.item.flag[jobs]>_<player.uuid> o:jobs_accept_button slot:10
-      - if <player.flag[jobs.current_list].size||0> >= <player.flag[jobs.allowed]>:
+      - else if <player.flag[jobs.current_list].size||0> >= <player.flag[jobs.allowed]>:
         - inventory set destination:<context.item.flag[jobs]>_<player.uuid> o:jobs_full_button slot:10
       - inventory open d:<context.item.flag[jobs]>_<player.uuid>
 
@@ -422,15 +422,15 @@ jobs_craft_event_handler:
           - if !<script[Jobs_data_script].list_keys[<[job]>.craft_item].contains_any[<context.item.material.name>]||false>:
             - foreach next
           - else:
-            - run jobs_crafted_item_define_rewards def.player:<player> def.item:<context.item.material.name> def.job:<[job]>
+            - run jobs_crafted_item_define_rewards def.player:<player> def.item:<context.item.material.name> def.job:<[job]> def.quantity:<context.amount>
 
 jobs_crafted_item_define_rewards:
   type: task
   debug: false
-  definitions: player|job|item
+  definitions: player|job|item|quantity
   script:
-    - define money <script[Jobs_data_script].data_key[<[job]>.craft_item.<[item]>.money]>
-    - define experience <script[Jobs_data_script].data_key[<[job]>.craft_item.<[item]>.experience]>
+    - define money <script[Jobs_data_script].data_key[<[job]>.craft_item.<[item]>.money].mul[<[quantity]>]>
+    - define experience <script[Jobs_data_script].data_key[<[job]>.craft_item.<[item]>.experience].mul[<[quantity]>]>
     - inject jobs_reward_delay
 
 jobs_furnace_event_handler:
