@@ -39,15 +39,15 @@ jobs_gui_handler:
             - flag <player> jobs.quit_cooldown duration:24h
           - else:
             - inventory close
-    - else if <context.item.has_flag[jobs]>:
+    - if <context.item.has_flag[jobs]>:
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - define inventory <inventory[<context.item.flag[jobs]>_info_gui]>
       - note <[inventory]> as:<context.item.flag[jobs]>_<player.uuid>
       - if <player.flag[jobs.current_list].contains_any[<context.item.flag[jobs]>]>:
         - inventory set destination:<context.item.flag[jobs]>_<player.uuid> o:jobs_quit_button slot:10
-      - else if <player.flag[jobs.current_list].size||0> < <player.flag[jobs.allowed]>:
+      - if <player.flag[jobs.current_list].size||0> < <player.flag[jobs.allowed]>:
         - inventory set destination:<context.item.flag[jobs]>_<player.uuid> o:jobs_accept_button slot:10
-      - else if <player.flag[jobs.current_list].size||0> >= <player.flag[jobs.allowed]>:
+      - if <player.flag[jobs.current_list].size||0> >= <player.flag[jobs.allowed]>:
         - inventory set destination:<context.item.flag[jobs]>_<player.uuid> o:jobs_full_button slot:10
       - inventory open d:<context.item.flag[jobs]>_<player.uuid>
 
@@ -63,7 +63,7 @@ jobs_structure_grow_handler:
         - foreach <context.location.flag[jobs.player_placed.crop].flag[jobs.current_list]> as:job:
           - if !<script[Jobs_data_script].list_keys[<[job]>.block_growth].contains_any[<context.location.material.name>]||false>:
             - foreach next
-          - else if <list[oak_sapling|dark_oak_sapling|jungle_sapling|acacia_sapling|birch_sapling|spruce_sapling|crimson_fungus|warped_fungus|brown_mushroom|red_mushroom].contains_any[<context.location.material.name>]>:
+          - if <list[oak_sapling|dark_oak_sapling|jungle_sapling|acacia_sapling|birch_sapling|spruce_sapling|crimson_fungus|warped_fungus|brown_mushroom|red_mushroom].contains_any[<context.location.material.name>]>:
             - define pre_material <context.location.material.name>
             - wait 5t
             - if <context.location.material.name> == <[pre_material]>:
@@ -94,7 +94,7 @@ jobs_crop_grow_handler:
         - foreach <context.location.flag[jobs.player_placed.crop].flag[jobs.current_list]> as:job:
           - if !<script[Jobs_data_script].list_keys[<[job]>.block_growth].contains_any[<context.material.name>]||false>:
             - foreach next
-          - else if <list[wheat|beetroots|potato|carrot|nether_wart].contains_any[<context.material.name>]>:
+          - if <list[wheat|beetroots|potato|carrot|nether_wart].contains_any[<context.material.name>]>:
             - run jobs_crop_growth_define_rewards def.job:<[job]> def.material:<context.location.material.name> def.player:<player> def.location:<context.location>
 
 jobs_crop_growth_define_rewards:
@@ -115,9 +115,9 @@ jobs_fishing_handler:
     on player fishes:
     - if !<player.flag[jobs.current_list].contains_any[Fisher]>:
       - stop
-    - else if !<list[CAUGHT_FISH|CAUGHT_ENTITY].contains_any[<context.state>]>:
+    - if !<list[CAUGHT_FISH|CAUGHT_ENTITY].contains_any[<context.state>]>:
       - stop
-    - else if <context.state> == CAUGHT_FISH:
+    - if <context.state> == CAUGHT_FISH:
       - if <script[Jobs_data_script].list_keys[Fisher.caught_item].contains_any[<context.item.material.name>]>:
         - run jobs_fishing_define_rewards def.player:<player> def.job:Fisher def.item:<context.item.material.name>
       - else:
@@ -238,7 +238,7 @@ jobs_breed_event_handler:
     on entity breeds:
       - if !<context.mother.has_flag[jobs.breeding]> || !<context.father.has_flag[jobs.breeding]>:
         - stop
-      - else if <context.mother.flag[jobs.breeding]> != <context.father.flag[jobs.breeding]>:
+      - if <context.mother.flag[jobs.breeding]> != <context.father.flag[jobs.breeding]>:
         - foreach <context.father.flag[jobs.breeding].flag[jobs.current_list]> as:job:
           - if !<script[Jobs_data_script].list_keys[<[job]>.breed_entity].contains_any[<context.child.entity_type>]||false>:
             - foreach next
@@ -247,7 +247,7 @@ jobs_breed_event_handler:
           - if !<script[Jobs_data_script].list_keys[<[job]>.breed_entity].contains_any[<context.child.entity_type>]||false>:
             - foreach next
           - run run animal_breed_define_rewards def.player:<context.mother.flag[jobs.breeding]> def.entity_type:<context.child.entity_type> def.job:<[job]>
-      - else if <context.mother.flag[jobs.breeding]> == <context.father.flag[jobs.breeding]>:
+      - if <context.mother.flag[jobs.breeding]> == <context.father.flag[jobs.breeding]>:
         - foreach <context.mother.flag[jobs.breeding].flag[jobs.current_list]> as:job:
           - if !<script[Jobs_data_script].list_keys[<[job]>.breed_entity].contains_any[<context.child.entity_type>]||false>:
             - foreach next
@@ -301,9 +301,9 @@ jobs_regular_kill_event_handler:
   events:
     # #killing regular non-mythicmobs
     on player kills entity:
-      - else if <context.entity.is_mythicmob>:
+      - if <context.entity.is_mythicmob>:
         - stop
-      - else if <context.entity.from_spawner>:
+      - if <context.entity.from_spawner>:
         - actionbar "<&a>Entities from a mob spawner are not eligible for pay."
         - stop
       - else:
@@ -332,7 +332,7 @@ jobs_mythic_kill_event_handler:
         - stop
       - if !<context.killer.is_player||false>:
         - stop
-      - else if <context.entity.from_spawner>:
+      - if <context.entity.from_spawner>:
         - actionbar "<&a>Entities from a mob spawner are not eligible for pay."
         - stop
       - if <context.level> < 1:

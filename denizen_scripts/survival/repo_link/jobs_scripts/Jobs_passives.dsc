@@ -162,12 +162,9 @@ jobs_Excavator_passive:
       - define exc_level <player.flag[jobs.Excavator.level]>
       ##boosts the proc rate per item at .2% per Excavator level, up to 20% at max level
       - define proc_rate <util.random.int[0].to[100].add[<[exc_level].div[5]>]>
-      - narrate <[proc_rate]>
       - if <[proc_rate]> > 90:
         - define drop_slot <script[Jobs_data_script].list_keys[Excavator.passive_drop].random>
-        - narrate <[drop_slot]>
         - define drop <script[Jobs_data_script].data_key[Excavator.passive_drop.<[drop_slot]>].parsed>
-        - narrate <[drop]>
         - determine passively <list[<[drop]>|<context.material.name>]>
 
 jobs_Blacksmith_passive:
