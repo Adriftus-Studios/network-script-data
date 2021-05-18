@@ -160,9 +160,9 @@ jobs_Excavator_passive:
       - if <context.location.has_flag[jobs.player_placed]> || <player.flag[jobs.Excavator.level]> < 10:
         - stop
       - define exc_level <player.flag[jobs.Excavator.level]>
-      ##boosts the proc rate per item at .2% per Excavator level, up to 20% at max level
-      - define proc_rate <util.random.int[0].to[100].add[<[exc_level].div[5]>]>
-      - if <[proc_rate]> > 90:
+      ##boosts the proc rate per item at 1% per Excavator level, up to 20% at max level
+      - define proc_rate <util.random.int[0].to[2000].add[<[exc_level]>]>
+      - if <[proc_rate]> > 1950:
         - define drop_slot <script[Jobs_data_script].list_keys[Excavator.passive_drop].random>
         - define drop <script[Jobs_data_script].data_key[Excavator.passive_drop.<[drop_slot]>].parsed>
         - determine passively <list[<[drop]>|<context.material.name>]>
