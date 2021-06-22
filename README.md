@@ -56,10 +56,12 @@
     <a href=https://github.com/Adriftus-Studios/network-script-data/tree/master/docs/guides/1.getting-started.md>
         <img src=https://img.shields.io/badge/docs-getting%20started-informational.svg?logo=read-the-docs>
     </a>
+    <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode>
+        <img src=https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg>
+    </a>
 </p>
 
 <!---
-[![License](https://img.shields.io/github/license/Adriftus-Studios/network-script-data.svg?logo=read-the-docs)](https://github.com/Adriftus-Studios/network-script-data)
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-green.svg?logo=PayPal)](https://www.paypal.com/paypalme2/BearRiley)
 [![DiscordActivity](https://img.shields.io/discord/481711026962694146?logo=discord)](https://discord.gg/4beFHHv)
 [![Dynmap](https://img.shields.io/website?down_color=lightgrey&down_message=Offline&label=Dynmap&up_message=Online&url=http%3A%2F%2F76.119.243.194%3A8123%2Findex.html)](http://76.119.243.194:8123/index.html)
