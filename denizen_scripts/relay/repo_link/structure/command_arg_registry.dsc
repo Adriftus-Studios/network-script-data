@@ -3,9 +3,9 @@ command_arg_registry:
   debug: false
   definitions: message|command_alias
   script:
-    - if <[message].type> == DiscordMessage:
+    - if <[message].object_type> == DiscordMessage:
       - define message_object <[message]>
-      - define message <[message].message>
+      - define message <[message].text>
 
     # % ██ [ Equivalent of <context.command> | Returns the command name as an ElementTag. ] ██
     - if <[command_alias]||invalid> == invalid:

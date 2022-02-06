@@ -19,7 +19,7 @@ discord_watcher:
   debug: false
   events:
     on discord message received for:adriftusbot:
-      - if <context.author||invalid> == invalid || <context.message||invalid> == invalid:
+      - if <context.new_message.author||invalid> == invalid || <context.new_message||invalid> == invalid:
         - stop
       - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null && !<context.author.name.contains[Adriftus]>:
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
@@ -36,7 +36,7 @@ discord_watcher:
         - define Name <context.author.name>
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
         - define Text <&7><[Name]>
-        - define Insert @<context.author.nickname[<context.group>]||<context.author.name>>
+        - define Insert @<context.new_message.author.nickname[<context.group>]||<context.new_message.author.name>>
         - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
 
         - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
@@ -46,8 +46,8 @@ discord_watcher:
         - define Insert <[Text]>
         - define MessageText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         - define Attachments <list>
-        - if !<context.message.attachments.is_empty>:
-          - foreach <context.message.attachments> as:Attachment:
+        - if !<context.new_message.attachments.is_empty>:
+          - foreach <context.new_message.attachments> as:Attachment:
             - define Hover "<&color[#F3FFAD]>Click to Open Link <&color[#26FFC9]>:<&nl><&color[#F3FFAD]><[Attachment]>"
             - define Text <&3>[<&b><&n>Link<&3>]<&r>
             - define Url <[Attachment]>

@@ -52,7 +52,7 @@ Embedded_Discord_Message:
         - case Channel:
           - if !<script[DDTBCTY].list_keys[WebHooks].contains[<[Channel]>]>:
             - stop
-          - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.Hook]>
+          - define Hook <script[DDTBCTY].parsed_key[WebHooks.<[Channel]>.Hook]>
 
         - default:
           - announce to_console "<&c>Error: Invalid Keys Used."
@@ -76,7 +76,7 @@ webhook_generic:
   script:
     - inject definition_registry
     - inject embedded_color_formatting
-    - define hook <script[DDTBCTY].data_key[WebHooks.<[channel]>.hook]>
+    - define hook <script[DDTBCTY].parsed_key[WebHooks.<[channel]>.hook]>
     - define headers <yaml[saved_headers].read[discord.webhook_message]>
     - choose <[type]>:
       - case title_description:
@@ -116,7 +116,7 @@ Embedded_Discord_Message_New:
 
     - define Data <[Data].with[embeds].as[<list[<[Embeds]>]>].to_json>
 
-    - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
+    - define Hook <script[DDTBCTY].parsed_key[WebHooks.<[Channel]>.hook]>
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
@@ -125,7 +125,7 @@ Waitable_Embedded_Webhook:
   debug: false
   definitions: Channel|Data
   script:
-    - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
+    - define Hook <script[DDTBCTY].parsed_key[WebHooks.<[Channel]>.hook]>
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]> save:response
     - inject Web_Debug.Webget_Response

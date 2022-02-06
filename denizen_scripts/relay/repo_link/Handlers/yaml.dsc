@@ -5,7 +5,7 @@ yaml_handler:
     - foreach <yaml[network_configuration].read[configurations]> key:yaml as:file_path:
       - ~run load_yaml def:<[yaml]>|<[file_path]>|false|false
 
-    - foreach <server.list_files[data/globalLiveData/discord/webhooks]> as:Json:
+    - foreach <server.list_files[data/global/discord/webhooks]> as:Json:
       - yaml id:webhook_template_<[Json].before[.]> load:data/globalLiveData/discord/webhooks/<[Json]>
 
     - foreach "<server.list_files[data/Script Dependency Support]>" as:Yaml:

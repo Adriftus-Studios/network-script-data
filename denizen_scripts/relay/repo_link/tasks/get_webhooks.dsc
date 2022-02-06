@@ -8,7 +8,7 @@ get_webhooks:
     - ~webget <[url]> headers:<[headers]> save:response
     - if <entry[response].failed>:
       - stop
-    - inject web_debug.webget_response
+    - inject web_debug path:webget_response
     - define result <util.parse_yaml[{"data":<entry[response].result>}].get[data]>
 
     - if <[result].is_empty>:

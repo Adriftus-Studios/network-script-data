@@ -1,0 +1,7 @@
+avatar_url: https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png
+embeds:
+- description: <[TagData].unescaped>
+  color: <[Color]>
+  footer:
+    text: 'Parsed for: <[tag].unescaped>'
+username: Tag Parser Results
