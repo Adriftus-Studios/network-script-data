@@ -10,8 +10,8 @@ mod_global_inv_events:
       - determine cancelled
 
     on player clicks red_stained_glass_pane in mod_*_inv:
-      - if <context.item.has_nbt[to]>:
-        - choose <context.item.nbt[to]>:
+      - if <context.item.has_flag[to]>:
+        - choose <context.item.flag[to]>:
           - case actions:
             - run mod_actions_inv_open
           - case online:

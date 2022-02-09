@@ -10,7 +10,7 @@ mod_actions_inv:
     x: <item[air]>
     b1: <item[light_blue_stained_glass_pane].with[display_name=<&r>]>
     b2: <item[cyan_stained_glass_pane].with[display_name=<&r>]>
-    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list;nbt=<list[to/online]>]>
+    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:online]>
     head: <item[mod_player_item]>
   slots:
     - [b1] [b2] [b1] [b2] [head] [b2] [b1] [b2] [b1]

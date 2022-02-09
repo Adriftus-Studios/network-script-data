@@ -8,7 +8,7 @@ mod_online_inv:
   size: 54
   definitions:
     border: <item[light_blue_stained_glass_pane].with[display_name=<&r>]>
-    close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close;nbt=<list[to/close]>]>
+    close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close].with_flag[to:close]>
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []

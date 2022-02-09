@@ -10,7 +10,7 @@ mod_send_inv:
     x: <item[air]>
     b1: <item[magenta_stained_glass_pane].with[display_name=<&r>]>
     b2: <item[purple_stained_glass_pane].with[display_name=<&r>]>
-    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;nbt=<list[to/actions]>]>
+    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
     - [b2] [b1] [b1] [b2] [b1] [b2] [b1] [b1] [b2]

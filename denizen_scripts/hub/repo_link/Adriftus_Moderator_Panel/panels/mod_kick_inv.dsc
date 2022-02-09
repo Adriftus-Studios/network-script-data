@@ -10,7 +10,7 @@ mod_kick_inv:
     x: <item[air]>
     b1: <item[lime_stained_glass_pane].with[display_name=<&r>]>
     b2: <item[green_stained_glass_pane].with[display_name=<&r>]>
-    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;nbt=<list[to/actions]>]>
+    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
