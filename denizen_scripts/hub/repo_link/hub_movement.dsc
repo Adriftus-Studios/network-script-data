@@ -2,7 +2,7 @@ hub_jump:
   type: world
   debug: false
   events:
-    on player jumps:
+    on player jumps flagged:hub_jump:
       - define location <player.location>
       - if <[location].pitch> < -25 && <player.location.y> <= 35:
         - wait 1t
@@ -11,7 +11,7 @@ hub_jump:
           - playsound <player.location> sound:ENTITY_FIREWORK_ROCKET_LAUNCH
           - playeffect effect:smoke at:<player.location> quantity:5 offset:0.1 players:<server.online_players>
           - wait 1t
-    on player toggles sprinting:
+    on player toggles sprinting flagged:hub_run:
       - if <context.state>:
         - adjust <player> walk_speed:0.4
       - else:
