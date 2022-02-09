@@ -4,9 +4,8 @@ mod_mute_item:
   material: jukebox
   display name: <&2>Mute
   lore:
+    - "Right Click:"
     - "<&6>Mute the Player from Chat."
-    - "<&6>Empêchez le joueur de parler."
-    - "Right Click / Clic Droit"
   mechanisms:
     hides: ALL
 
@@ -16,9 +15,8 @@ mod_unmute_item:
   material: note_block
   display name: <&a>Unmute
   lore:
+    - "Right Click:"
     - "<&e>Unmute the Player from Chat."
-    - "<&e>Permettez le joueur de parler."
-    - "Right Click / Clic Droit"
   mechanisms:
     hides: ALL
 
@@ -29,7 +27,6 @@ mod_send_item:
   display name: <&5><&l>Send
   lore:
     - "<&d>Transfer the Player to a Server."
-    - "<&d>Envoyez le joueur au serveur."
   mechanisms:
     hides: ALL
 
@@ -41,7 +38,6 @@ mod_kick_item:
   display name: <&d><&l>Kick
   lore:
     - "<&e>Kick the Player from the Server."
-    - "<&e>Coup de pied du serveur."
   mechanisms:
     hides: ALL
 
@@ -51,12 +47,10 @@ mod_ban_item:
   material: wooden_axe
   display name: <&c><&l>Ban
   lore:
-    - "Left Click / Clic Gauche:"
+    - "Left Click:"
     - "- <&c>Ban the Player from the Server."
-    - "- <&c>Bannissez le joueur du serveur."
-    - "Right Click / Clic Droit:"
+    - "Right Click:"
     - "- <&c>Ban the Player from the Network."
-    - "- <&c>Bannissez le joueur du réseau."
   enchantments:
     - ARROW_INFINITE:1
   mechanisms:
