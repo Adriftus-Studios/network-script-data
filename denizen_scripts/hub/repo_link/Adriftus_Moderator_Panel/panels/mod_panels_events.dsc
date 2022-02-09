@@ -5,7 +5,7 @@ mod_global_inv_events:
   events:
     on player clicks item in mod_*_inv priority:10:
       - determine cancelled
-    
+
     on player drags item in mod_*_inv priority:10:
       - determine cancelled
 

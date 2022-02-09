@@ -2,7 +2,7 @@
 mod_kick_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f>› <&d>Kick
+  title: <&6>A<&e>MP <&f><&gt> <&d>Kick
   inventory: CHEST
   gui: true
   size: 54
@@ -36,7 +36,7 @@ mod_kick_inv_open:
   script:
     - define items <list>
     - define inventory <inventory[mod_kick_inv]>
-    - adjust def:inventory "title:<&6>A<&e>MP <&f>› <&d>Kick <&e><player.flag[amp_map].as_map.get[uuid].as_player.name>."
+    - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&d>Kick <&e><player.flag[amp_map].as_map.get[uuid].as_player.name>."
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_kick_infractions].list_keys[<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>

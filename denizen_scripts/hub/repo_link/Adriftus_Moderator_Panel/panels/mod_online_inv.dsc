@@ -41,12 +41,12 @@ mod_online_inv_open:
   script:
     - define items <list>
     - define inventory <inventory[mod_online_inv]>
-    - adjust def:inventory "title:<&6>A<&e>MP <&f>– <&a><server.online_players.size> online."
+    - adjust def:inventory "title:<&6>A<&e>MP <&f>- <&a><server.online_players.size> online."
     - foreach <server.online_players> as:player:
       # Match item display name and lore to information about the online player.
       - define name <[player].name>
       - define skin <[player].name>
-      - define lore <&2>Nickname<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Display_Name]||None>
+      - define lore <list[<&2>Nickname<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Display_Name]||None>]>
       - define lore:->:<&2>Rank<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Rank]||None>
       - define lore:->:<&a>Current<&sp>Channel<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[chat.channels.current].to_titlecase||None>
       - define lore:->:<&a>Active<&sp>Channels<&co>
