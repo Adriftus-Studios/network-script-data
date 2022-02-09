@@ -80,19 +80,22 @@ mod_level1_item:
   type: item
   debug: false
   material: yellow_terracotta
-  tag: <&f><&lb><&e>1<&f><&rb><&e>
-  colour: <&e>
+  flags:
+    tag: <&f><&lb><&e>1<&f><&rb><&e>
+    colour: <&e>
 
 mod_level2_item:
   type: item
   debug: false
   material: orange_terracotta
-  tag: <&7><&lb><&6>2<&7><&rb><&6>
-  colour: <&6>
+  flags:
+    tag: <&7><&lb><&6>2<&7><&rb><&6>
+    colour: <&6>
 
 mod_level3_item:
   type: item
   debug: false
   material: red_terracotta
-  tag: <&8><&lb><&c>3<&8><&rb><&c>
-  colour: <&c>
+  flags:
+    tag: <&8><&lb><&c>3<&8><&rb><&c>
+    colour: <&c>
