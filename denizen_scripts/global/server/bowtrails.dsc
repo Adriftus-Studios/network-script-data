@@ -286,7 +286,7 @@ bowtrails_inventory_open:
           - inject build_current_trail
           - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.current_bowtrail]> o:<[item]>
         - case page_marker:
-          - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.page_marker]> o:<script[bowtrails_inventory].parsed_key[definitions.filler].with[nbt=page/<[page]>]>
+          - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.page_marker]> o:<item[standard_filler].with[nbt=page/<[page]>]>
     - inventory open d:<[inventory]>
 
 build_trail_select_item:
@@ -327,6 +327,6 @@ bowtrail_config_manager:
       - yaml id:bowtrails load:data/global/network/bowtrails.yml
   events:
     on server start:
-      - inject locally load_yaml
+      - inject locally path:load_yaml
     on reload scripts:
-      - inject locally load_yaml
+      - inject locally path:load_yaml

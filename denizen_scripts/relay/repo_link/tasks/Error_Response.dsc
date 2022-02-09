@@ -19,7 +19,7 @@ Error_Response_Webhook:
 
   # % ██ [ Generate Log        ] ██
     - log <[Message]> type:none file:<[File_Location]><[UUID]>.txt
-    - define Log_URL http://147.135.7.85:25580/webget?name=<[UUID]>.txt
+    - define Log_URL http://147.135.7.85:25581/webget?name=<[UUID]>.txt
 
   # % ██ [ Verify Script Fields    ] ██
     - if <[Data].keys.contains[Script]>:

@@ -6,7 +6,7 @@ web_handler:
     self: 0:0:0:0:0:0:0:1
   events:
     on server start:
-      - web start port:25580
+      - web start port:25581
 
     on get request:
       - announce to_console "<&c>--- get request ----------------------------------------------------------"
@@ -62,7 +62,7 @@ web_handler:
       - define domain <context.address>
 
     # % ██ [ Github Content pushes    ] ██
-      - if <[domain].starts_with[<script.data_key[domains.github]>]>:
+      - if <[domain].starts_with[/<script.data_key[domains.github]>]>:
         - inject github_updates
 
     # % ██ [ Self Pings               ] ██

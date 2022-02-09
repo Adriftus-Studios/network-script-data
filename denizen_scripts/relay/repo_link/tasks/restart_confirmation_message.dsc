@@ -27,7 +27,7 @@ Restart_Confirmation_Response:
     - if <[Log]>:
       - define LogDir ../../../<[server]>/logs/latest.log
       - define WebDir ../../../../web/webget/<[DUUID]>.txt
-      - define URL http://147.135.7.85:25580/webget?name=<[DUUID]>.txt
+      - define URL http://147.135.7.85:25581/webget?name=<[DUUID]>.txt
       - ~filecopy origin:<[LogDir]> destination:<[WebDir]>
       - define Message_Context "<[Message_Context].include_single[<&nl>**Log Output**: <&lb>`<&lb><[DUUID]>.txt<&rb>`<&rb>(<[URL]>)]>"
 

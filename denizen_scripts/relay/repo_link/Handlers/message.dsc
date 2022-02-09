@@ -7,13 +7,13 @@ Message_Handler:
         - determine cancelled
     on discord message received for:champagne:
     # % ██ [ Queue Stopping Cache Data       ] ██
-      - if <context.Author||WebHook> == WebHook:
+      - if <context.new_message.author.discriminator> == 0000:
         - stop
       - define Author <context.new_message.author>
 
-      - if <context.message.text||WebHook> == WebHook:
+      - if <context.new_message.text||WebHook> == WebHook:
         - stop
-      - define Message <context.message.text>
+      - define Message <context.new_message.text>
 
       - if <context.Bot> == <[Author]>:
         - stop

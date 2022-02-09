@@ -2,26 +2,26 @@
 chat_send_message:
   type: task
   debug: false
-  definitions: game_message|game_channel|server|name|display_name
+  definitions: game_message|game_channel|server|uuid|display_name
   script:
       - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.channel]>
-      - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
+      - define Hook <script[DDTBCTY].parsed_key[WebHooks.<[Channel]>.hook]>
       - define Data <script.parsed_key[webhook].to_json>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
   webhook:
     content: <[game_message].parse_color.strip_color.replace[@].with[(a)]>
     username: <[display_name]><&sp><&lb><[Server]><&rb>
-    avatar_url: https://minotar.net/cube/<[name]>/100.png
+    avatar_url: https://mc-heads.net/head/<[uuid]>/100
 
 discord_watcher:
   type: world
   debug: false
   events:
     on discord message received for:adriftusbot:
-      - if <context.new_message.author||invalid> == invalid || <context.new_message||invalid> == invalid:
+      - if <context.new_message.author.discriminator> == 0000 || <context.new_message.author.is_bot>:
         - stop
-      - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null && !<context.author.name.contains[Adriftus]>:
+      - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null && !<context.new_message.author.name.contains[Adriftus]>:
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
 
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
@@ -33,10 +33,10 @@ discord_watcher:
         - define Command "chat <[channel]>"
         - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
 
-        - define Name <context.author.name>
+        - define Name <context.new_message.author.name>
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
         - define Text <&7><[Name]>
-        - define Insert @<context.new_message.author.nickname[<context.group>]||<context.new_message.author.name>>
+        - define Insert @<context.new_message.author.name>>
         - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
 
         - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
@@ -72,6 +72,6 @@ chat_system_data_manager:
         - yaml id:discord_watcher set watched.<yaml[chat_config].read[channels.<[value]>.integrations.Discord.channel]>:<[value]>
   events:
     on server start:
-      - inject locally load
+      - inject local path:load
     on script reload:
-      - inject locally load
+      - inject local path:load

@@ -108,7 +108,7 @@ title_inventory_open:
           - inject build_current_title
           - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.current_title]> o:<[item]>
         - case page_marker:
-          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.page_marker]> o:<script[title_inventory].parsed_key[definitions.filler].with[nbt=page/<[page]>]>
+          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.page_marker]> o:<item[standard_filler].with[nbt=page/<[page]>]>
     - inventory open d:<[inventory]>
 
 build_title_select_item:
@@ -147,7 +147,7 @@ titles_config_manager:
       - yaml id:titles load:data/global/network/titles.yml
   events:
     on server start:
-      - inject locally load_yaml
+      - inject locally path:load_yaml
     on reload scripts:
       - yaml id:titles unload
-      - inject locally load_yaml
+      - inject locally path:load_yaml
