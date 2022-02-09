@@ -26,10 +26,6 @@ mod_command:
     # -- Hopefully this logic will work & make sense in a few weeks.
     - if <context.args.is_empty>:
       - inject mod_online_inv_open
-    - else if <context.args.first> == version:
-      - narrate "<&6>Adriftus <&e>Moderator Panel"
-      - narrate "<&f>Version 2.0.0 - 2020-07-31"
-      - narrate "<&f>Scripted by <&b>Kyu#5957"
     - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - if <server.match_offline_player[<context.args.first>].name> == <player.name>:
         - narrate "<&c>You cannot perform actions on yourself."
@@ -66,3 +62,15 @@ mod_command:
     - else:
       - narrate "<&c>Invalid player name entered!"
 
+# -- /amp - Adriftus Moderator Panel
+amp_command:
+  type: command
+  debug: false
+  permission: adriftus.staff
+  name: amp
+  description: Adriftus Moderator Panel
+  usage: /amp
+  script:
+    - narrate "<&6>Adriftus <&e>Moderator Panel"
+    - narrate "<&f>Version 2.0.0 - 2020-07-31"
+    - narrate "<&f>Scripted by <&b>Kyu#5957"
