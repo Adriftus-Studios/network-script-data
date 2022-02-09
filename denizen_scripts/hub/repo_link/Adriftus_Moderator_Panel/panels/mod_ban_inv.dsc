@@ -25,14 +25,14 @@ mod_ban_inv_events:
   debug: false
   events:
     on player right clicks mod_level*_item in mod_ban_inv:
-      - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|Ban|<context.item.nbt[LENGTH]>
-      - run mod_log_ban def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|<context.item.nbt[LENGTH]>
-      - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[INFRACTION]>|Ban|<context.item.nbt[LENGTH]>
-      - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid].as_player.name>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|Ban|<context.item.nbt[LENGTH]>
+      - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
+      - run mod_log_ban def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
+      - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
+      - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid].as_player.name>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
       - if <player.flag[amp_map].as_map.get[from]> == server:
-        - run mod_ban_player def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|<context.item.nbt[LENGTH]>
+        - run mod_ban_player def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
       - else if <player.flag[amp_map].as_map.get[from]> == network:
-        - run mod_ban_player def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.nbt[LEVEL]>|<context.item.nbt[INFRACTION]>|<context.item.nbt[LENGTH]>|global
+        - run mod_ban_player def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>|global
       - else:
         - announce to_console "<&c><player.name> triggered an error in mod_ban_inv_events!"
         - announce to_console "<&c>mod_ban_inv_events has an error! amp_map's [from] key is <&6><player.flag[amp_map].as_map.get[from]>."
@@ -52,8 +52,10 @@ mod_ban_inv_open:
         - define lore:->:<&c>Right<&sp>Click<&sp>to<&sp>ban<&co>
         - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
         - define lore:->:<&c>Clic<&sp>Droit<&sp>pour<&sp>bannir<&co>
-        - define nbt <list[LEVEL/<[level]>|INFRACTION/<[infraction]>|LENGTH/<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.length]>]>
-        - define item <[item].with[display_name=<[name]>;lore=<[lore]>;nbt=<[nbt]>]>
+        - flag <[item]> LEVEL:<[level]>
+        - flag <[item]> INFRACTION:<[infraction]>
+        - flag <[item]> LENGTH:<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.length]>
+        - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
         - define items:->:<[item]>
     - give <[items]> to:<[inventory]>
     - inventory open d:<[inventory]>

@@ -22,11 +22,11 @@ mod_send_inv_events:
   debug: false
   events:
     on player right clicks in mod_send_inv:
-      - if <context.item.has_nbt[SERVER]>:
-        - define origintodest <bungee.server><&sp>to<&sp><context.item.nbt[SERVER]>
+      - if <context.item.has_flag[SERVER]>:
+        - define origintodest <bungee.server><&sp>to<&sp><context.item.flag[SERVER]>
         - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|0|<[origintodest]>|Send
         - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<[origintodest]>|Send
-        - adjust <player.flag[amp_map].as_map.get[uuid].as_player> send_to:<context.item.nbt[SERVER]>
+        - adjust <player.flag[amp_map].as_map.get[uuid].as_player> send_to:<context.item.flag[SERVER]>
 
 mod_send_inv_open:
   type: task
@@ -41,8 +41,8 @@ mod_send_inv_open:
         - define lore:->:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
         - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
         - define lore:->:<&d>Clic<&sp>Droit<&sp>pour<&sp>envoyer<&co>
-        - define nbt <list[SERVER/<[server]>]>
-        - define item <yaml[bungee_config].read[servers.<[server]>.material].as_item.with[display_name=<[server]>;lore=<[lore]>;nbt=<[nbt]>]>
+        - define item <yaml[bungee_config].read[servers.<[server]>.material].as_item.with[display_name=<[server]>;lore=<[lore]>]>
+        - flag <[item]> SERVER:<[server]>
         - define items:->:<[item]>
     - give <[items]> to:<[inventory]>
     - inventory open d:<[inventory]>
