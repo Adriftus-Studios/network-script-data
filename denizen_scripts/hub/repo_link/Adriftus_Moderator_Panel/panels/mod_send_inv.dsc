@@ -40,7 +40,6 @@ mod_send_inv_open:
         - define lore <list.include[<yaml[bungee_config].parsed_key[servers.<[server]>.description]>]>
         - define lore:->:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
         - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
-        - define lore:->:<&d>Clic<&sp>Droit<&sp>pour<&sp>envoyer<&co>
         - define item <yaml[bungee_config].read[servers.<[server]>.material].as_item.with[display_name=<[server]>;lore=<[lore]>]>
         - flag <[item]> SERVER:<[server]>
         - define items:->:<[item]>
