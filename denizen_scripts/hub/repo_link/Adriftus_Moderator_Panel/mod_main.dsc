@@ -1,9 +1,7 @@
-# -- Notes for later!
-# - REPLACE TAB COMPLETES WITH NEW TAB COMPLETIONS SYSTEM.
-# - MAKE COMMAND DEFINITIONS CONSISTENT BETWEEN COMMANDS. (Definition name, value, usage, etc.)
-# - EXPAND CHAT (UN)MUTE FUNCTION.
-# - Replace nested foreach loop in mod_get_infractions procedure in mod_infractions.
-# - Move player verification into its own injectable task. (Online, Has Permission, etc.)
+# -- TODO
+# - Implement IP Bans
+# - Review list of infractions
+# - Allow Discord messages to be sent to #action-log
 
 # -- /mod - Adriftus Moderator Panel
 mod_command:
