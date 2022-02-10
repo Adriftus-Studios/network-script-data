@@ -3,8 +3,12 @@ github_updates:
   definitions: domain
   debug: false
   script:
+    # What in the actual fuck?
+    - shell "/home/minecraft/scripts/github_pull.sh"
+    - stop
+
   # % ██ [ Cache Data                  ] ██
-    - define embed <discordembed>
+    - define embed <map>
     - define emoji <&lt>:icons8commitgit641:746943945929523252<&gt>
     - define data <util.parse_yaml[{"data":<context.query>}].get[data]||invalid>
 

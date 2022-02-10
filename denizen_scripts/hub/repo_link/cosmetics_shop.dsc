@@ -26,23 +26,6 @@ store_hub_cosmeticShop:
   - [standard_filler] [standard_filler] [standard_filler] [] [standard_filler] [] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_close_button] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
-store_hub_cosmeticShop_filler:
-  debug: false
-  type: item
-  material: glass_pane
-  display name: <&b>
-  enchantments:
-  - damage_all:1
-  mechanisms:
-    hides: all
-
-store_hub_cosmeticShop_filler_events:
-  type: world
-  debug: false
-  events:
-    on player clicks store_hub_cosmeticShop_filler in inventory bukkit_priority:LOWEST:
-      - determine cancelled
-
 store_hub_cosmeticShop_titles:
   type: item
   debug: false

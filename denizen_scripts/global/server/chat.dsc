@@ -42,7 +42,7 @@ chat_system_events:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
         - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include_single[<[message]>]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
-          - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.name>].include_single[<player.display_name.strip_color>]>
+          - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.display_name.strip_color>]>
         - inject chat_history_save
 
 chat_history_save:
@@ -220,6 +220,6 @@ chat_settings_open:
           - define "lore:|:<&b>right click to start speaking."
         - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>;nbt=action/<[channel]>]>
     - repeat <[list].size.sub[8].abs>:
-      - define list:->:<script[chat_settings].parsed_key[definitions.filler].with[nbt=unique/<util.random.uuid>]>
+      - define list:->:<item[standard_filler].with[nbt=unique/<util.random.uuid>]>
     - give <[list]> to:<[inventory]>
     - inventory open d:<[inventory]>

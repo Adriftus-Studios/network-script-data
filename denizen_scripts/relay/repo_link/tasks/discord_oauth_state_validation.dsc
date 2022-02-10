@@ -7,9 +7,9 @@ manage_discord_oauth_records:
         - yaml id:discord_oauth load:data/discord_oauth.yml
       - else:
         - yaml id:discord_oauth create
-      - run locally clean
+      - run locally path:clean
     on delta time minutely:
-      - run locally clean
+      - run locally path:clean
   clean:
     - if <yaml[discord_oauth].contains[accepted_states]>:
       - foreach <yaml[discord_oauth].list_keys[accepted_states]>:

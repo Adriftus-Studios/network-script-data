@@ -62,7 +62,7 @@ discord_oauth_token_exchange:
     - define avatar https://cdn.discordapp.com/avatars/<[User_ID]>/<[User_Data].get[avatar]>
 
   # % ██ [ Send to The-Network             ] ██
-    - define url http://76.119.243.194:25580
+    - define url http://76.119.243.194:25581
     - define request relay/discorduser
 
     - define query <map.with[uuid].as[<[uuid]>]>

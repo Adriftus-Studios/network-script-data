@@ -6,7 +6,7 @@ yaml_handler:
       - ~run load_yaml def:<[yaml]>|<[file_path]>|false|false
 
     - foreach <server.list_files[data/global/discord/webhooks]> as:Json:
-      - yaml id:webhook_template_<[Json].before[.]> load:data/globalLiveData/discord/webhooks/<[Json]>
+      - yaml id:webhook_template_<[Json].before[.]> load:data/global/discord/webhooks/<[Json]>
 
     - foreach "<server.list_files[data/Script Dependency Support]>" as:Yaml:
       - yaml id:SDS_<[Yaml].before[.].replace[<&sp>].with[_]> "load:data/Script Dependency Support/<[Yaml]>"
@@ -14,10 +14,10 @@ yaml_handler:
   events:
     on server start:
       - yaml id:network_configuration load:data/global/network/configuration.yml
-      - inject locally load
+      - inject local path:load
       - inject package_deliveries
     on script reload:
-      - inject locally load
+      - inject local path:load
 
 load_yaml:
   type: task

@@ -70,7 +70,7 @@ pull_bungee_config:
   script:
     - if <yaml.list.contains[bungee_config]>:
       - yaml id:bungee_config unload
-    - yaml id:bungee_config load:data/global/bungee/config.yml
+    - yaml id:bungee_config load:../../../../bungee/config.yml
 
 command_play_inventory:
   type: inventory

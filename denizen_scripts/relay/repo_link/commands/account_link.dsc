@@ -71,7 +71,7 @@ Discord_Connect_DCommand:
         # $ - -------------------------------------------------------- - $
     - else:
         - define uuid <util.random.uuid>
-        - define url https://discord.com/api/oauth2/authorize?client_id=716381772610273430&redirect_uri=http<&pc>3A<&pc>2F<&pc>2F147.135.7.85<&pc>3A25580<&pc>2FoAuth<&pc>2FDiscord&response_type=code&scope=identify<&pc>20connections&state=<[player_uuid]>_<[uuid]>
+        - define url https://discord.com/api/oauth2/authorize?client_id=716381772610273430&redirect_uri=http<&pc>3A<&pc>2F<&pc>2F147.135.7.85<&pc>3A25581<&pc>2FoAuth<&pc>2FDiscord&response_type=code&scope=identify<&pc>20connections&state=<[player_uuid]>_<[uuid]>
         - define context "<list_single[<[discord_user].mention> link invite created for `<[player_name]>` - please check your direct messages for the connection link.]>"
         - define title "Invite Sent"
         - discord id:adriftusbot message user:<[discord_user]> "Here's your Discord Connection link: <&lt><[url]><&gt><n> By connecting your discord, you will be linked to the minecraft account: <[player_name]>"

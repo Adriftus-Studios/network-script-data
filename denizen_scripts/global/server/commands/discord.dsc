@@ -22,7 +22,7 @@ Discord_Command:
       - if !<list[Connect|SignMeUpCoach].contains_any[<context.args.first>]>:
         - inject Command_Syntax
       - define uuid <util.random.uuid>
-      - define url https://discord.com/api/oauth2/authorize?client_id=716381772610273430&redirect_uri=http<&pc>3A<&pc>2F<&pc>2F147.135.7.85<&pc>3A25580<&pc>2FoAuth<&pc>2FDiscord&response_type=code&scope=identify<&pc>20connections&state=<player.uuid>_<[uuid]>
+      - define url https://discord.com/api/oauth2/authorize?client_id=716381772610273430&redirect_uri=http<&pc>3A<&pc>2F<&pc>2F147.135.7.85<&pc>3A25581<&pc>2FoAuth<&pc>2FDiscord&response_type=code&scope=identify<&pc>20connections&state=<player.uuid>_<[uuid]>
       - define Hover "<proc[Colorize].context[Click Link to link Discord to Minecraft|green]><&nl><proc[Colorize].context[https://discord.com/oauth2/authorize|blue]>"
       - define Text "<proc[Colorize].context[Click Link to link Discord to Minecraft|yellow]>"
       - narrate <proc[msg_url].context[<[Hover]>|<[Text]>|<[URL]>]>

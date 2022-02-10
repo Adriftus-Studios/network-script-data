@@ -51,9 +51,9 @@ graves_data:
     - ~yaml id:graves savefile:data/graves.yml
   events:
     on server start:
-      - inject locally load
+      - inject locally path:load
     on delta time minutely:
-      - inject locally save
+      - inject locally path:save
 
 graves_handler:
   type: world
@@ -86,14 +86,14 @@ graves_handler:
         - adjust <yaml[graves].read[grave.<[value]>.hologram2].as_entity> custom_name:<script[graves_config].data_key[hologram.timer_display].parse_color.parsed>
   events:
     on server start:
-      - inject locally load
+      - inject locally path:load
     on delta time minutely:
-      - inject locally save
+      - inject locally path:save
     on delta time secondly:
-      - inject locally tick
+      - inject locally path:tick
     on script reload:
       - if !<yaml.list.contains[graves]>:
-        - inject locally load
+        - inject locally path:load
     on player dies bukkit_priority:HIGHEST:
       - if <script[graves_config].data_key[excluded_causes].contains[<context.cause>]||false>:
         - stop

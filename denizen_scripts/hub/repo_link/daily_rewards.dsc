@@ -84,6 +84,6 @@ daily_reward_config_manager:
       - yaml id:daily_reward load:data/global/network/daily_rewards.yml
   events:
     on server start:
-      - inject locally load_yaml
+      - inject locally path:load_yaml
     on reload scripts:
-      - inject locally load_yaml
+      - inject locally path:load_yaml
