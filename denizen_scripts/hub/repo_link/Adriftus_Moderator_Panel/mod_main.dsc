@@ -72,5 +72,5 @@ amp_command:
   usage: /amp
   script:
     - narrate "<&6>Adriftus <&e>Moderator Panel"
-    - narrate "<&f>Version 2.0.0 - 2020-07-31"
+    - narrate "<&f>Version 3.0.0 - 2022-02-09"
     - narrate "<&f>Scripted by <&b>Kyu#5957"
