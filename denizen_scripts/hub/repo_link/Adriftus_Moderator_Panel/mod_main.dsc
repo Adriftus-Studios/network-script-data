@@ -1,9 +1,7 @@
-# -- Notes for later!
-# - REPLACE TAB COMPLETES WITH NEW TAB COMPLETIONS SYSTEM.
-# - MAKE COMMAND DEFINITIONS CONSISTENT BETWEEN COMMANDS. (Definition name, value, usage, etc.)
-# - EXPAND CHAT (UN)MUTE FUNCTION.
-# - Replace nested foreach loop in mod_get_infractions procedure in mod_infractions.
-# - Move player verification into its own injectable task. (Online, Has Permission, etc.)
+# -- TODO
+# - Implement IP Bans
+# - Review list of infractions
+# - Allow Discord messages to be sent to #action-log
 
 # -- /mod - Adriftus Moderator Panel
 mod_command:
@@ -26,10 +24,6 @@ mod_command:
     # -- Hopefully this logic will work & make sense in a few weeks.
     - if <context.args.is_empty>:
       - inject mod_online_inv_open
-    - else if <context.args.first> == version:
-      - narrate "<&6>Adriftus <&e>Moderator Panel"
-      - narrate "<&f>Version 2.0.0 - 2020-07-31"
-      - narrate "<&f>Scripted by <&b>Kyu#5957"
     - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - if <server.match_offline_player[<context.args.first>].name> == <player.name>:
         - narrate "<&c>You cannot perform actions on yourself."
@@ -66,3 +60,15 @@ mod_command:
     - else:
       - narrate "<&c>Invalid player name entered!"
 
+# -- /amp - Adriftus Moderator Panel
+amp_command:
+  type: command
+  debug: false
+  permission: adriftus.staff
+  name: amp
+  description: Adriftus Moderator Panel
+  usage: /amp
+  script:
+    - narrate "<&6>Adriftus <&e>Moderator Panel"
+    - narrate "<&f>Version 3.0.0 - 2022-02-09"
+    - narrate "<&f>Scripted by <&b>Kyu#5957"

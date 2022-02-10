@@ -5,13 +5,13 @@ mod_global_inv_events:
   events:
     on player clicks item in mod_*_inv priority:10:
       - determine cancelled
-    
+
     on player drags item in mod_*_inv priority:10:
       - determine cancelled
 
     on player clicks red_stained_glass_pane in mod_*_inv:
-      - if <context.item.has_nbt[to]>:
-        - choose <context.item.nbt[to]>:
+      - if <context.item.has_flag[to]>:
+        - choose <context.item.flag[to]>:
           - case actions:
             - run mod_actions_inv_open
           - case online:
