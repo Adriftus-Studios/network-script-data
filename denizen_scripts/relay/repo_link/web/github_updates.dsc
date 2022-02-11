@@ -4,7 +4,7 @@ github_updates:
   debug: false
   script:
     # What in the actual fuck?
-    - shell "/home/minecraft/scripts/github_pull.sh"
+    - shell "/home/minecraft/scripts/github_pull.sh" 
     - stop
 
   # % ██ [ Cache Data                  ] ██
