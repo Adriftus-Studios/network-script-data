@@ -3,7 +3,7 @@ web_handler:
   debug: false
   Domains:
     Github: 140.82.115
-    self: 0:0:0:0:0:0:0:1
+    self: 127.0.0.1
   events:
     on server start:
       - web start port:25581
@@ -66,7 +66,7 @@ web_handler:
         - inject github_updates
 
     # % ██ [ Self Pings               ] ██
-      - else if <[domain]> == <script.data_key[domains.self]>:
+      - else if <[domain]> == /<script.data_key[domains.self]>:
         - bungee <bungee.list_servers.exclude[<bungee.server>|survival]>:
           - reload
         - wait 1t
