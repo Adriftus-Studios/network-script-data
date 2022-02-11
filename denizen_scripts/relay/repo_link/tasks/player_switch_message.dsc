@@ -17,6 +17,6 @@ Player_Switch_Message:
     - define Data <map.with[username].as[<[Name]>].with[avatar_url].as[https://minotar.net/helm/<[Name]>]>
     - define Data <[Data].with[embeds].as[<[Embeds]>].to_json>
 
-    - define Hook <script[DDTBCTY].data_key[WebHooks.651789860562272266.hook]>
+    - define Hook <script[DDTBCTY].parsed_key[WebHooks.651789860562272266.hook]>
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
