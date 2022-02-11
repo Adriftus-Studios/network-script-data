@@ -21,14 +21,13 @@ mod_actions_inv_events:
   type: world
   debug: false
   events:
-    on player clicks mod_ban_item in mod_actions_inv:
-      - flag <player> amp_map:<player.flag[amp_map].as_map.with[from].as[<tern[<context.click.is[==].to[right]>].pass[network].fail[server]>]>
+    on player right clicks mod_ban_item in mod_actions_inv:
       - inject mod_ban_inv_open
 
     on player clicks mod_send_item in mod_actions_inv:
       - inject mod_send_inv_open
 
-    on player clicks mod_kick_item in mod_actions_inv:
+    on player right clicks mod_kick_item in mod_actions_inv:
       - inject mod_kick_inv_open
 
     on player right clicks mod_*mute_item in mod_actions_inv:

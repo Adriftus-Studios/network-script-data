@@ -29,13 +29,7 @@ mod_ban_inv_events:
       - run mod_log_ban def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
       - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
       - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid].as_player.name>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
-      - if <player.flag[amp_map].as_map.get[from]> == server:
-        - run mod_ban_player def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
-      - else if <player.flag[amp_map].as_map.get[from]> == network:
-        - run mod_ban_player def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>|global
-      - else:
-        - announce to_console "<&c><player.name> triggered an error in mod_ban_inv_events!"
-        - announce to_console "<&c>mod_ban_inv_events has an error! amp_map's [from] key is <&6><player.flag[amp_map].as_map.get[from]>."
+      - run mod_ban_player def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
 
 mod_ban_inv_open:
   type: task
@@ -43,7 +37,7 @@ mod_ban_inv_open:
   script:
     - define items <list>
     - define inventory <inventory[mod_ban_inv]>
-    - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&c>Ban <&6><player.flag[amp_map].as_map.get[uuid].as_player.name> from <player.flag[amp_map].as_map.get[from].to_titlecase>."
+    - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&c>Ban <&6><player.flag[amp_map].as_map.get[uuid].as_player.name> from Network."
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_ban_infractions].list_keys[<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>

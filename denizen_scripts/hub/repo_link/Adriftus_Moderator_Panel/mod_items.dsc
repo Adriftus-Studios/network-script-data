@@ -26,7 +26,7 @@ mod_send_item:
   material: ender_pearl
   display name: <&5><&l>Send
   lore:
-    - "<&d>Transfer the Player to a Server."
+    - "<&d>Transfer the Player to another Server."
   mechanisms:
     hides: ALL
 
@@ -37,7 +37,8 @@ mod_kick_item:
   color: 16711680
   display name: <&d><&l>Kick
   lore:
-    - "<&e>Kick the Player from the Server."
+    - "Right Click:"
+    - "<&e>Kick the Player from the Network."
   mechanisms:
     hides: ALL
 
@@ -47,8 +48,6 @@ mod_ban_item:
   material: wooden_axe
   display name: <&c><&l>Ban
   lore:
-    - "Left Click:"
-    - "- <&c>Ban the Player from the Server."
     - "Right Click:"
     - "- <&c>Ban the Player from the Network."
   enchantments:
