@@ -1,15 +1,12 @@
-# -- Handle server & network bans.
+# -- Handle network bans. (Implement IP bans!)
 mod_ban_player:
   type: task
   debug: false
-  definitions: moderator|uuid|level|infraction|length|global
+  definitions: moderator|uuid|level|infraction|length
   script:
     # -- Check if player is online, set YAML ID to edit accordingly.
     - if <[uuid].as_player.is_online>:
-      - if <[global]||null> != null:
-        - define id global.player.<[uuid]>
-      - else:
-        - define id player.<[uuid]>
+      - define id global.player.<[uuid]>
       - yaml id:<[id]> set banned.level:<[level]>
       - yaml id:<[id]> set banned.infraction:<[infraction]>
       - yaml id:<[id]> set banned.length:<[length]>
@@ -17,7 +14,7 @@ mod_ban_player:
       - yaml id:<[id]> set banned.moderator:<[moderator]>
       - kick <[uuid].as_player> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[infraction]>|<[length]>|<util.time_now>]>
     - else:
-      - define dir data/<tern[<element[<[global]||null>].is[!=].to[null]>].pass[global/].fail[]>players/<[uuid]>.yml
+      - define dir data/global/players/<[uuid]>.yml
       - define id amp.banned.<[uuid]>
       - ~yaml id:<[id]> load:<[dir]>
       - yaml id:<[id]> set banned.level:<[level]>
@@ -34,12 +31,10 @@ mod_ban_check:
   debug: false
   events:
     after player joins:
-      # -- Check if player's global/server YAML data contains an ongoing-ban.
+      # -- Check if player's global YAML data contains an ongoing-ban.
       - wait 2s
       - if <yaml[global.player.<player.uuid>].contains[banned]>:
         - define id global.player.<player.uuid>
-      - else if <yaml[player.<player.uuid>].contains[banned]>:
-        - define id player.<player.uuid>
       - else:
         - stop
       # If duration since ban date/time is greater than the set duration, remove the banned key from player data.
