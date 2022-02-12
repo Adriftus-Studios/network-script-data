@@ -9,6 +9,7 @@ command_debugmode:
     - stop
   - if <player.has_flag[debugmode]>:
     - flag <player> debugmode:!
+    - bossbar remove id:debugmode_indicator players:<player>
     - narrate "<&9>You have left <&l>DebugMode."
   - else:
     - flag <player> debugmode
