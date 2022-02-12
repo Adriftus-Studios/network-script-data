@@ -34,7 +34,8 @@ error_handler_events:
     - if <context.message.ends_with[is<&sp>invalid!]> && <context.message.starts_with[Tag<&sp><&lt>inventory<&lb>]> && !<player.has_flag[debugmode]>:
       - wait 1t
       - inventory close
-    - if <context.script||null> != null && <context.line||null> != null:
+    - define "ignore_errors:|:The list_flags tag is meant for testing/debugging only. Do not use it in scripts (ignore this warning if using for testing reasons)."
+    - if <context.script||null> != null && <context.line||null> != null && !<[ignore_errors].contains[<context.message>]>:
       - if <player.if_null[null]> != null:
         - define "cause:<player.name.as_element.on_hover[Click to teleport].on_click[/ex -q teleport <player.location||null>]||None>"
       - else:
