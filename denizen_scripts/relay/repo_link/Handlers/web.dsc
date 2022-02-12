@@ -68,6 +68,7 @@ web_handler:
     # % ██ [ Self Pings               ] ██
       - else if <[domain]> == /<script.data_key[domains.self]>:
         - bungee <bungee.list_servers.exclude[<bungee.server>|survival]>:
+          - announce to_flagged:debugmode "<&e>Pulling from GitHub."
           - reload
         - wait 1t
         - reload
