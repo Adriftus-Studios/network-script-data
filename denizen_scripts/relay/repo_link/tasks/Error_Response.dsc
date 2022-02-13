@@ -29,9 +29,12 @@ Error_Response_Webhook:
       - if <[Script_File_Location].after[/plugins/Denizen/scripts/].starts_with[global]>:
         - define File_Link https://github.com/Adriftus-Studios/network-script-data/blob/master/denizen_scripts/global/server/<[Script_File_Location].after[/scripts/global/server/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
         - define File_Directory global/<[Script_File_Location].after[/scripts/global/server/]>
+      - else if <[Server]> == test:
+        - define File_Link https://github.com/Adriftus-Studios/test/blob/master/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
+        - define File_Directory /<[Script_File_Location].after[/plugins/Denizen/scripts/]>
       - else:
         - define File_Link https://github.com/Adriftus-Studios/network-script-data/blob/master/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
-        - define File_Directory <[Server]>/./<[Script_File_Location].after[/plugins/Denizen/scripts/]>
+        - define File_Directory /<[Script_File_Location].after[/plugins/Denizen/scripts/]>
       - define fields <[fields].include_single[<map.with[name].as[Script<&co>].with[value].as[`<[Script_Name]>`].with[inline].as[true]>]>
       - define fields <[fields].include_single[<map.with[name].as[Line<&co>].with[value].as[`#<[Script_Line]>`].with[inline].as[true]>]>
       - define fields <[fields].include_single[<map.with[name].as[File<&co>].with[value].as[<&lb>`<&lb><[File_Directory]><&rb>`<&rb>(<[File_Link]>)].with[inline].as[true]>]>
