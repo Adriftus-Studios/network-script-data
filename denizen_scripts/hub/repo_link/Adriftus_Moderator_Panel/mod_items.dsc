@@ -4,7 +4,7 @@ mod_mute_item:
   material: jukebox
   display name: <&2>Mute
   lore:
-    - "Right Click:"
+    - "<&a>Right Click:"
     - "<&6>Mute the Player from Chat."
   mechanisms:
     hides: ALL
@@ -15,7 +15,7 @@ mod_unmute_item:
   material: note_block
   display name: <&a>Unmute
   lore:
-    - "Right Click:"
+    - "<&a>Right Click:"
     - "<&e>Unmute the Player from Chat."
   mechanisms:
     hides: ALL
@@ -37,7 +37,7 @@ mod_kick_item:
   color: 16711680
   display name: <&d><&l>Kick
   lore:
-    - "Right Click:"
+    - "<&a>Right Click:"
     - "<&e>Kick the Player from the Network."
   mechanisms:
     hides: ALL
@@ -48,8 +48,8 @@ mod_ban_item:
   material: wooden_axe
   display name: <&c><&l>Ban
   lore:
-    - "Right Click:"
-    - "- <&c>Ban the Player from the Network."
+    - "<&a>Right Click:"
+    - "<&c>Ban the Player from the Network."
   enchantments:
     - ARROW_INFINITE:1
   mechanisms:
