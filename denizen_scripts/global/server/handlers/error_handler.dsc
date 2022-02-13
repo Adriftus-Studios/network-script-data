@@ -1,6 +1,10 @@
 error_handler:
   type: world
   debug: false
+  data:
+    enabled_servers:
+      - hub
+      - test
   events:
     on server start:
       - yaml id:error_handler create
@@ -13,7 +17,7 @@ error_handler:
     # % ██ [ verify connection             ] ██
       - define timeout <util.time_now.add[1m]>
       - waituntil <bungee.connected> || <[timeout].duration_since[<util.time_now>]> != 0
-      - if !<bungee.connected> || <context.queue.id||invalid> == invalid || !<list[hub|behrcraft|survival|relay|xeane|gielinor].contains[<bungee.server>]>:
+      - if !<bungee.connected> || <context.queue.id||invalid> == invalid || !<script.data_key[data.enabled_servers].contains[<bungee.server>]>:
         - stop
 
     # % ██ [ track errors                  ] ██
