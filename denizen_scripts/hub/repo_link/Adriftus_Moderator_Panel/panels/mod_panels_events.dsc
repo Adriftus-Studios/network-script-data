@@ -9,12 +9,11 @@ mod_global_inv_events:
     on player drags item in mod_*_inv priority:10:
       - determine cancelled
 
-    on player clicks red_stained_glass_pane in mod_*_inv:
-      - if <context.item.has_flag[to]>:
-        - choose <context.item.flag[to]>:
-          - case actions:
-            - run mod_actions_inv_open
-          - case online:
-            - run mod_online_inv_open
-          - default:
-            - inventory close
+    on player clicks item_flagged:to in mod_*_inv:
+      - choose <context.item.flag[to]>:
+        - case actions:
+          - run mod_actions_inv_open
+        - case online:
+          - run mod_online_inv_open
+        - default:
+          - inventory close
