@@ -21,12 +21,11 @@ mod_send_inv_events:
   type: world
   debug: false
   events:
-    on player right clicks in mod_send_inv:
-      - if <context.item.has_flag[SERVER]>:
-        - define origintodest <bungee.server><&sp>to<&sp><context.item.flag[SERVER]>
-        - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|0|<[origintodest]>|Send
-        - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<[origintodest]>|Send
-        - adjust <player.flag[amp_map].as_map.get[uuid].as_player> send_to:<context.item.flag[SERVER]>
+    on player right clicks item_flagged:SERVER in mod_send_inv:
+      - define origintodest <bungee.server><&sp>to<&sp><context.item.flag[SERVER]>
+      - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|0|<[origintodest]>|Send
+      - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<[origintodest]>|Send
+      - adjust <player.flag[amp_map].as_map.get[uuid].as_player> send_to:<context.item.flag[SERVER]>
 
 mod_send_inv_open:
   type: task
