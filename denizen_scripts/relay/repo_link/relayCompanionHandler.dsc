@@ -1,38 +1,3 @@
-companion_web_launch:
-  type: world
-  events:
-    on server start:
-      - web start port:25581
-
-companion_web_show:
-  type: world
-  events:
-    on GET request priority:-100:
-      - define vars <context.query_map>
-      - debug debug <[vars]>
-      - if <context.request.equals[/companion]>:
-        #IP from the web server filtered to show just the numbers
-        - define ip <context.address.replace_text[/].with[].split[:]>
-        #Ip that was sent from the server to the relay
-        - define relayIp <proc[companion_get_ip_using_hash].context[<[vars].get[hash]>]>
-        - if !<[relayIp].equals[null]>:
-          - if <[relayIp].equals[<[ip].first>]>:
-            - define uuid <proc[companion_get_uuid_using_hash].context[<[vars].get[hash]>]>
-            - if !<[uuid].equals[null]>:
-              - if <[vars].contains[request]> && <[vars].get[request].equals[data]>:
-                - determine passively code:200
-                - determine <proc[companion_get_data_using_hash].context[<[vars].get[hash]>]>
-              - determine passively code:200
-              - determine parsed_file:scripts/relay/repo_link/web/main.html
-            - else:
-              - determine "Youre data is missing, please contact administration"
-          - else:
-            - determine "You must use the same ip address, as the one you used to login to minecraft!"
-        - else:
-            - determine "You dont have an active session. Please use /companion in game to create one"
-      - else if <context.request.equals[/AdriftusMCHalf.png]>:
-        - determine file:scripts/relay/repo_link/web/AdriftusMCHalf.png
-
 companion_get_uuid_using_hash:
   type: procedure
   definitions: hash
