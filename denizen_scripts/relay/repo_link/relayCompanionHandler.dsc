@@ -20,7 +20,9 @@ companion_web_show:
             - define uuid <proc[companion_get_uuid_using_hash].context[<[vars].get[hash]>]>
             - if !<[uuid].equals[null]>:
               - if <[vars].contains[request]> && <[vars].get[request].equals[data]>:
+                - determine passively code:200
                 - determine <proc[companion_get_data_using_hash].context[<[vars].get[hash]>]>
+              - determine passively code:200
               - determine parsed_file:scripts/relay/repo_link/web/main.html
             - else:
               - determine "Youre data is missing, please contact administration"
