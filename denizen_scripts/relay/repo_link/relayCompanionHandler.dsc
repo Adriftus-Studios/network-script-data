@@ -21,7 +21,7 @@ companion_web_show:
             - if !<[uuid].equals[null]>:
               - if <[vars].contains[request]> && <[vars].get[request].equals[data]>:
                 - determine <proc[companion_get_data_using_hash].context[<[vars].get[hash]>]>
-              - determine parsed_file:scripts/repo_link/web/main.html
+              - determine parsed_file:scripts/relay/repo_link/web/main.html
             - else:
               - determine "Youre data is missing, please contact administration"
           - else:
@@ -29,7 +29,7 @@ companion_web_show:
         - else:
             - determine "You dont have an active session. Please use /companion in game to create one"
       - else if <context.request.equals[/AdriftusMCHalf.png]>:
-        - determine file:scripts/repo_link/web/AdriftusMCHalf.png
+        - determine file:scripts/relay/repo_link/web/AdriftusMCHalf.png
 
 companion_get_uuid_using_hash:
   type: procedure
