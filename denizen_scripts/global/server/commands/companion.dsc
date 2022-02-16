@@ -7,7 +7,7 @@ companion_oauth_command:
     - if !<player.has_flag[companionHash]>:
         - bungeerun relay companion_generate_hash def:<player>|<bungee.server>|<player.ip_address.replace_text[/].with[]>
     - else:
-        - narrate "Heres ur generated link http://50.35.235.151:81/companion?hash=<player.flag[companionHash]>"
+        - narrate "Heres ur generated link http://147.135.7.85:25581/companion?hash=<player.flag[companionHash]>"
 
 companion_reset_hash_if_exists:
     type: world
@@ -22,7 +22,7 @@ companion_hash_return_print:
     type: task
     definitions: uuid
     script:
-        - narrate "Heres ur generated link http://50.35.235.151:81/companion?hash=<player[<[uuid]>].flag[companionHash]>"
+        - narrate "Heres ur generated link http://147.135.7.85:25581/companion?hash=<player[<[uuid]>].flag[companionHash]>"
 
 companion_hash_set:
     type: task
