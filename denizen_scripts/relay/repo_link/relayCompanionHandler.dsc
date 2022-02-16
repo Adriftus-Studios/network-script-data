@@ -2,7 +2,7 @@ companion_web_launch:
   type: world
   events:
     on server start:
-      - web start port:81
+      - web start port:25581
 
 companion_web_show:
   type: world
@@ -89,7 +89,6 @@ companion_hash_handler:
             #Uses mock server details
             - define uuid <context.uuid>
             - if <server.has_flag[Hashes.<[uuid]>.companionHash]> :
-              - wait 5s
               - ~bungeetag server:hub <server.flag[<[uuid]>.oldServer]> save:oldServer
               - bungeerun <entry[oldServer].result> companion_hash_expire def:<[uuid]>
               - bungeerun <context.server> companion_hash_set def:<[uuid]>|<server.flag[Hashes.<[uuid]>.companionHash]>
