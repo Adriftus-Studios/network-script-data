@@ -7,7 +7,7 @@ companion_web_launch:
 companion_web_show:
   type: world
   events:
-    on GET request:
+    on GET request priority:-100:
       - define vars <context.query_map>
       - debug debug <[vars]>
       - if <context.request.equals[/companion]>:
