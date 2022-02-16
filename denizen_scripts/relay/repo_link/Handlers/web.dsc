@@ -55,16 +55,18 @@ web_handler:
       # % ██ [ Companion App          ] ██
         - case /companion:
           # Inject the script file with all the companion handlers
-          - inject relayCompanionHandler
           # IP from the web server filtered to show just the numbers
           - define ip <context.address.replace_text[/].with[].split[:]>
           # Ip that was sent from the server to the relay
+          - inject companion_get_ip_using_hash
           - define relayIp <proc[companion_get_ip_using_hash].context[<[query].get[hash]>]>
           - if !<[relayIp].equals[null]>:
             - if <[relayIp].equals[<[ip].first>]>:
+              - inject companion_get_uuid_using_hash
               - define uuid <proc[companion_get_uuid_using_hash].context[<[query].get[hash]>]>
               - if !<[uuid].equals[null]>:
                 - if <[query].contains[request]> && <[query].get[request].equals[data]>:
+                  - inject companion_get_data_using_hash
                   - determine passively code:200
                   - determine <proc[companion_get_data_using_hash].context[<[query].get[hash]>]>
                 - determine passively code:200
