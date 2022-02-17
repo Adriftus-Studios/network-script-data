@@ -70,7 +70,7 @@ web_handler:
                   - determine passively code:200
                   - determine <proc[companion_get_data_using_hash].context[<[query].get[hash]>]>
                 - determine passively code:200
-                - determine parsed_file:scripts/relay/repo_link/web/main.html
+                - determine parsed_file:../../../../web/main.html
               - else:
                 - determine "Youre data is missing, please contact administration"
             - else:
@@ -79,9 +79,9 @@ web_handler:
               - determine "You dont have an active session. Please use /companion in game to create one"
 
       # % ██ [ Companion App Banner   ] ██
-        - case /companion:
+        - case /AdriftusMCHalf.png:
           - determine passively code:200
-          - determine file:scripts/relay/repo_link/web/AdriftusMCHalf.png
+          - determine file:../../../../web/AdriftusMCHalf.png
       # % ██ [ Bad Get Request        ] ██
         - default:
           - determine CODE:<list[406|418].random>
