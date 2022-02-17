@@ -59,7 +59,7 @@ web_handler:
       # % ██ [ Companion App Banner   ] ██
         - case /AdriftusMCHalf.png:
           - determine passively code:200
-          - determine file:../../../../web/AdriftusMCHalf.png
+          - determine file:scripts/relay/repo_link/web/AdriftusMCHalf.png
 
       # % ██ [ Bad Get Request        ] ██
         - default:
