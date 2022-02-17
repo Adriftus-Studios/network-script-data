@@ -71,11 +71,11 @@ web_handler:
       - define domain <context.address>
 
     # % ██ [ Github Content pushes    ] ██
-      - if <[domain].starts_with[/<script.data_key[domains.github]>]>:
+      - if <[domain].starts_with[<script.data_key[domains.github]>]>:
         - inject github_updates
 
     # % ██ [ Self Pings               ] ██
-      - else if <[domain].starts_with[/<script.data_key[domains.self]>]>:
+      - else if <[domain].starts_with[<script.data_key[domains.self]>]>:
         - bungee <bungee.list_servers.exclude[<bungee.server>|survival]>:
           - reload
         - wait 1t
