@@ -1,6 +1,7 @@
 companion_oauth_command:
     type: command
     name: companion
+    debug: false
     description: Command that gives you your companion link
     usage: /companion
     script:
@@ -11,6 +12,7 @@ companion_oauth_command:
 
 companion_reset_hash_if_exists:
     type: world
+    debug: false
     events:
         on player joins:
             - define uuid <player.uuid>
@@ -24,12 +26,14 @@ companion_reset_hash_if_exists:
 companion_hash_return_print:
     type: task
     definitions: uuid
+    debug: false
     script:
         - narrate "Heres ur generated link http://147.135.7.85:25581/companion?hash=<player[<[uuid]>].flag[companionHash]>"
 
 companion_hash_set:
     type: task
     definitions: uuid|hash
+    debug: false
     script:
         - debug debug "Hash has been received for <player[<[uuid]>].name> and set as <[hash]>"
         - flag <player[<[uuid]>]> companionHash:<[hash]>
@@ -39,6 +43,7 @@ companion_hash_set:
 companion_hash_expire:
     type: task
     definitions: uuid
+    debug: false
     script:
         - debug debug "Hash <player[<[uuid]>].flag[companionHash]> has been marked as expired"
         - flag <player[<[uuid]>]> companionHash:!
@@ -63,6 +68,7 @@ companion_data_send_loop:
 
 companion_location_to_json_proc:
   type: procedure
+  debug: false
   definitions: location
   script:
     - determine <map[x=<[location].x>;y=<[location].y>;z=<[location].z>;world=<[location].world.name>].to_json>
