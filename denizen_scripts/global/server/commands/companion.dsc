@@ -17,6 +17,9 @@ companion_reset_hash_if_exists:
             - ~bungeetag server:relay <server.has_flag[Hashes.<[uuid]>.companionHash]> save:hasFlag
             - if <player.has_flag[companionHash]> && !<entry[hasFlag].result>:
                 - run companion_hash_expire def:<player.uuid>
+            - else:
+                - if <script[companion_data_send_loop].queues.size> = 0:
+                    - run companion_data_send_loop
 
 companion_hash_return_print:
     type: task
