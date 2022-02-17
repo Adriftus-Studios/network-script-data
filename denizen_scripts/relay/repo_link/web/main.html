@@ -95,18 +95,36 @@
             xhttp.send();
         }
 
+        var server;
+        var mapLink;
+
         function handleData(json) {
             if (initData) {
                 initData = false;
                 handleInitData(json);
+            }
+            if (server === null || json.server !== server) {
+                server = json.server
+                switch (server) {
+                    case "hub":
+                        {
+                            mapLink = "http://147.135.7.85:25591/";
+                            break;
+                        }
+                    case "test":
+                        {
+                            mapLink = "http://147.135.7.85:25592/";
+                            break;
+                        }
+                }
+                var location = JSON.parse(json.location);
+                document.getElementById('map').src = mapLink + "?world=" + location.world + "&zoom=5&x=" + location.x + "&z=" + location.z;
             }
             constructTable(json);
         }
 
         function handleInitData(json) {
             document.getElementById("card-title").innerHTML = json.name;
-            var location = JSON.parse(json.location);
-            document.getElementById('map').src = "http://50.35.235.151:82/?world=" + location.world + "&zoom=5&x=" + location.x + "&z=" + location.z;
             skinRender.render(json.name);
         }
 
