@@ -66,7 +66,7 @@ companion_hash_handler:
 
 companion_data_receive_handler:
   type: task
-  debug: true
+  debug: false
   definitions: data
   script:
     - foreach <[data].unescaped> as:playerData:
