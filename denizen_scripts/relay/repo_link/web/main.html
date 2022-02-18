@@ -24,9 +24,9 @@
         <img src="AdriftusMCHalf.png" height="150px">
     </div>
 
-    <div class="container mt-5 text-center">
+    <div class="container mt-5">
         <div class="row">
-            <div class="col-sm-4 mx-auto">
+            <div class="col-sm-4 mx-auto text-center">
                 <h3>Player</h3>
                 <div class="card">
                     <div style="margin-top: 10px">
@@ -35,7 +35,7 @@
                     <div id="mySkinContainer"></div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 text-center">
                 <h3>Data</h3>
                 <table id="data" class="table table-dark table-hover">
                     <tbody>
@@ -43,8 +43,12 @@
                 </table>
             </div>
             <div class="col-sm-4">
-                <h3>Map</h3>
+                <h3 class="text-center">Map</h3>
                 <iframe id="map" src="http://50.35.235.151:82/" style="width: 400px;height: 500px;" title="Map"></iframe>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="mySwitch" name="autoCenter" value="yes">
+                    <label class="form-check-label" for="mySwitch">Enable Auto Centering</label>
+                </div>
             </div>
         </div>
     </div>
@@ -52,6 +56,7 @@
     </div>
     <script>
         var initData = true;
+        var autoCenter = false;
 
         var skinRender = new SkinRender({
             canvas: {
@@ -65,6 +70,15 @@
                 pan: false
             }
         }, document.getElementById("mySkinContainer"));
+
+        document.addEventListener('change', function() {
+            var chk = event.target
+            if (chk.tagName === 'INPUT' && chk.type === 'checkbox') {
+                if (chk.name === "autoCenter") {
+                    autoCenter = chk.name;
+                }
+            }
+        })
 
 
         function getUrlVars() {
@@ -103,6 +117,7 @@
                 initData = false;
                 handleInitData(json);
             }
+
             if (server === null || json.server !== server) {
                 server = json.server
                 switch (server) {
@@ -120,6 +135,12 @@
                 var location = JSON.parse(json.location);
                 document.getElementById('map').src = mapLink + "?world=" + location.world + "&zoom=5&x=" + location.x + "&z=" + location.z;
             }
+
+            if (autoCenter) {
+                var location = JSON.parse(json.location);
+                document.getElementById('map').src = mapLink + "?world=" + location.world + "&zoom=5&x=" + location.x + "&z=" + location.z;
+            }
+
             constructTable(json);
         }
 
