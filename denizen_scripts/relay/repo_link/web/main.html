@@ -75,8 +75,9 @@
             var chk = event.target
             if (chk.tagName === 'INPUT' && chk.type === 'checkbox') {
                 if (chk.name === "autoCenter") {
-                    autoCenter = chk.name;
+                    autoCenter = chk.checked;
                 }
+                console.log(autoCenter)
             }
         })
 
