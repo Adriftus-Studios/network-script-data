@@ -7,7 +7,7 @@ channels:
     permission: "none"
     format: 
       channel: "<&7><&lb><server.flag[display_name]||<bungee.server>><&7><&rb> "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.name>>"
+      name: "<&7><player.display_name||<player.name>>"
       separator: "<&b>: "
       message: "<&f><[msg]||<context.message>>"
     integrations:
@@ -28,7 +28,7 @@ channels:
     permission: "none"
     format:
       channel: "<&7>[<&6>Global<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      name: "<&7><player.display_name||<player.name>>"
       separator: "<&b>: "
       message: "<&f><[msg]||<context.message>>"
     integrations:
@@ -50,7 +50,7 @@ channels:
     permission: adriftus.staff
     format:
       channel: "<&7>[<&a>Staff<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      name: "<&7><player.display_name||<player.name>>"
       separator: "<&b>: "
       message: "<&a><[msg]||<context.message>>"
     integrations:
@@ -72,7 +72,7 @@ channels:
     permission: adriftus.admin
     format:
       channel: "<&7>[<&4>Admin<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      name: "<&7><player.display_name||<player.name>>"
       separator: "<&b>: "
       message: "<&c><[msg]||<context.message>>"
     integrations:
@@ -94,7 +94,7 @@ channels:
     permission: adriftus.developer
     format:
       channel: "<&7>[<&b>Dev<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      name: "<&7><player.display_name||<player.name>>"
       separator: "<&f>: "
       message: "<&b><[msg]||<context.message>>"
     integrations:
