@@ -14,12 +14,14 @@ flag_handler:
     # Player Flag and Server Flag, with preference on Player
     # Player Flag "join_location" - will teleport the player on join, clear flag afterwards
     # Server Flag "join_location" - will teleport the player on join, if no player flag is present
-    on player joins bukkit_priority:LOWEST priority:-100:
-        - if <player.has_flag[join_location]>:
-          - teleport <player> <player.flag[join_location]>
-          - flag <player> join_location:!
-        - else if <server.has_flag[join_location]>:
-          - teleport <server.flag[join_location]>
+    after player joins bukkit_priority:LOWEST priority:-100 server_flagged:join_location:
+        - if <server.has_flag[join_location.<player.uuid>]>:
+          - teleport <player> <server.flag[join_location.<player.uuid>]>
+          - flag server join_location.<player.uuid>:!
+        - else if <server.has_flag[join_location.location]>:
+          - teleport <server.flag[join_location.location]>
+        - else:
+          - flag server join_location:!
 #    on player jumps flagged:no_jump bukkit_priority:LOWEST:
 #      - determine cancelled
 #    on player walks flagged:no_move bukkit_priority:LOWEST:
