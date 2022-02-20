@@ -218,8 +218,8 @@ chat_settings_open:
           - define lore "<[lore].insert[<&e>You are talking in this channel.].at[2]>"
         - else:
           - define "lore:|:<&b>right click to start speaking."
-        - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>;nbt=action/<[channel]>]>
+        - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>].with_flag[action:<[channel]>]>
     - repeat <[list].size.sub[8].abs>:
-      - define list:->:<item[standard_filler].with[nbt=unique/<util.random_uuid>]>
+      - define list:->:<item[standard_filler].with_flag[unique:<util.random_uuid>]>
     - give <[list]> to:<[inventory]>
     - inventory open d:<[inventory]>
