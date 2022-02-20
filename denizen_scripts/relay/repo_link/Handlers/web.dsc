@@ -68,7 +68,7 @@ web_handler:
     on post request:
       - announce to_console "<&c>--- post request ----------------------------------------------------------"
       - inject Web_Debug.Post_Request
-      - define domain <context.address>
+      - define domain <context.headers.get[Nginx.remote_addr]>
 
     # % ██ [ Github Content pushes    ] ██
       - if <[domain].starts_with[<script.data_key[domains.github]>]>:
