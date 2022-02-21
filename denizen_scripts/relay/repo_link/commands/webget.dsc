@@ -152,19 +152,19 @@ Webget_DCommand:
       - ~webget <[URL]> data:<[Data]> headers:<[Headers].parsed> Timeout:<[Timeout]> save:Response
 
     - else if <[Data]||invalid> != invalid  && <[Headers]||invalid> != invalid && <[Method]||invalid> != invalid:
-      - ~betterwebget <[URL]> data:<[Data]> Headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
+      - ~webget <[URL]> data:<[Data]> Headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
     - else if <[Data]||invalid> != invalid  && <[Headers]||invalid> == invalid && <[Method]||invalid> != invalid:
-      - ~betterwebget <[URL]> data:<[Data]> Method:<[Method]> Timeout:<[Timeout]> save:Response
+      - ~webget <[URL]> data:<[Data]> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
     - else if <[Data]||invalid> == invalid  && <[Headers]||invalid> == invalid && <[Method]||invalid> != invalid:
-      - ~betterwebget <[URL]> Method:<[Method]> Timeout:<[Timeout]> save:Response
+      - ~webget <[URL]> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
     - else if <[Data]||invalid> == invalid  && <[Headers]||invalid> != invalid && <[Method]||invalid> == invalid:
       - ~webget <[URL]> headers:<[Headers].parsed> Timeout:<[Timeout]> save:Response
 
     - else if <[Data]||invalid> == invalid  && <[Headers]||invalid> != invalid && <[Method]||invalid> != invalid:
-      - ~betterwebget <[URL]> headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
+      - ~webget <[URL]> headers:<[Headers].parsed> Method:<[Method]> Timeout:<[Timeout]> save:Response
 
   # % ██ [ Listener Flags                          ] ██
     - if <[Args].contains_any[-f|-fail|-failed]>:
