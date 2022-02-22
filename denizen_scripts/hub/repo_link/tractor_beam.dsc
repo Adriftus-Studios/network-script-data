@@ -6,6 +6,7 @@ tractor_beam_events:
     - cast LEVITATION amplifier:20 duration:99d
     - while <player.location.is_within[<context.area>]> && <player.is_spawned>:
       - adjust <player> velocity:<context.area.center.sub[<player.location>].div[10].with_y[0]>
+      - wait 1t
     on player exits tractor_beam_1:
     - cast LEVITATION amplifier:20 duration:0t
     after player enters tractor_beam_exit_1:
