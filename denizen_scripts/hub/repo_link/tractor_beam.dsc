@@ -4,7 +4,7 @@ tractor_beam_events:
   events:
     after player enters tractor_beam_1:
     - while <player.location.is_within[<context.area>]> && <player.is_spawned>:
-      - adjust <player> velocity:<context.area.center.sub[<player.location>].div[10].with_y[0.03]>
+      - adjust <player> velocity:<context.area.center.sub[<player.location>].div[10].with_y[0.3]>
       - wait 1t
     after player enters tractor_beam_exit_1:
     - adjust <player> gravity:false
