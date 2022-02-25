@@ -3,6 +3,7 @@ warps_main_command:
     name: warp
     description: A command used to access warps created around the hub
     usage: /warp
+    debug: false
     aliases:
     - warps
     tab completions:
@@ -16,6 +17,7 @@ warps_main_command:
 
 hub_warp_inventory:
   type: inventory
+  debug: false
   inventory: chest
   size: 27
   title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6909]>
@@ -29,6 +31,7 @@ hub_warp_inventory:
 
 hub_warp_inventory_events:
   type: world
+  debug: false
   events:
     on player clicks in hub_warp_inventory:
     - if <context.item.script.data_key[data.warp].exists>:
@@ -39,6 +42,7 @@ hub_warp_inventory_events:
 hub_warp_to:
     type: task
     definitions: player|warpName
+    debug: false
     script:
         - if <location[hub_warp_<[warpName]>].exists>:
             - teleport <[player]> hub_warp_<[warpName]>
@@ -50,6 +54,7 @@ hub_warp_to:
 
 reverse_color_gradient:
     type: procedure
+    debug: false
     definitions: text|hex1|hex2
     script:
         - define firstHalf <[text].substring[1,<[text].length.div_int[2].sub[1]>]>
@@ -59,6 +64,7 @@ reverse_color_gradient:
 hub_warp_crates_icon:
   type: item
   material: chest
+  debug: false
   data:
     warp: crates
   display name: "<&6><&l>Crates"
@@ -71,6 +77,7 @@ hub_warp_crates_icon:
 
 hub_warp_spawn_icon:
   type: item
+  debug: false
   material: grass_block
   data:
     warp: spawn
@@ -84,6 +91,7 @@ hub_warp_spawn_icon:
 
 hub_warp_towny_icon:
   type: item
+  debug: false
   material: bookshelf
   data:
     warp: towny
@@ -97,6 +105,7 @@ hub_warp_towny_icon:
 
 hub_warp_shops_icon:
   type: item
+  debug: false
   material: crafting_table
   data:
     warp: shop
