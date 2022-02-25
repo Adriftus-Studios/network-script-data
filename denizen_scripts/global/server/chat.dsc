@@ -42,7 +42,7 @@ chat_system_events:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
         - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include_single[<[message]>]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
-          - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.display_name.strip_color>]>
+          - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>]>
         - inject chat_history_save
 
 chat_history_save:
@@ -175,24 +175,24 @@ chat_settings_events:
     on player clicks item in chat_settings:
       - determine passively cancelled
       - wait 1t
-      - if <context.item.has_nbt[action]>:
+      - if <context.item.has_flag[action]>:
         - choose <context.click>:
           - case LEFT:
-            - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<context.item.nbt[action]>]>:
-              - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <context.item.nbt[action]>:
+            - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<context.item.flag[action]>]>:
+              - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <context.item.flag[action]>:
                 - narrate "<&c>You cannot stop listening to the channel you're talking in."
                 - stop
-              - yaml set id:global.player.<player.uuid> chat.channels.active:<-:<context.item.nbt[action]>
-              - flag player chat_channel_<context.item.nbt[action]>:!
-              - narrate "<&b>You are no longer listening to <yaml[chat_config].parsed_key[channels.<context.item.nbt[action]>.format.channel]>"
+              - yaml set id:global.player.<player.uuid> chat.channels.active:<-:<context.item.flag[action]>
+              - flag player chat_channel_<context.item.flag[action]>:!
+              - narrate "<&b>You are no longer listening to <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
             - else:
-              - yaml set id:global.player.<player.uuid> chat.channels.active:|:<context.item.nbt[action]>
-              - flag player chat_channel_<context.item.nbt[action]>
-              - narrate "<&b>You are now listening to <yaml[chat_config].parsed_key[channels.<context.item.nbt[action]>.format.channel]>"
+              - yaml set id:global.player.<player.uuid> chat.channels.active:|:<context.item.flag[action]>
+              - flag player chat_channel_<context.item.flag[action]>
+              - narrate "<&b>You are now listening to <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
           - case RIGHT:
-            - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> != <context.item.nbt[action]>:
-              - yaml set id:global.player.<player.uuid> chat.channels.current:<context.item.nbt[action]>
-              - narrate "<&b>You are now talking in <yaml[chat_config].parsed_key[channels.<context.item.nbt[action]>.format.channel]>"
+            - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> != <context.item.flag[action]>:
+              - yaml set id:global.player.<player.uuid> chat.channels.current:<context.item.flag[action]>
+              - narrate "<&b>You are now talking in <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
         - inject chat_settings_open
 
 chat_settings_open:
@@ -218,8 +218,8 @@ chat_settings_open:
           - define lore "<[lore].insert[<&e>You are talking in this channel.].at[2]>"
         - else:
           - define "lore:|:<&b>right click to start speaking."
-        - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>;nbt=action/<[channel]>]>
+        - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>].with_flag[action:<[channel]>]>
     - repeat <[list].size.sub[8].abs>:
-      - define list:->:<item[standard_filler].with[nbt=unique/<util.random.uuid>]>
+      - define list:->:<item[standard_filler].with_flag[unique:<util.random_uuid>]>
     - give <[list]> to:<[inventory]>
     - inventory open d:<[inventory]>
