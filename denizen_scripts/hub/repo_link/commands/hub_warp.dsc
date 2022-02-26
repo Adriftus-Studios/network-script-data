@@ -63,11 +63,13 @@ reverse_color_gradient:
 
 hub_warp_crates_icon:
   type: item
-  material: chest
+  material: feather
   debug: false
   data:
     warp: crates
   display name: "<&6><&l>Crates"
+  mechanisms:
+    custom_model_data: 3
   lore:
     - <&r><&7>Try your luck in in some loot crates!
     - <&r><&7>Lots of prizes available including
@@ -78,10 +80,12 @@ hub_warp_crates_icon:
 hub_warp_spawn_icon:
   type: item
   debug: false
-  material: grass_block
+  material: feather
   data:
     warp: spawn
   display name: "<&a><&l>Spawn"
+  mechanisms:
+    custom_model_data: 3
   lore:
     - <&r><&7>This is where you're journey begins!
     - <&r><&7>Teleports you back to the spawn in
@@ -92,10 +96,12 @@ hub_warp_spawn_icon:
 hub_warp_towny_icon:
   type: item
   debug: false
-  material: bookshelf
+  material: feather
   data:
     warp: towny
   display name: "<&e><&l>Towny"
+  mechanisms:
+    custom_model_data: 3
   lore:
     - <&r><&7>Join us in the world's greatest Towny server!
     - <&r><&7>A truly custom experience, fit only
@@ -106,10 +112,12 @@ hub_warp_towny_icon:
 hub_warp_shops_icon:
   type: item
   debug: false
-  material: crafting_table
+  material: feather
   data:
     warp: shop
   display name: "<&4><&l>Shops"
+  mechanisms:
+    custom_model_data: 3
   lore:
     - <&r><&7>Come here to waste your money!
     - <&r><&7>We have cosmetics, ranks, and more only
