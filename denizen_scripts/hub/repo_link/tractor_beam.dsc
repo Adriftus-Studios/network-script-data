@@ -22,7 +22,9 @@ tractor_beam_particles:
   script:
     - define blocks <cuboid[tractor_beam_1].blocks.filter[y.is[less].than[40]]>
     - define blocks2 <cuboid[tractor_beam_1].blocks.filter[y.is[less].than[58]]>
+    - define blocks3 <cuboid[tractor_beam_1].blocks.filter[y.is[less].than[35]]>
     - while <cuboid[tractor_beam_1].exists>:
-        - playeffect <[blocks].random[5]> offset:3 effect:DRAGON_BREATH quantity:5 velocity:<location[0,0.7,0]> targets:<server.online_players>
-        - playeffect <[blocks2].random[5]> offset:3 effect:END_ROD quantity:5 velocity:<location[0,0.7,0]> targets:<server.online_players>
+        - playeffect <[blocks].random[5]> offset:3 effect:DRAGON_BREATH quantity:2 velocity:<location[0,0.7,0]> targets:<server.online_players>
+        - playeffect <[blocks2].random[5]> offset:3 effect:END_ROD quantity:2 velocity:<location[0,0.7,0]> targets:<server.online_players>
+        - playeffect <[blocks3].random[2]> offset:3 effect:DRAGON_BREATH quantity:2 targets:<server.online_players>
         - wait 3t
