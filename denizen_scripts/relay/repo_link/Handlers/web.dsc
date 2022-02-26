@@ -6,7 +6,7 @@ web_handler:
     self: 127.0.0.1
   events:
     on server start:
-      - web start port:25581
+      - web start port:25579
 
     on get request:
       - announce to_console "<&c>--- get request ----------------------------------------------------------"
@@ -68,7 +68,7 @@ web_handler:
     on post request:
       - announce to_console "<&c>--- post request ----------------------------------------------------------"
       - inject Web_Debug.Post_Request
-      - define domain <context.address>
+      - define domain <context.headers.get[Nginx.remote_addr]>
 
     # % ██ [ Github Content pushes    ] ██
       - if <[domain].starts_with[<script.data_key[domains.github]>]>:
