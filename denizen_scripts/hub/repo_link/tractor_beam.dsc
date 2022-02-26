@@ -24,4 +24,4 @@ tractor_beam_particles:
     - while <cuboid[tractor_beam_1].exists>:
         - playeffect <[blocks].random[10]> offset:3 effect:DRAGON_BREATH quantity:5 velocity:<location[0,0.7,0]> targets:<server.online_players>
         - playeffect <[blocks].random[10]> offset:3 effect:END_ROD quantity:5 velocity:<location[0,0.7,0]> targets:<server.online_players>
-        - wait 1t
+        - wait 3t
