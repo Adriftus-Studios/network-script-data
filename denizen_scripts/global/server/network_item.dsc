@@ -53,11 +53,11 @@ network_item_events:
     on player right clicks block with:network_item:
       - determine passively cancelled
       - inventory open d:network_item_inventory
-    on player joins:
-      - if <bungee.server> == hub:
-        - wait 1t
-        - inventory set d:<player.inventory> slot:5 o:network_item
-        - adjust <player> item_slot:5
+    # on player joins:
+    #   - if <bungee.server> == hub:
+    #     - wait 1t
+    #     - inventory set d:<player.inventory> slot:5 o:network_item
+    #     - adjust <player> item_slot:5
     on player clicks network_item in inventory:
       - determine cancelled
     on player drops network_item:
