@@ -37,7 +37,7 @@ shop_blacklist:
 titles:
   Default:
     order: 0
-    tag: '&8｜&7No Title&8｜'
+    tag: '&8｜&7<player.chat_prefix>&8｜'
     description: Osu!, anyone?
     in_shop: false
     Price: 300
