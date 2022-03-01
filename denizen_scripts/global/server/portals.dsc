@@ -91,7 +91,7 @@ dtd_command:
       - if !<context.args.get[2].to_lowercase.matches_character_set[abcdefghijklmnopqrstuvwxyz_]>:
         - narrate <script[portal_config].parsed_key[messages.bad_arguments]>
         - stop
-      - define map <map[dtd.locations.<context.args.get[2]>.location=<player.location>;dtd.locations.<context.args.get[2]>.server:<bungee.server>]>
+      - define map <map[dtd.locations.<context.args.get[2]>.location=<player.location>;dtd.locations.<context.args.get[2]>.server=<bungee.server>]>
       - run global_player_data_modify_multiple def:<player.uuid>|<[map]>
       - narrate <script[portal_config].parsed_key[messages.saved_location]>
     - else:
