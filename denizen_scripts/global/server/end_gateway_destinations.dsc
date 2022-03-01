@@ -4,12 +4,12 @@ gateway_teleport:
   events:
     on player teleports cause:END_GATEWAY:
       - if <context.origin.has_flag[destination.location]>:
-        - if <bungee.connected> && <context.origin.has_flag[destination.server]||null> != <bungee.server>:
+        - if <bungee.connected> && <context.origin.flag[destination.server]||null> != <bungee.server>:
           - determine passively cancelled
           - ratelimit <player> 5t
-          - bungeerun <context.origin.has_flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<context.origin.has_flag[destination.location]>
+          - bungeerun <context.origin.flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<context.origin.flag[destination.location]>
           - wait 1t
-          - adjust <player> send_to:<context.origin.has_flag[destination.server]>
+          - adjust <player> send_to:<context.origin.flag[destination.server]>
         - adjust <player> fall_distance:0
         - determine passively cancelled
         - teleport <context.origin.flag[destination.location].parsed>
