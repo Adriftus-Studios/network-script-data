@@ -12,6 +12,17 @@ resource_pack_force:
     on player joins:
       - if !<player.has_flag[RP_Enabled]>:
         - resourcepack targets:<player> url:http://www.adriftus.net:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced
-        - flag player RP_enabled
+    on resource pack status:
+      - choose <context.status>:
+        - case SUCCESSFULLY_LOADED:
+          - flag <player> RP_Enabled
+        - case FAILED_DOWNLOAD:
+          - flag player rp_fail:++
+          - if <player.has_flag[rp_fail]> && <player.flag[rp_fail]> > 2:
+            - narrate "<&6>We are currently experiencing Resource Pack issues, please contact administration"
+            - stop
+          - else:
+            - resourcepack targets:<player> url:http://www.adriftus.net:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced
     on bungee player leaves network:
+      - flag player rp_fail:!
       - flag player RP_Enabled:!
