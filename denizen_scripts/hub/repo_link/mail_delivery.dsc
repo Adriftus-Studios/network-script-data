@@ -27,21 +27,19 @@ mail_delivery_mailbox_inventory:
 
 mail_delivery_generate_item:
   type: procedure
-  debug: false
+  debug: true
   definitions: number
   script:
-  - define item <item[mail_delivery_mail_item]>
-  - flag <[item]> mailbox_number:<[number]>
-  - adjust <[item]> "lore:<&e>Destination<&co> <[number]>"
-  - flag <[item]> no_stack:<util.random_uuid>
+  - define item <item[mail_delivery_mail_item].with[flag=mailbox_number:<[number]>].with[flag=no_stack:<util.random_uuid>]>
+  - define item <[item].with[lore=<&e>Destination<&co><&sp><[number]>]>
   - choose <util.random.int[1].to[3]>:
     - case 1:
-      - adjust <[item]> material:crafting_table
-      - adjust <[item]> "display_name:<&e>Package"
+      - define item <[item].with[material=crafting_table]>
+      - define item <[item].with[display_name=<&e>Package]>
     - case 2:
-      - adjust <[item]> material:paper
-      - adjust <[item]> "display_name:<&e>Letter"
+      - define item <[item].with[material=paper]>
+      - define item <[item].with[display_name=<&e>Letter]>
     - case 3:
-      - adjust <[item]> material:stripped_oak_wood
-      - adjust <[item]> "display_name:<&e>Container"
+      - define item <[item].with[material=stripped_oak_wood]>
+      - define item <[item].with[display_name=<&e>Container]>
   - determine <[item]>
