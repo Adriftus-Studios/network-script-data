@@ -96,19 +96,19 @@ title_inventory_open:
       - inject build_title_select_item
       - define list:->:<[item]>
     - give <[list].get[<[page].sub[1].mul[21].add[1]>].to[<[page].sub[1].mul[21].add[21]>]> to:<[inventory]>
-    - foreach <script[title_inventory].list_keys[custom.mapping]>:
+    - foreach <script[title_inventory].list_keys[data.mapping]>:
       - choose <[value]>:
         - case next_page:
           - if <[unlocked_tags].size> > <[page].sub[1].mul[21].add[21]>:
-            - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.next_page]> o:<script[title_inventory].parsed_key[definitions.next_page]>
+            - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[data.mapping.next_page]> o:<script[title_inventory].parsed_key[definitions.next_page]>
         - case previous_page:
           - if <[page]> > 1:
-            - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.previous_page]> o:<script[title_inventory].parsed_key[definitions.previous_page]>
+            - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[data.mapping.previous_page]> o:<script[title_inventory].parsed_key[definitions.previous_page]>
         - case current_title:
           - inject build_current_title
-          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.current_title]> o:<[item]>
+          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[data.mapping.current_title]> o:<[item]>
         - case page_marker:
-          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.page_marker]> o:<item[standard_filler].with[flag=page:<[page]>]>
+          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[data.mapping.page_marker]> o:<item[standard_filler].with[flag=page:<[page]>]>
     - inventory open d:<[inventory]>
 
 build_title_select_item:
