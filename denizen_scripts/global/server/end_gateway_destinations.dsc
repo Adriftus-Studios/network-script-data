@@ -3,6 +3,8 @@ gateway_teleport:
   debug: false
   events:
     on player teleports cause:END_GATEWAY:
+      - narrate <context.origin.simple>
+      - narrate <player.location.simple>
       - if <context.origin.has_flag[destination.location]>:
         - if <bungee.connected> && <context.origin.flag[destination.server]||null> != <bungee.server>:
           - determine passively cancelled
