@@ -10,4 +10,4 @@ resource_pack_force:
   debug: false
   events:
     on player joins:
-      - resourcepack targets:<player> url:http://www.adriftus.net:25581/resource_pack.zip sha:<server.flag[rp_sha]> forced
+      - resourcepack targets:<player> url:http://www.adriftus.net:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced
