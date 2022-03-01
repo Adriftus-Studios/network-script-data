@@ -10,4 +10,8 @@ resource_pack_force:
   debug: false
   events:
     on player joins:
-      - resourcepack targets:<player> url:http://www.adriftus.net:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced
+      - if !<player.has_flag[RP_Enabled]>:
+        - resourcepack targets:<player> url:http://www.adriftus.net:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced
+        - flag player RP_enabled
+    on bungee player leaves network:
+      - flag player RP_Enabled:!
