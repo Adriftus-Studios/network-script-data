@@ -14,6 +14,12 @@ web_handler:
       - define query <context.query_map>
 
       - choose <context.request>:
+
+      # % ██ [ Resource Pack  ] ██
+        - case /resource_pack:
+          - determine passively FILE:../../../../web/resource-pack/hosted-rp-main.zip
+          - determine CODE:200
+
       # % ██ [ Github oAuth Token Ex  ] ██
         - case /oAuth/GitHub:
           - inject discord_oauth_token_exchange
