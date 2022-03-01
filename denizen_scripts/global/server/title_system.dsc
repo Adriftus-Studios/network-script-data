@@ -70,7 +70,7 @@ title_inventory_events:
       - if <context.item.has_flag[action]>:
         - choose <context.item.flag[action]>:
           - case set_title:
-            - define map <map[titles.current:<context.item.flag[title]>]>
+            - define map <map[titles.current=<context.item.flag[title]>]>
             - run global_player_data_modify def:titles.current_tag|<yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color>
             - inject title_inventory_open
             - narrate "<&b>You have changed your active title to<&co> <yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color.parsed>"
