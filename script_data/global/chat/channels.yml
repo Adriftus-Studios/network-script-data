@@ -1,5 +1,5 @@
 settings:
-  excluded_servers: crafted|xeane|relay
+  excluded_servers: crafted|xeane|relay|herocraft
 channels:
   server:
     global: false

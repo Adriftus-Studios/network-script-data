@@ -9,7 +9,7 @@ tractor_beam_events:
     after player enters tractor_beam_exit_1:
     - adjust <player> gravity:false
     - define vel <location[0.05,0.01,0.085]>
-    - while <player.location.is_within[<context.area>]> && <player.is_spawned>:
+    - while <player.location.is_within[<context.area>]> && <player.is_online>:
       - adjust <player> velocity:<player.velocity.add[<[vel]>]>
       - wait 1t
     - adjust <player> gravity:true
