@@ -22,6 +22,7 @@ resource_pack_force:
             - narrate "<&6>We are currently experiencing Resource Pack issues, please contact administration"
             - stop
           - else:
+            - wait 1t
             - resourcepack targets:<player> url:http://www.adriftus.net:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced
     on bungee player leaves network:
       - flag player rp_fail:!
