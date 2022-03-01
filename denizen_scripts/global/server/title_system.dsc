@@ -91,7 +91,7 @@ title_inventory_open:
   script:
     - define page <[page]||1>
     - define inventory <inventory[title_inventory]>
-    - define unlocked_tags <yaml[global.player.<player.uuid>].read[titles.unlocked]||<list[Default]>>
+    - define unlocked_tags <yaml[global.player.<player.uuid>].read[titles.unlocked].keys||<list[Default]>>
     - foreach <[unlocked_tags]> as:tagID:
       - inject build_title_select_item
       - define list:->:<[item]>
