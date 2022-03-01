@@ -10,6 +10,7 @@ gateway_teleport:
           - bungeerun <context.origin.flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<context.origin.flag[destination.location]>
           - wait 1t
           - adjust <player> send_to:<context.origin.flag[destination.server]>
+          - stop
         - adjust <player> fall_distance:0
         - determine passively cancelled
         - teleport <context.origin.flag[destination.location].parsed>

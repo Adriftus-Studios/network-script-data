@@ -151,7 +151,7 @@ open_portal:
         - wait 1t
     - if <[use_velocity]>:
       - repeat 8:
-        - playeffect at:<[target].center.above[<[value].div[5]>]> effect:squid_ink quantity:<[particle_quantity]> velocity:<[velocity]> offset:1 targets:<[target].find.players.within[96]>
+        - playeffect at:<[target].center.above[<[value].div[5]>]> effect:squid_ink quantity:<[particle_quantity]> velocity:<[velocity]> offset:1 targets:<[target].find_players_within[96]>
         - wait 1t
     - define old_block1:<[target].material>
     - define old_block2:<[target].above.material>
@@ -214,7 +214,7 @@ cross_server_portal:
         - wait 1t
     - if <[use_velocity]>:
       - repeat 8:
-        - playeffect at:<[target].center.above[<[value].div[5]>]> effect:squid_ink quantity:<[particle_quantity]> velocity:<[velocity]> offset:1 targets:<[target].find.players.within[96]>
+        - playeffect at:<[target].center.above[<[value].div[5]>]> effect:squid_ink quantity:<[particle_quantity]> velocity:<[velocity]> offset:1 targets:<[target].find_players_within[96]>
         - wait 1t
     - define old_block1:<[target].material>
     - define old_block2:<[target].above.material>
