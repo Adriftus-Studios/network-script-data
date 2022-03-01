@@ -86,6 +86,6 @@ global_player_data_modify_multiple:
     - foreach <[map]> key:node as:value:
       - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
     - if <bungee.server> != hub:
-      - bungeerun hub global_player_data_modify def:<[uuid]>|<[map]>
+      - bungeerun hub global_player_data_modify_multiple def:<[uuid]>|<[map]>
     - else:
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
