@@ -82,8 +82,8 @@ web_handler:
 
     # % ██ [ Self Pings               ] ██
       - else if <[domain].starts_with[<script.data_key[domains.self]>]>:
-        - if <context.headers.get[adriftus.sha].exists>:
-          - bungeerun hub resource_pack_sha <context.headers.get[adriftus.sha].before[<&sp>]>
+        - if <context.query.parsed.get[adriftus_sha].exists>:
+          - bungeerun hub resource_pack_sha <context.query.parsed.get[adriftus_sha].before[<&sp>]>
         - bungee <bungee.list_servers.exclude[<bungee.server>|survival]>:
           - reload
         - wait 1t
