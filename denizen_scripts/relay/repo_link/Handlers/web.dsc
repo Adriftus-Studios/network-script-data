@@ -16,7 +16,7 @@ web_handler:
       - choose <context.request>:
 
       # % ██ [ Resource Pack  ] ██
-        - case /resource_pack:
+        - case /resource_pack.zip:
           - determine passively FILE:../../../../web/resource-pack/hosted-rp-main.zip
           - determine CODE:200
 
