@@ -7,7 +7,7 @@ title_unlock:
   debug: false
   script:
     - if <yaml[titles].read[titles.<[tagID]>].exists> && !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tagID]>]||false>:
-      - run global_player_data_modify def:titles.unlocked.<[tagID]>|true
+      - run global_player_data_modify def:<[uuid]>|titles.unlocked.<[tagID]>|true
 
 title_remove:
   type: task
@@ -15,7 +15,7 @@ title_remove:
   debug: false
   script:
     - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tagID]>]||false>:
-      - run global_player_data_modify titles.unlocked.<[tagID]>:true
+      - run global_player_data_modify def:<[uuid]>|titles.unlocked.<[tagID]>|true
 
 ##################
 ## Open Command ##
@@ -71,11 +71,11 @@ title_inventory_events:
         - choose <context.item.flag[action]>:
           - case set_title:
             - define map <map[titles.current=<context.item.flag[title]>]>
-            - run global_player_data_modify def:titles.current_tag|<yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color>
+            - run global_player_data_modify def:<[uuid]>|titles.current_tag|<yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color>
             - inject title_inventory_open
             - narrate "<&b>You have changed your active title to<&co> <yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color.parsed>"
           - case remove_title:
-            - run global_player_data_modify def:titles.current|!
+            - run global_player_data_modify def:<[uuid]>|titles.current|!
             - inject title_inventory_open
           - case next_page:
             - define page <context.inventory.slot[<script[title_inventory].data_key[data.mapping.page_marker]>].flag[page].add[1]>
