@@ -249,6 +249,8 @@ cross_server_portal:
         - wait 2t
     - modifyblock <[target]> <[old_block1]>
     - modifyblock <[target].above> <[old_block2]>
+    - flag <[target]> destination:!
+    - flag <[target].above> destination:!
 
 cross_server_portal_destination:
   type: task
