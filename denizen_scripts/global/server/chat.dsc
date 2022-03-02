@@ -85,7 +85,7 @@ chat_delete_message:
   debug: false
   definitions: channel|uuid
   script:
-    - yaml id:chat_history set <[channel]>_history:<yaml[chat_history].parsed_key[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>].not>]>
+    - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].parsed_key[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>].not>]>
     - foreach <server.online_players_flagged[chat_channel_<[channel]>]>:
       - run chat_history_show player:<[value]>
       - wait 1t
