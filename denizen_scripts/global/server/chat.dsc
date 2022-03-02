@@ -151,7 +151,7 @@ chat_command:
       - inject Command_Error
 
     - define Channel <context.args.first.to_lowercase>
-    - if <yaml[chat_config].contains[channels.<[Channel]>]> && ( <player.has_permission[<yaml[chat_config].read[channels.<[Channel]>.permission]>]> || <yaml[chat_config].read[channels.<[Channel]>.permission]> == none ):
+    - if <yaml[chat_config].contains[channels.<[Channel]>]> && ( ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[Channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[Channel]>.permission]> == none ):
       - run global_player_data_modify def:<player.uuid>|chat.channels.current|<[Channel]>
       - if !<yaml[global.player.<player.uuid>].read[chat.channels.active.<[Channel]>]>:
         - run global_player_data_modify def:<player.uuid>|chat.channels.active.<[Channel]>|true
