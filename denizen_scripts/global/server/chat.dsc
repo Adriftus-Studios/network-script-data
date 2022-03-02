@@ -73,7 +73,7 @@ chat_history_show:
     - narrate <element[<&nl>].repeat_as_list[20].separated_by[<&nl>]>
     - define list <list>
     - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
-      - if !<yaml[chat_history].contains[<[Channel]>_history]> || <player.has_flag[chat_channel_<[channel]>]>:
+      - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat_channel_<[channel]>]>:
         - foreach next
       - define list:|:<yaml[chat_history].parsed_key[<[Channel]>_history]>
     - if <[List].is_empty>:
