@@ -30,7 +30,7 @@ chat_system_events:
       - if <yaml[global.player.<player.uuid>].contains[rank]>:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
       - else:
-        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>:<player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
+        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
       - define Hint "msg <player.name> "
       - define NameText <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Hint]>]>
@@ -145,7 +145,7 @@ chat_system_flag_manager:
       - waituntil rate:10t <yaml.list.contains[global.player.<player.uuid>].or[<player.is_online.not>]>
       - if !<player.is_online>:
         - stop
-      - if !<yaml[global.player.<player.uuid>].contains[chat.channels]> || <yaml[global.player.<player.uuid>].read[chat.channels].contains[global]||false>:
+      - if !<yaml[global.player.<player.uuid>].contains[chat.channels]> || <yaml[global.player.<player.uuid>].read[chat.channels].object_type> == List:
           - define map <map[chat.channels.active=server;chat.channels.current=server]>
           - run global_player_data_modify def:<player.uuid>|<[map]>
       - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].keys>:
