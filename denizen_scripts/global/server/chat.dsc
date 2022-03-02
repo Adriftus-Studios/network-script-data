@@ -244,7 +244,7 @@ chat_settings_events:
               - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <context.item.flag[action]>:
                 - narrate "<&c>You cannot stop listening to the channel you're talking in."
                 - stop
-              - run global_player_data_modify def:<player.uuid>|chat.channels.active.<context.item.flag[action]>|true
+              - run global_player_data_modify def:<player.uuid>|chat.channels.active.<context.item.flag[action]>|false
               - flag player chat_channel_<context.item.flag[action]>:!
               - narrate "<&b>You are no longer listening to <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
             - else:
@@ -264,7 +264,7 @@ chat_settings_open:
     - define inventory <inventory[chat_settings]>
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
-      - if <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
+      - if !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
         - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<[channel]>]>:
           - define icon <item[green_wool]>
           - define "lore:!|:<&a>You are listening to this channel."
