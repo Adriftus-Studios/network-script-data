@@ -93,6 +93,7 @@ chatlock_command:
     - run global_player_data_modify def:<server.flag[player_map.names.<context.args.get[1]>.uuid]>|chat.locked|true
     - define message "<&c>You have been chat locked. You are restricted to speaking in <&b>Anarchy<&c> channel only."
     - run bungee_send_message def:<server.flag[player_map.names.<context.args.get[1]>.uuid]>|<[message]>
+    - narrate "<&a>Player <&b><context.args.get[1]> <&a>has been Chat Locked."
 
 chat_command:
   type: command
