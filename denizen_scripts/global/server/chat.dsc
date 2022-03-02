@@ -72,10 +72,10 @@ chat_history_show:
   script:
     - narrate <element[<&nl>].repeat_as_list[20].separated_by[<&nl>]>
     - define list <list>
-    - foreach <yaml[global.player.<player.uuid>].parsed_key[chat.channels.active].keys.filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
+    - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
       - if !<yaml[chat_history].contains[<[Channel]>_history]>:
         - foreach next
-      - define list <[List].include[<yaml[chat_history].read[<[Channel]>_history]>]>
+      - define list <[List].include[<yaml[chat_history].parsed_key[<[Channel]>_history]>]>
     - if <[List].is_empty>:
       - stop
     - foreach <[list].sort_by_number[get[time]].reverse.get[1].to[30].reverse.parse[get[message]]> as:Message:
