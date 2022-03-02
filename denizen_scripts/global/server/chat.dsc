@@ -66,7 +66,7 @@ chat_history_show:
   debug: false
   script:
     - define list <list>
-    - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
+    - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].keys.filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
       - if !<yaml[chat_history].contains[<[Channel]>_history]>:
         - foreach next
       - define list <[List].include[<yaml[chat_history].read[<[Channel]>_history]>]>
