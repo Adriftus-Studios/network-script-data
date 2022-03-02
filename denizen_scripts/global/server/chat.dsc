@@ -116,11 +116,11 @@ chat_command:
 
     - define Channel <context.args.first.to_lowercase>
     - if <yaml[chat_config].contains[channels.<[Channel]>]> && ( <player.has_permission[<yaml[chat_config].read[channels.<[Channel]>.permission]>]> || <yaml[chat_config].read[channels.<[Channel]>.permission]> == none ):
-      - yaml set id:global.player.<player.uuid> chat.channels.current:<[Channel]>
-      - if !<yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<[Channel]>]>:
-        - yaml id:global.player.<player.uuid> set chat.channels.active:->:<[Channel]>
+      - run global_player_data_modify def:<player.uuid>|chat.channels.current|<[Channel]>
+      - if !<yaml[global.player.<player.uuid>].read[chat.channels.active.<[Channel]>]>:
+        - run global_player_data_modify def:<player.uuid>|chat.channels.active.<[Channel]>|true
       - narrate "<&b>Now Talking in <yaml[chat_config].parsed_key[channels.<[Channel]>.format.channel]>"
-    - if <[Channel]> == reload:
+    - if <[Channel]> == reload && <player.has_permission[adriftus.chat.reload]>:
       - inject chat_settings_reload
       - foreach <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>|<bungee.server>]> as:server:
         - bungeerun <[server]> chat_settings_reload
@@ -145,10 +145,10 @@ chat_system_flag_manager:
       - waituntil rate:10t <yaml.list.contains[global.player.<player.uuid>].or[<player.is_online.not>]>
       - if !<player.is_online>:
         - stop
-      - if !<yaml[global.player.<player.uuid>].contains[chat.channels]> || <yaml[global.player.<player.uuid>].contains[chat.channels].contains[global]>:
-          - yaml id:global.player.<player.uuid> set chat.channels.active:!|:server
-          - yaml id:global.player.<player.uuid> set chat.channels.current:server
-      - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active]>:
+      - if !<yaml[global.player.<player.uuid>].contains[chat.channels]> || <yaml[global.player.<player.uuid>].read[chat.channels].contains[global]||false>:
+          - define map <map[chat.channels.active=server;chat.channels.current=server]>
+          - run global_player_data_modify def:<player.uuid>|<[map]>
+      - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].keys>:
         - flag player chat_channel_<[value]>
       - inject chat_history_show
 
@@ -204,20 +204,20 @@ chat_settings_events:
       - if <context.item.has_flag[action]>:
         - choose <context.click>:
           - case RIGHT:
-            - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<context.item.flag[action]>]>:
+            - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<context.item.flag[action]>]>:
               - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <context.item.flag[action]>:
                 - narrate "<&c>You cannot stop listening to the channel you're talking in."
                 - stop
-              - yaml set id:global.player.<player.uuid> chat.channels.active:<-:<context.item.flag[action]>
+              - run global_player_data_modify def:<player.uuid>|chat.channels.active.<context.item.flag[action]>|true
               - flag player chat_channel_<context.item.flag[action]>:!
               - narrate "<&b>You are no longer listening to <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
             - else:
-              - yaml set id:global.player.<player.uuid> chat.channels.active:|:<context.item.flag[action]>
+              - run global_player_data_modify def:<player.uuid>|chat.channels.active.<context.item.flag[action]>|true
               - flag player chat_channel_<context.item.flag[action]>
               - narrate "<&b>You are now listening to <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
           - case LEFT:
             - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> != <context.item.flag[action]>:
-              - yaml set id:global.player.<player.uuid> chat.channels.current:<context.item.flag[action]>
+              - run global_player_data_modify def:<player.uuid>|chat.channels.current|<context.item.flag[action]>
               - narrate "<&b>You are now talking in <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
         - inject chat_settings_open
 
@@ -229,7 +229,7 @@ chat_settings_open:
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - if <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
-        - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<[channel]>]>:
+        - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<[channel]>]>:
           - define icon <item[green_wool]>
           - define "lore:!|:<&a>You are listening to this channel."
           - define lore:->:<&a>-----------------------------
