@@ -89,7 +89,8 @@ chat_delete_message:
     - if <yaml[chat_config].read[channels.<[channel]>.global]>:
       - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
     - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]||true>
-    - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].parsed_key[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>].not>]>
+    - define message <yaml[chat_history].parsed_key[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>]>].get[1].get[message]>
+    - yaml id:chat_history set "<[channel]>_history:!|:<yaml[chat_history].parsed_key[<[channel]>_history].replace_text[<[message]>].with[<&7><&lb>Message Deleted<&rb>]>"
     - foreach <server.online_players_flagged[chat_channel_<[channel]>]>:
       - run chat_history_show player:<[value]>
       - wait 1t
