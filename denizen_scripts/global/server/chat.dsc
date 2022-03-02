@@ -6,6 +6,7 @@ chat_system_events:
       - determine passively cancelled
       - waituntil rate:1s <bungee.connected>
       - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current]||global>
+      - define uuid <util.random_uuid>
 
       # Check for Chat Lock
       - if <yaml[global.player.<player.uuid>].read[chat.locked]||false> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny]||false>:
@@ -22,11 +23,13 @@ chat_system_events:
       - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
         - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&rb><&end_hover>]>
 
+      # Build the Channel Text
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - define Command "chat <[channel]>"
       - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
 
+      # Build the Player Text
       - if <yaml[global.player.<player.uuid>].contains[rank]>:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
       - else:
@@ -35,11 +38,13 @@ chat_system_events:
       - define Hint "msg <player.name> "
       - define NameText <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Hint]>]>
 
+      # Separator
       - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
 
+      # Build the Message Content
       - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message]>
-      - define Insert <[Text]>
+      - define Insert "/chatdelete <[channel]> <[uuid]>"
       - define MessageText <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
 
       - define Message <[ChannelText]><[NameText]><[Separator]><[MessageText]>
@@ -47,18 +52,18 @@ chat_system_events:
       - narrate <[message]> targets:<server.online_players_flagged[chat_channel_<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
-        - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include_single[<[message]>]>
+        - bungeerun <[Servers]> chat_send_message def:<[channel]><[message]>|<[uuid]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
           - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>]>
-        - inject chat_history_save
+      - inject chat_history_save
 
 chat_history_save:
   type: task
   debug: false
-  definitions: Channel|Message
+  definitions: Channel|Message|UUID
   script:
-    - yaml id:chat_history set <[channel]>_history:->:<map.with[channel].as[<[channel]>].with[message].as[<[Message]>].with[time].as[<server.current_time_millis>]>
-    - if <yaml[chat_history].read[<[channel]>_history].size> > 25:
+    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>]>
+    - if <yaml[chat_history].read[<[channel]>_history].size> > 50:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
 
 chat_history_show:
@@ -72,8 +77,30 @@ chat_history_show:
       - define list <[List].include[<yaml[chat_history].read[<[Channel]>_history]>]>
     - if <[List].is_empty>:
       - stop
-    - foreach <[list].sort_by_number[get[time]].reverse.get[1].to[20].reverse.parse[get[message]]> as:Message:
+    - foreach <[list].sort_by_number[get[time]].reverse.get[1].to[30].reverse.parse[get[message]]> as:Message:
       - narrate <[Message]>
+
+chat_delete_message:
+  type: task
+  debug: false
+  definitions: channel|uuid
+  script:
+    - yaml id:chat_history set <[channel]>_history:<yaml[chat_history].parsed_key[<[channel]>_history].filter_tag[get[uuid].equals[<[uuid]>].not]>
+    - foreach <server.online_players_flagged[chat_channel_<[channel]>]>:
+      - run chat_history_show player:<[value]>
+      - wait 1t
+
+chatdelete_command:
+  type: command
+  name: chatdelete
+  usage: /chatdelete (message uuid)
+  description: Designed for automated use and not manual entry
+  permission: adriftus.chat.delete
+  debug: false
+  script:
+    - if <context.args.size> != 2:
+      - narrate "<&c>Not intended for manual usage..."
+    - run chat_delete_message def:<context.args.get[1]>|<context.args.get[2]>
 
 chatlock_command:
   type: command
@@ -133,7 +160,7 @@ chat_send_message:
   type: task
   debug: false
 #@definitions: channel|message_escaped
-  definitions: Channel|Message
+  definitions: Channel|Message|UUID
   script:
       - narrate <[Message]> targets:<server.online_players_flagged[chat_channel_<[channel]>]>
       - inject chat_history_save
