@@ -264,7 +264,7 @@ chat_settings_open:
     - define inventory <inventory[chat_settings]>
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
-      - if !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
+      - if ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
         - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<[channel]>]>:
           - define icon <item[green_wool]>
           - define "lore:!|:<&a>You are listening to this channel."
