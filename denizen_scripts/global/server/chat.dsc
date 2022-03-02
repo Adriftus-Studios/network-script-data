@@ -145,9 +145,9 @@ chat_system_flag_manager:
       - waituntil rate:10t <yaml.list.contains[global.player.<player.uuid>].or[<player.is_online.not>]>
       - if !<player.is_online>:
         - stop
-      - if !<yaml[global.player.<player.uuid>].contains[chat.channels]>:
-          - yaml id:global.player.<player.uuid> set chat.channels.active:!|:global|server
-          - yaml id:global.player.<player.uuid> set chat.channels.current:global
+      - if !<yaml[global.player.<player.uuid>].contains[chat.channels]> || <yaml[global.player.<player.uuid>].contains[chat.channels].contains[global]>:
+          - yaml id:global.player.<player.uuid> set chat.channels.active:!|:server
+          - yaml id:global.player.<player.uuid> set chat.channels.current:server
       - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active]>:
         - flag player chat_channel_<[value]>
       - inject chat_history_show
@@ -203,7 +203,7 @@ chat_settings_events:
       - wait 1t
       - if <context.item.has_flag[action]>:
         - choose <context.click>:
-          - case LEFT:
+          - case RIGHT:
             - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<context.item.flag[action]>]>:
               - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <context.item.flag[action]>:
                 - narrate "<&c>You cannot stop listening to the channel you're talking in."
@@ -215,7 +215,7 @@ chat_settings_events:
               - yaml set id:global.player.<player.uuid> chat.channels.active:|:<context.item.flag[action]>
               - flag player chat_channel_<context.item.flag[action]>
               - narrate "<&b>You are now listening to <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
-          - case RIGHT:
+          - case LEFT:
             - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> != <context.item.flag[action]>:
               - yaml set id:global.player.<player.uuid> chat.channels.current:<context.item.flag[action]>
               - narrate "<&b>You are now talking in <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
@@ -233,17 +233,17 @@ chat_settings_open:
           - define icon <item[green_wool]>
           - define "lore:!|:<&a>You are listening to this channel."
           - define lore:->:<&a>-----------------------------
-          - define "lore:|:<&b>Left click to stop listening."
+          - define "lore:|:<&b>Right click to stop listening."
         - else:
           - define icon <item[red_wool]>
           - define "lore:!|:<&c>You are not listening to this channel."
           - define lore:->:<&a>-----------------------------
-          - define "lore:|:<&b>Left click to start listening."
+          - define "lore:|:<&b>Right click to start listening."
         - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <[channel]>:
           - define icon <item[yellow_wool]>
           - define lore "<[lore].insert[<&e>You are talking in this channel.].at[2]>"
         - else:
-          - define "lore:|:<&b>right click to start speaking."
+          - define "lore:|:<&b>Left click to speak in this channel."
         - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>].with_flag[action:<[channel]>]>
     - repeat <[list].size.sub[8].abs>:
       - define list:->:<item[standard_filler].with_flag[unique:<util.random_uuid>]>
