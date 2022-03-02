@@ -70,7 +70,7 @@ chat_history_show:
   type: task
   debug: false
   script:
-    - narrate <element[<&nl>].repeat_as_list[50]>
+    - narrate <element[<&nl>].repeat_as_list[20].separated_by[<&nl>]>
     - define list <list>
     - foreach <yaml[global.player.<player.uuid>].parsed_key[chat.channels.active].keys.filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
       - if !<yaml[chat_history].contains[<[Channel]>_history]>:
