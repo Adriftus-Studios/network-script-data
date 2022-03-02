@@ -75,7 +75,7 @@ chat_history_show:
     - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
       - if !<yaml[chat_history].contains[<[Channel]>_history]>:
         - foreach next
-      - define list <[List].include[<yaml[chat_history].parsed_key[<[Channel]>_history]>]>
+      - define list:|:<yaml[chat_history].parsed_key[<[Channel]>_history]>
     - if <[List].is_empty>:
       - stop
     - foreach <[list].sort_by_number[get[time]].reverse.get[1].to[30].reverse.parse[get[message]]> as:Message:
