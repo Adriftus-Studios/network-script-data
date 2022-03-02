@@ -29,15 +29,18 @@ network_map_handler:
   debug: false
   events:
     on bungee player switches to server:
-      - if <server.has_flag[player_map.<context.uuid>.server]>:
+      - if <server.has_flag[player_map.uuids.<context.uuid>.server]>:
         - flag server server_map.<server.flag[player_map.<context.uuid>.server]>.<context.uuid>:!
-      - flag server player_map.<context.uuid>.server:<context.server>
-      - flag server player_map.<context.uuid>.name:<context.name>
+      - flag server player_map.uuids.<context.uuid>.server:<context.server>
+      - flag server player_map.uuids.<context.uuid>.name:<context.name>
       - flag server server_map.<context.server>.<context.uuid>:<context.name>
+      - flag server player_map.names.<context.name>.uuid:<context.uuid>
+      - flag server player_map.names.<context.name>.server:<context.server>
 
     on bungee player leaves network:
       - flag server server_map.<server.flag[player_map.<context.uuid>.server]>.<context.uuid>:!
-      - flag server player_map.<context.uuid>:!
+      - flag server player_map.uuids.<context.uuid>:!
+      - flag server player_map.names.<context.name>:!
 
 player_data_quit_event:
   type: task

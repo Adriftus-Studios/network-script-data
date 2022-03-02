@@ -7,11 +7,18 @@ chat_system_events:
       - waituntil rate:1s <bungee.connected>
       - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current]||global>
 
+      # Check for Chat Lock
+      - if <yaml[global.player.<player.uuid>].read[chat.locked]||false> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny]||false>:
+        - narrate "<&c>You are unable to speak in this channel, due to being chat locked."
+        - stop
+
+      # Allow Chat Colors in Chat
       - if <player.has_permission[adriftus.chat.color]>:
         - define msg <context.message.parse_color>
       - else:
         - define msg <context.message.parse_color.strip_color>
 
+      # Allow Items in Chat
       - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
         - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&rb><&end_hover>]>
 
@@ -23,7 +30,7 @@ chat_system_events:
       - if <yaml[global.player.<player.uuid>].contains[rank]>:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
       - else:
-        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
+        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>:<player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
       - define Hint "msg <player.name> "
       - define NameText <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Hint]>]>
@@ -67,6 +74,25 @@ chat_history_show:
       - stop
     - foreach <[list].sort_by_number[get[time]].reverse.get[1].to[20].reverse.parse[get[message]]> as:Message:
       - narrate <[Message]>
+
+chatlock_command:
+  type: command
+  name: chatlock
+  usage: /chatlock (player name)
+  description: Will prevent player from speaking in chatlock-able channels
+  debug: false
+  tab complete:
+    1: <server.online_players.parse[name].include[<server.flag[player_map.names].keys>]>
+  script:
+    - if <context.args.is_empty>:
+      - narrate "<&c>You must specify a player name to chat lock."
+      - stop
+    - if !<server.has_flag[player_map.names.<context.args.get[1]>.server]>:
+      - narrate "<&c>Unknown Player<&co> <context.args.get[1]>"
+      - stop
+    - run global_player_data_modify def:global.player.<server.flag[player_map.names.<context.args.get[1]>.uuid]>|chat.locked|true
+    - define message "<&c>You have been chat locked. You are restricted to speaking in <&b>Anarchy<&c> channel only."
+    - run bungee_send_message def:<server.flag[player_map.names.<context.args.get[1]>.uuid]>|<[message]>
 
 chat_command:
   type: command
