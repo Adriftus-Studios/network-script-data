@@ -2,72 +2,45 @@ player_data_handler:
   type: world
   debug: false
   events:
-    on player logs in:
+    on bungee player joins network:
     # % ██ [ Load Server player Data ] ██
-      - define server_yaml data/players/<player.uuid>.yml
-      - if <server.has_file[<[server_yaml]>]>:
-        - ~yaml id:player.<player.uuid> load:<[server_yaml]>
-      - else:
-        - yaml id:player.<player.uuid> create
-        - ~yaml id:player.<player.uuid> savefile:<[server_yaml]>
-
-    on delta time minutely every:5:
-      - define list <yaml.list>
-
-      - foreach <server.online_players> as:player:
-        - if !<[list].contains[player.<[player].uuid>]>:
-          - if !<server.has_file[data/global/players/<[player].uuid>.yml]>:
-            - yaml id:player.<[player].uuid> create
-            - yaml id:player.<[player].uuid> savefile:data/players/<[player].uuid>.yml
-          - ~yaml id:player.<[player].uuid> load:data/players/<[player].uuid>.yml
+      - if <bungee.server> == hub:
+        - define server_yaml data/global/players/<player.uuid>.yml
+        - if <server.has_file[<[server_yaml]>]>:
+          - ~yaml id:global.player.<player.uuid> load:<[server_yaml]>
         - else:
-          - ~yaml id:player.<[player].uuid> savefile:data/players/<[player].uuid>.yml
+          - yaml id:global.player.<player.uuid> create
+          - ~yaml id:global.player.<player.uuid> savefile:<[server_yaml]>
 
-        - if !<[list].contains[global.player.<[player].uuid>]>:
-          - if !<server.has_file[data/global/players/<[player].uuid>.yml]>:
-            - yaml id:global.player.<[player].uuid> create
-            - yaml id:global.player.<[player].uuid> savefile:data/global/players/<[player].uuid>.yml
-          - ~yaml id:global.player.<[player].uuid> load:data/global/players/<[player].uuid>.yml
-        - else:
-          - ~yaml id:global.player.<[player].uuid> savefile:data/global/players/<[player].uuid>.yml
+    on player joins:
+      - if <bungee.server> != hub:
+        - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
 
-player_Data_Join_Event:
-  type: task
+    on player quits:
+      - if <bungee.server> != hub:
+        - ~yaml id:global.player.<player.uuid> unload
+
+    on bungee player leaves network:
+      - if <bungee.server> == hub:
+        - ~yaml id:global.player.<player.uuid> unload
+
+network_map_handler:
+  type: world
   debug: false
-  definitions: uuid|Event
-  script:
-  # % ██ [ Cache player Info ] ██
-    - define timeout <util.time_now.add[5m]>
-    - define global_yaml global.player.<[uuid]>
+  events:
+    on bungee player switches to server:
+      - if <server.has_flag[player_map.uuids.<context.uuid>.server]>:
+        - flag server server_map.<server.flag[player_map.<context.uuid>.server]>.<context.uuid>:!
+      - flag server player_map.uuids.<context.uuid>.server:<context.server>
+      - flag server player_map.uuids.<context.uuid>.name:<context.name>
+      - flag server server_map.<context.server>.<context.uuid>:<context.name>
+      - flag server player_map.names.<context.name>.uuid:<context.uuid>
+      - flag server player_map.names.<context.name>.server:<context.server>
 
-  # % ██ [ Verify player ] ██
-    - waituntil rate:2t <player[<[uuid]>].is_online> || <[timeout].duration_since[<util.time_now>].in_seconds> == 0
-    - if !<player[<[uuid]>].is_online||false>:
-      - stop
-
-  # % ██ [ Load Global player Data ] ██
-    - yaml id:<[global_yaml]> load:data/global/players/<[uuid]>.yml
-
-    # % ██ [ Load and Set display_name ] ██
-    - define name <player[<[uuid]>].name>
-    - if !<yaml[<[global_yaml]>].contains[display_name]>:
-      - yaml id:<[global_yaml]> set display_name:<[name]>
-    - adjust <player[<[uuid]>]> display_name:<yaml[<[global_yaml]>].read[display_name]>
-
-  # % ██ [ Load Tab_display_name ] ██
-    - if !<yaml[<[global_yaml]>].contains[Tab_display_name]>:
-      - yaml id:<[global_yaml]> set Tab_display_name:<[name]>
-
-    # % ██ [ Fire player Login Tasks ] ██
-    - define player_map <map.with[name].as[<[name]>].with[Server].as[<bungee.server>]>
-    - if <yaml[<[global_yaml]>].contains[rank]>:
-      - define player_map <[player_map].with[rank].as[<yaml[global.player.<[uuid]>].read[rank].strip_color>]>
-
-    - waituntil rate:1s <bungee.connected>
-    - if <[Event]> == Joined:
-      - bungeerun relay player_Join_Message def:<list_single[<[player_map]>]>
-    - else:
-      - bungeerun relay player_Switch_Message def:<list_single[<[player_map]>]>
+    on bungee player leaves network:
+      - flag server server_map.<server.flag[player_map.<context.uuid>.server]>.<context.uuid>:!
+      - flag server player_map.uuids.<context.uuid>:!
+      - flag server player_map.names.<context.name>:!
 
 player_data_quit_event:
   type: task
@@ -116,9 +89,53 @@ unload_player_data:
     - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
     - yaml id:global.player.<[uuid]> unload
 
-player_data_safe_modify:
+
+## INTERNAL USAGE
+global_player_data_modify_single:
   type: task
   debug: false
   definitions: uuid|node|value
   script:
     - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+
+## INTERNAL USAGE
+global_player_data_modify_multiple_single:
+  type: task
+  debug: false
+  definitions: uuid|map
+  script:
+    - foreach <[map]> key:node as:value:
+      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+
+## External Usage
+global_player_data_modify:
+  type: task
+  debug: false
+  definitions: uuid|node|value|forward
+  script:
+    - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+    - if <bungee.server> != hub:
+      - if !<player[<[uuid]>].is_online||false>:
+        - define forward true
+      - bungeerun hub global_player_data_modify def:<[uuid]>|<[node]>|<[value]>|<[forward]||false>
+    - else:
+      - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
+      - if <[forward]||false> && <server.has_flag[player_map.<[uuid]>.server]>:
+        - bungeerun <server.flag[player_map.<[uuid]>.server]> global_player_data_modify_single def:<[uuid]>|<[node]>|<[value]>
+
+## External Usage
+global_player_data_modify_multiple:
+  type: task
+  debug: false
+  definitions: uuid|map|forward
+  script:
+    - foreach <[map]> key:node as:value:
+      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+    - if <bungee.server> != hub:
+      - if !<player[<[uuid]>].is_online||false>:
+        - define forward true
+      - bungeerun hub global_player_data_modify_multiple def:<[uuid]>|<[map]>|<[forward]||false>
+    - else:
+      - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
+      - if <[forward]||false> && <server.has_flag[player_map.<[uuid]>.server]>:
+        - bungeerun <server.flag[player_map.<[uuid]>.server]> global_player_data_modify_multiple def:<[uuid]>|<[map]>

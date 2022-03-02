@@ -6,7 +6,7 @@ web_handler:
     self: 127.0.0.1
   events:
     on server start:
-      - web start port:25581
+      - web start port:25579
 
     on get request:
       - announce to_console "<&c>--- get request ----------------------------------------------------------"
@@ -14,6 +14,12 @@ web_handler:
       - define query <context.query_map>
 
       - choose <context.request>:
+
+      # % ██ [ Resource Pack  ] ██
+        - case /resource_pack.zip:
+          - determine passively FILE:../../../../web/resource-pack/hosted-rp-main.zip
+          - determine CODE:200
+
       # % ██ [ Github oAuth Token Ex  ] ██
         - case /oAuth/GitHub:
           - inject discord_oauth_token_exchange
@@ -54,34 +60,13 @@ web_handler:
 
       # % ██ [ Companion App          ] ██
         - case /companion:
-          # Inject the script file with all the companion handlers
-          # IP from the web server filtered to show just the numbers
-          - define ip <context.address.replace_text[/].with[].split[:]>
-          # Ip that was sent from the server to the relay
-          - inject companion_get_ip_using_hash
-          - define relayIp <proc[companion_get_ip_using_hash].context[<[query].get[hash]>]>
-          - if !<[relayIp].equals[null]>:
-            - if <[relayIp].equals[<[ip].first>]>:
-              - inject companion_get_uuid_using_hash
-              - define uuid <proc[companion_get_uuid_using_hash].context[<[query].get[hash]>]>
-              - if !<[uuid].equals[null]>:
-                - if <[query].contains[request]> && <[query].get[request].equals[data]>:
-                  - inject companion_get_data_using_hash
-                  - determine passively code:200
-                  - determine <proc[companion_get_data_using_hash].context[<[query].get[hash]>]>
-                - determine passively code:200
-                - determine parsed_file:../../../../web/main.html
-              - else:
-                - determine "Youre data is missing, please contact administration"
-            - else:
-              - determine "You must use the same ip address, as the one you used to login to minecraft!"
-          - else:
-              - determine "You dont have an active session. Please use /companion in game to create one"
+          - inject companion_web_handler
 
       # % ██ [ Companion App Banner   ] ██
         - case /AdriftusMCHalf.png:
           - determine passively code:200
-          - determine file:../../../../web/AdriftusMCHalf.png
+          - determine file:scripts/relay/repo_link/web/AdriftusMCHalf.png
+
       # % ██ [ Bad Get Request        ] ██
         - default:
           - determine CODE:<list[406|418].random>
@@ -89,14 +74,16 @@ web_handler:
     on post request:
       - announce to_console "<&c>--- post request ----------------------------------------------------------"
       - inject Web_Debug.Post_Request
-      - define domain <context.address>
+      - define domain <context.headers.get[Nginx.remote_addr]>
 
     # % ██ [ Github Content pushes    ] ██
-      - if <[domain].starts_with[/<script.data_key[domains.github]>]>:
+      - if <[domain].starts_with[<script.data_key[domains.github]>]>:
         - inject github_updates
 
     # % ██ [ Self Pings               ] ██
-      - else if <[domain].starts_with[/<script.data_key[domains.self]>]>:
+      - else if <[domain].starts_with[<script.data_key[domains.self]>]>:
+        - if <context.query.parsed.get[adriftus_sha].exists>:
+          - bungeerun hub resource_pack_sha def:<context.query.parsed.get[adriftus_sha].before[<&sp>]>
         - bungee <bungee.list_servers.exclude[<bungee.server>|survival]>:
           - reload
         - wait 1t

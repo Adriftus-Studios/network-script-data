@@ -1,3 +1,27 @@
+companion_web_handler:
+  type: task
+  definitions: query
+  script:
+    # IP from the web server filtered to show just the numbers
+    - define ip <context.address.replace_text[/].with[].split[:]>
+    # Ip that was sent from the server to the relay
+    - define relayIp <proc[companion_get_ip_using_hash].context[<[query].get[hash]>]>
+    - if !<[relayIp].equals[null]>:
+      - if <[relayIp].equals[<[ip].first>]>:
+        - define uuid <proc[companion_get_uuid_using_hash].context[<[query].get[hash]>]>
+        - if !<[uuid].equals[null]>:
+          - if <[query].contains[request]> && <[query].get[request].equals[data]>:
+            - determine passively code:200
+            - determine <proc[companion_get_data_using_hash].context[<[query].get[hash]>]>
+          - determine passively code:200
+          - determine parsed_file:scripts/relay/repo_link/web/main.html
+        - else:
+          - determine "Youre data is missing, please contact administration"
+      - else:
+        - determine "You must use the same ip address, as the one you used to login to minecraft!"
+    - else:
+        - determine "You dont have an active session. Please use /companion in game to create one"
+
 companion_get_uuid_using_hash:
   type: procedure
   definitions: hash

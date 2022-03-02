@@ -6,8 +6,8 @@ title_unlock:
   definitions: tagID
   debug: false
   script:
-    - if <yaml[titles].read[titles.<[tagID]>]||null> != null && !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tagID]>]||false>:
-      - yaml id:global.player.<player.uuid> set titles.unlocked:->:<[tagID]>
+    - if <yaml[titles].read[titles.<[tagID]>].exists> && !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tagID]>]||false>:
+      - run global_player_data_modify def:<player.uuid>|titles.unlocked.<[tagID]>|true
 
 title_remove:
   type: task
@@ -15,7 +15,7 @@ title_remove:
   debug: false
   script:
     - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tagID]>]||false>:
-      - yaml id:global.player.<player.uuid> set titles.unlocked:<-:<[tagID]>
+      - run global_player_data_modify def:<player.uuid>|titles.unlocked.<[tagID]>|true
 
 ##################
 ## Open Command ##
@@ -43,15 +43,15 @@ title_inventory:
   gui: true
   size: 54
   title: <yaml[titles].read[gui.title].parse_color>
-  custom:
+  data:
     mapping:
       next_page: 54
       previous_page: 46
       current_title: 50
       page_marker: 1
   definitions:
-    next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;nbt=action/next_page]>
-    previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;nbt=action/previous_page]>
+    next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;flag=action:next_page]>
+    previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;flag=action:previous_page]>
   slots:
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
     - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
@@ -67,21 +67,21 @@ title_inventory_events:
     on player clicks item in title_inventory:
       - determine passively cancelled
       - wait 1t
-      - if <context.item.has_nbt[action]>:
-        - choose <context.item.nbt[action]>:
+      - if <context.item.has_flag[action]>:
+        - choose <context.item.flag[action]>:
           - case set_title:
-            - yaml id:global.player.<player.uuid> set titles.current:<context.item.nbt[title]>
-            - yaml id:global.player.<player.uuid> set titles.current_tag:<yaml[titles].read[titles.<context.item.nbt[title]>.tag].parse_color>
+            - define map <map[titles.current=<context.item.flag[title]>;titles.current_tag=<yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color>]>
+            - run global_player_data_modify_multiple def:<player.uuid>|<[map]>
             - inject title_inventory_open
-            - narrate "<&b>You have changed your active title to<&co> <yaml[titles].read[titles.<context.item.nbt[title]>.tag].parse_color.parsed>"
+            - narrate "<&b>You have changed your active title to<&co> <yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color.parsed>"
           - case remove_title:
-            - yaml id:global.player.<player.uuid> set titles.current:!
+            - run global_player_data_modify def:<player.uuid>|titles.current|!
             - inject title_inventory_open
           - case next_page:
-            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].nbt[page].add[1]>
+            - define page <context.inventory.slot[<script[title_inventory].data_key[data.mapping.page_marker]>].flag[page].add[1]>
             - inject title_inventory_open
           - case previous_page:
-            - define page <context.inventory.slot[<script[title_inventory].data_key[custom.mapping.page_marker]>].nbt[page].sub[1]>
+            - define page <context.inventory.slot[<script[title_inventory].data_key[data.mapping.page_marker]>].flag[page].sub[1]>
             - inject title_inventory_open
 
 title_inventory_open:
@@ -91,24 +91,24 @@ title_inventory_open:
   script:
     - define page <[page]||1>
     - define inventory <inventory[title_inventory]>
-    - define unlocked_tags <yaml[global.player.<player.uuid>].read[titles.unlocked]||<list[Default]>>
+    - define unlocked_tags <yaml[global.player.<player.uuid>].read[titles.unlocked].keys||<list[Default]>>
     - foreach <[unlocked_tags]> as:tagID:
       - inject build_title_select_item
       - define list:->:<[item]>
     - give <[list].get[<[page].sub[1].mul[21].add[1]>].to[<[page].sub[1].mul[21].add[21]>]> to:<[inventory]>
-    - foreach <script[title_inventory].list_keys[custom.mapping]>:
+    - foreach <script[title_inventory].list_keys[data.mapping]>:
       - choose <[value]>:
         - case next_page:
           - if <[unlocked_tags].size> > <[page].sub[1].mul[21].add[21]>:
-            - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.next_page]> o:<script[title_inventory].parsed_key[definitions.next_page]>
+            - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[data.mapping.next_page]> o:<script[title_inventory].parsed_key[definitions.next_page]>
         - case previous_page:
           - if <[page]> > 1:
-            - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.previous_page]> o:<script[title_inventory].parsed_key[definitions.previous_page]>
+            - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[data.mapping.previous_page]> o:<script[title_inventory].parsed_key[definitions.previous_page]>
         - case current_title:
           - inject build_current_title
-          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.current_title]> o:<[item]>
+          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[data.mapping.current_title]> o:<[item]>
         - case page_marker:
-          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[custom.mapping.page_marker]> o:<item[standard_filler].with[nbt=page/<[page]>]>
+          - inventory set d:<[inventory]> slot:<script[title_inventory].data_key[data.mapping.page_marker]> o:<item[standard_filler].with[flag=page:<[page]>]>
     - inventory open d:<[inventory]>
 
 build_title_select_item:
@@ -121,7 +121,7 @@ build_title_select_item:
     - define material <yaml[titles].read[gui.tag_select_item.material]>
     - define lore <yaml[titles].read[gui.tag_select_item.lore].parse[parse_color.parsed]>
     - define name <yaml[titles].read[gui.tag_select_item.displayname].parse_color.parsed>
-    - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;nbt=action/set_title|title/<[tagID]>]>
+    - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;flag=action:set_title;flag=title:<[tagID]>]>
 
 build_current_title:
   type: task
@@ -137,7 +137,7 @@ build_current_title:
       - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>]>
     - else:
       - define lore <yaml[titles].read[gui.current_title.lore].parse[parse_color.parsed]>
-      - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;nbt=action/remove_title]>
+      - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;flag=action:remove_title]>
 
 titles_config_manager:
   type: world

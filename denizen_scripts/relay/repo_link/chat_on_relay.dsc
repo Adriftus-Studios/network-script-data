@@ -25,7 +25,7 @@ discord_watcher:
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
 
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
-        - define Text <&7><&lb><&color[#738adb]>D<&7><&rb>
+        - define Text <&7><&lb><&f><&chr[0044].font[adriftus:chat]><&7><&rb>
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 
         - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"

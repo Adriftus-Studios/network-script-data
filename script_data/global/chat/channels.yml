@@ -1,5 +1,5 @@
 settings:
-  excluded_servers: crafted|xeane|relay
+  excluded_servers: crafted|xeane|relay|herocraft
 channels:
   server:
     global: false
@@ -7,7 +7,7 @@ channels:
     permission: "none"
     format: 
       channel: "<&7><&lb><server.flag[display_name]||<bungee.server>><&7><&rb> "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.name>>"
+      name: "<&7><player.display_name||<player.name>>"
       separator: "<&b>: "
       message: "<&f><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -22,18 +22,65 @@ channels:
         channel: false
         to-MC: false
         to-IRC: false
-  global:
+  pg:
     global: true
     on_by_default: true
     permission: "none"
+    chat_lock_deny: true
     format:
-      channel: "<&7>[<&6>Global<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      channel: "<&7>[<&a>PG<&7>] "
+      name: "<&7><player.display_name||<player.name>>"
       separator: "<&b>: "
       message: "<&f><[msg]||<context.new_message.text_display>>"
     integrations:
       Discord:
-        active: true
+        active: false
+        group: Adriftus
+        #channel: global-chat
+        channel: 651789860562272266
+        to-MC: true
+        to-Discord: true
+      IRC:
+        active: false
+        channel: false
+        to-MC: false
+        to-IRC: false
+  pg13:
+    global: true
+    on_by_default: true
+    permission: "none"
+    chat_lock_deny: true
+    format:
+      channel: "<&7>[<&6>PG-13<&7>] "
+      name: "<&7><player.display_name||<player.name>>"
+      separator: "<&b>: "
+      message: "<&f><[msg]||<context.new_message.text_display>>"
+    integrations:
+      Discord:
+        active: false
+        group: Adriftus
+        #channel: global-chat
+        channel: 651789860562272266
+        to-MC: true
+        to-Discord: true
+      IRC:
+        active: false
+        channel: false
+        to-MC: false
+        to-IRC: false
+  anarchy:
+    global: true
+    on_by_default: true
+    permission: "none"
+    chat_lock_deny: true
+    format:
+      channel: "<&7>[<&4>Anarchy<&7>] "
+      name: "<&7><player.display_name||<player.name>>"
+      separator: "<&b>: "
+      message: "<&f><[msg]||<context.new_message.text_display>>"
+    integrations:
+      Discord:
+        active: false
         group: Adriftus
         #channel: global-chat
         channel: 651789860562272266
@@ -50,7 +97,7 @@ channels:
     permission: adriftus.staff
     format:
       channel: "<&7>[<&a>Staff<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      name: "<&7><player.display_name||<player.name>>"
       separator: "<&b>: "
       message: "<&a><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -72,7 +119,7 @@ channels:
     permission: adriftus.admin
     format:
       channel: "<&7>[<&4>Admin<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      name: "<&7><player.display_name||<player.name>>"
       separator: "<&b>: "
       message: "<&c><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -94,7 +141,7 @@ channels:
     permission: adriftus.developer
     format:
       channel: "<&7>[<&b>Dev<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      name: "<&7><player.display_name||<player.name>>"
       separator: "<&f>: "
       message: "<&b><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -110,4 +157,3 @@ channels:
         channel: false
         to-MC: false
         to-IRC: false
-    
