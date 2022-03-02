@@ -5,6 +5,7 @@ channels:
     global: false
     on_by_default: true
     permission: "none"
+    chat_lock_deny: true
     format: 
       channel: "<&7><&lb><server.flag[display_name]||<bungee.server>><&7><&rb> "
       name: "<&7><player.display_name||<player.name>>"
@@ -72,7 +73,7 @@ channels:
     global: true
     on_by_default: true
     permission: "none"
-    chat_lock_deny: true
+    chat_lock_deny: false
     format:
       channel: "<&7>[<&4>Anarchy<&7>] "
       name: "<&7><player.display_name||<player.name>>"
