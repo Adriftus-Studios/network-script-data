@@ -22,6 +22,7 @@ discord_watcher:
       - if <context.new_message.author.discriminator> == 0000 || <context.new_message.author.is_bot>:
         - stop
       - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null && !<context.new_message.author.name.contains[Adriftus]>:
+        - define uuid <context.new_message.channel.id>_<context.new_message.id>
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
 
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
@@ -36,14 +37,14 @@ discord_watcher:
         - define Name <context.new_message.author.name>
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
         - define Text <&7><[Name]>
-        - define Insert @<context.new_message.author.name>>
+        - define Insert @<context.new_message.author.name>
         - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
 
         - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
 
         - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message].replace[]>
-        - define Insert <[Text]>
+        - define Insert "/chatdelete <[channel]> <[uuid]>"
         - define MessageText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         - define Attachments <list>
         - if !<context.new_message.attachments.is_empty>:
@@ -54,7 +55,7 @@ discord_watcher:
             - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
         - define Message <[DiscIcon]><[ChannelText]><[NameText]><[Separator]><[Attachments]><[MessageText]>
-        - define Definitions <list_single[<[Channel]>].include[<[Message]>]>
+        - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>]>
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
 
