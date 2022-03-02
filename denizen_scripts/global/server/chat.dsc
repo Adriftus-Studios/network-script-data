@@ -256,6 +256,8 @@ chat_settings_events:
               - run global_player_data_modify def:<player.uuid>|chat.channels.current|<context.item.flag[action]>
               - narrate "<&b>You are now talking in <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
         - inject chat_settings_open
+    on player closes chat_settings:
+      - run chat_history_show
 
 chat_settings_open:
   type: task
