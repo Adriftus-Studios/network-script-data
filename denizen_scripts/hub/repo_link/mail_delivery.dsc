@@ -36,7 +36,7 @@ mail_delivery_start:
   - flag <player> mail_delivery.current.time expire:<[time]>
   - flag <player> mail_delivery.current.difficulty:<[difficulty]>
   - repeat <[time].in_seconds>:
-    - actionbar "<&e>Time Remaining: <&r><&l><&e><[time].sub[<duration[<[value]>s]>].formatted_words>" targets:<player>
+    - actionbar "<&e>Time Remaining: <&r><&e><&l><[time].sub[<duration[<[value]>s]>].formatted_words>" targets:<player>
     - wait 1s
     - stop if:<player.has_flag[mail_delivery.current].not>
   - run mail_delivery_fail def:<[player]> if:<player.flag[mail_delivery.current.todo].values.sum.if_null[0].equals[0].not>
