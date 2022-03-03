@@ -35,7 +35,10 @@ mail_delivery_start:
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
   - flag <player> mail_delivery.current.time expire:<[time]>
   - flag <player> mail_delivery.current.difficulty:<[difficulty]>
-  - wait <[time]>
+  - repeat <[time].in_seconds>:
+    - actionbar "<&e>Time Remaining: <&r><&e><&l><[time].sub[<duration[<[value]>s]>].formatted_words>" targets:<player>
+    - wait 1s
+    - stop if:<player.has_flag[mail_delivery.current].not>
   - run mail_delivery_fail def:<[player]> if:<player.flag[mail_delivery.current.todo].values.sum.if_null[0].equals[0].not>
 
 mail_delivery_fail:
@@ -43,6 +46,8 @@ mail_delivery_fail:
   debug: false
   definitions: player
   script:
+  - stop if:<player.has_flag[mail_delivery.current].not>
+  - actionbar "<&c>You ran out of time." targets:<player>
   - define time_remaining <player.flag[mail_delivery.current.todo].values.sum>
   - narrate "<&c>You failed to deliver all of the mail in time, You had <[time_remaining]> left."
   - run mail_delivery_end def:<[player]>
@@ -52,6 +57,7 @@ mail_delivery_complete:
   debug: false
   definitions: player
   script:
+  - stop if:<player.has_flag[mail_delivery.current].not>
   - define difficulty <player.flag[mail_delivery.current.difficulty]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
   - define time_remaining:<player.flag_expiration[mail_delivery.current.time].from_now.if_null[0s]>
@@ -63,7 +69,9 @@ mail_delivery_end:
   debug: false
   definitions: player
   script:
-  - inventory close player:<[player]> if:<[player].open_inventory.script.name.equals[mail_delivery_mailbox_inventory].if_null[false]>
+  - stop if:<player.has_flag[mail_delivery.current].not>
+  - inventory close player:<[player]>
+  - wait 1t
   - foreach <player.inventory.find_all_items[mail_delivery_mail_item]> as:slot:
     - inventory set d:<player.inventory> slot:<[slot]> o:air
   - flag <player> mail_delivery.current:!
