@@ -1632,5 +1632,10 @@ titles:
   Herocraft:
     order: 268
     tag: '<element[HeroCraft].color_gradient[from=<color[aqua]>;to=<color[white]>]>'
-    description: '&6Proud member of the HeroCraft Community!'
+    description: '&6Proud member of the <&b>HeroCraft Season 0<&6>!'
+    in_shop: false
+  Syntrocity:
+    order: 269
+    tag: '<element[Syntrocity].rainbow>'
+    description: '<element[Welcome to the Synternet!].rainbow>'
     in_shop: false

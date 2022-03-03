@@ -44,8 +44,8 @@ discord_watcher:
 
         - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message].replace[]>
-        - define Insert "/chatdelete <[channel]> <[uuid]>"
-        - define MessageText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
+        - define Insert "chat interact <[channel]> <[uuid]>"
+        - define MessageText <proc[msg_cmd].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         - define Attachments <list>
         - if !<context.new_message.attachments.is_empty>:
           - foreach <context.new_message.attachments> as:Attachment:

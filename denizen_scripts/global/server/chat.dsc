@@ -5,8 +5,9 @@ chat_system_events:
     on player chats bukkit_priority:LOWEST:
       - determine passively cancelled
       - waituntil rate:1s <bungee.connected>
-      - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current]||global>
+      - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current]||server>
       - define uuid <util.random_uuid>
+      - define sender <player.uuid>
 
       # Check for Chat Lock
       - if <yaml[global.player.<player.uuid>].read[chat.locked]||false> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny]||false>:
@@ -44,25 +45,25 @@ chat_system_events:
       # Build the Message Content
       - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message]>
-      - define Insert "/chatdelete <[channel]> <[uuid]>"
-      - define MessageText <proc[msg_hover_ins].context[<[Hover]>|<[Text]>|<[Insert]>]>
+      - define Command "chat interact <[channel]> <[uuid]>"
+      - define MessageText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
 
       - define Message <[ChannelText]><[NameText]><[Separator]><[MessageText]>
 
-      - narrate <[message]> targets:<server.online_players_flagged[chat_channel_<[channel]>]>
+      - narrate <[message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
-        - bungeerun <[Servers]> chat_send_message def:<[channel]>|<[message]>|<[uuid]>
+        - bungeerun <[Servers]> chat_send_message def:<[channel]>|<[message]>|<[uuid]>|<[sender]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
           - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>]>
-      - inject chat_history_save
+      - run chat_history_save def:<[channel]>|<[message]>|<[uuid]>|<[sender]>
 
 chat_history_save:
   type: task
   debug: false
-  definitions: Channel|Message|UUID
+  definitions: Channel|Message|UUID|sender
   script:
-    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>]>
+    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]||DiscordUser>]>
     - if <yaml[chat_history].read[<[channel]>_history].size> > 50:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
 
@@ -73,9 +74,9 @@ chat_history_show:
     - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
     - define list <list>
     - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
-      - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat_channel_<[channel]>]>:
+      - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]>:
         - foreach next
-      - define list:|:<yaml[chat_history].parsed_key[<[Channel]>_history]>
+      - define list:|:<yaml[chat_history].read[<[Channel]>_history]>
     - if <[List].is_empty>:
       - stop
     - foreach <[list].sort_by_number[get[time]].reverse.get[1].to[30].reverse.parse[get[message]]> as:Message:
@@ -84,31 +85,34 @@ chat_history_show:
 chat_delete_message:
   type: task
   debug: false
-  definitions: channel|uuid|relay
+  definitions: channel|uuid|relay|lock
   script:
     - if <yaml[chat_config].read[channels.<[channel]>.global]>:
       - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
-    - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]||true>
-    - define message <yaml[chat_history].parsed_key[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>]>].get[1]>
+    - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]>
+    - define message <yaml[chat_history].read[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>]>].get[1]>
     - define new_message_map "<[message].with[message].as[<&7><&lb>Message Deleted<&rb>]>"
-    - foreach <yaml[chat_history].parsed_key[<[channel]>_history]> as:message_map:
+    - foreach <yaml[chat_history].read[<[channel]>_history]> as:message_map:
       - if <[message_map].get[uuid]> == <[uuid]>:
-        - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].parsed_key[<[channel]>_history].overwrite[<[new_message_map]>].at[<[loop_index]>]>
-    - foreach <server.online_players_flagged[chat_channel_<[channel]>]>:
+        - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].overwrite[<[new_message_map]>].at[<[loop_index]>]>
+    - foreach <server.online_players_flagged[chat.channels.<[channel]>]>:
       - run chat_history_show player:<[value]>
       - wait 1t
+    - if <[lock]||false>:
+      - run chatlock_task def:<[message].get[sender]>|<[message]>
+    - inject chat_interact_cancel
 
 chatdelete_command:
   type: command
   name: chatdelete
-  usage: /chatdelete (message uuid)
+  usage: /chatdelete (channel) (message uuid) (lock)
   description: Designed for automated use and not manual entry
   permission: adriftus.chat.delete
   debug: false
   script:
-    - if <context.args.size> != 2:
+    - if <context.args.size> < 2:
       - narrate "<&c>Not intended for manual usage..."
-    - run chat_delete_message def:<context.args.get[1]>|<context.args.get[2]>
+    - run chat_delete_message def:<context.args.get[1]>|<context.args.get[2]>|true|<context.args.get[3]||false>
 
 chatlock_command:
   type: command
@@ -125,10 +129,29 @@ chatlock_command:
     - if !<server.has_flag[player_map.names.<context.args.get[1]>.server]>:
       - narrate "<&c>Unknown Player<&co> <context.args.get[1]>"
       - stop
-    - run global_player_data_modify def:<server.flag[player_map.names.<context.args.get[1]>.uuid]>|chat.locked|true
-    - define message "<&c>You have been chat locked. You are restricted to speaking in <&b>Anarchy<&c> channel only."
-    - run bungee_send_message def:<server.flag[player_map.names.<context.args.get[1]>.uuid]>|<[message]>
-    - narrate "<&a>Player <&b><context.args.get[1]> <&a>has been Chat Locked."
+    - run chatlock_task def:<server.flag[player_map.names.<context.args.get[1]>.uuid]>
+
+chatlock_task:
+  type: task
+  debug: false
+  definitions: uuid|message_map
+  script:
+    - if <[message_map].exists>:
+      - if <[message_map].get[sender]> == DiscordUser:
+        - narrate "<&c>Unable to Chat Lock a Discord User at this time."
+        - stop
+      - run global_player_data_modify def:<[uuid]>|chat.locked|true
+      - define border <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
+      - define message "<&c>You have been chat locked for the above message. You are restricted to speaking in the <&b>Anarchy<&c> channel only."
+      - define chatlock_notification <[border]><&nl><&nl><[message_map].get[message]><&nl><&nl><[message]><&nl><[border]>
+      - run bungee_send_message def:<[uuid]>|<[chatlock_notification]>
+      - inject chat_interact_cancel
+      - narrate "<&a>Player <&b><server.flag[player_map.uuids.<[uuid]>.name]> <&a>has been Chat Locked."
+    - else:
+      - run global_player_data_modify def:<[uuid]>|chat.locked|true
+      - define message "<&c>You have been chat locked. You are restricted to speaking in <&b>Anarchy<&c> channel only."
+      - run bungee_send_message def:<[uuid]>|<[message]>
+      - narrate "<&a>Player <&b><[uuid]> <&a>has been Chat Locked."
 
 chat_command:
   type: command
@@ -145,6 +168,9 @@ chat_command:
     - if <context.args.is_empty>:
       - inject chat_settings_open
       - stop
+
+    - else if <context.args.get[1]> == interact && <context.args.size> > 1:
+      - inject chat_interact
 
     - else if <context.args.size> > 1:
       - define reason "Invalid Chat Channel."
@@ -164,13 +190,48 @@ chat_command:
         - reload
       - narrate "<&a>Chat config has been globally reloaded."
 
+chat_interact:
+  type: task
+  debug: false
+  script:
+    - if !<player.has_permission[adriftus.chat.moderate]>:
+      - stop
+    - if <context.args.get[2]> == cancel:
+      - inject chat_interact_cancel
+      - stop
+    - if <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].contains[<context.args.get[2]>]>:
+      - define message <yaml[chat_history].parsed_key[<context.args.get[2]>_history].filter_tag[<[filter_value].get[uuid].equals[<context.args.get[3]>]>]>
+      - if !<[message].is_empty>:
+        - define message <[message].get[1]>
+        - flag player chat.paused:<player.flag[chat.channels].keys>
+        - flag player chat.channels:!
+        - narrate <element[<&nl>].repeat_as_list[40].separated_by[<&nl>]>
+        - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
+        - narrate <&nl><&nl><[message].get[message]><&nl>
+        - define list "<element[<&c><&lb>Delete<&rb><&r>].on_hover[<&c>Delete this message].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]>].type[run_command]>"
+        - define "list:->:<element[<&4><&lb>Delete & Lock<&rb><&r>].on_hover[<&c>Delete this message, and chat lock the player].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]> true].type[run_command]>" if:<[message].get[sender].equals[DiscordUser].not>
+        - define "list:->:<element[<&b><&lb>Cancel<&rb><&r>].on_hover[<&c>Cancel Moderation Action].on_click[/chat interact cancel].type[run_command]>"
+        - narrate "   <[list].separated_by[      ]>"
+        - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
+    - stop
+
+chat_interact_cancel:
+  type: task
+  debug: false
+  script:
+    - if <player.has_flag[chat.paused]>:
+      - foreach <player.flag[chat.paused]>:
+        - flag player chat.channels.<[value]>
+      - flag player chat.paused:!
+      - inject chat_history_show
+
 chat_send_message:
   type: task
   debug: false
 #@definitions: channel|message_escaped
-  definitions: Channel|Message|UUID
+  definitions: Channel|Message|UUID|Sender
   script:
-      - narrate <[Message]> targets:<server.online_players_flagged[chat_channel_<[channel]>]>
+      - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
       - inject chat_history_save
 
 chat_system_flag_manager:
@@ -185,7 +246,7 @@ chat_system_flag_manager:
           - define map <map[chat.channels.active=<list[server]>;chat.channels.current=server]>
           - run global_player_data_modify def:<player.uuid>|<[map]>
       - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active]>:
-        - flag player chat_channel_<[value]>
+        - flag player chat.channels.<[value]>
       - inject chat_history_show
 
 chat_system_data_manager:
@@ -245,11 +306,11 @@ chat_settings_events:
                 - narrate "<&c>You cannot stop listening to the channel you're talking in."
                 - stop
               - run global_player_data_modify def:<player.uuid>|chat.channels.active.<context.item.flag[action]>|false
-              - flag player chat_channel_<context.item.flag[action]>:!
+              - flag player chat.channels.<context.item.flag[action]>:!
               - narrate "<&b>You are no longer listening to <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
             - else:
               - run global_player_data_modify def:<player.uuid>|chat.channels.active.<context.item.flag[action]>|true
-              - flag player chat_channel_<context.item.flag[action]>
+              - flag player chat.channels.<context.item.flag[action]>
               - narrate "<&b>You are now listening to <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
           - case LEFT:
             - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> != <context.item.flag[action]>:
