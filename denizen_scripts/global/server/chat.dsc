@@ -69,7 +69,7 @@ chat_history_save:
 
 chat_history_show:
   type: task
-  debug: false
+  debug: true
   script:
     - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
     - define list <list>
