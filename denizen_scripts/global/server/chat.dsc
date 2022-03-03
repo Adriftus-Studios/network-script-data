@@ -223,6 +223,7 @@ chat_interact_cancel:
       - foreach <player.flag[chat.paused]>:
         - flag palyer chat.channels.<[value]>
       - flag player chat.paused:!
+      - inject chat_history_show
 
 chat_send_message:
   type: task
