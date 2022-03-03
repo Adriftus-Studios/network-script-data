@@ -42,7 +42,7 @@ network_map_handler:
       - flag server player_map.names.<context.name>.server:<context.server>
 
     on bungee player leaves network:
-      - flag server server_map.<server.flag[player_map.<context.uuid>.server]>.<context.uuid>:!
+      - flag server server_map.<server.flag[player_map.uuids.<context.uuid>.server]>.<context.uuid>:!
       - flag server player_map.uuids.<context.uuid>:!
       - flag server player_map.names.<context.name>:!
 
