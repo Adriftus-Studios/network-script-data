@@ -5,7 +5,7 @@ chat_system_events:
     on player chats bukkit_priority:LOWEST:
       - determine passively cancelled
       - waituntil rate:1s <bungee.connected>
-      - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current]||global>
+      - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current]||server>
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
 
@@ -63,7 +63,7 @@ chat_history_save:
   debug: false
   definitions: Channel|Message|UUID|sender
   script:
-    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]>]>
+    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]||DiscordUser>]>
     - if <yaml[chat_history].read[<[channel]>_history].size> > 50:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
 
@@ -137,6 +137,9 @@ chatlock_task:
   definitions: uuid|message_map
   script:
     - if <[message_map].exists>:
+      - if <[message_map].get[sender]> == DiscordUser:
+        - narrate "<&c>Unable to Chat Lock a Discord User at this time."
+        - stop
       - run global_player_data_modify def:<server.flag[player_map.uuids.<[uuid]>.uuid]>|chat.locked|<[message_map].get[message]>
       - define border <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
       - define message "<&c>You have been chat locked for the above message. You are restricted to speaking in the <&b>Anarchy<&c> channel only."
@@ -196,16 +199,16 @@ chat_interact:
     - if <context.args.get[2]> == cancel:
       - inject chat_interact_cancel
       - stop
-    - if <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].contains[<context.args.get[2]||null>]>:
-      - define message <yaml[chat_history].parsed_key[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<context.args.get[3]>]>]>
+    - if <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].contains[<context.args.get[2]>]>:
+      - define message <yaml[chat_history].parsed_key[<context.args.get[2]>_history].filter_tag[<[filter_value].get[uuid].equals[<context.args.get[3]>]>]>
       - if !<[message].is_empty>:
         - flag player chat.paused:<player.flag[chat.channels].keys>
         - flag player chat.channels:!
         - narrate <element[<&nl>].repeat_as_list[40].separated_by[<&nl>]>
         - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
         - narrate <[message].get[message]>
-        - define delete "<element[<&c><&lb>Delete<&rb><&r>].on_hover[<&c>Delete this message].on_click[/chatdelete <[channel]> <[message].get[uuid]>].type[run_command]>"
-        - define delete_and_lock "<element[<&4><&lb>Delete & Lock<&rb><&r>].on_hover[<&c>Delete this message, and chat lock the player].on_click[/chatdelete <[channel]> <[message].get[uuid]> true].type[run_command]>"
+        - define delete "<element[<&c><&lb>Delete<&rb><&r>].on_hover[<&c>Delete this message].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]>].type[run_command]>"
+        - define delete_and_lock "<element[<&4><&lb>Delete & Lock<&rb><&r>].on_hover[<&c>Delete this message, and chat lock the player].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]> true].type[run_command]>"
         - define cancel "<element[<&b><&lb>Cancel<&rb><&r>].on_hover[<&c>Cancel Moderation Action].on_click[/chat interact cancel].type[run_command]>"
         - narrate "   <[delete]>     <[delete_and_lock]>     <[cancel]>"
         - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
