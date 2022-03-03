@@ -17,7 +17,7 @@ player_data_handler:
         - if <server.has_file[data/global/players/<player.uuid>.yml]>:
           - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
         - else:
-          - wait 2t
+          - wait 10t
           - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
 
     on player quits:
