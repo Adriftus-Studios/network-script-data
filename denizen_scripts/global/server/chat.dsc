@@ -89,12 +89,12 @@ chat_delete_message:
   script:
     - if <yaml[chat_config].read[channels.<[channel]>.global]>:
       - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
-    - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]||true>
-    - define message <yaml[chat_history].parsed_key[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>]>].get[1]>
+    - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]>
+    - define message <yaml[chat_history].read[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>]>].get[1]>
     - define new_message_map "<[message].with[message].as[<&7><&lb>Message Deleted<&rb>]>"
-    - foreach <yaml[chat_history].parsed_key[<[channel]>_history]> as:message_map:
+    - foreach <yaml[chat_history].read[<[channel]>_history]> as:message_map:
       - if <[message_map].get[uuid]> == <[uuid]>:
-        - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].parsed_key[<[channel]>_history].overwrite[<[new_message_map]>].at[<[loop_index]>]>
+        - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].overwrite[<[new_message_map]>].at[<[loop_index]>]>
     - foreach <server.online_players_flagged[chat.channels.<[channel]>]>:
       - run chat_history_show player:<[value]>
       - wait 1t
@@ -112,7 +112,7 @@ chatdelete_command:
   script:
     - if <context.args.size> < 2:
       - narrate "<&c>Not intended for manual usage..."
-    - run chat_delete_message def:<context.args.get[1]>|<context.args.get[2]>|false|<context.args.get[3]||false>
+    - run chat_delete_message def:<context.args.get[1]>|<context.args.get[2]>|true|<context.args.get[3]||false>
 
 chatlock_command:
   type: command
