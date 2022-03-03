@@ -207,11 +207,11 @@ chat_interact:
         - flag player chat.channels:!
         - narrate <element[<&nl>].repeat_as_list[40].separated_by[<&nl>]>
         - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
-        - narrate <[message].get[message]>
-        - define delete "<element[<&c><&lb>Delete<&rb><&r>].on_hover[<&c>Delete this message].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]>].type[run_command]>"
-        - define delete_and_lock "<element[<&4><&lb>Delete & Lock<&rb><&r>].on_hover[<&c>Delete this message, and chat lock the player].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]> true].type[run_command]>"
-        - define cancel "<element[<&b><&lb>Cancel<&rb><&r>].on_hover[<&c>Cancel Moderation Action].on_click[/chat interact cancel].type[run_command]>"
-        - narrate "   <[delete]>     <[delete_and_lock]>     <[cancel]>"
+        - narrate <&nl><&nl><[message].get[message]><&nl>
+        - define list "<element[<&c><&lb>Delete<&rb><&r>].on_hover[<&c>Delete this message].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]>].type[run_command]>"
+        - define "list:->:<element[<&4><&lb>Delete & Lock<&rb><&r>].on_hover[<&c>Delete this message, and chat lock the player].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]> true].type[run_command]>" if:<[message].get[sender].equals[DiscordUser].not>
+        - define "list:->:<element[<&b><&lb>Cancel<&rb><&r>].on_hover[<&c>Cancel Moderation Action].on_click[/chat interact cancel].type[run_command]>"
+        - narrate "   <[list].separated_by[      ]>"
         - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
     - stop
 
