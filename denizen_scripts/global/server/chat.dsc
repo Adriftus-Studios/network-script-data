@@ -202,6 +202,7 @@ chat_interact:
     - if <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].contains[<context.args.get[2]>]>:
       - define message <yaml[chat_history].parsed_key[<context.args.get[2]>_history].filter_tag[<[filter_value].get[uuid].equals[<context.args.get[3]>]>]>
       - if !<[message].is_empty>:
+        - define message <[message].get[1]>
         - flag player chat.paused:<player.flag[chat.channels].keys>
         - flag player chat.channels:!
         - narrate <element[<&nl>].repeat_as_list[40].separated_by[<&nl>]>
