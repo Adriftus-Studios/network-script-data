@@ -70,7 +70,8 @@ mail_delivery_end:
   definitions: player
   script:
   - stop if:<player.has_flag[mail_delivery.current].not>
-  - inventory close player:<[player]> if:<[player].open_inventory.script.name.equals[mail_delivery_mailbox_inventory].if_null[false]>
+  - inventory close player:<[player]>
+  - wait 1t
   - foreach <player.inventory.find_all_items[mail_delivery_mail_item]> as:slot:
     - inventory set d:<player.inventory> slot:<[slot]> o:air
   - flag <player> mail_delivery.current:!
