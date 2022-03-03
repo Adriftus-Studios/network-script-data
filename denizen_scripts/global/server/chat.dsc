@@ -221,7 +221,7 @@ chat_interact_cancel:
   script:
     - if <player.has_flag[chat.paused]>:
       - foreach <player.flag[chat.paused]>:
-        - flag palyer chat.channels.<[value]>
+        - flag player chat.channels.<[value]>
       - flag player chat.paused:!
       - inject chat_history_show
 
