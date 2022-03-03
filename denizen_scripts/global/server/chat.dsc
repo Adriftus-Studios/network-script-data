@@ -99,7 +99,7 @@ chat_delete_message:
       - run chat_history_show player:<[value]>
       - wait 1t
     - if <[lock]||false>:
-      - run chatlock_task def:<[message_map].get[sender]>|<[message]>
+      - run chatlock_task def:<[message].get[sender]>|<[message]>
     - inject chat_interact_cancel
 
 chatdelete_command:
