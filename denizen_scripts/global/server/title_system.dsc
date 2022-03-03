@@ -50,8 +50,8 @@ title_inventory:
       current_title: 50
       page_marker: 1
   definitions:
-    next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;flag=action:next_page]>
-    previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;flag=action:previous_page]>
+    next_page: <item[leather_horse_armor].with[display_name=<&a>Next<&sp>Page;flag=action:next_page;color=green;custom_model_data=7]>
+    previous_page: <item[leather_horse_armor].with[display_name=<&c>Previous<&sp>Page;flag=action:previous_page;color=green;custom_model_data=6]>
   slots:
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
     - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
