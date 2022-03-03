@@ -146,7 +146,7 @@ chatlock_task:
       - define chatlock_notification <[border]><&nl><&nl><[message_map].get[message]><&nl><[message]><&nl><[border]>
       - run bungee_send_message def:<server.flag[player_map.uuids.<[uuid]>.uuid]>|<[chatlock_notification]>
       - inject chat_interact_cancel
-      - narrate "<&a>Player <&b><[uuid]> <&a>has been Chat Locked."
+      - narrate "<&a>Player <&b><server.flag[player_map.uuids.<[uuid]>.name]> <&a>has been Chat Locked."
     - else:
       - run global_player_data_modify def:<server.flag[player_map.uuids.<[uuid]>.uuid]>|chat.locked|true
       - define message "<&c>You have been chat locked. You are restricted to speaking in <&b>Anarchy<&c> channel only."
