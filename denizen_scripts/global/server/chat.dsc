@@ -61,9 +61,9 @@ chat_system_events:
 chat_history_save:
   type: task
   debug: false
-  definitions: Channel|Message|UUID|Sender
+  definitions: Channel|Message|UUID|sender
   script:
-    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[Sender]>]>
+    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]>]>
     - if <yaml[chat_history].read[<[channel]>_history].size> > 50:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
 
