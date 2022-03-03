@@ -14,7 +14,11 @@ player_data_handler:
 
     on player joins:
       - if <bungee.server> != hub:
-        - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
+        - if <server.has_file[data/global/players/<player.uuid>.yml]>:
+          - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
+        - else:
+          - wait 2t
+          - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
 
     on player quits:
       - if <bungee.server> != hub:
