@@ -6,7 +6,7 @@ title_unlock:
   definitions: tagID
   debug: false
   script:
-    - if <yaml[titles].read[titles.<[tagID]>].exists> && !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tagID]>]||false>:
+    - if <yaml[titles].read[titles.<[tagID]>].exists> && !<yaml[global.player.<player.uuid>].contains[titles.unlocked.<[tagID]>]||false>:
       - run global_player_data_modify def:<player.uuid>|titles.unlocked.<[tagID]>|true
 
 title_remove:
