@@ -11,7 +11,7 @@ resource_pack_force:
   events:
     on player joins:
       - if !<player.has_flag[RP_Enabled]> || <player.flag[RP_Enabled]> != <server.flag[rp_sha]>:
-        - resourcepack targets:<player> url:http://www.adriftus.net:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced
+        - resourcepack targets:<player> url:http://www.adriftus.net:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced if:<player.has_flag[rp_bypass].not>
     on resource pack status:
       - choose <context.status>:
         - case SUCCESSFULLY_LOADED:
