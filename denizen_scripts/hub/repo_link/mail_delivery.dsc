@@ -35,7 +35,9 @@ mail_delivery_start:
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
   - flag <player> mail_delivery.current.time expire:<[time]>
   - flag <player> mail_delivery.current.difficulty:<[difficulty]>
-  - wait <[time]>
+  - repeat <[time].in_seconds>:
+    - actionbar "Time Remaining: <[time].sub[<duration[<[value]>s]>]>"
+    - wait 1s
   - run mail_delivery_fail def:<[player]> if:<player.flag[mail_delivery.current.todo].values.sum.if_null[0].equals[0].not>
 
 mail_delivery_fail:
