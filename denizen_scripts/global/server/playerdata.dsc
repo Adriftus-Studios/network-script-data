@@ -34,7 +34,7 @@ network_map_handler:
   events:
     on bungee player switches to server:
       - if <server.has_flag[player_map.uuids.<context.uuid>.server]>:
-        - flag server server_map.<server.flag[player_map.<context.uuid>.server]>.<context.uuid>:!
+        - flag server server_map.<server.flag[player_map.uuids.<context.uuid>.server]>.<context.uuid>:!
       - flag server player_map.uuids.<context.uuid>.server:<context.server>
       - flag server player_map.uuids.<context.uuid>.name:<context.name>
       - flag server server_map.<context.server>.<context.uuid>:<context.name>
