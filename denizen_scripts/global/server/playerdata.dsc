@@ -117,11 +117,17 @@ global_player_data_modify:
   debug: false
   definitions: uuid|node|value|forward
   script:
-    - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+    - yaml id:global.player.<[uuid]> set <[node]>:<[value]> if:<yaml.list.contains[global.player.<[uuid]>]>
     - if <bungee.server> != hub:
       - if !<player[<[uuid]>].is_online||false>:
         - define forward true
       - bungeerun hub global_player_data_modify def:<[uuid]>|<[node]>|<[value]>|<[forward]||false>
+    - else if <server.has_flag[player_map.<[uuid]>.server]>:
+      - ~yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
+      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+      - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
+      - if !<server.has_flag[player_map.<[uuid]>.server]>:
+        - yaml id:global.player.<[uuid]> unload
     - else:
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
       - if <[forward]||false> && <server.has_flag[player_map.<[uuid]>.server]>:
