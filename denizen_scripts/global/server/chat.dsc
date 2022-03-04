@@ -81,7 +81,7 @@ chat_history_show:
   script:
     - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
     - define list <list>
-    - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
+    - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
       - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]>:
         - foreach next
       - define list:|:<yaml[chat_history].read[<[Channel]>_history].filter[get[time].is_integer]>
@@ -204,7 +204,7 @@ chat_command:
     - if <[channel]> == debug_history && <player.has_permission[adriftus.admin]>:
       - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
       - define list <list>
-      - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
+      - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
         - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]>:
           - foreach next
         - define list:|:<yaml[chat_history].read[<[Channel]>_history]>
@@ -225,7 +225,7 @@ chat_interact:
     - if <context.args.get[2]> == cancel:
       - inject chat_interact_cancel
       - stop
-    - if <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].contains[<context.args.get[2]>]>:
+    - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<context.args.get[2]>]>:
       - define message <yaml[chat_history].parsed_key[<context.args.get[2]>_history].filter_tag[<[filter_value].get[uuid].equals[<context.args.get[3]>]>]>
       - if !<[message].is_empty>:
         - define message <[message].get[1]>
