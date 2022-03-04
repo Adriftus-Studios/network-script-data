@@ -71,7 +71,7 @@ chat_history_save:
   script:
     - if !<[Channel].exists> || !<[Message].exists> || !<[UUID].exists> || !<[sender].exists>:
       - stop
-    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]||DiscordUser>]>
+    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]>]>
     - if <yaml[chat_history].read[<[channel]>_history].size> > 40:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
 
@@ -149,7 +149,7 @@ chatlock_task:
   definitions: uuid|message_map
   script:
     - if <[message_map].exists>:
-      - if <[message_map].get[sender]> == DiscordUser:
+      - if <[message_map].get[sender].starts_with[DiscordUser_]>:
         - narrate "<&c>Unable to Chat Lock a Discord User at this time."
         - stop
       - run global_player_data_modify def:<[uuid]>|chat.locked|true
@@ -235,7 +235,7 @@ chat_interact:
         - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
         - narrate <&nl><&nl><[message].get[message]><&nl>
         - define list "<element[<&c><&lb>Delete<&rb><&r>].on_hover[<&c>Delete this message].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]>].type[run_command]>"
-        - define "list:->:<element[<&4><&lb>Delete & Lock<&rb><&r>].on_hover[<&c>Delete this message, and pemanently chat lock the player].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]> true].type[run_command]>" if:<[message].get[sender].equals[DiscordUser].not>
+        - define "list:->:<element[<&4><&lb>Delete & Lock<&rb><&r>].on_hover[<&c>Delete this message, and pemanently chat lock the player].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]> true].type[run_command]>" if:<[message].get[sender].starts_with[DiscordUser_].not>
         - define "list:->:<element[<&b><&lb>Cancel<&rb><&r>].on_hover[<&c>Cancel Moderation Action].on_click[/chat interact cancel].type[run_command]>"
         - narrate "   <[list].separated_by[      ]>"
         - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
