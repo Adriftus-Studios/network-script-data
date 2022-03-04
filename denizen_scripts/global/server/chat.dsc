@@ -332,7 +332,7 @@ chat_settings_events:
               - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <context.item.flag[action]>:
                 - narrate "<&c>You cannot stop listening to the channel you're talking in."
                 - stop
-              - run global_player_data_modify def:<player.uuid>|chat.channels.active.<context.item.flag[action]>|false
+              - run global_player_data_modify def:<player.uuid>|chat.channels.active.<context.item.flag[action]>|!
               - flag player chat.channels.<context.item.flag[action]>:!
               - narrate "<&b>You are no longer listening to <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
             - else:
