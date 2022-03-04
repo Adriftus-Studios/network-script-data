@@ -70,7 +70,7 @@ chat_history_save:
   definitions: Channel|Message|UUID|sender
   script:
     - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]||DiscordUser>]>
-    - if <yaml[chat_history].read[<[channel]>_history].size> > 50:
+    - if <yaml[chat_history].read[<[channel]>_history].size> > 60:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
 
 chat_history_show:
@@ -195,6 +195,20 @@ chat_command:
       - bungee relay:
         - reload
       - narrate "<&a>Chat config has been globally reloaded."
+    - if <[channel]> == debug_history && <player.has_permission[adriftus.admin]>:
+      - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
+      - define list <list>
+      - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
+        - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]>:
+          - foreach next
+        - define list:|:<yaml[chat_history].read[<[Channel]>_history]>
+      - if <[List].is_empty>:
+        - stop
+      - define sorted_list <[list].sort_by_number[get[time]]>
+      - foreach <[sorted_list]> as:Message:
+        - narrate <[Message]>
+        - wait 1t
+      
 
 chat_interact:
   type: task
