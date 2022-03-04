@@ -8,8 +8,6 @@ chat_system_events:
       - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current]||server>
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
-      - define msg <context.message.replace_text[<&lb>].with[]>
-      - define msg <[msg].replace_text[<&rb>].with[]>
       - define msg <[msg].replace_text[|].with[]>
 
       # Check for Chat Lock
@@ -26,6 +24,10 @@ chat_system_events:
       # Allow Items in Chat
       - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
         - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&rb><&end_hover>]>
+
+      # Sanitize
+      - define msg <context.message.replace_text[<&lb>].with[]>
+      - define msg <[msg].replace_text[<&rb>].with[]>
 
       # Build the Channel Text
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
