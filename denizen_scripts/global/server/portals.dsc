@@ -112,7 +112,7 @@ open_portal:
     - else:
       - define target <player.location.above[0.2].backward_flat[2]>
     - define cube <player.location.above[0.2].to_cuboid[<[target].above[1.2]>]>
-    - if <[cube].blocks.filter_tag[<script[portal_config].data_key[whitelisted_blocks].contains[<[filter_value].material.name>].not>].size> >= 1:
+    - if <[cube].blocks.filter[material.is_solid.not].size> >= 1:
       - narrate <script[portal_config].parsed_key[messages.no_room]>
       - stop
     - if <[type]> == dtd && <[server].exists>:
@@ -124,7 +124,7 @@ open_portal:
         - stop
     - if !<[destination].chunk.is_loaded>:
       - chunkload <[destination].chunk> duration:10s
-    - if !<script[portal_config].data_key[whitelisted_blocks].contains[<[destination].material.name>]>:
+    - if <[destination].material.is_solid>:
         - narrate <script[portal_config].parsed_key[messages.unsafe_destination]>
         - stop
     - if !<script[portal_config].parsed_key[types.<[type]>.origin_requirements].parsed>:
