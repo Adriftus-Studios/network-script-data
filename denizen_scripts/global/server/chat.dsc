@@ -81,7 +81,7 @@ chat_history_show:
   script:
     - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
     - define list <list>
-    - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
+    - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
       - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]>:
         - foreach next
       - define list:|:<yaml[chat_history].read[<[Channel]>_history].filter[get[time].is_integer]>
@@ -101,7 +101,7 @@ chat_delete_message:
   script:
     - if <yaml[chat_config].read[channels.<[channel]>.global]>:
       - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
-      - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]>
+    - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]>
     - define message <yaml[chat_history].read[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>]>].get[1]>
     - define new_message_map "<[message].with[message].as[<&7><&lb>Message Deleted<&rb>]>"
     - foreach <yaml[chat_history].read[<[channel]>_history]> as:message_map:
@@ -191,7 +191,7 @@ chat_command:
     - define Channel <context.args.first.to_lowercase>
     - if <yaml[chat_config].contains[channels.<[Channel]>]> && ( ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[Channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[Channel]>.permission]> == none ):
       - run global_player_data_modify def:<player.uuid>|chat.channels.current|<[Channel]>
-      - if !<yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<[Channel]>]>:
+      - if !<yaml[global.player.<player.uuid>].read[chat.channels.active.<[Channel]>]>:
         - run global_player_data_modify def:<player.uuid>|chat.channels.active.<[Channel]>|true
       - narrate "<&b>Now Talking in <yaml[chat_config].parsed_key[channels.<[Channel]>.format.channel]>"
     - if <[Channel]> == reload && <player.has_permission[adriftus.chat.reload]>:
@@ -204,7 +204,7 @@ chat_command:
     - if <[channel]> == debug_history && <player.has_permission[adriftus.admin]>:
       - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
       - define list <list>
-      - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
+      - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
         - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]>:
           - foreach next
         - define list:|:<yaml[chat_history].read[<[Channel]>_history]>
@@ -225,7 +225,7 @@ chat_interact:
     - if <context.args.get[2]> == cancel:
       - inject chat_interact_cancel
       - stop
-    - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<context.args.get[2]>]>:
+    - if <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].contains[<context.args.get[2]>]>:
       - define message <yaml[chat_history].parsed_key[<context.args.get[2]>_history].filter_tag[<[filter_value].get[uuid].equals[<context.args.get[3]>]>]>
       - if !<[message].is_empty>:
         - define message <[message].get[1]>
@@ -268,10 +268,10 @@ chat_system_flag_manager:
       - waituntil rate:10t <yaml.list.contains[global.player.<player.uuid>].or[<player.is_online.not>]>
       - if !<player.is_online>:
         - stop
-      - if !<yaml[global.player.<player.uuid>].contains[chat.channels.active]> || <yaml[global.player.<player.uuid>].read[chat.channels.active].object_type> != List:
-          - define map <map[chat.channels.active=<list[server|pg]>;chat.channels.current=server]>
-          - run global_player_data_modify_multiple def:<player.uuid>|<[map]>
-      - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active]>:
+      - if !<yaml[global.player.<player.uuid>].contains[chat.channels.active]> || <yaml[global.player.<player.uuid>].read[chat.channels.active].object_type> != Map:
+          - define map <map[chat.channels.active.server=true;chat.channels.current=server]>
+          - run global_player_data_modify def:<player.uuid>|<[map]>
+      - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active]>:
         - flag player chat.channels.<[value]>
       - inject chat_history_show
 
@@ -327,7 +327,7 @@ chat_settings_events:
       - if <context.item.has_flag[action]>:
         - choose <context.click>:
           - case RIGHT:
-            - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<context.item.flag[action]>]>:
+            - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<context.item.flag[action]>]>:
               - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <context.item.flag[action]>:
                 - narrate "<&c>You cannot stop listening to the channel you're talking in."
                 - stop
@@ -354,7 +354,7 @@ chat_settings_open:
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - if ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
-        - if <yaml[global.player.<player.uuid>].read[chat.channels.active].contains[<[channel]>]>:
+        - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<[channel]>]>:
           - define icon <item[green_wool]>
           - define "lore:!|:<&a>You are listening to this channel."
           - define lore:->:<&a>-----------------------------
