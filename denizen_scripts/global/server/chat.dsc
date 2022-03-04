@@ -328,7 +328,7 @@ chat_settings_events:
       - if <context.item.has_flag[action]>:
         - choose <context.click>:
           - case RIGHT:
-            - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<context.item.flag[action]>]>:
+            - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<context.item.flag[action]>]||false>:
               - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <context.item.flag[action]>:
                 - narrate "<&c>You cannot stop listening to the channel you're talking in."
                 - stop
