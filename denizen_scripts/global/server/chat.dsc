@@ -209,7 +209,7 @@ chat_interact:
         - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
         - narrate <&nl><&nl><[message].get[message]><&nl>
         - define list "<element[<&c><&lb>Delete<&rb><&r>].on_hover[<&c>Delete this message].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]>].type[run_command]>"
-        - define "list:->:<element[<&4><&lb>Delete & Lock<&rb><&r>].on_hover[<&c>Delete this message, and chat lock the player].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]> true].type[run_command]>" if:<[message].get[sender].equals[DiscordUser].not>
+        - define "list:->:<element[<&4><&lb>Delete & Lock<&rb><&r>].on_hover[<&c>Delete this message, and pemanently chat lock the player].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]> true].type[run_command]>" if:<[message].get[sender].equals[DiscordUser].not>
         - define "list:->:<element[<&b><&lb>Cancel<&rb><&r>].on_hover[<&c>Cancel Moderation Action].on_click[/chat interact cancel].type[run_command]>"
         - narrate "   <[list].separated_by[      ]>"
         - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
