@@ -24,6 +24,7 @@ discord_watcher:
       - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null && !<context.new_message.author.name.contains[Adriftus]>:
         - define uuid <context.new_message.channel.id>_<context.new_message.id>
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
+        - define sender DiscordUser_<context.new_message.author.id>
 
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
         - define Text <&7><&lb><&f><&chr[0044].font[adriftus:chat]><&7><&rb>
@@ -55,7 +56,7 @@ discord_watcher:
             - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
         - define Message <[DiscIcon]><[ChannelText]><[NameText]><[Separator]><[Attachments]><[MessageText]>
-        - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>]>
+        - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
 
