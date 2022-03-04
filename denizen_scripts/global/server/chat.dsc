@@ -270,7 +270,7 @@ chat_system_flag_manager:
         - stop
       - if !<yaml[global.player.<player.uuid>].contains[chat.channels.active]> || <yaml[global.player.<player.uuid>].read[chat.channels.active].object_type> != List:
           - define map <map[chat.channels.active=<list[server|pg]>;chat.channels.current=server]>
-          - run global_player_data_modify def:<player.uuid>|<[map]>
+          - run global_player_data_modify_multiple def:<player.uuid>|<[map]>
       - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active]>:
         - flag player chat.channels.<[value]>
       - inject chat_history_show
