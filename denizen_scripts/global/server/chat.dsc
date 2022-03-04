@@ -92,7 +92,7 @@ chat_history_show:
       #- narrate <[Message]>
     #- if <[sorted_list].size> > 30:
       #- narrate <[sorted_list].get[31].to[60].reverse.parse[get[message]].separated_by[<&nl>]>
-    - narrate <element[<&nl>].repeat_as_list[50].include[<[sorted_list].get[1].to[40].reverse.parse[get[message]].separated_by[<&nl>]>]>
+    - narrate <element[<&nl>].repeat_as_list[50].include[<[sorted_list].get[1].to[40].reverse.parse[get[message]]>].separated_by[<&nl>]>
 
 chat_delete_message:
   type: task
