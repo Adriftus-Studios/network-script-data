@@ -84,7 +84,7 @@ chat_history_show:
     - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
       - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]>:
         - foreach next
-      - define list:|:<yaml[chat_history].read[<[Channel]>_history].filter[contains[time]]>
+      - define list:|:<yaml[chat_history].read[<[Channel]>_history].filter[get[time].is_integer]>
     - if <[List].is_empty>:
       - stop
     - define sorted_list <[list].sort_by_number[get[time]].reverse>
