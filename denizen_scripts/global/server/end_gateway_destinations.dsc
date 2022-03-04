@@ -5,8 +5,9 @@ gateway_teleport:
     on player teleports cause:END_GATEWAY:
       - define gateway <player.location.find_blocks[end_gateway].within[2].get[1]>
       - if <[gateway].has_flag[destination.location]>:
+        - determine <player.location.forward[0.1]>
+        - ratelimit <player> 5t
         - if <bungee.connected> && <[gateway].has_flag[destination.server]> && <[gateway].flag[destination.server]> != <bungee.server>:
-          - ratelimit <player> 5t
           - bungeerun <[gateway].flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<[gateway].flag[destination.location]>
           - wait 1t
           - adjust <player> send_to:<[gateway].flag[destination.server]>
