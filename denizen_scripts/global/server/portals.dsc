@@ -112,7 +112,7 @@ open_portal:
     - else:
       - define target <player.location.above[0.2].backward_flat[2]>
     - define cube <player.location.above[0.2].to_cuboid[<[target].above[1.2]>]>
-    - if <[cube].blocks.filter[material.is_solid.not].size> >= 1:
+    - if <[cube].blocks.filter[material.is_solid].size> >= 1:
       - narrate <script[portal_config].parsed_key[messages.no_room]>
       - stop
     - if <[type]> == dtd && <[server].exists>:
