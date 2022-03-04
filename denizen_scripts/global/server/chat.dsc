@@ -341,7 +341,7 @@ chat_settings_events:
               - narrate "<&b>You are now listening to <yaml[chat_config].parsed_key[channels.<context.item.flag[action]>.format.channel]>"
           - case LEFT:
             - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> != <context.item.flag[action]>:
-              - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<context.item.flag[action]>]||false>:
+              - if !<yaml[global.player.<player.uuid>].read[chat.channels.active.<context.item.flag[action]>]||false>:
                 - define map <map[chat.channels.current=<context.item.flag[action]>;chat.channels.active.<context.item.flag[action]>=true]>
                 - run global_player_data_modify def:<player.uuid>|<[map]>
               - else:
