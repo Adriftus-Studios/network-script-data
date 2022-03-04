@@ -11,6 +11,7 @@ gateway_teleport:
           - wait 1t
           - adjust <player> send_to:<[gateway].flag[destination.server]>
           - stop
+        - wait 1t
         - adjust <player> fall_distance:0
         - teleport <[gateway].flag[destination.location].parsed>
 
