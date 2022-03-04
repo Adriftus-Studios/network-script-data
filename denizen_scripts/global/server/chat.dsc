@@ -265,6 +265,7 @@ chat_system_flag_manager:
   debug: false
   events:
     after player joins:
+      - flag player chat.channels:!
       - waituntil rate:10t <yaml.list.contains[global.player.<player.uuid>].or[<player.is_online.not>]>
       - if !<player.is_online>:
         - stop
