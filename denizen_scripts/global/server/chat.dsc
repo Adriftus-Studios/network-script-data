@@ -126,8 +126,8 @@ chatlock_command:
   usage: /chatlock (player name)
   description: Will prevent player from speaking in chatlock-able channels
   debug: false
-  tab complete:
-    1: <server.online_players.parse[name].include[<server.flag[player_map.names].keys>]>
+  tab completions:
+    1: <server.flag[player_map.names].keys>
   script:
     - if <context.args.is_empty>:
       - narrate "<&c>You must specify a player name to chat lock."
