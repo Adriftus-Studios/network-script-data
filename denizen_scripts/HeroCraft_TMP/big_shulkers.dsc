@@ -25,6 +25,7 @@ big_shulker_events:
     - define item <context.item>
     - foreach <[reagent].list_flags> as:f:
       - define item <[item].with_flag[<[f]>:<[reagent].flag[<[f]>]>]>
+    - define item <[item].with_flag[big_shulker_title:<context.new_name>]>
     - determine <[item]>
     on item recipe formed:
     - stop if:<context.item.script.name.equals[big_shulker_item].not.if_null[true]>
@@ -42,6 +43,7 @@ big_shulker_events:
     - stop if:<context.location.relative[<context.location.block_facing>].material.name.to_lowercase.equals[air].not>
     - define loc <context.location.relative[<context.location.block_facing>]>
     - flag <[loc]> big_shulker:<context.item.flag[big_shulker]>
+    - flag <[loc]> big_shulker_title:<context.item.flag[big_shulker_title].parse_color> if:<context.item.has_flag[big_shulker_title]>
     on player breaks *hulker_box bukkit_priority:MONITOR:
     - stop if:<context.location.block.has_flag[big_shulker].not>
     - define location <context.location>
@@ -51,6 +53,8 @@ big_shulker_events:
       - flag <context.location.block> big_shulker:<inventory[big_shulker_<context.location.block>].list_contents>
     - define item <item[big_shulker_item].with[material=<context.location.material.name>]>
     - flag <[item]> big_shulker:<context.location.block.flag[big_shulker]>
+    - flag <[item]> big_shulker_title:<context.location.block.flag[big_shulker_title].parse_color> if:<context.location.block.has_flag[big_shulker_title]>
+    - define item <[item].with[display=<context.location.block.flag[big_shulker_title].parse_color>]> if:<context.location.block.has_flag[big_shulker_title]>
     - flag <context.location.block> big_shulker:!
     - note remove as:big_shulker_<context.location.block>
     - determine <[item]>
@@ -100,6 +104,8 @@ big_shulker_events:
     - wait 1t
     - animatechest <context.location.block> open sound:false <server.online_players>
     - playsound at:<context.location.block> BLOCK_SHULKER_BOX_OPEN
+    - adjust <[inv]> title:<context.location.block.flag[big_shulker_title].parse_color> if:<context.location.block.has_flag[big_shulker_title]>
     - inventory open d:<[inv]>
     on player places big_shulker_item bukkit_priority:MONITOR:
     - flag <context.location.block> big_shulker:<context.item_in_hand.flag[big_shulker]||<list[]>>
+    - flag <context.location.block> big_shulker_title:<context.item_in_hand.flag[big_shulker_title].parse_color> if:<context.item_in_hand.has_flag[big_shulker_title]>
