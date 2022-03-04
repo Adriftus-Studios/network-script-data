@@ -268,7 +268,7 @@ chat_system_flag_manager:
       - waituntil rate:10t <yaml.list.contains[global.player.<player.uuid>].or[<player.is_online.not>]>
       - if !<player.is_online>:
         - stop
-      - if !<yaml[global.player.<player.uuid>].contains[chat.channels]> || <yaml[global.player.<player.uuid>].read[chat.channels.active].object_type> != List:
+      - if !<yaml[global.player.<player.uuid>].contains[chat.channels.active]> || <yaml[global.player.<player.uuid>].read[chat.channels.active].object_type> != List:
           - define map <map[chat.channels.active=<list[server|pg]>;chat.channels.current=server]>
           - run global_player_data_modify def:<player.uuid>|<[map]>
       - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active]>:
