@@ -205,7 +205,7 @@ chat_command:
       - if <[List].is_empty>:
         - stop
       - define sorted_list <[list].sort_by_number[get[time]]>
-      - foreach <[sorted_list]> as:Message:
+      - foreach <[sorted_list].filter[contains[time]]> as:Message:
         - if <[message].get[time]||null> == null:
           - narrate <[message]>
       
