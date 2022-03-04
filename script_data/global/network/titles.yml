@@ -1636,6 +1636,6 @@ titles:
     in_shop: false
   Syntrocity:
     order: 269
-    tag: '<element[Syntrocity].rainbow>'
+    tag: '<element[Syn].rainbow>'
     description: '<element[Welcome to the Synternet!].rainbow>'
     in_shop: false
