@@ -69,10 +69,10 @@ chat_history_save:
   debug: false
   definitions: Channel|Message|UUID|sender
   script:
-    - if !<[channel].exists> || !<[message].exists> || !<[UUID].exists> || !<[sender].exists>:
+    - if !<[Channel].exists> || !<[Message].exists> || !<[UUID].exists> || !<[sender].exists>:
       - stop
     - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]||DiscordUser>]>
-    - if <yaml[chat_history].read[<[channel]>_history].size> > 60:
+    - if <yaml[chat_history].read[<[channel]>_history].size> > 40:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
 
 chat_history_show:
