@@ -101,7 +101,7 @@ chat_delete_message:
   script:
     - if <yaml[chat_config].read[channels.<[channel]>.global]>:
       - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
-    - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]>
+      - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]>
     - define message <yaml[chat_history].read[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>]>].get[1]>
     - define new_message_map "<[message].with[message].as[<&7><&lb>Message Deleted<&rb>]>"
     - foreach <yaml[chat_history].read[<[channel]>_history]> as:message_map:
@@ -271,7 +271,7 @@ chat_system_flag_manager:
       - if !<yaml[global.player.<player.uuid>].contains[chat.channels.active]> || <yaml[global.player.<player.uuid>].read[chat.channels.active].object_type> != List:
           - define map <map[chat.channels.active=<list[server|pg]>;chat.channels.current=server]>
           - run global_player_data_modify_multiple def:<player.uuid>|<[map]>
-      - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active]>:
+      - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active]>:
         - flag player chat.channels.<[value]>
       - inject chat_history_show
 
