@@ -26,7 +26,7 @@ chat_system_events:
         - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&rb><&end_hover>]>
 
       # Sanitize
-      - define msg <context.message.replace_text[<&lb>].with[]>
+      - define msg <[msg].replace_text[<&lb>].with[]>
       - define msg <[msg].replace_text[<&rb>].with[]>
 
       # Build the Channel Text
