@@ -69,6 +69,8 @@ chat_history_save:
   debug: false
   definitions: Channel|Message|UUID|sender
   script:
+    - if !<[channels].exists> || !<[message].exists> || !<[UUID].exists> || !<[sender].exists>:
+      - stop
     - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]||DiscordUser>]>
     - if <yaml[chat_history].read[<[channel]>_history].size> > 60:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
@@ -82,7 +84,7 @@ chat_history_show:
     - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
       - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]>:
         - foreach next
-      - define list:|:<yaml[chat_history].read[<[Channel]>_history]>
+      - define list:|:<yaml[chat_history].read[<[Channel]>_history].filter[contains[time]]>
     - if <[List].is_empty>:
       - stop
     - foreach <[list].sort_by_number[get[time]].reverse.get[1].to[30].reverse.parse[get[message]]> as:Message:
