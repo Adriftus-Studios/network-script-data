@@ -9,7 +9,7 @@ hub_jump:
         - adjust <player> velocity:<[location].with_pitch[<[location].pitch.sub[5]>].direction.vector.mul[10]>
         - repeat 20:
           - playsound <player.location> sound:ENTITY_FIREWORK_ROCKET_LAUNCH
-          - playeffect effect:smoke at:<player.location> quantity:5 offset:0.1 players:<server.online_players>
+          - playeffect effect:smoke at:<player.location> quantity:5 offset:0.1 targets:<server.online_players>
           - wait 1t
     on player toggles sprinting flagged:hub_run:
       - if <context.state>:
