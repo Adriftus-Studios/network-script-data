@@ -206,7 +206,7 @@ chat_command:
         - stop
       - define sorted_list <[list].sort_by_number[get[time]]>
       - foreach <[sorted_list]> as:Message:
-        - narrate <[Message].get[time]>
+        - narrate <[Message].get[time]||<[message]>>
         - wait 1s
       
 
