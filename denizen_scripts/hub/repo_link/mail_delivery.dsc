@@ -89,6 +89,7 @@ mail_delivery_events:
     - flag <[inventory]> mailbox:<[number]>
     - inventory open d:<[inventory]> player:<player>
     on player closes mail_delivery_mailbox_inventory:
+    - stop if:<player.has_flag[mail_delivery.current].not>
     - if <context.inventory.note_name.is_truthy>:
       - define mailbox <context.inventory.flag[mailbox]>
       - define difficulty <player.flag[mail_delivery.current.difficulty]>
@@ -104,6 +105,7 @@ mail_delivery_events:
       - note remove as:<context.inventory.note_name>
       - run mail_delivery_complete def:<player> if:<player.flag[mail_delivery.current.todo].values.sum.if_null[1].equals[0]>
     on player drops mail_delivery_mail_item:
+    - stop if:<player.has_flag[mail_delivery.current].not>
     - determine cancelled
 
 mail_delivery_mail_item:
