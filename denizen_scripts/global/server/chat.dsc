@@ -90,9 +90,9 @@ chat_history_show:
     - define sorted_list <[list].sort_by_number[get[time]].reverse>
     #- foreach <[list].sort_by_number[get[time]].reverse.get[1].to[30].reverse.parse[get[message]]> as:Message:
       #- narrate <[Message]>
-    - if <[sorted_list].size> > 30:
-      - narrate <[sorted_list].get[31].to[60].reverse.parse[get[message]].separated_by[<&nl>]>
-    - narrate <[sorted_list].get[1].to[30].reverse.parse[get[message]].separated_by[<&nl>]>
+    #- if <[sorted_list].size> > 30:
+      #- narrate <[sorted_list].get[31].to[60].reverse.parse[get[message]].separated_by[<&nl>]>
+    - narrate <[sorted_list].get[1].to[40].reverse.parse[get[message]].separated_by[<&nl>]>
 
 chat_delete_message:
   type: task
