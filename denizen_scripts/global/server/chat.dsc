@@ -8,6 +8,7 @@ chat_system_events:
       - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current]||server>
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
+      - define msg <context.message>
       - define msg <[msg].replace_text[|].with[]>
 
       # Check for Chat Lock
