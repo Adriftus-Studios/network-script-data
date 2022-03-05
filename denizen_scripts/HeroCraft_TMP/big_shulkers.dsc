@@ -1,3 +1,4 @@
+
 big_shulker_item:
   type: item
   material: shulker_box
@@ -14,6 +15,22 @@ big_shulker_inventory:
   size: 54
   title: <&r><&6><&l>Big <&e><&l>Shulker
 
+big_shulker_build_lore:
+  type: procedure
+  debug: false
+  definitions: item
+  script:
+  - determine <[item]> if:<[item].script.name.equals[big_shulker_item].not.if_null[true]>
+  - define items <[item].flag[big_shulker]>
+  - if !<[items].is_empty>:
+    - foreach <[items].get[1].to[5]> as:i:
+      - define "lore:|:<&f><[i].display.to_titlecase.if_null[<[i].material.name.to_titlecase>]> <&f>x<[i].quantity>"
+    - if <[items].size> > 5:
+      - define "lore:|:<&f><&o>and <[items].size.sub[5]> more..."
+    - determine <[item].with[lore=<[lore]>]>
+  - else:
+    - determine <[item].with[lore=<list[]>]>
+
 big_shulker_events:
   type: world
   debug: false
@@ -26,13 +43,14 @@ big_shulker_events:
     - foreach <[reagent].list_flags> as:f:
       - define item <[item].with_flag[<[f]>:<[reagent].flag[<[f]>]>]>
     - define item <[item].with_flag[big_shulker_title:<context.new_name>]>
+    - define item <[item].proc[big_shulker_build_lore]>
     - determine <[item]>
     on item recipe formed:
     - stop if:<context.item.script.name.equals[big_shulker_item].not.if_null[true]>
     - stop if:<context.recipe_id.equals[big_shulker_1].if_null[true]>
     - define reagent <context.recipe.filter[script.name.equals[big_shulker_item]].get[1].if_null[null]>
     - stop if:<[reagent].equals[null]>
-    - determine <context.item.with_flag[big_shulker:<[reagent].flag[big_shulker].if_null[<list[]>]>].with[script=big_shulker_item]>
+    - determine <context.item.with_flag[big_shulker:<[reagent].flag[big_shulker].if_null[<list[]>]>].with[script=big_shulker_item].proc[big_shulker_build_lore]>
     on block explodes:
     - determine <context.blocks.filter[has_flag[big_shulker].not]>
     on entity explodes:
@@ -57,7 +75,7 @@ big_shulker_events:
     - define item <[item].with[display=<context.location.block.flag[big_shulker_title].parse_color>]> if:<context.location.block.has_flag[big_shulker_title]>
     - flag <context.location.block> big_shulker:!
     - note remove as:big_shulker_<context.location.block>
-    - determine <[item]>
+    - determine <[item].proc[big_shulker_build_lore]>
     on item moves from inventory to inventory bukkit_priority:MONITOR:
     - stop if:<context.destination.location.note_name.starts_with[big_shulker_].not.if_null[true]>
     - define location <context.destination.location>

@@ -4,7 +4,6 @@ easy_shulker_transfer:
   debug: false
   events:
     on player right clicks chest bukkit_priority:highest:
-    # shulker to chest
     - stop if:<player.item_in_hand.material.name.ends_with[shulker_box].not.if_null[true]>
     - stop if:<context.location.material.name.ends_with[chest].not.if_null[true]>
     - stop if:<context.cancelled>
@@ -47,6 +46,7 @@ easy_shulker_transfer:
         - else:
           - inventory flag d:<player.inventory> slot:<player.held_item_slot> big_shulker:<[shulker_items]>
         - adjust <context.location.inventory> contents:<[chest_items]>
+        - inventory set d:<player.inventory> slot:<player.held_item_slot> o:<player.item_in_hand.proc[big_shulker_build_lore]>
         - narrate "<&e>Transferred <[after].sub[<[before]>]> stacks of items."
       - else if <player.flag[shulker_transfer.mode]> == chest_to_shulker:
         - if <player.item_in_hand.script.name.equals[big_shulker_item].not.if_null[true]>:
@@ -71,4 +71,5 @@ easy_shulker_transfer:
         - else:
           - inventory flag d:<player.inventory> slot:<player.held_item_slot> big_shulker:<[shulker_items]>
         - adjust <context.location.inventory> contents:<[chest_items].include[<context.location.inventory.list_contents.filter[material.name.ends_with[shulker_box]]>]>
+        - inventory set d:<player.inventory> slot:<player.held_item_slot> o:<player.item_in_hand.proc[big_shulker_build_lore]>
         - narrate "<&e>Transferred <[after].sub[<[before]>]> stacks of items."
