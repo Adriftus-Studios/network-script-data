@@ -9,14 +9,17 @@ easy_shulker_transfer:
     - stop if:<context.location.material.name.ends_with[chest].not.if_null[true]>
     - stop if:<context.cancelled>
     - determine passively cancelled
+    - if !<player.has_flag[shulker_transfer.notify]>:
+      - narrate "<&e>To change modes, Shift click a chest with a shulker box." expire:1d
+      - flag <player> shulker_transfer.notify
     - if <player.is_sneaking>:
       - define mode <player.flag[shulker_transfer.mode].if_null[shulker_to_chest]>
       - choose <[mode]>:
         - case shulker_to_chest:
-          - actionbar targets:<player> "<&e><&l>Transferring items from chest to shulker."
+          - actionbar targets:<player> "<&e><&l>Transferring items from chest to shulker box."
           - flag <player> shulker_transfer.mode:chest_to_shulker
         - case chest_to_shulker:
-          - actionbar targets:<player> "<&e><&l>Transferring items from shulker to chest."
+          - actionbar targets:<player> "<&e><&l>Transferring items from shulker box to chest."
           - flag <player> shulker_transfer.mode:shulker_to_chest
     - else:
       - flag <player> shulker_transfer.mode:shulker_to_chest if:<player.has_flag[shulker_transfer.mode].not>
