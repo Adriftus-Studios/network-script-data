@@ -5,19 +5,19 @@ player_data_handler:
     on bungee player joins network:
     # % ██ [ Load Server player Data ] ██
       - if <bungee.server> == hub:
-        - define server_yaml data/global/players/<player.uuid>.yml
+        - define server_yaml data/global/players/<context.uuid>.yml
         - if <server.has_file[<[server_yaml]>]>:
-          - ~yaml id:global.player.<player.uuid> load:<[server_yaml]>
+          - ~yaml id:global.player.<context.uuid> load:<[server_yaml]>
         - else:
-          - yaml id:global.player.<player.uuid> create
-          - ~yaml id:global.player.<player.uuid> savefile:<[server_yaml]>
+          - yaml id:global.player.<context.uuid> create
+          - ~yaml id:global.player.<context.uuid> savefile:<[server_yaml]>
 
     on player joins:
       - if <bungee.server> != hub:
         - if <server.has_file[data/global/players/<player.uuid>.yml]>:
           - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
         - else:
-          - wait 10t
+          - wait 1s
           - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
 
     on player quits:
