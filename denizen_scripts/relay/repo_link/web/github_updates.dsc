@@ -13,7 +13,7 @@ github_updates:
         - shell "screen -dmS updating /home/minecraft/scripts/test_pull.sh"
       # Resource Pack Repo update
       - case /github/resource-pack:
-        - shell "screen -dmS updating /home/minecraft/scripts/RP_pull.sh"
+        - shell "screen -dmS updating /home/minecraft/scripts/rp_pull.sh"
     
     - stop
 
