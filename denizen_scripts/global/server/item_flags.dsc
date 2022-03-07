@@ -8,3 +8,5 @@ item_flags:
       - determine cancelled
     on player drops item_flagged:no_drop bukkit_priority:LOWEST::
       - determine cancelled
+    on player drops item_flagged:on_drop bukkit_priority:LOWEST::
+      - inject <context.item.flag[on_drop]>
