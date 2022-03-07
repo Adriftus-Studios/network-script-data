@@ -16,7 +16,7 @@ adriftus_chest_inventory:
 
 adriftus_chest_inventory_events:
   type: world
-  debug: false
+  debug: true
   events:
     on player closes adriftus_chest_inventory:
       - define contents <context.inventory.map_slots>
