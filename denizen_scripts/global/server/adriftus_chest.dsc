@@ -2,6 +2,7 @@ adriftus_chest_inventory_open:
   type: task
   debug: false
   script:
+    - wait 1t
     - define inventory <inventory[adriftus_chest_inventory]>
     - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<map>>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
