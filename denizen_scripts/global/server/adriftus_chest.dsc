@@ -39,4 +39,4 @@ adriftus_chest_validate:
       - determine cancelled
     - else:
       - define lore <context.item.lore.remove[last]>
-      - determine <context.item.with[lore=<[lore]>;flag=run_script:!;flag=adriftus:!]>
+      - determine <context.item.with[lore=<[lore]>;flag=run_script:!;flag=adriftus_server:!]>
