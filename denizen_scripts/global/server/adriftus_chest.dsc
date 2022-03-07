@@ -3,20 +3,19 @@ adriftus_chest_inventory_open:
   debug: false
   script:
     - define inventory <inventory[adriftus_chest_inventory]>
-    #- adjust def:inventory size:<yaml[global.player.<player.uuid>].read[adriftus.chest.size]||9>
     - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<map>>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
-    - inventory open d:<[inventory].with[size=54]>
+    - inventory open d:<[inventory]>
 
 adriftus_chest_inventory:
   type: inventory
   inventory: chest
   title: <&6>Adriftus Chest
-  size: 9
+  size: 54
 
 adriftus_chest_inventory_events:
   type: world
-  debug: true
+  debug: false
   events:
     on player closes adriftus_chest_inventory:
       - define contents <context.inventory.map_slots>
