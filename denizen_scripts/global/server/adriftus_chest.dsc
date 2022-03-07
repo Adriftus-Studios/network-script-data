@@ -3,8 +3,8 @@ adriftus_chest_inventory_open:
   debug: false
   script:
     - define inventory <inventory[adriftus_chest_inventory]>
-    - adjust <[inventory]> size:<yaml[global.player.<player.uuid>].read[adriftus.chest.size]||9>
-    - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<list>>:
+    #- adjust <[inventory]> size:<yaml[global.player.<player.uuid>].read[adriftus.chest.size]||9>
+    - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<map>>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
