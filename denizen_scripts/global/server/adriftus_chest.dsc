@@ -35,7 +35,9 @@ adriftus_chest_validate:
   type: task
   debug: false
   script:
-    - if <context.item.has_flag[adriftus_server]> && <context.item.flag[adriftus_server]> != <bungee.server>:
+    - if <bungee.server> == hub:
+      - stop
+    - if <context.item.has_flag[adriftus_server]> && ( <context.item.flag[adriftus_server]> != <bungee.server> || <context.item.flag[adriftus_server]> == hub ):
       - determine cancelled
     - else:
       - define lore <context.item.lore.remove[last]>
