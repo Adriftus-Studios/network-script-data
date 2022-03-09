@@ -7,7 +7,7 @@ mod_ban_inv:
   gui: true
   size: 54
   definitions:
-    x: <item[air]>
+    x: <item[standard_filler]>
     b1: <item[yellow_stained_glass_pane].with[display_name=<&r>]>
     b2: <item[orange_stained_glass_pane].with[display_name=<&r>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>

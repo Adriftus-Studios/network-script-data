@@ -4,26 +4,10 @@ mod_ban_player:
   debug: false
   definitions: moderator|uuid|level|infraction|length
   script:
-    # -- Check if player is online, set YAML ID to edit accordingly.
-    - if <[uuid].as_player.is_online>:
-      - define id global.player.<[uuid]>
-      - yaml id:<[id]> set banned.level:<[level]>
-      - yaml id:<[id]> set banned.infraction:<[infraction]>
-      - yaml id:<[id]> set banned.length:<[length]>
-      - yaml id:<[id]> set banned.date:<util.time_now>
-      - yaml id:<[id]> set banned.moderator:<[moderator]>
-      - kick <[uuid].as_player> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[infraction]>|<[length]>|<util.time_now>]>
-    - else:
-      - define dir data/global/players/<[uuid]>.yml
-      - define id amp.banned.<[uuid]>
-      - ~yaml id:<[id]> load:<[dir]>
-      - yaml id:<[id]> set banned.level:<[level]>
-      - yaml id:<[id]> set banned.infraction:<[infraction]>
-      - yaml id:<[id]> set banned.length:<[length]>
-      - yaml id:<[id]> set banned.date:<util.time_now>
-      - yaml id:<[id]> set banned.moderator:<[moderator]>
-      - ~yaml id:<[id]> savefile:<[dir]>
-      - yaml id:<[id]> unload
+    - define map <map[banned.level=<[level]>;banned.infraction=<[infraction]>;banned.length=<[length]>;banned.date=<util.time_now>;banned.moderator=<[moderator]>]>
+    - run global_player_data_modify_multiple def:<[uuid]>|<[map]>
+    - if <player[<[uuid]>].is_online>:
+      - kick <player[<[uuid]>]> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[infraction]>|<[length]>|<util.time_now>]>
 
 # -- Handle on login ban checking.
 mod_ban_check:

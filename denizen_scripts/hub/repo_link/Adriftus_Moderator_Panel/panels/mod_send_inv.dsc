@@ -7,7 +7,7 @@ mod_send_inv:
   gui: true
   size: 27
   definitions:
-    x: <item[air]>
+    x: <item[standard_filler]>
     b1: <item[magenta_stained_glass_pane].with[display_name=<&r>]>
     b2: <item[purple_stained_glass_pane].with[display_name=<&r>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>

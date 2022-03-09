@@ -7,14 +7,14 @@ mod_actions_inv:
   gui: true
   size: 27
   definitions:
-    x: <item[air]>
+    x: <item[standard_filler]>
     b1: <item[light_blue_stained_glass_pane].with[display_name=<&r>]>
     b2: <item[cyan_stained_glass_pane].with[display_name=<&r>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:online]>
     head: <item[mod_player_item]>
   slots:
     - [b1] [b2] [b1] [b2] [head] [b2] [b1] [b2] [b1]
-    - [b2] [] [x] [] [x] [] [x] [] [b2]
+    - [b2] [x] [] [x] [] [x] [] [x] [b2]
     - [b1] [b2] [b1] [b2] [back] [b2] [b1] [b2] [b1]
 
 mod_actions_inv_events:
@@ -46,9 +46,9 @@ mod_actions_inv_open:
   script:
     - define inventory <inventory[mod_actions_inv]>
     - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&5>Actions on <&d><player.flag[amp_map].as_map.get[uuid].as_player.name>."
-    - define muteItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.has_flag[muted]>].pass[<item[mod_unmute_item]>].fail[<item[mod_mute_item]>]>
+    # - define muteItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.has_flag[muted]>].pass[<item[mod_unmute_item]>].fail[<item[mod_mute_item]>]>
     - define sendItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>].pass[<item[mod_send_item]>].fail[<item[air]>]>
     - define kickItem <tern[<player.has_permission[mod.moderator].and[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>]>].pass[<item[mod_kick_item]>].fail[<item[air]>]>
     - define banItem <tern[<player.has_permission[mod.moderator]>].pass[<item[mod_ban_item]>].fail[<item[air]>]>
-    - give <[muteItem]>|<[sendItem]>|<[kickItem]>|<[banItem]> to:<[inventory]>
+    - give <[sendItem]>|<[kickItem]>|<[banItem]> to:<[inventory]>
     - inventory open d:<[inventory]>
