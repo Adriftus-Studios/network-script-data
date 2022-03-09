@@ -118,12 +118,12 @@ define_sphere2:
 define_circle:
   type: procedure
   debug: false
-  definitions: location|radius
+  definitions: location|radius|inbetween
   script:
   - define cir <[radius].mul[<util.pi>].mul[2]>
   - define between <element[360].div[<[radius].mul[<util.pi>].mul[2].div[0.2]>]>
   - define points <list>
-  - repeat <[cir].div[0.2].round>:
+  - repeat <[cir].div[<[inbetween].if_null[0.2]>].round>:
     - define offset <proc[find_offset].context[<[radius]>|<[value].mul[<[between]>]>]>
     - define points <[points].include_single[<[location].up[<[offset].get[1]>].right[<[offset].get[2]>]>]>
   - determine <[points]>
