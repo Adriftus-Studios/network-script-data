@@ -5,16 +5,20 @@ player_data_handler:
     on bungee player joins network:
     # % ██ [ Load Server player Data ] ██
       - if <bungee.server> == hub:
-        - define server_yaml data/global/players/<player.uuid>.yml
+        - define server_yaml data/global/players/<context.uuid>.yml
         - if <server.has_file[<[server_yaml]>]>:
-          - ~yaml id:global.player.<player.uuid> load:<[server_yaml]>
+          - ~yaml id:global.player.<context.uuid> load:<[server_yaml]>
         - else:
-          - yaml id:global.player.<player.uuid> create
-          - ~yaml id:global.player.<player.uuid> savefile:<[server_yaml]>
+          - yaml id:global.player.<context.uuid> create
+          - ~yaml id:global.player.<context.uuid> savefile:<[server_yaml]>
 
     on player joins:
       - if <bungee.server> != hub:
-        - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
+        - if <server.has_file[data/global/players/<player.uuid>.yml]>:
+          - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
+        - else:
+          - wait 1s
+          - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
 
     on player quits:
       - if <bungee.server> != hub:
@@ -30,7 +34,7 @@ network_map_handler:
   events:
     on bungee player switches to server:
       - if <server.has_flag[player_map.uuids.<context.uuid>.server]>:
-        - flag server server_map.<server.flag[player_map.<context.uuid>.server]>.<context.uuid>:!
+        - flag server server_map.<server.flag[player_map.uuids.<context.uuid>.server]>.<context.uuid>:!
       - flag server player_map.uuids.<context.uuid>.server:<context.server>
       - flag server player_map.uuids.<context.uuid>.name:<context.name>
       - flag server server_map.<context.server>.<context.uuid>:<context.name>
@@ -38,7 +42,7 @@ network_map_handler:
       - flag server player_map.names.<context.name>.server:<context.server>
 
     on bungee player leaves network:
-      - flag server server_map.<server.flag[player_map.<context.uuid>.server]>.<context.uuid>:!
+      - flag server server_map.<server.flag[player_map.uuids.<context.uuid>.server]>.<context.uuid>:!
       - flag server player_map.uuids.<context.uuid>:!
       - flag server player_map.names.<context.name>:!
 
@@ -113,11 +117,17 @@ global_player_data_modify:
   debug: false
   definitions: uuid|node|value|forward
   script:
-    - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+    - yaml id:global.player.<[uuid]> set <[node]>:<[value]> if:<yaml.list.contains[global.player.<[uuid]>]>
     - if <bungee.server> != hub:
       - if !<player[<[uuid]>].is_online||false>:
         - define forward true
       - bungeerun hub global_player_data_modify def:<[uuid]>|<[node]>|<[value]>|<[forward]||false>
+    - else if <server.has_flag[player_map.<[uuid]>.server]>:
+      - ~yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
+      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+      - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
+      - if !<server.has_flag[player_map.<[uuid]>.server]>:
+        - yaml id:global.player.<[uuid]> unload
     - else:
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
       - if <[forward]||false> && <server.has_flag[player_map.<[uuid]>.server]>:

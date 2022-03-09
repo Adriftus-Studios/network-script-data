@@ -4,7 +4,17 @@ github_updates:
   debug: false
   script:
     # What in the actual fuck?
-    - shell "/home/minecraft/scripts/github_pull.sh" 
+    - choose <context.request>:
+      # Main Repo update
+      - case /github/network-script-data:
+        - shell "screen -dmS updating /home/minecraft/scripts/main_pull.sh"
+      # Test Repo update
+      - case /github/test:
+        - shell "screen -dmS updating /home/minecraft/scripts/test_pull.sh"
+      # Resource Pack Repo update
+      - case /github/resource-pack:
+        - shell "screen -dmS updating /home/minecraft/scripts/rp_pull.sh"
+    
     - stop
 
   # % ██ [ Cache Data                  ] ██

@@ -82,12 +82,18 @@ web_handler:
 
     # % ██ [ Self Pings               ] ██
       - else if <[domain].starts_with[<script.data_key[domains.self]>]>:
-        - if <context.query.parsed.get[adriftus_sha].exists>:
-          - bungeerun hub resource_pack_sha def:<context.query.parsed.get[adriftus_sha].before[<&sp>]>
-        - bungee <bungee.list_servers.exclude[<bungee.server>|survival]>:
-          - reload
-        - wait 1t
-        - reload
+        - choose <context.request>:
+          - case /reload/main:
+            - bungee <bungee.list_servers.exclude[<bungee.server>]>:
+              - reload
+            - wait 1t
+            - reload
+          - case /reload/test:
+            - bungee test:
+              - reload
+          - case /reload/RP:
+            - if <context.query.parsed.get[adriftus_sha].exists>:
+              - bungeerun hub resource_pack_sha def:<context.query.parsed.get[adriftus_sha].before[<&sp>]>
 
     # % ██ [ Unrecognized posts       ] ██
       - else:

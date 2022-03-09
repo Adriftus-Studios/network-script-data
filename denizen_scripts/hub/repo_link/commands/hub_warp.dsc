@@ -15,6 +15,12 @@ warps_main_command:
             - define inventory <inventory[hub_warp_inventory]>
             - inventory open d:<[inventory]>
 
+hub_warp_open:
+  type: task
+  debug: false
+  script:
+    - inventory open d:hub_warp_inventory
+
 hub_warp_inventory:
   type: inventory
   debug: false

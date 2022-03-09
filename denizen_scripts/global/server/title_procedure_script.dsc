@@ -3,4 +3,5 @@ get_player_title:
   debug: false
   definitions: player
   script:
-    - determine <yaml[global.player.<player.uuid>].parsed_key[titles.current_tag]||<yaml[global.player.<[player].uuid>].parsed_key[titles.current_tag]||<&7>>>
+  - define player <[player].if_null[<player>]>
+  - determine <yaml[global.player.<[player].uuid>].parsed_key[titles.current_tag]||<yaml[global.player.<[player].uuid>].parsed_key[titles.current_tag]||<&7>>><&r>

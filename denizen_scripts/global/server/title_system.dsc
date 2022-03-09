@@ -6,7 +6,7 @@ title_unlock:
   definitions: tagID
   debug: false
   script:
-    - if <yaml[titles].read[titles.<[tagID]>].exists> && !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tagID]>]||false>:
+    - if <yaml[titles].read[titles.<[tagID]>].exists> && !<yaml[global.player.<player.uuid>].contains[titles.unlocked.<[tagID]>]||false>:
       - run global_player_data_modify def:<player.uuid>|titles.unlocked.<[tagID]>|true
 
 title_remove:
@@ -50,8 +50,8 @@ title_inventory:
       current_title: 50
       page_marker: 1
   definitions:
-    next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;flag=action:next_page]>
-    previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;flag=action:previous_page]>
+    next_page: <item[leather_horse_armor].with[display_name=<&a>Next<&sp>Page;flag=action:next_page;color=green;custom_model_data=7]>
+    previous_page: <item[leather_horse_armor].with[display_name=<&c>Previous<&sp>Page;flag=action:previous_page;color=green;custom_model_data=6]>
   slots:
     - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
     - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
