@@ -1,10 +1,17 @@
 hub_streamer_add:
   type: task
   debug: false
-  definitions: name|uuid|twitch_link
+  definitions: ign|twitch_link
   script:
-    - flag server hub.streamer.<[uuid]>.uuid:<&6><[uuid]>
-    - flag server hub.streamer.<[uuid]>.display:<&6><[name]>
+    - if <server.match_player[<[ign]>].is_online||false>:
+      - narrate "Streamer must be online, and in hub."
+      - stop
+    - define streamer <server.match_player[<[ign]>]>
+    - define uuid <[streamer].uuid>
+    - flag server hub.streamer.<[uuid]>.ign:<[ign]>
+    - flag server hub.streamer.<[uuid]>.skin_blob:<[streamer].skin_blob>
+    - flag server hub.streamer.<[uuid]>.skull_skin:<[streamer].uuid>;<[streamer].skin_blob>
+    - flag server hub.streamer.<[uuid]>.display:<&6><[ign]>
     - flag server hub.streamer.<[uuid]>.twitch_link:<[twitch_link]>
     - run hub_streamer_add_npc def:<[uuid]>
 
@@ -17,6 +24,7 @@ hub_streamer_add_npc:
       - if !<server.has_flag[hub.streamer.slot.<[value]>]>:
         - create PLAYER <server.flag[hub.streamer.<[uuid]>.display]> <server.flag[hub.streamer.locations.<[value]>]> registry:streamers save:npc
         # TODO - Armor Stand Holograms or Font Signs.
+        - adjust <entry[npc].created_npc> skin_blob:<server.flag[hub.streamer.<[uuid]>.skin_blob]>
         - flag server hub.streamer.slot.<[value]>.streamer:<[uuid]>
         - flag server hub.streamer.slot.<[value]>.npc:<entry[npc].created_npc>
         - flag server hub.streamer.<[uuid]>.slot:<[value]>
