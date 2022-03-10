@@ -26,7 +26,7 @@ player_data_handler:
 
     on bungee player leaves network:
       - if <bungee.server> == hub:
-        - ~yaml id:global.player.<player.uuid> unload
+        - ~yaml id:global.player.<context.uuid> unload
 
 network_map_handler:
   type: world
