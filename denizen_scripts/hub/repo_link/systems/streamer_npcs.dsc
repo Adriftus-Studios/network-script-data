@@ -15,7 +15,7 @@ hub_streamer_add_npc:
   script:
     - repeat <server.flag[hub.streamer.locations].keys.size>:
       - if !<server.has_flag[hub.streamer.slot.<[value]>]>:
-        - create <server.flag[hub.streamer.<[uuid]>.display]> <server.flag[hub.streamer.locations.<[value]>]> registry:streamers save:npc
+        - create PLAYER <server.flag[hub.streamer.<[uuid]>.display]> <server.flag[hub.streamer.locations.<[value]>]> registry:streamers save:npc
         # TODO - Armor Stand Holograms or Font Signs.
         - flag server hub.streamer.slot.<[value]>.streamer:<[uuid]>
         - flag server hub.streamer.slot.<[value]>.npc:<entry[npc].created_npc>
