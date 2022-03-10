@@ -3,7 +3,7 @@ hub_streamer_add:
   debug: false
   definitions: ign|twitch_link
   script:
-    - if <server.match_player[<[ign]>].is_online||false>:
+    - if !<server.match_player[<[ign]>].is_online||false>:
       - narrate "Streamer must be online, and in hub."
       - stop
     - define streamer <server.match_player[<[ign]>]>
