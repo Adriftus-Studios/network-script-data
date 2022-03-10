@@ -20,6 +20,7 @@ hub_streamer_add_npc:
         - flag server hub.streamer.slot.<[value]>.streamer:<[uuid]>
         - flag server hub.streamer.slot.<[value]>.npc:<entry[npc].created_npc>
         - flag server hub.streamer.<[uuid]>.slot:<[value]>
+        - repeat stop
 
 hub_streamer_events:
   type: world
