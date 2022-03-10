@@ -6,6 +6,20 @@ hub_streamer_add:
     - flag server hub.streamer.<[uuid]>.uuid:<&6><[uuid]>
     - flag server hub.streamer.<[uuid]>.display:<&6><[name]>
     - flag server hub.streamer.<[uuid]>.twitch_link:<[twitch_link]>
+    - run hub_streamer_add_npc def:<[uuid]>
+
+hub_streamer_add_npc:
+  type: task
+  debug: false
+  definitions: uuid
+  script:
+    - repeat <server.flag[hub.streamer.locations].keys.size>:
+      - if !<server.has_flag[hub.streamer.slot.<[value]>]>:
+        - create <server.flag[hub.streamer.<[uuid]>.display]> <server.flag[hub.streamer.locations.<[value]>]> registry:streamers save:npc
+        # TODO - Armor Stand Holograms or Font Signs.
+        - flag server hub.streamer.slot.<[value]>.streamer:<[uuid]>
+        - flag server hub.streamer.slot.<[value]>.npc:<entry[npc].created_npc>
+        - flag server hub.streamer.<[uuid]>.slot:<[value]>
 
 hub_streamer_events:
   type: world
@@ -13,13 +27,7 @@ hub_streamer_events:
   events:
     on bungee player joins network:
       - if <server.has_flag[hub.streamer.<context.uuid>]>:
-        - repeat <server.flag[hub.streamer.locations].keys.size>:
-          - if !<server.has_flag[hub.streamer.slot.<[value]>]>:
-            - create <server.flag[hub.streamer.<context.uuid>.display]> <server.flag[hub.streamer.locations.<[value]>]> registry:streamers save:npc
-            # TODO - Armor Stand Holograms or Font Signs.
-            - flag server hub.streamer.slot.<[value]>.streamer:<context.uuid>
-            - flag server hub.streamer.slot.<[value]>.npc:<entry[npc].created_npc>
-            - flag server hub.streamer.<context.uuid>.slot:<[value]>
+        - run hub_streamer_add_npc def:<context.uuid>
 
     on bungee player switches to server:
       - stop if:<server.has_flag[hub.streamer.<context.uuid>].not>
