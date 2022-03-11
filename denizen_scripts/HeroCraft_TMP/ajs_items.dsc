@@ -25,6 +25,10 @@ hammer_fix_events:
       netherite_ingot: 507
       diamond: 390
   events:
+    on player raises item:
+    - stop if:<player.item_in_hand.enchantment_types.contains[area_dig].not>
+    - stop if:<player.item_in_hand.enchantment_types.contains[efficiency].not>
+    - inventory adjust d:<player.inventory> slot:<player.held_item_slot> enchantments:<player.item_in_hand.enchantment_map.exclude[efficiency]>
     on player clicks item in anvil:
     - stop if:<context.raw_slot.equals[3].not>
     - stop if:<context.inventory.slot[1].script.data_key[data.repair_reagent_requirement_multiplier].exists.not>
