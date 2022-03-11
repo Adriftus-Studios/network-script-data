@@ -122,7 +122,7 @@ global_player_data_modify:
       - if !<player[<[uuid]>].is_online||false>:
         - define forward true
       - bungeerun hub global_player_data_modify def:<[uuid]>|<[node]>|<[value]>|<[forward]||false>
-    - else if !<server.has_flag[player_map.<[uuid]>.server]>:
+    - else if !<server.has_flag[player_map.uuids.<[uuid]>.server]>:
       - ~yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
       - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
@@ -146,7 +146,7 @@ global_player_data_modify_multiple:
       - if !<player[<[uuid]>].is_online||false>:
         - define forward true
       - bungeerun hub global_player_data_modify_multiple def:<[uuid]>|<[map]>|<[forward]||false>
-    - else if !<server.has_flag[player_map.<[uuid]>.server]>:
+    - else if !<server.has_flag[player_map.uuids.<[uuid]>.server]>:
       - ~yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
       - foreach <[map]> key:node as:value:
         - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
