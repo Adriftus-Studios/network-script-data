@@ -24,7 +24,7 @@ hub_streamer_add_npc:
       - if !<server.has_flag[hub.streamer.slot.<[value]>]>:
         - define twitch_username <server.flag[hub.streamer.<[uuid]>.twitch_username]>
         - create PLAYER <server.flag[hub.streamer.<[uuid]>.display]> <server.flag[hub.streamer.locations.<[value]>]> registry:streamers save:npc
-        - spawn armor_stand[gravity=false;visible=false;marker=true;custom_name_visible=true;custom_name=<&d>www.twitch.tv/<[twitch_username]>] <server.flag[hub.streamer.locations.<[value]>].above[2.1]> save:as1
+        - spawn armor_stand[gravity=false;visible=false;marker=true;custom_name_visible=true;custom_name=<&d>twitch.tv/<[twitch_username].to_lowercase>] <server.flag[hub.streamer.locations.<[value]>].above[2.1]> save:as1
         - spawn "armor_stand[gravity=false;visible=false;marker=true;custom_name_visible=true;custom_name=<&e>Playing On<&co> <&b>Hub]" <server.flag[hub.streamer.locations.<[value]>].above[2.4]> save:as2
         - create PLAYER <server.flag[hub.streamer.<[uuid]>.display]> <server.flag[hub.streamer.locations.<[value]>]> registry:streamers save:npc
         - adjust <entry[npc].created_npc> skin_blob:<server.flag[hub.streamer.<[uuid]>.skin_blob]>
