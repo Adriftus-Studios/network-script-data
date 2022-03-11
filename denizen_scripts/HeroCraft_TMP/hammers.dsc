@@ -112,7 +112,7 @@ enchantment_area_dig:
   is_curse: false
   is_tradable: false
   is_discoverable: false
-  is_compatible: <context.enchantment_key.advanced_matches_text[minecraft:mending].not>
+  is_compatible: <context.enchantment_key.advanced_matches_text[minecraft:mending|minecraft:efficiency].not>
   can_enchant: <context.item.material.name.contains[pickaxe]>
   damage_bonus: 0.0
   damage_protection: 0
