@@ -175,7 +175,7 @@ bowtrail_unlock:
   definitions: bowtrail
   debug: false
   script:
-    - if <yaml[bowtrails].read[bowtrails.<[bowtrail]>]||null> != null && !<yaml[global.player.<player.uuid>].contains[bowtrails.unlocked.<[bowtrail]>]||false>:
+    - if <yaml[bowtrails].contains[bowtrails.<[bowtrail]>]> && !<yaml[global.player.<player.uuid>].contains[bowtrails.unlocked.<[bowtrail]>]>:
       - run global_player_data_modify def:<player.uuid>|bowtrails.unlocked.<[bowtrail]>|true
     - else:
       - define checks:->:`<&lt>yaml[bowtrails].read[bowtrails.<&lt>[bowtrail]<&gt>]||null<&gt>`
