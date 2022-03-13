@@ -14,5 +14,5 @@ block_properties:
       - else:
         - determine passively cancelled
         - inventory open d:generic[title=<context.location.flag[infinite_chest]>;size=36;contents=<context.location.inventory.list_contents>]
-    on player right clicks chest location_flagged:on_right_click:
+    on player right clicks block location_flagged:on_right_click:
       - inject <context.location.flag[on_right_click]>
