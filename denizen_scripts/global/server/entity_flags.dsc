@@ -69,3 +69,5 @@ entity_flags:
           - teleport <server.flag[join_location.location].parsed>
         - else:
           - flag server join_location:!
+    on entity_flagged:on_entity_added added to world:
+      - inject <context.entity.flag[on_entity_added]>
