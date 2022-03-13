@@ -60,7 +60,7 @@ store_hub_cosmeticShop_title_open:
   script:
     - define inventory <inventory[store_hub_cosmeticShop_titles_inventory]>
     - foreach <server.flag[cosmetics_titles_today]> as:tag:
-      - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<[tag]>]||false>:
+      - if <yaml[global.player.<player.uuid>].contains[titles.unlocked.<[tag]>]||false>:
         - define lore "<&c>You already own this title.|<&a>Price<&co><&sp>300<&sp><&b>ⓐ"
       - else:
         - define lore <&a>Price<&co><&sp>300<&sp><&b>ⓐ
@@ -90,7 +90,7 @@ store_hub_cosmeticShop_titles_events:
     on player clicks name_tag in store_hub_cosmeticShop_titles_inventory:
       - determine passively cancelled
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-      - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<context.item.flag[tag]>]||false>:
+      - if <yaml[global.player.<player.uuid>].contains[titles.unlocked.<context.item.flag[tag]>]||false>:
         - narrate "<&c>You already have unlocked this title."
         - stop
       - if !<yaml[global.player.<player.uuid>].contains[economy.premium.current]> || <yaml[global.player.<player.uuid>].read[economy.premium.current]||0> < <context.item.flag[price]>:
@@ -111,32 +111,6 @@ title_changeover:
   debug: false
   script:
     - flag server cosmetics_titles_today:!|:<yaml[titles].list_keys[titles].filter_tag[<yaml[titles].read[titles.<[filter_value]>.in_shop]||false>].random[18]>
-
-title_voucher:
-  type: item
-  debug: false
-  material: name_tag
-
-title_voucher_events:
-  type: world
-  debug: false
-  events:
-    on player right clicks block with:title_voucher bukkit_priority:LOWEST:
-      - determine passively cancelled
-      - if <yaml[global.player.<player.uuid>].read[titles.unlocked].contains[<context.item.flag[title]>]||false>:
-        - narrate "<&c>You already have unlocked this title."
-        - stop
-      - if <player.has_flag[title_confirm]>:
-        - wait 1t
-        - if <player.item_in_hand> == <context.item>:
-          - define tagID <context.item.flag[title]>
-          - inject title_unlock
-          - take iteminhand quantity:1
-          - narrate "<&b>You have redeemed the <yaml[titles].read[titles.<context.item.flag[title]>.tag].parse_color><&b> title!"
-          - flag player title_confirm:!
-      - else:
-        - flag player title_confirm duration:10s
-        - narrate "<&e>Right click again to confirm claiming this title."
 
 store_hub_cosmeticShop_bowTrails:
   type: item
@@ -172,7 +146,7 @@ store_hub_cosmeticShop_bowtrails_open:
   script:
     - define inventory <inventory[store_hub_cosmeticShop_bowTrails_inventory]>
     - foreach <server.flag[cosmetics_bowtrails_today]> as:trail:
-      - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<[trail]>]||false>:
+      - if <yaml[global.player.<player.uuid>].contains[bowtrails.unlocked.<[trail]>]||false>:
         - define lore "<&c>You already own this bow trail.|<&a>Price<&co><&sp>300<&sp><&b>ⓐ"
       - else:
         - define lore <&a>Price<&co><&sp>300<&sp><&b>ⓐ
@@ -203,7 +177,7 @@ store_hub_cosmeticShop_bowtrails_events:
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - if <context.item> == standard_back_button:
         - inventory open d:store_hub_cosmeticShop
-      - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<context.item.flag[trail]>]||false>:
+      - if <yaml[global.player.<player.uuid>].contains[bowtrails.unlocked.<context.item.flag[trail]>]||false>:
         - narrate "<&c>You already have unlocked this bow trail."
         - stop
       - if !<yaml[global.player.<player.uuid>].contains[economy.premium.current]> || <yaml[global.player.<player.uuid>].read[economy.premium.current]> < <context.item.flag[price]>:
@@ -224,29 +198,3 @@ bowtrail_changeover:
   debug: false
   script:
     - flag server cosmetics_bowtrails_today:!|:<yaml[bowtrails].list_keys[bowtrails].exclude[<yaml[bowtrails].read[shop_blacklist]>].random[18]>
-
-bowtrail_voucher:
-  type: item
-  debug: false
-  material: name_tag
-
-bowtrail_voucher_events:
-  type: world
-  debug: false
-  events:
-    on player right clicks block with:bowtrail_voucher bukkit_priority:LOWEST:
-      - determine passively cancelled
-      - if <yaml[global.player.<player.uuid>].read[bowtrail.unlocked].contains[<context.item.flag[trail]>]||false>:
-        - narrate "<&c>You already have unlocked this bow trail."
-        - stop
-      - if <player.has_flag[bowtrail_confirm]>:
-        - wait 1t
-        - if <player.item_in_hand> == <context.item>:
-          - define bowtrail <context.item.flag[trail]>
-          - inject bowtrail_unlock
-          - take iteminhand quantity:1
-          - narrate "<&b>You have redeemed the <yaml[bowtrails].read[bowtrails.<context.item.flag[trail]>.name].parse_color><&b> title!"
-          - flag player bowtrail_confirm:!
-      - else:
-        - flag player bowtrail_confirm duration:10s
-        - narrate "<&e>Right click again to confirm claiming this bow trail."
