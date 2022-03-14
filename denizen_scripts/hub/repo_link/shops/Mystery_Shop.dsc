@@ -68,6 +68,7 @@ store_hub_mysteryShop_purchase:
     - determine passively cancelled
     - if <player.proc[premium_currency_can_afford].context[<context.item.flag[price]>]>:
       - run premium_currency_remove "def:<player>|<context.item.flag[price]>|Purchased <context.item.flag[number]> <context.item.flag[stars]>⭐ Mystery Boxes"
+      - execute as_server "gmysterybox give <player.name> <context.item.flag[number]> <context.item.flag[stars]>"
       - narrate "<&a>You have succesfully purchased: <&r><context.item.flag[number]> <&e><list.pad_left[<context.item.flag[stars]>].with[⭐].separated_by[]><&7><list.pad_right[<context.item.flag[stars].sub[5].abs>].with[✩].separated_by[]> <&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>."
     - else:
       - narrate "<&c>You do not have enough <&b>Adriftus Coins<&c> for that."
