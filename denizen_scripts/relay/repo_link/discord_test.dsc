@@ -26,7 +26,7 @@ discord_sendMessage:
   script:
     - announce to_console "<[group]> - <[channel]>"
     - define Fchannel <discord[AdriftusBot].group[<[group]>].channel[<[channel]>]>
-    - ~discordmessage id:AdriftusBot channel:<discord[mybot].group[<[group]>].channel[<[channel]>]> <[messageEscaped].unescaped>
+    - ~discordmessage id:<discord[AdriftusBot]> channel:<discord[mybot].group[<[group]>].channel[<[channel]>]> <[messageEscaped].unescaped>
 
 discord_editMessage:
   type: task
