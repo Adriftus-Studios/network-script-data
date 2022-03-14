@@ -23,5 +23,6 @@ admin_item:
     - repeat 20:
       - playeffect effect:squid_ink at:<entry[item].spawned_entity.location.below[0.5]> quantity:10 offset:0.1
       - wait 2t
+    - adjust <entry[item].spawned_entity> pickup_delay:5s
     - adjust <entry[item].spawned_entity> custom_name:<entry[item].spawned_entity.item.display||<entry[item].spawned_entity.item.material.translated_name>>
     - adjust <entry[item].spawned_entity> custom_name_visible:true
