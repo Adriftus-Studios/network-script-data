@@ -28,7 +28,7 @@ mod_ban_inv_events:
       - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
       - run mod_log_ban def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
       - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
-      - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid].as_player.name>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
+      - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
       - run mod_ban_player def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
 
 mod_ban_inv_open:
