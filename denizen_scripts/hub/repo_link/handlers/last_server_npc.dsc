@@ -7,7 +7,7 @@ last_server_npc:
     - trigger name:proximity state:true radius:15
     - adjust <npc> mirror_player:true
     - flag server last_server_npc:<npc>
-    - rename <npc> "<&b>Click to Rejoin!"
+    - rename "<&b>Click to Rejoin!"
     on damage:
     - inventory open d:store_hub_cosmeticShop
     on click:
