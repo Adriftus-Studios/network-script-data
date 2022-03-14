@@ -18,7 +18,7 @@ bowtrail_voucher_events:
           - define bowtrail <context.item.flag[trail]>
           - inject bowtrail_unlock
           - take iteminhand quantity:1
-          - narrate "<&b>You have redeemed the <yaml[bowtrails].read[bowtrails.<context.item.flag[trail]>.name].parse_color><&b> title!"
+          - narrate "<&b>You have redeemed the <yaml[bowtrails].read[bowtrails.<context.item.flag[trail]>.name].parse_color><&b> bow trail!"
           - flag player bowtrail_confirm:!
       - else:
         - flag player bowtrail_confirm duration:10s
