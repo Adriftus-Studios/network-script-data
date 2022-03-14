@@ -30,14 +30,6 @@ items_to_win:
     - diamond_leggings
     - diamond_helmet
     - diamond_boots
-    - wooden_sword
-    - wooden_hoe
-    - wooden_pickaxe
-    - wooden_shovel
-    - leather_chestplate
-    - leather_leggings
-    - leather_helmet
-    - leather_boots
     - golden_sword
     - golden_hoe
     - golden_pickaxe
@@ -54,6 +46,10 @@ items_to_win:
     - iron_leggings
     - iron_helmet
     - iron_boots
+    - chainmail_helmet
+    - chainmail_chestplate
+    - chainmail_leggings
+    - chainmail_boots
     - name_tag
     - diamond_block
     - iron_block
@@ -67,14 +63,6 @@ rotating_items:
   - diamond_leggings
   - diamond_helmet
   - diamond_boots
-  - wooden_sword
-  - wooden_hoe
-  - wooden_pickaxe
-  - wooden_shovel
-  - leather_chestplate
-  - leather_leggings
-  - leather_helmet
-  - leather_boots
   - golden_sword
   - golden_hoe
   - golden_pickaxe
@@ -91,6 +79,10 @@ rotating_items:
   - iron_leggings
   - iron_helmet
   - iron_boots
+  - chainmail_helmet
+  - chainmail_chestplate
+  - chainmail_leggings
+  - chainmail_boots
   - name_tag
   - diamond_block
   - iron_block
