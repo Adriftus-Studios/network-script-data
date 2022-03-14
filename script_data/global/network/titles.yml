@@ -7,8 +7,8 @@ gui:
     lore:
     - '&b&m---&r&8&m｜-&r  &8&m+--------------------------+&r  &8&m-｜&b&m---'
     - '&7* &eName: &7<[display]>'
-    - '&7* &ePreview: &r<yaml[titles].read[titles.<[cosmetic]>.tag].parsed>'
-    - '&7* &eDescription: &7<yaml[titles].read[titles.<[cosmetic]>.description].parsed>'
+    - '&7* &ePreview: &r<yaml[titles].read[titles.<[cosmetic]>.tag].parse_color.parsed>'
+    - '&7* &eDescription: &7<yaml[titles].read[titles.<[cosmetic]>.description].parse_color.parsed>'
     - '&r'
     - '&7* Want more cool titles? let us know!'
     - '&7  Buy more titles available at the shops!'
