@@ -16,6 +16,8 @@ lumber_axe_events:
         - acacia_log
         - dark_oak_wood
         - dark_oak_log
+        - warped_stem
+        - crimson_stem
     events:
         on player breaks block:
         - define item <player.item_in_hand>
