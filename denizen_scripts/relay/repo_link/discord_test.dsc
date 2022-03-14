@@ -34,5 +34,5 @@ discord_editMessage:
   definitions: group|channel|MessageID|messageEscaped
   script:
     - define Fchannel <discord[AdriftusBot].group[<[group]>].channel[<[channel]>]>
-    - discord id:AdriftusBot channel:<[Fchannel]> edit_message <[messageEscaped].unescaped> message_id:<[MessageID]>
+    - discord id:<discord[AdriftusBot]> channel:<[Fchannel]> edit_message <[messageEscaped].unescaped> message_id:<[MessageID]>
 
