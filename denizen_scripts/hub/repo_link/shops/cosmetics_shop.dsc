@@ -93,7 +93,7 @@ store_hub_cosmeticShop_titles_events:
       - if <yaml[global.player.<player.uuid>].contains[titles.unlocked.<context.item.flag[tag]>]||false>:
         - narrate "<&c>You already have unlocked this title."
         - stop
-      - if !<yaml[global.player.<player.uuid>].contains[economy.premium.current]> || <yaml[global.player.<player.uuid>].read[economy.premium.current]||0> < <context.item.flag[price]>:
+      - if !<player.proc[premium_currency_can_afford].context[<context.item.flag[price]>]>:
         - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
         - stop
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
@@ -103,7 +103,7 @@ store_hub_cosmeticShop_titles_events:
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
         #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;flag=title:<context.item.flag[tag]>]>"
       - narrate "<&a>You have succesfully purchased the Title: <yaml[titles].read[titles.<[tagID]>.tag].parse_color><&e>."
-      - yaml id:global.player.<player.uuid> set economy.premium.current:-:<context.item.flag[price]>
+      - run premium_currency_remove def:<player>|<context.item.flag[price]>|Purchased Title<&co> <[tagID]>"
       - inject store_hub_cosmeticShop_title_open
 
 title_changeover:
@@ -180,7 +180,7 @@ store_hub_cosmeticShop_bowtrails_events:
       - if <yaml[global.player.<player.uuid>].contains[bowtrails.unlocked.<context.item.flag[trail]>]||false>:
         - narrate "<&c>You already have unlocked this bow trail."
         - stop
-      - if !<yaml[global.player.<player.uuid>].contains[economy.premium.current]> || <yaml[global.player.<player.uuid>].read[economy.premium.current]> < <context.item.flag[price]>:
+      - if !<player.proc[premium_currency_can_afford].context[<context.item.flag[price]>]>:
         - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
         - stop
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
@@ -190,7 +190,7 @@ store_hub_cosmeticShop_bowtrails_events:
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
         #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;flag=title:<context.item.flag[tag]>]>"
       - narrate "<&a>You have succesfully purchased the bow trail: <yaml[bowtrails].read[bowtrails.<[bowtrail]>.name].parse_color><&e>."
-      - yaml id:global.player.<player.uuid> set economy.premium.current:-:<context.item.flag[price]>
+      - run premium_currency_remove def:<player>|<context.item.flag[price]>|Purchased Bowtrail<&co> <[bowtrail]>"
       - inject store_hub_cosmeticShop_bowtrails_open
 
 bowtrail_changeover:
