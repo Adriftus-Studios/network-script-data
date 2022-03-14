@@ -9,9 +9,9 @@ last_server_npc:
     - flag server last_server_npc:<npc>
     - rename "<&b>Click to Rejoin!"
     on damage:
-    - inventory open d:store_hub_cosmeticShop
+    - inject last_server_handler
     on click:
-    - inventory open d:store_hub_cosmeticShop
+    - inject last_server_handler
     on enter proximity:
     - if <yaml[global.player.<player.uuid>].contains[adriftus.last_server]>:
       - fakespawn "armor_stand[custom_name=<&6>Last Server<&co> <yaml[global.player.<player.uuid>].read[adriftus.last_server]>;custom_name_visible=true;marker=true;visible=false]" <npc.location.above[2]> duration:10h players:<player> save:ent1
