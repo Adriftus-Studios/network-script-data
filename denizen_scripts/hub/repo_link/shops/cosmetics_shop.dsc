@@ -103,7 +103,7 @@ store_hub_cosmeticShop_titles_events:
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
         #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;flag=title:<context.item.flag[tag]>]>"
       - narrate "<&a>You have succesfully purchased the Title: <yaml[titles].read[titles.<[tagID]>.tag].parse_color><&e>."
-      - run premium_currency_remove def:<player>|<context.item.flag[price]>|Purchased Title<&co> <[tagID]>"
+      - run premium_currency_remove "def:<player>|<context.item.flag[price]>|Purchased Title<&co> <[tagID]>"
       - inject store_hub_cosmeticShop_title_open
 
 title_changeover:
@@ -190,7 +190,7 @@ store_hub_cosmeticShop_bowtrails_events:
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
         #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[tagID]>.tag].parse_color>;lore=<&e>Right Click to Redeem;flag=title:<context.item.flag[tag]>]>"
       - narrate "<&a>You have succesfully purchased the bow trail: <yaml[bowtrails].read[bowtrails.<[bowtrail]>.name].parse_color><&e>."
-      - run premium_currency_remove def:<player>|<context.item.flag[price]>|Purchased Bowtrail<&co> <[bowtrail]>"
+      - run premium_currency_remove "def:<player>|<context.item.flag[price]>|Purchased Bowtrail<&co> <[bowtrail]>"
       - inject store_hub_cosmeticShop_bowtrails_open
 
 bowtrail_changeover:
