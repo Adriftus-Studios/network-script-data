@@ -4,7 +4,7 @@ last_server_npc:
     on assignment:
     - trigger name:click state:true
     - trigger name:damage state:true
-    - trigger name:proximity state:false radius:15
+    - trigger name:proximity state:true radius:15
     - adjust <npc> mirror_player:true
     - flag server last_server_npc:<npc>
     on damage:
