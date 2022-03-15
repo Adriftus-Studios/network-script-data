@@ -103,7 +103,7 @@ chat_delete_message:
   script:
     - if <yaml[chat_config].read[channels.<[channel]>.global]>:
       - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
-    - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]>
+      - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]>
     - define message <yaml[chat_history].read[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>]>].get[1]>
     - define new_message_map "<[message].with[message].as[<&7><&lb>Message Deleted<&rb>]>"
     - foreach <yaml[chat_history].read[<[channel]>_history]> as:message_map:

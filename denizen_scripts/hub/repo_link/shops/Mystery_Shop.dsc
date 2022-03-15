@@ -35,7 +35,7 @@ store_hub_mysteryShop_boxes_inventory:
     definitions:
       filler: <item[store_hub_mysteryShop_filler]>
       101: <item[ender_chest].with[quantity=1;flag=run_script:store_hub_mysteryShop_purchase;flag=price:200;flag=number:10;flag=stars:1;display_name=<&b>10<&sp><&e>⭐<&7>✩✩✩✩<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>200]>
-      251: <item[ender_chest].with[quantity=2;flag=run_script:store_hub_mysteryShop_purchase;lag=price:400;flag=number:25;flag=stars:1;display_name=<&b>25<&sp><&e>⭐<&7>✩✩✩✩<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>400]>
+      251: <item[ender_chest].with[quantity=2;flag=run_script:store_hub_mysteryShop_purchase;flag=price:400;flag=number:25;flag=stars:1;display_name=<&b>25<&sp><&e>⭐<&7>✩✩✩✩<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>400]>
       501: <item[ender_chest].with[quantity=3;flag=run_script:store_hub_mysteryShop_purchase;flag=price:700;flag=number:50;flag=stars:1;display_name=<&b>50<&sp><&e>⭐<&7>✩✩✩✩<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>700]>
       1001: <item[ender_chest].with[quantity=4;flag=run_script:store_hub_mysteryShop_purchase;flag=price:1000;flag=number:100;flag=stars:1;display_name=<&b>100<&sp><&e>⭐<&7>✩✩✩✩<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>1000]>
       102: <item[ender_chest].with[quantity=1;flag=run_script:store_hub_mysteryShop_purchase;flag=price:400;flag=number:10;flag=stars:2;display_name=<&b>10<&sp><&e>⭐⭐<&7>✩✩✩<&sp><&5>M<&d>y<&5>s<&d>t<&5>er<&d>y<&sp><&d>Boxes<&e>.;lore=<&a>Price<&co><&sp>400]>
