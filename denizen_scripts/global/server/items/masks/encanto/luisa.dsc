@@ -1,0 +1,11 @@
+mask_encanto_luisa:
+  type: data
+  display_data:
+    category: Encanto
+    material: stone
+    display_name: <&b>Encanto<&co> <&c>Luisa
+    description: "<&6>Luisa<&e> from <&6>Encanto"
+  mask_data:
+    id: encanto_luisa
+    display_name: <&c>Luisa
+    skin_blob: ewogICJ0aW1lc3RhbXAiIDogMTY0NzM1MzA4MDU5MSwKICAicHJvZmlsZUlkIiA6ICIzYzE0YmVkNDFiOGE0MDIzOGM3MDgzMTA1NzEwMTZmYiIsCiAgInByb2ZpbGVOYW1lIiA6ICJOb2Jpa28iLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2NiZDIyMjRmYjQxODZiNjViM2UwNGYxMzU3ZTZmZDI5NmU4MTEyNDdhZTNiZDUzZTEzY2Y4NDE5OTk3MDg0ZSIKICAgIH0KICB9Cn0=;tofItRk1+0blp8VwuM9XCCHOHPVlIIuyly3/kT0DQyuAkGYRyDmsISup+C0UfYV/+3Ud1qqvfLvkE8gfAt0Z28tOy3a78r4Cd8Bd2gqiEjeDQ6KT8uOv0mzYaT5PWN7GLBLredRysw8OpnAB1rZFEQOG/L4ee+2+Drj1qOn98ce1QSUJ8q7wu116ovl8cJYsNxNwCOr6nfNEkhbEc5QamXWpIPJltT4Wupd0Jwvo7FLQTD7EN7akEuyroBCkcGvo+b8o7lCvGB5qAbxrRsxX2NRrSjCp2pZua01cavm7PBdnTAF7HSOnZi71KACUlaeZJpQLLCao3gcf6lxu2j2hFdigSurXYc7MSmBDS90AxS/AThBzAp5iRNHHy71OAM5Xw46CGzcP3LDh9aVs2kO9eivLCt9tPrz7yJKdOgO/0uLnl/d8dZeNXS330ErMVc8t74er+NTOlo4aeYE+nNCdV/iR9E24y/Tlv9EW2ilc1Jr8huJ7896l3qLnKRm4xYZ7LX0ob8PvS3K+Q0kVyoW80/zqdJg6/bLscmG10DivG4BE/4Ir66xzH/JwVGxawrSQAMWxqJaeB0JLejf+I4hH+7tPXYDJP/VIZd7CHUSt79N79B9y0moL7u2LWxW5JWF6ueA+0GjdHXmnuWlDk9gdMIIYSKQEV0SIp0dRYLBi07g=
