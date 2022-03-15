@@ -3,9 +3,9 @@ mask_riverdale_archie_andrews:
   display_data:
     category: Riverdale
     material: cooked_beef
-    display_name: <&b>Riverdale<&co> <&e>Archie Andrews
-    description: "<&e>Archie Andrews<&e> from <&b>Riverdale"
+    display_name: <&b>Riverdale<&co> <&6>Archie Andrews
+    description: "<&6>Archie Andrews<&e> from <&b>Riverdale"
   mask_data:
     id: riverdale_archie_andrews
-    display_name: <&e>Archie Andrews
+    display_name: <&6>Archie Andrews
     skin_blob: ewogICJ0aW1lc3RhbXAiIDogMTY0NjU1NzgwOTk2NCwKICAicHJvZmlsZUlkIiA6ICJhOGJhMGY1YTFmNjQ0MTgzODZkZGI3OWExZmY5ZWRlYyIsCiAgInByb2ZpbGVOYW1lIiA6ICJDcmVlcGVyOTA3NSIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS83NjdhMGI2MWRmZjE0ZDFjMmU5Mzg0M2QyNTBhMzQ1ODY0MWViYzY3NzdlNmM1ZTFiNWMyZTUwNzZhYWEzNWFiIgogICAgfQogIH0KfQ==;vmXbvec/LkomXqWRrRSXTROa2v9Zc3uJ5v4vUu31V1QbQMBPabDPXTP0Z9HFyJYtsI0cR2w45YoBP0KhZ8YBEkn3hmBvgUGHjkYhD+6K1CyPNKPensBpkMFTGdDN2tiB8C1DdqRbGiDLYR7DcMoMMireGHTjFE3wvus2g7CwWZe/9X+8qgnRV/KemxfuzWnMPTslFa+yu3cmcCOxZFWrksO1wjvKHVI9ch/TD9N9pii+hcEiPxd9oBH1kG31e/2MmZ8xC+DxvxzPPdHXHoIHoVgwhiQ93RHaUYjJ8VkRfCdpbb/4V3O2+iM0ot23b2M0XoGWngZf4++LT9KjcQRV2SQltX6A+mrdn0uVDV6tRtmlwhG6h5iVO82UmS5t9zgf8GAkoUnE5EBRghV79zCVaONxMNvas3TFzqOsbNG3Em9lNzVwWgoXEBb0aLyDaSR5gKV07ID3jXtvAMdQo9390Bo14LymkRztfVwDb4cjYcjHKXHdADmB9CcwYjZsHIvVC426pS7uANeqVF/fgLyxGpNWbDcjtcRpB3OnxBsbakAy4ECIh9UvnX/abAVfPnxPOggLgqRJG7fGfHn60O13MMRvK0BAw6i3ABAp4meFRqyZdWCRNjiHcLunv3f8LzWRD8P0s+K+XpyQTsosPLfJccgQD5D5VpnCHbuFkowNZk4=

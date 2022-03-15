@@ -3,9 +3,9 @@ mask_riverdale_betty_cooper:
   display_data:
     category: Riverdale
     material: pink_tulip
-    display_name: <&b>Riverdale<&co> <&e>Betty Cooper
-    description: "<&e>Betty Cooper<&e> from <&b>Riverdale"
+    display_name: <&b>Riverdale<&co> <&6>Betty Cooper
+    description: "<&6>Betty Cooper<&e> from <&b>Riverdale"
   mask_data:
     id: riverdale_betty_cooper
-    display_name: <&e>Betty Cooper
+    display_name: <&6>Betty Cooper
     skin_blob: ewogICJ0aW1lc3RhbXAiIDogMTY0NzM1NDk2MTk5OCwKICAicHJvZmlsZUlkIiA6ICIxMGYwY2YzYTBhYzI0ZTUzYTliYzQ5NmNkMGFhYWE5YSIsCiAgInByb2ZpbGVOYW1lIiA6ICJGcmFhbmNpc2NvIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2IyYzRkOGNlM2Y1OTViM2RjZTg1ZGQ0OTgyMDRjN2VhY2ZmOGJlZjQ4Nzc5OWUyNzA3NWYwODA1ZmUzMDJlYzciLAogICAgICAibWV0YWRhdGEiIDogewogICAgICAgICJtb2RlbCIgOiAic2xpbSIKICAgICAgfQogICAgfQogIH0KfQ==;ckj6Sm8Daz0dIYELOsOaaSDigLtkUA6NfEHXSdxl/llqxF5c69xd6DECzJ7Z7RZOBW30sAZXfMcSWOFHOoA9bDsiUZj1WcILSHZ1rIeIIEdGYI+aR6VmZjUlmQsykD54gbuc/o+RfWggd2zph2mTdgpvtDLiT8OlxluQAHtb7TXNH+EFucO+WGAqdaKAQ5sOz9ggMQF1JIi1G/n5GsoQAkrWiKs5WXVqyB/mm0sLiUOTfm2kTxugnOd2XBTAqexJrXiLUdRMHoMWtg+EiFUynGppYohNmBpbjc8aLgcBAPHWb6sIxYPxmq9sziMd2WIEYrHmgcT+A9hBoeg7/4r+oPvnvxQhvcZwNSE/0B2v9i2cOg7qgfGiExsw4LotvkKrXgJLmofXgoxTO6Qzx9z+Tx3hYt5tba8hICD9Ru4JWXpXRl2c9oSD+AXwOsMYCVvtbMzZYPmlVfdMQvrgywY3PpCjPbv/zeFQIJFGUC7ORY/zvxuKHu5/CTkDU58X6oPVmCeoBZ122LzxZR0KO6EbqMzCCxORA1WOFYa4+1VGlfEpDDJ/tVt3y9o67BgfnNKRq+JBD3ivIEJbeMp3MNCcqwTifWtuKx0V6tQ9GkRBTbnWN3O5ju1lC9i2kHiJYrXLoiRCccbjUvnLdggdotfYYK3I2ROJllzDg10R88pdUek=
