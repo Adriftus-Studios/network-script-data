@@ -32,7 +32,7 @@ shop_blacklist:
   - "Default"
 bowtrails:
   Default:
-    trail_type: 'custom_fucking_off'
+    trail_type: 'none'
     icon: 'barrier'
     name: '&7None'
     description: "&7FINE... Don't use our bow trails...."

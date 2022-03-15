@@ -1,0 +1,11 @@
+mask_encanto_mirabel:
+  type: data
+  display_data:
+    category: Encanto
+    material: diamond
+    display_name: <&b>Encanto<&co> <&6>Mirabel
+    description: "<&6>Mirabel<&e> from <&6>Encanto"
+  mask_data:
+    id: encanto_mirabel
+    display_name: <&6>Mirabel
+    skin_blob: ewogICJ0aW1lc3RhbXAiIDogMTY0NzMwMTAxNjY4NSwKICAicHJvZmlsZUlkIiA6ICJmZDYwZjM2ZjU4NjE0ZjEyYjNjZDQ3YzJkODU1Mjk5YSIsCiAgInByb2ZpbGVOYW1lIiA6ICJSZWFkIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzUxOGY1ZGI3Y2Q2ZDg3ZmQxMWJjMDZjZWQxOTIxMGM0OWYwOTU0ZDlkYThkZjMyYjhkY2ExMTA5MTQ1MzljOCIKICAgIH0KICB9Cn0=;GnsrU1hehVpZYT1UWBTwE7cIiXjP2JXsp6J+QDd94Vd8bEQBdR+J+OXj8Swn8MvWp0FlzjoVIUyW9I825zDErj1txzvRZxKd00SyLk3cS3v6fnExSh8ONNRQrRTGFO9Nl/Ojar0bpm5MxgXlZ/opMxrwOUqdp0v2IbfDUmHDMea5x/pyrKpckX+q/gB9/yr+4k5XrMUtTnFmq86Wk9KV28vloE7n7UnhUImD90YlwpUMhUz641+59yejszLGA3aQ3bKYSSDGUZmKv5CGWOJmuKaD31GaUOfWYj62FPf2mGi3s3ZeqCjQ9jPnTK2OJYa81/gOAPOE/Z4L4FsL5MclZx7UVRoNuHgNCD26u+r95rFTojjGPmoAn4cQez/8TrpkAEjEtaZh3H9epagFHUgWcbBdik71H3aiHKxaKhZbgb88GmdkMEjFLuJkCFcZP9XtoUgJYfXcg0tz/6cKX4Pn5vlqjVcITVkvI6fN+bvFmW+DZfoN3x+CgmG83z0OMUPzg/QnILzfnL39Z3AsnlzJZzOt61609JN6zaYTUn26goRA+uOqACwJkSdagwJUITFvDA1y6XaxNtM5lgFm/XS8j2KquRdF2VnwmETPMISA37LqE3ZtDZ1U+zrmAWs8+AkENncfXiErx284M/4+e98hdDplimifxuQ93nCD40S4nmM=
