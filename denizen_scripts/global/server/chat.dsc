@@ -37,10 +37,10 @@ chat_system_events:
       - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
 
       # Build the Player Text
-      - if <yaml[global.player.<player.uuid>].contains[rank]>:
-        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
+      - if <yaml[global.player.<player.uuid>].contains[masks.current]>:
+        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&d>DISGUISED<&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
       - else:
-        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
+        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><proc[get_player_display_name]><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
       - define Hint "msg <player.name> "
       - define NameText <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Hint]>]>
