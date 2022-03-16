@@ -131,7 +131,7 @@ global_player_data_modify:
     - else:
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
       - if <[forward]||false> && <server.has_flag[player_map.uuids.<[uuid]>.server]>:
-        - bungeerun <server.flag[player_map.<[uuid]>.server]> global_player_data_modify_single def:<[uuid]>|<[node]>|<[value]>
+        - bungeerun <server.flag[player_map.uuids.<[uuid]>.server]> global_player_data_modify_single def:<[uuid]>|<[node]>|<[value]>
 
 ## External Usage
 global_player_data_modify_multiple:
@@ -156,4 +156,4 @@ global_player_data_modify_multiple:
     - else:
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
       - if <[forward]||false> && <server.has_flag[player_map.uuids.<[uuid]>.server]>:
-        - bungeerun <server.flag[player_map.<[uuid]>.server]> global_player_data_modify_multiple def:<[uuid]>|<[map]>
+        - bungeerun <server.flag[player_map.uuids.<[uuid]>.server]> global_player_data_modify_multiple_single def:<[uuid]>|<[map]>
