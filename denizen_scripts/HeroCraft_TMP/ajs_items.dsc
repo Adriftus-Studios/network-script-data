@@ -24,24 +24,26 @@ hammer_fix_events:
       iron_ingot: 62
       netherite_ingot: 507
       diamond: 390
+  task:
+  - stop if:<context.inventory.slot[1].script.data_key[data.repair_reagent_requirement_multiplier].exists.not>
+  - stop if:<context.inventory.slot[1].script.data_key[data.repair_reagent].exists.not>
+  - define current_durability <context.inventory.slot[1].durability>
+  - stop if:<[current_durability].equals[<context.item.durability>]>
+  - define reagent <context.inventory.slot[1].script.data_key[data.repair_reagent]>
+  - stop if:<context.inventory.slot[2].material.name.equals[<[reagent]>].not>
+  - stop if:<script.list_keys[data.repair_reagent_amount].contains[<[reagent]>].not>
+  - define multiplier <context.inventory.slot[1].script.data_key[data.repair_reagent_requirement_multiplier]>
+  - define diff <script.data_key[data.repair_reagent_amount.<[reagent]>].div[<[multiplier]>]>
+  - define reagent_item <context.inventory.slot[2]>
+  - define new_durability <[current_durability].sub[<[diff].round.mul[<[reagent_item].quantity>]>]>
   events:
     on player breaks block:
     - stop if:<player.item_in_hand.enchantment_types.parse[name].contains[area_dig].not>
     - stop if:<player.item_in_hand.enchantment_types.parse[name].contains[efficiency].not>
     - inventory adjust d:<player.inventory> slot:<player.held_item_slot> remove_enchantments:efficiency
-    on player clicks item in anvil:
+    on player clicks item in anvil bukkit_priority:high:
     - stop if:<context.raw_slot.equals[3].not>
-    - stop if:<context.inventory.slot[1].script.data_key[data.repair_reagent_requirement_multiplier].exists.not>
-    - stop if:<context.inventory.slot[1].script.data_key[data.repair_reagent].exists.not>
-    - define current_durability <context.inventory.slot[1].durability>
-    - stop if:<[current_durability].equals[<context.item.durability>]>
-    - define reagent <context.inventory.slot[1].script.data_key[data.repair_reagent]>
-    - stop if:<context.inventory.slot[2].material.name.equals[<[reagent]>].not>
-    - stop if:<script.list_keys[data.repair_reagent_amount].contains[<[reagent]>].not>
-    - define multiplier <context.inventory.slot[1].script.data_key[data.repair_reagent_requirement_multiplier]>
-    - define diff <script.data_key[data.repair_reagent_amount.<[reagent]>].div[<[multiplier]>]>
-    - define reagent_item <context.inventory.slot[2]>
-    - define new_durability <[current_durability].sub[<[diff].round.mul[<[reagent_item].quantity>]>]>
+    - inject <script.name> path:task
     - if <[new_durability].is_more_than[0]>:
       - inventory adjust d:<context.clicked_inventory> slot:2 quantity:0
     - else:
@@ -57,18 +59,7 @@ hammer_fix_events:
     - wait 1t
     - inventory update
     on player prepares anvil craft item bukkit_priority:high:
-    - stop if:<context.inventory.slot[1].script.data_key[data.repair_reagent_requirement_multiplier].exists.not>
-    - stop if:<context.inventory.slot[1].script.data_key[data.repair_reagent].exists.not>
-    - stop if:<context.item.durability.exists.not>
-    - define current_durability <context.inventory.slot[1].durability>
-    - stop if:<[current_durability].equals[<context.item.durability>]>
-    - define reagent <context.inventory.slot[1].script.data_key[data.repair_reagent]>
-    - stop if:<context.inventory.slot[2].material.name.equals[<[reagent]>].not>
-    - stop if:<script.list_keys[data.repair_reagent_amount].contains[<[reagent]>].not>
-    - define multiplier <context.inventory.slot[1].script.data_key[data.repair_reagent_requirement_multiplier]>
-    - define diff <script.data_key[data.repair_reagent_amount.<[reagent]>].div[<[multiplier]>]>
-    - define reagent_item <context.inventory.slot[2]>
-    - define new_durability <[current_durability].sub[<[diff].round.mul[<[reagent_item].quantity>]>]>
+    - inject <script.name> path:task
     - determine passively <context.item.with[durability=<[new_durability].max[0]>]>
     - if <[new_durability].is_more_than[0]>:
       - define quantity <[reagent_item].quantity>
