@@ -55,7 +55,7 @@ chat_system_events:
       - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message]>
       - define Command "chat interact <[channel]> <[uuid]>"
-      - define MessageText <proc[msg_cmd].context[<[Hover]>|<[Text].unescaped>|<[Command]>]>
+      - define MessageText <[Text].on_hover[<[Hover]>].on_click[/<[Command]>]>
 
       - define Message <[ChannelText]><[NameText]><[Separator]><[MessageText]>
 
