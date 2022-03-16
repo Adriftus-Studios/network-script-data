@@ -9,7 +9,7 @@ chat_system_events:
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
       - define msg <context.message>
-      - define msg <[msg].replace_text[|].with[]>
+      #- define msg <[msg].replace_text[|].with[]>
 
       # Check for Chat Lock
       - if <yaml[global.player.<player.uuid>].read[chat.locked]||false> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny]||false>:
@@ -29,6 +29,7 @@ chat_system_events:
       # Sanitize
       #- define msg <[msg].replace_text[<&lb>].with[]>
       #- define msg <[msg].replace_text[<&rb>].with[]>
+      - define msg <[msg].escaped>
 
       # Build the Channel Text
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
@@ -54,7 +55,7 @@ chat_system_events:
       - define Hover "<&color[#F3FFAD]>Timestamp<&color[#26FFC9]>: <&color[#C1F2F7]><util.time_now.format[E, MMM d, y h:mm a].replace[,].with[<&color[#26FFC9]>,<&color[#C1F2F7]>]>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message]>
       - define Command "chat interact <[channel]> <[uuid]>"
-      - define MessageText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+      - define MessageText <proc[msg_cmd].context[<[Hover]>|<[Text].unescaped>|<[Command]>]>
 
       - define Message <[ChannelText]><[NameText]><[Separator]><[MessageText]>
 
