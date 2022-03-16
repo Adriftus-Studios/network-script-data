@@ -62,7 +62,7 @@ Restart_DCommand:
           - define fields "<[fields].include_single[<map.with[name].as[**`(-c|-confirm)`**].with[value].as[Returns a confirmation when the server has completely restarted].with[inline].as[true]>]>"
           - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[<[color]>].with[description].as[<[message]>].with[fields].as[<[fields]>]>]>
           - define data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[embeds]>].to_json>
-          - define hook <script[ddtbcty].data_key[WebHooks.<[channel]>.hook]>
+          - define hook <script[ddtbcty].parsed_key[WebHooks.<[channel]>.hook]>
           - define headers <yaml[saved_headers].read[discord.webhook_message]>
           - ~webget <[hook]> data:<[data]> headers:<[headers]>
           - stop
@@ -75,7 +75,7 @@ Restart_DCommand:
           - inject embedded_color_formatting
           - define embeds <list_single[<map.with[title].as[<[title]>].with[color].as[<[color]>].with[description].as[<[message]>]>]>
           - define data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[embeds]>].to_json>
-          - define hook <script[ddtbcty].data_key[WebHooks.<[channel]>.hook]>
+          - define hook <script[ddtbcty].parsed_key[WebHooks.<[channel]>.hook]>
           - define headers <yaml[saved_headers].read[discord.webhook_message]>
           - ~webget <[hook]> data:<[data]> headers:<[headers]>
           - stop
