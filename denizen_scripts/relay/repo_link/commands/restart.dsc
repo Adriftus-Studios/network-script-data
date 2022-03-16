@@ -123,7 +123,7 @@ Restart_DCommand:
     - define embeds "<list_single[<map.with[color].as[<[color]>].with[description].as[Restarting Servers: <[servers].parse[replace[_].with[<&sp>].to_titlecase].formatted>]>]>"
     - define data <map.with[username].as[Network<&sp>Control].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[embeds]>].to_json>
 
-    - define hook <script[ddtbcty].data_key[WebHooks.<[channel]>.hook]>
+    - define hook <script[ddtbcty].parsed_key[WebHooks.<[channel]>.hook]>
     - define headers <yaml[saved_headers].read[discord.webhook_message]>
     - ~webget <[hook]> data:<[data]> headers:<[headers]>
 
