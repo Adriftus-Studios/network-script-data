@@ -1,8 +1,8 @@
-promo_code_syntrocity:
+promo_code_clownzer:
   type: data
   expires: false
   expiration_date: <time[2022/04/20_00:00:00]>
-  run_task: promo_code_syntrocity_task
+  run_task: promo_code_clownzer_task
 
 promo_code_clownzer_task:
   type: task
