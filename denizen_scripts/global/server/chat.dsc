@@ -89,7 +89,7 @@ chat_history_show:
         - foreach next
       - define list:|:<yaml[chat_history].read[<[Channel]>_history].filter[get[time].is_integer]>
     - if <yaml[global.player.<player.uuid>].contains[chat.message.history]>:
-      - define list <[list].include[<yaml[global.player.<player.uuid>].read[chat.message.history]>]>
+      - define list:|:<yaml[global.player.<player.uuid>].read[chat.message.history].filter[get[time].is_integer]>
     - if <[List].is_empty>:
       - stop
     - define sorted_list <[list].sort_by_number[get[time]].reverse>

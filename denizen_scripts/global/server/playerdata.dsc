@@ -138,6 +138,8 @@ global_player_data_message_history:
   definitions: uuid|message_map
   script:
     - yaml id:global.player.<[uuid]> set chat.message.history:|:<[message_map]> if:<yaml.list.contains[global.player.<[uuid]>]>
+    - if <yaml[global.player.<[uuid]>].read[chat.message.history].size> > 30:
+      - yaml id:global.player.<[uuid]> set chat.message.history:!|:<yaml[global.player.<[uuid]>].read[chat.message.history].remove[first]>
     - if <bungee.server> != hub:
       - bungeerun hub global_player_data_message_history def:<[uuid]>|<[message_map]>
     - else:
