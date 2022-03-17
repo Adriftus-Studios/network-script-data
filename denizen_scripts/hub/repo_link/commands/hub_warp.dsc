@@ -54,7 +54,7 @@ hub_warp_to:
             - teleport <[player]> hub_warp_<[warpName]>
             - playsound <[player]> sound:ENTITY_ENDERMAN_TELEPORT
             - playeffect effect:PORTAL at:<player.location> visibility:500 quantity:500 offset:1.0
-            - actionbar "<proc[reverse_color_gradient].context[Teleporting to <[warpName]>|#6DD5FA|#FFFFFF]>"
+            - actionbar "<proc[reverse_color_gradient].context[Teleporting to <[warpName].to_titlecase>|#6DD5FA|#FFFFFF]>"
         - else:
             - narrate "Invalid warp name"
 
