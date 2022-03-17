@@ -26,6 +26,7 @@ mod_send_inv_events:
       - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|0|<[origintodest]>|Send
       - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<[origintodest]>|Send
       - adjust <player.flag[amp_map].as_map.get[uuid].as_player> send_to:<context.item.flag[SERVER]>
+      - inventory close
 
 mod_send_inv_open:
   type: task
