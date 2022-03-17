@@ -61,13 +61,13 @@ dtd_command:
   allowed help:
   - determine <player.has_permission[adriftus.staff]>
   tab completions:
-    1: save|forward_portal|backward_portal
+    1: save|remove|forward_portal|backward_portal
     2: <list[coordinates].include[<yaml[global.player.<player.uuid>].read[dtd.locations].keys||<list[]>>].include[<server.online_players.parse[name]>]>
   script:
     ## Arg1 = Portal
     - if <context.args.get[1].advanced_matches_text[*_portal]>:
       - if <context.args.last.starts_with[duration<&co>]>:
-        - if <duration[<context.args.last.after[<&co>]>].exists||false>:
+        - if <duration[<context.args.last.after[<&co>]>].exists>:
           - define duration <util.time_now.add[<context.args.last.after[<&co>]>]>
         - else:
           - narrate <script[portal_config].parsed_key[messages.bad_duration]>
@@ -96,7 +96,7 @@ dtd_command:
         - run open_portal def:dtd|<context.args.get[1].before[_]>|<server.match_player[<context.args.get[2]>].location>|<[duration]>
     ## Arg1 = save
     - else if <context.args.get[1]> == save:
-      - if <context.args.size> <= 2:
+      - if <context.args.size> <= 1:
         - narrate <script[portal_config].parsed_key[messages.not_enough_arguments]>
         - stop
       - if !<context.args.get[2].to_lowercase.matches_character_set[abcdefghijklmnopqrstuvwxyz_]>:
@@ -105,9 +105,7 @@ dtd_command:
       - define map <map[dtd.locations.<context.args.get[2]>.location=<player.location>;dtd.locations.<context.args.get[2]>.server=<bungee.server>]>
       - run global_player_data_modify_multiple def:<player.uuid>|<[map]>
       - narrate <script[portal_config].parsed_key[messages.saved_location]>
-    - else:
-        - narrate <script[portal_config].parsed_key[messages.bad_arguments]>
-    ## Arg1 = save
+    ## Arg1 = remove
     - else if <context.args.get[1]> == remove:
       - if <context.args.size> <= 1:
         - narrate <script[portal_config].parsed_key[messages.not_enough_arguments]>
