@@ -46,11 +46,14 @@ big_shulker_events:
     - define item <[item].proc[big_shulker_build_lore]>
     - determine <[item]>
     on item recipe formed:
-    - stop if:<context.item.script.name.equals[big_shulker_item].not.if_null[true]>
-    - stop if:<context.recipe_id.equals[big_shulker_1].if_null[true]>
-    - define reagent <context.recipe.filter[script.name.equals[big_shulker_item]].get[1].if_null[null]>
-    - stop if:<[reagent].equals[null]>
-    - determine <context.item.with_flag[big_shulker:<[reagent].flag[big_shulker].if_null[<list[]>]>].with[script=big_shulker_item].proc[big_shulker_build_lore]>
+    - if <context.recipe_id> == denizen:big_shulker_1:
+      - if <context.recipe.filter[inventory_contents.exists].parse[inventory_contents].combine.size> != 0:
+        - determine cancelled
+    - if <context.recipe_id.equals[big_shulker_1].if_null[true]>:
+      - stop if:<context.item.script.name.equals[big_shulker_item].not.if_null[true]>
+      - define reagent <context.recipe.filter[script.name.equals[big_shulker_item]].get[1].if_null[null]>
+      - stop if:<[reagent].equals[null]>
+      - determine <context.item.with_flag[big_shulker:<[reagent].flag[big_shulker].if_null[<list[]>]>].with[script=big_shulker_item].proc[big_shulker_build_lore]>
     on block explodes:
     - determine <context.blocks.filter[has_flag[big_shulker].not]>
     on entity explodes:
