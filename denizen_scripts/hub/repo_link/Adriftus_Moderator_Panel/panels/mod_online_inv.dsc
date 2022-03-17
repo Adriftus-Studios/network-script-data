@@ -7,7 +7,7 @@ mod_online_inv:
   gui: true
   size: 54
   definitions:
-    border: <item[light_blue_stained_glass_pane].with[display_name=<&r>]>
+    border: <item[light_blue_stained_glass_pane].with[display_name=<&sp>]>
     close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close].with_flag[to:close]>
   slots:
     - [] [] [] [] [] [] [] [] []
