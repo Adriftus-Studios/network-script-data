@@ -54,12 +54,14 @@ network_map_update_name:
     - define forward true if:<[forward].exists.not>
     - define old_name <server.flag[player_map.uuids.<[uuid]>.name]>
     - define server <server.flag[player_map.uuids.<[uuid]>.server]>
-    - define name <[name].strip_color.replace[<&sp>].with[_]>
+    - define stripped_name <[name].strip_color.replace[<&sp>].with[_]>
     - flag server player_map.names.<[old_name]>:!
-    - flag server player_map.uuids.<[uuid]>.name:<[name]>
-    - flag server server_map.<[server]>.<[uuid]>:<[name]>
-    - flag server player_map.names.<[name]>.uuid:<[uuid]>
-    - flag server player_map.names.<[name]>.server:<[server]>
+    - flag server player_map.uuids.<[uuid]>.name:<[stripped_name]>
+    - flag server player_map.uuids.<[uuid]>.display_name:<[name]>
+    - flag server server_map.<[server]>.<[uuid]>:<[stripped_name]>
+    - flag server player_map.names.<[stripped_name]>.uuid:<[uuid]>
+    - flag server player_map.names.<[stripped_name]>.server:<[server]>
+    - flag server player_map.names.<[stripped_name]>.display_name:<[name]>
     - if <[forward]>:
       - bungeerun <bungee.list_servers.exclude[relay]> network_map_update_name def:<[uuid]>|<[name]>|false
     
