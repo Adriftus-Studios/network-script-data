@@ -116,7 +116,7 @@ dtd_command:
       - if !<yaml[global.player.<player.uuid>].contains[dtd.locations.<context.args.get[2]>]>:
         - narrate <script[portal_config].parsed_key[messages.no_saved_with_name]>
         - stop
-      - run global_player_data_modify def:<player.uuid>|dtd.location.<context.args.get[2]>|!
+      - run global_player_data_modify def:<player.uuid>|dtd.locations.<context.args.get[2]>|!
       - narrate <script[portal_config].parsed_key[messages.removed_location]>
     - else:
         - narrate <script[portal_config].parsed_key[messages.bad_arguments]>
