@@ -82,3 +82,4 @@ mask_remove:
     - run global_player_data_modify def:<player.uuid>|masks.current|!
     - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[defaults.skin_blob]>
     - adjust <player> name:<player.name>
+    - run network_map_update_name def:<player.uuid>|<player.name>
