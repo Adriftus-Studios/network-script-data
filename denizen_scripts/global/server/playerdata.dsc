@@ -131,6 +131,18 @@ global_player_data_modify_multiple_single:
     - foreach <[map]> key:node as:value:
       - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
 
+## Specific Usage - USE "bungee_send_message" INSTEAD
+global_player_data_message_history:
+  type: task
+  debug: false
+  definitions: uuid|message_map
+  script:
+    - yaml id:global.player.<[uuid]> set chat.message.history:|:<[message_map]> if:<yaml.list.contains[global.player.<[uuid]>]>
+    - if <bungee.server> != hub:
+      - bungeerun hub global_player_data_message_history def:<[uuid]>|<[message_map]>
+    - else:
+      - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
+
 ## External Usage
 global_player_data_modify:
   type: task
