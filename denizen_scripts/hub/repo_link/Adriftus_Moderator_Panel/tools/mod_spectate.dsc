@@ -1,8 +1,9 @@
 # -- /spec - Moderator spectate command
 mod_spectate_command:
   type: command
-  debug: true
+  debug: false
   name: spec
+  permission: adriftus.admin
   aliases:
     - spectate
   description: Moderator spectate

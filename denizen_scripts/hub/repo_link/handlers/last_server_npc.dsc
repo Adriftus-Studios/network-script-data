@@ -23,7 +23,7 @@ last_server_npc:
     - flag <player> adriftus.last_server.armor_stand2:<entry[ent2].faked_entity>
       
     on exit proximity:
-    - if <player.has_flag[adriftus.last_server.armor_stand]>:
+    - if <player.has_flag[adriftus.last_server]>:
       - fakespawn <player.flag[adriftus.last_server.armor_stand1]> cancel players:<player>
       - fakespawn <player.flag[adriftus.last_server.armor_stand2]> cancel players:<player>
 

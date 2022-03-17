@@ -1,11 +1,12 @@
 get_player_display_name:
   type: procedure
   debug: false
+  definitions: player
   script:
-    - if <yaml.list.contains[global.player.<player.uuid>]>:
-      - if <yaml[global.player.<player.uuid>].contains[masks.current]>:
-        - determine <yaml[global.player.<player.uuid>].read[masks.current.display_name]>
-      - else:
-        - determine <player.name>
+    - define player <player> if:<[player].exists.not>
+    - if <server.has_flag[player_map.uuids.<[player].uuid>.display_name]>:
+      - determine <server.flag[player_map.uuids.<[player].uuid>.display_name]>
+    - else if <server.has_flag[player_map.uuids.<[player].uuid>.name]>:
+      - determine <server.flag[player_map.uuids.<[player].uuid>.name]>
     - else:
-      - determine <player.name>
+      - determine <[player].name>

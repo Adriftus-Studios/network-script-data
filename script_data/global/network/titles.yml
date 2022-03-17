@@ -1639,3 +1639,8 @@ titles:
     tag: '<element[Syn].rainbow>'
     description: '<element[Welcome to the Synternet!].rainbow>'
     in_shop: false
+  Mind_Goblin:
+    order: 270
+    tag: '&8｜&2Mind Goblin&8｜'
+    description: Sounds like Devin...
+    in_shop: false

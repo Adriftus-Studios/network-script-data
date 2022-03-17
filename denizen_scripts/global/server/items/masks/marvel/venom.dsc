@@ -1,0 +1,12 @@
+
+mask_marvel_venom:
+  type: data
+  display_data:
+    category: Marvel
+    material: black_glazed_terracotta
+    display_name: <&c>Marvel<&co> <&4>Venom
+    description: "<&4>We Are Venom..."
+  mask_data:
+    id: marvel_venom
+    display_name: <&4>Venom
+    skin_blob: ewogICJ0aW1lc3RhbXAiIDogMTY0NzUxMDY0NjU3MywKICAicHJvZmlsZUlkIiA6ICI2MzQxNmVlYWMyYWI0MzFlOWFlZWFjYzI0Zjg4ZGM3NSIsCiAgInByb2ZpbGVOYW1lIiA6ICJEYXJnZWJfWXQiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTA2OWExZGZjYjMyZWYzOGVhZGE5YWQyMmNmZDgxNGVjZDUzZTEwYTAxNTEyM2E5OGQ0OTBjZjkwOTQyZWY3MSIKICAgIH0KICB9Cn0=;PXmCp3flKPF52U2WuLWi/1uUi4sizcnRmLugP2htrDpHPWETCfQ9Q6IqT3ZXHH28zQotv8oz/2jZ/anWSU6GCMh5j4I0F/2fG7p1O3TXrsQV4n7LoFfiyglygCjtfSYET8XQWOQmEm/uTzASs/5EPASFW/3CR4//d/gaa2aByjyW1PsT5QZcvzTytWQTKJkOYhjV2nE+u7HTES2Hv+Zg5OxZ/Axkc1OR+TKNkmv34hUEk1XpmGhdRDqcQ3kjqsylFdI4jU2wlnTKsAZEQ70PqZyduNK40KOYFIw/FO/wdSKmWfcElEwj2CxSNYUcc5Jymr7sOhrYgYcdrc/WAEktZgaBT7gANkCD8Ya7gqZ3OpBGA3fp6hOCzBSh/0EIgupgfp/pv8nurspN9pYUR39XfaJXDwzqzoGF8Y5oFABvHWwjiPfOTmGGSqE/b3NM+HM6RZYdDuFMI8V8R94GQTBwJoxPS3d79bLNZSuGlC8sI+8NEaC9rS+PL1yz5mA+WcL1sUtRb+YVj6iak0pR38AX6YxTsR2M2vOACTu6dT0FNJJh6mwldI33ofDc9DBc9ugTiu7E4B+nym0hg1uCviKR6iEoyroywVSqCn4jGbzLQFB4sgbsJk8mvm8CdjvRIM4sfSKthTr2X/ywWvZfJYLQqASk8yxrp8+DgigyAnwJJE0=

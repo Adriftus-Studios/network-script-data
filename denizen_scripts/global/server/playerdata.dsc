@@ -46,6 +46,26 @@ network_map_handler:
       - flag server player_map.uuids.<context.uuid>:!
       - flag server player_map.names.<context.name>:!
 
+network_map_update_name:
+  type: task
+  debug: false
+  definitions: uuid|name|forward
+  script:
+    - define forward true if:<[forward].exists.not>
+    - define old_name <server.flag[player_map.uuids.<[uuid]>.name]>
+    - define server <server.flag[player_map.uuids.<[uuid]>.server]>
+    - define stripped_name <[name].strip_color.replace[<&sp>].with[_]>
+    - flag server player_map.names.<[old_name]>:!
+    - flag server player_map.uuids.<[uuid]>.name:<[stripped_name]>
+    - flag server player_map.uuids.<[uuid]>.display_name:<[name]>
+    - flag server server_map.<[server]>.<[uuid]>:<[stripped_name]>
+    - flag server player_map.names.<[stripped_name]>.uuid:<[uuid]>
+    - flag server player_map.names.<[stripped_name]>.server:<[server]>
+    - flag server player_map.names.<[stripped_name]>.display_name:<[name]>
+    - if <[forward]>:
+      - bungeerun <bungee.list_servers.exclude[relay]> network_map_update_name def:<[uuid]>|<[name]>|false
+    
+
 player_data_quit_event:
   type: task
   debug: false
@@ -111,6 +131,20 @@ global_player_data_modify_multiple_single:
     - foreach <[map]> key:node as:value:
       - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
 
+## Specific Usage - USE "bungee_send_message" INSTEAD
+global_player_data_message_history:
+  type: task
+  debug: false
+  definitions: uuid|message_map
+  script:
+    - yaml id:global.player.<[uuid]> set chat.message.history:|:<[message_map]> if:<yaml.list.contains[global.player.<[uuid]>]>
+    - if <yaml[global.player.<[uuid]>].read[chat.message.history].size> > 30:
+      - yaml id:global.player.<[uuid]> set chat.message.history:!|:<yaml[global.player.<[uuid]>].read[chat.message.history].remove[first]>
+    - if <bungee.server> != hub:
+      - bungeerun hub global_player_data_message_history def:<[uuid]>|<[message_map]>
+    - else:
+      - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
+
 ## External Usage
 global_player_data_modify:
   type: task
@@ -130,8 +164,8 @@ global_player_data_modify:
         - yaml id:global.player.<[uuid]> unload
     - else:
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
-      - if <[forward]||false> && <server.has_flag[player_map.<[uuid]>.server]>:
-        - bungeerun <server.flag[player_map.<[uuid]>.server]> global_player_data_modify_single def:<[uuid]>|<[node]>|<[value]>
+      - if <[forward]||false> && <server.has_flag[player_map.uuids.<[uuid]>.server]>:
+        - bungeerun <server.flag[player_map.uuids.<[uuid]>.server]> global_player_data_modify_single def:<[uuid]>|<[node]>|<[value]>
 
 ## External Usage
 global_player_data_modify_multiple:
@@ -155,5 +189,5 @@ global_player_data_modify_multiple:
         - yaml id:global.player.<[uuid]> unload
     - else:
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
-      - if <[forward]||false> && <server.has_flag[player_map.<[uuid]>.server]>:
-        - bungeerun <server.flag[player_map.<[uuid]>.server]> global_player_data_modify_multiple def:<[uuid]>|<[map]>
+      - if <[forward]||false> && <server.has_flag[player_map.uuids.<[uuid]>.server]>:
+        - bungeerun <server.flag[player_map.uuids.<[uuid]>.server]> global_player_data_modify_multiple_single def:<[uuid]>|<[map]>

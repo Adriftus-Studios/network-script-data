@@ -14,6 +14,9 @@ portal_config:
     saved_location: <&a>You have saved this location as <&b><context.args.get[2]>
     no_room: <&c>There is not enough room for a portal.
     unsafe_destination: <&c>Unsafe Destination
+    removed_location: <&c>Saved location removed
+    no_saved_with_name: <&c>Unknown save location
+    bad_duration: <&c>Bad Duration Specified
   types:
     dtd:
       particle: squid_ink
@@ -58,11 +61,19 @@ dtd_command:
   allowed help:
   - determine <player.has_permission[adriftus.staff]>
   tab completions:
-    1: save|forward_portal|backward_portal
+    1: save|remove|forward_portal|backward_portal
     2: <list[coordinates].include[<yaml[global.player.<player.uuid>].read[dtd.locations].keys||<list[]>>].include[<server.online_players.parse[name]>]>
   script:
     ## Arg1 = Portal
     - if <context.args.get[1].advanced_matches_text[*_portal]>:
+      - if <context.args.last.starts_with[duration<&co>]>:
+        - if <duration[<context.args.last.after[<&co>]>].exists>:
+          - define duration <util.time_now.add[<context.args.last.after[<&co>]>]>
+        - else:
+          - narrate <script[portal_config].parsed_key[messages.bad_duration]>
+          - stop
+      - else:
+        - define duration <util.time_now.add[10s]>
       - if <context.args.size> <= 1:
         - narrate <script[portal_config].parsed_key[messages.not_enough_arguments]>
         - stop
@@ -75,14 +86,14 @@ dtd_command:
           - if !<[value].is_decimal>:
             - narrate <script[portal_config].parsed_key[messages.bad_arguments]>
             - stop
-        - run open_portal def:dtd|<context.args.get[1].before[_]>|<location[<context.args.get[3].to[5].separated_by[,]>,<player.location.world.name>]>
+        - run open_portal def:dtd|<context.args.get[1].before[_]>|<location[<context.args.get[3].to[5].separated_by[,]>,<player.location.world.name>]>|<[duration]>
         - stop
       ## Arg2 = Saved Location
       - if <yaml[global.player.<player.uuid>].contains[dtd.locations.<context.args.get[2]>]>:
-        - run open_portal def:dtd|<context.args.get[1].before[_]>|<yaml[global.player.<player.uuid>].read[dtd.locations.<context.args.get[2]>.location]>|<yaml[global.player.<player.uuid>].read[dtd.locations.<context.args.get[2]>.server]>
+        - run open_portal def:dtd|<context.args.get[1].before[_]>|<yaml[global.player.<player.uuid>].read[dtd.locations.<context.args.get[2]>.location]>|<[duration]>|<yaml[global.player.<player.uuid>].read[dtd.locations.<context.args.get[2]>.server]>
       ## Arg2 = Player
       - if <server.match_player[<context.args.get[2]>].exists>:
-        - run open_portal def:dtd|<context.args.get[1].before[_]>|<server.match_player[<context.args.get[2]>].location>
+        - run open_portal def:dtd|<context.args.get[1].before[_]>|<server.match_player[<context.args.get[2]>].location>|<[duration]>
     ## Arg1 = save
     - else if <context.args.get[1]> == save:
       - if <context.args.size> <= 1:
@@ -94,13 +105,26 @@ dtd_command:
       - define map <map[dtd.locations.<context.args.get[2]>.location=<player.location>;dtd.locations.<context.args.get[2]>.server=<bungee.server>]>
       - run global_player_data_modify_multiple def:<player.uuid>|<[map]>
       - narrate <script[portal_config].parsed_key[messages.saved_location]>
+    ## Arg1 = remove
+    - else if <context.args.get[1]> == remove:
+      - if <context.args.size> <= 1:
+        - narrate <script[portal_config].parsed_key[messages.not_enough_arguments]>
+        - stop
+      - if !<context.args.get[2].to_lowercase.matches_character_set[abcdefghijklmnopqrstuvwxyz_]>:
+        - narrate <script[portal_config].parsed_key[messages.bad_arguments]>
+        - stop
+      - if !<yaml[global.player.<player.uuid>].contains[dtd.locations.<context.args.get[2]>]>:
+        - narrate <script[portal_config].parsed_key[messages.no_saved_with_name]>
+        - stop
+      - run global_player_data_modify def:<player.uuid>|dtd.locations.<context.args.get[2]>|!
+      - narrate <script[portal_config].parsed_key[messages.removed_location]>
     - else:
         - narrate <script[portal_config].parsed_key[messages.bad_arguments]>
 
 open_portal:
   type: task
   debug: false
-  definitions: type|direction|destination|server
+  definitions: type|direction|destination|duration|server
   script:
     - define particle <script[portal_config].parsed_key[types.<[type]>.particle]>
     - define particle_quantity <script[portal_config].parsed_key[types.<[type]>.particle_quantity]>
@@ -170,31 +194,40 @@ open_portal:
     - flag <[target].above> destination.location:<[destination]>
     - define offset <[offset].mul[2]>
     - define quantity2 <[particle_quantity].div[2]>
+    - runlater portal_close delay:<[duration].from_now> def:<[target]>|<[old_block1]>|<[old_block2]>
     - if <[use_velocity]>:
-      - repeat 100:
+      - while <util.time_now.is_after[<[duration]>].not>:
         - define players1 <[target].find_players_within[96]>
         - define players2 <[destination].find_players_within[96]>
-        - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
-        - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
-        - playeffect at:<[destination].center> effect:<[particle]> quantity:<[quantity2]> velocity:<[velocity]> offset:<[offset]> targets:<[players2]>
-        - playeffect at:<[destination].above.center> effect:<[particle]> quantity:<[quantity2]> velocity:<[velocity]> offset:<[offset]> targets:<[players2]>
-        - wait 2t
+        - repeat 10:
+          - if !<[players1].is_empty>:
+            - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
+            - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
+          - if !<[players2].is_empty>:
+            - playeffect at:<[destination].center> effect:<[particle]> quantity:<[quantity2]> velocity:<[velocity]> offset:<[offset]> targets:<[players2]>
+            - playeffect at:<[destination].above.center> effect:<[particle]> quantity:<[quantity2]> velocity:<[velocity]> offset:<[offset]> targets:<[players2]>
+          - wait 2t
+          - define players1 <[players1].filter[is_online]>
+          - define players2 <[players2].filter[is_online]>
     - else:
-      - repeat 100:
+      - while <util.time_now.is_after[<[duration]>].not>:
         - define players1 <[target].find_players_within[96]>
         - define players2 <[destination].find_players_within[96]>
-        - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
-        - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
-        - playeffect at:<[destination].center> effect:<[particle]> quantity:<[quantity2]> offset:<[offset]> targets:<[players2]>
-        - playeffect at:<[destination].above.center> effect:<[particle]> quantity:<[quantity2]> offset:<[offset]> targets:<[players2]>
-        - wait 2t
-    - modifyblock <[target]> <[old_block1]>
-    - modifyblock <[target].above> <[old_block2]>
+        - repeat 10:
+          - if !<[players1].is_empty>:
+            - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
+            - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
+          - if !<[players2].is_empty>:
+            - playeffect at:<[destination].center> effect:<[particle]> quantity:<[quantity2]> offset:<[offset]> targets:<[players2]>
+            - playeffect at:<[destination].above.center> effect:<[particle]> quantity:<[quantity2]> offset:<[offset]> targets:<[players2]>
+          - wait 2t
+          - define players1 <[players1].filter[is_online]>
+          - define players2 <[players2].filter[is_online]>
 
 cross_server_portal:
   type: task
   debug: false
-  definitions: server|destination
+  definitions: server|destination|duration
   script:
     - define points <player.location.points_between[<[target].center.below[0.5]>].distance[0.2]>
     - if <[use_velocity]>:
@@ -235,31 +268,59 @@ cross_server_portal:
     - flag <[target].above> destination.server:<[server]>
     - define offset <[offset].mul[2]>
     - define quantity2 <[particle_quantity].div[2]>
+    - bungeerun <[server]> cross_server_portal_destination def:<[destination]>|<[duration]>
+    - runlater portal_close delay:<[duration].from_now> def:<[target]>|<[old_block1]>|<[old_block2]>
     - if <[use_velocity]>:
-      - repeat 100:
+      - while <util.time_now.is_after[<[duration]>].not>:
         - define players1 <[target].find_players_within[96]>
-        - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
-        - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
-        - wait 2t
+        - if !<[players1].is_empty>:
+          - repeat 10:
+            - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
+            - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
+            - wait 2t
+            - define players1 <[players1].filter[is_online]>
+        - else:
+          - wait 1s
     - else:
-      - repeat 100:
+      - while <util.time_now.is_after[<[duration]>].not>:
         - define players1 <[target].find_players_within[96]>
-        - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
-        - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
-        - wait 2t
+        - if !<[players1].is_empty>:
+          - repeat 10:
+            - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
+            - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
+            - wait 2t
+            - define players1 <[players1].filter[is_online]>
+        - else:
+          - wait 1s
+
+portal_close:
+  type: task
+  debug: false
+  definitions: target|old_block1|old_block2
+  script:
+    - if !<[target].chunk.is_loaded>:
+      - chunkload <[target].chunk> duration:10s
+      - wait 1t
     - modifyblock <[target]> <[old_block1]>
     - modifyblock <[target].above> <[old_block2]>
-    - flag <[target]> destination:!
-    - flag <[target].above> destination:!
+    - flag <[target]> destination.location:!
+    - flag <[target].above> destination.location:!
 
 cross_server_portal_destination:
   type: task
   debug: false
-  definitions: location
+  definitions: location|duration
   script:
     - if !<[location].chunk.is_loaded>:
       - chunkload <[location]> duration:11s
       - wait 1t
-    - repeat 100:
-        - playeffect at:<[location].center> effect:squid_ink quantity:15 velocity:0,0.1,0 offset:0.7
-        - playeffect at:<[location].above.center> effect:squid_ink quantity:15 velocity:0,0.1,0 offset:0.7
+    - while <util.time_now.is_after[<[duration]>].not>:
+        - define players1 <[location].find_players_within[96]>
+        - if !<[players1].is_empty>:
+          - repeat 10:
+            - playeffect at:<[location].center> effect:squid_ink quantity:15 velocity:0,0.1,0 offset:0.7 targets:<[players1]>
+            - playeffect at:<[location].above.center> effect:squid_ink quantity:15 velocity:0,0.1,0 offset:0.7 targets:<[players1]>
+            - wait 2t
+            - define players1 <[players1].filter[is_online]>
+        - else:
+          - wait 1s

@@ -11,6 +11,8 @@ gateway_teleport:
           - bungeerun <[gateway].flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<[gateway].flag[destination.location]>
           - wait 1t
           - adjust <player> send_to:<[gateway].flag[destination.server]>
+          - wait 1t
+          - adjust <player> location:<player.location.backward>
           - stop
         - wait 1t
         - adjust <player> fall_distance:0
