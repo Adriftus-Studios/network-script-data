@@ -8,8 +8,8 @@ mod_ban_inv:
   size: 54
   definitions:
     x: <item[standard_filler]>
-    b1: <item[yellow_stained_glass_pane].with[display_name=<&r>]>
-    b2: <item[orange_stained_glass_pane].with[display_name=<&r>]>
+    b1: <item[yellow_stained_glass_pane].with[display_name=<&sp>]>
+    b2: <item[orange_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
@@ -17,8 +17,8 @@ mod_ban_inv:
     - [x] [x] [] [x] [] [x] [] [x] [x]
     - [x] [] [] [x] [] [x] [] [] [x]
     - [x] [x] [] [x] [] [x] [] [x] [x]
-    - [] [] [] [] [] [] [] [] []
-    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [back]
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [b2] [b1] [b2] [back] [head] [back] [b2] [b1] [b2]
 
 mod_ban_inv_events:
   type: world

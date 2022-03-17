@@ -8,14 +8,14 @@ mod_send_inv:
   size: 27
   definitions:
     x: <item[standard_filler]>
-    b1: <item[magenta_stained_glass_pane].with[display_name=<&r>]>
-    b2: <item[purple_stained_glass_pane].with[display_name=<&r>]>
+    b1: <item[magenta_stained_glass_pane].with[display_name=<&sp>]>
+    b2: <item[purple_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
     - [b2] [b1] [b1] [b2] [b1] [b2] [b1] [b1] [b2]
     - [x] [] [] [] [] [] [] [] [x]
-    - [back] [b2] [b1] [b2] [head] [b2] [b1] [b2] [back]
+    - [b1] [b2] [b1] [back] [head] [back] [b1] [b2] [b1]
 
 mod_send_inv_events:
   type: world
