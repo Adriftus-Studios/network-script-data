@@ -46,6 +46,24 @@ network_map_handler:
       - flag server player_map.uuids.<context.uuid>:!
       - flag server player_map.names.<context.name>:!
 
+network_map_update_name:
+  type: task
+  debug: false
+  definitions: uuid|name|forward
+  script:
+    - define forward true if:<[forward].exists.not>
+    - define old_name <server.flag[player_map.uuids.<[uuid]>.name]>
+    - define server <server.flag[player_map.uuids.<[uuid]>.server]>
+    - define name <[name].strip_color>
+    - flag server player_map.names.<[old_name]>:!
+    - flag server player_map.uuids.<[uuid]>.name:<[name]>
+    - flag server server_map.<[server]>.<[uuid]>:<[name]>
+    - flag server player_map.names.<[name]>.uuid:<[uuid]>
+    - flag server player_map.names.<[name]>.server:<[server]>
+    - if <[forward]>:
+      - bungeerun <bungee.list_servers.exclude[relay]> network_map_update_name def:<[uuid]>|<[name]>|false
+    
+
 player_data_quit_event:
   type: task
   debug: false
