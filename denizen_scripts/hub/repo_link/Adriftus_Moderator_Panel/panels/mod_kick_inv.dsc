@@ -29,6 +29,7 @@ mod_kick_inv_events:
       - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[INFRACTION]>|Kick
       - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
       - kick <player.flag[amp_map].as_map.get[uuid].as_player> reason:<proc[mod_kick_message].context[<player.uuid>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>]>
+      - inventory close
 
 mod_kick_inv_open:
   type: task
