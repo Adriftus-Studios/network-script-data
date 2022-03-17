@@ -7,9 +7,9 @@ mod_kick_inv:
   gui: true
   size: 54
   definitions:
-    x: <item[standard_filler]>
-    b1: <item[lime_stained_glass_pane].with[display_name=<&r>]>
-    b2: <item[green_stained_glass_pane].with[display_name=<&r>]>
+    x: <item[standard_filler].with[display_name=<&sp>]>
+    b1: <item[lime_stained_glass_pane].with[display_name=<&sp>]>
+    b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
@@ -17,8 +17,8 @@ mod_kick_inv:
     - [x] [x] [] [x] [] [x] [] [x] [x]
     - [x] [] [x] [x] [] [x] [x] [] [x]
     - [x] [] [] [] [x] [] [] [] [x]
-    - [] [] [] [] [] [] [] [] []
-    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [back]
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [b2] [b1] [b2] [back] [head] [back] [b2] [b1] [b2]
 
 mod_kick_inv_events:
   type: world
@@ -29,6 +29,7 @@ mod_kick_inv_events:
       - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[INFRACTION]>|Kick
       - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
       - kick <player.flag[amp_map].as_map.get[uuid].as_player> reason:<proc[mod_kick_message].context[<player.uuid>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>]>
+      - inventory close
 
 mod_kick_inv_open:
   type: task

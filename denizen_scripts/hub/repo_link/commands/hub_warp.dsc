@@ -54,7 +54,7 @@ hub_warp_to:
             - teleport <[player]> hub_warp_<[warpName]>
             - playsound <[player]> sound:ENTITY_ENDERMAN_TELEPORT
             - playeffect effect:PORTAL at:<player.location> visibility:500 quantity:500 offset:1.0
-            - actionbar "<proc[reverse_color_gradient].context[Teleporting to <[warpName]>|#6DD5FA|#FFFFFF]>"
+            - actionbar "<proc[reverse_color_gradient].context[Teleporting to <[warpName].to_titlecase>|#6DD5FA|#FFFFFF]>"
         - else:
             - narrate "Invalid warp name"
 
@@ -77,7 +77,7 @@ hub_warp_crates_icon:
   mechanisms:
     custom_model_data: 3
   lore:
-    - <&r><&7>Try your luck in in some loot crates!
+    - <&r><&7>Try your luck at some loot crates!
     - <&r><&7>Lots of prizes available including
     - <&r><&7>cosmetics and more!
     - <&r>
@@ -93,7 +93,7 @@ hub_warp_spawn_icon:
   mechanisms:
     custom_model_data: 3
   lore:
-    - <&r><&7>This is where you're journey begins!
+    - <&r><&7>This is where your journey begins!
     - <&r><&7>Teleports you back to the spawn in
     - <&r><&7>the hub!
     - <&r>
@@ -111,7 +111,7 @@ hub_warp_towny_icon:
   lore:
     - <&r><&7>Join us in the world's greatest Towny server!
     - <&r><&7>A truly custom experience, fit only
-    - <&r><&7>for the strongest of towny players!
+    - <&r><&7>for the strongest of Towny players!
     - <&r>
     - <&r><element[➤ Click to Warp].color_gradient[from=#dab92f;to=#fee98f]>
 
