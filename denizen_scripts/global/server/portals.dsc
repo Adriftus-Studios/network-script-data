@@ -200,21 +200,29 @@ open_portal:
         - define players1 <[target].find_players_within[96]>
         - define players2 <[destination].find_players_within[96]>
         - repeat 10:
-          - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
-          - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
-          - playeffect at:<[destination].center> effect:<[particle]> quantity:<[quantity2]> velocity:<[velocity]> offset:<[offset]> targets:<[players2]>
-          - playeffect at:<[destination].above.center> effect:<[particle]> quantity:<[quantity2]> velocity:<[velocity]> offset:<[offset]> targets:<[players2]>
+          - if !<[players1].is_empty>:
+            - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
+            - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
+          - if !<[players2].is_empty>:
+            - playeffect at:<[destination].center> effect:<[particle]> quantity:<[quantity2]> velocity:<[velocity]> offset:<[offset]> targets:<[players2]>
+            - playeffect at:<[destination].above.center> effect:<[particle]> quantity:<[quantity2]> velocity:<[velocity]> offset:<[offset]> targets:<[players2]>
           - wait 2t
+          - define players1 <[players1].filter[is_online]>
+          - define players2 <[players2].filter[is_online]>
     - else:
       - while <util.time_now.is_after[<[duration]>].not>:
         - define players1 <[target].find_players_within[96]>
         - define players2 <[destination].find_players_within[96]>
         - repeat 10:
-          - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
-          - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
-          - playeffect at:<[destination].center> effect:<[particle]> quantity:<[quantity2]> offset:<[offset]> targets:<[players2]>
-          - playeffect at:<[destination].above.center> effect:<[particle]> quantity:<[quantity2]> offset:<[offset]> targets:<[players2]>
+          - if !<[players1].is_empty>:
+            - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
+            - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
+          - if !<[players2].is_empty>:
+            - playeffect at:<[destination].center> effect:<[particle]> quantity:<[quantity2]> offset:<[offset]> targets:<[players2]>
+            - playeffect at:<[destination].above.center> effect:<[particle]> quantity:<[quantity2]> offset:<[offset]> targets:<[players2]>
           - wait 2t
+          - define players1 <[players1].filter[is_online]>
+          - define players2 <[players2].filter[is_online]>
 
 cross_server_portal:
   type: task
@@ -265,17 +273,25 @@ cross_server_portal:
     - if <[use_velocity]>:
       - while <util.time_now.is_after[<[duration]>].not>:
         - define players1 <[target].find_players_within[96]>
-        - repeat 10:
-          - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
-          - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
-          - wait 2t
+        - if !<[players1].is_empty>:
+          - repeat 10:
+            - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
+            - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> velocity:<[velocity]> offset:<[offset]> targets:<[players1]>
+            - wait 2t
+            - define players1 <[players1].filter[is_online]>
+        - else:
+          - wait 1s
     - else:
       - while <util.time_now.is_after[<[duration]>].not>:
         - define players1 <[target].find_players_within[96]>
-        - repeat 10:
-          - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
-          - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
-          - wait 2t
+        - if !<[players1].is_empty>:
+          - repeat 10:
+            - playeffect at:<[target].center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
+            - playeffect at:<[target].above.center> effect:<[particle]> quantity:<[particle_quantity]> offset:<[offset]> targets:<[players1]>
+            - wait 2t
+            - define players1 <[players1].filter[is_online]>
+        - else:
+          - wait 1s
 
 portal_close:
   type: task
@@ -300,7 +316,11 @@ cross_server_portal_destination:
       - wait 1t
     - while <util.time_now.is_after[<[duration]>].not>:
         - define players1 <[location].find_players_within[96]>
-        - repeat 10:
-          - playeffect at:<[location].center> effect:squid_ink quantity:15 velocity:0,0.1,0 offset:0.7
-          - playeffect at:<[location].above.center> effect:squid_ink quantity:15 velocity:0,0.1,0 offset:0.7
-          - wait 2t
+        - if !<[players1].is_empty>:
+          - repeat 10:
+            - playeffect at:<[location].center> effect:squid_ink quantity:15 velocity:0,0.1,0 offset:0.7 targets:<[players1]>
+            - playeffect at:<[location].above.center> effect:squid_ink quantity:15 velocity:0,0.1,0 offset:0.7 targets:<[players1]>
+            - wait 2t
+            - define players1 <[players1].filter[is_online]>
+        - else:
+          - wait 1s
