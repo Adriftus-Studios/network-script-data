@@ -3,12 +3,20 @@ chat_system_events:
   debug: false
   events:
     on player chats bukkit_priority:LOWEST:
+      - inject chat_system_speak
+
+chat_system_speak:
+  type: task
+  debug: false
+  definitions: message
+  script:
+      - define message <context.message> if:<[message].exists.not>
       - determine passively cancelled
       - waituntil rate:1s <bungee.connected>
       - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current]||server>
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
-      - define msg <context.message>
+      - define msg <[message]>
       - define msg <[msg].replace_text[|].with[]>
 
       # Check for Chat Lock
@@ -64,7 +72,7 @@ chat_system_events:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
         - bungeerun <[Servers]> chat_send_message def:<[channel]>|<[message]>|<[uuid]>|<[sender]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
-          - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>]>
+          - bungeerun relay chat_send_message def:<list_single[<[message]>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>]>
       - run chat_history_save def:<[channel]>|<[message]>|<[uuid]>|<[sender]>
 
 chat_history_save:
@@ -161,13 +169,13 @@ chatlock_task:
       - define border <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
       - define message "<&c>You have been chat locked for the above message. You are restricted to speaking in the <&b>Anarchy<&c> channel only."
       - define chatlock_notification <[border]><&nl><&nl><[message_map].get[message]><&nl><&nl><[message]><&nl><[border]>
-      - run bungee_send_message def:<[uuid]>|<[chatlock_notification]>
+      - run bungee_send_message def:<[uuid]>|system|<[chatlock_notification]>
       - inject chat_interact_cancel
       - narrate "<&a>Player <&b><server.flag[player_map.uuids.<[uuid]>.name]> <&a>has been Chat Locked."
     - else:
       - run global_player_data_modify def:<[uuid]>|chat.locked|true
       - define message "<&c>You have been chat locked. You are restricted to speaking in <&b>Anarchy<&c> channel only."
-      - run bungee_send_message def:<[uuid]>|<[message]>
+      - run bungee_send_message def:<[uuid]>|system|<[message]>
       - narrate "<&a>Player <&b><[uuid]> <&a>has been Chat Locked."
 
 chat_command:
@@ -219,7 +227,7 @@ chat_command:
       - foreach <[sorted_list].filter[contains[time]]> as:Message:
         - if <[message].get[time]||null> == null:
           - narrate <[message]>
-      
+
 
 chat_interact:
   type: task
@@ -390,23 +398,34 @@ message_command:
   type: command
   name: msg
   usage: /msg (player) (message)
+  aliases:
+    - reply
   description: Message another player
   tab completions:
     1: <server.flag[player_map.names].keys>
   script:
-    - if !<server.has_flag[player_map.names.<context.args.get[1]>]>:
-      - narrate "<&c>Unknown Player<&co> <&e><context.args.get[1]>"
+    - if <context.alias> == reply:
+      - if <yaml[global.player.<player.uuid>].contains[chat.last_message.sender]>:
+        - define target_name <yaml[global.player.<player.uuid>].read[chat.last_message.sender]>
+      - else:
+        - narrate "<&c>No one has messaged you recently."
+        - stop
+    - else:
+      - if <context.args.size> <= 1:
+         - narrate "<&c>You need to include a player and a message!"
+         - stop
+      - define target_name <context.args.get[1]>
+    - if !<server.has_flag[player_map.names.<[target_name]>]>:
+      - narrate "<&c>Unknown Player<&co> <&e><[target_name]>"
       - stop
-    - if <context.args.size> <= 1:
-       - narrate "<&c>You need to include a player and a message!"
-       - stop
-    - if <server.flag[player_map.names.<context.args.get[1]>.uuid]> == <player.uuid>:
+    - if <server.flag[player_map.names.<[target_name]>.uuid]> == <player.uuid>:
       - narrate "<&c>You can't message yourself..."
       - stop
     # definitions
     - define msg <context.args.get[2].to[last].separated_by[<&sp>]>
+    - define sender <proc[get_player_display_name].strip_color.replace[<&sp>].with[_]>
     - define self_name <proc[get_player_display_name]>
-    - define other_name <proc[get_player_display_name].context[<player[<server.flag[player_map.names.<context.args.get[1]>.uuid]>]>]>
+    - define other_name <proc[get_player_display_name].context[<player[<server.flag[player_map.names.<[target_name]>.uuid]>]>]>
 
     # Allow Chat Colors in Chat
     - if <player.has_permission[adriftus.chat.color]>:
@@ -425,7 +444,7 @@ message_command:
     #- define WhisperTextMods "<&7><&lb>MSG<&rb><&r><proc[get_player_display_name]><&b>-<&gt><context.args.get[1].to_titlecase> "
 
     - define message "<element[<[WhisperTextOther]><&f><[msg]>].on_click[/msg <[self_name].strip_color.replace_text[<&sp>].with[_]> ].type[SUGGEST_COMMAND].on_hover[<&e>Click to Reply]>"
-    - run bungee_send_message def:<server.flag[player_map.names.<context.args.get[1]>.uuid]>|<[message]>|true
+    - run bungee_send_message def:<server.flag[player_map.names.<[target_name]>.uuid]>|<[sender]>|<[message]>|true
     - define message <[WhisperTextSelf]><&f><[msg]>
     - narrate <[message]>
     - define map <map[time=<server.current_time_millis>;message=<[message]>]>
