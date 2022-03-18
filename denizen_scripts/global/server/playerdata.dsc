@@ -55,6 +55,7 @@ network_map_update_name:
     - define old_name <server.flag[player_map.uuids.<[uuid]>.name]>
     - define server <server.flag[player_map.uuids.<[uuid]>.server]>
     - define stripped_name <[name].strip_color.replace[<&sp>].with[_]>
+    - define color <server.flag[player_map.uuids.<[uuid]>.name_color]> if:<server.has_flag[player_map.uuids.<[uuid]>.name_color]>
     - flag server player_map.names.<[old_name]>:!
     - flag server player_map.uuids.<[uuid]>.name:<[stripped_name]>
     - flag server player_map.uuids.<[uuid]>.display_name:<[name]>
@@ -62,9 +63,21 @@ network_map_update_name:
     - flag server player_map.names.<[stripped_name]>.uuid:<[uuid]>
     - flag server player_map.names.<[stripped_name]>.server:<[server]>
     - flag server player_map.names.<[stripped_name]>.display_name:<[name]>
+    - flag server player_map.names.<[stripped_name]>.name_color:<[color]> if:<[color].exists>
     - if <[forward]>:
       - bungeerun <bungee.list_servers.exclude[relay]> network_map_update_name def:<[uuid]>|<[name]>|false
-    
+
+network_map_update_name_color:
+  type: task
+  debug: false
+  definitions: uuid|color|forward
+  script:
+    - define forward true if:<[forward].exists.not>
+    - flag server player_map.uuids.<[uuid]>.name_color:<[color]>
+    - define name <server.flag[player_map.uuids.<[uuid]>.name]>
+    - flag server player_map.names.<[name]>.name_color:<[color]>
+    - if <[forward]>:
+      - bungeerun <bungee.list_servers.exclude[relay]> network_map_update_name_color def:<[uuid]>|<[color]>|false
 
 player_data_quit_event:
   type: task

@@ -8,7 +8,7 @@ channels:
     chat_lock_deny: true
     format: 
       channel: "<&7><&lb><server.flag[display_name]||<bungee.server>><&7><&rb> "
-      name: "<&7><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&f><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -30,7 +30,7 @@ channels:
     chat_lock_deny: true
     format:
       channel: "<&7>[<&a>PG<&7>] "
-      name: "<&7><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&f><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -53,7 +53,7 @@ channels:
     chat_lock_deny: true
     format:
       channel: "<&7>[<&6>PG-13<&7>] "
-      name: "<&7><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&f><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -76,7 +76,7 @@ channels:
     chat_lock_deny: false
     format:
       channel: "<&7>[<&4>Anarchy<&7>] "
-      name: "<&7><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&f><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -98,7 +98,7 @@ channels:
     permission: adriftus.staff
     format:
       channel: "<&7>[<&a>Staff<&7>] "
-      name: "<&7><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&a><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -120,7 +120,7 @@ channels:
     permission: adriftus.admin
     format:
       channel: "<&7>[<&4>Admin<&7>] "
-      name: "<&7><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&c><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -142,7 +142,7 @@ channels:
     permission: adriftus.developer
     format:
       channel: "<&7>[<&b>Dev<&7>] "
-      name: "<&7><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&f>: "
       message: "<&b><[msg]||<context.new_message.text_display>>"
     integrations:

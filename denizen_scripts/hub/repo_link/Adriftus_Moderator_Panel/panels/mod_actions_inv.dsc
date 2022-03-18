@@ -7,7 +7,7 @@ mod_actions_inv:
   gui: true
   size: 27
   definitions:
-    x: <item[standard_filler]>
+    x: <item[standard_filler].with[display_name=<&sp>]>
     b1: <item[light_blue_stained_glass_pane].with[display_name=<&sp>]>
     b2: <item[cyan_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:online]>
