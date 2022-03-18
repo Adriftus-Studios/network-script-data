@@ -8,7 +8,7 @@ promo_code_clownzer_task:
   type: task
   debug: false
   script:
-    - run title_unlock def:Synbreaker
+    - run titles_unlock def:Synbreaker
     - narrate <element[---------------------].rainbow>
     - narrate "<element[Clownzer, Breaker of Syn].rainbow>"
     - narrate <element[---------------------].rainbow>

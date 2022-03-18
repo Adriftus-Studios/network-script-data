@@ -8,7 +8,7 @@ promo_code_syntrocity_task:
   type: task
   debug: false
   script:
-    - run title_unlock def:Syntrocity
+    - run titles_unlock def:Syntrocity
     - execute as_server "lp user <player.name> permission set adriftus.anvil.color"
     - execute as_server "lp user <player.name> permission set adriftus.chat.color"
     - execute as_server "lp user <player.name> permission set adriftus.chat.link_item"
