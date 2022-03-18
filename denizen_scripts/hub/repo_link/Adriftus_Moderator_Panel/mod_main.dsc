@@ -7,7 +7,7 @@
 mod_command:
   type: command
   debug: false
-  permission: adriftus.staff
+  permission: adriftus.moderator
   name: mod
   description: Adriftus Moderator Panel
   usage: /mod (username)
@@ -64,7 +64,7 @@ mod_command:
 amp_command:
   type: command
   debug: false
-  permission: adriftus.staff
+  permission: adriftus.moderator
   name: amp
   description: Adriftus Moderator Panel
   usage: /amp
