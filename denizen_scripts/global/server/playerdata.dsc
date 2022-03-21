@@ -173,7 +173,7 @@ global_player_data_modify:
       - ~yaml id:global.player.<[uuid]> load:data/global/players/<[uuid]>.yml
       - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
-      - if !<server.has_flag[player_map.<[uuid]>.server]>:
+      - if !<server.has_flag[player_map.uuids.<[uuid]>.server]>:
         - yaml id:global.player.<[uuid]> unload
     - else:
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
@@ -198,7 +198,7 @@ global_player_data_modify_multiple:
       - foreach <[map]> key:node as:value:
         - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
-      - if !<server.has_flag[player_map.<[uuid]>.server]>:
+      - if !<server.has_flag[player_map.uuids.<[uuid]>.server]>:
         - yaml id:global.player.<[uuid]> unload
     - else:
       - ~yaml id:global.player.<[uuid]> savefile:data/global/players/<[uuid]>.yml
