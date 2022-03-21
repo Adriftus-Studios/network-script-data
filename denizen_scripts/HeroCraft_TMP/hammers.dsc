@@ -21,6 +21,7 @@ hammers_events:
     - bone_block
     - *brick*
     - calcite
+    - *sandstone*
   events:
     on player breaks block bukkit_priority:highest:
     - if <player.item_in_hand.enchantment_types.parse[name].contains[area_dig]>:
