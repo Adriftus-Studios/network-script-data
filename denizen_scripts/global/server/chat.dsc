@@ -24,6 +24,10 @@ chat_system_speak:
         - narrate "<&c>You are unable to speak in this channel, due to being chat locked."
         - stop
 
+      # Allow Items in Chat
+      - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
+        - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&r><&rb><&end_hover>]>
+
       # Allow Chat Colors in Chat
       - if <player.has_permission[adriftus.chat.color]>:
         # Custom Color Codes
@@ -33,10 +37,6 @@ chat_system_speak:
           - define msg <[msg].parse_color>
       - else:
         - define msg <[msg].parse_color.strip_color>
-
-      # Allow Items in Chat
-      - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
-        - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&r><&rb><&end_hover>]>
 
       # Sanitize
       #- define msg <[msg].replace_text[<&lb>].with[]>
