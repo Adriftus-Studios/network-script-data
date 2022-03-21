@@ -26,7 +26,11 @@ chat_system_speak:
 
       # Allow Chat Colors in Chat
       - if <player.has_permission[adriftus.chat.color]>:
-        - define msg <[msg].parse_color>
+        # Custom Color Codes
+        - if <[msg].starts_with[&z]>:
+          - define msg <[msg].substring[3].rainbow>
+        - else:
+          - define msg <[msg].parse_color>
       - else:
         - define msg <[msg].parse_color.strip_color>
 
