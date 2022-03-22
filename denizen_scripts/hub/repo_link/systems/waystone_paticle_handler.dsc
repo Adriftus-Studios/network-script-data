@@ -5,3 +5,10 @@ waystone_particle_handler:
     - while true:
       - playeffect <server.flag[hub_waystone_particles]> effect:ENCHANTMENT_TABLE data:2 quantity:20 offset:0 targets:<server.online_players>
       - wait 10t
+
+waystone_particle_starter:
+  type: world
+  debug: false
+  events:
+    on server start:
+      - run waystone_particle_handler
