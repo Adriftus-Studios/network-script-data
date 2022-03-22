@@ -46,9 +46,10 @@ mail_delivery_fail:
   debug: false
   definitions: player
   script:
-  - stop if:<player.has_flag[mail_delivery.current].not>
-  - actionbar "<&c>You ran out of time." targets:<player>
-  - define time_remaining <player.flag[mail_delivery.current.todo].values.sum>
+  - adjust <queue> linked_player:<[player]> if:<[player].exists>
+  - stop if:<[player].has_flag[mail_delivery.current].not>
+  - actionbar "<&c>You ran out of time." targets:<[player]>
+  - define time_remaining <[player].flag[mail_delivery.current.todo].values.sum>
   - narrate "<&c>You failed to deliver all of the mail in time, You had <[time_remaining]> left."
   - run mail_delivery_end def:<[player]>
 
@@ -57,10 +58,11 @@ mail_delivery_complete:
   debug: false
   definitions: player
   script:
-  - stop if:<player.has_flag[mail_delivery.current].not>
-  - define difficulty <player.flag[mail_delivery.current.difficulty]>
+  - adjust <queue> linked_player:<[player]> if:<[player].exists>
+  - stop if:<[player].has_flag[mail_delivery.current].not>
+  - define difficulty <[player].flag[mail_delivery.current.difficulty]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
-  - define time_remaining:<player.flag_expiration[mail_delivery.current.time].from_now.if_null[0s]>
+  - define time_remaining:<[player].flag_expiration[mail_delivery.current.time].from_now.if_null[0s]>
   - narrate "<&e>You delivered all the mail in <[time].sub[<[time_remaining]>].formatted_words>"
   - run mail_delivery_end def:<[player]>
 
@@ -69,12 +71,13 @@ mail_delivery_end:
   debug: false
   definitions: player
   script:
+  - adjust <queue> linked_player:<[player]> if:<[player].exists>
   # - stop if:<player.has_flag[mail_delivery.current].not>
   - inventory close player:<[player]>
   - wait 1t
-  - foreach <player.inventory.find_all_items[mail_delivery_mail_item]> as:slot:
-    - inventory set d:<player.inventory> slot:<[slot]> o:air
-  - flag <player> mail_delivery.current:!
+  - foreach <[player].inventory.find_all_items[mail_delivery_mail_item]> as:slot:
+    - inventory set d:<[player].inventory> slot:<[slot]> o:air
+  - flag <[player]> mail_delivery.current:!
 
 mail_delivery_events:
   type: world
