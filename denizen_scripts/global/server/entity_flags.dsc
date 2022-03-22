@@ -71,3 +71,7 @@ entity_flags:
           - flag server join_location:!
     on entity_flagged:on_entity_added added to world:
       - inject <context.entity.flag[on_entity_added]>
+    on entity_flagged:on_dismount exits vehicle:
+      - inject <context.entity.flag[on_dismount]>
+    on entity_flagged:on_mount exits vehicle:
+      - inject <context.entity.flag[on_mount]>
