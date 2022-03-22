@@ -27,7 +27,7 @@ gateway_teleport_bungee:
   definitions: uuid|location
   script:
     - flag server join_location.<[uuid]>:<[location]>
-  
+
 gateway_teleport_force:
   type: world
   debug: false
