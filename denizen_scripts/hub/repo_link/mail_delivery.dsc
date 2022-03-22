@@ -69,7 +69,7 @@ mail_delivery_end:
   debug: false
   definitions: player
   script:
-  - stop if:<player.has_flag[mail_delivery.current].not>
+  # - stop if:<player.has_flag[mail_delivery.current].not>
   - inventory close player:<[player]>
   - wait 1t
   - foreach <player.inventory.find_all_items[mail_delivery_mail_item]> as:slot:
