@@ -3,7 +3,7 @@ waystone_particle_handler:
   debug: false
   script:
     - while true:
-      - playeffect <server.flag[hub_waystone_particles]> effect:ENCHANTMENT_TABLE data:2 quantity:20 offset:0 targets:<server.online_players>
+      - playeffect <server.flag[hub_waystone_particles]> effect:ENCHANTMENT_TABLE data:2 quantity:20 offset:0 targets:<server.online_players> if:<server.online_players.is_empty.not>
       - wait 10t
 
 waystone_particle_starter:
