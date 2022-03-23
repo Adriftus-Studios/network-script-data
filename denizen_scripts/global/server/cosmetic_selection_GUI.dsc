@@ -62,6 +62,7 @@ cosmetic_selection_inventory_open:
   type: task
   debug: false
   definitions: type|page
+  gui: true
   data:
     slot_data:
       slots_used: 11|12|13|14|15|16|17|20|21|22|23|24|25|26|29|30|31|32|33|34|35
@@ -72,7 +73,7 @@ cosmetic_selection_inventory_open:
     masks:
       inventory_title: <&chr[F808]><&f><&chr[6912].font[adriftus:guis]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[masks.unlocked].if_null[<list>]>
-      material: <server.flag[masks.ids.<[cosmetic]>].data_key[display_data.material]>
+      material: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.material]>
       display_name: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.display_name]>
       description: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.description]>
       preview: "<&e>Disguised Name<&co> <&r><server.flag[masks.ids.<[cosmetic]>].parsed_key[mask_data.display_name]>"
