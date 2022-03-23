@@ -38,6 +38,8 @@ mask_wear_events:
       - if <yaml[global.player.<player.uuid>].contains[masks.current]>:
         - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[masks.current.skin_blob]>
         - adjust <player> name:<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
+        - if <yaml[global.player.<player.uuid>].contains[masks.current.attachment]>:
+          - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachment]>
         - run network_map_update_name def:<player.uuid>|<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
 
     on server start:
@@ -69,6 +71,8 @@ mask_wear:
       - run global_player_data_modify def:<player.uuid>|masks.current|<[script].parsed_key[mask_data]>
       - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[masks.current.skin_blob]>
       - adjust <player> name:<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
+      - if <yaml[global.player.<player.uuid>].contains[masks.current.attachment]>:
+        - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachment]>
       - run network_map_update_name def:<player.uuid>|<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
 
 mask_remove:
@@ -82,4 +86,19 @@ mask_remove:
     - run global_player_data_modify def:<player.uuid>|masks.current|!
     - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[defaults.skin_blob]>
     - adjust <player> name:<player.name>
+    - remove <player.passengers> if:<player.passenger.entity_type.equals[armor_stand].if_null[false]>
     - run network_map_update_name def:<player.uuid>|<player.name>
+
+mask_attachment:
+  type: task
+  debug: false
+  definitions: item
+  script:
+    - spawn armor_stand[marker=true;visible=false;equipment=air|air|air|<[item]>] <player.location> save:as
+    - mount <entry[as].spawned_entity>|<player>
+    - flag <entry[as].spawned_entity> on_dismount:cancel
+    - flag <entry[as].spawned_entity> on_entity_added:remove_this_entity
+    - while <player.is_online> && <player.passenger> == <entry[as].spawned_entity>:
+      - look <entry[as].spawned_entity> yaw:<player.location.yaw>
+      - wait 1t
+    - remove <entry[as].spawned_entity>
