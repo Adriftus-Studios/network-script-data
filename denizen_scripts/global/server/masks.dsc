@@ -102,4 +102,5 @@ mask_attachment:
     - while <player.is_online> && <player.passenger> == <entry[as].spawned_entity>:
       - look <entry[as].spawned_entity> yaw:<player.location.yaw>
       - wait 1t
+    - kill <entry[as].spawned_entity>
     - remove <entry[as].spawned_entity>
