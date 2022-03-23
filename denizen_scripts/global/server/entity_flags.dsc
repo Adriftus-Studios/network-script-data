@@ -75,3 +75,6 @@ entity_flags:
       - inject <context.entity.flag[on_dismount]>
     on entity_flagged:on_mount exits vehicle:
       - inject <context.entity.flag[on_mount]>
+    on player right clicks fake entity:
+      - stop if:<context.entity.has_flag[right_click_script].not>
+      - inject <context.entity.flag[right_click_script]>
