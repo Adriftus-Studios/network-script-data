@@ -114,14 +114,15 @@ cosmetic_selection_inventory_open:
     - define cosmetics <script.parsed_key[data.<[type]>.players_list]>
 
     # Build the cosmetic icons
-    - foreach <[cosmetics].get[<[start]>].to[<[end]>]> as:cosmetic:
-      - define material <script.parsed_key[data.<[type]>.material]>
-      - define display <script.parsed_key[data.<[type]>.display_name]>
-      - define preview <script.parsed_key[data.<[type]>.preview]>
-      - define description <script.parsed_key[data.<[type]>.description]>
-      - define equip_script <script.parsed_key[data.<[type]>.equip_task]>
-      - define lore <script[cosmetic_configuration].parsed_key[display_data.lore]>
-      - define items:|:<item[<[material]>].with[lore=<[lore]>;flag=run_script:<[equip_script]>;flag=cosmetic:<[cosmetic]>]>
+    - if !<[cosmetics].is_empty>:
+      - foreach <[cosmetics].get[<[start]>].to[<[end]>]> as:cosmetic:
+        - define material <script.parsed_key[data.<[type]>.material]>
+        - define display <script.parsed_key[data.<[type]>.display_name]>
+        - define preview <script.parsed_key[data.<[type]>.preview]>
+        - define description <script.parsed_key[data.<[type]>.description]>
+        - define equip_script <script.parsed_key[data.<[type]>.equip_task]>
+        - define lore <script[cosmetic_configuration].parsed_key[display_data.lore]>
+        - define items:|:<item[<[material]>].with[lore=<[lore]>;flag=run_script:<[equip_script]>;flag=cosmetic:<[cosmetic]>]>
     - define inventory <inventory[generic[title=<[title]>;size=54]]>
 
     # Put the items into the new inventory
