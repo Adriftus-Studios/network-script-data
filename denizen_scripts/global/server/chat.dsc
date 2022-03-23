@@ -36,7 +36,7 @@ chat_system_speak:
 
       # Allow Items in Chat
       - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
-        - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&end_hover>]>
+        - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&7><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&rb><&end_hover>]>
 
       # Sanitize
       #- define msg <[msg].replace_text[<&lb>].with[]>
