@@ -39,7 +39,7 @@ mail_delivery_start:
     - actionbar "<&e>Time Remaining: <&r><&e><&l><[time].sub[<duration[<[value]>s]>].formatted_words>" targets:<player>
     - wait 1s
     - stop if:<player.has_flag[mail_delivery.current].not>
-  - run mail_delivery_fail def:<[player]> if:<player.flag[mail_delivery.current.todo].values.sum.if_null[0].equals[0].not>
+  - run mail_delivery_fail def:<player> if:<player.flag[mail_delivery.current.todo].values.sum.if_null[0].equals[0].not>
 
 mail_delivery_fail:
   type: task
@@ -47,11 +47,11 @@ mail_delivery_fail:
   definitions: player
   script:
   - adjust <queue> linked_player:<[player]> if:<[player].exists>
-  - stop if:<[player].has_flag[mail_delivery.current].not>
-  - actionbar "<&c>You ran out of time." targets:<[player]>
-  - define time_remaining <[player].flag[mail_delivery.current.todo].values.sum>
+  - stop if:<player.has_flag[mail_delivery.current].not>
+  - actionbar "<&c>You ran out of time." targets:<player>
+  - define time_remaining <player.flag[mail_delivery.current.todo].values.sum>
   - narrate "<&c>You failed to deliver all of the mail in time, You had <[time_remaining]> left."
-  - run mail_delivery_end def:<[player]>
+  - run mail_delivery_end def:<player>
 
 mail_delivery_complete:
   type: task
@@ -59,12 +59,12 @@ mail_delivery_complete:
   definitions: player
   script:
   - adjust <queue> linked_player:<[player]> if:<[player].exists>
-  - stop if:<[player].has_flag[mail_delivery.current].not>
-  - define difficulty <[player].flag[mail_delivery.current.difficulty]>
+  - stop if:<player.has_flag[mail_delivery.current].not>
+  - define difficulty <player.flag[mail_delivery.current.difficulty]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
-  - define time_remaining:<[player].flag_expiration[mail_delivery.current.time].from_now.if_null[0s]>
+  - define time_remaining:<player.flag_expiration[mail_delivery.current.time].from_now.if_null[0s]>
   - narrate "<&e>You delivered all the mail in <[time].sub[<[time_remaining]>].formatted_words>"
-  - run mail_delivery_end def:<[player]>
+  - run mail_delivery_end def:<player>
 
 mail_delivery_end:
   type: task
@@ -73,11 +73,11 @@ mail_delivery_end:
   script:
   - adjust <queue> linked_player:<[player]> if:<[player].exists>
   # - stop if:<player.has_flag[mail_delivery.current].not>
-  - inventory close player:<[player]>
+  - inventory close player:<player>
   - wait 1t
-  - foreach <[player].inventory.find_all_items[mail_delivery_mail_item]> as:slot:
-    - inventory set d:<[player].inventory> slot:<[slot]> o:air
-  - flag <[player]> mail_delivery.current:!
+  - foreach <player.inventory.find_all_items[mail_delivery_mail_item]> as:slot:
+    - inventory set d:<player.inventory> slot:<[slot]> o:air
+  - flag <player> mail_delivery.current:!
 
 mail_delivery_events:
   type: world
@@ -141,3 +141,68 @@ mail_delivery_generate_item:
       - define item <[item].with[material=stripped_oak_wood]>
       - define item <[item].with[display_name=<&e>Container]>
   - determine <[item]>
+
+mail_delivery_menu_inventory:
+  type: inventory
+  inventory: chest
+  size: 45
+  gui: true
+  procedural items:
+  # TODO: program top 5 leaderboard for each difficulty.
+  - define items <list[]>
+  - foreach <list[easy|medium|hard]> as:d:
+    - repeat 5 as:number:
+      - if <server.has_flag[mail_delivery.leaderboard.<[d]>.<[number]>]>:
+        - define player <server.has_flag[mail_delivery.leaderboard.<[d]>.<[number]>]>
+      - else:
+        - define items:|:<item[player_head]>
+  - determine <[items]>
+  slots:
+  - [mail_delivery_icon_start_easy] [standard_filler] [standard_filler] [standard_filler] [] [] [] [] []
+  - [mail_delivery_icon_start_medium] [standard_filler] [standard_filler] [standard_filler] [] [] [] [] []
+  - [mail_delivery_icon_start_hard] [standard_filler] [standard_filler] [standard_filler] [] [] [] [] []
+  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [mail_delivery_icon_help] [standard_filler] [standard_filler] [standard_filler] [mail_delivery_icon_stop] [standard_filler] [standard_filler]
+
+mail_delivery_menu_events:
+  type: world
+  debug: false
+  events:
+    on player clicks item in mail_delivery_menu_inventory:
+    - determine passively cancelled
+    - stop if:<context.item.script.exists.not>
+    - choose <context.item.script.name>:
+      - case mail_delivery_icon_start_easy:
+        - inventory close
+        - run mail_delivery_start def:easy|<player>
+      - case mail_delivery_icon_start_medium:
+        - inventory close
+        - run mail_delivery_start def:medium|<player>
+      - case mail_delivery_icon_start_hard:
+        - inventory close
+        - run mail_delivery_start def:hard|<player>
+
+mail_delivery_icon_stop:
+  type: item
+  material: barrier
+  display name: TODO<&co> Forfeit ongoing session.
+
+mail_delivery_icon_help:
+  type: item
+  material: crafting_table
+  display name: TODO<&co> Minigame explanation.
+
+mail_delivery_icon_start_easy:
+  type: item
+  material: iron_ingot
+  display name: Start<&co> Easy
+
+mail_delivery_icon_start_medium:
+  type: item
+  material: gold_ingot
+  display name: Start<&co> Medium
+
+mail_delivery_icon_start_hard:
+  type: item
+  material: diamond
+  display name: Start<&co> Hard
