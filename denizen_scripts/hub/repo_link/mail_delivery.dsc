@@ -155,7 +155,7 @@ mail_delivery_menu_inventory:
   - [mail_delivery_icon_start_medium] [standard_filler] [standard_filler] [standard_filler] [] [] [] [] []
   - [mail_delivery_icon_start_hard] [standard_filler] [standard_filler] [standard_filler] [] [] [] [] []
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
+  - [standard_filler] [standard_filler] [mail_delivery_icon_help] [standard_filler] [standard_filler] [standard_filler] [mail_delivery_icon_stop] [standard_filler] [standard_filler]
 
 mail_delivery_menu_events:
   type: world
@@ -174,6 +174,16 @@ mail_delivery_menu_events:
       - case mail_delivery_icon_start_hard:
         - inventory close
         - run mail_delivery_start def:hard|<player>
+
+mail_delivery_icon_stop:
+  type: item
+  material: barrier
+  display name: TODO<&co> Forfeit ongoing session.
+
+mail_delivery_icon_help:
+  type: item
+  material: crafting_table
+  display name: TODO<&co> Minigame explanation.
 
 mail_delivery_icon_start_easy:
   type: item
