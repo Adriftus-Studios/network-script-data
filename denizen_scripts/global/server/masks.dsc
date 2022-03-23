@@ -99,7 +99,7 @@ mask_attachment:
     - mount <entry[as].spawned_entity>|<player>
     - flag <entry[as].spawned_entity> on_dismount:cancel
     - flag <entry[as].spawned_entity> on_entity_added:remove_this_entity
-    - while <player.is_online> && <player.passenger> == <entry[as].spawned_entity>:
+    - while <player.is_online> && <entry[as].spawned_entity.is_spawned>:
       - look <entry[as].spawned_entity> yaw:<player.location.yaw>
       - wait 1t
     - kill <entry[as].spawned_entity>
