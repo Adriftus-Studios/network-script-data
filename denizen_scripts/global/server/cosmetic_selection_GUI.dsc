@@ -135,7 +135,7 @@ cosmetic_selection_inventory_open:
       - define display "<&e>Unequip Cosmetic"
       - define lore "<&b>Left Click to Unequip|<&e>Current<&co> <&a><script.parsed_key[data.<[type]>.display_name]>"
       - define remove_script <script.parsed_key[data.<[type]>.remove_task]>
-      - define item <item[<[material]>[display=<[display]>;lore=<[lore]>;flag=run_script:<[remove_script]>;flag=page:<[page]>;flag=type:<[type]>]]>
+      - define item <item[<[material]>].with[display=<[display]>;lore=<[lore]>;flag=run_script:<[remove_script]>;flag=page:<[page]>;flag=type:<[type]>]>
     - else:
       - define item "barrier[display=<&e>No Cosmetic Equipped;flag=run_script:cancel;flag=page:<[page]>;flag=type:<[type]>]"
     - inventory set slot:<script.data_key[data.slot_data.remove_slot]> o:<[item]> d:<[inventory]>
