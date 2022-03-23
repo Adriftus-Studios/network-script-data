@@ -94,6 +94,7 @@ mask_attachment:
   debug: false
   definitions: item
   script:
+    - define item <item[<[item]>]> if:<[item].object_type.equals[ITEM].not>
     - spawn armor_stand[marker=true;visible=false;equipment=air|air|air|<[item]>] <player.location> save:as
     - mount <entry[as].spawned_entity>|<player>
     - flag <entry[as].spawned_entity> on_dismount:cancel
