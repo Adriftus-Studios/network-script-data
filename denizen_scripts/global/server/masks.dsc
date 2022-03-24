@@ -122,13 +122,13 @@ mask_loop:
       - define quantity <yaml[global.player.<player.uuid>].read[masks.current.particle.quantity]>
       - define offset <yaml[global.player.<player.uuid>].read[masks.current.particle.offset]>
     - if <[item]> && !<[particle]>:
-      - while <player.is_online> && <[armor_stand].is_spawned>:
+      - while <player.is_online> && && <yaml[global.player.<player.uuid>].read[masks.current.id]> == <[mask_id]>:
         - look <[armor_stand]> yaw:<player.location.yaw>
         - wait 1t
       - kill <[armor_stand]>
       - remove <[armor_stand]>
     - else if <[item]> && <[particle]>:
-      - while <player.is_online> && <[armor_stand].is_spawned>:
+      - while <player.is_online> && <yaml[global.player.<player.uuid>].read[masks.current.id]> == <[mask_id]>:
         - if <[loop_index].mod[<[rate]>]> == 0:
           - playeffect at:<player.location.above> effect:<[effect]> offset:<[offset]> quantity:<[quantity]>
         - look <[armor_stand]> yaw:<player.location.yaw>
