@@ -38,6 +38,7 @@ mask_wear_events:
       - if <yaml[global.player.<player.uuid>].contains[masks.current]>:
         - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[masks.current.skin_blob]>
         - adjust <player> name:<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
+        - define mask_id <yaml[global.player.<player.uuid>].read[masks.current.id]>
         - define particle false
         - define item false
         - if <yaml[global.player.<player.uuid>].contains[masks.current.attachment]>:
