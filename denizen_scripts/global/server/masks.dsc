@@ -161,7 +161,7 @@ mask_loop:
 
     # Particles without Item Rotation
     - else if !<[item]> && <[particle]>:
-      - define modulo_rate <element[40].div[rate]>
+      - define modulo_rate <element[40].div[<[rate]>]>
       - while <player.is_online> && <yaml[global.player.<player.uuid>].read[masks.current.id]> == <[mask_id]>:
         # ROUGHLY every 2 seconds we run range checks for particles
         - if <[loop_index].mod[<[modulo_rate]>]> == 0:
