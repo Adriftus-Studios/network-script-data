@@ -138,4 +138,4 @@ mask_loop:
     - else if !<[item]> && <[particle]>:
       - while <player.is_online> && <yaml[global.player.<player.uuid>].read[masks.current.id]> == <[mask_id]>:
         - playeffect at:<player.location.above> effect:<[effect]> offset:<[offset]> quantity:<[quantity]>
-        - wait <[rate]>
+        - wait <[rate]>t
