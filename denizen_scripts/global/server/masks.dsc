@@ -5,7 +5,10 @@ masks_gui_command:
   usage: /masks
   description: Used to access and change any unlocked masks.
   script:
-    - run cosmetic_selection_inventory_open def:masks
+    - if <context.args.size> < 1 || !<yaml[global.player.<player.uuid>].contains[masks.current.ability]>:
+      - run cosmetic_selection_inventory_open def:masks
+    - else if <context.args.get[1]> == ability:
+      - run mask_ability_use
 
 mask_ender_wizard:
   type: data
@@ -18,7 +21,6 @@ mask_ender_wizard:
     id: ender_wizard
     display_name: <&d>Ender Wizard
     skin_blob: ewogICJ0aW1lc3RhbXAiIDogMTYzNjQ3MDc5MzY4NywKICAicHJvZmlsZUlkIiA6ICIwNTVhOTk2NTk2M2E0YjRmOGMwMjRmMTJmNDFkMmNmMiIsCiAgInByb2ZpbGVOYW1lIiA6ICJUaGVWb3hlbGxlIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2Q0ZjdmYTA3YTdlOWY1NzU2ZWMxNGQ0YjUyYmIzNzk5ZjE2N2JkMTgxNjE2YmM5ODQ5ZmI5NGVkZjk1MTFmZjYiLAogICAgICAibWV0YWRhdGEiIDogewogICAgICAgICJtb2RlbCIgOiAic2xpbSIKICAgICAgfQogICAgfQogIH0KfQ==;BnPptUMoz6YAK1UVzGOipaY4a7U28aBhazRO5U7pToBuwMuH2b669AFM0T+/0d0LnmbzzHICFXv0npg+1NEoaCFfWf71koXXfJD/8lnO+ePlIWah7RrWWhha5gYY1UsUggGz7LJeUpieIqFIvRj+ZCF4Tu0nCSrN7O3FftVWWTyhL7CbxXhzlZ21MRwh2SfTDK+F4KdlUA5xfO5X+QL1RO6dSLZ91YHbf1xpkbJO5kxEmLDk77H5aoAUpM7us+FiKsxHDOLzRn6Cqmo4DvueONjWlK4jKuQciu0xDaeopZAgUJqojkdLzb2RGZfMTRmsUSP6g7TF9y1clJnjm165NnwlHG025ZOr0CLdOi/4HJHEHe+ug3h6P0RfKnszUae8flocQlt1vimgt71GgxGvQfdNs2DAKCA/5LeZXT9BZqbHf7AuTZ/KK0t6aSp1xgqETDCaOdgEnyclDQcg0LpV2elSPjyqOgT7A89F8LTAFAxxFrAKj2+BtM83C6BeGiFaAJowyqchDUQbfRhc04g9M8iTtSmacIj6bzLBeBRXjeR4Mqzdx1hfhUXXMzO2J9MMyx0/qOrtgbjDhV6iHyBihrNO3yjkcLJp3rfJa/1tVsvXbhSoGdCAFEuiDH3FGyQi0vzqazdedkLT7d8YnnkDQ0UvX6qfraRwsk1MzvZKYsM=
-
 
 mask_wear_events:
   type: world
@@ -122,22 +124,30 @@ mask_loop:
   debug: false
   definitions: item|particle
   script:
+    # Get armor stand, if mask has attached item
     - if <[item]>:
       - define armor_stand <entry[queue].created_queue.determination.get[1]>
+
+    # Define Particle Data, if applicable
     - if <[particle]>:
       - define rate <yaml[global.player.<player.uuid>].read[masks.current.particle.rate]>
       - define effect <yaml[global.player.<player.uuid>].read[masks.current.particle.effect]>
       - define quantity <yaml[global.player.<player.uuid>].read[masks.current.particle.quantity]>
       - define offset <yaml[global.player.<player.uuid>].read[masks.current.particle.offset]>
       - define targets <player.location.find_players_within[50]>
+
+    # Item Rotation Without Particles
     - if <[item]> && !<[particle]>:
       - while <player.is_online> && && <yaml[global.player.<player.uuid>].read[masks.current.id]> == <[mask_id]>:
         - look <[armor_stand]> yaw:<player.location.yaw>
         - wait 1t
       - kill <[armor_stand]>
       - remove <[armor_stand]>
+
+    # Item Rotation and Particles
     - else if <[item]> && <[particle]>:
       - while <player.is_online> && <yaml[global.player.<player.uuid>].read[masks.current.id]> == <[mask_id]>:
+        # Every 2 seconds we run range checks for particles
         - if <[loop_index].mod[40]> == 0:
           - define targets <player.location.find_players_within[50]>
         - if <[loop_index].mod[<[rate]>]> == 0:
@@ -146,9 +156,13 @@ mask_loop:
         - wait 1t
       - kill <[armor_stand]>
       - remove <[armor_stand]>
+
+    # Particles without Item Rotation
     - else if !<[item]> && <[particle]>:
+      - define modulo_rate <element[40].div[rate]>
       - while <player.is_online> && <yaml[global.player.<player.uuid>].read[masks.current.id]> == <[mask_id]>:
-        - if <[loop_index].mod[40]> == 0:
+        # ROUGHLY every 2 seconds we run range checks for particles
+        - if <[loop_index].mod[<[modulo_rate]>]> == 0:
           - define targets <player.location.find_players_within[50]>
         - playeffect at:<player.location.above> effect:<[effect]> offset:<[offset]> quantity:<[quantity]> targets:<[targets]>
         - wait <[rate]>t
