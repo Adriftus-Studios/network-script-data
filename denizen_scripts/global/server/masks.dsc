@@ -115,7 +115,7 @@ mask_attachment:
     - define off_hand <[item_map].get[offhand].if_null[air]>
     - define main_hand <[item_map].get[mainhand].if_null[air]>
     - define pose <map[left_arm=0,0,0;right_arm=0,0,0]>
-    - spawn armor_stand[armor_pose=marker=true;visible=false;equipment=<[item_map]>;item_in_offhand=<[off_hand]>;item_in_hand=<[main_hand]>]] <player.location> save:as
+    - spawn armor_stand[armor_pose=<[pose]>;marker=true;visible=false;equipment=<[item_map]>;item_in_offhand=<[off_hand]>;item_in_hand=<[main_hand]>]] <player.location> save:as
     - mount <entry[as].spawned_entity>|<player>
     - flag <entry[as].spawned_entity> on_dismount:cancel
     - flag <entry[as].spawned_entity> on_entity_added:remove_this_entity
