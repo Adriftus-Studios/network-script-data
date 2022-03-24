@@ -138,7 +138,7 @@ mask_loop:
 
     # Item Rotation Without Particles
     - if <[item]> && !<[particle]>:
-      - while <player.is_online> && && <yaml[global.player.<player.uuid>].read[masks.current.id]> == <[mask_id]>:
+      - while <player.is_online> && <yaml[global.player.<player.uuid>].read[masks.current.id]> == <[mask_id]>:
         - look <[armor_stand]> yaw:<player.location.yaw>
         - wait 1t
       - kill <[armor_stand]>
