@@ -38,9 +38,16 @@ mask_wear_events:
       - if <yaml[global.player.<player.uuid>].contains[masks.current]>:
         - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[masks.current.skin_blob]>
         - adjust <player> name:<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
+        - define particle false
+        - define item false
         - if <yaml[global.player.<player.uuid>].contains[masks.current.attachment]>:
-          - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachment]>
+          - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachment]> save:queue
+          - define item true
         - run network_map_update_name def:<player.uuid>|<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
+        - if <yaml[global.player.<player.uuid>].contains[masks.current.particle]>:
+          - define particle true
+        - if <[item]> || <[particle]>:
+          - inject mask_loop
 
     on server start:
       - inject locally path:initialize
