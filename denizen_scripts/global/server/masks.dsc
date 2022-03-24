@@ -43,8 +43,8 @@ mask_wear_events:
         - define mask_id <yaml[global.player.<player.uuid>].read[masks.current.id]>
         - define particle false
         - define item false
-        - if <yaml[global.player.<player.uuid>].contains[masks.current.attachment]>:
-          - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachment]> save:queue
+        - if <yaml[global.player.<player.uuid>].contains[masks.current.attachments]>:
+          - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachments]> save:queue
           - define item true
         - run network_map_update_name def:<player.uuid>|<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
         - if <yaml[global.player.<player.uuid>].contains[masks.current.particle]>:
@@ -83,8 +83,8 @@ mask_wear:
       - adjust <player> name:<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
       - define particle false
       - define item false
-      - if <yaml[global.player.<player.uuid>].contains[masks.current.attachment]>:
-        - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachment]> save:queue
+      - if <yaml[global.player.<player.uuid>].contains[masks.current.attachments]>:
+        - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachments]> save:queue
         - define item true
       - run network_map_update_name def:<player.uuid>|<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
       - if <yaml[global.player.<player.uuid>].contains[masks.current.particle]>:
@@ -110,10 +110,9 @@ mask_remove:
 mask_attachment:
   type: task
   debug: false
-  definitions: item
+  definitions: item_map
   script:
-    - define item <item[<[item]>]> if:<[item].object_type.equals[ITEM].not>
-    - spawn armor_stand[marker=true;visible=false;equipment=air|air|air|<[item]>] <player.location> save:as
+    - spawn armor_stand[marker=true;visible=false;equipment=<[item_map]>] <player.location> save:as
     - mount <entry[as].spawned_entity>|<player>
     - flag <entry[as].spawned_entity> on_dismount:cancel
     - flag <entry[as].spawned_entity> on_entity_added:remove_this_entity
