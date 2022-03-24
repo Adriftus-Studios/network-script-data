@@ -2,7 +2,7 @@ mask_adriftus_game_master:
   type: data
   display_data:
     category: Adriftus
-    material: stick[custom_model_data=667]
+    material: stick[custom_model_data=210]
     display_name: <&6>Adriftus<&co> Game Master
     description: "<&d>It's time to play the game"
   mask_data:
