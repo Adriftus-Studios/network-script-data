@@ -2,7 +2,7 @@ mask_adriftus_galactic_mage:
   type: data
   display_data:
     category: Adriftus
-    material: ender_pearl
+    material: stick[custom_model_data=667]
     display_name: <&6>Adriftus<&co> <&d>Galactic Mage
     description: "<&d>Larger than life"
   mask_data:
@@ -16,5 +16,5 @@ mask_adriftus_galactic_mage:
     particle:
       rate: 5
       effect: dragon_breath
-      quantity: 5
+      quantity: 2
       offset: 0.5

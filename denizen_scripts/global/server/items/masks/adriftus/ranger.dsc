@@ -2,7 +2,7 @@ mask_adriftus_ranger:
   type: data
   display_data:
     category: Adriftus
-    material: stick[custom_model_data=200]
+    material: stick[custom_model_data=100]
     display_name: <&6>Adriftus<&co> <&a>Ranger
     description: "<&a>Test Ranger"
   mask_data:
