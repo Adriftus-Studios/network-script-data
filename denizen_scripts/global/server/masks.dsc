@@ -71,9 +71,16 @@ mask_wear:
       - run global_player_data_modify def:<player.uuid>|masks.current|<[script].parsed_key[mask_data]>
       - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[masks.current.skin_blob]>
       - adjust <player> name:<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
+      - define particle false
+      - define item false
       - if <yaml[global.player.<player.uuid>].contains[masks.current.attachment]>:
-        - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachment]>
+        - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachment]> save:queue
+        - define item true
       - run network_map_update_name def:<player.uuid>|<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
+      - if <yaml[global.player.<player.uuid>].contains[masks.current.particle]>:
+        - define particle true
+      - if <[item]> || <[particle]>:
+        - inject mask_loop
 
 mask_remove:
   type: task
@@ -86,7 +93,8 @@ mask_remove:
     - run global_player_data_modify def:<player.uuid>|masks.current|!
     - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[defaults.skin_blob]>
     - adjust <player> name:<player.name>
-    - remove <player.passengers> if:<player.passenger.entity_type.equals[armor_stand].if_null[false]>
+    - kill <player.passenger> if:<player.passenger.entity_type.equals[armor_stand].if_null[false]>
+    - remove <player.passenger> if:<player.passenger.entity_type.equals[armor_stand].if_null[false]>
     - run network_map_update_name def:<player.uuid>|<player.name>
 
 mask_attachment:
@@ -99,8 +107,35 @@ mask_attachment:
     - mount <entry[as].spawned_entity>|<player>
     - flag <entry[as].spawned_entity> on_dismount:cancel
     - flag <entry[as].spawned_entity> on_entity_added:remove_this_entity
-    - while <player.is_online> && <entry[as].spawned_entity.is_spawned>:
-      - look <entry[as].spawned_entity> yaw:<player.location.yaw>
-      - wait 1t
-    - kill <entry[as].spawned_entity>
-    - remove <entry[as].spawned_entity>
+    - determine <entry[as].spawned_entity>
+
+mask_loop:
+  type: task
+  debug: false
+  definitions: item|particle
+  script:
+    - if <[item]>:
+      - define armor_stand <entry[queue].created_queue.determination.get[1]>
+    - if <[particle]>:
+      - define rate <yaml[global.player.<player.uuid>].read[masks.current.particle.rate]>
+      - define effect <yaml[global.player.<player.uuid>].read[masks.current.particle.effect]>
+      - define quantity <yaml[global.player.<player.uuid>].read[masks.current.particle.quantity]>
+      - define offset <yaml[global.player.<player.uuid>].read[masks.current.particle.offset]>
+    - if <[item]> && !<[particle]>:
+      - while <player.is_online> && <entry[as].spawned_entity.is_spawned>:
+        - look <entry[as].spawned_entity> yaw:<player.location.yaw>
+        - wait 1t
+      - kill <entry[as].spawned_entity>
+      - remove <entry[as].spawned_entity>
+    - else if <[item]> && <[particle]>:
+      - while <player.is_online> && <entry[as].spawned_entity.is_spawned>:
+        - if <[loop_index].mod[<[rate]>]> == 0:
+          - playeffect at:<player.location.above> effect:<[effect]> offset:<[offset]> quantity:<[quantity]>
+        - look <entry[as].spawned_entity> yaw:<player.location.yaw>
+        - wait 1t
+      - kill <entry[as].spawned_entity>
+      - remove <entry[as].spawned_entity>
+    - else if !<[item]> && <[particle]>:
+      - while <player.is_online> && <yaml[global.player.<player.uuid>].read[masks.current.id]> == <[mask_id]>:
+        - playeffect at:<player.location.above> effect:<[effect]> offset:<[offset]> quantity:<[quantity]>
+        - wait <[rate]>
