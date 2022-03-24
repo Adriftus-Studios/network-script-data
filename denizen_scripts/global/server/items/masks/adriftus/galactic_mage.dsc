@@ -8,6 +8,7 @@ mask_adriftus_galactic_mage:
   mask_data:
     id: adriftus_galactic_mage
     attachments:
+      helmet: stick[custom_model_data=200]
       mainhand: stick[custom_model_data=667]
       offhand: stick[custom_model_data=667]
     display_name: <&d>Galactic Mage
