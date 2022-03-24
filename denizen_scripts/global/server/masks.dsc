@@ -112,7 +112,9 @@ mask_attachment:
   debug: false
   definitions: item_map
   script:
-    - spawn armor_stand[marker=true;visible=false;equipment=<[item_map]>] <player.location> save:as
+    - define off_hand <[item_map].get[offhand].if_null[air]>
+    - define main_hand <[item_map].get[mainhand].if_null[air]>
+    - spawn armor_stand[marker=true;visible=false;equipment=<[item_map]>;item_in_offhand=<[off_hand]>;item_in_hand=<[main_hand]>]] <player.location> save:as
     - mount <entry[as].spawned_entity>|<player>
     - flag <entry[as].spawned_entity> on_dismount:cancel
     - flag <entry[as].spawned_entity> on_entity_added:remove_this_entity
