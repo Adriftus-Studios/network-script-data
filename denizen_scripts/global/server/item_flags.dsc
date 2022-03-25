@@ -12,4 +12,4 @@ item_flags:
       - inject <context.item.flag[on_drop]>
     on player dies:
       - if <player.inventory.contains_item[item_flagged:no_drop_on_death]>:
-        - determine <context.drops.filter[has_flag[no_drop_on_death].not]>:
+        - determine <context.drops.filter[has_flag[no_drop_on_death].not]>
