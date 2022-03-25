@@ -27,6 +27,7 @@ player_crafting_slots_override_events:
     on player dies bukkit_priority:LOWEST:
       - inventory clear d:<player.open_inventory>
     on player teleports:
+      - inventory close
       - inventory clear d:<player.open_inventory>
       - wait 1s
       - inject locally path:set_inv
