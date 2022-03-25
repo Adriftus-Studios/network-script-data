@@ -401,6 +401,7 @@ chat_settings_open:
 message_command:
   type: command
   name: msg
+  debug: false
   usage: /msg (player) (message)
   aliases:
     - reply
