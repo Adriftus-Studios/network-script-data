@@ -84,7 +84,7 @@ bowtrails_handler:
 ####################
 ## BOWTRAIL TYPES ##
 ####################
-bow_trail_data:
+bow_trail_custom:
   type: task
   debug: false
   script:

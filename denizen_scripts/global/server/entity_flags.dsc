@@ -8,7 +8,7 @@
 
 entity_flags:
   type: world
-  debug: true
+  debug: false
   events:
     on entity_flagged:no_fall_damage damaged by FALL:
       - determine cancelled
