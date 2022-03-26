@@ -52,11 +52,12 @@ easter_egg_events:
     - flag <context.location> easter_egg:!
     - flag server easter_egg.counter:-:1
     on delta time minutely:
+    # <cuboid[spawn_cuboid].blocks_flagged[easter_egg].filter[material.name.equals[PLAYER_HEAD]].size>
     - define duration 1m
     - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
     - define chosen <[all].random[20]>
     - showfake players:<server.online_players> air d:<[duration]> <[all].exclude[<[chosen]>]>
     - showfake players:<server.online_players> air d:<[duration]> <[chosen]>
-    - flag <[chosen]> easter_egg.active expire:<[duration]>
-    on player right clicks block_flagged:easter_egg.active:
+    - flag <[chosen]> easter_egg_active expire:<[duration]>
+    on player right clicks block_flagged:easter_egg_active:
     - narrate pass
