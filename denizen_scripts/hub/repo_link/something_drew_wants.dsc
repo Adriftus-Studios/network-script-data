@@ -37,7 +37,6 @@ easter_egg_events:
     - foreach <script.data_key[skins].keys> as:type:
       - define pool:|:<element[<[type]>|].repeat[<script.data_key[skins.<[type]>.weight]>].as_list>
     - define type <[pool].random>
-    - define skin <script.data_key[skins.<[type]>]>
-    - narrate <[skin]>
+    - define skin <script.data_key[skins.<[type]>.skin]>
     - wait 1t
     - adjust <context.location> skull_skin:<util.random_uuid>|<[skin]>
