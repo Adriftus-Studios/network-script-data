@@ -99,7 +99,7 @@ store_hub_cosmeticShop_titles_events:
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
         #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].sub[<context.item.flag[price]>]>
       - define title_id <context.item.flag[tag]>
-      - inject title_unlock
+      - inject titles_unlock
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
         #- give "<item[title_voucher].with[display_name=<&b>Title Voucher<&co> <yaml[titles].read[titles.<[title_id]>.tag].parse_color>;lore=<&e>Right Click to Redeem;flag=title:<context.item.flag[tag]>]>"
       - narrate "<&a>You have succesfully purchased the Title: <yaml[titles].read[titles.<[title_id]>.tag].parse_color><&e>."
@@ -186,7 +186,7 @@ store_hub_cosmeticShop_bowtrails_events:
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
         #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].sub[<context.item.flag[price]>]>
       - define bowtrail_id <context.item.flag[trail]>
-      - inject bowtrail_unlock
+      - inject bowtrails_unlock
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
         #- give "<item[bowtrail_voucher].with[display_name=<&b>Bowtrail Voucher<&co> <yaml[bowtrails].read[bowtrails.<[bowtrail_id]>.name].parse_color>;lore=<&e>Right Click to Redeem;flag=title:<context.item.flag[trail]>]>"
       - narrate "<&a>You have succesfully purchased the bow trail: <yaml[bowtrails].read[bowtrails.<[bowtrail_id]>.name].parse_color><&e>."
