@@ -86,7 +86,7 @@ chat_history_save:
   script:
     - if !<[Channel].exists> || !<[Message].exists> || !<[UUID].exists> || !<[sender].exists>:
       - stop
-    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message].replace_text[;].with[&sc]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]>]>
+    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]>]>
     - if <yaml[chat_history].read[<[channel]>_history].size> > 40:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
 
@@ -109,7 +109,7 @@ chat_history_show:
       #- narrate <[Message]>
     #- if <[sorted_list].size> > 30:
       #- narrate <[sorted_list].get[31].to[60].reverse.parse[get[message]].separated_by[<&nl>]>
-    - narrate <element[<&nl>].repeat_as_list[50].include[<[sorted_list].get[1].to[40].reverse.parse[get[message].unescaped]>].separated_by[<&nl>]>
+    - narrate <element[<&nl>].repeat_as_list[50].include[<[sorted_list].get[1].to[40].reverse.parse[get[message]]>].separated_by[<&nl>]>
 
 chat_delete_message:
   type: task
