@@ -38,5 +38,6 @@ easter_egg_events:
       - define pool:|:<[type].repeat[<script.data_key[skins.<[type]>.weight]>]>
     - define type <[pool].random>
     - define skin <script.data_key[skins.<[type]>]>
+    - narrate <[skin]>
     - wait 1t
-    - adjustblock <context.location> skull_skin:<util.random_uuid>|<[skin]>
+    - adjust <context.location> skull_skin:<util.random_uuid>|<[skin]>
