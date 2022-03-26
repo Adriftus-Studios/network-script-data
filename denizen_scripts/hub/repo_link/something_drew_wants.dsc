@@ -45,5 +45,8 @@ easter_egg_events:
     - flag <context.location> easter_egg.type:<[type]>
     - announce "Placed a <[type]> egg at <context.location.simple>: <[counter]>"
     on entity breaks block flagged:easter_egg:
+    - define type <context.location.flag[easter_egg.type]>
+    - define counter <server.flag[easter_egg.counter].sub[1].if_null[0]>
+    - announce "Placed a <[type]> egg <context.location.flag[easter_egg.number]>. Counter: <[counter]>"
     - flag <context.location> easter_egg:!
-    - flag server easter_egg.counter:-:1
+    - flag server easter_egg.counter:<[counter]>
