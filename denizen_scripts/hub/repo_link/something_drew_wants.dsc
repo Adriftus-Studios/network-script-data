@@ -39,4 +39,4 @@ easter_egg_events:
     - define type <[pool].random>
     - define skin <script.data_key[skins.<[type]>]>
     - wait 1t
-    - adjust <context.location> skull_skin:<util.random_uuid>|<[skin]>
+    - adjustblock <context.location> skull_skin:<util.random_uuid>|<[skin]>
