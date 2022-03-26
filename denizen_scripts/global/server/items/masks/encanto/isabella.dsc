@@ -16,7 +16,7 @@ mask_encanto_isabella_vines:
   type: task
   debug: false
   script:
-    - define target <player.location.precise_cursor_on.center>
+    - define target <player.eye_location.precise_cursor_on.center>
     - define points <player.eye_location.points_between[<[target]>].distance[0.3]>
     - foreach <[points]>:
       - playeffect effect:TOTEM quantity:3 offset:0.25 at:<[value]>
