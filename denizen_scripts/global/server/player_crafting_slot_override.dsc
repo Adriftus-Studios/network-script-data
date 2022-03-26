@@ -30,6 +30,9 @@ player_crafting_slots_override_events:
     on player teleports:
       - inventory close
       - inject locally path:set_inv
+    on player uses recipe book:
+      - if <player.open_inventory.slot[3].material.name> == stone:
+        - determine cancelled
 
 player_crafting_slots_open_button:
   type: task
