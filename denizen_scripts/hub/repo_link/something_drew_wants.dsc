@@ -50,4 +50,4 @@ easter_egg_events:
     - define counter <server.flag[easter_egg.counter].sub[1].if_null[0]>
     - announce "Placed a <[type]> egg <context.location.flag[easter_egg.number]>. Counter: <[counter]>"
     - flag <context.location> easter_egg:!
-    - flag server easter_egg.counter:<[counter]>
+    - flag server easter_egg.counter:-:1
