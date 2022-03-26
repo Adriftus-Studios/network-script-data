@@ -24,5 +24,5 @@ mask_encanto_isabella_vines:
     - while <[this_block].material.name> == air:
       - modifyblock <[this_block]> vine
       - playeffect effect:TOTEM quantity:3 offset:0.25 at:<[this_block]>
-      - wait 1t
+      - wait 5t
       - define this_block <[this_block].below>
