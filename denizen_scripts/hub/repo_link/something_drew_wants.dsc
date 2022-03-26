@@ -55,17 +55,19 @@ easter_egg_events:
     - adjust <player> noclip:true
     on player quit:
     - adjust <player> noclip:false
-    on delta time minutely:
+    on delta time hourly:
     # <cuboid[spawn_cuboid].blocks_flagged[easter_egg].filter[material.name.equals[PLAYER_HEAD]].size>
-    - define duration 1m
+    - define duration 1h
     - define quantity_to_spawn 100
     - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
     - define chosen <[all].random[<[quantity_to_spawn]>]>
     - showfake players:<server.online_players> air d:<[duration]> <[all].exclude[<[chosen]>]>
     - flag <[chosen]> easter_egg.active expire:<[duration]>
     - flag server easter_egg.session.active expire:<[duration]>
+    - announce "The Easter Bunny has planted eggs in hub."
     on player right clicks block:
     - stop if:<context.location.has_flag[easter_egg.active].not>
-    - define duration 1m
+    - define duration 1h
+    - define type <context.location.flag[easter_egg.type]>
     - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
-    - narrate "You found an easter egg."
+    - narrate "You found a <[type].replace[_].with[ ].to_titlecase> easter egg."
