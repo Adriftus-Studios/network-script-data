@@ -39,7 +39,7 @@ mask_wear_events:
         - run global_player_data_modify def:<player.uuid>|defaults.skin_blob|<player.skin_blob>
       - if <yaml[global.player.<player.uuid>].contains[masks.current]>:
         - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[masks.current.skin_blob]>
-        - adjust <player> name:<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
+        - rename t:<player> <yaml[global.player.<player.uuid>].read[masks.current.display_name]>
         - define mask_id <yaml[global.player.<player.uuid>].read[masks.current.id]>
         - define particle false
         - define item false
@@ -80,7 +80,7 @@ mask_wear:
       - define script <script[mask_<[mask_id]>]>
       - run global_player_data_modify def:<player.uuid>|masks.current|<[script].parsed_key[mask_data]>
       - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[masks.current.skin_blob]>
-      - adjust <player> name:<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
+      - rename t:<player> <yaml[global.player.<player.uuid>].read[masks.current.display_name]>
       - define particle false
       - define item false
       - if <yaml[global.player.<player.uuid>].contains[masks.current.attachments]>:
@@ -102,7 +102,7 @@ mask_remove:
     - wait 1t
     - run global_player_data_modify def:<player.uuid>|masks.current|!
     - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[defaults.skin_blob]>
-    - adjust <player> name:<player.name>
+    - rename t:<player> <player.name>
     - kill <player.passenger> if:<player.passenger.entity_type.equals[armor_stand].if_null[false]>
     - remove <player.passenger> if:<player.passenger.entity_type.equals[armor_stand].if_null[false]>
     - run network_map_update_name def:<player.uuid>|<player.name>
