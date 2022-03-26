@@ -58,6 +58,7 @@ easter_egg_events:
     - define chosen <[all].random[20]>
     - showfake players:<server.online_players> air d:<[duration]> <[all].exclude[<[chosen]>]>
     - showfake players:<server.online_players> air d:<[duration]> <[chosen]>
-    - flag <[chosen]> easter_egg_active expire:<[duration]>
-    on player right clicks block_flagged:easter_egg_active:
+    - flag <[chosen]> easter_egg.active expire:<[duration]>
+    on player right clicks block:
+    - stop if:<context.location.has_flag[easter_egg.active].not>
     - narrate pass
