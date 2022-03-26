@@ -65,4 +65,6 @@ easter_egg_events:
     - flag <[chosen]> easter_egg.active expire:<[duration]>
     on player right clicks block:
     - stop if:<context.location.has_flag[easter_egg.active].not>
-    - narrate pass
+    - define duration 1m
+    - ratelimit <player> <[duration]>
+    - narrate "You found an easter egg."
