@@ -126,8 +126,9 @@ cosmetic_selection_inventory_open:
     - define inventory <inventory[generic[title=<[title]>;size=54]]>
 
     # Put the items into the new inventory
-    - foreach <[items]>:
-      - inventory set slot:<[slots].get[<[loop_index]>]> o:<[value].with[display=<&6>]> d:<[inventory]>
+    - if <[items].exists>:
+      - foreach <[items]>:
+        - inventory set slot:<[slots].get[<[loop_index]>]> o:<[value].with[display=<&6>]> d:<[inventory]>
 
     # Build the "unequip cosmetic" item, and store pagination data on it
     - define cosmetic <script.parsed_key[data.<[type]>.current]>

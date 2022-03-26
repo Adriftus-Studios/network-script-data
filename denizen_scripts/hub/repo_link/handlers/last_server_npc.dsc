@@ -13,6 +13,8 @@ last_server_npc:
     on click:
     - inject last_server_handler
     on enter proximity:
+    # TEMPORARY FORCE
+    - yaml id:global.player.<player.uuid> set adriftus.last_server:Herocraft
     - if <yaml[global.player.<player.uuid>].contains[adriftus.last_server]>:
       - fakespawn "armor_stand[custom_name=<&6>Last Server<&co> <yaml[global.player.<player.uuid>].read[adriftus.last_server]>;custom_name_visible=true;marker=true;visible=false]" <npc.location.above[2]> duration:10h players:<player> save:ent1
       - fakespawn "armor_stand[custom_name=<&b>Click To Join!;custom_name_visible=true;marker=true;visible=false]" <npc.location.above[1.7]> duration:10h players:<player> save:ent2

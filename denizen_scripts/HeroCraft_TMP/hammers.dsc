@@ -45,6 +45,7 @@ hammer_diamond:
     repair_reagent_requirement_multiplier: 9
     repair_reagent: diamond
   mechanisms:
+    custom_model_data: 1
     enchantments:
       area_dig: 1
   display name: <&e>Diamond Hammer
@@ -65,6 +66,7 @@ hammer_netherite:
     repair_reagent_requirement_multiplier: 9
     repair_reagent: netherite_ingot
   mechanisms:
+    custom_model_data: 1
     enchantments:
       area_dig: 1
   display name: <&e>Netherite Hammer
@@ -85,6 +87,7 @@ hammer_iron:
     repair_reagent_requirement_multiplier: 9
     repair_reagent: iron_ingot
   mechanisms:
+    custom_model_data: 1
     enchantments:
       area_dig: 1
   display name: <&e>Iron Hammer

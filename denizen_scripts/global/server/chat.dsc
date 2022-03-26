@@ -401,14 +401,16 @@ chat_settings_open:
 message_command:
   type: command
   name: msg
+  debug: false
   usage: /msg (player) (message)
   aliases:
     - reply
+    - r
   description: Message another player
   tab completions:
     1: <server.flag[player_map.names].keys>
   script:
-    - if <context.alias> == reply:
+    - if <context.alias> == reply || <context.alias> == r:
       - if <yaml[global.player.<player.uuid>].contains[chat.last_message.sender]>:
         - define target_name <yaml[global.player.<player.uuid>].read[chat.last_message.sender]>
       - else:

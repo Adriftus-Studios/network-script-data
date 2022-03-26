@@ -11,5 +11,4 @@ item_flags:
     on player drops item_flagged:on_drop bukkit_priority:LOWEST:
       - inject <context.item.flag[on_drop]>
     on player dies:
-      - if <player.inventory.contains_item[item_flagged:no_drop_on_death]>:
-        - determine <context.drops.filter[has_flag[no_drop_on_death].not]>:
+      - determine <context.drops.filter[has_flag[no_drop_on_death].not]>

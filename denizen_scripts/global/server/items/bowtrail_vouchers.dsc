@@ -9,14 +9,14 @@ bowtrail_voucher_events:
   events:
     on player right clicks block with:bowtrail_voucher bukkit_priority:LOWEST:
       - determine passively cancelled
-      - if <yaml[global.player.<player.uuid>].read[bowtrail.unlocked].contains[<context.item.flag[trail]>]||false>:
+      - if <yaml[global.player.<player.uuid>].contains[bowtrail.unlocked.<context.item.flag[trail]>]>:
         - narrate "<&c>You already have unlocked this bow trail."
         - stop
       - if <player.has_flag[bowtrail_confirm]>:
         - wait 1t
         - if <player.item_in_hand> == <context.item>:
-          - define bowtrail <context.item.flag[trail]>
-          - inject bowtrail_unlock
+          - define bowtrail_id <context.item.flag[trail]>
+          - inject bowtrails_unlock
           - take iteminhand quantity:1
           - narrate "<&b>You have redeemed the <yaml[bowtrails].read[bowtrails.<context.item.flag[trail]>.name].parse_color><&b> bow trail!"
           - flag player bowtrail_confirm:!
