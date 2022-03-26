@@ -63,8 +63,9 @@ easter_egg_events:
     - define chosen <[all].random[<[quantity_to_spawn]>]>
     - showfake players:<server.online_players> air d:<[duration]> <[all].exclude[<[chosen]>]>
     - flag <[chosen]> easter_egg.active expire:<[duration]>
+    - flag server easter_egg.session.active expire:<[duration]>
     on player right clicks block:
     - stop if:<context.location.has_flag[easter_egg.active].not>
     - define duration 1m
-    - ratelimit <player>_<context.location.block> <[duration]>
+    - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
     - narrate "You found an easter egg."
