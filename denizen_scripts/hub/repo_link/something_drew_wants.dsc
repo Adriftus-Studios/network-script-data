@@ -54,10 +54,10 @@ easter_egg_events:
     on delta time minutely:
     # <cuboid[spawn_cuboid].blocks_flagged[easter_egg].filter[material.name.equals[PLAYER_HEAD]].size>
     - define duration 1m
+    - define quantity_to_spawn 100
     - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
-    - define chosen <[all].random[20]>
+    - define chosen <[all].random[<[quantity_to_spawn]>]>
     - showfake players:<server.online_players> air d:<[duration]> <[all].exclude[<[chosen]>]>
-    - showfake players:<server.online_players> air d:<[duration]> <[chosen]>
     - flag <[chosen]> easter_egg.active expire:<[duration]>
     on player right clicks block:
     - stop if:<context.location.has_flag[easter_egg.active].not>
