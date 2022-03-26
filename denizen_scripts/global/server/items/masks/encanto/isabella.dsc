@@ -18,11 +18,12 @@ mask_encanto_isabella_vines:
   script:
     - define target <player.eye_location.precise_cursor_on.center>
     - define points <player.eye_location.points_between[<[target]>].distance[0.3]>
+    - define players <player.location.find_players_within[60]>
     - foreach <[points]>:
-      - playeffect effect:TOTEM quantity:3 offset:0.25 at:<[value]>
+      - playeffect effect:TOTEM quantity:3 offset:0.25 at:<[value]> targets:<[players]>
     - define this_block <[target]>
     - while <[this_block].material.name> == air:
       - modifyblock <[this_block]> vine
-      - playeffect effect:TOTEM quantity:3 offset:0.25 at:<[this_block]>
+      - playeffect effect:TOTEM quantity:3 offset:0.25 at:<[this_block]> targets:<[players]>
       - wait 5t
       - define this_block <[this_block].below>
