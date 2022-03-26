@@ -35,7 +35,7 @@ easter_egg_events:
     on player places easter_egg_item:
     - define pool <list[]>
     - foreach <script.data_key[skins].keys> as:type:
-      - define pool:|:<[type].repeat[<script.data_key[skins.<[type]>.weight]>]>
+      - define pool:|:<element[<[type]>|].repeat[<script.data_key[skins.<[type]>.weight]>].as_list>
     - define type <[pool].random>
     - define skin <script.data_key[skins.<[type]>]>
     - narrate <[skin]>
