@@ -51,6 +51,10 @@ easter_egg_events:
     # - announce "Breaked a <[type]> egg <context.location.flag[easter_egg.number]>. Counter: <[counter]>"
     # - flag <context.location> easter_egg:!
     # - flag server easter_egg.counter:-:1
+    on player joins:
+    - adjust <player> noclip:true
+    on player quit:
+    - adjust <player> noclip:false
     on delta time minutely:
     # <cuboid[spawn_cuboid].blocks_flagged[easter_egg].filter[material.name.equals[PLAYER_HEAD]].size>
     - define duration 1m
