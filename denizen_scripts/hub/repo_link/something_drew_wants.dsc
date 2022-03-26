@@ -43,3 +43,4 @@ easter_egg_events:
     - flag server easter_egg.counter:<[counter]>
     - flag <context.location> easter_egg.number:<[counter]>
     - flag <context.location> easter_egg.type:<[type]>
+    - narrate "Placed a <[type]> egg at <context.location.simple>: <[counter]>"
