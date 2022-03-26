@@ -174,4 +174,4 @@ mask_ability_use:
   debug: false
   script:
     - if <yaml[global.player.<player.uuid>].contains[masks.current.ability]>:
-      - run <yaml[global.player.<player.uuid>].contains[masks.current.ability.tasks]>
+      - run <yaml[global.player.<player.uuid>].contains[masks.current.ability.task]>
