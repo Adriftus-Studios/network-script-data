@@ -39,3 +39,6 @@ easter_egg_events:
     - define type <[pool].random>
     - define skin <script.data_key[skins.<[type]>.skin]>
     - adjust <context.location> skull_skin:<util.random_uuid>|<[skin]>
+    - define counter <server.flag[easter_egg.counter].add[1].if_null[1]>
+    - flag server easter_egg.counter:<[counter]>
+    - flag <context.location> easter_egg:<[counter]>
