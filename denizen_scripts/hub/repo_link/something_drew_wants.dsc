@@ -90,3 +90,12 @@ easter_egg_respawn:
   - foreach <bungee.list_servers>:
     - bungee <[value]>:
       - announce "The Easter Bunny has planted eggs in hub." to_permission:easter.see_eggs
+
+easter_egg_view_command:
+  type: command
+  name: see_easter_eggs
+  debug: false
+  script:
+  - stop if:<player.has_permission[easter.command.see_eggs].not>
+  - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
+  - showfake <[all]> cancel players:<player>
