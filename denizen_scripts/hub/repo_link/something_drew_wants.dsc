@@ -82,8 +82,8 @@ easter_egg_respawn:
   - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
   - define chosen <[all].random[<[quantity_to_spawn]>]>
   - flag <[all]> easter_egg.active:!
-  - showfake players:<server.online_players.filter[has_permission[easter.see_eggs]]> cancel <[all]>
-  - showfake players:<server.online_players.filter[has_permission[easter.see_eggs]]> air d:<[duration]> <[all].exclude[<[chosen]>]>
+  - showfake players:<server.online_players> air d:<[duration]> <[all]>
+  - showfake players:<server.online_players.filter[has_permission[easter.see_eggs]]> cancel <[chosen]>
   - flag <[chosen]> easter_egg.active expire:<[duration]>
   - flag server easter_egg.session.active expire:<[duration]>
   - flag server easter_egg.session.current:<[chosen]>
