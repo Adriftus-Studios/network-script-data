@@ -60,7 +60,7 @@ easter_egg_events:
     on delta time hourly:
     # <cuboid[spawn_cuboid].blocks_flagged[easter_egg].filter[material.name.equals[PLAYER_HEAD]].size>
     - define duration 1h
-    - define quantity_to_spawn 100
+    - define quantity_to_spawn 40
     - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
     - define chosen <[all].random[<[quantity_to_spawn]>]>
     - showfake players:<server.online_players> air d:<[duration]> <[all].exclude[<[chosen]>]>
