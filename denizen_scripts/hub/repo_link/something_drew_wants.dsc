@@ -87,4 +87,6 @@ easter_egg_respawn:
   - flag <[chosen]> easter_egg.active expire:<[duration]>
   - flag server easter_egg.session.active expire:<[duration]>
   - flag server easter_egg.session.current:<[chosen]>
-  - announce "The Easter Bunny has planted eggs in hub."
+  - foreach <bungee.list_servers>:
+    - bungee <[value]>:
+      - narrate "The Easter Bunny has planted eggs in hub." targets:<server.online_players.filter[has_permission[easter.see_eggs]]>
