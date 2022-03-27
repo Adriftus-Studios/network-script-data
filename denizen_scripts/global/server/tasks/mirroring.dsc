@@ -27,7 +27,7 @@ mirroring_transfer_entities:
   definitions: chunk|server
   script:
     - define map <map>
-    - foreach <[chunk].entities[!player]>:
+    - foreach <[chunk].entities.filter[entity_type.equals[player].not]>:
       - define map <[map].with[<[value].location>].as[<[value].describe>]>
     - if <[map].size> > 0:
       - bungeerun <[server]> def:<[chunk]>|<[map]>
