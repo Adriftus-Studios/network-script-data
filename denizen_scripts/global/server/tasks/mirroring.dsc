@@ -5,7 +5,7 @@ mirroring_transfer_chunks:
   script:
     - define uuid <util.random_uuid>
     - chunkload <[chunk]> duration:10s if:<[chunk].is_loaded.not>
-    - schematic create name::<[uuid]> <[chunk].cuboid> origin:<[chunk].cuboid.center> entities flags
+    - schematic create name:<[uuid]> <[chunk].cuboid> origin:<[chunk].cuboid.center> entities flags
     - schematic save name:<[uuid]> filename:global/mirroring/<[uuid]>
     - bungeerun <[server]> mirroring_paste_schematic def:<[uuid]>|<[chunk].cuboid.center>
 
