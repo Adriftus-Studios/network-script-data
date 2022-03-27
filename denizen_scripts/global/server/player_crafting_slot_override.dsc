@@ -33,6 +33,8 @@ player_crafting_slots_override_events:
     on player uses recipe book:
       - if <player.open_inventory.slot[3].material.name> == stone:
         - determine cancelled
+    on player respawns:
+      - inject locally path:set_inv
 
 player_crafting_slots_open_button:
   type: task

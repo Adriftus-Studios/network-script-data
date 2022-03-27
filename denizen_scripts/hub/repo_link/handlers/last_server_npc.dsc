@@ -1,5 +1,6 @@
 last_server_npc:
   type: assignment
+  debug: false
   actions:
     on assignment:
     - trigger name:click state:true
