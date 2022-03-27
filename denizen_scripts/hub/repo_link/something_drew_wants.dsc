@@ -60,15 +60,7 @@ easter_egg_events:
     - adjust <player> noclip:false
     on delta time hourly:
     # <cuboid[spawn_cuboid].blocks_flagged[easter_egg].filter[material.name.equals[PLAYER_HEAD]].size>
-    - define duration 1h
-    - define quantity_to_spawn 40
-    - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
-    - define chosen <[all].random[<[quantity_to_spawn]>]>
-    - showfake players:<server.online_players.filter[has_permission[easter.see_eggs]]> air d:<[duration]> <[all].exclude[<[chosen]>]>
-    - flag <[chosen]> easter_egg.active expire:<[duration]>
-    - flag server easter_egg.session.active expire:<[duration]>
-    - flag server easter_egg.session.current:<[chosen]>
-    - announce "The Easter Bunny has planted eggs in hub."
+    - run easter_egg_respawn def:1h
     on player right clicks block:
     - stop if:<context.location.has_flag[easter_egg.active].not.if_null[true]>
     - define duration 1h
@@ -79,3 +71,20 @@ easter_egg_events:
     - playsound sound:entity_experience_orb_pickup volume:10 <player>
     - flag <player> easter_egg.session.found.<[type]>:+:1
     - flag <player> easter_egg.easter_token:+:1
+
+easter_egg_respawn:
+  type: task
+  definitions: duration
+  debug: false
+  script:
+  - define duration <[duration].if_null[<server.flag_expiration[easter_egg.session.active].from_now.if_null[1h]>]>
+  - define quantity_to_spawn 40
+  - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
+  - define chosen <[all].random[<[quantity_to_spawn]>]>
+  - flag <[all]> easter_egg.active:!
+  - showfake players:<server.online_players.filter[has_permission[easter.see_eggs]]> cancel <[all]>
+  - showfake players:<server.online_players.filter[has_permission[easter.see_eggs]]> air d:<[duration]> <[all].exclude[<[chosen]>]>
+  - flag <[chosen]> easter_egg.active expire:<[duration]>
+  - flag server easter_egg.session.active expire:<[duration]>
+  - flag server easter_egg.session.current:<[chosen]>
+  - announce "The Easter Bunny has planted eggs in hub."
