@@ -32,25 +32,25 @@ easter_egg_events:
       weight: 1
       skin: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTUxNTk5ZjY2ZTgzZGE1NTVjZjliOGI3ZTVhMzc5ZDBkZWFiMjFjMmVlZTkwOWQxODM3MzIzZGIwODkzYmYzOCJ9fX0=
   events:
-    # on player places easter_egg_item:
-    # - define pool <list[]>
-    # - foreach <script.data_key[skins].keys> as:type:
-    #   - define pool:|:<element[<[type]>|].repeat[<script.data_key[skins.<[type]>.weight]>].as_list>
-    # - define type <[pool].random>
-    # - define skin <script.data_key[skins.<[type]>.skin]>
-    # - adjust <context.location> skull_skin:<util.random_uuid>|<[skin]>
-    # - define counter <server.flag[easter_egg.counter].add[1].if_null[1]>
-    # - flag server easter_egg.counter:<[counter]>
-    # - flag <context.location> easter_egg.number:<[counter]>
-    # - flag <context.location> easter_egg.type:<[type]>
-    # - announce "Placed a <[type]> egg at <context.location.simple>: <[counter]>"
-    # on player breaks block:
-    # - stop if:<context.location.has_flag[easter_egg].not>
-    # - define type <context.location.flag[easter_egg.type]>
-    # - define counter <server.flag[easter_egg.counter].sub[1].if_null[0]>
-    # - announce "Breaked a <[type]> egg <context.location.flag[easter_egg.number]>. Counter: <[counter]>"
-    # - flag <context.location> easter_egg:!
-    # - flag server easter_egg.counter:-:1
+    on player places easter_egg_item:
+    - define pool <list[]>
+    - foreach <script.data_key[skins].keys> as:type:
+      - define pool:|:<element[<[type]>|].repeat[<script.data_key[skins.<[type]>.weight]>].as_list>
+    - define type <[pool].random>
+    - define skin <script.data_key[skins.<[type]>.skin]>
+    - adjust <context.location> skull_skin:<util.random_uuid>|<[skin]>
+    - define counter <server.flag[easter_egg.counter].add[1].if_null[1]>
+    - flag server easter_egg.counter:<[counter]>
+    - flag <context.location> easter_egg.number:<[counter]>
+    - flag <context.location> easter_egg.type:<[type]>
+    - announce "Placed a <[type]> egg at <context.location.simple>: <[counter]>"
+    on player breaks block:
+    - stop if:<context.location.has_flag[easter_egg].not>
+    - define type <context.location.flag[easter_egg.type]>
+    - define counter <server.flag[easter_egg.counter].sub[1].if_null[0]>
+    - announce "Breaked a <[type]> egg <context.location.flag[easter_egg.number]>. Counter: <[counter]>"
+    - flag <context.location> easter_egg:!
+    - flag server easter_egg.counter:-:1
     on player joins:
     - adjust <player> noclip:true
     - stop if:<player.has_permission[easter.see_eggs].not>
