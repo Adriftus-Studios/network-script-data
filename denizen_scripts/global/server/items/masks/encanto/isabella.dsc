@@ -16,7 +16,9 @@ mask_encanto_isabella_vines:
   type: task
   debug: false
   script:
-    - define target <player.eye_location.precise_cursor_on.center>
+    - define target <player.eye_location.precise_cursor_on>
+    - define vector <[target].sub[<player.location>].normalize.mul[0.5]>
+    - define target <[target].sub[<[vector]>]>
     - define points <player.eye_location.points_between[<[target]>].distance[0.3]>
     - define players <player.location.find_players_within[60]>
     - foreach <[points]>:
