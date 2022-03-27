@@ -71,3 +71,4 @@ easter_egg_events:
     - define type <context.location.flag[easter_egg.type]>
     - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
     - narrate "You found a <[type].replace[_].with[ ].to_titlecase> Easter Egg."
+    - showfake <context.location> air players:<player> d:<server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
