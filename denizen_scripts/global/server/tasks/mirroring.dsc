@@ -30,7 +30,7 @@ mirroring_transfer_entities:
     - foreach <[chunk].entities.filter[entity_type.equals[player].not]>:
       - define map <[map].with[<[value].location>].as[<[value].describe>]>
     - if <[map].size> > 0:
-      - bungeerun <[server]> def:<[chunk]>|<[map]>
+      - bungeerun <[server]> mirroring_paste_entities def:<[chunk]>|<[map]>
 
 mirroring_paste_entities:
   type: task
