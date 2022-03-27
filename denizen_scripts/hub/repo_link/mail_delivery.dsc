@@ -99,8 +99,6 @@ mail_delivery_events:
       - foreach <context.inventory.map_slots> key:slot as:item:
         - if <[item].flag[mailbox_number].equals[<[mailbox]>].not.if_null[true]>:
           - inventory set d:<context.inventory> slot:<[slot]> o:air
-          - narrate <[item].flag[mailbox_number]>
-          - narrate <[mailbox]>
           - give to:<player.inventory> <[item]>
         - else:
           - narrate "Delivered <[item].display>"

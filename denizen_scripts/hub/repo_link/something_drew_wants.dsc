@@ -72,7 +72,7 @@ easter_egg_events:
     - stop if:<context.location.has_flag[easter_egg.active].not.if_null[true]>
     - define duration 1h
     - define type <context.location.flag[easter_egg.type]>
-    - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
+    # - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
     - narrate "<element[You found a <[type].replace[_].with[ ].to_titlecase> Easter Egg.].rainbow>"
     - showfake <context.location> air players:<player> d:<server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
     - playsound sound:entity_experience_orb_pickup volume:10 <player>
