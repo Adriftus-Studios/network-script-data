@@ -168,3 +168,10 @@ mask_loop:
           - define targets <player.location.find_players_within[50]>
         - playeffect at:<player.location.above> effect:<[effect]> offset:<[offset]> quantity:<[quantity]> targets:<[targets]>
         - wait <[rate]>t
+
+mask_ability_use:
+  type: task
+  debug: false
+  script:
+    - if <yaml[global.player.<player.uuid>].contains[masks.current.ability]>:
+      - run <yaml[global.player.<player.uuid>].read[masks.current.ability.task]>

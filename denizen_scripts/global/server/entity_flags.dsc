@@ -78,3 +78,12 @@ entity_flags:
     on player right clicks fake entity:
       - stop if:<context.entity.has_flag[right_click_script].not>
       - inject <context.entity.flag[right_click_script]>
+    on player right clicks block flagged:player_right_clicks:
+      - inject <player.flag[player_right_clicks]>
+    on player right clicks block flagged:shift_player_right_clicks:
+      - if <player.is_sneaking>:
+        - if <player.flag[shift_player_right_clicks].object_type> == List:
+          - foreach <player.flag[shift_player_right_clicks]>:
+            - inject <[value]>
+        - else:
+          - inject <player.flag[shift_player_right_clicks]>
