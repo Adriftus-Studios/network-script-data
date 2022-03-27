@@ -66,7 +66,7 @@ easter_egg_events:
     - flag server easter_egg.session.active expire:<[duration]>
     - announce "The Easter Bunny has planted eggs in hub."
     on player right clicks block:
-    - stop if:<context.location.has_flag[easter_egg.active].not>
+    - stop if:<context.location.has_flag[easter_egg.active].not.if_null[true]>
     - define duration 1h
     - define type <context.location.flag[easter_egg.type]>
     - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
