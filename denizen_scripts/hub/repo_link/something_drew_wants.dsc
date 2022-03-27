@@ -53,6 +53,7 @@ easter_egg_events:
     # - flag server easter_egg.counter:-:1
     on player joins:
     - adjust <player> noclip:true
+    - stop if:<player.has_permission[easter.see_eggs].not>
     - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
     - showfake players:<player> air d:<server.flag_expiration[easter_egg.session.active].from_now> <[all].exclude[<server.flag[easter_egg.session.current]>]>
     on player quit:
@@ -63,7 +64,7 @@ easter_egg_events:
     - define quantity_to_spawn 40
     - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
     - define chosen <[all].random[<[quantity_to_spawn]>]>
-    - showfake players:<server.online_players> air d:<[duration]> <[all].exclude[<[chosen]>]>
+    - showfake players:<server.online_players.filter[has_permission[easter.see_eggs]]> air d:<[duration]> <[all].exclude[<[chosen]>]>
     - flag <[chosen]> easter_egg.active expire:<[duration]>
     - flag server easter_egg.session.active expire:<[duration]>
     - flag server easter_egg.session.current:<[chosen]>
