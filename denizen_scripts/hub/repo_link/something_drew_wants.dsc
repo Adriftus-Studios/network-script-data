@@ -53,21 +53,28 @@ easter_egg_events:
     # - flag server easter_egg.counter:-:1
     on player joins:
     - adjust <player> noclip:true
+    - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
+    - showfake players:<player> air d:<server.flag_expiration[easter_egg.session.active].from_now> <[all].exclude[<server.flag[easter_egg.session.current]>]>
     on player quit:
     - adjust <player> noclip:false
     on delta time hourly:
     # <cuboid[spawn_cuboid].blocks_flagged[easter_egg].filter[material.name.equals[PLAYER_HEAD]].size>
     - define duration 1h
-    - define quantity_to_spawn 100
+    - define quantity_to_spawn 40
     - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
     - define chosen <[all].random[<[quantity_to_spawn]>]>
     - showfake players:<server.online_players> air d:<[duration]> <[all].exclude[<[chosen]>]>
     - flag <[chosen]> easter_egg.active expire:<[duration]>
     - flag server easter_egg.session.active expire:<[duration]>
+    - flag server easter_egg.session.current:<[chosen]>
     - announce "The Easter Bunny has planted eggs in hub."
     on player right clicks block:
-    - stop if:<context.location.has_flag[easter_egg.active].not>
+    - stop if:<context.location.has_flag[easter_egg.active].not.if_null[true]>
     - define duration 1h
     - define type <context.location.flag[easter_egg.type]>
-    - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
-    - narrate "You found a <[type].replace[_].with[ ].to_titlecase> Easter Egg."
+    # - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
+    - narrate "<element[You found a <[type].replace[_].with[ ].to_titlecase> Easter Egg.].rainbow>"
+    - showfake <context.location> air players:<player> d:<server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
+    - playsound sound:entity_experience_orb_pickup volume:10 <player>
+    - flag <player> easter_egg.session.found.<[type]>:+:1
+    - flag <player> easter_egg.easter_token:+:1
