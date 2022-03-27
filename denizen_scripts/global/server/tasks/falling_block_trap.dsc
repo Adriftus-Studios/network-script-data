@@ -9,9 +9,3 @@ falling_block_trap:
     - flag <entry[block].spawned_entity> on_fall:cancel
     - wait 5s
     - modifyblock <context.location> <[material]>
-
-cancel:
-  type: task
-  debug: false
-  script:
-    - determine cancelled
