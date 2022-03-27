@@ -53,6 +53,8 @@ easter_egg_events:
     # - flag server easter_egg.counter:-:1
     on player joins:
     - adjust <player> noclip:true
+    - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
+    - showfake players:<player> air d:<server.flag_expiration[easter_egg.session.active]> <[all].exclude[<server.flag[easter_egg.session.current]>]>
     on player quit:
     - adjust <player> noclip:false
     on delta time hourly:
@@ -64,6 +66,7 @@ easter_egg_events:
     - showfake players:<server.online_players> air d:<[duration]> <[all].exclude[<[chosen]>]>
     - flag <[chosen]> easter_egg.active expire:<[duration]>
     - flag server easter_egg.session.active expire:<[duration]>
+    - flag server easter_egg.session.current:<[chosen]>
     - announce "The Easter Bunny has planted eggs in hub."
     on player right clicks block:
     - stop if:<context.location.has_flag[easter_egg.active].not.if_null[true]>
