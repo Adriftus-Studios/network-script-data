@@ -4,7 +4,7 @@ teleportation_animation_run:
   definitions: destination
   script:
     - if <yaml[global.player.<player.uuid>].contains[animations.teleportation.current.colorable]>:
-      - define color <yaml[global.player.<player.uuid>].read[animations.teleportation.current.color]>
+      - define color <yaml[global.player.<player.uuid>].read[animations.teleportation.current.color]||white>
     - else:
       - define color white
     - if <yaml[global.player.<player.uuid>].contains[animations.teleportation.current]>:
