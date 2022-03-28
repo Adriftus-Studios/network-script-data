@@ -161,6 +161,14 @@ mail_delivery_menu_inventory:
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [mail_delivery_icon_help] [standard_filler] [standard_filler] [standard_filler] [mail_delivery_icon_stop] [standard_filler] [standard_filler]
 
+mail_delivery_menu_inventory_npc_interaction:
+    type: interact
+    steps:
+        1:
+            click trigger:
+                script:
+                    - inventory open d:mail_delivery_menu_inventory
+
 mail_delivery_menu_events:
   type: world
   debug: false
