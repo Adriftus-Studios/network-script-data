@@ -129,7 +129,7 @@ chat_delete_message:
       - wait 1t
     - if <[lock]||false>:
       - run chatlock_task def:<[message].get[sender]>|<[message]>
-    - inject chat_interact_cancel
+    - inject chat_unpause
 
 chatdelete_command:
   type: command
@@ -174,7 +174,7 @@ chatlock_task:
       - define message "<&c>You have been chat locked for the above message. You are restricted to speaking in the <&b>Anarchy<&c> channel only."
       - define chatlock_notification <[border]><&nl><&nl><[message_map].get[message]><&nl><&nl><[message]><&nl><[border]>
       - run bungee_send_message def:<[uuid]>|system|<[chatlock_notification]>
-      - inject chat_interact_cancel
+      - inject chat_unpause
       - narrate "<&a>Player <&b><server.flag[player_map.uuids.<[uuid]>.name]> <&a>has been Chat Locked."
     - else:
       - run global_player_data_modify def:<[uuid]>|chat.locked|true
@@ -240,15 +240,13 @@ chat_interact:
     - if !<player.has_permission[adriftus.chat.moderate]>:
       - stop
     - if <context.args.get[2]> == cancel:
-      - inject chat_interact_cancel
+      - inject chat_unpause
       - stop
     - if <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].contains[<context.args.get[2]>]>:
       - define message <yaml[chat_history].parsed_key[<context.args.get[2]>_history].filter_tag[<[filter_value].get[uuid].equals[<context.args.get[3]>]>]>
       - if !<[message].is_empty>:
         - define message <[message].get[1]>
-        - flag player chat.paused:<player.flag[chat.channels].keys>
-        - flag player chat.channels:!
-        - narrate <element[<&nl>].repeat_as_list[40].separated_by[<&nl>]>
+        - run chat_pause
         - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
         - narrate <&nl><&nl><[message].get[message]><&nl>
         - define list "<element[<&c><&lb>Delete<&rb><&r>].on_hover[<&c>Delete this message].on_click[/chatdelete <context.args.get[2]> <[message].get[uuid]>].type[run_command]>"
@@ -258,7 +256,15 @@ chat_interact:
         - narrate <element[------------------].color_gradient[from=<color[aqua]>;to=<color[white]>]>
     - stop
 
-chat_interact_cancel:
+chat_pause:
+  type: task
+  debug: false
+  script:
+    - flag player chat.paused:<player.flag[chat.channels].keys>
+    - flag player chat.channels:!
+    - narrate <element[<&nl>].repeat_as_list[40].separated_by[<&nl>]>
+
+chat_unpause:
   type: task
   debug: false
   script:
