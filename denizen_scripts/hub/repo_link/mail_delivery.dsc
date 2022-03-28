@@ -103,6 +103,7 @@ mail_delivery_events:
         - else:
           - narrate "Delivered <[item].display>"
           - flag <player> mail_delivery.current.todo.<[mailbox]>:-:1
+      - wait 1t
       - run mail_delivery_complete def:<player> if:<player.flag[mail_delivery.current.todo].values.sum.if_null[1].equals[0]>
       - note remove as:<context.inventory.note_name>
     on player drops mail_delivery_mail_item:
