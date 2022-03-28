@@ -1,6 +1,6 @@
 player_crafting_slots_override_events:
   type: world
-  debug: true
+  debug: false
   data:
     items:
       - "crafting_table[display=<&e>Crafting Table;flag=run_script:player_crafting_slots_open_button;flag=on_drop:cancel;flag=grid_script:open_crafting_grid;flag=no_drop_on_death:true]"
