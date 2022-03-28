@@ -18,9 +18,6 @@ mail_delivery_start:
   script:
   - define difficulty <[difficulty].if_null[easy]>
   - adjust <queue> linked_player:<[player]> if:<[player].exists>
-  - if <player.inventory.empty_slots> < 18:
-    - narrate "<&c>You have too many items in your inventory to begin this challenge."
-    - stop
   - if <player.location.is_within[mail_delivery_area].not>:
     - narrate "<&c>You are outside the challenge area."
     - stop
