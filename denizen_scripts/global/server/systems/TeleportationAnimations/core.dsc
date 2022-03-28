@@ -3,10 +3,6 @@ teleportation_animation_run:
   debug: false
   definitions: destination
   script:
-    - if <yaml[global.player.<player.uuid>].contains[animations.teleportation.current.colorable]>:
-      - define color <yaml[global.player.<player.uuid>].read[animations.teleportation.current.color].if_null[white]>
-    - else:
-      - define color white
     - if <yaml[global.player.<player.uuid>].contains[animations.teleportation.current]>:
       - inject <yaml[global.player.<player.uuid>].read[animations.teleportation.current.task]>
     - else:

@@ -32,8 +32,8 @@ teleportation_animation_wisp_away_run:
     - define points <proc[define_curve1].context[<player.location>|<player.location.add[<[vector]>]>|5|90|1]>
     - define original_y <player.location.y>
     - repeat 10:
-      - playeffect at:<player.location> offset:0.4 effect:redstone special_data:5|<[color]> quantity:30 targets:<[targets]>
-      - wait 2t
+      - playeffect at:<player.location.above> offset:0.5 effect:redstone special_data:5|<[color]> quantity:30 targets:<[targets]>
+      - wait 1t
     - adjust <player> gamemode:spectator
     - adjust <player> gravity:false
     - adjust <player> can_fly:false
@@ -48,7 +48,7 @@ teleportation_animation_wisp_away_run:
       - adjust <player> velocity:0,-0.51,0
       - wait 2t
     - adjust <player> gamemode:<[gamemode]>
-    - adjust <player> gravity:true
     - repeat 3:
       - playeffect at:<[destination]> offset:<element[1].mul[<[value]>]> effect:redstone special_data:5|<[color]> quantity:<element[30].mul[<[value]>]> targets:<[targets]>
       - wait 1t
+    - adjust <player> gravity:true
