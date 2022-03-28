@@ -25,6 +25,7 @@ teleportation_animation_default_run:
   debug: true
   definitions: destination|color
   script:
+    - title title:<&font[adriftus:overlay]><&chr[0004]><&chr[F801]><&chr[0004]> fade_in:5t stay:10t fade_out:5t
     - repeat 5:
       - playeffect at:<player.location.above> offset:0.4 effect:redstone special_data:5|<[color]> quantity:20
       - wait 1t
