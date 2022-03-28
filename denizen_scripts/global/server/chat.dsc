@@ -260,6 +260,8 @@ chat_pause:
   type: task
   debug: false
   script:
+    - if <player.has_flag[chat.paused]>:
+      - stop
     - flag player chat.paused:<player.flag[chat.channels].keys>
     - flag player chat.channels:!
     - narrate <element[<&nl>].repeat_as_list[40].separated_by[<&nl>]>
