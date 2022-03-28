@@ -9,7 +9,7 @@ resource_pack_force:
   type: world
   debug: false
   events:
-    on player joins:
+    after player joins:
       - if !<player.has_flag[RP_Enabled]> || <player.flag[RP_Enabled]> != <server.flag[rp_sha]>:
         - resourcepack targets:<player> url:http://www.adriftus.net:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced if:<player.has_flag[rp_bypass].not>
     on resource pack status:
