@@ -12,3 +12,9 @@ item_flags:
       - inject <context.item.flag[on_drop]>
     on player dies:
       - determine <context.drops.filter[has_flag[no_drop_on_death].not]>
+    on player right clicks block with:item_flagged:right_click_script:
+      - if <context.item.flag[right_click_script].object_type> == List:
+        - foreach <context.item.flag[right_click_script]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[right_click_script]>
