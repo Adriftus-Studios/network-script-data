@@ -21,7 +21,6 @@ mail_delivery_start:
   - if <player.location.is_within[mail_delivery_area].not>:
     - narrate "<&c>You are outside the challenge area."
     - stop
-  - define slots <list[1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36].exclude[<player.inventory.map_slots.keys>]>
   # - define slots <[slots].random[<script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>]>
   # - if <[slots].size> < <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>:
   #   - narrate "<&c>You do not have enough empty slots in your inventory."
@@ -29,6 +28,7 @@ mail_delivery_start:
   - flag <player> minigame.active
   - flag <player> mail_delivery.current.inventory:<player.inventory.map_slots>
   - inventory clear d:<player.inventory>
+  - define slots <list[1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36].exclude[<player.inventory.map_slots.keys>]>
   - foreach <[slots]> as:slot:
     # - define mailbox_number <[loop_index].mod[1].add[1]>
     - define mailbox_number <[loop_index].mod[6].add[1]>
@@ -98,11 +98,10 @@ mail_delivery_end:
   - inventory close player:<player>
   - wait 1t
   - take slot:<player.inventory.find_all_items[mail_delivery_mail_item]> from:<player.inventory>
-  - flag <player> mail_delivery.current:!
-  - flag <player> minigame.active:!
-  - wait 1t
   - foreach <player.flag[mail_delivery.current.inventory].if_null[<map[]>]> key:slot as:item:
     - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
+  - flag <player> mail_delivery.current:!
+  - flag <player> minigame.active:!
 
 mail_delivery_events:
   type: world
