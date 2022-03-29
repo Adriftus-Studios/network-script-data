@@ -248,21 +248,20 @@ mail_delivery_icon_help:
   material: crafting_table
   display name: <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+--------------------------+<&r>  <&8><&m>-｜<&b><&m>---
   lore:
-  - <&3>Mail Delivery!
-  - <&7>The post-master is shorthanded,
-  - <&7>and needs these packages delivered ASAP,
-  - <&7>or the customer gets a refund. <&o>*shiver*
+  - <&3>* <&e>Name: Mail Delivery!
+  - <&7>* <&e>Description: <&7>The post-master is shorthanded,
+  - <&7>* and needs these packages delivered ASAP,
+  - <&7>* or the customer gets a refund. <&o>*shiver*
   - <&r>
-  - <&7>Help the post-master deliver all of the packages on time.
+  - <&7>* Help the post-master deliver all of the packages on time.
   - <&7>
-  - <&7>Around the area, you should see mail-boxes
-  - <&7>with a coresponding number above them.
-  - <&7>Deliver the the packages to the
-  - <&7>address you see on the box. This is a
-  - <&7>timed event, and your score is being recorded!
-  - <&7>Who knows, maybe you could be the next post master.
+  - <&7>* Around the area, you should see mail-boxes
+  - <&7>* with a coresponding number above them.
+  - <&7>* Deliver the the packages to the
+  - <&7>* address you see on the box. This is a
+  - <&7>* timed event, and your score is being recorded!
+  - <&7>* Who knows, maybe you could be the next post master.
   - <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+--------------------------+<&r>  <&8><&m>-｜<&b><&m>---
-  - <&r>
 
 mail_delivery_icon_start_easy:
   type: item
