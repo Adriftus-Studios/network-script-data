@@ -102,7 +102,7 @@ easter_egg_view_command:
   - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
   - showfake <[all]> cancel players:<player>
   - foreach <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>:
-    - fakespawn easter_egg_view_point_entity <[value]> d:<server.flag_expiration[easter_egg.session.active].from_now.if_null[1h]>
+    - fakespawn easter_egg_view_point_entity <[value].center> d:<server.flag_expiration[easter_egg.session.active].from_now.if_null[1h]>
 
 easter_egg_view_point_entity:
   type: entity
