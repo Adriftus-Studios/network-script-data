@@ -231,14 +231,14 @@ mail_delivery_icon_help:
 mail_delivery_icon_start_easy:
   type: item
   material: iron_ingot
-  display name: Start<&co> <&a>Easy
+  display name: <&7>Start -- <&l><&a>Easy <&r><&a>[5 Minute]
 
 mail_delivery_icon_start_medium:
   type: item
   material: gold_ingot
-  display name: Start<&co> <&6>Medium
+  display name: <&7>Start -- <&l><&6>Medium <&r><&6>[2 Minute]
 
 mail_delivery_icon_start_hard:
   type: item
   material: diamond
-  display name: Start<&co> <&c>Hard
+  display name: <&7>Start -- <&l><&c>Hard <&r><&c>[1 Minute]
