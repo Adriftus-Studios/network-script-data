@@ -246,10 +246,8 @@ mail_delivery_icon_stop:
 mail_delivery_icon_help:
   type: item
   material: crafting_table
-  display name: <&3><&l>Minigame explanation.
+  display name: <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+--------------------------+<&r>  <&8><&m>-｜<&b><&m>---
   lore:
-  - <&r>
-  - <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+--------------------------+<&r>  <&8><&m>-｜<&b><&m>---
   - <&3>Mail Delivery!
   - <&7>The post-master is shorthanded,
   - <&7>and needs these packages delivered ASAP,
