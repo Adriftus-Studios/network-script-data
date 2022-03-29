@@ -203,6 +203,7 @@ mail_delivery_menu_events:
   debug: false
   events:
     on player clicks item in mail_delivery_menu_inventory:
+    - narrate <context.raw_slot>
     - stop if:<context.item.script.exists.not>
     - choose <context.item.script.name>:
       - case mail_delivery_icon_start_easy:
