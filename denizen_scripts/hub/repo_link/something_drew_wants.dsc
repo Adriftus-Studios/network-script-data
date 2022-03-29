@@ -102,12 +102,12 @@ easter_egg_view_command:
   - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
   - showfake <[all]> cancel players:<player>
   - foreach <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>:
-    - fakespawn easter_egg_view_point_entity <[value]>
+    - fakespawn easter_egg_view_point_entity <[value]> d:<server.flag_expiration[easter_egg.session.active].from_now.if_null[1h]>
 
 easter_egg_view_point_entity:
   type: entity
   entity_type: falling_block
   mechanisms:
-    fallingblock_type: bedrock
+    fallingblock_type: player_head
     glowing: true
     gravity: false
