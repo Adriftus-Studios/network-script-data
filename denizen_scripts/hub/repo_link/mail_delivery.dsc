@@ -130,6 +130,8 @@ mail_delivery_events:
     on player exits mail_delivery_area:
     - stop if:<player.has_flag[mail_delivery.current].not>
     - run mail_delivery_fail_area def:<player>
+    on player clicks in inventory:
+    - narrate <context.raw_slot>
 
 mail_delivery_mail_item:
   type: item
