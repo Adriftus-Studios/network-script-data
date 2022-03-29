@@ -196,17 +196,27 @@ mail_delivery_menu_inventory:
         4: 26
         5: 27
   slots:
-  - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [standard_filler] [standard_filler] [] [] [] [] []
-  - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [standard_filler] [standard_filler] [] [] [] [] []
-  - [mail_delivery_icon_start_hard] [mail_delivery_icon_start_hard] [standard_filler] [standard_filler] [] [] [] [] []
-  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-  - [standard_filler] [standard_filler] [mail_delivery_icon_help] [standard_filler] [standard_filler] [standard_filler] [mail_delivery_icon_stop] [standard_filler] [standard_filler]
+  - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [] [] [] [] [] [] []
+  - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [] [] [] [] [] [] []
+  - [mail_delivery_icon_start_hard] [mail_delivery_icon_start_hard] [] [] [] [] [] [] []
+  - [] [] [] [] [] [] [] [] []
+  - [] [] [mail_delivery_icon_help] [] [] [] [mail_delivery_icon_stop] [] []
+
+mail_delivery_open_menu:
+  type: task
+  debug: false
+  definitions: player
+  script:
+  - adjust <queue> linked_player:<[player]> if:<[player].exists>
+  - define inv <inventory[mail_delivery_menu_inventory]>
+
+  - inventory open d:<[inv]>
 
 mail_delivery_menu_inventory_npc_assignment:
   type: assignment
   actions:
     on click:
-    - inventory open d:mail_delivery_menu_inventory
+    - run mail_delivery_open_menu def:<player>
 
 mail_delivery_menu_events:
   type: world
@@ -237,7 +247,14 @@ mail_delivery_icon_stop:
 mail_delivery_icon_help:
   type: item
   material: crafting_table
-  display name: TODO<&co> Minigame explanation.
+  display name: Minigame explanation.
+  lore:
+  - Mail Delivery! The post-master is shorthanded, and needs
+  - these packages delivered ASAP, or the customer gets a refund *shiver*.
+  - Help the post-master deliver all of the packages on time.
+  - Around the area, you should see mail-boxes with a coresponding number above them.
+  - Deliver the the packages to the address you see on the box. This is a timed
+  - event, and your score is being recorded! Who knows, maybe you could be the next post master.
 
 mail_delivery_icon_start_easy:
   type: item
