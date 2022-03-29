@@ -186,11 +186,11 @@ mail_delivery_menu_inventory:
         - define items:|:<item[player_head]>
   - determine <[items]>
   slots:
-  - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [standard_filler] [standard_filler] [] [] [] [] []
-  - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [standard_filler] [standard_filler] [] [] [] [] []
-  - [mail_delivery_icon_start_hard] [mail_delivery_icon_start_hard] [standard_filler] [standard_filler] [] [] [] [] []
-  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-  - [standard_filler] [standard_filler] [mail_delivery_icon_help] [standard_filler] [standard_filler] [standard_filler] [mail_delivery_icon_stop] [standard_filler] [standard_filler]
+  - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [] [] [] [] [] [] []
+  - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [] [] [] [] [] [] []
+  - [mail_delivery_icon_start_hard] [mail_delivery_icon_start_hard] [] [] [] [] [] [] []
+  - [] [] [] [] [] [] [] [] []
+  - [] [] [mail_delivery_icon_help] [] [] [] [mail_delivery_icon_stop] [] []
 
 mail_delivery_menu_inventory_npc_assignment:
   type: assignment
@@ -230,15 +230,21 @@ mail_delivery_icon_help:
 
 mail_delivery_icon_start_easy:
   type: item
-  material: iron_ingot
+  material: feather
   display name: <&7>Start -- <&l><&a>Easy <&r><&a>[5 Minute]
+  mechanisms:
+    custom_model_data: 3
 
 mail_delivery_icon_start_medium:
   type: item
-  material: gold_ingot
+  material: feather
   display name: <&7>Start -- <&l><&6>Medium <&r><&6>[2 Minute]
+  mechanisms:
+    custom_model_data: 3
 
 mail_delivery_icon_start_hard:
   type: item
-  material: diamond
+  material: feather
   display name: <&7>Start -- <&l><&c>Hard <&r><&c>[1 Minute]
+  mechanisms:
+    custom_model_data: 3
