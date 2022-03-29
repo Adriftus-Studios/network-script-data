@@ -3,13 +3,16 @@ mail_delivery_config:
   difficulties:
     easy:
       time: 5m
-      mail_items: 6
+      mail_items_min: 6
+      mail_items_max: 9
     medium:
       time: 2m
-      mail_items: 12
+      mail_items_min: 12
+      mail_items_max: 18
     hard:
       time: 1m
-      mail_items: 18
+      mail_items_min: 18
+      mail_items_max: 27
 
 mail_delivery_start:
   type: task
@@ -29,8 +32,7 @@ mail_delivery_start:
   - flag <player> mail_delivery.current.inventory:<player.inventory.map_slots>
   - inventory clear d:<player.inventory>
   - define slots <list[1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36].exclude[<player.inventory.map_slots.keys>]>
-  - foreach <[slots].random[<script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>]> as:slot:
-    # - define mailbox_number <[loop_index].mod[1].add[1]>
+  - foreach <[slots].random[<util.random.int[<script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items_min]>].to[<script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items_max]>]>]> as:slot:
     - define mailbox_number <[loop_index].mod[6].add[1]>
     - define item <proc[mail_delivery_generate_item].context[<[mailbox_number]>]>
     - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
