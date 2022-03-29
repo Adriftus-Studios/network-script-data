@@ -1,4 +1,4 @@
-teleport:
+teleport_task:
   type: task
   debug: false
   definitions: destination
