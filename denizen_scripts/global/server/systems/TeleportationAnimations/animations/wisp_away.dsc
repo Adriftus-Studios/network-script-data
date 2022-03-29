@@ -51,4 +51,5 @@ teleportation_animation_wisp_away_run:
     - repeat 3:
       - playeffect at:<[destination]> offset:<element[1].mul[<[value]>]> effect:redstone special_data:5|<[color]> quantity:<element[30].mul[<[value]>]> targets:<[targets]>
       - wait 1t
+    - adjust <player> fall_distance:0
     - adjust <player> gravity:true
