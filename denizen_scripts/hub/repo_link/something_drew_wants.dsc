@@ -108,6 +108,6 @@ easter_egg_view_point_entity:
   type: entity
   entity_type: falling_block
   mechanisms:
-    fallingblock_type: barrier
+    fallingblock_type: bedrock
     glowing: true
     gravity: false
