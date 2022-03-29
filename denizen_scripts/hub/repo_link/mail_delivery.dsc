@@ -251,14 +251,16 @@ mail_delivery_icon_help:
   - <&7>Mail Delivery! The post-master is
   - <&7>shorthanded, and needs these packages
   - <&7>delivered ASAP, or the customer gets a
-  - <&7>refund *shiver*. Help the post-master
-  - <&7>deliver all of the packages on time.
+  - <&7>refund. <&o>*shiver*
+  - <&r>
+  - <&7>Help the post-master deliver all of the packages on time.
+  - <&7>
   - <&7>Around the area, you should see mail-boxes
   - <&7>with a coresponding number above them.
-  - <&7>Deliver the the packages to the address
-  - <&7>you see on the box. This is a timed event,
-  - <&7>and your score is being recorded! Who knows,
-  - <&7>maybe you could be the next post master.
+  - <&7>Deliver the the packages to the
+  - <&7>address you see on the box. This is a
+  - <&7>timed event, and your score is being recorded!
+  - <&7>Who knows, maybe you could be the next post master.
 
 mail_delivery_icon_start_easy:
   type: item
