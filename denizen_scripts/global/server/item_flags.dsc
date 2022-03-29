@@ -3,7 +3,11 @@ item_flags:
   debug: false
   events:
     on player clicks item_flagged:run_script in inventory bukkit_priority:LOWEST:
-      - inject <context.item.flag[run_script]>
+      - if <context.item.flag[run_script].object_type> == List:
+        - foreach <context.item.flag[run_script]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[run_script]>
     on player clicks item_flagged:cancelled in inventory bukkit_priority:LOWEST:
       - determine cancelled
     on player drops item_flagged:no_drop bukkit_priority:LOWEST:

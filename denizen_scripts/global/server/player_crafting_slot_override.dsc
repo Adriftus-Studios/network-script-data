@@ -3,10 +3,10 @@ player_crafting_slots_override_events:
   debug: false
   data:
     items:
-      - "crafting_table[display=<&e>Crafting Table;flag=run_script:!|:cancel_in_minigame|player_crafting_slots_open_button;flag=on_drop:cancel;flag=grid_script:open_crafting_grid;flag=no_drop_on_death:true]"
-      - "stone[display=<&6>Adriftus Chest;flag=run_script:!|:cancel_in_minigame|player_crafting_slots_open_button;flag=on_drop:cancel;flag=grid_script:adriftus_chest_inventory_open;flag=no_drop_on_death:true;custom_model_data=1]"
-      - "piston[display=<&b>Menu;flag=run_script:!|:cancel_in_minigame|player_crafting_slots_open_button;flag=on_drop:cancel;flag=grid_script:main_menu_inventory_open;flag=no_drop_on_death:true]"
-      - "feather[display=<&a>Travel;flag=run_script:!|:cancel_in_minigame|player_crafting_slots_open_button;flag=on_drop:cancel;flag=grid_script:travel_menu_open;flag=no_drop_on_death:true]"
+      - "crafting_table[display=<&e>Crafting Table;flag=run_script:|:<list[cancel_in_minigame|player_crafting_slots_open_button]>;flag=on_drop:cancel;flag=grid_script:open_crafting_grid;flag=no_drop_on_death:true]"
+      - "stone[display=<&6>Adriftus Chest;flag=run_script:|:<list[cancel_in_minigame|player_crafting_slots_open_button]>;flag=on_drop:cancel;flag=grid_script:adriftus_chest_inventory_open;flag=no_drop_on_death:true;custom_model_data=1]"
+      - "piston[display=<&b>Menu;flag=run_script:|:<list[cancel_in_minigame|player_crafting_slots_open_button]>;flag=on_drop:cancel;flag=grid_script:main_menu_inventory_open;flag=no_drop_on_death:true]"
+      - "feather[display=<&a>Travel;flag=run_script:|:<list[cancel_in_minigame|player_crafting_slots_open_button]>;flag=on_drop:cancel;flag=grid_script:travel_menu_open;flag=no_drop_on_death:true]"
   set_inv:
       - define inv <player.open_inventory>
       - repeat 5:
