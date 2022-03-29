@@ -246,7 +246,7 @@ mail_delivery_icon_stop:
 mail_delivery_icon_help:
   type: item
   material: crafting_table
-  display name: <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+---------------------------------+<&r>  <&8><&m>-｜<&b><&m>---
+  display name: <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+----------------------------------+<&r>  <&8><&m>-｜<&b><&m>---
   lore:
   - <&7>* <&e>Name: Mail Delivery!
   - <&7>* <&e>Description: <&7>The post-master is shorthanded,
@@ -261,7 +261,7 @@ mail_delivery_icon_help:
   - <&7>  address you see on the box. This is a
   - <&7>  timed event, and your score is being recorded!
   - <&7>  Who knows, maybe you could be the next post master.
-  - <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+---------------------------------+<&r>  <&8><&m>-｜<&b><&m>---
+  - <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+----------------------------------+<&r>  <&8><&m>-｜<&b><&m>---
 
 mail_delivery_icon_start_easy:
   type: item
