@@ -247,14 +247,14 @@ mail_delivery_icon_stop:
 mail_delivery_icon_help:
   type: item
   material: crafting_table
-  display name: Minigame explanation.
+  display name: <&3>Minigame explanation.
   lore:
-  - Mail Delivery! The post-master is shorthanded, and needs
-  - these packages delivered ASAP, or the customer gets a refund *shiver*.
-  - Help the post-master deliver all of the packages on time.
-  - Around the area, you should see mail-boxes with a coresponding number above them.
-  - Deliver the the packages to the address you see on the box. This is a timed
-  - event, and your score is being recorded! Who knows, maybe you could be the next post master.
+  - <&7>Mail Delivery! The post-master is shorthanded, and needs
+  - <&7>these packages delivered ASAP, or the customer gets a refund *shiver*.
+  - <&7>Help the post-master deliver all of the packages on time.
+  - <&7>Around the area, you should see mail-boxes with a coresponding number above them.
+  - <&7>Deliver the the packages to the address you see on the box. This is a timed
+  - <&7>event, and your score is being recorded! Who knows, maybe you could be the next post master.
 
 mail_delivery_icon_start_easy:
   type: item
