@@ -248,7 +248,7 @@ mail_delivery_icon_help:
   material: crafting_table
   display name: <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+--------------------------+<&r>  <&8><&m>-｜<&b><&m>---
   lore:
-  - <&3>* <&e>Name: Mail Delivery!
+  - <&7>* <&e>Name: Mail Delivery!
   - <&7>* <&e>Description: <&7>The post-master is shorthanded,
   - <&7>* and needs these packages delivered ASAP,
   - <&7>* or the customer gets a refund. <&o>*shiver*
