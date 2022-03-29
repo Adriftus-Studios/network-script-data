@@ -18,14 +18,14 @@ mail_delivery_start:
   script:
   - define difficulty <[difficulty].if_null[easy]>
   - adjust <queue> linked_player:<[player]> if:<[player].exists>
-  - if <player.inventory.empty_slots> < 18:
-    - narrate "<&c>You have too many items in your inventory to begin this challenge."
-    - stop
   - if <player.location.is_within[mail_delivery_area].not>:
     - narrate "<&c>You are outside the challenge area."
     - stop
   - define slots <list[1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36].exclude[<player.inventory.map_slots.keys>]>
   - define slots <[slots].random[<script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>]>
+  - if <[slots].size> < <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>:
+    - narrate "<&c>You do not have enough empty slots in your inventory."
+    - stop
   - foreach <[slots]> as:slot:
     # - define mailbox_number <[loop_index].mod[1].add[1]>
     - define mailbox_number <[loop_index].mod[6].add[1]>
@@ -72,11 +72,9 @@ mail_delivery_end:
   definitions: player
   script:
   - adjust <queue> linked_player:<[player]> if:<[player].exists>
-  # - stop if:<player.has_flag[mail_delivery.current].not>
   - inventory close player:<player>
   - wait 1t
-  - foreach <player.inventory.find_all_items[mail_delivery_mail_item]> as:slot:
-    - inventory set d:<player.inventory> slot:<[slot]> o:air
+  - take slot:<player.inventory.find_all_items[mail_delivery_mail_item]> from:<player.inventory>
   - flag <player> mail_delivery.current:!
 
 mail_delivery_events:
@@ -163,6 +161,12 @@ mail_delivery_menu_inventory:
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [mail_delivery_icon_help] [standard_filler] [standard_filler] [standard_filler] [mail_delivery_icon_stop] [standard_filler] [standard_filler]
 
+mail_delivery_menu_inventory_npc_assignment:
+  type: assignment
+  actions:
+    on click:
+    - inventory open d:mail_delivery_menu_inventory
+
 mail_delivery_menu_events:
   type: world
   debug: false
@@ -179,11 +183,14 @@ mail_delivery_menu_events:
       - case mail_delivery_icon_start_hard:
         - inventory close
         - run mail_delivery_start def:hard|<player>
+      - case mail_delivery_icon_stop:
+        - inventory close
+        - run mail_delivery_fail def:<player>
 
 mail_delivery_icon_stop:
   type: item
   material: barrier
-  display name: TODO<&co> Forfeit ongoing session.
+  display name: <&4><&l>Forfeit ongoing session.
 
 mail_delivery_icon_help:
   type: item
@@ -193,14 +200,14 @@ mail_delivery_icon_help:
 mail_delivery_icon_start_easy:
   type: item
   material: iron_ingot
-  display name: Start<&co> Easy
+  display name: Start<&co> <&a>Easy
 
 mail_delivery_icon_start_medium:
   type: item
   material: gold_ingot
-  display name: Start<&co> Medium
+  display name: Start<&co> <&6>Medium
 
 mail_delivery_icon_start_hard:
   type: item
   material: diamond
-  display name: Start<&co> Hard
+  display name: Start<&co> <&c>Hard
