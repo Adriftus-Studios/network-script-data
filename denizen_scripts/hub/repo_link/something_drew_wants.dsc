@@ -101,6 +101,8 @@ easter_egg_view_command:
   - stop if:<player.has_permission[easter.command.see_eggs].not>
   - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
   - showfake <[all]> cancel players:<player>
+  - foreach <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>:
+    - fakespawn easter_egg_view_point_entity <[value]>
 
 easter_egg_view_point_entity:
   type: entity
