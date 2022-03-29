@@ -64,7 +64,7 @@ easter_egg_events:
     # <cuboid[spawn_cuboid].blocks_flagged[easter_egg].filter[material.name.equals[PLAYER_HEAD]].size>
     - run easter_egg_respawn def:1h
     on player right clicks block:
-    - stop if:<context.location.has_flag[easter_egg.active].not.if_null[true]>
+    - stop if:<context.location.flag[easter_egg.active].exists.not.if_null[true]>
     - define duration 1h
     - define type <context.location.flag[easter_egg.type]>
     # - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
