@@ -26,6 +26,9 @@ mail_delivery_start:
   - if <[slots].size> < <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>:
     - narrate "<&c>You do not have enough empty slots in your inventory."
     - stop
+  - flag <player> minigame.active
+  - flag <player> mail_delivery.current.inventory:<player.inventory.map_slots>
+  - inventory clear d:<player.inventory>
   - foreach <[slots]> as:slot:
     # - define mailbox_number <[loop_index].mod[1].add[1]>
     - define mailbox_number <[loop_index].mod[6].add[1]>
@@ -96,6 +99,10 @@ mail_delivery_end:
   - wait 1t
   - take slot:<player.inventory.find_all_items[mail_delivery_mail_item]> from:<player.inventory>
   - flag <player> mail_delivery.current:!
+  - flag <player> minigame.active:!
+  - wait 1t
+  - foreach <player.flag[mail_delivery.current.inventory].if_null[<map[]>]> key:slot as:item:
+    - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
 
 mail_delivery_events:
   type: world
