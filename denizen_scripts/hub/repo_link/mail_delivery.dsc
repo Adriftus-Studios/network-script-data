@@ -248,10 +248,12 @@ mail_delivery_icon_help:
   material: crafting_table
   display name: <&3><&l>Minigame explanation.
   lore:
-  - <&7>Mail Delivery! The post-master is
-  - <&7>shorthanded, and needs these packages
-  - <&7>delivered ASAP, or the customer gets a
-  - <&7>refund. <&o>*shiver*
+  - <&r>
+  - <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+--------------------------+<&r>  <&8><&m>-｜<&b><&m>---
+  - <&3>Mail Delivery!
+  - <&7>The post-master is shorthanded,
+  - <&7>and needs these packages delivered ASAP,
+  - <&7>or the customer gets a refund. <&o>*shiver*
   - <&r>
   - <&7>Help the post-master deliver all of the packages on time.
   - <&7>
@@ -261,6 +263,8 @@ mail_delivery_icon_help:
   - <&7>address you see on the box. This is a
   - <&7>timed event, and your score is being recorded!
   - <&7>Who knows, maybe you could be the next post master.
+  - <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+--------------------------+<&r>  <&8><&m>-｜<&b><&m>---
+  - <&r>
 
 mail_delivery_icon_start_easy:
   type: item
