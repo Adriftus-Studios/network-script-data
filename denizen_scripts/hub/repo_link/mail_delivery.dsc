@@ -186,9 +186,9 @@ mail_delivery_menu_inventory:
         - define items:|:<item[player_head]>
   - determine <[items]>
   slots:
-  - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [standard_filler] [] [] [] [] [] [standard_filler]
-  - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [standard_filler] [] [] [] [] [] [standard_filler]
-  - [mail_delivery_icon_start_hard] [mail_delivery_icon_start_hard] [standard_filler] [] [] [] [] [] [standard_filler]
+  - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [standard_filler] [standard_filler] [] [] [] [] []
+  - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [standard_filler] [standard_filler] [] [] [] [] []
+  - [mail_delivery_icon_start_hard] [mail_delivery_icon_start_hard] [standard_filler] [standard_filler] [] [] [] [] []
   - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
   - [standard_filler] [standard_filler] [mail_delivery_icon_help] [standard_filler] [standard_filler] [standard_filler] [mail_delivery_icon_stop] [standard_filler] [standard_filler]
 
