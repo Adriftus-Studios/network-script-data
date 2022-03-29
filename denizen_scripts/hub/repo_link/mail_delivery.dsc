@@ -175,16 +175,26 @@ mail_delivery_menu_inventory:
   inventory: chest
   size: 45
   gui: true
-  procedural items:
-  # TODO: program top 5 leaderboard for each difficulty.
-  - define items <list[]>
-  - foreach <list[easy|medium|hard]> as:d:
-    - repeat 5 as:number:
-      - if <server.has_flag[mail_delivery.leaderboard.<[d]>.<[number]>]>:
-        - define player <server.has_flag[mail_delivery.leaderboard.<[d]>.<[number]>]>
-      - else:
-        - define items:|:<item[player_head]>
-  - determine <[items]>
+  data:
+    leaderboard:
+      easy:
+        1: 5
+        2: 6
+        3: 7
+        4: 8
+        5: 9
+      medium:
+        1: 14
+        2: 15
+        3: 16
+        4: 17
+        5: 18
+      hard:
+        1: 23
+        2: 24
+        3: 25
+        4: 26
+        5: 27
   slots:
   - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [standard_filler] [standard_filler] [] [] [] [] []
   - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [standard_filler] [standard_filler] [] [] [] [] []
