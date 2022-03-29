@@ -39,9 +39,29 @@ mail_delivery_start:
     - actionbar "<&e>Time Remaining: <&r><&e><&l><[time].sub[<duration[<[value]>s]>].formatted_words>" targets:<player>
     - wait 1s
     - stop if:<player.has_flag[mail_delivery.current].not>
-  - run mail_delivery_fail def:<player> if:<player.flag[mail_delivery.current.todo].values.sum.if_null[0].equals[0].not>
+  - run mail_delivery_fail_time def:<player> if:<player.flag[mail_delivery.current.todo].values.sum.if_null[0].equals[0].not>
 
-mail_delivery_fail:
+mail_delivery_fail_forfeit:
+  type: task
+  debug: false
+  definitions: player
+  script:
+  - adjust <queue> linked_player:<[player]> if:<[player].exists>
+  - stop if:<player.has_flag[mail_delivery.current].not>
+  - narrate "<&c>You forfeit the session."
+  - run mail_delivery_end def:<player>
+
+mail_delivery_fail_area:
+  type: task
+  debug: false
+  definitions: player
+  script:
+  - adjust <queue> linked_player:<[player]> if:<[player].exists>
+  - stop if:<player.has_flag[mail_delivery.current].not>
+  - narrate "<&c>You left the minigame area."
+  - run mail_delivery_end def:<player>
+
+mail_delivery_fail_time:
   type: task
   debug: false
   definitions: player
@@ -107,6 +127,9 @@ mail_delivery_events:
     on player drops mail_delivery_mail_item:
     - stop if:<player.has_flag[mail_delivery.current].not>
     - determine cancelled
+    on player exits mail_delivery_area:
+    - stop if:<player.has_flag[mail_delivery.current].not>
+    - run mail_delivery_fail_area def:<player>
 
 mail_delivery_mail_item:
   type: item
@@ -185,7 +208,7 @@ mail_delivery_menu_events:
         - run mail_delivery_start def:hard|<player>
       - case mail_delivery_icon_stop:
         - inventory close
-        - run mail_delivery_fail def:<player>
+        - run mail_delivery_fail_forfeit def:<player>
 
 mail_delivery_icon_stop:
   type: item
