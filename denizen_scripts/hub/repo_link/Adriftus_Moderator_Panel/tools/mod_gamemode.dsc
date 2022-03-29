@@ -71,10 +71,8 @@ gamemode_handle_command:
       - announce to_console "<&c>You must specify a player when using this command from Console."
       - stop
     - else:
-      - define target:<context.args>
-    - define gamemode:<queue.script.data_key[gamemode]>
-    - if !<[target].is_player>:
-      - define target:<server.match_player[<[target]>]||null>
+      - define target:<server.match_player[<context.args.first>]||null>
+    - define gamemode:<queue.script.data_key[gamemode]>      
     - if <[target]> != null:
       - if <[target]> == <player>:
         - adjust <player> gamemode:<[gamemode]>
