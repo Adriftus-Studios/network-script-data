@@ -101,3 +101,11 @@ easter_egg_view_command:
   - stop if:<player.has_permission[easter.command.see_eggs].not>
   - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
   - showfake <[all]> cancel players:<player>
+
+easter_egg_view_point_entity:
+  type: entity
+  entity_type: falling_block
+  mechanisms:
+    fallingblock_type: bedrock
+    glowing: true
+    gravity: false
