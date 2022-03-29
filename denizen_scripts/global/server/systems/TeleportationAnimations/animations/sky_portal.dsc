@@ -25,6 +25,7 @@ teleportation_animation_sky_portal_run:
   debug: false
   definitions: destination|color
   script:
+    - define color white if:<[color].exists.not>
     - adjust <player> gravity:false
     - adjust <player> velocity:0,0.12,0
     - define portal_location <player.location.above[3.5]>

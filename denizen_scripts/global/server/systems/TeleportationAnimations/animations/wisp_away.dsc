@@ -25,6 +25,7 @@ teleportation_animation_wisp_away_run:
   debug: false
   definitions: destination|color
   script:
+    - define color white if:<[color].exists.not>
     - define gamemode <player.gamemode>
     - define targets <player.location.find_players_within[100]>
     - define starting_location <player.location>

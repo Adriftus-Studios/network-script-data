@@ -26,6 +26,7 @@ teleportation_animation_sink_run:
   debug: false
   definitions: destination|color
   script:
+    - define color white if:<[color].exists.not>
     - flag <player> no_suffocate
     - adjust <player> gravity:false
     - define foot_location <player.location>
