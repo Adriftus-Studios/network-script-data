@@ -3,6 +3,7 @@ teleportation_animation_run:
   debug: false
   definitions: destination
   script:
+    - flag <player> last_location:<player.location>
     - if <yaml[global.player.<player.uuid>].contains[animations.teleportation.current]>:
       - inject <yaml[global.player.<player.uuid>].read[animations.teleportation.current.task]>
     - else:
