@@ -64,7 +64,7 @@ easter_egg_events:
     # <cuboid[spawn_cuboid].blocks_flagged[easter_egg].filter[material.name.equals[PLAYER_HEAD]].size>
     - run easter_egg_respawn def:1h
     on player right clicks block:
-    - stop if:<context.location.has_flag[easter_egg.active].not.if_null[true]>
+    - stop if:<context.location.flag[easter_egg.active].exists.not.if_null[true]>
     - define duration 1h
     - define type <context.location.flag[easter_egg.type]>
     # - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
@@ -101,3 +101,13 @@ easter_egg_view_command:
   - stop if:<player.has_permission[easter.command.see_eggs].not>
   - define all <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>
   - showfake <[all]> cancel players:<player>
+  - foreach <cuboid[spawn_cuboid].blocks_flagged[easter_egg]>:
+    - fakespawn easter_egg_view_point_entity <[value].center.below[0.5]> d:<server.flag_expiration[easter_egg.session.active].from_now.if_null[1h]>
+
+easter_egg_view_point_entity:
+  type: entity
+  entity_type: falling_block
+  mechanisms:
+    fallingblock_type: glass
+    glowing: true
+    gravity: false

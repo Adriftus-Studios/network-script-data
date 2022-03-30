@@ -3,13 +3,16 @@ mail_delivery_config:
   difficulties:
     easy:
       time: 5m
-      mail_items: 6
+      mail_items_min: 6
+      mail_items_max: 9
     medium:
       time: 2m
-      mail_items: 12
+      mail_items_min: 12
+      mail_items_max: 18
     hard:
       time: 1m
-      mail_items: 18
+      mail_items_min: 18
+      mail_items_max: 27
 
 mail_delivery_start:
   type: task
@@ -21,13 +24,15 @@ mail_delivery_start:
   - if <player.location.is_within[mail_delivery_area].not>:
     - narrate "<&c>You are outside the challenge area."
     - stop
-  - define slots <list[1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36].exclude[<player.inventory.map_slots.keys>]>
-  - define slots <[slots].random[<script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>]>
-  - if <[slots].size> < <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>:
-    - narrate "<&c>You do not have enough empty slots in your inventory."
-    - stop
-  - foreach <[slots]> as:slot:
-    # - define mailbox_number <[loop_index].mod[1].add[1]>
+  # - define slots <[slots].random[<script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>]>
+  # - if <[slots].size> < <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>:
+  #   - narrate "<&c>You do not have enough empty slots in your inventory."
+  #   - stop
+  - flag <player> minigame.active
+  - flag <player> mail_delivery.current.inventory:<player.inventory.map_slots>
+  - inventory clear d:<player.inventory>
+  - define slots <list[10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36].exclude[<player.inventory.map_slots.keys>]>
+  - foreach <[slots].random[<util.random.int[<script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items_min]>].to[<script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items_max]>]>]> as:slot:
     - define mailbox_number <[loop_index].mod[6].add[1]>
     - define item <proc[mail_delivery_generate_item].context[<[mailbox_number]>]>
     - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
@@ -95,7 +100,10 @@ mail_delivery_end:
   - inventory close player:<player>
   - wait 1t
   - take slot:<player.inventory.find_all_items[mail_delivery_mail_item]> from:<player.inventory>
+  - foreach <player.flag[mail_delivery.current.inventory].if_null[<map[]>]> key:slot as:item:
+    - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
   - flag <player> mail_delivery.current:!
+  - flag <player> minigame.active:!
 
 mail_delivery_events:
   type: world
@@ -140,6 +148,7 @@ mail_delivery_mailbox_inventory:
   type: inventory
   inventory: chest
   size: 9
+  title: <&font[adriftus:guis]><&chr[F808]><&chr[6914]>
   slots:
   - [] [] [] [] [] [] [] [] []
 
@@ -167,28 +176,48 @@ mail_delivery_menu_inventory:
   inventory: chest
   size: 45
   gui: true
-  procedural items:
-  # TODO: program top 5 leaderboard for each difficulty.
-  - define items <list[]>
-  - foreach <list[easy|medium|hard]> as:d:
-    - repeat 5 as:number:
-      - if <server.has_flag[mail_delivery.leaderboard.<[d]>.<[number]>]>:
-        - define player <server.has_flag[mail_delivery.leaderboard.<[d]>.<[number]>]>
-      - else:
-        - define items:|:<item[player_head]>
-  - determine <[items]>
+  data:
+    leaderboard:
+      easy:
+        1: 5
+        2: 6
+        3: 7
+        4: 8
+        5: 9
+      medium:
+        1: 14
+        2: 15
+        3: 16
+        4: 17
+        5: 18
+      hard:
+        1: 23
+        2: 24
+        3: 25
+        4: 26
+        5: 27
   slots:
-  - [mail_delivery_icon_start_easy] [standard_filler] [standard_filler] [standard_filler] [] [] [] [] []
-  - [mail_delivery_icon_start_medium] [standard_filler] [standard_filler] [standard_filler] [] [] [] [] []
-  - [mail_delivery_icon_start_hard] [standard_filler] [standard_filler] [standard_filler] [] [] [] [] []
-  - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-  - [standard_filler] [standard_filler] [mail_delivery_icon_help] [standard_filler] [standard_filler] [standard_filler] [mail_delivery_icon_stop] [standard_filler] [standard_filler]
+  - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [] [] [] [] [] [] []
+  - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [] [] [] [] [] [] []
+  - [mail_delivery_icon_start_hard] [mail_delivery_icon_start_hard] [] [] [] [] [] [] []
+  - [] [] [] [] [] [] [] [] []
+  - [] [] [mail_delivery_icon_help] [] [] [] [mail_delivery_icon_stop] [] []
+
+mail_delivery_open_menu:
+  type: task
+  debug: false
+  definitions: player
+  script:
+  - adjust <queue> linked_player:<[player]> if:<[player].exists>
+  - define inv <inventory[mail_delivery_menu_inventory]>
+
+  - inventory open d:<[inv]>
 
 mail_delivery_menu_inventory_npc_assignment:
   type: assignment
   actions:
     on click:
-    - inventory open d:mail_delivery_menu_inventory
+    - run mail_delivery_open_menu def:<player>
 
 mail_delivery_menu_events:
   type: world
@@ -218,19 +247,40 @@ mail_delivery_icon_stop:
 mail_delivery_icon_help:
   type: item
   material: crafting_table
-  display name: TODO<&co> Minigame explanation.
+  display name: <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+----------------------------------+<&r>  <&8><&m>-｜<&b><&m>---
+  lore:
+  - <&7>* <&e>Name: <&7>Mail Delivery!
+  - <&7>* <&e>Description: <&7>The post-master is shorthanded,
+  - <&7>  and needs these packages delivered ASAP,
+  - <&7>  or the customer gets a refund. <&o>*shiver*
+  - <&r>
+  - <&7>  Help the post-master deliver all of the packages on time.
+  - <&7>
+  - <&7>  Around the area, you should see mail-boxes
+  - <&7>  with a coresponding number above them.
+  - <&7>  Deliver the the packages to the
+  - <&7>  address you see on the box. This is a
+  - <&7>  timed event, and your score is being recorded!
+  - <&7>  Who knows, maybe you could be the next post master.
+  - <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+----------------------------------+<&r>  <&8><&m>-｜<&b><&m>---
 
 mail_delivery_icon_start_easy:
   type: item
-  material: iron_ingot
-  display name: Start<&co> <&a>Easy
+  material: feather
+  display name: <&7>Start -- <&l><&a>Easy <&r><&a>[5 Minute]
+  mechanisms:
+    custom_model_data: 3
 
 mail_delivery_icon_start_medium:
   type: item
-  material: gold_ingot
-  display name: Start<&co> <&6>Medium
+  material: feather
+  display name: <&7>Start -- <&l><&6>Medium <&r><&6>[2 Minute]
+  mechanisms:
+    custom_model_data: 3
 
 mail_delivery_icon_start_hard:
   type: item
-  material: diamond
-  display name: Start<&co> <&c>Hard
+  material: feather
+  display name: <&7>Start -- <&l><&c>Hard <&r><&c>[1 Minute]
+  mechanisms:
+    custom_model_data: 3
