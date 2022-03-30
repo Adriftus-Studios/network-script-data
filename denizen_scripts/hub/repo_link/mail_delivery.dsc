@@ -148,6 +148,7 @@ mail_delivery_mailbox_inventory:
   type: inventory
   inventory: chest
   size: 9
+  title: <&font[adriftus:guis]><&chr[F808]><&chr[6914]>
   slots:
   - [] [] [] [] [] [] [] [] []
 
