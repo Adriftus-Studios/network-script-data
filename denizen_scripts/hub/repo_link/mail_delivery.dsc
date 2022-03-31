@@ -38,7 +38,7 @@ mail_delivery_start:
     - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
     - flag <player> mail_delivery.current.todo.<[mailbox_number]>:+:1
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
-  - flag <player> mail_delivery.current.time expire:<[time]>
+  - flag <player> mail_delivery.current.time:<util.time_now.in_seconds.milliseconds> expire:<[time]>
   - flag <player> mail_delivery.current.difficulty:<[difficulty]>
   - repeat <[time].in_seconds>:
     - actionbar "<&e>Time Remaining: <&r><&e><&l><[time].sub[<duration[<[value]>s]>].formatted_words>" targets:<player>
@@ -88,6 +88,8 @@ mail_delivery_complete:
   - define difficulty <player.flag[mail_delivery.current.difficulty]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
   - define time_remaining:<player.flag_expiration[mail_delivery.current.time].from_now.if_null[0s]>
+  - define time_taken:<player.flag[mail_delivery.current.time].sub[<util.time_now.in_seconds.milliseconds>]>
+  - narrate <[time_taken]>
   - narrate "<&e>You delivered all the mail in <[time].sub[<[time_remaining]>].formatted_words>"
   - run mail_delivery_end def:<player>
 
