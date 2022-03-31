@@ -90,6 +90,7 @@ mail_delivery_complete:
   - define time_remaining:<player.flag_expiration[mail_delivery.current.time].from_now.if_null[0s]>
   - define time_taken <util.time_now.in_seconds.milliseconds.sub[<player.flag[mail_delivery.current.time]>].div[1000]>
   - narrate "<&e>You delivered all the mail in <[time_taken]> seconds."
+  - run mail_delivery_apply_to_leaderboard def:<player>|<[difficulty]>|<[time_taken]>
   - run mail_delivery_end def:<player>
 
 mail_delivery_end:
@@ -155,20 +156,22 @@ mail_delivery_mailbox_events:
   type: world
   debug: false
   events:
-    on player clicks in mail_delivery_mailbox_inventory:
-    - narrate TODO
+    on player clicks standard_filler in mail_delivery_mailbox_inventory:
+    - determine cancelled
 
 mail_delivery_mailbox_inventory:
   type: inventory
   inventory: chest
   size: 45
+  definitions:
+    f: <item[standard_filler]>
   title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6914]>
   slots:
-  - [] [] [] [] [] [] [] [] []
-  - [] [] [] [] [] [] [] [] []
-  - [] [] [] [] [] [] [] [] []
-  - [] [] [] [] [] [] [] [] []
-  - [] [] [] [] [] [] [] [] []
+  - [f] [f] [f] [f] [f] [f] [f] [f] [f]
+  - [f] [f] [f] [] [] [] [f] [f] [f]
+  - [f] [f] [f] [] [] [] [f] [f] [f]
+  - [f] [f] [f] [] [] [] [f] [f] [f]
+  - [f] [f] [f] [f] [f] [f] [f] [f] [f]
 
 mail_delivery_generate_item:
   type: procedure
