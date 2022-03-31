@@ -154,7 +154,7 @@ mail_delivery_mailbox_inventory:
 
 mail_delivery_generate_item:
   type: procedure
-  debug: true
+  debug: false
   definitions: number
   script:
   - define item <item[mail_delivery_mail_item].with[flag=mailbox_number:<[number]>].with[flag=no_stack:<util.random_uuid>]>
