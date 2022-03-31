@@ -88,7 +88,7 @@ mail_delivery_complete:
   - define difficulty <player.flag[mail_delivery.current.difficulty]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
   - define time_remaining:<player.flag_expiration[mail_delivery.current.time].from_now.if_null[0s]>
-  - define time_taken:<player.flag[mail_delivery.current.time].sub[<util.time_now.in_seconds.milliseconds>]>
+  - define time_taken <util.time_now.in_seconds.milliseconds.sub[<player.flag[mail_delivery.current.time]>]>
   - narrate <[time_taken]>
   - narrate "<&e>You delivered all the mail in <[time].sub[<[time_remaining]>].formatted_words>"
   - run mail_delivery_end def:<player>
