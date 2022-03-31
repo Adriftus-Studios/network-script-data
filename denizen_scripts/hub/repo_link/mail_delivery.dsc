@@ -144,13 +144,19 @@ mail_delivery_mail_item:
   material: paper
   display name: Mail
 
+mail_delivery_mailbox_events:
+  type: world
+  debug: false
+  events:
+    on player clicks in mail_delivery_mailbox_inventory:
+    - narrate TODO
+
 mail_delivery_mailbox_inventory:
   type: inventory
   inventory: chest
-  size: 54
+  size: 45
   title: <&font[adriftus:guis]><&chr[F808]><&chr[6914]>
   slots:
-  - [] [] [] [] [] [] [] [] []
   - [] [] [] [] [] [] [] [] []
   - [] [] [] [] [] [] [] [] []
   - [] [] [] [] [] [] [] [] []
