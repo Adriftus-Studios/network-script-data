@@ -88,9 +88,8 @@ mail_delivery_complete:
   - define difficulty <player.flag[mail_delivery.current.difficulty]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
   - define time_remaining:<player.flag_expiration[mail_delivery.current.time].from_now.if_null[0s]>
-  - define time_taken <util.time_now.in_seconds.milliseconds.sub[<player.flag[mail_delivery.current.time]>]>
-  - narrate <[time_taken]>
-  - narrate "<&e>You delivered all the mail in <[time].sub[<[time_remaining]>].formatted_words>"
+  - define time_taken <util.time_now.in_seconds.milliseconds.sub[<player.flag[mail_delivery.current.time]>].div[1000]>
+  - narrate "<&e>You delivered all the mail in <[time_taken]> seconds."
   - run mail_delivery_end def:<player>
 
 mail_delivery_end:
@@ -107,6 +106,12 @@ mail_delivery_end:
   - flag <player> mail_delivery.current:!
   - flag <player> minigame.active:!
 
+mail_delivery_apply_to_leaderboard:
+  type: task
+  debug: false
+  definitions: player|difficulty|time_taken
+  script:
+  - narrate TODO
 mail_delivery_events:
   type: world
   debug: false
