@@ -164,7 +164,7 @@ mail_delivery_mailbox_inventory:
   inventory: chest
   size: 45
   definitions:
-    f: <item[standard_filler]>
+    f: <item[feather].with[custom_model_data=3]>
   title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6914]>
   slots:
   - [f] [f] [f] [f] [f] [f] [f] [f] [f]
