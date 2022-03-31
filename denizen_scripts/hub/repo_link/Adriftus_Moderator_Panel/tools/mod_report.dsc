@@ -1,7 +1,7 @@
 # -- /report - Player Reporter
 mod_report_command:
   type: command
-  debug: true
+  debug: false
   name: report
   description: Report a player for chat & in-game behaviour.
   usage: /report [username] [reason]
@@ -34,7 +34,7 @@ mod_report_command:
 # -- /bugreport - Bug Reporter
 mod_bugreport_command:
   type: command
-  debug: true
+  debug: false
   name: bugreport
   description: Report a bug to staff members.
   usage: /bugreport [username] [reason]
