@@ -100,5 +100,7 @@ Get_Owner_Ping:
     - choose <[owner]>:
       - case Taras:
         - determine 141669284710449152
+      - case Xeane:
+        - determine 565536267161567232
       - default:
         - determine null
