@@ -89,3 +89,15 @@ Error_Response_Webhook:
     relay: 744711732433387602
     test: 757180343244816454
     resort: 763228068789223424
+
+Get_Owner_Ping:
+  type: procedure
+  definitions: owner
+  script:
+    - choose <[owner]>:
+      - case Taras:
+        - determine 141669284710449152
+      - case Xeane:
+        - determine 565536267161567232
+      - default:
+        - determine null
