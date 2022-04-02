@@ -1450,12 +1450,14 @@ titles:
     description: It is Easter!
     in_shop: true
     Price: 300
+    Currency: easter_token
   EasterHunt:
     order: 237
     tag: '&8｜&e&k/&6Easter Hunt&e&k/&8｜'
     description: How many eggs did you find?
     in_shop: true
     Price: 300
+    Currency: easter_token
   Spring:
     order: 238
     tag: '&8｜&2&k/&aSpring&2&k/&8｜'

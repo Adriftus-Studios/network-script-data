@@ -112,7 +112,9 @@ mail_delivery_apply_to_leaderboard:
   debug: false
   definitions: player|difficulty|time_taken
   script:
-  - narrate TODO
+  - adjust <queue> linked_player:<[player]> if:<[player].exists>
+  # TODO
+
 mail_delivery_events:
   type: world
   debug: false
