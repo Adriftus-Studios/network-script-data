@@ -35,6 +35,7 @@ Error_Response_Webhook:
       - else:
         - define File_Link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/<[Server]>/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
         - define File_Directory /<[Script_File_Location].after[/plugins/Denizen/scripts/<[Server]>/]>
+      - define ErrorOwner <[File_Directory].split[/].first>
       - define fields <[fields].include_single[<map.with[name].as[Script<&co>].with[value].as[`<[Script_Name]>`].with[inline].as[true]>]>
       - define fields <[fields].include_single[<map.with[name].as[Line<&co>].with[value].as[`#<[Script_Line]>`].with[inline].as[true]>]>
       - define fields <[fields].include_single[<map.with[name].as[File<&co>].with[value].as[<&lb>`<&lb><[File_Directory]><&rb>`<&rb>(<[File_Link]>)].with[inline].as[true]>]>
@@ -78,7 +79,7 @@ Error_Response_Webhook:
     title: "`[Click for Log]` <[Server].to_titlecase> Error Response:"
     url: <[Log_URL]>
     color: 5820671
-    description: <[Message]||>
+    description: "<[ErrorOwner]> : <[Message]||>"
     fields: <[fields]||>
 
   Channel_Map:
