@@ -79,7 +79,7 @@ Error_Response_Webhook:
     title: "`[Click for Log]` <[Server].to_titlecase> Error Response:"
     url: <[Log_URL]>
     color: 5820671
-    description: "<[ErrorOwner]> : <[Message]||>"
+    description: "<&lb><&at><[ErrorOwner]><&rb> <n> <[Message]||>"
     fields: <[fields]||>
 
   Channel_Map:
