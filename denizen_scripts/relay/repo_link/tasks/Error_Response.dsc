@@ -36,8 +36,10 @@ Error_Response_Webhook:
         - define File_Link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/<[Server]>/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
         - define File_Directory /<[Script_File_Location].after[/plugins/Denizen/scripts/<[Server]>/]>
       - define ErrorOwner <[File_Directory].split[/].get[2]>
+      - define Ping <&lt><&at><proc[Get_Owner_Ping].context[<[ErrorOwner]>]><&gt>
       - define fields <[fields].include_single[<map.with[name].as[Script<&co>].with[value].as[`<[Script_Name]>`].with[inline].as[true]>]>
       - define fields <[fields].include_single[<map.with[name].as[Line<&co>].with[value].as[`#<[Script_Line]>`].with[inline].as[true]>]>
+      - define fields "<[fields].include_single[<map.with[name].as[Error Owner<&co>].with[value].as[<[Ping]>].with[inline].as[true]>]>"
       - define fields <[fields].include_single[<map.with[name].as[File<&co>].with[value].as[<&lb>`<&lb><[File_Directory]><&rb>`<&rb>(<[File_Link]>)].with[inline].as[true]>]>
       - define embed "<[embed].with[footer].as[<map.with[text].as[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>]>"
 
@@ -79,7 +81,7 @@ Error_Response_Webhook:
     title: "`[Click for Log]` <[Server].to_titlecase> Error Response:"
     url: <[Log_URL]>
     color: 5820671
-    description: "<&lb><&at><[ErrorOwner]><&rb> <n> <[Message]||>"
+    description: <[Message]||>
     fields: <[fields]||>
 
   Channel_Map:
@@ -90,3 +92,13 @@ Error_Response_Webhook:
     relay: 744711732433387602
     test: 757180343244816454
     resort: 763228068789223424
+
+Get_Owner_Ping:
+  type: procedure
+  definitions: owner
+  script:
+    - choose <[owner]>:
+      - case Taras:
+        - determine 141669284710449152
+      - default:
+        - determine null
