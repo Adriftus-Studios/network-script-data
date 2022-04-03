@@ -71,7 +71,7 @@ cosmetic_selection_inventory_open:
       previous_page: 37
       back: 46
     masks:
-      inventory_title: <&font[adriftus:cosmetics_guis]><&chr[F808]><&f><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0003]>
+      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0003]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[masks.unlocked].if_null[<list>]>
       material: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.material]>
       display_name: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.display_name]>
@@ -81,7 +81,7 @@ cosmetic_selection_inventory_open:
       equip_task: mask_wear
       remove_task: mask_remove
     titles:
-      inventory_title: <&font[adriftus:cosmetics_guis]><&chr[F808]><&f><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0004]>
+      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0004]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[titles.unlocked].if_null[<list>]>
       material: name_tag
       display_name: <[cosmetic]>
@@ -91,7 +91,7 @@ cosmetic_selection_inventory_open:
       equip_task: titles_equip
       remove_task: titles_remove
     bowtrails:
-      inventory_title: <&font[adriftus:cosmetics_guis]><&chr[F808]><&f><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0002]>
+      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0002]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[bowtrails.unlocked].if_null[<list>]>
       material: <yaml[bowtrails].read[bowtrails.<[cosmetic]>.icon]>
       display_name: <yaml[bowtrails].parsed_key[bowtrails.<[cosmetic]>.name].parse_color>
