@@ -47,7 +47,7 @@ mod_notify_action:
 # -- Notify online staff about reports.
 mod_notify_report:
   type: task
-  debug: true
+  debug: false
   definitions: reporter|reason|server|uuid
   script:
     - define reporter <[reporter].as_player.name>

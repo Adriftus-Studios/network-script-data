@@ -38,7 +38,7 @@ mail_delivery_start:
     - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
     - flag <player> mail_delivery.current.todo.<[mailbox_number]>:+:1
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
-  - flag <player> mail_delivery.current.time expire:<[time]>
+  - flag <player> mail_delivery.current.time:<util.time_now.in_seconds.milliseconds> expire:<[time]>
   - flag <player> mail_delivery.current.difficulty:<[difficulty]>
   - repeat <[time].in_seconds>:
     - actionbar "<&e>Time Remaining: <&r><&e><&l><[time].sub[<duration[<[value]>s]>].formatted_words>" targets:<player>
@@ -88,7 +88,9 @@ mail_delivery_complete:
   - define difficulty <player.flag[mail_delivery.current.difficulty]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
   - define time_remaining:<player.flag_expiration[mail_delivery.current.time].from_now.if_null[0s]>
-  - narrate "<&e>You delivered all the mail in <[time].sub[<[time_remaining]>].formatted_words>"
+  - define time_taken <util.time_now.in_seconds.milliseconds.sub[<player.flag[mail_delivery.current.time]>].div[1000]>
+  - narrate "<&e>You delivered all the mail in <[time_taken]> seconds."
+  - run mail_delivery_apply_to_leaderboard def:<player>|<[difficulty]>|<[time_taken]>
   - run mail_delivery_end def:<player>
 
 mail_delivery_end:
@@ -104,6 +106,14 @@ mail_delivery_end:
     - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
   - flag <player> mail_delivery.current:!
   - flag <player> minigame.active:!
+
+mail_delivery_apply_to_leaderboard:
+  type: task
+  debug: false
+  definitions: player|difficulty|time_taken
+  script:
+  - adjust <queue> linked_player:<[player]> if:<[player].exists>
+  # TODO
 
 mail_delivery_events:
   type: world
@@ -144,17 +154,30 @@ mail_delivery_mail_item:
   material: paper
   display name: Mail
 
+mail_delivery_mailbox_events:
+  type: world
+  debug: false
+  events:
+    on player clicks standard_filler in mail_delivery_mailbox_inventory:
+    - determine cancelled
+
 mail_delivery_mailbox_inventory:
   type: inventory
   inventory: chest
-  size: 9
-  title: <&font[adriftus:guis]><&chr[F808]><&chr[6914]>
+  size: 45
+  definitions:
+    f: <item[feather].with[custom_model_data=3]>
+  title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6914]>
   slots:
-  - [] [] [] [] [] [] [] [] []
+  - [f] [f] [f] [f] [f] [f] [f] [f] [f]
+  - [f] [f] [f] [] [] [] [f] [f] [f]
+  - [f] [f] [f] [] [] [] [f] [f] [f]
+  - [f] [f] [f] [] [] [] [f] [f] [f]
+  - [f] [f] [f] [f] [f] [f] [f] [f] [f]
 
 mail_delivery_generate_item:
   type: procedure
-  debug: true
+  debug: false
   definitions: number
   script:
   - define item <item[mail_delivery_mail_item].with[flag=mailbox_number:<[number]>].with[flag=no_stack:<util.random_uuid>]>

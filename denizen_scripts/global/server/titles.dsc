@@ -10,8 +10,9 @@ titles_gui_command:
 titles_equip:
   type: task
   debug: false
-  definitions: title_id
+  definitions: title_id|player
   script:
+    - adjust <queue> linked_player:<[player]> if:<[player].object_type.equals[Player].if_null[false]>
     - determine passively cancelled
     - define title_id <context.item.flag[cosmetic].if_null[default]> if:<[title_id].exists.not>
     - define map <map[titles.current=<context.item.flag[cosmetic]>;titles.current_tag=<yaml[titles].read[titles.<context.item.flag[cosmetic]>.tag].parse_color>]>
@@ -23,16 +24,18 @@ titles_equip:
 titles_unlock:
   type: task
   debug: false
-  definitions: title_id
+  definitions: title_id|player
   script:
+    - adjust <queue> linked_player:<[player]> if:<[player].object_type.equals[Player].if_null[false]>
     - if <yaml[titles].contains[titles.<[title_id]>]> && !<yaml[global.player.<player.uuid>].contains[titles.unlocked.<[title_id]>]>:
       - run global_player_data_modify def:<player.uuid>|titles.unlocked.<[title_id]>|true
 
 titles_remove:
   type: task
   debug: false
-  definitions: title_id
+  definitions: title_id|player
   script:
+    - adjust <queue> linked_player:<[player]> if:<[player].object_type.equals[Player].if_null[false]>
     - determine passively cancelled
     - define title_id <context.item.flag[cosmetic].if_null[default]> if:<[title_id].exists.not>
     - run global_player_data_modify def:<player.uuid>|titles.current|!
