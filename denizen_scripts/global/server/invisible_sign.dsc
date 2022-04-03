@@ -3,6 +3,8 @@ invisible_sign:
   debug: false
   material: warped_sign
   display name: <&f>Invisible Sign
+  data:
+    recipe_book_category: blocks
   recipes:
     1:
       type: shaped

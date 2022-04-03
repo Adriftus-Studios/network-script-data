@@ -289,7 +289,7 @@ chat_system_flag_manager:
   type: world
   debug: false
   events:
-    after player joins:
+    on custom event id:global_player_data_loaded:
       - flag player chat.channels:!
       - waituntil rate:10t <yaml.list.contains[global.player.<player.uuid>].or[<player.is_online.not>]>
       - if !<player.is_online>:
