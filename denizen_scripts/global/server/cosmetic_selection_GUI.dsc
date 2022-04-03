@@ -151,7 +151,7 @@ cosmetic_selection_inventory_open:
       - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:cosmetics_previous_page;color=green;custom_model_data=6]> d:<[inventory]>
 
     # Back to Cosmetics
-    - inventory set slot:<script.data_key[data.slot_data.back]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Back<&sp>To<&sp>Cosmetics;flag=run_script:cosmetic_main_menu_open;color=red;custom_model_data=6]> d:<[inventory]>
+    - inventory set slot:<script.data_key[data.slot_data.back]> o:<item[feather].with[hides=all;display_name=<&a>Back<&sp>To<&sp>Cosmetics;flag=run_script:cosmetic_main_menu_open;color=red;custom_model_data=3]> d:<[inventory]>
     # Open The Inventory
     - inventory open d:<[inventory]>
 
