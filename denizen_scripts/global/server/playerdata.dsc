@@ -24,8 +24,9 @@ player_data_handler:
         - if <server.has_file[data/global/players/<player.uuid>.yml]>:
           - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
           - if !<yaml.list.contains[global.player.<context.uuid>]>:
-            - bungeerun relay discord_sendMessage "def:Adriftus Development and Reporting|alerts|<&lt>@565536267161567232<&gt><&nl><context.uuid> (<context.name>) global player data failed to load."
-            - stop
+            - define uuid <context.uuid>
+            - define name <context.name>
+            - bungeerun relay discord_sendMessage "def:Adriftus Development and Reporting|alerts|<&lt>@565536267161567232<&gt><&nl><[uuid]> (<[name]>) global player data failed to load."
           - customevent id:global_player_data_loaded context:<map[uuid=<context.uuid>;name=<context.name>]>t
         - else:
           - wait 1s
