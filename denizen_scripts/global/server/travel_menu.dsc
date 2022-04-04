@@ -2,6 +2,11 @@ travel_menu_open:
   type: task
   debug: false
   data:
+    hub_slots:
+      spawn: 38|39|40
+      crates: 42|43|44
+      towny: 47|48|49
+      shops: 51|52|53
     server_slots_by_count:
       1: 32
       2: 30|32
@@ -42,17 +47,20 @@ travel_menu_open:
     - foreach <server.worlds> as:world:
       - define display "<&e>Teleport To <&b><[world].name.replace[_].with[<&sp>].to_titlecase>"
       - define server_list:|:<item[grass_block].with[hides=all;display=<[display]>;flag=run_script:travel_menu_to_world;flag=world:<[world]>]>
+  hub:
+    - foreach <script.data_key[data.hub_slots]> key:warp_name as:slots:
+      - foreach <[slots]> as:slot:
+        - inventory set slot:<[slot]> d:<[inventory]> o:<item[hub_warp_<[warp_name]>_icon]>
   # This task handles the final building of the inventory
   build_inventory:
     - define network_size <[network_list].size>
-    - define server_size <[server_list].size>
-    - define slots <list[<script.data_key[data.network_slots_by_count.<[network_size]>]>].include[<script.data_key[data.server_slots_by_count.<[server_size]>]>]>
-    - define items <[network_list].include[<[server_list]>]>
-    - define inventory <inventory[travel_menu_inventory]>
+    - define slots <list[<script.data_key[data.network_slots_by_count.<[network_size]>]>]>
+    - define items <[network_list]>
     - foreach <[slots]>:
       - inventory set slot:<[value]> o:<[items].get[<[loop_index]>]> d:<[inventory]>
   script:
     - define server_list <list>
+    - define inventory <inventory[travel_menu_inventory]>
     - inject locally path:network
     - if <script.data_key[<bungee.server>].exists>:
       - inject locally path:<bungee.server>

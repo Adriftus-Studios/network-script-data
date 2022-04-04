@@ -23,13 +23,13 @@ main_menu_help:
   flags:
     run_script: cancel
 
-main_menu_commands:
+main_menu_controls:
   type: item
   debug: false
   material: command_block
-  display name: <&6>Commands!
+  display name: <&6>Controls!
   lore:
-    - "<&e>Access your commands!"
+    - "<&e>Server Specific Controls!"
     - "<&e>Not Yet Implement"
   mechanisms:
     custom_model_data: 1
@@ -62,6 +62,18 @@ main_menu_mail:
   flags:
     run_script: cancel
 
+main_menu_recipes:
+  type: item
+  debug: false
+  material: book
+  display name: <&6>Recipes!
+  lore:
+    - "<&e>Available custom recipes!"
+  mechanisms:
+    custom_model_data: 1
+  flags:
+    run_script: crafting_book_open
+
 main_menu_inventory_open:
   type: task
   debug: false
@@ -69,7 +81,7 @@ main_menu_inventory_open:
     - define inventory <inventory[main_menu_inventory]>
     - define "lore:!|:<&e>Title<&co> <proc[get_player_title]>"
     - define "lore:|:<&e>Server<&co> <server.flag[display_name]||<&7><bungee.server>>"
-    - inventory set slot:5 o:<item[player_head].with[display=<player.display_name>;lore=<[lore]>;skull_skin=<player.skull_skin>]> d:<[inventory]>
+    - inventory set slot:5 o:<item[player_head].with[custom_model_data=1;display=<player.display_name>;lore=<[lore]>;skull_skin=<player.skull_skin>]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 main_menu_inventory:
@@ -80,5 +92,7 @@ main_menu_inventory:
   title: <&a>Menu Placeholder!
   slots:
     - [] [] [] [] [] [] [] [] []
-    - [] [main_menu_mail] [] [main_menu_cosmetics] [] [main_menu_commands] [] [main_menu_settings] []
+    - [] [] [] [] [] [] [] [] []
+    - [main_menu_mail] [] [] [] [main_menu_recipes] [] [] [] [main_menu_settings]
+    - [] [] [main_menu_cosmetics] [] [] [] [main_menu_controls] [] []
     - [] [] [] [] [main_menu_help] [] [] [] []

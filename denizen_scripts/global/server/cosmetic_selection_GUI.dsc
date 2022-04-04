@@ -71,7 +71,7 @@ cosmetic_selection_inventory_open:
       previous_page: 37
       back: 46
     masks:
-      inventory_title: <&chr[F808]><&f><&chr[6912].font[adriftus:guis]>
+      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0003]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[masks.unlocked].if_null[<list>]>
       material: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.material]>
       display_name: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.display_name]>
@@ -81,7 +81,7 @@ cosmetic_selection_inventory_open:
       equip_task: mask_wear
       remove_task: mask_remove
     titles:
-      inventory_title: <&chr[F808]><&f><&chr[6910].font[adriftus:guis]>
+      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0004]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[titles.unlocked].if_null[<list>]>
       material: name_tag
       display_name: <[cosmetic]>
@@ -91,7 +91,7 @@ cosmetic_selection_inventory_open:
       equip_task: titles_equip
       remove_task: titles_remove
     bowtrails:
-      inventory_title: <&chr[F808]><&f><&chr[6911].font[adriftus:guis]>
+      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0002]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[bowtrails.unlocked].if_null[<list>]>
       material: <yaml[bowtrails].read[bowtrails.<[cosmetic]>.icon]>
       display_name: <yaml[bowtrails].parsed_key[bowtrails.<[cosmetic]>.name].parse_color>
@@ -144,14 +144,14 @@ cosmetic_selection_inventory_open:
 
     # Next Page Button
     - if <[cosmetics].size> > <[end]>:
-      - inventory set slot:<script.data_key[data.slot_data.next_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Next<&sp>Page;flag=run_script:cosmetics_next_page;color=green;custom_model_data=1000007]> d:<[inventory]>
+      - inventory set slot:<script.data_key[data.slot_data.next_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Next<&sp>Page;flag=run_script:cosmetics_next_page;color=green;custom_model_data=7]> d:<[inventory]>
 
     # Previous Page Button
     - if <[page]> != 1:
-      - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:cosmetics_previous_page;color=green;custom_model_data=1000006]> d:<[inventory]>
+      - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:cosmetics_previous_page;color=green;custom_model_data=6]> d:<[inventory]>
 
     # Back to Cosmetics
-    - inventory set slot:<script.data_key[data.slot_data.back]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Back<&sp>To<&sp>Cosmetics;flag=run_script:cosmetic_main_menu_open;color=red;custom_model_data=1000006]> d:<[inventory]>
+    - inventory set slot:<script.data_key[data.slot_data.back]> o:<item[feather].with[hides=all;display_name=<&a>Back<&sp>To<&sp>Cosmetics;flag=run_script:cosmetic_main_menu_open;color=red;custom_model_data=3]> d:<[inventory]>
     # Open The Inventory
     - inventory open d:<[inventory]>
 
