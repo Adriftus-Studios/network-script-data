@@ -89,7 +89,7 @@ main_menu_inventory:
   debug: false
   inventory: chest
   gui: true
-  title: <&font[adriftus:guis]><&f><&chr[F808]><&chr[6927]>
+  title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6927]>
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
