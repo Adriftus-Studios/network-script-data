@@ -89,7 +89,7 @@ main_menu_inventory:
   debug: false
   inventory: chest
   gui: true
-  title: <&a>Menu Placeholder!
+  title: <&font[adriftus:guis]><&f><&chr[F808]><&chr[6927]>
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
