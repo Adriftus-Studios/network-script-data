@@ -92,7 +92,7 @@ main_menu_inventory:
   title: <&a>Menu Placeholder!
   slots:
     - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [main_menu_mail] [] [] [] [main_menu_recipes] [] [] [] [main_menu_settings]
+    - [] [] [main_menu_mail] [] [] [] [main_menu_settings] [] []
+    - [] [] [] [] [main_menu_recipes] [] [] [] []
     - [] [] [main_menu_cosmetics] [] [] [] [main_menu_controls] [] []
     - [] [] [] [] [main_menu_help] [] [] [] []
