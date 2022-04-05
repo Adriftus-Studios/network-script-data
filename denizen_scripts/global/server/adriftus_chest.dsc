@@ -10,7 +10,7 @@ adriftus_chest_inventory_open:
 adriftus_chest_inventory:
   type: inventory
   inventory: chest
-  title: <&6>Adriftus Chest
+  title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6930]>
   size: 54
 
 adriftus_chest_inventory_events:
