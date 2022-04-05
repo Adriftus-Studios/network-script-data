@@ -197,7 +197,7 @@ mail_delivery_generate_item:
 mail_delivery_menu_inventory:
   type: inventory
   inventory: chest
-  size: 45
+  size: 54
   gui: true
   title: <&f><&font[adriftus:guis]><&chr[f808]><&chr[6915]>
   data:
@@ -221,6 +221,7 @@ mail_delivery_menu_inventory:
         4: 26
         5: 27
   slots:
+  - [] [] [] [] [] [] [] [] []
   - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [] [] [] [] [] [] []
   - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [] [] [] [] [] [] []
   - [mail_delivery_icon_start_hard] [mail_delivery_icon_start_hard] [] [] [] [] [] [] []
