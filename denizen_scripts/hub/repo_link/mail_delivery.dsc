@@ -133,6 +133,7 @@ mail_delivery_events:
       - define mailbox <context.inventory.flag[mailbox]>
       - define difficulty <player.flag[mail_delivery.current.difficulty]>
       - foreach <context.inventory.map_slots> key:slot as:item:
+        - foreach next if:<[item].material.name.equals[feather]>
         - if <[item].flag[mailbox_number].equals[<[mailbox]>].not.if_null[true]>:
           - inventory set d:<context.inventory> slot:<[slot]> o:air
           - give to:<player.inventory> <[item]>
