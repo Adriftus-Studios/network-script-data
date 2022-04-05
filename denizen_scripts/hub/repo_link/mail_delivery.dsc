@@ -167,7 +167,7 @@ mail_delivery_mailbox_inventory:
   size: 45
   definitions:
     f: <item[feather].with[custom_model_data=3]>
-  title: <&f><&font[adriftus:guis]><&chr[6914]>
+  title: <&f><&font[adriftus:guis]><&chr[f808]><&chr[6914]>
   slots:
   - [f] [f] [f] [f] [f] [f] [f] [f] [f]
   - [f] [f] [f] [] [] [] [f] [f] [f]
@@ -203,23 +203,17 @@ mail_delivery_menu_inventory:
   data:
     leaderboard:
       easy:
-        1: 5
-        2: 6
-        3: 7
-        4: 8
-        5: 9
+        1: 16
+        2: 17
+        3: 18
       medium:
-        1: 14
-        2: 15
-        3: 16
-        4: 17
-        5: 18
+        1: 25
+        2: 26
+        3: 27
       hard:
-        1: 23
-        2: 24
-        3: 25
-        4: 26
-        5: 27
+        1: 33
+        2: 34
+        3: 35
   slots:
   - [] [] [] [] [] [] [] [] []
   - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [] [] [] [] [] [] []
