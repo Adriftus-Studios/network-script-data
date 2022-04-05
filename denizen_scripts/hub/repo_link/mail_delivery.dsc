@@ -197,7 +197,7 @@ mail_delivery_generate_item:
 mail_delivery_menu_inventory:
   type: inventory
   inventory: chest
-  size: 45
+  size: 54
   gui: true
   title: <&f><&font[adriftus:guis]><&chr[6915]>
   data:
