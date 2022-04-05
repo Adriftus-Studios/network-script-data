@@ -199,7 +199,7 @@ mail_delivery_menu_inventory:
   inventory: chest
   size: 45
   gui: true
-  title: <&f><&font[adriftus:guis]><&chr[6915]>
+  title: <&f><&font[adriftus:guis]><&chr[f808]><&chr[6915]>
   data:
     leaderboard:
       easy:
