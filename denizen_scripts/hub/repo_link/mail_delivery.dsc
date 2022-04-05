@@ -167,7 +167,7 @@ mail_delivery_mailbox_inventory:
   size: 45
   definitions:
     f: <item[feather].with[custom_model_data=3]>
-  title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6914]>
+  title: <&f><&font[adriftus:guis]><&chr[6915]>
   slots:
   - [f] [f] [f] [f] [f] [f] [f] [f] [f]
   - [f] [f] [f] [] [] [] [f] [f] [f]
@@ -199,6 +199,7 @@ mail_delivery_menu_inventory:
   inventory: chest
   size: 45
   gui: true
+  title: <&f><&font[adriftus:guis]><&chr[6914]>
   data:
     leaderboard:
       easy:
