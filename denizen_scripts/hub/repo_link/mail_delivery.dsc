@@ -146,6 +146,8 @@ mail_delivery_events:
     on player drops mail_delivery_mail_item:
     - stop if:<player.has_flag[mail_delivery.current].not>
     - determine cancelled
+    on player clicks feather in mail_delivery_mailbox_inventory:
+    - determine cancelled
     on player exits mail_delivery_area:
     - stop if:<player.has_flag[mail_delivery.current].not>
     - run mail_delivery_fail_area def:<player>
