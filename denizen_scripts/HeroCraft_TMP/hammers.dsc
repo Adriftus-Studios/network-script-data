@@ -42,6 +42,7 @@ hammer_diamond:
   type: item
   material: diamond_pickaxe
   data:
+    recipe_book_category: tools.hammer2
     repair_reagent_requirement_multiplier: 9
     repair_reagent: diamond
   mechanisms:
@@ -63,6 +64,7 @@ hammer_netherite:
   type: item
   material: netherite_pickaxe
   data:
+    recipe_book_category: tools.hammer3
     repair_reagent_requirement_multiplier: 9
     repair_reagent: netherite_ingot
   mechanisms:
@@ -84,6 +86,7 @@ hammer_iron:
   type: item
   material: iron_pickaxe
   data:
+    recipe_book_category: tools.hammer1
     repair_reagent_requirement_multiplier: 9
     repair_reagent: iron_ingot
   mechanisms:

@@ -57,6 +57,8 @@ lumber_axe_events:
 lumber_axe_iron:
     type: item
     material: iron_axe
+    data:
+        recipe_book_category: tools.axe1
     mechanisms:
         enchantments:
             tree_feller: 1
@@ -104,6 +106,8 @@ lumber_axe_diamond:
             tree_feller: 1
             unbreaking: 5
     display name: <&e>Diamond Lumber Axe
+    data:
+        recipe_book_category: tools.axe2
     recipes:
         1:
             type: shaped
@@ -146,6 +150,8 @@ lumber_axe_netherite:
             tree_feller: 1
             unbreaking: 5
     display name: <&e>Netherite Lumber Axe
+    data:
+        recipe_book_category: tools.axe3
     recipes:
         1:
             type: shaped

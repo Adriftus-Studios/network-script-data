@@ -27,6 +27,8 @@ leaf_blower_bow:
     type: item
     material: bow
     display name: <&e>Leaf Blower
+    data:
+        recipe_book_category: tools
     mechanisms:
         enchantments:
             leaf_blower: 1

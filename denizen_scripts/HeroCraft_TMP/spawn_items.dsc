@@ -1,7 +1,7 @@
 spawn_scroll:
   type: item
   material: feather
-  display name: <&6>Scroll of Spawn
+  display name: <&6>Scroll of Origination
   data:
     recipe_book_category: travel.scroll
   lore:
@@ -23,7 +23,7 @@ spawn_scroll:
 spawn_crystal:
   type: item
   material: feather
-  display name: <&6>Spawn Crystal
+  display name: <&6>Crystal of Origination
   data:
     recipe_book_category: travel.crystal
   lore:

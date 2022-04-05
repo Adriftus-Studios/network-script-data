@@ -23,7 +23,7 @@ return_scroll:
 return_crystal:
   type: item
   material: feather
-  display name: <&6>Return Crystal
+  display name: <&6>Crystal of Returning
   data:
     recipe_book_category: travel.crystal
   lore:

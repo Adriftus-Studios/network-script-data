@@ -1,7 +1,7 @@
 back_crystal:
   type: item
   material: feather
-  display name: <&c>Crystal of the Past
+  display name: <&c>Crystal of Recall
   data:
     recipe_book_category:  travel.crystal
   lore:
