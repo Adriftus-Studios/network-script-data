@@ -221,10 +221,10 @@ mail_delivery_menu_inventory:
         4: 26
         5: 27
   slots:
+  - [] [] [] [] [] [] [] [] []
   - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [] [] [] [] [] [] []
   - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [] [] [] [] [] [] []
   - [mail_delivery_icon_start_hard] [mail_delivery_icon_start_hard] [] [] [] [] [] [] []
-  - [] [] [] [] [] [] [] [] []
   - [] [] [mail_delivery_icon_help] [] [] [] [mail_delivery_icon_stop] [] []
 
 mail_delivery_open_menu:
