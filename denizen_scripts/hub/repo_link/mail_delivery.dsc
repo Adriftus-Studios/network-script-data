@@ -165,6 +165,7 @@ mail_delivery_mailbox_inventory:
   type: inventory
   inventory: chest
   size: 45
+  gui: true
   definitions:
     f: <item[feather].with[custom_model_data=3]>
   title: <&f><&font[adriftus:guis]><&chr[f808]><&chr[6914]>
