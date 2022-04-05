@@ -81,7 +81,7 @@ lumber_axe_iron:
             - air|material:stick|air
         3:
             type: shaped
-            recipe_id: iron_lumber_axe_1
+            recipe_id: iron_lumber_axe_3
             output_quantity: 1
             input:
             - material:iron_block|material:iron_block|air
@@ -89,7 +89,7 @@ lumber_axe_iron:
             - air|material:stick|air
         4:
             type: shaped
-            recipe_id: iron_lumber_axe_2
+            recipe_id: iron_lumber_axe_4
             output_quantity: 1
             input:
             - material:iron_block|material:iron_block|air
@@ -123,7 +123,7 @@ lumber_axe_diamond:
             - air|material:stick|air
         3:
             type: shaped
-            recipe_id: diamond_lumber_axe_1
+            recipe_id: diamond_lumber_axe_3
             output_quantity: 1
             input:
             - material:diamond_block|material:diamond_block|air
@@ -131,7 +131,7 @@ lumber_axe_diamond:
             - air|material:stick|air
         4:
             type: shaped
-            recipe_id: diamond_lumber_axe_2
+            recipe_id: diamond_lumber_axe_4
             output_quantity: 1
             input:
             - material:diamond_block|material:diamond_block|air
@@ -165,7 +165,7 @@ lumber_axe_netherite:
             - air|material:stick|air
         3:
             type: shaped
-            recipe_id: netherite_lumber_axe_1
+            recipe_id: netherite_lumber_axe_3
             output_quantity: 1
             input:
             - material:netherite_block|material:netherite_block|air
@@ -173,7 +173,7 @@ lumber_axe_netherite:
             - air|material:stick|air
         4:
             type: shaped
-            recipe_id: netherite_lumber_axe_2
+            recipe_id: netherite_lumber_axe_4
             output_quantity: 1
             input:
             - material:netherite_block|material:netherite_block|air

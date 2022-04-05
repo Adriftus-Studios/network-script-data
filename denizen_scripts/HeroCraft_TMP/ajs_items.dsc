@@ -1,21 +1,3 @@
-calculate_durability_damage:
-    type: procedure
-    definitions: unbreaking_level
-    debug: false
-    script:
-    - determine <element[1].div[<[unbreaking_level].add[1]>]>
-
-calculate_fortune_drops:
-    type: procedure
-    definitions: fortune_level|quantity
-    debug: false
-    script:
-    - define quantity <[quantity]||1>
-    - define list:|:1
-    - repeat <[fortune_level].add[1]>:
-        - define list:|:<[value]>
-    - determine <[quantity].mul[<util.random.decimal[1].to[<[list].random>]>]||1>
-
 hammer_fix_events:
   type: world
   debug: false
@@ -70,3 +52,21 @@ hammer_fix_events:
         - define quantity:+:1
         - define num1 <[num1].sub[<[diff]>]>
     - determine passively <context.repair_cost.add[<[quantity].mul[2.2].round>]>
+
+calculate_durability_damage:
+    type: procedure
+    definitions: unbreaking_level
+    debug: false
+    script:
+    - determine <element[1].div[<[unbreaking_level].add[1]>]>
+
+calculate_fortune_drops:
+    type: procedure
+    definitions: fortune_level|quantity
+    debug: false
+    script:
+    - define quantity <[quantity]||1>
+    - define list:|:1
+    - repeat <[fortune_level].add[1]>:
+        - define list:|:<[value]>
+    - determine <[quantity].mul[<util.random.decimal[1].to[<[list].random>]>]||1>
