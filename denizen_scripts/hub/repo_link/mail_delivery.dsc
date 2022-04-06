@@ -120,7 +120,7 @@ mail_delivery_apply_to_leaderboard:
   - else:
     - narrate "You achieved a new high score for <[difficulty].to_titlecase> Mail Run: <[time_taken]> Seconds"
     - flag server mail_delivery.leaderboard.<[difficulty]>.<[player]>:<[time_taken]>
-  # TODO
+  - flag server mail_delievry.leaderboard.<[difficulty]>:<server.flag[mail_delivery.leaderboard.<[difficulty]>].sort_by_value>
 
 mail_delivery_events:
   type: world
@@ -238,7 +238,8 @@ mail_delivery_open_menu:
   script:
   - adjust <queue> linked_player:<[player]> if:<[player].exists>
   - define inv <inventory[mail_delivery_menu_inventory]>
-
+  - foreach <list[easy|medium|hard]> as:d:
+    - define lb <server.flag[mail_delivery.leaderboard.<[d]>]>
   - inventory open d:<[inv]>
 
 mail_delivery_menu_inventory_npc_assignment:
