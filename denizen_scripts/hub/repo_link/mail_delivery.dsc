@@ -113,6 +113,13 @@ mail_delivery_apply_to_leaderboard:
   definitions: player|difficulty|time_taken
   script:
   - adjust <queue> linked_player:<[player]> if:<[player].exists>
+  - if <server.has_flag[mail_delivery.leaderboard.<[difficulty]>.<[player]>]>:
+    - define before <server.flag[mail_delivery.leaderboard.<[difficulty]>.<[player]>]>
+    - narrate "You improved your high score for <[difficulty]> Mail Run: <[time_taken].div[1000]> Seconds" if:<[time_taken].is_less_than[<[before]>]>
+    - flag server mail_delivery.leaderboard.<[difficulty]>.<[player]>:<[time_taken].min[<[before]>]>
+  - else:
+    - narrate "You achieved a new high score for <[difficulty].to_titlecase> Mail Run: <[time_taken].div[1000]> Seconds"
+    - flag server mail_delivery.leaderboard.<[difficulty]>.<[player]>:<[time_taken]>
   # TODO
 
 mail_delivery_events:
