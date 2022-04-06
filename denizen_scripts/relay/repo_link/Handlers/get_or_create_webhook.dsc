@@ -15,7 +15,7 @@ discord_get_or_create_webhook:
       - determine <server.flag[discord.webooks.<[channel_id]>]>
     - ~webget https://discord.com/api/channels/<[channel_id]>/webhooks headers:<script.parsed_key[data.headers]> save:webhooks
     - announce to_console <entry[webhooks].result>
-    - yaml loadtext:<entry[webhooks].result> id:webhooks
+    - yaml loadtext:<entry[webhooks].result.substring[1,<entry[webhooks].length.sub[1]>]> id:webhooks
     - if <[webhook].get[1].get[id].if_null[null]> != null:
       - flag server discord.webhooks.<[channel_id]>:https<&co>//discord.com/api/webhooks/<[webhook].get[1].get[id]>/<[webhook].get[1].get[token]>
       - determine <server.flag[discord.webooks.<[channel_id]>]>
