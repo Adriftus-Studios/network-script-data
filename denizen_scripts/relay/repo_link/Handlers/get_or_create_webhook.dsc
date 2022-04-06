@@ -6,7 +6,7 @@ discord_get_or_create_webhook:
     headers:
       User-Agent: Adriftus
       Authorization: Bot <[token]>
-      Content-Type: json/application
+      Content-Type: application/json
     create_webhook:
       name: DenizenGenerated
   script:
