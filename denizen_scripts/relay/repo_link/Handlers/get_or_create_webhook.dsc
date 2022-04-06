@@ -15,9 +15,8 @@ discord_get_or_create_webhook:
       - determine <server.flag[discord.webooks.<[channel_id]>]>
     - ~webget https://discord.com/api/channels/<[channel_id]>/webhooks headers:<script.parsed_key[data.headers]> save:webhooks
     - define webhook <util.parse_yaml[<&lc>"key":<entry[webhooks].result><&rc>].get[key]>
-    - announce to_console <[webhook].get[1].get[id]>
-    #- if <[webhook].get[1].get[id].if_null[null]> != null:
-      #- flag server discord.webhooks.<[channel_id]>:https<&co>//discord.com/api/webhooks/<[webhook].get[1].get[id]>/<[webhook].get[1].get[token]>
-      #- determine <server.flag[discord.webooks.<[channel_id]>]>
-    #- ~webget headers:<script.parsed_key[data.headers]> method:POST data:<script.parsed_key[data.create_webhook]> https://discord.com/api/channels/<[channel_id]>/webhooks save:created_webhook
-    #- announce to_console <entry[created_webhook].result>
+    - if <[webhook].get[1].get[id].if_null[null]> != null:
+      - flag server discord.webhooks.<[channel_id]>:https<&co>//discord.com/api/webhooks/<[webhook].get[1].get[id]>/<[webhook].get[1].get[token]>
+      - determine <server.flag[discord.webooks.<[channel_id]>]>
+    - ~webget headers:<script.parsed_key[data.headers]> method:POST data:<script.parsed_key[data.create_webhook]> https://discord.com/api/channels/<[channel_id]>/webhooks save:created_webhook
+    - announce to_console <entry[created_webhook].result>
