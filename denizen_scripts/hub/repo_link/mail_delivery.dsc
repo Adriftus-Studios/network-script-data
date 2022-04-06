@@ -28,6 +28,9 @@ mail_delivery_start:
   # - if <[slots].size> < <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.mail_items]>:
   #   - narrate "<&c>You do not have enough empty slots in your inventory."
   #   - stop
+  - if <player.has_flag[minigame.active]>:
+    - narrate "No"
+    - stop
   - flag <player> minigame.active
   - flag <player> mail_delivery.current.inventory:<player.inventory.map_slots>
   - inventory clear d:<player.inventory>
