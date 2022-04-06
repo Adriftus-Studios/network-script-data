@@ -123,7 +123,7 @@ mail_delivery_apply_to_leaderboard:
   - else:
     - narrate "You achieved a new high score for <[difficulty].to_titlecase> Mail Run: <[time_taken]> Seconds"
     - flag server mail_delivery.leaderboard.<[difficulty]>.<[player]>:<[time_taken]>
-  - flag server mail_delivery.leaderboard.<[difficulty]>:<server.flag[mail_delivery.leaderboard.<[difficulty]>].sort_by_value[mul[-1]]>
+  - flag server mail_delivery.leaderboard.<[difficulty]>:<server.flag[mail_delivery.leaderboard.<[difficulty]>].sort_by_value>
 
 mail_delivery_events:
   type: world
