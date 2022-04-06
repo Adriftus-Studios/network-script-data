@@ -5,7 +5,7 @@ chat_send_message:
   definitions: game_message|game_channel|server|uuid|display_name
   script:
       - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.channel]>
-      - ~run discord_get_or_create_webhook def:<[channel]>
+      - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
       - define Hook <entry[webhook].determination.get[1]>
       - define Data <script.parsed_key[webhook].to_json>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
