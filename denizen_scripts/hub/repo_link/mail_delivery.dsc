@@ -141,7 +141,7 @@ mail_delivery_events:
     on player clicks in mail_delivery_mailbox_inventory:
     - if <context.item.flag[mailbox_number].equals[<context.inventory.flag[mailbox]>].not.if_null[false]>:
       - playsound <player> sound:ENTITY_VILLAGER_NO
-      - adjust <player> velocity:<context.location.sub[<player.location>].mul[-1]>
+      - adjust <player> velocity:<context.inventory.flag[location].sub[<player.location>].mul[-1]>
       - inventory close
     on player closes mail_delivery_mailbox_inventory:
     - stop if:<player.has_flag[mail_delivery.current].not>
