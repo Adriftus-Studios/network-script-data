@@ -19,3 +19,5 @@ invisible_sign_events:
   events:
     on server start:
       - adjust server remove_recipes:<item[warped_sign].recipe_ids>
+    on player breaks warped_sign bukkit_priority:HIGHEST:
+      - determine invisible_sign
