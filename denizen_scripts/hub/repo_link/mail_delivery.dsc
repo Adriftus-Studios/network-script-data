@@ -244,7 +244,10 @@ mail_delivery_open_menu:
     - foreach <script[mail_delivery_menu_inventory].list_keys[data.leaderboard.<[d]>]> as:p:
       - define player <[lb].keys.get[<[p]>].if_null[null]>
       - if <[player]> != null:
-        - inventory set d:<[inv]> slot:<script[mail_delivery_menu_inventory].data_key[data.leaderboard.<[d]>.<[p]>]> o:<item[player_head].with[display_name=<[player].name>]>
+        - define time <[lb].get[<[player]>]>
+        - define item <item[player_head].with[display_name=<&e><[player].name>]>
+        - define item "<[item].with[lore=<&7>Time Elapsed: <[time]>]>"
+        - inventory set d:<[inv]> slot:<script[mail_delivery_menu_inventory].data_key[data.leaderboard.<[d]>.<[p]>]> o:<[item]>
   - inventory open d:<[inv]>
 
 mail_delivery_menu_inventory_npc_assignment:
