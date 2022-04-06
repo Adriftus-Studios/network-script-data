@@ -238,8 +238,13 @@ mail_delivery_open_menu:
   script:
   - adjust <queue> linked_player:<[player]> if:<[player].exists>
   - define inv <inventory[mail_delivery_menu_inventory]>
-  - foreach <list[easy|medium|hard]> as:d:
-    - define lb <server.flag[mail_delivery.leaderboard.<[d]>]>
+  - foreach <script[mail_delivery_menu_inventory].list_keys[data.leaderboard]> as:d:
+    - define lb <server.flag[mail_delivery.leaderboard.<[d]>].if_null[null]>
+    - foreach next if:<[lb].equals[null]>
+    - foreach <script[mail_delivery_menu_inventory].list_keys[data.leaderboard.<[d]>]> as:p:
+      - define player <[lb].get[<[lb].keys.get[<[p]>]>].if_null[null]>
+      - if <[player]> != null:
+        - inventory set d:<[inv]> slot:<script[mail_delivery_menu_inventory].data_key[data.leaderboard.<[d]>.<[p]>]> o:<item[player_head].with[display<&sp>name=<[player].name>]>
   - inventory open d:<[inv]>
 
 mail_delivery_menu_inventory_npc_assignment:
