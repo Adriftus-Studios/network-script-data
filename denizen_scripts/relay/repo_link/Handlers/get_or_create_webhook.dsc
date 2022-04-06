@@ -18,5 +18,5 @@ discord_get_or_create_webhook:
     - if <[webhook].get[1].get[id].if_null[null]> != null:
       - flag server discord.webhooks.<[channel_id]>:https<&co>//discord.com/api/webhooks/<[webhook].get[1].get[id]>/<[webhook].get[1].get[token]>
       - determine <server.flag[discord.webhooks.<[channel_id]>]>
-    - ~webget https://discord.com/api/channels/<[channel_id]>/webhooks headers:<script.parsed_key[data.headers]> method:POST data:<script.parsed_key[data.create_webhook]> save:created_webhook
+    - ~webget https://discord.com/api/channels/<[channel_id]>/webhooks headers:<script.parsed_key[data.headers]> method:POST data:<script.parsed_key[data.create_webhook].to_json> save:created_webhook
     - announce to_console <entry[created_webhook].result>
