@@ -63,6 +63,8 @@ easter_egg_events:
     on delta time hourly:
     # <cuboid[spawn_cuboid].blocks_flagged[easter_egg].filter[material.name.equals[PLAYER_HEAD]].size>
     - run easter_egg_respawn def:1h
+    on server start:
+    - run easter_egg_respawn
     on player right clicks block:
     - stop if:<context.location.flag[easter_egg.active].exists.not.if_null[true]>
     - define duration 1h
