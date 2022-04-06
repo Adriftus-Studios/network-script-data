@@ -16,46 +16,48 @@ cosmetic_configuration:
 
 cosmetic_menu_masks:
   type: item
-  material: totem_of_undying
+  material: feather
   display name: <&d>Masks
   lore:
     - "<&e>Take on different appearances"
     - "<&e>Completely disguise yourself!"
+  mechanisms:
+    custom_model_data: 3
 
 cosmetic_menu_titles:
   type: item
-  material: name_tag
+  material: feather
   display name: <&6>Titles
   lore:
     - "<&e>Titles appear above your head"
     - "<&e>They are also in chat player info."
+  mechanisms:
+    custom_model_data: 3
 
 cosmetic_menu_bowtrails:
   type: item
-  material: crossbow
+  material: feather
   display name: <&b>Bowtrails
   lore:
     - "<&e>Spiff up your bow shots!"
     - "<&e>Grab your bow, and show off."
+  mechanisms:
+    custom_model_data: 3
 
 
 cosmetic_main_menu_open:
   type: task
   debug: false
   data:
-    slots_by_count:
-      1: 5
-      2: 4|6
-      3: 3|5|7
-      4: 2|4|6|8
-      5: 1|3|5|7|9
+    slots:
+      masks: 1|2|3
+      titles: 4|5|6
+      bowtrails: 7|8|9
   script:
+    - define inventory <inventory[generic[title=<&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0005]>;size=9]]>
     - foreach <script[cosmetic_selection_inventory_open].list_keys[data].exclude[slot_data]>:
-      - define items:|:<item[cosmetic_menu_<[value]>].with_flag[run_script:cosmetic_selection_inventory_open].with_flag[cosmetic_type:<[value]>]>
-    - define inventory <inventory[generic[title=<&d>Cosmetics;size=9]]>
-    - define slots <list[<script.data_key[data.slots_by_count].get[<[items].size>]>]>
-    - foreach <[items]>:
-      - inventory set slot:<[slots].get[<[loop_index]>]> o:<[value]> d:<[inventory]>
+      - foreach <script.data_key[data.slots.<[value]>]> as:slot:
+        - inventory set slot:<[slot]> d:<[inventory]> o:<item[cosmetic_menu_<[value]>].with_flag[run_script:cosmetic_selection_inventory_open].with_flag[cosmetic_type:<[value]>]>
     - inventory open d:<[inventory]>
 
 cosmetic_selection_inventory_open:
