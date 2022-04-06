@@ -14,7 +14,7 @@ tractor_beam_events:
       - wait 1t
     - adjust <player> gravity:true
     after server start:
-      - run tractor_beam_particles
+    - inject tractor_beam_particles
 
 tractor_beam_particles:
   type: task

@@ -262,12 +262,16 @@ mail_delivery_menu_events:
 
 mail_delivery_icon_stop:
   type: item
-  material: barrier
+  material: feather
+  mechanisms:
+    custom_model_data: 3
   display name: <&4><&l>Forfeit ongoing session.
 
 mail_delivery_icon_help:
   type: item
-  material: crafting_table
+  material: feather
+  mechanisms:
+    custom_model_data: 3
   display name: <&b><&m>---<&r><&8><&m>｜-<&r>  <&8><&m>+----------------------------------+<&r>  <&8><&m>-｜<&b><&m>---
   lore:
   - <&7>* <&e>Name: <&7>Mail Delivery!
