@@ -13,11 +13,18 @@ tractor_beam_events:
       - adjust <player> velocity:<player.velocity.add[<[vel]>]>
       - wait 1t
     - adjust <player> gravity:true
-    on delta time secondly every:3:
+    after server start:
+    - while true:
+      - inject tractor_beam_particles
+
+tractor_beam_particles:
+  type: task
+  debug: false
+  script:
     - define blocks <cuboid[tractor_beam_1].blocks.filter[y.is[less].than[40]].parse[center]>
     - define blocks2 <cuboid[tractor_beam_1].blocks.filter[y.is[less].than[58]].parse[center]>
     - define blocks3 <cuboid[tractor_beam_1].blocks.filter[y.is[less].than[35]].parse[center]>
-    - repeat 20:
+    - while <cuboid[tractor_beam_1].exists>:
         - playeffect <[blocks].random[5]> offset:3 effect:DRAGON_BREATH quantity:2 velocity:<location[0,0.7,0]> targets:<server.online_players>
         - playeffect <[blocks2].random[5]> offset:3 effect:END_ROD quantity:2 velocity:<location[0,0.7,0]> targets:<server.online_players>
         - playeffect <[blocks3].random[2]> offset:1 effect:DRAGON_BREATH quantity:2 targets:<server.online_players>
