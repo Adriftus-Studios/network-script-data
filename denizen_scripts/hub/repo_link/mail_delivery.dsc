@@ -136,9 +136,12 @@ mail_delivery_events:
     - note <inventory[mail_delivery_mailbox_inventory]> as:mailbox_<[number]>_<player.uuid>
     - define inventory <inventory[mailbox_<[number]>_<player.uuid>]>
     - flag <[inventory]> mailbox:<[number]>
+    - flag <[inventory]> location:<context.location>
     - inventory open d:<[inventory]> player:<player>
     on player clicks in mail_delivery_mailbox_inventory:
     - if <context.item.flag[mailbox_number].equals[<context.inventory.flag[mailbox]>].not.if_null[false]>:
+      - playsound <player> sound:ENTITY_VILLAGER_NO
+      - adjust <player> velocity:<context.location.sub[<player.location>].mul[-1]>
       - inventory close
     on player closes mail_delivery_mailbox_inventory:
     - stop if:<player.has_flag[mail_delivery.current].not>
