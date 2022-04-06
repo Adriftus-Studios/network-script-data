@@ -40,7 +40,8 @@ Tag_Parser_DCommand:
         - if !<bungee.list_servers.contains[<[Args].first>]>:
           - define color red
           - inject Embedded_Color_Formatting
-          - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
+          - ~run discord_get_or_create_webhook def:<[Channel]> save:webhook
+          - define Hook <entry[webhook].created_queue.determination.get[1]>
           - define Embeds "<list[<map.with[description].as[<[Args].first> is **Not Connected** or is **OFFLINE**.].with[color].as[<[Color]>]>]>"
           - define Data "<map.with[username].as[Server Status Warning].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
           - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
@@ -83,7 +84,8 @@ Tag_Parser_DCommand:
       - define Embeds <list[<map.with[color].as[<[Color]>].with[footer].as[<[Footer]>].with[description].as[<[TagData].unescaped>]>]>
       - define Data "<map.with[username].as[Tag Parser Results].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
 
-      - define Hook <script[DDTBCTY].parsed_key[WebHooks.<[Channel]>.hook]>
+      - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
+      - define Hook <entry[webhook].created_queue.determination.get[1]>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
@@ -128,7 +130,8 @@ Tag_Receive:
     - define Embeds <list[<map.with[color].as[<[Color]>].with[footer].as[<[Footer]>].with[description].as[<[TagData].unescaped>]>]>
     - define Data "<map.with[username].as[Tag Parser Results].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
 
-    - define Hook <script[DDTBCTY].parsed_key[WebHooks.<[Channel]>.hook]>
+    - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
+    - define Hook <entry[webhook].created_queue.determination.get[1]>
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
 
