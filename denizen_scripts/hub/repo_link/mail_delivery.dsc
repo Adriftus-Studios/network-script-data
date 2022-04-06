@@ -293,6 +293,8 @@ mail_delivery_icon_start_easy:
   type: item
   material: feather
   display name: <&7>Start -- <&l><&a>Easy <&r><&a>[5 Minute]
+  lore:
+  - <&7>* <&e>Items to deliver: <&7><script[mail_delivery_config].data_key[difficulties.easy.mail_items_min]> to <script[mail_delivery_config].data_key[difficulties.easy.mail_items_max]>
   mechanisms:
     custom_model_data: 3
 
@@ -300,6 +302,8 @@ mail_delivery_icon_start_medium:
   type: item
   material: feather
   display name: <&7>Start -- <&l><&6>Medium <&r><&6>[2 Minute]
+  lore:
+  - <&7>* <&e>Items to deliver: <&7><script[mail_delivery_config].data_key[difficulties.medium.mail_items_min]> to <script[mail_delivery_config].data_key[difficulties.medium.mail_items_max]>
   mechanisms:
     custom_model_data: 3
 
@@ -307,5 +311,7 @@ mail_delivery_icon_start_hard:
   type: item
   material: feather
   display name: <&7>Start -- <&l><&c>Hard <&r><&c>[1 Minute]
+  lore:
+  - <&7>* <&e>Items to deliver: <&7><script[mail_delivery_config].data_key[difficulties.hard.mail_items_min]> to <script[mail_delivery_config].data_key[difficulties.hard.mail_items_max]>
   mechanisms:
     custom_model_data: 3
