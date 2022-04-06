@@ -38,6 +38,10 @@ hub_player_takes_damage:
     on player changes air level:
       - determine cancelled
 
+    # - Stop Fucking up our Farmland! >.>
+    on player interacts with material:
+      - determine cancelled
+
     # - Save the bees! ヽ(￣ω￣(。。 )ゝ
     # - Save everything!
 #    on entity damaged by player:
