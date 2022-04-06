@@ -250,6 +250,8 @@ mail_delivery_open_menu:
         - define time <[lb].get[<[player]>]>
         - define item <item[player_head].with[display_name=<&e><[player].name>]>
         - define item "<[item].with[lore=<&7>Time Elapsed: <[time]>]>"
+        - define item <[item].with[skull_skin=<[player].uuid>]>
+        - define item <[item].with[custom_model_data=1]>
         - inventory set d:<[inv]> slot:<script[mail_delivery_menu_inventory].data_key[data.leaderboard.<[d]>.<[p]>]> o:<[item]>
   - inventory open d:<[inv]>
 
