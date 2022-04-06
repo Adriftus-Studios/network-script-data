@@ -27,7 +27,8 @@ Status_DCommand:
   # % ██ [ Help Argument ] ██
     - if <[Server]> == help:
       - define Data <yaml[SDS_StatusDCmd].to_json>
-      - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
+      - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
+      - define Hook <entry[webhook].created_queue.determination.get[1]>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
       - stop

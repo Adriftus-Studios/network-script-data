@@ -41,6 +41,7 @@ Ex_DCommand:
     - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[description].as[Command ran: `/<[Command]>`]>]>"
     - define Data <map.with[username].as[<[Server].to_titlecase><&sp>Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
 
-    - define Hook <script[DDTBCTY].parsed_key[WebHooks.<[Channel]>.hook]>
+    - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
+    - define Hook <entry[webhook].created_queue.determination.get[1]>
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>

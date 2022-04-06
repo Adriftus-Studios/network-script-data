@@ -17,7 +17,8 @@ Webget_DCommand:
     - inject Role_Verification
     - inject Command_Arg_Registry
     - define Entry_Results <list>
-    - define Hook <script[DDTBCTY].parsed_key[WebHooks.<[Channel]>.hook]>
+    - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
+    - define Hook <entry[webhook].created_queue.determination.get[1]>
     - define RHeaders <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - define Reference_URL https://discordapp.com/channels/<[Group].id>/<[Channel]>/<[MessageID]>
     - define avatar_url https://cdn.discordapp.com/attachments/626098849127071746/737916305193173032/AY7Y8Zl9ylnIAAAAAElFTkSuQmCC.png

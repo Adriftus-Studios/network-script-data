@@ -18,6 +18,7 @@ player_data_handler:
         - else:
           - yaml id:global.player.<context.uuid> create
           - ~yaml id:global.player.<context.uuid> savefile:<[server_yaml]>
+          - customevent id:global_player_data_loaded context:<map[uuid=<context.uuid>;name=<context.name>]> player:<player[<context.uuid>]>
 
     on player joins:
       - if <bungee.server> != hub:
