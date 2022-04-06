@@ -224,9 +224,9 @@ mail_delivery_menu_inventory:
         2: 26
         3: 27
       hard:
-        1: 33
-        2: 34
-        3: 35
+        1: 34
+        2: 35
+        3: 36
   slots:
   - [] [] [] [] [] [] [] [] []
   - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [] [] [] [] [] [] []
