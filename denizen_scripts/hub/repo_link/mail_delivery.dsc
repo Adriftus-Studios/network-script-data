@@ -244,7 +244,7 @@ mail_delivery_open_menu:
     - foreach <script[mail_delivery_menu_inventory].list_keys[data.leaderboard.<[d]>]> as:p:
       - define player <[lb].get[<[lb].keys.get[<[p]>]>].if_null[null]>
       - if <[player]> != null:
-        - inventory set d:<[inv]> slot:<script[mail_delivery_menu_inventory].data_key[data.leaderboard.<[d]>.<[p]>]> o:<item[player_head].with[display<&sp>name=<[player].name>]>
+        - inventory set d:<[inv]> slot:<script[mail_delivery_menu_inventory].data_key[data.leaderboard.<[d]>.<[p]>]> o:<item[player_head].with[display_name=<[player].name>]>
   - inventory open d:<[inv]>
 
 mail_delivery_menu_inventory_npc_assignment:
