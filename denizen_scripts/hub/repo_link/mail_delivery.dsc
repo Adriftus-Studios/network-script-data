@@ -140,7 +140,7 @@ mail_delivery_events:
     on player clicks in mail_delivery_mailbox_inventory:
     - narrate <context.item.flag[mailbox_number]>
     - narrate <context.inventory.flag[mailbox]>
-    - determine cancelled if:<context.item.flag[mailbox_number].equals[<context.inventory.flag[mailbox]>].if_null[false]>
+    - determine cancelled if:<context.item.flag[mailbox_number].equals[<context.inventory.flag[mailbox]>].not.if_null[false]>
     on player closes mail_delivery_mailbox_inventory:
     - stop if:<player.has_flag[mail_delivery.current].not>
     - if <context.inventory.note_name.is_truthy>:
