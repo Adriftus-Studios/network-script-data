@@ -242,8 +242,7 @@ mail_delivery_open_menu:
     - define lb <server.flag[mail_delivery.leaderboard.<[d]>].if_null[null]>
     - foreach next if:<[lb].equals[null]>
     - foreach <script[mail_delivery_menu_inventory].list_keys[data.leaderboard.<[d]>]> as:p:
-      - define player <[lb].get[<[lb].keys.get[<[p]>]>].if_null[null]>
-      - narrate <[lb].keys.get[<[p]>]>
+      - define player <[lb].keys.get[<[p]>].if_null[null]>
       - if <[player]> != null:
         - inventory set d:<[inv]> slot:<script[mail_delivery_menu_inventory].data_key[data.leaderboard.<[d]>.<[p]>]> o:<item[player_head].with[display_name=<[player].name>]>
   - inventory open d:<[inv]>
