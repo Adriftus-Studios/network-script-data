@@ -3,7 +3,7 @@
 #=====================================================================#
 Banner_Designer_Version:
   type: data
-  version: 1.0.21
+  version: 1.0.22
   last_updated: 2022_04_07
 
 Banner_Designer_Data:
@@ -973,4 +973,4 @@ Banner_Designer_Storage:
   type: task
   debug: false
   script:
-    - bungeerun relay discord_sendMessage "def:Adriftus Staff|custom-banners|RENAME_ME:<&nl>    type: item<&nl>    debug: false<&nl>    material:<[converter_result].as_item.material.name><&nl>    mechanisms:<&nl>        patterns:<&nl>          - <[converter_result].as_item.patterns.separated_by[<&nl>        - ]>"
+    - bungeerun relay discord_sendMessage "def:Adriftus Staff|custom-banners|RENAME_ME:<&nl>    type: item<&nl>    debug: false<&nl>    material: <[converter_result].as_item.material.name><&nl>    mechanisms:<&nl>        patterns:<&nl>          - <[converter_result].as_item.patterns.separated_by[<&nl>          - ]>"
