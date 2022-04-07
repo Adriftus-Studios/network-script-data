@@ -1,7 +1,7 @@
 return_scroll:
   type: item
   material: feather
-  display name: <&6>Scroll of Returning
+  display name: <&6>Return Scroll
   data:
     recipe_book_category: travel.scroll
   lore:
@@ -23,7 +23,7 @@ return_scroll:
 return_crystal:
   type: item
   material: feather
-  display name: <&6>Crystal of Returning
+  display name: <&6>Return Crystal
   data:
     recipe_book_category: travel.crystal
   lore:

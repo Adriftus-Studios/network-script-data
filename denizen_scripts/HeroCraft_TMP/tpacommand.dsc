@@ -22,7 +22,7 @@ tpa_command:
 tpa_crystal:
   type: item
   material: feather
-  display name: <&2>Friendly Crystal
+  display name: <&2>TPA Crystal
   data:
     recipe_book_category: travel.crystal
   lore:

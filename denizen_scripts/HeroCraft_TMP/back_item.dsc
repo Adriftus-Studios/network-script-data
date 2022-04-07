@@ -1,7 +1,7 @@
 back_crystal:
   type: item
   material: feather
-  display name: <&c>Crystal of Recall
+  display name: <&c>Back Crystal
   data:
     recipe_book_category:  travel.crystal
   lore:
@@ -26,7 +26,7 @@ back_crystal:
 back_scroll:
   type: item
   material: feather
-  display name: <&c>Scroll of Recall
+  display name: <&c>Back Scroll
   data:
     recipe_book_category: travel.scroll
   lore:
