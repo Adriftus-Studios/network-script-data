@@ -9,6 +9,15 @@ Banner_Token_Test:
   lore:
   - Insert in a Banner Designer to enable Testing Mode.
 
+Banner_Token_Admin:
+  type: item
+  debug: false
+  material: gold_nugget
+  display name: <dark_red><bold>[Banner Token: ADMIN]
+  lore:
+  - Insert in a Banner Designer to enable Admin Mode.
+  - Saved banners will be stored in a yaml file.
+
 Banner_Token_Town:
   type: item
   debug: false

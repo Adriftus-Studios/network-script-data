@@ -3,8 +3,8 @@
 #=====================================================================#
 Banner_Designer_Version:
   type: data
-  version: 1.0.11
-  last_updated: 2022_03_22
+  version: 1.0.24
+  last_updated: 2022_04_07
 
 Banner_Designer_Data:
   type: data
@@ -20,6 +20,8 @@ Banner_Designer_Data:
       subtitle: <aqua>in <red><bold>Personal Emblem <aqua>Mode
     Single:
       subtitle: <aqua>in <dark_gray><bold>Single Use Banner <aqua>Mode
+    Admin:
+      subtitle: <aqua>in <dark_red><bold>ADMIN <aqua>Mode
   Signs:
     Color:
       default: <list[===============|Banner|Designer|===============]>
@@ -363,6 +365,12 @@ Banner_Designer_Function:
             - title "subtitle:<red>ACCESS DENIED" targets:<player>
             - narrate "<gray>Only <white><player.nation.king.name> <gray>has the ability to set these permissions."
             - stop
+        - case admin:
+          - if !<player.has_flag[banner_crafter]>:
+            - narrate "<dark_red>You don't have permission to create ADMIN banners."
+            - title "subtitle:<red>ACCESS DENIED" targets:<player>
+            - narrate "<gray>If you feel you've reached this message in error, contact Berufeng."
+            - stop
       - if !<player.has_flag[banner_machine_in_use]>:
         - define uuid:<context.location.cuboids.filter[contains_any_text[banner_designer_]].get[1].after[banner_designer_]>
         - flag <player> banner_machine_in_use:<[uuid]>
@@ -560,6 +568,8 @@ Banner_Designer_Update:
           - narrate "<gold>This nation does not have a flag yet. Setting machine to default."
       - case single:
         - stop
+      - case admin:
+        - stop
       - default:
         - narrate "<red>ERROR_CODE: 003 <gray>- please report!"
   load:
@@ -618,6 +628,11 @@ Banner_Designer_Save:
           - inject Banner_Designer_Converter instantly
           - wait 1t
           - give <[converter_result].as_item.with[hides=ALL;display=<white>Banner]>
+        - case admin:
+          - narrate "<dark_red>Saving your design to file."
+          - inject Banner_Designer_Converter instantly
+          - ~inject Banner_Designer_Storage
+          - wait 1t
         - default:
           - narrate "<red>ERROR_CODE: 004 <gray>- please report!"
           - stop
@@ -953,3 +968,9 @@ Banner_Designer_Hide_Buttons:
   script:
     - wait 1t
     - adjust <context.entity> hide_from_players:true
+
+Banner_Designer_Storage:
+  type: task
+  debug: false
+  script:
+    - bungeerun relay discord_sendMessage "def:Adriftus Staff|custom-banners|custom_banner_RENAME:<&nl>    type: item<&nl>    debug: false<&nl>    material: <[converter_result].as_item.material.name><&nl>    display name:<&nl>    mechanisms:<&nl>        patterns:<&nl>          - <[converter_result].as_item.patterns.separated_by[<&nl>          - ]><&nl>    lore:<&nl>    -"
