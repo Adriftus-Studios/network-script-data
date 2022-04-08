@@ -43,7 +43,7 @@ block_properties:
             - inject <[value]>
         - else:
           - inject <[value].flag[on_pistoned]>\
-    on piston_retracts:
+    on piston retracts:
       - foreach <context.blocks.filter[has_flag[on_pistoned]]>:
         - if <[value].flag[on_pistoned].object_type> == List:
           - foreach <[value].flag[on_pistoned]>:

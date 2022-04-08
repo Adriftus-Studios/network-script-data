@@ -22,3 +22,9 @@ item_flags:
           - inject <[value]>
       - else:
         - inject <context.item.flag[right_click_script]>
+    on player left clicks block with:item_flagged:left_click_script:
+      - if <context.item.flag[left_click_script].object_type> == List:
+        - foreach <context.item.flag[left_click_script]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[left_click_script]>
