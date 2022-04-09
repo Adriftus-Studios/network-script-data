@@ -1288,6 +1288,8 @@ fishing_minigame_merchant_open_gui:
             - inventory set o:fishing_minigame_end_game slot:19 d:<[inventory]>
             - inventory set o:fishing_minigame_end_game slot:20 d:<[inventory]>
             - inventory set o:fishing_minigame_end_game slot:21 d:<[inventory]>
+            - inventory set o:fishing_minigame_fish_button slot:42 d:<[inventory]>
+            - inventory set o:fishing_minigame_fish_button slot:43 d:<[inventory]>
         - else:
             - adjust <[inventory]> title:<&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0001]>
             - inventory set o:fishing_minigame_start_button slot:10 d:<[inventory]>
@@ -1296,6 +1298,8 @@ fishing_minigame_merchant_open_gui:
             - inventory set o:fishing_minigame_start_button slot:19 d:<[inventory]>
             - inventory set o:fishing_minigame_start_button slot:20 d:<[inventory]>
             - inventory set o:fishing_minigame_start_button slot:21 d:<[inventory]>
+            - inventory set o:fishing_minigame_fish_button_gray slot:42 d:<[inventory]>
+            - inventory set o:fishing_minigame_fish_button_gray slot:43 d:<[inventory]>
         - define tokensButton <item[fishing_minigame_fishtokens_button]>
         - define tokensLore <[tokensButton].lore>
         - if <[player].has_flag[fishingminigame.fishtokens]>:
@@ -1308,8 +1312,6 @@ fishing_minigame_merchant_open_gui:
         - inventory set o:<[tokensButton]> slot:39 d:<[inventory]>
         - inventory set o:<[tokensButton]> slot:40 d:<[inventory]>
         - inventory set o:fishing_minigame_leaderboards_button slot:9 d:<[inventory]>
-        - inventory set o:fishing_minigame_fish_button slot:42 d:<[inventory]>
-        - inventory set o:fishing_minigame_fish_button slot:43 d:<[inventory]>
     script:
         - inject locally path:build_inventory
         - inventory open d:<[inventory]>
@@ -1979,11 +1981,11 @@ fishing_minigame_fishtokens_button:
     mechanisms:
         custom_model_data: 3
     lore:
-    - <&7>This is your fishing currency.
+    - <&7>Spend your fishtokens!
     - <&r>
     - <&a>Fishtokens Amount: 0
     - <&r>
-    - <&r><element[➤ Fishtoken Shop].color_gradient[from=#62FF00;to=#CBFFB9]>
+    - <&r><element[➤ Shop!].color_gradient[from=#62FF00;to=#CBFFB9]>
 
 # % ██ [ Leaderboards Button ] ██
 fishing_minigame_leaderboards_button:
@@ -2021,6 +2023,16 @@ fishing_minigame_fish_button:
     - <&7>Get your catch valued by the merchant.
     - <&r>
     - <&r><element[➤ View Your Value].color_gradient[from=#FFF95B;to=#FFFCB0]>
+
+fishing_minigame_fish_button_gray:
+    debug: false
+    type: item
+    material: feather
+    display name: <dark_gray><&l>Unavailable
+    mechanisms:
+        custom_model_data: 3
+    lore:
+    - <&7>Only available while playing the minigame.
 
 # % ██ [ MP3 No Song ] ██
 fishing_minigame_mp3_no_button:
