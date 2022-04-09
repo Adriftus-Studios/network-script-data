@@ -3,8 +3,8 @@
 #=====================================================================#
 Banner_Designer_Version:
   type: data
-  version: 1.0.24
-  last_updated: 2022_04_07
+  version: 1.0.25
+  last_updated: 2022_04_08
 
 Banner_Designer_Data:
   type: data
@@ -629,7 +629,7 @@ Banner_Designer_Save:
           - wait 1t
           - give <[converter_result].as_item.with[hides=ALL;display=<white>Banner]>
         - case admin:
-          - narrate "<dark_red>Saving your design to file."
+          - narrate "<dark_red>Storing your design in <&f><&font[adriftus:chat]><&chr[0044]>#custom-banners<dark_red>."
           - inject Banner_Designer_Converter instantly
           - ~inject Banner_Designer_Storage
           - wait 1t
