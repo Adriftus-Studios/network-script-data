@@ -3,7 +3,7 @@
 #=====================================================================#
 Banner_Designer_Version:
   type: data
-  version: 1.0.26
+  version: 1.0.27
   last_updated: 2022_04_08
 
 Banner_Designer_Data:
@@ -629,7 +629,7 @@ Banner_Designer_Save:
           - wait 1t
           - give <[converter_result].as_item.with[hides=ALL;display=<white>Banner]>
         - case admin:
-          - narrate "<dark_red>Storing your design in <&f><&font[adriftus:chat]><&chr[0044]>#custom-banners<dark_red>."
+          - narrate "<dark_red>Storing your design in <&f><&font[adriftus:chat]><&chr[0044]><&font[minecraft:default]>#custom-banners<dark_red>."
           - inject Banner_Designer_Converter instantly
           - ~inject Banner_Designer_Storage
           - wait 1t
