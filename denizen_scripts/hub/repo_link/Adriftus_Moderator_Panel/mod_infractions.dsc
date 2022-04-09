@@ -13,7 +13,7 @@ mod_mute_infractions:
     Racism: 7d
     Sexism: 7d
     Disrespect to Players and/or Staff Members: 7d
-    Cyber-Bullying: 7d
+    Harassment: 7d
 
 mod_kick_infractions:
   type: data
