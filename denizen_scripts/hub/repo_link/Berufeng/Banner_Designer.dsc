@@ -3,8 +3,8 @@
 #=====================================================================#
 Banner_Designer_Version:
   type: data
-  version: 1.0.24
-  last_updated: 2022_04_07
+  version: 1.0.27
+  last_updated: 2022_04_08
 
 Banner_Designer_Data:
   type: data
@@ -629,10 +629,11 @@ Banner_Designer_Save:
           - wait 1t
           - give <[converter_result].as_item.with[hides=ALL;display=<white>Banner]>
         - case admin:
-          - narrate "<dark_red>Saving your design to file."
+          - narrate "<dark_red>Storing your design in <&f><&font[adriftus:chat]><&chr[0044]><&font[minecraft:default]>#custom-banners<dark_red>."
           - inject Banner_Designer_Converter instantly
           - ~inject Banner_Designer_Storage
           - wait 1t
+          - give banner_token_admin
         - default:
           - narrate "<red>ERROR_CODE: 004 <gray>- please report!"
           - stop
@@ -678,6 +679,9 @@ Banner_Designer_Save:
         - case single:
           - narrate "<dark_gray>Overwriting and creating a white banner."
           - give white_banner
+        - case admin:
+          - narrate "<dark_red>Why are you trying to save a <white>white_banner<dark_red>?"
+          - give banner_token_admin
         - default:
           - narrate "<red>ERROR_CODE: 005 <gray>- please report!"
       - title title:<dark_green>Overwritten! "subtitle:<green>Your token was consumed." targets:<player> fade_in:5t stay:1s fade_out:5t
