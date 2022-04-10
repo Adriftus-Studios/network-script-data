@@ -135,7 +135,7 @@ fishing_minigame_build_whirlpools:
     type: task
     script:
         - foreach <server.flag[fishing_minigame_active_whirlpool_locations]> as:loc:
-            - define stand <entity[armor_stand]>
+            - define stand <entity[armor_stand[equipment=air|air|air|cyan_stained_glass[custom_model_data=1]]]>
             - spawn <[stand]> <[loc]> save:entity persistent
             - adjust <entry[entity].spawned_entity> gravity:false
             - adjust <entry[entity].spawned_entity> marker:true
@@ -148,9 +148,11 @@ fishing_minigame_whirlpool_animation:
     type: task
     debug: false
     script:
-        - define circles <server.flag[fishing_minigame_active_whirlpool_locations].keys.parse[up.with_pitch[90].proc[define_circle].context[1|0.1]].combine>
+        - define circles <server.flag[fishing_minigame_active_whirlpool_locations].keys.parse[above]>
         - while !<server.has_flag[fishing_minigame_reset_whirlpools]>:
-            - playeffect at:<[circles]> dolphin offset:0.05,0.05,0.05 targets:<server.flag[fishingminingame.activeplayers]>
+            - playeffect at:<[circles]> dolphin quantity:30 offset:0.45,0.2,0.45 targets:<server.flag[fishingminingame.activeplayers]>
+            - if <[loop_index].mod[7]> == 0:
+              - playeffect at:<[circles]> end_rod quantity:1 offset:1.8,0.2,1.8 velocity:0,0.025,0 targets:<server.flag[fishingminingame.activeplayers]>
             - wait 1t
         - flag server fishing_minigame_reset_whirlpools:!
 
