@@ -8,7 +8,7 @@
 
 block_properties:
   type: world
-  debug: true
+  debug: false
   events:
     on player places block location_flagged:no_build:
       - determine cancelled

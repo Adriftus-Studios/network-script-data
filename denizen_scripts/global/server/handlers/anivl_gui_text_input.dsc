@@ -40,6 +40,7 @@ anvil_gui_text_events:
 
 anvil_gui_item:
   type: item
+  debug: false
   material: feather
   display name: <&c>DEBUG
   mechanisms:

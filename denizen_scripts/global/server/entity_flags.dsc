@@ -93,3 +93,9 @@ entity_flags:
             - inject <[value]>
         - else:
           - inject <player.flag[shift_player_right_clicks]>
+    on player dies flagged:on_death:
+      - if <player.flag[on_death].object_type> == List:
+        - foreach <player.flag[on_death]>:
+          - inject <[value]>
+      - else:
+        - inject <player.flag[on_death]>
