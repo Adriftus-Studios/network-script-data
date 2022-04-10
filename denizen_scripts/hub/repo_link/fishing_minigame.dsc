@@ -1099,7 +1099,7 @@ fishing_minigame_event_handler:
         on player clicks in fishing_minigame_mp3_gui:
             - if <player.has_flag[fishingminigame.active]> && <player.flag[fishingminigame.active]>:
                 - define song <context.item>
-                - if <[song].material.name.equals[leather_horse_armor]>:
+                - if <[song].material.name.equals[leather_leggings]>:
                     - if <player.has_flag[fishing_minigame_playing_music]>:
                         - queue <player.flag[fishing_minigame_music_queue]> stop
                         - midi cancel
@@ -1125,7 +1125,7 @@ fishing_minigame_event_handler:
                     - run fishing_minigame_merchant_open_gui def:<player>
                 - else:
                     - define song <context.item>
-                    - if <[song].material.name.equals[leather_horse_armor]>:
+                    - if <[song].material.name.equals[leather_leggings]>:
                         - if !<[song].is_enchanted>:
                             - run fish_tokens_remove def:<player>|1000 save:removed
                             - if <entry[removed].created_queue.determination.first>:
@@ -1519,7 +1519,7 @@ fishing_minigame_mp3_open_gui:
         - if <[ownedTracks].size> > 0:
             - foreach <[ownedTracks]> as:track:
                 - define trackName <[track].replace[_].with[<&sp>]>
-                - define item <item[leather_horse_armor[hides=all;custom_model_data=50]]>
+                - define item <item[leather_leggings[hides=all;custom_model_data=50]]>
                 - adjust def:item display:<&6><&l><[trackName]>
                 - adjust def:item "lore:<&7>By: <[music].get[<[track]>].get[author].replace[_].with[<&sp>]>"
                 - adjust def:item flag:fileName:<[music].get[<[track]>].get[filename]>
@@ -1568,11 +1568,11 @@ fishing_minigame_music_shop_open_gui:
         - foreach <[sublist]> as:track:
             - define map <[music].get[<[track]>]>
             - define trackName <[track].replace[_].with[<&sp>]>
-            - define item <item[leather_horse_armor[hides=all;custom_model_data=50]]>
+            - define item <item[leather_leggings[hides=all;custom_model_data=50]]>
             - adjust def:item display:<&6><&l><[trackName]>
             - if <[ownedTracks].contains[<[track]>]>:
                 - adjust def:item enchantments:sharpness=1
-                - adjust def:item hides:enchants
+                - adjust def:item hides:all
                 - adjust def:item "lore:<&7>By: <[map].get[author].replace[_].with[<&sp>]><n><&r><n><&r><element[You own this song].color_gradient[from=#FF8400;to=#FFC481]>"
             - else:
                 - adjust def:item "lore:<&7>By: <[map].get[author].replace[_].with[<&sp>]><n><&7>Price: <&b>1000<&r><&font[adriftus:chat]><&chr[0045]><&r><n><&r><n><&r><element[➤ Press to Purchase].color_gradient[from=#FF8400;to=#FFC481]>"
@@ -2117,7 +2117,7 @@ fishing_minigame_mp3_stop_button:
         flag: mp3_stop
     mechanisms:
         hides:
-        - ENCHANTS
+        - ALL
     enchantments:
     - sharpness:1
     lore:
