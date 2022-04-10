@@ -1099,7 +1099,7 @@ fishing_minigame_event_handler:
         on player clicks in fishing_minigame_mp3_gui:
             - if <player.has_flag[fishingminigame.active]> && <player.flag[fishingminigame.active]>:
                 - define song <context.item>
-                - if <[song].material.name.equals[music_disc_pigstep]>:
+                - if <[song].material.name.equals[leather_horse_armor]>:
                     - if <player.has_flag[fishing_minigame_playing_music]>:
                         - queue <player.flag[fishing_minigame_music_queue]> stop
                         - midi cancel
@@ -1120,17 +1120,21 @@ fishing_minigame_event_handler:
 
         # % ██ [ Player Interact with Music Shop ] ██
         on player clicks in fishing_minigame_music_shop_gui:
-            - define song <context.item>
-            - if <[song].material.name.equals[music_disc_pigstep]>:
-                - if !<[song].is_enchanted>:
-                    - run fish_tokens_remove def:<player>|1000 save:removed
-                    - if <entry[removed].created_queue.determination.first>:
-                        - define songName <[song].flag[songName]>
-                        - flag <player> fishingminigame.music:<player.flag[fishingminigame.music].include[<[songName]>]>
-                        - narrate "<&a><[songName]> has been added to your MP3 Player!"
-                        - run fishing_minigame_music_shop_open_gui def:<player>
-                    - else:
-                        - narrate "<&c>You can not afford that!"
+            - if !<context.item.material.name.equals[air]>:
+                - if <context.item.script.exists> and <context.item.script.name.equals[fishing_minigame_back_button]>:
+                    - run fishing_minigame_merchant_open_gui def:<player>
+                - else:
+                    - define song <context.item>
+                    - if <[song].material.name.equals[leather_horse_armor]>:
+                        - if !<[song].is_enchanted>:
+                            - run fish_tokens_remove def:<player>|1000 save:removed
+                            - if <entry[removed].created_queue.determination.first>:
+                                - define songName <[song].flag[songName]>
+                                - flag <player> fishingminigame.music:<player.flag[fishingminigame.music].include[<[songName]>]>
+                                - narrate "<&a><[songName]> has been added to your MP3 Player!"
+                                - run fishing_minigame_music_shop_open_gui def:<player>
+                            - else:
+                                - narrate "<&c>You can not afford that!"
 
         # % ██ [ Player Interact with Bucket ] ██
         on player clicks in fishing_minigame_bucket_gui:
@@ -1515,7 +1519,7 @@ fishing_minigame_mp3_open_gui:
         - if <[ownedTracks].size> > 0:
             - foreach <[ownedTracks]> as:track:
                 - define trackName <[track].replace[_].with[<&sp>]>
-                - define item <item[music_disc_pigstep[hides=all]]>
+                - define item <item[leather_horse_armor[hides=all;custom_model_data=50]]>
                 - adjust def:item display:<&6><&l><[trackName]>
                 - adjust def:item "lore:<&7>By: <[music].get[<[track]>].get[author].replace[_].with[<&sp>]>"
                 - adjust def:item flag:fileName:<[music].get[<[track]>].get[filename]>
@@ -1543,16 +1547,28 @@ fishing_minigame_mp3_gui:
 
 fishing_minigame_music_shop_open_gui:
     type: task
-    definitions: player
+    definitions: player|page
     debug: false
+    data:
+        slot_data:
+            slots_used: 11|12|13|14|15|16|17|20|21|22|23|24|25|26|29|30|31|32|33|34|35
+            next_page: 45
+            previous_page: 37
+            back: 1
     build_inventory:
-        - define inventory <inventory[fishing_minigame_music_shop_gui]>
+        - define page 1 if:<[page].exists.not>
+        - define slots <list[<script.data_key[data.slot_data.slots_used]>]>
+        - define start <[page].sub[1].mul[<[slots].size>].add[1]>
+        - define end <[slots].size.mul[<[page]>]>
         - define music <proc[fishing_minigame_get_all_music_tracks]>
+        - define inventory <inventory[fishing_minigame_music_shop_gui]>
         - define ownedTracks <[player].flag[fishingminigame.music]>
+        - define sublist <[music].keys.get[<[start]>].to[<[end]>]>
 
-        - foreach <[music]> key:track as:map:
+        - foreach <[sublist]> as:track:
+            - define map <[music].get[<[track]>]>
             - define trackName <[track].replace[_].with[<&sp>]>
-            - define item <item[music_disc_pigstep[hides=all]]>
+            - define item <item[leather_horse_armor[hides=all;custom_model_data=50]]>
             - adjust def:item display:<&6><&l><[trackName]>
             - if <[ownedTracks].contains[<[track]>]>:
                 - adjust def:item enchantments:sharpness=1
@@ -1562,17 +1578,43 @@ fishing_minigame_music_shop_open_gui:
                 - adjust def:item "lore:<&7>By: <[map].get[author].replace[_].with[<&sp>]><n><&7>Price: <&b>1000<&r><&font[adriftus:chat]><&chr[0045]><&r><n><&r><n><&r><element[➤ Press to Purchase].color_gradient[from=#FF8400;to=#FFC481]>"
             - adjust def:item flag:fileName:<[map].get[filename]>
             - adjust def:item flag:songName:<[track]>
-            - inventory set o:<[item]> slot:<[inventory].first_empty> d:<[inventory]>
+            - inventory set o:<[item]> slot:<[slots].get[<[loop_index]>]> d:<[inventory]>
+
+        # Next Page Button
+        - if <[music].size> > <[end]>:
+            - inventory set slot:<script.data_key[data.slot_data.next_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Next<&sp>Page;flag=run_script:fishing_mp3_next_page;color=#d8d15e;custom_model_data=7]> d:<[inventory]>
+
+        # Previous Page Button
+        - if <[page]> != 1:
+            - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:fishing_mp3_previous_page;color=#d8d15e;custom_model_data=6]> d:<[inventory]>
+
+        # Back to Merchant
+        - inventory set slot:<script.data_key[data.slot_data.back]> o:<item[fishing_minigame_back_button].with[hides=all;flag=page:<[page]>]> d:<[inventory]>
+
     script:
         - inject locally path:build_inventory
         - inventory open d:<[inventory]>
+
+fishing_mp3_next_page:
+  type: task
+  debug: false
+  script:
+    - define info_item <context.inventory.slot[<script[fishing_minigame_music_shop_open_gui].data_key[data.slot_data.back]>]>
+    - run fishing_minigame_music_shop_open_gui def:<player>|<[info_item].flag[page].add[1]>
+
+fishing_mp3_previous_page:
+  type: task
+  debug: false
+  script:
+    - define info_item <context.inventory.slot[<script[fishing_minigame_music_shop_open_gui].data_key[data.slot_data.back]>]>
+    - run fishing_minigame_music_shop_open_gui def:<player>|<[info_item].flag[page].sub[1]>
 
 fishing_minigame_music_shop_gui:
     type: inventory
     inventory: chest
     size: 45
     debug: false
-    title: <&6>Music Shop
+    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0050]>
     gui: true
     slots:
     - [] [] [] [] [] [] [] [] []
