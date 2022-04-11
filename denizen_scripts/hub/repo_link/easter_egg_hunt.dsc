@@ -66,10 +66,10 @@ easter_egg_events:
     on server start:
     - run easter_egg_respawn
     on player right clicks block:
-    - ratelimit <player.uuid> 1s
     - stop if:<context.location.flag[easter_egg.active].exists.not.if_null[true]>
     - define duration 1h
     - define type <context.location.flag[easter_egg.type]>
+    - ratelimit <player.uuid>_<[type]> 1s
     # - ratelimit <player>_<context.location.block> <server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
     - narrate "<element[You found a <[type].replace[_].with[ ].to_titlecase> Easter Egg.].rainbow>"
     - showfake <context.location> air players:<player> d:<server.flag_expiration[easter_egg.active].if_null[<[duration]>]>
