@@ -1125,7 +1125,7 @@ fishing_minigame_event_handler:
         on player clicks in fishing_minigame_music_shop_gui:
             - if !<context.item.material.name.equals[air]>:
                 - if <context.item.script.exists> and <context.item.script.name.equals[fishing_minigame_back_button]>:
-                    - run fishing_minigame_merchant_open_gui def:<player>
+                    - run fishing_minigame_shop_open_gui def:<player>
                 - else:
                     - define song <context.item>
                     - if <[song].material.name.equals[leather_leggings]>:
