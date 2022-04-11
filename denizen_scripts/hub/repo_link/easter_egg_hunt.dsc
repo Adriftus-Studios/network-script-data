@@ -66,6 +66,7 @@ easter_egg_events:
     on server start:
     - run easter_egg_respawn
     on player right clicks block:
+    - ratelimit <player.uuid> 1s
     - stop if:<context.location.flag[easter_egg.active].exists.not.if_null[true]>
     - define duration 1h
     - define type <context.location.flag[easter_egg.type]>
