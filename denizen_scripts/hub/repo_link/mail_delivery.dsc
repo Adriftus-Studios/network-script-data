@@ -123,6 +123,7 @@ mail_delivery_apply_to_leaderboard:
   - else:
     - narrate "You achieved a new high score for <[difficulty].to_titlecase> Mail Run: <[time_taken]> Seconds"
     - flag server mail_delivery.leaderboard.<[difficulty]>.<[player]>:<[time_taken]>
+  - flag <player> mail_delivery.personal_best.<[difficulty]>:<[time_taken]>
   - flag server mail_delivery.leaderboard.<[difficulty]>:<server.flag[mail_delivery.leaderboard.<[difficulty]>].sort_by_value>
 
 mail_delivery_events:
@@ -258,7 +259,7 @@ mail_delivery_open_menu:
         - define item <item[player_head].with[display_name=<&e><[player].name>]>
         - define item "<[item].with[lore=<&7>Time Elapsed: <[time]>]>"
         - define item <[item].with[skull_skin=<[player].uuid>]>
-        - define item <[item].with[custom_model_data=1]>
+        # - define item <[item].with[custom_model_data=1]>
         - inventory set d:<[inv]> slot:<script[mail_delivery_menu_inventory].data_key[data.leaderboard.<[d]>.<[p]>]> o:<[item]>
   - inventory open d:<[inv]>
 
