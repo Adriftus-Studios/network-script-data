@@ -13,7 +13,7 @@ fishing_minigame_start:
         - if !<[player].has_flag[fishingminigame.bucket]>:
             - flag <[player]> fishingminigame.bucket.fish:<list[]>
             - flag <[player]> fishingminigame.bucket.size:6
-            - flag <[player]> fishingminigame.fishtokens:0
+            - flag <[player]> fishingminigame.fishcoins:0
         - if !<[player].has_flag[fishingminigame.stats]>:
             - flag <[player]> fishingminigame.stats.daily.catch:0
             - flag <[player]> fishingminigame.stats.daily.value:0
@@ -29,7 +29,7 @@ fishing_minigame_start:
         - if !<server.has_flag[fishingminingame.activeplayers]>:
             - flag server fishingminingame.activeplayers:<list[]>
         - flag server fishingminingame.activeplayers:->:<[player]>
-        - title title:<&a>Fishing "subtitle:<&a>Find a whirlpool in a lake, and begin catching!" targets:<[player]>
+        - title title:<&a>Fishing "subtitle:<&a>Find a whirlpool and start catching!" targets:<[player]>
         - narrate "<&7><&l><&lt>!<&gt><&r> <&7>You are now in fishing mode. If you at any point would like to return to normal, look for a barrier in your inventory. Typing any command will revert you back to normal."
         - narrate <&8>----------------------------------------------------
         - define event <proc[fishing_minigame_get_current_event]>
@@ -72,7 +72,7 @@ fishing_minigame_set_inventory:
         - inventory clear
         - inventory set o:fishing_minigame_bad_rod slot:1
         - inventory set o:<proc[fishing_minigame_get_bucket_type].context[<[player]>]> slot:2
-        - inventory set o:<proc[fishing_minigame_get_fishtoken_item].context[<[player]>]> slot:3
+        - inventory set o:<proc[fishing_minigame_get_fishcoin_item].context[<[player]>]> slot:3
         - inventory set o:fishing_minigame_end_game_item slot:9
         - inventory set o:fishing_minigame_statistics_book_inv slot:8
         - inventory set o:fishing_minigame_mp3_player slot:7
@@ -259,33 +259,33 @@ fishing_minigame_update_bucket:
         - if !<[currentBucket].equals[<[updatedBucket]>]>:
             - inventory set o:<[updatedBucket]> slot:2
 
-# % ██ [ Adds given amount of tokens to given player ] ██
-fish_tokens_add:
+# % ██ [ Adds given amount of coins to given player ] ██
+fish_coins_add:
     debug: false
     type: task
     definitions: player|amount
     script:
-        - flag <[player]> fishingminigame.fishtokens:<[player].flag[fishingminigame.fishtokens].add[<[amount]>]>
+        - flag <[player]> fishingminigame.fishcoins:<[player].flag[fishingminigame.fishcoins].add[<[amount]>]>
         - narrate "<&a><[amount].round_to[2]><&r><&font[adriftus:chat]><&chr[0045]><&r><&a> has been deposited to your account" targets:<[player]>
         - if <[player].has_flag[fishingminigame.active]> && <[player].flag[fishingminigame.active]>:
-            - inventory set o:<proc[fishing_minigame_get_fishtoken_item].context[<[player]>]> slot:3 destination:<[player].inventory>
+            - inventory set o:<proc[fishing_minigame_get_fishcoin_item].context[<[player]>]> slot:3 destination:<[player].inventory>
 
-# % ██ [ Removes given amount of tokens from given player ] ██
-fish_tokens_remove:
+# % ██ [ Removes given amount of coins from given player ] ██
+fish_coins_remove:
     debug: false
     type: task
     definitions: player|amount
     script:
-        - define newBal <player.flag[fishingminigame.fishtokens].sub[<[amount]>]>
+        - define newBal <player.flag[fishingminigame.fishcoins].sub[<[amount]>]>
         - if <[newBal]> < 0:
             - determine false
-        - flag <[player]> fishingminigame.fishtokens:<[player].flag[fishingminigame.fishtokens].sub[<[amount]>]>
+        - flag <[player]> fishingminigame.fishcoins:<[player].flag[fishingminigame.fishcoins].sub[<[amount]>]>
         - narrate "<&c><[amount].round_to[2]><&r><&font[adriftus:chat]><&chr[0045]><&r><&c> has been deducted from your account" targets:<[player]>
         - if <[player].has_flag[fishingminigame.active]> && <[player].flag[fishingminigame.active]>:
-            - inventory set o:<proc[fishing_minigame_get_fishtoken_item].context[<[player]>]> slot:3 destination:<[player].inventory>
+            - inventory set o:<proc[fishing_minigame_get_fishcoin_item].context[<[player]>]> slot:3 destination:<[player].inventory>
         - determine true
 
-# % ██ [ Adds given amount of tokens to given player ] ██
+# % ██ [ Adds given amount of coins to given player ] ██
 fishing_minigame_reset_leaderboards:
     debug: false
     type: task
@@ -363,7 +363,7 @@ fishing_minigame_sell_all_fish:
         - if <player.has_flag[fishingminigame.active]> && <player.flag[fishingminigame.active]>:
             - run fishing_minigame_update_bucket def:<[player]>
         - if <[value]> > 0:
-            - run fish_tokens_add def:<player>|<[value]>
+            - run fish_coins_add def:<player>|<[value]>
             - if <server.has_flag[fishingminigame.bucketflush]> && !<server.has_flag[fishingminigame.flusher]>:
                 - flag server fishingminigame.flusher:<[player].uuid>
         - else:
@@ -440,8 +440,8 @@ fishing_minigame_speed_catch:
     debug: false
     type: task
     script:
-        - title "title:<&a>Speed Catch!" "subtitle:<&a>Catch as many fish as you can in 2m!" targets:<server.flag[fishingminingame.activeplayers]>
-        - narrate "<&7>You have 2 minutes to catch as many fish as you can to win this event. The reward is 2500 fishtokens." targets:<server.flag[fishingminingame.activeplayers]>
+        - title "title:<&a>Speed Catch!" "subtitle:<&a>2m catching spree!" targets:<server.flag[fishingminingame.activeplayers]>
+        - narrate "<&7>You have 2 minutes to catch as many fish as you can to win this event. The reward is 2500 fishcoins." targets:<server.flag[fishingminingame.activeplayers]>
         - flag server fishingminingame.speedcatch:<map[]>
         - wait 1m
         - narrate "<&7><&l><&lt>!<&gt><&r> <&7>There is 1 minute left!" targets:<server.flag[fishingminingame.activeplayers]>
@@ -454,9 +454,9 @@ fishing_minigame_speed_catch:
         - define players <server.flag[fishingminingame.speedcatch].sort_by_value.keys.reverse>
         - define amounts <server.flag[fishingminingame.speedcatch].sort_by_value.values.reverse>
         - if <[players].first.exists>:
-            - title "title:<&a><player[<[players].first>].name> Won!" "subtitle:<&a>They caught <[amounts].first> fish in 2 minutes" targets:<server.flag[fishingminingame.activeplayers]>
+            - title "title:<&a><player[<[players].first>].name> Won!" "subtitle:<&a>with <[amounts].first> fish" targets:<server.flag[fishingminingame.activeplayers]>
         - else:
-            - title "title:Nobody Won!" "subtitle:<&a>Wow really? What are yall doing!??" targets:<server.flag[fishingminingame.activeplayers]>
+            - title "title:Nobody Won!" "subtitle:<&a>Wow really? What are y'all doing!??" targets:<server.flag[fishingminingame.activeplayers]>
         - narrate "<&7><&l><&lt>!<&gt><&r> <&7>Event Results"
         - narrate <&8>+-----------------------------------+ targets:<server.flag[fishingminingame.activeplayers]>
         - if <[players].first.exists>:
@@ -473,31 +473,32 @@ fishing_minigame_speed_catch:
             - narrate "<&8>+ <element[3rd:].color_gradient[from=#F08800;to=#FFA057]> <&7>Nobody" targets:<server.flag[fishingminingame.activeplayers]>
         - narrate <&8>+-----------------------------------+ targets:<server.flag[fishingminingame.activeplayers]>
         - if <[players].first.exists>:
-            - run fish_tokens_add def:<player[<[players].first>]>|2500
+            - run fish_coins_add def:<player[<[players].first>]>|2500
         - flag server fishingminingame.speedcatch:!
 
 fishing_minigame_mega_whirlpool:
     debug: false
     type: task
     script:
-        - title "title:<&a>Mega Whirlpool!" "subtitle:<&a>Find the mega whirlpool, and catch a fish!" targets:<server.flag[fishingminingame.activeplayers]>
-        - narrate "<&7>There's a mega whirlpool that has spawned somewhere in the pond. Go be the first to find it, and catch a fish from it! The reward is 2500 fishtokens." targets:<server.flag[fishingminingame.activeplayers]>
+        - title "title:<&a>Mega Whirlpool!" "subtitle:<&a>Fish in the mega whirlpool!" targets:<server.flag[fishingminingame.activeplayers]>
+        - narrate "<&7>There's a mega whirlpool that has spawned somewhere in the pond. Go be the first to find it, and catch a fish from it! The reward is 2500 fishcoins." targets:<server.flag[fishingminingame.activeplayers]>
         - flag server fishingminigame.megawhirlpool:<proc[fishing_minigame_get_available_whirlpool_location].context[1]>
         - run fishing_minigame_mega_whirlpool_animation
         - while !<server.has_flag[fishingminigame.eventcatch]>:
             - wait 10t
         - flag server fishingminigame.megawhirlpool:!
         - define winner <server.flag[fishingminigame.eventcatch]>
-        - title "title:<&a><player[<[winner]>].name> Won!" "subtitle:<&a>They were first to catch a fish in the Mega Whirlpool" targets:<server.flag[fishingminingame.activeplayers]>
-        - run fish_tokens_add def:<player[<[winner]>]>|2500
+        - title "title:<&a><player[<[winner]>].name> Won!" "subtitle:<&a>Nicely done!" targets:<server.flag[fishingminingame.activeplayers]>
+        - narrate "<&7><player[<[winner]>].name> was the first to catch a fish in the Mega Whirlpool!" targets:<server.flag[fishingminingame.activeplayers]>
+        - run fish_coins_add def:<player[<[winner]>]>|2500
         - flag server fishingminigame.eventcatch:!
 
 fishing_minigame_chicken_save:
     debug: false
     type: task
     script:
-        - title "title:<&a>Chicken Stuck!" "subtitle:<&a>Find and save the chicken stuck in a whirlpool!" targets:<server.flag[fishingminingame.activeplayers]>
-        - narrate "<&7>A chicken was sighted stuck in some whirlpool! Be the first to find it and save the day! (go fish out the chiken)" targets:<server.flag[fishingminingame.activeplayers]>
+        - title "title:<&a>Chicken Stuck!" "subtitle:<&a>Save the chicken!" targets:<server.flag[fishingminingame.activeplayers]>
+        - narrate "<&7>A chicken was sighted stuck in some whirlpool! Be the first to find it and save the day! (go fish out the chicken)" targets:<server.flag[fishingminingame.activeplayers]>
         - flag server fishingminigame.chickenstuck
         #Spawn chicken
         - define chicken <entity[chicken]>
@@ -521,8 +522,9 @@ fishing_minigame_chicken_save:
         - flag server fishingminigame.chickenstuck:!
         - flag server fishingminigame.chickenentity:!
         - define winner <server.flag[fishingminigame.chickencatch]>
-        - title "title:<&a><player[<[winner]>].name> Won!" "subtitle:<&a>They rescued the chicken, and saved the day!  The reward is 2500 fishtokens" targets:<server.flag[fishingminingame.activeplayers]>
-        - run fish_tokens_add def:<player[<[winner]>]>|2500
+        - title "title:<&a><player[<[winner]>].name> Won!" "subtitle:<&a>Our hero!" targets:<server.flag[fishingminingame.activeplayers]>
+        - narrate "<&7><player[<[winner]>].name> rescued the chicken and saved the day!"
+        - run fish_coins_add def:<player[<[winner]>]>|2500
         - flag server fishingminigame.chickencatch:!
 
 fishing_minigame_fish_finder:
@@ -531,30 +533,31 @@ fishing_minigame_fish_finder:
     script:
         - define rarity <proc[fishing_minigame_get_random_rarity]>
         - define rarityColor <script[fishing_minigame_fish_table].parsed_key[rarity.<[rarity]>.color]>
-        - title "title:<&a>Fish Finder!" "subtitle:<&a>Be the first to catch a <&f><[rarityColor]><[rarity].to_titlecase> <&a>fish!" targets:<server.flag[fishingminingame.activeplayers]>
-        - narrate "<&7>We are looking for a fish of a specific rarity! Be the first to catch a <&f><[rarityColor]><[rarity].to_titlecase> <&8>Fish, and win the 2500 fishtoken prize!" targets:<server.flag[fishingminingame.activeplayers]>
+        - title "title:<&a>Fish Finder!" "subtitle:<&a>Catch the requested fish!" targets:<server.flag[fishingminingame.activeplayers]>
+        - narrate "<&7>We are looking for a fish of a specific rarity! Be the first to catch a <&f><[rarityColor]><[rarity].to_titlecase> <&7>fish, and win the 2500 fishcoin prize!" targets:<server.flag[fishingminingame.activeplayers]>
         - flag server fishingminigame.fishfinder:<[rarity]>
         - while !<server.has_flag[fishingminigame.findercatch]>:
             - wait 10t
         - flag server fishingminigame.fishfinder:!
         - define winner <server.flag[fishingminigame.findercatch]>
-        - title "title:<&a><player[<[winner]>].name> Won!" "subtitle:<&a>They were first to catch a <&f><[rarityColor]><[rarity].to_titlecase> <&a>fish" targets:<server.flag[fishingminingame.activeplayers]>
-        - run fish_tokens_add def:<player[<[winner]>]>|2500
+        - title "title:<&a><player[<[winner]>].name> Won!" "subtitle:<&a>Great job!" targets:<server.flag[fishingminingame.activeplayers]>
+        - narrate "<&7><player[<[winner]>].name> was the first to catch a <&f><[rarityColor]><[rarity].to_titlecase> <&7>fish!"
+        - run fish_coins_add def:<player[<[winner]>]>|2500
         - flag server fishingminigame.findercatch:!
 
 fishing_minigame_bucket_flush:
     debug: false
     type: task
     script:
-        - title "title:<&a>Bucket Flush!" "subtitle:<&a>Be the first person to sell your entire bucket!" targets:<server.flag[fishingminingame.activeplayers]>
-        - narrate "<&7>We are looking for people ready to risk the contents of their bucket for a reward of 2500 fishtokens!<n>(Note!: This event requires you to press the <&sq>Sell All<&sq> button at the fishing merchant.)" targets:<server.flag[fishingminingame.activeplayers]>
+        - title "title:<&a>Bucket Flush!" "subtitle:<&a>Quick! Sell your fish!" targets:<server.flag[fishingminingame.activeplayers]>
+        - narrate "<&7>We are looking for people ready to risk the contents of their bucket for a reward of 2500 fishcoins!<n>(Note!: This event requires you to press the <&sq>Sell All<&sq> button at the fishing merchant.)" targets:<server.flag[fishingminingame.activeplayers]>
         - flag server fishingminigame.bucketflush
         - while !<server.has_flag[fishingminigame.flusher]>:
             - wait 10t
         - flag server fishingminigame.bucketflush:!
         - define winner <server.flag[fishingminigame.flusher]>
-        - title "title:<&a><player[<[winner]>].name> Won!" "subtitle:<&a>They were first to sell all the fish from their bucket." targets:<server.flag[fishingminingame.activeplayers]>
-        - run fish_tokens_add def:<player[<[winner]>]>|2500
+        - title "title:<&a><player[<[winner]>].name> Won!" "subtitle:<&a>Excellent!" targets:<server.flag[fishingminingame.activeplayers]>
+        - run fish_coins_add def:<player[<[winner]>]>|2500
         - flag server fishingminigame.flusher:!
 
 #- % █████████████████████████████████
@@ -582,17 +585,17 @@ fishing_minigame_get_current_event_instructions:
     type: procedure
     script:
         - if <server.has_flag[fishingminingame.speedcatch]>:
-            - determine "<&7>You have 2 minutes to catch as many fish as you can to win this event. The reward is 2500 fishtokens"
+            - determine "<&7>You have 2 minutes to catch as many fish as you can to win this event. The reward is 2500 fishcoins"
         - if <server.has_flag[fishingminigame.megawhirlpool]>:
-            - determine "<&7>There's a mega whirlpool that has spawned somewhere in the pond. Go be the first to find it, and catch a fish from it! The reward is 2500 fishtokens."
+            - determine "<&7>There's a mega whirlpool that has spawned somewhere in the pond. Go be the first to find it, and catch a fish from it! The reward is 2500 fishcoins."
         - if <server.has_flag[fishingminigame.chickenstuck]>:
             - determine "<&7>A chicken was sighted stuck in a whirlpool! Be the first to find it and save the day! (Fish out the chicken.)"
         - if <server.has_flag[fishingminigame.fishfinder]>:
             - define rarity <server.flag[fishingminigame.fishfinder]>
             - define rarityColor <script[fishing_minigame_fish_table].parsed_key[rarity.<[rarity]>.color]>
-            - determine "<&7>We are looking for a fish of a specific rarity! Be the first to catch a <&f><[rarityColor]><[rarity].to_titlecase> <&8>Fish, and win the 2500 fishtoken prize!"
+            - determine "<&7>We are looking for a fish of a specific rarity! Be the first to catch a <&f><[rarityColor]><[rarity].to_titlecase> <&8>Fish, and win the 2500 fishcoin prize!"
         - if <server.has_flag[fishingminigame.bucketflush]>:
-            - determine "<&7>We are looking for people ready to risk the contents of their bucket for a reward of 2500 fishtokens!<n>(Note!: This event requires you to press the <&sq>Sell All<&sq> button at the fishing merchant.)"
+            - determine "<&7>We are looking for people ready to risk the contents of their bucket for a reward of 2500 fishcoins!<n>(Note!: This event requires you to press the <&sq>Sell All<&sq> button at the fishing merchant.)"
 
 # % ██ [ Returns the level of the players bucket ] ██
 fishing_minigame_get_bucket_level:
@@ -705,24 +708,24 @@ fishing_minigame_get_all_music_tracks:
     debug: false
     type: procedure
     script:
-        - define tracks <server.list_files[midi/mp3_player]>
+        - define tracks <server.list_files[midi/global/music]>
         - define music <map[]>
         - foreach <[tracks]> as:track:
             - define track <[track].replace[.mid].with[]>
             - define split <[track].split[-]>
-            - define music <[music].include[<[split].get[1]>=<map[author=<[split].get[2]>;filename=mp3_player/<[track]>]>]>
+            - define music <[music].include[<[split].get[1]>=<map[author=<[split].get[2]>;filename=global/music/<[track]>]>]>
         - determine <[music]>
 
-# % ██ [ Returns the token item with the balance ] ██
-fishing_minigame_get_fishtoken_item:
+# % ██ [ Returns the coin item with the balance ] ██
+fishing_minigame_get_fishcoin_item:
     debug: false
     type: procedure
     definitions: player
     script:
-        - define fishtokenwallet <item[fishing_minigame_fishtoken_item]>
-        - define displayName "<&d><&l><[player].flag[fishingminigame.fishtokens].round_to[2].format_number> Fishtokens"
-        - adjust def:fishtokenwallet display:<[displayName]>
-        - determine <[fishtokenwallet]>
+        - define fishcoinwallet <item[fishing_minigame_fishcoin_item]>
+        - define displayName "<&d><&l><[player].flag[fishingminigame.fishcoins].round_to[2].format_number> Fishcoins"
+        - adjust def:fishcoinwallet display:<[displayName]>
+        - determine <[fishcoinwallet]>
 
 # % ██ [ Returns the proper bucket item ] ██
 fishing_minigame_get_bucket_type:
@@ -1010,11 +1013,11 @@ fishing_minigame_event_handler:
                         - determine cancelled
                     - else:
                         - title "title:<&c>Bucket Full!" "subtitle:<&c>Go sell your fish before you catch more!" targets:<player>
-                        - narrate "<&c>The fish slipped out of your hands, because you had nowhere to put it! Go sell your fish at the fish merchant before you continue!"
+                        - narrate "<&c>The fish slipped out of your hands, because you had nowhere to put it! Go sell your fish at the fish merchant before you continue!" targets:<player>
                         - remove <context.hook>
                         - determine cancelled
                 - else:
-                    - narrate "<&c>There are no fish here, make sure you're fishing in a whirlpool!"
+                    - narrate "<&c>There are no fish here, make sure you're fishing in a whirlpool!" targets:<player>
                     - remove <context.hook>
                     - determine cancelled
 
@@ -1034,9 +1037,9 @@ fishing_minigame_event_handler:
                     - wait 3s
                 - if <context.hook.is_spawned>:
                     - if <proc[fishing_minigame_location_in_whirlpool].context[<context.hook.location>].not> :
-                        - narrate "<&c>Make sure you're fishing in a whirlpool to catch fish!"
+                        - narrate "<&c>Make sure you're fishing in a whirlpool to catch fish!" 
                     - if <proc[fishing_minigame_bucket_full].context[<player>]>:
-                        - title "title:<&c>Bucket Full!" "subtitle:<&c>Go sell your fish before you catch more!" targets:<player>
+                        - title "title:<&c>Bucket Full!" "subtitle:<&c>Go sell some fish!" targets:<player>
 
         # % ██ [ Generates and stores a list of valid whirlpool locations ] ██
         after server start:
@@ -1055,12 +1058,12 @@ fishing_minigame_event_handler:
                     - case fishing_minigame_start_button:
                         - inventory close
                         - run fishing_minigame_start def:<player>
-                    - case fishing_minigame_fishtokens_button:
-                        - if <player.has_flag[fishingminigame.fishtokens]>:
+                    - case fishing_minigame_fishcoins_button:
+                        - if <player.has_flag[fishingminigame.fishcoins]>:
                             - run fishing_minigame_shop_open_gui def:<player>
                         - else:
                             - inventory close
-                            - narrate "<&c>You cannot access the shop, until you have made some tokens!"
+                            - narrate "<&c>You cannot access the shop until you have made some coins!"
                     - case fishing_minigame_leaderboards_button:
                         - run fishing_minigame_leaderboards_open_gui def:<player>
                     - case fishing_minigame_fish_button:
@@ -1078,16 +1081,14 @@ fishing_minigame_event_handler:
             - if !<context.item.material.name.equals[air]> && <context.item.script.name.exists>:
                 - choose <context.item.script.name>:
                     - case fishing_minigame_shop_exchange_item:
-                        - inventory close
                         - narrate "<&c>Unavailable during the beta"
                     - case fishing_minigame_shop_skins_item:
-                        - inventory close
                         - narrate "<&c>Unavailable during the beta"
                     - case fishing_minigame_shop_music_item:
                         - run fishing_minigame_music_shop_open_gui def:<player>
                     - case fishing_minigame_shop_bucket_item:
                         - if !<proc[fishing_minigame_get_bucket_level].context[<player>].equals[MAX]>:
-                            - run fish_tokens_remove def:<player>|2500 save:removed
+                            - run fish_coins_remove def:<player>|2500 save:removed
                             - if <entry[removed].created_queue.determination.first>:
                                 - flag <player> fishingminigame.bucket.size:<player.flag[fishingminigame.bucket.size].add[<proc[fishing_minigame_get_slots_to_add].context[<player>]>]>
                                 - narrate "<&a>Your bucket was upgraded to level <proc[fishing_minigame_get_bucket_level].context[<player>]>"
@@ -1124,12 +1125,12 @@ fishing_minigame_event_handler:
         on player clicks in fishing_minigame_music_shop_gui:
             - if !<context.item.material.name.equals[air]>:
                 - if <context.item.script.exists> and <context.item.script.name.equals[fishing_minigame_back_button]>:
-                    - run fishing_minigame_merchant_open_gui def:<player>
+                    - run fishing_minigame_shop_open_gui def:<player>
                 - else:
                     - define song <context.item>
                     - if <[song].material.name.equals[leather_leggings]>:
                         - if !<[song].is_enchanted>:
-                            - run fish_tokens_remove def:<player>|1000 save:removed
+                            - run fish_coins_remove def:<player>|1000 save:removed
                             - if <entry[removed].created_queue.determination.first>:
                                 - define songName <[song].flag[songName]>
                                 - flag <player> fishingminigame.music:<player.flag[fishingminigame.music].include[<[songName]>]>
@@ -1149,7 +1150,7 @@ fishing_minigame_event_handler:
                         - run fishing_minigame_bucket_remove def:<player>|<[fish]>
                         - if <context.inventory.slot[1].material.name.equals[barrier]>:
                             - run fishing_minigame_open_bucket def:<player>|true
-                            - run fish_tokens_add def:<player>|<proc[fishing_minigame_fish_value].context[<[fish]>]>
+                            - run fish_coins_add def:<player>|<proc[fishing_minigame_fish_value].context[<[fish]>]>
                         - else:
                             - run fishing_minigame_open_bucket def:<player>|false
                     - else if <context.click.equals[RIGHT]>:
@@ -1308,17 +1309,17 @@ fishing_minigame_merchant_open_gui:
             - inventory set o:fishing_minigame_start_button slot:21 d:<[inventory]>
             - inventory set o:fishing_minigame_fish_button_gray slot:42 d:<[inventory]>
             - inventory set o:fishing_minigame_fish_button_gray slot:43 d:<[inventory]>
-        - define tokensButton <item[fishing_minigame_fishtokens_button]>
-        - define tokensLore <[tokensButton].lore>
-        - if <[player].has_flag[fishingminigame.fishtokens]>:
-            - define newLoreLine "<&a>Fishtokens Amount: <[player].flag[fishingminigame.fishtokens].round_to[2].format_number> <&r><&font[adriftus:chat]><&chr[0045]>"
+        - define coinsButton <item[fishing_minigame_fishcoins_button]>
+        - define coinsLore <[coinsButton].lore>
+        - if <[player].has_flag[fishingminigame.fishcoins]>:
+            - define newLoreLine "<&a>Fishcoins Amount: <[player].flag[fishingminigame.fishcoins].round_to[2].format_number> <&r><&font[adriftus:chat]><&chr[0045]>"
         - else:
-            - define newLoreLine "<&a>Fishtokens Amount: 0 <&r><&font[adriftus:chat]><&chr[0045]>"
-        - define tokensLore <[tokensLore].set_single[<[newLoreLine]>].at[3]>
-        - adjust def:tokensButton lore:<[tokensLore]>
-        - inventory set o:<[tokensButton]> slot:38 d:<[inventory]>
-        - inventory set o:<[tokensButton]> slot:39 d:<[inventory]>
-        - inventory set o:<[tokensButton]> slot:40 d:<[inventory]>
+            - define newLoreLine "<&a>Fishcoins Amount: 0 <&r><&font[adriftus:chat]><&chr[0045]>"
+        - define coinsLore <[coinsLore].set_single[<[newLoreLine]>].at[3]>
+        - adjust def:coinsButton lore:<[coinsLore]>
+        - inventory set o:<[coinsButton]> slot:38 d:<[inventory]>
+        - inventory set o:<[coinsButton]> slot:39 d:<[inventory]>
+        - inventory set o:<[coinsButton]> slot:40 d:<[inventory]>
         - inventory set o:fishing_minigame_leaderboards_button slot:9 d:<[inventory]>
     script:
         - inject locally path:build_inventory
@@ -1400,7 +1401,7 @@ fishing_minigame_bucket_open_gui:
             - inventory set o:fishing_minigame_sell_all slot:35 d:<[player].inventory>
             - inventory set o:fishing_minigame_sell_all slot:36 d:<[player].inventory>
             - if !<proc[fishing_minigame_get_bucket_level].context[<player>].equals[MAX]>:
-                - if <player.flag[fishingminigame.fishtokens]> >= 2500:
+                - if <player.flag[fishingminigame.fishcoins]> >= 2500:
                     - inventory set o:fishing_minigame_upgrade_available slot:19 d:<[player].inventory>
                     - inventory set o:fishing_minigame_upgrade_available slot:20 d:<[player].inventory>
                     - inventory set o:fishing_minigame_upgrade_available slot:21 d:<[player].inventory>
@@ -1843,17 +1844,17 @@ fishing_minigame_bad_rod:
     - <&7>Your basic fishing rod.
     - <&7>Use this to catch fish (duh).
 
-# % ██ [ Fishing Tokens Wallet ] ██
-fishing_minigame_fishtoken_item:
+# % ██ [ Fishing coins Wallet ] ██
+fishing_minigame_fishcoin_item:
     debug: false
     type: item
     material: iron_nugget
-    display name: <&d><&l>0 Fishtokens
+    display name: <&d><&l>0 Fishcoins
     mechanisms:
         custom_model_data: 40
     lore:
-    - <&7>Your fishtoken wallet.
-    - <&7>This will display your fishtoken balance.
+    - <&7>Your fishcoin wallet.
+    - <&7>This will display your fishcoin balance.
 
 # % ██ [ Shop Exchange item ] ██
 fishing_minigame_shop_exchange_item:
@@ -1864,7 +1865,7 @@ fishing_minigame_shop_exchange_item:
     mechanisms:
         custom_model_data: 3
     lore:
-    - <&7>Exchange your fish tokens
+    - <&7>Exchange your fish coins
     - <&7>to gain some currency
     - <&7>for the server.
     - <&r>
@@ -2042,8 +2043,8 @@ fishing_minigame_start_button:
     - <&r>
     - <&r><element[➤ Click to Start Minigame].color_gradient[from=#6DD5FA;to=#FFFFFF]>
 
-# % ██ [ Fishtokens Button ] ██
-fishing_minigame_fishtokens_button:
+# % ██ [ Fishcoins Button ] ██
+fishing_minigame_fishcoins_button:
     debug: false
     type: item
     material: feather
@@ -2051,9 +2052,9 @@ fishing_minigame_fishtokens_button:
     mechanisms:
         custom_model_data: 3
     lore:
-    - <&7>Spend your fishtokens!
+    - <&7>Spend your fishcoins!
     - <&r>
-    - <&a>Fishtokens Amount: 0
+    - <&a>Fishcoins Amount: 0
     - <&r>
     - <&r><element[➤ Shop!].color_gradient[from=#62FF00;to=#CBFFB9]>
 
