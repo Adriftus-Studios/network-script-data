@@ -34,10 +34,8 @@ mod_actions_inv_events:
       # - Check if target player is muted from somewhere?
       - if <player.flag[amp_map].as_map.get[uuid].as_player.has_flag[muted]>:
         - flag <player.flag[amp_map].as_map.get[uuid].as_player> muted:!
-        - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|Unmuted<&sp>by<&sp><player.name>|Unmute
       - else:
         - flag <player.flag[amp_map].as_map.get[uuid].as_player> muted
-        - run mod_notify_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|Muted<&sp>by<&sp><player.name>|Mute
       - inject mod_actions_inv_open
 
 mod_actions_inv_open:
