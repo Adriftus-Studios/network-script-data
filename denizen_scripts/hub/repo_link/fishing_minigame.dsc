@@ -550,13 +550,13 @@ fishing_minigame_bucket_flush:
     type: task
     script:
         - title "title:<&a>Bucket Flush!" "subtitle:<&a>Quick! Sell your fish!" targets:<server.flag[fishingminingame.activeplayers]>
-        - narrate "<&7>We are looking for people ready to risk the contents of their bucket for a reward of 2500 fishcoins!<n>(Note!: This event requires you to press the <&sq>Sell All<&sq> button at the fishing merchant.)" targets:<server.flag[fishingminingame.activeplayers]>
+        - narrate "<&7>We are looking for people ready to risk the contents of their bucket for a reward of 2500 fishcoins!<n>(Note!: This event requires you to press the <&sq>Sell All<&sq> button at Fisherman Frank.)" targets:<server.flag[fishingminingame.activeplayers]>
         - flag server fishingminigame.bucketflush
         - while !<server.has_flag[fishingminigame.flusher]>:
             - wait 10t
         - flag server fishingminigame.bucketflush:!
         - define winner <server.flag[fishingminigame.flusher]>
-        - title "title:<&a><player[<[winner]>].name> Won!" "subtitle:<&a>Excellent!" targets:<server.flag[fishingminingame.activeplayers]>
+        - title "title:<&a><player[<[winner]>].name> Won!" subtitle:<&a>Excellent! targets:<server.flag[fishingminingame.activeplayers]>
         - run fish_coins_add def:<player[<[winner]>]>|2500
         - flag server fishingminigame.flusher:!
 
@@ -595,7 +595,7 @@ fishing_minigame_get_current_event_instructions:
             - define rarityColor <script[fishing_minigame_fish_table].parsed_key[rarity.<[rarity]>.color]>
             - determine "<&7>We are looking for a fish of a specific rarity! Be the first to catch a <&f><[rarityColor]><[rarity].to_titlecase> <&8>Fish, and win the 2500 fishcoin prize!"
         - if <server.has_flag[fishingminigame.bucketflush]>:
-            - determine "<&7>We are looking for people ready to risk the contents of their bucket for a reward of 2500 fishcoins!<n>(Note!: This event requires you to press the <&sq>Sell All<&sq> button at the fishing merchant.)"
+            - determine "<&7>We are looking for people ready to risk the contents of their bucket for a reward of 2500 fishcoins!<n>(Note!: This event requires you to press the <&sq>Sell All<&sq> button at Fisherman Frank.)"
 
 # % ██ [ Returns the level of the players bucket ] ██
 fishing_minigame_get_bucket_level:
@@ -1037,7 +1037,7 @@ fishing_minigame_event_handler:
                     - wait 3s
                 - if <context.hook.is_spawned>:
                     - if <proc[fishing_minigame_location_in_whirlpool].context[<context.hook.location>].not> :
-                        - narrate "<&c>Make sure you're fishing in a whirlpool to catch fish!" 
+                        - narrate "<&c>Make sure you're fishing in a whirlpool to catch fish!"
                     - if <proc[fishing_minigame_bucket_full].context[<player>]>:
                         - title "title:<&c>Bucket Full!" "subtitle:<&c>Go sell some fish!" targets:<player>
 
@@ -1148,22 +1148,24 @@ fishing_minigame_event_handler:
                         - while <[fish].lore.size> > 6:
                             - adjust def:fish lore:<[fish].lore.remove[last]>
                         - run fishing_minigame_bucket_remove def:<player>|<[fish]>
-                        - if <context.inventory.slot[1].material.name.equals[barrier]>:
-                            - run fishing_minigame_open_bucket def:<player>|true
+                        - if <context.inventory.slot[1].script.exists> and <context.inventory.slot[1].script.name.equals[fishing_minigame_back_button]>:
+                            - inventory set o:air slot:<context.raw_slot> destination:<context.inventory>
                             - run fish_coins_add def:<player>|<proc[fishing_minigame_fish_value].context[<[fish]>]>
                         - else:
                             - run fishing_minigame_open_bucket def:<player>|false
                     - else if <context.click.equals[RIGHT]>:
-                        - define fish <context.item>
-                        - while <[fish].lore.size> > 6:
-                            - adjust def:fish lore:<[fish].lore.remove[last]>
-                        - inventory close
-                        - run fishing_minigame_show_off def:<player>|<[fish]>
+                        - if !<context.inventory.slot[1].script.exists>:
+                            - define fish <context.item>
+                            - while <[fish].lore.size> > 6:
+                                - adjust def:fish lore:<[fish].lore.remove[last]>
+                            - inventory close
+                            - run fishing_minigame_show_off def:<player>|<[fish]>
                 - if <context.item.script.exists> and <context.item.script.name.equals[fishing_minigame_sell_all]>:
                     - run fishing_minigame_sell_all_fish def:<player>
                     - run fishing_minigame_open_bucket def:<player>|true
                 - if <context.item.script.exists> and <context.item.script.name.equals[fishing_minigame_back_button]>:
                     - run fishing_minigame_merchant_open_gui def:<player>
+                    - inventory exclude origin:fishing_minigame_sell_all destination:<player.inventory>
 
         # % ██ [ Player Interact with Leaderboards ] ██
         on player clicks in fishing_minigame_leaderboards_gui:
@@ -1194,6 +1196,9 @@ fishing_minigame_event_handler:
         #     - define sub_inv <list[fishing_minigame_bucket_gui|fishing_minigame_music_shop_gui|fishing_minigame_shop_gui|fishing_minigame_leaderboards_gui]>
         #     - if <context.inventory.script.name.exists> and <[sub_inv].contains_any[<context.inventory.script.name>]>:
         #         - run fishing_minigame_merchant_open_gui def:<player>
+
+        on player closes fishing_minigame_bucket_gui:
+            - inventory exclude origin:fishing_minigame_sell_all destination:<player.inventory>
 
         # % ██ [ Bunch of events to prevent unwanted actions ] ██
         on player picks up item:
@@ -1288,7 +1293,7 @@ fishing_minigame_merchant_open_gui:
             - adjust def:playerHead "lore:<&7>Best catch of the day by:<n><&d><player[<[bestCatchPlayer]>].name.color_gradient[from=#FF62FA;to=#FFA8EF]>"
             - inventory set o:<[playerHead]> slot:15 d:<[inventory]>
             - inventory set o:<[bestCatch].unescaped> slot:16 d:<[inventory]>
-      
+
         - if <[player].has_flag[fishingminigame.active]> && <[player].flag[fishingminigame.active]>:
             - adjust <[inventory]> title:<&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0002]>
             - inventory set o:fishing_minigame_end_game slot:10 d:<[inventory]>
@@ -1369,7 +1374,7 @@ fishing_minigame_shop_gui:
     - [] [] [] [] [] [] [] [] []
     - [fishing_minigame_shop_skins_item] [fishing_minigame_shop_skins_item] [fishing_minigame_shop_skins_item] [] [] [] [fishing_minigame_shop_music_item] [fishing_minigame_shop_music_item] [fishing_minigame_shop_music_item]
     - [] [] [] [] [] [] [] [] []
-    - [] [] [fishing_minigame_shop_exchange_item] [fishing_minigame_shop_exchange_item] [fishing_minigame_shop_exchange_item] [] [] [] [] 
+    - [] [] [fishing_minigame_shop_exchange_item] [fishing_minigame_shop_exchange_item] [fishing_minigame_shop_exchange_item] [] [] [] []
 
 fishing_minigame_bucket_open_gui:
     type: task
@@ -2025,8 +2030,8 @@ fishing_minigame_mp3_player:
         flag: mp3
     lore:
     - <&7>Play your music!
-    - <&7>Purchase more songs at the
-    - <&7>fishing merchant
+    - <&7>Purchase more songs at
+    - <&7>Fisherman Frank
     - <&r>
     - <&r><element[➤ Click to Open].color_gradient[from=#FF8400;to=#FFC481]>
 
@@ -2143,7 +2148,7 @@ fishing_minigame_stats_book:
     debug: false
     type: book
     title: Stats
-    author: Fishing Merchant
+    author: Fisherman Frank
     text:
     - Something went wrong
 
@@ -2153,8 +2158,8 @@ fishing_minigame_bucket_upgrade:
     material: red_stained_glass_pane
     display name: <&c><&l>Locked
     lore:
-    - <&7>Upgrade your bucket at the
-    - <&7>Fishing Merchant
+    - <&7>Upgrade your bucket at
+    - <&7>Fisherman Frank
 
 fishing_minigame_upgrade_available:
     debug: false
