@@ -1,7 +1,6 @@
 # -- TODO
 # - Implement IP Bans
 # - Review list of infractions
-# - Allow Discord messages to be sent to #action-log
 
 # -- /mod - Adriftus Moderator Panel
 mod_command:
