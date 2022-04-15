@@ -46,7 +46,7 @@ mod_online_inv_open:
       # Match item display name and lore to information about the online player.
       - define name <[player].name>
       - define skin <[player].name>
-      - define lore <list[<&2>Nickname<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Display_Name]||None>]>
+      - define lore <list[<&2>Nickname<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Display_Name]||<[player].name>>]>
       - define lore:->:<&2>Rank<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Rank]||None>
       - define lore:->:<&a>Current<&sp>Channel<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[chat.channels.current].to_titlecase||Server>
       - define lore:->:<&a>Active<&sp>Channels<&co>
