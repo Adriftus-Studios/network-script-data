@@ -188,7 +188,7 @@ mail_delivery_mailbox_inventory:
   inventory: chest
   size: 45
   definitions:
-    f: <item[feather].with[custom_model_data=3].with[display_name=<&sp>]>
+    f: <item[feather].with_single[custom_model_data=3].with_single[display=<&sp>]>
   title: <&f><&font[adriftus:mail_run_minigame]><&chr[f808]><&chr[0002]>
   slots:
   - [f] [f] [f] [f] [f] [f] [f] [f] [f]
@@ -221,7 +221,7 @@ mail_delivery_menu_inventory:
   inventory: chest
   size: 45
   gui: true
-  title: <&f><&font[adriftus:mail_run_minigame]><&chr[f808]><&chr[0001]>
+  title: You Shouldn't Be Seeing This
   data:
     leaderboard:
       easy:
@@ -241,7 +241,7 @@ mail_delivery_menu_inventory:
   - [mail_delivery_icon_start_easy] [mail_delivery_icon_start_easy] [] [] [] [] [] [] []
   - [mail_delivery_icon_start_medium] [mail_delivery_icon_start_medium] [] [] [] [] [] [] []
   - [mail_delivery_icon_start_hard] [mail_delivery_icon_start_hard] [] [] [] [] [] [] []
-  - [mail_delivery_icon_help] [mail_delivery_icon_stop] [] [] [] [] [] [] []
+  - [mail_delivery_icon_help] [] [] [] [] [] [] [] []
 
 mail_delivery_open_menu:
   type: task
@@ -262,6 +262,13 @@ mail_delivery_open_menu:
         - define item <[item].with[skull_skin=<[player].uuid>]>
         # - define item <[item].with[custom_model_data=1]>
         - inventory set d:<[inv]> slot:<script[mail_delivery_menu_inventory].data_key[data.leaderboard.<[d]>.<[p]>]> o:<[item]>
+  - if <player.has_flag[minigame.active]>:
+    - adjust <[inv]> title:<&f><&font[adriftus:mail_run_minigame]><&chr[F808]><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0003]>
+    - foreach <list[10|11|19|20|28|29]> as:slot:
+      - inventory set d:<[inv]> slot:<[slot]> o:mail_delivery_icon_nope
+    - inventory set d:<[inv]> slot:38 o:mail_delivery_icon_stop
+  - else:
+    - adjust <[inv]> title:<&f><&font[adriftus:mail_run_minigame]><&chr[F808]><&chr[0001]>
   - inventory open d:<[inv]>
 
 mail_delivery_menu_inventory_npc_assignment:
@@ -289,6 +296,16 @@ mail_delivery_menu_events:
       - case mail_delivery_icon_stop:
         - inventory close
         - run mail_delivery_fail_forfeit def:<player>
+
+mail_delivery_icon_nope:
+  type: item
+  material: feather
+  mechanisms:
+    custom_model_data: 3
+  display name: <&8>Unavailable
+  lore:
+  - <&7> You cannot do that while
+  - <&7> the minigame is in progress.
 
 mail_delivery_icon_stop:
   type: item
