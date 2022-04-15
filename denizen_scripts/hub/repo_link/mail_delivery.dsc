@@ -43,8 +43,8 @@ mail_delivery_start:
   # - teleport <location[mail_delivery.spawnpoint.<util.random.int[1].to[8]>].with_yaw[<util.random.int[0].to[360]>].with_pitch[0]>
   - repeat 6 as:number:
     - define location <location[mailbox_<[number]>]>
-    - spawn mail_delivery_mailbox_entity <[location]> save:mailbox_<[number]>
-    - define entity <entry[mailbox].spawned_entity>
+    - fakespawn mail_delivery_mailbox_entity <[location]> players:<player> save:mailbox_<[number]>
+    - define entity <entry[mailbox_<[number]>].faked_entity>
     - flag <[entity]> mailbox:<[number]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
   - flag <player> mail_delivery.current.time:<util.time_now.in_seconds.milliseconds> expire:<[time]>
@@ -138,6 +138,7 @@ mail_delivery_mailbox_entity:
   mechanisms:
     gravity: true
     equipment: air|air|air|diamond[custom_model_data=1]
+    potion_effects: <map[type=GLOWING;amplifier=1;duration=1d;ambient=false;particles=false;icon=false]>
 
 mail_delivery_events:
   type: world
