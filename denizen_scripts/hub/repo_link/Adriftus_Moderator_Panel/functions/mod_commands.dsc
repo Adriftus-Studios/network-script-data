@@ -17,7 +17,6 @@ mod_server_kick_task:
     - define level <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].before[.]>].fail[1]>
     - define reason <tern[<[reason].char_at[2].is[==].to[.]>].pass[<[reason].after[.]>].fail[<[reason]>]>
     - run mod_log_action def:<[moderator]>|<[player].uuid>|<[level]>|<[reason]>|Kick
-    - run mod_notify_action def:<[moderator]>|<[player].uuid>|<[reason]>|Kick
     - run mod_message_discord def:<[moderator]>|<[player].uuid>|<[level]>|<[reason]>|Kick
     - kick <server.match_player[<context.args.first>]> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[reason]>]>
 
@@ -47,11 +46,10 @@ mod_server_ban_task:
       - else:
         - define reason Banned
         - define level 3
-      - run mod_log_action def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|60d
-      - run mod_log_ban def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|60d
-      - run mod_notify_action def:<[moderator]>|<[target].uuid>|<[reason]>|Ban|60d
-      - run mod_message_discord def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|60d
-      - run mod_ban_player def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|60d
+      - run mod_log_action def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|30d
+      - run mod_log_ban def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|30d
+      - run mod_message_discord def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|Ban|30d
+      - run mod_ban_player def:<[moderator]>|<[target].uuid>|<[level]>|<[reason]>|30d
     - else:
       - narrate "<&c>Invalid player name entered!"
 
@@ -144,7 +142,6 @@ mod_server_unban_task:
       - ~yaml id:<[id]> load:<[dir]>
       - define level <yaml[<[id]>].read[banned.level]||1>
       - define infraction <yaml[<[id]>].read[banned.infraction]||Banned>
-      - run mod_notify_action def:<[moderator]>|<[uuid]>|<[infraction]>|Unban|<[reason]>
       - run mod_message_discord def:<[moderator]>|<[uuid]>|<[level]>|<[infraction]>|Unban
       - yaml id:<[id]> set banned:!
       - ~yaml id:<[id]> savefile:<[dir]>
@@ -192,7 +189,6 @@ mod_global_unban_command:
       - ~yaml id:<[id]> load:<[dir]>
       - define level <yaml[<[id]>].read[banned.level]||3>
       - define infraction <yaml[<[id]>].read[banned.infraction]||Banned>
-      - run mod_notify_action def:<[moderator]>|<[uuid]>|<[infraction]>|Unban|<[reason]>
       - run mod_message_discord def:<[moderator]>|<[uuid]>|<[level]>|<[infraction]>|Unban
       - yaml id:<[id]> set banned:!
       - ~yaml id:<[id]> savefile:<[dir]>

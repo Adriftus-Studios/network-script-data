@@ -72,7 +72,7 @@ gamemode_handle_command:
       - stop
     - else:
       - define target:<server.match_player[<context.args.first>]||null>
-    - define gamemode:<queue.script.data_key[gamemode]>      
+    - define gamemode:<queue.script.data_key[gamemode]>
     - if <[target]> != null:
       - if <[target]> == <player>:
         - adjust <player> gamemode:<[gamemode]>
