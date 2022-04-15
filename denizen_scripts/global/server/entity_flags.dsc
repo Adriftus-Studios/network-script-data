@@ -93,9 +93,15 @@ entity_flags:
             - inject <[value]>
         - else:
           - inject <player.flag[shift_player_right_clicks]>
-    on player dies flagged:on_death:
-      - if <player.flag[on_death].object_type> == List:
-        - foreach <player.flag[on_death]>:
+    on entity_flagged:on_death dies:
+      - if <context.entity.flag[on_death].object_type> == List:
+        - foreach <context.entity.flag[on_death]>:
           - inject <[value]>
       - else:
-        - inject <player.flag[on_death]>
+        - inject <context.entity.flag[on_death]>
+    on entity_flagged:on_breed breeds:
+      - if <context.entity.flag[on_breed].object_type> == List:
+        - foreach <context.entity.flag[on_breed]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_breed]>
