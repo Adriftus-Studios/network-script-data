@@ -117,6 +117,7 @@ mail_delivery_end:
   - take slot:<player.inventory.find_all_items[mail_delivery_mail_item]> from:<player.inventory>
   - foreach <player.flag[mail_delivery.current.inventory].if_null[<map[]>]> key:slot as:item:
     - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
+  - remove <player.fake_entities.filter[has_flag[mailbox]]>
   - flag <player> mail_delivery.current:!
   - flag <player> minigame.active:!
 
