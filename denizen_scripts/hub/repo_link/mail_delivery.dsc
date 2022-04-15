@@ -48,6 +48,7 @@ mail_delivery_start:
     - define location <[location].with_yaw[-135]> if:<[number].equals[1]>
     - define location <[location].with_yaw[-135]> if:<[number].equals[2]>
     - define location <[location].with_yaw[-70]> if:<[number].equals[3]>
+    - define location <[location].with_yaw[90]> if:<[number].equals[4]>
     - fakespawn mail_delivery_mailbox_entity <[location]> players:<player> d:<[time]> save:mailbox_<[number]>
     - define entity <entry[mailbox_<[number]>].faked_entity>
     - flag <[entity]> mailbox:<[number]>
