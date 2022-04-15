@@ -61,7 +61,7 @@ mod_player_item:
   material: player_head
   display name: <player.flag[amp_map].as_map.get[uuid].as_player.name>
   lore:
-    - "<&6>Nickname: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Display_Name]||None>"
+    - "<&6>Nickname: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Display_Name]||<player.flag[amp_map].as_map.get[uuid].as_player.name>>"
     - "<&6>Rank: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Rank]||None>"
     - "<&e>Current Channel: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[chat.channels.current].to_titlecase||Server>"
     - "<&e>Active Channels:"
