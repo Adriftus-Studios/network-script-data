@@ -40,7 +40,12 @@ mail_delivery_start:
     - define item <proc[mail_delivery_generate_item].context[<[mailbox_number]>]>
     - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
     - flag <player> mail_delivery.current.todo.<[mailbox_number]>:+:1
-  - teleport <location[mail_delivery.spawnpoint.<util.random.int[1].to[8]>].with_yaw[<util.random.int[0].to[360]>].with_pitch[0]>
+  # - teleport <location[mail_delivery.spawnpoint.<util.random.int[1].to[8]>].with_yaw[<util.random.int[0].to[360]>].with_pitch[0]>
+  - repeat 6 as:number:
+    - define location <location[mailbox_<[number]>]>
+    - spawn mail_delivery_mailbox_entity <[location]> save:mailbox_<[number]>
+    - define entity <entry[mailbox].spawned_entity>
+    - flag <[entity]> mailbox:<[number]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
   - flag <player> mail_delivery.current.time:<util.time_now.in_seconds.milliseconds> expire:<[time]>
   - flag <player> mail_delivery.current.difficulty:<[difficulty]>
