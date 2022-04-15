@@ -23,8 +23,8 @@ mod_online_inv_events:
   events:
     on player clicks player_head in mod_online_inv:
       - flag <player> amp_map:!
-      - if <server.match_player[<context.item.display.strip_color>].has_permission[adriftus.staff]>:
-        - narrate "<&c>You cannot perform actions on other staff members."
+      - if <server.match_player[<context.item.display.strip_color>]> == <player>:
+        - narrate "<&c>You cannot perform actions on yourself."
         - stop
       - define uuid <server.match_player[<context.item.display.strip_color>].uuid>
       - define map <map.with[uuid].as[<[uuid]>]>
