@@ -93,6 +93,12 @@ entity_flags:
             - inject <[value]>
         - else:
           - inject <player.flag[shift_player_right_clicks]>
+    on entity_flagged:on_damaged damaged:
+      - if <context.entity.flag[on_damaged].object_type> == List:
+        - foreach <context.entity.flag[on_damaged]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_damaged]>
     on entity_flagged:on_death dies:
       - if <context.entity.flag[on_death].object_type> == List:
         - foreach <context.entity.flag[on_death]>:
