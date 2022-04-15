@@ -51,6 +51,7 @@ mail_delivery_start:
     - define location <[location].with_yaw[90]> if:<[number].equals[4]>
     - fakespawn mail_delivery_mailbox_entity <[location]> players:<player> d:<[time]> save:mailbox_<[number]>
     - define entity <entry[mailbox_<[number]>].faked_entity>
+    - glow <[entity]>
     - flag <[entity]> mailbox:<[number]>
   - flag <player> mail_delivery.current.time:<util.time_now.in_seconds.milliseconds> expire:<[time]>
   - flag <player> mail_delivery.current.difficulty:<[difficulty]>
