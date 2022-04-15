@@ -14,6 +14,7 @@ mail_delivery_config:
       mail_items_min: 18
       mail_items_max: 26
 
+
 mail_delivery_start:
   type: task
   debug: false
@@ -145,7 +146,11 @@ mail_delivery_events:
   type: world
   debug: false
   events:
-    on player right clicks mail_delivery_mailbox_entity:
+    on player right clicks fake entity:
+    - narrate <context.entity.script.name>
+    - narrate <context.entity.location>
+    - narrate <context.entity.flag[mailbox]>
+    - stop
     - stop if:<player.has_flag[mail_delivery.current].not>
     - stop if:<context.entity.has_flag[mailbox].not>
     - define number <context.entity.flag[mailbox]>
