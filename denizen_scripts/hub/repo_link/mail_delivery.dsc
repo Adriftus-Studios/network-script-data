@@ -44,8 +44,11 @@ mail_delivery_start:
   # - teleport <location[mail_delivery.spawnpoint.<util.random.int[1].to[8]>].with_yaw[<util.random.int[0].to[360]>].with_pitch[0]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
   - repeat 6 as:number:
-    - define location <location[mailbox_<[number]>]>
-    - fakespawn mail_delivery_mailbox_entity <[location].center.below[0.5]> players:<player> d:<[time]> save:mailbox_<[number]>
+    - define location <location[mailbox_<[number]>].center.below[0.5]>
+    - define location <[location].with_yaw[-135]> if:<[number].equals[1]>
+    - define location <[location].with_yaw[-135]> if:<[number].equals[2]>
+    - define location <[location].with_yaw[-70]> if:<[number].equals[3]>
+    - fakespawn mail_delivery_mailbox_entity <[location]> players:<player> d:<[time]> save:mailbox_<[number]>
     - define entity <entry[mailbox_<[number]>].faked_entity>
     - flag <[entity]> mailbox:<[number]>
   - flag <player> mail_delivery.current.time:<util.time_now.in_seconds.milliseconds> expire:<[time]>
