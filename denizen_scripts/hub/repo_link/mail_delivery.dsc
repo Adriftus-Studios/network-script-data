@@ -138,6 +138,7 @@ mail_delivery_mailbox_entity:
   mechanisms:
     gravity: true
     equipment: air|air|air|diamond[custom_model_data=1]
+    visible: false
     potion_effects: <map[type=GLOWING;amplifier=1;duration=1d;ambient=false;particles=false;icon=false]>
 
 mail_delivery_events:
