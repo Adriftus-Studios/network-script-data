@@ -127,18 +127,25 @@ mail_delivery_apply_to_leaderboard:
   - flag <player> mail_delivery.personal_best.<[difficulty]>:<[time_taken]>
   - flag server mail_delivery.leaderboard.<[difficulty]>:<server.flag[mail_delivery.leaderboard.<[difficulty]>].sort_by_value>
 
+mail_delivery_mailbox_entity:
+  type: entity
+  entity_type: armor_stand
+  mechanisms:
+    gravity: true
+    equipment: air|air|air|diamond[custom_model_data=1]
+
 mail_delivery_events:
   type: world
   debug: false
   events:
-    on player right clicks block:
+    on player right clicks mail_delivery_mailbox_entity:
     - stop if:<player.has_flag[mail_delivery.current].not>
-    - stop if:<context.location.has_flag[mailbox].not>
-    - define number <context.location.flag[mailbox]>
+    - stop if:<context.entity.has_flag[mailbox].not>
+    - define number <context.entity.flag[mailbox]>
     - note <inventory[mail_delivery_mailbox_inventory]> as:mailbox_<[number]>_<player.uuid>
     - define inventory <inventory[mailbox_<[number]>_<player.uuid>]>
     - flag <[inventory]> mailbox:<[number]>
-    - flag <[inventory]> location:<context.location>
+    - flag <[inventory]> location:<context.entity.location>
     - inventory open d:<[inventory]> player:<player>
     on player clicks in mail_delivery_mailbox_inventory:
     - if <context.item.flag[mailbox_number].equals[<context.inventory.flag[mailbox]>].not.if_null[false]>:
