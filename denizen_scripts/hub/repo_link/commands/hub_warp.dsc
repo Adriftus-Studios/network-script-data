@@ -35,7 +35,7 @@ hub_warp_inventory:
   - [] [hub_warp_spawn_icon] [hub_warp_spawn_icon] [hub_warp_spawn_icon] [] [hub_warp_crates_icon] [hub_warp_crates_icon] [hub_warp_crates_icon] []
   - [] [hub_warp_towny_icon] [hub_warp_towny_icon] [hub_warp_towny_icon] [] [hub_warp_shops_icon] [hub_warp_shops_icon] [hub_warp_shops_icon] []
   - [] [] [] [] [] [] [] [] []
-  - [] [] [hub_warp_mailrun_icon] [] [hub_warp_fishing_icon] [] [] [] []
+  - [] [] [hub_warp_mail_run_icon] [] [hub_warp_fishing_icon] [] [] [] []
 
 hub_warp_inventory_events:
   type: world
@@ -56,7 +56,7 @@ hub_warp_to:
             - teleport <[player]> hub_warp_<[warpName]>
             - playsound <[player]> sound:ENTITY_ENDERMAN_TELEPORT
             - playeffect effect:PORTAL at:<player.location> visibility:500 quantity:500 offset:1.0
-            - actionbar "<proc[reverse_color_gradient].context[Teleporting to <[warpName].to_titlecase>|#6DD5FA|#FFFFFF]>"
+            - actionbar "<proc[reverse_color_gradient].context[Teleporting to <[warpName].replace[_].with[ ].to_titlecase>|#6DD5FA|#FFFFFF]>"
         - else:
             - narrate "Invalid warp name"
 
@@ -149,12 +149,12 @@ hub_warp_fishing_icon:
     - <&r>
     - <&r><element[➤ Click to Warp].color_gradient[from=#1a8bf7;to=#54cafd]>
 
-hub_warp_mailrun_icon:
+hub_warp_mail_run_icon:
   type: item
   debug: false
   material: feather
   data:
-    warp: mailrun
+    warp: mail_run
   display name: "<red><&l>Mail Run"
   mechanisms:
     custom_model_data: 3
