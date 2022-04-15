@@ -50,7 +50,7 @@ mod_online_inv_open:
       - define lore:->:<&2>Rank<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Rank]||None>
       - define lore:->:<&a>Current<&sp>Channel<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[chat.channels.current].to_titlecase||Server>
       - define lore:->:<&a>Active<&sp>Channels<&co>
-      - define lore:->:<&e><&gt><&r><&sp><yaml[global.player.<player.uuid>].list_keys[chat.channels.active].separated_by[<&nl><&e><&gt><&r><&sp>].to_titlecase||Server>
+      - define lore:->:<&e><&gt><&r><&sp><yaml[global.player.<[player].uuid>].list_keys[chat.channels.active].separated_by[<&nl><&e><&gt><&r><&sp>].to_titlecase||Server>
       # Build the final item.
       - define item <item[player_head].with[display_name=<&a><[name]>;lore=<[lore]>;skull_skin=<[skin]>]>
       # Add the defined item to inventory list.
