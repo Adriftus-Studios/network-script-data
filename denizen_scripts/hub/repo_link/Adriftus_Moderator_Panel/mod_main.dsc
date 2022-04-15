@@ -46,8 +46,8 @@ mod_command:
         - define map <map.with[uuid].as[<[uuid]>]>
         - define map <[map].with[display_name].as[<yaml[<[id]>].read[Display_Name]||None>]>
         - define map <[map].with[rank].as[<yaml[<[id]>].read[Rank]||None>]>
-        - define map <[map].with[current].as[<yaml[<[id]>].read[chat.channels.current]||None>]>
-        - define map <[map].with[active].as[<yaml[<[id]>].read[chat.channels.active]||None>]>
+        - define map <[map].with[current].as[<yaml[<[id]>].read[chat.channels.current]||Server>]>
+        - define map <[map].with[active].as[<yaml[<[id]>].read[chat.channels.active]||Server>]>
         # Unload offline player's global data
         - if <yaml.list.contains[amp.target.<[uuid]>]>:
           - yaml unload id:amp.target.<[uuid]>
@@ -67,5 +67,6 @@ amp_command:
   usage: /amp
   script:
     - narrate "<&6>Adriftus <&e>Moderator Panel"
-    - narrate "<&f>Version 3.0.0 - 2022-03-14"
+    - narrate "<&f>Version 3.0.1 - 2022-04-15"
     - narrate "<&f>Scripted by <&b>Kyu#5957"
+    - narrate "<&f>Channel <&b>#mod-log"
