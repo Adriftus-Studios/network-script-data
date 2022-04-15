@@ -28,3 +28,10 @@ item_flags:
           - inject <[value]>
       - else:
         - inject <context.item.flag[left_click_script]>
+    on projectile launched:
+      - stop if:<context.entity.item.has_flag[on_projectile_launched].not>
+      - if <context.entity.item.flag[on_projectile_launched].object_type> == List:
+        - foreach <context.entity.item.flag[on_projectile_launched]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.item.flag[on_projectile_launched]>
