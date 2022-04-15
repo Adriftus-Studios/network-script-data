@@ -30,8 +30,8 @@ mod_online_inv_events:
       - define map <map.with[uuid].as[<[uuid]>]>
       - define map <[map].with[display_name].as[<yaml[global.player.<[uuid]>].read[Display_Name]||None>]>
       - define map <[map].with[rank].as[<yaml[global.player.<[uuid]>].read[Rank]||None>]>
-      - define map <[map].with[current].as[<yaml[global.player.<[uuid]>].read[chat.channels.current]||None>]>
-      - define map <[map].with[active].as[<yaml[global.player.<[uuid]>].read[chat.channels.active]||None>]>
+      - define map <[map].with[current].as[<yaml[global.player.<[uuid]>].read[chat.channels.current]||Server>]>
+      - define map <[map].with[active].as[<yaml[global.player.<[uuid]>].read[chat.channels.active]||Server>]>
       - flag <player> amp_map:<[map]>
       - inject mod_actions_inv_open
 
@@ -48,9 +48,9 @@ mod_online_inv_open:
       - define skin <[player].name>
       - define lore <list[<&2>Nickname<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Display_Name]||None>]>
       - define lore:->:<&2>Rank<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Rank]||None>
-      - define lore:->:<&a>Current<&sp>Channel<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[chat.channels.current].to_titlecase||None>
+      - define lore:->:<&a>Current<&sp>Channel<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[chat.channels.current].to_titlecase||Server>
       - define lore:->:<&a>Active<&sp>Channels<&co>
-      - define lore:->:<&e><&gt><&r><&sp><yaml[global.player.<[player].uuid>].read[chat.channels.active].separated_by[<&nl><&e><&gt><&r><&sp>].to_titlecase||None>
+      - define lore:->:<&e><&gt><&r><&sp><yaml[global.player.<player.uuid>].list_keys[chat.channels.active].separated_by[<&nl><&e><&gt><&r><&sp>].to_titlecase||Server>
       # Build the final item.
       - define item <item[player_head].with[display_name=<&a><[name]>;lore=<[lore]>;skull_skin=<[skin]>]>
       # Add the defined item to inventory list.
