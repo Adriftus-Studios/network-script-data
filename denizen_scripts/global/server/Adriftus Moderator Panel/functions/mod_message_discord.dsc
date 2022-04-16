@@ -12,5 +12,5 @@ mod_message_discord:
     # Append moderator to fields.
     - define fields:->:Moderator<&co><&sp><[moderator]>
     - define message SEARCHABLE_<[uuid]><&nl>```<[fields].separated_by[<&nl>]>```
-    - bungeerun relay discord_sendMessage "def:Adriftus Staff|mod-log|<[message].escaped>"
+    - bungeerun relay discord_sendMessage "def:Adriftus Staff|action-log|<[message].escaped>"
 
