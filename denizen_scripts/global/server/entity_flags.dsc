@@ -111,3 +111,9 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_breed]>
+    on entity_flagged:on_break breaks:
+      - if <context.entity.flag[on_break].object_type> == List:
+        - foreach <context.entity.flag[on_break]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_break]>
