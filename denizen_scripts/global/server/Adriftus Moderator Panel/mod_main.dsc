@@ -68,4 +68,4 @@ amp_command:
     - narrate "<&6>Adriftus <&e>Moderator Panel"
     - narrate "<&f>Version 3.0.1 - 2022-04-15"
     - narrate "<&f>Scripted by <&b>Kyu#5957"
-    - narrate "<&f>Channel <&b>#mod-log"
+    - narrate "<&f>Channel <&b>#action-log"

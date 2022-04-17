@@ -61,11 +61,11 @@ mod_player_item:
   material: player_head
   display name: <player.flag[amp_map].as_map.get[uuid].as_player.name>
   lore:
-    - "<&6>Nickname: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Display_Name]||None>"
+    - "<&6>Nickname: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Display_Name]||<player.flag[amp_map].as_map.get[uuid].as_player.name>>"
     - "<&6>Rank: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Rank]||None>"
-    - "<&e>Current Channel: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[chat.channels.current].to_titlecase||None>"
+    - "<&e>Current Channel: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[chat.channels.current].to_titlecase||Server>"
     - "<&e>Active Channels:"
-    - "<&a><&gt><&r> <yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[chat.channels.active].separated_by[<&nl><&a><&gt><&r><&sp>].to_titlecase||None>"
+    - "<&a><&gt><&r> <yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].list_keys[chat.channels.active].separated_by[<&nl><&a><&gt><&r><&sp>].to_titlecase||Server>"
   mechanisms:
     skull_skin: <player.flag[amp_map].as_map.get[uuid].as_player.name>
 

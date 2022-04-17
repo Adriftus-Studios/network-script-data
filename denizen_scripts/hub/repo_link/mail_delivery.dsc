@@ -14,6 +14,7 @@ mail_delivery_config:
       mail_items_min: 18
       mail_items_max: 26
 
+
 mail_delivery_start:
   type: task
   debug: false
@@ -40,8 +41,18 @@ mail_delivery_start:
     - define item <proc[mail_delivery_generate_item].context[<[mailbox_number]>]>
     - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
     - flag <player> mail_delivery.current.todo.<[mailbox_number]>:+:1
-  - teleport <location[mail_delivery.spawnpoint.<util.random.int[1].to[8]>].with_yaw[<util.random.int[0].to[360]>].with_pitch[0]>
+  # - teleport <location[mail_delivery.spawnpoint.<util.random.int[1].to[8]>].with_yaw[<util.random.int[0].to[360]>].with_pitch[0]>
   - define time <script[mail_delivery_config].data_key[difficulties.<[difficulty]>.time].as_duration>
+  - repeat 6 as:number:
+    - define location <location[mailbox_<[number]>].center.below[0.5]>
+    - define location <[location].with_yaw[-135]> if:<[number].equals[1]>
+    - define location <[location].with_yaw[-135]> if:<[number].equals[2]>
+    - define location <[location].with_yaw[-70]> if:<[number].equals[3]>
+    - define location <[location].with_yaw[90]> if:<[number].equals[4]>
+    - fakespawn mail_delivery_mailbox_entity <[location]> players:<player> d:<[time]> save:mailbox_<[number]>
+    - define entity <entry[mailbox_<[number]>].faked_entity>
+    - glow <[entity]>
+    - flag <[entity]> mailbox:<[number]>
   - flag <player> mail_delivery.current.time:<util.time_now.in_seconds.milliseconds> expire:<[time]>
   - flag <player> mail_delivery.current.difficulty:<[difficulty]>
   - repeat <[time].in_seconds>:
@@ -108,6 +119,7 @@ mail_delivery_end:
   - take slot:<player.inventory.find_all_items[mail_delivery_mail_item]> from:<player.inventory>
   - foreach <player.flag[mail_delivery.current.inventory].if_null[<map[]>]> key:slot as:item:
     - inventory set d:<player.inventory> slot:<[slot]> o:<[item]>
+  - remove <player.fake_entities.filter[has_flag[mailbox]]>
   - flag <player> mail_delivery.current:!
   - flag <player> minigame.active:!
 
@@ -127,18 +139,27 @@ mail_delivery_apply_to_leaderboard:
   - flag <player> mail_delivery.personal_best.<[difficulty]>:<[time_taken]>
   - flag server mail_delivery.leaderboard.<[difficulty]>:<server.flag[mail_delivery.leaderboard.<[difficulty]>].sort_by_value>
 
+mail_delivery_mailbox_entity:
+  type: entity
+  entity_type: armor_stand
+  mechanisms:
+    gravity: true
+    equipment: air|air|air|diamond[custom_model_data=1]
+    visible: false
+    potion_effects: <map[type=GLOWING;amplifier=1;duration=1d;ambient=false;particles=false;icon=false]>
+
 mail_delivery_events:
   type: world
   debug: false
   events:
-    on player right clicks block:
+    on player right clicks fake entity:
     - stop if:<player.has_flag[mail_delivery.current].not>
-    - stop if:<context.location.has_flag[mailbox].not>
-    - define number <context.location.flag[mailbox]>
+    - stop if:<context.entity.has_flag[mailbox].not>
+    - define number <context.entity.flag[mailbox]>
     - note <inventory[mail_delivery_mailbox_inventory]> as:mailbox_<[number]>_<player.uuid>
     - define inventory <inventory[mailbox_<[number]>_<player.uuid>]>
     - flag <[inventory]> mailbox:<[number]>
-    - flag <[inventory]> location:<context.location>
+    - flag <[inventory]> location:<context.entity.location>
     - inventory open d:<[inventory]> player:<player>
     on player clicks in mail_delivery_mailbox_inventory:
     - if <context.item.flag[mailbox_number].equals[<context.inventory.flag[mailbox]>].not.if_null[false]>:
