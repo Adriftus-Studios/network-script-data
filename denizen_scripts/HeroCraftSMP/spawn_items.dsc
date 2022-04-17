@@ -11,7 +11,7 @@ spawn_scroll:
   - "<&c>Incapable of crossing dimensions"
   - "<&a>-------------"
   flags:
-    right_click_script: spawn_task
+    right_click_script: spawn_return_task
     type: scroll
   mechanisms:
     custom_model_data: 200
@@ -32,7 +32,7 @@ spawn_crystal:
   - "<&e>Returns you to Spawn"
   - "<&a>-------------"
   flags:
-    right_click_script: return_task
+    right_click_script: spawn_return_task
     type: crystal
   mechanisms:
     custom_model_data: 103
@@ -44,7 +44,7 @@ spawn_crystal:
       - air|gold_block|air
       - magical_pylon|air|magical_pylon
 
-return_task:
+spawn_return_task:
   type: task
   debug: false
   script:
