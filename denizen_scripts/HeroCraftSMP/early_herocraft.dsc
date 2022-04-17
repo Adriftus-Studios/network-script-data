@@ -2,9 +2,7 @@ early_herocraft_reset_porkchop_task:
   type: task
   debug: false
   script:
-    - narrate <context.entity.framed_item>
     - if <context.entity.framed_item.material.name> == air:
-      - narrate "cancelled"
       - determine cancelled
     - flag <context.entity> last_broken:<util.time_now>
     - wait 5m
