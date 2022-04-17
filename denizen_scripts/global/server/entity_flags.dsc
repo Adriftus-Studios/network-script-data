@@ -78,7 +78,17 @@ entity_flags:
     on entity_flagged:on_entity_added added to world:
       - inject <context.entity.flag[on_entity_added]>
     on entity_flagged:on_dismount exits vehicle:
-      - inject <context.entity.flag[on_dismount]>
+      - if <context.entity.flag[on_dismount].object_type> == List:
+        - foreach <context.entity.flag[on_dismount]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_dismount]>
+    on entity exits entity_flagged:on_dismount:
+      - if <context.vehicle.flag[on_dismount].object_type> == List:
+        - foreach <context.vehicle.flag[on_dismount]>:
+          - inject <[value]>
+      - else:
+        - inject <context.vehicle.flag[on_dismount]>
     on entity_flagged:on_mount exits vehicle:
       - inject <context.entity.flag[on_mount]>
     on player right clicks fake entity:
