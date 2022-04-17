@@ -112,8 +112,8 @@ entity_flags:
       - else:
         - inject <context.entity.flag[on_breed]>
     on entity_flagged:on_break breaks:
-      - if <context.entity.flag[on_break].object_type> == List:
-        - foreach <context.entity.flag[on_break]>:
+      - if <context.hanging.flag[on_break].object_type> == List:
+        - foreach <context.hanging.flag[on_break]>:
           - inject <[value]>
       - else:
-        - inject <context.entity.flag[on_break]>
+        - inject <context.hanging.flag[on_break]>
