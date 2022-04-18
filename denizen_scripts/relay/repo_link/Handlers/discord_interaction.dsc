@@ -1,6 +1,6 @@
 discord_interaction_handler:
   type: task
-  debug: false
+  debug: true
   script:
     - define query <util.parse_yaml[<context.query>]>
     - choose <[query].get[version]>:
