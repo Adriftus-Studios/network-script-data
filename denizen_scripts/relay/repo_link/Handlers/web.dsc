@@ -97,7 +97,13 @@ web_handler:
       
       # % ██ [ Denizen Interactions   ] ██
       - else if <[domain].starts_with[35.227.62.178]>:
-        - inject discord_interaction_handler
+        - webget 127.0.0.1:8000 data:<context.query> headers:<context.headers> save:response
+
+      # hang server intentionally
+        - if <entry[response].failed||nil> == nil || <entry[response].failed>:
+          - determine code:401
+
+      - inject discord_interaction_handler
 
     # % ██ [ Unrecognized posts       ] ██
       - else:
@@ -106,3 +112,4 @@ web_handler:
         - determine passively code:200
 
 #<context.query> | {"application_id":"716381772610273430","id":"965683671787008015","token":"aW50ZXJhY3Rpb246OTY1NjgzNjcxNzg3MDA4MDE1Olo2UWc5MHEwTWVkcDEwUnhtbnBqOVNSZFl2enBudHlFdXhKdVBzU2s2UWZicWNkdFVQZHh4UGlKVDBubU9vSXN3d3hnTkhWRndnZmd1M3ZGV3pwWVU2ZEhrVVI0MGNqM3V5S3VOVnJ0MzZPSGhabFJoS0d6QVJNR3NmT2FqMTFy","type":1,"user":{"avatar":"bd4db22679fa4e3381ea2b5c79553b3b","discriminator":"0001","id":"565536267161567232","public_flags":0,"username":"Xeane"},"version":1}
+#  map@[X-signature-ed25519=556ece60b5f211bd2562889fa3bf701fa772690fd110be7cb5b181853da99a756e95c0b6713a6379b599ed605e580099601a9c057f6b2f2a2a9d8ce059ef6d0f;Connection=close;Nginx.remote_addr=35.237.4.214;Host=127.0.0.1:25579;User-agent=Discord-Interactions/1.0 (+https://discord.com);Content-type=application/json;X-signature-timestamp=1650309675;Content-length=447]
