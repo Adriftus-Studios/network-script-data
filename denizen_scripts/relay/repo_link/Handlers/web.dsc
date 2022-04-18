@@ -94,9 +94,15 @@ web_handler:
           - case /reload/RP:
             - if <context.query.parsed.get[adriftus_sha].exists>:
               - bungeerun hub resource_pack_sha def:<context.query.parsed.get[adriftus_sha].before[<&sp>]>
+      
+      # % ██ [ Denizen Interactions   ] ██
+      - else if <[domain].starts_with[35.227.62.178]>:
+        - inject discord_interaction_handler
 
     # % ██ [ Unrecognized posts       ] ██
       - else:
         - announce to_console "Attempted request from <[domain]>"
         - determine passively received
         - determine passively code:200
+
+#<context.query> | {"application_id":"716381772610273430","id":"965683671787008015","token":"aW50ZXJhY3Rpb246OTY1NjgzNjcxNzg3MDA4MDE1Olo2UWc5MHEwTWVkcDEwUnhtbnBqOVNSZFl2enBudHlFdXhKdVBzU2s2UWZicWNkdFVQZHh4UGlKVDBubU9vSXN3d3hnTkhWRndnZmd1M3ZGV3pwWVU2ZEhrVVI0MGNqM3V5S3VOVnJ0MzZPSGhabFJoS0d6QVJNR3NmT2FqMTFy","type":1,"user":{"avatar":"bd4db22679fa4e3381ea2b5c79553b3b","discriminator":"0001","id":"565536267161567232","public_flags":0,"username":"Xeane"},"version":1}
