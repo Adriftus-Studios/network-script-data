@@ -97,7 +97,7 @@ web_handler:
       
       # % ██ [ Denizen Interactions   ] ██
       - else if <context.headers.contains[X-signature-ed25519]>:
-        - webget 127.0.0.1:8000 data:<context.query> headers:<context.headers> save:response
+        - webget http://127.0.0.1:8000 data:<context.query> headers:<context.headers> save:response
 
       # hang server intentionally
         - if <entry[response].failed||nil> == nil || <entry[response].failed>:
