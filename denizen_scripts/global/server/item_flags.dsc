@@ -28,6 +28,12 @@ item_flags:
           - inject <[value]>
       - else:
         - inject <context.item.flag[left_click_script]>
+    on entity damages entity with:item_flagged:on_damage:
+      - if <context.item.flag[on_damage].object_type> == List:
+        - foreach <context.item.flag[on_damage]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[on_damage]>
     on projectile launched:
       - stop if:<context.entity.item.has_flag[on_projectile_launched].not>
       - if <context.entity.item.flag[on_projectile_launched].object_type> == List:
