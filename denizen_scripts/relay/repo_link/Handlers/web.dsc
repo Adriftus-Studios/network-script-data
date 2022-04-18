@@ -104,7 +104,7 @@ web_handler:
         - if <entry[response].failed||nil> == nil || <entry[response].failed>:
           - determine code:401
 
-      - inject discord_interaction_handler
+        - inject discord_interaction_handler
 
     # % ██ [ Unrecognized posts       ] ██
       - else:
