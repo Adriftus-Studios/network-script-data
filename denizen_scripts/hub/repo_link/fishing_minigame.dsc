@@ -33,6 +33,8 @@ fishing_minigame_start:
         - narrate "<&7><&l><&lt>!<&gt><&r> <&7>You are now in fishing mode. If you at any point would like to return to normal, look for a barrier in your inventory. Typing any command will revert you back to normal."
         - narrate <&8>----------------------------------------------------
         - define event <proc[fishing_minigame_get_current_event]>
+        - foreach <server.flag[fishing_minigame_active_whirlpool_locations]> key:loc as:entity:
+            - adjust <player> show_entity:<[entity].get[entity]>
         - narrate "<&7><&l><&lt>!<&gt><&r> <&7>Currently running event: <&a><[event]>"
         - if !<[event].equals[None]>:
             - narrate "<&7><&l><&lt>!<&gt><&r> <&7>Instructions:"
@@ -48,6 +50,8 @@ fishing_minigame_stop:
         - run fishing_minigame_reset_inventory def:<[player]>
         - title 'title:<&c>Fishing Exited' "subtitle:<&c>Your fishing session is over!" targets:<[player]>
         - narrate "<&e>Your fishing session is over. If you would like to resume, just speak to the fish merchant again"
+        - foreach <server.flag[fishing_minigame_active_whirlpool_locations]> key:loc as:entity:
+            - adjust <player> hide_entity:<[entity].get[entity]>
         - if <player.has_flag[fishing_minigame_playing_music]>:
             - queue <player.flag[fishing_minigame_music_queue]> stop
             - midi cancel
@@ -135,12 +139,10 @@ fishing_minigame_build_whirlpools:
     type: task
     script:
         - foreach <server.flag[fishing_minigame_active_whirlpool_locations]> as:loc:
-            - define stand <entity[armor_stand[equipment=air|air|air|cyan_stained_glass[custom_model_data=1]]]>
+            - define stand armor_stand[visible=false;equipment=air|air|air|cyan_stained_glass[custom_model_data=1];gravity=false;marker=true]
             - spawn <[stand]> <[loc]> save:entity persistent
-            - adjust <entry[entity].spawned_entity> gravity:false
-            - adjust <entry[entity].spawned_entity> marker:true
-            - invisible <entry[entity].spawned_entity> state:true
-            - flag server fishing_minigame_active_whirlpool_locations.<[loc]>.entity:<entry[entity].spawned_entity.escaped>
+            - adjust <entry[entity].spawned_entity> hide_from_players
+            - flag server fishing_minigame_active_whirlpool_locations.<[loc]>.entity:<entry[entity].spawned_entity>
         - run fishing_minigame_whirlpool_animation
 
 # % ██ [ Task for whirlpool animations ] ██
