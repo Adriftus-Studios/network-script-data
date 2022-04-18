@@ -16,6 +16,6 @@ magical_pylon:
     1:
       type: shaped
       input:
-        - amethyst_block|papyrus|amethyst_block
+        - air|papyrus|air
         - papyrus|amethyst_block|papyrus
-        - amethyst_block|papyrus|amethyst_block
+        - air|papyrus|air
