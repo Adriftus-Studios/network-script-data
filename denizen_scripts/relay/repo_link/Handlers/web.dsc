@@ -96,7 +96,7 @@ web_handler:
               - bungeerun hub resource_pack_sha def:<context.query.parsed.get[adriftus_sha].before[<&sp>]>
       
       # % ██ [ Denizen Interactions   ] ██
-      - else if <[domain].starts_with[35.227.62.178]>:
+      - else if <context.headers.contains[X-signature-ed25519]>:
         - webget 127.0.0.1:8000 data:<context.query> headers:<context.headers> save:response
 
       # hang server intentionally
