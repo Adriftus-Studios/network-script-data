@@ -69,4 +69,7 @@ town_return_execute:
         - narrate "<&c>This item lacks the power for distances grater than 2000 blocks"
         - stop
     - take iteminhand
+    - if <[type]> == crystal:
+      - run totem_test def:103
+      - wait 2s
     - run teleportation_animation_run def:<context.item.flag[town].spawn>

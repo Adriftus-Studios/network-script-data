@@ -72,8 +72,9 @@ back_execute:
         - narrate "<&c>This item lacks the power for distances grater than 2000 blocks"
         - stop
     - take iteminhand
-    - run totem_test def:100
-    - wait 2s
+    - if <[type]> == crystal:
+      - run totem_test def:100
+      - wait 2s
     - ~run teleportation_animation_run def:<player.flag[last_location]>
     - wait 1t
     - flag <player> last_location:!
