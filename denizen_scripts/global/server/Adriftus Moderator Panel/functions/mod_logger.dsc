@@ -30,9 +30,10 @@ mod_log_action:
       - define logLength LENGTH<&co><&sp><[length]><&nl>
     - else:
       - define logLength LENGTH<&co><&sp>Not<&sp>Applied<&nl>
+    - define logServer SERVER<&co><&sp><bungee.server><&nl>
     - define logTime TIME<&co><&sp><[time].format[yyyy-MM-dd<&sp>HH:mm:ss]><&nl>
     # Construct logged contents and log the information.
-    - define log:<&nl><[logModerator]><[logPlayer]><[logLevel]><[logInfraction]><[logAction]><[logLength]><[logTime]><[border]>
+    - define log:<&nl><[logModerator]><[logPlayer]><[logLevel]><[logInfraction]><[logAction]><[logLength]><[logServer]><[logTime]><[border]>
     - log <[log]> type:info file:plugins/Denizen/data/global/admin/moderation/<[time].format[yyyy-MM-dd]>.log
 
 mod_log_ban:
@@ -52,7 +53,8 @@ mod_log_ban:
     - define logLevel LEVEL<&co><&sp><[level]><&nl>
     - define logInfraction INFRACTION<&co><&sp><[infraction]><&nl>
     - define logLength LENGTH<&co><&sp><[length]><&nl>
+    - define logServer SERVER<&co><&sp><bungee.server><&nl>
     - define logTime TIME<&co><&sp><[time].format[yyyy-MM-dd<&sp>HH:mm:ss]><&nl>
     # Construct logged contents and log the information.
-    - define log:<&nl><[logModerator]><[logPlayer]><[logLevel]><[logInfraction]><[logLength]><[logTime]><[border]>
+    - define log:<&nl><[logModerator]><[logPlayer]><[logLevel]><[logInfraction]><[logLength]><[logServer]><[logTime]><[border]>
     - log <[log]> type:info file:plugins/Denizen/data/global/bans/<[uuid]>.log
