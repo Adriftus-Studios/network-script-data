@@ -5,7 +5,7 @@ mirroring_transfer_chunks:
   script:
     - define uuid <util.random_uuid>
     - chunkload <[chunk]> duration:10s if:<[chunk].is_loaded.not>
-    - foreach <[chunk].cuboid.blocks[*chest|barrel|*shulker]>:
+    - foreach <[chunk].cuboid.blocks[*chest|barrel|*shulker|hopper|dropper|dispenser|*furnace|smoker]>:
       - inventory clear d:<[value].inventory>
     - schematic create name:<[uuid]> <[chunk].cuboid> origin:<[chunk].cuboid.center>
     - schematic save name:<[uuid]> filename:global/mirroring/<[uuid]>
