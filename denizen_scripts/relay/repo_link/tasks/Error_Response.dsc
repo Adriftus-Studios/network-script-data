@@ -88,6 +88,7 @@ Error_Response_Webhook:
     survival: 744711692570853467
     relay: 744711732433387602
     test: 757180343244816454
+    herocraft: 965759767526137926
     resort: 763228068789223424
 
 Get_Owner_Ping:
