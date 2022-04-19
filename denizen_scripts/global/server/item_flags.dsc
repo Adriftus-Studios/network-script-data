@@ -41,3 +41,9 @@ item_flags:
           - inject <[value]>
       - else:
         - inject <context.entity.item.flag[on_projectile_launched]>
+    on entity picks up item_flagged:on_item_pickup:
+      - if <context.item.flag[on_item_pickup].object_type> == List:
+        - foreach <context.item.flag[on_item_pickup]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[on_item_pickup]>
