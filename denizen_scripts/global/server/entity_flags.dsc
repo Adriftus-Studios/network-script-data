@@ -128,8 +128,14 @@ entity_flags:
       - else:
         - inject <context.hanging.flag[on_break]>
     on entity_flagged:on_item_pickup picks up item:
-      - if <context.entity.flag[on_item_pickup].object_type> == List:
-        - foreach <context.entity.flag[on_item_pickup]>:
+      - if <context.pickup_entity.flag[on_item_pickup].object_type> == List:
+        - foreach <context.pickup_entity.flag[on_item_pickup]>:
           - inject <[value]>
       - else:
-        - inject <context.hangientityng.flag[on_item_pickup]>
+        - inject <context.pickup_entity.flag[on_item_pickup]>
+    on entity picks up item_flagged:on_item_pickup:
+      - if <context.item.flag[on_item_pickup].object_type> == List:
+        - foreach <context.item.flag[on_item_pickup]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[on_item_pickup]>
