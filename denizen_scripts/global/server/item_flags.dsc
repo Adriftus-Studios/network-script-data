@@ -35,7 +35,7 @@ item_flags:
       - else:
         - inject <context.damager.item_in_hand.flag[on_damage]>
     on projectile launched:
-      - stop if:<context.entity.item.has_flag[on_projectile_launched].not>
+      - stop if:<context.entity.item.has_flag[on_projectile_launched].not||true>
       - if <context.entity.item.flag[on_projectile_launched].object_type> == List:
         - foreach <context.entity.item.flag[on_projectile_launched]>:
           - inject <[value]>
