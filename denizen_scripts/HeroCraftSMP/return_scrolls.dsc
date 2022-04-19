@@ -71,5 +71,5 @@ return_task:
     - take iteminhand
     - if <[type]> == crystal:
       - run totem_test def:101
-      - wait 2s
+    - wait 2s
     - run teleportation_animation_run def:<context.item.flag[destination]>

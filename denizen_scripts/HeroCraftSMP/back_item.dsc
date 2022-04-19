@@ -77,7 +77,7 @@ back_execute:
     - take iteminhand
     - if <[type]> == crystal:
       - run totem_test def:100
-      - wait 2s
+    - wait 2s
     - ~run teleportation_animation_run def:<player.flag[last_location]>
     - wait 1t
     - flag <player> last_location:!
