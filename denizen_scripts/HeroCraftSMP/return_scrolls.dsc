@@ -18,7 +18,10 @@ return_scroll:
   recipes:
     1:
       type: shapeless
-      input: glow_ink_sac/ink_sac|papyrus|lapis_lazuli
+      input: ink_sac|papyrus|lapis_lazuli
+    2:
+      type: shapeless
+      input: glow_ink_sac|papyrus|lapis_lazuli
 
 return_crystal:
   type: item

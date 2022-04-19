@@ -42,7 +42,10 @@ town_return_scroll:
   recipes:
     1:
       type: shapeless
-      input: glow_ink_sac/ink_sac|papyrus|iron_ingot
+      input: ink_sac|papyrus|iron_ingot
+    2:
+      type: shapeless
+      input: glow_ink_sac|papyrus|iron_ingot
 
 town_return_events:
   type: world

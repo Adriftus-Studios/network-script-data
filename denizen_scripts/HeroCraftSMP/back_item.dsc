@@ -44,7 +44,10 @@ back_scroll:
   recipes:
     1:
       type: shapeless
-      input: glow_ink_sac/ink_sac|papyrus|redstone_block
+      input: ink_sac|papyrus|redstone_block
+    2:
+      type: shapeless
+      input: glow_ink_sac|papyrus|redstone_block
 
 back_item_tracker:
   type: world
