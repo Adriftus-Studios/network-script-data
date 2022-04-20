@@ -6,7 +6,7 @@ vanish:
     permission: adriftus.staff
     usage: /vanish
     script:
-        - if !<player.has_flag[vanished]>:
+        - if <player.has_flag[vanished]>:
           - run unvanish_task
         - else:
           - run vanish_task
