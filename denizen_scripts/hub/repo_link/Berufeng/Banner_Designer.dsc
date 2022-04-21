@@ -3,8 +3,8 @@
 #=====================================================================#
 Banner_Designer_Version:
   type: data
-  version: 1.0.27
-  last_updated: 2022_04_08
+  version: 1.0.28
+  last_updated: 2022_04_20
 
 Banner_Designer_Data:
   type: data
@@ -375,6 +375,7 @@ Banner_Designer_Function:
         - define uuid:<context.location.cuboids.filter[contains_any_text[banner_designer_]].get[1].after[banner_designer_]>
         - flag <player> banner_machine_in_use:<[uuid]>
         - flag <player> banner_designer.<[uuid]>.mode:<context.item.script.name.after[banner_token_]>
+        - flag <player> banner_designer.<[uuid]>.color.0:0
         - wait 1t
         - take iteminhand
         - title title:<&color[#000000]><&font[adriftus:overlay]><&chr[0004]><&chr[f801]><&chr[0004]> "subtitle:<blue>Launching <bold>Banner Designer" targets:<player> fade_in:1s stay:1s
@@ -631,7 +632,7 @@ Banner_Designer_Save:
         - case admin:
           - narrate "<dark_red>Storing your design in <&f><&font[adriftus:chat]><&chr[0044]><&font[minecraft:default]>#custom-banners<dark_red>."
           - inject Banner_Designer_Converter instantly
-          - ~inject Banner_Designer_Storage
+          - inject Banner_Designer_Storage
           - wait 1t
           - give banner_token_admin
         - default:

@@ -90,9 +90,6 @@ Message_Handler:
           - case note meetingnote meetingnotes meetingsnote meetingsnotes meatingnote meatingnotes meatingsnote meatingsnotes notemeeting notesmeeting snotemeeting snotesmeeting notemeating notesmeating snotemeating snotesmeating:
             - ~Run Note_DCommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>]>
 
-          - case player players:
-            - ~Run Players_DCommand def:<[Message]>|<[Channel]>|<[Author]>|<[Group]>
-
           - case reload:
             - ~Run Reload_Scripts_DCommand def:<[Message]>|<[Channel]>|<[Author]>|<[Group]>
 
