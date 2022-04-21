@@ -82,6 +82,7 @@ network_map_update_name:
   debug: false
   definitions: uuid|name|forward
   script:
+    - waituntil <server.has_flag[player_map.uuids.<[uuid]>]>
     - define forward true if:<[forward].exists.not>
     - define old_name <server.flag[player_map.uuids.<[uuid]>.name]>
     - define server <server.flag[player_map.uuids.<[uuid]>.server]>
