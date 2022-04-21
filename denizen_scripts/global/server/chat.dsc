@@ -85,7 +85,7 @@ chat_history_save:
   script:
     - if !<[Channel].exists> || !<[Message].exists> || !<[UUID].exists> || !<[sender].exists>:
       - stop
-    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;message=<[Message]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]>]>
+    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;time=<server.current_time_millis>;uuid=<[UUID]>;sender=<[sender]>].with[message].as[<[message]>]>
     - if <yaml[chat_history].read[<[channel]>_history].size> > 40:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
 
