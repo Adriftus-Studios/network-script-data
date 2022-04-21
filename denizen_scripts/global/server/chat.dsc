@@ -17,7 +17,6 @@ chat_system_speak:
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
       - define msg <[message]>
-      - define msg <[msg].replace_text[|].with[].replace[;].with[]>
 
       # Check for Chat Lock
       - if <yaml[global.player.<player.uuid>].read[chat.locked]||false> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny]||false>:
