@@ -47,6 +47,7 @@ network_map_handler:
   debug: false
   events:
     on server start:
+      - waituntil rate:1s <bungee.connected>
       - flag server server_map:!
       - flag server player_map:!
       - foreach <bungee.list_servers> as:server:
