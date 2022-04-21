@@ -17,6 +17,7 @@ chat_system_speak:
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
       - define msg <[message]>
+      - define msg <[msg].replace_text[|].with[].replace[;].with[]>
 
       # Check for Chat Lock
       - if <yaml[global.player.<player.uuid>].read[chat.locked]||false> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny]||false>:
@@ -76,7 +77,7 @@ chat_system_speak:
         - bungeerun <[Servers]> chat_send_message def:<[channel]>|<[message]>|<[uuid]>|<[sender]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
           - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>]>
-      - run chat_history_save def:<[channel]>|<[message]>|<[uuid]>|<[sender]>
+      - run chat_history_save def:<[channe]>|<[message]>|<[uuid]>|<[sender]>
 
 chat_history_save:
   type: task
