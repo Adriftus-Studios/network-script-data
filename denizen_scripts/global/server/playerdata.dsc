@@ -51,7 +51,7 @@ network_map_handler:
       - flag server player_map:!
       - foreach <bungee.list_servers> as:server:
         - bungeetag server:<[server]> <server.online_players.parse_tag[<map[<[parse_value]>=<[parse_value].name>].if_null[null]>].exclude[null]> save:list
-        - if <entry[list].result> == null || <entry[list].is_empty>:
+        - if <entry[list].result.contains_text[parse_value]>:
            - foreach next
         - foreach <entry[list].result> key:uuid as:name:
           - flag server player_map.uuids.<[uuid]>.name:<[name]>
