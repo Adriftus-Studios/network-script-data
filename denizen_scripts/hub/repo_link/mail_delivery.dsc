@@ -143,6 +143,7 @@ mail_delivery_mailbox_entity:
   type: entity
   entity_type: armor_stand
   mechanisms:
+    marker: true
     gravity: true
     equipment: air|air|air|diamond[custom_model_data=1]
     visible: false
