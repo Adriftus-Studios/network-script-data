@@ -10,17 +10,15 @@ chat_system_speak:
   debug: false
   definitions: message
   script:
-      - define message <context.message> if:<[message].exists.not>
       - determine passively cancelled
+      - define msg <[message].if_null[<context.message>]>
       - waituntil rate:1s <bungee.connected>
-      - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current]||server>
+      - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current].if_null[server]>
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
-      - define msg <[message]>
-      - define msg <[msg].replace_text[|].with[].replace[;].with[]>
 
       # Check for Chat Lock
-      - if <yaml[global.player.<player.uuid>].read[chat.locked]||false> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny]||false>:
+      - if <yaml[global.player.<player.uuid>].read[chat.locked].if_null[false]> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny].if_null[false]>:
         - narrate "<&c>You are unable to speak in this channel, due to being chat locked."
         - stop
 
@@ -28,7 +26,7 @@ chat_system_speak:
       - if <player.has_permission[adriftus.chat.color]>:
         # Custom Color Codes
         - if <[msg].starts_with[&z]>:
-          - define msg <[msg].substring[3].rainbow>
+          - define msg <[msg].after[&z].rainbow>
         - else:
           - define msg <[msg].parse_color>
       - else:
@@ -38,27 +36,23 @@ chat_system_speak:
       - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
         - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&7><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&7><&rb><&r><&end_hover>]>
 
-      # Sanitize
-      #- define msg <[msg].replace_text[<&lb>].with[]>
-      #- define msg <[msg].replace_text[<&rb>].with[]>
-      #- define msg <[msg].escaped>
-
       # Build the Channel Text
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - define Command "chat <[channel]>"
-      - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+      - define msg_cmd_context 
+      - define ChannelText <proc[msg_cmd].context[<list_single[<[hover]>].include_single[<[text]>].include_single[<[command]>]>]>
 
       # Build the Player Text
       - if <yaml[global.player.<player.uuid>].contains[masks.current]>:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&d>DISGUISED<&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
-        - define NameText <proc[msg_hover].context[<[Hover]>|<[Text]>]>
+        - define NameText <proc[msg_hover].context[<list_single[<[hover]>].include_single[<[text]>]>]>
       - else:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <proc[get_player_display_color]><proc[get_player_display_name]><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
         - define Hint "msg <player.name> "
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
-        - define NameText <proc[msg_hint].context[<[Hover]>|<[Text]>|<[Hint]>]>
+        - define NameText <proc[msg_hint].context[<list_single[<[hover]>].include_single[<[text]>].include_single[<[hint]>]>]>
 
       # Separator
       - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
@@ -74,10 +68,10 @@ chat_system_speak:
       - narrate <[message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
-        - bungeerun <[Servers]> chat_send_message def:<[channel]>|<[message]>|<[uuid]>|<[sender]>
+        - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include_single[message].include_single[uuid].include_single[sender]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
           - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>]>
-      - run chat_history_save def:<[channe]>|<[message]>|<[uuid]>|<[sender]>
+      - run chat_history_save def:<list_single[<[channel]>].include_single[<[message]>].include_single[<[uuid]>].include_single[<[sender]>]>
 
 chat_history_save:
   type: task
@@ -128,7 +122,7 @@ chat_delete_message:
       - run chat_history_show player:<[value]>
       - wait 1t
     - if <[lock]||false>:
-      - run chatlock_task def:<[message].get[sender]>|<[message]>
+      - run chatlock_task def:<list_single[<[message].get[sender]>].include_single[<[message]>]>
     - inject chat_unpause
 
 chatdelete_command:
@@ -213,7 +207,7 @@ chat_command:
       - narrate "<&b>Now Talking in <yaml[chat_config].parsed_key[channels.<[Channel]>.format.channel]>"
     - if <[Channel]> == reload && <player.has_permission[adriftus.chat.reload]>:
       - inject chat_settings_reload
-      - foreach <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>|<bungee.server>]> as:server:
+      - foreach <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers].include[<bungee.server>]>]> as:server:
         - bungeerun <[server]> chat_settings_reload
       - bungee relay:
         - reload
@@ -279,7 +273,6 @@ chat_unpause:
 chat_send_message:
   type: task
   debug: false
-#@definitions: channel|message_escaped
   definitions: Channel|Message|UUID|Sender
   script:
       - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
@@ -296,7 +289,7 @@ chat_system_flag_manager:
         - stop
       - if !<yaml[global.player.<player.uuid>].contains[chat.channels.active]> || <yaml[global.player.<player.uuid>].read[chat.channels.active].object_type> != Map:
           - define map <map[chat.channels.active.server=true;chat.channels.current=server]>
-          - run global_player_data_modify_multiple def:<player.uuid>|<[map]>
+          - run global_player_data_modify_multiple def:<list_single[<player.uuid>].include_single[<[map]>]>
       - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active]>:
         - flag player chat.channels.<[value]>
       - inject chat_history_show
@@ -368,7 +361,7 @@ chat_settings_events:
             - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> != <context.item.flag[action]>:
               - if !<yaml[global.player.<player.uuid>].read[chat.channels.active.<context.item.flag[action]>]||false>:
                 - define map <map[chat.channels.current=<context.item.flag[action]>;chat.channels.active.<context.item.flag[action]>=true]>
-                - run global_player_data_modify_multiple def:<player.uuid>|<[map]>
+                - run global_player_data_modify_multiple def:<list_single[<player.uuid>].include_single[<[map]>]>
                 - flag player chat.channels.<context.item.flag[action]>
               - else:
                 - run global_player_data_modify def:<player.uuid>|chat.channels.current|<context.item.flag[action]>
@@ -458,8 +451,8 @@ message_command:
     #- define WhisperTextMods "<&7><&lb>MSG<&rb><&r><proc[get_player_display_name]><&b>-<&gt><context.args.get[1].to_titlecase> "
 
     - define message "<element[<[WhisperTextOther]><&f><[msg]>].on_click[/msg <[self_name].strip_color.replace_text[<&sp>].with[_]> ].type[SUGGEST_COMMAND].on_hover[<&e>Click to Reply]>"
-    - run bungee_send_message def:<server.flag[player_map.names.<[target_name]>.uuid]>|<[sender]>|<[message]>|true
+    - run bungee_send_message def:<list_single[<server.flag[player_map.names.<[target_name]>.uuid]>].include_single[<[sender]>].include_single[<[message]>].include_single[true]>
     - define message <[WhisperTextSelf]><&f><[msg]>
     - narrate <[message]>
     - define map <map[time=<server.current_time_millis>;message=<[message]>]>
-    - run global_player_data_message_history def:<player.uuid>|<[map]>
+    - run global_player_data_message_history def:<list_single[<player.uuid>].include_single[<[map]>]>
