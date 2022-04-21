@@ -631,7 +631,7 @@ Banner_Designer_Save:
         - case admin:
           - narrate "<dark_red>Storing your design in <&f><&font[adriftus:chat]><&chr[0044]><&font[minecraft:default]>#custom-banners<dark_red>."
           - inject Banner_Designer_Converter instantly
-          - ~inject Banner_Designer_Storage
+          - inject Banner_Designer_Storage
           - wait 1t
           - give banner_token_admin
         - default:
