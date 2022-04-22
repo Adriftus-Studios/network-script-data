@@ -11,6 +11,7 @@ error_handler:
       - yaml id:error_handler create
 
     on script generates error:
+      - stop
     # % ██ [ verify incapable halts              ] ██
       - define queue <context.queue.if_null[invalid]>
       - if <context.script.starts_with[error_handler]>:
