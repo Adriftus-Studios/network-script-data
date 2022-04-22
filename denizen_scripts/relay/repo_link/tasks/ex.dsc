@@ -59,9 +59,9 @@ ex_command_handler:
     # % ██ [ execute command                       ] ██
       - if <context.options.contains[server]>:
         - bungee <[server]>:
-          - execute as_server "ex <[Command]>"
+          - execute as_server "ex <[Command].unescaped>"
       - else:
-        - execute as_server "ex <[Command]>"
+        - execute as_server "ex <[Command].unescaped>"
 
     # % ██ [ Parse Tags                            ] ██
       - define embed "<[embed].with[description].as[<&lt>a:checc:901758512420503572<&gt> Executed command: `/ex <[command].unescaped.replace[`].with[']>`]>"
