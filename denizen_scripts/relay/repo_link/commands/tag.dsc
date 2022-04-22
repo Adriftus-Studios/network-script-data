@@ -29,7 +29,7 @@ tag_command_handler:
 
   # % ██ [ verify server argument, if any        ] ██
       - if <context.options.contains[server]>:
-        - define server <context.options.server>
+        - define server <context.options.get[server]>
       - else:
         - define server relay
 
@@ -54,13 +54,13 @@ tag_command_handler:
   # % ██ [ create base embed                     ] ██
       - definemap embed_data:
           color: 0,254,255
-          footer: Parsed on: <[server].to_titlecase> for: <[tag].unescaped>
+          footer: Parsed on<&co> <[server].to_titlecase> for<&co> <[tag].unescaped>
       - define embed <[embed].with_map[<[embed_data]>]>
 
 
 
   # % ██ [ Parse Tags                            ] ██
-      - ~bungeetag server:<[server].to_titlecase> <[tag].unescaped.parsed> save:response
+      - ~bungeetag server:<[server]> <[tag].unescaped.parsed> save:response
       - define tag_response <entry[response].result.escaped>
 
       - ~discordinteraction reply interaction:<context.interaction> <[embed].with[description].as[<[tag_response].unescaped>]>
