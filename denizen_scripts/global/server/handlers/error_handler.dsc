@@ -71,4 +71,4 @@ error_handler:
 
       - stop
     # % ██ [ send to relay                 ] ██
-      - bungeerun relay error_response_webhook def:<[data]>
+      - bungeerun relay error_response def:<[data]>
