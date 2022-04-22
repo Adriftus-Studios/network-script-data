@@ -71,14 +71,14 @@ status_command_handler:
           - case server:
             - if <[input].advanced_matches_text[all|-all|--all]>:
               - foreach <yaml[bungee_config].read[servers].keys> as:server:
-                - if !<bungee.list_servers.contains[<[input]>]>:
-                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Offline`]>
+                - if !<bungee.list_servers.contains[<[server]>]>:
+                  - define embed <[embed].add_inline_field[**<[server].to_titlecase>**].value[`Offline`]>
                 - else:
-                  - ~bungeetag server:<[input].to_titlecase> <bungee.connected> save:request
+                  - ~bungeetag server:<[server].to_titlecase> <bungee.connected> save:request
                   - if <entry[request].result> == 0:
-                    - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Offline`]>
+                    - define embed <[embed].add_inline_field[**<[server].to_titlecase>**].value[`Offline`]>
                   - else:
-                    - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Online`]>
+                    - define embed <[embed].add_inline_field[**<[server].to_titlecase>**].value[`Online`]>
 
             - else:
               - if !<yaml[bungee_config].contains[servers.<[input]>]>:
