@@ -69,14 +69,25 @@ status_command_handler:
       - foreach <context.options> key:option as:input:
         - choose <[option]>:
           - case server:
-
-            - if !<yaml[bungee_config].contains[servers.<[input]>]>:
-              - define description "<[description].include_single[:warning: Opted for server <&dq>`<[input]>`<&dq><n>Server is not configured in the network's server listings.]>"
-
-            - else if !<bungee.list_servers.contains[<[input]>]>:
-              - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Offline`]>
+            - if <[input].advanced_matches_text[all|-all|--all]>:
+              - foreach <yaml[bungee_config].read[servers].keys> as:server:
+                - if !<bungee.list_servers.contains[<[input]>]>:
+                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Offline`]>
+                - else:
+                  - ~bungeetag server:<[input].to_titlecase> <bungee.connected> save:request
+                  - if <entry[request].result> == 0:
+                    - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Offline`]>
+                  - else:
+                    - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Online`]>
 
             - else:
+              - if !<yaml[bungee_config].contains[servers.<[input]>]>:
+                - define description "<[description].include_single[:warning: Opted for server <&dq>`<[input]>`<&dq><n>Server is not configured in the network's server listings.]>"
+
+              - else if !<bungee.list_servers.contains[<[input]>]>:
+                - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Offline`]>
+
+              - else:
                 - ~bungeetag server:<[input].to_titlecase> <bungee.connected> save:request
                 - if <entry[request].result> == 0:
                   - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Offline`]>
