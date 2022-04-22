@@ -58,7 +58,7 @@ error_handler:
     # % ██ [ cache the information needed  ] ██
       - definemap data:
           queue: <[queue]>
-          script: <[script]>
+          script: <context.script.if_null[invalid]>
           errors: <server.flag[error_listening.<[queue].id>.<[script]>]>
           definition_map: <[queue].definition_map>
           error_count: <[error_count]>
