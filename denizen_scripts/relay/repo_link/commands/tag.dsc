@@ -43,7 +43,7 @@ tag_command_handler:
         - stop
 
   # % ██ [ verify server is connected            ] ██
-      - if !<yaml[bungee_config].contains[servers.<[server].to_titlecase>]>:
+      - if !<bungee.list_servers.contains[<[server]>]>:
         - definemap embed_data:
             color: 200,0,0
             description: <&co>warning<&co> Server<&co> <&dq>`<[server].to_titlecase>`<&dq> is **Offline**.
