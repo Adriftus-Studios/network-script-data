@@ -1,13 +1,13 @@
 chat_system_events:
   type: world
-  debug: false
+  debug: true
   events:
     on player chats bukkit_priority:LOWEST:
       - inject chat_system_speak
 
 chat_system_speak:
   type: task
-  debug: false
+  debug: true
   definitions: message
   script:
       - determine passively cancelled
@@ -40,7 +40,6 @@ chat_system_speak:
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
       - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - define Command "chat <[channel]>"
-      - define msg_cmd_context 
       - define ChannelText <proc[msg_cmd].context[<list_single[<[hover]>].include_single[<[text]>].include_single[<[command]>]>]>
 
       # Build the Player Text
@@ -68,14 +67,14 @@ chat_system_speak:
       - narrate <[message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
-        - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include_single[message].include_single[uuid].include_single[sender]>
+        - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include_single[<[message]>].include_single[<[uuid]>].include_single[<[sender]>]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
           - bungeerun relay chat_send_message def:<list_single[<context.message>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>]>
       - run chat_history_save def:<list_single[<[channel]>].include_single[<[message]>].include_single[<[uuid]>].include_single[<[sender]>]>
 
 chat_history_save:
   type: task
-  debug: false
+  debug: true
   definitions: Channel|Message|UUID|sender
   script:
     - if !<[Channel].exists> || !<[Message].exists> || !<[UUID].exists> || !<[sender].exists>:
@@ -86,7 +85,7 @@ chat_history_save:
 
 chat_history_show:
   type: task
-  debug: false
+  debug: true
   script:
     - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
     - define list <list>
@@ -272,7 +271,7 @@ chat_unpause:
 
 chat_send_message:
   type: task
-  debug: false
+  debug: true
   definitions: Channel|Message|UUID|Sender
   script:
       - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
@@ -280,7 +279,7 @@ chat_send_message:
 
 chat_system_flag_manager:
   type: world
-  debug: false
+  debug: true
   events:
     on custom event id:global_player_data_loaded:
       - flag player chat.channels:!
@@ -296,7 +295,7 @@ chat_system_flag_manager:
 
 chat_system_data_manager:
   type: world
-  debug: false
+  debug: true
   events:
     on server start:
       - inject chat_settings_reload
@@ -307,7 +306,7 @@ chat_system_data_manager:
 
 chat_settings_reload:
   type: task
-  debug: false
+  debug: true
   script:
     - if <server.has_file[data/global/chat/channels.yml]>:
       - if <yaml.list.contains[chat_config]>:
@@ -327,14 +326,8 @@ chat_settings:
   debug: false
   inventory: chest
   gui: true
-  title: <&6>Chat Settings
+  title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6926]>
   size: 45
-  slots:
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 chat_settings_events:
   type: world
@@ -375,6 +368,7 @@ chat_settings_open:
   debug: false
   script:
     - define inventory <inventory[chat_settings]>
+    - define slots <list[11|13|15|17|29|31|33|35]>
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - if ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
@@ -396,7 +390,8 @@ chat_settings_open:
         - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>].with_flag[action:<[channel]>]>
     - repeat <[list].size.sub[8].abs>:
       - define list:->:<item[standard_filler].with_flag[unique:<util.random_uuid>]>
-    - give <[list]> to:<[inventory]>
+    - foreach <[list]>:
+      - inventory set slot:<[slots].get[<[loop_index]>]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 message_command:

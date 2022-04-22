@@ -42,7 +42,7 @@ error_handler:
       # todo ██ [ check if script is a timed queue, add to timer    ] ██
       - flag server error_listening.<[queue].id>.<context.script.if_null[invalid]>.runtime duration:5s
 
-      - define error_count <yaml[error_handler].read[<context.script.if_null[invalid].name>].size.if_null[0]>
+      - define error_count <yaml[error_handler].read[<context.script.name.if_null[invalid]>].size.if_null[0]>
 
     # % ██ [ check ratelimits                    ] ██
 

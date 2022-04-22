@@ -25,8 +25,8 @@ discord_sendMessage:
   definitions: group|channel|messageEscaped
   script:
     - announce to_console "<[group]> - <[channel]>"
-    - define Fchannel <discord[AdriftusBot].group[<[group]>].channel[<[channel]>]>
-    - ~discordmessage id:<discord[AdriftusBot]> channel:<discord[AdriftusBot].group[<[group]>].channel[<[channel]>]> <[messageEscaped].unescaped>
+    - define Fchannel <discord[a_bot].group[<[group]>].channel[<[channel]>]>
+    - ~discordmessage id:<discord[a_bot]> channel:<discord[a_bot].group[<[group]>].channel[<[channel]>]> <[messageEscaped].unescaped>
 
 discord_editMessage:
   type: task
