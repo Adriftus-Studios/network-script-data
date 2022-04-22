@@ -3,7 +3,7 @@ back_crystal:
   material: feather
   display name: <&c>Back Crystal
   data:
-    recipe_book_category:  travel.crystal
+    recipe_book_category: travel.crystal
   lore:
     - "<&e>--------------------"
     - "<&e>Return to your last location"
