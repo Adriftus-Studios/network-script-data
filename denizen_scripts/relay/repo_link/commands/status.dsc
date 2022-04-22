@@ -1,3 +1,21 @@
+status_command_create:
+  type: task
+  debug: true
+  script:
+    - ~discordcommand id:a_bot create name:status "Shows the status of a server, or servers" group:626078288556851230
+
+status_command_handler:
+  type: world
+  debug: false
+  events:
+    on discord slash command name:status:
+      - definemap embed_data:
+          color: <color[0,254,255]>
+          description: i dont know what you want from me
+
+      - ~discordinteraction reply interaction:<context.interaction> <discord_embed.with_map[<[embed_data]>]>
+
+
 Status_DCommand:
   type: task
   PermissionRoles:

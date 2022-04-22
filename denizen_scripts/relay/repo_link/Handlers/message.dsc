@@ -78,9 +78,6 @@ Message_Handler:
           - case bungee:
             - ~Run Bungee_DCommand def:<[Message]>|<[Channel]>|<[Author]>|<[Group]>
 
-          - case check onlinestatus status online:
-            - ~Run Status_DCommand def:<[Message]>|<[Channel]>|<[Author]>|<[Group]>
-
           - case discord_connect disc_connect discconnect discordconnect connect_discord connect_disc connectdiscord connectdisc discord_link disc_link disclink discordlink link_discord link_disc linkdiscord linkdisc:
             - ~Run Discord_Connect_DCommand def:<list_single[<context.message>].include[<[Channel]>|<[Author]>|<[Group]>]>
 
