@@ -30,7 +30,6 @@ error_handler:
       - if !<bungee.connected> || !<context.queue.id.exists> || !<script.data_key[data.enabled_servers].contains[<bungee.server>]>:
         - stop
 
-      - stop
     # % ██ [ disable /ex error handling          ] ██
       - if <context.queue.id.starts_with[excommand].if_null[false]>:
         - announce to_console "<context.queue.id.if_null[Invalid queue reference]> - not pursuing error handler."
@@ -74,5 +73,6 @@ error_handler:
       - define data <[data].with[player].as[<map[name=<queue.player.name>;uuid=<queue.player.uuid>]>]> if:<[queue].player.exists>
       - define data <[data].with[script].as[<map[name=<[script].name>;file=<[script].filename>]>]> if:<[script].is_truthy>
 
+      - stop
     # % ██ [ send to relay                 ] ██
       - bungeerun relay error_response_webhook def:<[data]>
