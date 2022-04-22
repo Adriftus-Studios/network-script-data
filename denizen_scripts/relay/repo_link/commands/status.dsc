@@ -5,7 +5,7 @@ status_command_create:
     - definemap options:
         1:
           type: string
-          name: server
+          name: Server(s)
           description: Specifies a server to check the status for
           #, default returning them all
           required: true
