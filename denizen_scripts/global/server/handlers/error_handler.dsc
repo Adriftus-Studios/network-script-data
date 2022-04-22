@@ -14,7 +14,7 @@ error_handler:
       - stop
     # % ██ [ verify incapable halts              ] ██
       - define queue <context.queue.if_null[invalid]>
-      - if <context.script.starts_with[error_handler]>:
+      - if <context.script.starts_with[error_handler].if_null[false]>:
         - announce to_console "<&4>Warning: Terrible Error"
         - stop
       - if <bungee.server.if_null[relay]> == relay:
