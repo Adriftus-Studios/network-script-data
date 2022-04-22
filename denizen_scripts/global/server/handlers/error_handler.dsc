@@ -69,6 +69,5 @@ error_handler:
       - define data <[data].with[player].as[<map[name=<queue.player.name>;uuid=<queue.player.uuid>]>]> if:<[queue].player.exists>
       - define data <[data].with[script].as[<map[name=<context.script.name>;file=<context.script.filename>]>]> if:<context.script.exists>
 
-      - stop
     # % ██ [ send to relay                 ] ██
       - bungeerun relay error_response def:<[data]>
