@@ -35,7 +35,7 @@ error_handler:
         - stop
 
     # % ██ [ track errors                        ] ██
-      - flag server "error_listening.<[queue].id>.<context.script.if_null[invalid]>.errors.line <context.line.if_null[(unknown)]>:->:<context.message.if_null[null]>" expire:6s
+      - flag server "error_listening.<[queue].id>.<context.script.if_null[invalid]>.errors.line <context.line.if_null[(unknown)]>:->:<context.message.if_null[null]>" expire:30s
       - yaml id:error_handler set <context.script.name.if_null[invalid]>:<util.time_now>
       - if <server.has_flag[error_listening.<[queue].id>.<context.script.if_null[invalid]>.runtime]>:
         - stop
