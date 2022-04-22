@@ -1,7 +1,7 @@
 ##IgnoreWarning todo_comment
 error_handler:
   type: world
-  debug: true
+  debug: false
   data:
     enabled_servers:
       - hub
