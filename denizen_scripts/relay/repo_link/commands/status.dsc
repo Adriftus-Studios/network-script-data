@@ -1,6 +1,6 @@
 status_command_create:
   type: task
-  debug: true
+  debug: false
   script:
     - definemap options:
         1:
@@ -60,7 +60,7 @@ status_command_create:
 
 status_command_handler:
   type: world
-  debug: false
+  debug: true
   events:
     on discord slash command name:status:
       - define embed <discord_embed.with[color].as[<color[0,254,255]>]>
@@ -69,27 +69,25 @@ status_command_handler:
       - foreach <context.options> key:option as:input:
         - choose <[option]>:
           - case server:
-            - if !<[input]>:
-              - foreach next
 
-          - if !<yaml[bungee_config].contains[servers.<[input]>]>:
-            - define description "<[description].with_single[:warning: Opted for server <&qo>`<[input]>`<&qo> but this is not configured in the bungee's server listings.]>"
+            - if !<yaml[bungee_config].contains[servers.<[input]>]>:
+              - define description "<[description].include_single[:warning: Opted for server <&dq>`<[input]>`<&dq><n>Server is not configured in the network's server listings.]>"
 
-          - else if !<bungee.list_servers.contains[<[input]>]>:
-            - define embed <[embed].add_inline_field[**<[option].to_titlecase>**].value[`Offline`]>
+            - else if !<bungee.list_servers.contains[<[input]>]>:
+              - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Offline`]>
 
-          - else:
-              - ~bungeetag server:<[input].to_titlecase> <bungee.connected> save:request
-              - if <entry[request].result> == 0:
-                - define embed <[embed].add_inline_field[**<[option].to_titlecase>**].value[`Offline`]>
-              - else:
-                - define embed <[embed].add_inline_field[**<[option].to_titlecase>**].value[<entry[Data].result>]>
+            - else:
+                - ~bungeetag server:<[input].to_titlecase> <bungee.connected> save:request
+                - if <entry[request].result> == 0:
+                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Offline`]>
+                - else:
+                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[`Online`]>
 
           # players argument template
           #- case players:
           #tag: "Online<&co> `(<server.online_players.size>)`<n>```md<n>- <server.online_players.parse[name].separated_by[<n>- ]>```"
 
-      #- define embed <[embed].with[description].as[<[description].separated_by[<n>]>]>
+      - define embed <[embed].with[description].as[<[description].separated_by[<n>]>]>
 
 
       - ~discordinteraction reply interaction:<context.interaction> <[embed]>
