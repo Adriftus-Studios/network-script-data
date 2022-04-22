@@ -1,3 +1,21 @@
+status_command_create:
+  type: task
+  debug: true
+  script:
+    - ~discordcommand id:a_bot create name:status "Description:Parse a tag for a server or in general" group:626078288556851230
+
+status_command_handler:
+  type: world
+  debug: false
+  events:
+    on discord slash command name:status:
+      - definemap embed_data:
+          color: <color[0,254,255]>
+          description: i'm not configured yet, i promise i'm not drunk that, toaster is
+
+      - ~discordinteraction reply interaction:<context.interaction> <discord_embed.with_map[<[embed_data]>]>
+
+
 Tag_Parser_DCommand:
   type: task
   PermissionRoles:
