@@ -64,5 +64,5 @@ ex_command_handler:
         - execute as_server "ex <[Command]>"
 
     # % ██ [ Parse Tags                            ] ██
-      - define embed "<[embed].with[description].as[<&lt>a:checc:901758512420503572<&gt> Executed command: `/ex <[command].unescaped.replace[`].with[̀  ̀]>`]>"
+      - define embed "<[embed].with[description].as[<&lt>a:checc:901758512420503572<&gt> Executed command: `/ex <[command].unescaped.replace[`].with[']>`]>"
       - ~discordinteraction reply interaction:<context.interaction> <[embed]>
