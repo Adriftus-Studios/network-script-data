@@ -16,6 +16,13 @@ error_handler:
       - if <context.script.starts_with[error_handler]>:
         - announce to_console "<&4>Warning: Terrible Error"
         - stop
+      - if <bungee.server.if_null[relay]> == relay:
+        - determine passively cancelled
+        - announce to_console <context.message>
+        - announce to_console <context.queue>
+        - announce to_console <context.script>
+        - announce to_console <context.line>
+        - stop
 
     # % ██ [ verify connection                   ] ██
       - define timeout <util.time_now.add[1m]>
