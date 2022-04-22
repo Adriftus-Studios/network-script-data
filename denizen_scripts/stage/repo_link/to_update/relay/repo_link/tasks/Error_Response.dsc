@@ -1,6 +1,6 @@
-Error_Response_Webhook:
+error_response:
   type: task
-  debug: false
+  debug: true
   definitions: Data
   script:
   # $ ██ [ Verify Server       ] ██
