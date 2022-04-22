@@ -36,18 +36,14 @@ error_handler:
         - stop
 
     # % ██ [ track errors                        ] ██
-      - define script <context.script.if_null[null]>
-      - if !<[script].is_truthy>:
-        - define script <script>
-
-      - flag server "error_listening.<[queue].id>.<[script]>.errors.line <context.line.if_null[(unknown)]>:->:<context.message.if_null[null]>" expire:6s
-      - yaml id:error_handler set <[script].name>:<util.time_now>
-      - if <server.has_flag[error_listening.<[queue].id>.<[script]>.runtime]>:
+      - flag server "error_listening.<[queue].id>.<context.script.if_null[invalid]>.errors.line <context.line.if_null[(unknown)]>:->:<context.message.if_null[null]>" expire:6s
+      - yaml id:error_handler set <context.script.name.if_null[invalid]>:<util.time_now>
+      - if <server.has_flag[error_listening.<[queue].id>.<context.script.if_null[invalid]>.runtime]>:
         - stop
       # todo ██ [ check if script is a timed queue, add to timer    ] ██
-      - flag server error_listening.<[queue].id>.<[script]>.runtime duration:5s
+      - flag server error_listening.<[queue].id>.<context.script.if_null[invalid]>.runtime duration:5s
 
-      - define error_count <yaml[error_handler].read[<[script].name>].size.if_null[0]>
+      - define error_count <yaml[error_handler].read[<context.script.if_null[invalid].name>].size.if_null[0]>
 
     # % ██ [ check ratelimits                    ] ██
 
@@ -56,8 +52,8 @@ error_handler:
 
       # todo ██ [ verify if <[queue].state> != running              ] ██
       # | potentially: || <yaml[error_handler].read[<[script].name>].filter[epoch_millis.is_more_than[<util.time_now.sub[5s]>]]>
-      - waituntil <util.time_now.is_after[<[timeout]>]> && ( <util.time_now.duration_since[<yaml[error_handler].read[<[script].name>].highest[epoch_millis]>].in_seconds> < 2 || !<server.has_flag[error_listening.<[queue].id>.<[script]>.runtime]> ) rate:1s
-      - flag server error_listening.<[queue].id>.<[script]>.runtime:!
+      - waituntil <util.time_now.is_after[<[timeout]>]> && ( <util.time_now.duration_since[<yaml[error_handler].read[<context.script.name.if_null[invalid]>].highest[epoch_millis]>].in_seconds> < 2 || !<server.has_flag[error_listening.<[queue].id>.<context.script.if_null[invalid]>.runtime]> ) rate:1s
+      - flag server error_listening.<[queue].id>.<context.script.if_null[invalid]>.runtime:!
 
     # % ██ [ cache the information needed  ] ██
       - definemap data:
@@ -71,7 +67,7 @@ error_handler:
           message: <context.message.strip_color>
 
       - define data <[data].with[player].as[<map[name=<queue.player.name>;uuid=<queue.player.uuid>]>]> if:<[queue].player.exists>
-      - define data <[data].with[script].as[<map[name=<[script].name>;file=<[script].filename>]>]> if:<[script].is_truthy>
+      - define data <[data].with[script].as[<map[name=<context.script.name>;file=<context.script.filename>]>]> if:<context.script.exists>
 
       - stop
     # % ██ [ send to relay                 ] ██
