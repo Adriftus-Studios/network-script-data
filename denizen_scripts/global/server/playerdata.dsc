@@ -28,11 +28,11 @@ player_data_handler:
             - define uuid <player.uuid>
             - define name <player.name>
             - bungeerun relay discord_sendMessage "def:Adriftus Development and Reporting|alerts|<&lt>@565536267161567232<&gt><&nl><[uuid]> (<[name]>) global player data failed to load."
-          - customevent id:global_player_data_loaded context:<map[uuid=<context.uuid>;name=<context.name>]>
+          - customevent id:global_player_data_loaded context:<map[uuid=<player.uuid>;name=<player.name>]>
         - else:
           - wait 1s
           - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
-          - customevent id:global_player_data_loaded context:<map[uuid=<context.uuid>;name=<context.name>]>
+          - customevent id:global_player_data_loaded context:<map[uuid=<player.uuid>;name=<player.name>]>
 
     on player quits:
       - if <bungee.server> != hub:
@@ -46,6 +46,23 @@ network_map_handler:
   type: world
   debug: false
   events:
+    on server start:
+      - waituntil rate:1s <bungee.connected>
+      - flag server server_map:!
+      - flag server player_map:!
+      - foreach <bungee.list_servers> as:server:
+        - ~bungeetag server:<[server]> <server.online_players.parse_tag[<map[<[parse_value]>=<[parse_value].name>].if_null[null]>].exclude[null]> save:list
+        - if <entry[list].result.if_null[null]> == null:
+           - foreach next
+        - foreach <entry[list].result> as:map:
+          - define uuid <[map].keys.first>
+          - define name <[map].get[<[uuid]>]>
+          - flag server player_map.uuids.<[uuid]>.name:<[name]>
+          - flag server player_map.uuids.<[uuid]>.server:<[server]>
+          - flag server server_map.<[server]>.<[uuid]>:<[name]>
+          - flag server player_map.names.<[name]>.uuid:<[uuid]>
+          - flag server player_map.names.<[name]>.server:<[server]>
+
     on bungee player switches to server:
       - if <server.has_flag[player_map.uuids.<context.uuid>.server]>:
         - flag server server_map.<server.flag[player_map.uuids.<context.uuid>.server]>.<context.uuid>:!
@@ -65,6 +82,7 @@ network_map_update_name:
   debug: false
   definitions: uuid|name|forward
   script:
+    - waituntil <server.has_flag[player_map.uuids.<[uuid]>]>
     - define forward true if:<[forward].exists.not>
     - define old_name <server.flag[player_map.uuids.<[uuid]>.name]>
     - define server <server.flag[player_map.uuids.<[uuid]>.server]>
