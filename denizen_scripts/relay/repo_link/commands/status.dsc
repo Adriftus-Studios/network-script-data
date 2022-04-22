@@ -89,7 +89,9 @@ status_command_handler:
           #- case players:
           #tag: "Online<&co> `(<server.online_players.size>)`<n>```md<n>- <server.online_players.parse[name].separated_by[<n>- ]>```"
 
-      - ~discordinteraction reply interaction:<context.interaction> <discord_embed.with_map[<[embed_data]>]>
+      - define embed <[embed].with[description].as[<[description].separated_by[<n>]>]>
+
+      - ~discordinteraction reply interaction:<context.interaction> <[embed]>
 
   legacy tags used:
     Players: Online<&co> `(<server.online_players.size>)`<n>```md<n>- <server.online_players.parse[name].separated_by[<n>- ]>```
