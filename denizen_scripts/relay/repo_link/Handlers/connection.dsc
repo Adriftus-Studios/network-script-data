@@ -11,7 +11,7 @@ Connection_Handler:
     - announce to_console "<&2>██ <&a>[ <&e>Discord Connections start in<&6>: <&e>13s <&a>] <&2>██"
     - wait 13s
     - yaml load:data/tokens.yml id:tokens
-    - ~discord id:AdriftusBot connect code:<yaml[tokens].read[discord.AdriftusBotToken]>
+    - ~discord id:a_bot connect code:<yaml[tokens].read[discord.AdriftusBotToken]>
     - ~discord id:champagne connect code:<yaml[tokens].read[discord.champagne_token]>
     - ~discord id:Rachela connect code:<yaml[tokens].read[discord.rachela_token]>
     - wait 3s
@@ -19,6 +19,6 @@ Connection_Handler:
 
 # % ██ [ Server Shutdown      ] ██
     on shutdown:
-      - discord id:AdriftusBot disconnect
+      - discord id:a_bot disconnect
       - discord id:champagne disconnect
       - discord id:rachela disconnect
