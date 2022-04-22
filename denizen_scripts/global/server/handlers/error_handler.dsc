@@ -24,13 +24,13 @@ error_handler:
         - announce to_console <context.line>
         - stop
 
-      - stop
     # % ██ [ verify connection                   ] ██
       - define timeout <util.time_now.add[1m]>
       - waituntil <bungee.connected> || <[timeout].duration_since[<util.time_now>]> != 0
       - if !<bungee.connected> || !<context.queue.id.exists> || !<script.data_key[data.enabled_servers].contains[<bungee.server>]>:
         - stop
 
+      - stop
     # % ██ [ disable /ex error handling          ] ██
       - if <context.queue.id.starts_with[excommand].if_null[false]>:
         - announce to_console "<context.queue.id.if_null[Invalid queue reference]> - not pursuing error handler."
