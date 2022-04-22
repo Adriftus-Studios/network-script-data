@@ -11,8 +11,8 @@ Connection_Handler:
       - announce to_console "<&2>██ <&a>[ <&e>Discord Connections start in<&6>: <&e>13s <&a>] <&2>██"
       - wait 13s
       - yaml load:data/tokens.yml id:tokens
-      - ~discord id:a_bot token:a_token
-      - ~discord id:c_bot token:c_token
+      - ~discord id:a_bot token:<secret[a_token]>
+      - ~discord id:c_bot token:<secret[c_token]>
 
 # % ██ [ Server Shutdown      ] ██
     on shutdown:
