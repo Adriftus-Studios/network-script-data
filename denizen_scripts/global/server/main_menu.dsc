@@ -91,8 +91,8 @@ main_menu_inventory:
   gui: true
   title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6927]>
   slots:
-    - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] [main_menu_mail]
+    - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [main_menu_cosmetics] [] [] [] []
     - [] [] [main_menu_recipes] [] [] [] [main_menu_controls] [] []
