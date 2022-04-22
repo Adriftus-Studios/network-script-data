@@ -39,7 +39,7 @@ tag_command_handler:
             color: 200,0,0
             description: <&co>warning<&co> Opted for server <&dq>`<[server].to_titlecase>`<&dq><n>Server is not configured in the network's server listings.
             footer: Attempted<&co> <[tag].unescaped>
-        - ~discordinteraction reply interaction:<context.interaction> <[embed].with[<[embed_data]>]>
+        - ~discordinteraction reply interaction:<context.interaction> <[embed].with_map[<[embed_data]>]>
         - stop
 
   # % ██ [ verify server is connected            ] ██
@@ -48,7 +48,7 @@ tag_command_handler:
             color: 200,0,0
             description: <&co>warning<&co> Server<&co> <&dq>`<[server].to_titlecase>`<&dq> is **Offline**.
             footer: Attempted<&co> <[tag].unescaped>
-        - ~discordinteraction reply interaction:<context.interaction> <[embed].with[<[embed_data]>]>
+        - ~discordinteraction reply interaction:<context.interaction> <[embed].with_map[<[embed_data]>]>
         - stop
 
   # % ██ [ create base embed                     ] ██
