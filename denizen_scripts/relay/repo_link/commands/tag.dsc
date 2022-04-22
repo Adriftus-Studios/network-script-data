@@ -1,3 +1,21 @@
+tag_command_create:
+  type: task
+  debug: true
+  script:
+    - ~discordcommand id:a_bot create name:tag "Description:Parse a tag for a server or in general" group:626078288556851230
+
+tag_command_handler:
+  type: world
+  debug: false
+  events:
+    on discord slash command name:tag:
+      - definemap embed_data:
+          color: <color[0,254,255]>
+          description: i'm not configured yet, i promise i'm not drunk that, toaster is
+
+      - ~discordinteraction reply interaction:<context.interaction> <discord_embed.with_map[<[embed_data]>]>
+
+
 Tag_Parser_DCommand:
   type: task
   PermissionRoles:
@@ -26,7 +44,7 @@ Tag_Parser_DCommand:
             - stop
           - flag server Discord.Ratelimit:<-:<[User_Ratelimit_Cache]>
       - flag server Discord.Ratelimit:->:<map.with[Discord_User].as[<[Author]>].with[Timeout].as[<util.time_now.add[5m]>]>
-      - discord id:AdriftusBot message user:<[Author]> "You are blacklisted from this command for unethical tag parsing."
+      - discord id:a_bot message user:<[Author]> "You are blacklisted from this command for unethical tag parsing."
       - stop
 
   # % ██ [ Verify Arguments            ] ██
@@ -43,7 +61,7 @@ Tag_Parser_DCommand:
           - ~run discord_get_or_create_webhook def:<[Channel]> save:webhook
           - define Hook <entry[webhook].created_queue.determination.get[1]>
           - define Embeds "<list[<map.with[description].as[<[Args].first> is **Not Connected** or is **OFFLINE**.].with[color].as[<[Color]>]>]>"
-          - define Data "<map.with[username].as[Server Status Warning].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
+          - define Data "<map.with[username].as[Server tag Warning].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
           - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
           - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
           - stop
@@ -62,18 +80,18 @@ Tag_Parser_DCommand:
   # % ██ [ Send Direct Message       ] ██
     - if <[Direct]>:
       - if <[Author].id> == 194619362223718400:
-        - discord id:AdriftusBot message user:<[Author]> "```ini<n># Parsed on: <[Server]> for: <[tag]>:<n> <[TagData].unescaped><n>```"
+        - discord id:a_bot message user:<[Author]> "```ini<n># Parsed on: <[Server]> for: <[tag]>:<n> <[TagData].unescaped><n>```"
         - stop
       - else:
         - announce to_console "<&7># <&8>Parsed on: <&6><[Server]><&8> for<&7>: <&6><[tag]> <&8>From user<&8>: <&6><[Author].name> <&e>(<&6><[Author].id><&e>)<&7>"
         #| Potentially add when restricting Logs: <n> <&3><[TagData].unescaped>
         - if <[TagData].unescaped.contains_any_text[<list_single[<yaml[tokens].read[discord.champagne_token]>].include_single[<yaml[oAuth].list_deep_keys[].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>].exclude[Headers|User-Agent|redirect_uri|code|state|discord|application|client|token|parameters|scope|grand|hATE_Webhook|ATE|name|config|GitHub|Twitch|Repository|Repositories]>]>:
-          - discord id:AdriftusBot message user:<[Author]> "You have been blacklisted from this command for unethical tag parsing. This incident will be reported."
+          - discord id:a_bot message user:<[Author]> "You have been blacklisted from this command for unethical tag parsing. This incident will be reported."
           - flag server Discord.Blacklist:->:<[Author]>
           - Define Warning "<&lt>a:weewoo:619323397880676363<&gt> Attention:<discorduser[adriftusbot,194619362223718400].mention> **Warning**:<n>"
         - else:
           - define Warning <empty>
-        - discord id:AdriftusBot message channel:746416381112877147 "<[Warning]>```ini<n># Parsed on: <[Server]> From user: <[Author].name> (<[Author].id>) for:<n> <[tag]><n>```"
+        - discord id:a_bot message channel:746416381112877147 "<[Warning]>```ini<n># Parsed on: <[Server]> From user: <[Author].name> (<[Author].id>) for:<n> <[tag]><n>```"
         #| Potentially add when restricting Channel: :<n><[TagData].unescaped><n>
 
   # % ██ [ Send Public Message       ] ██

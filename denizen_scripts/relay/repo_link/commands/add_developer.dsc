@@ -28,7 +28,7 @@ Add_Developer_DCommand:
         - foreach next
       - define new_developers <[new_developers].include_single[<[discord_user]>]>
       - if !<[discord_user].roles[<[group]>].contains[<[developer_role]>]>:
-        - discord id:adriftusbot add_role user:<[discord_user]> role:<[developer_role]> group:<[group]>
+        - discord id:a_bot add_role user:<[discord_user]> role:<[developer_role]> group:<[group]>
 
       - define user_id <[discord_user].id>
       - define uuid <util.random.uuid.before[-]>
@@ -39,11 +39,11 @@ Add_Developer_DCommand:
       - define context "<[context].include_single[:diamond_shape_with_a_dot_inside: **Developmental Domain**: You will receive a subdomain pointing to your testing environment. The subdomain will be initialized after authorizing the application and will be based on an alias; eg: `<[discord_user].name.substring[0,4]>.behr.dev`.]>"
       - define context "<[context].include_single[:diamond_shape_with_a_dot_inside: **Triage Management Access**: You'll earn access to manage issues and create pull requests to contribute upstream to Adriftus Studios projects.]>"
     #^- define embed "<discordembed.title[`[Adriftus Test Environment Invitation]`].description[<[context].separated_by[<n>]>].url[<[url]>]>"
-    #^- discord id:adriftusbot user:<[discord_user]> send_embed embed:<[embed]>
+    #^- discord id:a_bot user:<[discord_user]> send_embed embed:<[embed]>
 
     #^- define embed <map.with[embed].as[<map.with[url].as[<[url]>].with[color].as[16774144].with[title].as[<[title]>].with[description].as[<[context].separated_by[<n>]>]>]>
     #^- define headers <yaml[saved_headers].parsed_key[Bot_Auth]>
-      - discord id:adriftusbot message user:<[discord_user]> <[title]><n><&lt><[url]><&gt><n><[context].separated_by[<n>]>
+      - discord id:a_bot message user:<[discord_user]> <[title]><n><&lt><[url]><&gt><n><[context].separated_by[<n>]>
 
     #$ /adddev @Behr#5305
     - define context <list>

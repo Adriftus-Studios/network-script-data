@@ -1,6 +1,6 @@
 haste_command_create:
   type: task
-  debug: false
+  debug: true
   script:
     - ~discordcommand id:a_bot create name:haste "description:Serves the haste link for pasting scripts or code snippets" group:626078288556851230
 
@@ -11,6 +11,6 @@ haste_command_handler:
     on discord slash command name:haste:
       - definemap embed_data:
           color: <color[0,254,255]>
-          description: "[`[https://paste.denizenscript.com/New/Script]`]"
+          description: "[`[https://paste.denizenscript.com/New/Script]`](https://paste.denizenscript.com/New/Script)"
 
       - ~discordinteraction reply interaction:<context.interaction> <discord_embed.with_map[<[embed_data]>]>

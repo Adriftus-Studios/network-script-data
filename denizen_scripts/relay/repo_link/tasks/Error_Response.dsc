@@ -1,3 +1,12 @@
+error_response:
+  type: task
+  debug: true
+  definitions: Data
+  script:
+
+    - announce to_console <[data]>
+
+
 Error_Response_Webhook:
   type: task
   debug: false
@@ -6,7 +15,7 @@ Error_Response_Webhook:
   # $ ██ [ Verify Server       ] ██
     - if !<script.list_keys[Channel_Map].contains[<[Data].get[Server]>]>:
       - stop
-
+    - stop
   # % ██ [ Organize Definitions    ] ██
     - define channel_id <script.data_key[Channel_Map.<[Data].get[Server]>]>
     - define Server <[Data].get[Server]>

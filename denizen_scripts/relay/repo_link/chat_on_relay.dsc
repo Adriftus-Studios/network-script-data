@@ -19,7 +19,7 @@ discord_watcher:
   type: world
   debug: false
   events:
-    on discord message received for:adriftusbot:
+    on discord message received for:a_bot:
       - if <context.new_message.author.discriminator> == 0000 || <context.new_message.author.is_bot>:
         - stop
       - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null && !<context.new_message.author.name.contains[Adriftus]>:

@@ -39,7 +39,7 @@ Message_Handler:
       - else if <[Message].starts_with[yay]> || <[Message].contains_any[<&sp>yay<&sp>|<&sp>yay!**|**yay**]>:
         - ~run Yayap_DCommand def:<[Channel]>
 
-    on discord message received for:AdriftusBot:
+    on discord message received for:aBot:
     # % ██ [ Queue Stopping Cache Data       ] ██
       - if <context.new_message.author||WebHook> == WebHook:
         - stop
@@ -77,9 +77,6 @@ Message_Handler:
 
           - case bungee:
             - ~Run Bungee_DCommand def:<[Message]>|<[Channel]>|<[Author]>|<[Group]>
-
-          - case check onlinestatus status online:
-            - ~Run Status_DCommand def:<[Message]>|<[Channel]>|<[Author]>|<[Group]>
 
           - case discord_connect disc_connect discconnect discordconnect connect_discord connect_disc connectdiscord connectdisc discord_link disc_link disclink discordlink link_discord link_disc linkdiscord linkdisc:
             - ~Run Discord_Connect_DCommand def:<list_single[<context.message>].include[<[Channel]>|<[Author]>|<[Group]>]>
@@ -147,9 +144,6 @@ Message_Handler:
 
           - case link:
             - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>]>
-
-          - case paste haste:
-            - ~Run link_dcommand def:<list_single[<[Message]>].include[<[Channel]>|<[Author]>|<[Group]>|<[Message_ID]>|haste]>
 
       - else if <[message].starts_with[!]>:
         - choose <[message].before[<&sp>].after[!]>:

@@ -74,7 +74,7 @@ github_updates:
         - define embed <[embed].url[<[data].get[compare]>]>
 
       # % ██ [ Send the message                       ] ██
-        - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
+        - ~discord id:a_bot send_embed channel:<[channel]> embed:<[embed]>
 
       # % ██ [ Update the server                      ] ██
         - choose <[repository_full_name]>:
@@ -103,7 +103,7 @@ github_updates:
           - define embed "<[embed].description[<[issue_data].get[body].replace_text[\r<n>- ].with[<[emoji]> ].replace_text[<n>- ].with[<[emoji]> ]>]>"
 
       # % ██ [ Send the message                       ] ██
-        - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
+        - ~discord id:a_bot send_embed channel:<[channel]> embed:<[embed]>
 
       - case issue_comment:
       # % ██ [ Cache data                             ] ██
@@ -121,7 +121,7 @@ github_updates:
         - define embed <[embed].description[<[description]>]>
 
       # % ██ [ Send the message                       ] ██
-        - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
+        - ~discord id:a_bot send_embed channel:<[channel]> embed:<[embed]>
 
       - case pull_request:
       # % ██ [ Cache data                             ] ██
@@ -141,7 +141,7 @@ github_updates:
         - define embed <[embed].description[<[description]>]>
 
       # % ██ [ Send the message                       ] ██
-        - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
+        - ~discord id:a_bot send_embed channel:<[channel]> embed:<[embed]>
 
       - case pull_request_review:
       # % ██ [ Cache data                             ] ██
@@ -175,7 +175,7 @@ github_updates:
         - if <[context].separated_by[<[line]>].length> < 1500:
           # % ██ [ Send the message                   ] ██
           - define embed <[embed].description[<[context].separated_by[<[line]>]>]>
-          - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
+          - ~discord id:a_bot send_embed channel:<[channel]> embed:<[embed]>
         - else:
           - define messages 0
           - while !<[context].is_empty> as:string:
@@ -187,12 +187,12 @@ github_updates:
                 - repeat next
               - else:
                 - define new_embed <[embed].description[<[context].get[1].to[<[i]>].separated_by[<[line]>]>]>
-                - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
+                - ~discord id:a_bot send_embed channel:<[channel]> embed:<[embed]>
                 - define context <[context].remove[<util.list_numbers_to[<[i]>]>]>
                 - define messages:++
           - if <[messages]> == 0:
           # % ██ [ Send the message                   ] ██
-            - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
+            - ~discord id:a_bot send_embed channel:<[channel]> embed:<[embed]>
 
       - case pull_request_review_comment:
       # % ██ [ Cache data                             ] ██
@@ -225,7 +225,7 @@ github_updates:
           - flag server review.id.<[id]>:!
           
       # % ██ [ Send the message                       ] ██
-        - ~discord ID:adriftusbot send_embed channel:<[channel]> embed:<[embed]>
+        - ~discord id:a_bot send_embed channel:<[channel]> embed:<[embed]>
 
   channel_map:
     organization:

@@ -138,17 +138,17 @@ Tag_Parse_Listener:
   events:
     on script generates error:
       - announce to_console "Script Generates Error-------------------------------------------------"
-      - if <context.queue.id.contains[Tag_Parse]||false>:
+      - if <context.queue.id.contains[Tag_Parse].if_null[false]>:
         - determine passively cancelled
-        - announce to_console "<&4>Error:<&c> <context.message>"
-        - announce to_console "<&4>Error:<&c> <context.queue>"
-        - announce to_console "<&4>Error:<&c> <context.script>"
-        - announce to_console "<&4>Error:<&c> <context.line>"
+        - announce to_console "<&4>Error:<&c> <context.message.if_null[error]>"
+        - announce to_console "<&4>Error:<&c> <context.queue.if_null[error]>"
+        - announce to_console "<&4>Error:<&c> <context.script.if_null[error]>"
+        - announce to_console "<&4>Error:<&c> <context.line.if_null[error]>"
     on server generates exception:
       - announce to_console "Server Generates exception-------------------------------------------------"
-      - if <context.queue.id.contains[Tag_Parse]||false>:
+      - if <context.queue.id.contains[Tag_Parse].if_null[false]>:
         - determine passively cancelled
-        - announce to_console "<&4>Error:<&c> <context.message>"
-        - announce to_console "<&4>Error:<&c> <context.full_trace>"
-        - announce to_console "<&4>Error:<&c> <context.type>"
-        - announce to_console "<&4>Error:<&c> <context.queue>"
+        - announce to_console "<&4>Error:<&c> <context.message.if_null[error]>"
+        - announce to_console "<&4>Error:<&c> <context.full_trace.if_null[error]>"
+        - announce to_console "<&4>Error:<&c> <context.type.if_null[error]>"
+        - announce to_console "<&4>Error:<&c> <context.queue.if_null[error]>"
