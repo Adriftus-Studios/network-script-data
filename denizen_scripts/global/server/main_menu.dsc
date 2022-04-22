@@ -39,13 +39,13 @@ main_menu_controls:
 main_menu_settings:
   type: item
   debug: false
-  material: feather
+  material: paper
   display name: <&e>Settings!
   lore:
     - "<&e>Settings for your gameplay"
     - "<&e>Not Yet Implemented"
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 101
   flags:
     run_script: cancel
 
