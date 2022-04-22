@@ -5,7 +5,6 @@ error_handler:
   data:
     enabled_servers:
       - hub
-      - test
   events:
     on server start:
       - yaml id:error_handler create
