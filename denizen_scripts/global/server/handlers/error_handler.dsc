@@ -59,7 +59,7 @@ error_handler:
       - definemap data:
           queue: <[queue]>
           script: <context.script.if_null[invalid]>
-          errors: <server.flag[error_listening.<[queue].id>.<[script].if_null[invalid]>]>
+          errors: <server.flag[error_listening.<[queue].id>.<[script].if_null[invalid]>].if_null[invalid]>
           definition_map: <[queue].definition_map>
           error_count: <[error_count]>
           rate_limited: <[error_count].is_more_than[50]>
