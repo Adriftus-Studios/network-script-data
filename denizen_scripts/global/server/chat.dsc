@@ -327,14 +327,8 @@ chat_settings:
   debug: false
   inventory: chest
   gui: true
-  title: <&6>Chat Settings
+  title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6926]>
   size: 45
-  slots:
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-    - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
 
 chat_settings_events:
   type: world
@@ -375,6 +369,7 @@ chat_settings_open:
   debug: false
   script:
     - define inventory <inventory[chat_settings]>
+    - define slots <list[20|22|24|26|38|40|42|44]>
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - if ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
@@ -396,7 +391,8 @@ chat_settings_open:
         - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>].with_flag[action:<[channel]>]>
     - repeat <[list].size.sub[8].abs>:
       - define list:->:<item[standard_filler].with_flag[unique:<util.random_uuid>]>
-    - give <[list]> to:<[inventory]>
+    - foreach <[list]>:
+      - inventory set slot:<[slots].get[<[loop_index]>]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 message_command:
