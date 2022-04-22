@@ -17,10 +17,10 @@ error_handler:
         - stop
       - if <bungee.server.if_null[relay]> == relay:
         - determine passively cancelled
-        - announce to_console <context.message>
-        - announce to_console <context.queue>
-        - announce to_console <context.script>
-        - announce to_console <context.line>
+        - announce to_console <context.message.if_null[invalid]>
+        - announce to_console <context.queue.if_null[invalid]>
+        - announce to_console <context.script.if_null[invalid]>
+        - announce to_console <context.line.if_null[invalid]>
         - stop
 
     # % ██ [ verify connection                   ] ██
