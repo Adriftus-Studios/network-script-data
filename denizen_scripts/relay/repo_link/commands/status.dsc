@@ -92,7 +92,7 @@ status_command_handler:
                 - if <entry[request].result> == 0:
                   - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[:ballot_box_with_check:`Offline`]>
                 - else:
-                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[:warning:`Online`]>
+                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[:ballot_box_with_check:`Online`]>
 
           # players argument template
           #- case players:
