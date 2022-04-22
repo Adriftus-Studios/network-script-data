@@ -37,7 +37,7 @@ tag_command_handler:
       - if !<yaml[bungee_config].contains[servers.<[server].to_titlecase>]>:
         - definemap embed_data:
             color: 200,0,0
-            description: <&co>warning<&co> Opted for server <&dq>`<[server].to_titlecase>`<&dq><n>Server is not configured in the network's server listings.
+            description: <&co>warning<&co> Tried parsing for server <&dq>`<[server].to_titlecase>`<&dq><n>Server is not configured in the network's server listings.
             footer: Attempted<&co> <[tag].unescaped>
         - ~discordinteraction reply interaction:<context.interaction> <[embed].with_map[<[embed_data]>]>
         - stop
@@ -46,7 +46,7 @@ tag_command_handler:
       - if !<bungee.list_servers.contains[<[server]>]>:
         - definemap embed_data:
             color: 200,0,0
-            description: <&co>warning<&co> Server<&co> <&dq>`<[server].to_titlecase>`<&dq> is **Offline**.
+            description: <&co>warning<&co> Server<&co> <&dq>`<[server].to_titlecase>`<&dq> is Offline.
             footer: Attempted<&co> <[tag].unescaped>
         - ~discordinteraction reply interaction:<context.interaction> <[embed].with_map[<[embed_data]>]>
         - stop
