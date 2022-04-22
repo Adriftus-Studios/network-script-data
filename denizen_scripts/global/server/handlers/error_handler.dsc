@@ -11,7 +11,6 @@ error_handler:
       - yaml id:error_handler create
 
     on script generates error:
-      - stop
     # % ██ [ verify incapable halts              ] ██
       - define queue <context.queue.if_null[invalid]>
       - if <context.script.starts_with[error_handler].if_null[false]>:
@@ -25,6 +24,7 @@ error_handler:
         - announce to_console <context.line>
         - stop
 
+      - stop
     # % ██ [ verify connection                   ] ██
       - define timeout <util.time_now.add[1m]>
       - waituntil <bungee.connected> || <[timeout].duration_since[<util.time_now>]> != 0
