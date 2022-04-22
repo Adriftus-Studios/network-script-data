@@ -52,7 +52,8 @@ error_handler:
 
       # todo ██ [ verify if <[queue].state> != running              ] ██
       # | potentially: || <yaml[error_handler].read[<[script].name>].filter[epoch_millis.is_more_than[<util.time_now.sub[5s]>]]>
-      - waituntil <util.time_now.is_after[<[timeout]>]> && ( <util.time_now.duration_since[<yaml[error_handler].read[<context.script.name.if_null[invalid]>].highest[epoch_millis]>].in_seconds> < 2 || !<server.has_flag[error_listening.<[queue].id>.<context.script.if_null[invalid]>.runtime]> ) rate:1s
+      - waituntil <util.time_now.is_after[<[timeout]>]>
+      # && ( <util.time_now.duration_since[<yaml[error_handler].read[<context.script.name.if_null[invalid]>].highest[epoch_millis]>].in_seconds> < 2 || !<server.has_flag[error_listening.<[queue].id>.<context.script.if_null[invalid]>.runtime]> ) rate:1s
       - flag server error_listening.<[queue].id>.<context.script.if_null[invalid]>.runtime:!
 
     # % ██ [ cache the information needed  ] ██
