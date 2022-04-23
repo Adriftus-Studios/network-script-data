@@ -6,7 +6,10 @@ main_menu_cosmetics:
   lore:
     - "<&e>Control your cosmetics!"
   mechanisms:
-    custom_model_data: 102
+    custom_model_data: 102        
+    hides: ALL
+  enchantments:
+    - sharpness:1
   flags:
     run_script: cosmetic_main_menu_open
 
