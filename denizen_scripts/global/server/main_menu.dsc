@@ -52,13 +52,13 @@ main_menu_settings:
 main_menu_mail:
   type: item
   debug: false
-  material: paper
+  material: feather
   display name: <&a>Mailbox!
   lore:
     - "<&e>Check your Mailbox!"
     - "<&e>Not Yet Implemented"
   mechanisms:
-    custom_model_data: 100
+    custom_model_data: 3
   flags:
     run_script: cancel
 
