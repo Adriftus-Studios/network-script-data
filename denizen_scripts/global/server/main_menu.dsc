@@ -1,12 +1,12 @@
 main_menu_cosmetics:
   type: item
   debug: false
-  material: feather
+  material: paper
   display name: <&d>Cosmetics
   lore:
     - "<&e>Control your cosmetics!"
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 102
   flags:
     run_script: cosmetic_main_menu_open
 
