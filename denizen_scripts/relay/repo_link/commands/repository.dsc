@@ -1,17 +1,16 @@
-Repository_DCommand:
+repository_command_create:
   type: task
-  definitions: Message|Channel
-  debug: false
+  debug: true
   script:
-  # - ██ [ Clean Definitions & Inject Dependencies ] ██
-    - inject command_arg_registry
-    - define color Code
-    - inject embedded_color_formatting
-    - define hook <script[DDTBCTY].data_key[webhooks.<[channel]>.hook]>
-    - define headers <yaml[saved_headers].read[discord.webhook_message]>
+    - ~discordcommand id:a_bot create name:repository "description:Serves the link to a repository" group:626078288556851230
 
-    - if !<[args].is_empty> && <[args].first> == Gielinor:
-      - define data <yaml[SDS_Repository_Gielinor].to_json>
-    - else:
-      - define data <yaml[SDS_Repository].to_json>
-    - ~webget <[hook]> data:<[data]> headers:<[headers]>
+repository_command_handler:
+  type: world
+  debug: false
+  events:
+    on discord slash command name:repository:
+      - definemap embed_data:
+          color: <color[0,254,255]>
+          description: "[`[https://github.com/A-Studio/network-script-data/]`](https://github.com/Adriftus-Studios/network-script-data/)<n>A network script data repository"
+
+      - ~discordinteraction reply interaction:<context.interaction> <discord_embed.with_map[<[embed_data]>]>

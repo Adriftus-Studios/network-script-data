@@ -1,47 +1,68 @@
-Ex_DCommand:
+##IgnoreWarning bad_execute
+ex_command_create:
   type: task
-  PermissionRoles:
-  # - ██ [ Staff Roles  ] ██
-    - Lead Developer
-    - External Developer
-    - Developer
-
-  # - ██ [ Public Roles ] ██
-    - Lead Developer
-    - Developer
-  definitions: Message|Channel|Author|Group
-  debug: false
-  Context: Color
+  debug: true
   script:
-  # - ██ [ Clean Definitions & Inject Dependencies ] ██
-    - inject Role_Verification
-    - inject Command_Arg_Registry
+    - definemap options:
+        1:
+          type: string
+          name: command
+          description: Executes an /ex command
+          required: true
+        2:
+          type: string
+          name: server
+          description: Selects the server to execute the command for
+          required: false
 
-  # - ██ [ Verify Arguments                        ] ██
-    - if <[Args].is_empty>:
-      - stop
-    - else if <[Args].size> == 1:
-      - define server Relay
-      - define Command "ex <[Args].space_separated>"
-      - execute as_server <[Command]>
-    - else:
-      - if !<bungee.list_servers.contains[<[Args].first>]>:
-        - define server Relay
-        - define Command "ex <[Args].space_separated>"
-        - execute as_server <[Command]>
+    - ~discordcommand id:a_bot create options:<[options]> name:ex "Description:Executes an /ex command for a server" group:626078288556851230
+
+ex_command_handler:
+  type: world
+  debug: false
+  events:
+    on discord slash command name:ex:
+    # % ██ [ create base definitions               ] ██
+      - define command <context.options.get[command].escaped>
+      - define embed <discord_embed>
+
+    # % ██ [ verify server argument, if any        ] ██
+      - if <context.options.contains[server]>:
+        - define server <context.options.get[server]>
       - else:
-        - if <bungee.list_servers.contains[<[Args].first>]>:
-          - define Server <[Args].first>
-          - define Command "ex <[Args].remove[1].space_separated>"
-          - bungee <[Server]>:
-            - execute as_server <[Command]>
+        - define server relay
 
-    - define color Code
-    - inject Embedded_Color_Formatting
-    - define Embeds "<list_single[<map.with[color].as[<[Color]>].with[description].as[Command ran: `/<[Command]>`]>]>"
-    - define Data <map.with[username].as[<[Server].to_titlecase><&sp>Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
+    # % ██ [ verify server is bungee configurated  ] ██
+      - if !<yaml[bungee_config].contains[servers.<[server].to_titlecase>]>:
+        - definemap embed_data:
+            color: 200,0,0
+            description: <&co>warning<&co> Tried executing command for server <&dq>`<[server].to_titlecase>`<&dq><n>Server is not configured in the network's server listings.
+            footer: Attempted<&co> /ex <[command].unescaped>
+        - ~discordinteraction reply interaction:<context.interaction> <[embed].with_map[<[embed_data]>]>
+        - stop
 
-    - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
-    - define Hook <entry[webhook].created_queue.determination.get[1]>
-    - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+    # % ██ [ verify server is connected            ] ██
+      - if !<bungee.list_servers.contains[<[server]>]>:
+        - definemap embed_data:
+            color: 200,0,0
+            description: <&co>warning<&co> Server<&co> <&dq>`<[server].to_titlecase>`<&dq> is Offline.
+            footer: Attempted<&co> /ex <[command].unescaped>
+        - ~discordinteraction reply interaction:<context.interaction> <[embed].with_map[<[embed_data]>]>
+        - stop
+
+    # % ██ [ create base embed                     ] ██
+      - definemap embed_data:
+          color: 0,254,255
+          footer: Executed on<&co> <[server].to_titlecase>
+      - define embed <[embed].with_map[<[embed_data]>]>
+
+    # % ██ [ execute command                       ] ██
+      - if <context.options.contains[server]>:
+        - bungee <[server]>:
+          - execute as_server "ex <[Command].unescaped>"
+      - else:
+        - execute as_server "ex <[Command].unescaped>"
+
+    # % ██ [ Parse Tags                            ] ██
+      - define embed "<[embed].with[description].as[<&lt>a:checc:901758512420503572<&gt> Executed command: `/ex <[command].unescaped.replace[`].with[']>`]>"
+      - ~discordinteraction reply interaction:<context.interaction> <[embed]>

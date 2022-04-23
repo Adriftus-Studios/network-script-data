@@ -1,38 +1,41 @@
 main_menu_cosmetics:
   type: item
   debug: false
-  material: feather
+  material: paper
   display name: <&d>Cosmetics
   lore:
     - "<&e>Control your cosmetics!"
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 102        
+    hides: ALL
+  enchantments:
+    - sharpness:1
   flags:
     run_script: cosmetic_main_menu_open
 
 main_menu_help:
   type: item
   debug: false
-  material: feather
+  material: paper
   display name: <&a>Help!
   lore:
     - "<&e>Request Help!"
     - "<&e>Not Yet Implemented"
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 105
   flags:
     run_script: cancel
 
 main_menu_controls:
   type: item
   debug: false
-  material: feather
+  material: paper
   display name: <&6>Controls!
   lore:
     - "<&e>Server Specific Controls!"
     - "<&e>Not Yet Implemented"
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 104
   flags:
     run_script: cancel
 
@@ -65,12 +68,12 @@ main_menu_mail:
 main_menu_recipes:
   type: item
   debug: false
-  material: feather
+  material: paper
   display name: <&6>Recipes!
   lore:
     - "<&e>Available custom recipes!"
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 103
   flags:
     run_script: crafting_book_open
 
@@ -91,7 +94,7 @@ main_menu_inventory:
   gui: true
   title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6927]>
   slots:
-    - [] [] [] [] [] [] [] [] [main_menu_mail]
+    - [main_menu_mail] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [main_menu_cosmetics] [] [] [] []
