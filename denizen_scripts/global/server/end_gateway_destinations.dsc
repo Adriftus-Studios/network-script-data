@@ -12,11 +12,11 @@ gateway_teleport:
         - flag <player> force_tp duration:1s
         - ratelimit <player> 5t
         - if <bungee.connected> && <[gateway].has_flag[destination.server]> && <[gateway].flag[destination.server]> != <bungee.server>:
-          - bungeerun <[gateway].flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<[gateway].flag[destination.location]>
+          - if <[gateway].has_flag[destination.location]>:
+            - bungeerun <[gateway].flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<[gateway].flag[destination.location]>
           - wait 1t
           - adjust <player> send_to:<[gateway].flag[destination.server]>
           - wait 1t
-          - adjust <player> location:<player.location.backward>
           - stop
         - wait 1t
         - adjust <player> fall_distance:0
