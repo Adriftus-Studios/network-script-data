@@ -46,6 +46,8 @@ mask_wear_events:
         - if <yaml[global.player.<player.uuid>].contains[masks.current.attachments]>:
           - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachments]> save:queue
           - define item true
+        - if <yaml[global.player.<player.uuid>].contains[masks.current.on_equip_task]>:
+          - run <yaml[global.player.<player.uuid>].read[masks.current.on_equip_task]>
         - run network_map_update_name def:<player.uuid>|<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
         - if <yaml[global.player.<player.uuid>].contains[masks.current.particle]>:
           - define particle true
