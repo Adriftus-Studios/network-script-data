@@ -24,7 +24,7 @@ mask_adriftus_game_master_equip:
   type: task
   debug: false
   script:
-    - wait 1t
+    - wait 1s
     - adjust <player> can_fly:true
     - flag <player> no_damage
 
@@ -32,6 +32,6 @@ mask_adriftus_game_master_unequip:
   type: task
   debug: false
   script:
-    - wait 1t
+    - wait 1s
     - adjust <player> can_fly:false
     - flag <player> no_damage:!
