@@ -53,7 +53,7 @@
 
 <p align=center>
     <!--- Getting Started Guide ---->
-    <a href=https://github.com/Adriftus-Studios/network-script-data/tree/stage/docs/guides/1.getting-started.md>
+    <a href=https://github.com/Adriftus-Studios/network-script-data/blob/Stage/docs/guides/1.getting-started.md>
         <img src=https://img.shields.io/badge/docs-getting%20started-informational.svg?logo=read-the-docs>
     </a>
     <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode>
