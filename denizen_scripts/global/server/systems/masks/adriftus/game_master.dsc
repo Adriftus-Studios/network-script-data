@@ -33,7 +33,6 @@ mask_adriftus_game_master_unequip:
   type: task
   debug: false
   script:
-    - wait 1s
     - adjust <player> can_fly:false
     - flag <player> no_damage:!
     - flag <player> on_hunger_change:<-:cancel
