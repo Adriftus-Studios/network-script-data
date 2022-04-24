@@ -119,6 +119,7 @@ custom_recipe_inventory_open:
     # Previous Page
     - if <[page]> > 1:
       - inventory set slot:<script.data_key[data.previous]> o:<item[leather_horse_armor].with[hides=all;display=<&6>Previous<&sp>Recipe;color=#baa68e;custom_model_data=6;flag=run_script:custom_recipe_inventory_previouspage;flag=recipe_id:<[recipes].get[<[page].sub[1]>]>]> d:<[inventory]>
+
     - inventory open d:<[inventory]>
 
 custom_recipe_inventory_nextpage:
@@ -174,6 +175,7 @@ crafting_book_open:
     tools_slots: 29|30
     gadgets_slots: 32|33
     misc_slots: 35|36
+    back: 1
   script:
     - define inventory <inventory[crafting_book_inventory]>
     - foreach <script[custom_recipe_data_initializer].parsed_key[data.categories]> key:category as:values:
@@ -181,6 +183,10 @@ crafting_book_open:
       - define item <item[<[values].get[material]>].with[custom_model_data=3;display=<[values].get[display]>;flag=run_script:crafting_book_open_category;flag=category:<[category]>]>
       - foreach <script.data_key[data.<[category]>_slots]> as:slot:
         - inventory set slot:<[slot]> o:<[item]> d:<[inventory]>
+
+    #Back to Main Menu
+    - inventory set slot:<script.data_key[data.back]> d:<[inventory]> "o:<item[feather].with[flag=run_script:main_menu_inventory_open;custom_model_data=3;display=<&e>Back to Main Menu]>"
+
     - inventory open d:<[inventory]>
 
 crafting_book_open_category:
