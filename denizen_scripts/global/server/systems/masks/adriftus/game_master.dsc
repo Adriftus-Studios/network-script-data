@@ -7,6 +7,8 @@ mask_adriftus_game_master:
     description: "<&d>It's time to play the game."
   mask_data:
     id: adriftus_game_master
+    on_equip_task: mask_adriftus_game_master_equip
+    on_unequip_task: mask_adriftus_game_master_unequip
     attachments:
       helmet: stick[custom_model_data=210]
       mainhand: stick[custom_model_data=300]
@@ -17,3 +19,17 @@ mask_adriftus_game_master:
       effect: soul_fire_flame
       quantity: 2
       offset: 0.5
+
+mask_adriftus_game_master_equip:
+  type: task
+  debug: false
+  script:
+    - adjust <player> can_fly:true
+    - flag <player> no_damage
+
+mask_adriftus_game_master_unequip:
+  type: task
+  debug: false
+  script:
+    - adjust <player> can_fly:false
+    - flag <player> no_damage:!

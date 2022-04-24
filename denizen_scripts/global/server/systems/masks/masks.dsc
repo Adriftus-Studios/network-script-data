@@ -51,7 +51,11 @@ mask_wear_events:
           - define particle true
         - if <[item]> || <[particle]>:
           - inject mask_loop
-
+    on player quits:
+      - if <yaml[global.player.<player.uuid>].contains[masks.current]>:
+        - if <yaml[global.player.<player.uuid>].contains[masks.current.on_unequip_task]>:
+          - run <yaml[global.player.<player.uuid>].read[masks.current.on_unequip_task]>
+        
     on server start:
       - inject locally path:initialize
     on script reload:
@@ -78,6 +82,9 @@ mask_wear:
       - inventory close
       - wait 1t
       - define script <script[mask_<[mask_id]>]>
+      - if <[script].data_key[mask_data.attachments].exists> && !<player.has_permission[adriftus.masks.attachments]>:
+        - narrate "<&c>You lack the permission for this mask."
+        - stop
       - run global_player_data_modify def:<player.uuid>|masks.current|<[script].parsed_key[mask_data]>
       - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[masks.current.skin_blob]>
       - rename t:<player> <yaml[global.player.<player.uuid>].read[masks.current.display_name]>
@@ -86,6 +93,8 @@ mask_wear:
       - if <yaml[global.player.<player.uuid>].contains[masks.current.attachments]>:
         - run mask_attachment def:<yaml[global.player.<player.uuid>].read[masks.current.attachments]> save:queue
         - define item true
+      - if <yaml[global.player.<player.uuid>].contains[masks.current.on_equip_task]>:
+        - run <yaml[global.player.<player.uuid>].read[masks.current.on_equip_task]>
       - run network_map_update_name def:<player.uuid>|<yaml[global.player.<player.uuid>].read[masks.current.display_name]>
       - if <yaml[global.player.<player.uuid>].contains[masks.current.particle]>:
         - define particle true
@@ -100,6 +109,8 @@ mask_remove:
     - determine passively cancelled
     - inventory close
     - wait 1t
+    - if <yaml[global.player.<player.uuid>].contains[masks.current.on_unequip_task]>:
+      - run <yaml[global.player.<player.uuid>].read[masks.current.on_unequip_task]>
     - run global_player_data_modify def:<player.uuid>|masks.current|!
     - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[defaults.skin_blob]>
     - rename t:<player> <player.name>
