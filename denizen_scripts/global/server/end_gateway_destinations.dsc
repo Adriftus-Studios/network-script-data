@@ -5,18 +5,18 @@ gateway_teleport:
     on player teleports cause:END_GATEWAY:
       - flag <player> last_location:<player.location>
       - define gateway <player.location.find_blocks[end_gateway].within[2].get[1]>
-      - if <[gateway].has_flag[destination.location]>:
+      - if <[gateway].has_flag[destination.location]> || <[gateway].has_flag[destination.server]>:
         - playsound sound:ENTITY_ENDERMAN_TELEPORT <[gateway]> pitch:0.1
         - title title:<&color[#000000]><&font[adriftus:overlay]><&chr[0004]><&chr[F801]><&chr[0004]> fade_in:1t fade_out:10t stay:1s
         - determine passively <player.location.forward[0.1]>
         - flag <player> force_tp duration:1s
         - ratelimit <player> 5t
         - if <bungee.connected> && <[gateway].has_flag[destination.server]> && <[gateway].flag[destination.server]> != <bungee.server>:
-          - bungeerun <[gateway].flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<[gateway].flag[destination.location]>
+          - if <[gateway].has_flag[destination.location]>:
+            - bungeerun <[gateway].flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<[gateway].flag[destination.location]>
           - wait 1t
           - adjust <player> send_to:<[gateway].flag[destination.server]>
           - wait 1t
-          - adjust <player> location:<player.location.backward>
           - stop
         - wait 1t
         - adjust <player> fall_distance:0

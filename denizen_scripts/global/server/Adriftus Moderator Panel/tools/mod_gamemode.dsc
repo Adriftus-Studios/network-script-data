@@ -1,3 +1,16 @@
+gamemode_survival:
+  type: command
+  debug: false
+  gamemode: survival
+  name: gms
+  description: Set yourself, or another player to Survival mode.
+  usage: /gms
+  permission: dutilities.gamemode.survival
+  tab complete:
+    - inject gamemode_tab_complete
+  script:
+    - inject gamemode_handle_command
+
 gamemode_creative:
   type: command
   debug: false
@@ -19,19 +32,6 @@ gamemode_adventure:
   description: Set yourself, or another player to Adventure mode.
   usage: /gma
   permission: dutilities.gamemode.adventure
-  tab complete:
-    - inject gamemode_tab_complete
-  script:
-    - inject gamemode_handle_command
-
-gamemode_survival:
-  type: command
-  debug: false
-  gamemode: survival
-  name: gms
-  description: Set yourself, or another player to Survival mode.
-  usage: /gms
-  permission: dutilities.gamemode.survival
   tab complete:
     - inject gamemode_tab_complete
   script:
