@@ -44,20 +44,32 @@ cosmetic_menu_bowtrails:
   mechanisms:
     custom_model_data: 3
 
+cosmetic_selection_main_menu:
+  type: inventory
+  debug: false
+  inventory: chest
+  title: <&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0005]>
+  gui: true
+  size: 18
 
 cosmetic_main_menu_open:
   type: task
   debug: false
   data:
     slots:
-      masks: 1|2|3
-      titles: 4|5|6
-      bowtrails: 7|8|9
+      back: 1
+      masks: 12
+      titles: 14
+      bowtrails: 16
   script:
-    - define inventory <inventory[generic[title=<&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0005]>;size=9]]>
+    - define inventory <inventory[cosmetic_selection_main_menu]>
     - foreach <script[cosmetic_selection_inventory_open].list_keys[data].exclude[slot_data]>:
       - foreach <script.data_key[data.slots.<[value]>]> as:slot:
         - inventory set slot:<[slot]> d:<[inventory]> o:<item[cosmetic_menu_<[value]>].with_flag[run_script:cosmetic_selection_inventory_open].with_flag[cosmetic_type:<[value]>]>
+
+    #Back to Main Menu
+    - inventory set slot:<script.data_key[data.back]> d:<[inventory]> "o:<item[feather].with[flag=run_script:main_menu_inventory_open;custom_model_data=3;display=<&e>Back to Main Menu]>"
+
     - inventory open d:<[inventory]>
 
 cosmetic_selection_inventory_open:
