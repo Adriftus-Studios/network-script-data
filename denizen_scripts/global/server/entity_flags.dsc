@@ -133,3 +133,9 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.pickup_entity.flag[on_item_pickup]>
+    on entity_flagged:on_hunger_change dies:
+      - if <context.entity.flag[on_hunger_change].object_type> == List:
+        - foreach <context.entity.flag[on_hunger_change]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_hunger_change]>
