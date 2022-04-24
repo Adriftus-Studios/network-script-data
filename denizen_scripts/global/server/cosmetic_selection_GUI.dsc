@@ -48,7 +48,7 @@ cosmetic_selection_main_menu:
   type: inventory
   debug: false
   inventory: chest
-  title: <&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0005]>
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0005]>
   gui: true
   size: 18
 
