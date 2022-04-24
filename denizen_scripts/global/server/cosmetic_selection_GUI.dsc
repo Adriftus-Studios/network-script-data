@@ -23,6 +23,8 @@ cosmetic_menu_masks:
     - "<&e>Completely disguise yourself!"
   mechanisms:
     custom_model_data: 102
+    hides: enchants
+    enchantments: luck,1
 
 cosmetic_menu_titles:
   type: item
@@ -33,6 +35,8 @@ cosmetic_menu_titles:
     - "<&e>They are also in chat player info."
   mechanisms:
     custom_model_data: 106
+    hides: enchants
+    enchantments: luck,1
 
 cosmetic_menu_bowtrails:
   type: item
@@ -43,6 +47,8 @@ cosmetic_menu_bowtrails:
     - "<&e>Grab your bow, and show off."
   mechanisms:
     custom_model_data: 107
+    hides: enchants
+    enchantments: luck,1
 
 cosmetic_selection_main_menu:
   type: inventory
