@@ -1,4 +1,5 @@
-vanish:
+# -- /vanish - Moderator vanish command
+mod_vanish:
     type: command
     debug: false
     name: Vanish
@@ -7,23 +8,23 @@ vanish:
     usage: /vanish
     script:
         - if <player.has_flag[vanished]>:
-          - run unvanish_task
+          - run mod_unvanish_task
         - else:
-          - run vanish_task
+          - run mod_vanish_task
 
-vanish_task:
+mod_vanish_task:
   type: task
   debug: false
   script:
     - flag <player> vanished
     - flag server vanished_staff:->:<player>
     - adjust <player> hide_from_players
-    - flag player on_item_pickup:->:vanish_cancel
-    - narrate "<&e>You are now Vanished"
+    - flag player on_item_pickup:->:mod_vanish_cancel
+    - narrate "<&e>You are now <&b>Vanished<&e>."
     - foreach <server.online_players.filter[has_permission[adriftus.staff]].exclude[<player>]>:
       - adjust <[value]> show_entity:<player>
 
-unvanish_task:
+mod_unvanish_task:
   type: task
   debug: false
   script:
@@ -31,20 +32,20 @@ unvanish_task:
     - flag server vanished_staff:<-:<player>
     - adjust <player> show_to_players
     - flag player on_item_pickup:<-:vanish_cancel
-    - narrate "<&e>You are no longer Vanished"
+    - narrate "<&e>You are no longer <&b>Vanished<&e>."
 
-vanish_events:
+mod_vanish_events:
   type: world
   debug: false
   events:
     on player joins:
-      - if <player.has_flag[vanish]>:
-        - run vanish_task
+      - if <player.has_flag[vanished]>:
+        - run mod_vanish_task
       - if <player.has_permission[adriftus.staff]>:
         - foreach <server.flag[vanished_staff].exclude[<player>]>:
           - adjust <player> show_entity:<[value]>
 
-vanish_cancel:
+mod_vanish_cancel:
   type: task
   debug: false
   script:
