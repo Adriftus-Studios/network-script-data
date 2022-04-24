@@ -85,6 +85,9 @@ mask_wear:
       - if <[script].data_key[mask_data.attachments].exists> && !<player.has_permission[adriftus.masks.attachments]>:
         - narrate "<&c>You lack the permission for this mask."
         - stop
+      - if <[script].data_key[mask_data.permission].exists> && !<player.has_permission[<[script].data_key[mask_data.permission]>]>:
+        - narrate "<&c>You lack the permission for this mask."
+        - stop
       - run global_player_data_modify def:<player.uuid>|masks.current|<[script].parsed_key[mask_data]>
       - adjust <player> skin_blob:<yaml[global.player.<player.uuid>].read[masks.current.skin_blob]>
       - rename t:<player> <yaml[global.player.<player.uuid>].read[masks.current.display_name]>
