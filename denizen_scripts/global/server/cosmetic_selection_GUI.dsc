@@ -16,33 +16,33 @@ cosmetic_configuration:
 
 cosmetic_menu_masks:
   type: item
-  material: feather
+  material: paper
   display name: <&d>Masks
   lore:
     - "<&e>Take on different appearances"
     - "<&e>Completely disguise yourself!"
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 102
 
 cosmetic_menu_titles:
   type: item
-  material: feather
+  material: paper
   display name: <&6>Titles
   lore:
     - "<&e>Titles appear above your head"
     - "<&e>They are also in chat player info."
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 106
 
 cosmetic_menu_bowtrails:
   type: item
-  material: feather
+  material: paper
   display name: <&b>Bowtrails
   lore:
     - "<&e>Spiff up your bow shots!"
     - "<&e>Grab your bow, and show off."
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 107
 
 cosmetic_selection_main_menu:
   type: inventory
