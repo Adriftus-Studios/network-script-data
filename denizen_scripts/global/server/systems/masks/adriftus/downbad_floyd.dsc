@@ -18,9 +18,11 @@ mask_adriftus_downbad_floyd_equip:
   debug: false
   script:
     - adjust <player> walk_speed:0.1
+    - adjust <player> body_arrows:10
 
 mask_adriftus_downbad_floyd_unequip:
   type: task
   debug: false
   script:
     - adjust <player> walk_speed:0.2
+    - adjust <player> body_arrows:0
