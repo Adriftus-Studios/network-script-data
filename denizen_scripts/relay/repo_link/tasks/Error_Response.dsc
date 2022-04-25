@@ -1,113 +1,94 @@
-error_response:
-  type: task
-  debug: true
-  definitions: Data
-  script:
-
-    - announce to_console <[data]>
-
-
-Error_Response_Webhook:
+error_responding:
   type: task
   debug: false
-  definitions: Data
+  definitions: data
   script:
-  # $ ██ [ Verify Server       ] ██
-    - if !<script.list_keys[Channel_Map].contains[<[Data].get[Server]>]>:
-      - stop
-    - stop
-  # % ██ [ Organize Definitions    ] ██
-    - define channel_id <script.data_key[Channel_Map.<[Data].get[Server]>]>
-    - define Server <[Data].get[Server]>
-    - define UUID <util.random.duuid.after[_]>
-    - define File_Location ../../web/webget/
-    - define Message <[Data].get[Message]>
-    - define Body_text "<list.include_single[<&gt> **Error Message**<&co> `<[Message]>`<&nl>]>"
-    - define embed <map>
-    - define fields <list>
+    - define development_guild <discord_group[a_bot,631199819817549825]>
+    - define embed <discord_embed>
 
-  # % ██ [ Generate Log        ] ██
-    - log <[Message]> type:none file:<[File_Location]><[UUID]>.txt
-    - define Log_URL http://147.135.7.85:25581/webget?name=<[UUID]>.txt
-
-  # % ██ [ Verify Script Fields    ] ██
-    - if <[Data].keys.contains[Script]>:
-      - define Script_Name <[Data].get[Script].get[Name]>
-      - define Script_Line <[Data].get[Script].get[Line]>
-      - define Script_File_Location <[Data].get[Script].get[File_Location]>
-      - if <[Script_File_Location].after[/plugins/Denizen/scripts/].starts_with[global]>:
-        - define File_Link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/<[Script_File_Location].after[/scripts/global/server/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
-        - define File_Directory global/<[Script_File_Location].after[/scripts/global/server/]>
-      - else if <[Server]> == test:
-        - define File_Link https://github.com/Adriftus-Studios/test/blob/main/<[Script_File_Location].after[/plugins/Denizen/scripts/<[Server]>/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
-        - define File_Directory /<[Script_File_Location].after[/plugins/Denizen/scripts/<[Server]>/]>
-      - else:
-        - define File_Link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/<[Server]>/<[Script_File_Location].after[/plugins/Denizen/scripts/<[Server]>/].replace[<&sp>].with[<&pc>20]>#L<[Script_Line]>
-        - define File_Directory /<[Script_File_Location].after[/plugins/Denizen/scripts/<[Server]>/]>
-      - define fields <[fields].include_single[<map.with[name].as[Script<&co>].with[value].as[`<[Script_Name]>`].with[inline].as[true]>]>
-      - define fields <[fields].include_single[<map.with[name].as[Line<&co>].with[value].as[`#<[Script_Line]>`].with[inline].as[true]>]>
-      - define fields <[fields].include_single[<map.with[name].as[File<&co>].with[value].as[<&lb>`<&lb><[File_Directory]><&rb>`<&rb>(<[File_Link]>)].with[inline].as[true]>]>
-      - define embed "<[embed].with[footer].as[<map.with[text].as[Script Error Count (*/hr)<&co> <[Data].get[Script].get[Error_Count]>]>]>"
-
-      - define Title_Text "<&lb>BORKED<&rb> <[Script_Name]> error on <[Server].to_titlecase>"
-      - define Body_Text "<[Body_Text].include_single[<&gt> **Script Name**<&co> `<[Script_Name]>`<&nl><&gt> **Script Reference**<&co>  <&lb>`<[File_Directory]>`<&rb>(<[File_Link]>)<&nl><&gt> **Script Line**<&co> `<[Script_Line]>`<&nl>]>"
+    # check if channel exists
+    - if !<[data.server].advanced_matches_text[<[development_guild].channels.parse[name]>]>:
+      - ~discordcreatechannel id:a_bot group:<[development_guild]> name:<[data.server]> "description:Error reporting for <[data.server]>" type:text category:634752968759050270 save:new_channel
+      - define channel <entry[new_channel].channel>
     - else:
-      - define Title_Text "<&lb>BORKED<&rb> Error on <[Server].to_titlecase>"
-      - define fields "<[fields].with[name].as[<map.with[Note<&co>].with[value].as[`Different Queue Callback`].with[inline].as[true]>]>"
+      - define channel <[development_guild].channel[<[data.server]>]>
 
-  # % ██ [ Verify Player Fields    ] ██
-    - if <[Data].keys.contains[Player]>:
-      - define Player_Name <[Data].get[Player].get[Name]>
-      - define Player_UUID <[Data].get[Player].get[UUID]>
-      - define fields "<[fields].include_single[<map.with[name].as[Player Name<&co>].with[value].as[`<[Player_Name]>`].with[inline].as[true]>]>"
-      - define fields "<[fields].include_single[<map.with[name].as[Player UUID<&co>].with[value].as[`<[Player_UUID]>`].with[inline].as[true]>]>"
-      - define embed "<[embed].with[author].as[<map.with[name].as[Player Attached<&co> <[Player_Name]>]>]>"
-      - define embed <[embed].with[thumbnail].as[<map.with[url].as[https://minotar.net/avatar/<[Player_Name]>/32.png]>]>
+    - if <[channel].active_threads.is_empty>:
+      # || <[channel].active_threads>
+      - ~discordcreatethread id:a_bot name:<util.time_now.format[MMMM-dd-u]> parent:<[channel]> save:new_thread
+      - define thread <entry[new_thread].created_thread>
+    - else:
+      - define thread <[channel].active_threads.highest[id]>
 
-      - define Body_Text "<[Body_Text].include_single[<&gt> **Player Attached**<&co> `<[Player_Name]>` / `<[Player_UUID]>`<&nl>]>"
+    - define embed_data.color 0,254,255
+        #description: "**`[<[script_data].get[name]>]` | `[<[script_data].get[file].after_last[/].if_null[bork]>]` Script Errors**<&co><n><[errors].keys.parse_tag[:warning:**`<[parse_value]>`**<&co><n><&gt> <[errors].get[<[parse_value]>].parse[replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n><&gt> ]>].separated_by[<n><n>].strip_color><n><n>**File Location**: `/<[script_data].get[file].after[web]>`" 
 
-  # % ██ [ Verify Definition Fields  ] ██
-    - if <[Data].keys.contains[Definition_Map]> && !<[Data].get[Definition_Map].is_empty>:
-      - define Definition_Map <[Data].get[Definition_Map]>
-      - define fields <[fields].include_single[<map.with[name].as[Definitions<&co>].with[value].as[```yml<n><proc[object_formatting].context[<list_single[<[Definition_Map]>].include[0]>].strip_color><n>```]>]>
+    - if !<[data.rate_limited].exists>:
+      - define embed_data "<[embed_data].with[footer].as[Script Error Count (*/hr)<&co> <[data.error_rate]>]>"
+    - else:
+      - define embed_data "<[embed_data].with[footer].as[<&lb>Rate-limited<&rb> Script error count (*/hr)<&co> <[data.error_rate]>]>"
+      - define embed_data <[embed_data].with[footer_icon].as[https://cdn.discordapp.com/emojis/901634983867842610.gif?size=56&quality=lossless]>
 
-  # % ██ [ Create Issue Template Link ] ██
-    - define Issue_URL_Base https://github.com/Adriftus-Studios/network-script-data/issues/new?labels=Borked&
-    - define Body_Text "<[Body_Text].include_single[<&lt>!--- Remove any sections that don't apply or you have inadequate information for. ---<&gt><&nl><&lt>!--- Add any other context about the problem below. ---<&gt><&nl><&nl>]>"
-    - define Issue_URL <[Issue_URL_Base]>title=<[Title_Text].url_encode>&body=<[Body_Text].unseparated.url_encode>
-    - define fields "<[fields].include_single[<map.with[name].as[Create Issue].with[value].as[<&lb>`<&lb>Click to Generate Issue Template<&rb>`<&rb>(<[Issue_URL]>) for this error report.]>]>"
+    - if <[data.player_data].exists>:
+      - define embed_data.author_name "Player Attached<&co> <[data.player_data.name]>"
+      - define embed_data.author_icon_url https://crafatar.com/avatars/<[data.player_data.uuid].replace[-]>
+      - define embed "<[embed].add_inline_field[player name].value[`<[data.player_data.name]>`]>"
+      - define embed "<[embed].add_inline_field[player uuid].value[`<[data.player_data.uuid]>`]>"
 
-  # % ██ [ Submit Message      ] ██
-    - define headers <yaml[saved_headers].parsed_key[discord.Bot_Auth]>
-    - define url https://discordapp.com/api/channels/<[channel_id]>/messages
-    - define data <map.with[embed].as[<[embed].include[<script.parsed_key[embed]>]>].to_json>
-    - ~webget <[url]> method:post data:<[data]> headers:<[headers]> save:response
+    - if <[data.content].exists>:
+    #| map@[error_script=map@[Line_82=li@intentional error|]]
+      - define description <list>
+      - foreach <[data.content]> key:script as:content:
+        - define description "<[description].include_single[**`<[script]>`** | **`<&lb><[data.script_data.file]><&rb>`** script errors<&co>]>"
+        - foreach <[content]> key:line as:message:
+          - define description "<[description].include_single[<&co>warning<&co>`Line <[line]>`<&co>]>"
+          - define description <[description].include_single[<[message].parse[strip_color.replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n>]>]>
+          #
+      - define embed_data.description <[description].separated_by[<n>]>
+    - else:
+      - define embed_data.description "No context provided"
 
-  embed:
-    title: "`[Click for Log]` <[Server].to_titlecase> Error Response:"
-    url: <[Log_URL]>
-    color: 5820671
-    description: <[Message]||>
-    fields: <[fields]||>
+    - define embed <[embed].with_map[<[embed_data]>]>
+    - define embed <[embed].add_field[Definitions<&co>].value[```yml<n><[data.definition_map].proc[object_formatting].strip_color.replace[`].with[<&sq>]><n>```]> if:!<[data.definition_map].is_empty>
 
-  Channel_Map:
-  #$  xeane: 744713622642491433
-    hub: 744711708077064203
-    behrcraft: 744711666142543953
-    survival: 744711692570853467
-    relay: 744711732433387602
-    test: 757180343244816454
-    herocraft: 965759767526137926
-    resort: 763228068789223424
 
-Get_Owner_Ping:
+    - ~discordmessage id:a_bot channel:<[thread]> <[embed]>
+
+error_formatter:
   type: procedure
-  definitions: owner
+  debug: false
+  definitions: text
   script:
-    - choose <[owner]>:
-      - case Taras:
-        - determine 141669284710449152
-      - case Xeane:
-        - determine 565536267161567232
-      - default:
-        - determine null
+    - define text <[text].strip_color>
+
+    # % ██ [ ie: Debug.echoError(context, "Tag " + tagStr + " is invalid!"); ] ██
+    - if "<[text].starts_with[Tag <&lt>]>" && "<[text].ends_with[<&gt> is invalid!]>":
+      - determine "Tag `<[text].after[Tag ].before_last[ is invalid!]>` returned invalid."
+
+    # % ██ [ ie: Debug.echoError(event.getScriptEntry(), "Unfilled or unrecognized sub-tag(s) '<R>" + attribute.unfilledString() + "<W>' for tag <LG><" + attribute.origin + "<LG>><W>!"); ] ██
+    - else if "<[text].starts_with[Unfilled or unrecognized sub-tag(s) ']>":
+      - define string "<[text].after[sub-tag(s) '].before_last[' for tag <&lt>]>"
+      - determine "Unfilled or borked sub-tag(s) `<[string]>` <[text].after[<[string]>].before[' for tag <&lt>]> for tag<&co> `<&lt><[text].after[<[string]>].after[<&lt>].before_last[!]>`."
+
+    # % ██ [ ie: Debug.echoError(event.getScriptEntry(), "The returned value from initial tag fragment '<LG>" + attribute.filledString() + "<W>' was: '<LG>" + attribute.lastValid.debuggable() + "<W>'."); ] ██
+    - else if "<[text].starts_with[The returned value from initial tag fragment]>":
+      - define tag "<[text].after[fragment '].before[' was<&co> ']>"
+      - define parse_value "<[text].after_last[' was<&co> '].before_last['.]>"
+      - determine "The returned value from initial tag fragment<&co> `<&lt><[tag]><&gt>` returned<&co> `<[parse_value]>`"
+
+    # % ██ [ ie: Debug.echoError(context, "'ObjectTag' notation is for documentation purposes, and not to be used literally." ] ██
+    - else if "<[text].starts_with['ObjectTag' notation is for documentation purposes]>":
+      - determine "<&lt><&co>a<&co>901634983867842610<&gt> **<[text]>**"
+    # % ██ [ ie: Debug.echoError(event.getScriptEntry(), "Almost matched but failed (missing [context] parameter?): " + almost); ] ██
+    # % ██ [ ie: Debug.echoError(event.getScriptEntry(), "Almost matched but failed (possibly bad input?): " + almost); ] ██
+
+    # % ██ [ ie: Debug.echoError(context, "(Initial detection) Tag processing failed: " + ex.getMessage()); ] ██
+
+    # % ██ [ ie: attribute.echoError("Tag-base '" + base + "' returned null."); ] ██
+
+    # % ██ [ ie: Debug.echoError("No tag-base handler for '" + event.getName() + "'."); ] ██
+    # % ██ [ ie: Debug.echoError("Tag filling was interrupted!"); ] ██
+    # % ██ [ ie: Debug.echoError("Tag filling timed out!"); ] ██
+
+    - else:
+      - determine <[text]>

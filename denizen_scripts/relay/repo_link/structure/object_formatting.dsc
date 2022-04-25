@@ -9,9 +9,9 @@ object_formatting:
     - define space "<element[ ].repeat[<[padding]>]>"
     - define values <list>
 
-    - if <[object].type> == map:
+    - if <[object].object_type> == map:
       - foreach <[object]>:
-        - choose <[value].type>:
+        - choose <[value].object_type>:
           - case map:
             - define values <[values].include_single[<&e><[key]><&6>:<&a><n><proc[format_map].context[<list_single[<[value]>].include[<[padding].add[2]>|false]>]>]>
           - case list:
@@ -37,7 +37,7 @@ format_map:
       - define initial_space <[space]>
 
     - foreach <[map]>:
-      - choose <[value].type>:
+      - choose <[value].object_type>:
         - case map:
           - define values <[values].include_single[<&e><[key]><&6>:<&a><n><proc[format_map].context[<list_single[<[value]>].include[<[padding].add[2]>|false]>]>]>
         - case list:
@@ -63,7 +63,7 @@ format_list:
       - define initial_space <[space]>
 
     - foreach <[list]>:
-      - choose <[value].type>:
+      - choose <[value].object_type>:
         - case map:
           - define values <[values].include_single[<proc[format_map].context[<list_single[<[value]>].include[<[padding].add[2]>|true]>]>]>
         - case list:
