@@ -211,4 +211,4 @@ test_spawn_blood_raider_boss_death:
   type: task
   debug: false
   script:
-    - announce "<&e>The blood Raiders have lost"
+    - announce "<&e>The blood cult have taken notice of today's events..."
