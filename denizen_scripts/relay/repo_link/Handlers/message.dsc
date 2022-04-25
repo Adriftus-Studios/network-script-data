@@ -2,9 +2,6 @@ Message_Handler:
   type: world
   debug: false
   events:
-    on server generates exception:
-      - if <context.message> == "no value present":
-        - determine cancelled
     on discord message received for:champagne:
     # % ██ [ Queue Stopping Cache Data       ] ██
       - if <context.new_message.author.discriminator> == 0000:
