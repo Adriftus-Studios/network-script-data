@@ -18,9 +18,11 @@ mask_adriftus_blood_bandit_equip:
   debug: false
   script:
     - adjust <player> health_data:200/200
+    - flag <player> on_target:cancel
 
 mask_adriftus_blood_bandit_unequip:
   type: task
   debug: false
   script:
     - adjust <player> health_data:20/20
+    - flag <player> on_target:!
