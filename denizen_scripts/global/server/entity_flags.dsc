@@ -103,43 +103,43 @@ entity_flags:
             - inject <[value]>
         - else:
           - inject <player.flag[shift_player_right_clicks]>
-    on entity_flagged:on_damaged damaged:
+    on entity_flagged:on_damaged damaged bukkit_priority:low:
       - if <context.entity.flag[on_damaged].object_type> == List:
         - foreach <context.entity.flag[on_damaged]>:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_damaged]>
-    on entity_flagged:on_death dies:
+    on entity_flagged:on_death dies bukkit_priority:low:
       - if <context.entity.flag[on_death].object_type> == List:
         - foreach <context.entity.flag[on_death]>:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_death]>
-    on entity_flagged:on_breed breeds:
+    on entity_flagged:on_breed breeds bukkit_priority:low:
       - if <context.entity.flag[on_breed].object_type> == List:
         - foreach <context.entity.flag[on_breed]>:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_breed]>
-    on entity_flagged:on_break breaks:
+    on entity_flagged:on_break breaks bukkit_priority:low:
       - if <context.hanging.flag[on_break].object_type> == List:
         - foreach <context.hanging.flag[on_break]>:
           - inject <[value]>
       - else:
         - inject <context.hanging.flag[on_break]>
-    on entity_flagged:on_item_pickup picks up item:
+    on entity_flagged:on_item_pickup picks up item bukkit_priority:low:
       - if <context.pickup_entity.flag[on_item_pickup].object_type> == List:
         - foreach <context.pickup_entity.flag[on_item_pickup]>:
           - inject <[value]>
       - else:
         - inject <context.pickup_entity.flag[on_item_pickup]>
-    on entity_flagged:on_hunger_change changes food level:
+    on entity_flagged:on_hunger_change changes food level bukkit_priority:low:
       - if <context.entity.flag[on_hunger_change].object_type> == List:
         - foreach <context.entity.flag[on_hunger_change]>:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_hunger_change]>
-    on entity_flagged:on_explode explodes:
+    on entity_flagged:on_explode explodes bukkit_priority:low:
       - if <context.entity.flag[on_explode].object_type> == List:
         - foreach <context.entity.flag[on_explode]>:
           - inject <[value]>
