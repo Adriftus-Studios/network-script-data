@@ -1,2 +1,2 @@
 # Global
-Denizen Scripts used globally across Adriftus
+Denizen Scripts used globally across A
