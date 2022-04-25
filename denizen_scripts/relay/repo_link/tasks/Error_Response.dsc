@@ -1,4 +1,4 @@
-error_responding:
+error_response:
   type: task
   debug: false
   definitions: data
