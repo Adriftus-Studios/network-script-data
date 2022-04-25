@@ -211,4 +211,4 @@ test_spawn_blood_raider_boss_death:
   type: task
   debug: false
   script:
-    - announce "<&c>BOSS DEAD - SPAWN ENCHANTS (PLACEHOLDER)"
+    - announce "<&e>The blood Raiders have lost"
