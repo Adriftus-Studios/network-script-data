@@ -36,11 +36,11 @@ entity_flags:
           - inject <[value]>
       - flag <context.damager> on_next_hit:!
     on entity targets entity_flagged:on_target:
-        - if <context.location.flag[on_target].object_type> == List:
-          - foreach <context.location.flag[on_target]>:
+        - if <context.entity.flag[on_target].object_type> == List:
+          - foreach <context.entity.flag[on_target]>:
             - inject <[value]>
         - else:
-          - inject <context.location.flag[on_target]>
+          - inject <context.entity.flag[on_target]>
     on player kicked for flying flagged:no_fly_kick:
       - determine passively FLY_COOLDOWN:<player.flag_expiration[no_fly_kick].duration_since[<util.time_now>]>
       - determine cancelled
