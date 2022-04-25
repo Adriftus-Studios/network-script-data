@@ -31,7 +31,7 @@ mod_unvanish_task:
     - flag <player> vanished:!
     - flag server vanished_staff:<-:<player>
     - adjust <player> show_to_players
-    - flag player on_item_pickup:<-:vanish_cancel
+    - flag player on_item_pickup:<-:mod_vanish_cancel
     - narrate "<&e>You are no longer <&b>Vanished<&e>."
 
 mod_vanish_events:
