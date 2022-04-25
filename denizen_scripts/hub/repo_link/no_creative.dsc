@@ -8,6 +8,10 @@ herocraft_deny_creative:
 herocraft_command_monitoring:
   type: world
   debug: false
+  data:
+  . ignored:
+  .   chat : true
   events:
     on command permission:adriftus.admin:
-      - bungeerun relay discord_sendMessage "def:A Staff|manager-logs|`<bungee.server>`<&co>`<player.name>` ran command `<context.command> <context.raw_args>`"
+      - if !<script.data_key[data.ignored.<context.command>].exists>:
+      . - bungeerun relay discord_sendMessage "def:A Staff|manager-logs|`<bungee.server>`<&co>`<player.name>` ran command `<context.command> <context.raw_args>`"
