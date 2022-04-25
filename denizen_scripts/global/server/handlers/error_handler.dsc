@@ -5,6 +5,7 @@ error_handler:
     enabled_servers:
       - hub
       - test
+      - herocraft
   events:
     on server start:
       - yaml id:error_handler create
