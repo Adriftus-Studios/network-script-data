@@ -22,7 +22,7 @@ error_handler:
       # % ██ [ verify connection       ] ██
       - define timeout <util.time_now.add[1m]>
       - waituntil <bungee.connected> || <util.time_now.is_after[<[timeout]>]>
-      - if !<bungee.connected> || !<bungee.server.advanced_matches[<script.data_key[data.enabled_servers]>]>:
+      - if !<bungee.connected> || !<bungee.server.advanced_matches_text[<script.data_key[data.enabled_servers]>]>:
         - stop
 
       # % ██ [ collect queue context   ] ██
