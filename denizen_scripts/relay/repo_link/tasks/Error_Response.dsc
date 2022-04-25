@@ -42,7 +42,10 @@ error_response:
         - define description "<[description].include_single[**`<[script]>`** | **`<&lb><[data.script_data.file]><&rb>`** script errors<&co>]>"
         - foreach <[content]> key:line as:message:
           - define description "<[description].include_single[<&co>warning<&co>`Line <[line]>`<&co>]>"
-          - define description <[description].include_single[<[message].parse[strip_color.replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n>]>]>
+          - if !<[message].is_empty>:
+            - define description <[description].include_single[<[message].parse[strip_color.replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n>]>]>
+          - else:
+            - define description "<[description].include_single[<&lt>a:warn:942230068372062239<&gt>**No error message** - Consider providing better context]>"
           #
       - define embed_data.description <[description].separated_by[<n>]>
     - else:
