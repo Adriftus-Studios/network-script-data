@@ -10,7 +10,8 @@ repository_command_handler:
   events:
     on discord slash command name:repository:
       - definemap embed_data:
+          title: A network script data repository
           color: <color[0,254,255]>
-          description: "[`[https://github.com/A-Studio/network-script-data/]`](https://github.com/Adriftus-Studios/network-script-data/)<n>A network script data repository"
+          description: "[`[https://github.com/A-Studio/network-script-data/]`](https://github.com/Adriftus-Studios/network-script-data/)"
 
       - ~discordinteraction reply interaction:<context.interaction> <discord_embed.with_map[<[embed_data]>]>

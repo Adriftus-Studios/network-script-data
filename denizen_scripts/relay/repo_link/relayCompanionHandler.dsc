@@ -1,5 +1,6 @@
 companion_web_handler:
   type: task
+  debug: false
   definitions: query
   script:
     # IP from the web server filtered to show just the numbers
@@ -24,6 +25,7 @@ companion_web_handler:
 
 companion_get_uuid_using_hash:
   type: procedure
+  debug: false
   definitions: hash
   script:
     - foreach <server.flag[Hashes].keys> as:value:
@@ -33,6 +35,7 @@ companion_get_uuid_using_hash:
 
 companion_get_ip_using_hash:
   type: procedure
+  debug: false
   definitions: hash
   script:
     - foreach <server.flag[Hashes].keys> as:value:
@@ -42,6 +45,7 @@ companion_get_ip_using_hash:
 
 companion_get_data_using_hash:
   type: procedure
+  debug: false
   definitions: hash
   script:
     - foreach <server.flag[Hashes].keys> as:value:
@@ -51,6 +55,7 @@ companion_get_data_using_hash:
 
 companion_generate_hash:
   type: task
+  debug: false
   definitions: player|server|ipAddress
   script:
     - if !<server.has_flag[Hashes.<[player].uuid>.companionHash]> :
@@ -62,31 +67,33 @@ companion_generate_hash:
     - bungeerun <[server]> companion_hash_return_print def:<[player].uuid>
 
 companion_hash_expire:
-    type: task
-    definitions: uuid
-    script:
-        - debug debug "Expire hash"
-        - flag server Hashes.<[uuid]>.companionHash:!
-        - flag server Hashes.<[uuid]>.ipAddress:!
-        - flag server Hashes.<[uuid]>.data:!
-        - flag server Hashes.<[uuid]>:!
-        - ~bungeetag server:hub <server.flag[<[uuid]>.currentServer]> save:currentServer
-        - bungeerun <entry[currentServer].result> companion_hash_expire def:<[uuid]>
+  type: task
+  debug: false
+  definitions: uuid
+  script:
+    - debug debug "Expire hash"
+    - flag server Hashes.<[uuid]>.companionHash:!
+    - flag server Hashes.<[uuid]>.ipAddress:!
+    - flag server Hashes.<[uuid]>.data:!
+    - flag server Hashes.<[uuid]>:!
+    - ~bungeetag server:hub <server.flag[<[uuid]>.currentServer]> save:currentServer
+    - bungeerun <entry[currentServer].result> companion_hash_expire def:<[uuid]>
 
 companion_hash_handler:
-    type: world
-    events:
-        on bungee player switches to server:
-            #Uses mock server details
-            - define uuid <context.uuid>
-            - if <server.has_flag[Hashes.<[uuid]>.companionHash]> :
-              - ~bungeetag server:hub <server.flag[<[uuid]>.oldServer]> save:oldServer
-              - bungeerun <entry[oldServer].result> companion_hash_expire def:<[uuid]>
-              - bungeerun <context.server> companion_hash_set def:<[uuid]>|<server.flag[Hashes.<[uuid]>.companionHash]>
-        on bungee player leaves network:
-            - define uuid <context.uuid>
-            - if <server.has_flag[Hashes.<[uuid]>.companionHash]> :
-              - run companion_hash_expire def:<context.uuid>
+  type: world
+  debug: false
+  events:
+    on bungee player switches to server:
+      #Uses mock server details
+      - define uuid <context.uuid>
+      - if <server.has_flag[Hashes.<[uuid]>.companionHash]> :
+        - ~bungeetag server:hub <server.flag[<[uuid]>.oldServer]> save:oldServer
+        - bungeerun <entry[oldServer].result> companion_hash_expire def:<[uuid]>
+        - bungeerun <context.server> companion_hash_set def:<[uuid]>|<server.flag[Hashes.<[uuid]>.companionHash]>
+    on bungee player leaves network:
+      - define uuid <context.uuid>
+      - if <server.has_flag[Hashes.<[uuid]>.companionHash]> :
+        - run companion_hash_expire def:<context.uuid>
 
 companion_data_receive_handler:
   type: task
