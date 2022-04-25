@@ -16,14 +16,15 @@ error_handler:
         - stop
 
       # % ██ [ disable /ex reporting   ] ██
-      - if <[queue].id.starts_with[excommand]>:
-        - stop
+      - stop if:<[queue].id.starts_with[excommand]>
 
       # % ██ [ verify connection       ] ██
       - define timeout <util.time_now.add[1m]>
       - waituntil <bungee.connected> || <util.time_now.is_after[<[timeout]>]>
-      - if !<bungee.connected> || !<bungee.server.advanced_matches_text[<script.data_key[data.enabled_servers]>]>:
-        - stop
+      - stop if:!<bungee.connected>
+
+      # % ██ [ verify enabled          ] ██
+      - stop if:!<bungee.server.advanced_matches_text[<script.data_key[data.enabled_servers]>]>
 
       # % ██ [ collect queue context   ] ██
       - if <[queue].exists>:
@@ -43,9 +44,11 @@ error_handler:
 
       # % ██ [ collect script context  ] ██
       - if <context.script.exists>:
-        - define data.script_data.script <context.script.name>
+        - define data.script_data.script <context.script.name.if_null[invalid]>
         - define data.script_data.line <context.line.if_null[(unknown)]>
         - define data.script_data.file <context.script.filename.after[Denizen]> if:<context.script.filename.exists>
+      - else:
+        - stop
 
       # % ██ [ provide other context   ] ██
       - define data.server <bungee.server>
@@ -74,4 +77,4 @@ error_handler:
       # % ██ [ collect error context   ] ██
       - define data.content <server.flag[error_listening.<[queue].id>]>
 
-      - bungeerun server:relay error_responding def:<[data]>
+      - bungeerun server:relay error_response def:<[data]>
