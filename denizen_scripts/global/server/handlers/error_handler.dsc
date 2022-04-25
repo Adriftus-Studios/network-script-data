@@ -74,4 +74,4 @@ error_handler:
       # % ██ [ collect error context   ] ██
       - define data.content <server.flag[error_listening.<[queue].id>]>
 
-      - bungeerun server:relay error_responding def:<[data]>
+      - bungeerun server:relay error_response def:<[data]>
