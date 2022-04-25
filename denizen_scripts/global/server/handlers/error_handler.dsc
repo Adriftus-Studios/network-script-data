@@ -44,7 +44,7 @@ error_handler:
 
       # % ██ [ collect script context  ] ██
       - if <context.script.exists>:
-        - define data.script_data.script <context.script.name>
+        - define data.script_data.script <context.script.name.if_null[invalid]>
         - define data.script_data.line <context.line.if_null[(unknown)]>
         - define data.script_data.file <context.script.filename.after[Denizen]> if:<context.script.filename.exists>
       - else:
