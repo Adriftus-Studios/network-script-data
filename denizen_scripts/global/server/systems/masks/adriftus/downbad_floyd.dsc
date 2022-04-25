@@ -2,7 +2,7 @@ mask_adriftus_downbad_floyd:
   type: data
   display_data:
     category: Adriftus
-    material: snowball[custom_model_data=2]
+    material: redstone
     display_name: <&6>Adriftus<&co> <&f>Downbad Floyd
     description: "<&e>Downbad Floyd Character"
   mask_data:
