@@ -4,7 +4,7 @@ mask_adriftus_wander_trader:
     category: Adriftus
     material: lead
     display_name: <&6>Adriftus<&co> <&6>Wandering Trader
-    description: "<&e>Downbad Floyd Character"
+    description: "<&e>Wandering Trader Character"
   mask_data:
     permission: adriftus.admin
     id: adriftus_wander_trader
