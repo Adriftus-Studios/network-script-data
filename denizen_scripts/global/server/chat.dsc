@@ -1,13 +1,13 @@
 chat_system_events:
   type: world
-  debug: true
+  debug: false
   events:
     on player chats bukkit_priority:LOWEST:
       - inject chat_system_speak
 
 chat_system_speak:
   type: task
-  debug: true
+  debug: false
   definitions: message
   script:
       - determine passively cancelled
@@ -74,7 +74,7 @@ chat_system_speak:
 
 chat_history_save:
   type: task
-  debug: true
+  debug: false
   definitions: Channel|Message|UUID|sender
   script:
     - if !<[Channel].exists> || !<[Message].exists> || !<[UUID].exists> || !<[sender].exists>:
@@ -85,7 +85,7 @@ chat_history_save:
 
 chat_history_show:
   type: task
-  debug: true
+  debug: false
   script:
     - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
     - define list <list>
@@ -271,7 +271,7 @@ chat_unpause:
 
 chat_send_message:
   type: task
-  debug: true
+  debug: false
   definitions: Channel|Message|UUID|Sender
   script:
       - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
@@ -279,7 +279,7 @@ chat_send_message:
 
 chat_system_flag_manager:
   type: world
-  debug: true
+  debug: false
   events:
     on custom event id:global_player_data_loaded:
       - flag player chat.channels:!
@@ -295,7 +295,7 @@ chat_system_flag_manager:
 
 chat_system_data_manager:
   type: world
-  debug: true
+  debug: false
   events:
     on server start:
       - inject chat_settings_reload
@@ -306,7 +306,7 @@ chat_system_data_manager:
 
 chat_settings_reload:
   type: task
-  debug: true
+  debug: false
   script:
     - if <server.has_file[data/global/chat/channels.yml]>:
       - if <yaml.list.contains[chat_config]>:
