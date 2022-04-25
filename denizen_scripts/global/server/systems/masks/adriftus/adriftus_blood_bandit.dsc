@@ -2,7 +2,7 @@ mask_adriftus_blood_bandit:
   type: data
   display_data:
     category: Adriftus
-    material: stick
+    material: snowball[custom_model_data=2]
     display_name: <&6>Adriftus<&co> <&c>Blood Bandit
     description: "<&c>Scot's Character"
   mask_data:
