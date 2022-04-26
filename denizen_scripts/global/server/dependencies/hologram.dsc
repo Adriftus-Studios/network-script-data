@@ -1,4 +1,4 @@
-hologram:
+hologram_entity:
   type: entity
   debug: false
   entity_type: armor_stand
