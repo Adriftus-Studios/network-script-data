@@ -76,14 +76,14 @@ graves_handler:
       # % ██ [ remove drops, create definitions  ] ██
       - define items <context.drops>
       - determine passively NO_DROPS
-      - define location <player.location.find_blocks[air].within[2].get[1]>
+      - define location <player.location.find_blocks[water|cave_air|air].within[2].get[1]>
       - define duration <script[graves_config].data_key[grave_max_duration]>
       - wait 5t
 
       # % ██ [ find the lowest air block         ] ██
-      - while <[location].below.material.name> == air:
+      - while <[location].below.material.name.advanced_matches_text[water|cave_air|air]>:
         - define location <[location].below>
-      - while <[location].material.name> != air:
+      - while <[location].material.name.advanced_matches_text[water|cave_air|air]>:
         - define location <[location].above>
 
       # % ██ [ create the gravestone             ] ██
