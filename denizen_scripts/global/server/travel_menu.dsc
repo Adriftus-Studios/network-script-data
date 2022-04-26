@@ -85,5 +85,5 @@ travel_menu_inventory:
   type: inventory
   debug: false
   inventory: chest
-  title: <&font[adriftus:travel_menu]><&chr[F808]><&chr[0001]>
+  title: <&a>Travel!
   size: 54
