@@ -62,9 +62,9 @@ error_response:
             - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/<[data.server]>/server/<[data.script_data.file].after[global/server/].replace[<&sp>].with[<&pc>20]>
           - define data.script_data.file_short /<[data.script_data.file_location].after[/plugins/Denizen/scripts/<[data.server]>/]>
 
-        - define data.script_data.formatted_file <&lb>`<&lb><[data.script_data.file_location]><&rb>`<&rb>(<[data.script_data.file_link]>)
+        - define data.script_data.formatted_file **<&lb>`<&lb><[data.script_data.file_short]><&rb>`<&rb>(<[data.script_data.file_link]>)**
 
-        - define description "<[description].include_single[**`<[script]>`** | **`<[data.script_data.formatted_file]>`** script errors<&co>]>"
+        - define description "<[description].include_single[**`<[script]>`** | <[data.script_data.formatted_file]> script errors<&co>]>"
         - foreach <[content]> key:line as:message:
           - define description "<[description].include_single[<&co>warning<&co>`Line <[line]>`<&co>]>"
           - if !<[message].is_empty>:
