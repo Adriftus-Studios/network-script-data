@@ -15,7 +15,7 @@ error_response:
       - define channel <[development_guild].channel[<[data.server]>]>
 
     # % ██ [ check if the thread exists          ] ██
-    - if <[channel].active_threads.is_empty> || <util.time_now.format[MMMM-dd-u].advanced_matches_text[<[channel].active_threads.parse[name]>]>:
+    - if <[channel].active_threads.is_empty> || !<util.time_now.format[MMMM-dd-u].advanced_matches_text[<[channel].active_threads.parse[name]>]>:
       - ~discordcreatethread id:a_bot name:<util.time_now.format[MMMM-dd-u]> parent:<[channel]> save:new_thread
       - define thread <entry[new_thread].created_thread>
     - else:
