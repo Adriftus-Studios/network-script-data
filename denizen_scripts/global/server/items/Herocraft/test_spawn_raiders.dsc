@@ -163,7 +163,7 @@ test_spawn_blood_radier2:
   debug: false
   entity_type: skeleton
   mechanisms:
-    health_data: 250/250
+    health_data: 20/20
     custom_name: <&c>Blood Skeleton
     custom_name_visible: true
   flags:
