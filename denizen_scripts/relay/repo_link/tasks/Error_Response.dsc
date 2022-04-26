@@ -48,7 +48,7 @@ error_response:
             - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/<[data.script_data.file].after[global/server/].replace[<&sp>].with[<&pc>20]><&ns>L<[data.script_data.line]>
           - else:
             - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/<[data.script_data.file].after[global/server/].replace[<&sp>].with[<&pc>20]>
-            - define data.script_data.file_short global/<[data.script_data.file_location].after[/scripts/global/server/]>
+          - define data.script_data.file_short global/<[data.script_data.file_location].after[/scripts/global/server/]>
         ## if it's a test script
         #- else if <[data.server]> == test:
         #  - define data.script_data.file_link https://github.com/Adriftus-Studios/test/blob/main/<[data.script_data.file].after[/plugins/Denizen/scripts/<[data.server]>/].replace[<&sp>].with[<&pc>20]>#L<[data.script_data.line]>
