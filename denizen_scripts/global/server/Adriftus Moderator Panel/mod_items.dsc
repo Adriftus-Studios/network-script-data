@@ -29,6 +29,7 @@ mod_send_item:
   material: ender_pearl
   display name: <&5><&l>Send
   lore:
+    - "<&a>Right Click:"
     - "<&d>Transfer the Player to another Server."
   mechanisms:
     hides: ALL
@@ -49,10 +50,10 @@ mod_spectate_item:
   type: item
   debug: false
   material: spyglass
-  display name: <&b><&l>Teleport
+  display name: <&a><&l>Spectate
   lore:
     - "<&a>Right Click:"
-    - "<&b>Teleport to Player."
+    - "<&a>Spectate Player."
   mechanisms:
     hides: ALL
 
