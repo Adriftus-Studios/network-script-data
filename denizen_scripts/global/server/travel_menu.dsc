@@ -50,6 +50,8 @@ travel_menu_open:
     - foreach <server.worlds> as:world:
       - define display "<&e>Teleport To <&b><[world].name.replace[_].with[<&sp>].to_titlecase>"
       - define server_list:|:<item[grass_block].with[hides=all;display=<[display]>;flag=run_script:travel_menu_to_world;flag=world:<[world]>]>
+    - foreach <script.data_key[data.server_slots_by_count.<[server_list].size>]> as:slot:
+      - inventory set slot:<[slot]> o:<[server_list].get[<[loop_index]>]> d:<[inventory]>
   hub:
     - foreach <script.data_key[data.hub_slots]> key:warp_name as:slots:
       - foreach <[slots]> as:slot:
