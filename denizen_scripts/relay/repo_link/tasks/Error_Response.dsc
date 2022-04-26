@@ -44,27 +44,20 @@ error_response:
 
         # if its a global script
         - if <[data.script_data.file].starts_with[global]>:
-          - if <[data.script_data.line]> != (unknown):
-            - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/<[data.script_data.file].after[global/server/].replace[<&sp>].with[<&pc>20]><&ns>L<[data.script_data.line]>
-          - else:
-            - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/<[data.script_data.file].after[global/server/].replace[<&sp>].with[<&pc>20]>
+          - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/<[data.script_data.file].after[global/server/].replace[<&sp>].with[<&pc>20]>
           - define data.script_data.file_short global/<[data.script_data.file].after[global/server/]>
 
         # if it's a test script
         - else if <[data.server]> == test:
-          - if <[data.script_data.line]> != (unknown):
-            - define data.script_data.file_link https://github.com/Adriftus-Studios/test/blob/main/<[data.script_data.file].after[test/].replace[<&sp>].with[<&pc>20]><&ns>L<[data.script_data.line]>
-          - else:
-            - define data.script_data.file_link https://github.com/Adriftus-Studios/test/blob/main/<[data.script_data.file].after[test/].replace[<&sp>].with[<&pc>20]>
+          - define data.script_data.file_link https://github.com/Adriftus-Studios/test/blob/main/<[data.script_data.file].after[test/].replace[<&sp>].with[<&pc>20]>
           - define data.script_data.file_short /<[data.script_data.file].after[test/]>
         # if it's any other server
         - else:
-          - if <[data.script_data.line]> != (unknown):
-            - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/<[data.server]>/server/<[data.script_data.file].after[/server/].replace[<&sp>].with[<&pc>20]><&ns>L<[data.script_data.line]>
-          - else:
-            - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/<[data.server]>/server/<[data.script_data.file].after[/server/].replace[<&sp>].with[<&pc>20]>
+          - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/<[data.server]>/server/<[data.script_data.file].after[/server/].replace[<&sp>].with[<&pc>20]>
           - define data.script_data.file_short /<[data.script_data.file].after[/server/]>
 
+        - if <[data.script_data.line]> != (unknown):
+          - define data.script_data.file_link <[data.script_data.file_link]><&ns>L<[data.script_data.line]>
         - define data.script_data.formatted_file **<&lb>`<&lb><[data.script_data.file_short]><&rb>`<&rb>(<[data.script_data.file_link]>)**
 
         - define description "<[description].include_single[**`<[script]>`** | <[data.script_data.formatted_file]><&co>]>"
