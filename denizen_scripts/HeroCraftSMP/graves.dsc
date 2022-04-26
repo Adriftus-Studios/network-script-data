@@ -76,7 +76,7 @@ graves_handler:
       # % ██ [ remove drops, create definitions  ] ██
       - define items <context.drops>
       - determine passively NO_DROPS
-      - define location <player.location>
+      - define location <player.location.find_blocks[air].within[2].get[1]>
       - define duration <script[graves_config].data_key[grave_max_duration]>
       - wait 5t
 
