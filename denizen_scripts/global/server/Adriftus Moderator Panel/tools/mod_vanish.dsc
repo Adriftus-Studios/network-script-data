@@ -7,10 +7,10 @@ mod_vanish:
     permission: adriftus.staff
     usage: /vanish
     script:
-        - if <player.has_flag[vanished]>:
-          - run mod_unvanish_task
-        - else:
-          - run mod_vanish_task
+      - if <player.has_flag[vanished]>:
+        - run mod_unvanish_task
+      - else:
+        - run mod_vanish_task
 
 mod_vanish_task:
   type: task
