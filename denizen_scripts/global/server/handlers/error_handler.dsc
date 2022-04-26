@@ -47,7 +47,7 @@ error_handler:
       - if <context.script.exists>:
         - define data.script_data.script <context.script.name.if_null[invalid]>
         - define data.script_data.line <context.line.if_null[(unknown)]>
-        - define data.script_data.file_location <context.script.filename> if:<context.script.filename.exists>
+        - define data.script_data.file_path <context.script.filename> if:<context.script.filename.exists>
       - else:
         - stop
 
