@@ -47,6 +47,7 @@ store_hub_cosmeticShop_titles_inventory:
   debug: false
   title: <&a>Buying <&6>Titles.
   size: 45
+  gui: true
   slots:
     - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
     - [standard_filler] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [standard_filler]
@@ -133,6 +134,7 @@ store_hub_cosmeticShop_bowTrails_inventory:
     debug: false
     title: <&a>Buying <&6>Bow Trails<&e>.
     size: 45
+    gui: true
     slots:
       - [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler]
       - [standard_filler] [standard_filler] [] [standard_filler] [] [standard_filler] [] [standard_filler] [standard_filler]
@@ -175,7 +177,7 @@ store_hub_cosmeticShop_bowtrails_events:
     on player clicks item in store_hub_cosmeticShop_bowTrails_inventory:
       - determine passively cancelled
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
-      - if <context.item> == standard_back_button:
+      - if <context.item.script.name> == standard_filler:
         - inventory open d:store_hub_cosmeticShop
       - if <yaml[global.player.<player.uuid>].contains[bowtrails.unlocked.<context.item.flag[trail]>]||false>:
         - narrate "<&c>You already have unlocked this bow trail."
