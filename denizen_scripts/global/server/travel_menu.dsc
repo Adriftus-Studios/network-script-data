@@ -7,6 +7,8 @@ travel_menu_open:
       crates: 24|25|26
       towny: 29|30|31
       shops: 33|34|35
+      mail_run: 48
+      fishing: 50
     server_slots_by_count:
       1: 32
       2: 30|32
