@@ -42,6 +42,7 @@ travel_menu_open:
       - define lore <yaml[bungee_config].read[servers.<[server]>.description].parsed>
       - define item <item[<yaml[bungee_config].read[servers.<[server]>.material]>]>
       - define network_list:|:<[item].with[hides=all;display=<[display]>;lore=<[lore]>;flag=run_script:travel_menu_to_server;flag=server:<[server]>]>
+    - adjust <[inventory]> title:<&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[0001]>
   # These are specific to the test server
   test:
     - foreach <server.worlds> as:world:
@@ -51,6 +52,7 @@ travel_menu_open:
     - foreach <script.data_key[data.hub_slots]> key:warp_name as:slots:
       - foreach <[slots]> as:slot:
         - inventory set slot:<[slot]> d:<[inventory]> o:<item[hub_warp_<[warp_name]>_icon]>
+    - adjust <[inventory]> title:<[inventory].title><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0002]>
   # This task handles the final building of the inventory
   build_inventory:
     - define network_size <[network_list].size>
