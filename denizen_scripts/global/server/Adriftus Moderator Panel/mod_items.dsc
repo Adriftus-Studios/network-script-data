@@ -1,35 +1,3 @@
-mod_mute_item:
-  type: item
-  debug: false
-  material: jukebox
-  display name: <&2>Mute
-  lore:
-    - "<&a>Right Click:"
-    - "<&6>Mute the Player from Chat."
-  mechanisms:
-    hides: ALL
-
-mod_unmute_item:
-  type: item
-  debug: false
-  material: note_block
-  display name: <&a>Unmute
-  lore:
-    - "<&a>Right Click:"
-    - "<&e>Unmute the Player from Chat."
-  mechanisms:
-    hides: ALL
-
-mod_send_item:
-  type: item
-  debug: false
-  material: ender_pearl
-  display name: <&5><&l>Send
-  lore:
-    - "<&d>Transfer the Player to another Server."
-  mechanisms:
-    hides: ALL
-
 mod_kick_item:
   type: item
   debug: false
@@ -54,6 +22,40 @@ mod_ban_item:
     - ARROW_INFINITE:1
   mechanisms:
     hides: ATTRIBUTES|ENCHANTS
+
+mod_send_item:
+  type: item
+  debug: false
+  material: ender_pearl
+  display name: <&5><&l>Send
+  lore:
+    - "<&a>Right Click:"
+    - "<&d>Transfer the Player to another Server."
+  mechanisms:
+    hides: ALL
+
+mod_teleport_item:
+  type: item
+  debug: false
+  material: feather
+  display name: <&b><&l>Teleport
+  lore:
+    - "<&a>Right Click:"
+    - "<&b>Teleport to Player."
+  mechanisms:
+    hides: ALL
+    custom_model_data: 200
+
+mod_spectate_item:
+  type: item
+  debug: false
+  material: spyglass
+  display name: <&a><&l>Spectate
+  lore:
+    - "<&a>Right Click:"
+    - "<&a>Spectate Player."
+  mechanisms:
+    hides: ALL
 
 mod_player_item:
   type: item

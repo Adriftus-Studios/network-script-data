@@ -15,9 +15,9 @@ mod_spectate_command:
   script:
     - if <player.has_flag[spectateEnabled]> && <context.args.is_empty>:
       - flag player spectateEnabled:!
-      - adjust <player> gamemode:<player.flag[lastGM]>
+      - adjust <player> gamemode:<player.flag[lastGM].if_null[SURVIVAL]>
       - adjust <player> flying:false
-      - teleport <player> <player.flag[lastLocation]>
+      - teleport <player> <player.flag[lastLocation].if_null[<player.bed_spawn>]>
       - narrate "<&7>[<&b>ModSpec<&7>] <&c>Toggled ModSpec." targets:<player>
       - stop
     - if <context.args.is_empty>:
