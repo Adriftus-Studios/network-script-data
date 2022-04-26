@@ -64,7 +64,7 @@ error_response:
 
         - define data.script_data.formatted_file <&lb>`<&lb><[data.script_data.file_location]><&rb>`<&rb>(<[data.script_data.file_link]>)
 
-        - define description "<[description].include_single[**`<[script]>`** | **`<&lb><[data.script_data.file_short]><&rb>`** script errors<&co>]>"
+        - define description "<[description].include_single[**`<[script]>`** | **`<[data.script_data.formatted_file]>`** script errors<&co>]>"
         - foreach <[content]> key:line as:message:
           - define description "<[description].include_single[<&co>warning<&co>`Line <[line]>`<&co>]>"
           - if !<[message].is_empty>:
