@@ -5,6 +5,7 @@ error_handler:
     enabled_servers:
       - hub
       - test
+      - herocraft
   events:
     on server start:
       - yaml id:error_handler create
@@ -29,7 +30,7 @@ error_handler:
       # % ██ [ collect queue context   ] ██
       - if <[queue].exists>:
         - define data.queue <[queue].id>
-        - define data.definition_map <[queue].definition_map> if:!<[queue].definitions.is_empty>
+        - define data.definition_map <[queue].definition_map> if:!<[queue].definition_map.is_empty>
 
       # % ██ [ collect player context  ] ██
         - if <[queue].player.exists>:
@@ -46,7 +47,7 @@ error_handler:
       - if <context.script.exists>:
         - define data.script_data.script <context.script.name.if_null[invalid]>
         - define data.script_data.line <context.line.if_null[(unknown)]>
-        - define data.script_data.file <context.script.filename.after[Denizen]> if:<context.script.filename.exists>
+        - define data.script_data.file_path <context.script.filename> if:<context.script.filename.exists>
       - else:
         - stop
 

@@ -23,19 +23,17 @@ graves_config:
     enabled: true
     # This is the message displayed by the hologram
     # Any Denizen tags can be used here, and any context from "on player dies" event is available.
-    # Color codes will automatically be parsed.
-    display: "&c<player.name>'s Gravestone."
+    display: <&c><player.name><&sq>s Gravestone
     # enabling the timer will show how long till a head naturally pops
     # This creates a second hologram.
     timer: true
-    # The timer display message can contains colors
     # You can also use any tags
     # <[time]> is the placeholder for the time left.
-    timer_display: "&eTime Left: &b<[time]>"
+    timer_display: <&e>Time Left<&co> <&b><[time]>
   # Below are the messages output by the script
   messages:
-    not_your_grave: "&cYou cannot break someone else's gravestone."
-    retrieved_grave: "&aYou have retrieved your gravestone."
+    not_your_grave: <&c>You cannot break someone else<&sq>s gravestone.
+    retrieved_grave: <&a>You have retrieved your gravestone.
 
 hologram:
   type: entity
@@ -57,7 +55,7 @@ graves_handler:
       #- adjust <[truthy_holograms].parse[flag[grave.hologram.timer]]> custom_name:<[truthy_holograms].parse[flag_expiration[grave.hologram.timer].from_now.formatted]>
       - foreach <server.flag[graves].filter_tag[<[filter_value].flag[grave.hologram.timer].is_truthy>]> as:grave:
         - define time <[grave].flag_expiration[grave]>
-        - adjust <[grave].flag[grave.hologram.timer]> custom_name:<script[graves_config].data_key[hologram.timer_display].parse_color.parsed>
+        - adjust <[grave].flag[grave.hologram.timer]> custom_name:<script[graves_config].parsed_key[hologram.timer_display]>
 
     after delta time secondly every:10:
       # % ██ [ remove expired graves             ] ██
@@ -103,19 +101,19 @@ graves_handler:
 
       # % ██ [ create the hologram               ] ██
       - if <script[graves_config].data_key[hologram.enabled]>:
-        - spawn hologram[custom_name=<script[graves_config].data_key[hologram.display].parse_color.parsed>] <[location].center.above[0.75]> save:player_name
+        - spawn hologram[custom_name=<script[graves_config].parsed_key[hologram.display]>] <[location].center.above[0.75]> save:player_name
         - flag <[location]> grave.hologram.player_name_display:<entry[player_name].spawned_entity> expire:<[duration]>
 
       # % ██ [ create the hologram timer         ] ██
       - if <script[graves_config].data_key[hologram.timer]>:
         - define time <duration[<[duration]>].formatted>
-        - spawn hologram[custom_name=<script[graves_config].data_key[hologram.timer_display].parse_color.parsed>] <[location].center.above[0.5]> save:timer_display
+        - spawn hologram[custom_name=<script[graves_config].parsed_key[hologram.timer_display]>] <[location].center.above[0.5]> save:timer_display
         - flag <[location]> grave.hologram.timer:<entry[timer_display].spawned_entity> expire:<[duration]>
 
     on player breaks player_head location_flagged:grave bukkit_priority:LOWEST:
       # % ██ [ verify owner breaking grave       ] ██
       - if <context.location.flag[grave.owner].uuid> != <player.uuid>:
-        - narrate <script[graves_config].data_key[messages.not_your_grave].parse_color.parsed>
+        - narrate <script[graves_config].parsed_key[messages.not_your_grave]>
         - determine cancelled
 
       # % ██ [ remove the holograms              ] ██
@@ -124,7 +122,7 @@ graves_handler:
 
       # % ██ [ give the items back to the player ] ██
       - give <context.location.flag[grave.items]>
-      - narrate <script[graves_config].data_key[messages.retrieved_grave].parse_color.parsed>
+      - narrate <script[graves_config].parsed_key[messages.retrieved_grave]>
       - flag <context.location> grave:!
       - flag server graves.<context.location>:!
       - determine nothing

@@ -3,25 +3,25 @@ error_response:
   debug: false
   definitions: data
   script:
+    # % ██ [ define base definitions             ] ██
     - define development_guild <discord_group[a_bot,631199819817549825]>
     - define embed <discord_embed>
 
-    # check if channel exists
+    # % ██ [ check if the channel exists         ] ██
     - if !<[data.server].advanced_matches_text[<[development_guild].channels.parse[name]>]>:
       - ~discordcreatechannel id:a_bot group:<[development_guild]> name:<[data.server]> "description:Error reporting for <[data.server]>" type:text category:634752968759050270 save:new_channel
       - define channel <entry[new_channel].channel>
     - else:
       - define channel <[development_guild].channel[<[data.server]>]>
 
-    - if <[channel].active_threads.is_empty>:
-      # || <[channel].active_threads>
+    # % ██ [ check if the thread exists          ] ██
+    - if <[channel].active_threads.is_empty> || <util.time_now.format[MMMM-dd-u].advanced_matches_text[<[channel].active_threads.parse[name]>]>:
       - ~discordcreatethread id:a_bot name:<util.time_now.format[MMMM-dd-u]> parent:<[channel]> save:new_thread
       - define thread <entry[new_thread].created_thread>
     - else:
       - define thread <[channel].active_threads.highest[id]>
 
     - define embed_data.color 0,254,255
-        #description: "**`[<[script_data].get[name]>]` | `[<[script_data].get[file].after_last[/].if_null[bork]>]` Script Errors**<&co><n><[errors].keys.parse_tag[:warning:**`<[parse_value]>`**<&co><n><&gt> <[errors].get[<[parse_value]>].parse[replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n><&gt> ]>].separated_by[<n><n>].strip_color><n><n>**File Location**: `/<[script_data].get[file].after[web]>`" 
 
     - if !<[data.rate_limited].exists>:
       - define embed_data "<[embed_data].with[footer].as[Script Error Count (*/hr)<&co> <[data.error_rate]>]>"
@@ -36,17 +36,44 @@ error_response:
       - define embed "<[embed].add_inline_field[player uuid].value[`<[data.player_data.uuid]>`]>"
 
     - if <[data.content].exists>:
-    #| map@[error_script=map@[Line_82=li@intentional error|]]
       - define description <list>
       - foreach <[data.content]> key:script as:content:
-        - define description "<[description].include_single[**`<[script]>`** | **`<&lb><[data.script_data.file]><&rb>`** script errors<&co>]>"
+
+        # define the file and the file_link
+        - define data.script_data.file <[data.script_data.file_path].after[/plugins/Denizen/scripts/]>
+
+        # if its a global script
+        - if <[data.script_data.file].starts_with[global]>:
+          - if <[data.script_data.line]> != (unknown):
+            - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/<[data.script_data.file].after[global/server/].replace[<&sp>].with[<&pc>20]><&ns>L<[data.script_data.line]>
+          - else:
+            - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/<[data.script_data.file].after[global/server/].replace[<&sp>].with[<&pc>20]>
+          - define data.script_data.file_short global/<[data.script_data.file].after[global/server/]>
+
+        # if it's a test script
+        - else if <[data.server]> == test:
+          - if <[data.script_data.line]> != (unknown):
+            - define data.script_data.file_link https://github.com/Adriftus-Studios/test/blob/main/<[data.script_data.file].after[test/].replace[<&sp>].with[<&pc>20]><&ns>L<[data.script_data.line]>
+          - else:
+            - define data.script_data.file_link https://github.com/Adriftus-Studios/test/blob/main/<[data.script_data.file].after[test/].replace[<&sp>].with[<&pc>20]>
+          - define data.script_data.file_short /<[data.script_data.file].after[test/]>
+        # if it's any other server
+        - else:
+          - if <[data.script_data.line]> != (unknown):
+            - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/<[data.server]>/server/<[data.script_data.file].after[/server/].replace[<&sp>].with[<&pc>20]><&ns>L<[data.script_data.line]>
+          - else:
+            - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/<[data.server]>/server/<[data.script_data.file].after[/server/].replace[<&sp>].with[<&pc>20]>
+          - define data.script_data.file_short /<[data.script_data.file].after[/server/]>
+
+        - define data.script_data.formatted_file **<&lb>`<&lb><[data.script_data.file_short]><&rb>`<&rb>(<[data.script_data.file_link]>)**
+
+        - define description "<[description].include_single[**`<[script]>`** | <[data.script_data.formatted_file]><&co>]>"
         - foreach <[content]> key:line as:message:
           - define description "<[description].include_single[<&co>warning<&co>`Line <[line]>`<&co>]>"
           - if !<[message].is_empty>:
             - define description <[description].include_single[<[message].parse[strip_color.replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n>]>]>
           - else:
-            - define description "<[description].include_single[<&lt>a:warn:942230068372062239<&gt>**No error message** - Consider providing better context]>"
-          #
+            - define description "<[description].include_single[<&lt>a:warn:942230068372062239<&gt>**No error message** - Consider providing better context.]>"
       - define embed_data.description <[description].separated_by[<n>]>
     - else:
       - define embed_data.description "No context provided"
