@@ -174,7 +174,7 @@ store_hub_cosmeticShop_bowtrails_events:
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - inventory open d:store_hub_cosmeticShop
 
-    on player clicks item in store_hub_cosmeticShop_bowTrails_inventory:
+    on player clicks !standard_filler in store_hub_cosmeticShop_bowTrails_inventory:
       - determine passively cancelled
       - playsound <player> sound:UI_BUTTON_CLICK volume:0.6 pitch:1.4
       - if <context.item.script.name> == standard_filler:
