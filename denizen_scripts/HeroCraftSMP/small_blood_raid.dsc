@@ -22,7 +22,7 @@ small_blood_raid_event:
   type: world
   debug: false
   events:
-    on player right clicks *bed bukkit_priority:HIGHEST:
+    on player enters bed bukkit_priority:LOWEST:
       - if <context.location.has_town> && <context.location.town.has_flag[blood_raids_enabled]>:
         - if !<context.location.town.has_flag[blood_raid]> && <util.random_chance[10]>:
           - determine passively cancelled
