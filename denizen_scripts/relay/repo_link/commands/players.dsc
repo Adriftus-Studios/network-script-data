@@ -27,7 +27,7 @@ players_command_handler:
       - else:
         - define players <map>
         - foreach <bungee.list_servers> as:server:
-          - ~bungeetag server:<context.options.first> <server.online_players.parse[name]> save:request
+          - ~bungeetag server:<[server]> <server.online_players.parse[name]> save:request
           - define players <entry[request].result>
           - if <[players].is_empty>:
             - foreach next
