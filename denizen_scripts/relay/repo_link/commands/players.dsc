@@ -32,7 +32,7 @@ players_command_handler:
           - if <[players].is_empty>:
             - foreach next
           - define players <[players].with[<[server]>].as[<[players]>]>
-          - define embed "<[embed].add_inline_field[**<context.option.get[server]>**<n>`(<[players].size>)`].value[```md<n>- <[players].separated_by[<n>- ]>```]>"
+          - define embed "<[embed].add_inline_field[**<[server]>**<n>`(<[players].size>)`].value[```md<n>- <[players].separated_by[<n>- ]>```]>"
         - if <[players].is_empty>:
           - define embed "<[embed].with[description].as[No players online.]>"
 
