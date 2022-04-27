@@ -83,7 +83,7 @@ graves_handler:
       # % ██ [ find the lowest air block         ] ██
       - while <[location].below.material.name.advanced_matches_text[water|cave_air|air]>:
         - define location <[location].below>
-      - while <[location].material.name.advanced_matches_text[water|cave_air|air]>:
+      - while !<[location].material.name.advanced_matches_text[water|cave_air|air]>:
         - define location <[location].above>
 
       # % ██ [ create the gravestone             ] ██
