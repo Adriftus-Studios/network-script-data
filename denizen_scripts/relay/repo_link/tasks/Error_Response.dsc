@@ -15,7 +15,7 @@ error_response:
       - define channel <[development_guild].channel[<[data.server]>]>
 
     # % ██ [ check if the thread exists          ] ██
-    - if <[channel].active_threads.is_empty> || <util.time_now.format[MMMM-dd-u].advanced_matches_text[<[channel].active_threads.parse[name]>]>:
+    - if <[channel].active_threads.is_empty> || !<util.time_now.format[MMMM-dd-u].advanced_matches_text[<[channel].active_threads.parse[name]>]>:
       - ~discordcreatethread id:a_bot name:<util.time_now.format[MMMM-dd-u]> parent:<[channel]> save:new_thread
       - define thread <entry[new_thread].created_thread>
     - else:
@@ -72,7 +72,7 @@ error_response:
       - define embed_data.description "No context provided"
 
     - define embed <[embed].with_map[<[embed_data]>]>
-    - define embed <[embed].add_field[Definitions<&co>].value[```yml<n><[data.definition_map].proc[object_formatting].strip_color.replace[`].with[<&sq>]><n>```]> if:!<[data.definition_map].is_empty>
+    - define embed <[embed].add_field[Definitions<&co>].value[```yml<n><[data.definition_map].proc[object_formatting].strip_color.replace[`].with[<&sq>]><n>```]> if:!<[data.definition_map].is_empty.if_null[true]>
 
 
     - ~discordmessage id:a_bot channel:<[thread]> <[embed]>

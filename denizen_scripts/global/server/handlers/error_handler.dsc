@@ -11,6 +11,7 @@ error_handler:
       - yaml id:error_handler create
 
     on script generates error:
+      - announce to_console "ERROR CAPTURED"
     # % ██ [ disable headless queues   ] ██
       - define queue <context.queue.if_null[invalid]>
       - if <[queue]> == invalid:

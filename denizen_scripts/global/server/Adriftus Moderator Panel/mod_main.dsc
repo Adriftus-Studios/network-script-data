@@ -1,6 +1,6 @@
 # -- TODO
+# - Add pagination to online players panel
 # - Implement IP Bans
-# - Review list of infractions
 
 # -- /mod - Adriftus Moderator Panel
 mod_command:
@@ -66,6 +66,13 @@ amp_command:
   usage: /amp
   script:
     - narrate "<&6>Adriftus <&e>Moderator Panel"
-    - narrate "<&f>Version 3.0.2 - 2022-04-23"
+    - narrate "<&f>Version 3.1.0 - 2022-04-26"
     - narrate "<&f>Scripted by <&b>Kyu#5957"
-    - narrate "<&f>Channel <&b>#action-log"
+    - narrate "<&f>Channel <proc[msg_url].context[<script[amp_url].parsed_key[hover]>|<script[amp_url].parsed_key[text]>|<script[amp_url].data_key[url]>]>"
+
+# -- /amp - URL Data
+amp_url:
+  type: data
+  url: https://discord.com/channels/626078288556851230/715731482978812014
+  hover: "<&e>View the Action Log."
+  text: <&b>#action-log
