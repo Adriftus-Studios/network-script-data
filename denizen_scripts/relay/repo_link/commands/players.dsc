@@ -5,7 +5,7 @@ players_command_create:
     - definemap options:
         1:
           type: string
-          name: Server
+          name: server
           description: Specifies a server to check for players
           required: false
 
