@@ -48,7 +48,7 @@ graves_handler:
   type: world
   debug: false
   events:
-    after delta time secondly:
+    after delta time secondly server_flagged:graves:
       # % ██ [ update grave timers               ] ██
       # todo : test this snippet to replace the foreach
       #- define truthy_holograms <server.flag[graves].filter_tag[<[filter_value].flag[grave.hologram.timer].is_truthy>]>
@@ -96,8 +96,8 @@ graves_handler:
       - definemap grave:
           items: <[items]>
           owner: <player>
-      - flag server graves.<[location]> expire:<[duration]>
       - flag <[location]> grave:<[grave]> expire:<[duration]>
+      - flag server graves.<[location]> expire:<[duration]>
 
       # % ██ [ create the hologram               ] ██
       - if <script[graves_config].data_key[hologram.enabled]>:
