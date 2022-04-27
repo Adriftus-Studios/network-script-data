@@ -23,7 +23,7 @@ players_command_handler:
       - if !<context.options.is_empty>:
         - ~bungeetag server:<context.options.first> <server.online_players.parse[name]> save:request
         - define players <entry[request].result>
-        - define embed "<[embed].with[description].as[**<context.options.get[server]>** `(<[players].size>)`<n>```md<n>- <[players].separated_by[<n>- ]>```]>"
+        - define embed "<[embed].with[description].as[**<context.options.get[server].to_titlecase>** `(<[players].size>)`<n>```md<n>- <[players].separated_by[<n>- ]>```]>"
 
       - else:
         - foreach <bungee.list_servers> as:server:
@@ -31,7 +31,7 @@ players_command_handler:
           - define players <entry[request].result>
           - if <[players].is_empty>:
             - foreach next
-          - define embed "<[embed].add_inline_field[**<[server]>** `(<[players].size>)`].value[```md<n>- <[players].separated_by[<n>- ]>```]>"
+          - define embed "<[embed].add_inline_field[**<[server].to_titlecase>** `(<[players].size>)`].value[```md<n>- <[players].separated_by[<n>- ]>```]>"
         - if <[players].is_empty>:
           - define embed "<[embed].with[description].as[No players online.]>"
 
