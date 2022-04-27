@@ -16,23 +16,22 @@ players_command_handler:
   debug: true
   events:
     on discord slash command name:players:
+      - ~discordinteraction defer interaction:<context.interaction>
       - define embed <discord_embed.with[color].as[<color[0,254,255]>]>
       - define description <list>
 
       - if !<context.options.is_empty>:
         - ~bungeetag server:<context.options.first> <server.online_players.parse[name]> save:request
         - define players <entry[request].result>
-        - define embed "<[embed].with[description].as[**<context.options.get[server]>**<n>`(<[players].size>)`<n>```md<n>- <[players].separated_by[<n>- ]>```]>"
+        - define embed "<[embed].with[description].as[**<context.options.get[server]>** `(<[players].size>)`<n>```md<n>- <[players].separated_by[<n>- ]>```]>"
 
       - else:
-        - define players <map>
         - foreach <bungee.list_servers> as:server:
           - ~bungeetag server:<[server]> <server.online_players.parse[name]> save:request
           - define players <entry[request].result>
           - if <[players].is_empty>:
             - foreach next
-          - define players <[players].with[<[server]>].as[<[players]>]>
-          - define embed "<[embed].add_inline_field[**<[server]>**<n>`(<[players].size>)`].value[```md<n>- <[players].separated_by[<n>- ]>```]>"
+          - define embed "<[embed].add_inline_field[**<[server]>** `(<[players].size>)`].value[```md<n>- <[players].separated_by[<n>- ]>```]>"
         - if <[players].is_empty>:
           - define embed "<[embed].with[description].as[No players online.]>"
 
