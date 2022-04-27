@@ -64,5 +64,11 @@ ex_command_handler:
         - execute as_server "ex <[Command].unescaped>"
 
     # % ██ [ Parse Tags                            ] ██
-      - define embed "<[embed].with[description].as[<&lt>a:checc:901758512420503572<&gt> Executed command: `/ex <[command].unescaped.replace[`].with[']>`]>"
+      - define command_formatted <[command].unescaped.replace[`].with[']>
+      - if "!<[command_formatted].contains_text[ ]>" && <[command_formatted].starts_with[<&dq>]> && <[command_formatted].ends_with[<&dq>]>:
+        - define embed "<[embed].with[description].as[<&lt>a:checc:901758512420503572<&gt> Executed command: `/ex <[command_formatted]>`<n><&co>warning<&co>Note<&co> Pointless quotes in command;<n>`<[command_formatted]>`<n>can just be<&co><&n>`<[command_formatted].after[<&dq>].before_last[<&dq>]>]>`"
+      - if <[command_formatted].contains_text[<&at>]>:
+        - define embed "<[embed].with[description].as[<&lt>a:checc:901758512420503572<&gt> Executed command: `/ex <[command_formatted]>`<n><&co>warning<&co>Note<&co> Raw object notation detected; always avoid erroneous parsing.]>`"
+      - else:
+        - define embed "<[embed].with[description].as[<&lt>a:checc:901758512420503572<&gt> Executed command: `/ex <[command_formatted]>`]>"
       - ~discordinteraction reply interaction:<context.interaction> <[embed]>
