@@ -8,6 +8,7 @@ fishing_minigame_start:
     type: task
     definitions: player
     script:
+        - flag <[player]> minigame.active
         - flag <[player]> fishingminigame.active:true
         - flag <[player]> fishingminigame.savedinventory:<[player].inventory.map_slots>
         - if !<[player].has_flag[fishingminigame.bucket]>:
@@ -58,6 +59,7 @@ fishing_minigame_stop:
             - flag <player> fishing_minigame_playing_music:!
         - flag server fishingminingame.activeplayers:<server.flag[fishingminingame.activeplayers].deduplicate>
         - flag server fishingminingame.activeplayers:<-:<[player]>
+        - flag <[player]> minigame.active:!
 
 # % ██ [ Task called when bucket is clicked ] ██
 fishing_minigame_open_bucket:
