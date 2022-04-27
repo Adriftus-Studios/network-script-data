@@ -20,7 +20,11 @@ players_command_handler:
       - define embed <discord_embed.with[color].as[<color[0,254,255]>]>
       - define players <list>
 
-      - foreach <context.options.if_null[<bungee.list_servers>]> as:server:
+      - if <context.options.is_empty.if_null[true]>:
+        - define servers <bungee.list_servers>
+      - else:
+        - define servers <context.options>
+      - foreach <[servers]> as:server:
         - ~bungeetag server:<[server]> <server.online_players.parse[name]> save:request
         - define players <entry[request].result>
         - if <[players].is_empty>:
