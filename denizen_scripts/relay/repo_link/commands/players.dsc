@@ -18,7 +18,7 @@ players_command_handler:
     on discord slash command name:players:
       - ~discordinteraction defer interaction:<context.interaction>
       - define embed <discord_embed.with[color].as[<color[0,254,255]>]>
-      - define description <list>
+      - define players <list>
 
       - foreach <context.options.if_null[<bungee.list_servers>]> as:server:
         - ~bungeetag server:<[server]> <server.online_players.parse[name]> save:request
@@ -26,6 +26,7 @@ players_command_handler:
         - if <[players].is_empty>:
           - foreach next
         - define embed "<[embed].add_inline_field[**<[server].to_titlecase>** `(<[players].size>)`].value[```md<n>- <[players].separated_by[<n>- ]>```]>"
+
       - if <[players].is_empty>:
         - define embed "<[embed].with[description].as[No players online.]>"
 
