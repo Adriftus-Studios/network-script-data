@@ -13,7 +13,7 @@ players_command_create:
 
 players_command_handler:
   type: world
-  debug: false
+  debug: true
   events:
     on discord slash command name:players:
       - define embed <discord_embed.with[color].as[<color[0,254,255]>]>
@@ -22,7 +22,7 @@ players_command_handler:
       - if !<context.options.is_empty>:
         - ~bungeetag server:<context.options.first> <server.online_players.parse[name]> save:request
         - define players <entry[request].result>
-        - define embed "<[embed].with[description].as[**<context.option.get[server]>**<n>`(<[players].size>)`<n>```md<n>- <[players].separated_by[<n>- ]>```]>"
+        - define embed "<[embed].with[description].as[**<context.options.get[server]>**<n>`(<[players].size>)`<n>```md<n>- <[players].separated_by[<n>- ]>```]>"
 
       - else:
         - define players <map>
