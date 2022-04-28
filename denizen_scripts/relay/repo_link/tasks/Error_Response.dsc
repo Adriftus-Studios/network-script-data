@@ -21,60 +21,90 @@ error_response:
     - else:
       - define thread <[channel].active_threads.highest[id]>
 
+    # % ██ [ construct base embed content        ] ██
     - define embed_data.color 0,254,255
 
+    # % ██ [ construct footer, check ratelimits  ] ██
     - if !<[data.rate_limited].exists>:
       - define embed_data "<[embed_data].with[footer].as[Script Error Count (*/hr)<&co> <[data.error_rate]>]>"
     - else:
       - define embed_data "<[embed_data].with[footer].as[<&lb>Rate-limited<&rb> Script error count (*/hr)<&co> <[data.error_rate]>]>"
       - define embed_data <[embed_data].with[footer_icon].as[https://cdn.discordapp.com/emojis/901634983867842610.gif?size=56&quality=lossless]>
 
+    # % ██ [ construct player content            ] ██
     - if <[data.player_data].exists>:
       - define embed_data.author_name "Player Attached<&co> <[data.player_data.name]>"
       - define embed_data.author_icon_url https://crafatar.com/avatars/<[data.player_data.uuid].replace[-]>
       - define embed "<[embed].add_inline_field[player name].value[`<[data.player_data.name]>`]>"
       - define embed "<[embed].add_inline_field[player uuid].value[`<[data.player_data.uuid]>`]>"
 
+    # % ██ [ construct error content             ] ██
     - if <[data.content].exists>:
       - define description <list>
+      - define snipped false
       - foreach <[data.content]> key:script as:content:
+        # % ██ [ check for content snip          ] ██
+        - if !<[snipped].is_truthy>:
+          - foreach stop
 
-        # define the file and the file_link
+        # % ██ [ define the file and link        ] ██
         - define data.script_data.file <[data.script_data.file_path].after[/plugins/Denizen/scripts/]>
 
-        # if its a global script
+        # % ██ [ format global scripts           ] ██
         - if <[data.script_data.file].starts_with[global]>:
           - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/<[data.script_data.file].after[global/server/].replace[<&sp>].with[<&pc>20]>
           - define data.script_data.file_short global/<[data.script_data.file].after[global/server/]>
 
-        # if it's a test script
+        # % ██ [ format test scripts             ] ██
         - else if <[data.server]> == test:
           - define data.script_data.file_link https://github.com/Adriftus-Studios/test/blob/main/<[data.script_data.file].after[test/].replace[<&sp>].with[<&pc>20]>
           - define data.script_data.file_short /<[data.script_data.file].after[test/]>
-        # if it's any other server
+
+        # % ██ [ format all other scripts        ] ██
         - else:
           - define data.script_data.file_link https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/<[data.server]>/server/<[data.script_data.file].after[/server/].replace[<&sp>].with[<&pc>20]>
           - define data.script_data.file_short /<[data.script_data.file].after[/server/]>
 
+        # % ██ [ format link if lines evident    ] ██
         - if <[data.script_data.line]> != (unknown):
           - define data.script_data.file_link <[data.script_data.file_link]><&ns>L<[data.script_data.line]>
         - define data.script_data.formatted_file **<&lb>`<&lb><[data.script_data.file_short]><&rb>`<&rb>(<[data.script_data.file_link]>)**
 
+        # % ██ [ add error content               ] ██
         - define description "<[description].include_single[**`<[script]>`** | <[data.script_data.formatted_file]><&co>]>"
         - foreach <[content]> key:line as:message:
-          - define description "<[description].include_single[<&co>warning<&co>`Line <[line]>`<&co>]>"
+          - define error_content "<list_single[<&co>warning<&co>`Line <[line]>`<&co>]>"
           - if !<[message].is_empty>:
-            - define description <[description].include_single[<[message].parse[strip_color.replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n>]>]>
+            - define error_content <[error_content].include_single[<[message].parse[strip_color.replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n>]>]>
           - else:
-            - define description "<[description].include_single[<&lt>a:warn:942230068372062239<&gt>**No error message** - Consider providing better context.]>"
-      - define embed_data.description <[description].separated_by[<n>]>
+            - define error_content "<[error_content].include_single[<&lt>a:warn:942230068372062239<&gt>**No error message** - Consider providing better context.]>"
+
+          # % ██ [ check for description limit   ] ██
+          - if <[description].include[<[error_content]>].separated_by[<n>].length> < 4000:
+            - define description <[description].include[<[error_content]>]>
+          - else:
+            - define description "<[description].include_single[<&lt>a:warn:942230068372062239<&gt>**Snipped error count** - consider minimizing erroneous output.]>"
+            - define snipped true
+            - foreach stop
+
+    # % ██ [ construct description content     ] ██
+      - define embed <[embed].with[description].as[<[description].separated_by[<n>]>]>
     - else:
-      - define embed_data.description "No context provided"
+      - define embed "<[embed].with[description].as[<&lt>a:warn:942230068372062239<&gt>**No error content** - Consider providing better context.]>"
 
+    # % ██ [ construct definitions content       ] ██
+    - if !<[data.definition_map].is_empty.if_null[true]>:
+      - define definition_content <[data.definition_map].proc[object_formatting].strip_color.replace[`].with[<&sq>]>
+      - if <[definition_content].length> < 950:
+        - define definition_content ```yml<n><[definition_content]><n>```
+      - else:
+        - define definition_content ```yml<n><[definition_content].substring[0,950].before_last[<n>]><n>⚠**Snipped!**```
+      - define embed <[embed].add_field[Definitions<&co>].value[<[definition_content]>]>
+
+    # % ██ [ complete embed content              ] ██
     - define embed <[embed].with_map[<[embed_data]>]>
-    - define embed <[embed].add_field[Definitions<&co>].value[```yml<n><[data.definition_map].proc[object_formatting].strip_color.replace[`].with[<&sq>]><n>```]> if:!<[data.definition_map].is_empty.if_null[true]>
 
-
+    # % ██ [ send embed                          ] ██
     - ~discordmessage id:a_bot channel:<[thread]> <[embed]>
 
 error_formatter:
