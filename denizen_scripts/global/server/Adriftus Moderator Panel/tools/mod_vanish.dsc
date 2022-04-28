@@ -10,16 +10,18 @@ mod_vanish:
       - if <player.has_flag[vanished]>:
         - run mod_unvanish_task
       - else:
-        - run mod_vanish_task
+        - run mod_vanish_task def:true
 
 mod_vanish_task:
   type: task
   debug: false
+  definitions: flag
   script:
     - flag <player> vanished
     - flag server vanished_staff:->:<player>
     - adjust <player> hide_from_players
-    - flag player on_item_pickup:->:mod_vanish_cancel
+    - if <[flag]>:
+      - flag player on_item_pickup:->:mod_vanish_cancel
     - narrate "<&e>You are now <&b>Vanished<&e>."
     - foreach <server.online_players.filter[has_permission[adriftus.staff]].exclude[<player>]>:
       - adjust <[value]> show_entity:<player>
@@ -40,7 +42,7 @@ mod_vanish_events:
   events:
     on player joins:
       - if <player.has_flag[vanished]>:
-        - run mod_vanish_task
+        - run mod_vanish_task def:false
       - if <player.has_permission[adriftus.staff]>:
         - foreach <server.flag[vanished_staff].exclude[<player>]>:
           - adjust <player> show_entity:<[value]>
