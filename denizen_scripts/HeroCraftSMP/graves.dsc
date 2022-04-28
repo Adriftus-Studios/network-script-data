@@ -98,6 +98,10 @@ graves_handler:
           owner: <player>
       - flag <[location]> grave:<[grave]> expire:<[duration]>
       - flag server graves.<[location]> expire:<[duration]>
+      - flag <[location]> on_water_spreads:cancel
+      - flag <[location]> on_break:location_remove_flags
+      - flag <[location]> remove_flags:|:on_water_spreads|on_break
+
 
       # % ██ [ create the hologram               ] ██
       - if <script[graves_config].data_key[hologram.enabled]>:
