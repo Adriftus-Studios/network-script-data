@@ -62,3 +62,10 @@ block_properties:
             - inject <[value]>
         - else:
           - inject <context.location.flag[on_liquid_spreads]>
+    on liquid spreads:
+      - if <context.destination.has_flag[on_liquid_spreads]>:
+        - if <context.destination.flag[on_liquid_spreads].object_type> == List:
+          - foreach <context.destination.flag[on_liquid_spreads]>:
+            - inject <[value]>
+        - else:
+          - inject <context.destination.flag[on_liquid_spreads]>
