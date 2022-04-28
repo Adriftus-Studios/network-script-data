@@ -54,3 +54,9 @@ item_flags:
             - inject <[value]>
         - else:
           - inject <context.entity.item.flag[on_item_drop]>
+    on entity shoots item_flagged:on_item_shot:
+      - if <context.item.flag[on_item_shot].object_type> == List:
+        - foreach <context.item.flag[on_item_shot]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[on_item_shot]>
