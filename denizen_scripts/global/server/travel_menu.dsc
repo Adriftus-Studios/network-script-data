@@ -92,4 +92,5 @@ travel_menu_inventory:
   debug: false
   inventory: chest
   title: <&a>Travel!
+  gui: true
   size: 54

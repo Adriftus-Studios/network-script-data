@@ -4,6 +4,7 @@ warps_main_command:
     description: A command used to access warps created around the hub
     usage: /warp
     debug: false
+    permission: adriftus.staff
     aliases:
     - warps
     tab completions:

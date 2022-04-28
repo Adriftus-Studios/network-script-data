@@ -31,7 +31,7 @@ error_handler:
       # % ██ [ collect queue context   ] ██
       - if <[queue].exists>:
         - define data.queue <[queue].id>
-        - define data.definition_map <[queue].definition_map> if:!<[queue].definition_map.is_empty>
+        - define data.definition_map <[queue].definition_map> if:!<[queue].definition_map.is_empty.if_null[true]>
 
       # % ██ [ collect player context  ] ██
         - if <[queue].player.exists>:
