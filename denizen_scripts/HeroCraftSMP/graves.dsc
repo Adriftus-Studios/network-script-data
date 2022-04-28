@@ -87,7 +87,7 @@ graves_handler:
         - define location <[location].above>
 
       # % ██ [ create the gravestone             ] ██
-      - modifyblock <[location]> player_head
+      - modifyblock <[location]> player_head no_physics
       - playeffect at:<[location]> effect:LAVA quantity:10 offset:0.2 data:0.1
       - playsound sound:BLOCK_LAVA_EXTINGUISH at:<[location]>
       - adjust <[location]> skull_skin:<player.skull_skin>

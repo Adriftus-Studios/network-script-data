@@ -50,3 +50,9 @@ block_properties:
             - inject <[value]>
         - else:
           - inject <[value].flag[on_pistoned]>
+    on block physics location_flagged:on_physics:
+        - if <context.location.flag[on_physics].object_type> == List:
+          - foreach <context.location.flag[on_physics]>:
+            - inject <[value]>
+        - else:
+          - inject <context.location.flag[on_physics]>
