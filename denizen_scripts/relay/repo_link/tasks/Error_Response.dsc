@@ -75,7 +75,7 @@ error_response:
         - foreach <[content]> key:line as:message:
           - define error_content "<list_single[<&co>warning<&co>`Line <[line]>`<&co>]>"
           - if !<[message].is_empty>:
-            - define error_content <[error_content].include_single[<[message].parse[strip_color.replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n>]>]>
+            - define error_content "<[error_content].include_single[<&gt> <[message].parse[strip_color.replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n><&gt> ]>]>"
           - else:
             - define error_content "<[error_content].include_single[<&lt>a:warn:942230068372062239<&gt>**No error message** - Consider providing better context.]>"
 
