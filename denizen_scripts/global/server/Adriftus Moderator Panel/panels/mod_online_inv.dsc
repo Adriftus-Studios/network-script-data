@@ -48,7 +48,7 @@ mod_online_inv_events:
     - if <player.has_flag[vanished]>:
       - run mod_unvanish_task
     - else:
-      - run mod_vanish_task
+      - run mod_vanish_task def:true
 
 mod_online_inv_open:
   type: task
