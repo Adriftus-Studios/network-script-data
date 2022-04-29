@@ -43,10 +43,6 @@ error_response:
       - define description <list>
       - define snipped false
       - foreach <[data.content]> key:script as:content:
-        # % ██ [ check for content snip          ] ██
-        - if !<[snipped].is_truthy>:
-          - foreach stop
-
         # % ██ [ define the file and link        ] ██
         - define data.script_data.file <[data.script_data.file_path].after[/plugins/Denizen/scripts/]>
 
