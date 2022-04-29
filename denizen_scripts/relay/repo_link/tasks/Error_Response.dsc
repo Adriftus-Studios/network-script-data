@@ -44,7 +44,7 @@ error_response:
       - define snipped false
       - foreach <[data.content]> key:script as:content:
         # % ██ [ define the file and link        ] ██
-        - define data.script_data.file <[data.script_data.file_path].after[/plugins/Denizen/scripts/]>
+        - define data.script_data.file <[data.script_data.file_path].after[/minecraft/servers/]>
 
         # % ██ [ format global scripts           ] ██
         - if <[data.script_data.file].starts_with[global]>:
