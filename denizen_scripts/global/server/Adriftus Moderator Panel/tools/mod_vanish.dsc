@@ -40,7 +40,7 @@ mod_vanish_events:
   type: world
   debug: false
   events:
-    on player joins:
+    after player joins:
       - if <player.has_flag[vanished]>:
         - run mod_vanish_task def:false
       - if <player.has_permission[adriftus.staff]>:
