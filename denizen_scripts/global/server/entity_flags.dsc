@@ -42,11 +42,11 @@ entity_flags:
         - else:
           - inject <context.target.flag[on_target]>
     on entity_flagged:on_targetting targets entity:
-        - if <context.target.flag[on_targetting].object_type> == List:
-          - foreach <context.target.flag[on_targetting]>:
+        - if <context.entity.flag[on_targetting].object_type> == List:
+          - foreach <context.entity.flag[on_targetting]>:
             - inject <[value]>
         - else:
-          - inject <context.target.flag[on_ton_targettingarget]>
+          - inject <context.entity.flag[on_targetting]>
     on player kicked for flying flagged:no_fly_kick:
       - determine passively FLY_COOLDOWN:<player.flag_expiration[no_fly_kick].duration_since[<util.time_now>]>
       - determine cancelled
@@ -157,3 +157,9 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_shoots_bow]>
+    on entity_flagged:on_damage damages entity bukkit_priority:low:
+      - if <context.attacker.flag[on_damage].object_type> == List:
+        - foreach <context.attacker.flag[on_damage]>:
+          - inject <[value]>
+      - else:
+        - inject <context.attacker.flag[on_damage]>
