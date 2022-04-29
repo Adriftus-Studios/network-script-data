@@ -56,7 +56,7 @@ error_handler:
       - define data.server <bungee.server>
 
       # % ██ [ track errors            ] ██
-      - flag server error_listening.<[queue].id>.<[data.script_data.script]>.Line_<[data.script_data.line]>:->:<context.message.if_null[invalid]> expire:15s
+      - flag server error_listening.<[queue].id>.<[data.script_data.script]>.<[data.script_data.line]>:->:<context.message.if_null[invalid]> expire:15s
       - if <server.has_flag[error_listening.<[queue].id>.<[data.script_data.script]>.runtime]>:
         - stop
       - yaml id:error_handler set <[data.script_data.script]>:->:<util.time_now>

@@ -12,6 +12,7 @@ iron_armor_pack_give:
   debug: false
   script:
     - determine passively cancelled
+    - stop if:<bungee.server.equals[hub]<
     - wait 1t
     - take iteminhand
     - give iron_helmet|iron_chestplate|iron_leggings|iron_boots|iron_sword
@@ -30,6 +31,7 @@ diamond_armor_pack_give:
   debug: false
   script:
     - determine passively cancelled
+    - stop if:<bungee.server.equals[hub]>
     - wait 1t
     - take iteminhand
     - give diamond_helmet|diamond_chestplate|diamond_leggings|diamond_boots|diamond_sword

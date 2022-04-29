@@ -43,10 +43,6 @@ error_response:
       - define description <list>
       - define snipped false
       - foreach <[data.content]> key:script as:content:
-        # % ██ [ check for content snip          ] ██
-        - if !<[snipped].is_truthy>:
-          - foreach stop
-
         # % ██ [ define the file and link        ] ██
         - define data.script_data.file <[data.script_data.file_path].after[/plugins/Denizen/scripts/]>
 
@@ -58,7 +54,9 @@ error_response:
         # % ██ [ format test scripts             ] ██
         - else if <[data.server]> == test:
           - define data.script_data.file_link https://github.com/Adriftus-Studios/test/blob/main/<[data.script_data.file].after[test/].replace[<&sp>].with[<&pc>20]>
-          - define data.script_data.file_short /<[data.script_data.file].after[test/]>
+          - define data.script_data.file_short /<[data.script_data.file]>
+#https://github.com/Adriftus-Studios/test/blob/main/plugins/Denizen/scripts/test/AJ/herocraft_title_season_0.dsc#L7
+#
 
         # % ██ [ format all other scripts        ] ██
         - else:
