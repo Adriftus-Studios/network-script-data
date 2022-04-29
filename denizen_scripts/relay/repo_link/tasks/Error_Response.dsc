@@ -54,7 +54,7 @@ error_response:
         # % ██ [ format test scripts             ] ██
         - else if <[data.server]> == test:
           - define data.script_data.file_link https://github.com/Adriftus-Studios/test/blob/main/<[data.script_data.file].after[test/].replace[<&sp>].with[<&pc>20]>
-          - define data.script_data.file_short /<[data.script_data.file].after[test/plugins/Denizen/scripts]>
+          - define data.script_data.file_short /<[data.script_data.file].after[test/plugins/Denizen/scripts/]>
 
         # % ██ [ format all other scripts        ] ██
         - else:
