@@ -152,8 +152,8 @@ entity_flags:
       - else:
         - inject <context.entity.flag[on_explode]>
     on entity_flagged:on_shoots_bow shoots bow bukkit_priority:low:
-      - if <context.entity.flag[on_shoots_bow].object_type> == List:
-        - foreach <context.entity.flag[on_shoots_bow]>:
+      - if <context.shooter.flag[on_shoots_bow].object_type> == List:
+        - foreach <context.shooter.flag[on_shoots_bow]>:
           - inject <[value]>
       - else:
-        - inject <context.entity.flag[on_shoots_bow]>
+        - inject <context.shooter.flag[on_shoots_bow]>
