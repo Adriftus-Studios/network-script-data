@@ -158,8 +158,8 @@ entity_flags:
       - else:
         - inject <context.entity.flag[on_shoots_bow]>
     on entity_flagged:on_damage damages entity bukkit_priority:low:
-      - if <context.attacker.flag[on_damage].object_type> == List:
-        - foreach <context.attacker.flag[on_damage]>:
+      - if <context.damager.flag[on_damage].object_type> == List:
+        - foreach <context.damager.flag[on_damage]>:
           - inject <[value]>
       - else:
-        - inject <context.attacker.flag[on_damage]>
+        - inject <context.damager.flag[on_damage]>
