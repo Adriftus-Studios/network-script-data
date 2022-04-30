@@ -40,6 +40,7 @@ mod_online_inv_events:
       - if <player.can_fly>:
         - adjust <player> flying:false
         - adjust <player> can_fly:false
+        - flag <player> no_fall_damage_once
         - narrate "<&e>You are no longer <&b>Flying<&e>."
       - else:
         - adjust <player> can_fly:true
