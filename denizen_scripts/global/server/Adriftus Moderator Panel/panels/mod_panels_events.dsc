@@ -3,10 +3,10 @@ mod_global_inv_events:
   type: world
   debug: false
   events:
-    on player clicks item in mod_*_inv priority:100:
+    on player clicks item in mod_*_inv priority:10:
       - determine cancelled
 
-    on player drags item in mod_*_inv priority:100:
+    on player drags item in mod_*_inv priority:10:
       - determine cancelled
 
     on player clicks item_flagged:to in mod_*_inv:
