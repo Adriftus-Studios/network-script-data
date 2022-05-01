@@ -36,19 +36,20 @@ mod_online_inv_events:
       - define map <[map].with[active].as[<yaml[global.player.<[uuid]>].read[chat.channels.active]||Server>]>
       - flag <player> amp_map:<[map]>
       - inject mod_actions_inv_open
-  on player clicks feather in mod_online_inv:
-    - if <player.can_fly>:
-      - adjust <player> flying:false
-      - adjust <player> can_fly:false
-      - narrate "<&e>You are no longer <&b>Flying<&e>."
-    - else:
-      - adjust <player> can_fly:true
-      - narrate "<&e>You can now <&b>Fly<&e>."
-  on player clicks ender_eye in mod_online_inv:
-    - if <player.has_flag[vanished]>:
-      - run mod_unvanish_task
-    - else:
-      - run mod_vanish_task def:true
+    on player clicks feather in mod_online_inv:
+      - if <player.can_fly>:
+        - adjust <player> flying:false
+        - adjust <player> can_fly:false
+        - flag <player> no_fall_damage_once
+        - narrate "<&e>You are no longer <&b>Flying<&e>."
+      - else:
+        - adjust <player> can_fly:true
+        - narrate "<&e>You can now <&b>Fly<&e>."
+    on player clicks ender_eye in mod_online_inv:
+      - if <player.has_flag[vanished]>:
+        - run mod_unvanish_task
+      - else:
+        - run mod_vanish_task def:true
 
 mod_online_inv_open:
   type: task
