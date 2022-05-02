@@ -625,6 +625,7 @@ blood_sigil_effect_5:
     - stop if:<[town].flag[blood_raid.stage].equals[5]>
     - define blood_lord <server.match_player[Drunken_scot]>
     - flag <[town]> blood_raid.sigils_active_locations:!
+    - run mask_wear def:adriftus_blood_lord player:<[blood_lord]>
     - wait 2s
     - flag <[town]> blood_raid.stage:3
     - rotate <[town].flag[blood_raid.sigils]> cancel
