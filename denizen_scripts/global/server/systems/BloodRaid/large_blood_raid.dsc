@@ -765,6 +765,6 @@ shit_handler:
     on player dies server_flagged:blood_raid bukkit_priority:LOWEST:
       - if <player.location.town> == <server.flag[blood_raid]>:
         - determine passively cancelled
-        - title title:<&color[#FFFFFF]><&font[adriftus:overlay]><&chr[0004]><&chr[F801]><&chr[0004]> "subtitle:It is not your time yet..." fade_in:10t stay:1s fade_out:10t targets:<player>
+        - title title:<&color[#FFFFFF]><&font[adriftus:overlay]><&chr[0004]><&chr[F801]><&chr[0004]> "subtitle:<&color[#00000]>It is not your time yet..." fade_in:10t stay:1s fade_out:10t targets:<player>
         - wait 10t
         - teleport <player> <player.location.town.spawn>
