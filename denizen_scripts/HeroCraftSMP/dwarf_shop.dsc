@@ -105,7 +105,7 @@ dwarf_talk_events:
     - <&e>... And there I was, the beady eye dragon staring into me soul, gold in hand, I turned and ran...
     - <&e>Have you ever heard the tale of the bard who drank with a dwarf?
   events:
-    on delta time minutely every:5:
+    on delta time minutely every:1:
     - foreach <mythicmobs.active_mobs.filter[internal_name.equals[DwarfSmith]]> as:d:
       - define players <[d].entity.location.find_players_within[5]>
       - define line <script.data_key[data.lines_to_say].random.parsed>
