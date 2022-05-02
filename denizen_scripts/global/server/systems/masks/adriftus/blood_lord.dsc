@@ -16,8 +16,10 @@ mask_adriftus_blood_lord_equip:
   type: task
   debug: false
   script:
+    - wait 1s
     - flag <player> on_damaged:BLOOD_MAGIC_DEFLECT_ATTACK
-    - flag <player> can_fly:true
+    - adjust <player> can_fly:true
+    - adjust <player> flying:true
     - flag <player> on_target:cancel
     - flag <player> on_hunger_change:cancel
 
@@ -26,6 +28,7 @@ mask_adriftus_blood_lord_unequip:
   debug: false
   script:
     - flag <player> on_damaged:!
-    - flag <player> can_fly:false
+    - adjust <player> can_fly:false
+    - adjust <player> flying:false
     - flag <player> on_target:!
     - flag <player> on_hunger_change:!
