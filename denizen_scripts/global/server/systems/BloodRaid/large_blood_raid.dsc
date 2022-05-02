@@ -536,9 +536,13 @@ blood_sigil_effect_3:
     - else:
       - define base <[town].spawn>
     # play blood animation
+    - if <[town].flag[blood_raid.stage]> == 2:
+      - define coefficient 2
+    - else:
+      - define coefficient 1
     - while <[town].has_flag[blood_raid]> && <list[2|5].contains[<[town].flag[blood_raid.stage]>]>:
       - if <[loop_index].mod[10]> == 0:
-        - hurt <element[1].mul[<[town].flag[blood_raid.stage]>]> <[base].find_players_within[120]>
+        - hurt <element[1].mul[<[coefficient]>]> <[base].find_players_within[120]>
       - playeffect at:<[base]> effect:redstone special_data:10|#990000 offset:120,1,120 quantity:100 targets:<server.online_players>
       - wait 2t
 

@@ -38,9 +38,9 @@ actor_weapon_blood_raid_scythe_choke:
     - flag <[target]> blood_choke:<player.location.town.flag[center].above[10].random_offset[5,0,5]>
     - if <[target].uuid> == 41ea066b-03e4-4274-8db7-10e0c2bcba82:
       - flag <player.location.town> blood_raid.stage:6
-    - flag <player> on_stops_flying:actor_weapon_blood_raid_scythe_cancel_move
-    - flag <player> on_damaged:cancel
-    - flag <player> on_target:cancel
+    - flag <[target]> on_stops_flying:actor_weapon_blood_raid_scythe_cancel_move
+    - flag <[target]> on_damaged:cancel
+    - flag <[target]> on_target:cancel
     - title title:<&color[#990000]><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> fade_in:5s stay:120s fade_out:1s targets:<[target]>
     - adjust <[target]> <map[can_fly=true;fly_speed=0;flying=true;velocity=0,0.5,0;gravity=false]>
     - run actor_weapon_blood_raid_scythe_teleport def:<[target]>
