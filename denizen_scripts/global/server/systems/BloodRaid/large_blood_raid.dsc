@@ -623,6 +623,7 @@ blood_sigil_effect_5:
   definitions: town
   script:
     - stop if:<[town].flag[blood_raid.stage].equals[5]>
+    - remove <[town].flag[blood_raid.mobs].filter[is_spawned]>
     - define blood_lord <server.match_player[Drunken_scot]>
     - flag <[town]> blood_raid.sigils_active_locations:!
     - give actor_weapon_blood_raid_scythe to:<[blood_lord].inventory> slot:1
