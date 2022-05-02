@@ -163,3 +163,15 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.damager.flag[on_damage]>
+    on player starts flying bukkit_priority:low flagged:on_start_flying:
+      - if <player.flag[on_start_flying].object_type> == List:
+        - foreach <player.flag[on_start_flying]>:
+          - inject <[value]>
+      - else:
+        - inject <player.flag[on_start_flying]>
+    on player stops flying bukkit_priority:low flagged:on_stops_flying:
+      - if <player.flag[on_stops_flying].object_type> == List:
+        - foreach <player.flag[on_stops_flying]>:
+          - inject <[value]>
+      - else:
+        - inject <player.flag[on_stops_flying]>
