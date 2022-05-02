@@ -28,6 +28,7 @@ mask_adriftus_game_master_equip:
     - adjust <player> can_fly:true
     - flag <player> no_damage
     - flag <player> on_hunger_change:->:cancel
+    - flag <player> on_target:cancel
 
 mask_adriftus_game_master_unequip:
   type: task
@@ -36,3 +37,4 @@ mask_adriftus_game_master_unequip:
     - adjust <player> can_fly:false
     - flag <player> no_damage:!
     - flag <player> on_hunger_change:<-:cancel
+    - flag <player> on_target:!
