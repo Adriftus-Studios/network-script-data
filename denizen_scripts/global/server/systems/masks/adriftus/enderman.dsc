@@ -13,4 +13,4 @@ mask_adriftus_enderman:
       rate: 5
       effect: dragon_breath
       quantity: 5
-      offset: 0.25,1,0.25
+      offset: 0.25,0,5,0.25
