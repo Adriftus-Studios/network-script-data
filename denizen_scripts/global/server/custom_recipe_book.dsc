@@ -72,7 +72,11 @@ custom_recipe_data_initializer:
             - if <[recipe_item].starts_with[material]>:
               - define recipe_item <[recipe_item].substring[10].as_item>
             - else if <[recipe_item].script.data_key[recipes].exists>:
-              - define recipe_item "<item[<[recipe_item]>].with[flag=run_script:custom_recipe_inventory_open;flag=recipe_id:<[recipe_item].as_item.recipe_ids.get[1].after[<&co>]>;lore=<[recipe_item].lore.include[<&b>Click to see Recipe]>]>"
+              - if <[recipe_item].lore.exists>:
+                - define modified_lore "<[recipe_item].lore.include[<&b>Click to see Recipe]>"
+              - else:
+                - define modified_lore "<&b>Click to see Recipe"
+              - define recipe_item <item[<[recipe_item]>].with[flag=run_script:custom_recipe_inventory_open;flag=recipe_id:<[recipe_item].as_item.recipe_ids.get[1].after[<&co>]>;lore=<[modified_lore]>]>
             - else:
               - define value <[recipe_item].as_item>
             - define items:|:<[recipe_item]>
