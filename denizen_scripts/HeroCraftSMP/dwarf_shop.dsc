@@ -142,7 +142,7 @@ rock_spirit_events:
         chance: 3
         total: 10
   events:
-    on player breaks block:
+    on player breaks block server_flagged:dwarf_activated:
     - stop if:<list[survival|adventure].contains[<player.gamemode>].not>
     - define material <context.material.name>
     - stop if:<script.data_key[data.drop_chances].keys.contains[<[material]>].not>
