@@ -52,6 +52,8 @@ mod_vanish_events:
       - if <player.has_permission[adriftus.staff]>:
         - foreach <server.flag[vanished_staff].exclude[<player>]>:
           - adjust <player> show_entity:<[value]>
+    on player quits flagged:vanished:
+      - flag server vanished_staff:<server.flag[vanished_staff].filter[is_online].exclude[<player>]>
 
 mod_vanish_cancel:
   type: task
