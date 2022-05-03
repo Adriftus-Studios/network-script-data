@@ -105,7 +105,7 @@ dwarf_talk_events:
     - <&e>... And there I was, the beady eye dragon staring into me soul, gold in hand, I turned and ran...
     - <&e>Have you ever heard the tale of the bard who drank with a dwarf?
   events:
-    on delta time minutely every:5:
+    on delta time minutely every:1:
     - foreach <mythicmobs.active_mobs.filter[internal_name.equals[DwarfSmith]]> as:d:
       - define players <[d].entity.location.find_players_within[5]>
       - define line <script.data_key[data.lines_to_say].random.parsed>
@@ -142,7 +142,7 @@ rock_spirit_events:
         chance: 3
         total: 10
   events:
-    on player breaks block:
+    on player breaks block server_flagged:dwarf_activated:
     - stop if:<list[survival|adventure].contains[<player.gamemode>].not>
     - define material <context.material.name>
     - stop if:<script.data_key[data.drop_chances].keys.contains[<[material]>].not>
