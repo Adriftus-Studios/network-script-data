@@ -52,7 +52,7 @@ travel_menu_open:
   hub:
     - foreach <script.data_key[data.hub_slots]> key:warp_name as:slots:
       - foreach <[slots]> as:slot:
-        - inventory set slot:<[slot]> d:<[inventory]> o:<item[hub_warp_<[warp_name]>_icon]>
+        - inventory set slot:<[slot]> d:<[inventory]> o:<item[hub_warp_<[warp_name]>_icon].with_flag[warp_id:<[warp_name]>]>
     - adjust <[inventory]> title:<[inventory].title><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0002]>
   # This task handles the final building of the inventory
   build_inventory:
@@ -91,3 +91,13 @@ travel_menu_inventory:
   title: <&a>Travel!
   gui: true
   size: 54
+
+hub_warp:
+  type: task
+  debug: false
+  script:
+    - define warpName <context.item.flag[warp_id]>
+    - teleport <player> hub_warp_<[warpName]>
+    - playsound <player> sound:ENTITY_ENDERMAN_TELEPORT
+    - playeffect effect:PORTAL at:<player.location> visibility:500 quantity:500 offset:1.0
+    - actionbar "<proc[reverse_color_gradient].context[Teleporting to <[warpName].replace[_].with[ ].to_titlecase>|#6DD5FA|#FFFFFF]>"
