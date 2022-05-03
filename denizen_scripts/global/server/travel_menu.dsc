@@ -18,12 +18,6 @@ travel_menu_open:
       6: 29|31|33|35|39|43
       7: 29|39|31|41|33|43|35
       8: 20|22|24|26|38|40|42|44
-    network_slots_by_count:
-      1: 1
-      2: 1|2
-      3: 1|2|3
-      4: 1|2|3|4
-      5: 1|2|3|4|5
     # NETWORK ITEMS
     #- [1] [2] [3] [4] [5] [6] [7] [8] [9]
     #- [10] [11] [12] [13] [14] [15] [16] [17] [18]
@@ -43,7 +37,8 @@ travel_menu_open:
       - define display <yaml[bungee_config].read[servers.<[server]>.display_name].parsed>
       - define lore <yaml[bungee_config].read[servers.<[server]>.description].parsed>
       - define item <item[<yaml[bungee_config].read[servers.<[server]>.material]>]>
-      - define network_list:|:<[item].with[hides=all;display=<[display]>;lore=<[lore]>;flag=run_script:travel_menu_to_server;flag=server:<[server]>]>
+      - define slot <item[<yaml[bungee_config].read[servers.<[server]>.travel_menu_slot]>]>
+      - define network_list:|:<[item].with[hides=all;display=<[display]>;lore=<[lore]>;flag=run_script:travel_menu_to_server;flag=server:<[server]>;flag=slot:<[slot]>]>
     - adjust <[inventory]> title:<&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[0001]>
   # These are specific to the test server
   test:
@@ -62,8 +57,8 @@ travel_menu_open:
     - define network_size <[network_list].size>
     - define slots <list[<script.data_key[data.network_slots_by_count.<[network_size]>]>]>
     - define items <[network_list]>
-    - foreach <[slots]>:
-      - inventory set slot:<[value]> o:<[items].get[<[loop_index]>]> d:<[inventory]>
+    - foreach <[items]>:
+      - inventory set slot:<[value].flag[slot]> o:<[value]> d:<[inventory]>
   script:
     - define server_list <list>
     - define inventory <inventory[travel_menu_inventory]>
