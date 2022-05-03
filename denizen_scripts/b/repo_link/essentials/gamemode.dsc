@@ -1,11 +1,18 @@
-gma_Command:
+gamemode_command:
   type: command
   name: gamemode
   debug: false
   description: Adjusts another user or your gamemode
   usage: /gamemode (Player) <&lt>adventure|creative|spectator|survival<&gt>
   permission: behrry.essentials.gamemode
-  tab completion: <server.online_players.parse[name]>
+  tab completions: 
+    1: <server.online_players.parse[name].exclude[<player.name>].include[<list[adventure|creative|spectator|survival].exclude[<player.gamemode>]>]>
+    2: <list[adventure|creative|spectator|survival].exclude[<server.match_player[<context.args.first>].gamemode.if_null[invalid]>]>
+  aliases:
+    - gma
+    - gmc
+    - gms
+    - gmsp
   script:
   # % ██ [ check if using too many arguments      ] ██
     - if <context.args.size> > 2:
@@ -14,7 +21,23 @@ gma_Command:
 
   # % ██ [ check if not using arguments at all    ] ██
     - if <context.args.is_empty>:
-      - narrate "<&c>Invalid usage, type a gamemode to switch to.
+
+  # % ██ [ check if using a shorthand alias       ] ██
+      - define alias_map <map[gma=adventure;gmc=creative;gms=survival;gmsp=spectator]>
+      - define gamemode <[alias_map].get[<context.alias>]>
+      - if !<context.alias.advanced_matches[<[alias_map].keys>]>:
+        - narrate "<&c>Invalid usage, type a gamemode to switch to.
+        - stop
+
+  # % ██ [ check if already in the gamemode       ] ██
+      - if <player.gamemode.advanced_matches[<[gamemode]>:
+        - narrate "<&a>You're already in <[gamemode].to_titlecase>"
+        - stop
+
+  # % ██ [ change the gamemode, tell the player   ] ██
+    - adjust <[player]> gamemode:<[gamemode]>
+    - narrate "<&a>Set gamemode to <[gamemode].to_titlecase>"
+    - stop
 
   # % ██ [ check if using another player          ] ██
     - else if <context.args.size> == 2:
@@ -40,7 +63,7 @@ gma_Command:
       - if <[player]> != <player>:
         - narrate "<&c><[player].name> is already in <[gamemode].to_titlecase>"
       - else:
-        - narrate "<&a>You're already in the <[gamemode].to_titlecase>"
+        - narrate "<&a>You're already in <[gamemode].to_titlecase>"
       - stop
 
   # % ██ [ change the gamemode, tell the player(s) ] ██
