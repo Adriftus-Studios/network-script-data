@@ -65,8 +65,8 @@ dwarf_shop_events:
         - define price_item <[price_item].as_item>
         - define "lore:|:<&7> - <[price_quantity]> <[price_item].display||<[price_item].material.name>>"
       - inventory set d:<[inv]> slot:<[slot]> o:<[item].with_flag[dwarf_shop_item.item:<[item].as_item>].with_flag[dwarf_shop_item.quantity:<[quantity]>].with[lore=<[lore]>]>
-  - narrate targets:<server.online_players.filter[has_permission[admin]]> "<&e>Dwarf shop inventory <&6>Compiled"
-  - narrate targets:<server.online_players> "Dwarf shop something something restocked something. ##TODO"
+  # - narrate targets:<server.online_players.filter[has_permission[admin]]> "<&e>Dwarf shop inventory <&6>Compiled"
+  # - narrate targets:<server.online_players> "Dwarf shop something something restocked something. ##TODO"
   events:
     on player right clicks cow server_flagged:dwarf_active:
     - stop if:<context.entity.mythicmob.internal_name.equals[DwarfSmith].not.if_null[true]>
