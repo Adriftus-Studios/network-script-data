@@ -1,6 +1,6 @@
 inventory_data_keys:
   type: world
-  debug: false
+  debug: true
   events:
     on player closes inventory:
       - if <context.inventory.script.data_key[data.on_close].exists>:
