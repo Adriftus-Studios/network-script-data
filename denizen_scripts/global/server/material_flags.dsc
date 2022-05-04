@@ -1,0 +1,16 @@
+material_flags:
+  type: world
+  debug: false
+  events:
+    on player right clicks material_flagged:on_right_click:
+      - if <context.location.material.flag[left_click_script].object_type> == List:
+        - foreach <context.location.material.flag[left_click_script]>:
+          - inject <[value]>
+      - else:
+        - inject <context.location.material.flag[left_click_script]>
+    on player places material_flagged:on_place bukkit_priority:HIGHEST:
+      - if <context.material.flag[on_place].object_type> == List:
+        - foreach <context.material.flag[on_place]>:
+          - inject <[value]>
+      - else:
+        - inject <context.material.flag[on_place]>
