@@ -69,3 +69,9 @@ block_properties:
             - inject <[value]>
         - else:
           - inject <context.destination.flag[on_liquid_spreads]>
+    on block_flagged:on_explodes destroyed by explosion:
+        - if <context.block.flag[on_explodes].object_type> == List:
+          - foreach <context.block.flag[on_explodes]>:
+            - inject <[value]>
+        - else:
+          - inject <context.block.flag[on_explodes]>
