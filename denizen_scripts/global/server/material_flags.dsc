@@ -3,11 +3,11 @@ material_flags:
   debug: false
   events:
     on player right clicks material_flagged:on_right_click:
-      - if <context.location.material.flag[left_click_script].object_type> == List:
-        - foreach <context.location.material.flag[left_click_script]>:
+      - if <context.location.material.flag[on_right_click].object_type> == List:
+        - foreach <context.location.material.flag[on_right_click]>:
           - inject <[value]>
       - else:
-        - inject <context.location.material.flag[left_click_script]>
+        - inject <context.location.material.flag[on_right_click]>
     on player places material_flagged:on_place bukkit_priority:HIGHEST:
       - if <context.material.flag[on_place].object_type> == List:
         - foreach <context.material.flag[on_place]>:
