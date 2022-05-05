@@ -1,4 +1,3 @@
-##IgnoreWarning bad_execute
 debug_command_create:
   type: task
   debug: true

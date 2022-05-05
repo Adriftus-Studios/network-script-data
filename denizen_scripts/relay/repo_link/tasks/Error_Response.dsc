@@ -96,7 +96,7 @@ error_response:
       - if <[definition_content].length> < 950:
         - define definition_content ```yml<n><[definition_content]><n>```
       - else:
-        - define definition_content ```yml<n><[definition_content].substring[0,950].before_last[<n>]><n>⚠**Snipped!**```
+        - define definition_content "```yml<n><[definition_content].substring[0,950].before_last[<n>]><n>⚠<&co> **Snipped!**```"
       - define embed <[embed].add_field[Definitions<&co>].value[<[definition_content]>]>
 
     # % ██ [ complete embed content              ] ██
