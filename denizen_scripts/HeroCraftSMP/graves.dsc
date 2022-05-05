@@ -60,7 +60,7 @@ graves_handler:
     after delta time secondly every:10:
       # % ██ [ remove expired graves             ] ██
       - foreach <server.flag[graves].filter_tag[<[filter_key].chunk.is_loaded>].filter_tag[<[filter_key].flag[grave.hologram.timer].is_truthy>]> as:grave:
-        - if <server.flag_expiration[grave].is_after[<util.time_now>]>:
+        - if <server.flag_expiration[grave].is_after[<util.time_now>].if_null[false]>:
           - chunkload <[grave].chunk> duration:20s if:!<[grave].chunk.is_loaded>
           - remove <[grave].flag[grave.hologram.player_name_display]> if:<[grave].flag[grave.hologram.player_name_display].is_truthy>
           - remove <[grave].flag[grave.hologram.timer]> if:<[grave].flag[grave.hologram.timer].is_truthy>

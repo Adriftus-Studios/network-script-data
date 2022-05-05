@@ -7,7 +7,7 @@ smite_command:
   description: Smites a player by name, or gives you the smite stick
   permission: smite
   script:
-    - if !<player.advanced_matches[<list[xeane|kyu|Drunken_Scot|_behr|aj_4real|mutim|Grumblinn].parse_tag[<server.match_player[<[parse_value]>].if_null[invalid]>]>]>:
+    - if !<list[xeane|kyu|Drunken_Scot|_behr|aj_4real|mutim|Grumblinn].parse_tag[<server.match_player[<[parse_value]>].if_null[invalid]>].contains[<player>]>:
       - narrate "<&e>nothing interesting happens."
       - stop
 
@@ -39,7 +39,7 @@ smite_stick_handler:
   debug: false
   events:
     on player clicks block with:smite_stick:
-      - stop if:!<player.advanced_matches[<list[xeane|kyu|Drunken_Scot|_behr|aj_4real|mutim|Grumblinn].parse_tag[<server.match_player[<[parse_value]>].if_null[invalid]>]>]>
+      - stop if:!<list[xeane|kyu|Drunken_Scot|_behr|aj_4real|mutim|Grumblinn].parse_tag[<server.match_player[<[parse_value]>].if_null[invalid]>].contains[<player>]>
       - if <player.target.is_truthy>:
         - strike <player.target.location>
       - else:
