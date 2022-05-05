@@ -57,19 +57,19 @@ graves_handler:
         - define time <[grave].flag_expiration[grave]>
         - adjust <[grave].flag[grave.hologram.timer]> custom_name:<script[graves_config].parsed_key[hologram.timer_display]>
 
-    after delta time secondly every:10:
+    after delta time secondly every:10 server_flagged:graves:
       # % ██ [ remove expired graves             ] ██
-      - foreach <server.flag[graves].filter_tag[<[filter_key].chunk.is_loaded>].filter_tag[<[filter_key].flag[grave.hologram.timer].is_truthy>]> as:grave:
-        - if <server.flag_expiration[grave].is_after[<util.time_now>].if_null[false]>:
+      - foreach <server.flag[graves].filter_tag[<[filter_key].chunk.is_loaded>].filter_tag[<[filter_key].flag[grave.hologram.timer].is_truthy>]> key:uuid as:grave:
+        - if <server.flag_expiration[<[uuid]>.grave].is_after[<util.time_now>].if_null[false]>:
           - chunkload <[grave].chunk> duration:20s if:!<[grave].chunk.is_loaded>
-          - remove <[grave].flag[grave.hologram.player_name_display]> if:<[grave].flag[grave.hologram.player_name_display].is_truthy>
-          - remove <[grave].flag[grave.hologram.timer]> if:<[grave].flag[grave.hologram.timer].is_truthy>
+          - remove <[grave].flag[<[uuid]>.grave.hologram.player_name_display]> if:<[grave].flag[grave.hologram.player_name_display].is_truthy>
+          - remove <[grave].flag[<[uuid]>.grave.hologram.timer]> if:<[grave].flag[grave.hologram.timer].is_truthy>
           - modifyblock <[grave]> air
           - drop <[grave].flag[grave.items]> <[grave]>
 
     on player dies bukkit_priority:HIGHEST:
       # % ██ [ check if script is to run         ] ██
-      - stop if:<script[graves_config].data_key[excluded_causes].contains[<context.cause>]>
+      - stop if:<script[graves_config].data_key[excluded_causes].contains[<context.cause.if_null[invalid]>]>
       - stop if:<script[graves_config].data_key[excluded_worlds].contains[<player.location.world.name>]>
       - stop if:<context.drops.is_empty>
 
@@ -93,11 +93,13 @@ graves_handler:
       - adjust <[location]> skull_skin:<player.skull_skin>
 
       # % ██ [ save the gravestone               ] ██
+      - define duuid <util.random.duuid>
       - definemap grave:
           items: <[items]>
           owner: <player>
+          duuid: <[duuid]>
       - flag <[location]> grave:<[grave]> expire:<[duration]>
-      - flag server graves.<[location]> expire:<[duration]>
+      - flag server graves.<[duuid]>:<[location]> expire:<[duration]>
       - flag <[location]> on_liquid_spreads:cancel
       - flag <[location]> on_break:location_remove_flags
       - flag <[location]> remove_flags:|:on_water_spreads|on_break
@@ -127,6 +129,6 @@ graves_handler:
       # % ██ [ give the items back to the player ] ██
       - give <context.location.flag[grave.items]>
       - narrate <script[graves_config].parsed_key[messages.retrieved_grave]>
+      - flag server graves.<context.location.flag[duuid]>.<context.location>:!
       - flag <context.location> grave:!
-      - flag server graves.<context.location>:!
       - determine nothing
