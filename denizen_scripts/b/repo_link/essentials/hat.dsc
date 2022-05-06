@@ -1,28 +1,25 @@
-heal_command:
+hat_command:
   type: command
-  name: heal
-  debug: false
-  description: Heals a player or yourself
-  usage: /heal (player)
-  permission: behr.essentials.heal
-  tab completions:
-    1: <server.online_players.exclude[<player>].parse[name]>
+  name: hat
+  debug: true
+  description: Places a held item as a hat
+  usage: /hat
+  permission: behr.essentials.hat
   script:
-    - if <context.args.is_empty>:
-      - define player <player>
+  # % ██ [ check if tryping arguments               ] ██
+    - if !<context.args.is_empty>:
+      - narrate "<&c>Invalid usage - /hat"
 
-    - else if <context.args.size> == 1:
-      - define player <server.match_player[<context.args.first>].if_null[null]>
-      - if !<[player].is_truthy>:
-        - narrate "<&c>Invalid player by the name of <context.args.first>"
-        - stop
-
-    - else:
-      - narrate "<&c>Invalid syntax - /heal (player)"
+  # % ██ [ check if not holding a hat               ] ██
+    - if <player.item_in_hand.material.name> == air:
+      - narrate "<&c>No item in hand."
       - stop
 
-    - heal <[player]>
-    - adjust <[player]> food_level:20
-    - if <[player]> != <player>:
-        - narrate "<[player].name> was healed"
-    - narrate targets:<[player]> "You were healed"
+  # % ██ [ check if player is wearing a hat already ] ██
+    - if <player.equipment_map.contains[helmet]>:
+      - narrate "<&c>You must remove your current hat first."
+      - stop
+
+  # % ██ [ receive hat                              ] ██
+    - equip <player> head:<player.item_in_hand.with[quantity=1]>
+    - take iteminhand quantity:1
