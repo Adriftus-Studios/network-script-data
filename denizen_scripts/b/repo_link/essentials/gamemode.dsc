@@ -4,8 +4,8 @@ gamemode_command:
   debug: false
   description: Adjusts another user or your gamemode
   usage: /gamemode (Player) <&lt>adventure|creative|spectator|survival<&gt>
-  permission: behrry.essentials.gamemode
-  tab completions: 
+  permission: behr.essentials.gamemode
+  tab completions:
     1: <server.online_players.parse[name].exclude[<player.name>].include[<list[adventure|creative|spectator|survival].exclude[<player.gamemode>]>]>
     2: <list[adventure|creative|spectator|survival].exclude[<server.match_player[<context.args.first>].gamemode.if_null[invalid]>]>
   aliases:
@@ -26,18 +26,18 @@ gamemode_command:
       - define alias_map <map[gma=adventure;gmc=creative;gms=survival;gmsp=spectator]>
       - define gamemode <[alias_map].get[<context.alias>]>
       - if !<context.alias.advanced_matches[<[alias_map].keys>]>:
-        - narrate "<&c>Invalid usage, type a gamemode to switch to.
+        - narrate "<&c>Invalid gamemode, you want any of <list[adventure|creative|spectator|survival].exclude[<player.gamemode>].parse[to_titlecase].separated_by[/]>"
         - stop
 
   # % ██ [ check if already in the gamemode       ] ██
-      - if <player.gamemode.advanced_matches[<[gamemode]>:
+      - if <player.gamemode.advanced_matches[<[gamemode]>]>:
         - narrate "<&a>You're already in <[gamemode].to_titlecase>"
         - stop
 
   # % ██ [ change the gamemode, tell the player   ] ██
-    - adjust <[player]> gamemode:<[gamemode]>
-    - narrate "<&a>Set gamemode to <[gamemode].to_titlecase>"
-    - stop
+      - adjust <player> gamemode:<[gamemode]>
+      - narrate "<&a>Set gamemode to <[gamemode].to_titlecase>"
+      - stop
 
   # % ██ [ check if using another player          ] ██
     - else if <context.args.size> == 2:
