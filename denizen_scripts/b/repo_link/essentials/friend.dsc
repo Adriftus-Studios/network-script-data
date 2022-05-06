@@ -9,7 +9,7 @@ friend_command:
     1: <server.online_players.exclude[<player>].parse[name]>
     2: remove
   script:
-  # % ██ [ check if typing nothing            ] ██
+  # % ██ [ check if typing nothing                ] ██
     - if <context.args.is_empty>:
       - if <player.has_flag[behr.essentials.friends]>:
         - narrate "<&a>You have <player.flag[behr.essentials.friends].size> friends<&co><n><player.flag[behr.essentials.friends].parse_tag[<&e>- <&a><[parse_value].name>].separated_by[<n>]>"
