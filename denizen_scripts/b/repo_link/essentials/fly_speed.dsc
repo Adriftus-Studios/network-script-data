@@ -4,6 +4,8 @@ fly_speed_command:
   name: fly_speed
   usage: /fly_speed (player) <&lt>speed<&gt>
   description: Changes yours or another player<&dq>s fly speed
+  tab completions:
+    1: <server.online_players.exclude[<player>].parse[name]>
   script:
     - if <context.args.is_empty>:
       - narrate "<&a>Your fly speed is <player.fly_speed.mul[10].round_to[2]>"

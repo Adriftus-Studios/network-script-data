@@ -1,7 +1,7 @@
 hat_command:
   type: command
   name: hat
-  debug: true
+  debug: false
   description: Places a held item as a hat
   usage: /hat
   permission: behr.essentials.hat

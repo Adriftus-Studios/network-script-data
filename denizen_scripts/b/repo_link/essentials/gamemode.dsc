@@ -3,7 +3,7 @@ gamemode_command:
   name: gamemode
   debug: false
   description: Adjusts another user or your gamemode
-  usage: /gamemode (Player) <&lt>adventure|creative|spectator|survival<&gt>
+  usage: /gamemode (player) <&lt>adventure|creative|spectator|survival<&gt>
   permission: behr.essentials.gamemode
   tab completions:
     1: <server.online_players.parse[name].exclude[<player.name>].include[<list[adventure|creative|spectator|survival].exclude[<player.gamemode>]>]>

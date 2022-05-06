@@ -37,7 +37,7 @@ old_Colors_Command:
     debug: false
     description: Lists the colors in a click-menu
     usage: /colors
-    permission: Behr.Essentials.Colors
+    permission: behr.essentials.colors
     script:
     # % ██ [ Verify args ] ██
         - if !<context.args.is_empty>:
