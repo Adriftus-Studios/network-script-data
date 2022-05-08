@@ -30,16 +30,37 @@ run_speed_command:
       - define player <player>
       - define speed <context.args.last>
 
+    - define alias <context.alias.before[_]>
+
     - if <[speed].is_decimal>:
-      - narrate "<&c>Invalid usage - speed has to be a number"
-      - stop
+      - choose <[speed]>:
+        - case lightspeed:
+          - define speed 6
+          - define speed_name <&b>Lightspeed
+
+        - case ludicrous:
+          - define speed 8
+          - define speed_name "<&b><italic><bold>Ludicrous speed"
+
+        - case plaid:
+          - define speed 10
+          - define speed_name "<element[Plaid speed].rainbow[ca]>"
+
+        - default:
+          - narrate "<&c>Invalid usage - <[alias]> speed has to be a number"
+          - stop
+
+      - adjust <[player]> walk_speed:<[speed]>
+      - if <[player]> != <player>:
+        - narrate "You sent <[player].name> running at <[speed_name]><&a>!"
+      - narrate targets:<[player]> "Now running at <[speed_name]><&a>!"
 
     - else if <[speed]> > 10:
-      - narrate "<&c>Invalid usage - speed must be below 10"
+      - narrate "<&c>Invalid usage - <[alias]> speed must be below 10"
       - stop
 
     - else if <[speed]> < 0:
-      - narrate "<&c>Invalid usage - speed must be at or above 0"
+      - narrate "<&c>Invalid usage - <[alias]> speed must be at or above 0"
       - stop
 
     - else if <[speed]> == <[player].walk_speed.mul[10]>:
@@ -48,5 +69,5 @@ run_speed_command:
 
     - adjust <[player]> walk_speed:<[speed].div[10]>
     - if <[player]> != <player>:
-      - narrate "<[player].name><&sq>s <context.alias.before[_]> speed set to <[speed]>"
-    - narrate targets:<[player]> "<context.alias.before[_]> speed set to <[speed]>"
+      - narrate "<[player].name><&sq>s <[alias]> speed set to <[speed]>"
+    - narrate targets:<[player]> "<[alias].to_titlecase> speed set to <[speed]>"

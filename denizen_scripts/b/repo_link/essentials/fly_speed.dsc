@@ -28,15 +28,38 @@ fly_speed_command:
       - define speed <context.args.first>
 
     - else if !<[speed].is_decimal>:
-      - narrate "<&c>Invalid fly speed - must be a number"
-      - stop
+      - choose <[speed]>:
+        - case lightspeed:
+          - define speed 6
+          - define speed_name <&b>Lightspeed
+
+        - case ludicrous:
+          - define speed 8
+          - define speed_name "<&b><italic><bold>Ludicrous speed"
+
+        - case plaid:
+          - define speed 10
+          - define speed_name "<element[Plaid speed].rainbow[ca]>"
+
+        - default:
+          - narrate "<&c>Invalid usage - fly speed must be a number"
+          - stop
+
+      - adjust <[player]> walk_speed:<[speed]>
+      - if <[player]> != <player>:
+        - narrate "<&a>You sent <[player].name> flying at <[speed_name]><&a>!"
+      - narrate targets:<[player]> "<&a>Now flying at <[speed_name]><&a>!"
 
     - if <[speed]> > 10:
-      - narrate "<&c>Invalid fly speed - Fly speed must be set below 10"
+      - narrate "<&c>Invalid fly speed - Fly speed must be below 10"
       - stop
 
     - else if <[speed]> < 0:
       - narrate "<&c>Invalid fly speed - Fly speed must be at or above 0"
+      - stop
+
+    - else if <[speed]> == <[player].fly_speed.mul[10]>:
+      - narrate "<&e>Nothing interesting happens"
       - stop
 
     - adjust <[player]> fly_speed:<[speed].div[10]>
