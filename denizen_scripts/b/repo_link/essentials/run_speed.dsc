@@ -32,7 +32,7 @@ run_speed_command:
 
     - define alias <context.alias.before[_]>
 
-    - if <[speed].is_decimal>:
+    - if !<[speed].is_decimal>:
       - choose <[speed]>:
         - case lightspeed:
           - define speed 6
