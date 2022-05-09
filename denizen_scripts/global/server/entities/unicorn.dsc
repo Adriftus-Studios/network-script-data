@@ -18,4 +18,4 @@ unicorn_preserve_skin:
   debug: false
   script:
     - if <context.item.exists> && <context.item.material.name> == name_tag && <context.item.has_display>:
-      - inventory adjust slot:<player.held_item_slot> o:<context.item.with[display=<&chr[F801]><context.item.display>]> d:<player.inventory>
+      - inventory adjust slot:<player.held_item_slot> display:<&chr[F801]><context.item.display> d:<player.inventory>
