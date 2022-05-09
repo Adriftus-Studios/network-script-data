@@ -26,6 +26,7 @@ unicorn_spawn_from_egg:
   type: task
   debug: false
   script:
+    - determine passively cancelled
     - take iteminhand
     - spawn unicorn <context.location>
 
