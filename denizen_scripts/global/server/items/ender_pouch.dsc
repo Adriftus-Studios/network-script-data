@@ -9,6 +9,8 @@ ender_pouch:
     right_click_script: ender_pouch_open
   mechanisms:
     custom_model_data: 50
+  data:
+    recipe_book_category: gadgets
   recipes:
     1:
       type: shaped
