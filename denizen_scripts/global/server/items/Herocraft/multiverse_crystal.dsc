@@ -1,7 +1,7 @@
 multiverse_dust:
   type: item
   material: feather
-  display name: <&6>Multiverse Crystal
+  display name: <element[Multiverse Dust].rainbow>
   lore:
   - "<&e>What the heck is this?"
   data:
