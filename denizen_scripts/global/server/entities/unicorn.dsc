@@ -27,8 +27,13 @@ unicorn_spawn_from_egg:
   debug: false
   script:
     - determine passively cancelled
-    - take iteminhand
-    - spawn unicorn <context.location>
+    - spawn unicorn <context.location.above> save:ent
+    - if <entry[ent].spawned_entity.is_spawned>:
+      - adjust <entry[ent].spawned_entity> owner:<player>
+      - equip <entry[ent].spawned_entity> saddle:saddle
+      - take iteminhand
+    - else:
+      - narrate "<&c>Unable to spawn here"
 
 unicorn_preserve_skin:
   type: task

@@ -52,11 +52,9 @@ entity_flags:
       - determine cancelled
     on player right clicks entity_flagged:right_click_script:
       - if !<player.is_sneaking>:
-        - determine passively cancelled
         - inject <context.entity.flag[right_click_script]>
     on player right clicks entity_flagged:shift_right_click_script:
       - if <player.is_sneaking>:
-        - determine passively cancelled
         - inject <context.entity.flag[shift_right_click_script]>
     on material falls:
       - if <context.entity.has_flag[showfake]>:
