@@ -23,6 +23,7 @@ multiverse_dust_task:
   type: task
   debug: false
   script:
+    - ratelimit <player> 1t
     - if <context.item.has_flag[last_used]> && <context.item.flag[last_used].from_now.in_minutes> < 10:
       - narrate "<&c>This item has not recharged"
       - stop
