@@ -8,14 +8,14 @@ error_response:
     - define embed <discord_embed>
 
     # % ██ [ check if the channel exists         ] ██
-    - if !<[data.server].advanced_matches_text[<[development_guild].channels.parse[name]>]>:
+    - if !<[data.server].advanced_matches[<[development_guild].channels.parse[name]>]>:
       - ~discordcreatechannel id:a_bot group:<[development_guild]> name:<[data.server]> "description:Error reporting for <[data.server]>" type:text category:634752968759050270 save:new_channel
       - define channel <entry[new_channel].channel>
     - else:
       - define channel <[development_guild].channel[<[data.server]>]>
 
     # % ██ [ check if the thread exists          ] ██
-    - if <[channel].active_threads.is_empty> || !<util.time_now.format[MMMM-dd-u].advanced_matches_text[<[channel].active_threads.parse[name]>]>:
+    - if <[channel].active_threads.is_empty> || !<util.time_now.format[MMMM-dd-u].advanced_matches[<[channel].active_threads.parse[name]>]>:
       - ~discordcreatethread id:a_bot name:<util.time_now.format[MMMM-dd-u]> parent:<[channel]> save:new_thread
       - define thread <entry[new_thread].created_thread>
     - else:
@@ -41,7 +41,6 @@ error_response:
     # % ██ [ construct error content             ] ██
     - if <[data.content].exists>:
       - define description <list>
-      - define snipped false
       - foreach <[data.content]> key:script as:content:
         # % ██ [ define the file and link        ] ██
         - define data.script_data.file <[data.script_data.file_path].after[/plugins/Denizen/scripts/]>
@@ -75,20 +74,20 @@ error_response:
           - if !<[message].is_empty>:
             - define error_content "<[error_content].include_single[<&gt> <[message].parse[strip_color.replace[`].with[<&sq>].proc[error_formatter]].separated_by[<n><&gt> ]>]>"
           - else:
-            - define error_content "<[error_content].include_single[<&lt>a:warn:942230068372062239<&gt>**No error message** - Consider providing better context.]>"
+            - define error_content "<[error_content].include_single[<&co>warning<&co>**No error message** - Consider providing better context.]>"
 
           # % ██ [ check for description limit   ] ██
-          - if <[description].include[<[error_content]>].separated_by[<n>].length> < 4000:
+          - if <[description].include[<[error_content].substring[0,3500]>].separated_by[<n>].length> < 4000:
             - define description <[description].include[<[error_content]>]>
           - else:
-            - define description "<[description].include_single[<&lt>a:warn:942230068372062239<&gt>**Snipped error count** - consider minimizing erroneous output.]>"
-            - define snipped true
+            - define description <[description].include_single[<[error_content].substring[0,<element[3500].sub[<[description].length>]>]>]>
+            - define description "<[description].include_single[<&co>warning<&co>**Snipped error count** - consider minimizing erroneous output.]>"
             - foreach stop
 
     # % ██ [ construct description content     ] ██
       - define embed <[embed].with[description].as[<[description].separated_by[<n>]>]>
     - else:
-      - define embed "<[embed].with[description].as[<&lt>a:warn:942230068372062239<&gt>**No error content** - Consider providing better context.]>"
+      - define embed "<[embed].with[description].as[<&co>warning<&co>**No error content** - Consider providing better context.]>"
 
     # % ██ [ construct definitions content       ] ██
     - if !<[data.definition_map].is_empty.if_null[true]>:
