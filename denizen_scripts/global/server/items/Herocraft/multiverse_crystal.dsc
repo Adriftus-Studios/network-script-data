@@ -4,8 +4,17 @@ multiverse_crystal:
   display name: <&6>Multiverse Crystal
   lore:
   - "<&e>What the heck is this?"
+  data:
+    recipe_book_category: travel
   flags:
     right_click_script: multiverse_crystal_task
+  recipes:
+    1:
+      type: shaped
+      input:
+        - compressed_obsidian|compressed_obsidian|compressed_obsidian
+        - compressed_obsidian|nether_star|compressed_obsidian
+        - compressed_obsidian|compressed_obsidian|compressed_obsidian
 
 multiverse_crystal_task:
   type: task
@@ -14,7 +23,7 @@ multiverse_crystal_task:
     - if <context.item.has_flag[last_used]> && <context.item.flag[last_used].from_now.in_minutes> < 10:
       - narrate "<&c>This item has not recharged"
       - stop
-    - inventory adjust slot:<player.held_item_slot> last_used:<util.time_now>
+    - inventory flag slot:<player.held_item_slot> last_used:<util.time_now>
     - if <bungee.server> == herocraft:
       - run herocraft_send_to_world def:zanzabar
     - else if <bungee.server> == zanzabar:
