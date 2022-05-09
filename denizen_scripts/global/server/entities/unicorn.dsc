@@ -12,6 +12,8 @@ unicorn:
   flags:
     on_damaged: cancel
     right_click_script: unicorn_preserve_skin
+    on_mounted: unicorn_protect_rider
+    on_dismounted: unicorn_unprotect_rider
 
 unicorn_spawn_egg:
   type: item
@@ -21,8 +23,6 @@ unicorn_spawn_egg:
   - "<&6>Mythical Spawn Egg"
   flags:
     right_click_script: unicorn_spawn_from_egg
-    on_mounted: unicorn_protect_rider
-    on_dismounted: unicorn_unprotect_rider
 
 unicorn_protect_rider:
   type: task
