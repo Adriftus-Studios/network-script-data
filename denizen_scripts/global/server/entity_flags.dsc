@@ -99,7 +99,7 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_mount]>
-    on entity exits entity_flagged:on_mounted:
+    on entity enters entity_flagged:on_mounted:
       - if <context.vehicle.flag[on_mounted].object_type> == List:
         - foreach <context.vehicle.flag[on_mounted]>:
           - inject <[value]>
