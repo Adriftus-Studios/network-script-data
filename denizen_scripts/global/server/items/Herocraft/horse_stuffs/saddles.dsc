@@ -7,8 +7,13 @@ custom_saddle:
   recipes:
     1:
       type: shaped
-      output_quantity: 1
       input:
       - leather|leather|leather
       - string|air|air
-      - iron_ingot/copper_ingot|air|iron_ingot/copper_ingot
+      - iron_ingot|air|iron_ingot
+    2:
+      type: shaped
+      input:
+      - leather|leather|leather
+      - string|air|air
+      - copper_ingot|air|copper_ingot
