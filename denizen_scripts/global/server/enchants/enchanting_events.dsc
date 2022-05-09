@@ -181,7 +181,7 @@ player_death_enchant_handler:
   type: world
   debug: false
   events:
-    on player dies:
+    on player dies bukkit_priority:LOWEST:
       - foreach <context.drops> as:item:
         - if <[item].has_flag[soulbound]>:
           - define keep:->:<[item]>
