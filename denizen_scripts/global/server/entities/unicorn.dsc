@@ -21,6 +21,20 @@ unicorn_spawn_egg:
   - "<&6>Mythical Spawn Egg"
   flags:
     right_click_script: unicorn_spawn_from_egg
+    on_mounted: unicorn_protect_rider
+    on_dismounted: unicorn_unprotect_rider
+
+unicorn_protect_rider:
+  type: task
+  debug: false
+  script:
+    - flag <context.entity> on_damaged:->:cancel
+
+unicorn_unprotect_rider:
+  type: task
+  debug: false
+  script:
+    - flag <context.entity> on_damaged:<-:cancel
 
 unicorn_spawn_from_egg:
   type: task

@@ -87,14 +87,24 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_dismount]>
-    on entity exits entity_flagged:on_dismount:
+    on entity exits entity_flagged:on_dismounted:
       - if <context.vehicle.flag[on_dismount].object_type> == List:
         - foreach <context.vehicle.flag[on_dismount]>:
           - inject <[value]>
       - else:
         - inject <context.vehicle.flag[on_dismount]>
-    on entity_flagged:on_mount exits vehicle:
-      - inject <context.entity.flag[on_mount]>
+    on entity_flagged:on_mount enters vehicle:
+      - if <context.entity.flag[on_mount].object_type> == List:
+        - foreach <context.entity.flag[on_mount]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_mount]>
+    on entity exits entity_flagged:on_mounted:
+      - if <context.vehicle.flag[on_mounted].object_type> == List:
+        - foreach <context.vehicle.flag[on_mounted]>:
+          - inject <[value]>
+      - else:
+        - inject <context.vehicle.flag[on_mounted]>
     on player right clicks fake entity:
       - stop if:<context.entity.has_flag[right_click_script].not>
       - inject <context.entity.flag[right_click_script]>
