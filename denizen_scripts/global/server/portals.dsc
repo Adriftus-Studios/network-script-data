@@ -65,7 +65,7 @@ dtd_command:
     2: <list[coordinates].include[<yaml[global.player.<player.uuid>].read[dtd.locations].keys||<list[]>>].include[<server.online_players.parse[name]>]>
   script:
     ## Arg1 = Portal
-    - if <context.args.get[1].advanced_matches_text[*_portal]>:
+    - if <context.args.get[1].advanced_matches[*_portal]>:
       - if <context.args.last.starts_with[duration<&co>]>:
         - if <duration[<context.args.last.after[<&co>]>].exists>:
           - define duration <util.time_now.add[<context.args.last.after[<&co>]>]>

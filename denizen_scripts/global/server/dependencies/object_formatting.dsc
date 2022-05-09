@@ -16,7 +16,7 @@ script_formatting:
 
     # todo : scripts are always maps, add error for malformed script container type
     # - if <[content].object_type> == map:
-    - foreach <[content]> if:<[content].object_type.advanced_matches_text[map|list]>:
+    - foreach <[content]> if:<[content].object_type.advanced_matches[map|list]>:
       - choose <[value].object_type>:
         - case map:
           - define values <[values].include_single[<&e><[key]><&6>:<&a><n><proc[script_formatting].context[<list_single[<[value]>].include[<[padding].add[2]>|false]>]>]>
