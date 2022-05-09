@@ -27,6 +27,7 @@ per_player_loot:
       - define loot <player.flag[looted_locations.<context.location.simple>]>
     - else if <context.location.has_loot_table>:
       - define loot <server.generate_loot_table[<map[id=<context.location.loot_table_id>;location=<context.location>]>]>
+      - if <script[].data_key[additiona_loot.<context.location.loot_table_id>]>
       - flag player looted_locations.<context.location.simple>:<[loot]>
     - inventory set o:<[loot]> d:<[inventory]>
     - inventory open d:<[inventory]>
