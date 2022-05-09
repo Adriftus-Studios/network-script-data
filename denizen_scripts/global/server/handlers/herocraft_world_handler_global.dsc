@@ -16,7 +16,7 @@ herocraft_send_to_world:
       - narrate "<&c>Unable to complete this action right now..."
       - log error "SERVER<&co> <[world]> is not currently connected."
       - stop
-    - bungeerun <[world]> set_inventory def:<player>|<player.inventory.map_slots>
+    - bungeerun <[world]> set_inventory def:<player>|<player.inventory.map_slots>|<player.enderchest.map_slots>
     - if <[world]> == herocraft:
       - bungeerun herocraft herocraft_set_world def:<player>|!
     - else if <bungee.server> == herocraft:
