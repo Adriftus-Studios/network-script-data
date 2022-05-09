@@ -3,7 +3,7 @@ custom_saddle:
   material: saddle
   data:
     recipe_book_category: travel.horse_armor0
-  no_id: true
+  allow in material recipes: true
   recipes:
     1:
       type: shaped
