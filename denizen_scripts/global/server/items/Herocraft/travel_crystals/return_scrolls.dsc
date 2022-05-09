@@ -54,13 +54,16 @@ return_events:
   events:
     on return_scroll|return_crystal recipe formed:
       - define lore "<context.item.lore.include[<&b>Location<&co> <player.location.simple>]>"
-      - determine passively <context.item.with[flag=destination:<player.location>;lore=<[lore]>]>
+      - determine passively <context.item.with[flag=server:<bungee.server>;flag=destination:<player.location>;lore=<[lore]>]>
 
 return_task:
   type: task
   debug: false
   script:
     - define type <context.item.flag[type]>
+    - if <bungee.server> != <context.item.flag[server].if_null[herocraft]>:
+      - narrate "<&c>The item lacks the ability to cross the multiuniverse..."
+      - stop
     - if <[type]> == scroll:
       - if <context.item.flag[destination].world> != <player.location.world>:
         - narrate "<&c>This item lacks the power for cross dimensional travel"
