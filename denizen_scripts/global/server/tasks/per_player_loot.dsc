@@ -18,6 +18,8 @@ per_player_loot:
   type: task
   debug: false
   script:
+    - if !<context.location.has_loot_table>:
+      - stop
     - determine passively cancelled
     - define inventory <inventory[per_player_loot_inventory]>
     - flag <player> looted_locations.current:<context.location.simple>
