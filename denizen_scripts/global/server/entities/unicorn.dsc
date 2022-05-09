@@ -53,6 +53,9 @@ unicorn_preserve_skin:
   type: task
   debug: false
   script:
+    - if <context.entity.owner.exists> && <context.entity.owner> != <player>:
+      - narrate "<&c>The Whimsicorn rejects you, as you are not it's master."
+      - determine cancelled
     - if <context.item.exists> && <context.item.material.name> == name_tag && <context.item.has_display>:
       - adjust <context.entity> custom_name:<&chr[F801]><context.item.display>
       - take iteminhand
