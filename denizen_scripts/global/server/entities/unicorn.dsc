@@ -13,6 +13,22 @@ unicorn:
     on_damaged: cancel
     right_click_script: unicorn_preserve_skin
 
+unicorn_spawn_egg:
+  type: item
+  material: horse_spawn_egg
+  display name: <&6>Unicorn Spawn Egg
+  lore:
+  - "<&6>Mythical Spawn Egg"
+  flags:
+    right_click_script: unicorn_spawn_from_egg
+
+unicorn_spawn_from_egg:
+  type: task
+  debug: false
+  script:
+    - take iteminhand
+    - spawn unicorn <context.location>
+
 unicorn_preserve_skin:
   type: task
   debug: false
