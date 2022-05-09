@@ -1,4 +1,4 @@
-multiverse_crystal:
+multiverse_dust:
   type: item
   material: feather
   display name: <&6>Multiverse Crystal
@@ -8,6 +8,8 @@ multiverse_crystal:
     recipe_book_category: travel
   flags:
     right_click_script: multiverse_crystal_task
+  mechanisms:
+    custom_model_data: 500
   recipes:
     1:
       type: shaped
