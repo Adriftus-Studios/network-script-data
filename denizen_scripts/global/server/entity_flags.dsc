@@ -88,11 +88,11 @@ entity_flags:
       - else:
         - inject <context.entity.flag[on_dismount]>
     on entity exits entity_flagged:on_dismounted:
-      - if <context.vehicle.flag[on_dismount].object_type> == List:
-        - foreach <context.vehicle.flag[on_dismount]>:
+      - if <context.vehicle.flag[on_dismounted].object_type> == List:
+        - foreach <context.vehicle.flag[on_dismounted]>:
           - inject <[value]>
       - else:
-        - inject <context.vehicle.flag[on_dismount]>
+        - inject <context.vehicle.flag[on_dismounted]>
     on entity_flagged:on_mount enters vehicle:
       - if <context.entity.flag[on_mount].object_type> == List:
         - foreach <context.entity.flag[on_mount]>:
