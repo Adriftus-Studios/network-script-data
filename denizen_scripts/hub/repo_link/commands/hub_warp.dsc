@@ -20,6 +20,7 @@ hub_warp_open:
   type: task
   debug: false
   script:
+    - determine passively cancelled
     - inventory open d:hub_warp_inventory
 
 hub_warp_inventory:
