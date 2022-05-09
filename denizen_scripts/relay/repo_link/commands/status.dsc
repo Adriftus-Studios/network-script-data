@@ -69,7 +69,7 @@ status_command_handler:
       - foreach <context.options> key:option as:input:
         - choose <[option]>:
           - case server:
-            - if <[input].advanced_matches_text[all|-all|--all]>:
+            - if <[input].advanced_matches[all|-all|--all]>:
               - foreach <yaml[bungee_config].read[servers].keys> as:server:
                 - if !<bungee.list_servers.contains[<[server]>]>:
                   - define embed <[embed].add_inline_field[**<[server].to_titlecase>**].value[:warning:`Offline`]>

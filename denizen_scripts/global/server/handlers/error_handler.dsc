@@ -3,9 +3,11 @@ error_handler:
   debug: false
   data:
     enabled_servers:
+      - b
       - hub
       - test
       - herocraft
+      - zanzabar
   events:
     on server start:
       - yaml id:error_handler create
@@ -26,7 +28,7 @@ error_handler:
       - stop if:!<bungee.connected>
 
       # % ██ [ verify enabled          ] ██
-      - stop if:!<bungee.server.advanced_matches_text[<script.data_key[data.enabled_servers]>]>
+      - stop if:!<bungee.server.advanced_matches[<script.data_key[data.enabled_servers]>]>
 
       # % ██ [ collect queue context   ] ██
       - if <[queue].exists>:
