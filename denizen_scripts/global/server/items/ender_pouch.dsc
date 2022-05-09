@@ -9,6 +9,13 @@ ender_pouch:
     right_click_script: ender_pouch_open
   mechanisms:
     custom_model_data: 50
+  recipes:
+    1:
+      type: shaped
+      input:
+        - ender_eye|double_compressed_obsidian|ender_eye
+        - double_compressed_obsidian|ender_chest|double_compressed_obsidian
+        - ender_eye|double_compressed_obsidian|ender_eye
 
 ender_pouch_open:
   type: task
