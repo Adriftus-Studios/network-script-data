@@ -7,7 +7,7 @@ multiverse_dust:
   data:
     recipe_book_category: travel
   flags:
-    right_click_script: multiverse_crystal_task
+    right_click_script: multiverse_dust_task
   mechanisms:
     custom_model_data: 500
   recipes:
@@ -18,7 +18,7 @@ multiverse_dust:
         - compressed_obsidian|nether_star|compressed_obsidian
         - compressed_obsidian|compressed_obsidian|compressed_obsidian
 
-multiverse_crystal_task:
+multiverse_dust_task:
   type: task
   debug: false
   script:
