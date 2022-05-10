@@ -21,9 +21,9 @@ morb_empty:
     1:
       type: shaped
       input:
-        - air|diamond|air
+        - diamond|piston|diamond
         - compressed_stone|ghast_tear|compressed_stone
-        - air|obsidian|air
+        - obsidian|piston|obsidian
 
 morb_filled:
   type: item
