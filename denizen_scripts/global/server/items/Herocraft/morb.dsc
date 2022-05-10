@@ -69,7 +69,7 @@ morb_events:
         - define "list:->:<&e>Owner: <&b><context.hit_entity.owner.name>"
       - else:
         - define "list:->:<&e>Owner: <&7>Unowned"
-      - adjust def:item lore:<[item].lore.include[<[list]>]>
+      - adjust def:item lore:<[item].lore.if_null[<list>].include[<[list]>]>
       - flag <context.hit_entity> temp:! if:<context.hit_entity.has_flag[temp]>
       - flag <context.hit_entity> no_modify
       - flag <[item]> describe:<context.hit_entity.describe>
