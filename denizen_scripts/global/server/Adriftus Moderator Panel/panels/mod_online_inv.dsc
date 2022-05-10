@@ -41,7 +41,7 @@ mod_online_inv_events:
       - if <[equipped]> != default:
         - run mask_remove def:<[equipped]>
       - else:
-        - run mask_wear def:<[equipped]>
+        - run mask_wear def:adriftus_moderator
     on player clicks ender_eye in mod_online_inv:
       - if <player.has_flag[vanished]>:
         - run mod_unvanish_task
