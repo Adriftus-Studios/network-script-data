@@ -9,6 +9,7 @@ head_command:
   # % ██ [ check if not using arguments ] ██
     - if <context.args.is_empty>:
       - give <player.skull_item>
+      - stop
 
   # % ██ [ give head                    ] ██
     - define player <server.match_offline_player[<context.args.first>].if_null[null]>
