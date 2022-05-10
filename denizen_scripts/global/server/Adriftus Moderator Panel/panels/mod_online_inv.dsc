@@ -7,7 +7,7 @@ mod_online_inv:
   gui: true
   size: 54
   definitions:
-    flight: <item[feather].with[display_name=<&b>Toggle<&sp>Flight]>
+    mask: <item[iron_pickaxe].with[display_name=<&6>Toggle<&sp>Mask;custom_model_data=1]>
     vanish: <item[ender_eye].with[display_name=<&d>Toggle<&sp>Vanish]>
     border: <item[light_blue_stained_glass_pane].with[display_name=<&sp>]>
     close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close].with_flag[to:close]>
@@ -36,15 +36,12 @@ mod_online_inv_events:
       - define map <[map].with[active].as[<yaml[global.player.<[uuid]>].read[chat.channels.active]||Server>]>
       - flag <player> amp_map:<[map]>
       - inject mod_actions_inv_open
-    on player clicks feather in mod_online_inv:
-      - if <player.can_fly>:
-        - adjust <player> flying:false
-        - adjust <player> can_fly:false
-        - flag <player> no_fall_damage_once
-        - narrate "<&e>You are no longer <&b>Flying<&e>."
+    on player clicks iron_pickaxe in mod_online_inv:
+      - define equipped <yaml[global.player.<player.uuid>].read[masks.current.id].if_null[default]>
+      - if <[equipped]> != default:
+        - run mask_remove def:<[equipped]>
       - else:
-        - adjust <player> can_fly:true
-        - narrate "<&e>You can now <&b>Fly<&e>."
+        - run mask_wear def:<[equipped]>
     on player clicks ender_eye in mod_online_inv:
       - if <player.has_flag[vanished]>:
         - run mod_unvanish_task
@@ -55,6 +52,8 @@ mod_online_inv_open:
   type: task
   debug: false
   script:
+    # Give user permission to use the moderator mask.
+    - run mask_unlock def:adriftus_moderator
     - define items <list>
     - define inventory <inventory[mod_online_inv]>
     - adjust def:inventory "title:<&6>A<&e>MP <&f>- <&a><server.online_players.size> online."
