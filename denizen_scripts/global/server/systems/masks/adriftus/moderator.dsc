@@ -25,7 +25,7 @@ mask_adriftus_moderator_equip:
     - flag player on_hunger_change:->:cancel
     - flag player on_damaged:->:cancel
     - run SAVED_INVENTORY_LOAD def:moderator
-    - wait 2t
+    - wait 10t
     - adjust player can_fly:true
 
 mask_adriftus_moderator_unequip:
