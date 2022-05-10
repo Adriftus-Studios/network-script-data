@@ -20,6 +20,7 @@ mask_adriftus_moderator_equip:
     - flag player moderator_mask.location:<player.location>
     - flag player moderator_mask.health:<player.health>
     - flag player moderator_mask.hunger:<player.food_level>
+    - flag player player_right_clicks:->:moderator_mask_right_click
     - heal
     - feed
     - flag player on_hunger_change:->:cancel
@@ -34,6 +35,7 @@ mask_adriftus_moderator_unequip:
   script:
     - flag player on_hunger_change:<-:cancel
     - flag player on_damaged:<-:cancel
+    - flag player player_right_clicks:<-:moderator_mask_right_click
     - adjust player can_fly:false
     - adjust <player> health:<player.flag[moderator_mask.health]>
     - adjust <player> food_level:<player.flag[moderator_mask.hunger]>
@@ -42,3 +44,11 @@ mask_adriftus_moderator_unequip:
     - flag player moderator_mask.hunger:!
     - flag player moderator_mask.location:!
     - run SAVED_INVENTORY_LOAD def:default
+
+moderator_mask_right_click:
+  type: task
+  debug: false
+  script:
+    - determine passively cancelled
+    - if <context.location.inventory.exists>:
+      - inventory open d:<context.location.inventory>
