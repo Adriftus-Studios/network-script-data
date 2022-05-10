@@ -25,6 +25,7 @@ mask_adriftus_moderator_equip:
     - flag player on_hunger_change:->:cancel
     - flag player on_damaged:->:cancel
     - adjust player can_fly:true
+    - run SAVED_INVENTORY_LOAD def:moderator
 
 mask_adriftus_moderator_unequip:
   type: task
@@ -39,3 +40,4 @@ mask_adriftus_moderator_unequip:
     - flag player moderator_mask.health:!
     - flag player moderator_mask.hunger:!
     - flag player moderator_mask.location:!
+    - run SAVED_INVENTORY_LOAD def:default
