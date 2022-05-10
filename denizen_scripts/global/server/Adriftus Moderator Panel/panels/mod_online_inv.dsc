@@ -17,7 +17,7 @@ mod_online_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [flight] [border] [border] [border] [close] [border] [border] [border] [vanish]
+    - [mask] [border] [border] [border] [close] [border] [border] [border] [vanish]
 
 mod_online_inv_events:
   type: world
