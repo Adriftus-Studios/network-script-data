@@ -183,3 +183,9 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <player.flag[on_stops_flying]>
+    on player breaks block flagged:on_break:
+      - if <player.flag[on_break].object_type> == List:
+        - foreach <player.flag[on_break]>:
+          - inject <[value]>
+      - else:
+        - inject <player.flag[on_break]>
