@@ -35,7 +35,7 @@ mask_adriftus_moderator_unequip:
   script:
     - flag player on_hunger_change:<-:cancel
     - flag player on_damaged:<-:cancel
-    - flag player player_right_clicks:moderator_mask_right_click
+    - flag player player_right_clicks:!
     - adjust player can_fly:false
     - adjust <player> health:<player.flag[moderator_mask.health]>
     - adjust <player> food_level:<player.flag[moderator_mask.hunger]>

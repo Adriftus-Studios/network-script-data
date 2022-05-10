@@ -24,17 +24,28 @@ mask_adriftus_game_master_equip:
   type: task
   debug: false
   script:
-    - wait 1s
-    - adjust <player> can_fly:true
-    - flag <player> no_damage
-    - flag <player> on_hunger_change:->:cancel
-    - flag <player> on_target:cancel
+    - flag player admin_mask.location:<player.location>
+    - flag player admin_mask.health:<player.health>
+    - flag player admin_mask.hunger:<player.food_level>
+    - heal
+    - feed
+    - flag player on_hunger_change:->:cancel
+    - flag player on_damaged:->:cancel
+    - run SAVED_INVENTORY_LOAD def:game_master
+    - wait 10t
+    - adjust player can_fly:true
 
 mask_adriftus_game_master_unequip:
   type: task
   debug: false
   script:
-    - adjust <player> can_fly:false
-    - flag <player> no_damage:!
-    - flag <player> on_hunger_change:<-:cancel
-    - flag <player> on_target:!
+    - flag player on_hunger_change:<-:cancel
+    - flag player on_damaged:<-:cancel
+    - adjust player can_fly:false
+    - adjust <player> health:<player.flag[admin_mask.health]>
+    - adjust <player> food_level:<player.flag[admin_mask.hunger]>
+    - adjust <player> location:<player.flag[admin_mask.location]>
+    - flag player admin_mask.health:!
+    - flag player admin_mask.hunger:!
+    - flag player admin_mask.location:!
+    - run SAVED_INVENTORY_LOAD def:default

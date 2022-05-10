@@ -15,6 +15,15 @@ morb_empty:
     - "<&b>Throw at an Entity to capture it."
   mechanisms:
     custom_model_data: 1
+  data:
+    recipe_book_category: gadgets
+  recipes:
+    1:
+      type: shaped
+      input:
+        - air|diamond|air
+        - compressed_stone|ghast_tear|compressed_stone
+        - air|obsidian|air
 
 morb_filled:
   type: item
