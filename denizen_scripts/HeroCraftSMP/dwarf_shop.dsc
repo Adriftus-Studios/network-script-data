@@ -139,6 +139,17 @@ rock_spirit_events:
     # Material
     # Chance is a percentage
       stone: 3
+      andesite: 3
+      diorite: 3
+      tuff: 4
+      deepslate: 5
+      coal_ore: 6
+      copper_ore: 6
+      iron_ore: 7
+      redstone_ore: 9
+      gold_ore: 12
+      emerald_ore: 30
+      lapis_ore: 15
 
   events:
     on player breaks block server_flagged:rock_spores_activated:
