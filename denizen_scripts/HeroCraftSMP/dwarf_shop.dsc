@@ -137,18 +137,14 @@ rock_spirit_events:
   data:
     drop_chances:
     # Material
-      stone:
-      # chance is 3 out of 10
-        chance: 3
-        total: 10
+    # Chance is a percentage
+      stone: 3
+
   events:
     on player breaks block server_flagged:rock_spores_activated:
     - stop if:<list[survival|adventure].contains[<player.gamemode>].not>
     - define material <context.material.name>
-    - stop if:<script.data_key[data.drop_chances].keys.contains[<[material]>].not>
-    - define config <script.data_key[data.drop_chances.<[material]>]>
-    - define list <element[no].repeat_as_list[<[config].get[total].sub[<[config].get[chance]>]>]>
-    - define list <[list].include[<element[yes].repeat_as_list[<[config].get[chance]>]>]>
-    - define outcome <[list].random>
-    - if <[outcome]> == yes:
+    - stop if:<script.data_key[data.drop_chances.<[material]>].exists.not>
+    - define chance <script.data_key[data.drop_chances.<[material]>]>
+    - if <util.random_chance[<[chance]>]>:
       - determine <context.location.drops[<player.item_in_hand>].include[<item[rock_spore_item]>]>
