@@ -150,6 +150,7 @@ rock_spirit_events:
       gold_ore: 12
       emerald_ore: 30
       lapis_ore: 15
+      diamond_ore: 30
 
   events:
     on player breaks block server_flagged:rock_spores_activated:
