@@ -53,6 +53,7 @@ unicorn_preserve_skin:
   type: task
   debug: false
   script:
+    - ratelimit <player> 5t
     - if <context.entity.owner.exists> && <context.entity.owner> != <player>:
       - narrate "<&c>The Whimsicorn rejects you, as you are not it's master."
       - determine cancelled
