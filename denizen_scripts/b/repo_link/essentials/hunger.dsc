@@ -5,17 +5,21 @@ hunger_command:
   description: Hungers or satiates another player's or your own hunger
   usage: /hunger (player) <&lt>#<&gt>
   permission: behr.essentials.hunger
+  aliases:
+    - feed
   tab completions:
     1: <server.online_players.exclude[<player>].parse[name]>
   script:
   # % ██ [ check if typing too many or no arguments ] ██
     - if <context.args.is_empty> || <context.args.size> > 2:
       - narrate "<&c>Invalid usage - /hunger (player) <&lt>#<&gt>"
+      - stop
 
   # % ██ [ check if using self or named player      ] ██
     - if <context.args.size> == 1:
       - define player <player>
       - define level <context.args.first>
+
     - else:
       - define player <server.match_player[<context.args.first>].if_null[null]>
       - if !<[player].is_truthy>:
