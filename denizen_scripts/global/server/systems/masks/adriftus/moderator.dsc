@@ -3,7 +3,7 @@ mask_adriftus_moderator:
   display_data:
     category: Adriftus
     material: iron_pickaxe[custom_model_data=1]
-    display_name: <&6>Adriftus<&co> <&c>Moderator
+    display_name: <&6>Adriftus<&co> <&a>Moderator
     description: "<&d>We r da Law!"
   mask_data:
     on_equip_task: mask_adriftus_moderator_equip
