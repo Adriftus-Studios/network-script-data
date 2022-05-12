@@ -5,10 +5,15 @@ status_command_create:
     - definemap options:
         1:
           type: string
-          name: Server(s)
+          name: selection
           description: Specifies a server to check the status for
           required: false
-        #additional option templates
+
+        #1:
+        #  type: string
+        #  name: Server(s)
+        #  description: Specifies a server to check the status for
+        #  required: false
         #2:
         #  type: boolean
         #  name: help
