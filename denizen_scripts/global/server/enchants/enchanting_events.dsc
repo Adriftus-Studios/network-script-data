@@ -197,7 +197,7 @@ player_death_enchant_handler:
             - define keep:->:<[item].proc[build_item_enchantment_lore]>
         - else:
           - define drops:->:<[item]>
-      - flag player temp.soulbound_enchant:|:<[keep]>
+      - flag player temp.soulbound_enchant:|:<[keep]> if:<[keep].exists>
       - determine <[drops]||air>
 
 spawn_enchant_handler:
