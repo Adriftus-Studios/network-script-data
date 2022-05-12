@@ -51,11 +51,11 @@ entity_flags:
       - determine passively FLY_COOLDOWN:<player.flag_expiration[no_fly_kick].duration_since[<util.time_now>]>
       - determine cancelled
     on player right clicks entity_flagged:right_click_script:
-      - if !<player.is_sneaking>:
+      - if <context.entity.flag[right_click_script].object_type> == List:
+        - foreach <context.entity.flag[right_click_script]>:
+          - inject <[value]>
+      - else:
         - inject <context.entity.flag[right_click_script]>
-    on player right clicks entity_flagged:shift_right_click_script:
-      - if <player.is_sneaking>:
-        - inject <context.entity.flag[shift_right_click_script]>
     on material falls:
       - if <context.entity.has_flag[showfake]>:
         - determine passively cancelled
