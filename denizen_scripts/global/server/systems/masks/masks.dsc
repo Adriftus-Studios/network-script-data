@@ -31,7 +31,7 @@ mask_wear_events:
       - flag server masks.categories.<[value].data_key[display_data.category]>.<[value].data_key[mask_data.id]>:<[value]>
       - flag server masks.ids.<[value].data_key[mask_data.id]>:<[value]>
   events:
-    on custom event id:global_player_data_loaded::
+    on custom event id:global_player_data_loaded:
       - if !<player.is_online>:
         - stop
       - if !<yaml[global.player.<player.uuid>].contains[defaults.skin_blob]> || <yaml[global.player.<player.uuid>].read[defaults.skin_blob]> != <player.skin_blob>:
