@@ -7,8 +7,7 @@ status_command_create:
           type: string
           name: Server(s)
           description: Specifies a server to check the status for
-          #, default returning them all
-          required: true
+          required: false
         #additional option templates
         #2:
         #  type: boolean
@@ -66,33 +65,44 @@ status_command_handler:
       - define embed <discord_embed.with[color].as[<color[0,254,255]>]>
       - define description <list>
 
+      - if <context.options.is_empty>:
+        - foreach <yaml[bungee_config].read[servers].keys> as:server:
+          - if !<bungee.list_servers.contains[<[server]>]>:
+            - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>warning<&co> `Offline`]>"
+          - else:
+            - ~bungeetag server:<[server].to_titlecase> <bungee.connected> save:request
+            - if <entry[request].result> == 0:
+              - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>warning<&co> `Offline`]>"
+            - else:
+              - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>ballot_box_with_check<&co> `Online`]>"
+
       - foreach <context.options> key:option as:input:
         - choose <[option]>:
           - case server:
             - if <[input].advanced_matches[all|-all|--all]>:
               - foreach <yaml[bungee_config].read[servers].keys> as:server:
                 - if !<bungee.list_servers.contains[<[server]>]>:
-                  - define embed <[embed].add_inline_field[**<[server].to_titlecase>**].value[:warning:`Offline`]>
+                  - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>warning<&co> `Offline`]>"
                 - else:
                   - ~bungeetag server:<[server].to_titlecase> <bungee.connected> save:request
                   - if <entry[request].result> == 0:
-                    - define embed <[embed].add_inline_field[**<[server].to_titlecase>**].value[:warning:`Offline`]>
+                    - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>warning<&co> `Offline`]>"
                   - else:
-                    - define embed <[embed].add_inline_field[**<[server].to_titlecase>**].value[:ballot_box_with_check:`Online`]>
+                    - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>ballot_box_with_check<&co> `Online`]>"
 
             - else:
               - if !<yaml[bungee_config].contains[servers.<[input]>]>:
-                - define description "<[description].include_single[:warning: Opted for server <&dq>`<[input]>`<&dq><n>Server is not configured in the network's server listings.]>"
+                - define description "<[description].include_single[<&co>warning<&co> Opted for server <&dq>`<[input]>`<&dq><n>Server is not configured in the network's server listings.]>"
 
               - else if !<bungee.list_servers.contains[<[input]>]>:
-                - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[:warning:`Offline`]>
+                - define embed "<[embed].add_inline_field[**<[input].to_titlecase>**].value[<&co>warning<&co> `Offline`]>"
 
               - else:
                 - ~bungeetag server:<[input].to_titlecase> <bungee.connected> save:request
                 - if <entry[request].result> == 0:
-                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[:ballot_box_with_check:`Offline`]>
+                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[<&co>ballot_box_with_check<&co>`Offline`]>
                 - else:
-                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[:ballot_box_with_check:`Online`]>
+                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[<&co>ballot_box_with_check<&co>`Online`]>
 
           # players argument template
           #- case players:
