@@ -189,3 +189,9 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <player.flag[on_break]>
+    on player kicked flagged:on_kick:
+      - if <player.flag[on_kick].object_type> == List:
+        - foreach <player.flag[on_kick]>:
+          - inject <[value]>
+      - else:
+        - inject <player.flag[on_kick]>
