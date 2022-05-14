@@ -93,6 +93,23 @@ custom_recipe_data_initializer:
     on script reload:
       - inject locally path:build_item_list
 
+custom_recipe_add_to_crafting:
+  type: item
+  material: feather
+  display name: <&e>Learn Recipe
+  lore:
+    - "<&e>Add to Vanilla Crafting Book"
+    - "<&7>This can fix uncraftable items"
+  flags:
+    run_script: custom_recipe_book_add_recipe
+
+custom_recipe_book_add_recipe:
+  type: task
+  debug: false
+  script:
+    - ratelimit <player> 1s
+    - adjust <player> discover_recipe:denizen:<context.item.flag[recipe]>
+
 custom_recipe_inventory_open:
   type: task
   debug: false
@@ -103,6 +120,7 @@ custom_recipe_inventory_open:
     back: 20
     next: 34
     previous: 30
+    crafting_book_add: 35
   script:
     - define page 1 if:<[page].exists.not>
     - define recipe_id <context.item.flag[recipe_id]> if:<[recipe_id].exists.not>
@@ -110,10 +128,13 @@ custom_recipe_inventory_open:
     - define inventory <inventory[custom_recipe_inventory]>
     - inventory set slot:<script.data_key[data.back]> d:<[inventory]> "o:feather[custom_model_data=3;display=<&c>Back to Categories;flag=run_script:crafting_book_open]"
     - inventory set slot:<script.data_key[data.result]> d:<[inventory]> o:<server.flag[recipe_book.recipes.<[recipe_id]>.result].with[flag=page:<[page]>]>
+    - inventory set slot:<script.data_key[data.crafting_book_add]> d:<[inventory]> o:custom_recipe_add_to_crafting[flag=recipe:<[recipe_id]>]
     - define slots <script.data_key[data.slots].as_list>
     - foreach <server.flag[recipe_book.recipes.<[recipe_id]>.items]>:
       - foreach next if:<[value].material.name.equals[air].if_null[false]>
       - inventory set slot:<[slots].get[<[loop_index]>]> d:<[inventory]> o:<[value]>
+
+    # Add Recipe to Crafting Book
 
     # Next Page
     - define recipes <server.flag[recipe_book.recipes.<[recipe_id]>.result].recipe_ids.parse[after[<&co>]]>
