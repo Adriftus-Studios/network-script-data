@@ -8,7 +8,7 @@ chat_send_message:
       - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
 
       # Ping Sanitization
-      - if !<list[staff|admin|development].contains[<[channel]>]>:
+      - if !<list[staff|admin|development].contains[<[game_channel]>]>:
         - define game_message <[game_message].replace[@].with[(a)]>
 
       - define Hook <entry[webhook].created_queue.determination.get[1]>
