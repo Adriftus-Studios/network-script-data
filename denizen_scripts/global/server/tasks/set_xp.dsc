@@ -12,5 +12,5 @@ set_xp_fix:
     after player joins:
       - if <server.has_flag[transferred_inventories.<player.uuid>.xp]>:
         - if <player.xp_total> < <server.flag[transferred_inventories.<player.uuid>.xp]>:
-          - experience set <server.has_flag[transferred_inventories.<player.uuid>.xp]>
+          - experience set <server.flag[transferred_inventories.<player.uuid>.xp]>
         - flag server transferred_inventories.<player.uuid>.xp:!
