@@ -26,6 +26,7 @@ multiverse_dust_task:
     - ratelimit <player> 1t
     - if <context.item.has_flag[last_used]> && <context.item.flag[last_used].from_now.in_minutes> < 10:
       - narrate "<&c>This item has not recharged"
+      - narrate "<&e>Cooldown Remaining<&co> <&f><context.item.flag[last_used].from_now.formatted>"
       - stop
     - if <bungee.server> == herocraft:
       - inventory flag slot:<player.held_item_slot> last_used:<util.time_now>
