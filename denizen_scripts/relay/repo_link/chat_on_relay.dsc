@@ -6,12 +6,17 @@ chat_send_message:
   script:
       - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.channel]>
       - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
+
+      # Ping Sanitization
+      - if !<list[staff|admin|development].contains[<[channel]>]>:
+        - define game_message <[game_message].replace[@].with[(a)]>
+
       - define Hook <entry[webhook].created_queue.determination.get[1]>
       - define Data <script.parsed_key[webhook].to_json>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
   webhook:
-    content: <[game_message].parse_color.strip_color.replace[@].with[(a)]>
+    content: <[game_message].parse_color.strip_color>
     username: <[display_name]><&sp><&lb><[Server]><&rb>
     avatar_url: https://mc-heads.net/head/<[uuid]>/100
 
