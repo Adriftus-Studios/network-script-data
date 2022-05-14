@@ -37,7 +37,7 @@ adriftus_chest_validate:
   script:
     - if <bungee.server> == hub:
       - stop
-    - if <context.item.has_flag[adriftus_server]> && <context.item.flag[adriftus_server]> != <bungee.server> && <server.flag[linked_servers].contains[<bungee.server>].if_null[false].not> && <context.item.flag[adriftus_server]> != hub:
+    - if <context.item.has_flag[adriftus_server]> && <context.item.flag[adriftus_server]> != <bungee.server> && <server.flag[linked_servers].contains[<context.item.flag[adriftus_server]>].if_null[false].not> && <context.item.flag[adriftus_server]> != hub:
       - determine cancelled
     - else:
       - define lore <context.item.lore.remove[last]>
