@@ -19,12 +19,12 @@ main_menu_help:
   material: paper
   display name: <&a>Help!
   lore:
-    - "<&e>Request Help!"
-    - "<&e>Not Yet Implemented"
+    - "<&e>Request A Staff Member!"
+    - "<&7>- 5 Minute Cooldown -"
   mechanisms:
     custom_model_data: 105
   flags:
-    run_script: cancel
+    run_script: main_menu_request_help
 
 main_menu_controls:
   type: item
@@ -100,3 +100,10 @@ main_menu_inventory:
     - [] [] [] [] [main_menu_cosmetics] [] [] [] []
     - [] [] [main_menu_recipes] [] [] [] [main_menu_controls] [] []
     - [] [] [] [] [main_menu_help] [] [] [] [main_menu_settings]
+
+main_menu_request_help:
+  type: task
+  debug: false
+  script:
+    - ratelimit <player> 5m
+    - run chat_system_speak "def.message:I am requesting a staff member to help!" def.channel:staff

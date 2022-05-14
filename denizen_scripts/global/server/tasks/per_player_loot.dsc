@@ -28,5 +28,15 @@ per_player_loot:
     - else if <context.location.has_loot_table>:
       - define loot <server.generate_loot_table[<map[id=<context.location.loot_table_id>;location=<context.location>]>]>
       - flag player looted_locations.<context.location.simple>:<[loot]>
+    - if <script[per_player_loot_additions].data_key[<bungee.server>].exists> && <util.random_chance[5]>:
+      - define loot:->:<item[<script[per_player_loot_additions].data_key[<bungee.server>].random>]>
     - inventory set o:<[loot]> d:<[inventory]>
     - inventory open d:<[inventory]>
+
+per_player_loot_additions:
+  type: data
+  zanzabar:
+    - multiverse_dust
+    - tpa_crystal
+    - back_crystal
+    - morb_empty

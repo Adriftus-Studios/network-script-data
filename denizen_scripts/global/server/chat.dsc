@@ -8,12 +8,13 @@ chat_system_events:
 chat_system_speak:
   type: task
   debug: false
-  definitions: message
+  definitions: message|channel
   script:
       - determine passively cancelled
       - define msg <[message].if_null[<context.message>]>
       - waituntil rate:1s <bungee.connected>
-      - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current].if_null[server]>
+      - if !<[channel].exists>:
+        - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current].if_null[server]>
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
 
