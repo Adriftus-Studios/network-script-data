@@ -58,7 +58,7 @@ discord_watcher:
         - if !<context.new_message.attachments.is_empty>:
           - foreach <context.new_message.attachments> as:Attachment:
             - define Hover "<&color[#F3FFAD]>Click to Open Link <&color[#26FFC9]>:<&nl><&color[#F3FFAD]><[Attachment]>"
-            - define Text <&3>[<&b><&n>Link<&3>]<&r>
+            - define Text <&sp><&3>[<&b><&n>Link<&3>]<&r>
             - define Url <[Attachment]>
             - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
