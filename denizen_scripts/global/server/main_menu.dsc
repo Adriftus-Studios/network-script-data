@@ -84,7 +84,7 @@ main_menu_inventory_open:
     - define inventory <inventory[main_menu_inventory]>
     - define "lore:!|:<&e>Title<&co> <proc[get_player_title]>"
     - define "lore:|:<&e>Server<&co> <server.flag[display_name]||<&7><bungee.server>>"
-    - inventory set slot:14 o:<item[player_head].with[custom_model_data=1;display=<&l><player.display_name>;lore=<[lore]>;skull_skin=<player.skull_skin>]> d:<[inventory]>
+    - inventory set slot:14 o:<item[player_head].with[custom_model_data=1;display=<&6><&l><player.name>;lore=<[lore]>;skull_skin=<player.skull_skin>]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 main_menu_inventory:
