@@ -17,7 +17,7 @@ main_menu_help:
   type: item
   debug: false
   material: paper
-  display name: <&a><&l>Help
+  display name: <&c><&l>Help
   lore:
     - "<&e>Request A Staff Member!"
     - "<&7>- 5 Minute Cooldown -"
@@ -56,7 +56,7 @@ main_menu_mail:
   type: item
   debug: false
   material: feather
-  display name: <&a>Mailbox
+  display name: <&a><&l>Mailbox
   lore:
     - "<&e>Check your Mailbox!"
     - "<&e>Not Yet Implemented"
