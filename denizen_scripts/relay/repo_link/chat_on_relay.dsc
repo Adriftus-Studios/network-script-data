@@ -33,7 +33,7 @@ discord_watcher:
         - define sender DiscordUser_<context.new_message.author.id>
 
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
-        - define Text <&7><&lb><&f><&chr[0044].font[adriftus:chat]><&7><&rb>
+        - define Text <&7><&lb><&f><&chr[0002].font[adriftus:chat]><&7><&rb>
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 
         - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
@@ -61,7 +61,7 @@ discord_watcher:
             - define Url <[Attachment]>
             - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
-        - define Message <[DiscIcon]><[ChannelText]><[NameText]><[Separator]><[Attachments]><[MessageText]>
+        - define Message <[DiscIcon]><&sp><&r><[ChannelText]><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[Attachments]><[MessageText]>
         - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
