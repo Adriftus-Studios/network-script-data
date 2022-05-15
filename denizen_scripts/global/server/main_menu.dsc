@@ -2,7 +2,7 @@ main_menu_cosmetics:
   type: item
   debug: false
   material: paper
-  display name: <&d>Cosmetics
+  display name: <&d><&l>Cosmetics
   lore:
     - "<&e>Control your cosmetics!"
   mechanisms:
@@ -17,7 +17,7 @@ main_menu_help:
   type: item
   debug: false
   material: paper
-  display name: <&a>Help
+  display name: <&a><&l>Help
   lore:
     - "<&e>Request A Staff Member!"
     - "<&7>- 5 Minute Cooldown -"
@@ -30,7 +30,7 @@ main_menu_controls:
   type: item
   debug: false
   material: paper
-  display name: <&6>Controls
+  display name: <&6><&l>Controls
   lore:
     - "<&e>Server Specific Controls!"
     - "<&e>Not Yet Implemented"
@@ -43,7 +43,7 @@ main_menu_settings:
   type: item
   debug: false
   material: paper
-  display name: <&e>Settings
+  display name: <&e><&l>Settings
   lore:
     - "<&e>Settings for your gameplay"
     - "<&e>Not Yet Implemented"
@@ -69,7 +69,7 @@ main_menu_recipes:
   type: item
   debug: false
   material: paper
-  display name: <&6>Recipes
+  display name: <&6><&l>Recipes
   lore:
     - "<&e>Available custom recipes!"
   mechanisms:
