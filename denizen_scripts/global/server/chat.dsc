@@ -18,6 +18,7 @@ chat_system_speak:
         - define channel <yaml[global.player.<player.uuid>].read[chat.channels.current].if_null[server]>
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
+      - define icon <yaml[global.player.<player.uuid>].read[chat.icon].if_null[<&chr[0001]>]>
 
       # Check for Chat Lock
       - if <yaml[global.player.<player.uuid>].read[chat.locked].if_null[false]> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny].if_null[false]>:
@@ -64,7 +65,7 @@ chat_system_speak:
       - define Command "chat interact <[channel]> <[uuid]>"
       - define MessageText <[Text].on_hover[<[Hover]>].on_click[/<[Command]>]>
 
-      - define Message <[ChannelText]><[NameText]><[Separator]><[MessageText]>
+      - define Message "<[Icon]><&sp><[ChannelText]><&r> <[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>"
 
       - narrate <[message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
