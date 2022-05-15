@@ -15,8 +15,11 @@ Banner_Token_Admin:
   material: gold_nugget
   display name: <dark_red><bold>[Banner Token: ADMIN]
   lore:
-  - Insert in a Banner Designer to enable Admin Mode.
-  - Saved banners will be stored in a yaml file.
+  - Insert in a Banner Designer 
+  - to enable Admin Mode.
+  - Saved banners will be
+  - sent to #custom-banners in
+  - the staff Discord.
 
 Banner_Token_Town:
   type: item
@@ -56,7 +59,8 @@ Banner_Token_Single:
     custom_model_data: 30
   display name: <dark_gray><bold>[Banner Token: Single Use]
   lore:
-  - Insert in a Banner Designer to create a single custom banner.
+  - Insert in a Banner Designer to 
+  - create a single custom banner.
 
 Banner_Item_Town:
   type: item
