@@ -65,7 +65,7 @@ chat_system_speak:
       - define Command "chat interact <[channel]> <[uuid]>"
       - define MessageText <[Text].on_hover[<[Hover]>].on_click[/<[Command]>]>
 
-      - if <player.uuid> == <yaml[chat_history].read[<[channel]>_history].first.get[sender]> && <server.current_time_millis.sub[<yaml[chat_history].read[<[channel]>_history].first.get[time]>]> < 120000:
+      - if <player.uuid> == <yaml[chat_history].read[<[channel]>_history].last.get[sender]> && <server.current_time_millis.sub[<yaml[chat_history].read[<[channel]>_history].last.get[time]>]> < 120000:
         - define Message <&sp><&sp><&sp><&sp><&sp><[MessageText]>
       - else:
         - define Message <&nl><&font[adriftus:chat]><[Icon]><&r><&sp><[ChannelText]><&r><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
