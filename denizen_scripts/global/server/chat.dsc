@@ -65,7 +65,10 @@ chat_system_speak:
       - define Command "chat interact <[channel]> <[uuid]>"
       - define MessageText <[Text].on_hover[<[Hover]>].on_click[/<[Command]>]>
 
-      - define Message <&nl><&font[adriftus:chat]><[Icon]><&r><&sp><[ChannelText]><&r><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
+      - if <player> == <yaml[chat_history].read[<[channel]>_history].first.get[sender]>:
+        - define Message <&sp><&sp><&sp><&sp><&sp><[MessageText]>
+      - else:
+        - define Message <&nl><&font[adriftus:chat]><[Icon]><&r><&sp><[ChannelText]><&r><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
 
       - narrate <[message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
