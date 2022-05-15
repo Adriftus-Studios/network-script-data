@@ -35,7 +35,7 @@ discord_watcher:
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
         - define Text <&f><&chr[0044].font[adriftus:chat]>
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
-        - define icon <yaml[global.player.<player.uuid>].read[chat.icon].if_null[<&chr[0001]>]>
+        - define icon <&chr[0001].font[adriftus:chat]>
 
         - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
