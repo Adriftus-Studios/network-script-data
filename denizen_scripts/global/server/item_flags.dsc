@@ -60,3 +60,15 @@ item_flags:
           - inject <[value]>
       - else:
         - inject <context.item.flag[on_item_shot]>
+    on player equips item_flagged:on_equip:
+      - if <context.new_item.flag[on_equip].object_type> == List:
+        - foreach <context.new_item.flag[on_equip]>:
+          - inject <[value]>
+      - else:
+        - inject <context.new_item.flag[on_equip]>
+    on player unequips item_flagged:on_unequip:
+      - if <context.old_item.flag[on_unequip].object_type> == List:
+        - foreach <context.old_item.flag[on_unequip]>:
+          - inject <[value]>
+      - else:
+        - inject <context.old_item.flag[on_unequip]>
