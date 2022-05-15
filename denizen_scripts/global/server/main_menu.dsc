@@ -17,7 +17,7 @@ main_menu_help:
   type: item
   debug: false
   material: paper
-  display name: <&a>Help!
+  display name: <&a>Help
   lore:
     - "<&e>Request A Staff Member!"
     - "<&7>- 5 Minute Cooldown -"
@@ -30,7 +30,7 @@ main_menu_controls:
   type: item
   debug: false
   material: paper
-  display name: <&6>Controls!
+  display name: <&6>Controls
   lore:
     - "<&e>Server Specific Controls!"
     - "<&e>Not Yet Implemented"
@@ -43,7 +43,7 @@ main_menu_settings:
   type: item
   debug: false
   material: paper
-  display name: <&e>Settings!
+  display name: <&e>Settings
   lore:
     - "<&e>Settings for your gameplay"
     - "<&e>Not Yet Implemented"
@@ -56,7 +56,7 @@ main_menu_mail:
   type: item
   debug: false
   material: feather
-  display name: <&a>Mailbox!
+  display name: <&a>Mailbox
   lore:
     - "<&e>Check your Mailbox!"
     - "<&e>Not Yet Implemented"
@@ -69,7 +69,7 @@ main_menu_recipes:
   type: item
   debug: false
   material: paper
-  display name: <&6>Recipes!
+  display name: <&6>Recipes
   lore:
     - "<&e>Available custom recipes!"
   mechanisms:
@@ -84,7 +84,7 @@ main_menu_inventory_open:
     - define inventory <inventory[main_menu_inventory]>
     - define "lore:!|:<&e>Title<&co> <proc[get_player_title]>"
     - define "lore:|:<&e>Server<&co> <server.flag[display_name]||<&7><bungee.server>>"
-    - inventory set slot:14 o:<item[player_head].with[custom_model_data=1;display=<player.display_name>;lore=<[lore]>;skull_skin=<player.skull_skin>]> d:<[inventory]>
+    - inventory set slot:14 o:<item[player_head].with[custom_model_data=1;display=<&l><player.display_name>;lore=<[lore]>;skull_skin=<player.skull_skin>]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 main_menu_inventory:
