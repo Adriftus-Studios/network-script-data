@@ -28,15 +28,21 @@ per_player_loot:
     - else if <context.location.has_loot_table>:
       - define loot <server.generate_loot_table[<map[id=<context.location.loot_table_id>;location=<context.location>]>]>
       - flag player looted_locations.<context.location.simple>:<[loot]>
-    - if <script[per_player_loot_additions].data_key[<bungee.server>].exists> && <util.random_chance[5]>:
-      - define loot:->:<item[<script[per_player_loot_additions].data_key[<bungee.server>].random>]>
+    - if <script[per_player_loot_additions].data_key[<bungee.server>].exists>:
+      - foreach <script[per_player_loot_additions].data_key[<bungee.server>]> key:item as:chance:
+        - if <util.random_chance[<[chance]>]>:
+          - define loot:->:<item[<[item]>]>
     - inventory set o:<[loot]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 per_player_loot_additions:
   type: data
   zanzabar:
-    - multiverse_dust
-    - tpa_crystal
-    - back_crystal
-    - morb_empty
+    multiverse_dust: 1
+    tpa_crystal: 5
+    back_crystal: 2
+    morb_empty: 1
+    grappling_hook_basic: 3
+    grappling_hook_better: 1
+    grappling_hook_advanced: 0.5
+    grappling_hook_master: 0.01
