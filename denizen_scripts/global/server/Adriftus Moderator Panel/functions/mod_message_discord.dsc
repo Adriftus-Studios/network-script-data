@@ -13,5 +13,5 @@ mod_message_discord:
     - define fields:->:Moderator<&co><&sp><[moderator]>
     - define fields:->:Server<&co><&sp><bungee.server>
     - define message SEARCHABLE_<[uuid]><&nl>```<[fields].separated_by[<&nl>]>```
-    - bungeerun relay discord_sendMessage "def:Adriftus Staff|action-log|<[message].escaped>"
+    - bungeerun relay discord_sendMessage "def:A Staff|action-log|<[message].escaped>"
 

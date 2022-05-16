@@ -68,7 +68,7 @@ amp_command:
     - narrate "<&6>Adriftus <&e>Moderator Panel"
     - narrate "<&f>Version 3.1.0 - 2022-04-26"
     - narrate "<&f>Scripted by <&b>Kyu#5957"
-    - narrate "<&f>Channel <proc[msg_url].context[<script[amp_url].parsed_key[hover]>|<script[amp_url].parsed_key[text]>|<script[amp_url].data_key[url]>]>"
+    - narrate "<&f>Channel <proc[msg_url].context[<script[amp_url].parsed_key[hover]>|<script[amp_url].parsed_key[text]>|<script[amp_url].parsed_key[url]>]>"
 
 # -- /amp - URL Data
 amp_url:
