@@ -614,23 +614,23 @@ dwisp_run_behaviour:
   debug: false
   script:
     - while <player.has_flag[dwisp.active]>:
-      - foreach <player.flag[dwisp.data.behaviours]> key:behaviour as:value:
+      - foreach <player.flag[dwisp.data.behaviour]> key:behaviour as:value:
         - if <[value]> != off:
           - choose <[behaviour]>:
             - case heal:
-              - define targets <player.flag[dwisp.data.behaviours.heal].parsed>
+              - define targets <player.flag[dwisp.data.behaviour.heal].parsed>
               - foreach <[targets]> as:heal_target:
                 - run dwisp_heal_target def:<[heal_target]>
                 - wait 5t
             - case attack:
-              - define targets <player.flag[dwisp.data.behaviours.attack].parsed>
+              - define targets <player.flag[dwisp.data.behaviour.attack].parsed>
               - foreach <[targets]> as:damage_target:
                 - run dwisp_kill_target def:<[damage_target]>
                 - wait 5t
             - case spawn:
-              - if <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviours.spawn]>].within[50]> > 4:
+              - if <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.spawn]>].within[50]> > 4:
                 - stop
-              - if <entity[<player.flag[dwisp.data.behaviours.spawn]>].exists>:
-                - run dwisp_spawn_mob def:<player.flag[dwisp.data.behaviours.spawn]>
+              - if <entity[<player.flag[dwisp.data.behaviour.spawn]>].exists>:
+                - run dwisp_spawn_mob def:<player.flag[dwisp.data.behaviour.spawn]>
                 - wait 10t
       - wait 1s
