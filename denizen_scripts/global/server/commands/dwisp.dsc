@@ -324,7 +324,7 @@ dwisp_spawn_mob:
     - define target <player.flag[dwisp.active.location].find_spawnable_blocks_within[5].random.if_null[null]>
     - stop if:<[target].equals[null]>
     - define start <player.flag[dwisp.active.location]>
-    - define points <proc[define_curve1].context[<[start]>|<[target]>|5|90|0.5]>
+    - define points <proc[define_curve1].context[<[start]>|<[target]>|5|90|0.25]>
     - define targets <player.flag[dwisp.active.location].find_players_within[100]>
     - foreach <[points]> as:point:
       - playeffect effect:redstone at:<[point]> offset:0.05 quantity:5 special_data:1|<player.flag[dwisp.data.color1]> targets:<[targets]>
