@@ -628,7 +628,7 @@ dwisp_run_behaviour:
                 - run dwisp_kill_target def:<[damage_target]>
                 - wait 5t
             - case spawn:
-              - if <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.spawn]>].within[50]> > 4:
+              - if <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.spawn]>].within[50].size> > 4:
                 - stop
               - if <entity[<player.flag[dwisp.data.behaviour.spawn]>].exists>:
                 - run dwisp_spawn_mob def:<player.flag[dwisp.data.behaviour.spawn]>
