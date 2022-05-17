@@ -324,15 +324,15 @@ dwisp_spawn_mob:
     - define target <player.flag[dwisp.active.location].find_spawnable_blocks_within[5].random.if_null[null]>
     - stop if:<[target].equals[null]>
     - define start <player.flag[dwisp.active.location]>
-    - define points <proc[define_curve1].context[<[start]>|<[target]>|2|90|0.5]>
+    - define points <proc[define_curve1].context[<[start]>|<[target]>|2|<list[90|-90].random>|0.5]>
     - define targets <player.flag[dwisp.active.location].find_players_within[100]>
     - foreach <[points]> as:point:
       - playeffect effect:redstone at:<[point]> offset:0.05 quantity:5 special_data:1|<player.flag[dwisp.data.color1]> targets:<[targets]>
       - playeffect effect:redstone at:<[point]> offset:0.1 quantity:5 special_data:0.5|<player.flag[dwisp.data.color2]> targets:<[targets]>
       - wait 1t
     - repeat 10:
-      - playeffect effect:redstone at:<[target]> offset:0.25,0.5,0.25 quantity:10 special_data:2|<player.flag[dwisp.data.color1]> targets:<[targets]>
-      - playeffect effect:redstone at:<[target]> offset:0.25,0.5,0.25 quantity:5 special_data:1|<player.flag[dwisp.data.color2]> targets:<[targets]>
+      - playeffect effect:redstone at:<[target]> offset:0.25,1,0.25 quantity:10 special_data:2|<player.flag[dwisp.data.color1]> targets:<[targets]>
+      - playeffect effect:redstone at:<[target]> offset:0.25,1,0.25 quantity:5 special_data:1|<player.flag[dwisp.data.color2]> targets:<[targets]>
       - wait 1t
     - spawn <[mob]> <[target]>
 
