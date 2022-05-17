@@ -978,4 +978,4 @@ Banner_Designer_Storage:
   type: task
   debug: false
   script:
-    - bungeerun relay discord_sendMessage "def:A Staff|custom-banners|custom_banner_RENAME:<&nl>    type: item<&nl>    debug: false<&nl>    material: <[converter_result].as_item.material.name><&nl>    display name:<&nl>    mechanisms:<&nl>        patterns:<&nl>          - <[converter_result].as_item.patterns.separated_by[<&nl>          - ]><&nl>    lore:<&nl>    -"
+    - bungeerun relay discord_sendMessage "def:Adriftus Staff|custom-banners|custom_banner_RENAME:<&nl>    type: item<&nl>    debug: false<&nl>    material: <[converter_result].as_item.material.name><&nl>    display name:<&nl>    mechanisms:<&nl>        patterns:<&nl>          - <[converter_result].as_item.patterns.separated_by[<&nl>          - ]><&nl>    lore:<&nl>    -"

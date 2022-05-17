@@ -10,4 +10,4 @@ herocraft_command_monitoring:
   debug: false
   events:
     on command permission:adriftus.admin:
-      - bungeerun relay discord_sendMessage "def:A Staff|manager-logs|`<bungee.server>`<&co>`<player.name>` ran command `<context.command> <context.raw_args>`"
+      - bungeerun relay discord_sendMessage "def:Adriftus Staff|manager-logs|`<bungee.server>`<&co>`<player.name>` ran command `<context.command> <context.raw_args>`"

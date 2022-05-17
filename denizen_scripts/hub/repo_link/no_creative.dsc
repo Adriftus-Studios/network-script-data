@@ -14,4 +14,4 @@ herocraft_command_monitoring:
   events:
     on command permission:adriftus.admin:
       - if !<script.data_key[data.ignored.<context.command>].exists>:
-        - bungeerun relay discord_sendMessage "def:A Staff|manager-logs|`<bungee.server>`<&co>`<player.name>` ran command `<context.command> <context.raw_args>`"
+        - bungeerun relay discord_sendMessage "def:Adriftus Staff|manager-logs|`<bungee.server>`<&co>`<player.name>` ran command `<context.command> <context.raw_args>`"
