@@ -423,7 +423,7 @@ dwisp_run_movement:
           - define targets <player.location.find_players_within[100]>
           - spawn dwisp_armor_stand[custom_name=<player.flag[dwisp.data.name]>] <player.eye_location.above[30]> save:wisp
           - flag player dwisp.active.entity:<entry[wisp].spawned_entity>
-          - flag <entry[wisp].spawned_entity> on_entity_added:remove_this_entity
+          - flag <entry[wisp].spawned_entity> on_entity_added:cancel
           - flag <entry[wisp].spawned_entity> owner:<player>
           - run dwisp_apply_traits
           - define points <proc[define_spiral].context[<player.location.above[30]>|<player.location.above[5]>|1|1|1]>
@@ -618,7 +618,10 @@ dwisp_run_behaviour:
           - choose <[behaviour]>:
             - case heal:
               - if <player.flag[dwisp.data.behaviour.heal]> == self:
-                - define targets <player>
+                - if <player.flag[dwisp.active.location].distance[<player.location>]> < 50:
+                  - define targets <player>
+                - else:
+                  - foreach next
               - else:
                 - define targets <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.heal]>].within[30]>
               - foreach <[targets]> as:heal_target:
