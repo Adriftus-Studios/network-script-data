@@ -161,6 +161,8 @@ blood_cult_boss_stage_4:
     - flag server blood_cult_boss.beam_count:!
     - rotate <[curry]> cancel
     - adjust <[curry]> gravity:true
+    - heal <[curry]>
+    - feed <[curry]>
     - flag server blood_cult_boss:!
     #- run mask_wear def:
 
