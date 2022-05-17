@@ -617,7 +617,10 @@ dwisp_run_behaviour:
         - if <[value]> != off:
           - choose <[behaviour]>:
             - case heal:
-              - define targets <player.flag[dwisp.data.behaviour.heal].parsed>
+              - if <player.flag[dwisp.data.behaviour.heal]> == self:
+                - define targets <player>
+              - else:
+                - define targets <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.heal]>].within[30]>
               - foreach <[targets]> as:heal_target:
                 - run dwisp_heal_target def:<[heal_target]>
                 - wait 5t
