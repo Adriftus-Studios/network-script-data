@@ -68,6 +68,12 @@ entity_flags:
       - inject <context.projectile.flag[on_hit_block]>
     on player damaged by suffocation flagged:no_suffocate bukkit_priority:LOWEST:
       - determine cancelled
+    on projectile hits entity_flagged:on_shot:
+      - if <context.hit_entity.flag[on_shot].object_type> == List:
+        - foreach <context.hit_entity.flag[on_shot]>:
+          - inject <[value]>
+      - else:
+        - inject <context.hit_entity.flag[on_shot]>
     # Player Flag and Server Flag, with preference on Player
     # Player Flag "join_location" - will teleport the player on join, clear flag afterwards
     # Server Flag "join_location" - will teleport the player on join, if no player flag is present

@@ -400,7 +400,7 @@ dwisp_run_movement:
 
         # Far Idle (5 opposed to 2 blocks)
         - case far_idle:
-          - if <player.has_flag[dwisp.active.follow_target]> && <player.flag[dwisp.active.follow_target].is_online>:
+          - if <player.has_flag[dwisp.active.follow_target]> && <player.flag[dwisp.active.follow_target].is_spawned.if_null[false]>:
             - define target <player.flag[dwisp.active.follow_target]>
           - else:
             - define target <player>
@@ -603,7 +603,6 @@ dwisp_run_movement:
               - flag player dwisp.active.follow_target:!
             - else:
               - flag player dwisp.active.task:sleep
-              - flag player dwisp.active.task:!
           - else:
             - flag player dwisp.active.task:<player.flag[dwisp.active.queued_actions].first>
             - flag player dwisp.active.queued_actions:!|:<player.flag[dwisp.active.queued_actions].remove[first]>
@@ -616,6 +615,8 @@ dwisp_run_behaviour:
       - foreach <player.flag[dwisp.data.behaviour]> key:behaviour as:value:
         - if <[value]> != off:
           - choose <[behaviour]>:
+
+            # Heal
             - case heal:
               - if <player.flag[dwisp.data.behaviour.heal]> == self:
                 - if <player.flag[dwisp.active.location].distance[<player.location>]> < 50:
@@ -628,11 +629,16 @@ dwisp_run_behaviour:
                 - if <[heal_target].health> < <[heal_target].health_max>:
                   - run dwisp_heal_target def:<[heal_target]>
                   - wait 5t
+
+            # Attack
             - case attack:
               - define targets <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.attack]>].within[30].exclude[<player>]>
               - foreach <[targets]> as:damage_target:
-                - run dwisp_kill_target def:<[damage_target]>
-                - wait 5t
+                - if <player.flag[dwisp.active.entity].can_see[<[damage_target]>]>:
+                  - run dwisp_kill_target def:<[damage_target]>
+                  - wait 5t
+
+            # Spawn Mob
             - case spawn:
               - if <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.spawn]>].within[50].size> > 4:
                 - foreach next
