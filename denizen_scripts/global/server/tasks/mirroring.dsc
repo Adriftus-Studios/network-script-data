@@ -1,13 +1,14 @@
-mirroring_transfer_chunks:
+mirroring_transfer_chunk:
   type: task
   debug: false
   definitions: chunk|server
   script:
+    - define biomes false if:<[biomes].exists.not>
     - define uuid <util.random_uuid>
     - chunkload <[chunk]> duration:10s if:<[chunk].is_loaded.not>
     #- foreach <[chunk].cuboid.blocks[*chest|barrel|*shulker|hopper|dropper|dispenser|*furnace|smoker]>:
       #- inventory clear d:<[value].inventory>
-    - schematic create name:<[uuid]> <[chunk].cuboid> origin:<[chunk].cuboid.center>
+    - schematic create name:<[uuid]> <[chunk].cuboid> origin:<[chunk].cuboid.center> entities flags
     - schematic save name:<[uuid]> filename:global/mirroring/<[uuid]>
     - bungeerun <[server]> mirroring_paste_schematic def:<[uuid]>|<[chunk].cuboid.center>
     # Transfers entities
@@ -22,7 +23,7 @@ mirroring_paste_schematic:
     - schematic load name:<[uuid]> filename:global/mirroring/<[uuid]>
     - foreach <schematic[<[uuid]>].cuboid[<[location]>].chunks>:
       - chunkload <[value]> duration:10s
-    - schematic paste name:<[uuid]> origin:<[location]> flags
+    - schematic paste name:<[uuid]> origin:<[location]> entities
 
 mirroring_transfer_entities:
   type: task
