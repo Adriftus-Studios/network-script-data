@@ -91,7 +91,7 @@ premium_currency_give:
         - define map <map[economy.premium.current=<[newBal]>;economy.premium.lifetime=<[newLifetime]>]>
         - run global_player_data_modify_multiple def:<[player].uuid>|<[map]>
         - define message "SEARCHABLE_<[player].uuid>```<[player].name> has been given <[amount]> Premium Currency<&nl>Reason<&co> <[reason]>```"
-        - bungeerun relay discord_sendMessage "def:A Staff|manager-logs|<[message].escaped>"
+        - bungeerun relay discord_sendMessage "def:Adriftus Staff|manager-logs|<[message].escaped>"
 
 ## External ##
 # % ██ [ Remove player curency ] ██
@@ -110,7 +110,7 @@ premium_currency_remove:
           - determine false
         - run global_player_data_modify def:<[player].uuid>|economy.premium.current|<[amount]>
         - define message "SEARCHABLE_<[player].uuid>```<[player].name> has spent <[amount]> Premium Currency<&nl>Reason<&co> <[reason]>```"
-        - bungeerun relay discord_sendMessage "def:A Staff|manager-logs|<[message].escaped>"
+        - bungeerun relay discord_sendMessage "def:Adriftus Staff|manager-logs|<[message].escaped>"
         - determine true
 
 ## External ##
@@ -127,7 +127,7 @@ premium_currency_set:
           - determine false
         - run global_player_data_modify def:<[player].uuid>|economy.premium.current|<[amount]>
         - define message "SEARCHABLE_<[player].uuid>```<[player].name> was set to <[amount]> Premium Currency<&nl>Reason<&co> <[reason]>```"
-        - bungeerun relay discord_sendMessage "def:A Staff|manager-logs|<[message].escaped>"
+        - bungeerun relay discord_sendMessage "def:Adriftus Staff|manager-logs|<[message].escaped>"
         - determine true
 
 premium_currency_can_afford:
