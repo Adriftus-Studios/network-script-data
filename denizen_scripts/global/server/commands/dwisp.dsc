@@ -622,10 +622,11 @@ dwisp_run_behaviour:
               - else:
                 - define targets <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.heal]>].within[30]>
               - foreach <[targets]> as:heal_target:
-                - run dwisp_heal_target def:<[heal_target]>
-                - wait 5t
+                - if <[heal_target].health> < <[heal_target].health_max>:
+                  - run dwisp_heal_target def:<[heal_target]>
+                  - wait 5t
             - case attack:
-              - define targets <player.flag[dwisp.data.behaviour.attack].parsed>
+              - define targets <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.attack]>].within[30].exclude[<player>]>
               - foreach <[targets]> as:damage_target:
                 - run dwisp_kill_target def:<[damage_target]>
                 - wait 5t
