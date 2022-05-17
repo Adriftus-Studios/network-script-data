@@ -632,7 +632,7 @@ dwisp_run_behaviour:
                 - wait 5t
             - case spawn:
               - if <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.spawn]>].within[50].size> > 4:
-                - stop
+                - foreach next
               - if <entity[<player.flag[dwisp.data.behaviour.spawn]>].exists>:
                 - run dwisp_spawn_mob def:<player.flag[dwisp.data.behaviour.spawn]>
                 - wait 10t
