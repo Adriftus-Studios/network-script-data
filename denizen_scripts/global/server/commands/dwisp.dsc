@@ -451,6 +451,11 @@ dwisp_run_movement:
           - remove <player.flag[dwisp.active.entity]>
           - flag player dwisp.active:!
 
+        # Despawning Wisp
+        - case immediate_despawn:
+          - remove <player.flag[dwisp.active.entity]>
+          - flag player dwisp.active:!
+
         # Guard Player
         - case guard_target:
           - define target <player.flag[dwisp.active.guard_target]>
