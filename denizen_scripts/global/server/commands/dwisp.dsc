@@ -8,17 +8,17 @@ dwisp_command:
   data:
     tab_complete:
       2:
-        spawn: no_arguments
+        summon: no_arguments
         guard: <server.online_players.parse[name].insert[area].at[1]>
         stay: <list[cursor|here|current].include[<server.online_players.parse[name]>]>
         follow: <server.online_players.parse[name]>
         sleep: no_arguments
-        edit: name|color1|color2|target|damage
+        edit: name|color1|color2|target|damage|attack|range|heal|spawn
         assume: on|off
         inventory: <player.flag[dwisp.data.inventories].keys.if_null[<list>].include[off]>
         give: <server.online_players.parse[name]>
   tab completions:
-    1: assume|spawn|guard|stay|follow|sleep|edit|inventory|give
+    1: assume|summon|stay|follow|sleep|edit|inventory|give
     2: <script.parsed_key[data.tab_complete.2.<context.args.get[1]>].if_null[invalid_argument]>
   script:
     - if <context.args.size> < 1:
@@ -26,11 +26,12 @@ dwisp_command:
       - stop
     - choose <context.args.get[1]>:
 
-      # Spawn
-      - case spawn:
+      # Summon
+      - case summon:
         - stop if:<player.has_flag[dwisp.active]>
-        - flag player dwisp.active.task:spawn
-        - run dwisp_run
+        - flag player dwisp.active.task:summon
+        - run dwisp_run_movement
+        - run dwisp_run_behaviour
 
       # Follow
       - case follow:
@@ -125,6 +126,12 @@ dwisp_command:
             - flag <player> dwisp.data.target:<context.args.get[3]>
           - case damage:
             - flag <player> dwisp.data.damage:<context.args.get[3]>
+          - case attack:
+            - flag <player> dwisp.data.behaviour.attack:<context.args.get[3]>
+          - case heal:
+            - flag <player> dwisp.data.behaviour.heal:<context.args.get[3]>
+          - case spawn:
+            - flag <player> dwisp.data.behaviour.spawn:<context.args.get[3]>
           - default:
             - narrate "<&c>Unknown field<&co> <context.args.get[2]>"
 
@@ -309,6 +316,27 @@ dwisp_kill_target:
     - else:
       - kill <[target]>
 
+dwisp_spawn_mob:
+  type: task
+  debug: false
+  definitions: mob
+  script:
+    - define target <player.flag[dwisp.active.location].find_spawnable_blocks_within[5].random.if_null[null]>
+    - stop if:<[target].equals[null]>
+    - define start <player.flag[dwisp.active.location]>
+    - define points <proc[define_curve1].context[<[start]>|<[target]>|2|90|0.5]>
+    - define targets <player.flag[dwisp.active.location].find_players_within[100]>
+    - foreach <[points]>:
+      - define point <[start].add[<[target].sub[<player.flag[dwisp.active.location]>].mul[<[value].mul[0.1]>]>]>
+      - playeffect effect:redstone at:<[point]> offset:0.05 quantity:5 special_data:1|<player.flag[dwisp.data.color1]> targets:<[targets]>
+      - playeffect effect:redstone at:<[point]> offset:0.1 quantity:5 special_data:0.5|<player.flag[dwisp.data.color2]> targets:<[targets]>
+      - wait 1t
+    - repeat 10:
+      - playeffect effect:redstone at:<[target]> offset:0.25,0.5,0.25 quantity:10 special_data:2|<player.flag[dwisp.data.color1]> targets:<[targets]>
+      - playeffect effect:redstone at:<[target]> offset:0.25,0.5,0.25 quantity:5 special_data:1|<player.flag[dwisp.data.color2]> targets:<[targets]>
+      - wait 1t
+    - spawn <[mob]> <[target]>
+
 dwisp_goto:
   type: task
   debug: false
@@ -346,7 +374,7 @@ dwisp_goto:
         - playeffect effect:redstone at:<[point]> offset:0.1 quantity:5 special_data:0.75|<player.flag[dwisp.data.color2]> targets:<[targets]>
         - flag player dwisp.active.location:<[point]>
 
-dwisp_run:
+dwisp_run_movement:
   type: task
   debug: false
   script:
@@ -390,7 +418,7 @@ dwisp_run:
               - wait 2t
 
         # Spawning Wisp
-        - case spawn:
+        - case summon:
           - flag player dwisp.active.location:<player.eye_location.above[30]>
           - flag player dwisp.data.target:monster if:<player.has_flag[dwisp.data.target].not>
           - define targets <player.location.find_players_within[100]>
@@ -580,3 +608,29 @@ dwisp_run:
           - else:
             - flag player dwisp.active.task:<player.flag[dwisp.active.queued_actions].first>
             - flag player dwisp.active.queued_actions:!|:<player.flag[dwisp.active.queued_actions].remove[first]>
+
+dwisp_run_behaviour:
+  type: task
+  debug: false
+  script:
+    - while <player.has_flag[dwisp.active]>:
+      - foreach <player.flag[dwisp.data.behaviours]> key:behaviour as:value:
+        - if <[value]> != off:
+          - choose <[behaviour]>:
+            - case heal:
+              - define targets <player.flag[dwisp.data.behaviours.heal].parsed>
+              - foreach <[targets]> as:heal_target:
+                - run dwisp_heal_target def:<[heal_target]>
+                - wait 5t
+            - case attack:
+              - define targets <player.flag[dwisp.data.behaviours.attack].parsed>
+              - foreach <[targets]> as:damage_target:
+                - run dwisp_kill_target def:<[damage_target]>
+                - wait 5t
+            - case spawn:
+              - if <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviours.spawn]>].within[50]> > 4:
+                - stop
+              - if <entity[<player.flag[dwisp.data.behaviours.spawn]>].exists>:
+                - run dwisp_spawn_mob def:<player.flag[dwisp.data.behaviours.spawn]>
+                - wait 10t
+      - wait 1s
