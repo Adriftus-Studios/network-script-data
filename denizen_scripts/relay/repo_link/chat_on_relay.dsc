@@ -25,7 +25,7 @@ chat_send_message:
 
 discord_watcher:
   type: world
-  debug: false
+  debug: true
   events:
     on discord message received for:a_bot:
       - if <context.new_message.author.discriminator> == 0000 || <context.new_message.author.is_bot>:
