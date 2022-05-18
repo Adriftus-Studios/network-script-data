@@ -77,7 +77,7 @@ chat_system_speak:
         #- define Message <&sp><&sp><&sp><&sp><&sp><[MessageText]>
       #- else:
         #- define Message <&nl><&font[adriftus:chat]><[Icon]><&r><&sp><[ChannelText]><&r><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
-      
+
       - define Message <&font[adriftus:chat]><[Icon]><&r><&sp><[ChannelText]><&r><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
 
       - narrate <[message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
@@ -100,6 +100,7 @@ chat_history_save:
       - define temp <yaml[chat_history].read[<[channel]>_history].remove[first]>
       - yaml id:chat_history set <[channel]>_history:!
       - yaml id:chat_history set <[channel]>_history:|:<[temp]>
+      - yaml save
 
 chat_history_show:
   type: task
@@ -335,9 +336,6 @@ chat_settings_reload:
         - yaml id:chat_history load:data/chat_history.yml
       - else:
         - yaml create id:chat_history
-    - else:
-      - yaml id:chat_history unload
-      - yaml id:chat_history load:data/chat_history.yml
 
 chat_settings:
   type: inventory
