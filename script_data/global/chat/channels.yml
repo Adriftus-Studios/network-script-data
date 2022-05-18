@@ -13,16 +13,30 @@ channels:
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
       Discord:
-        active: false
-        group: none
-        channel: none
-        to-MC: false
-        to-Discord: false
-      IRC:
-        active: false
-        channel: false
-        to-MC: false
-        to-IRC: false
+        herocraft:
+          active: true
+          group: SyntrocityHQ
+          channel: 976579984871260202
+          to-MC: true
+          to-Discord: true
+        test:
+          active: false
+          group: none
+          channel: none
+          to-MC: false
+          to-Discord: false
+        lobby:
+          active: false
+          group: none
+          channel: none
+          to-MC: false
+          to-Discord: false
+        zanzabar:
+          active: false
+          group: none
+          channel: none
+          to-MC: false
+          to-Discord: false
     icon:
       hub: <&chr[1008]>
       herocraft: <&chr[1008]>

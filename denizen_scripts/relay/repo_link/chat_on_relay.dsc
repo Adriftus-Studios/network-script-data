@@ -4,7 +4,10 @@ chat_send_message:
   debug: false
   definitions: game_message|game_channel|server|uuid|display_name
   script:
-      - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.channel]>
+      - if <[game_channel]> == server:
+        - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.<[server]>.channel]>
+      - else:
+        - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.channel]>
       - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
 
       # Ping Sanitization
@@ -104,6 +107,9 @@ chat_system_data_manager:
     - foreach <yaml[chat_config].list_keys[channels]>:
       - if <yaml[chat_config].read[channels.<[value]>.integrations.Discord.active]> && <yaml[chat_config].read[channels.<[value]>.integrations.Discord.to-MC]>:
         - yaml id:discord_watcher set watched.<yaml[chat_config].read[channels.<[value]>.integrations.Discord.channel]>:<[value]>
+    - foreach <yaml[chat_config].list_keys[channels.server.integration.Discord]>:
+      - if <yaml[chat_config].read[channels.server.integration.Discord.<[value]>.active]> && <yaml[chat_config].read[channels.server.integrations.Discord.<[value]>.to-MC]>:
+        - yaml id:discord_watcher set watched.<yaml[chat_config].read[channels.server.integrations.Discord.<[value]>.channel]>:<[value]>
     - if !<yaml.list.contains[chat_history]>:
       - if <server.has_file[data/chat_history.yml]>:
         - yaml id:chat_history load:data/chat_history.yml
