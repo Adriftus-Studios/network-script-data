@@ -27,7 +27,7 @@ chat_send_message:
   webhook:
     content: <[game_message].strip_color>
     username: <[display_name]><&sp><&lb><[Server]><&rb>
-    avatar_url: https://mc-heads.net/head/<[uuid]>/100
+    avatar_url: https://mc-heads.net/head/<[uuid]>/50
 
 discord_watcher:
   type: world
