@@ -184,7 +184,7 @@ channels:
         active: true
         group: Adriftus Staff
         #channel: development-chat
-        channel: 976316595993477160
+        channel: 976528472509927444
         to-MC: true
         to-Discord: true
       IRC:
