@@ -99,6 +99,21 @@ discord_watcher:
             - else:
               - bungeerun hub chat_delete_message def:<[channel]>|<[value].get[uuid]>|true|false
 
+discord_delete_message_from_chat:
+  type: task
+  debug: false
+  definitions: channel|uuid
+  data:
+    headers:
+      User-Agent: Adriftus
+      Authorization: <[token]>
+      Content-Type: application/json
+  script:
+    - define token <secret[adriftus_bot]>
+    - foreach <yaml[chat_history].read[<[channel]>_history]>:
+      - if <[value].get[uuid]> == <[uuid]>:
+        - webget https://discord.com/api/channels/<[value].get[discord_channel]>/messages/<[value].get[discord_id]> headers:<script.parsed_key[data.headers]> method:DELETE
+
 discord_save_message:
   type: task
   debug: false
