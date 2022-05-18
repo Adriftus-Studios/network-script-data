@@ -40,6 +40,7 @@ discord_watcher:
 
         # Server chat Override
         - if <[channel].starts_with[server_]>:
+          - stop if:<context.new_message.attachments.is_empty.not>
           - define Definitions <list_single[<[Channel]>].include[<context.new_message.text_display>].include[<[uuid]>].include[<[sender]>].include[<context.new_message.author.name>]>
           - bungeerun <[channel].after[_]> chat_send_server_message def:<[definitions]>
           - stop
