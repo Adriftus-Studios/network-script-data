@@ -85,7 +85,7 @@ chat_system_speak:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
         - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include_single[<[message]>].include_single[<[uuid]>].include_single[<[sender]>]>
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
-          - bungeerun relay chat_send_message def:<list_single[<[raw_message]>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>]>
+          - bungeerun relay chat_send_message def:<list_single[<[raw_message]>].include[<[Channel]>|<bungee.server>|<[uuid]>].include_single[<player.name.strip_color>]>
       - run chat_history_save def:<list_single[<[channel]>].include_single[<[message]>].include_single[<[uuid]>].include_single[<[sender]>]>
 
 chat_history_save:

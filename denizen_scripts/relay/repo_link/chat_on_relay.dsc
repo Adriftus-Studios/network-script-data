@@ -73,6 +73,7 @@ discord_watcher:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
         - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
+
     on discord message deleted for:a_bot:
       - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null:
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
