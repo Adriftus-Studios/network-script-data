@@ -20,11 +20,11 @@ chat_system_speak:
       - define sender <player.uuid>
 
       # Determine Chat Icon
-      - define icon <yaml[global.player.<player.uuid>].read[chat.icon].if_null[null]>
+      - define icon <yaml[global.player.<player.uuid>].parsed_key[chat.icon].if_null[null]>
       - if <[channel]> == server:
-        - define icon <yaml[chat_config].read[channels.<[channel]>.<bungee.server>.icon].if_null[null]> if:<[icon].equals[null]>
+        - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.<bungee.server>.icon].if_null[null]> if:<[icon].equals[null]>
       - else:
-        - define icon <yaml[chat_config].read[channels.<[channel]>.icon].if_null[null]> if:<[icon].equals[null]>
+        - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]> if:<[icon].equals[null]>
       - define icon <&chr[0001]> if:<[icon].equals[null]>
 
       # Check for Chat Lock
