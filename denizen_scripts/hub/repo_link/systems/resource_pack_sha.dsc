@@ -6,7 +6,7 @@ resource_pack_sha:
     - flag server rp_sha:<[sha]>
 
 resource_pack_force:
-  type: world
+  type: task
   debug: false
   events:
     after player joins:
