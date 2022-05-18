@@ -90,7 +90,10 @@ discord_watcher:
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
         - foreach <yaml[chat_history].read[<[channel]>_history]>:
           - if <[value].get[discord_id]> == <context.old_message.id>:
-            - bungeerun hub chat_delete_message def:<[channel]>|<[value].get[uuid]>|true|false
+            - if <[channel].starts_with[server_]>:
+              - bungeerun hub chat_delete_message def:<[channel].after[_]>|<[value].get[uuid]>|true|false
+            - else:
+              - bungeerun hub chat_delete_message def:<[channel]>|<[value].get[uuid]>|true|false
 
 discord_save_message:
   type: task

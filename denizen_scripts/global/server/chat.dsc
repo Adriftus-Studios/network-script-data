@@ -330,7 +330,7 @@ chat_send_server_message:
         - define MessageText <proc[msg_cmd].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         - define Message <&font[adriftus:chat]><[icon]><&r><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><&sp><&sp><&sp><&sp><[MessageText]>
         - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.server]>
-        #- inject chat_history_save
+        - inject chat_history_save
 
 chat_system_flag_manager:
   type: world
