@@ -32,7 +32,7 @@ travel_menu_open:
     - foreach <yaml[bungee_config].list_keys[servers]> as:server:
       - if !<yaml[bungee_config].contains[servers.<[server]>.show_in_play_menu]> || !<yaml[bungee_config].read[servers.<[server]>.show_in_play_menu]>:
         - foreach next
-      - if <yaml[bungee_config].read[servers.<[server]>.restricted]||true> && !<player.has_permission[bungee.server.<[server]>]>:
+      - if <yaml[bungee_config].read[servers.<[server]>.restricted]||true> && !<player.has_permission[bungeecord.server.<[server]>]>:
         - foreach next
       - define display <yaml[bungee_config].read[servers.<[server]>.display_name].parsed>
       - define lore <yaml[bungee_config].read[servers.<[server]>.description].parsed>
