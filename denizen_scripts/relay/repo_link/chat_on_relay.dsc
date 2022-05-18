@@ -41,7 +41,7 @@ discord_watcher:
         # Server chat Override
         - if <[channel].starts_with[server_]>:
           - define Definitions <list_single[<[Channel]>].include[<context.new_message.text_display>].include[<[uuid]>].include[<[sender]>]>
-          - bungeerun <[channel].after[_]> relay_send_server_message def:<[definitions]>
+          - bungeerun <[channel].after[_]> chat_send_server_message def:<[definitions]>
           - stop
 
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
