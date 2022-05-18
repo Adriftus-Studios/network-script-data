@@ -443,7 +443,7 @@ message_command:
     - define sender <proc[get_player_display_name].strip_color.replace[<&sp>].with[_]>
     - define self_name <proc[get_player_display_name]>
     - define other_name <proc[get_player_display_name].context[<player[<server.flag[player_map.names.<[target_name]>.uuid]>]>]>
-
+    - define icon <&chr[0001]>
     # Allow Chat Colors in Chat
     - if <player.has_permission[adriftus.chat.color]>:
       - define msg <[msg].parse_color>
@@ -454,9 +454,12 @@ message_command:
     - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
       - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&r><&rb><&end_hover>]>
 
+    #- define Message <&font[adriftus:chat]><[Icon]><&r><&sp><[ChannelText]><&r><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
+    - define WhisperTextSelf <&font[adriftus:chat]><[Icon]><&r><&sp><&7><&lb>MSG<&rb><&r><&e>You<&b>-<&gt><&e><[other_name]><&co><&nl><&sp><&sp><&sp><&sp><&sp>
+    - define WhisperTextOther <&font[adriftus:chat]><[Icon]><&r><&sp><&7><&lb>MSG<&rb><&r><&e><[self_name]><&b>-<&gt><&e>You<&co><&nl><&sp><&sp><&sp><&sp><&sp>
     # Whisper Channel
-    - define WhisperTextSelf "<&7><&lb>MSG<&rb><&r><&e>You<&b>-<&gt><&e><[other_name]><&co> "
-    - define WhisperTextOther "<&7><&lb>MSG<&rb><&r><&e><[self_name]><&b>-<&gt><&e>You<&co> "
+    #- define WhisperTextSelf "<&7><&lb>MSG<&rb><&r><&e>You<&b>-<&gt><&e><[other_name]><&co> "
+    #- define WhisperTextOther "<&7><&lb>MSG<&rb><&r><&e><[self_name]><&b>-<&gt><&e>You<&co> "
     # Disabled for Freedom!
     #- define WhisperTextMods "<&7><&lb>MSG<&rb><&r><proc[get_player_display_name]><&b>-<&gt><context.args.get[1].to_titlecase> "
 
