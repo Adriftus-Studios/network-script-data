@@ -38,12 +38,16 @@ discord_watcher:
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
         - define sender DiscordUser_<context.new_message.author.id>
 
+        # Server chat Override
+        - if <[channel].starts_with[server_]>:
+          - define Definitions <list_single[<[Channel]>].include[<context.new_message.text_display>].include[<[uuid]>].include[<[sender]>]>
+          - bungeerun <[channel].after[_]> relay_send_server_message def:<[definitions]>
+          - stop
+
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
         - define Text <&f><&chr[0044].font[adriftus:chat]>
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 
-        - if <[channel].starts_with[server_]>:
-          - define channel <[channel].after[_]>
       # Determine Chat Icon
         - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]>
         - define icon <&chr[0001]> if:<[icon].equals[null]>
@@ -75,12 +79,8 @@ discord_watcher:
         - define Attachments <[Attachments].unseparated><&sp>
         - define Message <&font[adriftus:chat]><[icon]><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><&sp><&sp><&sp><&sp><[Attachments]><[MessageText]>
         - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
-        # Server chat Override
-        - if <[channel].starts_with[server_]>:
-          - bungeerun <[channel].after[_]> chat_send_message def:<[Definitions]>
-        - else:
-          - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
-          - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
+        - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
+        - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
         - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
 
     on discord message deleted for:a_bot:
