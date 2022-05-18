@@ -16,7 +16,7 @@ chat_send_message:
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]> save:webget
       - announce to_console <entry[webget].result>
-      - announce to_console <util.parse_yaml[<entry[webget].result.get[id]>]>
+      - announce to_console <util.parse_yaml[<entry[webget].result>].get[id]>
 
   webhook:
     content: <[game_message].strip_color>
