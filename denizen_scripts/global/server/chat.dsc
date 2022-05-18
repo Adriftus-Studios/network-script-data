@@ -443,7 +443,7 @@ message_command:
     - define sender <proc[get_player_display_name].strip_color.replace[<&sp>].with[_]>
     - define self_name <proc[get_player_display_name]>
     - define other_name <proc[get_player_display_name].context[<player[<server.flag[player_map.names.<[target_name]>.uuid]>]>]>
-    - define icon <&chr[0001]>
+    - define icon <&chr[1001]>
     # Allow Chat Colors in Chat
     - if <player.has_permission[adriftus.chat.color]>:
       - define msg <[msg].parse_color>
