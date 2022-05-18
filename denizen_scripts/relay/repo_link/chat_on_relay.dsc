@@ -19,7 +19,10 @@ chat_send_message:
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]> save:webget
       - define discord_id <util.parse_yaml[<entry[webget].result>].get[id]>
-      - run discord_save_message def:<[game_channel]>|<[uuid]>|<[discord_id]>|<[channel]>
+      - if <[game_channel]> == server:
+        - run discord_save_message def:<[game_channel]>_<[server]>|<[uuid]>|<[discord_id]>|<[channel]>
+      - else:
+        - run discord_save_message def:<[game_channel]>|<[uuid]>|<[discord_id]>|<[channel]>
 
   webhook:
     content: <[game_message].strip_color>
