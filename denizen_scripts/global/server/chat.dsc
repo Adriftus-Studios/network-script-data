@@ -301,7 +301,7 @@ chat_send_message:
 chat_send_server_message:
   type: task
   debug: false
-  definitions: Channel|msg|UUID|Sender
+  definitions: Channel|msg|UUID|Sender|author_name
   script:
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
         - define Text <&f><&chr[0044].font[adriftus:chat]>
@@ -316,10 +316,10 @@ chat_send_server_message:
         - define Command "chat <[channel]>"
         - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
 
-        - define Name <context.new_message.author.name>
+        - define Name <[author_name]>
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
         - define Text <&7><[Name]>
-        - define Insert @<context.new_message.author.name>
+        - define Insert @<[author_name]>
         - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
 
         - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
@@ -328,13 +328,6 @@ chat_send_server_message:
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message].replace[]>
         - define Insert "chat interact <[channel]> <[uuid]>"
         - define MessageText <proc[msg_cmd].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
-        - define Attachments <list>
-        - if !<context.new_message.attachments.is_empty>:
-          - foreach <context.new_message.attachments> as:Attachment:
-            - define Hover "<&color[#F3FFAD]>Click to Open Link <&color[#26FFC9]>:<&nl><&color[#F3FFAD]><[Attachment]>"
-            - define Text <&sp><&3>[<&b><&n>Link<&3>]<&r>
-            - define Url <[Attachment]>
-            - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
         - define Message <&font[adriftus:chat]><[icon]><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><&sp><&sp><&sp><&sp><[Attachments]><[MessageText]>
         - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.server]>
