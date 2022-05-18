@@ -129,13 +129,18 @@ chat_history_show:
 chat_delete_message:
   type: task
   debug: false
-  definitions: channel|uuid|relay|lock
+  definitions: channel|uuid|relay|lock|from_relay
   script:
+    - define from_relay if:<[from_relay].exists.not>
     - if <yaml[chat_config].read[channels.<[channel]>.global]>:
       - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
       - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]>
-    - if <[channel]> == server:
-      - 
+    - if <[relay]> && !<[from_relay]>:
+      - if <[channel]> == server:
+        - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.<bungee.server>.active].if_null[false]>:
+          - bungeerun relay discord_delete_message_from_chat def:<[channel]>_<bungee.server>|<[uuid]>
+      - else if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]>:
+        - bungeerun relay discord_delete_message_from_chat def:<[channel]>|<[uuid]>
     - define message <yaml[chat_history].read[<[channel]>_history].filter_tag[<[filter_value].get[uuid].equals[<[uuid]>]>].get[1]>
     - define new_message_map "<[message].with[message].as[<&7><&lb>Message Deleted<&rb>]>"
     - foreach <yaml[chat_history].read[<[channel]>_history]> as:message_map:
