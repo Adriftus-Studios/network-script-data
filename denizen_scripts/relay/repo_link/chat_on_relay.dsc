@@ -72,9 +72,15 @@ discord_watcher:
             - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
         - define Message <&font[adriftus:chat]><[icon]><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><&sp><&sp><&sp><&sp><[Attachments]><[MessageText]>
-        - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
-        - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
-        - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
+        #- define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
+        # Server chat Override
+        - if <[channel].starts_with[server_]>:
+          - define Definitions <list_single[server].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
+          - bungeerun <[channel].after[_]> chat_send_message def:<[Definitions]>
+        - else:
+          - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
+          - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
+          - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
         - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
 
     on discord message deleted for:a_bot:
@@ -109,7 +115,7 @@ chat_system_data_manager:
         - yaml id:discord_watcher set watched.<yaml[chat_config].read[channels.<[value]>.integrations.Discord.channel]>:<[value]>
     - foreach <yaml[chat_config].list_keys[channels.server.integrations.Discord]>:
       - if <yaml[chat_config].read[channels.server.integrations.Discord.<[value]>.active]> && <yaml[chat_config].read[channels.server.integrations.Discord.<[value]>.to-MC]>:
-        - yaml id:discord_watcher set watched.<yaml[chat_config].read[channels.server.integrations.Discord.<[value]>.channel]>:<[value]>
+        - yaml id:discord_watcher set watched.<yaml[chat_config].read[channels.server.integrations.Discord.<[value]>.channel]>:server_<[value]>
     - if !<yaml.list.contains[chat_history]>:
       - if <server.has_file[data/chat_history.yml]>:
         - yaml id:chat_history load:data/chat_history.yml
