@@ -131,7 +131,7 @@ chat_delete_message:
   debug: false
   definitions: channel|uuid|relay|lock|from_relay
   script:
-    - define from_relay if:<[from_relay].exists.not>
+    - define from_relay false if:<[from_relay].exists.not>
     - if <yaml[chat_config].read[channels.<[channel]>.global]>:
       - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
       - bungeerun <[Servers]> chat_delete_message def:<[channel]>|<[uuid]>|false if:<[relay]>
