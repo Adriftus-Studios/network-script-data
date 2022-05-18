@@ -308,7 +308,7 @@ chat_send_server_message:
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 
       # Determine Chat Icon
-        - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]>
+        - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon.<bungee.server>].if_null[null]>
         - define icon <&chr[0001]> if:<[icon].equals[null]>
 
         - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
@@ -328,8 +328,9 @@ chat_send_server_message:
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message].replace[]>
         - define Insert "chat interact <[channel]> <[uuid]>"
         - define MessageText <proc[msg_cmd].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
-        - define Message <&font[adriftus:chat]><[icon]><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><&sp><&sp><&sp><&sp><[MessageText]>
+        - define Message <&font[adriftus:chat]><[icon]><&r><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><&sp><&sp><&sp><&sp><[MessageText]>
         - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.server]>
+        #- inject chat_history_save
 
 chat_system_flag_manager:
   type: world
