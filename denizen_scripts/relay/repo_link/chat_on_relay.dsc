@@ -42,6 +42,8 @@ discord_watcher:
         - define Text <&f><&chr[0044].font[adriftus:chat]>
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 
+        - if <[channel].starts_with[server_]>:
+          - define channel <[channel].after[_]>
       # Determine Chat Icon
         - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]>
         - define icon <&chr[0001]> if:<[icon].equals[null]>
@@ -72,13 +74,11 @@ discord_watcher:
             - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
         - define Message <&font[adriftus:chat]><[icon]><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><&sp><&sp><&sp><&sp><[Attachments]><[MessageText]>
-        #- define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
+        - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
         # Server chat Override
         - if <[channel].starts_with[server_]>:
-          - define Definitions <list_single[server].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
           - bungeerun <[channel].after[_]> chat_send_message def:<[Definitions]>
         - else:
-          - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
           - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
           - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
         - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
