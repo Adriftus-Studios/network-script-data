@@ -15,8 +15,8 @@ chat_send_message:
       - define Data <script.parsed_key[webhook].to_json>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
       - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]> save:webget
-      - announce to_console <entry[webget].result>
-      - announce to_console <util.parse_yaml[<entry[webget].result>].get[id]>
+      - define discord_id <util.parse_yaml[<entry[webget].result>].get[id]>
+      - run discord_save_message def:<[game_channel]>|<[uuid]>|<[discord_id]>|<[channel]>
 
   webhook:
     content: <[game_message].strip_color>
@@ -72,13 +72,22 @@ discord_watcher:
         - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
+        - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
+    on discord message deleted for:a_bot:
+      - if <context.new_message.author.discriminator> == 0000 || <context.new_message.author.is_bot>:
+        - stop
+      - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null:
+        - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
+        - foreach <yaml[chat_history].read[<[channel]>_history]>:
+          - if <[value].get[discord_id]> == <context.old_message.id>:
+            - bungeerun hub chat_delete_message def:<[channel]>|<[value].get[uuid]>|true|false
 
 discord_save_message:
   type: task
   debug: false
-  definitions: channel|uuid|discord_id
+  definitions: channel|uuid|discord_id|discord_channel
   script:
-    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;discord_id=<[discord_id]>;uuid=<[UUID]>]>
+    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;discord_id=<[discord_id]>;uuid=<[UUID]>;discord_channel=<[discord_channel]>]>
     - if <yaml[chat_history].read[<[channel]>_history].size> > 40:
       - define temp <yaml[chat_history].read[<[channel]>_history].remove[first]>
       - yaml id:chat_history set <[channel]>_history:!

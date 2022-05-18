@@ -140,7 +140,7 @@ chat_delete_message:
       - wait 1t
     - if <[lock]||false>:
       - run chatlock_task def:<list_single[<[message].get[sender]>].include_single[<[message]>]>
-    - inject chat_unpause
+    - inject chat_unpause if:<player.exists>
 
 chatdelete_command:
   type: command
