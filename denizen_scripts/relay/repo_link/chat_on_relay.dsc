@@ -83,7 +83,7 @@ discord_watcher:
             - define Url <[Attachment]>
             - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
-        - define Message <[ChannelText]><[DiscIcon]><&sp><[NameText]><&co><&nl><[ChannelSpaceText]><&sp><[Attachments]><[MessageText]>
+        - define Message <[ChannelText]><[DiscIcon]><&sp><[NameText]><&co><&nl><[ChannelSpaceText]><[Attachments]><[MessageText]>
         - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
