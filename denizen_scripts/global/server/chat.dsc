@@ -330,7 +330,7 @@ chat_send_server_message:
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message].replace[]>
         - define Insert "chat interact <[channel]> <[uuid]>"
         - define MessageText <proc[msg_cmd].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
-        - define Message <[ChannelText]><[DiscIcon]><&sp><[NameText]><[ChannelSpaceText]><&sp><[MessageText]>
+        - define Message <[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><[ChannelSpaceText]><&sp><[MessageText]>
         - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.server]>
         - inject chat_history_save
 
