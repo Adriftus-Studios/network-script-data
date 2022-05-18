@@ -51,8 +51,8 @@ discord_watcher:
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 
       # Determine Chat Icon
-        - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon.<bungee.server>].if_null[null]>
-        - define icon <&chr[0001]> if:<[icon].equals[null]>
+        - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]>
+        - define icon <&chr[1001]> if:<[icon].equals[null]>
 
         - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
