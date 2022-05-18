@@ -74,8 +74,6 @@ discord_watcher:
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
         - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
     on discord message deleted for:a_bot:
-      - if <context.old_message.author.discriminator> == 0000 || <context.new_message.author.is_bot>:
-        - stop
       - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null:
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
         - foreach <yaml[chat_history].read[<[channel]>_history]>:
