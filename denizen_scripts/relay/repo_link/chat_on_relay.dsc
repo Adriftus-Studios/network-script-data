@@ -14,14 +14,13 @@ chat_send_message:
       - define Hook <entry[webhook].created_queue.determination.get[1]>
       - define Data <script.parsed_key[webhook].to_json>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-      - ~webget <[Hook]> data:<[Data]> headers:<[Headers]> save:webget
+      - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]> save:webget
       - announce to_console <entry[webget].result>
 
   webhook:
     content: <[game_message].strip_color>
     username: <[display_name]><&sp><&lb><[Server]><&rb>
     avatar_url: https://mc-heads.net/head/<[uuid]>/100
-    wait: true
 
 discord_watcher:
   type: world
