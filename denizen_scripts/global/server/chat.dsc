@@ -100,7 +100,6 @@ chat_history_save:
       - define temp <yaml[chat_history].read[<[channel]>_history].remove[first]>
       - yaml id:chat_history set <[channel]>_history:!
       - yaml id:chat_history set <[channel]>_history:|:<[temp]>
-      - yaml save
 
 chat_history_show:
   type: task
