@@ -10,7 +10,7 @@ discord_get_or_create_webhook:
     create_webhook:
       name: DenizenGenerated
   script:
-    - define token <secret[adriftus_bot]>
+    - define token <secret[a_bot_token]>
     - if <server.has_flag[discord.webhooks.<[channel_id]>]>:
       - determine <server.flag[discord.webhooks.<[channel_id]>]>
     - ~webget https://discord.com/api/channels/<[channel_id]>/webhooks headers:<script.parsed_key[data.headers]> save:webhooks
