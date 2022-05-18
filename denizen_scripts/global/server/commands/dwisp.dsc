@@ -13,7 +13,7 @@ dwisp_command:
         stay: <list[cursor|here|current].include[<server.online_players.parse[name]>]>
         follow: <server.online_players.parse[name]>
         sleep: no_arguments
-        edit: name|color1|color2|target|damage|attack|range|heal|spawn
+        edit: name|color1|color2|damage|attack|range|heal|spawn
         assume: on|off
         inventory: <player.flag[dwisp.data.inventories].keys.if_null[<list>].include[off]>
         give: <server.online_players.parse[name]>
@@ -122,8 +122,6 @@ dwisp_command:
             - flag <player> dwisp.data.color1:<context.args.get[3]>
           - case color2:
             - flag <player> dwisp.data.color2:<context.args.get[3]>
-          - case target:
-            - flag <player> dwisp.data.target:<context.args.get[3]>
           - case damage:
             - flag <player> dwisp.data.damage:<context.args.get[3]>
           - case attack:
@@ -420,6 +418,7 @@ dwisp_run_movement:
         - case summon:
           - flag player dwisp.active.location:<player.eye_location.above[30]>
           - flag player dwisp.data.target:monster if:<player.has_flag[dwisp.data.target].not>
+          - flag player dwisp.data.behaviour.attack:monster if:<player.has_flag[dwisp.data.behaviour.attack].not>
           - define targets <player.location.find_players_within[100]>
           - spawn dwisp_armor_stand[custom_name=<player.flag[dwisp.data.name]>] <player.eye_location.above[30]> save:wisp
           - flag player dwisp.active.entity:<entry[wisp].spawned_entity>
@@ -464,7 +463,7 @@ dwisp_run_movement:
             - ~run dwisp_goto def:<[target].eye_location.above[5]>
             - if <[target].health> != <[target].health_max>:
               - run dwisp_heal_target def:<[target]>
-            - define mob <[target].location.find_entities[<player.flag[dwisp.data.target]>].within[30].exclude[<player>|<[target]>].random.if_null[none]>
+            - define mob <[target].location.find_entities[<player.flag[dwisp.data.behaviour.attack]>].within[30].exclude[<player>|<[target]>].random.if_null[none]>
             - if <[mob]> != none && <[mob].is_spawned>:
               - define points <proc[define_curve1].context[<player.flag[dwisp.active.location]>|<[mob].eye_location>|2|<util.random.int[-20].to[20]>|<player.flag[dwisp.active.location].distance[<[mob].eye_location>].mul[0.1]>]>
             - else:
@@ -506,7 +505,7 @@ dwisp_run_movement:
               - playeffect effect:redstone at:<player.flag[dwisp.active.location]> offset:0.05 quantity:5 special_data:1.5|<player.flag[dwisp.data.color1]> targets:<[targets]>
               - playeffect effect:redstone at:<player.flag[dwisp.active.location]> offset:0.1 quantity:5 special_data:0.75|<player.flag[dwisp.data.color2]> targets:<[targets]>
               - wait 2t
-            - define mobs <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.target]>].within[36].exclude[<player>]>
+            - define mobs <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.attack]>].within[36].exclude[<player>]>
             - foreach <[mobs]> as:target:
               - run dwisp_kill_target def:<[target]>
               - playeffect effect:redstone at:<player.flag[dwisp.active.location]> offset:0.05 quantity:5 special_data:1.5|<player.flag[dwisp.data.color1]> targets:<[targets]>
