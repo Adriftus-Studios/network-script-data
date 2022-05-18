@@ -48,7 +48,7 @@ chat_system_speak:
 
       # Build the Channel Text
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
-      - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
+      - define Text <&font[adriftus:chat]><[Icon]><&r><&sp><yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - define Command "chat <[channel]>"
       - define ChannelText <proc[msg_cmd].context[<list_single[<[hover]>].include_single[<[text]>].include_single[<[command]>]>]>
 
@@ -78,7 +78,7 @@ chat_system_speak:
       #- else:
         #- define Message <&nl><&font[adriftus:chat]><[Icon]><&r><&sp><[ChannelText]><&r><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
 
-      - define Message <&font[adriftus:chat]><[Icon]><&r><&sp><[ChannelText]><&r><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
+      - define Message <[ChannelText]><&r><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
 
       - narrate <[message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
