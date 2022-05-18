@@ -22,7 +22,7 @@ chat_system_speak:
       # Determine Chat Icon
       - define icon <yaml[global.player.<player.uuid>].parsed_key[chat.icon].if_null[null]>
       - if <[channel]> == server:
-        - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.server.<bungee.server>.icon].if_null[null]> if:<[icon].equals[null]>
+        - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon.<bungee.server>].if_null[null]> if:<[icon].equals[null]>
       - else:
         - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]> if:<[icon].equals[null]>
       - define icon <&chr[0001]> if:<[icon].equals[null]>
