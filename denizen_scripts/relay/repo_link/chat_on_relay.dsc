@@ -14,7 +14,9 @@ chat_send_message:
       - define Hook <entry[webhook].created_queue.determination.get[1]>
       - define Data <script.parsed_key[webhook].to_json>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-      - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+      - ~webget <[Hook]> data:<[Data]> headers:<[Headers]> save:webget
+      - announce to_console <entry[webget].result>
+
   webhook:
     content: <[game_message].strip_color>
     username: <[display_name]><&sp><&lb><[Server]><&rb>
@@ -70,6 +72,17 @@ discord_watcher:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
 
+discord_save_message:
+  type: task
+  debug: false
+  definitions: channel|uuid|discord_id
+  script:
+    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;discord_id=<[discord_id]>;uuid=<[UUID]>]>
+    - if <yaml[chat_history].read[<[channel]>_history].size> > 40:
+      - define temp <yaml[chat_history].read[<[channel]>_history].remove[first]>
+      - yaml id:chat_history set <[channel]>_history:!
+      - yaml id:chat_history set <[channel]>_history:|:<[temp]>
+
 chat_system_data_manager:
   type: world
   debug: false
@@ -82,6 +95,11 @@ chat_system_data_manager:
     - foreach <yaml[chat_config].list_keys[channels]>:
       - if <yaml[chat_config].read[channels.<[value]>.integrations.Discord.active]> && <yaml[chat_config].read[channels.<[value]>.integrations.Discord.to-MC]>:
         - yaml id:discord_watcher set watched.<yaml[chat_config].read[channels.<[value]>.integrations.Discord.channel]>:<[value]>
+    - if !<yaml.list.contains[chat_history]>:
+      - if <server.has_file[data/chat_history.yml]>:
+        - yaml id:chat_history load:data/chat_history.yml
+      - else:
+        - yaml create id:chat_history
   events:
     on server start:
       - inject local path:load
