@@ -58,7 +58,7 @@ discord_watcher:
         - define icon <&chr[1001]> if:<[icon].equals[null]>
 
         - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
-        - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
+        - define Text <&font[adriftus:chat]><[icon]><&f><&sp><&r><yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
         - define Command "chat <[channel]>"
         - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
         - define ChannelSpaceText <proc[msg_cmd].context[<list_single[<[hover]>].include_single[<&sp><&sp><&sp><&sp>].include_single[<[command]>]>]>
@@ -83,7 +83,7 @@ discord_watcher:
             - define Url <[Attachment]>
             - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
-        - define Message <&font[adriftus:chat]><[icon]><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><[ChannelSpaceText]><&sp><[Attachments]><[MessageText]>
+        - define Message <[ChannelText]><[DiscIcon]><&sp><[NameText]><[ChannelSpaceText]><&sp><[Attachments]><[MessageText]>
         - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
