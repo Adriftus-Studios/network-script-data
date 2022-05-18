@@ -43,6 +43,7 @@ discord_watcher:
           - stop if:<context.new_message.attachments.is_empty.not>
           - define Definitions <list_single[server].include[<context.new_message.text_display>].include[<[uuid]>].include[<[sender]>].include[<context.new_message.author.name>]>
           - bungeerun <[channel].after[_]> chat_send_server_message def:<[definitions]>
+          - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
           - stop
 
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
