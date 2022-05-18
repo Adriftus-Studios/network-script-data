@@ -106,7 +106,7 @@ channels:
     permission: adriftus.staff
     icon: <&chr[0001]>
     format:
-      channel: "<&7><&l>[<&a><&l>Staff<&7><&l>] "
+      channel: "<&7><&l>[<&e><&l>Staff<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
