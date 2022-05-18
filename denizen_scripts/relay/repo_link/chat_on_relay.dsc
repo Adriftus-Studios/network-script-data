@@ -50,7 +50,7 @@ discord_watcher:
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 
       # Determine Chat Icon
-        - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]>
+        - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon.<bungee.server>].if_null[null]>
         - define icon <&chr[0001]> if:<[icon].equals[null]>
 
         - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
@@ -78,7 +78,7 @@ discord_watcher:
             - define Url <[Attachment]>
             - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
-        - define Message <&font[adriftus:chat]><[icon]><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><&sp><&sp><&sp><&sp><[Attachments]><[MessageText]>
+        - define Message <&font[adriftus:chat]><[icon]><&r><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><&sp><&sp><&sp><&sp><[Attachments]><[MessageText]>
         - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
