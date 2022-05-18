@@ -28,7 +28,7 @@ chat_send_message:
 
 discord_watcher:
   type: world
-  debug: true
+  debug: false
   events:
     on discord message received for:a_bot:
       - if <context.new_message.author.discriminator> == 0000 || <context.new_message.author.is_bot>:
@@ -86,12 +86,12 @@ discord_watcher:
         - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
 
     on discord message deleted for:a_bot:
-      - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null:
+      - if <yaml[discord_watcher].read[watched.<context.channel.id>].if_null[null]> != null:
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
         - foreach <yaml[chat_history].read[<[channel]>_history]>:
           - if <[value].get[discord_id]> == <context.old_message.id>:
             - if <[channel].starts_with[server_]>:
-              - bungeerun hub chat_delete_message def:<[channel].after[_]>|<[value].get[uuid]>|true|false
+              - bungeerun <[channel].after[_]> chat_delete_message def:server|<[value].get[uuid]>|true|false
             - else:
               - bungeerun hub chat_delete_message def:<[channel]>|<[value].get[uuid]>|true|false
 
@@ -100,7 +100,7 @@ discord_save_message:
   debug: false
   definitions: channel|uuid|discord_id|discord_channel
   script:
-    - yaml id:chat_history set <[channel]>_history:->:<map[channel=<[channel]>;discord_id=<[discord_id]>;uuid=<[UUID]>;discord_channel=<[discord_channel]>]>
+    - yaml id:chat_history set <[channel]>_history:->:<map[discord_id=<[discord_id]>;uuid=<[UUID]>;discord_channel=<[discord_channel]>]>
     - if <yaml[chat_history].read[<[channel]>_history].size> > 40:
       - define temp <yaml[chat_history].read[<[channel]>_history].remove[first]>
       - yaml id:chat_history set <[channel]>_history:!
