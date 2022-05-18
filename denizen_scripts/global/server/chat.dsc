@@ -316,6 +316,7 @@ chat_send_server_message:
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
         - define Command "chat <[channel]>"
         - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+        - define ChannelSpaceText <proc[msg_cmd].context[<list_single[<[hover]>].include_single[<&sp><&sp><&sp><&sp>].include_single[<[command]>]>]>
 
         - define Name <[author_name]>
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
@@ -329,7 +330,7 @@ chat_send_server_message:
         - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.message].replace[]>
         - define Insert "chat interact <[channel]> <[uuid]>"
         - define MessageText <proc[msg_cmd].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
-        - define Message <&font[adriftus:chat]><[icon]><&r><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
+        - define Message <&font[adriftus:chat]><[icon]><&r><&f><&sp><&r><[ChannelText]><[DiscIcon]><&sp><[NameText]><[ChannelSpaceText]><&sp><[MessageText]>
         - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.server]>
         - inject chat_history_save
 
