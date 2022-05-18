@@ -33,7 +33,7 @@ channels:
     on_by_default: true
     permission: "none"
     chat_lock_deny: true
-    iocn: <&chr[0005]>
+    icon: <&chr[0005]>
     format:
       channel: "<&7><&l>[<&a><&l>PG<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -57,7 +57,7 @@ channels:
     on_by_default: true
     permission: "none"
     chat_lock_deny: true
-    iocn: <&chr[0006]>
+    icon: <&chr[0006]>
     format:
       channel: "<&7><&l>[<&6><&l>PG-13<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -81,7 +81,7 @@ channels:
     on_by_default: true
     permission: "none"
     chat_lock_deny: false
-    iocn: <&chr[0007]>
+    icon: <&chr[0007]>
     format:
       channel: "<&7><&l>[<&4><&l>Anarchy<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -104,7 +104,7 @@ channels:
     global: true
     on_by_default: false
     permission: adriftus.staff
-    iocn: <&chr[0001]>
+    icon: <&chr[0001]>
     format:
       channel: "<&7><&l>[<&a><&l>Staff<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -127,7 +127,7 @@ channels:
     global: true
     on_by_default: false
     permission: adriftus.admin
-    iocn: <&chr[0002]>
+    icon: <&chr[0002]>
     format:
       channel: "<&7><&l>[<&4><&l>Admin<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -150,7 +150,7 @@ channels:
     global: true
     on_by_default: false
     permission: adriftus.developer
-    iocn: <&chr[0003]>
+    icon: <&chr[0003]>
     format:
       channel: "<&7><&l>[<&b><&l>Dev<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -173,7 +173,7 @@ channels:
     global: true
     on_by_default: false
     permission: adriftus.moderator
-    iocn: <&chr[0004]>
+    icon: <&chr[0004]>
     format:
       channel: "<&7><&l>[<&d><&l>Mod<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
