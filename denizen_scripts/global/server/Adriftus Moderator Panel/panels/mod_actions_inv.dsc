@@ -31,7 +31,7 @@ mod_actions_inv_events:
 
     on player right clicks mod_spectate_item in mod_actions_inv:
       # Disable if already spectating.
-      - if <player.has_flag[spectateEnabled]>:
+      - if <player.has_flag[spectateEnabled]> || <player.gamemode> == SPECTATOR:
         - flag player spectateEnabled:!
         - adjust <player> gamemode:<player.flag[lastGM].if_null[SURVIVAL]>
         - adjust <player> flying:false
