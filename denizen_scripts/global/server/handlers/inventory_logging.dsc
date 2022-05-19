@@ -6,6 +6,7 @@ inventory_logger_death:
       cause: Death
       location: <player.location>
       inventory: <player.inventory.map_slots>
+      xp: <player.xp_total>
       time: <util.time_now>
       uuid: <util.random_uuid>
       milli_time: <server.current_time_millis>
@@ -25,6 +26,7 @@ inventory_logger_logout:
       cause: Logout
       location: <player.location>
       inventory: <player.inventory.map_slots>
+      xp: <player.xp_total>
       time: <util.time_now>
       uuid: <util.random_uuid>
       milli_time: <server.current_time_millis>

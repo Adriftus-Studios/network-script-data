@@ -77,7 +77,7 @@ grappling_hook_divine:
   data:
     tier: <&b>Divine
     range: 80
-    cooldown: 10s
+    cooldown: 5s
   lore:
     - "<&e>Tier: <script.parsed_key[data.tier]>"
     - "<&e>Range<&co> <&f><&f><script.data_key[data.range]>"
