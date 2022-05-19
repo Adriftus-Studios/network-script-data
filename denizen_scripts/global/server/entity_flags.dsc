@@ -86,7 +86,11 @@ entity_flags:
         - else:
           - flag server join_location:!
     on entity_flagged:on_entity_added added to world:
-      - inject <context.entity.flag[on_entity_added]>
+      - if <context.entity.flag[on_entity_added].object_type> == List:
+        - foreach <context.entity.flag[on_entity_added]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_entity_added]>
     on entity_flagged:on_dismount exits vehicle:
       - if <context.entity.flag[on_dismount].object_type> == List:
         - foreach <context.entity.flag[on_dismount]>:
