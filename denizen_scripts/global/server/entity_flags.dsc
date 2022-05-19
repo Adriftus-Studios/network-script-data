@@ -86,6 +86,8 @@ entity_flags:
         - else:
           - flag server join_location:!
     on entity_flagged:on_entity_added added to world:
+      - if <bungee.server> == test:
+        - announce "<context.entity> - <context.entity.flag[on_entity_added]>"
       - if <context.entity.flag[on_entity_added].object_type> == List:
         - foreach <context.entity.flag[on_entity_added]>:
           - inject <[value]>
