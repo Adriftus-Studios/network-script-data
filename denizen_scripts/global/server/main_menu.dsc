@@ -106,4 +106,4 @@ main_menu_request_help:
   debug: false
   script:
     - ratelimit <player> 5m
-    - run chat_system_speak "def.message:<&lt>@&938915147509030913<&gt> <&lt>@&939675790096879656<&gt><&nl>I am requesting a staff member to help!<&nl>Server<&co> <bungee.server><&nl>Location<&co> <player.location.simple>" def.channel:staff
+    - run chat_system_speak "def.message:<&lt>@&976324656594300958<&gt> <&lt>@&976324625678082068<&gt><&nl>I am requesting a staff member to help!<&nl>Server<&co> <bungee.server><&nl>Location<&co> <player.location.simple>" def.channel:staff
