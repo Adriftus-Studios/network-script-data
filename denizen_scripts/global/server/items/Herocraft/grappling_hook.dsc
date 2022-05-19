@@ -91,7 +91,7 @@ grappling_hook_divine:
 
 grappling_hook_shoot:
   type: task
-  debug: true
+  debug: false
   script:
     - determine passively cancelled
     - ratelimit <player> 1t
@@ -102,7 +102,7 @@ grappling_hook_shoot:
     - define range <context.item.script.data_key[data.range]>
     - define target <player.eye_location.precise_cursor_on[<[range]>].if_null[null]>
     - define start <player.eye_location.forward[0.5]>
-    - if <[target]> == null || !<[target].material.is_solid>:
+    - if <[target]> == null || !<[target].with_pose[<player>].forward[0.05].material.is_solid>:
       - narrate "<&c>You have no target in range"
       - stop
     - spawn snowball[item=tripwire_hook[custom_model_data=3];gravity=false] <[start]> save:ent
