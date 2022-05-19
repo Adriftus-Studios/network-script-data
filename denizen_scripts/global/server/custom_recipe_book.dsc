@@ -95,13 +95,15 @@ custom_recipe_data_initializer:
 
 custom_recipe_add_to_crafting:
   type: item
-  material: feather
+  material: paper
   display name: <&e>Learn Recipe
   lore:
     - "<&e>Add to Vanilla Crafting Book"
     - "<&7>This can fix uncraftable items"
   flags:
     run_script: custom_recipe_book_add_recipe
+  mechanisms:
+    custom_model_data: 108
 
 custom_recipe_book_add_recipe:
   type: task
