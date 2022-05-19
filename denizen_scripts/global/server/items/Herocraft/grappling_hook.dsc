@@ -91,7 +91,7 @@ grappling_hook_divine:
 
 grappling_hook_shoot:
   type: task
-  debug: false
+  debug: true
   script:
     - determine passively cancelled
     - ratelimit <player> 1t
