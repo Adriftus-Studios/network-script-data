@@ -26,6 +26,7 @@ mod_actions_inv_events:
 
     on player right clicks mod_teleport_item in mod_actions_inv:
       - teleport <player> <player.flag[amp_map].as_map.get[uuid].as_player.location>
+      - run mod_message_discord_command def:<player.uuid>|tp<&sp><player.flag[amp_map].as_map.get[uuid].as_player.name>
       - inventory close
 
     on player right clicks mod_spectate_item in mod_actions_inv:
@@ -36,6 +37,7 @@ mod_actions_inv_events:
         - adjust <player> flying:false
         - teleport <player> <player.flag[lastLocation].if_null[<player.bed_spawn>]>
         - narrate "<&7>[<&b>ModSpec<&7>] <&c>Toggled ModSpec." targets:<player>
+        - run mod_message_discord_command def:<player.uuid>|spectate<&sp>
       # Enable spectator mode and teleport to target.
       - else:
         - if <player.gamemode> != SPECTATOR:
@@ -45,6 +47,7 @@ mod_actions_inv_events:
         - adjust <player> gamemode:spectator
         - teleport <player> <player.flag[amp_map].as_map.get[uuid].as_player.location>
         - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <player.flag[amp_map].as_map.get[uuid].as_player.name>." targets:<player>
+        - run mod_message_discord_command def:<player.uuid>|spectate<&sp><player.flag[amp_map].as_map.get[uuid].as_player.name>
       - inventory close
 
     on player right clicks mod_kick_item in mod_actions_inv:
