@@ -57,7 +57,7 @@ travel_menu_open:
   # This task handles the final building of the inventory
   build_inventory:
     - define network_size <[network_list].size>
-    - define slots <list[<script.data_key[data.network_slots_by_count.<[network_size]>]>]>
+    #- define slots <list[<script.data_key[data.network_slots_by_count.<[network_size]>]>]>
     - define items <[network_list]>
     - foreach <[items]>:
       - inventory set slot:<[value].flag[slot]> o:<[value]> d:<[inventory]>
