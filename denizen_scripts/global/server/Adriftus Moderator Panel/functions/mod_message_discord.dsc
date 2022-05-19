@@ -15,3 +15,11 @@ mod_message_discord:
     - define message SEARCHABLE_<[uuid]><&nl>```<[fields].separated_by[<&nl>]>```
     - bungeerun relay discord_sendMessage "def:Adriftus Staff|action-log|<[message].escaped>"
 
+mod_message_discord_command:
+  type: task
+  debug: false
+  definitions: moderator|command
+  script:
+    - define moderator <[moderator].as_player.name>
+    - bungeerun relay discord_sendMessage "def:Adriftus Staff|command-log|`<bungee.server>`<&co>`<[moderator]>` ran command `<[command]>`"
+
