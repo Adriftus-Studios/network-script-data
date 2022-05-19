@@ -13,6 +13,7 @@ mod_spectate_command:
     - inject online_player_tabcomplete
     # 1: <server.online_players.parse[name].exclude[<player.name>]>
   script:
+    # Disable if already spectating.
     - if ( <player.has_flag[spectateEnabled]> || <player.gamemode> == SPECTATOR ) && <context.args.is_empty>:
       - flag player spectateEnabled:!
       - adjust <player> gamemode:<player.flag[lastGM].if_null[SURVIVAL]>
