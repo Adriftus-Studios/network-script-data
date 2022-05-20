@@ -380,7 +380,7 @@ dwisp_run_movement:
     - if !<player.has_flag[dwisp.data.name]>:
       - narrate "<&c>You must configure your dWisp name first"
       - stop
-    - while <player.has_flag[dwisp.active]> && <player.is_online>:
+    - while <player.has_flag[dwisp.active]>:
       - choose <player.flag[dwisp.active.task].if_null[default]>:
         # Basic Idle Animation
         - case idle:
