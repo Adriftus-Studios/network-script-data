@@ -31,7 +31,7 @@ inventory_logger_death:
       uuid: <util.random_uuid>
       milli_time: <server.current_time_millis>
   events:
-    on player dies bukkit_priority:MONITOR:
+    on player dies bukkit_priority:HIGHEST priority:-1000:
       - stop if:<player.flag[saved_inventory.current].equals[default].not.if_null[false]>
       - stop if:<context.drops.is_empty>
       - flag <player> logged_inventories.death:->:<script.parsed_key[data.map]>
