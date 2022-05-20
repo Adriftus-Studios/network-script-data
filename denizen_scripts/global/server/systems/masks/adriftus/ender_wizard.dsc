@@ -37,4 +37,4 @@ mask_ender_wizard_trades:
       - trade[result=ender_pearl;inputs=diamond;max_uses=9999]
       - trade[result=shulker_shell;inputs=diamond[quantity=12];max_uses=9999]
   script:
-    - opentrades <script.data_key[data.trades]>
+    - opentrades <script.data_key[data.trades]> "title:<&d>Ender Wizard Trades"
