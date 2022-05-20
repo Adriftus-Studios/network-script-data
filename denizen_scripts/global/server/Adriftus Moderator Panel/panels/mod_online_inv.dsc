@@ -28,6 +28,9 @@ mod_online_inv_events:
       - if <server.match_player[<context.item.display.strip_color>]> == <player>:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
+      - if !<player.has_permission[adriftus.admin]> && <server.match_player[<context.item.display.strip_color>].has_permission[adriftus.admin]>:
+        - narrate "<&c>You cannot perform actions on administrators."
+        - stop
       - define uuid <server.match_player[<context.item.display.strip_color>].uuid>
       - define map <map.with[uuid].as[<[uuid]>]>
       - define map <[map].with[display_name].as[<yaml[global.player.<[uuid]>].read[Display_Name]||None>]>
