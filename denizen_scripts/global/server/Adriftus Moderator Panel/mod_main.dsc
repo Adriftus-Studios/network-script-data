@@ -27,6 +27,9 @@ mod_command:
       - if <server.match_offline_player[<context.args.first>].name> == <player.name>:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
+      - if !<player.has_permission[adriftus.admin]> && <server.match_offline_player[<context.args.first>].has_permission[adriftus.admin]>:
+        - narrate "<&c>You cannot perform actions on administrators."
+        - stop
       - else:
         - flag <player> amp_map:!
         - define uuid <server.match_offline_player[<context.args.first>].uuid>
