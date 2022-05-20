@@ -71,5 +71,5 @@ mod_actions_inv_open:
     - define inventorylogItem <item[mod_inventorylog_item]>
     - define kickItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>].pass[<item[mod_kick_item]>].fail[<item[air]>]>
     - define banItem <item[mod_ban_item]>
-    - give <[sendItem]>|<[teleportItem]>|<[spectateItem]>|<[kickItem]>|<[banItem]> to:<[inventory]>
+    - give <[sendItem]>|<[teleportItem]>|<[spectateItem]>|<[inventorylogItem]>|<[kickItem]>|<[banItem]> to:<[inventory]>
     - inventory open d:<[inventory]>
