@@ -414,6 +414,7 @@ dwisp_run_movement:
               - playeffect effect:redstone at:<[point]> offset:0.1 quantity:5 special_data:0.75|<player.flag[dwisp.data.color2]> targets:<[targets]>
               - flag player dwisp.active.location:<[point]>
               - wait 2t
+          - flag player dwisp.active.task:!
 
         # Spawning Wisp
         - case summon:
