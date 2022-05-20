@@ -11,7 +11,7 @@ resource_pack_force:
   events:
     after player joins:
       - if !<player.has_flag[RP_Enabled]> || <player.flag[RP_Enabled]> != <server.flag[rp_sha]>:
-        - resourcepack targets:<player> url:http://www.denizencraft.com:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced if:<player.has_flag[rp_bypass].not>
+        - resourcepack targets:<player> url:http://147.135.7.85:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced if:<player.has_flag[rp_bypass].not>
     on resource pack status:
       - choose <context.status>:
         - case SUCCESSFULLY_LOADED:
