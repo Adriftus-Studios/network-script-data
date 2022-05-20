@@ -33,7 +33,6 @@ inventory_logger_logout:
 
   events:
     on player joins:
-      - announce test
       - stop if:<player.flag[saved_inventory.current].equals[default].not.if_null[false]>
       - stop if:<player.inventory.list_contents.is_empty>
       - flag <player> logged_inventories.logout:->:<script.parsed_key[data.map]>
