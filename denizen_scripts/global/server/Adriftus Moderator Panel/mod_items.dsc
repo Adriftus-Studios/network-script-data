@@ -4,7 +4,7 @@ mod_send_item:
   material: ender_pearl
   display name: <&5><&l>Send
   lore:
-    - "<&a>Right Click:"
+    - "<&1>Right Click:"
     - "<&d>Transfer the Player to another Server."
   mechanisms:
     hides: ALL
@@ -15,7 +15,7 @@ mod_teleport_item:
   material: feather
   display name: <&3><&l>Teleport
   lore:
-    - "<&a>Right Click:"
+    - "<&1>Right Click:"
     - "<&b>Teleport to the Player."
   mechanisms:
     hides: ALL
@@ -27,7 +27,7 @@ mod_spectate_item:
   material: spyglass
   display name: <&6><&l>Spectate
   lore:
-    - "<&a>Right Click:"
+    - "<&1>Right Click:"
     - "<&e>Spectate the Player."
   mechanisms:
     hides: ALL
@@ -38,7 +38,7 @@ mod_inventorylog_item:
   material: chest
   display name: <&2><&l>Inventory Log
   lore:
-    - "<&a>Right Click:"
+    - "<&1>Right Click:"
     - "<&a>View Inventory Log of Player."
   mechanisms:
     hides: ALL
@@ -50,7 +50,7 @@ mod_kick_item:
   color: 16711680
   display name: <&5><&l>Kick
   lore:
-    - "<&a>Right Click:"
+    - "<&1>Right Click:"
     - "<&d>Kick the Player from the Network."
   mechanisms:
     hides: ALL
@@ -61,7 +61,7 @@ mod_ban_item:
   material: wooden_axe
   display name: <&4><&l>Ban
   lore:
-    - "<&a>Right Click:"
+    - "<&1>Right Click:"
     - "<&c>Ban the Player from the Network."
   enchantments:
     - ARROW_INFINITE:1
