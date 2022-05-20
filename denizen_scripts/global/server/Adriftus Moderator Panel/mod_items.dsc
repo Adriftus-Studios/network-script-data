@@ -50,10 +50,21 @@ mod_spectate_item:
   type: item
   debug: false
   material: spyglass
-  display name: <&a><&l>Spectate
+  display name: <&e><&l>Spectate
   lore:
     - "<&a>Right Click:"
     - "<&a>Spectate Player."
+  mechanisms:
+    hides: ALL
+
+mod_inventorylog_item:
+  type: item
+  debug: false
+  material: chest
+  display name: <&a><&l>Inventory Log
+  lore:
+    - "<&a>Right Click:"
+    - "<&a>View Inventory Log of Player."
   mechanisms:
     hides: ALL
 
