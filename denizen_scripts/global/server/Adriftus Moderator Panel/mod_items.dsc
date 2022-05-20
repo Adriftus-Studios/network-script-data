@@ -16,7 +16,7 @@ mod_teleport_item:
   display name: <&3><&l>Teleport
   lore:
     - "<&a>Right Click:"
-    - "<&b>Teleport to Player."
+    - "<&b>Teleport to the Player."
   mechanisms:
     hides: ALL
     custom_model_data: 200
@@ -28,7 +28,7 @@ mod_spectate_item:
   display name: <&6><&l>Spectate
   lore:
     - "<&a>Right Click:"
-    - "<&e>Spectate Player."
+    - "<&e>Spectate the Player."
   mechanisms:
     hides: ALL
 
@@ -48,10 +48,10 @@ mod_kick_item:
   debug: false
   material: leather_boots
   color: 16711680
-  display name: <&d><&l>Kick
+  display name: <&5><&l>Kick
   lore:
     - "<&a>Right Click:"
-    - "<&5>Kick the Player from the Network."
+    - "<&d>Kick the Player from the Network."
   mechanisms:
     hides: ALL
 
@@ -59,10 +59,10 @@ mod_ban_item:
   type: item
   debug: false
   material: wooden_axe
-  display name: <&c><&l>Ban
+  display name: <&4><&l>Ban
   lore:
     - "<&a>Right Click:"
-    - "<&4>Ban the Player from the Network."
+    - "<&c>Ban the Player from the Network."
   enchantments:
     - ARROW_INFINITE:1
   mechanisms:
