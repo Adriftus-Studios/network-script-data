@@ -16,6 +16,7 @@ mask_ender_wizard:
       offset: 0.5
     on_equip_task: mask_ender_wizard_equip
     on_unequip_task: mask_ender_wizard_unequip
+    permission: adriftus.admin
 
 mask_ender_wizard_equip:
   type: task
