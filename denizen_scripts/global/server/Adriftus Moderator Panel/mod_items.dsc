@@ -36,8 +36,10 @@ mod_inventorylog_item:
   type: item
   debug: false
   material: chest
-  display name: <&2><&l>Inventory Log
+  display name: <&2><&l>Inventory
   lore:
+    - "<&1>Left Click:"
+    - "<&a>View Inventory of Player."
     - "<&1>Right Click:"
     - "<&a>View Inventory Log of Player."
   mechanisms:
