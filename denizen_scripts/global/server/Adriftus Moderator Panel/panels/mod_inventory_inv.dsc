@@ -76,7 +76,7 @@ mod_ender_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_ender_chest_inv]>
-    - define map <player.flag[amp_map].as_map.get[uuid].as_player.inventory.map_slots>
+    - define map <player.flag[amp_map].as_map.get[uuid].as_player.enderchest.map_slots>
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Ender Chest."
     - foreach <[map]>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
