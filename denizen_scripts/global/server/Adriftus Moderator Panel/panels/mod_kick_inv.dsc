@@ -15,7 +15,7 @@ mod_kick_inv:
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [x] [x] [] [x] [] [x] [] [x] [x]
-    - [x] [] [x] [x] [] [x] [x] [] [x]
+    - [x] [x] [] [x] [] [x] [] [x] [x]
     - [x] [] [] [] [x] [] [] [] [x]
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [b2] [b1] [b2] [back] [head] [back] [b2] [b1] [b2]
