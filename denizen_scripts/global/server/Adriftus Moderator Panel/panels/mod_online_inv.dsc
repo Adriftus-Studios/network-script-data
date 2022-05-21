@@ -46,6 +46,7 @@ mod_online_inv_events:
       - else:
         - run mask_wear def:adriftus_moderator
     on player clicks ender_eye in mod_online_inv:
+      - run mod_message_discord_command def:<player.uuid>|vanish<&sp>
       - if <player.has_flag[vanished]>:
         - run mod_unvanish_task
       - else:
