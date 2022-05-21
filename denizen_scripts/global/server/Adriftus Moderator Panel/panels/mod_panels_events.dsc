@@ -15,5 +15,12 @@ mod_global_inv_events:
           - run mod_actions_inv_open
         - case online:
           - run mod_online_inv_open
+        # Inventory
+        - case inventory:
+          - run mod_inventory_inv_open
+        - case enderchest:
+          - run mod_ender_chest_inv_open
+        - case adriftuschest:
+          - run mod_adriftus_chest_inv_open
         - default:
           - inventory close
