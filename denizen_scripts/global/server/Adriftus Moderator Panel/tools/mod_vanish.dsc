@@ -19,6 +19,7 @@ mod_vanish_task:
   script:
     - flag <player> vanished
     - flag server vanished_staff:->:<player>
+    - adjust <player> health_data:200/200
     - adjust <player> hide_from_players
     - if <[flag]>:
       - flag player on_item_pickup:->:mod_vanish_cancel
@@ -35,6 +36,7 @@ mod_unvanish_task:
   script:
     - flag <player> vanished:!
     - flag server vanished_staff:<-:<player>
+    - adjust <player> health_data:20/20
     - adjust <player> show_to_players
     - flag player on_item_pickup:<-:mod_vanish_cancel
     - flag <player> on_damaged:!
