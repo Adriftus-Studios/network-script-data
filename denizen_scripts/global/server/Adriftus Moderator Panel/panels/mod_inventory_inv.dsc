@@ -111,7 +111,7 @@ mod_adriftus_chest_inv_open:
   type: task
   debug: false
   script:
-    - define inventory <inventory[mod_inventory_inv]>
+    - define inventory <inventory[mod_adriftus_chest_inv]>
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Adriftus Chest."
     - foreach <yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[adriftus.chest.contents_map]||<map>>:
       - define item <[value]>
