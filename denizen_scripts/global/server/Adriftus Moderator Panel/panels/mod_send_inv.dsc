@@ -13,9 +13,9 @@ mod_send_inv:
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
-    - [b2] [b1] [b1] [b2] [b1] [b2] [b1] [b1] [b2]
-    - [x] [] [] [] [] [] [] [] [x]
-    - [b1] [b2] [b1] [back] [head] [back] [b1] [b2] [b1]
+    - [b2] [b1] [b2] [b1] [b2] [b1] [b2] [b1] [b2]
+    - [b1] [] [] [] [] [] [] [] [b1]
+    - [b2] [b1] [b2] [back] [head] [back] [b2] [b1] [b2]
 
 mod_send_inv_events:
   type: world
