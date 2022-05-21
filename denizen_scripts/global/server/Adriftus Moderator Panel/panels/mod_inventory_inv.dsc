@@ -14,14 +14,14 @@ mod_inventory_inv:
     head: <item[mod_player_item]>
     inv: <item[chest].with[display_name=<&a><&l>⬓<&sp>Inventory].with_flag[to:inventory]>
     ec: <item[ender_chest].with[display_name=<&d><&l>■<&sp>Ender<&sp>Chest].with_flag[to:enderchest]>
-    ac: <item[ender_chest].with[display_name=<&6><&l>□<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
+    ac: <item[stone].with[display_name=<&6><&l>□<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
   slots:
+    - [x] [x] [] [] [] [] [] [x] [x]
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [back] [b1] [inv] [b1] [head] [b1] [ec] [ac] [b2]
+    - [back] [b1] [b2] [b1] [head] [b1] [ec] [ac] [b2]
 
 mod_inventory_inv_open:
   type: task
@@ -52,6 +52,29 @@ map_inventory_map:
   40: 3
 
 # ENDER CHEST
+mod_ender_chest_inv:
+  type: inventory
+  debug: false
+  title: <&6>A<&e>MP <&f><&gt> <&2>Ender Chest
+  inventory: CHEST
+  gui: true
+  size: 54
+  definitions:
+    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    b1: <item[lime_stained_glass_pane].with[display_name=<&sp>]>
+    b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
+    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
+    head: <item[mod_player_item]>
+    inv: <item[chest].with[display_name=<&a><&l>⬓<&sp>Inventory].with_flag[to:inventory]>
+    ac: <item[stone].with[display_name=<&6><&l>□<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
+  slots:
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [back] [b1] [b2] [b1] [head] [b1] [inv] [ac] [b2]
+
 mod_ender_chest_inv_open:
   type: task
   debug: false
@@ -63,13 +86,37 @@ mod_ender_chest_inv_open:
     - inventory open d:<[inventory]>
 
 # ADRIFTUS CHEST
+mod_adriftus_chest_inv:
+  type: inventory
+  debug: false
+  title: <&6>A<&e>MP <&f><&gt> <&2>Adriftus Chest
+  inventory: CHEST
+  gui: true
+  size: 54
+  definitions:
+    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    b1: <item[lime_stained_glass_pane].with[display_name=<&sp>]>
+    b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
+    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
+    head: <item[mod_player_item]>
+  slots:
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+
 mod_adriftus_chest_inv_open:
   type: task
   debug: false
   script:
-    - define inventory <inventory[mod_adriftus_chest_inv]>
+    - define inventory <inventory[mod_inventory_inv]>
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Adriftus Chest."
     - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<map>>:
-      - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
+      - define item <[value]>
+      - adjust def:item "lore:<[value].lore>|<&a><&l>⬓<&sp>Inventory"
+      - flag <[item]> to:inventory
+      - inventory set slot:<[key]> o:<[item]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
