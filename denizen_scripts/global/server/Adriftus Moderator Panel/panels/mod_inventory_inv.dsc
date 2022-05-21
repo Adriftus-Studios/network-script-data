@@ -38,16 +38,16 @@ mod_inventory_inv_open:
         - define slot <script[map_inventory_map].data_key[<[slot]>]>
       # Offhand
       - else if <[key]> == 41:
-        - define slot 5
+        - define slot 7
       - inventory set slot:<[slot]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 map_inventory_map:
   type: data
-  37: 4
-  38: 3
-  39: 2
-  40: 1
+  37: 6
+  38: 5
+  39: 4
+  40: 3
 
 # -- ENDER CHEST PANEL
 mod_ender_chest_inv:
