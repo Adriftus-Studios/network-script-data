@@ -74,7 +74,7 @@ mod_player_item:
   type: item
   debug: false
   material: player_head
-  display name: <player.flag[amp_map].as_map.get[uuid].as_player.name.if_null[invalid]>
+  display name: <&r><player.flag[amp_map].as_map.get[uuid].as_player.name.if_null[invalid]>
   lore:
     - "<&6>Nickname: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Display_Name]||<player.flag[amp_map].as_map.get[uuid].as_player.name>>"
     - "<&6>Rank: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Rank]||None>"
