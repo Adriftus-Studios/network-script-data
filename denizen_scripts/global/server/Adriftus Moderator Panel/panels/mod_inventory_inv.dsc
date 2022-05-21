@@ -13,8 +13,8 @@ mod_inventory_inv:
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
     inv: <item[chest].with[display_name=<&a><&l>⬓<&sp>Inventory].with_flag[to:inventory]>
-    ec: <item[ender_chest].with[display_name=<&d><&l>◼<&sp>Ender<&sp>Chest].with_flag[to:enderchest]>
-    ac: <item[red_stained_glass_pane].with[display_name=<&6><&l>◻<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
+    ec: <item[ender_chest].with[display_name=<&d><&l>■<&sp>Ender<&sp>Chest].with_flag[to:enderchest]>
+    ac: <item[ender_chest].with[display_name=<&6><&l>□<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
