@@ -18,7 +18,7 @@ mod_kick_inv:
     - [x] [x] [] [x] [] [x] [] [x] [x]
     - [x] [] [] [] [x] [] [] [] [x]
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [b2] [b1] [b2] [back] [head] [back] [b2] [b1] [b2]
+    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
 
 mod_kick_inv_events:
   type: world
