@@ -114,6 +114,6 @@ mod_adriftus_chest_inv_open:
     - define inventory <inventory[mod_adriftus_chest_inv]>
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Adriftus Chest."
     - foreach <yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[adriftus.chest.contents_map]||<map>>:
-      - inventory set slot:<[key]> o:<[value].with[lore=<[value].lore>|<&c><&l>↩<&sp>⬓<&sp>Inventory].with_flag[to:inventory]> d:<[inventory]>
+      - inventory set slot:<[key]> o:<[value].with[lore=<[value].lore.include[<&c><&l>↩<&sp>⬓<&sp>Inventory]>].with_flag[to:inventory]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
