@@ -25,11 +25,10 @@ mod_inventory_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_inventory_inv]>
-    - define map <player.flag[amp_map].as_map.get[uuid].as_player.inventory.map_slots>
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Inventory."
-    - foreach <[map]>:
+    - foreach <player.flag[amp_map].as_map.get[uuid].as_player.inventory.map_slots>:
       # How do I do a range? (from 1 to 9, etc.)
-      - define slot <[key]>
+      - define slot <player.flag[amp_map].as_map.get[uuid].as_player.inventory.map_slots>
       # Hotbar
       - if <list[1|2|3|4|5|6|7|8|9].contains[<[key]>]>:
         - define slot:+:36
@@ -76,9 +75,8 @@ mod_ender_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_ender_chest_inv]>
-    - define map <player.flag[amp_map].as_map.get[uuid].as_player.enderchest.map_slots>
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Ender Chest."
-    - foreach <[map]>:
+    - foreach <player.flag[amp_map].as_map.get[uuid].as_player.enderchest.map_slots>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
@@ -109,9 +107,8 @@ mod_adriftus_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_adriftus_chest_inv]>
-    - define map <player.flag[amp_map].as_map.get[uuid].as_player.inventory.map_slots>
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Adriftus Chest."
-    - foreach <[map]>:
+    - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<map>>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
