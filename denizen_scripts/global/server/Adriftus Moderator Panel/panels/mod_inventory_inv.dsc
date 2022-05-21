@@ -89,7 +89,7 @@ mod_ender_chest_inv_open:
 mod_adriftus_chest_inv:
   type: inventory
   debug: false
-  title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6930]>
+  title: <&6>A<&e>MP <&f><&gt> <&2>Adriftus Chest
   inventory: CHEST
   gui: true
   size: 54
@@ -112,9 +112,10 @@ mod_adriftus_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_adriftus_chest_inv]>
+    - adjust def:inventory "title:<&f><&font[adriftus:guis]><&chr[F808]><&chr[6930]>"
     - foreach <yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[adriftus.chest.contents_map]||<map>>:
       - define item <[value]>
-      - adjust def:item "lore:<[value].lore>|<&a><&l>↩<&sp>⬓<&sp>Inventory"
+      - adjust def:item "lore:<[value].lore>|<&c><&l>↩<&sp>⬓<&sp>Inventory"
       - flag <[item]> to:inventory
       - inventory set slot:<[key]> o:<[item]> d:<[inventory]>
     - inventory open d:<[inventory]>
