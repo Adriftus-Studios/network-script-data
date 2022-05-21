@@ -18,7 +18,7 @@ mod_inventory_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [b2] [b1] [b2] [back] [head] [back] [b2] [b1] [b2]
+    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
 
 mod_inventory_inv_open:
   type: task
