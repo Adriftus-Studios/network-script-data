@@ -16,7 +16,7 @@ mod_inventory_inv:
     ec: <item[ender_chest].with[display_name=<&d><&l>■<&sp>Ender<&sp>Chest].with_flag[to:enderchest]>
     ac: <item[stone].with[display_name=<&6><&l>□<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
   slots:
-    - [x] [x] [] [] [] [] [] [x] [x]
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
