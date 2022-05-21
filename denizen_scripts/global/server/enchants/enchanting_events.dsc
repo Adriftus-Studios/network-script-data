@@ -198,7 +198,7 @@ player_death_enchant_handler:
         - else:
           - define drops:->:<[item]>
       - flag player temp.soulbound_enchant:|:<[keep]> if:<[keep].exists>
-      - determine <[drops]||air>
+      - determine <[drops]||NO_DROPS>
 
 spawn_enchant_handler:
   type: world

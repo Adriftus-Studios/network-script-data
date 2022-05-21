@@ -1,35 +1,10 @@
-mod_kick_item:
-  type: item
-  debug: false
-  material: leather_boots
-  color: 16711680
-  display name: <&d><&l>Kick
-  lore:
-    - "<&a>Right Click:"
-    - "<&e>Kick the Player from the Network."
-  mechanisms:
-    hides: ALL
-
-mod_ban_item:
-  type: item
-  debug: false
-  material: wooden_axe
-  display name: <&c><&l>Ban
-  lore:
-    - "<&a>Right Click:"
-    - "<&c>Ban the Player from the Network."
-  enchantments:
-    - ARROW_INFINITE:1
-  mechanisms:
-    hides: ATTRIBUTES|ENCHANTS
-
 mod_send_item:
   type: item
   debug: false
   material: ender_pearl
   display name: <&5><&l>Send
   lore:
-    - "<&a>Right Click:"
+    - "<&1>Right Click:"
     - "<&d>Transfer the Player to another Server."
   mechanisms:
     hides: ALL
@@ -38,10 +13,10 @@ mod_teleport_item:
   type: item
   debug: false
   material: feather
-  display name: <&b><&l>Teleport
+  display name: <&3><&l>Teleport
   lore:
-    - "<&a>Right Click:"
-    - "<&b>Teleport to Player."
+    - "<&1>Right Click:"
+    - "<&b>Teleport to the Player."
   mechanisms:
     hides: ALL
     custom_model_data: 200
@@ -50,12 +25,48 @@ mod_spectate_item:
   type: item
   debug: false
   material: spyglass
-  display name: <&a><&l>Spectate
+  display name: <&6><&l>Spectate
   lore:
-    - "<&a>Right Click:"
-    - "<&a>Spectate Player."
+    - "<&1>Right Click:"
+    - "<&e>Spectate the Player."
   mechanisms:
     hides: ALL
+
+mod_inventorylog_item:
+  type: item
+  debug: false
+  material: chest
+  display name: <&2><&l>Inventory Log
+  lore:
+    - "<&1>Right Click:"
+    - "<&a>View Inventory Log of Player."
+  mechanisms:
+    hides: ALL
+
+mod_kick_item:
+  type: item
+  debug: false
+  material: leather_boots
+  color: 16711680
+  display name: <&5><&l>Kick
+  lore:
+    - "<&1>Right Click:"
+    - "<&d>Kick the Player from the Network."
+  mechanisms:
+    hides: ALL
+
+mod_ban_item:
+  type: item
+  debug: false
+  material: wooden_axe
+  display name: <&4><&l>Ban
+  lore:
+    - "<&1>Right Click:"
+    - "<&c>Ban the Player from the Network."
+  enchantments:
+    - ARROW_INFINITE:1
+  mechanisms:
+    hides: ATTRIBUTES|ENCHANTS
 
 mod_player_item:
   type: item

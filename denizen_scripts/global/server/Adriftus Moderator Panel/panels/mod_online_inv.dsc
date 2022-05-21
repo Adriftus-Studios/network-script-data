@@ -28,6 +28,9 @@ mod_online_inv_events:
       - if <server.match_player[<context.item.display.strip_color>]> == <player>:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
+      - if !<player.has_permission[adriftus.admin]> && <server.match_player[<context.item.display.strip_color>].has_permission[adriftus.admin]>:
+        - narrate "<&c>You cannot perform actions on administrators."
+        - stop
       - define uuid <server.match_player[<context.item.display.strip_color>].uuid>
       - define map <map.with[uuid].as[<[uuid]>]>
       - define map <[map].with[display_name].as[<yaml[global.player.<[uuid]>].read[Display_Name]||None>]>
@@ -43,6 +46,7 @@ mod_online_inv_events:
       - else:
         - run mask_wear def:adriftus_moderator
     on player clicks ender_eye in mod_online_inv:
+      - run mod_message_discord_command def:<player.uuid>|vanish<&sp>
       - if <player.has_flag[vanished]>:
         - run mod_unvanish_task
       - else:
