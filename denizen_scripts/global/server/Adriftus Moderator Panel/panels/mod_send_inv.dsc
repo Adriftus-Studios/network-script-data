@@ -15,7 +15,7 @@ mod_send_inv:
   slots:
     - [b2] [b1] [b2] [b1] [b2] [b1] [b2] [b1] [b2]
     - [b1] [] [] [] [] [] [] [] [b1]
-    - [b2] [b1] [b2] [back] [head] [back] [b2] [b1] [b2]
+    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
 
 mod_send_inv_events:
   type: world
