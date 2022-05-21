@@ -29,6 +29,6 @@ mod_inventory_inv_open:
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&7><player.flag[amp_map].as_map.get[uuid].as_player.name><&sq>s <&8>Inventory."
     - narrate <[map]>
     - foreach <[map]>:
-      - narrate <[value]>
-      - inventory set o:<[value]> d:<[inventory]>
+      - narrate <[key]><&co><&sp><[value]>
+      - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
