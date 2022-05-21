@@ -15,7 +15,7 @@ mod_actions_inv:
   slots:
     - [b1] [b2] [b1] [b2] [head] [b2] [b1] [b2] [b1]
     - [b2] [] [] [] [b2] [] [] [] [b2]
-    - [b1] [b2] [b1] [b2] [back] [b2] [b1] [b2] [b1]
+    - [back] [b2] [b1] [b2] [b1] [b2] [b1] [b2] [b1]
 
 mod_actions_inv_events:
   type: world
