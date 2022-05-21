@@ -28,5 +28,23 @@ mod_inventory_inv_open:
     - define map <player.flag[amp_map].as_map.get[uuid].as_player.inventory.map_slots>
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Inventory."
     - foreach <[map]>:
-      - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
+      # How do I do a range? (from 1 to 9, etc.)
+      - define slot <[key]>
+      # Hotbar
+      - if <list[1|2|3|4|5|6|7|8|9].contains[<[key]>]>:
+        - define slot:+:36
+      # Armour
+      - else if <list[37|38|39|40].contains[<[key]>]>:
+        - define slot <script[map_inventory_map].data_key[<[slot]>]>
+      # Offhand
+      - else if <[key]> == 41:
+        - define slot 5
+      - inventory set slot:<[slot]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
+
+map_inventory_map:
+  type: data
+  37: 4
+  38: 3
+  39: 2
+  40: 1
