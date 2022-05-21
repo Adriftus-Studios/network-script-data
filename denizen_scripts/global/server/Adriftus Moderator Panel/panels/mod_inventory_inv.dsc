@@ -13,8 +13,8 @@ mod_inventory_inv:
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
     inv: <item[chest].with[display_name=<&a><&l>⬓<&sp>Inventory].with_flag[to:inventory]>
-    ec: <item[ender_chest].with[display_name=<&d><&l>■<&sp>Ender<&sp>Chest].with_flag[to:enderchest]>
-    ac: <item[stone].with[display_name=<&6><&l>□<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
+    ec: <item[ender_chest].with[display_name=<&d><&l>◼<&sp>Ender<&sp>Chest].with_flag[to:enderchest]>
+    ac: <item[stone].with[display_name=<&6><&l>◻<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
   slots:
     - [x] [x] [] [] [] [] [] [x] [x]
     - [] [] [] [] [] [] [] [] []
@@ -66,7 +66,7 @@ mod_ender_chest_inv:
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
     inv: <item[chest].with[display_name=<&a><&l>⬓<&sp>Inventory].with_flag[to:inventory]>
-    ac: <item[stone].with[display_name=<&6><&l>□<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
+    ac: <item[stone].with[display_name=<&6><&l>◻<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [] [] [] [] [] [] [] [] []
@@ -89,7 +89,7 @@ mod_ender_chest_inv_open:
 mod_adriftus_chest_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f><&gt> <&2>Adriftus Chest
+  title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6930]>
   inventory: CHEST
   gui: true
   size: 54
@@ -112,7 +112,6 @@ mod_adriftus_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_adriftus_chest_inv]>
-    - adjust def:inventory "title:<&f><&font[adriftus:guis]><&chr[F808]><&chr[6930]>"
     - foreach <yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[adriftus.chest.contents_map]||<map>>:
       - define item <[value]>
       - adjust def:item "lore:<[value].lore>|<&a><&l>↩<&sp>⬓<&sp>Inventory"
