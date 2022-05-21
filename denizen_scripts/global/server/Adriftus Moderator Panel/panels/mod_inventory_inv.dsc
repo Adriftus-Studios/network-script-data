@@ -8,8 +8,8 @@ mod_inventory_inv:
   size: 54
   definitions:
     x: <item[air]>
-    b1: <item[magenta_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[purple_stained_glass_pane].with[display_name=<&sp>]>
+    b1: <item[lime_stained_glass_pane].with[display_name=<&sp>]>
+    b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
