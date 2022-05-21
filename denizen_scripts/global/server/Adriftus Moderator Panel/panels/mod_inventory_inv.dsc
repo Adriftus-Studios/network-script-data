@@ -12,13 +12,16 @@ mod_inventory_inv:
     b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
+    inv: <item[chest].with[display_name=<&a><&l>⬓<&sp>Inventory].with_flag[to:inventory]>
+    ec: <item[ender_chest].with[display_name=<&d><&l>◼<&sp>Ender<&sp>Chest].with_flag[to:enderchest]>
+    ac: <item[red_stained_glass_pane].with[display_name=<&6><&l>◻<&sp>Adriftus<&sp>Chest].with_flag[to:adriftuschest]>
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
+    - [back] [b1] [inv] [b1] [head] [b1] [ec] [ac] [b2]
 
 mod_inventory_inv_open:
   type: task
@@ -48,28 +51,7 @@ map_inventory_map:
   39: 4
   40: 3
 
-# -- ENDER CHEST PANEL
-mod_ender_chest_inv:
-  type: inventory
-  debug: false
-  title: <&6>A<&e>MP <&f><&gt> <&2>Ender Chest
-  inventory: CHEST
-  gui: true
-  size: 54
-  definitions:
-    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    b1: <item[lime_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
-    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
-    head: <item[mod_player_item]>
-  slots:
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
-
+# ENDER CHEST
 mod_ender_chest_inv_open:
   type: task
   debug: false
@@ -80,28 +62,7 @@ mod_ender_chest_inv_open:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
-# -- ADRIFTUS CHEST PANEL
-mod_adriftus_chest_inv:
-  type: inventory
-  debug: false
-  title: <&6>A<&e>MP <&f><&gt> <&2>Adriftus Chest
-  inventory: CHEST
-  gui: true
-  size: 54
-  definitions:
-    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    b1: <item[lime_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
-    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
-    head: <item[mod_player_item]>
-  slots:
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
-
+# ADRIFTUS CHEST
 mod_adriftus_chest_inv_open:
   type: task
   debug: false
