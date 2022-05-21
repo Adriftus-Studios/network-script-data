@@ -5,7 +5,7 @@ mod_inventory_inv:
   title: <&6>A<&e>MP <&f><&gt> <&8>Inventory
   inventory: CHEST
   gui: true
-  size: 27
+  size: 54
   definitions:
     x: <item[air]>
     b1: <item[magenta_stained_glass_pane].with[display_name=<&sp>]>
