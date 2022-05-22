@@ -339,6 +339,7 @@ dwisp_goto:
   debug: false
   definitions: destination
   script:
+    - flag player dwisp.active.goto
     - if <player.flag[dwisp.active.location].world> != <[destination].world>:
       - flag player dwisp.active.location:<[destination].above[30]>
       - define points <proc[define_spiral].context[<[destination].above[30]>|<[destination]>|1|1|1]>
@@ -370,6 +371,7 @@ dwisp_goto:
         - playeffect effect:redstone at:<[point]> offset:0.05 quantity:5 special_data:1.5|<player.flag[dwisp.data.color1]> targets:<[targets]>
         - playeffect effect:redstone at:<[point]> offset:0.1 quantity:5 special_data:0.75|<player.flag[dwisp.data.color2]> targets:<[targets]>
         - flag player dwisp.active.location:<[point]>
+    - flag player dwisp.active.goto:!
 
 dwisp_run_movement:
   type: task
@@ -619,6 +621,8 @@ dwisp_run_behaviour:
   debug: false
   script:
     - while <player.has_flag[dwisp.active]>:
+      - if <player.has_flag[dwisp.active.goto]>:
+        - waituntil rate:1s <player.has_flag[dwisp.active.goto].not>
       - foreach <player.flag[dwisp.data.behaviour]> key:behaviour as:value:
         - if <[value]> != off:
           - choose <[behaviour]>:
