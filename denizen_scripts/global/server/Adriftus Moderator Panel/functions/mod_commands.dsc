@@ -35,7 +35,7 @@ mod_global_ban_task:
   debug: false
   script:
     - if <context.args.is_empty>:
-      - narrate "<&6>A<&e>MP <&6>- /ban -- Server banning."
+      - narrate "<&6>A<&e>MP <&6>- /ban -- Network-wide banning."
       - narrate "<&f>/ban [username] (reason)"
     - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
@@ -129,7 +129,7 @@ mod_global_unban_task:
   script:
     # -- Removes `banned` YAML key from global player data.
     - if <context.args.is_empty>:
-      - narrate "<&6>A<&e>MP <&6>- /unban -- Server unbanning."
+      - narrate "<&6>A<&e>MP <&6>- /unban -- Network-wide unbanning."
       - narrate "<&f>/unban [username]"
     - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
