@@ -3,4 +3,5 @@ staff_no_fly_kick:
   debug: false
   events:
     on player kicked for flying permission:adriftus.staff:
-      - determine FLY_COOLDOWN:24h
+      - determine passively cancelled
+      - determine FLY_COOLDOWN:1m
