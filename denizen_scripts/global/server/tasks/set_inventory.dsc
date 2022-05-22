@@ -3,9 +3,10 @@ set_inventory:
   debug: false
   definitions: target|inventory_map|enderchest_map
   script:
-    - if !<player[<[target]>].exists>:
+    - if <[target].last_played_time.year> == 1970:
       - flag server transferred_inventories.<[target].uuid>.inventory:<[inventory_map]>
       - flag server transferred_inventories.<[target].uuid>.enderchest:<[inventory_map]>
+      - stop
     - if <[inventory_map].exists>:
       - inventory set o:<[inventory_map].with[54].as[air]> d:<[target].inventory>
     - if <[enderchest_map].exists>:
