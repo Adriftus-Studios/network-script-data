@@ -28,14 +28,14 @@ mod_ban_command_listener:
   events:
     on ban command:
       - determine passively fulfilled
-      - inject mod_server_ban_task
+      - inject mod_global_ban_task
 
-mod_server_ban_task:
+mod_global_ban_task:
   type: task
   debug: false
   script:
     - if <context.args.is_empty>:
-      - narrate "<&6>A<&e>MP <&6>- /ban -- Server banning."
+      - narrate "<&6>A<&e>MP <&6>- /ban -- Network-wide banning."
       - narrate "<&f>/ban [username] (reason)"
     - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
@@ -121,22 +121,22 @@ mod_unban_command_listener:
   events:
     on unban command:
       - determine passively fulfilled
-      - inject mod_server_unban_task
+      - inject mod_global_unban_task
 
-mod_server_unban_task:
+mod_global_unban_task:
   type: task
   debug: false
   script:
     # -- Removes `banned` YAML key from global player data.
     - if <context.args.is_empty>:
-      - narrate "<&6>A<&e>MP <&6>- /unban -- Server unbanning."
+      - narrate "<&6>A<&e>MP <&6>- /unban -- Network-wide unbanning."
       - narrate "<&f>/unban [username]"
     - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - define moderator <tern[<context.source_type.is[==].to[PLAYER]>].pass[<player.uuid>].fail[Server]>
       - define uuid <server.match_offline_player[<context.args.first>].uuid>
       - define reason <context.args.get[2]||Unbanned>
       # Define directory and YAML ID
-      - define dir data/players/<[uuid]>.yml
+      - define dir data/global/players/<[uuid]>.yml
       - define id amp.target.<[uuid]>
       # Load yaml data
       - ~yaml id:<[id]> load:<[dir]>
@@ -183,7 +183,7 @@ mod_global_unban_command:
       - define uuid <server.match_offline_player[<context.args.first>].uuid>
       - define reason <context.args.get[2]||Unbanned>
       # Define directory and YAML ID
-      - define dir data/players/<[uuid]>.yml
+      - define dir data/global/players/<[uuid]>.yml
       - define id amp.target.<[uuid]>
       # Load yaml data
       - ~yaml id:<[id]> load:<[dir]>

@@ -7,7 +7,7 @@ mod_actions_inv:
   gui: true
   size: 27
   definitions:
-    x: <item[air]>
+    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     b1: <item[light_blue_stained_glass_pane].with[display_name=<&sp>]>
     b2: <item[cyan_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:online]>
@@ -15,7 +15,7 @@ mod_actions_inv:
   slots:
     - [b1] [b2] [b1] [b2] [head] [b2] [b1] [b2] [b1]
     - [b2] [] [] [] [b2] [] [] [] [b2]
-    - [b1] [b2] [b1] [b2] [back] [b2] [b1] [b2] [b1]
+    - [back] [b2] [b1] [b2] [b1] [b2] [b1] [b2] [b1]
 
 mod_actions_inv_events:
   type: world
@@ -49,6 +49,9 @@ mod_actions_inv_events:
         - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <player.flag[amp_map].as_map.get[uuid].as_player.name>." targets:<player>
         - run mod_message_discord_command def:<player.uuid>|spectate<&sp><player.flag[amp_map].as_map.get[uuid].as_player.name>
       - inventory close
+
+    on player left clicks mod_inventorylog_item in mod_actions_inv:
+      - inject mod_inventory_inv_open
 
     on player right clicks mod_inventorylog_item in mod_actions_inv:
       - run inventory_logger_list def:<player.flag[amp_map].as_map.get[uuid].as_player>

@@ -7,18 +7,18 @@ mod_kick_inv:
   gui: true
   size: 54
   definitions:
-    x: <item[air]>
-    b1: <item[lime_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
+    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    b1: <item[magenta_stained_glass_pane].with[display_name=<&sp>]>
+    b2: <item[purple_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [x] [x] [] [x] [] [x] [] [x] [x]
-    - [x] [] [x] [x] [] [x] [x] [] [x]
+    - [x] [x] [] [x] [] [x] [] [x] [x]
     - [x] [] [] [] [x] [] [] [] [x]
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [b2] [b1] [b2] [back] [head] [back] [b2] [b1] [b2]
+    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
 
 mod_kick_inv_events:
   type: world
@@ -43,7 +43,7 @@ mod_kick_inv_open:
         - define name <[item].flag[tag].parsed><&sp><[infraction]>
         - define lore <list[<&b>Level<&co><&sp><[item].flag[colour].parsed><[level]>]>
         - define lore:->:<&e>Right<&sp>Click<&sp>to<&sp>kick<&co>
-        - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
+        - define lore:->:<&r><player.flag[amp_map].as_map.get[uuid].as_player.name>
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> INFRACTION:<[infraction]>
         - flag <[item]> LENGTH:<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.length]>

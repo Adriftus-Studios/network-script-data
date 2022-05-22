@@ -7,15 +7,15 @@ mod_send_inv:
   gui: true
   size: 27
   definitions:
-    x: <item[air]>
+    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     b1: <item[magenta_stained_glass_pane].with[display_name=<&sp>]>
     b2: <item[purple_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
-    - [b2] [b1] [b1] [b2] [b1] [b2] [b1] [b1] [b2]
-    - [x] [] [] [] [] [] [] [] [x]
-    - [b1] [b2] [b1] [back] [head] [back] [b1] [b2] [b1]
+    - [b2] [b1] [b2] [b1] [b2] [b1] [b2] [b1] [b2]
+    - [b1] [] [] [] [] [] [] [] [b1]
+    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
 
 mod_send_inv_events:
   type: world
@@ -39,7 +39,7 @@ mod_send_inv_open:
       - if <yaml[bungee_config].read[servers.<[server]>.show_in_play_menu]>:
         - define lore <list.include[<yaml[bungee_config].parsed_key[servers.<[server]>.description]>]>
         - define lore:->:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
-        - define lore:->:<player.flag[amp_map].as_map.get[uuid].as_player.name>
+        - define lore:->:<&r><player.flag[amp_map].as_map.get[uuid].as_player.name>
         - define item <yaml[bungee_config].read[servers.<[server]>.material].as_item.with[display_name=<&f><[server].to_titlecase>;lore=<[lore]>]>
         - flag <[item]> SERVER:<[server]>
         - define items:->:<[item]>
