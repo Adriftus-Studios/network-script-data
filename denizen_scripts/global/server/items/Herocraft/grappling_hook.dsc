@@ -128,12 +128,13 @@ grappling_hook_pull:
     - adjust <queue> linked_player:<context.projectile.flag[user]>
     - define target <context.projectile.flag[target]>
     - define targets <context.location.find_players_within[100]>
+    - define vector <[target].sub[<player.eye_location>].normalize>
     - adjust <player> gravity:false
-    - while <player.eye_location.below[0.5].distance[<[target]>]> > 2 && <player.is_online>:
+    - while <[target].sub[<player.eye_location>].normalize.distance[<[vector]>]> < 1 && <player.is_online>:
       - playeffect at:<player.eye_location.below[0.45].right[0.3].points_between[<[target]>].distance[0.33]> quantity:2 offset:0 special_data:1|#FFFFFF effect:redstone targets:<[targets]>
       - adjust <player> velocity:<[target].sub[<player.location>].normalize>
       - wait 4t
-      - if <[loop_index]> > 45:
+      - if <[loop_index]> > 35:
         - while stop
     - adjust <player> fall_distance:0
     - if <player.location.pitch> < -15 && <[target].above.material.name.advanced_matches[*air]>:
