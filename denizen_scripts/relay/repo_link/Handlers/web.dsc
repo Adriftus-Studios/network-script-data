@@ -20,6 +20,11 @@ web_handler:
           - determine passively FILE:../../../../web/resource-pack/hosted-rp-main.zip
           - determine CODE:200
 
+      # % ██ [ Staff Resource Pack  ] ██
+        - case /resource_pack_staff.zip:
+          - determine passively FILE:../../../../web/resource-pack/hosted-rp-staff.zip
+          - determine CODE:200
+
       # % ██ [ Github oAuth Token Ex  ] ██
         - case /oAuth/GitHub:
           - inject discord_oauth_token_exchange
@@ -93,7 +98,7 @@ web_handler:
               - reload
           - case /reload/RP:
             - if <context.query.parsed.get[adriftus_sha].exists>:
-              - bungeerun hub resource_pack_sha def:<context.query.parsed.get[adriftus_sha].before[<&sp>]>
+              - bungeerun hub resource_pack_sha def:<context.query.parsed.get[adriftus_sha].before[<&sp>]>|<context.query.parsed.get[adriftus_staff_sha].before[<&sp>]>
       
       # % ██ [ Denizen Interactions   ] ██
       - else if <context.headers.contains[X-signature-ed25519]>:
