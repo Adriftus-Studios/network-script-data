@@ -28,4 +28,4 @@ mod_global_inv_events:
           - inventory close
     # DEBUG
     on player closes mod_*_inv:
-      - narrate "Closed <context.inventory>"
+      - narrate "Closed <context.inventory.script>"
