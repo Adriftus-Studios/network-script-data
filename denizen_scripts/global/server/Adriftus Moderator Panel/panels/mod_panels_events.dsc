@@ -27,7 +27,7 @@ mod_global_inv_events:
         - default:
           - inventory close
     # DEBUG
-    on player closes mod_*_inv priority:10:
+    on player closes mod_*_inv bukkit_priority:MONITOR:
       - narrate "Closed <context.inventory.script>"
       - if <player.open_inventory> == <player.inventory>:
         - narrate "Completely closed mod menu."
