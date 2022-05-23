@@ -8,9 +8,7 @@ mod_inventory_inv:
   size: 54
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    b1: <item[lime_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
-    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
+    back: <item[feather].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;custom_model_data=3].with_flag[to:actions]>
     head: <item[mod_player_item]>
     inv: <item[paper].with[display_name=<&a><&l>⬓<&sp>Inventory;custom_model_data=400;enchantments=arrow_infinite=1;hides=ALL].with_flag[to:inventory]>
     ec: <item[paper].with[display_name=<&d><&l>⬒<&sp>Ender<&sp>Chest;custom_model_data=402].with_flag[to:enderchest]>
@@ -21,7 +19,7 @@ mod_inventory_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [back] [b1] [b2] [b1] [head] [b1] [inv] [ec] [ac]
+    - [back] [x] [x] [x] [head] [x] [inv] [ec] [ac]
 
 mod_inventory_inv_open:
   type: task
@@ -61,9 +59,7 @@ mod_ender_chest_inv:
   size: 54
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    b1: <item[lime_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
-    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
+    back: <item[feather].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;custom_model_data=3].with_flag[to:actions]>
     head: <item[mod_player_item]>
     inv: <item[paper].with[display_name=<&a><&l>⬓<&sp>Inventory;custom_model_data=400].with_flag[to:inventory]>
     ec: <item[paper].with[display_name=<&d><&l>⬒<&sp>Ender<&sp>Chest;custom_model_data=402;enchantments=arrow_infinite=1;hides=ALL].with_flag[to:enderchest]>
@@ -74,7 +70,7 @@ mod_ender_chest_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [back] [b1] [b2] [b1] [head] [b1] [inv] [ec] [ac]
+    - [back] [x] [x] [x] [head] [x] [inv] [ec] [ac]
 
 mod_ender_chest_inv_open:
   type: task
@@ -96,9 +92,7 @@ mod_adriftus_chest_inv:
   size: 54
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    b1: <item[lime_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
-    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
+    back: <item[feather].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;custom_model_data=3].with_flag[to:actions]>
     head: <item[mod_player_item]>
     inv: <item[paper].with[display_name=<&a><&l>⬓<&sp>Inventory;custom_model_data=400].with_flag[to:inventory]>
     ec: <item[paper].with[display_name=<&d><&l>⬒<&sp>Ender<&sp>Chest;custom_model_data=402].with_flag[to:enderchest]>
@@ -109,7 +103,7 @@ mod_adriftus_chest_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [back] [b1] [b2] [b1] [head] [b1] [inv] [ec] [ac]
+    - [back] [x] [x] [x] [head] [x] [inv] [ec] [ac]
 
 mod_adriftus_chest_inv_open:
   type: task
