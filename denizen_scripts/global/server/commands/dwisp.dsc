@@ -641,7 +641,7 @@ dwisp_run_behaviour:
               - foreach <[targets]> as:heal_target:
                 - if <[heal_target].health> < <[heal_target].health_max>:
                   - run dwisp_heal_target def:<[heal_target]>
-                  - wait 5t
+                  - wait 1t
 
             # Attack
             - case attack:
@@ -649,7 +649,7 @@ dwisp_run_behaviour:
               - foreach <[targets]> as:damage_target:
                 - if <player.flag[dwisp.active.entity].can_see[<[damage_target]>]>:
                   - run dwisp_kill_target def:<[damage_target]>
-                  - wait 5t
+                  - wait 1t
 
             # Spawn Mob
             - case spawn:
