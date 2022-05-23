@@ -20,7 +20,7 @@ channels:
           to-MC: true
           to-Discord: true
         test:
-          active: false
+          active: true
           group: 626078288556851230
           channel: 978313832533487616
           to-MC: false
