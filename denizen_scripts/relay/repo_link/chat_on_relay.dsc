@@ -120,11 +120,12 @@ discord_watcher:
         - foreach <yaml[chat_history].read[<[channel]>_history]>:
           - if <[value].get[discord_id]> == <context.old_message.id>:
             - define uuid <[value].get[uuid]>
+
         # Server chat Override
         - if <[channel].starts_with[server_]>:
           - stop if:<context.new_message.attachments.is_empty.not>
-          - define Definitions <list_single[server].include[<context.new_message.text_display>].include[<[uuid]>].include[<[sender]>].include[<context.new_message.author.name>]>
-          - bungeerun <[channel].after[_]> chat_send_server_message def:<[definitions]>
+          - define Definitions <list_single[server].include[<context.new_message.text_display>].include[<[uuid]>]>
+          - bungeerun <[channel].after[_]> chat_edit_message def:<[definitions]>
           - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
           - stop
 
