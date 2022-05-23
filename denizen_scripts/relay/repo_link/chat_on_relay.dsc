@@ -108,7 +108,6 @@ discord_watcher:
       - if <context.new_message.author.discriminator> == 0000 || <context.new_message.author.is_bot>:
         - stop
       - if <yaml[discord_watcher].read[watched.<context.channel.id>]||null> != null && !<context.new_message.author.name.contains[Adriftus]>:
-        - define uuid <context.new_message.channel.id>_<context.new_message.id>
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
         - define sender DiscordUser_<context.new_message.author.id>
 
@@ -117,6 +116,10 @@ discord_watcher:
         - else:
           - stop if:<yaml[chat_config].read[channels.<[channel]>.integrations.Discord.to-MC].if_null[true].not>
 
+        # get the UUID
+        - foreach <yaml[chat_history].read[<[channel]>_history]>:
+          - if <[value].get[dsicord_id]> == <context.old_message.id>:
+            - define uuid <[value].get[uuid]>
         # Server chat Override
         - if <[channel].starts_with[server_]>:
           - stop if:<context.new_message.attachments.is_empty.not>
@@ -161,7 +164,10 @@ discord_watcher:
         - define Attachments <[Attachments].unseparated><&sp>
         - define Message <[ChannelText]><[DiscIcon]><&sp><[NameText]><&co><&nl><[ChannelSpaceText]><[Attachments]><[MessageText]>
         - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>]>
-        - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
+        - if <[channel].starts_with[server]>:
+          - define Servers <list[<[channel].after[_]>]>
+        - else:
+          - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_edit_message def:<[Definitions]>
         #- run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
 
