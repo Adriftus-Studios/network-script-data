@@ -103,7 +103,7 @@ discord_watcher:
               - bungeerun <[channel].after[_]> chat_delete_message def:server|<[value].get[uuid]>|true|false|true
             - else:
               - bungeerun hub chat_delete_message def:<[channel]>|<[value].get[uuid]>|true|false
-    
+
     on discord message modified for:a_bot:
       - if <context.new_message.author.discriminator> == 0000 || <context.new_message.author.is_bot>:
         - stop
@@ -118,7 +118,7 @@ discord_watcher:
 
         # get the UUID
         - foreach <yaml[chat_history].read[<[channel]>_history]>:
-          - if <[value].get[dsicord_id]> == <context.old_message.id>:
+          - if <[value].get[discord_id]> == <context.old_message.id>:
             - define uuid <[value].get[uuid]>
         # Server chat Override
         - if <[channel].starts_with[server_]>:
