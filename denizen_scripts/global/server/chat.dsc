@@ -323,8 +323,9 @@ chat_send_message:
 chat_send_server_message:
   type: task
   debug: false
-  definitions: Channel|msg|UUID|Sender|author_name
+  definitions: Channel|msg|UUID|Sender|author_name|edit
   script:
+        - define edit false if:<[edit].exists.not>
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
         - define Text <&f><&chr[0044].font[adriftus:chat]>
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
@@ -352,8 +353,11 @@ chat_send_server_message:
         - define Insert "chat interact <[channel]> <[uuid]>"
         - define MessageText <proc[msg_cmd].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
         - define Message <[ChannelText]><[DiscIcon]><&sp><[NameText]><&co><&nl><[ChannelSpaceText]><[MessageText]>
-        - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.server]>
-        - inject chat_history_save
+        - if <[edit]>:
+          - run chat_edit_message def:server|<[message]>|<[uuid]>
+        - else:
+          - narrate <[Message]> targets:<server.online_players_flagged[chat.channels.server]>
+          - inject chat_history_save
 
 chat_system_flag_manager:
   type: world

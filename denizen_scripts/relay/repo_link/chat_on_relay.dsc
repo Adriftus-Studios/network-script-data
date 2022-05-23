@@ -121,6 +121,14 @@ discord_watcher:
           - if <[value].get[discord_id]> == <context.old_message.id>:
             - define uuid <[value].get[uuid]>
 
+        # Server chat Override
+        - if <[channel].starts_with[server_]>:
+          - stop if:<context.new_message.attachments.is_empty.not>
+          - define Definitions <list_single[server].include[<context.new_message.text_display>].include[<[uuid]>].include[<[sender]>].include[<context.new_message.author.name>].include[true]>
+          - bungeerun <[channel].after[_]> chat_send_server_message def:<[definitions]>
+          - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
+          - stop
+
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
         - define Text <&f><&chr[0044].font[adriftus:chat]>
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
@@ -157,16 +165,8 @@ discord_watcher:
         - define Attachments <[Attachments].unseparated><&sp>
         - define Message <[ChannelText]><[DiscIcon]><&sp><[NameText]><&co><&nl><[ChannelSpaceText]><[Attachments]><[MessageText]>
         - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>]>
-        # Server chat Override
-        - if <[channel].starts_with[server_]>:
-          - stop if:<context.new_message.attachments.is_empty.not>
-          - define Definitions <list_single[server].include[<[Message]>].include[<[uuid]>]>
-          - bungeerun <[channel].after[_]> chat_edit_message def:<[definitions]>
-          - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
-          - stop
-        - else:
-          - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
-          - bungeerun <[Servers]> chat_edit_message def:<[Definitions]>
+        - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
+        - bungeerun <[Servers]> chat_edit_message def:<[Definitions]>
         #- run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
 
 
