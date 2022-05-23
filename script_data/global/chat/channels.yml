@@ -21,20 +21,20 @@ channels:
           to-Discord: true
         test:
           active: true
-          group: 626078288556851230
+          group: Adriftus Staff
           channel: 978313832533487616
           to-MC: false
           to-Discord: true
         lobby:
-          active: false
-          group: none
-          channel: none
+          active: true
+          group: Adriftus Staff
+          channel: 977669010890063874
           to-MC: false
           to-Discord: true
         zanzabar:
-          active: false
-          group: none
-          channel: none
+          active: true
+          group: Adriftus Staff
+          channel: 977669217484681266
           to-MC: false
           to-Discord: true
     icon:
