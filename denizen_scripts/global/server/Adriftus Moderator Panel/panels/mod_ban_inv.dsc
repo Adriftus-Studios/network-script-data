@@ -2,14 +2,12 @@
 mod_ban_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f><&gt> <&c>Ban
+  title: <&f><&font[adriftus:mod_tools]><&chr[F808]><&chr[1001]>
   inventory: CHEST
   gui: true
   size: 54
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    b1: <item[yellow_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[orange_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
@@ -18,7 +16,7 @@ mod_ban_inv:
     - [x] [] [] [x] [] [x] [] [] [x]
     - [x] [x] [] [x] [] [x] [] [x] [x]
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
+    - [back] [x] [x] [x] [head] [x] [x] [x] [x]
 
 mod_ban_inv_events:
   type: world
@@ -37,7 +35,6 @@ mod_ban_inv_open:
   script:
     - define items <list>
     - define inventory <inventory[mod_ban_inv]>
-    - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&c>Ban <&6><player.flag[amp_map].as_map.get[uuid].as_player.name> from Network."
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_ban_infractions].list_keys[<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>
