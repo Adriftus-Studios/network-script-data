@@ -647,6 +647,8 @@ dwisp_run_behaviour:
             - case attack:
               - define targets <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.attack]>].within[30].exclude[<player>]>
               - foreach <[targets]> as:damage_target:
+                - if !<[damage_target].is_spawned>:
+                  - foreach next
                 - if <player.flag[dwisp.active.entity].can_see[<[damage_target]>]>:
                   - run dwisp_kill_target def:<[damage_target]>
                   - wait 5t

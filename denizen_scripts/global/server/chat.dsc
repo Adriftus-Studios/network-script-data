@@ -434,17 +434,24 @@ chat_settings_open:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - if ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
         - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<[channel]>]||false>:
-          - define icon <item[green_wool]>
+          - if <[channel]> == server:
+            - define icon <item[<yaml[chat_config].read[channels.server.settings_icon.<bungee.server>.active]>]>
+          - else:
+            - define icon <item[<yaml[chat_config].read[channels.<[channel]>.settings_icon.active]>]>
           - define "lore:!|:<&a>You are listening to this channel."
           - define lore:->:<&a>-----------------------------
           - define "lore:|:<&b>Right click to stop listening."
         - else:
-          - define icon <item[red_wool]>
+          - if <[channel]> == server:
+            - define icon <item[<yaml[chat_config].read[channels.server.settings_icon.<bungee.server>.inactive]>]>
+          - else:
+            - define icon <item[<yaml[chat_config].read[channels.<[channel]>.settings_icon.inactive]>]>
           - define "lore:!|:<&c>You are not listening to this channel."
           - define lore:->:<&a>-----------------------------
           - define "lore:|:<&b>Right click to start listening."
         - if <yaml[global.player.<player.uuid>].read[chat.channels.current]> == <[channel]>:
-          - define icon <item[yellow_wool]>
+          # Need Icon Here
+          #- define icon <item[yellow_wool]>
           - define lore "<[lore].insert[<&e>You are talking in this channel.].at[2]>"
         - else:
           - define "lore:|:<&b>Left click to speak in this channel."

@@ -42,12 +42,28 @@ channels:
       herocraft: <&chr[1008]>
       zanzabar: <&chr[1008]>
       test: <&chr[1009]>
+    settings_icon:
+      hub: 
+        active: paper[custom_model_data=511]
+        inactive: paper[custom_model_data=512]
+      herocraft: 
+        active: paper[custom_model_data=513]
+        inactive: paper[custom_model_data=514]
+      zanzabar: 
+        active: paper[custom_model_data=517]
+        inactive: paper[custom_model_data=518]
+      test: 
+        active: paper[custom_model_data=515]
+        inactive: paper[custom_model_data=516]
   pg:
     global: true
     on_by_default: true
     permission: "none"
     chat_lock_deny: true
     icon: <&chr[1005]>
+    settings_icon:
+      active: paper[custom_model_data=505]
+      inactive: paper[custom_model_data=506]
     format:
       channel: "<&7><&l>[<&a><&l>PG<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -72,6 +88,9 @@ channels:
     permission: "none"
     chat_lock_deny: true
     icon: <&chr[1006]>
+    settings_icon:
+      active: paper[custom_model_data=507]
+      inactive: paper[custom_model_data=508]
     format:
       channel: "<&7><&l>[<&6><&l>PG-13<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -96,6 +115,9 @@ channels:
     permission: "none"
     chat_lock_deny: false
     icon: <&chr[1007]>
+    settings_icon:
+      active: paper[custom_model_data=509]
+      inactive: paper[custom_model_data=510]
     format:
       channel: "<&7><&l>[<&4><&l>Anarchy<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -119,6 +141,9 @@ channels:
     on_by_default: false
     permission: adriftus.staff
     icon: <&chr[1001]>
+    settings_icon:
+      active: paper[custom_model_data=504]
+      inactive: paper[custom_model_data=500]
     format:
       channel: "<&7><&l>[<&e><&l>Staff<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -142,6 +167,9 @@ channels:
     on_by_default: false
     permission: adriftus.admin
     icon: <&chr[1002]>
+    settings_icon:
+      active: paper[custom_model_data=501]
+      inactive: paper[custom_model_data=500]
     format:
       channel: "<&7><&l>[<&4><&l>Admin<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -165,6 +193,9 @@ channels:
     on_by_default: false
     permission: adriftus.developer
     icon: <&chr[1003]>
+    settings_icon:
+      active: paper[custom_model_data=502]
+      inactive: paper[custom_model_data=500]
     format:
       channel: "<&7><&l>[<&b><&l>Dev<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
@@ -188,6 +219,9 @@ channels:
     on_by_default: false
     permission: adriftus.moderator
     icon: <&chr[1004]>
+    settings_icon:
+      active: paper[custom_model_data=503]
+      inactive: paper[custom_model_data=500]
     format:
       channel: "<&7><&l>[<&d><&l>Mod<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
