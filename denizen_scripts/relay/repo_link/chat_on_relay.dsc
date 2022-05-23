@@ -52,7 +52,7 @@ discord_watcher:
             - if <[value].get[discord_id]> == <context.new_message.replied_to.id>:
               - define reply_map <[value]>
           - if <[reply_map].exists>:
-            - define Hover "<&color[#F3FFAD]>Replied to<&co> <[reply_map].get[message].after[<&chr[0044].font[adriftus:chat]>].replace[<&nl>].with[<&sp>].replace[<&sp><&sp><&sp><&sp>].with[]>"
+            - define Hover "<&color[#F3FFAD]>Replied to<&co> <[reply_map].get[message].after[<&chr[0044].font[adriftus:chat]>].replace[<&nl>].with[].replace[<&sp><&sp><&sp><&sp>].with[]>"
             - define Text <&f><&chr[0044].font[adriftus:chat]>
           - else:
             - define Hover "<&color[#F3FFAD]>Replied to<&co> <&7>Old Message"
@@ -80,12 +80,12 @@ discord_watcher:
         - define Text <&font[adriftus:chat]><[icon]><&f><&sp><&r><yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
         - define Command "chat <[channel]>"
         - define ChannelText <proc[msg_cmd].context[<[Hover]>|<[Text]>|<[Command]>]>
-        - define ChannelSpaceText <proc[msg_cmd].context[<list_single[<[hover]>].include_single[<&sp><&sp><&sp><&sp><&sp>].include_single[<[command]>]>]>
+        - define ChannelSpaceText <proc[msg_cmd].context[<list_single[<[hover]>].include_single[<&sp><&sp><&sp><&sp>].include_single[<[command]>]>]>
 
         - define Name <context.new_message.author.name>
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
         - define Text <&7><[Name]>
-        - define Insert @<context.new_message.author.name>
+        - define Insert @<context.new_message.author.name>t
         - if <[ReplyIcon].exists>:
           - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]><[ReplyIcon]>
         - else:
