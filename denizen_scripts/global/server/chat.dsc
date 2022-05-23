@@ -153,6 +153,19 @@ chat_delete_message:
       - run chatlock_task def:<list_single[<[message].get[sender]>].include_single[<[message]>]>
     - inject chat_unpause if:<player.exists>
 
+chat_edit_message:
+  type: task
+  debug: false
+  definitions: channel|message|uuid
+  script:
+    - foreach <yaml[chat_history].read[<[channel]>_history]>:
+      - if <[value].get[uuid]> == <[uuid]>:
+        - define map <[value].with[message].as[<[message]>]>
+        - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].overwrite[<[map]>].at[<[loop_index]>]>
+    - foreach <server.online_players_flagged[chat.channels.<[channel]>]>:
+      - run chat_history_show player:<[value]>
+      - wait 1t
+
 chatdelete_command:
   type: command
   name: chatdelete
