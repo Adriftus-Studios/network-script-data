@@ -46,19 +46,33 @@ discord_watcher:
         - else:
           - stop if:<yaml[chat_config].read[channels.<[channel]>.integrations.Discord.to-MC].if_null[true].not>
 
+        # Replied to
+        - if <context.new_message.replied_to.exists>:
+          - foreach <yaml[chat_history].read[<[channel]>_history]>:
+            - if <[value].get[discord_id]> == <context.new_message.replied_to.id>:
+              - define reply_map <[value]>
+          - if <[reply_map].exists>:
+            - define Hover "<&color[#F3FFAD]>Replied to<&co> <[reply_map].get[message]>!"
+            - define Text <&f><&chr[0044].font[adriftus:chat]>
+          - else:
+            - define Hover "<&color[#F3FFAD]>Replied to<&co> <&7>Old Message"
+            - define Text <&f><&chr[0044].font[adriftus:chat]>
+          - define ReplyIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
         # Server chat Override
         - if <[channel].starts_with[server_]>:
+          - define ReplyIcon none if:<[ReplyIcon].exists.not>
           - stop if:<context.new_message.attachments.is_empty.not>
-          - define Definitions <list_single[server].include[<context.new_message.text_display>].include[<[uuid]>].include[<[sender]>].include[<context.new_message.author.name>]>
+          - define Definitions <list_single[server].include[<context.new_message.text_display>].include[<[uuid]>].include[<[sender]>].include[<context.new_message.author.name>].include[false].include[<[ReplyIcon]>]>
           - bungeerun <[channel].after[_]> chat_send_server_message def:<[definitions]>
           - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
           - stop
 
+        # Discord Icon
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
         - define Text <&f><&chr[0044].font[adriftus:chat]>
         - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 
-      # Determine Chat Icon
+        # Determine Chat Icon
         - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]>
         - define icon <&chr[1001]> if:<[icon].equals[null]>
 
@@ -72,7 +86,10 @@ discord_watcher:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
         - define Text <&7><[Name]>
         - define Insert @<context.new_message.author.name>
-        - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
+        - if <[ReplyIcon].exists>:
+          - define NameText <[ReplyIcon]><proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
+        - else:
+          - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
 
         - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
 

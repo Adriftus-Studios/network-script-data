@@ -323,7 +323,7 @@ chat_send_message:
 chat_send_server_message:
   type: task
   debug: false
-  definitions: Channel|msg|UUID|Sender|author_name|edit
+  definitions: Channel|msg|UUID|Sender|author_name|edit|reply
   script:
         - define edit false if:<[edit].exists.not>
         - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
@@ -344,7 +344,10 @@ chat_send_server_message:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
         - define Text <&7><[Name]>
         - define Insert @<[author_name]>
-        - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
+        - if <[reply].exists> && <[reply]> != none:
+          - define NameText <[reply]><proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
+        - else:
+          - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
 
         - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
 
