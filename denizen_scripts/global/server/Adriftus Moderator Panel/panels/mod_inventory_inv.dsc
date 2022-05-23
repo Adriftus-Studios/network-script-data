@@ -2,7 +2,7 @@
 mod_inventory_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f><&gt> <&2>Inventory
+  title: <&f><&font[adriftus:mod_tools]><&chr[F808]><&chr[1003]>
   inventory: CHEST
   gui: true
   size: 54
@@ -26,7 +26,6 @@ mod_inventory_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_inventory_inv]>
-    - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Inventory."
     - foreach <player.flag[amp_map].as_map.get[uuid].as_player.inventory.map_slots>:
       # How do I do a range? (from 1 to 9, etc.)
       - define slot <[key]>
@@ -77,7 +76,6 @@ mod_ender_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_ender_chest_inv]>
-    - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Ender Chest."
     - foreach <player.flag[amp_map].as_map.get[uuid].as_player.enderchest.map_slots>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
@@ -110,7 +108,6 @@ mod_adriftus_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_adriftus_chest_inv]>
-    - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&2><player.flag[amp_map].as_map.get[uuid].as_player.name><&a>'s Adriftus Chest."
     - foreach <yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[adriftus.chest.contents_map]||<map>>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
