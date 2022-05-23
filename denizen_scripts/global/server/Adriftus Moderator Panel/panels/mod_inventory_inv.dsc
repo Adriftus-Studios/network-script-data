@@ -12,7 +12,7 @@ mod_inventory_inv:
     b2: <item[green_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
-    inv: <item[paper].with[display_name=<&a><&l>⬓<&sp>Inventory;custom_model_data=400].with_flag[to:inventory]>
+    inv: <item[paper].with[display_name=<&a><&l>⬓<&sp>Inventory;custom_model_data=400;enchantments=arrow_infinite=1;hides=ALL].with_flag[to:inventory]>
     ec: <item[paper].with[display_name=<&d><&l>⬒<&sp>Ender<&sp>Chest;custom_model_data=402].with_flag[to:enderchest]>
     ac: <item[stone].with[display_name=<&6><&l>⬕<&sp>Adriftus<&sp>Chest;custom_model_data=1].with_flag[to:adriftuschest]>
   slots:
@@ -66,7 +66,7 @@ mod_ender_chest_inv:
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
     inv: <item[paper].with[display_name=<&a><&l>⬓<&sp>Inventory;custom_model_data=400].with_flag[to:inventory]>
-    ec: <item[paper].with[display_name=<&d><&l>⬒<&sp>Ender<&sp>Chest;custom_model_data=402].with_flag[to:enderchest]>
+    ec: <item[paper].with[display_name=<&d><&l>⬒<&sp>Ender<&sp>Chest;custom_model_data=402;enchantments=arrow_infinite=1;hides=ALL].with_flag[to:enderchest]>
     ac: <item[stone].with[display_name=<&6><&l>⬕<&sp>Adriftus<&sp>Chest;custom_model_data=1].with_flag[to:adriftuschest]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
@@ -102,7 +102,7 @@ mod_adriftus_chest_inv:
     head: <item[mod_player_item]>
     inv: <item[paper].with[display_name=<&a><&l>⬓<&sp>Inventory;custom_model_data=400].with_flag[to:inventory]>
     ec: <item[paper].with[display_name=<&d><&l>⬒<&sp>Ender<&sp>Chest;custom_model_data=402].with_flag[to:enderchest]>
-    ac: <item[stone].with[display_name=<&6><&l>⬕<&sp>Adriftus<&sp>Chest;custom_model_data=1].with_flag[to:adriftuschest]>
+    ac: <item[stone].with[display_name=<&6><&l>⬕<&sp>Adriftus<&sp>Chest;custom_model_data=1;enchantments=arrow_infinite=1;hides=ALL].with_flag[to:adriftuschest]>
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
