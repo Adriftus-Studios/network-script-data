@@ -12,9 +12,9 @@ mod_ban_inv:
     head: <item[mod_player_item]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [x] [x] [] [x] [] [x] [] [x] [x]
-    - [x] [] [] [x] [] [x] [] [] [x]
-    - [x] [x] [] [x] [] [x] [] [x] [x]
+    - [x] [x] [] [] [] [x] [x] [x] [x]
+    - [x] [x] [] [] [] [] [] [x] [x]
+    - [x] [x] [] [] [] [x] [x] [x] [x]
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [back] [x] [x] [x] [head] [x] [x] [x] [x]
 
