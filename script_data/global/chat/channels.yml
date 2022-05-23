@@ -23,7 +23,7 @@ channels:
           active: true
           group: Adriftus Staff
           channel: 978313832533487616
-          to-MC: false
+          to-MC: true
           to-Discord: true
         hub:
           active: true
