@@ -2,23 +2,21 @@
 mod_kick_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f><&gt> <&d>Kick
+  title: <&f><&font[adriftus:mod_tools]><&chr[F808]><&chr[1002]>
   inventory: CHEST
   gui: true
   size: 54
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    b1: <item[magenta_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[purple_stained_glass_pane].with[display_name=<&sp>]>
-    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
+    back: <item[feather].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;custom_model_data=3].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [x] [x] [] [x] [] [x] [] [x] [x]
-    - [x] [x] [] [x] [] [x] [] [x] [x]
-    - [x] [] [] [] [x] [] [] [] [x]
+    - [x] [x] [] [] [] [x] [x] [x] [x]
+    - [x] [x] [] [] [] [x] [x] [x] [x]
+    - [x] [x] [] [] [] [] [] [] [x]
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
+    - [back] [x] [x] [x] [head] [x] [x] [x] [x]
 
 mod_kick_inv_events:
   type: world
@@ -36,7 +34,6 @@ mod_kick_inv_open:
   script:
     - define items <list>
     - define inventory <inventory[mod_kick_inv]>
-    - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&d>Kick <&e><player.flag[amp_map].as_map.get[uuid].as_player.name>."
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_kick_infractions].list_keys[<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>
