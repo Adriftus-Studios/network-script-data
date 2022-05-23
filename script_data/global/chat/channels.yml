@@ -34,7 +34,7 @@ channels:
         zanzabar:
           active: true
           group: Adriftus Staff
-          channel: 977669217484681266
+          channel: 977669078976172092
           to-MC: false
           to-Discord: true
     icon:
