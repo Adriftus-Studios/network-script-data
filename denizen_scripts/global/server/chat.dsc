@@ -158,6 +158,7 @@ chat_edit_message:
   debug: false
   definitions: channel|message|uuid
   script:
+    - define channel server if:<[channel].starts_with[server]>
     - foreach <yaml[chat_history].read[<[channel]>_history]>:
       - if <[value].get[uuid]> == <[uuid]>:
         - define map <[value].with[message].as[<[message]>]>
