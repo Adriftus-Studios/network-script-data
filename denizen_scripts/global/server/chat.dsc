@@ -345,7 +345,7 @@ chat_send_server_message:
         - define Text <&7><[Name]>
         - define Insert @<[author_name]>
         - if <[reply].exists> && <[reply]> != none:
-          - define NameText <[reply]><proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
+          - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]><[reply]>
         - else:
           - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
 

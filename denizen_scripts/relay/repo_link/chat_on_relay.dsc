@@ -52,7 +52,7 @@ discord_watcher:
             - if <[value].get[discord_id]> == <context.new_message.replied_to.id>:
               - define reply_map <[value]>
           - if <[reply_map].exists>:
-            - define Hover "<&color[#F3FFAD]>Replied to<&co> <[reply_map].get[message].after[<&chr[0044].font[adriftus:chat]>].replace[<&nl>].with[<&sp>].replace[<&sp><&sp><&sp><&sp>].with[<&sp>]>"
+            - define Hover "<&color[#F3FFAD]>Replied to<&co> <[reply_map].get[message].after[<&chr[0044].font[adriftus:chat]>].replace[<&nl>].with[<&sp>].replace[<&sp><&sp><&sp><&sp>].with[]>"
             - define Text <&f><&chr[0044].font[adriftus:chat]>
           - else:
             - define Hover "<&color[#F3FFAD]>Replied to<&co> <&7>Old Message"
@@ -87,7 +87,7 @@ discord_watcher:
         - define Text <&7><[Name]>
         - define Insert @<context.new_message.author.name>
         - if <[ReplyIcon].exists>:
-          - define NameText <[ReplyIcon]><proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
+          - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]><[ReplyIcon]>
         - else:
           - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
 
