@@ -140,10 +140,10 @@ chat_system_data_manager:
       - yaml id:discord_watcher unload
     - yaml create id:discord_watcher
     - foreach <yaml[chat_config].list_keys[channels]>:
-      - if <yaml[chat_config].read[channels.<[value]>.integrations.Discord.active]> && <yaml[chat_config].read[channels.<[value]>.integrations.Discord.to-MC]>:
+      - if <yaml[chat_config].read[channels.<[value]>.integrations.Discord.active]>:
         - yaml id:discord_watcher set watched.<yaml[chat_config].read[channels.<[value]>.integrations.Discord.channel]>:<[value]>
     - foreach <yaml[chat_config].list_keys[channels.server.integrations.Discord]>:
-      - if <yaml[chat_config].read[channels.server.integrations.Discord.<[value]>.active]> && <yaml[chat_config].read[channels.server.integrations.Discord.<[value]>.to-MC]>:
+      - if <yaml[chat_config].read[channels.server.integrations.Discord.<[value]>.active]>:
         - yaml id:discord_watcher set watched.<yaml[chat_config].read[channels.server.integrations.Discord.<[value]>.channel]>:server_<[value]>
     - if !<yaml.list.contains[chat_history]>:
       - if <server.has_file[data/chat_history.yml]>:
