@@ -21,22 +21,22 @@ channels:
           to-Discord: true
         test:
           active: false
-          group: none
-          channel: none
+          group: 626078288556851230
+          channel: 978313832533487616
           to-MC: false
-          to-Discord: false
+          to-Discord: true
         lobby:
           active: false
           group: none
           channel: none
           to-MC: false
-          to-Discord: false
+          to-Discord: true
         zanzabar:
           active: false
           group: none
           channel: none
           to-MC: false
-          to-Discord: false
+          to-Discord: true
     icon:
       hub: <&chr[1008]>
       herocraft: <&chr[1008]>
@@ -55,6 +55,9 @@ channels:
       test: 
         active: paper[custom_model_data=515]
         inactive: paper[custom_model_data=516]
+    rules:
+      hub:
+        - "No"
   pg:
     global: true
     on_by_default: true

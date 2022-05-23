@@ -41,6 +41,11 @@ discord_watcher:
         - define channel <yaml[discord_watcher].read[watched.<context.channel.id>]>
         - define sender DiscordUser_<context.new_message.author.id>
 
+        - if <[channel].starts_with[server_]>:
+          - stop if:<yaml[chat_config].read[channels.server.integrations.Discord.<[channel].after[_]>.to-MC].if_null[true].not>
+        - else:
+          - stop if:<yaml[chat_config].read[channels.<[channel]>.integrations.Discord.to-MC].if_null[true].not>
+
         # Server chat Override
         - if <[channel].starts_with[server_]>:
           - stop if:<context.new_message.attachments.is_empty.not>
