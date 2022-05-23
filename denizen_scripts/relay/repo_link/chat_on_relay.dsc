@@ -52,7 +52,7 @@ discord_watcher:
             - if <[value].get[discord_id]> == <context.new_message.replied_to.id>:
               - define reply_map <[value]>
           - if <[reply_map].exists>:
-            - define Hover "<&color[#F3FFAD]>Replied to<&co> <[reply_map].get[message].after[<&r>].replace[<&nl><&sp><&sp><&sp><&sp>].with[ ]>"
+            - define Hover "<&color[#F3FFAD]>Replied to<&co> <[reply_map].get[message].after[<&r>]>"
             - define Text <&f><&chr[0044].font[adriftus:chat]>
           - else:
             - define Hover "<&color[#F3FFAD]>Replied to<&co> <&7>Old Message"
