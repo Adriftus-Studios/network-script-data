@@ -428,7 +428,7 @@ chat_settings:
    - [] [] [] [] [] [] [] [] []
    - [] [] [] [] [] [] [] [] []
    - [] [] [] [] [] [] [] [] []
-   - [] [] [] [] [] [] [] [] []
+   - [chat_back_to_main_menu] [] [] [] [] [] [] [] []
 
 chat_settings_events:
   type: world
