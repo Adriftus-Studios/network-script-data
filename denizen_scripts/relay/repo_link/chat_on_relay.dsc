@@ -58,10 +58,10 @@ discord_watcher:
               - define reply_map <[value]>
           - if <[reply_map].exists>:
             - define Hover "<&color[#F3FFAD]>Replied to<&co> <&r><[reply_map].get[message].after[<[DiscIcon]><&sp>].replace[<&nl>].with[].replace[<&sp><&sp><&sp><&sp>].with[]>"
-            - define Text <&f><&chr[0045].font[adriftus:chat]>
+            - define Text <&f><&chr[0046].font[adriftus:chat]>
           - else:
             - define Hover "<&color[#F3FFAD]>Replied to<&co> <&7>Old Message"
-            - define Text <&f><&chr[0045].font[adriftus:chat]>
+            - define Text <&f><&chr[0046].font[adriftus:chat]>
           - define ReplyIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
         # Server chat Override
         - if <[channel].starts_with[server_]>:
