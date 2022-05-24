@@ -403,6 +403,19 @@ chat_settings_reload:
       - else:
         - yaml create id:chat_history
 
+chat_back_to_main_menu:
+  type: item
+  material: leather_horse_armor
+  display name: <&e>Back To Main Menu
+  flags:
+    run_script:
+    - main_menu_inventory_open
+    - cancel
+  mechanisms:
+    color: red
+    custom_model_data: 6
+
+
 chat_settings:
   type: inventory
   debug: false
@@ -410,6 +423,12 @@ chat_settings:
   gui: true
   title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6926]>
   size: 45
+  slots:
+   - [] [] [] [] [] [] [] [] []
+   - [] [] [] [] [] [] [] [] []
+   - [] [] [] [] [] [] [] [] []
+   - [] [] [] [] [] [] [] [] []
+   - [] [] [] [] [] [] [] [] []
 
 chat_settings_events:
   type: world
