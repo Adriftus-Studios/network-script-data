@@ -65,6 +65,19 @@ main_menu_mail:
   flags:
     run_script: cancel
 
+main_menu_chat:
+  type: item
+  debug: false
+  material: paper
+  display name: <&a><&l>Mailbox
+  lore:
+    - "<&e>Chat Channels!"
+    - "<&e>Manage what you see!"
+  mechanisms:
+    custom_model_data: 109
+  flags:
+    run_script: chat_settings_open
+
 main_menu_recipes:
   type: item
   debug: false
@@ -99,7 +112,7 @@ main_menu_inventory:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [main_menu_cosmetics] [] [] [] []
     - [] [] [main_menu_recipes] [] [] [] [main_menu_controls] [] []
-    - [] [] [] [] [main_menu_help] [] [] [] [main_menu_settings]
+    - [main_menu_chat] [] [] [] [main_menu_help] [] [] [] [main_menu_settings]
 
 main_menu_request_help:
   type: task
