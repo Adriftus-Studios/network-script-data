@@ -46,17 +46,22 @@ discord_watcher:
         - else:
           - stop if:<yaml[chat_config].read[channels.<[channel]>.integrations.Discord.to-MC].if_null[true].not>
 
+        # Discord Icon
+        - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
+        - define Text <&f><&chr[0044].font[adriftus:chat]>
+        - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
+
         # Replied to
         - if <context.new_message.replied_to.exists>:
           - foreach <yaml[chat_history].read[<[channel]>_history]>:
             - if <[value].get[discord_id]> == <context.new_message.replied_to.id>:
               - define reply_map <[value]>
           - if <[reply_map].exists>:
-            - define Hover "<&color[#F3FFAD]>Replied to<&co> <&r><[reply_map].get[message].after[<&chr[0044].font[adriftus:chat]>].replace[<&nl>].with[].replace[<&sp><&sp><&sp><&sp>].with[]>"
-            - define Text <&f><&chr[0044].font[adriftus:chat]>
+            - define Hover "<&color[#F3FFAD]>Replied to<&co> <&r><[reply_map].get[message].after[<[DiscIcon]>].replace[<&nl>].with[].replace[<&sp><&sp><&sp><&sp>].with[]>"
+            - define Text <&f><&chr[0045].font[adriftus:chat]>
           - else:
             - define Hover "<&color[#F3FFAD]>Replied to<&co> <&7>Old Message"
-            - define Text <&f><&chr[0044].font[adriftus:chat]>
+            - define Text <&f><&chr[0045].font[adriftus:chat]>
           - define ReplyIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
         # Server chat Override
         - if <[channel].starts_with[server_]>:
@@ -66,11 +71,6 @@ discord_watcher:
           - bungeerun <[channel].after[_]> chat_send_server_message def:<[definitions]>
           - run discord_save_message def:<[channel]>|<[uuid]>|<context.new_message.id>|<context.channel.id>
           - stop
-
-        # Discord Icon
-        - define Hover "<&color[#F3FFAD]>Message is from <&color[#738adb]>Discord<&color[#F3FFAD]>!"
-        - define Text <&f><&chr[0044].font[adriftus:chat]>
-        - define DiscIcon <proc[msg_hover].context[<[Hover]>|<[Text]>]>
 
         # Determine Chat Icon
         - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]>
