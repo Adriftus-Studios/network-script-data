@@ -57,7 +57,7 @@ discord_watcher:
             - if <[value].get[discord_id]> == <context.new_message.replied_to.id>:
               - define reply_map <[value]>
           - if <[reply_map].exists>:
-            - define Hover "<&color[#F3FFAD]>Replied to<&co> <&r><[reply_map].get[message].after[<[DiscIcon]><&sp>].replace[<&nl>].with[].replace[<&sp><&sp><&sp><&sp>].with[]>"
+            - define Hover "<&color[#F3FFAD]>Replied to<&co> <&r><[reply_map].get[message].after[<[DiscIcon]><&sp>].replace[<&sp><&sp><&sp><&sp>].with[]>"
             - define Text <&f><&chr[0046].font[adriftus:chat]>
           - else:
             - define Hover "<&color[#F3FFAD]>Replied to<&co> <&7>Old Message"
@@ -87,9 +87,9 @@ discord_watcher:
         - define Text <&7><[Name]>
         - define Insert @<context.new_message.author.name>t
         - if <[ReplyIcon].exists>:
-          - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]><[ReplyIcon]>
+          - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]><&co><[ReplyIcon]>
         - else:
-          - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]>
+          - define NameText <proc[msg_hover_ins].context[<list_single[<[Hover]>].include[<[Text]>].include[<[Insert]>]>]><&co>
 
         - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
 
@@ -105,7 +105,7 @@ discord_watcher:
             - define Url <[Attachment]>
             - define Attachments <[Attachments].include[<proc[msg_url].context[<[Hover]>|<[Text]>|<[Attachment]>]>]>
         - define Attachments <[Attachments].unseparated><&sp>
-        - define Message <[ChannelText]><[DiscIcon]><&sp><[NameText]><&co><&nl><[ChannelSpaceText]><[Attachments]><[MessageText]>
+        - define Message <[ChannelText]><[DiscIcon]><&sp><[NameText]><&nl><[ChannelSpaceText]><[Attachments]><[MessageText]>
         - define Definitions <list_single[<[Channel]>].include[<[Message]>].include[<[uuid]>].include[<[sender]>]>
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>]>
         - bungeerun <[Servers]> chat_send_message def:<[Definitions]>
