@@ -87,9 +87,9 @@ chat_system_speak:
         - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include_single[<[message]>].include_single[<[uuid]>].include_single[<[sender]>]>
       - if <[channel]> == server:
         - if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.<bungee.server>.active].if_null[false]> && <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.<bungee.server>.to-Discord].if_null[false]>:
-          - bungeerun relay chat_send_message def:<list_single[<[raw_message]>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>].include_single[<[uuid]>]>
+          - bungeerun relay chat_send_message def:<list_single[<[raw_message]>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>].include_single[<[uuid]>].include[<[Message]>]>
       - else if <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.active]> && <yaml[chat_config].read[channels.<[channel]>.integrations.Discord.to-Discord]>:
-        - bungeerun relay chat_send_message def:<list_single[<[raw_message]>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>].include_single[<[uuid]>]>
+        - bungeerun relay chat_send_message def:<list_single[<[raw_message]>].include[<[Channel]>|<bungee.server>|<player.uuid>].include_single[<player.name.strip_color>].include_single[<[uuid]>].include[<[Message]>]>
       - run chat_history_save def:<list_single[<[channel]>].include_single[<[message]>].include_single[<[uuid]>].include_single[<[sender]>]>
 
 chat_history_save:

@@ -2,7 +2,7 @@
 chat_send_message:
   type: task
   debug: false
-  definitions: game_message|game_channel|server|uuid|display_name|message_uuid
+  definitions: game_message|game_channel|server|uuid|display_name|message_uuid|formatted_message
   script:
       - if <[game_channel]> == server:
         - define channel <yaml[chat_config].read[channels.<[game_channel]>.integrations.Discord.<[server]>.channel]>
@@ -20,9 +20,9 @@ chat_send_message:
       - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]> save:webget
       - define discord_id <util.parse_yaml[<entry[webget].result>].get[id]>
       - if <[game_channel]> == server:
-        - run discord_save_message def:<list[<[game_channel]>_<[server]>|<[message_uuid]>|<[discord_id]>|<[channel]>].include[<[game_message]>]>
+        - run discord_save_message def:<list[<[game_channel]>_<[server]>|<[message_uuid]>|<[discord_id]>|<[channel]>].include[<[formatted_message]>]>
       - else:
-        - run discord_save_message def:<list[<[game_channel]>|<[message_uuid]>|<[discord_id]>|<[channel]>].include[<[game_message]>]>
+        - run discord_save_message def:<list[<[game_channel]>|<[message_uuid]>|<[discord_id]>|<[channel]>].include[<[formatted_message]>]>
 
   webhook:
     content: <[game_message].strip_color>
