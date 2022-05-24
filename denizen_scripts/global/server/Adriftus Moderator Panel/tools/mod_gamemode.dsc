@@ -5,7 +5,7 @@ gamemode_survival:
   name: gms
   description: Set yourself, or another player to Survival mode.
   usage: /gms
-  permission: dutilities.gamemode.survival
+  permission: dutilities.gamemode.survival;adriftus.gamemode.survival
   tab complete:
     - inject gamemode_tab_complete
   script:
