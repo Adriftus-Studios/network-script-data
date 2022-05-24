@@ -69,7 +69,7 @@ main_menu_chat:
   type: item
   debug: false
   material: paper
-  display name: <&a><&l>Mailbox
+  display name: <&a><&l>Chat Settings
   lore:
     - "<&e>Chat Channels!"
     - "<&e>Manage what you see!"
