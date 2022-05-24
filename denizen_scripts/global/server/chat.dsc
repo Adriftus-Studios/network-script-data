@@ -56,13 +56,13 @@ chat_system_speak:
       # Build the Player Text
       - if <yaml[global.player.<player.uuid>].contains[masks.current]>:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&d>DISGUISED<&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
-        - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
-        - define NameText <&chr[F802]><proc[msg_hover].context[<list_single[<[hover]>].include_single[<[text]>]>]>
+        - define Text <&chr[F802]><yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
+        - define NameText <proc[msg_hover].context[<list_single[<[hover]>].include_single[<[text]>]>]>
       - else:
         - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <proc[get_player_display_color]><proc[get_player_display_name]><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
         - define Hint "msg <player.name> "
-        - define Text <yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
-        - define NameText <&chr[F802]><proc[msg_hint].context[<list_single[<[hover]>].include_single[<[text]>].include_single[<[hint]>]>]>
+        - define Text <&chr[F802]><yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
+        - define NameText <proc[msg_hint].context[<list_single[<[hover]>].include_single[<[text]>].include_single[<[hint]>]>]>
 
       # Separator
       - define Separator <yaml[chat_config].parsed_key[channels.<[channel]>.format.separator]>
