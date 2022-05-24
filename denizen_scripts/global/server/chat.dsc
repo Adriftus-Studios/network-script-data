@@ -405,7 +405,7 @@ chat_settings_reload:
 
 chat_back_to_main_menu:
   type: item
-  material: leather_horse_armor
+  material: feather
   display name: <&e>Back To Main Menu
   flags:
     run_script:
@@ -413,7 +413,7 @@ chat_back_to_main_menu:
     - cancel
   mechanisms:
     color: red
-    custom_model_data: 6
+    custom_model_data: 3
 
 
 chat_settings:

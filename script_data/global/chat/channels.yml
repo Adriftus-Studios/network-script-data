@@ -39,8 +39,8 @@ channels:
           to-Discord: true
     icon:
       hub: <&chr[1008]>
-      herocraft: <&chr[1008]>
-      zanzabar: <&chr[1008]>
+      herocraft: <&chr[1010]>
+      zanzabar: <&chr[1011]>
       test: <&chr[1009]>
     settings_icon:
       hub: 
