@@ -13,4 +13,4 @@ get_player_display_color:
   type: procedure
   debug: false
   script:
-    - determine <server.flag[player_map.uuids.<player.uuid>.name_color].if_null[<&r>]>
+    - determine <server.flag[player_map.uuids.<player.uuid>.name_color].if_null[<&7>]>
