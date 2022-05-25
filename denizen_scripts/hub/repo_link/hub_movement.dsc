@@ -16,5 +16,3 @@ hub_jump:
         - adjust <player> walk_speed:0.4
       - else:
         - adjust <player> walk_speed:0.2
-    on player exits spawn_cuboid:
-    - determine cancelled if:<player.has_permission[this.is.not.a.permission].not>
