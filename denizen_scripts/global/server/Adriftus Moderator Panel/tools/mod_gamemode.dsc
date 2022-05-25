@@ -5,7 +5,7 @@ gamemode_survival:
   name: gms
   description: Set yourself, or another player to Survival mode.
   usage: /gms
-  permission: dutilities.gamemode.survival
+  permission: adriftus.gamemode.survival
   tab complete:
     - inject gamemode_tab_complete
   script:
@@ -18,7 +18,7 @@ gamemode_creative:
   name: gmc
   description: Set yourself, or another player to Creative mode.
   usage: /gmc
-  permission: dutilities.gamemode.creative
+  permission: adriftus.gamemode.creative
   tab complete:
     - inject gamemode_tab_complete
   script:
@@ -31,7 +31,7 @@ gamemode_adventure:
   name: gma
   description: Set yourself, or another player to Adventure mode.
   usage: /gma
-  permission: dutilities.gamemode.adventure
+  permission: adriftus.gamemode.adventure
   tab complete:
     - inject gamemode_tab_complete
   script:
@@ -44,7 +44,7 @@ gamemode_spectator:
   name: gmsp
   description: Set yourself, or another player to Spectator mode.
   usage: /gmsp
-  permission: dutilities.gamemode.spectator
+  permission: adriftus.gamemode.spectator
   tab complete:
     - inject gamemode_tab_complete
   script:

@@ -83,7 +83,7 @@ discord_watcher:
         - define ChannelSpaceText <proc[msg_cmd].context[<list_single[<[hover]>].include_single[<&sp><&sp><&sp><&sp>].include_single[<[command]>]>]>
 
         - define Name <context.new_message.author.name>
-        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>in-game name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
+        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><[Name]><&nl><&color[#F3FFAD]>In-Game Name<&color[#26FFC9]>: <&7>Not Linked<&nl><&color[#F3FFAD]>Shift-Click to ping"
         - define Text <&7><[Name]>
         - define Insert @<context.new_message.author.name>t
         - if <[ReplyIcon].exists>:
