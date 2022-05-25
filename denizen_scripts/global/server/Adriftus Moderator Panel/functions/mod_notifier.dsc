@@ -21,7 +21,7 @@ mod_chat_notifier:
     - define moderator <[moderator].as_player.name||Server>
     - define name <[uuid].as_player.name>
     # -- Used for server & network bans.
-    - if <[length]||null> != null && <[date]||null> != null:
+    - if <[length]||null> != null:
       - run chat_system_speak "def.message:I have banned <[name]> for <[infraction]> for <[length]>. (Level <[level]>)" def.channel:moderation
     # -- Used for kicks.
     - else:
