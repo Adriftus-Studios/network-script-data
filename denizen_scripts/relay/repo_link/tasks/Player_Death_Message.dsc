@@ -6,7 +6,7 @@ Player_Death_Message:
     webhook_content:
       username: <[name]>
       avatar_url: https://mc-heads.net/head/<[uuid]>
-      embeds: <list[<script.parsed_key[data.embed]>]>
+      embeds: <list[<script[Player_Death_Message].parsed_key[data.embed]>]>
     embed:
       type: rich
       title: Player Death
