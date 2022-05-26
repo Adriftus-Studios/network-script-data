@@ -205,3 +205,9 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <player.flag[on_kick]>
+    on entity_flagged:on_teleport teleports:
+      - if <context.entity.flag[on_teleport].object_type> == List:
+        - foreach <context.entity.flag[on_teleport]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_teleport]>
