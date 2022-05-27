@@ -35,7 +35,7 @@ chat_send_message:
 
   webhook_server:
     content: <[game_message].strip_color>
-    username: <[display_name]><&sp><&lb><[Server]><&rb>
+    username: <[display_name]>
     avatar_url: https://mc-heads.net/head/<[uuid]>/50
 
 discord_watcher:
