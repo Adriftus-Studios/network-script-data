@@ -213,4 +213,4 @@ player_death_handler:
       - narrate <[staff_final]> targets:<[staff]>
       - wait 1t
       - if <yaml[chat_config].read[channels.server.integrations.Discord.<bungee.server>.active]>:
-        - bungeerun relay Player_Death_Message def:<list[test|Xeane|<player.uuid>].include[<[discord_message].strip_color>]>
+        - bungeerun relay Player_Death_Message def:<list[<bungee.server>|Xeane|<player.uuid>].include[<[discord_message].strip_color>]>
