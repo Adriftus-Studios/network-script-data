@@ -28,3 +28,5 @@ mod_chat_notifier:
       - run chat_system_speak "def.message:I have kicked <[name]> for <[infraction]>. (Level <[level]>)" def.channel:moderation
     - else if <[action]> == Send:
       - run chat_system_speak "def.message:I have sent <[name]> from <[text]>." def.channel:moderation
+    - else if <[action]> == InventoryRestore:
+      - run chat_system_speak "def.message:I have restored <[name]>'s inventory <[text]>." def.channel:moderation
