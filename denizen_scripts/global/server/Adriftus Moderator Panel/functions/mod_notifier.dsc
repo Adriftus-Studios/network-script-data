@@ -16,7 +16,7 @@ mod_kick_message:
 mod_chat_notifier:
   type: task
   debug: false
-  definitions: moderator|uuid|level|infraction|action|length
+  definitions: moderator|uuid|level|infraction|action|length|text
   script:
     - define moderator <[moderator].as_player.name||Server>
     - define name <[uuid].as_player.name>
@@ -26,3 +26,5 @@ mod_chat_notifier:
     # -- Used for kicks.
     - else if <[action]> == Kick:
       - run chat_system_speak "def.message:I have kicked <[name]> for <[infraction]>. (Level <[level]>)" def.channel:moderation
+    - else if <[action]> == Send:
+      - run chat_system_speak "def.message:I have sent <[name]> from <[text]>." def.channel:moderation
