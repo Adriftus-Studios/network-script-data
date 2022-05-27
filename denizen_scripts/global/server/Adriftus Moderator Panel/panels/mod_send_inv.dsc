@@ -25,6 +25,7 @@ mod_send_inv_events:
       - define origintodest <bungee.server><&sp>to<&sp><context.item.flag[SERVER]>
       - run mod_log_action def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|0|<[origintodest]>|Send
       - run mod_message_discord_command def:<player.uuid>|send<&sp><player.flag[amp_map].as_map.get[uuid].as_player.name><&sp><context.item.flag[SERVER]>
+      - run mod_chat_notifier def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]> def.text:<bungee.server><&sp>to<&sp><context.item.flag[SERVER]>
       - adjust <player.flag[amp_map].as_map.get[uuid].as_player> send_to:<context.item.flag[SERVER]>
       - inventory close
 
