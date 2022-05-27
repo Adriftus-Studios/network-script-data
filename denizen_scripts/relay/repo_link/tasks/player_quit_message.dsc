@@ -14,7 +14,7 @@ Player_Leave_Message:
       description: <[message]>
       color: 15548997
       thumbnail:
-        url: https://icons.iconarchive.com/icons/gakuseisean/ivista-2/128/Alarm-Minus-icon.png
+        url: https://raw.githubusercontent.com/Adriftus-Studios/resource-pack/main/assets/adriftus/textures/custom_chat/leave_icon.png
         height: 8
         width: 8
   script:
@@ -24,4 +24,3 @@ Player_Leave_Message:
     - define Data <script.parsed_key[data.webhook_content].to_json>
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]> save:webget
-    - announce to_console <entry[webget].results>

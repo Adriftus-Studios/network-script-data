@@ -14,7 +14,7 @@ Player_Join_Message:
       description: <[message]>
       color: 39484
       thumbnail:
-        url: https://icons.iconarchive.com/icons/gakuseisean/ivista-2/128/Alarm-Plus-icon.png
+        url: https://github.com/Adriftus-Studios/resource-pack/blob/main/assets/adriftus/textures/custom_chat/join_icon.png
         height: 8
         width: 8
   script:
@@ -24,4 +24,3 @@ Player_Join_Message:
     - define Data <script.parsed_key[data.webhook_content].to_json>
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]> save:webget
-    - announce to_console <entry[webget].results>
