@@ -7,6 +7,7 @@ Player_Death_Message:
       username: <[name]>
       avatar_url: https://mc-heads.net/head/<[uuid]>
       embeds: <list[<script[Player_Death_Message].parsed_key[data.embed]>]>
+      content: ""
     embed:
       type: rich
       title: Player Death
@@ -25,3 +26,4 @@ Player_Death_Message:
     - define Data <script.parsed_key[data.webhook_content].to_json>
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]> save:webget
+    - announce to_console <entry[webget].results>
