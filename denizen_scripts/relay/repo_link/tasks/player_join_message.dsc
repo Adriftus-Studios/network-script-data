@@ -14,7 +14,7 @@ Player_Join_Message:
       description: <[message]>
       color: 39484
       thumbnail:
-        url: https://github.com/Adriftus-Studios/resource-pack/blob/main/assets/adriftus/textures/custom_chat/join_icon.png
+        url: https://raw.githubusercontent.com/Adriftus-Studios/resource-pack/main/assets/adriftus/textures/custom_chat/join_icon.png
         height: 8
         width: 8
   script:
