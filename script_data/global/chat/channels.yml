@@ -74,7 +74,7 @@ channels:
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
       Discord:
-        active: false
+        active: true
         group: Adriftus
         #channel: global-chat
         channel: 979785769986191380
@@ -101,7 +101,7 @@ channels:
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
       Discord:
-        active: false
+        active: true
         group: Adriftus
         #channel: global-chat
         channel: 979785805524529214
