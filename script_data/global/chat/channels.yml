@@ -77,7 +77,7 @@ channels:
         active: false
         group: Adriftus
         #channel: global-chat
-        channel: 651789860562272266
+        channel: 979785769986191380
         to-MC: true
         to-Discord: true
       IRC:
@@ -104,7 +104,7 @@ channels:
         active: false
         group: Adriftus
         #channel: global-chat
-        channel: 651789860562272266
+        channel: 979785805524529214
         to-MC: true
         to-Discord: true
       IRC:
