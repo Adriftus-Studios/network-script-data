@@ -5,6 +5,9 @@ admin_mode_spectator:
   description: spectator mode, with particles!
   permission: adriftus.admin
   script:
+    - if !<player.has_flag[dwisp.data.color1]> || !<player.has_flag[dwisp.data.color2]>:
+      - narrate "<&c>You must first set up your dWisp colors with <&b>/dwisp edit"
+      - stop
     - if <player.gamemode> != SPECTATOR:
       - flag player dmsp.gamemode:<player.gamemode>
       - adjust <player> gamemode:spectator
@@ -18,6 +21,7 @@ admin_mode_spectator_loop:
   debug: false
   script:
     - while <player.is_online> && <player.gamemode> == SPECTATOR:
-      - playeffect at:<player.location> quantity:20 effect:REDSTONE offset:0.5 special_data:5|<player.flag[dwisp.data.color1]> visibility:50
-      - playeffect at:<player.location> quantity:20 effect:REDSTONE offset:0.5 special_data:1|<player.flag[dwisp.data.color2]> visibility:50
+      - define targets <player.location.find_players_within[100]> if:<[loop_index].mod[10].equals[0]>
+      - playeffect at:<player.location> quantity:20 effect:REDSTONE offset:0.5 special_data:5|<player.flag[dwisp.data.color1]> targets:<[targets]>
+      - playeffect at:<player.location> quantity:20 effect:REDSTONE offset:0.5 special_data:1|<player.flag[dwisp.data.color2]> targets:<[targets]>
       - wait 2t
