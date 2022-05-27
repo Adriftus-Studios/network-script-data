@@ -12,7 +12,7 @@ Player_Death_Message:
       type: rich
       title: Player Death
       description: <[message]>
-      color: 0xff0000
+      color: 15548997
       thumbnail:
         url: https://icons.iconarchive.com/icons/google/noto-emoji-smileys/128/10099-skull-and-crossbones-icon.png
         height: 16
