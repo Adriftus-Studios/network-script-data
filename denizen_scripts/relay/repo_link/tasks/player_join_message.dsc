@@ -1,22 +1,27 @@
 Player_Join_Message:
   type: task
   debug: false
-  definitions: Definitions
+  definitions: server|name|uuid|message
+  data:
+    webhook_content:
+      username: <[name]>
+      avatar_url: https://mc-heads.net/head/<[uuid]>
+      embeds: <list[<script[Player_Join_Message].parsed_key[data.embed]>]>
+      content: ""
+    embed:
+      type: rich
+      title: Player Join
+      description: <[message]>
+      color: 39484
+      thumbnail:
+        url: https://icons.iconarchive.com/icons/martz90/circle-addon1/128/text-plus-icon.png
+        height: 8
+        width: 8
   script:
-    - define color green
-    - inject Embedded_Color_Formatting
-    - inject Definition_Registry
-
-    - if <[Rank]||null> != null:
-      - define Footer "<map.with[text].as[<[Rank]> ★ Joined on <[Server]>]>"
-    - else:
-      - define Footer "<map.with[text].as[Joined <[Server]>]>"
-    - define Footer <[Footer].with[icon_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png]>
-    - define Embeds <list[<map.with[color].as[<[Color]>].with[footer].as[<[Footer]>]>]>
-
-    - define Data <map.with[username].as[<[Name]>].with[avatar_url].as[https://minotar.net/helm/<[Name]>]>
-    - define Data <[Data].with[embeds].as[<[Embeds]>].to_json>
-
-    - define Hook <script[DDTBCTY].parsed_key[WebHooks.651789860562272266.hook]>
+    - define channel <yaml[chat_config].read[channels.server.integrations.Discord.<[server]>.channel]>
+    - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
+    - define Hook <entry[webhook].created_queue.determination.get[1]>
+    - define Data <script.parsed_key[data.webhook_content].to_json>
     - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]> save:webget
+    - announce to_console <entry[webget].results>
