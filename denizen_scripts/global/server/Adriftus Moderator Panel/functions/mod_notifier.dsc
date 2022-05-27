@@ -20,13 +20,16 @@ mod_chat_notifier:
   script:
     - define moderator <[moderator].as_player.name||Server>
     - define name <[uuid].as_player.name>
-    # -- Used for network bans.
-    - if <[action]> == Ban:
-      - run chat_system_speak "def.message:I have banned <[name]> for <[infraction]> for <[length]>. (Level <[level]>)" def.channel:moderation
-    # -- Used for kicks.
-    - else if <[action]> == Kick:
-      - run chat_system_speak "def.message:I have kicked <[name]> for <[infraction]>. (Level <[level]>)" def.channel:moderation
-    - else if <[action]> == Send:
-      - run chat_system_speak "def.message:I have sent <[name]> from <[text]>." def.channel:moderation
-    - else if <[action]> == InventoryRestore:
-      - run chat_system_speak "def.message:I have restored <[name]>'s inventory <[text]>." def.channel:moderation
+    - choose <[action]>:
+      - case Ban:
+        # -- Used for network bans.
+        - run chat_system_speak "def.message:I have banned <[name]> for <[infraction]> for <[length]>. (Level <[level]>)" def.channel:moderation
+      - case Kick:
+        # -- Used for kicks.
+        - run chat_system_speak "def.message:I have kicked <[name]> for <[infraction]>. (Level <[level]>)" def.channel:moderation
+      - case Send:
+        # -- Used for sending players.
+        - run chat_system_speak "def.message:I have sent <[name]> from <[text]>." def.channel:moderation
+      - case InventoryRestore:
+        # -- Used for fully restoring inventories.
+        - run chat_system_speak "def.message:I have restored <[name]>'s inventory<&co> <[text]>." def.channel:moderation
