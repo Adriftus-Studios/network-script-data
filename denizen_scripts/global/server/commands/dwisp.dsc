@@ -9,7 +9,6 @@ dwisp_command:
     tab_complete:
       2:
         summon: no_arguments
-        guard: <server.online_players.parse[name].insert[area].at[1]>
         stay: <list[cursor|here|current].include[<server.online_players.parse[name]>]>
         follow: <server.online_players.parse[name]>
         sleep: no_arguments
@@ -28,7 +27,11 @@ dwisp_command:
 
       # Summon
       - case summon:
-        - stop if:<player.has_flag[dwisp.active]>
+        - if <player.has_flag[dwisp.active]>:
+          - if <player.flag[dwisp.active.entity].is_spawned>:
+            - stop
+          - else:
+            - flag player dwisp.active:!
         - flag player dwisp.active.task:summon
         - run dwisp_run_movement
         - run dwisp_run_behaviour
@@ -257,6 +260,8 @@ dwisp_armor_stand:
     is_small: true
     invincible: true
     gravity: false
+  flags:
+    on_entity_added: cancel
 
 dwisp_dropped_item:
   type: entity
@@ -637,7 +642,7 @@ dwisp_run_behaviour:
                 - else:
                   - foreach next
               - else:
-                - define targets <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.heal]>].within[30]>
+                - define targets <player.flag[dwisp.active.location].find_entities[<[value]>].within[30]>
               - foreach <[targets]> as:heal_target:
                 - if <[heal_target].health> < <[heal_target].health_max>:
                   - run dwisp_heal_target def:<[heal_target]>
@@ -645,7 +650,7 @@ dwisp_run_behaviour:
 
             # Attack
             - case attack:
-              - define targets <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.attack]>].within[30].exclude[<player>]>
+              - define targets <player.flag[dwisp.active.location].find_entities[<[value]>].within[30].exclude[<player>]>
               - foreach <[targets]> as:damage_target:
                 - if !<[damage_target].is_spawned>:
                   - foreach next
@@ -655,9 +660,9 @@ dwisp_run_behaviour:
 
             # Spawn Mob
             - case spawn:
-              - if <player.flag[dwisp.active.location].find_entities[<player.flag[dwisp.data.behaviour.spawn]>].within[50].size> > 4:
+              - if <player.flag[dwisp.active.location].find_entities[<[value]>].within[50].size> > 4:
                 - foreach next
-              - if <entity[<player.flag[dwisp.data.behaviour.spawn]>].exists>:
-                - run dwisp_spawn_mob def:<player.flag[dwisp.data.behaviour.spawn]>
+              - if <entity[<[value]>].exists>:
+                - run dwisp_spawn_mob def:<[value]>
                 - wait 10t
       - wait 1s
