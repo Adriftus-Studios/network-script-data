@@ -496,8 +496,8 @@ chat_settings_open:
         - else:
           - define "lore:|:<&b>Left click to speak in this channel."
         - define list:->:<[icon].with[display_name=<[name]>;lore=<[lore]>].with_flag[action:<[channel]>]>
-    - repeat <[list].size.sub[8].abs>:
-      - define list:->:<item[standard_filler].with_flag[unique:<util.random_uuid>]>
+    #- repeat <[list].size.sub[8].abs>:
+      #- define list:->:<item[standard_filler].with_flag[unique:<util.random_uuid>]>
     - foreach <[list]>:
       - inventory set slot:<[slots].get[<[loop_index]>]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
