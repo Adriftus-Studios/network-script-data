@@ -157,6 +157,8 @@ dwisp_command:
           - flag player dwisp.active.queued_actions:->:stay
           - flag player dwisp.active.stay_target:<player.location>
           - flag player dwisp.active.task:!
+        - else if <context.args.get[2]> == disembark:
+          - flag player dwisp.active.task:!
         - else:
           - narrate "<&c>Must Specify 'on' or 'off'"
 
