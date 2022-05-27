@@ -14,7 +14,7 @@ Player_Death_Message:
       description: <[message]>
       color: 15548997
       thumbnail:
-        url: https://icons.iconarchive.com/icons/google/noto-emoji-smileys/128/10099-skull-and-crossbones-icon.png
+        url: https://raw.githubusercontent.com/Adriftus-Studios/resource-pack/main/assets/adriftus/textures/custom_chat/death_message_icon.png
         height: 8
         width: 8
   script:
