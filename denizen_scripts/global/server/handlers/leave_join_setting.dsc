@@ -158,14 +158,14 @@ network_join_colors:
     - repeat 16:
       - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The world feels more vibrant!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
       - wait 5t
-    - stop
+    - define message "<player.name> has joined, making the world more vibrant!"
 
 network_leave_colors:
   type: task
   debug: false
   script:
     - title title:<&7><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The World is a little less colorful" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
-    - stop
+    - define message "<player.name> has left, the world feels less colorful..."
 
 network_join_queen:
   type: task
