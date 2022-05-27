@@ -14,7 +14,7 @@ Player_Join_Message:
       description: <[message]>
       color: 39484
       thumbnail:
-        url: https://icons.iconarchive.com/icons/martz90/circle-addon1/128/text-plus-icon.png
+        url: https://icons.iconarchive.com/icons/gakuseisean/ivista-2/128/Alarm-Plus-icon.png
         height: 8
         width: 8
   script:
