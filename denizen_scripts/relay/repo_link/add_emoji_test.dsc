@@ -11,5 +11,5 @@ discord_add_react:
   script:
     - define token <secret[adriftus_bot]>
     - define headers <script.parsed_key[data.headers]>
-    - define hook https://discord.com/api/channels/<[channel]>/messages/<[message]>/reactions/<[emoji]>/@me method:PUT
-    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
+    - define hook https://discord.com/api/channels/<[channel]>/messages/<[message]>/reactions/<[emoji]>/@me
+    - ~webget <[Hook]> headers:<[Headers]> method:PUT
