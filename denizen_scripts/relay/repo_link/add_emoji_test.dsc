@@ -7,7 +7,6 @@ discord_add_react:
     headers:
       User-Agent: Rachelalala
       Authorization: <[token]>
-      Content-Type: application/json
   script:
     - define token <secret[adriftus_bot]>
     - define headers <script.parsed_key[data.headers]>
