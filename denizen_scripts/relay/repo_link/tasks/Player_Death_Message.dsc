@@ -15,8 +15,8 @@ Player_Death_Message:
       color: 15548997
       thumbnail:
         url: https://icons.iconarchive.com/icons/google/noto-emoji-smileys/128/10099-skull-and-crossbones-icon.png
-        height: 16
-        width: 16
+        height: 8
+        width: 8
       footer:
         text: <util.time_now.format>
   script:
