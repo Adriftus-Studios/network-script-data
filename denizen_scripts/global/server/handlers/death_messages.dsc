@@ -141,8 +141,15 @@ player_death_handler:
       # Definitions
       - define player <proc[get_player_display_name].context[<context.entity>]>
 
+      # Personal Override
+      - if <yaml[global.player.<player.uuid>].contains[death_message]>:
+        - if <yaml[global.player.<player.uuid>].read[death_message]> != silent:
+          - define message <yaml[global.player.<player.uuid>].read[death_message]>
+        - else:
+          - stop
+
       # Check for Custom Damage Messages
-      - if <context.cause> == CUSTOM:
+      - else if <context.cause> == CUSTOM:
         - define message "<proc[get_player_display_name]><&e> was killed by <player.flag[custom_damage]>."
         - flag <context.entity> custom_damage:!
       - else:
