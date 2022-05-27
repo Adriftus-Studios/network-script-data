@@ -17,8 +17,8 @@ Player_Death_Message:
         url: https://icons.iconarchive.com/icons/google/noto-emoji-smileys/128/10099-skull-and-crossbones-icon.png
         height: 8
         width: 8
-      footer:
-        text: <util.time_now.format>
+      #footer:
+        #text: <util.time_now.format>
   script:
     - define channel <yaml[chat_config].read[channels.server.integrations.Discord.<[server]>.channel]>
     - ~run discord_get_or_create_webhook def:<[channel]> save:webhook
