@@ -17,6 +17,10 @@ chat_send_message:
       - define Hook <entry[webhook].created_queue.determination.get[1]>
       - define Data <script.parsed_key[webhook].to_json>
       - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
+      - if <[game_channel]> == server:
+        - define Data <script.parsed_key[webhook_server].to_json>
+      - else:
+        - define Data <script.parsed_key[webhook].to_json>
       - ~webget <[Hook]>?wait=true data:<[Data]> headers:<[Headers]> save:webget
       - define discord_id <util.parse_yaml[<entry[webget].result>].get[id]>
       - if <[game_channel]> == server:
@@ -25,6 +29,11 @@ chat_send_message:
         - run discord_save_message def:<list[<[game_channel]>|<[message_uuid]>|<[discord_id]>|<[channel]>].include[<[formatted_message]>]>
 
   webhook:
+    content: <[game_message].strip_color>
+    username: <[display_name]><&sp><&lb><[Server]><&rb>
+    avatar_url: https://mc-heads.net/head/<[uuid]>/50
+
+  webhook_server:
     content: <[game_message].strip_color>
     username: <[display_name]><&sp><&lb><[Server]><&rb>
     avatar_url: https://mc-heads.net/head/<[uuid]>/50
