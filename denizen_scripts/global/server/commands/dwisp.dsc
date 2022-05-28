@@ -141,7 +141,7 @@ dwisp_command:
         - if <player.has_flag[dwisp.active.entity]> && <player.flag[dwisp.active.entity].is_spawned>:
           - remove <player.flag[dwisp.active.entity]>
         - flag player dwisp.active:!
-        - narrate "<&a>Wisp has been cleared"
+        - narrate "<&a>Wisp has been cleared."
 
       # Assume Wisp
       - case assume:
@@ -292,7 +292,7 @@ dwisp_heal_target:
       - stop
     - heal <[target]>
     - feed <[target]>
-    - narrate "<&a>A Wisp invigorates you.." targets:<[target]>
+    - narrate "<&a>A Wisp invigorates you..." targets:<[target]>
     - repeat 5:
       - playeffect effect:redstone at:<[target].location.above> offset:0.25,0.5,0.25 quantity:10 special_data:2|<player.flag[dwisp.data.color1]> targets:<[targets]>
       - playeffect effect:redstone at:<[target].location.above> offset:0.25,0.5,0.25 quantity:10 special_data:1|<player.flag[dwisp.data.color2]> targets:<[targets]>
