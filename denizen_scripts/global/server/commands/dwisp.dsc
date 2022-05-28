@@ -289,7 +289,9 @@ dwisp_heal_target:
       - playeffect effect:redstone at:<[point]> offset:0.1 quantity:5 special_data:0.5|<player.flag[dwisp.data.color2]> targets:<[targets]>
       - wait 1t
     - if <[target].health> <= 0:
+      - define loc <[target].location>
       - adjust <[target]> respawn
+      - adjust <[target]> location:<[loc]>
     - heal <[target]>
     - feed <[target]>
     - repeat 5:
