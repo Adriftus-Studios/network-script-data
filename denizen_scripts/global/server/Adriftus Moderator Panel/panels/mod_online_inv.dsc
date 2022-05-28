@@ -9,7 +9,9 @@ mod_online_inv:
   definitions:
     mask: <item[iron_pickaxe].with[display_name=<&6>Toggle<&sp>Mask;custom_model_data=1]>
     vanish: <item[ender_eye].with[display_name=<&d>Toggle<&sp>Vanish]>
-    border: <item[light_blue_stained_glass_pane].with[display_name=<&sp>]>
+    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    previous: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    next: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close].with_flag[to:close]>
   slots:
     - [] [] [] [] [] [] [] [] []
@@ -17,7 +19,7 @@ mod_online_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [close] [border] [border] [mask] [border] [vanish] [border] [border] [border]
+    - [close] [x] [mask] [vanish] [x] [x] [x] [previous] [next]
 
 mod_online_inv_events:
   type: world
@@ -55,25 +57,63 @@ mod_online_inv_events:
 mod_online_inv_open:
   type: task
   debug: false
+  definitions: page
+  data:
+    slot_data:
+      slots_used: <util.list_numbers_to[45]>
+      close: 46
+      page: 50
+      previous_page: 53
+      next_page: 54
   script:
     # Give user permission to use the moderator mask.
     - run mask_unlock def:adriftus_moderator
-    - define items <list>
+    # Pagination
+    - define page 1 if:<[page].exists.not>
+    - define slots <list[<script.parsed_key[data.slot_data.slots_used]>]>
+    - define start <[page].sub[1].mul[<[slots].size>].add[1]>
+    - define end <[slots].size.mul[<[page]>]>
+    - define players <server.online_players>
+
+    # Define inventory
     - define inventory <inventory[mod_online_inv]>
     - adjust def:inventory "title:<&6>A<&e>MP <&f>- <&a><server.online_players.size> online."
-    - foreach <server.online_players> as:player:
-      # Match item display name and lore to information about the online player.
-      - define name <[player].name>
-      - define skin <[player].name>
-      - define lore <list[<&2>Nickname<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Display_Name]||<[player].name>>]>
-      - define lore:->:<&2>Rank<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Rank]||None>
-      - define lore:->:<&a>Current<&sp>Channel<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[chat.channels.current].to_titlecase||Server>
-      - define lore:->:<&a>Active<&sp>Channels<&co>
-      - define lore:->:<&e><&gt><&r><&sp><yaml[global.player.<[player].uuid>].list_keys[chat.channels.active].separated_by[<&nl><&e><&gt><&r><&sp>].to_titlecase||Server>
-      # Build the final item.
-      - define item <item[player_head].with[display_name=<&a><[name]>;lore=<[lore]>;skull_skin=<[skin]>]>
-      # Add the defined item to inventory list.
-      - define items:->:<[item]>
-    # Give built items to inventory and open it.
-    - give <[items]> to:<[inventory]>
+    # Add items according to page number.
+    - if <[players].size> > 0:
+      - foreach <[players].get[<[start]>].to[<[end]>]> as:player:
+        # Match item display name and lore to information about the online player.
+        - define name <[player].name>
+        - define skin <[player].name>
+        - define lore <list[<&2>Nickname<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Display_Name]||<[player].name>>]>
+        - define lore:->:<&2>Rank<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[Rank]||None>
+        - define lore:->:<&a>Current<&sp>Channel<&co><&sp><&r><yaml[global.player.<[player].uuid>].read[chat.channels.current].to_titlecase||Server>
+        - define lore:->:<&a>Active<&sp>Channels<&co>
+        - define lore:->:<&e><&gt><&r><&sp><yaml[global.player.<[player].uuid>].list_keys[chat.channels.active].separated_by[<&nl><&e><&gt><&r><&sp>].to_titlecase||Server>
+        # Build the final item.
+        - define item <item[player_head].with[display_name=<&a><[name]>;lore=<[lore]>;skull_skin=<[skin]>]>
+        # Set the defined item an inventory slot.
+        - inventory set o:<[item]> slot:<[slots].get[<[loop_index]>]> d:<[inventory]>
+    # Pagination Item
+    - inventory set slot:<script.data_key[data.slot_data.page]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=page:<[page]>]> d:<[inventory]>
+    # Next Page Button
+    - if <[players].size> > <[end]>:
+      - inventory set slot:<script.data_key[data.slot_data.next_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Next<&sp>Page;flag=run_script:mod_online_inv_next_page;color=green;custom_model_data=7]> d:<[inventory]>
+    # Previous Page Button
+    - if <[page]> != 1:
+      - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:mod_online_inv_previous_page;color=green;custom_model_data=6]> d:<[inventory]>
+    # Open inventory
     - inventory open d:<[inventory]>
+
+mod_online_inv_next_page:
+  type: task
+  debug: false
+  script:
+    - define page_item <context.inventory.slot[<script[mod_online_inv_open].data_key[data.slot_data.page]>]>
+    - run mod_online_inv_open def:<[page_item].flag[page].add[1]>
+
+mod_online_inv_previous_page:
+  type: task
+  debug: false
+  script:
+    - define page_item <context.inventory.slot[<script[mod_online_inv_open].data_key[data.slot_data.page]>]>
+    - run mod_online_inv_open def:<[page_item].flag[page].sub[1]>
