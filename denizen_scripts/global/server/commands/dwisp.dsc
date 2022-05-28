@@ -288,6 +288,8 @@ dwisp_heal_target:
       - playeffect effect:redstone at:<[point]> offset:0.05 quantity:5 special_data:1|<player.flag[dwisp.data.color1]> targets:<[targets]>
       - playeffect effect:redstone at:<[point]> offset:0.1 quantity:5 special_data:0.5|<player.flag[dwisp.data.color2]> targets:<[targets]>
       - wait 1t
+    - if <[target].health> <= 0:
+      - adjust <[target]> respawn
     - heal <[target]>
     - feed <[target]>
     - repeat 5:
@@ -316,6 +318,7 @@ dwisp_kill_target:
       - playeffect effect:redstone at:<[target].location.above> offset:0.25,0.5,0.25 quantity:10 special_data:2|<player.flag[dwisp.data.color1]> targets:<[targets]>
       - playeffect effect:redstone at:<[target].location.above> offset:0.25,0.5,0.25 quantity:10 special_data:1|<player.flag[dwisp.data.color2]> targets:<[targets]>
       - wait 1t
+    - flag <[target]> custom_damage.cause:<player.flag[dwisp.data.entity].custom_name>
     - if <player.has_flag[dwisp.data.damage]> && <player.flag[dwisp.data.damage]> != kill:
       - hurt <player.flag[dwisp.data.damage]> <[target]>
     - else:
@@ -491,6 +494,7 @@ dwisp_run_movement:
                 - playeffect effect:redstone at:<[mob].location.above> offset:0.25,0.75,0.25 quantity:20 special_data:5|<player.flag[dwisp.data.color1]> targets:<[targets]>
                 - playeffect effect:redstone at:<[mob].location.above> offset:0.25,0.75,0.25 quantity:20 special_data:2|<player.flag[dwisp.data.color2]> targets:<[targets]>
                 - wait 1t
+              - flag <[mob]> custom_damage.cause:<player.flag[dwisp.data.entity].custom_name>
               - if <player.has_flag[dwisp.data.damage]> && <player.flag[dwisp.data.damage]> != kill:
                 - hurt <player.flag[dwisp.data.damage]> <[mob]>
               - else:
