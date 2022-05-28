@@ -10,6 +10,8 @@ mod_online_inv:
     mask: <item[iron_pickaxe].with[display_name=<&6>Toggle<&sp>Mask;custom_model_data=1]>
     vanish: <item[ender_eye].with[display_name=<&d>Toggle<&sp>Vanish]>
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    previous: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    next: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close].with_flag[to:close]>
   slots:
     - [] [] [] [] [] [] [] [] []
@@ -17,7 +19,7 @@ mod_online_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [close] [x] [mask] [vanish] [x] [x] [x] [x] [x]
+    - [close] [x] [mask] [vanish] [x] [x] [x] [previous] [next]
 
 mod_online_inv_events:
   type: world
