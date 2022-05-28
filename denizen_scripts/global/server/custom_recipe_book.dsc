@@ -115,7 +115,7 @@ custom_recipe_book_add_recipe:
 custom_recipe_inventory_open:
   type: task
   debug: false
-  definitions: recipe_id|page
+  definitions: recipe_id|page|category
   data:
     slots: 13|14|15|22|23|24|31|32|33
     result: 26
@@ -126,9 +126,10 @@ custom_recipe_inventory_open:
   script:
     - define page 1 if:<[page].exists.not>
     - define recipe_id <context.item.flag[recipe_id]> if:<[recipe_id].exists.not>
+    - define category <context.item.flag[category]> if:<[category].exists.not>
     - define recipe_id <[recipe_id]>
     - define inventory <inventory[custom_recipe_inventory]>
-    - inventory set slot:<script.data_key[data.back]> d:<[inventory]> "o:feather[custom_model_data=3;display=<&c>Back to Categories;flag=run_script:crafting_book_open]"
+    - inventory set slot:<script.data_key[data.back]> d:<[inventory]> "o:feather[custom_model_data=3;display=<&c>Back to <[category].to_titlecase>;flag=category:<[category]>;flag=run_script:crafting_book_open_category]"
     - inventory set slot:<script.data_key[data.result]> d:<[inventory]> o:<server.flag[recipe_book.recipes.<[recipe_id]>.result].with[flag=page:<[page]>]>
     - inventory set slot:<script.data_key[data.crafting_book_add]> d:<[inventory]> o:custom_recipe_add_to_crafting[flag=recipe:<[recipe_id]>]
     - define slots <script.data_key[data.slots].as_list>
@@ -235,7 +236,7 @@ crafting_book_open_category:
     - if <server.has_flag[recipe_book.categories.<[category]>]>:
       - define items <server.flag[recipe_book.categories.<[category]>].keys.sort_by_value[as_item.script.data_key[data.recipe_book_category]]>
       - foreach <[items].get[<[page].sub[1].mul[<[slots].size>].add[1]>].to[<[page].mul[<[slots].size>]>]> as:item:
-        - inventory set slot:<[slots].get[<[loop_index]>]> o:<item[<[item]>].with[flag=run_script:custom_recipe_inventory_open;flag=recipe_id:<server.flag[recipe_book.categories.<[category]>.<[item]>].get[1]>]> d:<[inv]>
+        - inventory set slot:<[slots].get[<[loop_index]>]> o:<item[<[item]>].with[flag=run_script:custom_recipe_inventory_open;flag=category:<[category]>;flag=recipe_id:<server.flag[recipe_book.categories.<[category]>.<[item]>].get[1]>]> d:<[inv]>
 
       # Next Page
       - if <[items].size> > <[page].mul[<[slots].size>]>:

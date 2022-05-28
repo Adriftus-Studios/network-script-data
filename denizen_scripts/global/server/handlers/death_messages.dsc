@@ -154,7 +154,7 @@ player_death_handler:
         - if !<player.has_flag[custom_damage.cause]>:
           - define cause "<&d>Unknown Forces"
         - else:
-          - define cause <player.has_flag[custom_damage.cause]>
+          - define cause <player.flag[custom_damage.cause]>
         - define message "<proc[get_player_display_name]><&e> was killed by <[cause]>."
         - define discord_message "<player.name><&e> was killed by <[cause]>."
         - flag <context.entity> custom_damage:!
