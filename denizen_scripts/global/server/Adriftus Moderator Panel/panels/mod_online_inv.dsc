@@ -106,12 +106,12 @@ mod_online_inv_next_page:
   type: task
   debug: false
   script:
-    - define info_item <context.inventory.slot[<script[cosmetic_selection_inventory_open].data_key[data.slot_data.remove_slot]>]>
-    - run mod_online_inv_open def:<[info_item].flag[page].add[1]>
+    - define page_item <context.inventory.slot[<script[mod_online_inv_open].data_key[data.slot_data.page]>]>
+    - run mod_online_inv_open def:<[page_item].flag[page].add[1]>
 
 mod_online_inv_previous_page:
   type: task
   debug: false
   script:
-    - define info_item <context.inventory.slot[<script[cosmetic_selection_inventory_open].data_key[data.slot_data.remove_slot]>]>
-    - run mod_online_inv_open def:<[info_item].flag[page].sub[1]>
+    - define page_item <context.inventory.slot[<script[mod_online_inv_open].data_key[data.slot_data.page]>]>
+    - run mod_online_inv_open def:<[page_item].flag[page].sub[1]>
