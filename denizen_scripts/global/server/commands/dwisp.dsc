@@ -292,6 +292,9 @@ dwisp_heal_target:
       - define loc <[target].location>
       - adjust <[target]> respawn
       - adjust <[target]> location:<[loc]>
+      - narrate "<&a>A Wisp revives you.." targets:<[target]>
+    - else:
+      - narrate "<&a>A Wisp invigorates you.." targets:<[target]>
     - heal <[target]>
     - feed <[target]>
     - repeat 5:
@@ -299,7 +302,6 @@ dwisp_heal_target:
       - playeffect effect:redstone at:<[target].location.above> offset:0.25,0.5,0.25 quantity:10 special_data:1|<player.flag[dwisp.data.color2]> targets:<[targets]>
       - wait 1t
     - ratelimit <[target]> 5s
-    - narrate "<&a>You Feel Invigorated" targets:<[target]>
 
 dwisp_kill_target:
   type: task
