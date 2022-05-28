@@ -151,8 +151,12 @@ player_death_handler:
 
       # Check for Custom Damage Messages
       - else if <context.cause> == CUSTOM:
-        - define message "<proc[get_player_display_name]><&e> was killed by <player.flag[custom_damage.cause]>."
-        - define discord_message "<player.name><&e> was killed by <player.flag[custom_damage.cause]>."
+        - if !<player.has_flag[custom_damage.cause]>:
+          - define cause "<&d>Unknown Forces"
+        - else:
+          - define cause <player.has_flag[custom_damage.cause]>
+        - define message "<proc[get_player_display_name]><&e> was killed by <[cause]>."
+        - define discord_message "<player.name><&e> was killed by <[cause]>."
         - flag <context.entity> custom_damage:!
       - else:
         - choose <context.cause>:
@@ -169,7 +173,10 @@ player_death_handler:
               - define discord_message <script.parsed_key[data.messages.ENTITY_ATTACK.PVP].random>
             # Mythic Mob
             - else if <context.damager.is_mythicmob>:
-              - define attacker <context.damager.mythicmob.display_name>
+              - if <context.damager.mythicmob.display_name> != null:
+                - define attacker <context.damager.mythicmob.display_name>
+              - else:
+                - define attacker <context.damager.mythicmob.internal_name>
               - if <script.data_key[data.messages.MYTHIC_MOB.<context.damager.mythicmob.internal_name>].exists>:
                 - define message <script.parsed_key[data.messages.ENTITY_ATTACK.MYTHIC_MOB.<context.damager.mythicmob.internal_name>].random>
                 - define player <player.name>
