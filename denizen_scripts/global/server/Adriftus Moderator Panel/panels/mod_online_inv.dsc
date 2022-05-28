@@ -61,10 +61,10 @@ mod_online_inv_open:
   data:
     slot_data:
       slots_used: <util.list_numbers_to[1]>
-      next_page: 53
-      previous_page: 54
       close: 46
       page: 50
+      previous_page: 53
+      next_page: 54
   script:
     # Give user permission to use the moderator mask.
     - run mask_unlock def:adriftus_moderator
