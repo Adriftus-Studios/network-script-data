@@ -215,9 +215,9 @@ player_death_handler:
 
           # EVERYTHING ELSE
           - default:
-              - define message <script.parsed_key[data.messages.<context.cause>].random>
+              - define message "<script.parsed_key[data.messages.<context.cause>].random.if_null[Uncaught exception<&co> <context.cause>]>"
               - define player <player.name>
-              - define discord_message <script.parsed_key[data.messages.<context.cause>].random>
+              - define "discord_message <script.parsed_key[data.messages.<context.cause>].random.if_null[Uncaught exception<&co> <context.cause>]>"
 
       # PROCESSING STARTS
       - determine passively NO_MESSAGE
