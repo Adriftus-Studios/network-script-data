@@ -145,12 +145,14 @@ player_death_handler:
       - if <yaml[global.player.<player.uuid>].contains[death_message]>:
         - if <yaml[global.player.<player.uuid>].read[death_message]> != silent:
           - define message <yaml[global.player.<player.uuid>].read[death_message]>
+          - define discord_message <yaml[global.player.<player.uuid>].read[death_message]>
         - else:
           - stop
 
       # Check for Custom Damage Messages
       - else if <context.cause> == CUSTOM:
         - define message "<proc[get_player_display_name]><&e> was killed by <player.flag[custom_damage.cause]>."
+        - define discord_message "<player.name><&e> was killed by <player.flag[custom_damage.cause]>."
         - flag <context.entity> custom_damage:!
       - else:
         - choose <context.cause>:
