@@ -33,8 +33,8 @@ player_data_handler:
           - wait 1s
           - ~yaml id:global.player.<player.uuid> load:data/global/players/<player.uuid>.yml
           - customevent id:global_player_data_loaded context:<map[uuid=<player.uuid>;name=<player.name>]>
-      - else:
-        - customevent id:global_player_data_loaded context:<map[uuid=<player.uuid>;name=<player.name>]>
+      #- else:
+        #- customevent id:global_player_data_loaded context:<map[uuid=<player.uuid>;name=<player.name>]>
 
     on player quits:
       - if <bungee.server> != hub:
