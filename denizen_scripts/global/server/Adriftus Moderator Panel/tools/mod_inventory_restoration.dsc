@@ -44,10 +44,11 @@ inventory_log_open:
     - if <context.args.size> < 1:
       - narrate "<&c>You must specify a player name."
       - stop
-    - define target <server.match_player[<context.args.get[1]>].if_null[null]>
+    - define target <server.match_player[<context.args.first>].if_null[null]>
     - if <[target]> == null:
-      - narrate "<&c>Unknown Player<&co> <&f><context.args.get[1]>"
+      - narrate "<&c>Unknown Player<&co> <&f><context.args.first>"
       - stop
+    - run mod_initialize def:<[target].uuid>
     - run inventory_logger_list def:<[target]>
 
 inventory_logger_view_inventory:
