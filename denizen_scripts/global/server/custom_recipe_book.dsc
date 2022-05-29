@@ -156,7 +156,8 @@ custom_recipe_inventory_nextpage:
   script:
     - define page <context.inventory.slot[<script[custom_recipe_inventory_open].data_key[data.result]>].flag[page].add[1]>
     - define recipe_id <context.item.flag[recipe_id]>
-    - run custom_recipe_inventory_open def:<[recipe_id]>|<[page]>
+    - define category <context.inventory.slot[<script[custom_recipe_inventory_open].data_key[data.back]>].flag[category]>
+    - run custom_recipe_inventory_open def:<[recipe_id]>|<[page]>|<[category]>
 
 custom_recipe_inventory_previouspage:
   type: task
@@ -164,7 +165,8 @@ custom_recipe_inventory_previouspage:
   script:
     - define page <context.inventory.slot[<script[custom_recipe_inventory_open].data_key[data.result]>].flag[page].sub[1]>
     - define recipe_id <context.item.flag[recipe_id]>
-    - run custom_recipe_inventory_open def:<[recipe_id]>|<[page]>
+    - define category <context.inventory.slot[<script[custom_recipe_inventory_open].data_key[data.back]>].flag[category]>
+    - run custom_recipe_inventory_open def:<[recipe_id]>|<[page]>|<[category]>
 
 crafting_book_inventory:
   type: inventory
