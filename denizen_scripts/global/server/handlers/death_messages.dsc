@@ -193,7 +193,7 @@ player_death_handler:
                 - define attacker <context.damager.entity_type.replace[_].with[<&sp>].to_titlecase>
               - define message <script.parsed_key[data.messages.ENTITY_ATTACK.OTHER].random>
               - define player <player.name>
-              - define discord_message <script.parsed_key[data.messages.<context.cause>].random>
+              - define discord_message <script.parsed_key[data.messages.ENTITY_ATTACK.OTHER].random>
 
           # PROJECTILE
           - case PROJECTILE:
