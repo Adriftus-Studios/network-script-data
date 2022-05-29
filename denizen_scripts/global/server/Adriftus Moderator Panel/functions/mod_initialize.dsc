@@ -4,7 +4,6 @@ mod_initialize:
   debug: false
   definitions: target
   script:
-    - flag <player> amp_map:!
     - define uuid <[target].uuid>
     # Check if target player is offline
     - if <[target].is_online>:
