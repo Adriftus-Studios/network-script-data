@@ -33,13 +33,7 @@ mod_online_inv_events:
       - if !<player.has_permission[adriftus.admin]> && <server.match_player[<context.item.display.strip_color>].has_permission[adriftus.admin]>:
         - narrate "<&c>You cannot perform actions on administrators."
         - stop
-      - define uuid <server.match_player[<context.item.display.strip_color>].uuid>
-      - define map <map.with[uuid].as[<[uuid]>]>
-      - define map <[map].with[display_name].as[<yaml[global.player.<[uuid]>].read[Display_Name]||None>]>
-      - define map <[map].with[rank].as[<yaml[global.player.<[uuid]>].read[Rank]||None>]>
-      - define map <[map].with[current].as[<yaml[global.player.<[uuid]>].read[chat.channels.current]||Server>]>
-      - define map <[map].with[active].as[<yaml[global.player.<[uuid]>].read[chat.channels.active]||Server>]>
-      - flag <player> amp_map:<[map]>
+      - run mod_initialize def:<server.match_player[<context.item.display.strip_color>].uuid>
       - inject mod_actions_inv_open
     on player clicks iron_pickaxe in mod_online_inv:
       - define equipped <yaml[global.player.<player.uuid>].read[masks.current.id].if_null[default]>
