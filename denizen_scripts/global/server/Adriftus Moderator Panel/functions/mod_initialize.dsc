@@ -2,12 +2,11 @@
 mod_initialize:
   type: task
   debug: false
-  definitions: target
+  definitions: uuid
   script:
-    - define uuid <[target].uuid>
-    - narrate <[target]>
+    - flag <player> amp_map:!
     # Check if target player is offline
-    - if <[target].is_online>:
+    - if <player[<[uuid]>].is_online>:
       # Define YAML ID
       - define id global.player.<[uuid]>
     - else:
@@ -19,7 +18,7 @@ mod_initialize:
     # Define map
     - definemap map:
       uuid: <[uuid]>
-      name: <[target].name>
+      name: <player[<[uuid]>].name>
       display_name: <yaml[<[id]>].read[Display_Name]||None>
       rank: <yaml[<[id]>].read[Rank]||None>
       current: <yaml[<[id]>].read[chat.channels.current]||Server>
