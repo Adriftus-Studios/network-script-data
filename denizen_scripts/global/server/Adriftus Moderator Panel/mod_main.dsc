@@ -33,7 +33,7 @@ mod_command:
       - else:
         - flag <player> amp_map:!
         - define target <server.match_offline_player[<context.args.first>]>
-        - run mod_initialize def:<[target]>
+        - inject mod_initialize
         - inject mod_actions_inv_open
     - else:
       - narrate "<&c>Invalid player name entered!"
