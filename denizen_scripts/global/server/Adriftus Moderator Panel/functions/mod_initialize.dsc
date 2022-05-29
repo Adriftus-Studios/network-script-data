@@ -5,6 +5,7 @@ mod_initialize:
   definitions: target
   script:
     - define uuid <[target].uuid>
+    - narrate <[target]>
     # Check if target player is offline
     - if <[target].is_online>:
       # Define YAML ID
@@ -27,6 +28,7 @@ mod_initialize:
     - if <yaml.list.contains[amp.target.<[uuid]>]>:
       - yaml unload id:amp.target.<[uuid]>
     # Flag moderator with map of target player's information
+    - narrate <[map]>
     - flag <player> amp_map:<[map]>
 
 
