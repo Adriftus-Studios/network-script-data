@@ -74,16 +74,16 @@ mod_player_item:
   type: item
   debug: false
   material: player_head
-  display name: <&r><player.flag[amp_map].as_map.get[uuid].as_player.name.if_null[invalid]>
+  display name: <&r><player.flag[amp_map].as_map.get[name].if_null[invalid]>
   lore:
-    - "<&6>Nickname: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Display_Name]||<player.flag[amp_map].as_map.get[uuid].as_player.name>>"
+    - "<&6>Nickname: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Display_Name]||<player.flag[amp_map].as_map.get[name]>>"
     - "<&6>Rank: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Rank]||None>"
     - "<&e>Current Channel: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[chat.channels.current].to_titlecase||Server>"
     - "<&e>Active Channels:"
     - "<&2><&gt><&r> <yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].list_keys[chat.channels.active].separated_by[<&nl><&2><&gt><&r><&sp>].to_titlecase||Server>"
   mechanisms:
     custom_model_data: 1
-    skull_skin: <player.flag[amp_map].as_map.get[uuid].as_player.name>
+    skull_skin: <player.flag[amp_map].as_map.get[name]>
 
 mod_level1_item:
   type: item

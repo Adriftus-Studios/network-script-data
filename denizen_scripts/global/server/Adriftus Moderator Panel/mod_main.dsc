@@ -31,8 +31,7 @@ mod_command:
         - narrate "<&c>You cannot perform actions on administrators."
         - stop
       - else:
-        - define uuid <server.match_offline_player[<context.args.first>].uuid>
-        - inject mod_initialize
+        - run mod_initialize def:<server.match_offline_player[<context.args.first>].uuid>
         - inject mod_actions_inv_open
     - else:
       - narrate "<&c>Invalid player name entered!"
