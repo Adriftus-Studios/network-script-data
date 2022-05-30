@@ -2,12 +2,12 @@
 mod_spectate_command:
   type: command
   debug: false
-  name: spec
+  name: spectate
   permission: adriftus.admin
   aliases:
-    - spectate
+    - spec
   description: Moderator spectate
-  usage: /spec (username)
+  usage: /spectate (username)
   tab complete:
     - define blacklist <player||null>
     - inject online_player_tabcomplete
@@ -36,7 +36,7 @@ mod_spectate_command:
           - flag player lastGM:<player.gamemode>
           - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
         - adjust <player> gamemode:spectator
-        - teleport <player> <server.match_player[<context.args.first>].location>
+        - adjust <player> spectator_target:<server.match_player[<context.args.first]>
         - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <context.args.first>." targets:<player>
       - else:
         - narrate "<&c>That player is not online!"
