@@ -38,7 +38,7 @@ mod_spectate_command:
           - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
         - adjust <player> gamemode:spectator
         - teleport <player> <server.match_player[<context.args.first>].location>
-        - wait 1t
+        - wait 10t
         - adjust <player> spectator_target:<server.match_player[<context.args.first]>
         - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <context.args.first>." targets:<player>
       - else:
