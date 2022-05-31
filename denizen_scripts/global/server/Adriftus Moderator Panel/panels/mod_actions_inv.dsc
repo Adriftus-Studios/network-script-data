@@ -26,16 +26,16 @@ mod_actions_inv_events:
 
     on player right clicks mod_teleport_item in mod_actions_inv:
       - teleport <player> <player.flag[amp_map].as_map.get[uuid].as_player.location>
-      - run mod_message_discord_command def:<player.uuid>|tp<&sp><player.flag[amp_map].as_map.get[uuid].as_player.name>
+      - run mod_message_discord_command def:<player.uuid>|tp<&sp><player.flag[amp_map].as_map.get[name]>
       - inventory close
 
     on player right clicks mod_spectate_item in mod_actions_inv:
       # Disable if already spectating.
       - if <player.has_flag[spectateEnabled]> || <player.gamemode> == SPECTATOR:
         - flag player spectateEnabled:!
+        - teleport <player> <player.flag[lastLocation].if_null[<player.bed_spawn>]>
         - adjust <player> gamemode:<player.flag[lastGM].if_null[SURVIVAL]>
         - adjust <player> flying:false
-        - teleport <player> <player.flag[lastLocation].if_null[<player.bed_spawn>]>
         - narrate "<&7>[<&b>ModSpec<&7>] <&c>Toggled ModSpec." targets:<player>
         - run mod_message_discord_command def:<player.uuid>|spectate<&sp>
       # Enable spectator mode and teleport to target.
@@ -45,9 +45,9 @@ mod_actions_inv_events:
           - flag player lastGM:<player.gamemode>
           - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
         - adjust <player> gamemode:spectator
-        - teleport <player> <player.flag[amp_map].as_map.get[uuid].as_player.location>
-        - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <player.flag[amp_map].as_map.get[uuid].as_player.name>." targets:<player>
-        - run mod_message_discord_command def:<player.uuid>|spectate<&sp><player.flag[amp_map].as_map.get[uuid].as_player.name>
+        - adjust <player> spectator_target:<player.flag[amp_map].as_map.get[uuid].as_player.location>
+        - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <player.flag[amp_map].as_map.get[name]>." targets:<player>
+        - run mod_message_discord_command def:<player.uuid>|spectate<&sp><player.flag[amp_map].as_map.get[name]>
       - inventory close
 
     on player left clicks mod_inventorylog_item in mod_actions_inv:
@@ -67,7 +67,7 @@ mod_actions_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_actions_inv]>
-    - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&5>Actions on <&d><player.flag[amp_map].as_map.get[uuid].as_player.name>."
+    - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&5>Actions on <&d><player.flag[amp_map].as_map.get[name]>."
     - define sendItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>].pass[<item[mod_send_item]>].fail[<item[air]>]>
     - define teleportItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>].pass[<item[mod_teleport_item]>].fail[<item[air]>]>
     - define spectateItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>].pass[<item[mod_spectate_item]>].fail[<item[air]>]>
