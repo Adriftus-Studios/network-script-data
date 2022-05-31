@@ -25,7 +25,10 @@ inventory_logger_list:
     # Title
     - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&a>Restore <&2><[target].name><&a>'s inventories."
     # Back Button
-    - inventory set slot:46 d:<[inventory]> o:<item[red_stained_glass_pane].with[hides=all;display_name=<&c><&l>↩<&sp>Actions<&sp>panel;flag=run_script:mod_actions_inv_open;flag=target:<[target]>]>
+    - if <[target]> != <player>:
+      - inventory set slot:46 d:<[inventory]> o:<item[red_stained_glass_pane].with[hides=all;display_name=<&c><&l>↩<&sp>Actions<&sp>panel;flag=run_script:mod_actions_inv_open;flag=target:<[target]>]>
+    - else:
+      - inventory set slot:46 d:<[inventory]> o:<item[red_stained_glass_pane].with[hides=all;display_name=<&c><&l>↩<&sp>Actions<&sp>panel;flag=run_script:inventory_logger_back_cancel;flag=target:<[target]>]>
     - inventory open d:<[inventory]>
 
 inventory_logger_inventory:
@@ -115,3 +118,9 @@ inventory_logger_view_inventory_single:
     - flag <[item]> target:!
     - give <[item]> to:<player.inventory>
     - run mod_message_discord_notification def:<player.uuid>|restored<&sp>`<[target].name>`<&sq>s<&sp>item<&co><&sp>`<[item]>`
+
+inventory_logger_back_cancel:
+  type: task
+  debug: false
+  script:
+    - narrate "<&c>You cannot perform actions on yourself."
