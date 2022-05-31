@@ -2,4 +2,5 @@ keep_inventory:
   type: task
   debug: false
   script:
-    - determine KEEP_INV
+    - determine passively KEEP_INV
+    - determine NO_DROPS
