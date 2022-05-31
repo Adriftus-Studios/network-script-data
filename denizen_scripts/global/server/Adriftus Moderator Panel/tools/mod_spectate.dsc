@@ -16,6 +16,7 @@ mod_spectate_command:
     # Disable if already spectating.
     - if ( <player.has_flag[spectateEnabled]> || <player.gamemode> == SPECTATOR ) && <context.args.is_empty>:
       - flag player spectateEnabled:!
+      - adjust <player> spectator_target
       - teleport <player> <player.flag[lastLocation].if_null[<player.bed_spawn>]>
       - adjust <player> gamemode:<player.flag[lastGM].if_null[SURVIVAL]>
       - adjust <player> flying:false
@@ -37,6 +38,7 @@ mod_spectate_command:
           - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
         - adjust <player> gamemode:spectator
         - teleport <player> <server.match_player[<context.args.first>].location>
+        - wait 1t
         - adjust <player> spectator_target:<server.match_player[<context.args.first]>
         - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <context.args.first>." targets:<player>
       - else:
