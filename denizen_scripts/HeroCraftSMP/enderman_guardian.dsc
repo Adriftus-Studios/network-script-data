@@ -75,10 +75,10 @@ enderman_guardian_phase_1:
       - flag <[target]> "custom_damage.cause:<&d>Ender Guardian Explosion"
       - hurt 5 <[target]> cause:custom
     - wait 1s
-    - if <[all_players].size> < 4:
+    - if <[all_players].filter[gamemode.equals[adventure]].size> < 4:
       - define spawns_per_wave 8
     - else:
-      - define spawns_per_wave <[all_players].size.mul[2.5].round_up>
+      - define spawns_per_wave <[all_players].filter[gamemode.equals[adventure]].size.mul[2]>
     # Spawn Adds
     ## Waves of Minions
     - repeat 5:
@@ -205,7 +205,7 @@ enderman_guardian_minion_expire:
       - playeffect effect:DRAGON_BREATH at:<[entity].location.above> quantity:20 ofset:0.2,0.5,0.2 targets:<[all_players]>
       - wait 2t
     - stop if:<[entity].is_spawned.not>
-    - define health <[entity].health.mul[<[all_players].size>]>
+    - define health <[entity].health.mul[<[all_players].filter[gamemode.equals[adventure]].size>]>
     - remove <[entity]>
     - narrate "<&e>An Enderman gives his life to the Guardian." targets:<[all_players]>
     - stop if:<[boss].is_spawned.not>
