@@ -3,7 +3,7 @@ mod_spectate_command:
   type: command
   debug: false
   name: spectate
-  permission: adriftus.admin
+  permission: adriftus.moderator
   aliases:
     - spec
   description: Moderator spectate
