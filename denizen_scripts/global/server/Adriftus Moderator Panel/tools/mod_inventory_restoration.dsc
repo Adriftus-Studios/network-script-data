@@ -21,16 +21,10 @@ inventory_logger_list:
         - define "list:->:<item[black_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
       - else:
         - define "list:->:<item[white_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
-    # Padding
-    - repeat 9:
-      -  inventory set slot:<[value]> d:<[inventory]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3]>
     - give <[list]> to:<[inventory]>
 
     # Title
     - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&a>Restore <&2><[target].name><&a>'s inventories."
-
-    # Player Head
-    - inventory set slot:50 d:<[inventory]> o:<item[mod_player_item]>
 
     # Back Button
     - if <[target]> != <player>:
@@ -46,6 +40,16 @@ inventory_logger_inventory:
   inventory: chest
   size: 54
   gui: true
+  definitions:
+    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    head: <item[mod_player_item]>
+  slots:
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [x] [x] [x] [x] [head] [x] [x] [x] [x]
 
 inventory_log_open:
   type: command
