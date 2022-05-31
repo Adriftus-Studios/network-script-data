@@ -3,4 +3,5 @@ no_kick_flying:
   debug: false
   events:
     on player kicked for flying:
+      - determine passively cancelled
       - determine FLY_COOLDOWN:1m
