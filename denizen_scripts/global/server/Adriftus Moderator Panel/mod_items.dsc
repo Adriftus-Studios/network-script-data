@@ -27,6 +27,8 @@ mod_spectate_item:
   material: spyglass
   display name: <&6><&l>Spectate
   lore:
+    - "<&1>Left Click:"
+    - "<&e>Stop Spectating."
     - "<&1>Right Click:"
     - "<&e>Spectate the Player."
   mechanisms:
