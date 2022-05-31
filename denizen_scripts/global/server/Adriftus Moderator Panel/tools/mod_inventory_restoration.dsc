@@ -23,7 +23,7 @@ inventory_logger_list:
         - define "list:->:<item[white_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
     # Padding
     - repeat 9:
-      - give <item[feather].with[display_name=<&sp>;custom_model_data=3]> to:<[inventory]>
+      -  inventory set slot:<[value]> d:<[inventory]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3]>
     - give <[list]> to:<[inventory]>
 
     # Title
