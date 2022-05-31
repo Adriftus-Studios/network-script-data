@@ -29,8 +29,8 @@ mod_actions_inv_events:
       - run mod_message_discord_command def:<player.uuid>|tp<&sp><player.flag[amp_map].as_map.get[name]>
       - inventory close
 
-    on player right clicks mod_spectate_item in mod_actions_inv:
-      # Disable if already spectating.
+    on player left clicks mod_spectate_item in mod_actions_inv:
+      # Disable if already in spectator mode.
       - if <player.has_flag[spectateEnabled]> || <player.gamemode> == SPECTATOR:
         - flag player spectateEnabled:!
         - teleport <player> <player.flag[lastLocation].if_null[<player.bed_spawn>]>
@@ -38,16 +38,19 @@ mod_actions_inv_events:
         - adjust <player> flying:false
         - narrate "<&7>[<&b>ModSpec<&7>] <&c>Toggled ModSpec." targets:<player>
         - run mod_message_discord_command def:<player.uuid>|spectate<&sp>
-      # Enable spectator mode and teleport to target.
+        - inventory close
       - else:
-        - if <player.gamemode> != SPECTATOR:
-          - flag player spectateEnabled
-          - flag player lastGM:<player.gamemode>
-          - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
-        - adjust <player> gamemode:spectator
-        - adjust <player> spectator_target:<player.flag[amp_map].as_map.get[uuid].as_player>
-        - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <player.flag[amp_map].as_map.get[name]>." targets:<player>
-        - run mod_message_discord_command def:<player.uuid>|spectate<&sp><player.flag[amp_map].as_map.get[name]>
+        - narrate "<&c>You are not in spectator mode!"
+
+    on player right clicks mod_spectate_item in mod_actions_inv:
+      - if <player.gamemode> != SPECTATOR:
+        - flag player spectateEnabled
+        - flag player lastGM:<player.gamemode>
+        - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
+      - adjust <player> gamemode:spectator
+      - adjust <player> spectator_target:<player.flag[amp_map].as_map.get[uuid].as_player>
+      - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <player.flag[amp_map].as_map.get[name]>." targets:<player>
+      - run mod_message_discord_command def:<player.uuid>|spectate<&sp><player.flag[amp_map].as_map.get[name]>
       - inventory close
 
     on player left clicks mod_inventorylog_item in mod_actions_inv:
