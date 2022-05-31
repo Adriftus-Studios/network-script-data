@@ -22,13 +22,19 @@ inventory_logger_list:
       - else:
         - define "list:->:<item[white_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
     - give <[list]> to:<[inventory]>
+
     # Title
     - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&a>Restore <&2><[target].name><&a>'s inventories."
+
+    # Player Head
+    - inventory set slot:50 d:<[inventory]> o:<item[mod_player_item]>
+
     # Back Button
     - if <[target]> != <player>:
       - inventory set slot:46 d:<[inventory]> o:<item[red_stained_glass_pane].with[hides=all;display_name=<&c><&l>↩<&sp>Actions<&sp>panel;flag=run_script:mod_actions_inv_open;flag=target:<[target]>]>
     - else:
       - inventory set slot:46 d:<[inventory]> o:<item[red_stained_glass_pane].with[hides=all;display_name=<&c><&l>↩<&sp>Actions<&sp>panel;flag=run_script:inventory_logger_back_cancel;flag=target:<[target]>]>
+
     - inventory open d:<[inventory]>
 
 inventory_logger_inventory:
@@ -78,14 +84,14 @@ inventory_logger_view_inventory:
         - inventory set o:<[map].get[inventory].parse_value_tag[<[parse_value].with_flag[run_script:inventory_logger_view_inventory_single].with_flag[target:<[target]>]>]> d:<[inventory]>
         - define the_map <[map]>
 
+    # Title
+    - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&a><[the_map].get[cause]> <[the_map].get[time].format>"
+
     # Restore Inventory Button
     - inventory set slot:50 d:<[inventory]> "o:player_head[skull_skin=<[target].skull_skin>;display=<&a>Restore Inventory;lore=<&e>Requires Empty Inventory|<&nl><&e>Cause<&co> <&f><[the_map].get[cause]>|<&e>Time<&co> <&f><[the_map].get[time].format>|<&e>Location<&co> <&f><[the_map].get[location].simple>;flag=cause:<[the_map].get[cause]>;flag=run_script:inventory_logger_view_inventory_restore;flag=uuid:<[the_map].get[uuid]>;flag=target:<[target]>]"
 
     # Back Button
     - inventory set slot:46 d:<[inventory]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Back;flag=run_script:inventory_logger_list;flag=target:<[target]>;color=red;custom_model_data=6]>
-
-    # Title
-    - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&a><[the_map].get[cause]> <[the_map].get[time].format>"
 
     - inventory open d:<[inventory]>
 
