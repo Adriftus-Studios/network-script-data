@@ -3,7 +3,7 @@ mod_spectate_command:
   type: command
   debug: false
   name: spectate
-  permission: adriftus.admin
+  permission: adriftus.moderator
   aliases:
     - spec
   description: Moderator spectate
@@ -16,9 +16,9 @@ mod_spectate_command:
     # Disable if already spectating.
     - if ( <player.has_flag[spectateEnabled]> || <player.gamemode> == SPECTATOR ) && <context.args.is_empty>:
       - flag player spectateEnabled:!
+      - teleport <player> <player.flag[lastLocation].if_null[<player.bed_spawn>]>
       - adjust <player> gamemode:<player.flag[lastGM].if_null[SURVIVAL]>
       - adjust <player> flying:false
-      - teleport <player> <player.flag[lastLocation].if_null[<player.bed_spawn>]>
       - narrate "<&7>[<&b>ModSpec<&7>] <&c>Toggled ModSpec." targets:<player>
       - stop
     - if <context.args.is_empty>:
@@ -36,7 +36,7 @@ mod_spectate_command:
           - flag player lastGM:<player.gamemode>
           - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
         - adjust <player> gamemode:spectator
-        - adjust <player> spectator_target:<server.match_player[<context.args.first]>
+        - adjust <player> spectator_target:<server.match_player[<context.args.first>]>
         - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <context.args.first>." targets:<player>
       - else:
         - narrate "<&c>That player is not online!"
