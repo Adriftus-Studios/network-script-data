@@ -310,7 +310,7 @@ enderman_guardian_task_3:
     - while <context.entity.is_spawned>:
       - define targets <context.entity.location.find_players_within[140]>
       - foreach <[targets]>:
-        - if <[value].gamemode> == adventure:
+        - if <list[adventure|spectator].contains[<[value].gamemode>]>:
           - foreach next
         - adjust <[value]> gamemode:adventure
         - flag <[value]> on_death:keep_inventory
