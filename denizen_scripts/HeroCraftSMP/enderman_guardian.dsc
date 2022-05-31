@@ -63,7 +63,7 @@ enderman_guardian_phase_1:
   definitions: boss
   script:
     # Initialize Definitions
-    - define spawnable_blocks <[boss].location.find_spawnable_blocks_within[15]>
+    - define spawnable_blocks <[boss].filter[y.equals[52]]>
     - define all_players <[boss].location.find_players_within[100]>
     - define targets <[boss].location.find_players_within[6]>
     # Knockback Explosion
