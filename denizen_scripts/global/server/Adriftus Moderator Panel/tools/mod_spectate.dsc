@@ -36,6 +36,7 @@ mod_spectate_command:
           - flag player lastGM:<player.gamemode>
           - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
         - adjust <player> gamemode:spectator
+        - wait 1t
         - adjust <player> spectator_target:<server.match_player[<context.args.first]>
         - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <context.args.first>." targets:<player>
       - else:
