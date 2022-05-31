@@ -25,7 +25,7 @@ inventory_logger_list:
     # Title
     - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&a>Restore <&2><[target].name><&a>'s inventories."
     # Back Button
-    - inventory set slot:46 d:<[inventory]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Back;flag=run_script:mod_actions_inv_open;flag=target:<[target]>;color=red;custom_model_data=6]>
+    - inventory set slot:46 d:<[inventory]> o:<item[red_stained_glass_pane].with[hides=all;display_name=<&c><&l>↩<&sp>Actions<&sp>panel;flag=run_script:mod_actions_inv_open;flag=target:<[target]>]>
     - inventory open d:<[inventory]>
 
 inventory_logger_inventory:
