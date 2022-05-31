@@ -44,11 +44,11 @@ inventory_logger_inventory:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     head: <item[mod_player_item]>
   slots:
-    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [x] [] [] [] [] [] [] [] []
-    - [x] [] [] [] [] [] [] [] []
-    - [x] [] [] [] [] [] [] [] []
-    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
     - [x] [x] [x] [x] [head] [x] [x] [x] [x]
 
 inventory_log_open:
