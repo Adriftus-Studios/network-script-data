@@ -5,7 +5,7 @@ enderman_guardian:
   mechanisms:
     custom_name: <&d>Ender Guardian
     custom_name_visible: true
-    health_data: 1000/1000
+    health_data: 2000/2000
     has_ai: false
   flags:
     on_damaged: enderman_guardian_damaged
@@ -75,11 +75,15 @@ enderman_guardian_phase_1:
       - flag <[target]> "custom_damage.cause:<&d>Ender Guardian Explosion"
       - hurt 5 <[target]> cause:custom
     - wait 1s
+    - if <[all_players].size> < 4:
+      - define spawns_per_wave 8
+    - else:
+      - define spawns_per_wave <[all_players].size.mul[2.5].round_up>
     # Spawn Adds
     ## Waves of Minions
     - repeat 5:
       ## Minions Per Wave
-      - repeat 8:
+      - repeat <[spawns_per_wave]>:
         - stop if:<[boss].is_spawned.not>
         - run enderman_guardian_spawn_enderman def:<[boss]>|<[spawnable_blocks].random>
         - wait 2s
@@ -201,7 +205,7 @@ enderman_guardian_minion_expire:
       - playeffect effect:DRAGON_BREATH at:<[entity].location.above> quantity:20 ofset:0.2,0.5,0.2 targets:<[all_players]>
       - wait 2t
     - stop if:<[entity].is_spawned.not>
-    - define health <[entity].health.mul[2]>
+    - define health <[entity].health.mul[<[all_players].size>]>
     - remove <[entity]>
     - narrate "<&e>An Enderman gives his life to the Guardian." targets:<[all_players]>
     - stop if:<[boss].is_spawned.not>
@@ -309,10 +313,12 @@ enderman_guardian_task_3:
         - if <[value].gamemode> == adventure:
           - foreach next
         - adjust <[value]> gamemode:adventure
+        - flag <[value]> on_death:keep_inventory
         - flag server gamemode_changer.<context.entity.uuid>:->:<[value]>
         - wait 1t
       - foreach <server.flag[gamemode_changer.<context.entity.uuid>].exclude[<[targets]>].if_null[<list>]>:
         - adjust <[value]> gamemode:survival
+        - flag <[value]> on_death:!
         - flag server gamemode_changer.<context.entity.uuid>:<-:<[value]>
         - wait 1t
       - wait 5s
