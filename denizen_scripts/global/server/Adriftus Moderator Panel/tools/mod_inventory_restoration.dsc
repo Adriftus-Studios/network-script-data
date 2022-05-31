@@ -73,7 +73,7 @@ inventory_logger_view_inventory:
         - define the_map <[map]>
 
     # Restore Inventory Button
-    - inventory set slot:50 d:<[inventory]> "o:player_head[skull_skin=<[target].skull_skin>;display=<&a>Restore Inventory;lore=<&a>Requires Empty Inventory;flag=cause:<[the_map].get[cause]>;flag=run_script:inventory_logger_view_inventory_restore;flag=uuid:<[the_map].get[uuid]>;flag=target:<[target]>]"
+    - inventory set slot:50 d:<[inventory]> "o:player_head[skull_skin=<[target].skull_skin>;display=<&a>Restore Inventory;lore=<&e>Requires Empty Inventory|<&e>Cause<&co> <&f><[map].get[cause]>|<&e>Time<&co> <&f><[map].get[time].format>|<&e>Location<&co> <&f><[map].get[location].simple>;flag=cause:<[the_map].get[cause]>;flag=run_script:inventory_logger_view_inventory_restore;flag=uuid:<[the_map].get[uuid]>;flag=target:<[target]>]"
 
     # Back Button
     - inventory set slot:46 d:<[inventory]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Back;flag=run_script:inventory_logger_list;flag=target:<[target]>;color=red;custom_model_data=6]>
