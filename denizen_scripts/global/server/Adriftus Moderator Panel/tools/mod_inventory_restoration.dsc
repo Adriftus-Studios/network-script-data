@@ -21,6 +21,9 @@ inventory_logger_list:
         - define "list:->:<item[black_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
       - else:
         - define "list:->:<item[white_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
+    # Padding
+    - repeat 9:
+      - give <item[feather].with[display_name=<&sp>;custom_model_data=3]> to:<[inventory]>
     - give <[list]> to:<[inventory]>
 
     # Title
