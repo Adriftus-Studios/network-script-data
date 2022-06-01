@@ -38,6 +38,7 @@ inventory_logger_list:
     - define start <[page].sub[1].mul[<[slots].size>].add[1]>
     - define end <[slots].size.mul[<[page]>]>
     # Logged inventories
+    - define inventory <inventory[inventory_logger_inventory]>
     - define target <context.item.flag[target]> if:<[target].exists.not>
     - define list <list>
     - if <[target].has_flag[logged_inventories.logout]>:
@@ -48,15 +49,12 @@ inventory_logger_list:
     - if <[list].is_empty>:
       - narrate "<&c>No Saved Inventories Recorded."
       - stop
-    - define inventory <inventory[inventory_logger_inventory]>
-    - define items <list>
     - foreach <[list].get[<[start]>].to[<[end]>]> as:map:
       - define lore "<&e>Cause<&co> <&f><[map].get[cause]>|<&e>Time<&co> <&f><[map].get[time].format>|<&e>Location<&co> <&f><[map].get[location].simple>"
       - if <[map].get[cause]> == Death:
-        - define "items:->:<item[black_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
+        - inventory set slot:<[slots].get[<[loop_index]>]> "o:<item[black_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>" d:<[inventory]>
       - else:
-        - define "items:->:<item[white_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
-    - give <[items]> to:<[inventory]>
+        - inventory set slot:<[slots].get[<[loop_index]>]> "o:<item[white_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>" d:<[inventory]>
 
     # Title
     - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&a>Restore <&2><[target].name><&a>'s inventories."
@@ -106,6 +104,7 @@ inventory_logger_view_inventory:
   debug: true
   definitions: uuid|target
   script:
+    - define inventory <inventory[inventory_logger_inventory]>
     - define target <context.item.flag[target]> if:<[target].exists.not>
     - define uuid <context.item.flag[uuid]> if:<[uuid].exists.not>
     - define list <list>
@@ -116,7 +115,6 @@ inventory_logger_view_inventory:
     - if <[list].is_empty>:
       - narrate "<&c>No Saved Inventories Recorded."
       - stop
-    - define inventory <inventory[inventory_logger_inventory]>
     - foreach <[list]> as:map:
       - if <[map].get[uuid]> == <[uuid]>:
         - inventory set o:<[map].get[inventory].parse_value_tag[<[parse_value].with_flag[run_script:inventory_logger_view_inventory_single].with_flag[target:<[target]>]>]> d:<[inventory]>
