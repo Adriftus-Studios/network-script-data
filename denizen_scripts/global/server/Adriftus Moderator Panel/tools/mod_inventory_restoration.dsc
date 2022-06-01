@@ -79,19 +79,19 @@ inventory_logger_list:
 
     - inventory open d:<[inventory]>
 
-inventory_logger_list_next_page:
-  type: task
-  debug: false
-  script:
-    - define page_item <context.inventory.slot[<script[inventory_logger_list].data_key[data.slot_data.page]>]>
-    - run inventory_logger_list def:<[page_item].flag[target]>|<[page_item].flag[page].add[1]>
-
 inventory_logger_list_previous_page:
   type: task
   debug: false
   script:
     - define page_item <context.inventory.slot[<script[inventory_logger_list].data_key[data.slot_data.page]>]>
     - run inventory_logger_list def:<[page_item].flag[target]>|<[page_item].flag[page].sub[1]>
+
+inventory_logger_list_next_page:
+  type: task
+  debug: false
+  script:
+    - define page_item <context.inventory.slot[<script[inventory_logger_list].data_key[data.slot_data.page]>]>
+    - run inventory_logger_list def:<[page_item].flag[target]>|<[page_item].flag[page].add[1]>
 
 inventory_logger_back_cancel:
   type: task
