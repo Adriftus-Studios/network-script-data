@@ -62,7 +62,7 @@ inventory_logger_list:
     - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&a>Restore <&2><[target].name><&a>'s inventories."
 
     # Pagination Item
-    - inventory set slot:<script.data_key[data.slot_data.page]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=page:<[page]>]> d:<[inventory]>
+    - inventory set slot:<script.data_key[data.slot_data.page]> o:<item[mod_player_item].with[flag=target:<[target]>;flag=page:<[page]>]> d:<[inventory]>
 
     # Previous Page Button
     - if <[page]> != 1:
