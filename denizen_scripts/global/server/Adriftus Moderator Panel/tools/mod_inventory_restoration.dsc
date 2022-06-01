@@ -47,6 +47,7 @@ inventory_logger_list:
       - define list:|:<[target].flag[logged_inventories.death]>
     - define list <[list].sort_by_number[get[milli_time]].reverse>
     - narrate <[list].size>
+    - narrate <[slots].size>
     - if <[list].is_empty>:
       - narrate "<&c>No Saved Inventories Recorded."
       - stop
