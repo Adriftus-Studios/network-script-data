@@ -49,13 +49,14 @@ inventory_logger_list:
       - narrate "<&c>No Saved Inventories Recorded."
       - stop
     - define inventory <inventory[inventory_logger_inventory]>
+    - define items <list>
     - foreach <[list].get[<[start]>].to[<[end]>]> as:map:
       - define lore "<&e>Cause<&co> <&f><[map].get[cause]>|<&e>Time<&co> <&f><[map].get[time].format>|<&e>Location<&co> <&f><[map].get[location].simple>"
       - if <[map].get[cause]> == Death:
-        - define "list:->:<item[black_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
+        - define "items:->:<item[black_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
       - else:
-        - define "list:->:<item[white_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
-    - give <[list]> to:<[inventory]>
+        - define "items:->:<item[white_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
+    - give <[items]> to:<[inventory]>
 
     # Title
     - adjust def:inventory "title:<&6>A<&e>MP <&f>· <&a>Restore <&2><[target].name><&a>'s inventories."
