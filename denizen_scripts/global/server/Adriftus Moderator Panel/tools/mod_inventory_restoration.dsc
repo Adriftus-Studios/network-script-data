@@ -14,9 +14,9 @@ inventory_logger_inventory:
     back: <item[feather].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;custom_model_data=3]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [x] [] [] [] [] [] [] [] [x]
-    - [x] [] [] [] [] [] [] [] [x]
-    - [x] [] [] [] [] [] [] [] [x]
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
     - [previous] [x] [x] [x] [x] [x] [x] [x] [next]
     - [back] [x] [x] [x] [head] [x] [x] [x] [x]
 
