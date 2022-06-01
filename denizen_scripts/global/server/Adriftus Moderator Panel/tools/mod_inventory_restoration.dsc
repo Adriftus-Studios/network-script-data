@@ -57,7 +57,7 @@ inventory_logger_list:
       - if <[map].get[cause]> == Death:
         - define "items:|:<item[black_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
       - else:
-        - define "items:|:<item[white_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>" d:<[inventory]>
+        - define "items:|:<item[white_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
     - foreach <[items]>:
       - inventory set slot:<[slots].get[<[loop_index]>]> o:<[value]> d:<[inventory]>
     # Title
