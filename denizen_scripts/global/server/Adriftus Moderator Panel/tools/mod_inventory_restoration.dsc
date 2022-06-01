@@ -49,7 +49,7 @@ inventory_logger_list:
       - narrate "<&c>No Saved Inventories Recorded."
       - stop
     - define inventory <inventory[inventory_logger_inventory]>
-    - foreach <[list]> as:map:
+    - foreach <[list].get[<[start]>].to[<[end]>]> as:map:
       - define lore "<&e>Cause<&co> <&f><[map].get[cause]>|<&e>Time<&co> <&f><[map].get[time].format>|<&e>Location<&co> <&f><[map].get[location].simple>"
       - if <[map].get[cause]> == Death:
         - define "list:->:<item[black_wool].with[display=<&6>Logged Inventory;lore=<[lore]>;flag=run_script:inventory_logger_view_inventory;flag=uuid:<[map].get[uuid]>;flag=target:<[target]>]>"
