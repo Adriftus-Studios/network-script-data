@@ -71,7 +71,7 @@ inventory_logger_list:
       - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:inventory_logger_list_previous_page;color=green;custom_model_data=6]> d:<[inventory]>
 
     # Next Page Button
-    - if <[items].size> > <[end]>:
+    - if <[list].size> > <[end]>:
       - inventory set slot:<script.data_key[data.slot_data.next_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Next<&sp>Page;flag=run_script:inventory_logger_list_next_page;color=green;custom_model_data=7]> d:<[inventory]>
 
     # Back Button
