@@ -3,7 +3,6 @@ github_updates:
   definitions: domain
   debug: false
   script:
-    # What in the actual fuck?
     - choose <context.request>:
       # Main Repo update
       - case /github/network-script-data:
@@ -14,8 +13,12 @@ github_updates:
       # Resource Pack Repo update
       - case /github/resource-pack:
         - shell "screen -dmS updating /home/minecraft/scripts/rp_pull.sh"
-    
+      # General Bot Repo update
+      - case /github/general-bot:
+        - shell "screen -dmS updating /home/minecraft/scripts/bot_pull.sh"
+
     - stop
+  # What in the actual fuck?
 
   # % ██ [ Cache Data                  ] ██
     - define embed <map>
