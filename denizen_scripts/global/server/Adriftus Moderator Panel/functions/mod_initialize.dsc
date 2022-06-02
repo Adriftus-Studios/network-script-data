@@ -18,10 +18,16 @@ mod_initialize:
     # Define map
     - define map <map.with[uuid].as[<[uuid]>]>
     - define map <[map].with[name].as[<player[<[uuid]>].name>]>
-    - define map <[map].with[display_name].as[<yaml[global.player.<[uuid]>].read[Display_Name]||None>]>
-    - define map <[map].with[rank].as[<yaml[global.player.<[uuid]>].read[Rank]||None>]>
-    - define map <[map].with[current].as[<yaml[global.player.<[uuid]>].read[chat.channels.current]||Server>]>
-    - define map <[map].with[active].as[<yaml[global.player.<[uuid]>].read[chat.channels.active]||Server>]>
+    - define map <[map].with[display_name].as[<yaml[<[id]>].read[Display_Name]||None>]>
+    - define map <[map].with[rank].as[<yaml[<[id]>].read[Rank]||None>]>
+    - define map <[map].with[current].as[<yaml[<[id]>].read[chat.channels.current]||Server>]>
+    - define map <[map].with[active].as[<yaml[<[id]>].read[chat.channels.active]||Server>]>
+    - if <yaml[<[id]>].contains[banned]>:
+      - define map <[map].with[banned.level].as[<yaml[<[id]>].read[banned.level]>]>
+      - define map <[map].with[banned.infraction].as[<yaml[<[id]>].read[banned.infraction]>]>
+      - define map <[map].with[banned.length].as[<yaml[<[id]>].read[banned.length]>]>
+      - define map <[map].with[banned.date].as[<yaml[<[id]>].read[banned.date]>]>
+      - define map <[map].with[banned.moderator].as[<yaml[<[id]>].read[banned.moderator]>]>
     # Unload offline player's global data
     - if <yaml.list.contains[amp.target.<[uuid]>]>:
       - yaml unload id:amp.target.<[uuid]>
