@@ -32,7 +32,7 @@ mod_spectate_item:
   mechanisms:
     hides: ALL
 
-mod_inventorylog_item:
+mod_inventory_item:
   type: item
   debug: false
   material: chest
