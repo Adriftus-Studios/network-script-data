@@ -32,7 +32,7 @@ mod_spectate_item:
   mechanisms:
     hides: ALL
 
-mod_inventorylog_item:
+mod_inventory_item:
   type: item
   debug: false
   material: chest
@@ -65,6 +65,19 @@ mod_ban_item:
   lore:
     - "<&1>Right Click:"
     - "<&c>Ban the Player from the Network."
+  enchantments:
+    - ARROW_INFINITE:1
+  mechanisms:
+    hides: ATTRIBUTES|ENCHANTS
+
+mod_unban_item:
+  type: item
+  debug: false
+  material: wooden_axe
+  display name: <&4><&l>Unban
+  lore:
+    - "<&1>Right Click:"
+    - "<&c>Unban the Player from the Network."
   enchantments:
     - ARROW_INFINITE:1
   mechanisms:

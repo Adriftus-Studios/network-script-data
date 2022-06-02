@@ -24,6 +24,9 @@ mod_chat_notifier:
       - case Ban:
         # -- Used for network bans.
         - run chat_system_speak "def.message:I have banned <[name]> for <[infraction]> for <[length]>. (Level <[level]>)" def.channel:moderation
+      - case Unban:
+        # -- Used for unbans.
+        - run chat_system_speak "def.message:I have unbanned <[name]> who was banned for <[infraction]>. (Level <[level]>)" def.channel:moderation
       - case Kick:
         # -- Used for kicks.
         - run chat_system_speak "def.message:I have kicked <[name]> for <[infraction]>. (Level <[level]>)" def.channel:moderation
