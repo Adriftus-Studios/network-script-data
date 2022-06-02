@@ -22,6 +22,7 @@ mod_initialize:
     - define map <[map].with[rank].as[<yaml[<[id]>].read[Rank]||None>]>
     - define map <[map].with[current].as[<yaml[<[id]>].read[chat.channels.current]||Server>]>
     - define map <[map].with[active].as[<yaml[<[id]>].read[chat.channels.active]||Server>]>
+    # Check if target player is banned
     - if <yaml[<[id]>].contains[banned]>:
       - define map <[map].with[banned.level].as[<yaml[<[id]>].read[banned.level]>]>
       - define map <[map].with[banned.infraction].as[<yaml[<[id]>].read[banned.infraction]>]>
