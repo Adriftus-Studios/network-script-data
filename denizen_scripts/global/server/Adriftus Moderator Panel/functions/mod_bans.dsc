@@ -9,6 +9,28 @@ mod_ban_player:
     - if <player[<[uuid]>].is_online>:
       - kick <player[<[uuid]>]> reason:<proc[mod_kick_message].context[<[moderator]>|<[level]>|<[infraction]>|<[length]>|<util.time_now>]>
 
+# -- Handle unbans.
+mod_unban_player:
+  type: task
+  debug: false
+  definitions: uuid
+  script:
+    - define moderator <player.uuid.if_null[Server]>
+    - define reason Unbanned
+    # Define directory and YAML ID
+    - define dir data/global/players/<[uuid]>.yml
+    - define id amp.target.<[uuid]>
+    # Load YAML data and remove banned key
+    - ~yaml id:<[id]> load:<[dir]>
+    - yaml id:<[id]> set banned:!
+    # Send Discord message to #action-log
+    - define level <yaml[<[id]>].read[banned.level]||3>
+    - define infraction <yaml[<[id]>].read[banned.infraction]||Banned>
+    - run mod_message_discord def:<[moderator]>|<[uuid]>|<[level]>|<[infraction]>|Unban
+    # Save YAML and unload
+    - ~yaml id:<[id]> savefile:<[dir]>
+    - yaml id:<[id]> unload
+
 # -- Handle on login ban checking.
 mod_ban_check:
   type: world
