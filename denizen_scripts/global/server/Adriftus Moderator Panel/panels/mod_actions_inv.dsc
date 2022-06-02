@@ -62,8 +62,13 @@ mod_actions_inv_open:
     - define sendItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>].pass[<item[mod_send_item]>].fail[<item[air]>]>
     - define teleportItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>].pass[<item[mod_teleport_item]>].fail[<item[air]>]>
     - define spectateItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>].pass[<item[mod_spectate_item]>].fail[<item[air]>]>
-    - define inventorylogItem <item[mod_inventorylog_item]>
+    - define inventoryItem <item[mod_inventory_item]>
     - define kickItem <tern[<player.flag[amp_map].as_map.get[uuid].as_player.is_online>].pass[<item[mod_kick_item]>].fail[<item[air]>]>
-    - define banItem <item[mod_ban_item]>
-    - give <[sendItem]>|<[teleportItem]>|<[spectateItem]>|<[inventorylogItem]>|<[kickItem]>|<[banItem]> to:<[inventory]>
+    # Check if target player is banned
+    - if <player.flag[amp_map].as_map.contains[banned]>:
+      - define banItem <item[mod_unban_item]>
+    - else:
+      - define banItem <item[mod_ban_item]>
+    # Give items
+    - give <[sendItem]>|<[teleportItem]>|<[spectateItem]>|<[inventoryItem]>|<[kickItem]>|<[banItem]> to:<[inventory]>
     - inventory open d:<[inventory]>
