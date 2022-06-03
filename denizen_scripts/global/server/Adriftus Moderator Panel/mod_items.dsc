@@ -141,7 +141,7 @@ mod_ban_hammer_item:
     - "<&c>Open the Ban Menu."
   enchantments:
     - ARROW_INFINITE:1
-    - CURSE_OF_VANISHING:1
+    - VANISHING_CURSE:1
   mechanisms:
     hides: ATTRIBUTES|ENCHANTS
   flags:
