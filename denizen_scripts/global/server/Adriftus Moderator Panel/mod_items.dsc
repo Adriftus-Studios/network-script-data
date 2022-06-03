@@ -134,7 +134,7 @@ mod_level3_item:
 mod_ban_hammer_item:
   type: item
   debug: false
-  material: wooden_axe
+  material: netherite_axe
   display name: <&4><&l>Ban Hammer
   lore:
     - "<&1>Left Click:"
@@ -146,4 +146,3 @@ mod_ban_hammer_item:
     hides: ATTRIBUTES|ENCHANTS
   flags:
     no_drop: true
-    on_damage: mod_ban_hammer_task
