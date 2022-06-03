@@ -43,7 +43,7 @@ mod_ban_check:
             - stop
           - case SUCCESSFULLY_LOADED:
             # -- Check if player's global YAML data contains an ongoing-ban.
-            - wait 2s
+            - wait 3s
             - if <yaml[global.player.<player.uuid>].contains[banned]>:
               - define id global.player.<player.uuid>
             - else:
