@@ -54,6 +54,7 @@ mod_actions_inv_events:
       - inject mod_ban_inv_open
 
     on player right clicks mod_unban_item in mod_actions_inv:
+      - define uuid <player.flag[amp_map].as_map.get[uuid]>
       - inject mod_unban_player
       - run mod_chat_notifier def:<player.uuid>|<player.flag[amp_map].as_map.get[uuid]>|<player.flag[amp_map].as_map.get[banned.level]>|<player.flag[amp_map].as_map.get[banned.infraction]>|Unban
       - inventory close
