@@ -1,3 +1,4 @@
+# MOD PANEL ITEMS
 mod_send_item:
   type: item
   debug: false
@@ -98,6 +99,7 @@ mod_player_item:
     custom_model_data: 1
     skull_skin: <player.flag[amp_map].as_map.get[name]>
 
+# KICK/BAN INFRACTION ITEMS
 mod_level1_item:
   type: item
   debug: false
@@ -127,3 +129,20 @@ mod_level3_item:
   flags:
     tag: <&8><&lb><&c>3<&8><&rb><&c>
     colour: <&c>
+
+# MOD TOOL ITEMS
+mod_ban_hammer_item:
+  type: item
+  debug: false
+  material: wooden_axe
+  display name: <&4><&l>Ban Hammer
+  lore:
+    - "<&1>Left Click:"
+    - "<&c>Open the Ban Menu."
+  enchantments:
+    - ARROW_INFINITE:1
+  mechanisms:
+    hides: ATTRIBUTES|ENCHANTS
+  flags:
+    no_drop: true
+    on_damage: mod_ban_hammer_task|cancel
