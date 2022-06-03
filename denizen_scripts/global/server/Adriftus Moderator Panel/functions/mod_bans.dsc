@@ -40,7 +40,9 @@ mod_ban_check:
       - define spawn <player.location.simple>
       - waituntil rate:5s max:60s <player.location.simple> != <[spawn]>
       # -- Check if player's global YAML data contains an ongoing-ban.
-      - if <yaml[global.player.<player.uuid>].contains[banned]>:
+      - if <yaml[global.player.<player.uuid>].contains[banned].not>:
+        - stop
+      - else:
         - define id global.player.<player.uuid>
         # If duration since ban date/time is greater than the set duration, remove the banned key from player data.
         - if <util.time_now.duration_since[<yaml[<[id]>].read[banned.date]>].in_seconds> > <yaml[<[id]>].read[banned.length].as_duration.in_seconds>:
@@ -50,5 +52,3 @@ mod_ban_check:
         # Else, kick 'em.
         - else:
           - kick <player> reason:<proc[mod_kick_message].context[<yaml[<[id]>].read[banned.moderator]>|<yaml[<[id]>].read[banned.level]>|<yaml[<[id]>].read[banned.infraction]>|<yaml[<[id]>].read[banned.length]>|<yaml[<[id]>].read[banned.date]>]>
-      - else:
-        - stop
