@@ -36,7 +36,7 @@ mod_ban_check:
   type: world
   debug: false
   events:
-    after resource pack status:
+    on resource pack status:
       - if <server.has_flag[resourcepackurl]>:
         - choose <context.status>:
           - case FAILED_DOWNLOAD DECLINED ACCEPTED:
