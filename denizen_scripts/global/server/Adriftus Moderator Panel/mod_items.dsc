@@ -137,7 +137,7 @@ mod_ban_hammer_item:
   material: netherite_axe
   display name: <&4><&l>Ban Hammer
   lore:
-    - "<&1>Left Click:"
+    - "<&1>Drop:"
     - "<&c>Open the Ban Menu."
   enchantments:
     - ARROW_INFINITE:1
