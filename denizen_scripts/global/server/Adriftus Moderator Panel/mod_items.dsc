@@ -146,4 +146,4 @@ mod_ban_hammer_item:
     hides: ATTRIBUTES|ENCHANTS
   flags:
     no_drop: true
-    on_damage: mod_ban_hammer_task|cancel
+    on_damage: mod_ban_hammer_task
