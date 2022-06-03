@@ -36,10 +36,10 @@ mod_ban_check:
   type: world
   debug: false
   events:
-    after resourcepack status:
+    after resource pack status:
       - if <server.has_flag[resourcepackurl]>:
         - choose <context.status>:
-          - case FAILED_DOWNLOAD DECLINED:
+          - case FAILED_DOWNLOAD DECLINED ACCEPTED:
             - stop
           - case SUCCESSFULLY_LOADED:
             # -- Check if player's global YAML data contains an ongoing-ban.
