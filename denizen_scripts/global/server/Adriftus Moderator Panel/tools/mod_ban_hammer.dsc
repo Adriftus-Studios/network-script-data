@@ -5,6 +5,8 @@ mod_ban_hammer_events:
   events:
     on player drops mod_ban_hammer_item:
       - define target <player.precise_target[10].if_null[null]>
+      - narrate <[target].if_null[null]>
+      - narrate <[target].entity_type.if_null[null]>
       - if <[target]> != null && <[target].entity_type> == PLAYER:
         - define uuid <[target].uuid>
         - inject mod_initialize
