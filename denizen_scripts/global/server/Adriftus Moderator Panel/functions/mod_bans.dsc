@@ -36,9 +36,8 @@ mod_ban_check:
   type: world
   debug: false
   events:
-    on resource pack status:
+    on resource pack status:SUCCESSFULLY_LOADED:
       - if <server.has_flag[resourcepackurl]>:
-        - waituntil rate:1s max:60s <context.status> == SUCCESSFULLY_LOADED
         # -- Check if player's global YAML data contains an ongoing-ban.
         - if <yaml[global.player.<player.uuid>].contains[banned]>:
           - define id global.player.<player.uuid>
