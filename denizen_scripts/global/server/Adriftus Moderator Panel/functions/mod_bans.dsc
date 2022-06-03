@@ -38,7 +38,7 @@ mod_ban_check:
   events:
     after player joins:
       - define spawn <player.location.simple>
-      - waituntil rate:5s <player.location.simple> != <[spawn]>
+      - waituntil rate:5s max:60s <player.location.simple> != <[spawn]>
       # -- Check if player's global YAML data contains an ongoing-ban.
       - if <yaml[global.player.<player.uuid>].contains[banned].not>:
         - stop
