@@ -4,9 +4,7 @@ mod_ban_hammer_task:
   debug: false
   script:
     - determine passively cancelled
-    - define target <player.precise_target[10].if_null[null]>
-    - narrate <[target].if_null[null]>
-    - narrate <[target].entity_type.if_null[null]>
+    - define target <player.precise_target[20].if_null[null]>
     - if <[target]> != null && <[target].entity_type> == PLAYER:
       - define uuid <[target].uuid>
       - inject mod_initialize
