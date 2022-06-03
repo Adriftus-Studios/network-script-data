@@ -20,14 +20,14 @@ mod_unban_player:
     # Define directory and YAML ID
     - define dir data/global/players/<[uuid]>.yml
     - define id amp.target.<[uuid]>
-    # Load YAML data and remove banned key
+    # Load YAML data
     - ~yaml id:<[id]> load:<[dir]>
-    - yaml id:<[id]> set banned:!
     # Send Discord message to #action-log
     - define level <yaml[<[id]>].read[banned.level]||3>
     - define infraction <yaml[<[id]>].read[banned.infraction]||Banned>
     - run mod_message_discord def:<[moderator]>|<[uuid]>|<[level]>|<[infraction]>|Unban
-    # Save YAML and unload
+    # Set, save YAML and unload
+    - yaml id:<[id]> set banned:!
     - ~yaml id:<[id]> savefile:<[dir]>
     - yaml id:<[id]> unload
 
