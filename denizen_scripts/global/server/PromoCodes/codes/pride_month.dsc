@@ -13,7 +13,7 @@ promo_code_pride_month_task:
     - execute as_server "lp user <player.name> permission set adriftus.chat.color"
     - execute as_server "lp user <player.name> permission set adriftus.chat.link_item"
     - narrate <&color[#010000]>----------------
-    - narrate <&color[#010000]>"Happy Pride Month!"
+    - narrate "<&color[#010000]>Happy Pride Month!"
     - narrate <&color[#010000]>----------------
     - narrate "<&6>---- <&e>Let's make things a little more... <&color[#000001]>Colorful<&r>! <&6>----"
     - narrate "<&6>- <&e>You have unlocked a new title!! <&b>/titles"
