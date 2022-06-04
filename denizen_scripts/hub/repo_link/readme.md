@@ -1,2 +1,2 @@
-# Hub 1
+# Hub
 Denizen Scripts used on the Hub server
