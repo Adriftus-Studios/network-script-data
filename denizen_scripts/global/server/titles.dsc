@@ -15,7 +15,7 @@ titles_equip:
     - adjust <queue> linked_player:<[player]> if:<[player].object_type.equals[Player].if_null[false]>
     - determine passively cancelled
     - define title_id <context.item.flag[cosmetic].if_null[default]> if:<[title_id].exists.not>
-    - define map <map[titles.current=<context.item.flag[cosmetic]>;titles.current_tag=<yaml[titles].read[titles.<context.item.flag[cosmetic]>.tag].parse_color>]>
+    - define map <map[titles.current=<context.item.flag[cosmetic]>;titles.current_tag=<yaml[titles].parsed_key[titles.<context.item.flag[cosmetic]>.tag].parse_color>]>
     - run global_player_data_modify_multiple def:<player.uuid>|<[map]>
     - if <context.inventory.exists>:
       - define info_item <context.inventory.slot[<script[cosmetic_selection_inventory_open].data_key[data.slot_data.remove_slot]>]>
