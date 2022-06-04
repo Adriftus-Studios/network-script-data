@@ -41,8 +41,7 @@ chat_system_speak:
           - define msg <[msg].replace[&y].with[<&color[#000001]>]>
         - if <[msg].contains_text[&x]>:
           - define msg <[msg].replace[&x].with[<&color[#000100]>]>
-        - else:
-          - define msg <[msg].parse_color>
+        - define msg <[msg].parse_color>
       - else:
         - define msg <[msg].parse_color.strip_color>
 
