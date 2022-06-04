@@ -1651,3 +1651,8 @@ titles:
     tag: '&8｜<&color[#010000]>Synbreaker&8｜'
     description: Granted by the Great Clownzer
     in_shop: false
+  LGBT:
+    order: 272
+    tag: '<&color[000001]>LGBT '
+    description: <element[Pride Month 2022].rainbow>
+    in_shop: false
