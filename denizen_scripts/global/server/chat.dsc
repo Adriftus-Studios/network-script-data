@@ -250,7 +250,7 @@ chat_command:
       - run global_player_data_modify def:<player.uuid>|chat.channels.current|<[Channel]>
       - if !<yaml[global.player.<player.uuid>].read[chat.channels.active.<[Channel]>]>:
         - run global_player_data_modify def:<player.uuid>|chat.channels.active.<[Channel]>|true
-      - narrate "<&b>Now Talking in <yaml[chat_config].parsed_key[channels.<[Channel]>.format.channel]>"
+      - narrate "<&b>Now Talking in <yaml[chat_config].parsed_key[channels.<[Channel]>.format.channel].trim>"
     - if <[Channel]> == reload && <player.has_permission[adriftus.chat.reload]>:
       - inject chat_settings_reload
       - foreach <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers].include[<bungee.server>]>]> as:server:
