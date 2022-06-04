@@ -35,8 +35,12 @@ chat_system_speak:
       # Allow Chat Colors in Chat
       - if <player.has_permission[adriftus.chat.color]>:
         # Custom Color Codes
-        - if <[msg].starts_with[&z]>:
-          - define msg <[msg].after[&z].rainbow>
+        - if <[msg].contains_text[&z]>:
+          - define msg <[msg].replace[&z].with[<&color[#010000]>]>
+        - if <[msg].contains_text[&y]>:
+          - define msg <[msg].replace[&y].with[<&color[#000001]>]>
+        - if <[msg].contains_text[&x]>:
+          - define msg <[msg].replace[&x].with[<&color[#000100]>]>
         - else:
           - define msg <[msg].parse_color>
       - else:
