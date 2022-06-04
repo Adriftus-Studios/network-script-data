@@ -1,4 +1,4 @@
-promo_code_pride_month:
+promo_code_pride:
   type: data
   expires: false
   expiration_date: <time[2022/07/1_00:00:00]>
