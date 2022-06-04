@@ -1653,6 +1653,6 @@ titles:
     in_shop: false
   LGBT:
     order: 272
-    tag: '<&color[000001]>LGBT '
+    tag: '<&color[#000001]>LGBT '
     description: <element[Pride Month 2022].rainbow>
     in_shop: false
