@@ -56,6 +56,11 @@
     <a href=https://github.com/Adriftus-Studios/network-script-data/blob/Stage/docs/guides/1.getting-started.md>
         <img src=https://img.shields.io/badge/docs-getting%20started-informational.svg?logo=read-the-docs>
     </a>
+	<!--- Meta Documentation ---->
+	<a href=https://github.com/Adriftus-Studios/network-script-data/blob/Stage/docs/meta/entity_flags.md>
+        <img src=https://img.shields.io/badge/docs-meta-informational.svg?logo=read-the-docs>
+    </a>
+	<!--- License ---->
     <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode>
         <img src=https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg>
     </a>
