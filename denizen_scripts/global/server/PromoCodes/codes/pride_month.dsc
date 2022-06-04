@@ -12,8 +12,9 @@ promo_code_pride_month_task:
     - execute as_server "lp user <player.name> permission set adriftus.anvil.color"
     - execute as_server "lp user <player.name> permission set adriftus.chat.color"
     - execute as_server "lp user <player.name> permission set adriftus.chat.link_item"
+    - narrate <element[----------------].rainbow>
     - narrate "<element[Happy Pride Month!].rainbow>"
-    - narrate <element[---------------------].rainbow>
+    - narrate <element[----------------].rainbow>
     - narrate "Let's make things a little more... <&color[#000001]>Colorful<&r>!"
-    - narrate "<&e>You have unlocked a new title!! <&b>/titles"
-    - narrate "<&e>You can also use colors in chat and when renaming items in an anvil!<&nl>You can also link your held item by putting [item] in chat.<&nl>&z, &y, and &x are our custom color codes, try em out!"
+    - narrate "<&6>You have unlocked a new title!! <&b>/titles"
+    - narrate "<&6>- <&e>You can also use colors in chat and when renaming items in an anvil!<&nl><&6> - <&e>You can also link your held item by putting <&b>[item]<&e> in chat.<&nl><&6> - <&b>&z<&e>, <&b>&y<&e>, and <&b>&x <&e>are our custom color codes, try em out!"
