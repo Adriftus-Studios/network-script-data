@@ -186,6 +186,7 @@ chatlock_command:
   type: command
   name: chatlock
   usage: /chatlock (player name)
+  permission: adriftus.chat.lock
   description: Will prevent player from speaking in chatlock-able channels
   debug: false
   tab completions:
