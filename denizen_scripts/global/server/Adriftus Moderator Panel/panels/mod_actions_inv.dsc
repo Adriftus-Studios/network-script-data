@@ -41,10 +41,10 @@ mod_actions_inv_events:
       - run mod_message_discord_command def:<player.uuid>|spectate<&sp><player.flag[amp_map].as_map.get[name]>
       - inventory close
 
-    on player left clicks mod_inventorylog_item in mod_actions_inv:
+    on player left clicks mod_inventory_item in mod_actions_inv:
       - inject mod_inventory_inv_open
 
-    on player right clicks mod_inventorylog_item in mod_actions_inv:
+    on player right clicks mod_inventory_item in mod_actions_inv:
       - run inventory_logger_list def:<player.flag[amp_map].as_map.get[uuid].as_player>
 
     on player right clicks mod_kick_item in mod_actions_inv:
