@@ -61,7 +61,7 @@ mod_kick_item:
 mod_ban_item:
   type: item
   debug: false
-  material: wooden_axe
+  material: netherite_axe
   display name: <&4><&l>Ban
   lore:
     - "<&1>Right Click:"
@@ -74,7 +74,7 @@ mod_ban_item:
 mod_unban_item:
   type: item
   debug: false
-  material: wooden_axe
+  material: netherite_axe
   display name: <&4><&l>Unban
   lore:
     - "<&1>Right Click:"
