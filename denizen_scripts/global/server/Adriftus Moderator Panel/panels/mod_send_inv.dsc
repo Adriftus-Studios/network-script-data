@@ -5,7 +5,7 @@ mod_send_inv:
   title: <&6>A<&e>MP <&f><&gt> <&5>Send
   inventory: CHEST
   gui: true
-  size: 27
+  size: 36
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
@@ -13,6 +13,7 @@ mod_send_inv:
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [] [] [] [] [] [] [] [] []
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [back] [x] [x] [x] [head] [x] [x] [x] [x]
 
 mod_send_inv_events:
