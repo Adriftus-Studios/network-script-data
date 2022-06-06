@@ -8,14 +8,12 @@ mod_actions_inv:
   size: 27
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    b1: <item[light_blue_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[cyan_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:online]>
     head: <item[mod_player_item]>
   slots:
-    - [b1] [b2] [b1] [b2] [head] [b2] [b1] [b2] [b1]
-    - [b2] [] [] [] [b2] [] [] [] [b2]
-    - [back] [b2] [b1] [b2] [b1] [b2] [b1] [b2] [b1]
+    - [x] [x] [x] [x] [head] [x] [x] [x] [x]
+    - [x] [] [] [] [x] [] [] [] [x]
+    - [back] [x] [x] [x] [x] [x] [x] [x] [x]
 
 mod_actions_inv_events:
   type: world
