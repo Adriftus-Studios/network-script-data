@@ -8,8 +8,6 @@ mod_send_inv:
   size: 27
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    b1: <item[magenta_stained_glass_pane].with[display_name=<&sp>]>
-    b2: <item[purple_stained_glass_pane].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
