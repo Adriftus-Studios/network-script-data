@@ -35,7 +35,7 @@ mod_send_inv_open:
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&5>Send <&e><player.flag[amp_map].get[uuid].as_player.name> <&5>to Server."
     - foreach <yaml[bungee_config].list_keys[servers]> as:server:
       - if <yaml[bungee_config].read[servers.<[server]>.show_in_play_menu]>:
-        - define slot <yaml[bungee_config].read[servers.<[server]>.travel_menu_slot]>
+        - define slot <yaml[bungee_config].read[servers.<[server]>.travel_menu_slot].mul[2]>
         - define lore <list.include[<yaml[bungee_config].parsed_key[servers.<[server]>.description]>]>
         - define lore:->:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
         - define lore:->:<&r><player.flag[amp_map].get[uuid].as_player.name>
