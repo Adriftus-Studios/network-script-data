@@ -2,7 +2,7 @@
 mod_send_inv:
   type: inventory
   debug: false
-  title: <&f><&font[adriftus:mod_tools]><&chr[F808]><&chr[1003]>
+  title: <&f><&font[adriftus:mod_tools]><&chr[F808]><&chr[1006]>
   inventory: CHEST
   gui: true
   size: 36
