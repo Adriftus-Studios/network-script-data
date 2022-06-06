@@ -13,9 +13,9 @@ mod_send_inv:
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
-    - [b2] [b1] [b2] [b1] [b2] [b1] [b2] [b1] [b2]
-    - [b1] [] [] [] [] [] [] [] [b1]
-    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [b2]
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [] [] [] [] [] [] [] [] []
+    - [back] [x] [x] [x] [head] [x] [x] [x] [x]
 
 mod_send_inv_events:
   type: world
@@ -33,16 +33,15 @@ mod_send_inv_open:
   type: task
   debug: false
   script:
-    - define items <list>
     - define inventory <inventory[mod_send_inv]>
     - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&5>Send <&e><player.flag[amp_map].get[uuid].as_player.name> <&5>to Server."
     - foreach <yaml[bungee_config].list_keys[servers]> as:server:
       - if <yaml[bungee_config].read[servers.<[server]>.show_in_play_menu]>:
+        - define slot <yaml[bungee_config].read[servers.<[server]>.travel_menu_slot]>
         - define lore <list.include[<yaml[bungee_config].parsed_key[servers.<[server]>.description]>]>
         - define lore:->:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
         - define lore:->:<&r><player.flag[amp_map].get[uuid].as_player.name>
         - define item <yaml[bungee_config].read[servers.<[server]>.material].as_item.with[display_name=<&f><[server].to_titlecase>;lore=<[lore]>]>
         - flag <[item]> SERVER:<[server]>
-        - define items:->:<[item]>
-    - give <[items]> to:<[inventory]>
+        - inventory set slot:<[slot]> o:<[item]> d:<[inventory]>
     - inventory open d:<[inventory]>
