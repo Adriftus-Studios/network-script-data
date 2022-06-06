@@ -2,7 +2,7 @@
 mod_send_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f><&gt> <&5>Send
+  title: <&f><&font[adriftus:mod_tools]><&chr[F808]><&chr[1003]>
   inventory: CHEST
   gui: true
   size: 36
@@ -33,7 +33,6 @@ mod_send_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_send_inv]>
-    - adjust def:inventory "title:<&6>A<&e>MP <&f><&gt> <&5>Send <&e><player.flag[amp_map].get[uuid].as_player.name> <&5>to Server."
     - foreach <yaml[bungee_config].list_keys[servers]> as:server:
       - if <yaml[bungee_config].read[servers.<[server]>.show_in_play_menu]>:
         - define slot <yaml[bungee_config].read[servers.<[server]>.travel_menu_slot].add[9]>
