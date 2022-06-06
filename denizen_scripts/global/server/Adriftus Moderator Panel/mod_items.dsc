@@ -96,7 +96,7 @@ mod_player_item:
     - "<&e>Active Channels:"
     - "<&2><&gt><&r> <yaml[global.player.<player.flag[amp_map].get[uuid]>].list_keys[chat.channels.active].separated_by[<&nl><&2><&gt><&r><&sp>].to_titlecase||Server>"
   mechanisms:
-    custom_model_data: 2
+    custom_model_data: 3
     skull_skin: <player.flag[amp_map].as_map.get[name]>
 
 # KICK/BAN INFRACTION ITEMS
