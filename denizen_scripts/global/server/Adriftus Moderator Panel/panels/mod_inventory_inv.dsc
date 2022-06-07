@@ -26,7 +26,7 @@ mod_inventory_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_inventory_inv]>
-    - foreach <player.flag[amp_map].get[uuid].as_player.inventory.map_slots>:
+    - foreach <player.flag[amp_map].get[player].inventory.map_slots>:
       # How do I do a range? (from 1 to 9, etc.)
       - define slot <[key]>
       # Hotbar
