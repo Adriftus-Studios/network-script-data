@@ -42,4 +42,3 @@ mod_spectate_events:
       - flag player spectateEnabled:true
       - flag player lastGM:<player.gamemode>
       - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
-      - adjust <player> gamemode:spectator
