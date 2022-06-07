@@ -90,14 +90,14 @@ mod_player_item:
   material: player_head
   display name: <&r><player.flag[amp_map].get[name].if_null[invalid]>
   lore:
-    - "<&6>Nickname: <&r><yaml[global.player.<player.flag[amp_map].get[uuid]>].read[Display_Name]||<player.flag[amp_map].as_map.get[name]>>"
+    - "<&6>Nickname: <&r><yaml[global.player.<player.flag[amp_map].get[uuid]>].read[Display_Name]||<player.flag[amp_map].get[name]>>"
     - "<&6>Rank: <&r><yaml[global.player.<player.flag[amp_map].get[uuid]>].read[Rank]||None>"
     - "<&e>Current Channel: <&r><yaml[global.player.<player.flag[amp_map].get[uuid]>].read[chat.channels.current].to_titlecase||Server>"
     - "<&e>Active Channels:"
     - "<&2><&gt><&r> <yaml[global.player.<player.flag[amp_map].get[uuid]>].list_keys[chat.channels.active].separated_by[<&nl><&2><&gt><&r><&sp>].to_titlecase||Server>"
   mechanisms:
     custom_model_data: 3
-    skull_skin: <player.flag[amp_map].as_map.get[name]>
+    skull_skin: <player.flag[amp_map].get[name]>
 
 # KICK/BAN INFRACTION ITEMS
 mod_level1_item:
