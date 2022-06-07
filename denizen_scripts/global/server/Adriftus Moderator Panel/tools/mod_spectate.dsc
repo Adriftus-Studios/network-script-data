@@ -42,4 +42,5 @@ mod_spectate_events:
       - flag <player> spectateEnabled:true
       - flag <player> lastGM:<player.gamemode>
       - flag <player> lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
-      - run mod_message_discord_notification def:<player.uuid>|started<&sp>spectating<&sp>from<&sp><player.location.simple>
+      - if <bungee.server> != test:
+        - run mod_message_discord_notification def:<player.uuid>|started<&sp>spectating<&sp>from<&sp><player.location.simple>
