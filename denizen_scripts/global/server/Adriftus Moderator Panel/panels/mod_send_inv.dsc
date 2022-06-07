@@ -23,9 +23,9 @@ mod_send_inv_events:
     on player right clicks item_flagged:SERVER in mod_send_inv:
       - define origintodest <bungee.server><&sp>to<&sp><context.item.flag[SERVER]>
       - run mod_log_action def:<player.uuid>|<player.flag[amp_map].get[uuid]>|0|<[origintodest]>|Send
-      - run mod_message_discord_command def:<player.uuid>|send<&sp><player.flag[amp_map].get[uuid].as_player.name><&sp><context.item.flag[SERVER]>
+      - run mod_message_discord_command def:<player.uuid>|send<&sp><player.flag[amp_map].get[name]><&sp><context.item.flag[SERVER]>
       - run mod_chat_notifier def:<player.uuid>|<player.flag[amp_map].get[uuid]> def.action:Send def.text:<bungee.server><&sp>to<&sp><context.item.flag[SERVER]>
-      - adjust <player.flag[amp_map].get[uuid].as_player> send_to:<context.item.flag[SERVER]>
+      - adjust <player.flag[amp_map].get[player]> send_to:<context.item.flag[SERVER]>
       - inventory close
 
 mod_send_inv_open:
@@ -38,7 +38,7 @@ mod_send_inv_open:
         - define slot <yaml[bungee_config].read[servers.<[server]>.travel_menu_slot].add[9]>
         - define lore <list.include[<yaml[bungee_config].parsed_key[servers.<[server]>.description]>]>
         - define lore:->:<&d>Right<&sp>Click<&sp>to<&sp>transfer<&co>
-        - define lore:->:<&r><player.flag[amp_map].get[uuid].as_player.name>
+        - define lore:->:<&r><player.flag[amp_map].get[name]>
         - define item <yaml[bungee_config].read[servers.<[server]>.material].as_item.with[display_name=<&f><[server].to_titlecase>;lore=<[lore]>]>
         - flag <[item]> SERVER:<[server]>
         - inventory set slot:<[slot]> o:<[item]> d:<[inventory]>
