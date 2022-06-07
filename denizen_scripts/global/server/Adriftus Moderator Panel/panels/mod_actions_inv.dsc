@@ -31,7 +31,7 @@ mod_actions_inv_events:
       - adjust <player> gamemode:spectator
       - adjust <player> spectator_target:<player.flag[amp_map].get[player]>
       - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <player.flag[amp_map].get[name]>." targets:<player>
-      - narrate "<&7>[<&b>ModSpec<&7>] <&a>Use <&hover[<&a>Click to stop spectating.].type[SHOW_TEXT]><&click[/spectate]><&b>/spectate<&end_click><&end_hover> <&a>to return to your last position." targets:<player>
+      - narrate "<&7>[<&b>ModSpec<&7>] <&a>Use <&hover[<&a>Click to toggle spectator mode.].type[SHOW_TEXT]><&click[/spectate]><&b>/spectate<&end_click><&end_hover> <&a>to return to your last position." targets:<player>
       - run mod_message_discord_command def:<player.uuid>|spectate<&sp><player.flag[amp_map].get[name]>
       - inventory close
 
