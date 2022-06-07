@@ -26,7 +26,7 @@ mod_kick_inv_events:
       - run mod_log_action def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
       - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
       - run mod_chat_notifier def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
-      - kick <player.flag[amp_map].get[uuid].as_player> reason:<proc[mod_kick_message].context[<player.uuid>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>]>
+      - kick <player.flag[amp_map].get[player]> reason:<proc[mod_kick_message].context[<player.uuid>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>]>
       - inventory close
 
 mod_kick_inv_open:
@@ -41,7 +41,7 @@ mod_kick_inv_open:
         - define name <[item].flag[tag].parsed><&sp><[infraction]>
         - define lore <list[<&b>Level<&co><&sp><[item].flag[colour].parsed><[level]>]>
         - define lore:->:<&e>Right<&sp>Click<&sp>to<&sp>kick<&co>
-        - define lore:->:<&r><player.flag[amp_map].get[uuid].as_player.name>
+        - define lore:->:<&r><player.flag[amp_map].get[name]>
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> INFRACTION:<[infraction]>
         - flag <[item]> LENGTH:<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.length]>
