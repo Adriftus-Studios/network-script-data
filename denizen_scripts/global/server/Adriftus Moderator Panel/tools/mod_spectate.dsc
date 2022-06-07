@@ -15,7 +15,7 @@ mod_spectate_command:
   script:
     # Disable if already spectating.
     - if ( <player.has_flag[spectateEnabled]> || <player.gamemode> == SPECTATOR ) && <context.args.is_empty>:
-      - flag player spectateEnabled:!
+      - flag <player> spectateEnabled:!
       - teleport <player> <player.flag[lastLocation].if_null[<player.bed_spawn>]>
       - adjust <player> gamemode:<player.flag[lastGM].if_null[SURVIVAL]>
       - adjust <player> flying:false
@@ -39,6 +39,7 @@ mod_spectate_events:
   debug: false
   events:
     on player changes gamemode to spectator:
-      - flag player spectateEnabled:true
-      - flag player lastGM:<player.gamemode>
-      - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
+      - flag <player> spectateEnabled:true
+      - flag <player> lastGM:<player.gamemode>
+      - flag <player> lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
+      - mod_message_discord_notification def:<player.uuid>|started<&sp>spectating<&sp>from<&sp><player.location>
