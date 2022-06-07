@@ -76,7 +76,7 @@ mod_ender_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_ender_chest_inv]>
-    - foreach <player.flag[amp_map].as_map.get[uuid].as_player.enderchest.map_slots>:
+    - foreach <player.flag[amp_map].as_map.get[player].enderchest.map_slots>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
