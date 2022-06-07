@@ -18,6 +18,7 @@ mod_initialize:
     # Define map
     - define map <map.with[uuid].as[<[uuid]>]>
     - define map <[map].with[name].as[<player[<[uuid]>].name>]>
+    - define map <[map].with[player].as[<player[<[uuid]>]>]>
     - define map <[map].with[display_name].as[<yaml[<[id]>].read[Display_Name]||None>]>
     - define map <[map].with[rank].as[<yaml[<[id]>].read[Rank]||None>]>
     - define map <[map].with[current].as[<yaml[<[id]>].read[chat.channels.current]||Server>]>
