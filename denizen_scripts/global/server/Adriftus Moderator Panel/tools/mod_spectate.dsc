@@ -42,4 +42,4 @@ mod_spectate_events:
       - flag <player> spectateEnabled:true
       - flag <player> lastGM:<player.gamemode>
       - flag <player> lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
-      - mod_message_discord_notification def:<player.uuid>|started<&sp>spectating<&sp>from<&sp><player.location>
+      - mod_message_discord_notification def:<player.uuid>|started<&sp>spectating<&sp>from<&sp><player.location.simple>
