@@ -28,10 +28,6 @@ mod_actions_inv_events:
       - inventory close
 
     on player right clicks mod_spectate_item in mod_actions_inv:
-      - if <player.gamemode> != SPECTATOR:
-        - flag player spectateEnabled
-        - flag player lastGM:<player.gamemode>
-        - flag player lastLocation:<player.location.with_pitch[<player.location.pitch>].with_yaw[<player.location.yaw>]>
       - adjust <player> gamemode:spectator
       - adjust <player> spectator_target:<player.flag[amp_map].get[uuid].as_player>
       - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <player.flag[amp_map].get[name]>." targets:<player>
