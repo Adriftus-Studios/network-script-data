@@ -3,93 +3,108 @@ mod_report_command:
   type: command
   debug: false
   name: report
-  description: Report a player for chat & in-game behaviour.
-  usage: /report [username] [reason]
+  description: Adriftus Player Report
+  usage: /report (username)
   tab complete:
-    - define players <server.online_players.parse[name].exclude[<player.name>]>
-    - if <context.args.is_empty>:
-      - determine <[players]>
-    - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-      - determine <[players].filter[starts_with[<context.args.first>]]>
+    # -- One Argument Tab Complete
+    - define blacklist <player||null>
+    - inject online_player_tabcomplete
   script:
+    # -- Hopefully this logic will work & make sense in a few weeks.
     - if <context.args.is_empty>:
-      - narrate "<&c>Adriftus Reporter"
-      - narrate "<&6>/report [username] [reason]"
+      - inject mod_report_online_inv_open
     - else if <server.match_offline_player[<context.args.first>]||null> != null:
-      - define target <server.match_offline_player[<context.args.first>]>
-      - if <[target]> != <player>:
-        - if <context.args.get[2]||null> != null:
-          - define reason <context.args.get[2].to[<context.args.size>].space_separated>
-          - run mod_notify_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>|<[target].uuid>]>
-          - run mod_message_discord_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>|<[target]>]>
-          - narrate "<&e>You have successfully reported <[target].name> for <[reason]>."
-        - else:
-          - narrate "<&c>A reason must be provided in order to report this player."
+      - if <server.match_offline_player[<context.args.first>]> == <player>:
+        - narrate "<&c>You cannot perform actions on yourself."
+        - stop
       - else:
-        - narrate "<&c>You may not report yourself."
+        - define uuid <server.match_offline_player[<context.args.first>].uuid>
+        # - run mod_report_inv_open def:<server.match_offline_player[<context.args.first>]>
     - else:
-      - narrate "<&c>Invalid player name entered."
-      - narrate "<&c>Use /report [username] [reason]."
+      - narrate "<&c>Invalid player name entered!"
 
-# -- /bugreport - Bug Reporter
-mod_bugreport_command:
-  type: command
+# -- ONLINE PLAYERS PANEL --
+mod_report_online_inv:
+  type: inventory
   debug: false
-  name: bugreport
-  description: Report a bug to staff members.
-  usage: /bugreport [username] [reason]
-  script:
-    - if <context.args.is_empty>:
-      - narrate "<&c>Adriftus Bug Reporter"
-      - narrate "<&6>/bugreport [reason]"
-    - else:
-      - define reason <context.args.get[1].to[<context.args.size>].space_separated>
-      - run mod_notify_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
-      - run mod_message_discord_report def:<list[<player>].include_single[<[reason]>].include[<bungee.server||Server>]>
-      - narrate "<&e>You have successfully reported a bug: <[reason]>."
+  title: <&6>Adriftus <&f>- <&a>Report a Player
+  inventory: CHEST
+  gui: true
+  size: 54
+  definitions:
+    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    previous: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    next: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close].with_flag[to:close]>
+  slots:
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [close] [x] [previous] [x] [x] [x] [next] [x] [x]
 
-mod_message_discord_report:
+mod_report_online_inv_events:
+  type: world
+  debug: false
+  events:
+    on player clicks player_head in mod_report_online_inv:
+      - if <server.match_player[<context.item.display.strip_color>]> == <player>:
+        - narrate "<&c>You cannot report yourself."
+        - stop
+      - define target <server.match_player[<context.item.display.strip_color>]>
+      - narrate <[target]>
+
+mod_report_online_inv_open:
   type: task
   debug: false
-  definitions: reporter|reason|server|player
+  definitions: page
+  data:
+    slot_data:
+      slots_used: <util.list_numbers_to[45]>
+      close: 46
+      page: 50
+      previous_page: 48
+      next_page: 52
   script:
-    - define reporter <[reporter].as_player.name>
+    # Pagination
+    - define page 1 if:<[page].exists.not>
+    - define slots <list[<script.parsed_key[data.slot_data.slots_used]>]>
+    - define start <[page].sub[1].mul[<[slots].size>].add[1]>
+    - define end <[slots].size.mul[<[page]>]>
+    - define players <server.online_players>
 
-    - if <[player]||null> == null:
-      # -- Messages #🐛bug-reports on the Adriftus server. (601677205445279744/697206135421141152).
-      - define channel 697206135421141152
-      - define webhook_username <&lb><[server]><&rb><&sp>Bug<&sp>Report
-      - define title User<&co><&sp><[reporter]>
-      - define title_icon_url https://minotar.net/helm/<[reporter]>
-      - define author <map.with[name].as[<[title]>].with[icon_url].as[<[title_icon_url]>]>
-    - else:
-      - define player <[player].as_player.name>
-      # -- Messages #action-log on the Adriftus Staff server. (626078288556851230/715731482978812014).
-      - define channel 715731482978812014
-      - define webhook_username <&lb><[server]><&rb><&sp>Player<&sp>Report
-      - define title User<&co><&sp><[player]>
-      - define title_icon_url https://minotar.net/helm/<[player]>
-      - define author <map.with[name].as[<[title]>].with[icon_url].as[<[title_icon_url]>]>
+    # Define inventory
+    - define inventory <inventory[mod_report_online_inv]>
+    # Add items according to page number.
+    - if <[players].size> > 0:
+      - foreach <[players].get[<[start]>].to[<[end]>]> as:player:
+        # Match item display name and lore to information about the online player.
+        # Build the final item.
+        - define item <item[player_head].with[display_name=<&a><[player].name>;skull_skin=<[player].name>]>
+        # Set the defined item an inventory slot.
+        - inventory set o:<[item]> slot:<[slots].get[<[loop_index]>]> d:<[inventory]>
+    # Pagination Item
+    - inventory set slot:<script.data_key[data.slot_data.page]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=page:<[page]>]> d:<[inventory]>
+    # Previous Page Button
+    - if <[page]> != 1:
+      - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:mod_report_online_inv_previous_page;color=green;custom_model_data=6]> d:<[inventory]>
+    # Next Page Button
+    - if <[players].size> > <[end]>:
+      - inventory set slot:<script.data_key[data.slot_data.next_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Next<&sp>Page;flag=run_script:mod_report_online_inv_next_page;color=green;custom_model_data=7]> d:<[inventory]>
+    # Open inventory
+    - inventory open d:<[inventory]>
 
-    - define webhook_icon_url https://img.icons8.com/nolan/64/inspection.png
-    - define embeds <list>
+mod_report_online_inv_previous_page:
+  type: task
+  debug: false
+  script:
+    - define page_item <context.inventory.slot[<script[mod_report_online_inv_open].data_key[data.slot_data.page]>]>
+    - run mod_report_online_inv_open def:<[page_item].flag[page].sub[1]>
 
-    - define fields <list>
-    - define color 8781824
-
-    - define field_name Reason<&co>
-    - define field_value <[reason]>
-    - define field_inline false
-    - define fields:->:<map.with[name].as[<[field_name]>].with[value].as[<[field_value]>].with[inline].as[<[field_inline]>]>
-
-    - define footer_text Reported<&sp>by<&co><&sp><[reporter]>
-    - define footer_icon_url https://minotar.net/helm/<[reporter]>
-    - define footer <map.with[text].as[<[footer_text]>].with[icon_url].as[<[footer_icon_url]>]>
-
-    - define timestamp <util.time_now.format[yyyy-MM-dd]>T<util.time_now.format[HH:mm:ss.SS]>Z
-
-    - define embeds <[embeds].include[<map.with[color].as[<[color]>].with[fields].as[<[fields]>].with[author].as[<[author]>].with[footer].as[<[footer]>].with[timestamp].as[<[timestamp]>]>]>
-
-    - define data <map.with[username].as[<[webhook_username]>].with[avatar_url].as[<[webhook_icon_url]>].with[embeds].as[<[embeds]>].to_json>
-    - define context <list[<[channel]>].include[<[data]>]>
-    - bungeerun relay embedded_discord_message_new def:<[context]>
+mod_report_online_inv_next_page:
+  type: task
+  debug: false
+  script:
+    - define page_item <context.inventory.slot[<script[mod_report_online_inv_open].data_key[data.slot_data.page]>]>
+    - run mod_report_online_inv_open def:<[page_item].flag[page].add[1]>
