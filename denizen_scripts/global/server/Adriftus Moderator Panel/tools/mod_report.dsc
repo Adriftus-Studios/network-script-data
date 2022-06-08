@@ -61,7 +61,7 @@ mod_report_online_inv_open:
   definitions: page
   data:
     slot_data:
-      slots_used: <util.list_numbers_to[1]>
+      slots_used: <util.list_numbers_to[45]>
       close: 46
       page: 50
       previous_page: 53
@@ -108,3 +108,24 @@ mod_report_online_inv_next_page:
   script:
     - define page_item <context.inventory.slot[<script[mod_report_online_inv_open].data_key[data.slot_data.page]>]>
     - run mod_report_online_inv_open def:<[page_item].flag[page].add[1]>
+
+
+# -- ONLINE PLAYERS PANEL --
+mod_report_inv:
+  type: inventory
+  debug: false
+  title: <&6>Adriftus <&f>- <&a>Report a Player
+  inventory: CHEST
+  gui: true
+  size: 54
+  definitions:
+    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    close: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:report]>
+  slots:
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [back] [x] [x] [x] [x] [x] [x] [x] [x]
+  
