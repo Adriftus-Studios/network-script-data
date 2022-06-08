@@ -18,7 +18,7 @@ mod_report_command:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
       - else:
-        - define uuid <server.match_offline_player[<context.args.first>].uuid>
+        - narrate <server.match_offline_player[<context.args.first>]>
         # - run mod_report_inv_open def:<server.match_offline_player[<context.args.first>]>
     - else:
       - narrate "<&c>Invalid player name entered!"
@@ -42,7 +42,7 @@ mod_report_online_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [close] [x] [previous] [x] [x] [x] [next] [x] [x]
+    - [close] [x] [x] [x] [x] [x] [x] [previous] [next]
 
 mod_report_online_inv_events:
   type: world
@@ -64,8 +64,8 @@ mod_report_online_inv_open:
       slots_used: <util.list_numbers_to[1]>
       close: 46
       page: 50
-      previous_page: 48
-      next_page: 52
+      previous_page: 53
+      next_page: 54
   script:
     # Pagination
     - define page 1 if:<[page].exists.not>
