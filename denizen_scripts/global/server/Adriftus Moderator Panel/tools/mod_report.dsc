@@ -120,7 +120,7 @@ mod_report_inv:
   size: 54
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    close: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:report]>
+    back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:report]>
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
