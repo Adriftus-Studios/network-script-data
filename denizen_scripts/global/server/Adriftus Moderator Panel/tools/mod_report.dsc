@@ -138,7 +138,7 @@ mod_report_inv_open:
     - define map <map>
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_kick_infractions].list_keys[<[level]>]> as:infraction:
-        - define map <[map].with[<[infraction]>.category].as[<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>
+        - define map <[map].with[<[infraction]>.category].as[<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>]>
         - define map <[map].with[<[infraction]>.level].as[<[level]>]>
     - narrate <[map]>
     - inventory open d:<[inventory]>
