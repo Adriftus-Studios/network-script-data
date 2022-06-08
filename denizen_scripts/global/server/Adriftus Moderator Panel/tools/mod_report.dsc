@@ -19,7 +19,7 @@ mod_report_command:
         - stop
       - else:
         - narrate <server.match_offline_player[<context.args.first>]>
-        # - run mod_report_inv_open def:<server.match_offline_player[<context.args.first>]>
+        - run mod_report_inv_open def:<server.match_offline_player[<context.args.first>]>
     - else:
       - narrate "<&c>Invalid player name entered!"
 
@@ -52,8 +52,7 @@ mod_report_online_inv_events:
       - if <server.match_player[<context.item.display.strip_color>]> == <player>:
         - narrate "<&c>You cannot report yourself."
         - stop
-      - define target <server.match_player[<context.item.display.strip_color>]>
-      - narrate <[target]>
+      - run mod_report_inv_open def:<server.match_player[<context.item.display.strip_color>]>
 
 mod_report_online_inv_open:
   type: task
@@ -132,9 +131,11 @@ mod_report_inv:
 mod_report_inv_open:
   type: task
   debug: false
+  definitions: target
   script:
     - define items <list>
     - define inventory <inventory[mod_report_inv]>
+    - adjust def:inventory "title:<&6>Adriftus <&f>- <&a>Report <&e><[target].name>"
     - define map <map>
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_kick_infractions].list_keys[<[level]>]> as:infraction:
