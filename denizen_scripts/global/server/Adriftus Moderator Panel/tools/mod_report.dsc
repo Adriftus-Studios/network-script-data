@@ -119,6 +119,7 @@ mod_report_inv:
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     y: <item[white_stained_glass].with[display_name=<&sp>]>
+    head: <item[player_head].with[display_name=<&sp>;custom_model_data=3]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:report]>
     confirm: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
   slots:
@@ -127,7 +128,7 @@ mod_report_inv:
     - [x] [x] [] [] [] [y] [x] [x] [x]
     - [x] [x] [] [] [] [] [x] [x] [x]
     - [x] [x] [x] [] [x] [] [x] [x] [x]
-    - [back] [x] [x] [x] [x] [x] [x] [x] [confirm]
+    - [back] [x] [x] [x] [head] [x] [x] [x] [confirm]
 
 mod_report_inv_open:
   type: task
@@ -176,9 +177,9 @@ mod_report_inv_open:
       - inventory set slot:54 o:<item[lime_stained_glass_pane].with[display_name=<&a><&l>✓<&sp>Report]> d:<[inventory]>
     # Save data on an item in the inventory
     - if <[message].exists>:
-      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;lore=<list[<&e>Message<&co><&sp><&f><[message].unescaped.parse_color>]>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>;flag=message:<[message].unescaped>]> d:<[inventory]>
+      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[player_head].with[display_name=<&e><[target].name>;lore=<list[<&6>Message<&co><&sp><&f><[message].unescaped.parse_color>]>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>;flag=message:<[message].unescaped>]> d:<[inventory]>
     - else:
-      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>]> d:<[inventory]>
+      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[player_head].with[display_name=<&e><[target].name>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 mod_report_inv_events:
@@ -212,8 +213,12 @@ mod_report_inv_events:
       - define info_item <context.inventory.slot[<script[mod_report_inv_open].data_key[data.slot_data.info]>]>
       - define target <[info_item].flag[target]>
       - define selected <[info_item].flag[selected]>
+      - define message <[info_item].flag[message]> if:<[info_item].has_flag[message]>
       - flag <player> report expire:10m
       - flag <player> reported.<[target].uuid> expire:30m
-      - run mod_message_discord_report "def:reported `<[target].name>` for <[selected].formatted>."
+      - if <[message].exists>:
+        - run mod_message_discord_report "def:reported `<[target].name>` for <[selected].formatted> for the chat message `<[message].unescaped.strip_color>`."
+      - else:
+        - run mod_message_discord_report "def:reported `<[target].name>` for <[selected].formatted>."
       - narrate "<&a>You have reported <&e><[target].name><&a> for <&e><[selected].formatted><&a>. Thank you for your report."
       - inventory close
