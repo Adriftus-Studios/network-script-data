@@ -26,14 +26,15 @@ mod_online_inv_events:
   debug: false
   events:
     on player clicks player_head in mod_online_inv:
-      - flag <player> amp_map:!
+      - flag <player> amp:!
       - if <server.match_player[<context.item.display.strip_color>]> == <player>:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
       - if !<player.has_permission[adriftus.admin]> && <server.match_player[<context.item.display.strip_color>].has_permission[adriftus.admin]>:
         - narrate "<&c>You cannot perform actions on administrators."
         - stop
-      - run mod_initialize def:<server.match_player[<context.item.display.strip_color>].uuid>
+      - define uuid <server.match_player[<context.item.display.strip_color>].uuid>
+      - inject mod_initialize
       - inject mod_actions_inv_open
     on player clicks iron_pickaxe in mod_online_inv:
       - define equipped <yaml[global.player.<player.uuid>].read[masks.current.id].if_null[default]>

@@ -30,3 +30,10 @@ mod_message_discord_notification:
   script:
     - define moderator <[moderator].as_player.name>
     - bungeerun relay discord_sendMessage "def:Adriftus Staff|command-log|`<bungee.server>`<&co>`<[moderator]>` <[text]>"
+
+mod_message_discord_report:
+  type: task
+  debug: false
+  definitions: text
+  script:
+    - bungeerun relay discord_sendMessage "def:Adriftus Staff|in-game-reports|`<bungee.server>`<&co>`<player.name>` <[text]>"

@@ -176,5 +176,6 @@ inventory_log_command:
     - if <[target]> == null:
       - narrate "<&c>Unknown Player<&co> <&f><context.args.first>"
       - stop
-    - run mod_initialize def:<[target].uuid>
+    - define uuid <[target].uuid>
+    - inject mod_initialize
     - run inventory_logger_list def:<[target]>

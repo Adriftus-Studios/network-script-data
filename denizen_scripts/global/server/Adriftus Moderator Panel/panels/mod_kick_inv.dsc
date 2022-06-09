@@ -23,10 +23,10 @@ mod_kick_inv_events:
   debug: false
   events:
     on player right clicks mod_level*_item in mod_kick_inv:
-      - run mod_log_action def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
-      - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
-      - run mod_chat_notifier def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
-      - kick <player.flag[amp_map].get[player]> reason:<proc[mod_kick_message].context[<player.uuid>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>]>
+      - run mod_log_action def:<player.uuid>|<player.flag[amp].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
+      - run mod_message_discord def:<player.uuid>|<player.flag[amp].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
+      - run mod_chat_notifier def:<player.uuid>|<player.flag[amp].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Kick
+      - kick <player.flag[amp].get[player]> reason:<proc[mod_kick_message].context[<player.uuid>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>]>
       - inventory close
 
 mod_kick_inv_open:
@@ -41,7 +41,7 @@ mod_kick_inv_open:
         - define name <[item].flag[tag].parsed><&sp><[infraction]>
         - define lore <list[<&b>Level<&co><&sp><[item].flag[colour].parsed><[level]>]>
         - define lore:->:<&e>Right<&sp>Click<&sp>to<&sp>kick<&co>
-        - define lore:->:<&r><player.flag[amp_map].get[name]>
+        - define lore:->:<&r><player.flag[amp].get[name]>
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> INFRACTION:<[infraction]>
         - flag <[item]> LENGTH:<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.length]>
