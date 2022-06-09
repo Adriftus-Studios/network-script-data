@@ -118,12 +118,13 @@ mod_report_inv:
   size: 54
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    y: <item[glass].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:report]>
     confirm: <item[lime_stained_glass_pane].with[display_name<&a><&l>✓<&sp>Report]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [x] [x] [x] [] [] [] [x] [x] [x]
-    - [x] [x] [] [] [] [x] [x] [x] [x]
+    - [x] [x] [] [] [] [y] [x] [x] [x]
     - [x] [x] [] [] [] [] [x] [x] [x]
     - [x] [x] [x] [] [x] [] [x] [x] [x]
     - [back] [x] [x] [x] [x] [x] [x] [x] [confirm]
