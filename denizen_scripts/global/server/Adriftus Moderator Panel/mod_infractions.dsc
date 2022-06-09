@@ -38,8 +38,8 @@ mod_kick_infractions:
       category: Chat
     Disrespectful Behaviour:
       category: Harassment
-    Cyber-Bullying:
-      category: Harassment
+    Unfair Visual Advantage:
+      category: Visual Advantage
     Unfair Movement Advantage:
       category: Movement Advantage
     Unfair Combat Advantage:

@@ -12,7 +12,7 @@ mod_online_inv:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     previous: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     next: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close].with_flag[to:close]>
+    close: <item[red_stained_glass_pane].with[display_name=<&c><&l>χ<&sp>Close].with_flag[to:close]>
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []

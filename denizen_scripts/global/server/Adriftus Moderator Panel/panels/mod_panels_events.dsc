@@ -23,6 +23,8 @@ mod_global_inv_events:
           - run mod_ender_chest_inv_open
         - case adriftuschest:
           - run mod_adriftus_chest_inv_open
+        - case report:
+          - run mod_report_online_inv_open
         # Close
         - default:
           - inventory close

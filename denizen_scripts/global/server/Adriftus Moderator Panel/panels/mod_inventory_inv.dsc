@@ -26,7 +26,7 @@ mod_inventory_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_inventory_inv]>
-    - foreach <player.flag[amp_map].as_map.get[uuid].as_player.inventory.map_slots>:
+    - foreach <player.flag[amp_map].get[player].inventory.map_slots>:
       # How do I do a range? (from 1 to 9, etc.)
       - define slot <[key]>
       # Hotbar
@@ -52,7 +52,7 @@ map_inventory_map:
 mod_ender_chest_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f><&gt> <&2>Ender Chest
+  title: <&f><&font[adriftus:mod_tools]><&chr[F808]><&chr[1004]>
   inventory: CHEST
   gui: true
   size: 54
@@ -76,7 +76,7 @@ mod_ender_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_ender_chest_inv]>
-    - foreach <player.flag[amp_map].as_map.get[uuid].as_player.enderchest.map_slots>:
+    - foreach <player.flag[amp_map].as_map.get[player].enderchest.map_slots>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
@@ -84,7 +84,7 @@ mod_ender_chest_inv_open:
 mod_adriftus_chest_inv:
   type: inventory
   debug: false
-  title: <&6>A<&e>MP <&f><&gt> <&2>Adriftus Chest
+  title: <&f><&font[adriftus:mod_tools]><&chr[F808]><&chr[1005]>
   inventory: CHEST
   gui: true
   size: 54

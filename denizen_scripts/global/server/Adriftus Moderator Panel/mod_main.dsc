@@ -14,17 +14,12 @@ mod_command:
     # -- One Argument Tab Complete
     - define blacklist <player||null>
     - inject online_player_tabcomplete
-    # - define arguments <server.online_players.parse[name].exclude[<player.name>]>
-    # - if <context.args.is_empty>:
-    #   - determine <[arguments]>
-    # - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
-    #   - determine <[arguments].filter[starts_with[<context.args.first>]]>
   script:
     # -- Hopefully this logic will work & make sense in a few weeks.
     - if <context.args.is_empty>:
       - inject mod_online_inv_open
     - else if <server.match_offline_player[<context.args.first>]||null> != null:
-      - if <server.match_offline_player[<context.args.first>].name> == <player.name>:
+      - if <server.match_offline_player[<context.args.first>]> == <player>:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
       - if !<player.has_permission[adriftus.admin]> && <server.match_offline_player[<context.args.first>].has_permission[adriftus.admin]>:

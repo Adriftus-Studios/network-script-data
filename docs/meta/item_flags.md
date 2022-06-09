@@ -1,6 +1,6 @@
 # network-script-data meta
 
-| [Previous](./entity_flags.md) | [Item Flags](https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/entity_flags.dsc) | [Next](https://github.com/Adriftus-Studios/network-script-data) |
+| [Previous](./entity_flags.md) | [Item Flags](https://github.com/Adriftus-Studios/network-script-data/blob/Stage/denizen_scripts/global/server/item_flags.dsc) | [Next](https://github.com/Adriftus-Studios/network-script-data) |
 |:--------:|:----------:|:----:|
 
 ## Item Flags
