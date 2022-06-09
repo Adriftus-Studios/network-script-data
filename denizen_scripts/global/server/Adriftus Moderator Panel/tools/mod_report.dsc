@@ -193,5 +193,6 @@ mod_report_inv_events:
       - define info_item <context.inventory.slot[<script[mod_report_inv_open].data_key[data.slot_data.info]>]>
       - define target <[info_item].flag[target]>
       - define selected <[info_item].flag[selected]>
+      - run mod_message_discord_report "def:reported <[target].name> for <[selected].formatted>."
       - narrate "<&a>You have reported <&e><[target].name><&a> for <&e><[selected].formatted><&a>. Thank you for your report."
       - inventory close
