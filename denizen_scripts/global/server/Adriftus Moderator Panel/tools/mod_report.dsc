@@ -51,6 +51,13 @@ mod_report_online_inv_events:
       - if <server.match_player[<context.item.display.strip_color>]> == <player>:
         - narrate "<&c>You cannot report yourself."
         - stop
+      # Player has recently reported a player
+      - if <player.has_flag[report]>:
+        - narrate "<&c>You have recently reported a player within the last five minutes."
+        - stop
+      - else if <player.has_flag[reported.<[target].uuid>]>:
+        - narrate "<&c>You have already reported <[target].name>. Our team will address your issue as soon as possible."
+        - stop
       - run mod_report_inv_open def:<server.match_player[<context.item.display.strip_color>]>
 
 mod_report_online_inv_open:
@@ -138,12 +145,6 @@ mod_report_inv_open:
     slot_data:
       info: 50
   script:
-    - if <player.has_flag[report]>:
-      - narrate "<&c>You have recently reported a player within the last five minutes."
-      - inventory close
-    - else if <player.has_flag[reported.<[target].uuid>]>:
-      - narrate "<&c>You have already reported <[target].name>. Our team will address your issue as soon as possible."
-      - inventory close
     # Inventory
     - define items <list>
     - define inventory <inventory[mod_report_inv]>
