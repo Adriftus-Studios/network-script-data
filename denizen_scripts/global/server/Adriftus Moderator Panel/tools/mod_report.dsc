@@ -120,7 +120,7 @@ mod_report_inv:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     y: <item[white_stained_glass].with[display_name=<&sp>]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:report]>
-    confirm: <item[lime_stained_glass_pane].with[display_name=<&a><&l>✓<&sp>Report]>
+    confirm: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [x] [x] [x] [] [] [] [x] [x] [x]
