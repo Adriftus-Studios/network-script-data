@@ -180,7 +180,7 @@ mod_report_inv_events:
       - define target <[info_item].flag[target]>
       - define selected <[info_item].flag[selected]>
       - define infractions <[info_item].flag[infractions]>
-      - define this <context.item.flag[infractions]>
+      - define this <context.item.flag[infraction]>
       # Add if selected has less than five items
       - if <[selected].contains[<[this]>].not> && <[selected].size.+[1]> < 6:
         - run mod_report_inv_open def:<[target]>|<[selected].include[<[this]>]>
