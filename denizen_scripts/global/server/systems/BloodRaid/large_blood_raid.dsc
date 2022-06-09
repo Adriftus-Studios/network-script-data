@@ -16,7 +16,7 @@ large_blood_raid:
     - foreach <[town].plots> as:chunk:
       - if <[loop_index].mod[10]> == 0:
         - wait 1t
-      - if <[chunk].cuboid.center.distance[<[base]>]> < 200:
+      - if <[chunk].cuboid.center.with_y[<[base].y>].distance[<[base]>]> < 200:
         - define valid_chunks:->:<[chunk]>
 
     # get town corners
