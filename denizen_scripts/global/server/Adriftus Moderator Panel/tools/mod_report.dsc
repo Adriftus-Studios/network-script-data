@@ -225,7 +225,8 @@ mod_report_inv_events:
       - flag <player> reported.<[target].uuid>:true expire:30m
       - if <[message].exists>:
         - run mod_message_discord_report "def:reported `<[target].name>` for <[selected].formatted> for the chat message `<[message].unescaped.strip_color>`."
+        - narrate "<&a>You have reported <&e><[target].name><&a> for <&e><[selected].formatted><&a> for the chat message <&f><[message].unescaped.parse_color><&a>. Thank you for your report."
       - else:
         - run mod_message_discord_report "def:reported `<[target].name>` for <[selected].formatted>."
-      - narrate "<&a>You have reported <&e><[target].name><&a> for <&e><[selected].formatted><&a>. Thank you for your report."
+        - narrate "<&a>You have reported <&e><[target].name><&a> for <&e><[selected].formatted><&a>. Thank you for your report."
       - inventory close
