@@ -29,12 +29,12 @@ chat_send_message:
         - run discord_save_message def:<list[<[game_channel]>|<[message_uuid]>|<[discord_id]>|<[channel]>].include[<[formatted_message]>]>
 
   webhook:
-    content: <[game_message].strip_color>
+    content: <[game_message]>
     username: <[display_name]><&sp><&lb><[Server]><&rb>
     avatar_url: https://mc-heads.net/head/<[uuid]>/50
 
   webhook_server:
-    content: <[game_message].strip_color>
+    content: <[game_message]>
     username: <[display_name]>
     avatar_url: https://mc-heads.net/head/<[uuid]>/50
 
