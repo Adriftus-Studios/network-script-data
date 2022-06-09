@@ -26,7 +26,7 @@ mod_inventory_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_inventory_inv]>
-    - foreach <player.flag[amp_map].get[player].inventory.map_slots>:
+    - foreach <player.flag[amp].get[player].inventory.map_slots>:
       # How do I do a range? (from 1 to 9, etc.)
       - define slot <[key]>
       # Hotbar
@@ -76,7 +76,7 @@ mod_ender_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_ender_chest_inv]>
-    - foreach <player.flag[amp_map].as_map.get[player].enderchest.map_slots>:
+    - foreach <player.flag[amp].as_map.get[player].enderchest.map_slots>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
@@ -108,7 +108,7 @@ mod_adriftus_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_adriftus_chest_inv]>
-    - foreach <yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[adriftus.chest.contents_map]||<map>>:
+    - foreach <yaml[global.player.<player.flag[amp].as_map.get[uuid]>].read[adriftus.chest.contents_map]||<map>>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 

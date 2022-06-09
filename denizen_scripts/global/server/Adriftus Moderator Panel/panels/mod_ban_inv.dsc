@@ -23,11 +23,11 @@ mod_ban_inv_events:
   debug: false
   events:
     on player right clicks mod_level*_item in mod_ban_inv:
-      - run mod_log_action def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
-      - run mod_log_ban def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
-      - run mod_message_discord def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
-      - run mod_chat_notifier def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
-      - run mod_ban_player def:<player.uuid>|<player.flag[amp_map].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
+      - run mod_log_action def:<player.uuid>|<player.flag[amp].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
+      - run mod_log_ban def:<player.uuid>|<player.flag[amp].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
+      - run mod_message_discord def:<player.uuid>|<player.flag[amp].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
+      - run mod_chat_notifier def:<player.uuid>|<player.flag[amp].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|Ban|<context.item.flag[LENGTH]>
+      - run mod_ban_player def:<player.uuid>|<player.flag[amp].get[uuid]>|<context.item.flag[LEVEL]>|<context.item.flag[INFRACTION]>|<context.item.flag[LENGTH]>
       - inventory close
 
 mod_ban_inv_open:
@@ -42,7 +42,7 @@ mod_ban_inv_open:
         - define name <[item].flag[tag].parsed><&sp><[infraction]>
         - define lore <list[<&b>Level<&co><&sp><[item].flag[colour].parsed><[level]>]>
         - define lore:->:<&c>Right<&sp>Click<&sp>to<&sp>ban<&co>
-        - define lore:->:<&r><player.flag[amp_map].get[name]>
+        - define lore:->:<&r><player.flag[amp].get[name]>
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> INFRACTION:<[infraction]>
         - flag <[item]> LENGTH:<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.length]>

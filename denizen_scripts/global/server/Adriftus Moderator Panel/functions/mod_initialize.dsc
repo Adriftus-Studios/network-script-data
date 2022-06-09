@@ -4,7 +4,7 @@ mod_initialize:
   debug: false
   definitions: uuid
   script:
-    - flag <player> amp_map:!
+    - flag <player> amp:!
     # Check if target player is offline
     - if <player[<[uuid]>].is_online>:
       # Define YAML ID
@@ -35,6 +35,6 @@ mod_initialize:
     - if <yaml.list.contains[amp.target.<[uuid]>]>:
       - yaml unload id:amp.target.<[uuid]>
     # Flag moderator with map of target player's information
-    - flag <player> amp_map:<[map]>
+    - flag <player> amp:<[map]>
 
 
