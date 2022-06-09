@@ -165,6 +165,8 @@ mod_report_inv_open:
         - define items:->:<[item]>
     # Sort and give items to list
     - give <[items].sort_by_value[flag[CATEGORY]]> to:<[inventory]>
+    # Place confirmation button if player has selected at least one infraction
+    - inventory set slot:54 o:<item[lime_stained_glass_pane].with[display_name=<&a><&l>✓<&sp>Report]> d:<[inventory]>
     # Save data on an item in the inventory
     - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>]> d:<[inventory]>
     - inventory open d:<[inventory]>
