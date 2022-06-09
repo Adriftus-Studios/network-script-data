@@ -14,7 +14,7 @@ daily_restart_execute:
     - wait 4m
     - bungeeexecute "alert Network restart begins in 1 minute..."
     - wait 50s
-    - bungeeexecute "alert Network restartbegins in 10 seconds..."
+    - bungeeexecute "alert Network restart begins in 10 seconds..."
     - wait 10s
     - bungeerun hub protect_server
     - foreach <bungee.list_servers.exclude[relay|hub]> as:server:
