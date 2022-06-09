@@ -164,7 +164,7 @@ mod_report_inv_open:
     # Sort and give items to list
     - give <[items].sort_by_value[flag[CATEGORY]]> to:<[inventory]>
     # Save data on an item in the inventory
-    - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected]>]> d:<[inventory]>
+    - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 mod_report_inv_events:
@@ -179,13 +179,13 @@ mod_report_inv_events:
       - define this <context.item.flag[infraction]>
       # Add if selected has less than five items
       - if <[selected].contains[<[this]>].not> && <[selected].size.add[1]> < 6:
-        - run mod_report_inv_open def:<[target]>|<[selected].include[<[this]>]>
+        - run mod_report_inv_open def:<[target]>|<[selected].include[<[this]>].escaped>
       # Do not add if selected has five items
       - else if <[selected].contains[<[this]>].not> && <[selected].size.add[1]> == 6:
         - narrate "<&c>Only five reasons can be selected per report."
       # Remove from selected
       - else:
-        - run mod_report_inv_open def:<[target]>|<[selected].exclude[<[this]>]>
+        - run mod_report_inv_open def:<[target]>|<[selected].exclude[<[this]>].escaped>
       - narrate <[selected].contains[<[this]>].not>
       - narrate <[selected].size.add[1].is_less_than[6]>
       - narrate <[selected].size.add[1].is_equal_to[6]>
