@@ -20,8 +20,8 @@ mod_report_command:
       - else if <player.has_flag[report]>:
         - narrate "<&c>You have recently reported a player within the last five minutes."
         - stop
-      - else if <player.has_flag[reported.<server.match_player[<context.item.display.strip_color>].uuid>]>:
-        - narrate "<&c>You have already reported <[target].name>. Our team will address your issue as soon as possible."
+      - else if <player.has_flag[reported.<server.match_offline_player[<context.args.first>].uuid>]>:
+        - narrate "<&c>You have already reported <server.match_offline_player[<context.args.first>].name>. Our team will address your issue as soon as possible."
         - stop
       - else:
         - run mod_report_inv_open def:<server.match_offline_player[<context.args.first>]>
