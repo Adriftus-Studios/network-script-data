@@ -188,3 +188,6 @@ mod_report_inv_events:
         - run mod_report_inv_open def:<[target]>|<[selected].exclude[<[this]>]>
       - narrate <[selected].contains[<[this]>].not>
       - narrate <[selected].size.add[1].is_less_than[6]>
+      - narrate <[selected].size.add[1].is_equal_to[6]>
+      - narrate <[selected]>
+      - narrate <[selected].include[<[this]>]>
