@@ -131,15 +131,36 @@ mod_report_inv:
 mod_report_inv_open:
   type: task
   debug: false
-  definitions: target
+  definitions: target|selected
   script:
+    # Inventory
     - define items <list>
     - define inventory <inventory[mod_report_inv]>
-    - adjust def:inventory "title:<&6>Adriftus <&f>- <&a>Report <&e><[target].name>"
+    - adjust def:inventory "title:<&6>Adriftus <&f>- <&a>Report <&e><[target].name><&a>."
+    # Selected
+    - define selected <list> if:<[selected].exists.not>
+    - define infractions <list>
     - define map <map>
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_kick_infractions].list_keys[<[level]>]> as:infraction:
+        # Add infraction to list for later
+        - define infractions:->:<[infraction]>
         - define map <[map].with[<[infraction]>.category].as[<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>]>
         - define map <[map].with[<[infraction]>.level].as[<[level]>]>
-    - narrate <[map]>
+        # Build item
+        - define item <item[red_terracotta]>
+        - define name <[infraction]>
+        - define lore <list[<&b>Category<&co><&sp><script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>]>
+        - define lore:->:<&e>Right<&sp>Click<&sp>to<&sp>report<&co>
+        - define lore:->:<&r><[target].name>
+        - flag <[item]> LEVEL:<[level]>
+        # Selected vs Not Selected
+        - if <[selected].contains[<[infraction]>]>:
+          - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
+        - else:
+          - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
+        - define items:->:<[item]>
+    - flag <player> report_infractions:<[infractions]>
+    - give <[items]> to:<[inventory]>
+    - narrate <[infractions]>
     - inventory open d:<[inventory]>
