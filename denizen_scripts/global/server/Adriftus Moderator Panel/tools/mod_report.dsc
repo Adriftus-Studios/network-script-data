@@ -15,7 +15,7 @@ mod_report_command:
       - inject mod_report_online_inv_open
     - else if <server.match_offline_player[<context.args.first>]||null> != null:
       - if <server.match_offline_player[<context.args.first>]> == <player>:
-        - narrate "<&c>You cannot perform actions on yourself."
+        - narrate "<&c>You cannot report yourself."
         - stop
       - else:
         - run mod_report_inv_open def:<server.match_offline_player[<context.args.first>]>
