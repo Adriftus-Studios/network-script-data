@@ -119,13 +119,14 @@ mod_report_inv:
   definitions:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:report]>
+    confirm: <item[lime_stained_glass_pane].with[display_name<&a><&l>✓<&sp>Report]>
   slots:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [x] [x] [x] [] [] [] [x] [x] [x]
-    - [x] [x] [x] [] [] [] [x] [x] [x]
-    - [x] [] [] [] [x] [] [] [] [x]
-    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [back] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [x] [x] [] [] [] [x] [x] [x] [x]
+    - [x] [x] [] [] [] [] [x] [x] [x]
+    - [x] [x] [x] [] [x] [] [x] [x] [x]
+    - [back] [x] [x] [x] [x] [x] [x] [x] [confirm]
 
 mod_report_inv_open:
   type: task
@@ -191,3 +192,10 @@ mod_report_inv_events:
       - narrate <[selected].size.add[1].is_equal_to[6]>
       - narrate <[selected]>
       - narrate <[selected].include[<[this]>]>
+
+    on player left clicks lime_stained_glass_pane in mod_report_inv:
+      - define info_item <context.inventory.slot[<script[mod_report_inv_open].data_key[data.slot_data.info]>]>
+      - define selected <[info_item].flag[selected]>
+      - narrate selected
+      - narrate "<&a>Thank you for your report."
+      - inventory close
