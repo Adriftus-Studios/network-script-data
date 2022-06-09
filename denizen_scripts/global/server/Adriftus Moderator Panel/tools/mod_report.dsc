@@ -167,7 +167,6 @@ mod_report_inv_open:
     - give <[items].sort_by_value[flag[CATEGORY]]> to:<[inventory]>
     # Save data on an item in the inventory
     - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected]>;flag=infractions:<[infractions]>]> d:<[inventory]>
-    - narrate <[infractions]>
     - inventory open d:<[inventory]>
 
 mod_report_inv_events:
@@ -190,3 +189,7 @@ mod_report_inv_events:
       # Remove from selected
       - else:
         - run mod_report_inv_open def:<[target]>|<[selected].exclude[<[this]>]>
+      - narrate <[target]>
+      - narrate <[selected]>
+      - narrate <[infractions]>
+      - narrate <[this]>
