@@ -8,5 +8,5 @@ dutilities_command:
   usage: /dutilities
   script:
     - narrate "<&6>dUtilities <&f>- <&a>Denizen Utilities"
-    - narrate "<&f>Version 3.0.0 - 2022-04-23"
+    - narrate "<&f>Version 4.0.0 - 2022-06-09"
     - narrate "<&f>Scripted by <&b>Kyu#5957"
