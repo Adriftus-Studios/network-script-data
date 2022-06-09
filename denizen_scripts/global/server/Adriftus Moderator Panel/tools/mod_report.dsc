@@ -167,6 +167,9 @@ mod_report_inv_open:
     - give <[items].sort_by_value[flag[CATEGORY]]> to:<[inventory]>
     # Place confirmation button if player has selected at least one infraction
     - narrate <[selected]>
+    - narrate <[selected].size>
+    - narrate <[selected].unescaped>
+    - narrate <[selected].unescaped.size>
     - if <[selected].size> > 0:
       - inventory set slot:54 o:<item[lime_stained_glass_pane].with[display_name=<&a><&l>✓<&sp>Report]> d:<[inventory]>
     # Save data on an item in the inventory
