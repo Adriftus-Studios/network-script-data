@@ -215,8 +215,8 @@ mod_report_inv_events:
       - define target <[info_item].flag[target]>
       - define selected <[info_item].flag[selected]>
       - define message <[info_item].flag[message]> if:<[info_item].has_flag[message]>
-      - flag <player> report expire:10m
-      - flag <player> reported.<[target].uuid> expire:30m
+      - flag <player> report:true expire:10m
+      - flag <player> reported.<[target].uuid>:true expire:30m
       - if <[message].exists>:
         - run mod_message_discord_report "def:reported `<[target].name>` for <[selected].formatted> for the chat message `<[message].unescaped.strip_color>`."
       - else:
