@@ -186,6 +186,5 @@ mod_report_inv_events:
       # Remove from selected
       - else:
         - run mod_report_inv_open def:<[target]>|<[selected].exclude[<[this]>]>
-      - narrate <[target]>
-      - narrate <[selected]>
-      - narrate <[this]>
+      - narrate <[selected].contains[<[this]>].not>
+      - narrate <[selected].size.add[1].is_less_than[6]>
