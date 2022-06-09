@@ -123,7 +123,7 @@ mod_report_inv:
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [x] [x] [x] [] [] [] [x] [x] [x]
     - [x] [x] [] [] [x] [] [] [x] [x]
-    - [x] [] [] [] [x] [] [] [] [x]
+    - [x] [x] [] [] [] [] [] [x] [x]
     - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [back] [x] [x] [x] [x] [x] [x] [x] [x]
 
@@ -153,8 +153,7 @@ mod_report_inv_open:
         - define item <item[red_terracotta]>
         - define name <&e><[infraction]>
         - define lore <list[<&b>Category<&co><&sp><script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>]>
-        - define lore:->:<&e>Right<&sp>Click<&sp>to<&sp>report<&co>
-        - define lore:->:<&r><[target].name>
+        - define lore:->:<&e>Left<&sp>Click<&sp>to<&sp>add<&sp>to<&sp>selection
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> CATEGORY:<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>
         # Selected vs Not Selected
@@ -166,6 +165,27 @@ mod_report_inv_open:
     # Sort and give items to list
     - give <[items].sort_by_value[flag[CATEGORY]]> to:<[inventory]>
     # Save data on an item in the inventory
-    - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3].with[flag=infractions:<[infractions]>]> d:<[inventory]>
+    - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected]>;flag=infractions:<[infractions]>]> d:<[inventory]>
     - narrate <[infractions]>
     - inventory open d:<[inventory]>
+
+mod_report_inv_events:
+  type: world
+  debug: false
+  events:
+    on player left clicks red_terracotta in mod_report_inv:
+      # Get definitions from inventory and item clicked
+      - define info_item <context.inventory.slot[<script[mod_report_inv_open].data_key[data.slot_data.info]>]>
+      - define target <[info_item].flag[target]>
+      - define selected <[info_item].flag[selected]>
+      - define infractions <[info_item].flag[selected]>
+      - define this <context.item.display.strip_color>
+      # Add if selected has less than five items
+      - if <[selected].contains[<[this]>].not> && <[selected].size.+[1]> < 6:
+        - run mod_report_inv_open def:<[target]>|<[selected].include[<[this]>]>
+      # Do not add if selected has five items
+      - else <[selected].contains[<[this]>].not> && <[selected].size.+[1]> == 6:
+        - narrate "<&c>Only five reasons can be selected per report."
+      # Remove from selected
+      - else:
+        - run mod_report_inv_open def:<[target]>|<[selected].exclude[<[this]>]>
