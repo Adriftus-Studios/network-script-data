@@ -132,11 +132,17 @@ mod_report_inv:
 mod_report_inv_open:
   type: task
   debug: false
-  definitions: target|selected
+  definitions: target|selected|message
   data:
     slot_data:
       info: 50
   script:
+    - if <player.has_flag[report]>:
+      - narrate "<&c>You have recently reported a player within the last five minutes."
+      - inventory close
+    - else if <player.has_flag[reported.<[target].uuid>]>:
+      - narrate "<&c>You have already reported <[target].name>. Our team will address your issue as soon as possible."
+      - inventory close
     # Inventory
     - define items <list>
     - define inventory <inventory[mod_report_inv]>
@@ -169,7 +175,10 @@ mod_report_inv_open:
     - if <[selected].unescaped.as_list.size> > 0:
       - inventory set slot:54 o:<item[lime_stained_glass_pane].with[display_name=<&a><&l>✓<&sp>Report]> d:<[inventory]>
     # Save data on an item in the inventory
-    - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>]> d:<[inventory]>
+    - if <[message].exists>:
+      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;lore=<list[<&e>Message<&co><&sp><&r><[message].unescaped.parse_color>]>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>;flag=message:<[message].escaped>]> d:<[inventory]>
+    - else:
+      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 mod_report_inv_events:
@@ -181,21 +190,30 @@ mod_report_inv_events:
       - define info_item <context.inventory.slot[<script[mod_report_inv_open].data_key[data.slot_data.info]>]>
       - define target <[info_item].flag[target]>
       - define selected <[info_item].flag[selected]>
+      - define message <[info_item].flag[message]> if:<[info_item].has_flag[message]>
       - define this <context.item.flag[infraction]>
       # Add if selected has less than five items
       - if <[selected].contains[<[this]>].not> && <[selected].size.add[1]> < 6:
-        - run mod_report_inv_open def:<[target]>|<[selected].include[<[this]>].escaped>
+        - define selected:->:<[this]>
       # Do not add if selected has five items
       - else if <[selected].contains[<[this]>].not> && <[selected].size.add[1]> == 6:
-        - narrate "<&c>Only five reasons can be selected per report."
+        - narrate "<&c>Only five reasons can be selected at maximum per report."
+        - stop
       # Remove from selected
       - else:
-        - run mod_report_inv_open def:<[target]>|<[selected].exclude[<[this]>].escaped>
+        - define selected:<-:<[this]>
+      # Check if player is reporting a message
+      - if <[message].exists>:
+        - run mod_report_inv_open def:<[target]>|<[selected].escaped>|<[message].escaped>
+      - else:
+        - run mod_report_inv_open def:<[target]>|<[selected].escaped>
 
     on player left clicks lime_stained_glass_pane in mod_report_inv:
       - define info_item <context.inventory.slot[<script[mod_report_inv_open].data_key[data.slot_data.info]>]>
       - define target <[info_item].flag[target]>
       - define selected <[info_item].flag[selected]>
+      - flag <player> report expire:10m
+      - flag <player> reported.<[target].uuid> expire:30m
       - run mod_message_discord_report "def:reported `<[target].name>` for <[selected].formatted>."
       - narrate "<&a>You have reported <&e><[target].name><&a> for <&e><[selected].formatted><&a>. Thank you for your report."
       - inventory close
