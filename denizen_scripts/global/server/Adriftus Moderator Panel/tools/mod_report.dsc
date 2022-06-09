@@ -149,18 +149,22 @@ mod_report_inv_open:
         - define map <[map].with[<[infraction]>.level].as[<[level]>]>
         # Build item
         - define item <item[red_terracotta]>
-        - define name <[infraction]>
+        - define name <&e><[infraction]>
         - define lore <list[<&b>Category<&co><&sp><script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>]>
         - define lore:->:<&e>Right<&sp>Click<&sp>to<&sp>report<&co>
         - define lore:->:<&r><[target].name>
         - flag <[item]> LEVEL:<[level]>
+        - flag <[item]> CATEGORY:<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>
         # Selected vs Not Selected
         - if <[selected].contains[<[infraction]>]>:
-          - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
+          - define item <[item].with[display_name=<[name]>;lore=<[lore]>;enchantments=arrow_infinite=1;hides=ALL]>
         - else:
-          - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
+          - define item <[item].with[display_name=<[name]>;lore=<[lore]>;hides=ALL]>
         - define items:->:<[item]>
+    # Save list of infractions on player for later comparisons
     - flag <player> report_infractions:<[infractions]>
+    # Sort and give items to list
+    # <[items].sort_by_value>
     - give <[items]> to:<[inventory]>
     - narrate <[infractions]>
     - inventory open d:<[inventory]>
