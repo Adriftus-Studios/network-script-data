@@ -13,7 +13,7 @@ player_data_handler:
             - define name <context.name>
             - bungeerun relay discord_sendMessage "def:Adriftus Development and Reporting|alerts|<&lt>@565536267161567232<&gt><&nl><[uuid]> (<[name]>) global player data failed to load."
             - stop
-          - wait 1t
+          - waituntil rate:5t <player[<context.uuid>].is_online>
           - customevent id:global_player_data_loaded context:<map[uuid=<context.uuid>;name=<context.name>]> player:<player[<context.uuid>]>
         - else:
           - yaml id:global.player.<context.uuid> create
