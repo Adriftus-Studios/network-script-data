@@ -154,6 +154,7 @@ mod_report_inv_open:
         - define name <&e><[infraction]>
         - define lore <list[<&b>Category<&co><&sp><script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>]>
         - define lore:->:<&e>Left<&sp>Click<&sp>to<&sp>add<&sp>to<&sp>selection
+        - flag <[item]> INFRACTION:<[infraction]>
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> CATEGORY:<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>
         # Selected vs Not Selected
@@ -179,7 +180,7 @@ mod_report_inv_events:
       - define target <[info_item].flag[target]>
       - define selected <[info_item].flag[selected]>
       - define infractions <[info_item].flag[infractions]>
-      - define this <context.item.display.strip_color>
+      - define this <context.item.flag[infractions]>
       # Add if selected has less than five items
       - if <[selected].contains[<[this]>].not> && <[selected].size.+[1]> < 6:
         - run mod_report_inv_open def:<[target]>|<[selected].include[<[this]>]>
