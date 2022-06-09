@@ -187,11 +187,6 @@ mod_report_inv_events:
       # Remove from selected
       - else:
         - run mod_report_inv_open def:<[target]>|<[selected].exclude[<[this]>].escaped>
-      - narrate <[selected].contains[<[this]>].not>
-      - narrate <[selected].size.add[1].is_less_than[6]>
-      - narrate <[selected].size.add[1].is_equal_to[6]>
-      - narrate <[selected]>
-      - narrate <[selected].include[<[this]>]>
 
     on player left clicks lime_stained_glass_pane in mod_report_inv:
       - define info_item <context.inventory.slot[<script[mod_report_inv_open].data_key[data.slot_data.info]>]>
