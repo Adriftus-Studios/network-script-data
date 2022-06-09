@@ -17,6 +17,12 @@ mod_report_command:
       - if <server.match_offline_player[<context.args.first>]> == <player>:
         - narrate "<&c>You cannot report yourself."
         - stop
+      - else if <player.has_flag[report]>:
+        - narrate "<&c>You have recently reported a player within the last five minutes."
+        - stop
+      - else if <player.has_flag[reported.<server.match_player[<context.item.display.strip_color>].uuid>]>:
+        - narrate "<&c>You have already reported <[target].name>. Our team will address your issue as soon as possible."
+        - stop
       - else:
         - run mod_report_inv_open def:<server.match_offline_player[<context.args.first>]>
     - else:
@@ -52,7 +58,7 @@ mod_report_online_inv_events:
         - narrate "<&c>You cannot report yourself."
         - stop
       # Player has recently reported a player
-      - if <player.has_flag[report]>:
+      - else if <player.has_flag[report]>:
         - narrate "<&c>You have recently reported a player within the last five minutes."
         - stop
       - else if <player.has_flag[reported.<server.match_player[<context.item.display.strip_color>].uuid>]>:
@@ -178,9 +184,9 @@ mod_report_inv_open:
       - inventory set slot:54 o:<item[lime_stained_glass_pane].with[display_name=<&a><&l>✓<&sp>Report]> d:<[inventory]>
     # Save data on an item in the inventory
     - if <[message].exists>:
-      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[player_head].with[display_name=<&e><[target].name>;lore=<list[<&6>Message<&co><&sp><&f><[message].unescaped.parse_color>]>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>;flag=message:<[message].unescaped>]> d:<[inventory]>
+      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[player_head].with[display_name=<&e><[target].name>;lore=<list[<&6>Message<&co><&sp><&f><[message].unescaped.parse_color>]>;skull_skin=<[target].name>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>;flag=message:<[message].unescaped>]> d:<[inventory]>
     - else:
-      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[player_head].with[display_name=<&e><[target].name>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>]> d:<[inventory]>
+      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[player_head].with[display_name=<&e><[target].name>;skull_skin=<[target].name>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 mod_report_inv_events:
