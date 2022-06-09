@@ -145,8 +145,6 @@ mod_report_inv_open:
     - define map <map>
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_kick_infractions].list_keys[<[level]>]> as:infraction:
-        # Add infraction to list for later
-        - define infractions:->:<[infraction]>
         - define map <[map].with[<[infraction]>.category].as[<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>]>
         - define map <[map].with[<[infraction]>.level].as[<[level]>]>
         # Build item
@@ -166,7 +164,7 @@ mod_report_inv_open:
     # Sort and give items to list
     - give <[items].sort_by_value[flag[CATEGORY]]> to:<[inventory]>
     # Save data on an item in the inventory
-    - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].as_list>;flag=infractions:<[infractions]>]> d:<[inventory]>
+    - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected]>]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 mod_report_inv_events:
@@ -178,18 +176,16 @@ mod_report_inv_events:
       - define info_item <context.inventory.slot[<script[mod_report_inv_open].data_key[data.slot_data.info]>]>
       - define target <[info_item].flag[target]>
       - define selected <[info_item].flag[selected]>
-      - define infractions <[info_item].flag[infractions]>
-      - define this <context.item.flag[infraction]>
+      - define this <context.item.flag[INFRACTION]>
       # Add if selected has less than five items
-      - if <[selected].contains[<[this]>].not> && <[selected].size.+[1]> < 6:
+      - if <[selected].contains[<[this]>].not> && <[selected].size.add[1]> != 6:
         - run mod_report_inv_open def:<[target]>|<[selected].include[<[this]>]>
       # Do not add if selected has five items
-      - else <[selected].contains[<[this]>].not> && <[selected].size.+[1]> == 6:
+      - else <[selected].contains[<[this]>].not> && <[selected].size.add[1]> == 6:
         - narrate "<&c>Only five reasons can be selected per report."
       # Remove from selected
       - else:
         - run mod_report_inv_open def:<[target]>|<[selected].exclude[<[this]>]>
       - narrate <[target]>
       - narrate <[selected]>
-      - narrate <[infractions]>
       - narrate <[this]>
