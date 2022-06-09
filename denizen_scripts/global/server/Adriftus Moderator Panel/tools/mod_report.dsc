@@ -176,7 +176,7 @@ mod_report_inv_open:
       - inventory set slot:54 o:<item[lime_stained_glass_pane].with[display_name=<&a><&l>✓<&sp>Report]> d:<[inventory]>
     # Save data on an item in the inventory
     - if <[message].exists>:
-      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;lore=<list[<&e>Message<&co><&sp><&r><[message].unescaped.parse_color>]>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>;flag=message:<[message].escaped>]> d:<[inventory]>
+      - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;lore=<list[<&e>Message<&co><&sp><&f><[message].unescaped.parse_color>]>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>;flag=message:<[message].unescaped>]> d:<[inventory]>
     - else:
       - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].unescaped>]> d:<[inventory]>
     - inventory open d:<[inventory]>
@@ -204,7 +204,7 @@ mod_report_inv_events:
         - define selected:<-:<[this]>
       # Check if player is reporting a message
       - if <[message].exists>:
-        - run mod_report_inv_open def:<[target]>|<[selected].escaped>|<[message].escaped>
+        - run mod_report_inv_open def:<[target]>|<[selected].escaped>|<[message]>
       - else:
         - run mod_report_inv_open def:<[target]>|<[selected].escaped>
 
