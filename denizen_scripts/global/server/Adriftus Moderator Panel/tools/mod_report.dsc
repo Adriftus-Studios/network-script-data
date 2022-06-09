@@ -178,7 +178,7 @@ mod_report_inv_events:
       - define info_item <context.inventory.slot[<script[mod_report_inv_open].data_key[data.slot_data.info]>]>
       - define target <[info_item].flag[target]>
       - define selected <[info_item].flag[selected]>
-      - define infractions <[info_item].flag[selected]>
+      - define infractions <[info_item].flag[infractions]>
       - define this <context.item.display.strip_color>
       # Add if selected has less than five items
       - if <[selected].contains[<[this]>].not> && <[selected].size.+[1]> < 6:
