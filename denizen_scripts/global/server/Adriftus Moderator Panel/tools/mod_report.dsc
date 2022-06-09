@@ -55,7 +55,7 @@ mod_report_online_inv_events:
       - if <player.has_flag[report]>:
         - narrate "<&c>You have recently reported a player within the last five minutes."
         - stop
-      - else if <player.has_flag[reported.<[target].uuid>]>:
+      - else if <player.has_flag[reported.<server.match_player[<context.item.display.strip_color>].uuid>]>:
         - narrate "<&c>You have already reported <[target].name>. Our team will address your issue as soon as possible."
         - stop
       - run mod_report_inv_open def:<server.match_player[<context.item.display.strip_color>]>
