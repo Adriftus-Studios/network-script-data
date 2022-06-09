@@ -18,7 +18,6 @@ mod_report_command:
         - narrate "<&c>You cannot perform actions on yourself."
         - stop
       - else:
-        - narrate <server.match_offline_player[<context.args.first>]>
         - run mod_report_inv_open def:<server.match_offline_player[<context.args.first>]>
     - else:
       - narrate "<&c>Invalid player name entered!"
@@ -121,17 +120,20 @@ mod_report_inv:
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:report]>
   slots:
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [x] [x] [x] [] [] [] [x] [x] [x]
+    - [x] [x] [] [] [x] [] [] [x] [x]
+    - [x] [] [] [] [x] [] [] [] [x]
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
     - [back] [x] [x] [x] [x] [x] [x] [x] [x]
 
 mod_report_inv_open:
   type: task
   debug: false
   definitions: target|selected
+  data:
+    slot_data:
+      info: 50
   script:
     # Inventory
     - define items <list>
@@ -161,10 +163,9 @@ mod_report_inv_open:
         - else:
           - define item <[item].with[display_name=<[name]>;lore=<[lore]>;hides=ALL]>
         - define items:->:<[item]>
-    # Save list of infractions on player for later comparisons
-    - flag <player> report_infractions:<[infractions]>
     # Sort and give items to list
-    # <[items].sort_by_value>
-    - give <[items]> to:<[inventory]>
+    - give <[items].sort_by_value[flag[CATEGORY]]> to:<[inventory]>
+    # Save data on an item in the inventory
+    - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3].with[flag=infractions:<[infractions]>]> d:<[inventory]>
     - narrate <[infractions]>
     - inventory open d:<[inventory]>
