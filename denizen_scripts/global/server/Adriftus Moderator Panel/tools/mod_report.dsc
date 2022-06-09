@@ -166,7 +166,7 @@ mod_report_inv_open:
     # Sort and give items to list
     - give <[items].sort_by_value[flag[CATEGORY]]> to:<[inventory]>
     # Save data on an item in the inventory
-    - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected]>;flag=infractions:<[infractions]>]> d:<[inventory]>
+    - inventory set slot:<script.data_key[data.slot_data.info]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=target:<[target]>;flag=selected:<[selected].as_list>;flag=infractions:<[infractions]>]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 mod_report_inv_events:
