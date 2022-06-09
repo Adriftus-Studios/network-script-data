@@ -176,12 +176,12 @@ mod_report_inv_events:
       - define info_item <context.inventory.slot[<script[mod_report_inv_open].data_key[data.slot_data.info]>]>
       - define target <[info_item].flag[target]>
       - define selected <[info_item].flag[selected]>
-      - define this <context.item.flag[INFRACTION]>
+      - define this <context.item.flag[infraction]>
       # Add if selected has less than five items
-      - if <[selected].contains[<[this]>].not> && <[selected].size.add[1]> != 6:
+      - if <[selected].contains[<[this]>].not> && <[selected].size.add[1]> < 6:
         - run mod_report_inv_open def:<[target]>|<[selected].include[<[this]>]>
       # Do not add if selected has five items
-      - else <[selected].contains[<[this]>].not> && <[selected].size.add[1]> == 6:
+      - else if <[selected].contains[<[this]>].not> && <[selected].size.add[1]> == 6:
         - narrate "<&c>Only five reasons can be selected per report."
       # Remove from selected
       - else:
