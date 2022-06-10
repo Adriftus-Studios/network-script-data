@@ -574,7 +574,7 @@ blood_sigil_effect_4:
     - foreach <[town].plots> as:chunk:
       - if <[loop_index].mod[10]> == 0:
         - wait 1t
-      - if <[chunk].cuboid.center.distance[<[base]>]> < 200:
+      - if <[chunk].cuboid.center.with_y[<[base].y>].distance[<[base]>]> < 200:
         - define chunks:->:<[chunk]>
     - while <[town].has_flag[blood_raid.stage]> && <list[2|5].contains[<[town].flag[blood_raid.stage]>]>:
       - run blood_sigil_effect_4_task def:<[town]>|<[chunks].random>

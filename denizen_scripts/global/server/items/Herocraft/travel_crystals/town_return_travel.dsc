@@ -61,7 +61,7 @@ town_return_execute:
   debug: false
   script:
     - define type <context.item.flag[type]>
-    - if <bungee.server> != herocraft:
+    - if !<list[test|herocraft].contains[<bungee.server>]>:
       - narrate "<&c>The item has no reaction in this world..."
       - stop
     - if !<context.item.has_flag[town]> || !<context.item.flag[town].spawn.exists>:
