@@ -152,7 +152,7 @@ process_mob_attributes_task:
   debug: false
   data:
     MobSpawnChanceMap:
-      uncommon: 20
+      uncommon: 10
       rare: 5
       epic: 1
   script:
