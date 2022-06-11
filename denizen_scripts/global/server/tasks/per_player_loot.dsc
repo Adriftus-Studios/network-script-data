@@ -26,7 +26,7 @@ per_player_loot:
     - if <player.has_flag[looted_locations.<context.location.simple>]>:
       - define loot <player.flag[looted_locations.<context.location.simple>]>
     - else if <context.location.has_loot_table>:
-      - define loot <server.generate_loot_table[<map[id=<context.location.loot_table_id>;location=<context.location>]>]>
+      - define loot <server.generate_loot_table[<map[id=<context.location.loot_table_id>;location=<context.location>]>].parse[proc[build_item_enchantment_lore]]>
       - flag player looted_locations.<context.location.simple>:<[loot]>
       - if <script[per_player_loot_additions].data_key[<bungee.server>].exists>:
         - foreach <script[per_player_loot_additions].data_key[<bungee.server>]> key:item as:chance:
