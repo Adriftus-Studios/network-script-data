@@ -108,7 +108,7 @@ mod_adriftus_chest_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_adriftus_chest_inv]>
-    - foreach <yaml[global.player.<player.flag[amp].as_map.get[uuid]>].read[adriftus.chest.contents_map]||<map>>:
+    - foreach <player.flag[amp].get[adriftus_chest]>:
       - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
