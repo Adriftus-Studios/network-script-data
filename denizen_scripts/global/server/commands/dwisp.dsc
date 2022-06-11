@@ -318,7 +318,7 @@ dwisp_kill_target:
       - playeffect effect:redstone at:<[target].location.above> offset:0.25,0.5,0.25 quantity:10 special_data:2|<player.flag[dwisp.data.color1]> targets:<[targets]>
       - playeffect effect:redstone at:<[target].location.above> offset:0.25,0.5,0.25 quantity:10 special_data:1|<player.flag[dwisp.data.color2]> targets:<[targets]>
       - wait 1t
-    - flag <[target]> custom_damage.cause:<player.flag[dwisp.data.entity].custom_name>
+    - flag <[target]> custom_damage.cause:<player.flag[dwisp.data.name]>
     - if <player.has_flag[dwisp.data.damage]> && <player.flag[dwisp.data.damage]> != kill:
       - hurt <player.flag[dwisp.data.damage]> <[target]>
     - else:
