@@ -4,7 +4,7 @@ Temporal_theft_enchantment:
   debug: false
   slots:
   - mainhand
-  rarity: uncommon
+  rarity: rare
   min_cost: <context.level.mul[1]>
   max_cost: <context.level.mul[2]>
   data:

@@ -4,7 +4,7 @@ vampirism_enchantment:
   debug: false
   slots:
   - mainhand
-  rarity: rare
+  rarity: very_rare
   min_cost: <context.level.mul[2]>
   max_cost: <context.level.mul[3]>
   data:
