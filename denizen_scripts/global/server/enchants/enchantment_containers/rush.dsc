@@ -4,7 +4,7 @@ Rush_enchantment:
   debug: false
   slots:
   - feet
-  rarity: uncommon
+  rarity: very_rare
   min_cost: <context.level.mul[1]>
   max_cost: <context.level.mul[2]>
   data:

@@ -36,9 +36,9 @@ mod_ban_check:
   type: world
   debug: false
   events:
-    after player joins:
-      - define spawn <player.location.simple>
-      - waituntil rate:1s max:60s <player.location.simple> != <[spawn]>
+    on custom event id:global_player_data_loaded:
+      - if <bungee.server> == hub:
+        - waituntil rate:1s max:30s <player.has_flag[RP_Enabled]>
       # -- Check if player's global YAML data contains an ongoing-ban.
       - if <yaml[global.player.<player.uuid>].contains[banned].not>:
         - stop

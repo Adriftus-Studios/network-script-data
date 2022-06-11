@@ -18,6 +18,7 @@ network_leave_join_messages:
       - bungeerun relay Player_Leave_Message def:<list[<bungee.server>|<player.name>|<player.uuid>].include[<[discord_message].strip_color>]>
 
     on custom event id:global_player_data_loaded:
+      - ratelimit <player> 1s
       - if <yaml[global.player.<player.uuid>].contains[settings.join_task]> && <script[network_join_<yaml[global.player.<player.uuid>].read[settings.join_task]>].exists>:
         - inject network_join_<yaml[global.player.<player.uuid>].read[settings.join_task]>
       - else if <server.has_flag[join_message]>:
