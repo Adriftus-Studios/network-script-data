@@ -36,7 +36,7 @@ mod_ban_check:
   type: world
   debug: false
   events:
-    after player joins:
+    on custom event id:global_player_data_loaded:
       - define spawn <player.location.simple>
       - waituntil rate:1s max:60s <player.location.simple> != <[spawn]>
       # -- Check if player's global YAML data contains an ongoing-ban.
