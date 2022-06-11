@@ -17,7 +17,7 @@
 #    - define Data <map[content/<[messageEscaped].unescaped>|username/<[Name]>|avatar_url/https://minotar.net/helm/<[Name]>].to_json>
 #    - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
 #    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
-#    #- discord id:AdriftusBot channel:<[Fchannel]> message <[messageEscaped].unescaped>
+#    #- discord id:a_bot channel:<[Fchannel]> message <[messageEscaped].unescaped>
 
 discord_sendMessage:
   type: task
@@ -25,8 +25,8 @@ discord_sendMessage:
   definitions: group|channel|messageEscaped
   script:
     - announce to_console "<[group]> - <[channel]>"
-    - define Fchannel <discord[AdriftusBot].group[<[group]>].channel[<[channel]>]>
-    - discord id:AdriftusBot channel:<[Fchannel]> message <[messageEscaped].unescaped>
+    - define Fchannel <discord[a_bot].group[<[group]>].channel[<[channel]>]>
+    - ~discordmessage id:<discord[a_bot]> channel:<discord[a_bot].group[<[group]>].channel[<[channel]>]> <[messageEscaped].unescaped>
 
 discord_editMessage:
   type: task
@@ -34,5 +34,4 @@ discord_editMessage:
   definitions: group|channel|MessageID|messageEscaped
   script:
     - define Fchannel <discord[AdriftusBot].group[<[group]>].channel[<[channel]>]>
-    - discord id:AdriftusBot channel:<[Fchannel]> edit_message <[messageEscaped].unescaped> message_id:<[MessageID]>
-
+    - discord id:<discord[AdriftusBot]> channel:<[Fchannel]> edit_message <[messageEscaped].unescaped> message_id:<[MessageID]>

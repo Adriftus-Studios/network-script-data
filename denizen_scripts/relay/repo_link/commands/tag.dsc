@@ -1,154 +1,66 @@
-Tag_Parser_DCommand:
+tag_command_create:
   type: task
-  PermissionRoles:
-  # % ██ [ Staff Roles  ] ██
-    - Lead Developer
-    - External Developer
-    - Developer
-
-  # % ██ [ Public Roles ] ██
-    - Lead Developer
-    - Developer
-  definitions: Message|Channel|Author|Group|Direct
-  debug: false
-  Context: Color
+  debug: true
   script:
-  # % ██ [ Clean Definitions & Inject Dependencies ] ██
-    - inject Role_Verification
-    - inject Command_Arg_Registry
+    - definemap options:
+        1:
+          type: string
+          name: tag
+          description: Parses a tag
+          required: true
+        2:
+          type: string
+          name: server
+          description: Selects the server to parse the tag for
+          required: false
 
-  # % ██ [ Verify Blacklists           ] ██
-    - if <server.has_flag[Discord.Blacklist]> && <server.flag[Discord.Blacklist].contains[<[Author]>]>:
-      - if <server.has_flag[Discord.Ratelimit]>:
-        - define User_Ratelimit_Cache <server.flag[Discord.Ratelimit].filter[get[Discord_User].contains[<[Author]>]]>
-        - if !<[User_Ratelimit_Cache].is_empty>:
-          - if <[User_Ratelimit_Cache].first.get[Timeout].duration_since[<util.time_now>].in_seconds> != 0:
-            - stop
-          - flag server Discord.Ratelimit:<-:<[User_Ratelimit_Cache]>
-      - flag server Discord.Ratelimit:->:<map.with[Discord_User].as[<[Author]>].with[Timeout].as[<util.time_now.add[5m]>]>
-      - discord id:AdriftusBot message user:<[Author]> "You are blacklisted from this command for unethical tag parsing."
-      - stop
+    - ~discordcommand id:a_bot create options:<[options]> name:t "Description:Parse a tag for a server or in general" group:626078288556851230
+    - ~discordcommand id:a_bot create options:<[options]> name:tag "Description:Parse a tag for a server or in general" group:626078288556851230
+    - ~discordcommand id:a_bot create options:<[options]> name:parse "Description:Parse a tag for a server or in general" group:626078288556851230
 
-  # % ██ [ Verify Arguments            ] ██
-    - if <[Args].is_empty>:
-      - stop
-    - else if <[Args].size> == 1:
-      - define Server Relay
-      - define Tag <[Args].first>
-    - else:
-      - if <yaml[bungee_config].contains[servers.<[Args].first>]>:
-        - if !<bungee.list_servers.contains[<[Args].first>]>:
-          - define color red
-          - inject Embedded_Color_Formatting
-          - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-          - define Embeds "<list[<map.with[description].as[<[Args].first> is **Not Connected** or is **OFFLINE**.].with[color].as[<[Color]>]>]>"
-          - define Data "<map.with[username].as[Server Status Warning].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
-          - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-          - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
-          - stop
-        - else:
-          - narrate <[Args]>
-          - define Server <[Args].first>
-          - define Tag <[Args].remove[1].space_separated>
-      - else:
-        - narrate <[Args]>
-        - define Server Relay
-        - define Tag <[Args].space_separated>
-  # % ██ [ Parse Tags                ] ██
-    - ~bungeetag server:<[server]> <[tag].parsed> save:result
-    - define TagData <entry[result].result.escaped>
-
-  # % ██ [ Send Direct Message       ] ██
-    - if <[Direct]>:
-      - if <[Author].id> == 194619362223718400:
-        - discord id:AdriftusBot message user:<[Author]> "```ini<n># Parsed on: <[Server]> for: <[tag]>:<n> <[TagData].unescaped><n>```"
-        - stop
-      - else:
-        - announce to_console "<&7># <&8>Parsed on: <&6><[Server]><&8> for<&7>: <&6><[tag]> <&8>From user<&8>: <&6><[Author].name> <&e>(<&6><[Author].id><&e>)<&7>"
-        #| Potentially add when restricting Logs: <n> <&3><[TagData].unescaped>
-        - if <[TagData].unescaped.contains_any_text[<list_single[<yaml[tokens].read[discord.champagne_token]>].include_single[<yaml[oAuth].list_deep_keys[].parse_tag[<yaml[oAuth].parsed_key[<[Parse_Value]>]>]>].exclude[Headers|User-Agent|redirect_uri|code|state|discord|application|client|token|parameters|scope|grand|hATE_Webhook|ATE|name|config|GitHub|Twitch|Repository|Repositories]>]>:
-          - discord id:AdriftusBot message user:<[Author]> "You have been blacklisted from this command for unethical tag parsing. This incident will be reported."
-          - flag server Discord.Blacklist:->:<[Author]>
-          - Define Warning "<&lt>a:weewoo:619323397880676363<&gt> Attention:<discorduser[adriftusbot,194619362223718400].mention> **Warning**:<n>"
-        - else:
-          - define Warning <empty>
-        - discord id:AdriftusBot message channel:746416381112877147 "<[Warning]>```ini<n># Parsed on: <[Server]> From user: <[Author].name> (<[Author].id>) for:<n> <[tag]><n>```"
-        #| Potentially add when restricting Channel: :<n><[TagData].unescaped><n>
-
-  # % ██ [ Send Public Message       ] ██
-    - else:
-      - define color Code
-      - inject Embedded_Color_Formatting
-      - define Footer "<map.with[text].as[Parsed on: <[Server]> for: <[tag]>]>"
-      - define Embeds <list[<map.with[color].as[<[Color]>].with[footer].as[<[Footer]>].with[description].as[<[TagData].unescaped>]>]>
-      - define Data "<map.with[username].as[Tag Parser Results].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
-
-      - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-      - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-      - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
-
-# $ ██ [ Run on Relay ] ██
-Tag_ParseFrom:
-  type: task
-  debug: false
-  definitions: Server|Tag
-  script:
-    - flag server TagUnparsed:<[Tag].escaped> duration:1s
-    - bungeerun <[Server]> Tag_Parse def:<[Tag].escaped>
-
-# $ ██ [ Run on Server induced by Relay ] ██
-Tag_Parse:
-  type: task
-  debug: false
-  definitions: Tag
-  script:
-    - define TagData <[Tag].unescaped.parsed>
-    - if <server.has_flag[TagError]>:
-      - bungeerun Relay Tag_Receive def:<list_single[<[TagData]>].include[<server.flag[TagError]>]>
-    - else:
-      - bungeerun Relay Tag_Receive def:<list_single[<[TagData]>]>
-
-# $ ██ [ Run on Relay induced by Server ] ██
-Tag_Receive:
-  type: task
-  debug: false
-  definitions: TagData|TagError
-  script:
-  # % ██ [                     ] ██
-    - if <[TagError]||null> != null:
-      - define Color Red
-    - else:
-      - define Color Code
-    - define TagUnparsed:<server.flag[TagUnparsed]>
-
-  # % ██ [ Send Embedded Message           ] ██
-    - define color Code
-    - inject Embedded_Color_Formatting
-    - define Footer "<map.with[text].as[Parsed on: <[Server]> for: <[tag]>]>"
-    - define Embeds <list[<map.with[color].as[<[Color]>].with[footer].as[<[Footer]>].with[description].as[<[TagData].unescaped>]>]>
-    - define Data "<map.with[username].as[Tag Parser Results].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>"
-
-    - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-    - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
-
-Tag_Parse_Listener:
+tag_command_handler:
   type: world
   debug: false
   events:
-    on script generates error:
-      - announce to_console "Script Generates Error-------------------------------------------------"
-      - if <context.queue.id.contains[Tag_Parse]||false>:
-        - determine passively cancelled
-        - announce to_console "<&4>Error:<&c> <context.message>"
-        - announce to_console "<&4>Error:<&c> <context.queue>"
-        - announce to_console "<&4>Error:<&c> <context.script>"
-        - announce to_console "<&4>Error:<&c> <context.line>"
-    on server generates exception:
-      - announce to_console "Server Generates exception-------------------------------------------------"
-      - if <context.queue.id.contains[Tag_Parse]||false>:
-        - determine passively cancelled
-        - announce to_console "<&4>Error:<&c> <context.message>"
-        - announce to_console "<&4>Error:<&c> <context.full_trace>"
-        - announce to_console "<&4>Error:<&c> <context.type>"
-        - announce to_console "<&4>Error:<&c> <context.queue>"
+    on discord slash command name:tag|parse|t:
+  # % ██ [ create base definitions               ] ██
+      - define tag <context.options.get[tag].escaped>
+      - define embed <discord_embed>
+
+  # % ██ [ verify server argument, if any        ] ██
+      - if <context.options.contains[server]>:
+        - define server <context.options.get[server]>
+      - else:
+        - define server relay
+
+  # % ██ [ verify server is bungee configurated  ] ██
+      - if !<yaml[bungee_config].contains[servers.<[server].to_titlecase>]>:
+        - definemap embed_data:
+            color: 200,0,0
+            description: <&co>warning<&co> Tried parsing for server <&dq>`<[server].to_titlecase>`<&dq><n>Server is not configured in the network's server listings.
+            footer: Attempted<&co> <[tag].unescaped>
+        - ~discordinteraction reply interaction:<context.interaction> <[embed].with_map[<[embed_data]>]>
+        - stop
+
+  # % ██ [ verify server is connected            ] ██
+      - if !<bungee.list_servers.contains[<[server]>]>:
+        - definemap embed_data:
+            color: 200,0,0
+            description: <&co>warning<&co> Server<&co> <&dq>`<[server].to_titlecase>`<&dq> is Offline.
+            footer: Attempted<&co> <[tag].unescaped>
+        - ~discordinteraction reply interaction:<context.interaction> <[embed].with_map[<[embed_data]>]>
+        - stop
+
+  # % ██ [ create base embed                     ] ██
+      - definemap embed_data:
+          color: 0,254,255
+          footer: Parsed on<&co> <[server].to_titlecase> for<&co> <[tag].unescaped>
+      - define embed <[embed].with_map[<[embed_data]>]>
+
+
+
+  # % ██ [ Parse Tags                            ] ██
+      - ~bungeetag server:<[server]> <[tag].unescaped.parsed> save:response
+      - define tag_response <entry[response].result.escaped>
+
+      - ~discordinteraction reply interaction:<context.interaction> <[embed].with[description].as[<[tag_response].unescaped>]>

@@ -3,7 +3,7 @@ name: Bug Report
 about: Create a report to help us find broken commands or fix something not working.
 title: "[BORK] (ShortDescription)"
 labels: ''
-assignees: BehrRiley
+assignees: Eutherin
 
 ---
 

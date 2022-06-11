@@ -1,3 +1,63 @@
+bowtrails_gui_command:
+  type: command
+  name: bowtrails
+  debug: false
+  usage: /bowtrails
+  description: Used to access and change any unlocked cosmetic bow trails.
+  aliases:
+    - bowtrail
+    - bt
+  script:
+    - run cosmetic_selection_inventory_open def:bowtrails
+
+bowtrails_equip:
+  type: task
+  debug: false
+  definitions: bowtrail_id
+  script:
+    - determine passively cancelled
+    - define bowtrail_id <context.item.flag[cosmetic].if_null[default]> if:<[bowtrail_id].exists.not>
+    - run global_player_data_modify def:<player.uuid>|bowtrails.current|<context.item.flag[cosmetic]>
+    - flag player bowtrail:<[bowtrail_id]>
+    - if <context.inventory.exists>:
+      - define info_item <context.inventory.slot[<script[cosmetic_selection_inventory_open].data_key[data.slot_data.remove_slot]>]>
+      - run cosmetic_selection_inventory_open def:<[info_item].flag[type]>|<[info_item].flag[page]>
+
+bowtrails_unlock:
+  type: task
+  debug: false
+  definitions: bowtrail_id
+  script:
+    - if <yaml[bowtrails].contains[bowtrails.<[bowtrail_id]>]> && !<yaml[global.player.<player.uuid>].contains[bowtrails.unlocked.<[bowtrail_id]>]>:
+      - run global_player_data_modify def:<player.uuid>|bowtrails.unlocked.<[bowtrail_id]>|true
+
+bowtrails_remove:
+  type: task
+  debug: false
+  definitions: bowtrail_id
+  script:
+    - determine passively cancelled
+    - define bowtrail_id <context.item.flag[cosmetic].if_null[default]> if:<[bowtrail_id].exists.not>
+    - run global_player_data_modify def:<player.uuid>|bowtrails.current|!
+    - if <context.inventory.exists>:
+      - define info_item <context.inventory.slot[<script[cosmetic_selection_inventory_open].data_key[data.slot_data.remove_slot]>]>
+      - run cosmetic_selection_inventory_open def:<[info_item].flag[type]>|<[info_item].flag[page]>
+
+bowtrails_initialize:
+  type: world
+  debug: false
+  load_yaml:
+    - if <yaml.list.contains[bowtrails]>:
+      - yaml id:bowtrails unload
+    - if <server.has_file[data/global/network/bowtrails.yml]>:
+      - ~yaml id:bowtrails load:data/global/network/bowtrails.yml
+  events:
+    on server start:
+      - inject locally path:load_yaml
+    on reload scripts:
+      - yaml id:bowtrails unload
+      - inject locally path:load_yaml
+
 bowtrails_handler:
   type: world
   debug: false
@@ -13,7 +73,7 @@ bowtrails_handler:
       - ratelimit <player> 1s
       - if <yaml[bowtrails].contains[bowtrails.<player.flag[bowtrail]>.trail_type]> && <script[bow_trail_<yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.trail_type]>]||invalid> != invalid:
         - inject bow_trail_<yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.trail_type]>
-    after player shoots block with arrow flagged:bowtrail:
+    after player shoots block with:arrow flagged:bowtrail:
       - if <context.projectile.has_flag[no_trail]>:
         - stop
       - if <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.trail_type].starts_with[block]>:
@@ -166,167 +226,3 @@ bow_trail_block_2_color:
       - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|<[color1]> targets:<player.world.players>
       - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|<[color2]> targets:<player.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
-
-###################
-## ACCESSOR TASK ##
-###################
-bowtrail_unlock:
-  type: task
-  definitions: bowtrail
-  debug: false
-  script:
-    - if <yaml[bowtrails].read[bowtrails.<[bowtrail]>]||null> != null && !<yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<[bowtrail]>]||false>:
-      - yaml id:global.player.<player.uuid> set bowtrails.unlocked:|:<[bowtrail]>
-    - else:
-      - define checks:->:`<&lt>yaml[bowtrails].read[bowtrails.<&lt>[bowtrail]<&gt>]||null<&gt>`
-      - define checks:->:`!<&lt>yaml[global.player.<&lt>player.uuid<&gt>].read[bowtrails.unlocked].contains[<&lt>[bowtrail]<&gt>]||false<&gt>`
-      - debug error "The The if statement above errored with the check(s): <[checks].separated_by[ | ]>"
-
-bowtrail_remove:
-  type: task
-  definitions: bowtrail
-  debug: false
-  script:
-    - if <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].contains[<[bowtrail]>]||false>:
-      - yaml id:global.player.<player.uuid> set bowtrails.unlocked:<-:<[bowtrail]>
-    - else:
-      - debug error "The The if statement in `bowtrail_remove` errored with the check: `<&lt>yaml[global.player.<&lt>player.uuid<&gt>].read[bowtrails.unlocked].contains[<&lt>[bowtrail]<&gt>]||false<&gt>`"
-
-##################
-## Open Command ##
-##################
-
-bowtrails_gui_command:
-  type: command
-  name: bowtrails
-  debug: false
-  usage: /bowtrails
-  description: Used to access and change any unlocked cosmetic bow trails.
-  aliases:
-    - bowtrail
-    - bt
-  script:
-    - inject bowtrails_inventory_open
-
-###################
-## Internal Shit ##
-###################
-
-bowtrails_inventory:
-  type: inventory
-  inventory: chest
-  gui: true
-  debug: false
-  size: 54
-  title: <yaml[bowtrails].read[gui.title].parse_color>
-  custom:
-    mapping:
-      next_page: 54
-      previous_page: 46
-      current_bowtrail: 50
-      page_marker: 1
-  definitions:
-    next_page: <item[arrow].with[display_name=<&a>Next<&sp>Page;nbt=action/next_page]>
-    previous_page: <item[arrow].with[display_name=<&c>Previous<&sp>Page;nbt=action/previous_page]>
-  slots:
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
-    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
-    - [standard_filler] [] [] [] [] [] [] [] [standard_filler]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-    - [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler] [standard_filler]
-
-bowtrails_inventory_events:
-  type: world
-  debug: false
-  events:
-    on player clicks item in bowtrails_inventory:
-      - determine passively cancelled
-      - wait 1t
-      - if <context.item.has_nbt[action]>:
-        - choose <context.item.nbt[action]>:
-          - case set_bowtrail:
-            - yaml id:global.player.<player.uuid> set bowtrails.current:<context.item.nbt[bowtrail]>
-            - flag player bowtrail:<context.item.nbt[bowtrail]>
-            - inject bowtrails_inventory_open
-            - narrate "<&b>You have changed your active bow trail to<&co> <yaml[bowtrails].read[bowtrails.<context.item.nbt[bowtrail]>.name].parse_color.parsed>"
-          - case remove_bowtrail:
-            - yaml id:global.player.<player.uuid> set bowtrails.current:!
-            - flag player bowtrail:!
-            - narrate "<&r>You have removed your Bow Trail."
-            - inject bowtrails_inventory_open
-          - case next_page:
-            - define page <context.inventory.slot[<script[bowtrails_inventory].data_key[custom.mapping.page_marker]>].nbt[page].add[1]>
-            - inject bowtrails_inventory_open
-          - case previous_page:
-            - define page <context.inventory.slot[<script[bowtrails_inventory].data_key[custom.mapping.page_marker]>].nbt[page].sub[1]>
-            - inject bowtrails_inventory_open
-
-bowtrails_inventory_open:
-  type: task
-  definitions: page
-  debug: false
-  script:
-    - define page <[page]||1>
-    - define inventory <inventory[bowtrails_inventory]>
-    - define unlocked_trails <yaml[global.player.<player.uuid>].read[bowtrails.unlocked].as_list||<list[Default]>>
-    - foreach <[unlocked_trails]> as:trailID:
-      - inject build_trail_select_item
-      - define list:->:<[item]>
-    - give <[list].get[<[page].sub[1].mul[21].add[1]>].to[<[page].sub[1].mul[21].add[21]>]> to:<[inventory]>
-    - foreach <script[bowtrails_inventory].list_keys[custom.mapping]>:
-      - choose <[value]>:
-        - case next_page:
-          - if <[unlocked_trails].size> > <[page].sub[1].mul[21].add[21]>:
-            - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.next_page]> o:<script[bowtrails_inventory].parsed_key[definitions.next_page]>
-        - case previous_page:
-          - if <[page]> > 1:
-            - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.previous_page]> o:<script[bowtrails_inventory].parsed_key[definitions.previous_page]>
-        - case current_bowtrail:
-          - inject build_current_trail
-          - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.current_bowtrail]> o:<[item]>
-        - case page_marker:
-          - inventory set d:<[inventory]> slot:<script[bowtrails_inventory].data_key[custom.mapping.page_marker]> o:<script[bowtrails_inventory].parsed_key[definitions.filler].with[nbt=page/<[page]>]>
-    - inventory open d:<[inventory]>
-
-build_trail_select_item:
-  type: task
-  definitions: trailID
-  debug: false
-  script:
-    - define description <yaml[bowtrails].parsed_key[bowtrails.<[trailID]>.description].parse_color>
-    - define material <yaml[bowtrails].read[bowtrails.<[trailID]>.icon]>
-    - define display_name <yaml[bowtrails].parsed_key[bowtrails.<[trailID]>.name].parse_color>
-    - define lore <yaml[bowtrails].parsed_key[gui.trail_select_item.lore].parse[parse_color]>
-    - define name <yaml[bowtrails].parsed_key[gui.trail_select_item.displayname].parse_color>
-    - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;nbt=action/set_bowtrail|bowtrail/<[trailID]>]>
-
-build_current_trail:
-  type: task
-  debug: false
-  script:
-    - define trailID <yaml[global.player.<player.uuid>].read[bowtrails.current]||Default>
-    - define description <yaml[bowtrails].parsed_key[bowtrails.<[trailID]>.description].parse_color>
-    - if <[trailID]> == Default:
-      - define name <yaml[bowtrails].parsed_key[gui.no_current_trail.displayname].parse_color>
-      - define material <yaml[bowtrails].read[gui.no_current_trail.material]>
-      - define lore <yaml[bowtrails].parsed_key[gui.no_current_trail.lore].parse[parse_color]>
-      - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>]>
-    - else:
-      - define display_name <yaml[bowtrails].parsed_key[bowtrails.<[trailID]>.name].parse_color>
-      - define name <yaml[bowtrails].parsed_key[gui.current_trail.displayname].parse_color>
-      - define material <yaml[bowtrails].read[bowtrails.<[trailID]>.icon]>
-      - define lore <yaml[bowtrails].parsed_key[gui.current_trail.lore].parse[parse_color]>
-      - define item <item[<[material]>].with[display_name=<[name]>;lore=<[lore]>;nbt=action/remove_bowtrail]>
-
-bowtrail_config_manager:
-  type: world
-  debug: false
-  load_yaml:
-    - if <server.has_file[data/global/network/bowtrails.yml]>:
-      - yaml id:bowtrails load:data/global/network/bowtrails.yml
-  events:
-    on server start:
-      - inject locally load_yaml
-    on reload scripts:
-      - inject locally load_yaml

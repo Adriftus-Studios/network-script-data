@@ -4,36 +4,131 @@ channels:
   server:
     global: false
     on_by_default: true
-    permission: "none"
+    permission: adriftus.chat.basic
+    chat_lock_deny: true
     format: 
-      channel: "<&7><&lb><server.flag[display_name]||<bungee.server>><&7><&rb> "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.name>>"
+      channel: "<&7><&l><&lb><server.flag[display_name]||<bungee.server>><&7><&l><&rb> "
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
-      message: "<&f><[msg]||<context.formatted_message>>"
+      message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
       Discord:
-        active: false
-        group: none
-        channel: none
-        to-MC: false
-        to-Discord: false
+        herocraft:
+          active: true
+          group: SyntrocityHQ
+          channel: 976579984871260202
+          to-MC: true
+          to-Discord: true
+        test:
+          active: true
+          group: Adriftus Staff
+          channel: 978313832533487616
+          to-MC: true
+          to-Discord: true
+        hub:
+          active: true
+          group: Adriftus Staff
+          channel: 977669010890063874
+          to-MC: false
+          to-Discord: true
+        zanzabar:
+          active: true
+          group: Adriftus Staff
+          channel: 977669078976172092
+          to-MC: false
+          to-Discord: true
+    icon:
+      hub: <&chr[1008]>
+      herocraft: <&chr[1010]>
+      zanzabar: <&chr[1011]>
+      test: <&chr[1009]>
+    settings_icon:
+      hub: 
+        active: paper[custom_model_data=511]
+        inactive: paper[custom_model_data=512]
+      herocraft: 
+        active: paper[custom_model_data=513]
+        inactive: paper[custom_model_data=514]
+      zanzabar: 
+        active: paper[custom_model_data=517]
+        inactive: paper[custom_model_data=518]
+      test: 
+        active: paper[custom_model_data=515]
+        inactive: paper[custom_model_data=516]
+    rules:
+      hub:
+        - "No"
+  pg:
+    global: true
+    on_by_default: true
+    permission: adriftus.chat.basic
+    chat_lock_deny: true
+    icon: <&chr[1005]>
+    settings_icon:
+      active: paper[custom_model_data=505]
+      inactive: paper[custom_model_data=506]
+    format:
+      channel: "<&7><&l>[<&a><&l>PG<&7><&l>] "
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      separator: "<&b>: "
+      message: "<&r><[msg]||<context.new_message.text_display>>"
+    integrations:
+      Discord:
+        active: true
+        group: Adriftus
+        #channel: global-chat
+        channel: 979785769986191380
+        to-MC: true
+        to-Discord: true
       IRC:
         active: false
         channel: false
         to-MC: false
         to-IRC: false
-  global:
+  pg13:
     global: true
     on_by_default: true
-    permission: "none"
+    permission: adriftus.chat.basic
+    chat_lock_deny: true
+    icon: <&chr[1006]>
+    settings_icon:
+      active: paper[custom_model_data=507]
+      inactive: paper[custom_model_data=508]
     format:
-      channel: "<&7>[<&6>Global<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      channel: "<&7><&l>[<&6><&l>PG-13<&7><&l>] "
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
-      message: "<&f><[msg]||<context.formatted_message>>"
+      message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
       Discord:
         active: true
+        group: Adriftus
+        #channel: global-chat
+        channel: 979785805524529214
+        to-MC: true
+        to-Discord: true
+      IRC:
+        active: false
+        channel: false
+        to-MC: false
+        to-IRC: false
+  anarchy:
+    global: true
+    on_by_default: true
+    permission: adriftus.chat.basic
+    chat_lock_deny: false
+    icon: <&chr[1007]>
+    settings_icon:
+      active: paper[custom_model_data=509]
+      inactive: paper[custom_model_data=510]
+    format:
+      channel: "<&7><&l>[<&4><&l>Anarchy<&7><&l>] "
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      separator: "<&b>: "
+      message: "<&r><[msg]||<context.new_message.text_display>>"
+    integrations:
+      Discord:
+        active: false
         group: Adriftus
         #channel: global-chat
         channel: 651789860562272266
@@ -48,11 +143,15 @@ channels:
     global: true
     on_by_default: false
     permission: adriftus.staff
+    icon: <&chr[1001]>
+    settings_icon:
+      active: paper[custom_model_data=504]
+      inactive: paper[custom_model_data=500]
     format:
-      channel: "<&7>[<&a>Staff<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      channel: "<&7><&l>[<&e><&l>Staff<&7><&l>] "
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
-      message: "<&a><[msg]||<context.formatted_message>>"
+      message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
       Discord:
         active: true
@@ -66,21 +165,25 @@ channels:
         channel: false
         to-MC: false
         to-IRC: false
-  admin:
+  moderation:
     global: true
     on_by_default: false
-    permission: adriftus.admin
+    permission: adriftus.moderator
+    icon: <&chr[1004]>
+    settings_icon:
+      active: paper[custom_model_data=503]
+      inactive: paper[custom_model_data=500]
     format:
-      channel: "<&7>[<&4>Admin<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
-      separator: "<&b>: "
-      message: "<&c><[msg]||<context.formatted_message>>"
+      channel: "<&7><&l>[<&d><&l>Mod<&7><&l>] "
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      separator: "<&f>: "
+      message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
       Discord:
         active: true
         group: Adriftus Staff
-        #channel: manager-chat
-        channel: 626086306606350366
+        #channel: development-chat
+        channel: 976528472509927444
         to-MC: true
         to-Discord: true
       IRC:
@@ -92,11 +195,15 @@ channels:
     global: true
     on_by_default: false
     permission: adriftus.developer
+    icon: <&chr[1003]>
+    settings_icon:
+      active: paper[custom_model_data=502]
+      inactive: paper[custom_model_data=500]
     format:
-      channel: "<&7>[<&b>Dev<&7>] "
-      name: "<&7><yaml[global.player.<player.uuid>].read[display_name]||<player.display_name>>"
+      channel: "<&7><&l>[<&b><&l>Dev<&7><&l>] "
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&f>: "
-      message: "<&b><[msg]||<context.formatted_message>>"
+      message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
       Discord:
         active: true
@@ -110,4 +217,29 @@ channels:
         channel: false
         to-MC: false
         to-IRC: false
-    
+  admin:
+    global: true
+    on_by_default: false
+    permission: adriftus.admin
+    icon: <&chr[1002]>
+    settings_icon:
+      active: paper[custom_model_data=501]
+      inactive: paper[custom_model_data=500]
+    format:
+      channel: "<&7><&l>[<&4><&l>Admin<&7><&l>] "
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      separator: "<&b>: "
+      message: "<&r><[msg]||<context.new_message.text_display>>"
+    integrations:
+      Discord:
+        active: true
+        group: Adriftus Staff
+        #channel: manager-chat
+        channel: 626086306606350366
+        to-MC: true
+        to-Discord: true
+      IRC:
+        active: false
+        channel: false
+        to-MC: false
+        to-IRC: false

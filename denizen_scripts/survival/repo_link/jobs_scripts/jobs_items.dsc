@@ -326,7 +326,7 @@ jobs_item_chef_info_2:
   - <&6>Cookie<&co> <&a>$<script[Jobs_data_script].data_key[Chef.craft_item.Cookie.money].mul[<script[Jobs_data_script].data_key[Chef.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Chef.craft_item.Cookie.experience].mul[<script[Jobs_data_script].data_key[Chef.difficulty_level]>]>XP
   - <&6>Pumpkin Pie<&co> <&a>$<script[Jobs_data_script].data_key[Chef.craft_item.Pumpkin_Pie.money].mul[<script[Jobs_data_script].data_key[Chef.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Chef.craft_item.Pumpkin_Pie.experience].mul[<script[Jobs_data_script].data_key[Chef.difficulty_level]>]>XP
   - <&6>Golden Apple<&co> <&a>$<script[Jobs_data_script].data_key[Chef.craft_item.Golden_Apple.money].mul[<script[Jobs_data_script].data_key[Chef.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Chef.craft_item.Golden_Apple.experience].mul[<script[Jobs_data_script].data_key[Chef.difficulty_level]>]>XP
-  - <&6>Glistening Melon Slice<&co> <&a>$<script[Jobs_data_script].data_key[Chef.craft_item.glistening_melon_slice.money].mul[<script[Jobs_data_script].data_key[Chef.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Chef.craft_item.glistening_melon_slice.experience].mul[<script[Jobs_data_script].data_key[Chef.difficulty_level]>]>XP
+  - <&6>Glistering Melon Slice<&co> <&a>$<script[Jobs_data_script].data_key[Chef.craft_item.glistering_melon_slice.money].mul[<script[Jobs_data_script].data_key[Chef.difficulty_level]>]><&6>/<&b><script[Jobs_data_script].data_key[Chef.craft_item.glistering_melon_slice.experience].mul[<script[Jobs_data_script].data_key[Chef.difficulty_level]>]>XP
   - ''
 
 jobs_item_enchanter:

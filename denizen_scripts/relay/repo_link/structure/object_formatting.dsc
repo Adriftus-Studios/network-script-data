@@ -1,74 +1,47 @@
 object_formatting:
   type: procedure
-  definitions: object|padding
+  definitions: object|padding|inline
   debug: false
   script:
-    - if <[padding]||invalid> == invalid:
-      - define padding 0
+    - define padding 0 if:!<[padding].exists>
 
-    - define space "<element[ ].repeat[<[padding]>]>"
+    - define space <&sp.repeat[<[padding]>]>
     - define values <list>
 
-    - if <[object].type> == map:
-      - foreach <[object]>:
-        - choose <[value].type>:
+    - if <[inline].is_truthy>:
+      - define initial_space <empty>
+    - else:
+      - define initial_space <[space]>
+
+    - define debug.object <[object]>
+    - foreach <[object]>:
+      - if <[object].object_type> == map:
+        - choose <[value].object_type>:
           - case map:
-            - define values <[values].include_single[<&e><[key]><&6>:<&a><n><proc[format_map].context[<list_single[<[value]>].include[<[padding].add[2]>|false]>]>]>
+            - define values <[values].include_single[<[key]><&co><n><proc[object_formatting].context[<list_single[<[value]>].include[<[padding].add[2]>|false]>]>]>
+
           - case list:
-            - define values <[values].include_single[<&e><[key]><&6>:<&a><n><proc[format_list].context[<list_single[<[value]>].include[<[padding].add[2]>|false]>]>]>
+            - define values <[values].include_single[<[key]><&co><n><proc[object_formatting].context[<list_single[<[value]>].include[<[padding].add[2]>|false]>]>]>
+
           - default:
-            - define values "<[values].include_single[<&e><[key]><&6>:<&a> <[value]>]>"
+            - define values "<[values].include_single[<[key]><&co> <[value]>]>"
 
-      - determine <[space]><[values].separated_by[<n><[space]>]>
+      - else if <[object].object_type> == list:
+        - choose <[value].object_type>:
+          - case map:
+            - define values <[values].include_single[<proc[object_formatting].context[<list_single[<[value]>].include[<[padding].add[2]>|true]>]>]>
 
-format_map:
-  type: procedure
-  definitions: map|padding|inline
-  debug: false
-  script:
-    - if <[padding]||invalid> == invalid:
-      - define padding 0
+          - case list:
+            - define values <[values].include_single[<proc[object_formatting].context[<list_single[<[value]>].include[<[padding].add[2]>|true]>]>]>
 
-    - define values <list>
-    - define space "<element[ ].repeat[<[padding]>]>"
-    - if <[inline]||false>:
-      - define initial_space <empty>
-    - else:
-      - define initial_space <[space]>
+          - default:
+            - define values <[values].include_single[<[value]>]>
 
-    - foreach <[map]>:
-      - choose <[value].type>:
-        - case map:
-          - define values <[values].include_single[<&e><[key]><&6>:<&a><n><proc[format_map].context[<list_single[<[value]>].include[<[padding].add[2]>|false]>]>]>
-        - case list:
-          - define values <[values].include_single[<&e><[key]><&6>:<&a><n><proc[format_list].context[<list_single[<[value]>].include[<[padding].add[2]>|false]>]>]>
-        - default:
-          - define values "<[values].include_single[<&e><[key]><&6>:<&a> <[value]>]>"
 
-    - determine <[initial_space]><[values].separated_by[<n><[space]>]>
-
-format_list:
-  type: procedure
-  definitions: list|padding|inline
-  debug: false
-  script:
-    - if <[padding]||invalid> == invalid:
-      - define padding 0
-
-    - define values <list>
-    - define space "<element[ ].repeat[<[padding]>]>"
-    - if <[inline]||false>:
-      - define initial_space <empty>
-    - else:
-      - define initial_space <[space]>
-
-    - foreach <[list]>:
-      - choose <[value].type>:
-        - case map:
-          - define values <[values].include_single[<proc[format_map].context[<list_single[<[value]>].include[<[padding].add[2]>|true]>]>]>
-        - case list:
-          - define values <[values].include_single[<proc[format_list].context[<list_single[<[value]>].include[<[padding].add[2]>|true]>]>]>
-        - default:
-          - define values <[values].include_single[<[value]>]>
-
-    - determine "<[initial_space]><&e>-<&a> <[values].separated_by[<n><[space]><&e>-<&a> ]>"
+    - choose <[object].object_type>:
+      - case map:
+        - determine <[space]><[values].separated_by[<n><[space]>]>
+      - case list:
+        - determine "<[initial_space]>- <[values].separated_by[<n><[space]>- ]>"
+      - default:
+        - define values <[values].include_single[<[value]>]>

@@ -5,7 +5,7 @@ server_double_xp_setting:
     on server start:
       ##Flags the server to have a weekend jobs boost, then triggers the server to calculate the boost rate
       - if <util.time_now.day_of_week> == 6:
-        - flag server jobs.weekend_boost:2 duration:48h
+        - flag server jobs.weekend_boost:1.5 duration:48h
         - wait 10t
       - inject server_jobs_reward_multiplier
 

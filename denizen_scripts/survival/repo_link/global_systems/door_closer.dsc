@@ -3,6 +3,8 @@ Door_Closer:
   debug: false
   events:
     after player right clicks *door|*_gate priority:2:
+      - if <player.has_flag[DoorsStay]>:
+        - stop
       - if !<context.location.material.switched>:
         - stop
       - wait 2s
@@ -16,3 +18,20 @@ Door_Closer:
             - playsound <context.location> BLOCK_WOODEN_TRAPDOOR_CLOSE
           - case gate:
             - playsound <context.location> BLOCK_FENCE_GATE_CLOSE
+
+dont_close_doors:
+  type: command
+  debug: false
+  name: doorcloser
+  description: flags the player to keep doors open
+  usage: /doorcloser
+  aliases:
+    - closedoor
+    - opendoors
+  script:
+  - if <player.has_flag[DoorsStay]>:
+    - flag player DoorsStay:!
+    - narrate "<&6>Now closing <&e>doors <&6>behind you."
+  - else:
+    - flag player DoorsStay
+    - narrate "<&6>Now allowing you to leave <&e>doors <&6>wide open."

@@ -7,6 +7,8 @@ jobs_farmer_passive:
       ##Checks the player level is over the minimum, and that they arent just breaking un-grown crops
       - if <context.material.age> != <context.material.maximum_age> || <player.flag[jobs.farmer.level]> < 10:
         - stop
+      - if <context.location.add[0,1,0].has_flag[custom_planted]>:
+        - define custom_crop <context.location.add[0,1,0].flag[custom_planted]>
       - define farmer_level <player.flag[jobs.farmer.level]>
 
       ##boosts the chances for the passive, in this case each level adds 0.2% per player level, up to 20% at max level
@@ -21,6 +23,9 @@ jobs_farmer_passive:
         - flag <context.location> jobs.just_broken duration:1s
         ##flags the crop for the player to earn their cash
         - flag <context.location> jobs.player_placed.crop:<player>
+        - if <[custom_crop]||null> != null:
+          - flag <context.location.add[0,1,0]> <[custom_crop]>
+
 
         ##Checks and removes a bit more hoe durability, or breaks the item
         - define hoe_item <player.item_in_hand>
@@ -155,14 +160,11 @@ jobs_Excavator_passive:
       - if <context.location.has_flag[jobs.player_placed]> || <player.flag[jobs.Excavator.level]> < 10:
         - stop
       - define exc_level <player.flag[jobs.Excavator.level]>
-      ##boosts the proc rate per item at .2% per Excavator level, up to 20% at max level
-      - define proc_rate <util.random.int[0].to[100].add[<[exc_level].div[5]>]>
-      - narrate <[proc_rate]>
-      - if <[proc_rate]> > 90:
+      ##boosts the proc rate per item at 1% per Excavator level, up to 20% at max level
+      - define proc_rate <util.random.int[0].to[2000].add[<[exc_level]>]>
+      - if <[proc_rate]> > 1950:
         - define drop_slot <script[Jobs_data_script].list_keys[Excavator.passive_drop].random>
-        - narrate <[drop_slot]>
         - define drop <script[Jobs_data_script].data_key[Excavator.passive_drop.<[drop_slot]>].parsed>
-        - narrate <[drop]>
         - determine passively <list[<[drop]>|<context.material.name>]>
 
 jobs_Blacksmith_passive:

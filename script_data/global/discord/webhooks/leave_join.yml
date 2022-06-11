@@ -1,0 +1,7 @@
+avatar_url: https://minotar.net/helm/<[name]>
+embeds:
+- color: '65321'
+  footer:
+    text: <[Rank]> ★ <[Event]> ★ <[Title]>
+    icon_url: https://cdn.discordapp.com/icons/601677205445279744/508ea99e68694fe10b10ed93772748da.png?size=128
+username: <[name]>

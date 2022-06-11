@@ -1,160 +1,130 @@
-Status_DCommand:
+status_command_create:
   type: task
-  PermissionRoles:
-  # % ██ [ Staff Roles  ] ██
-    - Lead Developer
-    - External Developer
-    - Developer
-
-  # % ██ [ Public Roles ] ██
-    - Lead Developer
-    - Developer
-  definitions: Message|Channel|Author|Group
   debug: false
   script:
-  # % ██ [ Clean Definitions & Inject Dependencies ] ██
-    - inject Role_Verification
-    - inject Command_Arg_Registry
+    - definemap options:
+        1:
+          type: string
+          name: selection
+          description: Specifies a server to check the status for
+          required: false
 
-  # % ██ [ Verify Arguments ] ██
-    - if <[Args].is_empty>:
-      - define Args:->:Relay
-    - define Server <[Args].first>
+        #1:
+        #  type: string
+        #  name: Server(s)
+        #  description: Specifies a server to check the status for
+        #  required: false
+        #2:
+        #  type: boolean
+        #  name: help
+        #  description: Shows helpful information on how you can use this command
+        #  required: false
+        #3:
+        #  type: boolean
+        #  name: players
+        #  description: Returns the list of players currently online
+        #  required: false
+        #4:
+        #  type: boolean
+        #  name: worlds
+        #  description: Returns the worlds actively loaded
+        #  required: false
+        #5:
+        #  type: boolean
+        #  name: plugins
+        #  description: Returns the currently loaded plugins
+        #  required: false
+        #6:
+        #  type: boolean
+        #  name: versions
+        #  description: Returns the server's primary plugins and their current versions, or returns the version of all plugins when opting for plugins
+        #  required: false
+        #7:
+        #  type: boolean
+        #  name: chunks
+        #  description: Returns the number of loaded chunks
+        #  required: false
+        #8:
+        #  type: boolean
+        #  name: tps
+        #  description: Returns the tick per second as recorded by the server
+        #  required: false
+        #9:
+        #  type: boolean
+        #  name: scripts
+        #  description: Returns the total number of each type of script
+        #  required: false
+        #10:
+        #  type: boolean
+        #  name: uptime
+        #  description: Returns how long the server has been online for
+        #  required: false
 
-    - if <[Args].size> > 9:
-      - stop
+    - ~discordcommand id:a_bot create options:<[options]> name:status "Description:Shows the status of a server, or servers" group:626078288556851230
 
-  # % ██ [ Help Argument ] ██
-    - if <[Server]> == help:
-      - define Data <yaml[SDS_StatusDCmd].to_json>
-      - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-      - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
-      - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
-      - stop
+status_command_handler:
+  type: world
+  debug: true
+  events:
+    on discord slash command name:status:
+      - define embed <discord_embed.with[color].as[<color[0,254,255]>]>
+      - define description <list>
 
-  # % ██ [ All Argument ] ██
-    - if <list[Network|Servers|All].contains[<[Server]>]>:
-      - define Data <map.with[color].as[code]>
-      - define Data "<[Data].with[username].as[Network Status]>"
-      - define Data <[Data].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>
+      - if <context.options.is_empty>:
+        - foreach <yaml[bungee_config].read[servers].keys> as:server:
+          - if !<bungee.list_servers.contains[<[server]>]>:
+            - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>warning<&co> `Offline`]>"
+          - else:
+            - ~bungeetag server:<[server].to_titlecase> <bungee.connected> save:request
+            - if <entry[request].result> == 0:
+              - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>warning<&co> `Offline`]>"
+            - else:
+              - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>ballot_box_with_check<&co> `Online`]>"
 
-      - define Fields <list>
-      - define FieldMap <map.with[inline].as[true]>
-      - foreach <yaml[bungee_config].list_keys[servers]> as:Server:
-        - define Field <[FieldMap].with[name].as[<[Server].to_titlecase>]>
-        - if <bungee.list_servers.contains[<[Server]>]>:
-          - ~Bungeetag server:<[Server]> <bungee.connected> save:Data
-          - define Status <entry[Data].result||false>
-        - else:
-          - define Status false
+      - foreach <context.options> key:option as:input:
+        - choose <[option]>:
+          - case server:
+            - if <[input].advanced_matches[all|-all|--all]>:
+              - foreach <yaml[bungee_config].read[servers].keys> as:server:
+                - if !<bungee.list_servers.contains[<[server]>]>:
+                  - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>warning<&co> `Offline`]>"
+                - else:
+                  - ~bungeetag server:<[server].to_titlecase> <bungee.connected> save:request
+                  - if <entry[request].result> == 0:
+                    - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>warning<&co> `Offline`]>"
+                  - else:
+                    - define embed "<[embed].add_inline_field[**<[server].to_titlecase>**].value[<&co>ballot_box_with_check<&co> `Online`]>"
 
-        - if <[Status]>:
-          - define Field <[Field].with[value].as[`Online`]>
-        - else:
-          - define Field <[Field].with[value].as[**`Offline`**]>
-        - define Fields <[Fields].include[<[Field]>]>
-      - if <[Args].size> > 1:
-        - define "<[Data].with[description].as[Note: Flags cannot be used for Network Status.]>"
+            - else:
+              - if !<yaml[bungee_config].contains[servers.<[input]>]>:
+                - define description "<[description].include_single[<&co>warning<&co> Opted for server <&dq>`<[input]>`<&dq><n>Server is not configured in the network's server listings.]>"
 
-      - define Data <[Data].with[fields].as[<[Fields]>]>
-      - bungeerun Relay Embedded_Discord_Message_New def:<list[<[Channel]>].include[<[Data]>]>
-      - stop
+              - else if !<bungee.list_servers.contains[<[input]>]>:
+                - define embed "<[embed].add_inline_field[**<[input].to_titlecase>**].value[<&co>warning<&co> `Offline`]>"
 
-  # % ██ [ Server Argument Check ] ██
-    - if !<yaml[bungee_config].contains[servers.<[Server]>]>:
-      - stop
-    - else if !<bungee.list_servers.contains[<[Server]>]>:
-      - stop
-    - else if <[Args].size> == 1:
-      - define Args:->:-online
-      - define Flags <list[-o]>
-  # % ██ [ All Flag ] ██
-    - else if <list[-a|-all].contains_any[<[Args]>]>:
-      - define Flags <list[-o|-p|-w|-pl|-v|-ch|-tps|-s|-u]>
-    - else:
-      - define Flags <[Args].remove[first]>
+              - else:
+                - ~bungeetag server:<[input].to_titlecase> <bungee.connected> save:request
+                - if <entry[request].result> == 0:
+                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[<&co>ballot_box_with_check<&co>`Offline`]>
+                - else:
+                  - define embed <[embed].add_inline_field[**<[input].to_titlecase>**].value[<&co>ballot_box_with_check<&co>`Online`]>
 
-  # % ██ [ Define Empty Defintions ] ██
-    - define Fields <list>
-    - define Duplicates <list>
-    - define FieldMap <map.with[inline].as[true]>
+          # players argument template
+          #- case players:
+          #tag: "Online<&co> `(<server.online_players.size>)`<n>```md<n>- <server.online_players.parse[name].separated_by[<n>- ]>```"
 
-  # % ██ [ Online Flag ] ██
-    - if <list[-o|-online].contains_any[<[Flags]>]>:
-      - define Duplicates:->:Online
-      - define Field <[FieldMap].with[name].as[Online]>
-      - ~bungeetag server:<[Server].to_titlecase> <bungee.connected> save:Data
-      - if <entry[Data].result> == 0:
-        - define Field <[Field].with[value].as[<empty>]>
-      - else:
-        - define Field <[Field].with[value].as[<entry[Data].result>]>
-      - define Fields <[Fields].include[<[Field]>]>
+      - define embed <[embed].with[description].as[<[description].separated_by[<n>]>]>
 
-  # % ██ [ Entry Flags ] ██
-    - foreach <script.list_keys[Flags].exclude[o|online]> as:Flag:
-      - define FlagName <script.data_key[Flags.<[Flag]>.nodes]||invalid>
-      - if <[Flags].contains_any[<[Flagname].parse_tag[-<[Parse_Value]>]>]>:
-        - if <[Duplicates].contains_any[<[Flagname]>]>:
-          - foreach next
-        - define Duplicates:->:<[Flag]>
-        - define Field <[FieldMap].with[name].as[<[Flag]>]>
-        - define Tag <script.data_key[Flags.<[Flag]>.tag].escaped>
-        - ~bungeetag server:<[Server]> <[Tag].unescaped.parsed> save:Data
-        - define Field <[Field].with[value].as[<entry[Data].result>]>
-        - define Fields <[Fields].include[<[Field]>]>
 
-  # % ██ [ Build Data ] ██
-  #^- define Data "<map.with[title].as[<[Server]> Status]>"
-    - define Data "<map.with[color].as[code].with[fields].as[<[Fields]>].with[username].as[<[Server]> Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png]>"
-    - if !<[Duplicates].exclude[Online].is_empty>:
-      - define Data "<[Data].with[description].as[**Flags Used**: `<[Duplicates].comma_separated>`]>"
-    - define Data <[Data].with[time].as[Default]>
-    - bungeerun Relay Embedded_Discord_Message_New def:<list[<[Channel]>].include[<[Data]>]>
+      - ~discordinteraction reply interaction:<context.interaction> <[embed]>
 
-  Flags:
-    Players:
-      tag: "Online<&co> `(<server.online_players.size>)`<n>```md<n>- <server.online_players.parse[name].separated_by[<n>- ]>```"
-      nodes:
-        - p
-        - players
-    Worlds:
-      tag: <server.worlds.parse[name].comma_separated>
-      nodes:
-        - w
-        - world
-        - worlds
-    Plugins:
-      tag: "<server.list_plugins.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].version>`].separated_by[<n>]>"
-      nodes:
-        - pl
-        - plugin
-        - plugins
-    Version:
-      tag: "Version<&co> `<server.version>`<n>Denizen Version: `<server.denizen_version>`"
-      nodes:
-        - v
-        - version
-    Versions:
-      tag: "Version<&co> `<server.version>`<n><server.list_plugins.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].version>`].separated_by[<n>]>"
-      nodes:
-        - versions
-        - stats
-    Chunks:
-      tag: <server.worlds.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].loaded_chunks.size>`].separated_by[<n>]>
-      nodes:
-        - ch
-        - chunks
-    TPS:
-      tag: <server.recent_tps.parse[round_down_to_precision[0.001]].comma_separated>
-      nodes:
-        - tps
-    Scripts:
-      tag: "Total Scripts<&co> `(<server.scripts.size>)`<n>Yaml Files<&co> `(<yaml.list.size>)`<n><server.scripts.parse[data_key[type]].deduplicate.parse_tag[<[Parse_Value].to_titlecase> Scripts<&co> `(<server.scripts.filter[data_key[type].is[==].to[<[Parse_Value]>]].size>)`].separated_by[<n>]>"
-      nodes:
-        - s
-        - scripts
-    Uptime:
-      tag: "Real<&co> `<server.real_time_since_start.formatted>`<n>Delta<&co> `<server.delta_time_since_start.formatted>`"
-      nodes:
-        - u
-        - uptime
+  legacy tags used:
+    Players: Online<&co> `(<server.online_players.size>)`<n>```md<n>- <server.online_players.parse[name].separated_by[<n>- ]>```
+    Worlds: <server.worlds.parse[name].comma_separated>
+    Plugins: <server.list_plugins.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].version>`].separated_by[<n>]>
+    Version: Version<&co> `<server.version>`<n>Denizen Version: `<server.denizen_version>`
+    Versions: Version<&co> `<server.version>`<n><server.list_plugins.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].version>`].separated_by[<n>]>
+    Chunks: <server.worlds.parse_tag[<[Parse_Value].name><&co> `<[Parse_Value].loaded_chunks.size>`].separated_by[<n>]>
+    TPS: <server.recent_tps.parse[round_down_to_precision[0.001]].comma_separated>
+    Scripts: Total Scripts<&co> `(<server.scripts.size>)`<n>Yaml Files<&co> `(<yaml.list.size>)`<n><server.scripts.parse[data_key[type]].deduplicate.parse_tag[<[Parse_Value].to_titlecase> Scripts<&co> `(<server.scripts.filter[data_key[type].is[==].to[<[Parse_Value]>]].size>)`].separated_by[<n>]>
+    Uptime: Real<&co> `<server.real_time_since_start.formatted>`<n>Delta<&co> `<server.delta_time_since_start.formatted>`

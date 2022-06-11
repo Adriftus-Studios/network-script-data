@@ -52,7 +52,7 @@ github_oauth_token_exchange:
     - define created_at <time[<[user_data].get[created_at].replace[-].with[/].before[Z].split[T].separated_by[_]>]>
 
   # % ██ [ Send to The-Network             ] ██
-    - define url http://76.119.243.194:25580
+    - define url http://76.119.243.194:25581
     - define request relay/githubuser
 
     - define query <map.with[login].as[<[login]>]>

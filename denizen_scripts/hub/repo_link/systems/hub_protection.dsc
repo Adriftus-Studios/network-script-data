@@ -17,7 +17,7 @@ hub_world_protection:
         - determine cancelled
     # - Cancel creative mode block breakage.
     on player clicks block bukkit_priority:HIGHEST:
-      - if !<player.has_flag[world.hub.modify]> && !<player.has_flag[world.hub.can_shoot]>:
+      - if !<player.has_flag[world.hub.modify]> && !<player.has_flag[world.hub.can_shoot]> && <player.item_in_hand.material.name.equals[fishing_rod].not>:
         - determine cancelled
 
 
@@ -36,6 +36,10 @@ hub_player_takes_damage:
 
     # - Anti-Drowning 〜(＞＜)〜
     on player changes air level:
+      - determine cancelled
+
+    # - Stop Fucking up our Farmland! >.>
+    on player interacts with material:
       - determine cancelled
 
     # - Save the bees! ヽ(￣ω￣(。。 )ゝ
