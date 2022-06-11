@@ -10,7 +10,7 @@ mob_rarity_handler:
       - stop
     - if <context.entity.entity_type> != creeper:
       - flag <context.entity> emboldable
-    - define rarity_roll <util.random.int[1].to[10000].div[1000]>
+    - define rarity_roll <util.random.int[1].to[10000].div[10000]>
     - stop if:<[rarity_roll].is_more_than[<server.flag[custom_mob_data.mob_spawn_rates].keys.last>]>
     - foreach <server.flag[custom_mob_data.mob_spawn_rates].keys>:
       - if <[rarity_roll]> <= <[value]>:
