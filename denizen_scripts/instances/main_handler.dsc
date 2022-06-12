@@ -49,7 +49,7 @@ instance_finished:
   script:
     - announce to_console "Instance <[name]> finished initializing"
 
-instancing separation:
+instancing_separation:
   type: world
   debug: false
   events:
