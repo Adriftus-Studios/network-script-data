@@ -43,6 +43,7 @@ create_new_instance:
     - define cuboidOffset <location[<[cuboid].center.x.mod[10000]>,<[cuboid].center.y>,<[cuboid].center.z.mod[10000]>,world]>
     - define offsetVector <location[5000,<[cuboid].center.y>,5000,world].sub[<[cuboidOffset]>]>
     - flag server instance_map.names.<[name]>.offset:<[offsetVector]>
+    - flag server instance_map.names.<[name]>.center:<location[<[xStart]>,<[cuboid].center.y>,<[zStart]>,world].add[<[offsetVector]>]>
     - bungeerun <[callback_server]> instance_area_transfer def:<[cuboid]>|<[name]>
 
 instance_finished:
@@ -61,3 +62,10 @@ instancing_separation:
       - define zMod <context.location.z.mod[10000]>
       - if <[xMod]> > 9500 || <[xMod]> < 500 || <[zMod]> > 9500 || <[zMod]> < 500:
         - determine cancelled
+
+teleport_to_instance:
+  type: task
+  debug: false
+  definitions: name
+  script:
+    - if <server.has_flag[instance_map.names.<[name]>.coordinates]>
