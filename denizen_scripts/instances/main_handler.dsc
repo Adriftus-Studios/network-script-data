@@ -68,4 +68,5 @@ teleport_to_instance:
   debug: false
   definitions: name
   script:
-    - if <server.has_flag[instance_map.names.<[name]>.coordinates]>
+    - if <server.has_flag[instance_map.names.<[name]>.center]>:
+      - teleport <server.flag[instance_map.names.<[name]>.center]>
