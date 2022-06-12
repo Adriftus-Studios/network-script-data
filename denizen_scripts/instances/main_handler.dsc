@@ -17,6 +17,7 @@ create_new_instance:
       - case herocraft:
         - define xStart <[xNumber].mul[-10000]>
         - define zStart <[zNumber].mul[10000]>
+        - define centerOffset <location[-5000,0,5000]>
         - if <[xStart]> < -2047403648:
           - flag server instances.<[type]>.xCurrent:1
           - flag server instances.<[type]>.zCurrent:+:1
@@ -25,6 +26,7 @@ create_new_instance:
       - case admin:
         - define xStart <[xNumber].mul[10000]>
         - define zStart <[zNumber].mul[-10000]>
+        - define centerOffset <location[5000,0,-5000]>
         - if <[xStart]> > 2047403648:
           - flag server instances.<[type]>.xCurrent:1
           - flag server instances.<[type]>.zCurrent:+:1
@@ -33,6 +35,7 @@ create_new_instance:
       - case generic:
         - define xStart <[xNumber].mul[10000]>
         - define zStart <[zNumber].mul[10000]>
+        - define centerOffset <location[5000,0,5000]>
         - if <[xStart]> > 2047403648:
           - flag server instances.<[type]>.xCurrent:1
           - flag server instances.<[type]>.zCurrent:+:1
@@ -43,7 +46,7 @@ create_new_instance:
     - define cuboidOffset <location[<[cuboid].center.x.mod[10000]>,<[cuboid].center.y>,<[cuboid].center.z.mod[10000]>,world]>
     - define offsetVector <location[5000,<[cuboid].center.y>,5000,world].sub[<[cuboidOffset]>]>
     - flag server instance_map.names.<[name]>.offset:<[offsetVector]>
-    - flag server instance_map.names.<[name]>.center:<location[<[xStart]>,<[cuboid].center.y>,<[zStart]>,world].add[<[offsetVector]>]>
+    - flag server instance_map.names.<[name]>.center:<location[<[xStart]>,<[cuboid].center.y>,<[zStart]>,world].add[<[centerOffset]>]>
     - bungeerun <[callback_server]> instance_area_transfer def:<[cuboid]>|<[name]>
 
 instance_finished:
