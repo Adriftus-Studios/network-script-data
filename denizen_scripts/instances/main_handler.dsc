@@ -43,7 +43,7 @@ create_new_instance:
     - define cuboidOffset <location[<[cuboid].center.x.mod[10000]>,<[cuboid].center.y>,<[cuboid].center.z.mod[10000]>,world]>
     - define offsetVector <location[5000,<[cuboid].center.y>,5000,world].sub[<[cuboidOffset]>]>
     - flag server instance_map.names.<[name]>.offset:<[offsetVector]>
-    - bungeerun <[callback_server]> instance_area_transfer def:<[cuboid]>
+    - bungeerun <[callback_server]> instance_area_transfer def:<[cuboid]>|<[name]>
 
 instance_finished:
   type: task
