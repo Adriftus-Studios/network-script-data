@@ -3,7 +3,7 @@ error_handler:
   debug: false
   data:
     enabled_servers:
-      - b
+      - instances
       - hub
       - test
       - herocraft
