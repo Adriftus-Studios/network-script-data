@@ -13,7 +13,7 @@ create_new_instance:
     - define type generic if:<[type].exists.not>
     - define xNumber <server.flag[instances.<[type]>.xCurrent].if_null[1].add[1]>
     - define zNumber <server.flag[instances.<[type]>.zCurrent].if_null[1].add[1]>
-    - choose type:
+    - choose <[type]>:
       - case herocraft:
         - define xStart <[xNumber].mul[-10000]>
         - define zStart <[zNumber].mul[10000]>
