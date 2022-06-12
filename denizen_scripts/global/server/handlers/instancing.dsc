@@ -42,3 +42,4 @@ instancing_paste_schematic:
       - if !<[this_chunk].is_loaded>:
         - chunkload <[this_chunk]> duration:10s
     - schematic paste name:<[uuid]> origin:<[finalLocation]> entities
+    - schematic unload name:<[uuid]>
