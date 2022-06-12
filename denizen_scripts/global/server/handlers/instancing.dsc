@@ -1,9 +1,10 @@
 instance_area:
   type: task
   debug: false
-  definitions: name|cuboid
+  definitions: name|cuboid|type
   script:
-    - bungeerun instances create_new_instance def:<[name]>|<[cuboid]>|<bungee.server>|<[cuboid]>
+    - define type generic if:<[type].exists.not>
+    - bungeerun instances create_new_instance def:<[name]>|<[type]>|<bungee.server>|<[cuboid]>
 
 instance_area_transfer:
   type: task

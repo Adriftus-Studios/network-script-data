@@ -7,6 +7,9 @@ create_new_instance:
     - if <server.has_flag[instance_map.names.<[name]>]>:
       - log ERROR "Instance name already exists<&co> <[name]>"
       - stop
+    - if !<list[generic|herocraft|admin].contains[<[type]>]>:
+      - log ERROR "Unknown Instance Type<&co> <[type]>"
+      - stop
     - define type generic if:<[type].exists.not>
     - define xNumber <server.flag[instances.<[type]>.xCurrent].if_null[1].add[1]>
     - define zNumber <server.flag[instances.<[type]>.zCurrent].if_null[1].add[1]>
