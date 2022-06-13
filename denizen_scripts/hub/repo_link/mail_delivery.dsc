@@ -171,6 +171,7 @@ mail_delivery_events:
     - define inventory <inventory[mailbox_<[number]>_<player.uuid>]>
     - flag <[inventory]> mailbox:<[number]>
     - flag <[inventory]> location:<context.entity.location>
+    - inventory set d:<[inventory]> slot:5 o:<item[iron_nugget].with[custom_model_data=<element[40].add[<[number]>]>]>
     - inventory open d:<[inventory]> player:<player>
     on player clicks in mail_delivery_mailbox_inventory:
     - if <context.item.flag[mailbox_number].equals[<context.inventory.flag[mailbox]>].not.if_null[false]>:
