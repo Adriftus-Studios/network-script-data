@@ -16,4 +16,4 @@ sit_in_place_cancel:
     - animate <player> animation:stop_sitting
     - flag player on_dismount:<-:sit_in_place_cancel
     - wait 1t
-    - teleport <player> <player.location.above[2]>
+    - teleport <player> <player.location.above[0.3]>
