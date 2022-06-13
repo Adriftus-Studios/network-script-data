@@ -6,6 +6,9 @@ sit_in_place:
     - if <player.flag[on_dismount].contains[sit_in_place_cancel].if_null[false]>:
       - inject sit_in_place_cancel
       - stop
+    - if !<player.location.below.material.is_solid> || <player.location.below.material.name> == barrier:
+      - narrate "<&c>You must sit on solid ground"
+      - stop
     - inventory close
     - teleport <player> <player.location.below[0.175]>
     - animate animation:sit <player>
