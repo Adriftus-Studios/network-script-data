@@ -18,7 +18,7 @@ player_crafting_slots_override_events:
       - stop if:<player.is_online.not>
       - foreach <script.data_key[data.items]>:
         - inventory set slot:<[loop_index].add[1]> o:<[value].parsed> d:<[inv]>
-      - inventory set slot:1 o:stone[flag=grid_script:cancel] d:<[inv]>
+      - inventory set slot:1 o:stone[flag=grid_script:sit_in_place] d:<[inv]>
       - wait 1t
       - take flagged:grid_script quantity:999
       - inventory update
