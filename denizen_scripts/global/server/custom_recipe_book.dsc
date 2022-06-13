@@ -68,6 +68,10 @@ custom_recipe_data_initializer:
         - foreach <[item_script].as_item.recipe_ids> as:recipe_id:
           - define result <server.recipe_result[<[recipe_id]>]>
           - define items <list>
+          - define category <[result].script.data_key[data.recipe_book_category].before[.]>
+          - if !<script.data_key[data.categories].keys.contains[<[category]>]>:
+            - debug ERROR "ITEM HAS UNKNOWN CATEGORY<&co> <[category]>"
+            - foreach next
           - foreach <server.recipe_items[<[recipe_id]>]> as:recipe_item:
             - if <[recipe_item].starts_with[material]>:
               - define recipe_item <[recipe_item].substring[10].as_item>
@@ -76,14 +80,10 @@ custom_recipe_data_initializer:
                 - define modified_lore "<[recipe_item].lore.include[<&b>Click to see Recipe]>"
               - else:
                 - define modified_lore "<&b>Click to see Recipe"
-              - define recipe_item <item[<[recipe_item]>].with[flag=run_script:custom_recipe_inventory_open;flag=recipe_id:<[recipe_item].as_item.recipe_ids.get[1].after[<&co>]>;lore=<[modified_lore]>]>
+              - define recipe_item <item[<[recipe_item]>].with[flag=category:<[category]>;flag=run_script:custom_recipe_inventory_open;flag=recipe_id:<[recipe_item].as_item.recipe_ids.get[1].after[<&co>]>;lore=<[modified_lore]>]>
             - else:
               - define value <[recipe_item].as_item>
             - define items:|:<[recipe_item]>
-          - define category <[result].script.data_key[data.recipe_book_category].before[.]>
-          - if !<script.data_key[data.categories].keys.contains[<[category]>]>:
-            - debug ERROR "ITEM HAS UNKNOWN CATEGORY<&co> <[category]>"
-            - foreach next
           - flag server recipe_book.categories.<[category]>.<[item_script]>:|:<[recipe_id].after[<&co>]>
           - flag server recipe_book.recipes.<[recipe_id].after[<&co>]>.items:!|:<[items]>
           - flag server recipe_book.recipes.<[recipe_id].after[<&co>]>.result:<[result]>
