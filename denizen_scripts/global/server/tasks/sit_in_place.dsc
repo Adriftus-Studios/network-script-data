@@ -14,5 +14,5 @@ sit_in_place_cancel:
   script:
     - ratelimit <player> 1t
     - animate <player> animation:stop_sitting
-    - teleport <player> <player.location.above[1.8]>
+    - teleport <player> <player.location.above[2]>
     - flag player on_dismount:<-:sit_in_place_cancel
