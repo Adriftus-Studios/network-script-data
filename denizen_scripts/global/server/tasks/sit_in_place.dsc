@@ -3,6 +3,9 @@ sit_in_place:
   debug: false
   script:
     - ratelimit <player> 1t
+    - if <player.flag[on_dismount].contains[sit_in_place_cancel].if_null[false]>:
+      - inject sit_in_place_cancel
+      - stop
     - inventory close
     - teleport <player> <player.location.below[0.175]>
     - animate animation:sit <player>
