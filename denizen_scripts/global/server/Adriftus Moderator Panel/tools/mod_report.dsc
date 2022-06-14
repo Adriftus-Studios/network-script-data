@@ -37,7 +37,6 @@ mod_report_online_inv:
   gui: true
   size: 54
   definitions:
-    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     previous: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     next: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     close: <item[red_stained_glass_pane].with[display_name=<&c><&l>χ<&sp>Close].with_flag[to:close]>
@@ -47,7 +46,7 @@ mod_report_online_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [close] [x] [x] [x] [x] [x] [x] [previous] [next]
+    - [close] [] [] [] [] [] [] [previous] [next]
 
 mod_report_online_inv_events:
   type: world
@@ -136,11 +135,11 @@ mod_report_inv:
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:report]>
     confirm: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
   slots:
-    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [x] [x] [x] [] [] [] [x] [x] [x]
-    - [x] [x] [] [] [] [y] [x] [x] [x]
-    - [x] [x] [] [] [] [] [x] [x] [x]
-    - [x] [x] [x] [] [x] [] [x] [x] [x]
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
     - [back] [x] [x] [x] [head] [x] [x] [x] [confirm]
 
 mod_report_inv_open:
@@ -152,7 +151,6 @@ mod_report_inv_open:
       info: 50
   script:
     # Inventory
-    - define items <list>
     - define inventory <inventory[mod_report_inv]>
     - adjust def:inventory "title:<&6>Adriftus <&f>- <&a>Report <&e><[target].name><&a>."
     # Selected
@@ -176,9 +174,7 @@ mod_report_inv_open:
           - define item <[item].with[display_name=<[name]>;lore=<[lore]>;enchantments=arrow_infinite=1;hides=ALL]>
         - else:
           - define item <[item].with[display_name=<[name]>;lore=<[lore]>;hides=ALL]>
-        - define items:->:<[item]>
-    # Sort and give items to list
-    - give <[items].sort_by_value[flag[CATEGORY]]> to:<[inventory]>
+        - inventory set slot:<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.report_slot]> o:<[item]> d:<[inventory]>
     # Place confirmation button if player has selected at least one infraction
     - if <[selected].unescaped.as_list.size> > 0:
       - inventory set slot:54 o:<item[lime_stained_glass_pane].with[display_name=<&a><&l>✓<&sp>Report]> d:<[inventory]>
