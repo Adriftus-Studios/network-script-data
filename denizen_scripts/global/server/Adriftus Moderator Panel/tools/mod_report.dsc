@@ -129,18 +129,17 @@ mod_report_inv:
   gui: true
   size: 54
   definitions:
-    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    y: <item[white_stained_glass].with[display_name=<&sp>]>
+    x: <item[white_stained_glass].with[display_name=<&sp>]>
     head: <item[player_head].with[display_name=<&sp>;custom_model_data=3]>
     back: <item[red_stained_glass_pane].with[display_name=<&c><&l>↩<&sp>Player<&sp>list].with_flag[to:report]>
-    confirm: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    confirm: <item[air]>
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [x] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [back] [x] [x] [x] [head] [x] [x] [x] [confirm]
+    - [back] [] [] [] [head] [] [] [] [confirm]
 
 mod_report_inv_open:
   type: task
