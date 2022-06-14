@@ -37,6 +37,7 @@ mod_report_online_inv:
   gui: true
   size: 54
   definitions:
+    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     previous: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     next: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     close: <item[red_stained_glass_pane].with[display_name=<&c><&l>χ<&sp>Close].with_flag[to:close]>
@@ -46,7 +47,7 @@ mod_report_online_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [close] [] [] [] [] [] [] [previous] [next]
+    - [close] [x] [x] [x] [x] [x] [x] [previous] [next]
 
 mod_report_online_inv_events:
   type: world
