@@ -75,15 +75,15 @@ mod_ban_infractions:
     Minor Inappropriate Chat Usage:
       category: Chat
       length: 7d
-      slot: 13
+      slot: 12
     Advertising:
       category: Chat
       length: 7d
-      slot: 14
+      slot: 13
     X-Ray:
       category: Visual Advantage
       length: 14d
-      slot: 15
+      slot: 14
   2:
     Minor Movement Advantage:
       category: Movement Advantage
