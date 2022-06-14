@@ -5,6 +5,8 @@ mod_bug_report_command:
   name: bugreport
   description: Adriftus Bug Report
   usage: /bugreport
+  aliases:
+    - reportbug
   script:
     - narrate "<&6>Adriftus <&e>Bug Report"
     - narrate "<&f>Network<&co> <proc[msg_url].context[<script[mod_bug_report_url].parsed_key[1hover]>|<script[mod_bug_report_url].parsed_key[1text]>|<script[mod_bug_report_url].parsed_key[1url]>]>"
