@@ -11,11 +11,11 @@ mod_ban_inv:
     back: <item[feather].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;custom_model_data=3].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
-    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [x] [x] [] [] [] [x] [x] [x] [x]
-    - [x] [x] [] [] [] [] [] [x] [x]
-    - [x] [x] [] [] [] [x] [x] [x] [x]
-    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
     - [back] [x] [x] [x] [head] [x] [x] [x] [x]
 
 mod_ban_inv_events:
@@ -34,7 +34,6 @@ mod_ban_inv_open:
   type: task
   debug: false
   script:
-    - define items <list>
     - define inventory <inventory[mod_ban_inv]>
     - foreach <list[1|2|3]> as:level:
       - foreach <script[mod_ban_infractions].list_keys[<[level]>]> as:infraction:
@@ -47,6 +46,5 @@ mod_ban_inv_open:
         - flag <[item]> INFRACTION:<[infraction]>
         - flag <[item]> LENGTH:<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.length]>
         - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
-        - define items:->:<[item]>
-    - give <[items]> to:<[inventory]>
+        - inventory set slot:<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.slot]> o:<[item]> d:<[inventory]>
     - inventory open d:<[inventory]>
