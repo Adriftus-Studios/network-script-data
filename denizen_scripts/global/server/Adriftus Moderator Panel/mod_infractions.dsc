@@ -69,53 +69,67 @@ mod_kick_infractions:
 
 mod_ban_infractions:
   type: data
-  1:
-    Minor Inappropriate Chat Usage:
-      category: Chat
-      length: 7d
-      slot: 12
-    Advertising:
-      category: Chat
-      length: 7d
-      slot: 13
-    X-Ray:
-      category: Visual Advantage
-      length: 14d
-      slot: 14
-  2:
-    Minor Movement Advantage:
-      category: Movement Advantage
-      length: 14d
-      slot: 21
-    Minor Combat Advantage:
-      category: Combat Advantage
-      length: 14d
-      slot: 22
-    Excessive Negativity:
-      category: Chat
-      length: 14d
-      slot: 23
-    ESP:
-      category: Visual Advantage
-      length: 14d
-      slot: 24
-    Bug Abuse:
-      category: Exploit
-      length: 14d
-      slot: 25
-  3:
-    Major Movement Advantage:
-      category: Movement Advantage
-      length: 30d
-      slot: 30
-    Major Combat Advantage:
-      category: Combat Advantage
-      length: 30d
-      slot: 31
-    Major Inappropriate Chat Usage:
-      category: Chat
-      length: 30d
-      slot: 32
+  test:
+    1:
+      Test 1:
+        category: Chat
+        slot: 12
+    2:
+      Test 2:
+        category: Harassment
+        slot: 21
+    3:
+      Test 3:
+        category: Combat Advantage
+        slot: 30
+  default:
+    1:
+      Minor Inappropriate Chat Usage:
+        category: Chat
+        length: 7d
+        slot: 12
+      Advertising:
+        category: Chat
+        length: 7d
+        slot: 13
+      X-Ray:
+        category: Visual Advantage
+        length: 14d
+        slot: 14
+    2:
+      Minor Movement Advantage:
+        category: Movement Advantage
+        length: 14d
+        slot: 21
+      Minor Combat Advantage:
+        category: Combat Advantage
+        length: 14d
+        slot: 22
+      Excessive Negativity:
+        category: Chat
+        length: 14d
+        slot: 23
+      ESP:
+        category: Visual Advantage
+        length: 14d
+        slot: 24
+      Bug Abuse:
+        category: Exploit
+        length: 14d
+        slot: 25
+    3:
+      Major Movement Advantage:
+        category: Movement Advantage
+        length: 30d
+        slot: 30
+      Major Combat Advantage:
+        category: Combat Advantage
+        length: 30d
+        slot: 31
+      Major Inappropriate Chat Usage:
+        category: Chat
+        length: 30d
+        slot: 32
 
 mod_action_past_tense:
   type: data
