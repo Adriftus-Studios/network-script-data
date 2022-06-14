@@ -36,8 +36,13 @@ mod_kick_inv_open:
   debug: false
   script:
     - define inventory <inventory[mod_kick_inv]>
+    - choose <bungee.server>:
+      - case test:
+        - define server <bungee.server>
+      - default:
+        - define server default
     - foreach <list[1|2|3]> as:level:
-      - foreach <script[mod_kick_infractions].list_keys[<[level]>]> as:infraction:
+      - foreach <script[mod_kick_infractions].list_keys[<[server]>.<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>
         - define name <[item].flag[tag].parsed><&sp><[infraction]>
         - define lore <list[<&b>Level<&co><&sp><[item].flag[colour].parsed><[level]>]>
@@ -46,5 +51,5 @@ mod_kick_inv_open:
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> INFRACTION:<[infraction]>
         - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
-        - inventory set slot:<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.slot]> o:<[item]> d:<[inventory]>
+        - inventory set slot:<script[mod_kick_infractions].data_key[<[server]>.<[level]>.<[infraction]>.slot]> o:<[item]> d:<[inventory]>
     - inventory open d:<[inventory]>
