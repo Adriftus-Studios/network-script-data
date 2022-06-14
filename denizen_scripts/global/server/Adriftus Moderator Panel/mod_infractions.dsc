@@ -5,65 +5,80 @@ mod_kick_infractions:
     1:
       Test 1:
         category: Chat
+        cmd: 0
         slot: 12
     2:
       Test 2:
         category: Harassment
+        cmd: 0
         slot: 21
     3:
       Test 3:
         category: Combat Advantage
+        cmd: 0
         slot: 30
   default:
     1:
       Spam:
         category: Chat
+        cmd: 0
         slot: 12
         report_slot: 13
       Chat Maturity:
         category: Chat
+        cmd: 0
         slot: 13
         report_slot: 14
       Flying:
         category: Movement Advantage
+        cmd: 0
         slot: 14
         report_slot: 33
     2:
       Inappropriate Chat Usage:
         category: Chat
+        cmd: 0
         slot: 21
         report_slot: 15
       Advertising:
         category: Chat
+        cmd: 0
         slot: 22
         report_slot: 21
       Griefing:
         category: Harassment
+        cmd: 0
         slot: 23
         report_slot: 31
     3:
       Racism:
         category: Chat
+        cmd: 0
         slot: 30
         report_slot: 22
       Sexism:
         category: Chat
+        cmd: 0
         slot: 31
         report_slot: 23
       Disrespectful Behaviour:
         category: Harassment
+        cmd: 0
         slot: 32
         report_slot: 32
       Unfair Visual Advantage:
         category: Visual Advantage
+        cmd: 0
         slot: 33
         report_slot: 40
       Unfair Movement Advantage:
         category: Movement Advantage
+        cmd: 0
         slot: 34
         report_slot: 42
       Unfair Combat Advantage:
         category: Combat Advantage
+        cmd: 0
         slot: 35
         report_slot: 30
 
