@@ -43,7 +43,6 @@ mod_kick_inv_open:
         - define lore:->:<&r><player.flag[amp].get[name]>
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> INFRACTION:<[infraction]>
-        - flag <[item]> LENGTH:<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.length]>
         - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
-        - inventory set slot:<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.slot]> o:<[item]> d:<[inventory]>
+        - inventory set slot:<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.slot]> o:<[item]> d:<[inventory]>
     - inventory open d:<[inventory]>
