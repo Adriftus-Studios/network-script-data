@@ -158,23 +158,23 @@ mod_report_inv_open:
     - define infractions <list>
     - define map <map>
     - foreach <list[1|2|3]> as:level:
-      - foreach <script[mod_kick_infractions].list_keys[<[level]>]> as:infraction:
-        - define map <[map].with[<[infraction]>.category].as[<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>]>
+      - foreach <script[mod_kick_infractions].list_keys[default.<[level]>]> as:infraction:
+        - define map <[map].with[<[infraction]>.category].as[<script[mod_kick_infractions].data_key[default.<[level]>.<[infraction]>.category]>]>
         - define map <[map].with[<[infraction]>.level].as[<[level]>]>
         # Build item
         - define item <item[red_terracotta]>
         - define name <&e><[infraction]>
-        - define lore <list[<&b>Category<&co><&sp><script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>]>
+        - define lore <list[<&b>Category<&co><&sp><script[mod_kick_infractions].data_key[default.<[level]>.<[infraction]>.category]>]>
         - define lore:->:<&e>Left<&sp>Click<&sp>to<&sp>add<&sp>to<&sp>selection
         - flag <[item]> INFRACTION:<[infraction]>
         - flag <[item]> LEVEL:<[level]>
-        - flag <[item]> CATEGORY:<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.category]>
+        - flag <[item]> CATEGORY:<script[mod_kick_infractions].data_key[default.<[level]>.<[infraction]>.category]>
         # Selected vs Not Selected
         - if <[selected].contains[<[infraction]>]>:
           - define item <[item].with[display_name=<[name]>;lore=<[lore]>;enchantments=arrow_infinite=1;hides=ALL]>
         - else:
           - define item <[item].with[display_name=<[name]>;lore=<[lore]>;hides=ALL]>
-        - inventory set slot:<script[mod_kick_infractions].data_key[<[level]>.<[infraction]>.report_slot]> o:<[item]> d:<[inventory]>
+        - inventory set slot:<script[mod_kick_infractions].data_key[default.<[level]>.<[infraction]>.report_slot]> o:<[item]> d:<[inventory]>
     # Place confirmation button if player has selected at least one infraction
     - if <[selected].unescaped.as_list.size> > 0:
       - inventory set slot:54 o:<item[lime_stained_glass_pane].with[display_name=<&a><&l>✓<&sp>Report]> d:<[inventory]>
