@@ -29,29 +29,29 @@ mod_kick_infractions:
     Flying:
       category: Movement Advantage
       slot: 14
-      report_slot: 15
+      report_slot: 33
   2:
     Inappropriate Chat Usage:
       category: Chat
       slot: 21
-      report_slot: 21
+      report_slot: 15
     Advertising:
       category: Chat
       slot: 22
-      report_slot: 22
+      report_slot: 21
     Griefing:
       category: Harassment
       slot: 23
-      report_slot: 23
+      report_slot: 31
   3:
     Racism:
       category: Chat
       slot: 30
-      report_slot: 30
+      report_slot: 22
     Sexism:
       category: Chat
       slot: 31
-      report_slot: 31
+      report_slot: 23
     Disrespectful Behaviour:
       category: Harassment
       slot: 32
@@ -59,15 +59,15 @@ mod_kick_infractions:
     Unfair Visual Advantage:
       category: Visual Advantage
       slot: 33
-      report_slot: 33
+      report_slot: 40
     Unfair Movement Advantage:
       category: Movement Advantage
       slot: 34
-      report_slot: 40
+      report_slot: 42
     Unfair Combat Advantage:
       category: Combat Advantage
       slot: 35
-      report_slot: 42
+      report_slot: 30
 
 mod_ban_infractions:
   type: data
