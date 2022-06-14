@@ -7,9 +7,9 @@ mod_ban_inv:
   gui: true
   size: 54
   definitions:
-    lvl1: <item[feather].with[display_name=<&e><&l>Level<&sp>1;custom_model_data=3]>
-    lvl2: <item[feather].with[display_name=<&6><&l>Level<&sp>2;custom_model_data=3]>
-    lvl3: <item[feather].with[display_name=<&c><&l>Level<&sp>3;custom_model_data=3]>
+    lvl1: <item[feather].with[display_name=<&f><&lb><&e>1<&f><&rb>;custom_model_data=3]>
+    lvl2: <item[feather].with[display_name=<&7><&lb><&6>2<&7><&rb>;custom_model_data=3]>
+    lvl3: <item[feather].with[display_name=<&8><&lb><&c>3<&8><&rb>;custom_model_data=3]>
     back: <item[feather].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;custom_model_data=3].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
