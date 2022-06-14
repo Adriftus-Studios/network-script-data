@@ -7,16 +7,18 @@ mod_kick_inv:
   gui: true
   size: 54
   definitions:
-    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    lvl1: <item[feather].with[display_name=<&f><&lb><&e>1<&f><&rb>;custom_model_data=3]>
+    lvl2: <item[feather].with[display_name=<&7><&lb><&6>2<&7><&rb>;custom_model_data=3]>
+    lvl3: <item[feather].with[display_name=<&8><&lb><&c>3<&8><&rb>;custom_model_data=3]>
     back: <item[feather].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;custom_model_data=3].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
     - [] [] [] [] [] [] [] [] []
+    - [lvl1] [lvl1] [] [] [] [] [] [] []
+    - [lvl2] [lvl2] [] [] [] [] [] [] []
+    - [lvl3] [lvl3] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
-    - [back] [x] [x] [x] [head] [x] [x] [x] [x]
+    - [back] [] [] [] [head] [] [] [] []
 
 mod_kick_inv_events:
   type: world
