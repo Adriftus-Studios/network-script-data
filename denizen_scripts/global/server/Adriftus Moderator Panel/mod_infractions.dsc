@@ -89,26 +89,31 @@ mod_ban_infractions:
       Test 1:
         category: Chat
         length: 7d
+        cmd: 0
         slot: 12
     2:
       Test 2:
         category: Harassment
         length: 14d
+        cmd: 0
         slot: 21
     3:
       Test 3:
         category: Combat Advantage
         length: 30d
+        cmd: 0
         slot: 30
   default:
     1:
       Minor Inappropriate Chat Usage:
         category: Chat
         length: 7d
+        cmd: 0
         slot: 12
       Advertising:
         category: Chat
         length: 7d
+        cmd: 0
         slot: 13
       X-Ray:
         category: Visual Advantage
@@ -118,35 +123,43 @@ mod_ban_infractions:
       Minor Movement Advantage:
         category: Movement Advantage
         length: 14d
+        cmd: 0
         slot: 21
       Minor Combat Advantage:
         category: Combat Advantage
         length: 14d
+        cmd: 0
         slot: 22
       Excessive Negativity:
         category: Chat
         length: 14d
+        cmd: 0
         slot: 23
       ESP:
         category: Visual Advantage
         length: 14d
+        cmd: 0
         slot: 24
       Bug Abuse:
         category: Exploit
         length: 14d
+        cmd: 0
         slot: 25
     3:
       Major Movement Advantage:
         category: Movement Advantage
         length: 30d
+        cmd: 0
         slot: 30
       Major Combat Advantage:
         category: Combat Advantage
         length: 30d
+        cmd: 0
         slot: 31
       Major Inappropriate Chat Usage:
         category: Chat
         length: 30d
+        cmd: 0
         slot: 32
 
 mod_action_past_tense:
