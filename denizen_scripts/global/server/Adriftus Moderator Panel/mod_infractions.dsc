@@ -73,14 +73,17 @@ mod_ban_infractions:
     1:
       Test 1:
         category: Chat
+        length: 7d
         slot: 12
     2:
       Test 2:
         category: Harassment
+        length: 14d
         slot: 21
     3:
       Test 3:
         category: Combat Advantage
+        length: 30d
         slot: 30
   default:
     1:
