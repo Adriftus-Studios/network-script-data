@@ -74,7 +74,7 @@ mod_report_online_inv_open:
     slot_data:
       slots_used: <util.list_numbers_to[45]>
       close: 46
-      page: 50
+      page: 46
       previous_page: 53
       next_page: 54
   script:
@@ -96,7 +96,7 @@ mod_report_online_inv_open:
         # Set the defined item an inventory slot.
         - inventory set o:<[item]> slot:<[slots].get[<[loop_index]>]> d:<[inventory]>
     # Pagination Item
-    - inventory set slot:<script.data_key[data.slot_data.page]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=page:<[page]>]> d:<[inventory]>
+    - inventory set slot:<script.data_key[data.slot_data.page]> o:<item[red_stained_glass_pane].with[display_name=<&c><&l>χ<&sp>Close;flag=to:close;flag=page:<[page]>]> d:<[inventory]>
     # Previous Page Button
     - if <[page]> != 1:
       - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:mod_report_online_inv_previous_page;color=green;custom_model_data=6]> d:<[inventory]>
