@@ -72,7 +72,7 @@ mod_report_online_inv_open:
   definitions: page
   data:
     slot_data:
-      slots_used: <util.list_numbers_to[1]>
+      slots_used: <util.list_numbers_to[45]>
       close: 46
       page: 46
       previous_page: 53
