@@ -19,7 +19,7 @@ mod_online_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [close] [x] [mask] [vanish] [x] [x] [x] [previous] [next]
+    - [close] [] [mask] [vanish] [] [] [] [previous] [next]
 
 mod_online_inv_events:
   type: world
