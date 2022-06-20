@@ -48,8 +48,9 @@ mod_kick_inv_open:
         - define lore <list[<&b>Level<&co><&sp><[item].flag[colour].parsed><[level]>]>
         - define lore:->:<&e>Right<&sp>Click<&sp>to<&sp>kick<&co>
         - define lore:->:<&r><player.flag[amp].get[name]>
+        - define color <script[mod_color_codes].data_key[kick.<[level]>]>
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> INFRACTION:<[infraction]>
-        - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
+        - define item <[item].with[display_name=<[name]>;lore=<[lore]>;color=#<[color]>]>
         - inventory set slot:<script[mod_kick_infractions].data_key[<[server]>.<[level]>.<[infraction]>.slot]> o:<[item]> d:<[inventory]>
     - inventory open d:<[inventory]>
