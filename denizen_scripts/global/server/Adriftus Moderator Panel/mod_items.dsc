@@ -103,9 +103,9 @@ mod_player_item:
 mod_level1_item:
   type: item
   debug: false
-  material: feather
+  material: leather_horse_armor
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 100
   flags:
     tag: <&f><&lb><&e>1<&f><&rb><&e>
     colour: <&e>
@@ -113,9 +113,9 @@ mod_level1_item:
 mod_level2_item:
   type: item
   debug: false
-  material: feather
+  material: leather_horse_armor
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 100
   flags:
     tag: <&7><&lb><&6>2<&7><&rb><&6>
     colour: <&6>
@@ -123,9 +123,9 @@ mod_level2_item:
 mod_level3_item:
   type: item
   debug: false
-  material: feather
+  material: leather_horse_armor
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 100
   flags:
     tag: <&8><&lb><&c>3<&8><&rb><&c>
     colour: <&c>
