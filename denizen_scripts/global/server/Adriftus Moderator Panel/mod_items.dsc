@@ -106,6 +106,7 @@ mod_level1_item:
   material: leather_horse_armor
   mechanisms:
     custom_model_data: 100
+    hides: ALL
   flags:
     tag: <&f><&lb><&e>1<&f><&rb><&e>
     colour: <&e>
@@ -116,6 +117,7 @@ mod_level2_item:
   material: leather_horse_armor
   mechanisms:
     custom_model_data: 100
+    hides: ALL
   flags:
     tag: <&7><&lb><&6>2<&7><&rb><&6>
     colour: <&6>
@@ -126,6 +128,7 @@ mod_level3_item:
   material: leather_horse_armor
   mechanisms:
     custom_model_data: 100
+    hides: ALL
   flags:
     tag: <&8><&lb><&c>3<&8><&rb><&c>
     colour: <&c>
