@@ -162,6 +162,17 @@ mod_ban_infractions:
         cmd: 0
         slot: 32
 
+mod_color_codes:
+  type: data
+  kick:
+    1: F995F4
+    2: EC10E0
+    3: 8A00C4
+  ban:
+    1: EFF200
+    2: FFA800
+    3: FF0000
+
 mod_action_past_tense:
   type: data
   Mute: muted
