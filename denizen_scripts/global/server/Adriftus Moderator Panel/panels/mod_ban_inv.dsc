@@ -49,9 +49,10 @@ mod_ban_inv_open:
         - define lore <list[<&b>Level<&co><&sp><[item].flag[colour].parsed><[level]>]>
         - define lore:->:<&c>Right<&sp>Click<&sp>to<&sp>ban<&co>
         - define lore:->:<&r><player.flag[amp].get[name]>
+        - define color <script[mod_color_codes].data_key[ban.<[level]>]>
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> INFRACTION:<[infraction]>
         - flag <[item]> LENGTH:<script[mod_ban_infractions].data_key[<[server]>.<[level]>.<[infraction]>.length]>
-        - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
+        - define item <[item].with[display_name=<[name]>;lore=<[lore]>;color=#<[color]>]>
         - inventory set slot:<script[mod_ban_infractions].data_key[<[server]>.<[level]>.<[infraction]>.slot]> o:<[item]> d:<[inventory]>
     - inventory open d:<[inventory]>
