@@ -8,10 +8,10 @@ inventory_data_keys:
 
     on player clicks in inventory bukkit_priority:HIGHEST ignorecancelled:true:
       - if <context.clicked_inventory.script.data_key[data.click_script_slots.<context.slot>].exists>:
-        - inject <context.inventory.script.data_key[data.click_script_slots.<context.slot>]>
-      - else if <context.inventory.script.data_key[data.clickable_slots.<context.slot>].exists>:
+        - inject <context.clicked_inventory.script.data_key[data.click_script_slots.<context.slot>]>
+      - else if <context.clicked_inventory.script.data_key[data.clickable_slots.<context.slot>].exists>:
         - determine cancelled:false
 
-    on player clicks in inventory bukkit_priority:HIGHEST ignorecancelled:true:
+    on player drags in inventory bukkit_priority:HIGHEST ignorecancelled:true:
       - if <context.clicked_inventory.script.data_key[data.on_drag].exists>:
-        - inject <context.inventory.script.data_key[data.on_drag]>
+        - inject <context.clicked_inventory.script.data_key[data.on_drag]>
