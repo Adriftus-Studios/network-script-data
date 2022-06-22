@@ -24,7 +24,12 @@ player_death_handler:
           # This is an example of a specific mob
           specific_mob:
             - "<[player]> got beaten up specifically by the specific_mob."
-
+          OrcWarHorse:
+            - "<[player]> got their skull kicked by a War Horse."
+          Orc:
+            - "<[player]> fell prey to the orcish horde."
+          OrcShaman:
+            - "<[player]> couldn't overcome the hexes of an Orc Shaman."
         # Everything Else
         OTHER:
           - "<[player]><&e> was slain by <&c><[attacker]>."
