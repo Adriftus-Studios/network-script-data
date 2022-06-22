@@ -7,16 +7,18 @@ mod_kick_inv:
   gui: true
   size: 54
   definitions:
-    x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
+    lvl1: <item[feather].with[display_name=<&f><&lb><&e>1<&f><&rb>;custom_model_data=3]>
+    lvl2: <item[feather].with[display_name=<&7><&lb><&6>2<&7><&rb>;custom_model_data=3]>
+    lvl3: <item[feather].with[display_name=<&8><&lb><&c>3<&8><&rb>;custom_model_data=3]>
     back: <item[feather].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;custom_model_data=3].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
-    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [x] [x] [] [] [] [x] [x] [x] [x]
-    - [x] [x] [] [] [] [x] [x] [x] [x]
-    - [x] [x] [] [] [] [] [] [] [x]
-    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
-    - [back] [x] [x] [x] [head] [x] [x] [x] [x]
+    - [] [] [] [] [] [] [] [] []
+    - [lvl1] [lvl1] [] [] [] [] [] [] []
+    - [lvl2] [lvl2] [] [] [] [] [] [] []
+    - [lvl3] [lvl3] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [back] [] [] [] [head] [] [] [] []
 
 mod_kick_inv_events:
   type: world
@@ -33,19 +35,22 @@ mod_kick_inv_open:
   type: task
   debug: false
   script:
-    - define items <list>
     - define inventory <inventory[mod_kick_inv]>
+    - choose <bungee.server>:
+      - case test:
+        - define server <bungee.server>
+      - default:
+        - define server default
     - foreach <list[1|2|3]> as:level:
-      - foreach <script[mod_kick_infractions].list_keys[<[level]>]> as:infraction:
+      - foreach <script[mod_kick_infractions].list_keys[<[server]>.<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>
         - define name <[item].flag[tag].parsed><&sp><[infraction]>
         - define lore <list[<&b>Level<&co><&sp><[item].flag[colour].parsed><[level]>]>
         - define lore:->:<&e>Right<&sp>Click<&sp>to<&sp>kick<&co>
         - define lore:->:<&r><player.flag[amp].get[name]>
+        - define color <script[mod_color_codes].data_key[kick.<[level]>]>
         - flag <[item]> LEVEL:<[level]>
         - flag <[item]> INFRACTION:<[infraction]>
-        - flag <[item]> LENGTH:<script[mod_ban_infractions].data_key[<[level]>.<[infraction]>.length]>
-        - define item <[item].with[display_name=<[name]>;lore=<[lore]>]>
-        - define items:->:<[item]>
-    - give <[items]> to:<[inventory]>
+        - define item <[item].with[display_name=<[name]>;lore=<[lore]>;color=#<[color]>]>
+        - inventory set slot:<script[mod_kick_infractions].data_key[<[server]>.<[level]>.<[infraction]>.slot]> o:<[item]> d:<[inventory]>
     - inventory open d:<[inventory]>

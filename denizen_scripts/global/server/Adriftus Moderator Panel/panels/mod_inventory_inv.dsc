@@ -77,7 +77,7 @@ mod_ender_chest_inv_open:
   script:
     - define inventory <inventory[mod_ender_chest_inv]>
     - foreach <player.flag[amp].as_map.get[player].enderchest.map_slots>:
-      - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
+      - inventory set slot:<[key].add[9]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 # ADRIFTUS CHEST
