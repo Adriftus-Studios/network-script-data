@@ -481,6 +481,8 @@ chat_settings_open:
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - if ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
+        - if ( <[channel]> == town && !<player.has_town> ) || ( <[channel]> == nation && !<player.has_nation> ):
+          - foreach next
         - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<[channel]>]||false>:
           - if <[channel]> == server:
             - define icon <item[<yaml[chat_config].read[channels.server.settings_icon.<bungee.server>.active]>]>
