@@ -139,6 +139,58 @@ channels:
         channel: false
         to-MC: false
         to-IRC: false
+  town:
+    global: false
+    on_by_default: false
+    permission: towny.town.chat
+    icon: <&chr[1002]>
+    settings_icon:
+      active: paper[custom_model_data=501]
+      inactive: paper[custom_model_data=500]
+    format:
+      channel: "<&7><&l>[<&b><player.town.name><&7><&l>] "
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      separator: "<&b>: "
+      message: "<&r><[msg]||<context.new_message.text_display>>"
+    integrations:
+      Discord:
+        active: false
+        group: Adriftus Staff
+        #channel: manager-chat
+        channel: 626086306606350366
+        to-MC: true
+        to-Discord: true
+      IRC:
+        active: false
+        channel: false
+        to-MC: false
+        to-IRC: false
+  nation:
+    global: false
+    on_by_default: false
+    permission: towny.nation.chat
+    icon: <&chr[1002]>
+    settings_icon:
+      active: paper[custom_model_data=501]
+      inactive: paper[custom_model_data=500]
+    format:
+      channel: "<&7><&l>[<&b><player.nation.name><&7><&l>] "
+      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      separator: "<&b>: "
+      message: "<&r><[msg]||<context.new_message.text_display>>"
+    integrations:
+      Discord:
+        active: false
+        group: Adriftus Staff
+        #channel: manager-chat
+        channel: 626086306606350366
+        to-MC: true
+        to-Discord: true
+      IRC:
+        active: false
+        channel: false
+        to-MC: false
+        to-IRC: false
   staff:
     global: true
     on_by_default: false
