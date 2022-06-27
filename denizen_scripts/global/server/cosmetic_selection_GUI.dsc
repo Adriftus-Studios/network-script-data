@@ -56,7 +56,7 @@ cosmetic_selection_main_menu:
   inventory: chest
   title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0005]>
   gui: true
-  size: 36
+  size: 27
 
 cosmetic_main_menu_open:
   type: task
