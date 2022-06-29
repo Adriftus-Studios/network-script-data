@@ -79,7 +79,7 @@ cosmetic_main_menu_open:
       masks: 12
       titles: 14
       bowtrails: 16
-      hats: 22
+      hats: 31
   script:
     - define inventory <inventory[cosmetic_selection_main_menu]>
     - foreach <script[cosmetic_selection_inventory_open].list_keys[data].exclude[slot_data]>:
