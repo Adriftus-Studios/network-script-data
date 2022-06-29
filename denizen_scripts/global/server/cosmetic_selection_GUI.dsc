@@ -58,7 +58,7 @@ cosmetic_menu_hats:
     - "<&e>Hats are neat!"
     - "<&e>Hide that boring head!"
   mechanisms:
-    custom_model_data: 107
+    custom_model_data: 111
     hides: enchants
     enchantments: luck,1
 
