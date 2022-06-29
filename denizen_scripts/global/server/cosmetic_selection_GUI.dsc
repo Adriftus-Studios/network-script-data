@@ -91,6 +91,14 @@ cosmetic_main_menu_open:
 
     - inventory open d:<[inventory]>
 
+cosmetic_selection_menu:
+  type: inventory
+  debug: false
+  inventory: chest
+  title: <&a>PLACEHOLDER
+  gui: true
+  size: 54
+
 cosmetic_selection_inventory_open:
   type: task
   debug: false
@@ -166,7 +174,7 @@ cosmetic_selection_inventory_open:
         - define equip_script <script.parsed_key[data.<[type]>.equip_task]>
         - define lore <script[cosmetic_configuration].parsed_key[display_data.lore]>
         - define items:|:<item[<[material]>].with[lore=<[lore]>;flag=run_script:<[equip_script]>;flag=cosmetic:<[cosmetic]>]>
-    - define inventory <inventory[generic[title=<[title]>;size=54]]>
+    - define inventory <inventory[cosmetic_selection_menu].with[title=<[title]>;size=54]>
 
     # Put the items into the new inventory
     - if <[items].exists>:
