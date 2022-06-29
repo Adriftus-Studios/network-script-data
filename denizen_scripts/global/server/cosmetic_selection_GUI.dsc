@@ -91,11 +91,35 @@ cosmetic_main_menu_open:
 
     - inventory open d:<[inventory]>
 
-cosmetic_selection_menu:
+cosmetic_selection_masks_menu:
   type: inventory
   debug: false
   inventory: chest
-  title: <&a>PLACEHOLDER
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0006]>
+  gui: true
+  size: 54
+
+cosmetic_selection_titles_menu:
+  type: inventory
+  debug: false
+  inventory: chest
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0007]>
+  gui: true
+  size: 54
+
+cosmetic_selection_bowtrails_menu:
+  type: inventory
+  debug: false
+  inventory: chest
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0008]>
+  gui: true
+  size: 54
+
+cosmetic_selection_hats_menu:
+  type: inventory
+  debug: false
+  inventory: chest
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0009]>
   gui: true
   size: 54
 
@@ -112,7 +136,6 @@ cosmetic_selection_inventory_open:
       previous_page: 47
       back: 1
     masks:
-      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0006]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[masks.unlocked].if_null[<list>]>
       material: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.material]>
       display_name: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.display_name]>
@@ -122,7 +145,6 @@ cosmetic_selection_inventory_open:
       equip_task: mask_wear
       remove_task: mask_remove
     titles:
-      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0007]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[titles.unlocked].if_null[<list>]>
       material: name_tag
       display_name: <[cosmetic]>
@@ -132,7 +154,6 @@ cosmetic_selection_inventory_open:
       equip_task: titles_equip
       remove_task: titles_remove
     bowtrails:
-      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0008]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[bowtrails.unlocked].if_null[<list>]>
       material: <yaml[bowtrails].read[bowtrails.<[cosmetic]>.icon]>
       display_name: <yaml[bowtrails].parsed_key[bowtrails.<[cosmetic]>.name].parse_color>
@@ -142,7 +163,6 @@ cosmetic_selection_inventory_open:
       equip_task: bowtrails_equip
       remove_task: bowtrails_remove
     hats:
-      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0009]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[hats.unlocked].if_null[<list>]>
       material: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.material]>
       display_name: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.display_name]>
@@ -174,7 +194,7 @@ cosmetic_selection_inventory_open:
         - define equip_script <script.parsed_key[data.<[type]>.equip_task]>
         - define lore <script[cosmetic_configuration].parsed_key[display_data.lore]>
         - define items:|:<item[<[material]>].with[lore=<[lore]>;flag=run_script:<[equip_script]>;flag=cosmetic:<[cosmetic]>]>
-    - define inventory <inventory[cosmetic_selection_menu].with[title=<[title]>;size=54]>
+    - define inventory <inventory[cosmetic_selection_<[type]>_menu]>
 
     # Put the items into the new inventory
     - if <[items].exists>:
