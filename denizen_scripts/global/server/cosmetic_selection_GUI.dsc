@@ -50,13 +50,25 @@ cosmetic_menu_bowtrails:
     hides: enchants
     enchantments: luck,1
 
+cosmetic_menu_hats:
+  type: item
+  material: paper
+  display name: <&b>Hats
+  lore:
+    - "<&e>Hats are neat!"
+    - "<&e>Hide that boring head!"
+  mechanisms:
+    custom_model_data: 107
+    hides: enchants
+    enchantments: luck,1
+
 cosmetic_selection_main_menu:
   type: inventory
   debug: false
   inventory: chest
   title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0005]>
   gui: true
-  size: 27
+  size: 45
 
 cosmetic_main_menu_open:
   type: task
@@ -67,6 +79,7 @@ cosmetic_main_menu_open:
       masks: 12
       titles: 14
       bowtrails: 16
+      hats: 22
   script:
     - define inventory <inventory[cosmetic_selection_main_menu]>
     - foreach <script[cosmetic_selection_inventory_open].list_keys[data].exclude[slot_data]>:
