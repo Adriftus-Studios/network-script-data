@@ -134,7 +134,7 @@ cosmetic_selection_inventory_open:
       equip_task: bowtrails_equip
       remove_task: bowtrails_remove
     hats:
-      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0006]>
+      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0007]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[hats.unlocked].if_null[<list>]>
       material: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.material]>
       display_name: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.display_name]>
