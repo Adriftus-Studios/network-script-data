@@ -120,6 +120,16 @@ cosmetic_selection_inventory_open:
       current: <yaml[global.player.<player.uuid>].read[bowtrails.current].if_null[default]>
       equip_task: bowtrails_equip
       remove_task: bowtrails_remove
+    hats:
+      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0006]>
+      players_list: <yaml[global.player.<player.uuid>].list_keys[hats.unlocked].if_null[<list>]>
+      material: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.material]>
+      display_name: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.display_name]>
+      description: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.description]>
+      preview: "<&e>Check out the Hat Shop for previews!"
+      current: <yaml[global.player.<player.uuid>].read[hats.current.id].if_null[default]>
+      equip_task: mask_wear
+      remove_task: mask_remove
   script:
     # Sanity Check
     - if !<[type].exists>:
