@@ -128,8 +128,8 @@ cosmetic_selection_inventory_open:
       description: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.description]>
       preview: "<&e>Check out the Hat Shop for previews!"
       current: <yaml[global.player.<player.uuid>].read[hats.current.id].if_null[default]>
-      equip_task: mask_wear
-      remove_task: mask_remove
+      equip_task: hat_wear
+      remove_task: hat_remove
   script:
     # Sanity Check
     - if !<[type].exists>:
