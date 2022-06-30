@@ -7,17 +7,17 @@ bookshelf_inventory:
   gui: true
   data:
     on_close: bookshelf_inventory_save
-    clickable_slots:
-      12: true
-      13: true
-      14: true
-      15: true
-      16: true
-      30: true
-      31: true
-      32: true
-      33: true
-      34: true
+    click_script_slots:
+      12: bookshelf_transform
+      13: bookshelf_transform
+      14: bookshelf_transform
+      15: bookshelf_transform
+      16: bookshelf_transform
+      30: bookshelf_transform
+      31: bookshelf_transform
+      32: bookshelf_transform
+      33: bookshelf_transform
+      34: bookshelf_transform
 
 bookshelf_display:
   type: item
@@ -36,6 +36,19 @@ bookshelf_inventory_open:
       - inventory set o:<context.location.flag[bookshelf_inventory]> d:<[inventory]>
     - inventory set slot:5 o:<item[bookshelf_display].with[flag=location:<context.location>]> d:<[inventory]>
     - inventory open d:<[inventory]>
+
+bookshelf_transform:
+  type: task
+  debug: false
+  data:
+    acceptable_materials:
+      enchanted_book: true
+  script:
+    - stop if:<script.data_key[data.acceptable_materials.<context.material.name>].exists.not>
+    - if <context.item.material.name> != air:
+      - determine <context.item.with[custom_model_data=2]>
+    - if <context.cursor_item.material.name> != air:
+      - adjust <player> item_on_cursor:<context.cursor_item.with[custom_model_data=1]>
 
 bookshelf_inventory_no_piston:
   type: world
