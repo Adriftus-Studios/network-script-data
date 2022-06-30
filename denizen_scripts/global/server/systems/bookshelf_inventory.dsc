@@ -47,7 +47,7 @@ bookshelf_transform:
   script:
     - stop if:<script.data_key[data.acceptable_materials.<context.cursor_item.material.name>].exists.not>
     - if <context.item.material.name> != air:
-      - determine <context.item.with[custom_model_data=2]>
+      - determine passively <context.item.with[custom_model_data=2]>
     - if <context.cursor_item.material.name> != air:
       - adjust <player> item_on_cursor:<context.cursor_item.with[custom_model_data=1]>
     - determine cancelled:false
