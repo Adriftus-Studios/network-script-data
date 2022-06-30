@@ -49,7 +49,7 @@ bookshelf_transform:
       - determine <context.item.with[custom_model_data=2]>
     - if <context.cursor_item.material.name> != air:
       - adjust <player> item_on_cursor:<context.cursor_item.with[custom_model_data=1]>
-    - determine uncancelled
+    - determine cancelled:false
 
 bookshelf_inventory_no_piston:
   type: world
