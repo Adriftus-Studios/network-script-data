@@ -44,7 +44,7 @@ bookshelf_transform:
     acceptable_materials:
       enchanted_book: true
   script:
-    - stop if:<script.data_key[data.acceptable_materials.<context.item.material.name>].exists.not>
+    - stop if:<script.data_key[data.acceptable_materials.<context.cursor_item.material.name>].exists.not>
     - if <context.item.material.name> != air:
       - determine <context.item.with[custom_model_data=2]>
     - if <context.cursor_item.material.name> != air:
