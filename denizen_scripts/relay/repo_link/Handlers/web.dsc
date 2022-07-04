@@ -17,12 +17,12 @@ web_handler:
 
       # % ██ [ Resource Pack  ] ██
         - case /resource_pack.zip:
-          - determine passively FILE:/mnt/sdb/web/resource-pack/hosted-rp-main.zip
+          - determine passively FILE:data/web/resource-pack/hosted-rp-main.zip
           - determine CODE:200
 
       # % ██ [ Staff Resource Pack  ] ██
         - case /resource_pack_staff.zip:
-          - determine passively FILE:/mnt/sdb/web/resource-pack/hosted-rp-staff.zip
+          - determine passively FILE:data/web/resource-pack/hosted-rp-staff.zip
           - determine CODE:200
 
       # % ██ [ Github oAuth Token Ex  ] ██
