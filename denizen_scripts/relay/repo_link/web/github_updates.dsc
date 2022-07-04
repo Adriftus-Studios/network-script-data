@@ -6,16 +6,16 @@ github_updates:
     - choose <context.request>:
       # Main Repo update
       - case /github/network-script-data:
-        - shell "screen -dmS updating /home/minecraft/scripts/main_pull.sh"
+        - shell "screen -dmS updating /mnt/sdb/scripts/main_pull.sh"
       # Test Repo update
       - case /github/test:
-        - shell "screen -dmS updating /home/minecraft/scripts/test_pull.sh"
+        - shell "screen -dmS updating /mnt/sdb/scripts/test_pull.sh"
       # Resource Pack Repo update
       - case /github/resource-pack:
-        - shell "screen -dmS updating /home/minecraft/scripts/rp_pull.sh"
+        - shell "screen -dmS updating /mnt/sdb/scripts/rp_pull.sh"
       # General Bot Repo update
       - case /github/general-bot:
-        - shell "screen -dmS updating /home/minecraft/scripts/bot_pull.sh"
+        - shell "screen -dmS updating /mnt/sdb/scripts/bot_pull.sh"
 
     - stop
   # What in the actual fuck?
