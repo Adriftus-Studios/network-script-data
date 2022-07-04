@@ -4,7 +4,7 @@ bungee_config_loader:
   load:
     - if <yaml.list.contains[bungee_config]>:
       - yaml id:bungee_config unload
-    - yaml id:bungee_config load:data/network/bungee_config.yml
+    - yaml id:bungee_config load:data/global/network/bungee_config.yml
   events:
     on server start:
       - inject locally path:load
