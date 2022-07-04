@@ -237,16 +237,7 @@ mail_delivery_generate_item:
   script:
   - define item <item[mail_delivery_mail_item].with[flag=mailbox_number:<[number]>].with[flag=no_stack:<util.random_uuid>]>
   - define item <[item].with[lore=<&e>Destination<&co><&sp><[number]>]>
-  - choose <util.random.int[1].to[3]>:
-    - case 1:
-      - define item <[item].with[material=crafting_table]>
-      - define item <[item].with[display_name=<&e>Package]>
-    - case 2:
-      - define item <[item].with[material=paper]>
-      - define item <[item].with[display_name=<&e>Letter]>
-    - case 3:
-      - define item <[item].with[material=stripped_oak_wood]>
-      - define item <[item].with[display_name=<&e>Container]>
+  - define item <[item].with[custom_model_data=<util.random.int[1001].to[1003]>]>
   - determine <[item]>
 
 mail_delivery_menu_inventory:
