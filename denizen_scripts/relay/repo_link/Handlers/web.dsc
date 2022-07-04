@@ -17,7 +17,7 @@ web_handler:
 
       # % ██ [ Resource Pack  ] ██
         - case /resource_pack.zip:
-          - determine passively FILE:mnt/sdb/web/resource-pack/hosted-rp-main.zip
+          - determine passively FILE:/mnt/sdb/web/resource-pack/hosted-rp-main.zip
           - determine CODE:200
 
       # % ██ [ Staff Resource Pack  ] ██
