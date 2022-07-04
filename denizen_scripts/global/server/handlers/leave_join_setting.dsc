@@ -178,6 +178,7 @@ network_join_queen:
   script:
     - title title:<&6><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The Queen graces the land once more!" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "The Queen graces the land once more!"
+    - - define discord_message "The Queen graces the land once more!"
 
 network_leave_queen:
   type: task
@@ -185,6 +186,7 @@ network_leave_queen:
   script:
     - title title:<&e><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The Queen departs this world..." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "The Queen departs this world!"
+    - define discord_message "The Queen departs this world!"
 
 network_join_syn:
   type: task
@@ -192,7 +194,7 @@ network_join_syn:
   script:
     - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The world feels a bit more... Synful!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
     - define message "The world feels a bit more... Synful!"
-    - define discord_message "The world is free of Syn... for now..."
+    - define discord_message "The world feels a bit more... Synful!"
 
 network_leave_syn:
   type: task

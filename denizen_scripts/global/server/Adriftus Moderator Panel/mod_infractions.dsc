@@ -1,88 +1,177 @@
 # The `category` key is used for organization
-mod_mute_infractions:
-  type: data
-  1:
-    Spam: 30m
-    Excessive Characters: 30m
-    Excessive Capitals: 30m
-    Chat Maturity: 1h
-  2:
-    Advertising Servers: 1d
-    Excessive Negativity: 12h
-  3:
-    Racism: 7d
-    Sexism: 7d
-    Disrespect to Players and/or Staff Members: 7d
-    Harassment: 7d
-
 mod_kick_infractions:
   type: data
-  1:
-    Spam:
-      category: Chat
-    Chat Maturity:
-      category: Chat
-    Flying:
-      category: Movement Advantage
-  2:
-    Inappropriate Chat Usage:
-      category: Chat
-    Advertising:
-      category: Chat
-    Griefing:
-      category: Harassment
-  3:
-    Racism:
-      category: Chat
-    Sexism:
-      category: Chat
-    Disrespectful Behaviour:
-      category: Harassment
-    Unfair Visual Advantage:
-      category: Visual Advantage
-    Unfair Movement Advantage:
-      category: Movement Advantage
-    Unfair Combat Advantage:
-      category: Combat Advantage
+  test:
+    1:
+      Test 1:
+        category: Chat
+        cmd: 100
+        slot: 12
+    2:
+      Test 2:
+        category: Harassment
+        cmd: 100
+        slot: 21
+    3:
+      Test 3:
+        category: Advantage
+        cmd: 100
+        slot: 30
+  default:
+    1:
+      Spam:
+        category: Chat
+        cmd: 100
+        slot: 12
+        report_slot: 13
+      Chat Maturity:
+        category: Chat
+        cmd: 100
+        slot: 13
+        report_slot: 14
+      Flying:
+        category: Advantage
+        cmd: 100
+        slot: 14
+        report_slot: 33
+    2:
+      Inappropriate Chat Usage:
+        category: Chat
+        cmd: 100
+        slot: 21
+        report_slot: 15
+      Advertising:
+        category: Chat
+        cmd: 100
+        slot: 22
+        report_slot: 21
+      Griefing:
+        category: Harassment
+        cmd: 100
+        slot: 23
+        report_slot: 31
+    3:
+      Racism:
+        category: Chat
+        cmd: 100
+        slot: 30
+        report_slot: 22
+      Sexism:
+        category: Chat
+        cmd: 100
+        slot: 31
+        report_slot: 23
+      Disrespectful Behaviour:
+        category: Harassment
+        cmd: 100
+        slot: 32
+        report_slot: 32
+      Unfair Visual Advantage:
+        category: Advantage
+        cmd: 100
+        slot: 33
+        report_slot: 40
+      Unfair Movement Advantage:
+        category: Advantage
+        cmd: 100
+        slot: 34
+        report_slot: 42
+      Unfair Combat Advantage:
+        category: Advantage
+        cmd: 100
+        slot: 35
+        report_slot: 30
 
 mod_ban_infractions:
   type: data
-  1:
-    Minor Inappropriate Chat Usage:
-      category: Chat
-      length: 7d
-    Advertising:
-      category: Chat
-      length: 7d
-    X-Ray:
-      category: Visual Advantage
-      length: 14d
-  2:
-    Minor Movement Advantage:
-      category: Movement Advantage
-      length: 14d
-    Minor Combat Advantage:
-      category: Combat Advantage
-      length: 14d
-    Excessive Negativity:
-      category: Chat
-      length: 14d
-    ESP:
-      category: Visual Advantage
-      length: 14d
-    Bug Abuse:
-      category: Exploit
-      length: 14d
-  3:
-    Major Movement Advantage:
-      category: Movement Advantage
-      length: 30d
-    Major Combat Advantage:
-      category: Combat Advantage
-      length: 30d
-    Major Inappropriate Chat Usage:
-      category: Chat
-      length: 30d
+  test:
+    1:
+      Test 1:
+        category: Chat
+        length: 7d
+        cmd: 100
+        slot: 12
+    2:
+      Test 2:
+        category: Harassment
+        length: 14d
+        cmd: 100
+        slot: 21
+    3:
+      Test 3:
+        category: Advantage
+        length: 30d
+        cmd: 100
+        slot: 30
+  default:
+    1:
+      Minor Inappropriate Chat Usage:
+        category: Chat
+        length: 7d
+        cmd: 100
+        slot: 12
+      Advertising:
+        category: Chat
+        length: 7d
+        cmd: 100
+        slot: 13
+      X-Ray:
+        category: Advantage
+        length: 14d
+        slot: 14
+    2:
+      Minor Movement Advantage:
+        category: Advantage
+        length: 14d
+        cmd: 100
+        slot: 21
+      Minor Combat Advantage:
+        category: Advantage
+        length: 14d
+        cmd: 100
+        slot: 22
+      Excessive Negativity:
+        category: Chat
+        length: 14d
+        cmd: 100
+        slot: 23
+      ESP:
+        category: Advantage
+        length: 14d
+        cmd: 100
+        slot: 24
+      Bug Abuse:
+        category: Exploit
+        length: 14d
+        cmd: 100
+        slot: 25
+    3:
+      Major Movement Advantage:
+        category: Advantage
+        length: 30d
+        cmd: 100
+        slot: 30
+      Major Combat Advantage:
+        category: Advantage
+        length: 30d
+        cmd: 100
+        slot: 31
+      Major Inappropriate Chat Usage:
+        category: Chat
+        length: 30d
+        cmd: 100
+        slot: 32
+
+mod_color_codes:
+  type: data
+  kick:
+    1: F995F4
+    2: EC10E0
+    3: 8A00C4
+  ban:
+    1: EFF200
+    2: FFA800
+    3: FF0000
 
 mod_action_past_tense:
   type: data

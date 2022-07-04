@@ -50,13 +50,25 @@ cosmetic_menu_bowtrails:
     hides: enchants
     enchantments: luck,1
 
+cosmetic_menu_hats:
+  type: item
+  material: paper
+  display name: <&b>Hats
+  lore:
+    - "<&e>Hats are neat!"
+    - "<&e>Hide that boring head!"
+  mechanisms:
+    custom_model_data: 111
+    hides: enchants
+    enchantments: luck,1
+
 cosmetic_selection_main_menu:
   type: inventory
   debug: false
   inventory: chest
   title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0005]>
   gui: true
-  size: 18
+  size: 45
 
 cosmetic_main_menu_open:
   type: task
@@ -67,6 +79,7 @@ cosmetic_main_menu_open:
       masks: 12
       titles: 14
       bowtrails: 16
+      hats: 31
   script:
     - define inventory <inventory[cosmetic_selection_main_menu]>
     - foreach <script[cosmetic_selection_inventory_open].list_keys[data].exclude[slot_data]>:
@@ -77,6 +90,38 @@ cosmetic_main_menu_open:
     - inventory set slot:<script.data_key[data.slots.back]> d:<[inventory]> "o:<item[feather].with[flag=run_script:main_menu_inventory_open;custom_model_data=3;display=<&e>Back to Main Menu]>"
 
     - inventory open d:<[inventory]>
+
+cosmetic_selection_masks_menu:
+  type: inventory
+  debug: false
+  inventory: chest
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0006]>
+  gui: true
+  size: 54
+
+cosmetic_selection_titles_menu:
+  type: inventory
+  debug: false
+  inventory: chest
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0007]>
+  gui: true
+  size: 54
+
+cosmetic_selection_bowtrails_menu:
+  type: inventory
+  debug: false
+  inventory: chest
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0008]>
+  gui: true
+  size: 54
+
+cosmetic_selection_hats_menu:
+  type: inventory
+  debug: false
+  inventory: chest
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0009]>
+  gui: true
+  size: 54
 
 cosmetic_selection_inventory_open:
   type: task
@@ -91,7 +136,6 @@ cosmetic_selection_inventory_open:
       previous_page: 47
       back: 1
     masks:
-      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0006]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[masks.unlocked].if_null[<list>]>
       material: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.material]>
       display_name: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.display_name]>
@@ -101,7 +145,6 @@ cosmetic_selection_inventory_open:
       equip_task: mask_wear
       remove_task: mask_remove
     titles:
-      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0007]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[titles.unlocked].if_null[<list>]>
       material: name_tag
       display_name: <[cosmetic]>
@@ -111,7 +154,6 @@ cosmetic_selection_inventory_open:
       equip_task: titles_equip
       remove_task: titles_remove
     bowtrails:
-      inventory_title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0008]>
       players_list: <yaml[global.player.<player.uuid>].list_keys[bowtrails.unlocked].if_null[<list>]>
       material: <yaml[bowtrails].read[bowtrails.<[cosmetic]>.icon]>
       display_name: <yaml[bowtrails].parsed_key[bowtrails.<[cosmetic]>.name].parse_color>
@@ -120,6 +162,15 @@ cosmetic_selection_inventory_open:
       current: <yaml[global.player.<player.uuid>].read[bowtrails.current].if_null[default]>
       equip_task: bowtrails_equip
       remove_task: bowtrails_remove
+    hats:
+      players_list: <yaml[global.player.<player.uuid>].list_keys[hats.unlocked].if_null[<list>]>
+      material: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.material]>
+      display_name: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.display_name]>
+      description: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.description]>
+      preview: "<&e>Check out the Hat Shop for previews!"
+      current: <yaml[global.player.<player.uuid>].read[hats.current.id].if_null[default]>
+      equip_task: hat_wear
+      remove_task: hat_remove
   script:
     # Sanity Check
     - if !<[type].exists>:
@@ -143,7 +194,7 @@ cosmetic_selection_inventory_open:
         - define equip_script <script.parsed_key[data.<[type]>.equip_task]>
         - define lore <script[cosmetic_configuration].parsed_key[display_data.lore]>
         - define items:|:<item[<[material]>].with[lore=<[lore]>;flag=run_script:<[equip_script]>;flag=cosmetic:<[cosmetic]>]>
-    - define inventory <inventory[generic[title=<[title]>;size=54]]>
+    - define inventory <inventory[cosmetic_selection_<[type]>_menu]>
 
     # Put the items into the new inventory
     - if <[items].exists>:

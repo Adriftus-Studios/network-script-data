@@ -83,8 +83,12 @@ chat_system_speak:
         #- define Message <&nl><&font[adriftus:chat]><[Icon]><&r><&sp><[ChannelText]><&r><[NameText]><&nl><&sp><&sp><&sp><&sp><&sp><[MessageText]>
 
       - define Message <[ChannelText]><&r><[NameText]><&co><&nl><[ChannelSpaceText]><&sp><[MessageText]>
-
-      - narrate <[message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
+      - if <[channel]> == town:
+        - narrate <[message]> targets:<player.town.residents.filter[is_online]>
+      - else if <[channel]> == nation:
+        - narrate <[message]> targets:<player.nation.residents.filter[is_online]>
+      - else:
+        - narrate <[message]> targets:<server.online_players_flagged[chat.channels.<[channel]>]>
       - if <yaml[chat_config].read[channels.<[channel]>.global]>:
         - define Servers <bungee.list_servers.exclude[<yaml[chat_config].read[settings.excluded_servers]>].exclude[<bungee.server>]>
         - bungeerun <[Servers]> chat_send_message def:<list_single[<[channel]>].include_single[<[message]>].include_single[<[uuid]>].include_single[<[sender]>]>
@@ -477,6 +481,8 @@ chat_settings_open:
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - if ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
+        - if ( <[channel]> == town && !<player.has_town> ) || ( <[channel]> == nation && !<player.has_nation> ):
+          - foreach next
         - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<[channel]>]||false>:
           - if <[channel]> == server:
             - define icon <item[<yaml[chat_config].read[channels.server.settings_icon.<bungee.server>.active]>]>

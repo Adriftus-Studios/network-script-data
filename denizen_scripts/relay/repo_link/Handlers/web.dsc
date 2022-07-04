@@ -17,12 +17,12 @@ web_handler:
 
       # % ██ [ Resource Pack  ] ██
         - case /resource_pack.zip:
-          - determine passively FILE:../../../../web/resource-pack/hosted-rp-main.zip
+          - determine passively FILE:data/web/resource-pack/hosted-rp-main.zip
           - determine CODE:200
 
       # % ██ [ Staff Resource Pack  ] ██
         - case /resource_pack_staff.zip:
-          - determine passively FILE:../../../../web/resource-pack/hosted-rp-staff.zip
+          - determine passively FILE:data/web/resource-pack/hosted-rp-staff.zip
           - determine CODE:200
 
       # % ██ [ Github oAuth Token Ex  ] ██
@@ -99,7 +99,7 @@ web_handler:
           - case /reload/RP:
             - if <context.query.parsed.get[adriftus_sha].exists>:
               - bungeerun hub resource_pack_sha def:<context.query.parsed.get[adriftus_sha].before[<&sp>]>|<context.query.parsed.get[adriftus_staff_sha].before[<&sp>]>
-      
+
       # % ██ [ Denizen Interactions   ] ██
       - else if <context.headers.contains[X-signature-ed25519]>:
         - ~webget http://127.0.0.1:8000 data:<context.query> headers:<context.headers> save:response

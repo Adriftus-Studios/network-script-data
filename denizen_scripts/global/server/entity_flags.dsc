@@ -91,6 +91,12 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_entity_added]>
+    on entity_flagged:on_entity_removed removed from world:
+      - if <context.entity.flag[on_entity_removed].object_type> == List:
+        - foreach <context.entity.flag[on_entity_removed]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_entity_removed]>
     on entity_flagged:on_dismount exits vehicle:
       - if <context.entity.flag[on_dismount].object_type> == List:
         - foreach <context.entity.flag[on_dismount]>:

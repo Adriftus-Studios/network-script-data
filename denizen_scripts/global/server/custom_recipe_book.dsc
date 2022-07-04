@@ -172,7 +172,7 @@ crafting_book_inventory:
   type: inventory
   debug: false
   title: <&f><&font[adriftus:recipe_book]><&chr[F808]><&chr[0001]>
-  size: 36
+  size: 45
   gui: true
   inventory: chest
 
