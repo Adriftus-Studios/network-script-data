@@ -10,8 +10,7 @@ anvil_gui_text_input:
   debug: false
   definitions: title|info|callback
   script:
-    - define lore <element[<&b>------------].repeat_as_list[2].insert[<[info]>].at[2].separated_by[<&nl>]>
-    - define item <item[anvil_gui_item].with[display=<&a>;lore=<[lore]>;flag=callback:<[callback]>]>
+    - define item <item[anvil_gui_item].with[display=<&a>;flag=callback:<[callback]>]>
     - openanvil title:<&f><[title]> font:adriftus:guis
     - inventory set d:<player.open_inventory> slot:1 o:<[item]>
     - inventory set d:<player.open_inventory> slot:3 o:air
