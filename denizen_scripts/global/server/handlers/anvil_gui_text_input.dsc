@@ -8,10 +8,10 @@ anvil_gui_callback_example:
 anvil_gui_text_input:
   type: task
   debug: false
-  definitions: title|info|callback
+  definitions: title|font|callback
   script:
     - define item <item[anvil_gui_item].with[display=<&a>;flag=callback:<[callback]>]>
-    - openanvil title:<&f><[title]> font:adriftus:guis
+    - openanvil title:<&f><[title]> font:<[font]>
     - inventory set d:<player.open_inventory> slot:1 o:<[item]>
     - inventory set d:<player.open_inventory> slot:3 o:air
 
