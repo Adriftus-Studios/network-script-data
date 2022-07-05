@@ -199,6 +199,8 @@ cosmetic_selection_inventory_open:
     # Sanity Check
     - if !<[type].exists>:
       - define type <context.item.flag[cosmetic_type]>
+    - if !<script.data_key[data.<[type]>].exists>:
+      - determine cancelled
 
     # Define our initialization data
     - define page 1 if:<[page].exists.not>
