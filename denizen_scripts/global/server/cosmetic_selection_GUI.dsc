@@ -62,6 +62,24 @@ cosmetic_menu_hats:
     hides: enchants
     enchantments: luck,1
 
+cosmetic_menu_plushies:
+  type: item
+  material: paper
+  display name: <&b>Plushies
+  lore:
+    - "<&e>COMING SOON!"
+  mechanisms:
+    custom_model_data: 112
+
+cosmetic_menu_toys:
+  type: item
+  material: paper
+  display name: <&b>Toys
+  lore:
+    - "<&e>COMING SOON!"
+  mechanisms:
+    custom_model_data: 113
+
 cosmetic_selection_main_menu:
   type: inventory
   debug: false
@@ -79,7 +97,9 @@ cosmetic_main_menu_open:
       masks: 12
       titles: 14
       bowtrails: 16
-      hats: 31
+      hats: 30
+      plushies: 32
+      toys: 34
   script:
     - define inventory <inventory[cosmetic_selection_main_menu]>
     - foreach <script[cosmetic_selection_inventory_open].list_keys[data].exclude[slot_data]>:
