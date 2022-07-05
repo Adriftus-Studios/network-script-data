@@ -1,5 +1,5 @@
 
-mask_marvel_ghost_spider_unmasked:
+mask_marvel_ghost_spider:
   type: data
   display_data:
     category: Marvel
