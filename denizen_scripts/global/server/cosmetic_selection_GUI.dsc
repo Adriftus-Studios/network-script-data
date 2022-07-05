@@ -203,12 +203,11 @@ cosmetic_selection_inventory_open:
     # Sanity Check
     - if !<[type].exists>:
       - define type <context.item.flag[cosmetic_type]>
-    - if !<script.data_key[data.<[type]>].exists>:
+    - if !<script.data_key[data.<[type]>.players_list].exists>:
       - determine cancelled
 
     # Define our initialization data
     - define page 1 if:<[page].exists.not>
-    - define title <script.parsed_key[data.<[type]>.inventory_title]>
     - define slots <list[<script.data_key[data.slot_data.slots_used]>]>
     - define start <[page].sub[1].mul[<[slots].size>].add[1]>
     - define end <[slots].size.mul[<[page]>]>
