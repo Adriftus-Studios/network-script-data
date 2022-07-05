@@ -106,8 +106,9 @@ cosmetic_main_menu_open:
       toys: 34
   script:
     - define inventory <inventory[cosmetic_selection_main_menu]>
-    - foreach <script.data_key[data.slots.<[value]>]> as:slot:
-      - inventory set slot:<[slot]> d:<[inventory]> o:<item[cosmetic_menu_<[value]>].with_flag[run_script:cosmetic_selection_inventory_open].with_flag[cosmetic_type:<[value]>]>
+    - foreach <script[cosmetic_selection_inventory_open].list_keys[data].exclude[slot_data]>:
+      - foreach <script.data_key[data.slots.<[value]>]> as:slot:
+        - inventory set slot:<[slot]> d:<[inventory]> o:<item[cosmetic_menu_<[value]>].with_flag[run_script:cosmetic_selection_inventory_open].with_flag[cosmetic_type:<[value]>]>
 
     #Back to Main Menu
     - inventory set slot:<script.data_key[data.slots.back]> d:<[inventory]> "o:<item[feather].with[flag=run_script:main_menu_inventory_open;custom_model_data=3;display=<&e>Back to Main Menu]>"
@@ -158,6 +159,10 @@ cosmetic_selection_inventory_open:
       next_page: 53
       previous_page: 47
       back: 1
+    plushies:
+      dummy: true
+    toys:
+     dummy: true
     masks:
       players_list: <yaml[global.player.<player.uuid>].list_keys[masks.unlocked].if_null[<list>]>
       material: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.material]>
