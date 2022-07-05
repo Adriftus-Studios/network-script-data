@@ -70,6 +70,8 @@ cosmetic_menu_plushies:
     - "<&e>COMING SOON!"
   mechanisms:
     custom_model_data: 112
+  flags:
+    run_script: cancel
 
 cosmetic_menu_toys:
   type: item
@@ -79,6 +81,8 @@ cosmetic_menu_toys:
     - "<&e>COMING SOON!"
   mechanisms:
     custom_model_data: 113
+  flags:
+    run_script: cancel
 
 cosmetic_selection_main_menu:
   type: inventory
