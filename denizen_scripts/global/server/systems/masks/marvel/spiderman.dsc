@@ -1,9 +1,8 @@
-
 mask_marvel_spiderman:
   type: data
   display_data:
     category: Marvel
-    material: web
+    material: cobweb
     display_name: <&c>Marvel<&co> <&c>Spider-man
     description: "<&f>Your friendly neighborhood Spider-Man"
   mask_data:
