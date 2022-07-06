@@ -131,6 +131,10 @@ player_death_handler:
       FREEZE:
         - "<[player]><&e> froze to death."
 
+      # SONIC_BOOM - Warden
+      SONIC_BOOM:
+        - "<[player]><&e> got an earful from the Warden."
+
     # Moderation Information
     death_info:
       - "<&e>Location<&co> <player.location.simple>"
