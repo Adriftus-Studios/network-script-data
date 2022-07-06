@@ -1,5 +1,4 @@
 # -- TODO
-# - Add pagination to online players panel
 # - Implement IP Bans
 
 # -- /mod - Adriftus Moderator Panel
