@@ -88,7 +88,7 @@ cosmetic_selection_main_menu:
   type: inventory
   debug: false
   inventory: chest
-  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0005]>
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[1005]>
   gui: true
   size: 45
 
@@ -119,7 +119,7 @@ cosmetic_selection_masks_menu:
   type: inventory
   debug: false
   inventory: chest
-  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0006]>
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[1006]>
   gui: true
   size: 54
 
@@ -127,7 +127,7 @@ cosmetic_selection_titles_menu:
   type: inventory
   debug: false
   inventory: chest
-  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0007]>
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[1007]>
   gui: true
   size: 54
 
@@ -135,7 +135,7 @@ cosmetic_selection_bowtrails_menu:
   type: inventory
   debug: false
   inventory: chest
-  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0008]>
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[1008]>
   gui: true
   size: 54
 
@@ -143,7 +143,7 @@ cosmetic_selection_hats_menu:
   type: inventory
   debug: false
   inventory: chest
-  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[0009]>
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[1009]>
   gui: true
   size: 54
 
