@@ -21,10 +21,12 @@ bookshelf_inventory:
 
 bookshelf_display:
   type: item
-  material: bookshelf
-  display name: <&a>Bookshelf
+  material: feather
+  display name: <&a>
   flags:
     run_script: cancel
+  mechanisms:
+    custom_model_data: 3
 
 bookshelf_inventory_open:
   type: task
