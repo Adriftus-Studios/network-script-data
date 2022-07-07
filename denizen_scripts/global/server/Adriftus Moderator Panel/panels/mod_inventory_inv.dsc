@@ -84,7 +84,7 @@ mod_ender_chest_inv_open:
 mod_adriftus_chest_inv:
   type: inventory
   debug: false
-  title: <&f><&font[adriftus:mod_tools]><&chr[F808]><&chr[1005]>
+  title: <&f><&font[adriftus:mod_tools]><&chr[1005]>
   inventory: CHEST
   gui: true
   size: 54
