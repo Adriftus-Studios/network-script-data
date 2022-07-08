@@ -3,7 +3,7 @@ first_join:
   debug: false
   events:
     on player joins:
-      - if !<player.flag[has_joined]>:
+      - if !<player.has_flag[has_joined]>:
         - teleport <player> <location[0,1000,0,HeroCraft]>
         - wait 1s
         - title "title:<&color[#000001]>Welcome to Herocraft!!!" fade_in:1s stay:5s fade_out:1s
