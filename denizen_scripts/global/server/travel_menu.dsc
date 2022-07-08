@@ -39,7 +39,7 @@ travel_menu_open:
       - define item <item[<yaml[bungee_config].read[servers.<[server]>.material]>]>
       - define slot <yaml[bungee_config].read[servers.<[server]>.travel_menu_slot]>
       - define network_list:|:<[item].with[hides=all;display=<[display]>;lore=<[lore]>;flag=run_script:travel_menu_to_server;flag=server:<[server]>;flag=slot:<[slot]>]>
-    - adjust <[inventory]> title:<&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[0001]>
+    - adjust <[inventory]> title:<&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[1001]>
   # These are specific to the test server
   test:
     - foreach <server.worlds> as:world:
@@ -48,12 +48,12 @@ travel_menu_open:
     - foreach <script.data_key[data.server_slots_by_count.<[server_list].size>]> as:slot:
       - inventory set slot:<[slot]> o:<[server_list].get[<[loop_index]>]> d:<[inventory]>
   herocraft:
-    - adjust <[inventory]> title:<[inventory].title><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0003]>
+    - adjust <[inventory]> title:<[inventory].title><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[1003]>
   hub:
     - foreach <script.data_key[data.hub_slots]> key:warp_name as:slots:
       - foreach <[slots]> as:slot:
         - inventory set slot:<[slot]> d:<[inventory]> o:<item[hub_warp_<[warp_name]>_icon].with[flag=warp_id:<[warp_name]>;flag=run_script:hub_warp]>
-    - adjust <[inventory]> title:<[inventory].title><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0002]>
+    - adjust <[inventory]> title:<[inventory].title><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[1002]>
   # This task handles the final building of the inventory
   build_inventory:
     - define network_size <[network_list].size>

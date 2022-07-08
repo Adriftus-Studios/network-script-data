@@ -8,59 +8,59 @@ custom_recipe_data_initializer:
         display: <element[Travel Items].color_gradient[from=#A303D4;to=#AAAAAA]>
         lore:
           - "<&e>Items related to getting around"
-        title: <&chr[0011]>
+        title: <&chr[1011]>
       tools:
         material: feather
         display: <element[Tools].color_gradient[from=#A303D4;to=#AAAAAA]>
         lore:
           - "<&e>Items for getting work DONE!"
-        title: <&chr[0012]>
+        title: <&chr[1012]>
       blocks:
         material: feather
         display: <element[Blocks].color_gradient[from=#17840b;to=#AAAAAA]>
         lore:
           - "<&e>Various custom blocks!"
-        title: <&chr[0004]>
+        title: <&chr[1004]>
       combat:
         material: feather
         display: <element[Combat].color_gradient[from=#A303D4;to=#AAAAAA]>
         lore:
           - "<&e>Stuff to beat your friends!"
           - "<&e>Yea, probably your enemies too"
-        title: <&chr[0006]>
+        title: <&chr[1006]>
       gadgets:
         material: feather
         display: <element[Gadgets].color_gradient[from=#bd770f;to=#AAAAAA]>
         lore:
           - "<&e>Cool things!"
           - "<&e>Other stuff, too..."
-        title: <&chr[0009]>
+        title: <&chr[1009]>
       food:
         material: feather
         display: <element[Food].color_gradient[from=#bd770f;to=#AAAAAA]>
         lore:
           - "<&e>FEWD!!!!"
           - "<&e>Nom nom nom"
-        title: <&chr[0008]>
+        title: <&chr[1008]>
       brewing:
         material: feather
         display: <element[Brewing].color_gradient[from=#bd770f;to=#AAAAAA]>
         lore:
           - "<&e>DRINKS!!!"
           - "<&e>You must be 21+ to click"
-        title: <&chr[0005]>
+        title: <&chr[1005]>
       decor:
         material: feather
         display: <element[Decor].color_gradient[from=#17840b;to=#AAAAAA]>
         lore:
           - "<&e>Stuff for the pretty pretty!"
-        title: <&chr[0007]>
+        title: <&chr[1007]>
       misc:
         material: feather
         display: "<element[Misc Items].color_gradient[from=#17840b;to=#AAAAAA]>"
         lore:
           - "<&e>Lotta random, ngl"
-        title: <&chr[0010]>
+        title: <&chr[1010]>
   build_item_list:
     - flag server recipe_book:!
     - foreach <server.scripts.filter[data_key[data.recipe_book_category].exists].parse[name]> as:item_script:
@@ -171,7 +171,7 @@ custom_recipe_inventory_previouspage:
 crafting_book_inventory:
   type: inventory
   debug: false
-  title: <&f><&font[adriftus:recipe_book]><&chr[F808]><&chr[0001]>
+  title: <&f><&font[adriftus:recipe_book]><&chr[F808]><&chr[1001]>
   size: 45
   gui: true
   inventory: chest
@@ -179,7 +179,7 @@ crafting_book_inventory:
 crafting_book_category_inventory:
   type: inventory
   debug: false
-  title: <&f><&font[adriftus:recipe_book]><&chr[F808]><&chr[0002]>
+  title: <&f><&font[adriftus:recipe_book]><&chr[F808]><&chr[1002]>
   size: 36
   gui: true
   inventory: chest
@@ -187,7 +187,7 @@ crafting_book_category_inventory:
 custom_recipe_inventory:
   type: inventory
   debug: false
-  title: <&f><&font[adriftus:recipe_book]><&chr[F808]><&chr[0003]>
+  title: <&f><&font[adriftus:recipe_book]><&chr[F808]><&chr[1003]>
   size: 36
   gui: true
   inventory: chest
