@@ -51,7 +51,7 @@ mod_vanish_events:
     after player joins:
       - if <player.has_flag[vanished]>:
         - run mod_vanish_task def:false
-      - if <player.has_permission[adriftus.staff]>:
+      - if <player.has_permission[adriftus.staff]> && <server.has_flag[vanished_staff]>:
         - foreach <server.flag[vanished_staff].exclude[<player>]>:
           - adjust <player> show_entity:<[value]>
     on player quits flagged:vanished:
