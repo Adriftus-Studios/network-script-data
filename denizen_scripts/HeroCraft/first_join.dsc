@@ -9,7 +9,8 @@ first_join:
         - title "title:<&color[#000001]>Welcome to Herocraft!!!" fade_in:1s stay:5s fade_out:1s
         - wait 7s
         - teleport <player> <location[0,400,0,HeroCraft].random_offset[12500,0,12500]>
-        - equip <player> chest:elytra[on_drop=delete_item]
+        - equip <player> chest:elytra[flag=on_drop:delete_item]
+        - wait 1t
         - adjust <player> gliding:true
         - flag player has_joined
         - while <player.location.below.material.name.contains_text[air]>:
