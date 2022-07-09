@@ -23,9 +23,9 @@ mod_vanish_task:
     - adjust <player> hide_from_players
     - if <[flag]>:
       - flag player on_item_pickup:->:mod_vanish_cancel
-    - flag <player> on_damaged:cancel
-    - flag <player> on_damage:cancel
-    - flag <player> on_target:cancel
+    - flag <player> on_damaged:->:mod_vanish_cancel
+    - flag <player> on_damage:->:mod_vanish_cancel
+    - flag <player> on_target:->:mod_vanish_cancel
     - narrate "<&e>You are now <&b>Vanished<&e>."
     - foreach <server.online_players.filter[has_permission[adriftus.staff]].exclude[<player>]>:
       - adjust <[value]> show_entity:<player>
@@ -39,9 +39,9 @@ mod_unvanish_task:
     - adjust <player> health_data:20/20
     - adjust <player> show_to_players
     - flag player on_item_pickup:<-:mod_vanish_cancel
-    - flag <player> on_damaged:!
-    - flag <player> on_damage:!
-    - flag <player> on_target:!
+    - flag <player> on_damaged:<-:mod_vanish_cancel
+    - flag <player> on_damage:<-:mod_vanish_cancel
+    - flag <player> on_target:<-:mod_vanish_cancel
     - narrate "<&e>You are no longer <&b>Vanished<&e>."
 
 mod_vanish_events:
