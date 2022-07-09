@@ -6,7 +6,7 @@ dummy_economy:
   name plural: dollars
   digits: 2
   format: $<[amount]>
-  balance: <player.flag[money].if_null[<server.flag[money.<[player]>]>].if_null[0]>
+  balance: <player.flag[money].if_null[<server.flag[money.<[player]>].if_null[0]>]>
   has: <player.flag[money].is[or_more].than[<[amount]>].if_null[<server.flag[money.<[player]>].is[or_more].than[<[amount]>]>]>
   withdraw:
     - if <player.exists>:
