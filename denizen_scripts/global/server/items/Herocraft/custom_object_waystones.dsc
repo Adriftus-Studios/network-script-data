@@ -368,7 +368,7 @@ waystone_rename:
   debug: false
   script:
     - flag player waystone_rename:<context.item.flag[entity]>
-    - run anvil_gui_text_input "def:<&a>Rename Waystone|<&7>Rename This Waystone|waystone_rename_callback"
+    - run anvil_gui_text_input "def:<&a>Rename Waystone|waystone_rename_callback"
 
 waystone_rename_callback:
   type: task
