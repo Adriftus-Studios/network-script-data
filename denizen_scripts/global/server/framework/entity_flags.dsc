@@ -218,3 +218,9 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_teleport]>
+    on entity_flagged:on_combust combusts:
+      - if <context.entity.flag[on_combust].object_type> == List:
+        - foreach <context.entity.flag[on_combust]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_combust]>

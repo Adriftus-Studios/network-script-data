@@ -72,3 +72,15 @@ item_flags:
           - inject <[value]>
       - else:
         - inject <context.old_item.flag[on_unequip]>
+    on player crafts item_flagged:on_craft:
+      - if <context.item.flag[on_craft].object_type> == List:
+        - foreach <context.item.flag[on_craft]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[on_craft]>
+    on item_flagged:on_recipe_formed recipe formed:
+      - if <context.item.flag[on_recipe_formed].object_type> == List:
+        - foreach <context.item.flag[on_recipe_formed]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[on_recipe_formed]>
