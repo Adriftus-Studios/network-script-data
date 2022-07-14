@@ -28,8 +28,42 @@ player_death_handler:
             - "<[player]> got their skull kicked by a War Horse."
           Orc:
             - "<[player]> fell prey to the orcish horde."
+          OrcDrummer:
+            - "<[player]> Couldnt dance to the beat of the drum."
           OrcShaman:
             - "<[player]> couldn't overcome the hexes of an Orc Shaman."
+          OrcArcher:
+            - "<[player]> got shot through the neck by an Orc Archer."
+          OrcWargmaster:
+            - "<[player]> got shot through the neck by an Orc Wargmaster."
+          OrcAdept:
+            - "<[player]> couldn't overcome the hexes of an Orc Adept."
+          OrcBerserker:
+            - "<[player]> got forced to chill out by an Orc Berserker."
+          OrcChampion:
+            - "<[player]> Tried to throw down the gauntlet with an Orc Champion."
+          OrcBeastmaster:
+            - "<[player]> was stabbed by an Orc Beastmaster."
+          OrcWargMinion:
+            - "<[player]> was eaten alive by an Orc Warg."
+          OrcWarbearMinion:
+            - "<[player]> was mauled to death by an Orc WarBear."
+          OrcTigerMinion:
+            - "<[player]> was drug in by an Orcs Tiger."
+          OrcWarg:
+            - "<[player]> was eaten alive by an Orc Warg."
+          OrcWarg:
+            - "An Orc Warg devoured <[player]> with a mighty chomp."
+          OrcWarbear:
+            - "<[player]> was mauled to death by an Orc WarBear."
+          OrcWarbeast:
+            - "<[player]> was trampled by an Orc WarBeast."
+          OrcTiger:
+            - "<[player]> was drug in by an Orcs Tiger."
+          OrcTigerMount:
+            - "<[player]> was drug in by an Orcs Tiger."
+          OrcWarHorse:
+            - "<[player]> stood behind an Orc WarHorse."
         # Everything Else
         OTHER:
           - "<[player]><&e> was slain by <&c><[attacker]>."
