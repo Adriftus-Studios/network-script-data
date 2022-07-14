@@ -130,7 +130,7 @@ large_blood_raid:
     # Wait for Arcs
     - waituntil <[town].flag[blood_raid.portal].equals[30]> rate:1s
 
-    - title title:<&color[#990000]><&font[adriftus:overlay]><&chr[1004]><&chr[F801]><&chr[0004]> fade_in:6s stay:5s fade_out:6s targets:<server.online_players>
+    - title title:<&color[#990000]><&font[adriftus:overlay]><&chr[1004]><&chr[F802]><&chr[0004]> fade_in:6s stay:5s fade_out:6s targets:<server.online_players>
 
     # Wait for Overlay to near full occlusion
     - wait 5s
@@ -162,7 +162,7 @@ large_blood_raid:
     - remove <[town].flag[blood_raid.mobs].filter[is_spawned]>
     #CLEANUP - DEBUG
     - bossbar remove Blood_Raid_<[town].name>
-    - title title:<&color[#FFFFFF]><&font[adriftus:overlay]><&chr[1004]><&chr[F801]><&chr[1004]> fade_in:6s stay:5s fade_out:6s targets:<server.online_players>
+    - title title:<&color[#FFFFFF]><&font[adriftus:overlay]><&chr[1004]><&chr[F802]><&chr[1004]> fade_in:6s stay:5s fade_out:6s targets:<server.online_players>
     - wait 5s
     - foreach <server.online_players.filter[location.town.equals[<[town]>]]> as:__player:
       - run actor_weapon_blood_raid_scythe_cancel_effect
@@ -771,6 +771,6 @@ shit_handler:
     on player dies server_flagged:blood_raid bukkit_priority:LOWEST:
       - if <player.location.town> == <server.flag[blood_raid]>:
         - determine passively cancelled
-        - title title:<&color[#FFFFFF]><&font[adriftus:overlay]><&chr[1004]><&chr[F801]><&chr[1004]> "subtitle:<&color[#000000]>It is not your time yet..." fade_in:10t stay:1s fade_out:10t targets:<player>
+        - title title:<&color[#FFFFFF]><&font[adriftus:overlay]><&chr[1004]><&chr[F802]><&chr[1004]> "subtitle:<&color[#000000]>It is not your time yet..." fade_in:10t stay:1s fade_out:10t targets:<player>
         - wait 10t
         - teleport <player> <player.location.town.spawn>
