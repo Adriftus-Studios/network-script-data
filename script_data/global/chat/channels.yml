@@ -148,7 +148,7 @@ channels:
       active: paper[custom_model_data=501]
       inactive: paper[custom_model_data=500]
     format:
-      channel: "<&7><&l>[<&b><player.town.name><&7><&l>] "
+      channel: "<&7><&l>[<&e>Town<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
@@ -174,7 +174,7 @@ channels:
       active: paper[custom_model_data=501]
       inactive: paper[custom_model_data=500]
     format:
-      channel: "<&7><&l>[<&b><player.nation.name><&7><&l>] "
+      channel: "<&7><&l>[<&6>Nation<&7><&l>] "
       name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
