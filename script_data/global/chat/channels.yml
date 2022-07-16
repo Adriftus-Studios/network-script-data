@@ -42,6 +42,7 @@ channels:
       herocraft: <&chr[1010]>
       zanzabar: <&chr[1011]>
       test: <&chr[1009]>
+      calipolis: <&chr[1008]>
     settings_icon:
       hub: 
         active: paper[custom_model_data=511]
@@ -55,6 +56,9 @@ channels:
       test: 
         active: paper[custom_model_data=515]
         inactive: paper[custom_model_data=516]
+      calipolis:
+        active: paper[custom_model_data=511]
+        inactive: paper[custom_model_data=512]
     rules:
       hub:
         - "No"
