@@ -64,8 +64,8 @@ mission_pvp_zanzar_events:
   debug: false
   events:
     on player killed by entity_flagged:missions.active.pvp_zanzar:
-      #- if <bungee.server> != zanzabar:
-      #  - stop
+      - if <bungee.server> != zanzabar:
+        - stop
       - if <context.damager.entity_type> != PLAYER:
         - stop
       - define __player <context.damager>
