@@ -420,7 +420,6 @@ chat_back_to_main_menu:
     - main_menu_inventory_open
     - cancel
   mechanisms:
-    color: red
     custom_model_data: 3
 
 
@@ -480,8 +479,8 @@ chat_settings_open:
     - define slots <list[11|13|15|17|29|31|33|35]>
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
-      - if ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
-        - if ( <[channel]> == town && !<player.has_town> ) || ( <[channel]> == nation && !<player.has_nation> ):
+      - if ( <yaml[chat_config].read[channels.<[channel]>.permission]> == none || ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) || :
+        - if <bungee.server> == herocraft && ( <[channel]> == town && !<player.has_town> ) || ( <[channel]> == nation && !<player.has_nation> ):
           - foreach next
         - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<[channel]>]||false>:
           - if <[channel]> == server:

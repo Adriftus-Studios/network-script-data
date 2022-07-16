@@ -4,7 +4,7 @@ channels:
   server:
     global: false
     on_by_default: true
-    permission: adriftus.chat.basic
+    permission: none
     chat_lock_deny: true
     format: 
       channel: "<&7><&l><&lb><server.flag[display_name]||<bungee.server>><&7><&l><&rb> "
@@ -61,7 +61,7 @@ channels:
   pg:
     global: true
     on_by_default: true
-    permission: adriftus.chat.basic
+    permission: none
     chat_lock_deny: true
     icon: <&chr[1005]>
     settings_icon:
@@ -88,7 +88,7 @@ channels:
   pg13:
     global: true
     on_by_default: true
-    permission: adriftus.chat.basic
+    permission: none
     chat_lock_deny: true
     icon: <&chr[1006]>
     settings_icon:
@@ -115,7 +115,7 @@ channels:
   anarchy:
     global: true
     on_by_default: true
-    permission: adriftus.chat.basic
+    permission: none
     chat_lock_deny: false
     icon: <&chr[1007]>
     settings_icon:
