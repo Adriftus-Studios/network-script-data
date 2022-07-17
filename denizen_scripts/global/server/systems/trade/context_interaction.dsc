@@ -5,12 +5,21 @@ context_menu_events:
     on player right clicks player with:air:
       - ratelimit <player> 1t
       - if <player.is_sneaking>:
-        - ratelimit <player> 10s
-        - clickable until:10s defmap:<map[clicker=<player>;target=<context.entity>]> save:cmd:
-          - adjust <queue> linked_player:<[clicker]>
-          - run trade_open def:<[target]>
-        - narrate targets:<context.entity> "<yellow><player.name> wants to trade with you!<n><element[<green><bold><&lb>Accept<&rb>].on_click[<entry[cmd].command>]>"
-        - narrate targets:<player> "<yellow>You requested to trade with <context.entity.name>."
+        - define prompt "<&e><player.name> wants to trade with you!"
+        - flag <context.entity> tmp.trade_target:<player> expire:30s
+        - narrate targets:<player> "<&e>You requested to trade with <context.entity.name>."
+        - run chat_confirm "def:<[prompt]>|context_menu_trade_confirmed"
+
+context_menu_trade_confirmed:
+  type: task
+  debug: false
+  definitions: result
+  script:
+    - if <[result]>:
+      - run trade_open def:<player.flag[tmp.trade_target]>
+    - else:
+      - narrate "<&c>You denied <player.flag[tmp.trade_target].name>'s Trade Request"
+      - narrate "<&c><player.name> Denied your trade request." targets:<player.flag[tmp.trade_target]>
 
 open_context_menu:
   type: task

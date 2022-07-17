@@ -37,6 +37,12 @@ channels:
           channel: 977669078976172092
           to-MC: false
           to-Discord: true
+        Calipolis:
+          active: false
+          group: Adriftus Staff
+          channel: 977669078976172092
+          to-MC: false
+          to-Discord: true
     icon:
       hub: <&chr[1008]>
       herocraft: <&chr[1010]>
