@@ -6,8 +6,8 @@ context_menu_events:
       - ratelimit <player> 1t
       - if <player.is_sneaking>:
         - ratelimit <player> 10s
-        - clickable until:10s defmap:<map[target=<context.entity>]> save:cmd:
-          - announce <[target].name><&sp><player.name>
+        - clickable until:10s defmap:<map[clicker=<player>;target=<context.entity>]> save:cmd:
+          - adjust <queue> linked_player:<[clicker]>
           - run trade_open def:<[target]>
         - narrate targets:<context.entity> "<yellow><player.name> wants to trade with you!<n><element[<green><bold><&lb>Accept<&rb>].on_click[<entry[cmd].command>]>"
 
