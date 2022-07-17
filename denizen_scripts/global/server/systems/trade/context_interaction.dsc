@@ -5,7 +5,9 @@ context_menu_events:
     on player right clicks player with:air:
       - ratelimit <player> 1t
       - if <player.is_sneaking>:
-        - run trade_open def:<context.entity>
+        - clickable save:cmd:
+          - run trade_open def:<context.entity>
+        - narrate targets:<context.entity> "<yellow><player.name> wants to trade with you!<n><element[<bold><&lb>Accept<&rb>].on_click[<entry[cmd].command>]>"
 
 open_context_menu:
   type: task
