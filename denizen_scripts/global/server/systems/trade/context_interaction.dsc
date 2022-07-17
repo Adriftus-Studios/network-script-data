@@ -8,7 +8,7 @@ context_menu_events:
         - define prompt "<&e><player.name> wants to trade with you!"
         - flag <context.entity> tmp.trade_target:<player> expire:30s
         - narrate targets:<player> "<&e>You requested to trade with <context.entity.name>."
-        - run chat_confirm "def:<[prompt]>|context_menu_trade_confirmed"
+        - run chat_confirm "def:<[prompt]>|context_menu_trade_confirmed" player:<context.entity>
 
 context_menu_trade_confirmed:
   type: task
