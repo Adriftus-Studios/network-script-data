@@ -10,6 +10,7 @@ context_menu_events:
           - adjust <queue> linked_player:<[clicker]>
           - run trade_open def:<[target]>
         - narrate targets:<context.entity> "<yellow><player.name> wants to trade with you!<n><element[<green><bold><&lb>Accept<&rb>].on_click[<entry[cmd].command>]>"
+        - narrate targets:<player> "<yellow>You requested to trade with <context.entity.name>."
 
 open_context_menu:
   type: task
