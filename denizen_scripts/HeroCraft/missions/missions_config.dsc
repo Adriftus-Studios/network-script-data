@@ -14,4 +14,9 @@ missions_config:
     - slay
     - retrieve
     - pvp_zanzar
+  # Max multipliers
+  multipliers:
+    daily: 1
+    weekly: 7
+    monthly: 30
 
