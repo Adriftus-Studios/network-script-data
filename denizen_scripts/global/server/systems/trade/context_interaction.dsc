@@ -3,7 +3,7 @@ context_menu_events:
   debug: false
   events:
     on player right clicks player with:air:
-      - ratelimit <player.uuid>_<context.entity.uuid> 1s
+      - ratelimit <player.uuid>_<context.entity.uuid> 5s
       - if <player.is_sneaking>:
         - define prompt "<&e><player.name> wants to trade with you!"
         - flag <context.entity> tmp.trade_target:<player> expire:30s
