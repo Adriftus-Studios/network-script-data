@@ -13,8 +13,8 @@ mission_slay:
     max: mission_slay_complete
   rewards:
     daily: 150
-    weekly: 175
-    monthly: 200
+    weekly: 300
+    monthly: 500
   mobs:
     zombie:
       - 2
@@ -49,7 +49,7 @@ mission_slay_assignment:
     - define map <map.with[id].as[<[config].data_key[id]>]>
     - define map <[map].with[timeframe].as[<[timeframe]>]>
     - define map <[map].with[mob].as[<[mob]>]>
-    - define map <[map].with[max].as[<[max]>]>
+    - define map <[map].with[max].as[<[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>]>
     - define map <[map].with[name].as[<proc[missions_replace_name].context[<[config].parsed_key[name]>|<map[mobs=<[name]>].escaped>]>]>
     - define map <[map].with[description].as[<proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[mobs=<[name]>;max=<[max]>].escaped>]>]>
     - define map <[map].with[rewarded].as[false]>

@@ -13,8 +13,8 @@ mission_craft:
     max: mission_craft_complete
   rewards:
     daily: 100
-    weekly: 125
-    monthly: 150
+    weekly: 200
+    monthly: 400
   items:
     oak_planks:
       - 8
@@ -68,7 +68,7 @@ mission_craft_assignment:
     - define map <map.with[id].as[<[config].data_key[id]>]>
     - define map <[map].with[timeframe].as[<[timeframe]>]>
     - define map <[map].with[item].as[<[item]>]>
-    - define map <[map].with[max].as[<[max]>]>
+    - define map <[map].with[max].as[<[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>]>
     - define map <[map].with[name].as[<proc[missions_replace_name].context[<[config].parsed_key[name]>|<map[items=<[name]>].escaped>]>]>
     - define map <[map].with[description].as[<proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[items=<[name]>;max=<[max]>].escaped>]>]>
     - define map <[map].with[rewarded].as[false]>

@@ -13,8 +13,8 @@ mission_pvp_zanzar:
     max: mission_pvp_zanzar_complete
   rewards:
     daily: 200
-    weekly: 225
-    monthly: 250
+    weekly: 400
+    monthly: 600
   players:
     - 1
     - 2
@@ -34,7 +34,7 @@ mission_pvp_zanzar_assignment:
     # Define map
     - define map <map.with[id].as[<[config].data_key[id]>]>
     - define map <[map].with[timeframe].as[<[timeframe]>]>
-    - define map <[map].with[max].as[<[max]>]>
+    - define map <[map].with[max].as[<[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>]>
     - define map <[map].with[name].as[<[config].parsed_key[name]>]>
     - define map <[map].with[description].as[<proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[max=<[max]>].escaped>]>]>
     - define map <[map].with[rewarded].as[false]>
