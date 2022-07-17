@@ -43,14 +43,24 @@ channels:
           channel: 977669078976172092
           to-MC: false
           to-Discord: true
+        build:
+          active: false
+          group: Adriftus Staff
+          channel: 977669010890063874
+          to-MC: false
+          to-Discord: true
     icon:
       hub: <&chr[1008]>
+      build: <&chr[1008]>
       herocraft: <&chr[1010]>
       zanzabar: <&chr[1011]>
       test: <&chr[1009]>
       calipolis: <&chr[1008]>
     settings_icon:
       hub: 
+        active: paper[custom_model_data=511]
+        inactive: paper[custom_model_data=512]
+      build: 
         active: paper[custom_model_data=511]
         inactive: paper[custom_model_data=512]
       herocraft: 
