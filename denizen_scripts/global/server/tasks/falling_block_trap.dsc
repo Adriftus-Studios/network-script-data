@@ -16,6 +16,6 @@ falling_block_multiple:
   type: task
   debug: false
   script:
-    - define flag_to_check <context.location.flag[trigger_flag]>
+    - define flag_to_check <context.location.flag[falling_block_flag]>
     - foreach <context.location.find_blocks_flagged[<[flag_to_check]>].within[6]>:
       - run falling_block_trap def:<[value]>
