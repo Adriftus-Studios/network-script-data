@@ -10,7 +10,7 @@ falling_block_trap:
     - spawn falling_block[fallingblock_type=<[material]>] <[location].center.below[0.5]> save:block
     - flag <entry[block].spawned_entity> on_fall:cancel
     - wait 5s
-    - modifyblock <[location]> <[material]>\
+    - modifyblock <[location]> <[material]>
 
 falling_block_multiple:
   type: task
