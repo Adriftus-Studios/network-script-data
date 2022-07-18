@@ -1418,7 +1418,7 @@ fishing_minigame_bucket_open_gui:
                     - inventory set o:fishing_minigame_upgrade_available slot:20 d:<[player].inventory>
                     - inventory set o:fishing_minigame_upgrade_available slot:21 d:<[player].inventory>
                     - inventory set o:fishing_minigame_upgrade_available slot:22 d:<[player].inventory>
-                    - adjust <[inventory]> title:<[inventory].title><&chr[F806]><&chr[F808]><&chr[F80A]><&chr[F80C]><&chr[0032]>
+                    - adjust <[inventory]> title:<[inventory].title><&chr[F806]><&chr[F808]><&chr[F80A]><&chr[F80C]><&chr[1032]>
     script:
         - inject locally path:build_inventory
         - inventory open d:<[inventory]>
