@@ -1406,7 +1406,7 @@ fishing_minigame_bucket_open_gui:
             - inventory set o:<[fishCopy]> slot:<[bucketSlots].first> d:<[inventory]>
             - define bucketSlots <[bucketSlots].remove[first]>
         - if <[merchant]>:
-            - adjust <[inventory]> title:<[inventory].title><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0031]>
+            - adjust <[inventory]> title:<[inventory].title><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[1031]>
             - inventory set o:fishing_minigame_back_button slot:1 d:<[inventory]>
             - inventory set o:fishing_minigame_sell_all slot:26 d:<[player].inventory>
             - inventory set o:fishing_minigame_sell_all slot:27 d:<[player].inventory>
@@ -1418,7 +1418,7 @@ fishing_minigame_bucket_open_gui:
                     - inventory set o:fishing_minigame_upgrade_available slot:20 d:<[player].inventory>
                     - inventory set o:fishing_minigame_upgrade_available slot:21 d:<[player].inventory>
                     - inventory set o:fishing_minigame_upgrade_available slot:22 d:<[player].inventory>
-                    - adjust <[inventory]> title:<[inventory].title><&chr[F806]><&chr[F808]><&chr[F80A]><&chr[F80C]><&chr[1031]>
+                    - adjust <[inventory]> title:<[inventory].title><&chr[F806]><&chr[F808]><&chr[F80A]><&chr[F80C]><&chr[1032]>
     script:
         - inject locally path:build_inventory
         - inventory open d:<[inventory]>
