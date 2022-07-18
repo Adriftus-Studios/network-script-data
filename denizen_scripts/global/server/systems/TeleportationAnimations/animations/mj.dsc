@@ -32,7 +32,7 @@ teleportation_animation_mj_run:
     - define targets <player.location.find_players_within[60]>
     - wait 1t
     - repeat 10:
-      - define spiral_<[value]> <proc[define_spiral].context[<[start_location].with_yaw[<element[36].mul[<[loop_index]>]>].forward_flat[1]>|<[start_location].above[30]>|2|0]>
+      - define spiral_<[value]> <proc[define_spiral].context[<[start_location].with_yaw[<element[36].mul[<[value]>]>].forward_flat[1]>|<[start_location].above[30]>|2|0]>
       - wait 1t
     - repeat 10:
       - playeffect at:<[spiral_<[value]>]> effect:redstone special_data:5|<list[purple|black].random> offset:0.1 quantity:2 targets:<[targets]>
@@ -61,3 +61,4 @@ teleportation_animation_mj_secondary:
       - playeffect at:<[destination]> effect:redstone special_data:5|purple offset:0.5 quantity:20 targets:<[far_targets]> if:<[far_targets].is_empty.not>
       - wait 1t
     - teleport <player> <[destination]>
+    - adjust <player> gravity:true
