@@ -27,8 +27,8 @@ teleportation_animation_cal_run:
   script:
     - define foot_location <player.location>
     - define targets <player.location.find_players_within[60]>
-    - spawn falling_block[gravity=false;fallingblock_type=oak_log] <player.location.center.below[0.5]> save:log1
-    - spawn falling_block[gravity=false;fallingblock_type=oak_log] <player.location.center.above[0.5]> save:log2
+    - spawn falling_block[gravity=false;fallingblock_type=oak_log] <player.location> save:log1
+    - spawn falling_block[gravity=false;fallingblock_type=oak_log] <player.location.above> save:log2
     - title title:<&color[#000000]><&font[adriftus:overlay]><&chr[1004]><&chr[F802]><&chr[1004]> fade_in:5t stay:10t fade_out:1.5s
     - repeat 5:
       - playeffect at:<[foot_location]> offset:0.2 effect:redstone special_data:5|<[color]> quantity:10 targets:<[targets]>
