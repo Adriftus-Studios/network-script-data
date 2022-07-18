@@ -673,13 +673,13 @@ fishing_minigame_get_bucket_name:
     script:
         - choose <[level]>:
             - case 1:
-                - determine <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0021]>
+                - determine <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1021]>
             - case 2:
-                - determine <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0022]>
+                - determine <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1022]>
             - case 3:
-                - determine <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0023]>
+                - determine <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1023]>
             - case MAX:
-                - determine <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0024]>
+                - determine <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1024]>
 
 # % ██ [ Returns available whirlpool locations ] ██
 fishing_minigame_get_available_whirlpool_location:
@@ -1299,7 +1299,7 @@ fishing_minigame_merchant_open_gui:
             - inventory set o:<[bestCatch].unescaped> slot:16 d:<[inventory]>
 
         - if <[player].has_flag[fishingminigame.active]> && <[player].flag[fishingminigame.active]>:
-            - adjust <[inventory]> title:<&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[0002]>
+            - adjust <[inventory]> title:<&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1001]><&chr[F801]><&chr[F809]><&chr[F80A]><&chr[F80C]><&chr[1002]>
             - inventory set o:fishing_minigame_end_game slot:10 d:<[inventory]>
             - inventory set o:fishing_minigame_end_game slot:11 d:<[inventory]>
             - inventory set o:fishing_minigame_end_game slot:12 d:<[inventory]>
@@ -1309,7 +1309,7 @@ fishing_minigame_merchant_open_gui:
             - inventory set o:fishing_minigame_fish_button slot:42 d:<[inventory]>
             - inventory set o:fishing_minigame_fish_button slot:43 d:<[inventory]>
         - else:
-            - adjust <[inventory]> title:<&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0001]>
+            - adjust <[inventory]> title:<&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1001]>
             - inventory set o:fishing_minigame_start_button slot:10 d:<[inventory]>
             - inventory set o:fishing_minigame_start_button slot:11 d:<[inventory]>
             - inventory set o:fishing_minigame_start_button slot:12 d:<[inventory]>
@@ -1339,7 +1339,7 @@ fishing_minigame_merchant_gui:
     inventory: chest
     size: 45
     debug: false
-    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0001]>
+    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1001]>
     gui: true
     slots:
     - [] [] [] [] [] [] [] [] []
@@ -1371,7 +1371,7 @@ fishing_minigame_shop_gui:
     inventory: chest
     size: 45
     debug: false
-    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0040]>
+    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1040]>
     gui: true
     slots:
     - [fishing_minigame_back_button] [] [] [] [] [] [] [] []
@@ -1424,7 +1424,7 @@ fishing_minigame_bucket_gui:
     type: inventory
     inventory: chest
     size: 54
-    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0021]>
+    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1021]>
     gui: true
     debug: false
     slots:
@@ -1497,7 +1497,7 @@ fishing_minigame_leaderboards_gui:
     inventory: chest
     size: 45
     debug: false
-    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0003]>
+    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1003]>
     gui: true
     definitions:
         green: <item[lime_stained_glass_pane[display=<&r> ]]>
@@ -1554,7 +1554,7 @@ fishing_minigame_mp3_gui:
     inventory: chest
     size: 54
     debug: false
-    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0060]>
+    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1060]>
     gui: true
     slots:
     - [] [] [] [] [] [] [] [] []
@@ -1633,7 +1633,7 @@ fishing_minigame_music_shop_gui:
     inventory: chest
     size: 45
     debug: false
-    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[0050]>
+    title: <&f><&font[adriftus:fishing_minigame]><&chr[F808]><&chr[1050]>
     gui: true
     slots:
     - [] [] [] [] [] [] [] [] []
