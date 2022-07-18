@@ -34,7 +34,7 @@ teleportation_animation_cal_run:
       - playeffect at:<[foot_location].above> effect:redstone special_data:5|<[color]> offset:1,2,1 quantity:20 targets:<[targets]>
       - wait 1t
     - teleport <player> <[destination]>
-    - wait 3s
+    - wait 4s
     - remove <entry[log1].spawned_entity>
     - remove <entry[log2].spawned_entity>
     - repeat 5:
