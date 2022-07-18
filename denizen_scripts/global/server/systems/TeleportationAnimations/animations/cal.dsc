@@ -31,12 +31,12 @@ teleportation_animation_cal_run:
     - spawn falling_block[gravity=false;fallingblock_type=oak_log] <player.location.above> save:log2
     - title title:<&color[#000000]><&font[adriftus:overlay]><&chr[1004]><&chr[F802]><&chr[1004]> fade_in:5t stay:10t fade_out:1.5s
     - repeat 5:
-      - playeffect at:<[foot_location].above> effect:redstone special_data:5|<[color]> offset:1 quantity:20 targets:<[targets]>
+      - playeffect at:<[foot_location].above> effect:redstone special_data:5|<[color]> offset:0.5,1,0.5 quantity:20 targets:<[targets]>
       - wait 1t
     - teleport <player> <[destination]>
     - wait 4s
     - remove <entry[log1].spawned_entity>
     - remove <entry[log2].spawned_entity>
     - repeat 5:
-      - playeffect at:<[foot_location].above> effect:redstone special_data:5|<[color]> offset:1 quantity:20 targets:<[targets]>
+      - playeffect at:<[foot_location].above> effect:redstone special_data:5|<[color]> offset:0.5,1,0.5 quantity:20 targets:<[targets]>
       - wait 1t
