@@ -144,6 +144,7 @@ fishing_minigame_build_whirlpools:
             - define stand armor_stand[visible=false;equipment=air|air|air|cyan_stained_glass[custom_model_data=1];gravity=false;marker=true]
             - spawn <[stand]> <[loc]> save:entity persistent
             - adjust <entry[entity].spawned_entity> hide_from_players
+            - flag <entry[entity].spawned_entity> on_entity_added:cancel
             - flag server fishing_minigame_active_whirlpool_locations.<[loc]>.entity:<entry[entity].spawned_entity>
         - run fishing_minigame_whirlpool_animation
 
