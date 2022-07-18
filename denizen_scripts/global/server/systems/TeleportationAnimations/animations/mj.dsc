@@ -33,6 +33,7 @@ teleportation_animation_mj_run:
     - wait 1t
     - repeat 10:
       - define spiral_<[value]> <proc[define_spiral].context[<[start_location].with_yaw[<element[36].mul[<[value]>]>].forward_flat[1]>|<[start_location].above[30]>|2|0]>
+      - playeffect at:<[star_locations]> effect:redstone special_data:5|<list[black].random> offset:0.1 quantity:2 targets:<[targets]>
       - wait 1t
     - repeat 10:
       - playeffect at:<[spiral_<[value]>]> effect:redstone special_data:5|<list[purple|black].random> offset:0.1 quantity:2 targets:<[targets]>
