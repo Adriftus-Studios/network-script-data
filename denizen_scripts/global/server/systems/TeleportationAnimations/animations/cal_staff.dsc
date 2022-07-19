@@ -17,10 +17,10 @@ teleportation_animation_cal_staff:
   colorable: false
 
   # The task for running the animation
-  task: teleportation_animation_mj_run
+  task: teleportation_animation_cal_staff_run
 
 
-teleportation_animation_mj_run:
+teleportation_animation_cal_staff_run:
   type: task
   debug: false
   definitions: destination|color
@@ -37,13 +37,13 @@ teleportation_animation_mj_run:
       - wait 1t
     - repeat 10:
       - playeffect at:<[spiral_<[value]>]> effect:redstone special_data:5|<list[green|yellow].random> offset:0.1 quantity:2 targets:<[targets]>
-    - run teleportation_animation_mj_secondary def:<[start_location]>|<[destination]>
+    - run teleportation_animation_cal_staff_secondary def:<[start_location]>|<[destination]>
     - repeat 3:
       - repeat 10:
         - define spiral_<[value]> <proc[define_spiral].context[<[start_location].with_yaw[<element[36].mul[<[loop_index]>]>].forward_flat[1]>|<[start_location].above[30]>|2|0]>
         - wait 1t
 
-teleportation_animation_mj_secondary:
+teleportation_animation_cal_staff_secondary:
   type: task
   debug: false
   definitions: start|destination
