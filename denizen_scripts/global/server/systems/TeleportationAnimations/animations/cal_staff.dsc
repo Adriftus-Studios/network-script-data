@@ -26,15 +26,17 @@ teleportation_animation_cal_staff_run:
   definitions: destination|color
   script:
     - define start_location <player.location>
-    - define star_locations <proc[define_star].context[<[start_location].above[0.1].with_pitch[90]>|5|15|5]>
+    - repeat 12:
+      - define star_locations_<[value]> <proc[define_star].context[<[start_location].above[0.1].with_pitch[90]>|<element[10].mul[<[value]>]>|15|5]>
     - adjust <player> gravity:false
     - teleport <[start_location].above[0.1]>
     - define targets <player.location.find_players_within[60]>
     - wait 1t
-    - repeat 10:
-      - define spiral_<[value]> <proc[define_spiral].context[<[start_location].with_yaw[<element[36].mul[<[value]>]>].forward_flat[1]>|<[start_location].above[30]>|2|0]>
-      - playeffect at:<[star_locations]> effect:redstone special_data:5|<list[green|yellow].random> offset:0.1 quantity:2 targets:<[targets]>
-      - wait 1t
+    - repeat 10 as:star_value:
+      - repeat 6:
+        - define spiral_<[value]> <proc[define_spiral].context[<[start_location].with_yaw[<element[36].mul[<[value]>]>].forward_flat[1]>|<[start_location].above[30]>|2|0]>
+        - playeffect at:<[star_locations_<[star_value]>]> effect:redstone special_data:5|<list[green|yellow].random> offset:0.1 quantity:2 targets:<[targets]>
+        - wait 1t
     - repeat 10:
       - playeffect at:<[spiral_<[value]>]> effect:redstone special_data:5|<list[green|yellow].random> offset:0.1 quantity:2 targets:<[targets]>
     - run teleportation_animation_cal_staff_secondary def:<[start_location]>|<[destination]>
