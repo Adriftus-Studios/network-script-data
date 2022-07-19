@@ -27,7 +27,7 @@ teleportation_animation_cal_staff_run:
   script:
     - define start_location <player.location>
     - repeat 12:
-      - define star_locations_<[value]> <proc[define_star].context[<[start_location].above[0.1].with_pitch[90]>|<element[10].mul[<[value]>]>|15|5]>
+      - define star_locations_<[value]> <proc[define_star].context[<[start_location].above[0.1].with_pitch[90]>|5|<element[15].mul[<[value]>]>|5]>
     - adjust <player> gravity:false
     - teleport <[start_location].above[0.1]>
     - define targets <player.location.find_players_within[60]>
