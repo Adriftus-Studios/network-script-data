@@ -62,7 +62,7 @@ teleportation_animation_cal_staff_secondary:
       - playeffect at:<[value]> effect:redstone special_data:5|yellow offset:0.5 quantity:20 targets:<[targets]>
       - teleport <player> <[value]>
       - playeffect at:<[destination]> effect:redstone special_data:5|green offset:0.5 quantity:20 targets:<[far_targets]> if:<[far_targets].is_empty.not>
-      - playeffect at:<[destination]> effect:redstone special_data:5|purple offset:0.5 quantity:20 targets:<[far_targets]> if:<[far_targets].is_empty.not>
+      - playeffect at:<[destination]> effect:redstone special_data:5|yellow offset:0.5 quantity:20 targets:<[far_targets]> if:<[far_targets].is_empty.not>
       - wait 1t
     - teleport <player> <[destination]>
     - wait 1t
