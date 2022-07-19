@@ -58,7 +58,8 @@ teleportation_animation_cal_staff_secondary:
     - title title:<&color[#000000]><&font[adriftus:overlay]><&chr[1004]><&chr[F802]><&chr[1004]> fade_in:5t stay:10t fade_out:1.5s
     - define far_targets <[destination].find_players_within[60]>
     - foreach <[points].get[-5].to[last]>:
-      - playeffect at:<[value]> effect:redstone special_data:5|purple offset:0.5 quantity:20 targets:<[targets]>
+      - playeffect at:<[value]> effect:redstone special_data:5|green offset:0.5 quantity:20 targets:<[targets]>
+      - playeffect at:<[value]> effect:redstone special_data:5|yellow offset:0.5 quantity:20 targets:<[targets]>
       - teleport <player> <[value]>
       - playeffect at:<[destination]> effect:redstone special_data:5|purple offset:0.5 quantity:20 targets:<[far_targets]> if:<[far_targets].is_empty.not>
       - wait 1t
