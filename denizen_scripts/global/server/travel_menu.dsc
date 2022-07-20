@@ -64,7 +64,9 @@ travel_menu_open:
           - narrate test
         # Hub tab
         - case hub:
-          - narrate test
+          - foreach <script.data_key[data.hub_slots]> key:warp_name as:slots:
+            - foreach <[slots]> as:slot:
+              - inventory set slot:<[slot]> d:<[inventory]> o:<item[hub_warp_<[warp_name]>_icon].with[flag=warp_id:<[warp_name]>;flag=run_script:hub_warp]>
         # test tab
         - case test:
           - narrate test
