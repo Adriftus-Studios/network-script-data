@@ -146,14 +146,14 @@ network_join_hell:
   type: task
   debug: false
   script:
-    - title title:<&c><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:<&color[#880000]>Doom has come to this world" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&c><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:<&color[#880000]>Doom has come to this world" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - stop
 
 network_leave_hell:
   type: task
   debug: false
   script:
-    - title title:<&f><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The World feels a litte safer.." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&f><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The World feels a litte safer.." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - stop
 
 network_join_colors:
@@ -161,7 +161,7 @@ network_join_colors:
   debug: false
   script:
     - repeat 16:
-      - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The world feels more vibrant!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
+      - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The world feels more vibrant!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
       - wait 5t
     - define message "<player.name> has joined, making the world more vibrant!"
 
@@ -169,14 +169,14 @@ network_leave_colors:
   type: task
   debug: false
   script:
-    - title title:<&7><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The World is a little less colorful" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&7><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The World is a little less colorful" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "<player.name> has left, the world feels less colorful..."
 
 network_join_queen:
   type: task
   debug: false
   script:
-    - title title:<&6><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The Queen graces the land once more!" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&6><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The Queen graces the land once more!" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "The Queen graces the land once more!"
     - - define discord_message "The Queen graces the land once more!"
 
@@ -184,7 +184,7 @@ network_leave_queen:
   type: task
   debug: false
   script:
-    - title title:<&e><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The Queen departs this world..." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&e><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The Queen departs this world..." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "The Queen departs this world!"
     - define discord_message "The Queen departs this world!"
 
@@ -192,7 +192,7 @@ network_join_syn:
   type: task
   debug: false
   script:
-    - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The world feels a bit more... Synful!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
+    - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The world feels a bit more... Synful!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
     - define message "The world feels a bit more... Synful!"
     - define discord_message "The world feels a bit more... Synful!"
 
@@ -200,6 +200,6 @@ network_leave_syn:
   type: task
   debug: false
   script:
-    - title title:<&7><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The world is free of Syn... for now..." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&7><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The world is free of Syn... for now..." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "The world is free of Syn... for now..."
     - define discord_message "The world is free of Syn... for now..."
