@@ -10,8 +10,9 @@ travel_menu_open:
       mail_run: 48
       fishing: 50
     inactive_slots:
-      - 35
-      - 36
+      - 31
+      - 32
+      - 33
     title_data:
       hub:
        active: <&chr[1002]>
