@@ -160,7 +160,7 @@ multiverse_dust_info:
 return_scroll_info:
   type: item
   material: feather
-  display name: <&6>Scrolls of Returning
+  display name: <&6>Scroll of Returning
   lore:
     - <&6>Saves Location when Crafted
     - <&6>Returns you there when used
@@ -198,7 +198,7 @@ town_return_scroll_info:
     - <&e>- Replaces <&a>/t spawn
     - <&b>-- Click to see Crafting Recipe --
   mechanisms:
-    custom_model_data: 200
+    custom_model_data: 202
   flags:
     run_script: travel_menu_show_recipe
     item_recipe: shapeless_recipe_town_return_scroll_1
