@@ -56,8 +56,8 @@ missions_inv_open:
     - foreach <[items]> as:item:
       - inventory set slot:<[slots].get[<[loop_index]>]> o:<[item]> d:<[inventory]>
     # Add Reset Missions button if weekly/monthly
-    - if <list[weekly|monthly].contains[<[timeframe]>]>:
-      - inventory set slot:45 o:<item[lime_stained_glass_pane].with[display_name=<&a><&l>Reset<&sp>Missions;lore=<list[<&e>Complete<&sp>all<&sp>missions<&sp>to<&sp>reset]>;flag=timeframe:<[timeframe]>]> d:<[inventory]>
+    #- if <list[weekly|monthly].contains[<[timeframe]>]>:
+    #  - inventory set slot:45 o:<item[lime_stained_glass_pane].with[display_name=<&a><&l>Reset<&sp>Missions;lore=<list[<&e>Complete<&sp>all<&sp>missions<&sp>to<&sp>reset]>;flag=timeframe:<[timeframe]>]> d:<[inventory]>
     # Open inventory
     - inventory open d:<[inventory]>
 
