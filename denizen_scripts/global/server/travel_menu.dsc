@@ -11,19 +11,19 @@ travel_menu_open:
       fishing: 50
     herocraft:
       waystones:
-        - 11
-        - 12
-        - 13
-        - 14
+        - 26
+        - 27
+        - 35
+        - 36
       items:
-        multiverse_dust: 15
-        return_scroll: 27
-        back_scroll: 28
-        town_return_scroll: 29
-        tpa_crystal: 31
-        return_crystal: 31
-        back_crystal: 31
-        town_return_crystal: 31
+        multiverse_dust: 20
+        return_scroll: 38
+        back_scroll: 39
+        town_return_scroll: 40
+        tpa_crystal: 41
+        return_crystal: 42
+        back_crystal: 43
+        town_return_crystal: 44
     inactive_slots:
       - 31
       - 32
