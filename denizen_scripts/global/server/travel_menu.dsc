@@ -155,7 +155,7 @@ multiverse_dust_info:
     custom_model_data: 500
   flags:
     run_script: travel_menu_show_recipe
-    item_recipe: shaped_recipe_multiverse_dust_1
+    item_recipe: shapeless_recipe_multiverse_dust_1
 
 return_scroll_info:
   type: item
@@ -171,7 +171,7 @@ return_scroll_info:
     custom_model_data: 200
   flags:
     run_script: travel_menu_show_recipe
-    item_recipe: shaped_recipe_return_scroll_1
+    item_recipe: shapeless_recipe_return_scroll_1
 
 back_scroll_info:
   type: item
@@ -186,7 +186,7 @@ back_scroll_info:
     custom_model_data: 201
   flags:
     run_script: travel_menu_show_recipe
-    item_recipe: shaped_recipe_back_scroll_1
+    item_recipe: shapeless_recipe_back_scroll_1
 
 town_return_scroll_info:
   type: item
@@ -231,7 +231,7 @@ return_crystal_info:
     - <&e>- Replaces <&a>/home
     - <&b>-- Click to see Crafting Recipe --
   mechanisms:
-    custom_model_data: 102
+    custom_model_data: 101
   flags:
     run_script: travel_menu_show_recipe
     item_recipe: shaped_recipe_return_crystal_1
@@ -247,7 +247,7 @@ back_crystal_info:
     - <&e>- Replaces <&a>/back
     - <&b>-- Click to see Crafting Recipe --
   mechanisms:
-    custom_model_data: 102
+    custom_model_data: 100
   flags:
     run_script: travel_menu_show_recipe
     item_recipe: shaped_recipe_back_crystal_1
@@ -263,7 +263,7 @@ town_return_crystal_info:
     - <&e>- Replaces <&a>/t spawn
     - <&b>-- Click to see Crafting Recipe --
   mechanisms:
-    custom_model_data: 102
+    custom_model_data: 103
   flags:
     run_script: travel_menu_show_recipe
     item_recipe: shaped_recipe_town_return_crystal_1
