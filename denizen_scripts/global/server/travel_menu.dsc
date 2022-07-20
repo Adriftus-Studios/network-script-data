@@ -58,10 +58,10 @@ travel_menu_open:
       - choose <[tab]>:
         # HeroCraft tab
         - case herocraft:
-          - narrate HeroCraft
+          - narrate HeroCraft1
         # Calipolis tab
         - case calipolis:
-          - narrate Calipolis
+          - narrate Calipolis1
         # Hub tab
         - case hub:
           - foreach <script.data_key[data.hub_slots]> key:warp_name as:slots:
