@@ -14,19 +14,19 @@ travel_menu_open:
       - 36
     title_data:
       hub:
-       active: <&chr[1000]>
+       active: <&chr[1002]>
        inactive: <&chr[1001]>
       herocraft:
-       active: <&chr[1000]>
-       inactive: <&chr[1001]>
+       active: <&chr[1003]>
+       inactive: <&chr[1004]>
       calipolis:
-       active: <&chr[1000]>
-       inactive: <&chr[1001]>
+       active: <&chr[1998]>
+       inactive: <&chr[1999]>
       build:
-       active: <&chr[1000]>
+       active: <&chr[1001]>
        inactive: <&chr[1001]>
       test:
-       active: <&chr[1000]>
+       active: <&chr[1001]>
        inactive: <&chr[1001]>
   definitions: tab
   script:
