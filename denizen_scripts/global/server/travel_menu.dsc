@@ -198,10 +198,10 @@ town_return_scroll_info:
     - <&e>- Replaces <&a>/t spawn
     - <&b>-- Click to see Crafting Recipe --
   mechanisms:
-    custom_model_data: 201
+    custom_model_data: 200
   flags:
     run_script: travel_menu_show_recipe
-    item_recipe: shaped_recipe_town_return_scroll_1
+    item_recipe: shapeless_recipe_town_return_scroll_1
 
 tpa_crystal_info:
   type: item
