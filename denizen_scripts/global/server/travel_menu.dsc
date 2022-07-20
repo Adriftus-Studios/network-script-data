@@ -160,7 +160,7 @@ multiverse_dust_info:
 return_scroll_info:
   type: item
   material: feather
-  display name: <&6>Scroll of Returning
+  display name: <&6>Return Scroll
   lore:
     - <&6>Saves Location when Crafted
     - <&6>Returns you there when used
