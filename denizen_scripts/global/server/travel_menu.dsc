@@ -85,7 +85,7 @@ travel_menu_open_tab:
   debug: false
   script:
     - determine passively cancelled
-    - ratelimit <player> 1s
+    - ratelimit <player> 10t
     - run travel_menu_open def:<context.item.flag[server]>
 
 travel_menu_to_server:
