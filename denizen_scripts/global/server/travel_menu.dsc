@@ -25,9 +25,9 @@ travel_menu_open:
         back_crystal: 43
         town_return_crystal: 44
     inactive_slots:
+      - 40
       - 41
       - 42
-      - 43
     title_data:
       hub:
        active: <&chr[5004]>
