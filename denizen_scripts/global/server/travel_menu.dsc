@@ -155,7 +155,7 @@ multiverse_dust_info:
     custom_model_data: 500
   flags:
     run_script: travel_menu_show_recipe
-    item_recipe: shapeless_recipe_multiverse_dust_1
+    item_recipe: shaped_recipe_multiverse_dust_1
 
 return_scroll_info:
   type: item
