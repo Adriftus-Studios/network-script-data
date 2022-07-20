@@ -9,6 +9,21 @@ travel_menu_open:
       shops: 33|34|35
       mail_run: 48
       fishing: 50
+    herocraft:
+      waystones:
+        - 11
+        - 12
+        - 13
+        - 14
+      items:
+        multiverse_dust: 15
+        return_scroll: 27
+        back_scroll: 28
+        town_return_scroll: 29
+        tpa_crystal: 31
+        return_crystal: 31
+        back_crystal: 31
+        town_return_crystal: 31
     inactive_slots:
       - 31
       - 32
@@ -58,7 +73,10 @@ travel_menu_open:
       - choose <[tab]>:
         # HeroCraft tab
         - case herocraft:
-          - narrate HeroCraft
+          - foreach <script.data_key[data.herocraft.waystones]>:
+            - inventory set slot:<[value]> o:town_waystones_info d:<[inventory]>
+          - foreach <script.data_key[data.herocraft.items]>:
+            - inventory set slot:<script.data_key[data.herocraft.items.<[value]>]> o:<[value]>_info d:<[inventory]>
         # Calipolis tab
         - case calipolis:
           - narrate Calipolis
@@ -114,3 +132,151 @@ hub_warp:
     - playsound <player> sound:ENTITY_ENDERMAN_TELEPORT
     - playeffect effect:PORTAL at:<player.location> visibility:500 quantity:500 offset:1.0
     - actionbar "<proc[reverse_color_gradient].context[Teleporting to <[warpName].replace[_].with[ ].to_titlecase>|#6DD5FA|#FFFFFF]>"
+
+## Herocraft
+travel_menu_show_recipe:
+  type: task
+  debug: false
+  script:
+    - run custom_recipe_inventory_open def:<context.item.flag[item_recipe]>|1|travel
+
+multiverse_dust_info:
+  type: item
+  material: feather
+  display name: <element[Multiverse Dust].rainbow>
+  lore:
+    - <&6>Travel To Zan'Zar!
+    - <&6>Full of Challenge and Adventure
+    - <&e>- Over 5000 dungeons
+    - <&e>- 100+ Loot Tables!
+    - <&e>- Custom Mobs & Enchantments
+    - <&b>-- Click to see Crafting Recipe --
+  mechanisms:
+    custom_model_data: 500
+  flags:
+    run_script: travel_menu_show_recipe
+    item_recipe: shaped_recipe_multiverse_dust_1
+
+return_scroll_info:
+  type: item
+  material: feather
+  display name: <&6>Scrolls of Returning
+  lore:
+    - <&6>Saves Location when Crafted
+    - <&6>Returns you there when used
+    - <&e>- 2,000 Block Range
+    - <&e>- Replaces <&a>/home
+    - <&b>-- Click to see Crafting Recipe --
+  mechanisms:
+    custom_model_data: 200
+  flags:
+    run_script: travel_menu_show_recipe
+    item_recipe: shaped_recipe_return_scroll_1
+
+back_scroll_info:
+  type: item
+  material: feather
+  display name: <&6>Back Scroll
+  lore:
+    - <&6>Return to your death location
+    - <&e>- 2,000 Block Range
+    - <&e>- Replaces <&a>/back
+    - <&b>-- Click to see Crafting Recipe --
+  mechanisms:
+    custom_model_data: 201
+  flags:
+    run_script: travel_menu_show_recipe
+    item_recipe: shaped_recipe_back_scroll_1
+
+town_return_scroll_info:
+  type: item
+  material: feather
+  display name: <&6>Town Scroll
+  lore:
+    - <&6>Teleports you to a Town Spawn
+    - <&e>- 2,000 Block Range
+    - <&e>- Replaces <&a>/t spawn
+    - <&b>-- Click to see Crafting Recipe --
+  mechanisms:
+    custom_model_data: 201
+  flags:
+    run_script: travel_menu_show_recipe
+    item_recipe: shaped_recipe_town_return_scroll_1
+
+tpa_crystal_info:
+  type: item
+  material: feather
+  display name: <&6>TPA Crystal
+  lore:
+    - <&6>Request Teleportation
+    - <&e>- Unlimited Range
+    - <&e>- Capable of Crossing Dimensions
+    - <&e>- Replaces <&a>/tpa
+    - <&b>-- Click to see Crafting Recipe --
+  mechanisms:
+    custom_model_data: 102
+  flags:
+    run_script: travel_menu_show_recipe
+    item_recipe: shaped_recipe_tpa_crystal_1
+
+return_crystal_info:
+  type: item
+  material: feather
+  display name: <&6>Return Crystal
+  lore:
+    - <&6>Saves Location when Crafted
+    - <&6>Returns you there when used
+    - <&e>- Unlimited Range
+    - <&e>- Capable of Crossing Dimensions
+    - <&e>- Replaces <&a>/home
+    - <&b>-- Click to see Crafting Recipe --
+  mechanisms:
+    custom_model_data: 102
+  flags:
+    run_script: travel_menu_show_recipe
+    item_recipe: shaped_recipe_return_crystal_1
+
+back_crystal_info:
+  type: item
+  material: feather
+  display name: <&6>Back Crystal
+  lore:
+    - <&6>Return to your death location
+    - <&e>- Unlimited Range
+    - <&e>- Capable of Crossing Dimensions
+    - <&e>- Replaces <&a>/back
+    - <&b>-- Click to see Crafting Recipe --
+  mechanisms:
+    custom_model_data: 102
+  flags:
+    run_script: travel_menu_show_recipe
+    item_recipe: shaped_recipe_back_crystal_1
+
+town_return_crystal_info:
+  type: item
+  material: feather
+  display name: <&6>Town Crystal
+  lore:
+    - <&6>Teleports you to a Town Spawn
+    - <&e>- Unlimited Range
+    - <&e>- Capable of Crossing Dimensions
+    - <&e>- Replaces <&a>/t spawn
+    - <&b>-- Click to see Crafting Recipe --
+  mechanisms:
+    custom_model_data: 102
+  flags:
+    run_script: travel_menu_show_recipe
+    item_recipe: shaped_recipe_town_return_crystal_1
+
+town_waystones_info:
+  type: item
+  material: feather
+  display name: <&6>Waystones
+  lore:
+    - <&e>Waystones are free fast travel
+    - <&e>Some need to be discovered
+    - <&e>Some are unlocked for all
+    - <&e>Towns can even place their own!
+    - <&b>Right Click a stone to travel
+  mechanisms:
+    custom_model_data: 3
