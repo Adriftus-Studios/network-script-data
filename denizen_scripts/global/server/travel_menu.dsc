@@ -48,7 +48,7 @@ travel_menu_open:
     - else:
       - define type inactive
     # Inventory title Overlays
-    - adjust <[inventory]> title:<&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[1001]><&chr[F703]><script.data_key[data.title_data.<[tab]>.<[type]>]>
+    - adjust <[inventory]> title:<&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[1001]><&chr[F703]><script.parsed_key[data.title_data.<[tab]>.<[type]>]>
     # If inactive, build "travel to server" buttons
     - if <[type]> == inactive:
       - foreach <script.data_key[data.inactive_slots]>:
