@@ -25,13 +25,13 @@ travel_menu_open:
         back_crystal: 43
         town_return_crystal: 44
     inactive_slots:
-      - 31
-      - 32
-      - 33
+      - 41
+      - 42
+      - 43
     title_data:
       hub:
-       active: <&chr[1002]>
-       inactive: <&chr[1001]>
+       active: <&chr[5004]>
+       inactive: <&chr[5005]>
       herocraft:
        active: <&chr[1003]>
        inactive: <&chr[1004]>
@@ -39,11 +39,11 @@ travel_menu_open:
        active: <&chr[1998]>
        inactive: <&chr[1999]>
       build:
-       active: <&chr[1001]>
-       inactive: <&chr[1001]>
+       active: <&chr[5002]>
+       inactive: <&chr[5003]>
       test:
-       active: <&chr[1001]>
-       inactive: <&chr[1001]>
+       active: <&chr[5000]>
+       inactive: <&chr[5001]>
   definitions: tab
   script:
     - define tab <bungee.server> if:<[tab].exists.not>
