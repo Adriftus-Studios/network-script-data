@@ -75,7 +75,7 @@ travel_menu_open:
         - case herocraft:
           - foreach <script.data_key[data.herocraft.waystones]>:
             - inventory set slot:<[value]> o:town_waystones_info d:<[inventory]>
-          - foreach <script.data_key[data.herocraft.items]>:
+          - foreach <script.data_key[data.herocraft.items].keys>:
             - inventory set slot:<script.data_key[data.herocraft.items.<[value]>]> o:<[value]>_info d:<[inventory]>
         # Calipolis tab
         - case calipolis:
