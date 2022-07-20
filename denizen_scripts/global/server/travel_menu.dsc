@@ -52,7 +52,7 @@ travel_menu_open:
     # If inactive, build "travel to server" buttons
     - if <[type]> == inactive:
       - foreach <script.data_key[data.inactive_slots]>:
-        - inventory set slot:<[value]> o:feather[custom_model_data=3;display=<&a>Travel To Server;flag=run_script:travel_menu_to_server;flag=server:<[tab]>] d:<[inventory]>
+        - inventory set slot:<[value]> "o:feather[custom_model_data=3;display=<&a>Travel To Server;flag=run_script:travel_menu_to_server;flag=server:<[tab]>]" d:<[inventory]>
     - else:
       - choose <[tab]>:
         # HeroCraft tab
