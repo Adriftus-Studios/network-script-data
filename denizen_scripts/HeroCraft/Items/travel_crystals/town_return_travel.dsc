@@ -38,7 +38,7 @@ town_return_scroll:
       - town_return_execute
     type: scroll
   mechanisms:
-    custom_model_data: 200
+    custom_model_data: 202
   recipes:
     1:
       type: shapeless
