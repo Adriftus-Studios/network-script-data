@@ -7,7 +7,7 @@ get_player_display_name:
     - stop if:<[player].equals[player]>
     - if <server.has_flag[player_map.uuids.<[player].uuid>.display_name]>:
       - determine <&translate[adriftus.user.display_name].with[<server.flag[player_map.uuids.<[player].uuid>.display_name]>|<&7>(<&f><[player].name><&7>)<&f>]>
-    - else if <yaml[global.player.<[player]>].contains[chat.display_color]>:
-      - determine <yaml[global.player.<[player]>].parsed_key[chat.display_color]><[player].name>
+    - else if <yaml[global.player.<[player]>].contains[display.color]>:
+      - determine <yaml[global.player.<[player]>].parsed_key[display.color]><[player].name>
     - else:
       - determine <[player].name>
