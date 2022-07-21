@@ -27,13 +27,13 @@ travel_menu_open:
     calipolis:
       items:
         Home:
-          - 28
+          - 23
         Lore:
-          - 41
-          - 42
+          - 39
+          - 40
         Warp:
+          - 42
           - 43
-          - 44
     inactive_slots:
       - 40
       - 41
