@@ -305,14 +305,14 @@ travel_menu_calipolis_home_icon:
   mechanisms:
     custom_model_data: 3
   flags:
-    run_script: 
+    run_script: cancel
 
 travel_menu_calipolis_lore_icon:
   type: item
   debug: false
-  display name: <&6>Homes
+  display name: <&6>Lore
   lore:
-  - "<&6>You House!"
+  - "<&6>Lore Locations!"
   material: feather
   mechanisms:
     custom_model_data: 3
@@ -322,12 +322,12 @@ travel_menu_calipolis_lore_icon:
 travel_menu_calipolis_warp_icon:
   type: item
   debug: false
-  display name: <&6>Homes
+  display name: <&6>Warps
   lore:
-  - "<&6>You House!"
+  - "<&6>Warps!"
   material: feather
   mechanisms:
     custom_model_data: 3
   flags:
-    run_script: 
+    run_script: cancel
 
