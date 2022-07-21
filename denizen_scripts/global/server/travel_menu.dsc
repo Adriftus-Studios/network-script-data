@@ -90,7 +90,7 @@ travel_menu_open:
         # Calipolis tab
         - case calipolis:
           - foreach <script.data_key[data.calipolis.items].keys>:
-            - inventory set slot:<[value]> o:travel_menu_calipolis_<[value]>_icon d:<[inventory]>
+            - inventory set slot:<script.data_key[data.calipolis.items.<[value]>].get[<[loop_index]>]> o:travel_menu_calipolis_<[value]>_icon d:<[inventory]>
         # Hub tab
         - case hub:
           - foreach <script.data_key[data.hub_slots]> key:warp_name as:slots:
