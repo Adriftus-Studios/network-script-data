@@ -24,6 +24,16 @@ travel_menu_open:
         return_crystal: 42
         back_crystal: 43
         town_return_crystal: 44
+    calipolis:
+      items:
+        Home:
+          - 28
+        Lore:
+          - 41
+          - 42
+        Warp:
+          - 43
+          - 44
     inactive_slots:
       - 40
       - 41
@@ -79,7 +89,8 @@ travel_menu_open:
             - inventory set slot:<script.data_key[data.herocraft.items.<[value]>]> o:<[value]>_info d:<[inventory]>
         # Calipolis tab
         - case calipolis:
-          - narrate Calipolis
+          - foreach <script.data_key[data.calipolis.items].keys>:
+            - inventory set slot:<[value]> o:travel_menu_calipolis_<[value]>_icon d:<[inventory]>
         # Hub tab
         - case hub:
           - foreach <script.data_key[data.hub_slots]> key:warp_name as:slots:
@@ -280,3 +291,42 @@ town_waystones_info:
     - <&b>Right Click a stone to travel
   mechanisms:
     custom_model_data: 3
+
+# Home Lore Warp
+
+travel_menu_calipolis_home_icon:
+  type: item
+  debug: false
+  display name: <&6>Homes
+  lore:
+  - "<&6>You House!"
+  material: feather
+  mechanisms:
+    custom_model_data: 3
+  flags:
+    run_script: 
+
+travel_menu_calipolis_lore_icon:
+  type: item
+  debug: false
+  display name: <&6>Homes
+  lore:
+  - "<&6>You House!"
+  material: feather
+  mechanisms:
+    custom_model_data: 3
+  flags:
+    run_script: calipolis_lore_locations_open
+
+travel_menu_calipolis_warp_icon:
+  type: item
+  debug: false
+  display name: <&6>Homes
+  lore:
+  - "<&6>You House!"
+  material: feather
+  mechanisms:
+    custom_model_data: 3
+  flags:
+    run_script: 
+
