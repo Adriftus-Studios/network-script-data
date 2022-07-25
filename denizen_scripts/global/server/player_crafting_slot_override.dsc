@@ -21,10 +21,7 @@ player_crafting_slots_override_events:
       - wait 1t
       - inventory set slot:1 o:player_crafting_slots_<bungee.server> d:<[inv]>
       - take flagged:grid_script quantity:999
-      - wait 1t
-      - if <player.inventory> != <player.open_inventory> || !<player.is_online>:
-        - stop
-      - inventory update d:<player.open_inventory>
+      - inventory update
   events:
     after player joins:
       - inject locally path:set_inv
