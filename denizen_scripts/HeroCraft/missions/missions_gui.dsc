@@ -7,12 +7,12 @@ missions_inv:
   gui: true
   size: 45
   definitions:
-    daily: <item[copper_block].with[display_name=<&a>Daily;flag=timeframe:daily]>
-    weekly: <item[iron_block].with[display_name=<&e>Weekly;flag=timeframe:weekly]>
-    monthly: <item[gold_block].with[display_name=<&6>Monthly;flag=timeframe:monthly]>
-    herocraft: <item[diamond_block].with[display_name=<&b>HeroCraft;flag=timeframe:persistent]>
+    daily: <item[feather].with[display_name=<&a>Daily;flag=timeframe:daily;custom_model_data=3]>
+    weekly: <item[feather].with[display_name=<&e>Weekly;flag=timeframe:weekly;custom_model_data=3]>
+    monthly: <item[feather].with[display_name=<&6>Monthly;flag=timeframe:monthly;custom_model_data=3]>
+    herocraft: <item[feather].with[display_name=<&b>HeroCraft;flag=timeframe:persistent;custom_model_data=3]>
     none: <item[barrier].with[display_name=<&c>No<&sp>Missions]>
-    close: <item[red_stained_glass_pane].with[display_name=<&c><&l>χ<&sp>Close]>
+    close: <item[feather].with[display_name=<&c><&l>χ<&sp>Close;custom_model_data=3]>
   slots:
     - [] [daily] [daily] [weekly] [weekly] [monthly] [monthly] [herocraft] []
     - [] [] [] [] [] [] [] [] []
