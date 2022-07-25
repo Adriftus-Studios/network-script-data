@@ -58,7 +58,7 @@ player_crafting_slots_herocraft:
   lore:
     - <&e>Herocraft Specific Stuff!
   flags:
-    run_script: cancel
+    run_script: missions_inv_open
   mechanisms:
     custom_model_data: 202
 
