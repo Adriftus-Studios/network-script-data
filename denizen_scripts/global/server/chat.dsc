@@ -476,7 +476,7 @@ chat_settings_open:
   debug: false
   script:
     - define inventory <inventory[chat_settings]>
-    - define slots <list[11|13|15|17|29|31|33|35]>
+    - define slots <list[11|13|15|17|21|23|25|29|31|33|35]>
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - if ( <yaml[chat_config].read[channels.<[channel]>.permission]> == none || ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) ):
