@@ -58,7 +58,8 @@ player_crafting_slots_herocraft:
   lore:
     - <&e>Herocraft Specific Stuff!
   flags:
-    run_script: missions_inv_open
+    run_script: player_crafting_slots_open_button
+    grid_script: missions_inv_open
   mechanisms:
     custom_model_data: 202
 
