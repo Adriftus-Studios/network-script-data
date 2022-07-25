@@ -25,9 +25,6 @@ player_crafting_slots_override_events:
         - stop
       - inventory update d:<player.open_inventory>
   events:
-    on player clicks in PLAYER bukkit_priority:HIGH:
-        - stop if:<player.uuid.starts_with[00000000]>
-        - determine cancelled if:<context.raw_slot.equals[1]>
     after player joins:
       - inject locally path:set_inv
     on player closes PLAYER:
