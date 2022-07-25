@@ -2,7 +2,7 @@
 missions_inv:
   type: inventory
   debug: false
-  title: <&2>Towny <&a>Missions
+  title: <&f><&font[adriftus:missions]><&chr[1001]>
   inventory: CHEST
   gui: true
   size: 45
@@ -14,7 +14,7 @@ missions_inv:
     none: <item[barrier].with[display_name=<&c>No<&sp>Missions]>
     close: <item[red_stained_glass_pane].with[display_name=<&c><&l>χ<&sp>Close]>
   slots:
-    - [] [daily] [] [weekly] [] [monthly] [] [herocraft] []
+    - [] [daily] [daily] [weekly] [weekly] [monthly] [monthly] [herocraft] []
     - [] [] [] [] [] [] [] [] []
     - [] [none] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
@@ -27,6 +27,11 @@ missions_inv_open:
   data:
     slot_data:
       slots_used: 20|21|22|23|24|25|26
+    titles:
+      daily: <&chr[1002]>
+      weekly: <&chr[1003]>
+      monthly: <&chr[1004]>
+      herocraft: <&chr[1005]>
   script:
     # Set definitions
     - define timeframe daily if:<[timeframe].exists.not>
@@ -34,6 +39,7 @@ missions_inv_open:
     - define slots <list[<script.parsed_key[data.slot_data.slots_used]>]>
     - define missions <proc[missions_get_timeframe].context[<[timeframe]>]>
     # Loop over missions with the currently viewed timeframe
+    - adjust <[inventory]> title:<&f><&font[adriftus:missions]><&chr[1001]><&chr[F601]><script.parsed_key[data.titles.<[timeframe]>]>
     - define items <list>
     - foreach <[missions]> as:mission:
       # Match item display name and lore to information about the mission
