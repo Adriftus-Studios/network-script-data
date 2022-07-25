@@ -31,9 +31,8 @@ mission_smelt:
       - 16
       - 32
     netherite_scrap:
+      - 4
       - 8
-      - 16
-      - 32
 
 
 # Assignment Task
