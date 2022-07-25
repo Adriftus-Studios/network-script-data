@@ -6,7 +6,7 @@ web_handler:
     self: 127.0.0.1
   events:
     on server start:
-      - webserver  start port:25579
+      - webserver start port:25579
 
     on webserver web request port:25579 method:get:
       - announce to_console "<&c>--- get request ----------------------------------------------------------"
