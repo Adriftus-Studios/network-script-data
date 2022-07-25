@@ -39,7 +39,7 @@ missions_inv_open:
     - define slots <list[<script.parsed_key[data.slot_data.slots_used]>]>
     - define missions <proc[missions_get_timeframe].context[<[timeframe]>]>
     # Loop over missions with the currently viewed timeframe
-    - adjust <[inventory]> title:<&f><&font[adriftus:missions]><&chr[1001]><&chr[F601]><script.parsed_key[data.titles.<[timeframe]>]>
+    - adjust <[inventory]> title:<&f><&font[adriftus:missions]><&chr[F808]><&chr[1001]><&chr[F601]><script.parsed_key[data.titles.<[timeframe]>]>
     - define items <list>
     - foreach <[missions]> as:mission:
       # Match item display name and lore to information about the mission
