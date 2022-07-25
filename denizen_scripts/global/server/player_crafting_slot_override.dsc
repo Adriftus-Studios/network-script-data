@@ -76,21 +76,25 @@ player_crafting_slots_calipolis:
 
 player_crafting_slots_test:
   type: item
-  material: piston
+  material: paper
   display name: <&7>Test
   lore:
     - <&e>Test Specific Stuff!
   flags:
     run_script: cancel
+  mechanisms:
+    custom_model_data: 209
 
 player_crafting_slots_build:
   type: item
-  material: dirt
+  material: paper
   display name: <&a>Build
   lore:
     - <&e>Build Specific Stuff!
   flags:
     run_script: cancel
+  mechanisms:
+    custom_model_data: 208
 
 player_crafting_slots_hub:
   type: item
