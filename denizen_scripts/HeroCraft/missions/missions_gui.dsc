@@ -12,7 +12,7 @@ missions_inv:
     monthly: <item[feather].with[display_name=<&6>Monthly;flag=timeframe:monthly;custom_model_data=3;flag=run_script:missions_inv_run]>
     herocraft: <item[feather].with[display_name=<&b>HeroCraft;flag=timeframe:persistent;custom_model_data=3;flag=run_script:missions_inv_run]>
     none: <item[barrier].with[display_name=<&c>No<&sp>Missions]>
-    close: <item[feather].with[display_name=<&c><&l>χ<&sp>Close;custom_model_data=3]>
+    close: <item[feather].with[display_name=<&c><&l>χ<&sp>Close;custom_model_data=3;flag=run_script:missions_inv_close]>
   slots:
     - [] [daily] [daily] [weekly] [weekly] [monthly] [monthly] [herocraft] []
     - [] [] [] [] [] [] [] [] []
@@ -73,13 +73,16 @@ missions_inv_run:
   script:
     - run missions_inv_open def:<context.item.flag[timeframe]>
 
+missions_inv_close:
+  type: task
+  debug: false
+  script:
+    - inventory close
+
 missions_inv_events:
   type: world
   debug: false
   events:
-
-    on player clicks red_stained_glass_pane in missions_inv:
-      - inventory close
 
     on player clicks lime_stained_glass_pane in missions_inv:
       - define timeframe <context.item.flag[timeframe]>
