@@ -8,9 +8,7 @@ player_crafting_slots_override_events:
       - "paper[custom_model_data=301;display=<&b>Menu;flag=run_script:|:<list[cancel_in_minigame|player_crafting_slots_open_button]>;flag=on_drop:cancel;flag=grid_script:main_menu_inventory_open;flag=no_drop_on_death:true]"
       - "paper[custom_model_data=303;display=<&a>Travel;flag=run_script:|:<list[cancel_in_minigame|player_crafting_slots_open_button]>;flag=on_drop:cancel;flag=grid_script:travel_menu_open;flag=no_drop_on_death:true]"
   set_inv:
-      - stop if:<player.uuid.starts_with[00000000]>
-      - if <player.inventory> != <player.open_inventory>:
-        - stop
+      - stop if:<player.inventory.equals[<player.open_inventory>].not>
       - define inv <player.open_inventory>
       - repeat 5:
         - inventory set slot:<[value]> o:air d:<[inv]>
@@ -28,7 +26,7 @@ player_crafting_slots_override_events:
   events:
     after player joins:
       - inject locally path:set_inv
-    on player closes PLAYER:
+    on player closes inventory:
       - inject locally path:set_inv
     on player dies bukkit_priority:LOWEST:
       - inventory close
