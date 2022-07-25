@@ -97,7 +97,7 @@ web_handler:
             - bungee test:
               - reload
           - case /reload/RP:
-            - if <context.query.parsed.get[adriftus_sha].exists>:
+            - if <context.body.parsed.get[adriftus_sha].exists>:
               - bungeerun hub resource_pack_sha def:<context.query.parsed.get[adriftus_sha].before[<&sp>]>|<context.query.parsed.get[adriftus_staff_sha].before[<&sp>]>
 
       # % ██ [ Denizen Interactions   ] ██
