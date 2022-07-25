@@ -298,7 +298,7 @@ town_waystones_info:
 travel_menu_gui_waystone:
   type: item
   material: feather
-  display name: <&font[adriftus:overlays]><&chr[F90F]>
+  display name: <&font[adriftus:overlay]><&chr[F90F]>
 
 # Home Lore Warp
 
