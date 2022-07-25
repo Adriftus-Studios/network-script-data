@@ -3,7 +3,7 @@ github_updates:
   definitions: domain
   debug: false
   script:
-    - choose <context.request>:
+    - choose <context.path>:
       # Main Repo update
       - case /github/network-script-data:
         - shell "screen -dmS updating /mnt/sdb/scripts/main_pull.sh"
