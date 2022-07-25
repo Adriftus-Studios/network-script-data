@@ -480,7 +480,7 @@ chat_settings_open:
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
       - if ( <yaml[chat_config].read[channels.<[channel]>.permission]> == none || ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) ):
-        - if <bungee.server> == herocraft && ( <[channel]> == town && !<player.has_town> ) || ( <[channel]> == nation && !<player.has_nation> ):
+        - if <bungee.server> == herocraft && ( <[channel]> == town && !<player.town.exists> ) || ( <[channel]> == nation && !<player.nation.exists> ):
           - foreach next
         - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<[channel]>]||false>:
           - if <[channel]> == server:
