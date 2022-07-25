@@ -9,7 +9,6 @@ player_crafting_slots_override_events:
       - "paper[custom_model_data=303;display=<&a>Travel;flag=run_script:|:<list[cancel_in_minigame|player_crafting_slots_open_button]>;flag=on_drop:cancel;flag=grid_script:travel_menu_open;flag=no_drop_on_death:true]"
   set_inv:
       - stop if:<player.uuid.starts_with[00000000]>
-      - inventory update
       - if <player.inventory> != <player.open_inventory>:
         - stop
       - define inv <player.open_inventory>
@@ -22,9 +21,10 @@ player_crafting_slots_override_events:
       - wait 1t
       - inventory set slot:1 o:player_crafting_slots_<bungee.server> d:<[inv]>
       - take flagged:grid_script quantity:999
-      - if <player.inventory> != <player.open_inventory>:
+      - wait 1t
+      - if <player.inventory> != <player.open_inventory> || !<player.is_online>:
         - stop
-      - inventory update
+      - inventory update d:<player.open_inventory>
   events:
     after player joins:
       - inject locally path:set_inv
