@@ -21,7 +21,9 @@ player_crafting_slots_override_events:
       - inventory set slot:1 o:player_crafting_slots_<bungee.server> d:<[inv]>
       - wait 1t
       - take flagged:grid_script quantity:999
-      - inventory update
+      - if <player.inventory> != <player.open_inventory>:
+        - stop
+      - inventory update d:<player.open_inventory>
   events:
     on player clicks in PLAYER bukkit_priority:HIGH:
         - stop if:<player.uuid.starts_with[00000000]>
