@@ -7,10 +7,10 @@ missions_inv:
   gui: true
   size: 45
   definitions:
-    daily: <item[feather].with[display_name=<&a>Daily;flag=timeframe:daily;custom_model_data=3]>
-    weekly: <item[feather].with[display_name=<&e>Weekly;flag=timeframe:weekly;custom_model_data=3]>
-    monthly: <item[feather].with[display_name=<&6>Monthly;flag=timeframe:monthly;custom_model_data=3]>
-    herocraft: <item[feather].with[display_name=<&b>HeroCraft;flag=timeframe:persistent;custom_model_data=3]>
+    daily: <item[feather].with[display_name=<&a>Daily;flag=timeframe:daily;custom_model_data=3;flag=run_script:missions_inv_run]>
+    weekly: <item[feather].with[display_name=<&e>Weekly;flag=timeframe:weekly;custom_model_data=3;flag=run_script:missions_inv_run]>
+    monthly: <item[feather].with[display_name=<&6>Monthly;flag=timeframe:monthly;custom_model_data=3;flag=run_script:missions_inv_run]>
+    herocraft: <item[feather].with[display_name=<&b>HeroCraft;flag=timeframe:persistent;custom_model_data=3;flag=run_script:missions_inv_run]>
     none: <item[barrier].with[display_name=<&c>No<&sp>Missions]>
     close: <item[feather].with[display_name=<&c><&l>χ<&sp>Close;custom_model_data=3]>
   slots:
@@ -67,13 +67,16 @@ missions_inv_open:
     # Open inventory
     - inventory open d:<[inventory]>
 
+missions_inv_run:
+  type: task
+  debug: false
+  script:
+    - run missions_inv_open def:<context.item.flag[timeframe]>
+
 missions_inv_events:
   type: world
   debug: false
   events:
-    on player clicks *_block in missions_inv:
-      - if <context.item.has_flag[timeframe]>:
-        - run missions_inv_open def:<context.item.flag[timeframe]>
 
     on player clicks red_stained_glass_pane in missions_inv:
       - inventory close
