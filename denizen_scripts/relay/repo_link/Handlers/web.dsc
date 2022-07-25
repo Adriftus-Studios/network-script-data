@@ -87,7 +87,7 @@ web_handler:
 
     # % ██ [ Self Pings               ] ██
       - else if <[domain].starts_with[<script.data_key[domains.self]>]>:
-        - choose <context.request>:
+        - choose <context.path>:
           - case /reload/main:
             - bungee <bungee.list_servers.exclude[<bungee.server>]>:
               - reload
