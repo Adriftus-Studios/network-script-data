@@ -299,6 +299,8 @@ travel_menu_gui_waystone:
   type: item
   material: feather
   display name: <&font[adriftus:overlay]><&chr[F90F]>
+  mechanisms:
+    custom_model_data: 19
 
 # Home Lore Warp
 
