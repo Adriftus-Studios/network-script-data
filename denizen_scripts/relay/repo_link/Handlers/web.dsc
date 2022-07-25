@@ -79,7 +79,7 @@ web_handler:
     on webserver web request port:25579 method:post:
       - announce to_console "<&c>--- post request ----------------------------------------------------------"
       - inject Web_Debug.Post_Request
-      - define domain <context.headers.get[Nginx.remote_addr]>
+      - define domain <context.headers.get[Nginx.remote_addr].first>
 
     # % ██ [ Github Content pushes    ] ██
       - if <[domain].starts_with[<script.data_key[domains.github]>]>:
