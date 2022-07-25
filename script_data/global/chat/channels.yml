@@ -148,10 +148,10 @@ channels:
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
       Discord:
-        active: false
+        active: true
         group: Adriftus
         #channel: global-chat
-        channel: 651789860562272266
+        channel: 1001249576004620378
         to-MC: true
         to-Discord: true
       IRC:
