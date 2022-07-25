@@ -18,13 +18,13 @@ player_crafting_slots_override_events:
       - stop if:<player.is_online.not>
       - foreach <script.data_key[data.items]>:
         - inventory set slot:<[loop_index].add[1]> o:<[value].parsed> d:<[inv]>
-      - inventory set slot:1 o:player_crafting_slots_<bungee.server> d:<[inv]>
       - wait 1t
+      - inventory update d:<player.open_inventory>
+      - inventory set slot:1 o:player_crafting_slots_<bungee.server> d:<[inv]>
       - take flagged:grid_script quantity:999
       - if <player.inventory> != <player.open_inventory>:
         - stop
-      - inventory set slot:1 o:player_crafting_slots_<bungee.server> d:<[inv]>
-      - inventory update
+      - inventory update d:<player.open_inventory>
   events:
     after player joins:
       - inject locally path:set_inv
