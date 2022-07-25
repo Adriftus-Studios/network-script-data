@@ -18,7 +18,7 @@ player_crafting_slots_override_events:
       - stop if:<player.is_online.not>
       - foreach <script.data_key[data.items]>:
         - inventory set slot:<[loop_index].add[1]> o:<[value].parsed> d:<[inv]>
-      - inventory set slot:1 o:stone[display=<&d>Sit;flag=run_script:player_crafting_slots_open_button;flag=grid_script:sit_in_place] d:<[inv]>
+      - inventory set slot:1 o:player_crafting_slots_<bungee.server> d:<[inv]>
       - wait 1t
       - take flagged:grid_script quantity:999
       - inventory update
@@ -50,3 +50,54 @@ player_crafting_slots_open_button:
     - define script <context.item.flag[grid_script]>
     - wait 2t
     - inject <[script]>
+
+player_crafting_slots_herocraft:
+  type: item
+  material: paper
+  display name: <&b>Herocraft
+  lore:
+    - <&e>Herocraft Specific Stuff!
+  flags:
+    run_script: cancel
+  mechanisms:
+    custom_model_data: 202
+
+player_crafting_slots_calipolis:
+  type: item
+  material: paper
+  display name: <&1>Calipolis
+  lore:
+    - <&e>Calipolis Specific Stuff!
+  flags:
+    run_script: cancel
+  mechanisms:
+    custom_model_data: 203
+
+player_crafting_slots_test:
+  type: item
+  material: piston
+  display name: <&7>Test
+  lore:
+    - <&e>Test Specific Stuff!
+  flags:
+    run_script: cancel
+
+player_crafting_slots_build:
+  type: item
+  material: dirt
+  display name: <&a>Build
+  lore:
+    - <&e>Build Specific Stuff!
+  flags:
+    run_script: cancel
+
+player_crafting_slots_hub:
+  type: item
+  material: paper
+  display name: <&6>Hub
+  lore:
+    - <&e>Hub Specific Stuff!
+  flags:
+    run_script: cancel
+  mechanisms:
+    custom_model_data: 201
