@@ -35,33 +35,33 @@ web_handler:
 
       # % ██ [ WebGet Hosting         ] ██
         - case /webget:
-          - if <server.has_file[../../../../web/webget/<context.query_map.get[name]||invalid>]>:
-            - determine FILE:../../../../web/webget/<context.query_map.get[name]>
+          - if <server.has_file[webget/<context.query_map.get[name]||invalid>]>:
+            - determine FILE:webget/<context.query_map.get[name]>
           - else:
             - determine CODE:404
 
       # % ██ [ FavIcon                ] ██
         - case /favicon.ico:
           - determine passively CODE:200
-          - determine FILE:../../../../web/favicon.ico
+          - determine FILE:favicon.ico
 
       # % ██ [ CSS Hosting            ] ██
         - case /css:
-          - if <server.has_file[../../../../web/css/<context.query_map.get[name]||invalid>.css]>:
+          - if <server.has_file[css/<context.query_map.get[name]||invalid>.css]>:
             - determine passively CODE:200
-            - determine FILE:../../../../web/css/<context.query_map.get[name]>.css
+            - determine FILE:css/<context.query_map.get[name]>.css
 
       # % ██ [ Webpages               ] ██
         - case /page:
-          - if <server.has_file[../../../../web/pages/<context.query_map.get[name]||invalid>.html]>:
+          - if <server.has_file[pages/<context.query_map.get[name]||invalid>.html]>:
             - determine passively CODE:200
-            - determine FILE:../../../../web/pages/<context.query_map.get[name]>.html
+            - determine FILE:pages/<context.query_map.get[name]>.html
 
       # % ██ [ Images                 ] ██
         - case /image:
-          - if <server.has_file[../../../../web/images/<context.query_map.get[name]||invalid>]>:
+          - if <server.has_file[images/<context.query_map.get[name]||invalid>]>:
             - determine passively CODE:200
-            - determine FILE:../../../../web/images/<context.query_map.get[name]>
+            - determine FILE:images/<context.query_map.get[name]>
 
       # % ██ [ Companion App          ] ██
         - case /companion:
