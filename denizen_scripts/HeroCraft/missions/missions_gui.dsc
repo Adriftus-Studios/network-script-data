@@ -31,7 +31,7 @@ missions_inv_open:
       daily: <&chr[1002]>
       weekly: <&chr[1003]>
       monthly: <&chr[1004]>
-      herocraft: <&chr[1005]>
+      persistent: <&chr[1005]>
   script:
     # Set definitions
     - define timeframe daily if:<[timeframe].exists.not>
