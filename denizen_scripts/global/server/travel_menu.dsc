@@ -15,6 +15,7 @@ travel_menu_open:
         - 27
         - 35
         - 36
+      gui_waystone: 54
       items:
         multiverse_dust: 20
         return_scroll: 38
@@ -87,6 +88,7 @@ travel_menu_open:
             - inventory set slot:<[value]> o:town_waystones_info d:<[inventory]>
           - foreach <script.data_key[data.herocraft.items].keys>:
             - inventory set slot:<script.data_key[data.herocraft.items.<[value]>]> o:<[value]>_info d:<[inventory]>
+          - inventory set slot:<script.data_key[data.herocraft.gui_waystone]> o:travel_menu_gui_waystone[lore=<&sp.repeat_as_list[250]>] d:<[inventory]>
         # Calipolis tab
         - case calipolis:
           - foreach <script.data_key[data.calipolis.items].keys>:
@@ -292,6 +294,11 @@ town_waystones_info:
     - <&b>Right Click a stone to travel
   mechanisms:
     custom_model_data: 3
+
+travel_menu_gui_waystone:
+  type: item
+  material: feather
+  display name: <&font[adriftus:overlays]><&chr[F90F]>
 
 # Home Lore Warp
 
