@@ -6,14 +6,14 @@ web_handler:
     self: 127.0.0.1
   events:
     on server start:
-      - web start port:25579
+      - webserver  start port:25579
 
-    on get request:
+    on webserver web request port:25579 method:get:
       - announce to_console "<&c>--- get request ----------------------------------------------------------"
       - inject Web_Debug.Get_Response
-      - define query <context.query_map>
+      - define query <context.query>
 
-      - choose <context.request>:
+      - choose <context.path>:
 
       # % ██ [ Resource Pack  ] ██
         - case /resource_pack.zip:
@@ -76,7 +76,7 @@ web_handler:
         - default:
           - determine CODE:<list[406|418].random>
 
-    on post request:
+    on webserver web request port:25579 method:post:
       - announce to_console "<&c>--- post request ----------------------------------------------------------"
       - inject Web_Debug.Post_Request
       - define domain <context.headers.get[Nginx.remote_addr]>
