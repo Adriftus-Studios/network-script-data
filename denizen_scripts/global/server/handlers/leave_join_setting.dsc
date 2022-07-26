@@ -11,9 +11,11 @@ network_leave_join_messages:
       - else if <server.has_flag[leave_message]>:
         - define message <server.flag[leave_message].parsed>
         - define discord_message <server.flag[leave_message].parsed>
+        - playsound sound:UI_BUTTON_CLICK <server.online_players>
       - else:
         - define message "<proc[get_player_display_name]><&f> has left the Server."
         - define discord_message "<player.name><&f> has left the Server."
+        - playsound sound:UI_BUTTON_CLICK <server.online_players>
       - announce "<&font[adriftus:chat]><&chr[2003]><&r>  <&7><&l><&lb><&c><&l>Player Leaves<&7><&l><&rb><&r> - <proc[get_player_display_name]><&nl>     <[message]>"
       - bungeerun relay Player_Leave_Message def:<list[<bungee.server>|<player.name>|<player.uuid>].include[<[discord_message].strip_color>]>
 
@@ -24,9 +26,11 @@ network_leave_join_messages:
       - else if <server.has_flag[join_message]>:
         - define message <server.flag[join_message].parsed>
         - define discord_message <server.flag[join_message].parsed>
+        - playsound sound:ENTITY_EXPERIENCE_ORB_PICKUP <server.online_players>
       - else:
         - define message "<proc[get_player_display_name]><&f> has joined the Server."
         - define discord_message "<player.name><&f> has joined the Server."
+        - playsound sound:ENTITY_EXPERIENCE_ORB_PICKUP <server.online_players>
       - announce "<&font[adriftus:chat]><&chr[2002]><&r>  <&7><&l><&lb><&a><&l>Player Joined<&7><&l><&rb><&r> - <proc[get_player_display_name]><&nl>     <[message]>"
       - bungeerun relay Player_Join_Message def:<list[<bungee.server>|<player.name>|<player.uuid>].include[<[discord_message].strip_color>]>
 

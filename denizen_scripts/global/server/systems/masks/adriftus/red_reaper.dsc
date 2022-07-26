@@ -4,7 +4,7 @@ mask_adriftus_red_reaper:
     category: Adriftus
     material: stick[custom_model_data=666]
     display_name: <&6>Adriftus<&co> <&4>Red Reaper
-    description: "<&4>Seasons don't fear the reaper..."
+    description: <&4>Seasons don't fear the reaper...
   mask_data:
     id: adriftus_red_reaper
     attachments:
