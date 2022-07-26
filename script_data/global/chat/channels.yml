@@ -8,7 +8,7 @@ channels:
     chat_lock_deny: true
     format: 
       channel: "<&7><&l><&lb><server.flag[display_name]||<bungee.server>><&7><&l><&rb> "
-      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      name: "<&7><player.proc[get_player_title]><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
