@@ -8,7 +8,7 @@ channels:
     chat_lock_deny: true
     format: 
       channel: "<&7><&l><&lb><server.flag[display_name]||<bungee.server>><&7><&l><&rb> "
-      name: "<&7><player.proc[get_player_title]><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -89,7 +89,7 @@ channels:
       inactive: paper[custom_model_data=506]
     format:
       channel: "<&7><&l>[<&a><&l>PG<&7><&l>] "
-      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -116,7 +116,7 @@ channels:
       inactive: paper[custom_model_data=508]
     format:
       channel: "<&7><&l>[<&6><&l>PG-13<&7><&l>] "
-      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -143,7 +143,7 @@ channels:
       inactive: paper[custom_model_data=510]
     format:
       channel: "<&7><&l>[<&4><&l>Anarchy<&7><&l>] "
-      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -169,7 +169,7 @@ channels:
       inactive: paper[custom_model_data=500]
     format:
       channel: "<&7><&l>[<&e>Town<&7><&l>] "
-      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -195,7 +195,7 @@ channels:
       inactive: paper[custom_model_data=500]
     format:
       channel: "<&7><&l>[<&6>Nation<&7><&l>] "
-      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -221,7 +221,7 @@ channels:
       inactive: paper[custom_model_data=500]
     format:
       channel: "<&7><&l>[<&e><&l>Staff<&7><&l>] "
-      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -247,7 +247,7 @@ channels:
       inactive: paper[custom_model_data=500]
     format:
       channel: "<&7><&l>[<&d><&l>Mod<&7><&l>] "
-      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_name]>"
       separator: "<&f>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -273,7 +273,7 @@ channels:
       inactive: paper[custom_model_data=500]
     format:
       channel: "<&7><&l>[<&b><&l>Dev<&7><&l>] "
-      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_name]>"
       separator: "<&f>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
@@ -299,7 +299,7 @@ channels:
       inactive: paper[custom_model_data=500]
     format:
       channel: "<&7><&l>[<&4><&l>Admin<&7><&l>] "
-      name: "<&7><proc[get_player_display_color]><proc[get_player_display_name]>"
+      name: "<&7><proc[get_player_display_name]>"
       separator: "<&b>: "
       message: "<&r><[msg]||<context.new_message.text_display>>"
     integrations:
