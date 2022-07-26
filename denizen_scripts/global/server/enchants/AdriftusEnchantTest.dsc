@@ -72,7 +72,7 @@ enchantment_book_updater:
   type: world
   debug: false
   events:
-    on player clicks enchantment:
+    on player clicks enchanting_table:
       - if !<player.is_sneaking>:
         - stop
       - determine passively cancelled
