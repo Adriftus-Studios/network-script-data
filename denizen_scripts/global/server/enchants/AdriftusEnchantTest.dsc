@@ -72,12 +72,13 @@ enchantment_book_updater:
   type: world
   debug: false
   events:
-    on player clicks lectern:
-      - if <context.location.has_flag[enchanting_book_lectern]>:
-        - determine passively cancelled
-        - adjust <player> show_book:enchantment_explainer_book_item[book_pages=<server.flag[enchantment_book_pages]>]
-        - if !<player.inventory.list_contents.parse[script.name].contains_any[enchantment_explainer_book_item]>:
-          - give enchantment_explainer_book_item
-          - repeat 3:
-            - playsound sound:ITEM_BOOK_PAGE_TURN <player.location>
-            - wait <util.random.int[3].to[8]>t
+    on player clicks enchantment:
+      - if !<player.is_sneaking>:
+        - stop
+      - determine passively cancelled
+      - adjust <player> show_book:enchantment_explainer_book_item[book_pages=<server.flag[enchantment_book_pages]>]
+      - if !<player.inventory.list_contents.parse[script.name].contains_any[enchantment_explainer_book_item]>:
+        - give enchantment_explainer_book_item
+        - repeat 3:
+          - playsound sound:ITEM_BOOK_PAGE_TURN <player.location>
+          - wait <util.random.int[3].to[8]>t
