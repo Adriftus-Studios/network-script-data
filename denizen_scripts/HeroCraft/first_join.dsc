@@ -15,5 +15,5 @@ first_join:
         - flag player has_joined
         - while <player.location.below.material.name.contains_text[air]>:
           - wait 5s
-          - stop if:<player.is_online.not>
+          - while stop if:<player.is_online.not>
         - take item:elytra
