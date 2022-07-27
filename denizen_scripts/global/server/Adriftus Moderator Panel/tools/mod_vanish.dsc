@@ -32,8 +32,8 @@ mod_vanish_task:
 
 mod_unvanish_task:
   type: task
-  debug: false
   script:
+    - stop if:<player.has_flag[vanished]>
     - flag <player> vanished:!
     - flag server vanished_staff:<-:<player>
     - adjust <player> health_data:20/20
