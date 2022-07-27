@@ -62,7 +62,7 @@ chat_system_speak:
         - define Text <&chr[F802]><yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
         - define NameText <proc[msg_hover].context[<list_single[<[hover]>].include_single[<[text]>]>]>
       - else:
-        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <proc[get_player_display_color]><proc[get_player_display_name]><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
+        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <proc[get_player_display_name]><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
         - define Hint "msg <player.name> "
         - define Text <&chr[F802]><yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
         - define NameText <proc[msg_hint].context[<list_single[<[hover]>].include_single[<[text]>].include_single[<[hint]>]>]>
