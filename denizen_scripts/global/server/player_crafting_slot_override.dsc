@@ -7,21 +7,21 @@ player_crafting_slots_override_events:
       - "paper[custom_model_data=303;display=<&a>Travel;flag=run_script:|:<list[cancel_in_minigame|player_crafting_slots_open_button]>;flag=on_drop:cancel;flag=grid_script:travel_menu_open;flag=no_drop_on_death:true]"
       - "paper[custom_model_data=300;display=<&6>Adriftus Chest;flag=run_script:|:<list[cancel_in_minigame|player_crafting_slots_open_button]>;flag=on_drop:cancel;flag=grid_script:adriftus_chest_inventory_open;flag=no_drop_on_death:true]"
       - "paper[custom_model_data=302;display=<&e>Crafting Table;flag=run_script:|:<list[cancel_in_minigame|player_crafting_slots_open_button]>;flag=on_drop:cancel;flag=grid_script:open_crafting_grid;flag=no_drop_on_death:true]"
-    set_inv:
-      - if <player.inventory> != <player.open_inventory>:
-        - wait 1t
-      - stop if:<player.inventory.equals[<player.open_inventory>].not>
-      - define inv <player.open_inventory>
-      - repeat 5:
-        - inventory set slot:<[value]> o:air d:<[inv]>
+  set_inv:
+    - if <player.inventory> != <player.open_inventory>:
       - wait 1t
-      - stop if:<player.is_online.not>
-      - foreach <script.data_key[data.items]>:
-        - inventory set slot:<[loop_index].add[1]> o:<[value].parsed> d:<[inv]>
-      - wait 1t
-      - inventory set slot:1 o:player_crafting_slots_<bungee.server> d:<[inv]>
-      - take flagged:grid_script quantity:999
-      - inventory update
+    - stop if:<player.inventory.equals[<player.open_inventory>].not>
+    - define inv <player.open_inventory>
+    - repeat 5:
+      - inventory set slot:<[value]> o:air d:<[inv]>
+    - wait 1t
+    - stop if:<player.is_online.not>
+    - foreach <script.data_key[data.items]>:
+      - inventory set slot:<[loop_index].add[1]> o:<[value].parsed> d:<[inv]>
+    - wait 1t
+    - inventory set slot:1 o:player_crafting_slots_<bungee.server> d:<[inv]>
+    - take flagged:grid_script quantity:999
+    - inventory update
   events:
     after player joins:
       - inject locally path:set_inv
