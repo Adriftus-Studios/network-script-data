@@ -95,6 +95,7 @@ custom_recipe_data_initializer:
 
 custom_recipe_command:
   type: command
+  name: recipes
   command: recipes
   usage: recipes
   description: Open Custom Recipe Book
