@@ -5,7 +5,7 @@ mission_pvp_zanzar:
   category: PvP
   name: <&c>Kill <&4>Players
   description:
-    - <&e>Complete this by killing other players in Zan<&sq>zar.
+    - <&e>Complete this by killing other players in Zan<&sq>Zar.
   assignment: mission_pvp_zanzar_assignment
   icon: player_head
   cmd: 0
@@ -26,19 +26,22 @@ mission_pvp_zanzar_assignment:
   type: task
   debug: false
   definitions: timeframe
+  data:
+    map:
+      id: <[config].data_key[id]>
+      timeframe: <[timeframe]>
+      max: <[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>
+      name: <[config].parsed_key[name]>
+      description: <proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[max=<[max]>].escaped>]>
+      rewarded: false
+      done: false
   script:
     - stop if:<[timeframe].exists.not>
     - define config <script[mission_pvp_zanzar]>
     # Generate random amount from config.
     - define max <[config].data_key[players].random>
     # Define map
-    - define map <map.with[id].as[<[config].data_key[id]>]>
-    - define map <[map].with[timeframe].as[<[timeframe]>]>
-    - define map <[map].with[max].as[<[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>]>
-    - define map <[map].with[name].as[<[config].parsed_key[name]>]>
-    - define map <[map].with[description].as[<proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[max=<[max]>].escaped>]>]>
-    - define map <[map].with[rewarded].as[false]>
-    - define map <[map].with[done].as[false]>
+    - define map <script.parsed_key[data.map]>
     # Give mission
     - run missions_give def:<[map]>
 
