@@ -38,6 +38,16 @@ mission_slay_assignment:
   type: task
   debug: false
   definitions: timeframe
+  data:
+    map:
+      id: <[config].data_key[id]>
+      timeframe: <[timeframe]>
+      mob: <[mob]>
+      max: <[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>
+      name: <proc[missions_replace_name].context[<[config].parsed_key[name]>|<map[mobs=<[name]>].escaped>]>
+      description: <proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[mobs=<[name]>;max=<[max]>].escaped>]>
+      rewarded: false
+      done: false
   script:
     - stop if:<[timeframe].exists.not>
     - define config <script[mission_slay]>
@@ -46,14 +56,7 @@ mission_slay_assignment:
     - define name <[mob].as_entity.name.replace[_].with[<&sp>].to_titlecase.if_null[<[mob].as_entity.entity_type.replace[_].with[<&sp>].to_titlecase>]>
     - define max <[config].data_key[mobs.<[mob]>].random>
     # Define map
-    - define map <map.with[id].as[<[config].data_key[id]>]>
-    - define map <[map].with[timeframe].as[<[timeframe]>]>
-    - define map <[map].with[mob].as[<[mob]>]>
-    - define map <[map].with[max].as[<[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>]>
-    - define map <[map].with[name].as[<proc[missions_replace_name].context[<[config].parsed_key[name]>|<map[mobs=<[name]>].escaped>]>]>
-    - define map <[map].with[description].as[<proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[mobs=<[name]>;max=<[max]>].escaped>]>]>
-    - define map <[map].with[rewarded].as[false]>
-    - define map <[map].with[done].as[false]>
+    - define map <script.parsed_key[data.map]>
     # Give mission
     - run missions_give def:<[map]>
 

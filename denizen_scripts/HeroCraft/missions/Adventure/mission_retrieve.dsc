@@ -42,6 +42,16 @@ mission_retrieve_assignment:
   type: task
   debug: false
   definitions: timeframe
+  data:
+    map:
+      id: <[config].data_key[id]>
+      timeframe: <[timeframe]>
+      item: <[item]>
+      max: <[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>
+      name: <proc[missions_replace_name].context[<[config].parsed_key[name]>|<map[items=<[name]>].escaped>]>
+      description: <proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[items=<[name]>;max=<[max]>].escaped>]>
+      rewarded: false
+      done: false
   script:
     - stop if:<[timeframe].exists.not>
     - define config <script[mission_retrieve]>
@@ -50,14 +60,7 @@ mission_retrieve_assignment:
     - define name <[item].as_item.display.if_null[<[item].as_item.material.name.replace[_].with[<&sp>].to_titlecase>]>
     - define max <[config].data_key[items.<[item]>].random>
     # Define map
-    - define map <map.with[id].as[<[config].data_key[id]>]>
-    - define map <[map].with[timeframe].as[<[timeframe]>]>
-    - define map <[map].with[item].as[<[item]>]>
-    - define map <[map].with[max].as[<[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>]>
-    - define map <[map].with[name].as[<proc[missions_replace_name].context[<[config].parsed_key[name]>|<map[items=<[name]>].escaped>]>]>
-    - define map <[map].with[description].as[<proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[items=<[name]>;max=<[max]>].escaped>]>]>
-    - define map <[map].with[rewarded].as[false]>
-    - define map <[map].with[done].as[false]>
+    - define map <script.parsed_key[data.map]>
     # Give mission
     - run missions_give def:<[map]>
 
