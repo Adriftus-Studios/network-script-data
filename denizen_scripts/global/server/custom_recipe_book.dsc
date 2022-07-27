@@ -93,6 +93,14 @@ custom_recipe_data_initializer:
     on script reload:
       - inject locally path:build_item_list
 
+custom_recipe_command:
+  type: command
+  command: recipes
+  usage: recipes
+  description: Open Custom Recipe Book
+  script:
+    - run crafting_book_open
+
 custom_recipe_add_to_crafting:
   type: item
   material: paper
