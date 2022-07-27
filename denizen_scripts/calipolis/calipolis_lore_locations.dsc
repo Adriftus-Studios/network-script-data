@@ -42,6 +42,8 @@ calipolis_lore_locations_back_button:
   display name: <&c>Back To Travel Menu
   mechanisms:
     custom_model_data: 3
+  flags:
+    run_script: travel_menu_open
 
 calipolis_lore_locations_open:
   type: task
