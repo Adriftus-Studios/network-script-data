@@ -87,7 +87,7 @@ achievement_data:
         y: 5
     ## Hub
     welcome_to_adriftus:
-      icon: feather[custom_model_data=301]
+      icon: paper[custom_model_data=301]
       name: <&6>Your First Steps
       description: <&e>Completed a Mission
       parent: denizen:hub
@@ -98,7 +98,7 @@ achievement_data:
         x: -1
         y: 4
     welcome_to_adriftus1:
-      icon: feather[custom_model_data=300]
+      icon: paper[custom_model_data=300]
       name: <&6>Your First Steps
       description: <&e>Completed a Mission
       parent: denizen:hub
@@ -109,7 +109,7 @@ achievement_data:
         x: 1
         y: 6
     welcome_to_adriftus2:
-      icon: feather[custom_model_data=302]
+      icon: paper[custom_model_data=302]
       name: <&6>Your First Steps
       description: <&e>Completed a Mission
       parent: denizen:hub
@@ -120,7 +120,7 @@ achievement_data:
         x: -1
         y: 6
     welcome_to_adriftus3:
-      icon: feather[custom_model_data=303]
+      icon: paper[custom_model_data=303]
       name: <&6>Your First Steps
       description: <&e>Completed a Mission
       parent: denizen:hub
