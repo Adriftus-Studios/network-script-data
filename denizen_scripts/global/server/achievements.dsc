@@ -21,7 +21,7 @@ achievement_data:
       name: <&color[#010000]>Welcome To Herocraft!
       description: <&e>Joined the Battle!
       parent: denizen:herocraft
-      frame: true
+      frame: task
       announce: true
       hidden: false
       offset:
