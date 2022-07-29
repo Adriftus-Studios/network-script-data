@@ -8,15 +8,15 @@ achievement_data:
     - <&a>- <[reward_text]>
     - <&a>----------------------------------
   parents:
-    herocraft:
-      icon: paper[custom_model_data=202]
-      name: <&color[#010000]>Herocraft
-      description: <&e>A battleground of Heroes and Villains
-      background: minecraft:textures/gui/advancements/backgrounds/stone.png
     hub:
       icon: paper[custom_model_data=201]
       name: <&color[#010000]>Hub
       description: <&e>A Fun Lobby, with Fun Minigames
+      background: adriftus:textures/advancements/test.png
+    herocraft:
+      icon: paper[custom_model_data=202]
+      name: <&color[#010000]>Herocraft
+      description: <&e>A battleground of Heroes and Villains
       background: minecraft:textures/gui/advancements/backgrounds/stone.png
     calipolis:
       icon: paper[custom_model_data=203]
