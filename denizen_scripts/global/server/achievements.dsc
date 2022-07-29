@@ -25,7 +25,7 @@ achievement_data:
       announce: true
       hidden: false
       offset:
-        x: 0
+        x: 1
         y: 5
 
 achievement_give:
@@ -52,7 +52,7 @@ achievement_data_load:
     on server prestart:
       # -- Create list of parents (root advancements) achievements will use.
       - foreach <script[achievement_data].list_keys[parents]> as:id:
-        - advancement id:<[id]> icon:<script[achievement_data].parsed_key[parents.<[id]>.icon]> title:<script[achievement_data].parsed_key[parents.<[id]>.name]> description:<script[achievement_data].parsed_key[parents.<[id]>.description]> background:<script[achievement_data].parsed_key[parents.<[id]>.background]>
+        - advancement id:<[id]> icon:<script[achievement_data].parsed_key[parents.<[id]>.icon]> title:<script[achievement_data].parsed_key[parents.<[id]>.name]> description:<script[achievement_data].parsed_key[parents.<[id]>.description]> background:<script[achievement_data].parsed_key[parents.<[id]>.background]> x:0 y:5
 
       # -- Create list of achievements as in-game advancements.
       - foreach <script[achievement_data].list_keys[achievements]> as:id:
