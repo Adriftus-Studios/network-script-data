@@ -10,8 +10,8 @@ achievement_data:
   parents:
     herocraft:
       icon: paper[custom_model_data=202]
-      name: Survival
-      description: <&color[#010000]>Herocraft
+      name: <&color[#010000]>Herocraft
+      description: <&f>A battleground of Heroes and Villains
       background: minecraft:textures/gui/advancements/backgrounds/stone.png
   achievements:
     joined_herocraft:
