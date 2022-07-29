@@ -11,13 +11,12 @@ achievement_data:
     herocraft:
       icon: paper[custom_model_data=202]
       name: <&color[#010000]>Herocraft
-      description: <&f>A battleground of Heroes and Villains
+      description: <&e>A battleground of Heroes and Villains
       background: minecraft:textures/gui/advancements/backgrounds/stone.png
   achievements:
     joined_herocraft:
-      reward:
-        script: herocraft_mission_1
-      icon: paper[custom_model_data=202]
+      reward_script: herocraft_mission_1
+      icon: diamond_sword
       name: <&color[#010000]>Welcome To Herocraft!
       description: <&e>Joined the Battle!
       parent: denizen:herocraft
@@ -26,6 +25,58 @@ achievement_data:
       hidden: false
       offset:
         x: 1
+        y: 5
+    failed_hot_drop:
+      reward:
+        script: herocraft_mission_2
+      icon: elytra
+      name: <&6>Well, That's One Way Down...
+      description: <&e>Died on First Join
+      parent: denizen:joined_herocraft
+      frame: task
+      announce: true
+      hidden: true
+      offset:
+        x: 2
+        y: 4
+    completed_hot_drop:
+      reward:
+        script: herocraft_mission_2
+      icon: elytra
+      name: <&6>Nailed The Landing
+      description: <&e>Survived the Hot Drop
+      parent: denizen:joined_herocraft
+      frame: task
+      announce: true
+      hidden: true
+      offset:
+        x: 2
+        y: 4
+    firt_return_scroll:
+      reward:
+        script: herocraft_mission_3
+      icon: feather[custom_model_data=200]
+      name: <&6>Now You're Travelling
+      description: <&e>Crafted A Return Scroll
+      parent: denizen:joined_herocraft
+      frame: task
+      announce: true
+      hidden: false
+      offset:
+        x: 2
+        y: 5
+    first_mission_complete:
+      reward:
+        script: herocraft_mission_4
+      icon: feather[custom_model_data=200]
+      name: <&6>Your First Steps
+      description: <&e>Complete a Mission
+      parent: denizen:firt_return_scroll
+      frame: task
+      announce: true
+      hidden: false
+      offset:
+        x: 3
         y: 5
 
 achievement_give:
@@ -39,10 +90,9 @@ achievement_give:
 
     - define name <script[achievement_data].parsed_key[achievements.<[id]>.name]>
     - define description <script[achievement_data].parsed_key[achievements.<[id]>.description]>
-    - define reward_text <script[achievement_data].parsed_key[achievements.<[id]>.reward.text]>
     - foreach <script[achievement_data].parsed_key[GUI]>:
       - narrate <[value]>
-    - run <script[achievement_data].parsed_key[achievements.<[id]>.reward.script].before[/]> def:<script[achievement_data].data_key[achievements.<[id]>.reward.script].after[/]>
+    - run <script[achievement_data].parsed_key[achievements.<[id]>.reward_script]> def:<script[achievement_data].data_key[achievements.<[id]>.reward.script].after[/]>
     - advancement id:<[id]> grant:<player>
 
 achievement_data_load:
