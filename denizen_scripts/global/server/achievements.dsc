@@ -13,7 +13,18 @@ achievement_data:
       name: <&color[#010000]>Herocraft
       description: <&e>A battleground of Heroes and Villains
       background: minecraft:textures/gui/advancements/backgrounds/stone.png
+    hub:
+      icon: paper[custom_model_data=201]
+      name: <&color[#010000]>Hub
+      description: <&e>A Fun Lobby, with Fun Minigames
+      background: minecraft:textures/gui/advancements/backgrounds/stone.png
+    calipolis:
+      icon: paper[custom_model_data=203]
+      name: <&color[#010000]>Calipolis
+      description: <&e>Lore Driven Awesome SMP!
+      background: minecraft:textures/gui/advancements/backgrounds/stone.png
   achievements:
+    ## Herocraft
     joined_herocraft:
       reward_script: herocraft_mission_1
       icon: diamond_sword
@@ -27,8 +38,7 @@ achievement_data:
         x: 1
         y: 5
     failed_hot_drop:
-      reward:
-        script: herocraft_mission_2
+      reward_script: herocraft_mission_2
       icon: elytra
       name: <&6>Well, That's One Way Down...
       description: <&e>Died on First Join
@@ -40,8 +50,7 @@ achievement_data:
         x: 2
         y: 4
     completed_hot_drop:
-      reward:
-        script: herocraft_mission_2
+      reward_script: herocraft_mission_2
       icon: elytra
       name: <&6>Nailed The Landing
       description: <&e>Survived the Hot Drop
@@ -52,9 +61,8 @@ achievement_data:
       offset:
         x: 2
         y: 4
-    firt_return_scroll:
-      reward:
-        script: herocraft_mission_3
+    first_return_scroll:
+      reward_script: herocraft_mission_3
       icon: feather[custom_model_data=200]
       name: <&6>Now You're Travelling
       description: <&e>Crafted A Return Scroll
@@ -66,11 +74,10 @@ achievement_data:
         x: 2
         y: 5
     first_mission_complete:
-      reward:
-        script: herocraft_mission_4
-      icon: feather[custom_model_data=200]
+      reward_script: herocraft_mission_4
+      icon: diamond_sword
       name: <&6>Your First Steps
-      description: <&e>Complete a Mission
+      description: <&e>Completed a Mission
       parent: denizen:firt_return_scroll
       frame: task
       announce: true
@@ -78,6 +85,51 @@ achievement_data:
       offset:
         x: 3
         y: 5
+    ## Hub
+    welcome_to_adriftus:
+      icon: feather[custom_model_data=301]
+      name: <&6>Your First Steps
+      description: <&e>Completed a Mission
+      parent: denizen:firt_return_scroll
+      frame: task
+      announce: true
+      hidden: false
+      offset:
+        x: -1
+        y: 4
+    welcome_to_adriftus1:
+      icon: feather[custom_model_data=300]
+      name: <&6>Your First Steps
+      description: <&e>Completed a Mission
+      parent: denizen:firt_return_scroll
+      frame: task
+      announce: true
+      hidden: false
+      offset:
+        x: 1
+        y: 6
+    welcome_to_adriftus2:
+      icon: feather[custom_model_data=302]
+      name: <&6>Your First Steps
+      description: <&e>Completed a Mission
+      parent: denizen:firt_return_scroll
+      frame: task
+      announce: true
+      hidden: false
+      offset:
+        x: -1
+        y: 6
+    welcome_to_adriftus3:
+      icon: feather[custom_model_data=303]
+      name: <&6>Your First Steps
+      description: <&e>Completed a Mission
+      parent: denizen:firt_return_scroll
+      frame: task
+      announce: true
+      hidden: false
+      offset:
+        x: 1
+        y: 4
 
 achievement_give:
   type: task
@@ -92,7 +144,8 @@ achievement_give:
     - define description <script[achievement_data].parsed_key[achievements.<[id]>.description]>
     - foreach <script[achievement_data].parsed_key[GUI]>:
       - narrate <[value]>
-    - run <script[achievement_data].parsed_key[achievements.<[id]>.reward_script]> def:<script[achievement_data].data_key[achievements.<[id]>.reward.script].after[/]>
+    - if <script[achievement_data].data_key[achievements.<[id]>.reward_script].exists>:
+      - run <script[achievement_data].parsed_key[achievements.<[id]>.reward_script]> def:<script[achievement_data].data_key[achievements.<[id]>.reward.script].after[/]>
     - advancement id:<[id]> grant:<player>
 
 achievement_data_load:
