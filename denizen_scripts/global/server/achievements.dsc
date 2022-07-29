@@ -90,7 +90,7 @@ achievement_data:
       icon: feather[custom_model_data=301]
       name: <&6>Your First Steps
       description: <&e>Completed a Mission
-      parent: denizen:firt_return_scroll
+      parent: denizen:hub
       frame: task
       announce: true
       hidden: false
@@ -101,7 +101,7 @@ achievement_data:
       icon: feather[custom_model_data=300]
       name: <&6>Your First Steps
       description: <&e>Completed a Mission
-      parent: denizen:firt_return_scroll
+      parent: denizen:hub
       frame: task
       announce: true
       hidden: false
@@ -112,7 +112,7 @@ achievement_data:
       icon: feather[custom_model_data=302]
       name: <&6>Your First Steps
       description: <&e>Completed a Mission
-      parent: denizen:firt_return_scroll
+      parent: denizen:hub
       frame: task
       announce: true
       hidden: false
@@ -123,7 +123,7 @@ achievement_data:
       icon: feather[custom_model_data=303]
       name: <&6>Your First Steps
       description: <&e>Completed a Mission
-      parent: denizen:firt_return_scroll
+      parent: denizen:hub
       frame: task
       announce: true
       hidden: false
