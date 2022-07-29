@@ -6,7 +6,7 @@ first_join:
       - if !<player.has_flag[has_joined]>:
         - teleport <player> <location[0,1000,0,HeroCraft]>
         - wait 1s
-        - title "title:<&color[#000001]>Welcome to Herocraft!!!" fade_in:1s stay:5s fade_out:1s
+        - title "title:<&color[#010000]>Drop in!" "subtitle:Prepare to Glide!" fade_in:1s stay:5s fade_out:1s
         - wait 7s
         - teleport <player> <location[0,400,0,HeroCraft].random_offset[12500,0,12500]>
         - equip <player> chest:elytra[flag=on_drop:delete_item]

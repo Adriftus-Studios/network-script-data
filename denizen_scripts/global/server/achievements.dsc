@@ -8,26 +8,25 @@ achievement_data:
     - <&a>- <[reward_text]>
     - <&a>----------------------------------
   parents:
-    survival:
-      icon: grass_block
+    herocraft:
+      icon: paper[custom_model_data=202]
       name: Survival
-      description: Adriftus Survival
+      description: <&color[#010000]>Herocraft
       background: minecraft:textures/gui/advancements/backgrounds/stone.png
   achievements:
-    First_RTP:
+    joined_herocraft:
       reward:
-        script: title_unlock/Explorer
-        text: <&b>You have unlocked a new title!
-      icon: ender_pearl
-      name: <&6>Your First RTP
-      description: <&e>You have started your journey by randomly teleporting for the first time.
-      parent: survival
-      frame: task
-      announce: false
+        script: herocraft_mission_1
+      icon: paper[custom_model_data=202]
+      name: <&color[#010000]>Welcome To Herocraft!
+      description: <&e>Joined the Battle!
+      parent: denizen:herocraft
+      frame: true
+      announce: true
       hidden: false
       offset:
         x: 0
-        y: 0
+        y: 5
 
 achievement_give:
   type: task
@@ -50,7 +49,7 @@ achievement_data_load:
   type: world
   debug: false
   events:
-    on server start:
+    on server prestart:
       # -- Create list of parents (root advancements) achievements will use.
       - foreach <script[achievement_data].list_keys[parents]> as:id:
         - advancement id:<[id]> icon:<script[achievement_data].data_key[parents.<[id]>.icon]> title:<script[achievement_data].parsed_key[parents.<[id]>.name]> description:<script[achievement_data].parsed_key[parents.<[id]>.description]> background:<script[achievement_data].data_key[parents.<[id]>.background]>
