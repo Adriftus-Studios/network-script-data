@@ -117,7 +117,7 @@ achievement_data:
       announce: true
       hidden: false
       offset:
-        x: -1
+        x: 1
         y: 6
     welcome_to_adriftus3:
       icon: paper[custom_model_data=303]
@@ -128,7 +128,7 @@ achievement_data:
       announce: true
       hidden: false
       offset:
-        x: 1
+        x: -1
         y: 4
 
 achievement_give:
