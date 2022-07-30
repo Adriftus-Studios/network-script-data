@@ -46,13 +46,13 @@ player_crafting_slots_open_button:
   script:
     - determine passively cancelled
     - if <player.item_on_cursor.material.name> != air:
-      - define item <player.item_on_cursor>
+      - define cursor_item <player.item_on_cursor>
       - adjust <player> item_on_cursor:air
     - define script <context.item.flag[grid_script]>
     - wait 2t
     - inject <[script]>
-    - if <[item].exists>:
-      - adjust <player> item_on_cursor:<[item]>
+    - if <[cursor_item].exists>:
+      - adjust <player> item_on_cursor:<[cursor_item]>
 
 player_crafting_slots_herocraft:
   type: item

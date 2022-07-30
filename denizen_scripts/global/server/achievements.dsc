@@ -147,6 +147,7 @@ achievement_give:
     - if <script[achievement_data].data_key[achievements.<[id]>.reward_script].exists>:
       - run <script[achievement_data].parsed_key[achievements.<[id]>.reward_script]> def:<script[achievement_data].data_key[achievements.<[id]>.reward.script].after[/]>
     - advancement id:<[id]> grant:<player>
+    - adjust <player> save_advancements
 
 achievement_data_load:
   type: world
