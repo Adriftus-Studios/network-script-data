@@ -35,7 +35,7 @@ player_crafting_slots_override_events:
       - inventory close
       - inject locally path:set_inv
     on player uses recipe book:
-      - if <player.open_inventory.slot[3].material.name> == stone:
+      - if <player.open_inventory.inventory_type> != WORKBENCH:
         - determine cancelled
     on player respawns:
       - inject locally path:set_inv
