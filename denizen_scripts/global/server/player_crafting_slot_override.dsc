@@ -52,7 +52,7 @@ player_crafting_slots_open_button:
     - wait 2t
     - inject <[script]>
     - wait 5t
-    - if <player.item_on_cursor.material.name> != air:
+    - if <[item].exists>:
       - adjust <player> item_on_cursor:<[item]>
 
 player_crafting_slots_herocraft:
