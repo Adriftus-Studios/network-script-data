@@ -17,35 +17,29 @@ mission_craft:
     monthly: 400
   items:
     oak_planks:
-      - 32
-      - 64
-      - 100
       - 128
+      - 256
+      - 384
     spruce_planks:
-      - 32
-      - 64
-      - 100
       - 128
+      - 256
+      - 384
     birch_planks:
-      - 32
-      - 64
-      - 100
       - 128
+      - 256
+      - 384
     jungle_planks:
-      - 32
-      - 64
-      - 100
       - 128
+      - 256
+      - 384
     acacia_planks:
-      - 32
-      - 64
-      - 100
       - 128
+      - 256
+      - 384
     dark_oak_planks:
-      - 32
-      - 64
-      - 100
       - 128
+      - 256
+      - 384
     stone_bricks:
       - 32
       - 48
