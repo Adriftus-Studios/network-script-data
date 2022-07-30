@@ -13,12 +13,12 @@ papyrus:
     1:
       type: shaped
       input:
-      - air|charcoal|air
+      - charcoal|charcoal|charcoal
       - air|paper|air
       - air|air|air
     2:
       type: shaped
       input:
-      - air|coal|air
+      - coal|coal|coal
       - air|paper|air
       - air|air|air
