@@ -17,24 +17,24 @@ mission_retrieve:
     monthly: 500
   items:
     leather:
-      - 4
-      - 8
-      - 16
+      - 32
+      - 48
+      - 64
     beef:
-      - 4
-      - 8
-      - 16
+      - 32
+      - 48
+      - 64
     feather:
-      - 4
-      - 8
-      - 16
+      - 32
+      - 48
+      - 64
     porkchop:
-      - 4
-      - 8
-      - 16
+      - 32
+      - 48
+      - 64
     rabbit:
-      - 2
-      - 4
+      - 12
+      - 24
 
 
 # Assignment Task

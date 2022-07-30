@@ -16,9 +16,9 @@ mission_pvp_zanzar:
     weekly: 400
     monthly: 600
   players:
-    - 1
-    - 2
     - 3
+    - 4
+    - 5
 
 
 # Assignment Task
