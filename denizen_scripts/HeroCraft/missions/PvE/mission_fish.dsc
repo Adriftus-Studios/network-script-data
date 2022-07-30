@@ -17,25 +17,25 @@ mission_fish:
     monthly: 400
   items:
     cod:
-      - 2
-      - 4
-      - 6
-      - 8
+      - 12
+      - 14
+      - 16
+      - 18
     salmon:
-      - 2
-      - 4
-      - 6
-      - 8
+      - 12
+      - 14
+      - 16
+      - 18
     tropical_fish:
-      - 2
-      - 4
-      - 6
-      - 8
+      - 12
+      - 14
+      - 16
+      - 18
     pufferfish:
-      - 2
-      - 4
-      - 6
-      - 8
+      - 12
+      - 14
+      - 16
+      - 18
 
 
 # Assignment Task
@@ -77,7 +77,7 @@ mission_fish_complete:
       - if <player.flag[<[mission]>].get[done]> && <player.flag[<[mission]>].get[rewarded].not>:
         - define timeframe <player.flag[<[mission]>].get[timeframe]>
         - define item <player.flag[<[mission]>].get[item]>
-        - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<[config].data_key[items.<[item]>].find[<player.flag[<[mission]>].get[max]>]>]>
+        - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<player.flag[<[mission]>].get[max].div[5]>]>
         - money give quantity:<[quantity]>
         - flag <player> <[mission]>.rewarded:true
         - narrate "<&b>Mission completed! <&a>+$<[quantity]>"

@@ -17,15 +17,15 @@ mission_submit_blocks:
     monthly: 400
   items:
     stone:
-      - 16
       - 32
-      - 48
       - 64
+      - 100
+      - 128
     dirt:
-      - 16
-      - 32
-      - 48
       - 64
+      - 128
+      - 192
+      - 256
 
 
 # Assignment Task
@@ -67,7 +67,7 @@ mission_submit_blocks_complete:
       - if <player.flag[<[mission]>].get[done]> && <player.flag[<[mission]>].get[rewarded].not>:
         - define timeframe <player.flag[<[mission]>].get[timeframe]>
         - define item <player.flag[<[mission]>].get[item]>
-        - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<[config].data_key[items.<[item]>].find[<player.flag[<[mission]>].get[max]>]>]>
+        - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<player.flag[<[mission]>].get[max].div[5]>]>
         - money give quantity:<[quantity]>
         - flag <player> <[mission]>.rewarded:true
         - narrate "<&b>Mission completed! <&a>+$<[quantity]>"
