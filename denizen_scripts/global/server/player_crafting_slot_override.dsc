@@ -51,6 +51,7 @@ player_crafting_slots_open_button:
     - define script <context.item.flag[grid_script]>
     - wait 2t
     - inject <[script]>
+    - wait 2t
     - if <player.item_on_cursor.material.name> != air:
       - adjust <player> item_on_cursor:<[item]>
 
