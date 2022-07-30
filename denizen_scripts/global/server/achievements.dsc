@@ -12,12 +12,12 @@ achievement_data:
       icon: paper[custom_model_data=201]
       name: <&color[#010000]>Hub
       description: <&e>A Fun Lobby, with Fun Minigames
-      background: adriftus:textures/advancements/test.png
+      background: minecraft:textures/gui/advancements/backgrounds/stone.png
     herocraft:
       icon: paper[custom_model_data=202]
       name: <&color[#010000]>Herocraft
       description: <&e>A battleground of Heroes and Villains
-      background: minecraft:textures/gui/advancements/backgrounds/stone.png
+      background: adriftus:textures/advancements/herocraft.png
     calipolis:
       icon: paper[custom_model_data=203]
       name: <&color[#010000]>Calipolis
@@ -139,6 +139,7 @@ achievement_give:
     - if <script[achievement_data].data_key[achievements.<[id]>]||invalid> == invalid:
       - debug error "Invalid ID from achievement_give script in achievements.dsc. Ideally, scripts that read manual input **should never error.**"
       - stop
+    - stop if:<player.has_advancement[<[id]>]>
 
     - define name <script[achievement_data].parsed_key[achievements.<[id]>.name]>
     - define description <script[achievement_data].parsed_key[achievements.<[id]>.description]>
