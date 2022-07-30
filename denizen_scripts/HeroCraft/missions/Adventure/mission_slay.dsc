@@ -17,20 +17,17 @@ mission_slay:
     monthly: 500
   mobs:
     zombie:
-      - 2
-      - 4
-      - 6
-      - 8
+      - 24
+      - 36
+      - 48
     skeleton:
-      - 2
-      - 4
-      - 6
-      - 8
+      - 24
+      - 36
+      - 48
     creeper:
-      - 2
-      - 4
-      - 6
-      - 8
+      - 24
+      - 36
+      - 48
 
 
 # Assignment Task
