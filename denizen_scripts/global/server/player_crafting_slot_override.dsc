@@ -51,7 +51,6 @@ player_crafting_slots_open_button:
     - define script <context.item.flag[grid_script]>
     - wait 2t
     - inject <[script]>
-    - wait 5t
     - if <[item].exists>:
       - adjust <player> item_on_cursor:<[item]>
 
