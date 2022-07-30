@@ -14,11 +14,11 @@ papyrus:
       type: shaped
       input:
       - air|charcoal|air
-      - air|sugar_cane|air
-      - air|sugar_cane|air
+      - air|paper|air
+      - air|air|air
     2:
       type: shaped
       input:
       - air|coal|air
-      - air|sugar_cane|air
-      - air|sugar_cane|air
+      - air|paper|air
+      - air|air|air
