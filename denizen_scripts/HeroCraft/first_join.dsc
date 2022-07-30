@@ -17,6 +17,7 @@ first_join:
           - wait 5s
           - while stop if:<player.is_online.not>
         - take item:elytra
+        - run herocraft_start_missions
         - equip head:leather_helmet chest:leather_chestplate legs:leather_leggings feet:leather_boots
         - foreach stone_sword|stone_pickaxe|stone_axe|stone_shovel|tpa_crystal|campfire|food_crate as:item:
           - give <[item]>
