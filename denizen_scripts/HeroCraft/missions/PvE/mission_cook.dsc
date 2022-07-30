@@ -17,13 +17,13 @@ mission_cook:
     monthly: 400
   items:
     cooked_cod:
-      - 8
-      - 12
-      - 16
+      - 18
+      - 24
+      - 36
     cooked_salmon:
-      - 8
-      - 12
-      - 16
+      - 18
+      - 24
+      - 36
 
 
 # Assignment Task
@@ -65,7 +65,7 @@ mission_cook_complete:
       - if <player.flag[<[mission]>].get[done]> && <player.flag[<[mission]>].get[rewarded].not>:
         - define timeframe <player.flag[<[mission]>].get[timeframe]>
         - define item <player.flag[<[mission]>].get[item]>
-        - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<player.flag[<[mission]>].get[max]>]>
+        - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<player.flag[<[mission]>].get[max].div[5]>]>
         - money give quantity:<[quantity]>
         - flag <player> <[mission]>.rewarded:true
         - narrate "<&b>Mission completed! <&a>+$<[quantity]>"
