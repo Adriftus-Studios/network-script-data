@@ -134,7 +134,7 @@ achievement_data:
 achievement_give_parent:
   type: task
   debug: false
-  definitions: parent
+  definitions: id
   script:
     - if <script[achievement_data].data_key[parents.<[id]>].if_null[invalid]> == invalid:
       - debug error "Invalid ID from achievement_give script in achievements.dsc. Ideally, scripts that read manual input **should never error.**"
