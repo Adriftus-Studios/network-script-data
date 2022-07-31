@@ -57,7 +57,7 @@ player_crafting_slots_open_button:
     - define script <context.item.flag[grid_script]>
     - wait 2t
     - define achievement <script.data_key[data.achievement_map.<[script]>]>
-    - if !<player.has_advancement[<[achievement]>]>:
+    - if !<player.has_advancement[denizen<&co><[achievement]>]>:
       - run achievement_give def:<[achievement]>
     - inject <[script]>
     - if <[cursor_item].exists>:
