@@ -32,6 +32,7 @@ achievement_data:
       description: <&e>Joined the Battle!
       parent: denizen:herocraft
       frame: task
+      sound: true
       announce: true
       hidden: false
       offset:
@@ -44,6 +45,7 @@ achievement_data:
       description: <&e>Died on First Join
       parent: denizen:joined_herocraft
       frame: task
+      sound: false
       announce: true
       hidden: true
       offset:
@@ -56,6 +58,7 @@ achievement_data:
       description: <&e>Survived the Hot Drop
       parent: denizen:joined_herocraft
       frame: task
+      sound: true
       announce: true
       hidden: true
       offset:
@@ -68,6 +71,7 @@ achievement_data:
       description: <&e>Crafted A Return Scroll
       parent: denizen:joined_herocraft
       frame: task
+      sound: true
       announce: true
       hidden: false
       offset:
@@ -80,6 +84,7 @@ achievement_data:
       description: <&e>Completed a Mission
       parent: denizen:firt_return_scroll
       frame: task
+      sound: true
       announce: true
       hidden: false
       offset:
@@ -92,6 +97,7 @@ achievement_data:
       description: <&e>Opened the Main Menu!
       parent: denizen:hub
       frame: task
+      sound: false
       announce: false
       hidden: false
       offset:
@@ -103,6 +109,7 @@ achievement_data:
       description: <&e>Opened the Adriftus Chest!
       parent: denizen:hub
       frame: task
+      sound: false
       announce: false
       hidden: false
       offset:
@@ -114,6 +121,7 @@ achievement_data:
       description: <&e>Opened the Crafting Grid!
       parent: denizen:hub
       frame: task
+      sound: false
       announce: false
       hidden: false
       offset:
@@ -125,6 +133,7 @@ achievement_data:
       description: <&e>Opened the Travel Menu!
       parent: denizen:hub
       frame: task
+      sound: false
       announce: false
       hidden: false
       offset:
@@ -156,8 +165,8 @@ achievement_give:
 
     - define name <script[achievement_data].parsed_key[achievements.<[id]>.name]>
     - define description <script[achievement_data].parsed_key[achievements.<[id]>.description]>
-    - foreach <script[achievement_data].parsed_key[GUI]>:
-      - narrate <[value]>
+    #- foreach <script[achievement_data].parsed_key[GUI]>:
+    #  - narrate <[value]>
     - if <script[achievement_data].data_key[achievements.<[id]>.reward_script].exists>:
       - run <script[achievement_data].parsed_key[achievements.<[id]>.reward_script]> def:<script[achievement_data].data_key[achievements.<[id]>.reward.script].after[/]>
     - advancement id:<[id]> grant:<player>

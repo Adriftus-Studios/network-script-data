@@ -24,6 +24,7 @@ resource_pack_force:
             - flag <player> RP_Enabled:<server.flag[rp_sha]>
           - else:
             - flag <player> RP_Enabled:<server.flag[rp_staff_sha]>
+          - customevent id:resource_pack_loaded
         - case FAILED_DOWNLOAD:
             - wait 1s
             - if !<player.has_permission[adriftus.staff]>:
