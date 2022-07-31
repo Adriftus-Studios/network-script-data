@@ -16,6 +16,9 @@ mission_1_event:
     on towny camp created flagged:missions.persistent.current:
       - if <player.flag[missions.persistent.current]> == 1:
         - run achievement_give def:first_campsite
+    on player crafts return_scroll flagged:missions.persistent.current:
+      - if <player.flag[missions.persistent.current]> == 2:
+        - run achievement_give def:first_return_scroll
 
 mission_1_icon:
   type: item
