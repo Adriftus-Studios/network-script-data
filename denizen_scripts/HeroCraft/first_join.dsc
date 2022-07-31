@@ -14,11 +14,28 @@ first_join:
         - wait 1t
         - adjust <player> gliding:true
         - flag player has_joined
+        - flag player hot_dropping
         - while <player.location.below.material.name.contains_text[air]>:
           - wait 5s
           - while stop if:<player.is_online.not>
+        - if !<player.is_online>:
+          - inventory clear
+          - flag player hot_dropping:!
+          - flag player has_joined:!
+          - stop
         - take item:elytra
-        - run herocraft_start_missions
-        - equip head:leather_helmet chest:leather_chestplate legs:leather_leggings feet:leather_boots
-        - foreach stone_sword|stone_pickaxe|stone_axe|stone_shovel|tpa_crystal|campfire|food_crate as:item:
-          - give <[item]>
+        - wait 2s
+        - if !<player.has_advancement[denizen:failed_hot_drop]> && <player.has_flag[hot_dropping]>:
+          - run achievement_give def:completed_hot_drop
+        - flag player hot_dropping:!
+
+    on player dies flagged:hot_dropping:
+      - flag player hot_dropping:!
+      - wait 5s
+      - if <player.is_online>:
+        - run achievement_give def:failed_hot_drop
+      - else:
+        - inventory clear
+        - flag player hot_dropping:!
+        - flag player has_joined:!
+
