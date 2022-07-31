@@ -88,8 +88,8 @@ achievement_data:
     ## Hub
     welcome_to_adriftus:
       icon: paper[custom_model_data=301]
-      name: <&6>Your First Steps
-      description: <&e>Completed a Mission
+      name: <&6>Main Menu
+      description: <&e>Opened the Main Menu!
       parent: denizen:hub
       frame: task
       announce: true
@@ -99,8 +99,8 @@ achievement_data:
         y: 4
     welcome_to_adriftus1:
       icon: paper[custom_model_data=300]
-      name: <&6>Your First Steps
-      description: <&e>Completed a Mission
+      name: <&6>Adriftus Chest
+      description: <&e>Opened the Adriftus Chest
       parent: denizen:hub
       frame: task
       announce: true
@@ -110,8 +110,8 @@ achievement_data:
         y: 6
     welcome_to_adriftus2:
       icon: paper[custom_model_data=302]
-      name: <&6>Your First Steps
-      description: <&e>Completed a Mission
+      name: <&6>Crafting Table
+      description: <&e>Opened the Crafting Grid!
       parent: denizen:hub
       frame: task
       announce: true
@@ -121,8 +121,8 @@ achievement_data:
         y: 6
     welcome_to_adriftus3:
       icon: paper[custom_model_data=303]
-      name: <&6>Your First Steps
-      description: <&e>Completed a Mission
+      name: <&6>Travel Menu
+      description: <&e>Opened the Travl Menu
       parent: denizen:hub
       frame: task
       announce: true

@@ -103,6 +103,7 @@ missions_get_timeframe:
   definitions: timeframe
   script:
     - stop if:<[timeframe].exists.not>
+    - inject missions_persistent_herocraft if:<[timeframe].equals[persistent]>
     - define missions <list>
     # Define config and missions list.
     - define config <script[missions_config]>
