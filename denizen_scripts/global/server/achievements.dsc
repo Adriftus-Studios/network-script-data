@@ -100,7 +100,7 @@ achievement_data:
     welcome_to_adriftus1:
       icon: paper[custom_model_data=300]
       name: <&6>Adriftus Chest
-      description: <&e>Opened the Adriftus Chest
+      description: <&e>Opened the Adriftus Chest!
       parent: denizen:hub
       frame: task
       announce: false
@@ -122,7 +122,7 @@ achievement_data:
     welcome_to_adriftus3:
       icon: paper[custom_model_data=303]
       name: <&6>Travel Menu
-      description: <&e>Opened the Travl Menu
+      description: <&e>Opened the Travel Menu!
       parent: denizen:hub
       frame: task
       announce: false

@@ -43,6 +43,12 @@ player_crafting_slots_override_events:
 player_crafting_slots_open_button:
   type: task
   debug: false
+  data:
+    achievement_map:
+      main_menu_inventory_open: welcome_to_adriftus
+      travel_menu_open: welcome_to_adriftus3
+      adriftus_chest_inventory_open: welcome_to_adriftus1
+      open_crafting_grid: welcome_to_adriftus2
   script:
     - determine passively cancelled
     - if <player.item_on_cursor.material.name> != air:
@@ -50,6 +56,9 @@ player_crafting_slots_open_button:
       - adjust <player> item_on_cursor:air
     - define script <context.item.flag[grid_script]>
     - wait 2t
+    - define achievement <script.data_key[data.achievement_map.<[script]>]>
+    - if !<player.has_advancement[<[achievement]>]>:
+      - run achievement_give def:<[achievement]>
     - inject <[script]>
     - if <[cursor_item].exists>:
       - adjust <player> item_on_cursor:<[cursor_item]>
