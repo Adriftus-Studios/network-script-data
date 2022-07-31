@@ -48,7 +48,7 @@ achievement_data:
       announce: true
       hidden: true
       offset:
-        x: 2
+        x: 1
         y: 4
     completed_hot_drop:
       reward_script: herocraft_mission_1_start
@@ -61,20 +61,20 @@ achievement_data:
       announce: true
       hidden: true
       offset:
-        x: 2
+        x: 1
         y: 4
     first_campsite:
       reward_script: herocraft_mission_2_start
       icon: campfire
       name: <&6>Your First... Home?
-      description: <&e>Created a campsite!
+      description: <&e>Created a Campsite!
       parent: denizen:joined_herocraft
       frame: task
       sound: true
       announce: false
       hidden: false
       offset:
-        x: 3
+        x: 2
         y: 5
     first_return_scroll:
       reward_script: herocraft_mission_3_start
