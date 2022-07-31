@@ -5,4 +5,4 @@ hub_first_join:
     on player joins:
       - if !<player.has_advancement[denizen:hub]>:
         - wait 2s
-        - run achievement_give def:hub
+        - run achievement_give_parents def:hub
