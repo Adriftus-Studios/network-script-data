@@ -3,4 +3,5 @@ hub_first_join:
   debug: false
   events:
     on player joins flagged:!first_joined:
-      - run achievement_give def:denizen<&co>hub
+      - wait 2s
+      - run achievement_give def:hub
