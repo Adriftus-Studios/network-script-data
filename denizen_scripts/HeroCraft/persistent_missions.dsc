@@ -27,12 +27,12 @@ mission_1_icon:
     - <&e>Create a Campsite!
     - <&a>Campsites are temporary claims.
 
-herocraft_mission_1:
+herocraft_mission_1_start:
   type: task
   debug: false
   script:
     - give tpa_crystal|campfire|cooked_beef[quantity=24]
-    - flag player missions.persistent.current:!
+    - flag player missions.persistent.current:1
 
 mission_2_icon:
   type: item
@@ -44,11 +44,12 @@ mission_2_icon:
     - <&a>Check The Main Menu For Recipes!
     - <&7>Use your <&keybind[key.inventory]> key!
 
-herocraft_mission_2:
+herocraft_mission_2_start:
   type: task
   debug: false
   script:
     - give papyrus|lapis_lazuli|glow_ink_sac
+    - flag player missions.persistent.current:2
 
 mission_3_icon:
   type: item
@@ -60,8 +61,9 @@ mission_3_icon:
     - <&a>Get Paid!
     - <&7>Let's goooo!
 
-herocraft_mission_3:
+herocraft_mission_3_start:
   type: task
   debug: false
   script:
     - give leather_helmet|leather_chestplate|leather_leggings|leather_boots|stone_sword|stone_pickaxe|stone_axe|stone_hoe
+    - flag player missions.persistent.current:3

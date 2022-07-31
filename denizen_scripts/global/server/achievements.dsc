@@ -38,7 +38,7 @@ achievement_data:
         x: 1
         y: 5
     failed_hot_drop:
-      reward_script: herocraft_mission_1
+      reward_script: herocraft_mission_1_start
       icon: elytra
       name: <&6>Well, That's One Way Down...
       description: <&e>Died on First Join
@@ -51,7 +51,7 @@ achievement_data:
         x: 2
         y: 4
     completed_hot_drop:
-      reward_script: herocraft_mission_1
+      reward_script: herocraft_mission_1_start
       icon: elytra
       name: <&6>Nailed The Landing
       description: <&e>Survived the Hot Drop
@@ -64,7 +64,7 @@ achievement_data:
         x: 2
         y: 4
     first_campsite:
-      reward_script: herocraft_mission_2
+      reward_script: herocraft_mission_2_start
       icon: campfire
       name: <&6>Your First... Home?
       description: <&e>Created a campsite!
@@ -77,7 +77,7 @@ achievement_data:
         x: 3
         y: 5
     first_return_scroll:
-      reward_script: herocraft_mission_3
+      reward_script: herocraft_mission_3_start
       icon: feather[custom_model_data=200]
       name: <&6>Now You're Travelling
       description: <&e>Crafted A Return Scroll
@@ -90,7 +90,7 @@ achievement_data:
         x: 3
         y: 5
     first_mission_complete:
-      reward_script: herocraft_mission_4
+      reward_script: herocraft_mission_4_start
       icon: diamond_sword
       name: <&6>Your First Steps
       description: <&e>Completed a Mission
