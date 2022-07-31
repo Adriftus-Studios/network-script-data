@@ -7,7 +7,15 @@ missions_persistent_herocraft:
       2: mission_2_icon
       3: mission_3_icon
   script:
-    - determine <list[mission_<player.flag[missions.active.persistent]>_icon]>
+    - determine <list[mission_<player.flag[missions.persistent.current]>_icon]>
+
+mission_1_event:
+  type: world
+  debug: false
+  events:
+    on towny camp created flagged:missions.persistent.current:
+      - if <player.flag[missions.persistent.current]> == 1:
+        - run achievement_give def:first_campsite
 
 mission_1_icon:
   type: item
