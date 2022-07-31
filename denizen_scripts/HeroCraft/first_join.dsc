@@ -4,7 +4,7 @@ first_join:
   events:
     on player joins:
       - if !<player.has_flag[has_joined]>:
-        - run achievement_give_parent def:herocraft
+        - run achievement_give def:joined_herocraft
         - teleport <player> <location[0,1000,0,HeroCraft]>
         - wait 1s
         - title "title:<&color[#010000]>Drop in!" "subtitle:Prepare to Glide!" fade_in:1s stay:5s fade_out:1s

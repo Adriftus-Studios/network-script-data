@@ -3,6 +3,7 @@ hub_first_join:
   debug: false
   events:
     on custom event id:resource_pack_loaded:
-      - if !<player.has_advancement[denizen:hub]>:
+      - if !<player.has_advancement[denizen:herocraft]>:
         - wait 2s
         - run achievement_give_parent def:hub
+        - run achievement_give_parent def:herocraft
