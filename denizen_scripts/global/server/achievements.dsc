@@ -131,6 +131,19 @@ achievement_data:
         x: 1
         y: 4
 
+achievement_give_parent:
+  type: task
+  debug: false
+  definitions: parent
+  script:
+    - if <script[achievement_data].data_key[achievements.parent.<[id]>]||invalid> == invalid:
+      - debug error "Invalid ID from achievement_give script in achievements.dsc. Ideally, scripts that read manual input **should never error.**"
+      - stop
+    - stop if:<player.has_advancement[denizen<&co><[id]>]>
+
+    - advancement id:<[id]> grant:<player>
+    - adjust <player> save_advancements
+
 achievement_give:
   type: task
   debug: false
@@ -139,7 +152,7 @@ achievement_give:
     - if <script[achievement_data].data_key[achievements.<[id]>]||invalid> == invalid:
       - debug error "Invalid ID from achievement_give script in achievements.dsc. Ideally, scripts that read manual input **should never error.**"
       - stop
-    - stop if:<player.has_advancement[<[id]>]>
+    - stop if:<player.has_advancement[denizen<&co><[id]>]>
 
     - define name <script[achievement_data].parsed_key[achievements.<[id]>.name]>
     - define description <script[achievement_data].parsed_key[achievements.<[id]>.description]>
