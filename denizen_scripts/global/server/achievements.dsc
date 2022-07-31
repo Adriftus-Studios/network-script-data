@@ -94,7 +94,7 @@ achievement_data:
       icon: diamond_sword
       name: <&6>Your First Steps
       description: <&e>Completed a Mission
-      parent: denizen:firt_return_scroll
+      parent: denizen:first_return_scroll
       frame: task
       sound: true
       announce: true
