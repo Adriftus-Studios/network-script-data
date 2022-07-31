@@ -11,7 +11,7 @@ achievement_data:
     hub:
       icon: paper[custom_model_data=201]
       name: <&color[#010000]>Hub
-      description: <&e>A Fun Lobby, with Fun Minigames
+      description: <&e>Welcome to Adriftus!
       background: minecraft:textures/gui/advancements/backgrounds/stone.png
     herocraft:
       icon: paper[custom_model_data=202]
@@ -92,7 +92,7 @@ achievement_data:
       description: <&e>Opened the Main Menu!
       parent: denizen:hub
       frame: task
-      announce: true
+      announce: false
       hidden: false
       offset:
         x: -1
@@ -103,7 +103,7 @@ achievement_data:
       description: <&e>Opened the Adriftus Chest
       parent: denizen:hub
       frame: task
-      announce: true
+      announce: false
       hidden: false
       offset:
         x: -1
@@ -114,7 +114,7 @@ achievement_data:
       description: <&e>Opened the Crafting Grid!
       parent: denizen:hub
       frame: task
-      announce: true
+      announce: false
       hidden: false
       offset:
         x: 1
@@ -125,7 +125,7 @@ achievement_data:
       description: <&e>Opened the Travl Menu
       parent: denizen:hub
       frame: task
-      announce: true
+      announce: false
       hidden: false
       offset:
         x: 1
