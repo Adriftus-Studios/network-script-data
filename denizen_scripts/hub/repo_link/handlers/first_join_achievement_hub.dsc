@@ -3,6 +3,6 @@ hub_first_join:
   debug: false
   events:
     on player joins:
-      - if <player.has_advancement[denizen:hub]>:
+      - if !<player.has_advancement[denizen:hub]>:
         - wait 2s
         - run achievement_give def:hub
