@@ -17,7 +17,8 @@ travel_menu_open:
         - 36
       gui_waystone: 54
       items:
-        multiverse_dust: 20
+        spawn_button: 19
+        multiverse_dust: 21
         return_scroll: 38
         back_scroll: 39
         town_return_scroll: 40
@@ -186,6 +187,17 @@ return_scroll_info:
   flags:
     run_script: travel_menu_show_recipe
     item_recipe: shapeless_recipe_return_scroll_1
+
+spawn_info:
+  type: item
+  material: feather
+  display name: <&6>Spawn
+  lore:
+    - <&6>Return to Spawn!
+  mechanisms:
+    custom_model_data: 3
+  flags:
+    run_script: teleport_to_spawn
 
 back_scroll_info:
   type: item
