@@ -2,7 +2,7 @@ Herocraft_RTP:
   type: task
   debug: false
   script:
-      - if !<player.has_flag[has_joined]>:
+      - if !<player.has_advancement[denizen:joined_herocraft]>:
         - run achievement_give def:joined_herocraft
         - flag player has_joined
       - teleport <player> <location[0,1000,0,HeroCraft]>
