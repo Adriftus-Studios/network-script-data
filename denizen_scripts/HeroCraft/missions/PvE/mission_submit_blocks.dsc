@@ -61,13 +61,14 @@ mission_submit_blocks_complete:
   debug: false
   script:
     - define config <script[mission_submit_blocks]>
+    - define bigconfig <script[missions_config]>
     - define missions <proc[missions_get].context[submit_blocks]>
     # Check each mission if their item matches the item.
     - foreach <[missions]> as:mission:
       - if <player.flag[<[mission]>].get[done]> && <player.flag[<[mission]>].get[rewarded].not>:
         - define timeframe <player.flag[<[mission]>].get[timeframe]>
         - define item <player.flag[<[mission]>].get[item]>
-        - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<player.flag[<[mission]>].get[max].div[5]>]>
+        - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<[bigconfig].data_key[multipliers.<[timeframe]>]>
         - money give quantity:<[quantity]>
         - flag <player> <[mission]>.rewarded:true
         - narrate "<&b>Mission completed! <&a>+$<[quantity]>"
