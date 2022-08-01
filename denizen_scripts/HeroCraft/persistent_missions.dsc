@@ -20,6 +20,12 @@ mission_1_event:
       - if <player.flag[missions.persistent.current]> == 2:
         - run achievement_give def:first_return_scroll
 
+herocraft_mission_0_start:
+  type: task
+  debug: false
+  script:
+    - flag player missions.persistent.current:1
+
 mission_1_icon:
   type: item
   debug: false
