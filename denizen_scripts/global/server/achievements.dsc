@@ -28,9 +28,9 @@ achievement_data:
     joined_herocraft:
       icon: diamond_sword
       name: <&color[#010000]>Welcome To Herocraft!
-      description: <&e>Joined the Battle!
+      description: <&e>First RTP
       parent: denizen:herocraft
-      frame: task
+      frame: challenge
       sound: true
       announce: true
       hidden: false
