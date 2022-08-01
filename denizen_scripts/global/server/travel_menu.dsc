@@ -188,7 +188,7 @@ return_scroll_info:
     run_script: travel_menu_show_recipe
     item_recipe: shapeless_recipe_return_scroll_1
 
-spawn_info:
+spawn_button_info:
   type: item
   material: feather
   display name: <&6>Spawn
