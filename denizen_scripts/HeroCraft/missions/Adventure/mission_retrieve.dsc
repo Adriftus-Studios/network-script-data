@@ -16,23 +16,23 @@ mission_retrieve:
     weekly: 300
     monthly: 500
   items:
-    leather:
+    bone:
       - 32
       - 48
       - 64
-    beef:
+    gunpowder:
       - 32
       - 48
       - 64
-    feather:
+    rotten_flesh:
       - 32
       - 48
       - 64
-    porkchop:
+    slime_ball:
       - 32
       - 48
       - 64
-    rabbit:
+    eye_of_ender:
       - 12
       - 24
 
