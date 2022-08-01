@@ -66,7 +66,7 @@ mission_cook_complete:
       - if <player.flag[<[mission]>].get[done]> && <player.flag[<[mission]>].get[rewarded].not>:
         - define timeframe <player.flag[<[mission]>].get[timeframe]>
         - define item <player.flag[<[mission]>].get[item]>
-        - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<[bigconfig].data_key[multipliers.<[timeframe]>]>
+        - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<[bigconfig].data_key[multipliers.<[timeframe]>]>]>
         - money give quantity:<[quantity]>
         - flag <player> <[mission]>.rewarded:true
         - narrate "<&b>Mission completed! <&a>+$<[quantity]>"
