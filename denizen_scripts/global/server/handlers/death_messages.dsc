@@ -267,7 +267,7 @@ player_death_handler:
       - define players_final "<&font[adriftus:chat]><&chr[2001]><&r> <&7><&l><&lb><&4><&l>DEATH<&7><&l><&rb><&r><&nl>     <[message]>"
       - define staff_final "<&font[adriftus:chat]><&chr[2001]><&r> <&7><&l><&lb><&4><&l>DEATH<&7><&l><&rb><&r> - <element[<&7><&lb><&d>Moderation Information<&7><&rb>].on_hover[<script.parsed_key[data.death_info].separated_by[<&nl>]>].on_click[/dtd forward_portal coordinates <player.location.x> <player.location.y> <player.location.z>].type[RUN_COMMAND]><&nl>     <[message]>"
       - define player_final "<&font[adriftus:chat]><&chr[2001]><&r> <&7><&l><&lb><&4><&l>DEATH<&7><&l><&rb><&r> - <&e>Location<&co> <context.entity.location.simple><&nl>     <[message]>"
-      - define staff <server.online_players.filter[has_permission[adriftus.staff]]>
+      - define staff <server.online_players.filter[has_permission[adriftus.staff]].exclude[<player>]>
       - define players <server.online_players.exclude[<[staff]>]>
       - narrate <[players_final]> targets:<[players].exclude[<player>]>
       - narrate <[player_final]> targets:<player>
