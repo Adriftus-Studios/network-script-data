@@ -1,8 +1,7 @@
-first_join:
-  type: world
+Herocraft_RTP:
+  type: task
   debug: false
-  events:
-    on player joins:
+  script:
       - if !<player.has_flag[has_joined]>:
         - run achievement_give def:joined_herocraft
         - teleport <player> <location[0,1000,0,HeroCraft]>
