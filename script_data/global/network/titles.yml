@@ -1663,6 +1663,6 @@ titles:
     in_shop: false
   UwU:
     order: 274
-    tag: '&8｜&yUwU&8｜'
+    tag: '&8｜<&color[#010000]>UwU&8｜'
     description: Weebs Unite!
     in_shop: false
