@@ -136,6 +136,7 @@ grappling_hook_pull:
       - wait 4t
       - if <[loop_index]> > 35:
         - while stop
+      - while stop if:<player.is_sneaking>
     - adjust <player> fall_distance:0
     - if <player.location.pitch> < -15 && <[target].above.material.name.advanced_matches[*air]>:
       - adjust <player> velocity:<player.location.direction.vector.with_y[0.5]>
