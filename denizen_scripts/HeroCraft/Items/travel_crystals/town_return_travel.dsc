@@ -5,9 +5,10 @@ town_return_crystal:
   data:
     recipe_book_category:  travel.crystal
   lore:
-    - "<&e>--------------------"
-    - "<&e>Teleport to Town Spawn"
-    - "<&e>--------------------"
+    - <&a><&l>Consumed on Use
+    - <&e>--------------------
+    - <&e>Teleport to Town Spawn
+    - <&e>--------------------
   flags:
     right_click_script:
       - town_return_execute
@@ -29,10 +30,11 @@ town_return_scroll:
   data:
     recipe_book_category: travel.scroll
   lore:
-    - "<&e>--------------------"
-    - "<&e>Teleport to Town Spawn"
-    - "<&c>Incapable of long distances"
-    - "<&e>--------------------"
+    - <&a><&l>Consumed on Use
+    - <&e>--------------------
+    - <&e>Teleport to Town Spawn
+    - <&c>Incapable of long distances
+    - <&e>--------------------
   flags:
     right_click_script:
       - town_return_execute

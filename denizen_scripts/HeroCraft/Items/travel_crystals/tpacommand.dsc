@@ -26,10 +26,11 @@ tpa_crystal:
   data:
     recipe_book_category: travel.crystal
   lore:
-    - "<&e>--------------------"
-    - "<&e>Use to request a teleport"
-    - "<&e>You can target anyone awake"
-    - "<&e>--------------------"
+    - <&a><&l>Consumed on Use
+    - <&e>--------------------
+    - <&e>Use to request a teleport
+    - <&e>You can target anyone awake
+    - <&e>--------------------
   flags:
     right_click_script:
       - tpa_remove_item

@@ -5,6 +5,7 @@ back_crystal:
   data:
     recipe_book_category: travel.crystal
   lore:
+    - <&a><&l>Consumed on Use
     - "<&e>--------------------"
     - "<&e>Return to your last location"
     - "<&e>--------------------"
@@ -30,6 +31,7 @@ back_scroll:
   data:
     recipe_book_category: travel.scroll
   lore:
+    - <&a><&l>Consumed on Use
     - "<&e>--------------------"
     - "<&e>Return to your last location"
     - "<&c>Incapable of long distances"

@@ -5,11 +5,12 @@ return_scroll:
   data:
     recipe_book_category: travel.scroll
   lore:
-  - "<&a>-------------"
-  - "<&e>Right Click while Holding"
-  - "<&e>Saves location when crafted"
-  - "<&c>Incapable of long distances"
-  - "<&a>-------------"
+    - <&a><&l>Consumed on Use
+    - <&a>-------------
+    - <&e>Right Click while Holding
+    - <&e>Saves location when crafted
+    - <&c>Incapable of long distances
+    - <&a>-------------
   flags:
     right_click_script: return_task
     type: scroll
@@ -30,10 +31,11 @@ return_crystal:
   data:
     recipe_book_category: travel.crystal
   lore:
-  - "<&a>-------------"
-  - "<&e>Right Click while Holding"
-  - "<&e>Saves location when crafted"
-  - "<&a>-------------"
+    - <&a><&l>Consumed on Use
+    - <&a>-------------
+    - <&e>Right Click while Holding
+    - <&e>Saves location when crafted
+    - <&a>-------------
   flags:
     right_click_script: return_task
     type: crystal
