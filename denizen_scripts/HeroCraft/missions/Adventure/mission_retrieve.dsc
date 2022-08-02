@@ -99,7 +99,6 @@ mission_retrieve_events:
           - foreach next
         - define items <context.drops.if_null[<list[]>]>
         - foreach <[items]>:
-          - determine passively NO_DROPS
           - define retrieve <player.flag[<[mission]>].get[item].as_item.script.name.if_null[<player.flag[<[mission]>].get[item].as_item.material.name>]>
           - define item <[value].as_item.script.name.if_null[<[value].as_item.material.name>]>
           # Drop item
@@ -111,6 +110,4 @@ mission_retrieve_events:
             # Otherwise, notify player that their inventory is full.
             - else:
               - narrate "<&c>You cannot retrieve items right now! Your inventory is full."
-          - else:
-            - drop <[item]> <context.entity.location> quantity:<[value].as_item.quantity>
 
