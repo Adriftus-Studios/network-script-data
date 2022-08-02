@@ -1661,3 +1661,8 @@ titles:
     tag: '<&4><&l>Tractor'
     description: <&6>Tractor goes Brrrr...
     in_shop: false
+  UwU:
+    order: 274
+    tag: '&8｜&4&k/&yUwUk/&8｜'
+    description: Weebs Unite!
+    in_shop: false
