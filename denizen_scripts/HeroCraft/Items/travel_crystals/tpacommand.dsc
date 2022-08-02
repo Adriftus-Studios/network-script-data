@@ -48,6 +48,14 @@ tpa_crystal:
       - air|emerald_block|air
       - magical_pylon|air|magical_pylon
 
+tpa_crystal_gui_refund:
+  type: world
+  debug: false
+  events:
+    after player closes target_players_inventory flagged:!tpa_request_sent:
+      - wait 10t
+      - inject tpa_give_item
+
 tpa_execute:
   type: task
   debug: false
@@ -67,6 +75,12 @@ tpa_remove_item:
     - wait 1t
     - run totem_test def:102
     - wait 2s
+
+tpa_give_item:
+  type: task
+  debug: false
+  script:
+    - give tpa_crystal
 
 tpa_command_callback:
     type: task
