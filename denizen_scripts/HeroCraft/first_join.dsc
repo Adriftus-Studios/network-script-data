@@ -10,7 +10,7 @@ Herocraft_RTP:
       - title "title:<&color[#010000]>Drop in!" "subtitle:Prepare to Glide!" fade_in:1s stay:5s fade_out:1s
       - wait 7s
       - teleport <player> <location[0,400,0,HeroCraft].random_offset[12500,0,12500]>
-      - equip <player> chest:elytra[flag=on_drop:delete_item]
+      - equip <player> chest:elytra[flag=on_drop:delete_item;flag=run_script:determine_air]
       - wait 1t
       - adjust <player> gliding:true
       - flag player hot_dropping
