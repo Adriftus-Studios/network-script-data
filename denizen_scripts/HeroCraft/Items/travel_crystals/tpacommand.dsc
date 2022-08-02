@@ -4,8 +4,9 @@ tpa_command:
     name: tpa
     description: Used To Request A Teleport
     usage: /tpa (name)
-    permission: adriftus.staff
+    permission: adriftus.moderator
     script:
+    - narrate "<&a>This is a Moderator Priviledge"
     - if <context.args.size> < 1:
       - narrate "<red><bold>Please Use A Name That's Online"
       - stop
