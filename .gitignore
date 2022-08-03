@@ -39,3 +39,6 @@ denizen_scripts/relay/repo_link/Handlers/message_handler.dsc
 
 # ██ [ System Script Directories  ] ██
 denizen_scripts/relay/repo_link/OffhandData/*
+
+# ██ [ Misc Script Files          ] ██
+misc_scripts/output/*

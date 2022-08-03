@@ -12,6 +12,10 @@ compressed_coal_block:
   type: item
   material: coal_block
   display name: <&f>Compressed Coal Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>9 Coal Block"
   data:
@@ -34,6 +38,10 @@ double_compressed_coal_block:
   type: item
   material: coal_block
   display name: <&f>Double Compressed Coal Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>81 Coal Block"
   data:
@@ -56,6 +64,10 @@ triple_compressed_coal_block:
   type: item
   material: coal_block
   display name: <&f>Triple Compressed Coal Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>729 Coal Block"
   data:
@@ -78,6 +90,10 @@ quadruple_compressed_coal_block:
   type: item
   material: coal_block
   display name: <&f>Quadruple Compressed Coal Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>6561 Coal Block"
   data:

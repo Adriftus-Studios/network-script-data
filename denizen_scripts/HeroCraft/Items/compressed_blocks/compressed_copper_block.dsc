@@ -12,6 +12,10 @@ compressed_copper_block:
   type: item
   material: copper_block
   display name: <&f>Compressed Copper Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>9 Copper Block"
   data:
@@ -34,6 +38,10 @@ double_compressed_copper_block:
   type: item
   material: copper_block
   display name: <&f>Double Compressed Copper Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>81 Copper Block"
   data:
@@ -56,6 +64,10 @@ triple_compressed_copper_block:
   type: item
   material: copper_block
   display name: <&f>Triple Compressed Copper Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>729 Copper Block"
   data:
@@ -78,6 +90,10 @@ quadruple_compressed_copper_block:
   type: item
   material: copper_block
   display name: <&f>Quadruple Compressed Copper Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>6561 Copper Block"
   data:

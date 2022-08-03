@@ -12,6 +12,10 @@ compressed_dirt:
   type: item
   material: dirt
   display name: <&f>Compressed Dirt
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>9 Dirt"
   data:
@@ -34,6 +38,10 @@ double_compressed_dirt:
   type: item
   material: dirt
   display name: <&f>Double Compressed Dirt
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>81 Dirt"
   data:
@@ -56,6 +64,10 @@ triple_compressed_dirt:
   type: item
   material: dirt
   display name: <&f>Triple Compressed Dirt
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>729 Dirt"
   data:
@@ -78,6 +90,10 @@ quadruple_compressed_dirt:
   type: item
   material: dirt
   display name: <&f>Quadruple Compressed Dirt
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>6561 Dirt"
   data:

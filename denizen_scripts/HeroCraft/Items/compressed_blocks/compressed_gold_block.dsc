@@ -12,6 +12,10 @@ compressed_gold_block:
   type: item
   material: gold_block
   display name: <&f>Compressed Gold Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>9 Gold Block"
   data:
@@ -34,6 +38,10 @@ double_compressed_gold_block:
   type: item
   material: gold_block
   display name: <&f>Double Compressed Gold Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>81 Gold Block"
   data:
@@ -56,6 +64,10 @@ triple_compressed_gold_block:
   type: item
   material: gold_block
   display name: <&f>Triple Compressed Gold Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>729 Gold Block"
   data:
@@ -78,6 +90,10 @@ quadruple_compressed_gold_block:
   type: item
   material: gold_block
   display name: <&f>Quadruple Compressed Gold Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>6561 Gold Block"
   data:

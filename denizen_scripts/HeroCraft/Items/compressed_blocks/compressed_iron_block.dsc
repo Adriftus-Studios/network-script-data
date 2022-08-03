@@ -12,6 +12,10 @@ compressed_iron_block:
   type: item
   material: iron_block
   display name: <&f>Compressed Iron Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>9 Iron Block"
   data:
@@ -34,6 +38,10 @@ double_compressed_iron_block:
   type: item
   material: iron_block
   display name: <&f>Double Compressed Iron Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>81 Iron Block"
   data:
@@ -56,6 +64,10 @@ triple_compressed_iron_block:
   type: item
   material: iron_block
   display name: <&f>Triple Compressed Iron Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>729 Iron Block"
   data:
@@ -78,6 +90,10 @@ quadruple_compressed_iron_block:
   type: item
   material: iron_block
   display name: <&f>Quadruple Compressed Iron Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>6561 Iron Block"
   data:
