@@ -3,6 +3,6 @@ inventory_sorting_events:
   debug: true
   events:
     on player middle clicks in inventory:
-    - if <context.clicked_inventory.exists>:
+    - if <context.clicked_inventory.exists> && <context.clicked_inventory.script.exists.not>:
       - ratelimit <context.clicked_inventory> 1t
-      - adjust <context.clicked_inventory> contents:<context.clicked_inventory.list_contents.alphabetical.exclude[<item[air]>]>
+      - adjust <context.clicked_inventory> contents:<context.clicked_inventory.list_contents.sort_by_value[material.name].exclude[<item[air]>]>
