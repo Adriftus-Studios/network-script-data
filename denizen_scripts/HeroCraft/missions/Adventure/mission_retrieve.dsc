@@ -32,7 +32,7 @@ mission_retrieve:
       - 32
       - 48
       - 64
-    eye_of_ender:
+    ender_pearl:
       - 12
       - 24
 
