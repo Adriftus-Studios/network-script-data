@@ -12,6 +12,10 @@ compressed_diamond_block:
   type: item
   material: diamond_block
   display name: <&f>Compressed Diamond Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>9 Diamond Block"
   data:
@@ -34,6 +38,10 @@ double_compressed_diamond_block:
   type: item
   material: diamond_block
   display name: <&f>Double Compressed Diamond Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>81 Diamond Block"
   data:
@@ -56,6 +64,10 @@ triple_compressed_diamond_block:
   type: item
   material: diamond_block
   display name: <&f>Triple Compressed Diamond Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>729 Diamond Block"
   data:
@@ -78,6 +90,10 @@ quadruple_compressed_diamond_block:
   type: item
   material: diamond_block
   display name: <&f>Quadruple Compressed Diamond Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>6561 Diamond Block"
   data:

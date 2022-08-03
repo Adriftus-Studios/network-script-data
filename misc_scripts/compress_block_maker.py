@@ -1,6 +1,5 @@
 def create_item(material):
-    file = f"""
-uncompressed_{material}:
+    file = f"""uncompressed_{material}:
   type: item
   material: {material}
   no_id: true
@@ -13,13 +12,13 @@ uncompressed_{material}:
 compressed_{material}:
   type: item
   material: {material}
-  display name: <&f>{material.replace('_', ' ').title()}
+  display name: <&f>Compressed {material.replace('_', ' ').title()}
   mechanisms:
     hides: ENCHANTS
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 {material.title()}"
+    - "<&7>9 {material.replace('_', ' ').title()}"
   data:
     recipe_book_category: blocks.{material}1
   flags:
@@ -45,7 +44,7 @@ double_compressed_{material}:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 {material}"
+    - "<&7>81 {material.replace('_', ' ').title()}"
   data:
     recipe_book_category: blocks.{material}2
   flags:
@@ -71,7 +70,7 @@ triple_compressed_{material}:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 {material}"
+    - "<&7>729 {material.replace('_', ' ').title()}"
   data:
     recipe_book_category: blocks.{material}3
   flags:
@@ -97,7 +96,7 @@ quadruple_compressed_{material}:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 {material}"
+    - "<&7>6561 {material.replace('_', ' ').title()}"
   data:
     recipe_book_category: blocks.{material}4
   flags:
@@ -108,8 +107,7 @@ quadruple_compressed_{material}:
       input:
       - triple_compressed_{material}|triple_compressed_{material}|triple_compressed_{material}
       - triple_compressed_{material}|triple_compressed_{material}|triple_compressed_{material}
-      - triple_compressed_{material}|triple_compressed_{material}|triple_compressed_{material}
-    """
+      - triple_compressed_{material}|triple_compressed_{material}|triple_compressed_{material}"""
 
     with open(f'output/compressed_{material}.dsc', 'w+') as f:
         f.write(file)

@@ -12,6 +12,10 @@ compressed_stone:
   type: item
   material: stone
   display name: <&f>Compressed Stone
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>9 Stone"
   data:
@@ -34,6 +38,10 @@ double_compressed_stone:
   type: item
   material: stone
   display name: <&f>Double Compressed Stone
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>81 Stone"
   data:
@@ -56,6 +64,10 @@ triple_compressed_stone:
   type: item
   material: stone
   display name: <&f>Triple Compressed Stone
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>729 Stone"
   data:
@@ -78,6 +90,10 @@ quadruple_compressed_stone:
   type: item
   material: stone
   display name: <&f>Quadruple Compressed Stone
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>6561 Stone"
   data:

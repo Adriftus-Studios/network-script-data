@@ -12,6 +12,10 @@ compressed_cobblestone:
   type: item
   material: cobblestone
   display name: <&f>Compressed Cobblestone
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>9 Cobblestone"
   data:
@@ -34,6 +38,10 @@ double_compressed_cobblestone:
   type: item
   material: cobblestone
   display name: <&f>Double Compressed Cobblestone
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>81 Cobblestone"
   data:
@@ -56,6 +64,10 @@ triple_compressed_cobblestone:
   type: item
   material: cobblestone
   display name: <&f>Triple Compressed Cobblestone
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>729 Cobblestone"
   data:
@@ -78,6 +90,10 @@ quadruple_compressed_cobblestone:
   type: item
   material: cobblestone
   display name: <&f>Quadruple Compressed Cobblestone
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>6561 Cobblestone"
   data:

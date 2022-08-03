@@ -12,6 +12,10 @@ compressed_obsidian:
   type: item
   material: obsidian
   display name: <&f>Compressed Obsidian
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>9 Obsidian"
   data:
@@ -34,6 +38,10 @@ double_compressed_obsidian:
   type: item
   material: obsidian
   display name: <&f>Double Compressed Obsidian
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>81 Obsidian"
   data:
@@ -56,6 +64,10 @@ triple_compressed_obsidian:
   type: item
   material: obsidian
   display name: <&f>Triple Compressed Obsidian
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>729 Obsidian"
   data:
@@ -78,6 +90,10 @@ quadruple_compressed_obsidian:
   type: item
   material: obsidian
   display name: <&f>Quadruple Compressed Obsidian
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>6561 Obsidian"
   data:

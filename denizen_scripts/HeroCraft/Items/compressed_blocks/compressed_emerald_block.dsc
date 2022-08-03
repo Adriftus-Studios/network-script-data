@@ -12,6 +12,10 @@ compressed_emerald_block:
   type: item
   material: emerald_block
   display name: <&f>Compressed Emerald Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>9 Emerald Block"
   data:
@@ -34,6 +38,10 @@ double_compressed_emerald_block:
   type: item
   material: emerald_block
   display name: <&f>Double Compressed Emerald Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>81 Emerald Block"
   data:
@@ -56,6 +64,10 @@ triple_compressed_emerald_block:
   type: item
   material: emerald_block
   display name: <&f>Triple Compressed Emerald Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>729 Emerald Block"
   data:
@@ -78,6 +90,10 @@ quadruple_compressed_emerald_block:
   type: item
   material: emerald_block
   display name: <&f>Quadruple Compressed Emerald Block
+  mechanisms:
+    hides: ENCHANTS
+  enchantments:
+  - sharpness:1
   lore:
     - "<&7>6561 Emerald Block"
   data:
