@@ -309,3 +309,9 @@ trade_sanitize:
               - inventory set slot:<[value]> o:trade_confirm_button[flag=player:2] d:<context.inventory>
           - determine air
       - determine cancelled
+
+trade_menu_test:
+  type: task
+  debug: false
+  script:
+    - adjust <player.open_inventory> title:<player.open_inventory><&r>TESTINGSTUFF
