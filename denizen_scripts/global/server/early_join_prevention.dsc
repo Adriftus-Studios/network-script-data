@@ -6,5 +6,5 @@ early_join_prevention:
       - flag server protected
       - wait 10s
       - flag server protected:!
-    on player logs in server_flagged:protected:
+    on player logs in server_flagged:protected1:
       - determine "KICKED:<&6>Server is still booting..."
