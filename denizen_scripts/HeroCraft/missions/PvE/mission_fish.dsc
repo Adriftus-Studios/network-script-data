@@ -88,8 +88,7 @@ mission_fish_events:
   type: world
   debug: true
   events:
-    on player fishes item while caught_fish flagged:missions.active.fish:
-      - wait 1t
+    on player fishes item while caught_fish flagged:missions.active.fish bukkit_priority:MONITOR:
       # Add missions with ID fish to a list.
       - define missions <proc[missions_get].context[fish]>
       # Check each mission if their item matches the item.
