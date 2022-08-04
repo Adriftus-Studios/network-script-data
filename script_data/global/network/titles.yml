@@ -1668,6 +1668,6 @@ titles:
     in_shop: false
   c4t_burglar:
     order: 275
-    tag: '<&color[#020000]>C4t Burglar '
+    tag: '&8｜<&color[#020000]>C4t Burglar &8｜'
     description: <&e>For the most notorious thief...
     in_shop: false
