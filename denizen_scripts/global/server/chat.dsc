@@ -33,7 +33,7 @@ chat_system_speak:
         - stop
 
       # Allow Chat Colors in Chat
-      - if <player.has_permission[adriftus.chat.color]>:
+      - if <player.has_permission[adriftus.chat.advanced_color]>:
         # Custom Color Codes
         - if <[msg].contains_text[&z]>:
           - define msg <[msg].replace[&z].with[<&color[#010000]>]>
@@ -41,6 +41,7 @@ chat_system_speak:
           - define msg <[msg].replace[&y].with[<&color[#000001]>]>
         - if <[msg].contains_text[&x]>:
           - define msg <[msg].replace[&x].with[<&color[#000100]>]>
+      - if <player.has_permission[adriftus.chat.color]>:
         - define msg <[msg].parse_color>
       - else:
         - define msg <[msg].parse_color.strip_color>
