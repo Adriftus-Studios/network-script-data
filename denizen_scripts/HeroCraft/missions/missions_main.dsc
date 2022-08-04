@@ -144,6 +144,7 @@ missions_update_progress:
     - if <[y]> >= <[max]>:
       - flag <player> <[path]>.progress:<[max]>
       - flag <player> <[path]>.done:true
+      - flag <player> missions.total.<player.flag[<[path]>].get[timeframe]>:+:1
       - run <script[mission_<[id]>].data_key[milestones.max]>
     - else if <[milestones].contains[<[y]>]>:
       - run <script[mission_<[id]>].data_key[milestones.<[y]>]>

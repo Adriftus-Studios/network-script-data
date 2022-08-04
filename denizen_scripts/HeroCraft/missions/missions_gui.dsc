@@ -28,10 +28,10 @@ missions_inv_open:
     slot_data:
       slots_used: 20|21|22|23|24|25|26
     titles:
-      daily: <&chr[1002]>
-      weekly: <&chr[1003]>
-      monthly: <&chr[1004]>
-      persistent: <&chr[1005]>
+      daily: <&chr[1002]><&chr[F602]><&r><&4><&l>Done<&co><&color[#010000]><player.flag[missions.total.daily].if_null[0]>
+      weekly: <&chr[1003]><&chr[F602]><&r><&4><&l>Done<&co><&color[#010000]><player.flag[missions.total.weekly].if_null[0]>
+      monthly: <&chr[1004]><&chr[F602]><&r><&4><&l>Done<&co><&color[#010000]><player.flag[missions.total.monthly].if_null[0]>
+      persistent: <&chr[1005]><&chr[F602]><&r><&4><&l>Done<&co><&color[#010000]><player.flag[missions.total.global].if_null[0]>
   script:
     # Set definitions
     - define timeframe daily if:<[timeframe].exists.not>
