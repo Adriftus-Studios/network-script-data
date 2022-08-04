@@ -49,7 +49,6 @@ enchantment_table_lore_fixer:
   events:
     on item enchanted:
       - define enchantment_map <map>
-      - narrate <context.enchants>
       - if !<server.scripts.filter[container_type.equals[enchantment]].parse[name.before[_enchantment]].contains_any[<context.enchants.keys>]>:
         - stop
       - define lore_list <list[]>
