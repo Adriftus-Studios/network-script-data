@@ -1666,3 +1666,8 @@ titles:
     tag: '&8｜<&color[#010000]>UwU&8｜'
     description: Weebs Unite!
     in_shop: false
+  c4t_burglar:
+    order: 275
+    tag: '<&color[#020000]>C4t Burglar'
+    description: <&e>For the most notorious thief...
+    in_shop: false
