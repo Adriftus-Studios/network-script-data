@@ -11,7 +11,7 @@ honey_sticky_piston:
       - air|piston|air
       - air|air|air
 
-honey_sticky_piston_block_display:
+honey_sticky_piston_honey_block_display:
   type: item
   material: honey_block
 
@@ -29,5 +29,11 @@ honey_sticky_piston_display:
       type: shaped
       input:
       - air|honey_sticky_piston_honey_block_display|air
+      - air|piston|air
+      - air|air|air
+    2:
+      type: shaped
+      input:
+      - air|honey_sticky_piston_slime_ball_display|air
       - air|piston|air
       - air|air|air
