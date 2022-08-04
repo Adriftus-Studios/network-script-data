@@ -3,7 +3,7 @@ honey_sticky_piston:
   material: sticky_piston
   allow in material recipes: true
   data:
-    recipe_book_category: blocks.1
+    recipe_book_category: blocks.a1
   no_id: true
   recipes:
     1:
