@@ -19,6 +19,11 @@ chat_system_speak:
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
 
+      # Check for Chat Lock
+      - if <yaml[global.player.<player.uuid>].read[chat.locked].if_null[false]> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny].if_null[false]>:
+        - narrate "<&c>You are unable to speak in this channel, due to being chat locked."
+        - stop
+
       # Determine Chat Icon
       - define icon <yaml[global.player.<player.uuid>].parsed_key[chat.icon].if_null[null]>
       - if <[channel]> == server:
@@ -26,11 +31,6 @@ chat_system_speak:
       - else:
         - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]> if:<[icon].equals[null]>
       - define icon <&chr[0001]> if:<[icon].equals[null]>
-
-      # Check for Chat Lock
-      - if <yaml[global.player.<player.uuid>].read[chat.locked].if_null[false]> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny].if_null[false]>:
-        - narrate "<&c>You are unable to speak in this channel, due to being chat locked."
-        - stop
 
       # Allow Chat Colors in Chat
       - if <player.has_permission[adriftus.chat.advanced_color]>:
@@ -47,7 +47,7 @@ chat_system_speak:
         - define msg <[msg].parse_color.strip_color>
 
       # Allow Items in Chat
-      - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
+      - if <player.has_permission[adriftus.chat.link_item]> && <[msg].contains_text[<&lb>item<&rb>]>:
         - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&7><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&7><&rb><&r><&end_hover>]>
 
       # Build the Channel Text

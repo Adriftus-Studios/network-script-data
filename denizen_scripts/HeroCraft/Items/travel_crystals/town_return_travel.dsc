@@ -66,7 +66,7 @@ town_return_execute:
     - if !<list[test|herocraft].contains[<bungee.server>]>:
       - narrate "<&c>The item has no reaction in this world..."
       - stop
-    - if !<context.item.has_flag[town]> || !<context.item.flag[town].spawn.exists>:
+    - if !<context.item.has_flag[town]> || !<town[<context.item.flag[town]>].spawn.exists>:
       - narrate "<&c>This <[type]> appears to be broken..."
       - determine cancelled
     - if <[type]> == scroll:
