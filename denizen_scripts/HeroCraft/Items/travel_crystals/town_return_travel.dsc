@@ -80,4 +80,4 @@ town_return_execute:
     - if <[type]> == crystal:
       - run totem_test def:103
     - wait 2s
-    - run teleportation_animation_run def:<context.item.flag[town].spawn>
+    - run teleportation_animation_run def:<town[<context.item.flag[town]>].spawn>
