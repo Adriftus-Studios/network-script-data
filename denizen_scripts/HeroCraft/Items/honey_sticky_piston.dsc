@@ -9,6 +9,6 @@ honey_sticky_piston:
     1:
       type: shaped
       input:
-        - air|honey_block|air
-        - air|piston|air
-        - air|air|air
+      - air|honey_block|air
+      - air|piston|air
+      - air|air|air
