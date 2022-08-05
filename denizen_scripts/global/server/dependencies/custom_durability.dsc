@@ -28,3 +28,15 @@ custom_durability_process_task:
         - take slot:<[slot]>
         - playsound sound:item_shield_break <player>
 
+custom_durability_repair:
+  type: world
+  debug: false
+  events:
+    on item recipe formed:
+      - define first <context.recipe.first.script.name>
+      - if <context.recipe_id> == minecraft<&co>repair_item && <[first].script.exists>:
+        - define valid <context.recipe.filter[script.name.equals[<[first].script.name>]].exclude[true].size>
+        - if <[valid].size> > 0:
+          - determine cancelled
+        - determine <[first].script.name.as_item.with[flag=custom_durability.current:<context.recipe.parse[custom_durability.current].sum.min[<[first].flag[custom_durability.max]>]>]>
+
