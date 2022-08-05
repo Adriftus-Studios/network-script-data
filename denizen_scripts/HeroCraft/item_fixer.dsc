@@ -11,12 +11,20 @@ item_fixer:
           - foreach next
         - inventory set slot:<[key]> o:<[value].script.name.as_item.with[quantity=<[value].quantity>]> d:<[inventory]>
 
+item_fixer_give_back:
+  type: task
+  debug: false
+  script:
+    - give <context.inventory.map_slots.exclude[50].values> to:<player.inventory>
+
 item_fixer_inventory:
   type: inventory
   debug: false
   inventory: chest
   size: 54
   title: <&color[#010000]>Item Fixer!
+  data:
+    on close: item_fixer_give_back
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
