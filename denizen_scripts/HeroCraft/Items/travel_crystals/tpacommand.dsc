@@ -48,14 +48,6 @@ tpa_crystal:
       - air|emerald_block|air
       - magical_pylon|air|magical_pylon
 
-tpa_crystal_gui_refund:
-  type: world
-  debug: false
-  events:
-    after player closes target_players_inventory flagged:!tpa_request_sent:
-      - wait 10t
-      - inject tpa_give_item
-
 tpa_execute:
   type: task
   debug: false
@@ -64,7 +56,7 @@ tpa_execute:
     - inventory close
     - define prompt "<proc[get_player_display_name]><&r><&e> wants to teleport to you"
     - narrate "<&a>TPA Request sent!"
-    - flag <[target]> tmp.tpa_accept:<player> expire:30s
+    - flag <[target]> tmp.tpa_accept:<player>
     - run chat_confirm def:<[prompt]>|tpa_command_callback player:<[target]>
 
 tpa_remove_item:
@@ -75,12 +67,6 @@ tpa_remove_item:
     - wait 1t
     - run totem_test def:102
     - wait 2s
-
-tpa_give_item:
-  type: task
-  debug: false
-  script:
-    - give tpa_crystal
 
 tpa_command_callback:
     type: task
