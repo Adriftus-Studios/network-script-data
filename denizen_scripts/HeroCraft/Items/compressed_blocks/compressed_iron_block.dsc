@@ -21,7 +21,7 @@ compressed_iron_block:
   data:
     recipe_book_category: blocks.iron_block1
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shapeless
@@ -47,7 +47,7 @@ double_compressed_iron_block:
   data:
     recipe_book_category: blocks.iron_block2
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shapeless
@@ -73,7 +73,7 @@ triple_compressed_iron_block:
   data:
     recipe_book_category: blocks.iron_block3
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shapeless
@@ -99,7 +99,7 @@ quadruple_compressed_iron_block:
   data:
     recipe_book_category: blocks.iron_block4
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shaped
