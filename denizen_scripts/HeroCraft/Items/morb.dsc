@@ -106,6 +106,7 @@ morb_events:
         - define "list:->:<&e>Owner: <&7>Unowned"
       - adjust def:item lore:<[item].lore.if_null[<list>].include[<[list]>]>
       - flag <[item]> reuseable if:<context.projectile.has_flag[reuseable]>
+      - adjust def:item "display:<&a>Reuseable <[item].display>" if:<context.projectile.has_flag[reuseable]>
       - flag <context.hit_entity> temp:! if:<context.hit_entity.has_flag[temp]>
       - flag <context.hit_entity> no_modify
       - flag <[item]> describe:<context.hit_entity.describe>
