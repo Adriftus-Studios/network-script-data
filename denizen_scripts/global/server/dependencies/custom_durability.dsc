@@ -30,7 +30,7 @@ custom_durability_process_task:
 
 custom_durability_repair:
   type: world
-  debug: false
+  debug: true
   events:
     on item recipe formed:
       - define first <context.recipe.first.script.name>
