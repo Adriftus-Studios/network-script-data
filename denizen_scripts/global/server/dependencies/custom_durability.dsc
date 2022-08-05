@@ -33,7 +33,7 @@ custom_durability_repair:
   debug: true
   events:
     on item recipe formed:
-      - define first <context.recipe.exclude[<item[air]>].first.script.name>
+      - define first <context.recipe.exclude[<item[air]>].first>
       - if <context.recipe_id> == minecraft<&co>repair_item && <[first].script.exists>:
         - define valid <context.recipe.filter[script.name.equals[<[first].script.name>]].exclude[true].size>
         - narrate <[valid]>
