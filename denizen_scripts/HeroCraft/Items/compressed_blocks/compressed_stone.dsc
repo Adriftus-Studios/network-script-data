@@ -21,7 +21,7 @@ compressed_stone:
   data:
     recipe_book_category: blocks.stone1
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shapeless
@@ -47,7 +47,7 @@ double_compressed_stone:
   data:
     recipe_book_category: blocks.stone2
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shapeless
@@ -73,7 +73,7 @@ triple_compressed_stone:
   data:
     recipe_book_category: blocks.stone3
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shapeless
@@ -99,7 +99,7 @@ quadruple_compressed_stone:
   data:
     recipe_book_category: blocks.stone4
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shaped

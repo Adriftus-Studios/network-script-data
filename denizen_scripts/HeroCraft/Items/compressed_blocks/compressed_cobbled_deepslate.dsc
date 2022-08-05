@@ -21,7 +21,7 @@ compressed_cobbled_deepslate:
   data:
     recipe_book_category: blocks.cobbled_deepslate1
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shapeless
@@ -47,7 +47,7 @@ double_compressed_cobbled_deepslate:
   data:
     recipe_book_category: blocks.cobbled_deepslate2
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shapeless
@@ -73,7 +73,7 @@ triple_compressed_cobbled_deepslate:
   data:
     recipe_book_category: blocks.cobbled_deepslate3
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shapeless
@@ -99,7 +99,7 @@ quadruple_compressed_cobbled_deepslate:
   data:
     recipe_book_category: blocks.cobbled_deepslate4
   flags:
-    right_click_script: cancel
+    on_place: cancel
   recipes:
     1:
       type: shaped

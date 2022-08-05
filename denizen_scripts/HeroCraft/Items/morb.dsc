@@ -5,6 +5,7 @@ morb_config:
     - wither
     - player
     - ender_dragon
+    - warden
 
 morb_empty:
   type: item
@@ -12,11 +13,17 @@ morb_empty:
   material: feather
   display name: <&7>Empty <&a>Morb
   lore:
-    - "<&b>Throw at an Entity to capture it."
+    - <&b><&l>Single Use Morb
+    - <&b>Throw at an Entity to capture it.
+    - <&c>Does Not Work On<&co>
+    - <&c>- Players
+    - <&c>- Wither
+    - <&c>- Ender Dragon
+    - <&c>- Warden
   mechanisms:
     custom_model_data: 1
   data:
-    recipe_book_category: gadgets
+    recipe_book_category: gadgets.morb1
   recipes:
     1:
       type: shaped
@@ -24,6 +31,33 @@ morb_empty:
         - diamond|piston|diamond
         - compressed_stone|ghast_tear|compressed_stone
         - obsidian|piston|obsidian
+
+morb_empty_reuseable:
+  type: item
+  debug: false
+  material: feather
+  display name: <&a>Reuseable Morb
+  lore:
+    - <&b><&l>Multiple Use Morb
+    - <&b>Throw at an Entity to capture it.
+    - <&c>Does Not Work On<&co>
+    - <&c>- Players
+    - <&c>- Wither
+    - <&c>- Ender Dragon
+    - <&c>- Warden
+  mechanisms:
+    custom_model_data: 1
+  data:
+    recipe_book_category: gadgets.morb2
+  flags:
+    reuseable: true
+  recipes:
+    1:
+      type: shaped
+      input:
+        - morb_empty|morb_empty|morb_empty
+        - morb_empty|nether_star|morb_empty
+        - morb_empty|morb_empty|morb_empty
 
 morb_filled:
   type: item
@@ -51,10 +85,11 @@ morb_events:
   type: world
   debug: false
   events:
-    on player right clicks block with:morb_empty:
+    on player right clicks block with:morb_empty|morb_empty_reuseable:
       - shoot empty_morb_projectile speed:3.7 save:shot
       - flag <entry[shot].shot_entity> morb:<player>
-      - take item:morb_empty quantity:1
+      - flag <entry[shot].shot_entity> reuseable if:<context.item.has_flag[reuseable]>
+      - take iteminhand quantity:1
 
     on empty_morb_projectile hits entity:
       - stop if:<context.hit_entity.has_flag[no_morb]>
@@ -70,6 +105,8 @@ morb_events:
       - else:
         - define "list:->:<&e>Owner: <&7>Unowned"
       - adjust def:item lore:<[item].lore.if_null[<list>].include[<[list]>]>
+      - flag <[item]> reuseable if:<context.projectile.has_flag[reuseable]>
+      - adjust def:item "display:<&a>Reuseable <[item].display>" if:<context.projectile.has_flag[reuseable]>
       - flag <context.hit_entity> temp:! if:<context.hit_entity.has_flag[temp]>
       - flag <context.hit_entity> no_modify
       - flag <[item]> describe:<context.hit_entity.describe>
@@ -79,7 +116,10 @@ morb_events:
       - take iteminhand quantity:1
       - shoot filled_morb_projectile speed:3.7 save:shot
       - flag <entry[shot].shot_entity> spawn:<context.item.flag[describe]>
+      - flag <entry[shot].shot_entity> reuseable if:<context.item.has_flag[reuseable]>
     on filled_morb_projectile hits entity:
       - spawn <context.projectile.flag[spawn]> <context.hit_entity.location>
+      - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
     on filled_morb_projectile hits block:
       - spawn <context.projectile.flag[spawn]> <context.location.add[<context.hit_face>]>
+      - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.location.add[<context.hit_face>]>

@@ -56,7 +56,7 @@ tpa_execute:
     - inventory close
     - define prompt "<proc[get_player_display_name]><&r><&e> wants to teleport to you"
     - narrate "<&a>TPA Request sent!"
-    - flag <[target]> tmp.tpa_accept:<player> expire:30s
+    - flag <[target]> tmp.tpa_accept:<player>
     - run chat_confirm def:<[prompt]>|tpa_command_callback player:<[target]>
 
 tpa_remove_item:

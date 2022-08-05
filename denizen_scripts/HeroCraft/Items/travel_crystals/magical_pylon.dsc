@@ -8,7 +8,7 @@ magical_pylon:
   lore:
   - "<&a>-------------"
   - "<&7>Crafting Material"
-  - "<&e>Magical Paper for Crafting"
+  - "<&e>Magical Casing for Crystals"
   - "<&a>-------------"
   mechanisms:
     custom_model_data: 104

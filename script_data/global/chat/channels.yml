@@ -162,7 +162,7 @@ channels:
   town:
     global: false
     on_by_default: false
-    permission: towny.town.chat
+    permission: none
     icon: <&chr[1002]>
     settings_icon:
       active: paper[custom_model_data=501]

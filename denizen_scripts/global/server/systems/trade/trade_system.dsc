@@ -101,7 +101,7 @@ trade_confirm_button:
   material: feather
   display name: <&a>Confirm Trade
   lore:
-    - "<&a>Accept the trade"
+    - <&a>Accept the trade
   mechanisms:
     custom_model_data: 3
   flags:
@@ -113,8 +113,8 @@ trade_cancel_confirm_button11:
   material: paper
   display name: <&a>Cancel Confirm
   lore:
-    - "<&a>Cancel the confirmation"
-    - "<&e>Allows further changes"
+    - <&a>Cancel the confirmation
+    - <&e>Allows further changes
   flags:
     run_script: trade_player_cancel_confirm
   mechanisms:
@@ -126,8 +126,8 @@ trade_cancel_confirm_button12:
   material: paper
   display name: <&a>Cancel Confirm
   lore:
-    - "<&a>Cancel the confirmation"
-    - "<&e>Allows further changes"
+    - <&a>Cancel the confirmation
+    - <&e>Allows further changes
   flags:
     run_script: trade_player_cancel_confirm
   mechanisms:
@@ -139,8 +139,8 @@ trade_cancel_confirm_button21:
   material: paper
   display name: <&a>Cancel Confirm
   lore:
-    - "<&a>Cancel the confirmation"
-    - "<&e>Allows further changes"
+    - <&a>Cancel the confirmation
+    - <&e>Allows further changes
   flags:
     run_script: trade_player_cancel_confirm
   mechanisms:
@@ -152,8 +152,8 @@ trade_cancel_confirm_button22:
   material: paper
   display name: <&a>Cancel Confirm
   lore:
-    - "<&a>Cancel the confirmation"
-    - "<&e>Allows further changes"
+    - <&a>Cancel the confirmation
+    - <&e>Allows further changes
   flags:
     run_script: trade_player_cancel_confirm
   mechanisms:
@@ -165,7 +165,7 @@ trade_currency_button:
   material: feather
   display name: <&a>Currency
   lore:
-    - "<&c>Unavailable"
+    - <&c>Unavailable
   flags:
     run_script: cancel
   mechanisms:

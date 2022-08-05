@@ -19,6 +19,11 @@ chat_system_speak:
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
 
+      # Check for Chat Lock
+      - if <yaml[global.player.<player.uuid>].read[chat.locked].if_null[false]> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny].if_null[false]>:
+        - narrate "<&c>You are unable to speak in this channel, due to being chat locked."
+        - stop
+
       # Determine Chat Icon
       - define icon <yaml[global.player.<player.uuid>].parsed_key[chat.icon].if_null[null]>
       - if <[channel]> == server:
@@ -27,13 +32,8 @@ chat_system_speak:
         - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]> if:<[icon].equals[null]>
       - define icon <&chr[0001]> if:<[icon].equals[null]>
 
-      # Check for Chat Lock
-      - if <yaml[global.player.<player.uuid>].read[chat.locked].if_null[false]> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny].if_null[false]>:
-        - narrate "<&c>You are unable to speak in this channel, due to being chat locked."
-        - stop
-
       # Allow Chat Colors in Chat
-      - if <player.has_permission[adriftus.chat.color]>:
+      - if <player.has_permission[adriftus.chat.advanced_color]>:
         # Custom Color Codes
         - if <[msg].contains_text[&z]>:
           - define msg <[msg].replace[&z].with[<&color[#010000]>]>
@@ -41,12 +41,15 @@ chat_system_speak:
           - define msg <[msg].replace[&y].with[<&color[#000001]>]>
         - if <[msg].contains_text[&x]>:
           - define msg <[msg].replace[&x].with[<&color[#000100]>]>
+      - else:
+          - define msg <[msg].replace[&#].with[]>
+      - if <player.has_permission[adriftus.chat.color]>:
         - define msg <[msg].parse_color>
       - else:
         - define msg <[msg].parse_color.strip_color>
 
       # Allow Items in Chat
-      - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
+      - if <player.has_permission[adriftus.chat.link_item]> && <[msg].contains_text[<&lb>item<&rb>]>:
         - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&7><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&7><&rb><&r><&end_hover>]>
 
       # Build the Channel Text
@@ -119,7 +122,7 @@ chat_history_show:
     - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
     - define list <list>
     - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
-      - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]>:
+      - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]> || <list[town|nation].contains[<[channel]>]>:
         - foreach next
       - define list:|:<yaml[chat_history].read[<[Channel]>_history].filter[get[time].is_integer]>
     - if <yaml[global.player.<player.uuid>].contains[chat.message.history]>:
@@ -524,8 +527,8 @@ message_command:
     1: <server.flag[player_map.names].keys>
   script:
     - if <context.alias> == reply || <context.alias> == r:
-      - if <yaml[global.player.<player.uuid>].contains[chat.last_message.sender]>:
-        - define target_name <yaml[global.player.<player.uuid>].read[chat.last_message.sender]>
+      - if <yaml[global.player.<player.uuid>].contains[chat.message.history]>:
+        - define target_name <yaml[global.player.<player.uuid>].read[chat.message.history].last.get[sender]>
       - else:
         - narrate "<&c>No one has messaged you recently."
         - stop

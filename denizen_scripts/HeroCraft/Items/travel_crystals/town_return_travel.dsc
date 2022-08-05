@@ -66,7 +66,7 @@ town_return_execute:
     - if !<list[test|herocraft].contains[<bungee.server>]>:
       - narrate "<&c>The item has no reaction in this world..."
       - stop
-    - if !<context.item.has_flag[town]> || !<context.item.flag[town].spawn.exists>:
+    - if !<context.item.has_flag[town]> || !<town[<context.item.flag[town]>].spawn.exists>:
       - narrate "<&c>This <[type]> appears to be broken..."
       - determine cancelled
     - if <[type]> == scroll:
@@ -80,4 +80,4 @@ town_return_execute:
     - if <[type]> == crystal:
       - run totem_test def:103
     - wait 2s
-    - run teleportation_animation_run def:<context.item.flag[town].spawn>
+    - run teleportation_animation_run def:<town[<context.item.flag[town]>].spawn>
