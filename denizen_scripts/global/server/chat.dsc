@@ -527,8 +527,8 @@ message_command:
     1: <server.flag[player_map.names].keys>
   script:
     - if <context.alias> == reply || <context.alias> == r:
-      - if <yaml[global.player.<player.uuid>].contains[chat.last_message.sender]>:
-        - define target_name <yaml[global.player.<player.uuid>].read[chat.last_message.sender]>
+      - if <yaml[global.player.<player.uuid>].contains[chat.message.history]>:
+        - define target_name <yaml[global.player.<player.uuid>].read[chat.message.history].last.get[sender]>
       - else:
         - narrate "<&c>No one has messaged you recently."
         - stop
