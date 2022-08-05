@@ -539,7 +539,7 @@ message_command:
          - stop
       - define target_name <context.args.get[1]>
     - if !<server.has_flag[player_map.names.<[target_name]>]>:
-      - narrate "<&c>Unknown Player<&co> <&e><[target_name]>"
+      - narrate "<&c>Unknown Player<&co> <&e><[target_name].if_null[No Recent Message Received]>"
       - stop
     - if <server.flag[player_map.names.<[target_name]>.uuid]> == <player.uuid>:
       - narrate "<&c>You can't message yourself..."
