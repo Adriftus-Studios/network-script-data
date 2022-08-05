@@ -528,7 +528,8 @@ message_command:
   script:
     - if <context.alias> == reply || <context.alias> == r:
       - if <yaml[global.player.<player.uuid>].contains[chat.message.history]>:
-        - define target_name <yaml[global.player.<player.uuid>].read[chat.message.history].last.get[sender]>
+        - foreach <yaml[global.player.<player.uuid>].read[chat.message.history].reverse>:
+          - define target_name <[value].get[sender]> if:<[value].get[sender].equals[<player.name>].not>
       - else:
         - narrate "<&c>No one has messaged you recently."
         - stop
