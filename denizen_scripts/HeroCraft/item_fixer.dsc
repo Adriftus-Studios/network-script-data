@@ -24,7 +24,7 @@ item_fixer_inventory:
   size: 54
   title: <&color[#010000]>Item Fixer!
   data:
-    on close: item_fixer_give_back
+    on_close: item_fixer_give_back
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
