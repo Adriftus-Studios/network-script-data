@@ -43,4 +43,6 @@ custom_durability_repair:
         - narrate <[valid]>
         - if <[valid]> > 0:
           - determine cancelled
-        - determine <[first].script.name.as_item.with[flag=custom_durability.current:<[script_items].parse[custom_durability.current].sum.min[<[first].flag[custom_durability.max]>]>]>
+        - define max_durability <[first].flag[custom_durability.max]>
+        - define current_durability <[script_items].parse[custom_durability.current].sum.min[<[max_durability]>]>
+        - determine <[first].script.name.as_item.with[flag=custom_durability.current:<[current_durability]>;durability=<[max_durability].div[<[current_durability]>].mul[<[first].material.max_durability>]>]>
