@@ -115,6 +115,7 @@ morb_events:
       - take iteminhand quantity:1
       - shoot filled_morb_projectile speed:3.7 save:shot
       - flag <entry[shot].shot_entity> spawn:<context.item.flag[describe]>
+      - flag <entry[shot].shot_entity> reuseable if:<context.item.has_flag[reuseable]>
     on filled_morb_projectile hits entity:
       - spawn <context.projectile.flag[spawn]> <context.hit_entity.location>
       - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
