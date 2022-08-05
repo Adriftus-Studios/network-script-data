@@ -85,8 +85,8 @@ item_flags:
       - else:
         - inject <context.item.flag[on_recipe_formed]>
     on player places item_flagged:on_place:
-      - if <context.item.flag[on_place].object_type> == List:
-        - foreach <context.item.flag[on_place]>:
+      - if <context.item_in_hand.flag[on_place].object_type> == List:
+        - foreach <context.item_in_hand.flag[on_place]>:
           - inject <[value]>
       - else:
-        - inject <context.item.flag[on_place]>
+        - inject <context.item_in_hand.flag[on_place]>
