@@ -30,7 +30,7 @@ custom_durability_process_task:
 
 custom_durability_repair:
   type: world
-  debug: true
+  debug: false
   events:
     on item recipe formed:
       - if <context.recipe_id> == minecraft<&co>repair_item:
@@ -40,7 +40,6 @@ custom_durability_repair:
         - determine cancelled if:<[script_items].parse[script.name].deduplicate.size.equals[1].not>
         - define first <[script_items].exclude[<item[air]>].first>
         - define valid <[script_items].filter[script.name.equals[<[first].script.name>].not].exclude[true].size>
-        - narrate <[valid]>
         - if <[valid]> > 0:
           - determine cancelled
         - define max_durability <[first].flag[custom_durability.max]>
