@@ -37,9 +37,9 @@ custom_durability_repair:
         - define script_items <context.recipe.filter[script.exists]>
         - determine cancelled if:<[script_items].size.equals[<context.recipe.size>].not>
         - determine cancelled if:<[script_items].parse[script.name].deduplicate.size.equals[1].not>
-        - define first <context.recipe.exclude[<item[air]>].first>
-        - define valid <context.recipe.filter[script.name.equals[<[first].script.name>]].exclude[true].size>
+        - define first <[script_items].exclude[<item[air]>].first>
+        - define valid <[script_items].filter[script.name.equals[<[first].script.name>]].exclude[true].size>
         - narrate <[valid]>
         - if <[valid]> > 0:
           - determine cancelled
-        - determine <[first].script.name.as_item.with[flag=custom_durability.current:<context.recipe.parse[custom_durability.current].sum.min[<[first].flag[custom_durability.max]>]>]>
+        - determine <[first].script.name.as_item.with[flag=custom_durability.current:<[script_items].parse[custom_durability.current].sum.min[<[first].flag[custom_durability.max]>]>]>
