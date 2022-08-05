@@ -14,10 +14,10 @@ target_players_open:
     - define inv <inventory[target_players_inventory]>
     - if !<[filter].exists>:
       - foreach <server.online_players.exclude[<player>]>:
-        - give to:<[inv]> player_head[skull_skin=<[value].skull_skin>;custom_model_data=1;display=<[value].proc[get_player_display_name]>;flag=run_script:target_players_open_callback;flag=script:<[callback]>;flag=player:<[value]>]
+        - give to:<[inv]> player_head[skull_skin=<[value].skull_skin>;custom_model_data=1;display=<[value].proc[get_player_display_name]>;flag=run_script:target_players_open_callback;flag=script:<[callback]>;flag=player:<[value]>;flag=origin:<player>]
     - else:
       - foreach <server.online_players.filter[<[filter]>]>:
-        - give to:<[inv]> player_head[skull_skin=<[value].skull_skin>;custom_model_data=1;display=<[value].proc[get_player_display_name]>;flag=run_script:target_players_open_callback;flag=script:<[callback]>;flag=player:<[value]>]
+        - give to:<[inv]> player_head[skull_skin=<[value].skull_skin>;custom_model_data=1;display=<[value].proc[get_player_display_name]>;flag=run_script:target_players_open_callback;flag=script:<[callback]>;flag=player:<[value]>;flag=origin:<player>]
     - inventory open d:<[inv]>
 
 target_players_open_callback:
@@ -25,4 +25,5 @@ target_players_open_callback:
   debug: false
   script:
     - determine passively cancelled
+    - flag <context.item.flag[origin]> tpa_request_sent expire:3s
     - run <context.item.flag[script]> def:<context.item.flag[player]>
