@@ -41,6 +41,8 @@ chat_system_speak:
           - define msg <[msg].replace[&y].with[<&color[#000001]>]>
         - if <[msg].contains_text[&x]>:
           - define msg <[msg].replace[&x].with[<&color[#000100]>]>
+      - else:
+          - define msg <[msg].replace[&#].with[]>
       - if <player.has_permission[adriftus.chat.color]>:
         - define msg <[msg].parse_color>
       - else:
