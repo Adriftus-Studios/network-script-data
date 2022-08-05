@@ -35,7 +35,7 @@ custom_durability_repair:
     on item recipe formed:
       - if <context.recipe_id> == minecraft<&co>repair_item:
         - define script_items <context.recipe.filter[script.exists]>
-        - determine cancelled if:<[script_items].size.equals[<context.recipe.size>].not>
+        - determine cancelled if:<[script_items].size.equals[<context.recipe.exclude[<item[air]>].size>].not>
         - determine cancelled if:<[script_items].parse[script.name].deduplicate.size.equals[1].not>
         - define first <[script_items].exclude[<item[air]>].first>
         - define valid <[script_items].filter[script.name.equals[<[first].script.name>]].exclude[true].size>
