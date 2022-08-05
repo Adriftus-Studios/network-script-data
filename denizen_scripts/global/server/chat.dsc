@@ -544,7 +544,10 @@ message_command:
       - narrate "<&c>You can't message yourself..."
       - stop
     # definitions
-    - define msg <context.args.get[2].to[last].separated_by[<&sp>]>
+    - if <context.alias> == reply || <context.alias> == r:
+      - define msg <context.args.get[1].to[last].separated_by[<&sp>]>
+    - else:
+      - define msg <context.args.get[2].to[last].separated_by[<&sp>]>
     - define sender <proc[get_player_display_name].strip_color.replace[<&sp>].with[_]>
     - define self_name <proc[get_player_display_name]>
     - define other_name <proc[get_player_display_name].context[<player[<server.flag[player_map.names.<[target_name]>.uuid]>]>]>
