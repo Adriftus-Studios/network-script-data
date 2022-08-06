@@ -1,6 +1,6 @@
 inventory_sorting_events:
   type: world
-  debug: false
+  debug: true
   events:
     on player middle clicks in inventory:
     - if <context.clicked_inventory.exists> && <context.clicked_inventory.id_holder.object_type> == Location:
