@@ -17,7 +17,7 @@ compressed_gold_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Gold Block"
+    - <&7>9 Gold Block
   data:
     recipe_book_category: blocks.gold_block1
   flags:
@@ -43,7 +43,7 @@ double_compressed_gold_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Gold Block"
+    - <&7>81 Gold Block
   data:
     recipe_book_category: blocks.gold_block2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_gold_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Gold Block"
+    - <&7>729 Gold Block
   data:
     recipe_book_category: blocks.gold_block3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_gold_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Gold Block"
+    - <&7>6561 Gold Block
   data:
     recipe_book_category: blocks.gold_block4
   flags:

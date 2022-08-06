@@ -17,7 +17,7 @@ compressed_copper_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Copper Block"
+    - <&7>9 Copper Block
   data:
     recipe_book_category: blocks.copper_block1
   flags:
@@ -43,7 +43,7 @@ double_compressed_copper_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Copper Block"
+    - <&7>81 Copper Block
   data:
     recipe_book_category: blocks.copper_block2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_copper_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Copper Block"
+    - <&7>729 Copper Block
   data:
     recipe_book_category: blocks.copper_block3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_copper_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Copper Block"
+    - <&7>6561 Copper Block
   data:
     recipe_book_category: blocks.copper_block4
   flags:

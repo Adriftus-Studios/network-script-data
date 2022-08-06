@@ -12,7 +12,7 @@ iron_armor_pack_give:
   debug: false
   script:
     - determine passively cancelled
-    - stop if:<bungee.server.equals[hub]<
+    - stop if:<bungee.server.equals[hub]>
     - wait 1t
     - take iteminhand
     - give iron_helmet|iron_chestplate|iron_leggings|iron_boots|iron_sword

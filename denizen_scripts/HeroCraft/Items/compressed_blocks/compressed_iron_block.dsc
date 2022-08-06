@@ -17,7 +17,7 @@ compressed_iron_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Iron Block"
+    - <&7>9 Iron Block
   data:
     recipe_book_category: blocks.iron_block1
   flags:
@@ -43,7 +43,7 @@ double_compressed_iron_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Iron Block"
+    - <&7>81 Iron Block
   data:
     recipe_book_category: blocks.iron_block2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_iron_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Iron Block"
+    - <&7>729 Iron Block
   data:
     recipe_book_category: blocks.iron_block3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_iron_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Iron Block"
+    - <&7>6561 Iron Block
   data:
     recipe_book_category: blocks.iron_block4
   flags:

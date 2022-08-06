@@ -17,7 +17,7 @@ compressed_obsidian:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Obsidian"
+    - <&7>9 Obsidian
   data:
     recipe_book_category: blocks.obsidian1
   flags:
@@ -43,7 +43,7 @@ double_compressed_obsidian:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Obsidian"
+    - <&7>81 Obsidian
   data:
     recipe_book_category: blocks.obsidian2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_obsidian:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Obsidian"
+    - <&7>729 Obsidian
   data:
     recipe_book_category: blocks.obsidian3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_obsidian:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Obsidian"
+    - <&7>6561 Obsidian
   data:
     recipe_book_category: blocks.obsidian4
   flags:

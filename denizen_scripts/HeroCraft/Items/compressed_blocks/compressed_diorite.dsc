@@ -17,7 +17,7 @@ compressed_diorite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Diorite"
+    - <&7>9 Diorite
   data:
     recipe_book_category: blocks.diorite1
   flags:
@@ -43,7 +43,7 @@ double_compressed_diorite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Diorite"
+    - <&7>81 Diorite
   data:
     recipe_book_category: blocks.diorite2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_diorite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Diorite"
+    - <&7>729 Diorite
   data:
     recipe_book_category: blocks.diorite3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_diorite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Diorite"
+    - <&7>6561 Diorite
   data:
     recipe_book_category: blocks.diorite4
   flags:
