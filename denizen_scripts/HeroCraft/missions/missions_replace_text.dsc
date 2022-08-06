@@ -3,6 +3,7 @@
 missions_replace_text:
   type: data
   items: -items-
+  blocks: -blocks-
   mobs: -mobs-
   biome: -biome-
   max: -max-
