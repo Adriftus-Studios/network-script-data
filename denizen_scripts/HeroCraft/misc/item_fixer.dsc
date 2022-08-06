@@ -1,6 +1,6 @@
 item_fixer:
   type: task
-  debug: false
+  debug: true
   definitions: inventory
   script:
     - determine passively cancelled
@@ -45,12 +45,11 @@ fix_items_button:
   mechanisms:
     custom_model_data: 1
   flags:
-    run_script:
-      - item_fixer
-      - cancel
+    run_script: item_fixer
 
 item_fixer_assignment:
   type: assignment
+  debug: false
   actions:
     on assignment:
       - trigger name:click state:true
