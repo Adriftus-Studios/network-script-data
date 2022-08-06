@@ -95,7 +95,7 @@ store_hub_cosmeticShop_titles_events:
         - narrate "<&c>You already have unlocked this title."
         - stop
       - if !<player.proc[premium_currency_can_afford].context[<context.item.flag[price]>]>:
-        - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
+        - narrate "<&c>You do not have enough Gems for this purchase."
         - stop
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
         #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].sub[<context.item.flag[price]>]>
@@ -183,7 +183,7 @@ store_hub_cosmeticShop_bowtrails_events:
         - narrate "<&c>You already have unlocked this bow trail."
         - stop
       - if !<player.proc[premium_currency_can_afford].context[<context.item.flag[price]>]>:
-        - narrate "<&c>You do not have enough Adriftus Coins for this purchase."
+        - narrate "<&c>You do not have enough Gems for this purchase."
         - stop
       #- if <server.has_flag[release_stage]> && <server.flag[release_stage]> != alpha:
         #- define newBal <yaml[global.player.<player.uuid>].read[economy.premium.current].sub[<context.item.flag[price]>]>

@@ -141,19 +141,19 @@ titles:
     order: 18
     tag: '&8｜&e&k/&f&k/&6&nHalloween 2019&f&k/&e&k/&8｜'
     description: Halloween 2019.
-    in_shop: true
+    in_shop: false
     Price: 300
   TrickOrTreat:
     order: 19
     tag: '&8｜&e&k/&6Trick or Treat&e&k/&8｜'
     description: Halloween 2019.
-    in_shop: true
+    in_shop: false
     Price: 300
   Spooky:
     order: 20
     tag: '&8｜&6&k/&e&k/&fSp00ky&e&k/&6&k/&8｜'
     description: Halloween 2019.
-    in_shop: true
+    in_shop: false
     Price: 300
   Awesome:
     order: 21
@@ -447,7 +447,7 @@ titles:
     order: 69
     tag: '&8｜&cI Love Capes&8｜'
     description: Ok
-    in_shop: true
+    in_shop: false
     Price: 300
   GrindingMachine:
     order: 70
@@ -627,7 +627,7 @@ titles:
     order: 99
     tag: '&8｜&bParkour&3Pro&8｜'
     description: You must be good at parkour!
-    in_shop: true
+    in_shop: false
     Price: 300
   Rose:
     order: 100
@@ -830,7 +830,7 @@ titles:
   Backup:
     order: 133
     tag: '&8｜&2&k/&4Backup&2&k/&8｜'
-    description: Better protect your mate.
+    description: SAVE TEH DATAS!!11!
     in_shop: true
     Price: 300
   PlanB:
@@ -999,43 +999,43 @@ titles:
     order: 161
     tag: '&8｜&6January&8｜'
     description: Month.
-    in_shop: true
+    in_shop: false
     Price: 300
   February:
     order: 162
     tag: '&8｜&3February&8｜'
     description: Month.
-    in_shop: true
+    in_shop: false
     Price: 300
   March:
     order: 163
     tag: '&8｜&2March&8｜'
     description: Month.
-    in_shop: true
+    in_shop: false
     Price: 300
   April:
     order: 164
     tag: '&8｜&aApril&8｜'
     description: Month.
-    in_shop: true
+    in_shop: false
     Price: 300
   May:
     order: 165
     tag: '&8｜&bMay&8｜'
     description: Month.
-    in_shop: true
+    in_shop: false
     Price: 300
   June:
     order: 166
     tag: '&8｜&cJune&8｜'
     description: Pride Month!
-    in_shop: true
+    in_shop: false
     Price: 300
   July:
     order: 167
     tag: '&8｜&dJuly&8｜'
     description: Month.
-    in_shop: true
+    in_shop: false
     Price: 300
   August:
     order: 168
@@ -1047,31 +1047,31 @@ titles:
     order: 169
     tag: '&8｜&2September&8｜'
     description: Do you remember the 21st night of September?
-    in_shop: true
+    in_shop: false
     Price: 300
   October:
     order: 170
     tag: '&8｜&4October&8｜'
     description: Month.
     Price: 300
-    in_shop: true
+    in_shop: false
   November:
     order: 171
     tag: '&8｜&9November&8｜'
     description: Month.
     Price: 300
-    in_shop: true
+    in_shop: false
   December:
     order: 172
     tag: '&8｜&bDecember&8｜'
     description: Month.
-    in_shop: true
+    in_shop: false
     Price: 300
   Horror:
     order: 173
     tag: '&8｜&4&k/&bHorror&4&k/&8｜'
     description: Is this a dream or reality?
-    in_shop: true
+    in_shop: false
     Price: 300
   Burger:
     order: 174
@@ -1143,19 +1143,19 @@ titles:
     order: 185
     tag: '&8｜&fSnowy&8｜'
     description: LET IT SNOW!
-    in_shop: true
+    in_shop: false
     Price: 300
   Scary:
     order: 186
     tag: '&8｜&4&k/&cScary&4&k/&8｜'
     description: Scary... run!
-    in_shop: true
+    in_shop: false
     Price: 300
   Haunted:
     order: 187
     tag: '&8｜&4&k/&6Haunted&4&k/&8｜'
     description: Are ghosts here?
-    in_shop: true
+    in_shop: false
     Price: 300
   Java:
     order: 188
@@ -1203,43 +1203,43 @@ titles:
     order: 195
     tag: '&8｜&e&k/&bSwimmer&e&k/&8｜'
     description: Swim fast.
-    in_shop: true
+    in_shop: false
     Price: 300
   Runner:
     order: 196
     tag: '&8｜&e&k/&cRunner&e&k/&8｜'
     description: Run!
-    in_shop: true
+    in_shop: false
     Price: 300
   Champion:
     order: 197
     tag: '&8｜&e&k/&dChampion&e&k/&8｜'
     description: Champion of all.
-    in_shop: true
+    in_shop: false
     Price: 300
   Hero:
     order: 198
     tag: '&8｜&e&k/&eHero&e&k/&8｜'
     description: You are my hero.
-    in_shop: true
+    in_shop: false
     Price: 300
   Thanksgiving:
     order: 199
     tag: '&8｜&e&k/&6Thanksgiving 2019&e&k/&8｜'
     description: Food time.
-    in_shop: true
+    in_shop: false
     Price: 300
   Turkey:
     order: 200
     tag: '&8｜&e&k/&cTurkey&e&k/&8｜'
     description: Taste nice but it is a bit dry.
-    in_shop: true
+    in_shop: false
     Price: 300
   Jolly:
     order: 201
     tag: '&8｜&b&k/&3Jolly&b&k/&8｜'
     description: Have a jolly time!
-    in_shop: true
+    in_shop: false
     Price: 300
   XD:
     order: 202
@@ -1317,91 +1317,91 @@ titles:
     order: 214
     tag: '&8｜&e&k/&cBoss Slayer&e&k/&8｜'
     description: Do you like the bosses?
-    in_shop: true
+    in_shop: false
     Price: 300
   BossHunter:
     order: 215
     tag: '&8｜&e&k/&cBoss Hunter&e&k/&8｜'
     description: Do you like the bosses?
-    in_shop: true
+    in_shop: false
     Price: 300
   BossFighter:
     order: 216
     tag: '&8｜&e&k/&cBoss Fighter&e&k/&8｜'
     description: Do you like the bosses?
-    in_shop: true
+    in_shop: false
     Price: 300
   BossCamper:
     order: 217
     tag: '&8｜&e&k/&cBoss Camper&e&k/&8｜'
     description: Do you like the bosses?
-    in_shop: true
+    in_shop: false
     Price: 300
   MerryChristmas:
     order: 218
     tag: '&8｜&f&k/&4&lMerry Christmas&f&k/&8｜'
     description: Christmas 2019
-    in_shop: true
+    in_shop: false
     Price: 300
   XMAS:
     order: 219
     tag: '&8｜&f&k/&c&lXMAS&f&k/&8｜'
     description: Christmas 2019
-    in_shop: true
+    in_shop: false
     Price: 300
   HappyChristmas:
     order: 220
     tag: '&8｜&c&k/&e&lHappy Christmas&c&k/&8｜'
     description: Christmas 2019
-    in_shop: true
+    in_shop: false
     Price: 300
   Santa:
     order: 221
     tag: '&8｜&c&lS&f&lA&c&lN&f&lT&c&lA&8｜'
     description: Christmas 2019
-    in_shop: true
+    in_shop: false
     Price: 300
   XMAS2019:
     order: 222
     tag: '&8｜&c&k/&6X&eMAS &c2019&c&k/&8｜'
     description: Christmas 2019
-    in_shop: true
+    in_shop: false
     Price: 300
   LetItSnow:
     order: 223
     tag: '&8｜&f&k/&b&lLET&f&lIT&b&lSNOW&f&k/&8｜'
     description: Christmas 2019
-    in_shop: true
+    in_shop: false
     Price: 300
   LetItSnow2:
     order: 224
     tag: '&8｜&f&k/&b&l&nLET&f&l&nIT&b&l&nSNOW&f&k/&8｜'
     description: Christmas 2019
-    in_shop: true
+    in_shop: false
     Price: 300
   HappyNewYear:
     order: 225
     tag: '&8｜&e&k/&6Happy New Year&e&k/&8｜'
     description: Is it 2020 yet?
-    in_shop: true
+    in_shop: false
     Price: 300
   '2020':
     order: 226
     tag: '&8｜&e&k/&42020&e&k/&8｜'
     description: It is 2020!
-    in_shop: true
+    in_shop: false
     Price: 300
   Valentines:
     order: 227
     tag: '&8｜&c&k/&c&nValentines&r&c&k/&8｜'
     description: Valentines Day 2020
-    in_shop: true
+    in_shop: false
     Price: 300
   BeMyValentine:
     order: 228
     tag: '&8｜&c&k/&c&nBe My Valentine&r&c&k/&8｜'
     description: Valentines Day 2020
-    in_shop: true
+    in_shop: false
     Price: 300
   Voyager:
     order: 229
@@ -1417,8 +1417,8 @@ titles:
   StPatricksDay:
     order: 231
     tag: '&8｜&a&k/&2&nSt Patrick''s Day&r&a&k/&8｜'
-    description: It is a special say! :)
-    in_shop: true
+    description: It is a special day! :)
+    in_shop: false
     Price: 300
   Not4Me:
     order: 232
@@ -1448,7 +1448,7 @@ titles:
     order: 236
     tag: '&8｜&6&k/&eEaster&6&k/&8｜'
     description: It is Easter!
-    in_shop: true
+    in_shop: false
     Price: 300
     Currency: easter_token
   EasterHunt:
@@ -1576,7 +1576,7 @@ titles:
     order: 257
     tag: '&5&k｜&r&5｜&5&k｜ &r&dGhastly &5&k｜&r&5｜&5&k｜'
     description: '&eTrick or Treat Prize &6Halloween 2019&e'
-    in_shop: true
+    in_shop: false
     Price: 300
   IronKing:
     order: 258
