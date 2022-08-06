@@ -17,7 +17,7 @@ compressed_cobbled_deepslate:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Cobbled Deepslate"
+    - <&7>9 Cobbled Deepslate
   data:
     recipe_book_category: blocks.cobbled_deepslate1
   flags:
@@ -43,7 +43,7 @@ double_compressed_cobbled_deepslate:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Cobbled Deepslate"
+    - <&7>81 Cobbled Deepslate
   data:
     recipe_book_category: blocks.cobbled_deepslate2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_cobbled_deepslate:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Cobbled Deepslate"
+    - <&7>729 Cobbled Deepslate
   data:
     recipe_book_category: blocks.cobbled_deepslate3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_cobbled_deepslate:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Cobbled Deepslate"
+    - <&7>6561 Cobbled Deepslate
   data:
     recipe_book_category: blocks.cobbled_deepslate4
   flags:

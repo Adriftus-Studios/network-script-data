@@ -17,7 +17,7 @@ compressed_stone:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Stone"
+    - <&7>9 Stone
   data:
     recipe_book_category: blocks.stone1
   flags:
@@ -43,7 +43,7 @@ double_compressed_stone:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Stone"
+    - <&7>81 Stone
   data:
     recipe_book_category: blocks.stone2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_stone:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Stone"
+    - <&7>729 Stone
   data:
     recipe_book_category: blocks.stone3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_stone:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Stone"
+    - <&7>6561 Stone
   data:
     recipe_book_category: blocks.stone4
   flags:

@@ -17,7 +17,7 @@ compressed_cobblestone:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Cobblestone"
+    - <&7>9 Cobblestone
   data:
     recipe_book_category: blocks.cobblestone1
   flags:
@@ -43,7 +43,7 @@ double_compressed_cobblestone:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Cobblestone"
+    - <&7>81 Cobblestone
   data:
     recipe_book_category: blocks.cobblestone2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_cobblestone:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Cobblestone"
+    - <&7>729 Cobblestone
   data:
     recipe_book_category: blocks.cobblestone3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_cobblestone:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Cobblestone"
+    - <&7>6561 Cobblestone
   data:
     recipe_book_category: blocks.cobblestone4
   flags:
