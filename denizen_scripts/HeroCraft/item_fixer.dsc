@@ -1,8 +1,9 @@
 item_fixer:
   type: task
-  debug: false
+  debug: true
   definitions: inventory
   script:
+    - determine passively cancelled
     - ratelimit <player> 5t
     - define inventory <player.open_inventory> if:<[inventory].exists.not>
     - foreach <[inventory].map_slots>:
@@ -25,8 +26,6 @@ item_fixer_inventory:
   title: <&color[#010000]>Item Fixer!
   data:
     on_close: item_fixer_give_back
-    click_script_slots:
-      50: cancel
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
@@ -50,6 +49,7 @@ fix_items_button:
 
 item_fixer_assignment:
   type: assignment
+  debug: false
   actions:
     on assignment:
       - trigger name:click state:true
