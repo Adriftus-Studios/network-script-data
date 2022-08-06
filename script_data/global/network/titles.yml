@@ -1645,7 +1645,7 @@ titles:
     order: 270
     tag: '&8｜&2Mind Goblin&8｜'
     description: Sounds like Devin...
-    in_shop: false
+    in_shop: true
   Synbreaker:
     order: 271
     tag: '&8｜<&color[#010000]>Synbreaker&8｜'
@@ -1660,7 +1660,7 @@ titles:
     order: 273
     tag: '<&4><&l>Tractor'
     description: <&6>Tractor goes Brrrr...
-    in_shop: false
+    in_shop: true
   UwU:
     order: 274
     tag: '&8｜<&color[#010000]>UwU&8｜'
