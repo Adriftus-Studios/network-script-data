@@ -17,7 +17,7 @@ compressed_diamond_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Diamond Block"
+    - <&7>9 Diamond Block
   data:
     recipe_book_category: blocks.diamond_block1
   flags:
@@ -43,7 +43,7 @@ double_compressed_diamond_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Diamond Block"
+    - <&7>81 Diamond Block
   data:
     recipe_book_category: blocks.diamond_block2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_diamond_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Diamond Block"
+    - <&7>729 Diamond Block
   data:
     recipe_book_category: blocks.diamond_block3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_diamond_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Diamond Block"
+    - <&7>6561 Diamond Block
   data:
     recipe_book_category: blocks.diamond_block4
   flags:

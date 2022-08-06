@@ -17,7 +17,7 @@ compressed_netherrack:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Netherrack"
+    - <&7>9 Netherrack
   data:
     recipe_book_category: blocks.netherrack1
   flags:
@@ -43,7 +43,7 @@ double_compressed_netherrack:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Netherrack"
+    - <&7>81 Netherrack
   data:
     recipe_book_category: blocks.netherrack2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_netherrack:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Netherrack"
+    - <&7>729 Netherrack
   data:
     recipe_book_category: blocks.netherrack3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_netherrack:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Netherrack"
+    - <&7>6561 Netherrack
   data:
     recipe_book_category: blocks.netherrack4
   flags:

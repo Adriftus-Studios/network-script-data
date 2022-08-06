@@ -17,7 +17,7 @@ compressed_moss_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Moss Block"
+    - <&7>9 Moss Block
   data:
     recipe_book_category: blocks.moss_block1
   flags:
@@ -43,7 +43,7 @@ double_compressed_moss_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Moss Block"
+    - <&7>81 Moss Block
   data:
     recipe_book_category: blocks.moss_block2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_moss_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Moss Block"
+    - <&7>729 Moss Block
   data:
     recipe_book_category: blocks.moss_block3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_moss_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Moss Block"
+    - <&7>6561 Moss Block
   data:
     recipe_book_category: blocks.moss_block4
   flags:

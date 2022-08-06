@@ -17,7 +17,7 @@ compressed_coal_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Coal Block"
+    - <&7>9 Coal Block
   data:
     recipe_book_category: blocks.coal_block1
   flags:
@@ -43,7 +43,7 @@ double_compressed_coal_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Coal Block"
+    - <&7>81 Coal Block
   data:
     recipe_book_category: blocks.coal_block2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_coal_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Coal Block"
+    - <&7>729 Coal Block
   data:
     recipe_book_category: blocks.coal_block3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_coal_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Coal Block"
+    - <&7>6561 Coal Block
   data:
     recipe_book_category: blocks.coal_block4
   flags:

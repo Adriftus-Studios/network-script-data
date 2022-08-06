@@ -7,9 +7,9 @@ grappling_hook_basic:
     range: 15
     cooldown: 20s
   lore:
-    - "<&e>Tier: <script.parsed_key[data.tier]>"
-    - "<&e>Range<&co> <&f><script.data_key[data.range]>"
-    - "<&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>"
+    - <&e>Tier: <script.parsed_key[data.tier]>
+    - <&e>Range<&co> <&f><script.data_key[data.range]>
+    - <&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>
   flags:
     right_click_script: grappling_hook_shoot
     uuid: <util.random_uuid>
@@ -25,9 +25,9 @@ grappling_hook_better:
     range: 20
     cooldown: 15s
   lore:
-    - "<&e>Tier: <script.parsed_key[data.tier]>"
-    - "<&e>Range<&co> <&f><script.data_key[data.range]>"
-    - "<&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>"
+    - <&e>Tier: <script.parsed_key[data.tier]>
+    - <&e>Range<&co> <&f><script.data_key[data.range]>
+    - <&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>
   flags:
     right_click_script: grappling_hook_shoot
     uuid: <util.random_uuid>
@@ -43,9 +43,9 @@ grappling_hook_advanced:
     range: 25
     cooldown: 10s
   lore:
-    - "<&e>Tier: <script.parsed_key[data.tier]>"
-    - "<&e>Range<&co> <&f><script.data_key[data.range]>"
-    - "<&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>"
+    - <&e>Tier: <script.parsed_key[data.tier]>
+    - <&e>Range<&co> <&f><script.data_key[data.range]>
+    - <&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>
   flags:
     right_click_script: grappling_hook_shoot
     uuid: <util.random_uuid>
@@ -61,9 +61,9 @@ grappling_hook_master:
     range: 30
     cooldown: 10s
   lore:
-    - "<&e>Tier: <script.parsed_key[data.tier]>"
-    - "<&e>Range<&co> <&f><script.data_key[data.range]>"
-    - "<&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>"
+    - <&e>Tier: <script.parsed_key[data.tier]>
+    - <&e>Range<&co> <&f><script.data_key[data.range]>
+    - <&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>
   flags:
     right_click_script: grappling_hook_shoot
     uuid: <util.random_uuid>
@@ -79,9 +79,9 @@ grappling_hook_divine:
     range: 80
     cooldown: 5s
   lore:
-    - "<&e>Tier: <script.parsed_key[data.tier]>"
-    - "<&e>Range<&co> <&f><&f><script.data_key[data.range]>"
-    - "<&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>"
+    - <&e>Tier: <script.parsed_key[data.tier]>
+    - <&e>Range<&co> <&f><&f><script.data_key[data.range]>
+    - <&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>
   flags:
     right_click_script: grappling_hook_shoot
     uuid: <util.random_uuid>
@@ -96,18 +96,18 @@ grappling_hook_shoot:
     - determine passively cancelled
     - ratelimit <player> 1t
     - if <context.item.has_flag[last_used]>:
-      - narrate "<&c>This item has not recharged"
-      - narrate "<&e>Cooldown Remaining<&co> <&f><duration[<context.item.script.data_key[data.cooldown]>].sub[<context.item.flag[last_used].from_now>].formatted>"
+      - narrate <&c>This item has not recharged
+      - narrate <&e>Cooldown Remaining<&co> <&f><duration[<context.item.script.data_key[data.cooldown]>].sub[<context.item.flag[last_used].from_now>].formatted>
       - stop
     - define range <context.item.script.data_key[data.range]>
     - define target <player.eye_location.precise_cursor_on[<[range]>].if_null[null]>
     - define start <player.eye_location.forward[0.5]>
     - if <[target]> == null || !<[target].with_pose[<player>].forward[0.05].material.is_solid>:
-      - narrate "<&c>You have no target in range"
+      - narrate "<&c>You have no target in range!"
       - stop
     - spawn snowball[item=tripwire_hook[custom_model_data=3];gravity=false] <[start]> save:ent
     - if !<entry[ent].spawned_entity.is_spawned>:
-      - narrate "<&c>INTERNAL ERROR - REPORT Grappling0001"
+      - narrate <&c>INTERNAL ERROR - REPORT Grappling0001
       - stop
     - adjust <entry[ent].spawned_entity> velocity:<[target].sub[<[start]>].normalize>
     - inventory flag slot:<player.held_item_slot> last_used:<util.time_now> expire:<context.item.script.data_key[data.cooldown]>
