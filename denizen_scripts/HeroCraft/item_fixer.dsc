@@ -46,9 +46,7 @@ fix_items_button:
   mechanisms:
     custom_model_data: 1
   flags:
-    run_script:
-      - item_fixer
-      - cancel
+    run_script: item_fixer
 
 item_fixer_assignment:
   type: assignment
