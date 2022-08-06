@@ -539,7 +539,7 @@ message_command:
          - stop
       - define target_name <context.args.get[1]>
     - if !<server.has_flag[player_map.names.<[target_name]>]>:
-      - narrate "<&c>Unknown Player<&co> <&e><[target_name]>"
+      - narrate "<&c>Unknown Player<&co> <&e><[target_name].if_null[No Recent Message Received]>"
       - stop
     - if <server.flag[player_map.names.<[target_name]>.uuid]> == <player.uuid>:
       - narrate "<&c>You can't message yourself..."
@@ -576,5 +576,5 @@ message_command:
     - run bungee_send_message def:<list_single[<server.flag[player_map.names.<[target_name]>.uuid]>].include_single[<[sender]>].include_single[<[message]>].include_single[true]>
     - define message <[WhisperTextSelf]><&f><[msg]>
     - narrate <[message]>
-    - define map <map[time=<server.current_time_millis>;message=<[message]>]>
+    - define map <map[time=<util.current_time_millis>;message=<[message]>]>
     - run global_player_data_message_history def:<list_single[<player.uuid>].include_single[<[map]>]>

@@ -17,7 +17,7 @@ compressed_clay:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Clay"
+    - <&7>9 Clay
   data:
     recipe_book_category: blocks.clay1
   flags:
@@ -43,7 +43,7 @@ double_compressed_clay:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Clay"
+    - <&7>81 Clay
   data:
     recipe_book_category: blocks.clay2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_clay:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Clay"
+    - <&7>729 Clay
   data:
     recipe_book_category: blocks.clay3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_clay:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Clay"
+    - <&7>6561 Clay
   data:
     recipe_book_category: blocks.clay4
   flags:

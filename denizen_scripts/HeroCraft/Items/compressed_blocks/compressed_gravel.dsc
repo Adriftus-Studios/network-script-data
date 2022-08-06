@@ -17,7 +17,7 @@ compressed_gravel:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Gravel"
+    - <&7>9 Gravel
   data:
     recipe_book_category: blocks.gravel1
   flags:
@@ -43,7 +43,7 @@ double_compressed_gravel:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Gravel"
+    - <&7>81 Gravel
   data:
     recipe_book_category: blocks.gravel2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_gravel:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Gravel"
+    - <&7>729 Gravel
   data:
     recipe_book_category: blocks.gravel3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_gravel:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Gravel"
+    - <&7>6561 Gravel
   data:
     recipe_book_category: blocks.gravel4
   flags:

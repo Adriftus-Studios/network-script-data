@@ -17,7 +17,7 @@ compressed_dirt:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Dirt"
+    - <&7>9 Dirt
   data:
     recipe_book_category: blocks.dirt1
   flags:
@@ -43,7 +43,7 @@ double_compressed_dirt:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Dirt"
+    - <&7>81 Dirt
   data:
     recipe_book_category: blocks.dirt2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_dirt:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Dirt"
+    - <&7>729 Dirt
   data:
     recipe_book_category: blocks.dirt3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_dirt:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Dirt"
+    - <&7>6561 Dirt
   data:
     recipe_book_category: blocks.dirt4
   flags:

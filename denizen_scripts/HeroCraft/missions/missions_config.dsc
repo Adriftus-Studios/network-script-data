@@ -11,6 +11,7 @@ missions_config:
     - fish
     - smelt
     - cook
+    - farm
     - slay
     - retrieve
     - pvp_zanzar

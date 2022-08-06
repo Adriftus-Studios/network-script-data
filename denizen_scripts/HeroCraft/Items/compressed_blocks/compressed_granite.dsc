@@ -17,7 +17,7 @@ compressed_granite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Granite"
+    - <&7>9 Granite
   data:
     recipe_book_category: blocks.granite1
   flags:
@@ -43,7 +43,7 @@ double_compressed_granite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Granite"
+    - <&7>81 Granite
   data:
     recipe_book_category: blocks.granite2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_granite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Granite"
+    - <&7>729 Granite
   data:
     recipe_book_category: blocks.granite3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_granite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Granite"
+    - <&7>6561 Granite
   data:
     recipe_book_category: blocks.granite4
   flags:

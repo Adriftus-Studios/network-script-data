@@ -17,7 +17,7 @@ compressed_emerald_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Emerald Block"
+    - <&7>9 Emerald Block
   data:
     recipe_book_category: blocks.emerald_block1
   flags:
@@ -43,7 +43,7 @@ double_compressed_emerald_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Emerald Block"
+    - <&7>81 Emerald Block
   data:
     recipe_book_category: blocks.emerald_block2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_emerald_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Emerald Block"
+    - <&7>729 Emerald Block
   data:
     recipe_book_category: blocks.emerald_block3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_emerald_block:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Emerald Block"
+    - <&7>6561 Emerald Block
   data:
     recipe_book_category: blocks.emerald_block4
   flags:

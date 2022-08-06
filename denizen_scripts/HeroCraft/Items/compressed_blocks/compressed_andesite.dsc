@@ -17,7 +17,7 @@ compressed_andesite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Andesite"
+    - <&7>9 Andesite
   data:
     recipe_book_category: blocks.andesite1
   flags:
@@ -43,7 +43,7 @@ double_compressed_andesite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>81 Andesite"
+    - <&7>81 Andesite
   data:
     recipe_book_category: blocks.andesite2
   flags:
@@ -69,7 +69,7 @@ triple_compressed_andesite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>729 Andesite"
+    - <&7>729 Andesite
   data:
     recipe_book_category: blocks.andesite3
   flags:
@@ -95,7 +95,7 @@ quadruple_compressed_andesite:
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>6561 Andesite"
+    - <&7>6561 Andesite
   data:
     recipe_book_category: blocks.andesite4
   flags:

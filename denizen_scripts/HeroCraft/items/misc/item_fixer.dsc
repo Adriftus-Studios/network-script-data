@@ -1,6 +1,6 @@
 item_fixer:
   type: task
-  debug: false
+  debug: true
   definitions: inventory
   script:
     - ratelimit <player> 5t
@@ -25,6 +25,8 @@ item_fixer_inventory:
   title: <&color[#010000]>Item Fixer!
   data:
     on_close: item_fixer_give_back
+    click_script_slots:
+      50: cancel
   slots:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
@@ -44,12 +46,11 @@ fix_items_button:
   mechanisms:
     custom_model_data: 1
   flags:
-    run_script:
-      - item_fixer
-      - cancel
+    run_script: item_fixer
 
 item_fixer_assignment:
   type: assignment
+  debug: false
   actions:
     on assignment:
       - trigger name:click state:true
