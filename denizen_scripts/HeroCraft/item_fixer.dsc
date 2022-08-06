@@ -3,6 +3,7 @@ item_fixer:
   debug: false
   definitions: inventory
   script:
+    - determine passively cancelled
     - ratelimit <player> 5t
     - define inventory <player.open_inventory> if:<[inventory].exists.not>
     - foreach <[inventory].map_slots>:
