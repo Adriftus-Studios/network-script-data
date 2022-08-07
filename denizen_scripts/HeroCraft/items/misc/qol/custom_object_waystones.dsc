@@ -36,8 +36,11 @@ custom_object_waystone_wild:
 
 waystone_town:
   type: item
+  debug: false
   material: feather
   display name: <&e>Town Waystone
+  data:
+    recipe_book_category: gadgets.waystone
   mechanisms:
     custom_model_data: 20
   flags:
@@ -45,9 +48,35 @@ waystone_town:
     custom_object: waystone_town
     type: town
     unique: <server.current_time_millis>
+  recipes:
+    type: shaped
+    input:
+    - waystone_pillar|nether_star|waystone_pillar
+    - waystone_pillar|ender_eye|waystone_pillar
+    - quadruple_compressed_stone|quadruple_compressed_stone|quadruple_compressed_stone
+
+waystone_pillar:
+  type: item
+  debug: false
+  material: stone
+  display name: <&6>Waystone Pillar
+  data:
+    recipe_book_category: misc
+  lore:
+    - <&6>Crafting Ingredient
+    - <&a>Used for Waystones
+  flags:
+    on_place: cancel
+  recipes:
+    type: shaped
+    input:
+    - magical_pylon|glow_ink_sac|magical_pylon
+    - magical_pylon|ender_pearl|magical_pylon
+    - magical_pylon|glow_ink_sac|magical_pylon
 
 waystone_wild:
   type: item
+  debug: false
   material: feather
   display name: <&a>Wild Waystone
   mechanisms:
@@ -60,6 +89,7 @@ waystone_wild:
 
 waystone_server:
   type: item
+  debug: false
   material: feather
   display name: <&6>Server Waystone
   mechanisms:
