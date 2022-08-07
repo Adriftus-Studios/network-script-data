@@ -2,7 +2,7 @@ inventory_sorting_events:
   type: world
   debug: true
   events:
-    on player clicks in inventory:
+    on player clicks in inventory ignorecancelled:true:
       - narrate <context.click> if:<player.name.equals[Xeane]>
       #- if <context.clicked_inventory.exists> && <context.clicked_inventory.id_holder.object_type> == Location:
         #- ratelimit <context.clicked_inventory> 1t
