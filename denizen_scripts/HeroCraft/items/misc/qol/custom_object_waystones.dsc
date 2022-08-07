@@ -40,7 +40,7 @@ waystone_town:
   material: feather
   display name: <&e>Town Waystone
   data:
-    recipe_book_category: gadgets.waystone
+    recipe_book_category: travel.waystone
   mechanisms:
     custom_model_data: 20
   flags:
