@@ -49,11 +49,12 @@ waystone_town:
     type: town
     unique: <server.current_time_millis>
   recipes:
-    type: shaped
-    input:
-    - waystone_pillar|nether_star|waystone_pillar
-    - waystone_pillar|ender_eye|waystone_pillar
-    - quadruple_compressed_stone|quadruple_compressed_stone|quadruple_compressed_stone
+    1:
+      type: shaped
+      input:
+      - waystone_pillar|nether_star|waystone_pillar
+      - waystone_pillar|ender_eye|waystone_pillar
+      - quadruple_compressed_stone|quadruple_compressed_stone|quadruple_compressed_stone
 
 waystone_pillar:
   type: item
@@ -68,11 +69,12 @@ waystone_pillar:
   flags:
     on_place: cancel
   recipes:
-    type: shaped
-    input:
-    - magical_pylon|glow_ink_sac|magical_pylon
-    - magical_pylon|ender_pearl|magical_pylon
-    - magical_pylon|glow_ink_sac|magical_pylon
+    1:
+      type: shaped
+      input:
+      - magical_pylon|glow_ink_sac|magical_pylon
+      - magical_pylon|ender_pearl|magical_pylon
+      - magical_pylon|glow_ink_sac|magical_pylon
 
 waystone_wild:
   type: item
