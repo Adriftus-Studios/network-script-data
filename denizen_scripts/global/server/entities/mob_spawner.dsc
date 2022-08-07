@@ -24,7 +24,7 @@ mob_spawner_armor_stand_repeating:
   flags:
     on_entity_added: mob_spawner_armor_stand_spawn_mob_repeat
     mob_to_spawn: zombie
-    mob_spawn_delay: 5s
+    mob_spawn_delay: 8s
 
 mob_spawner_armor_stand_spawn_mob_repeat:
   type: task
