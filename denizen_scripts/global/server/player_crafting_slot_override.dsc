@@ -13,8 +13,8 @@ player_crafting_slots_override_events:
       - wait 1t
     - stop if:<player.inventory.equals[<player.open_inventory>].not>
     - define inv <player.open_inventory>
-    ##- repeat 5:
-      ##- inventory set slot:<[value]> o:air d:<[inv]>
+    - repeat 5:
+      - inventory set slot:<[value]> o:air d:<[inv]>
     - wait 1t
     - stop if:<player.is_online.not>
     - foreach <script.data_key[data.items]>:
