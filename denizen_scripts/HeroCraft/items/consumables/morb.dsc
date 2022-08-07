@@ -128,7 +128,7 @@ morb_hits_block:
   type: task
   debug: false
   script:
-    - drop morb_empty_reuseable <context.location> if:<context.projectile.has_flag[reuseable]>
+    - drop morb_empty_reuseable <context.projectile.location> if:<context.projectile.has_flag[reuseable]>
 
 morb_throw_filled:
   type: task
