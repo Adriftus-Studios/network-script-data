@@ -86,7 +86,7 @@ mission_fish_complete:
 # Events
 mission_fish_events:
   type: world
-  debug: true
+  debug: false
   events:
     on player fishes item while caught_fish flagged:missions.active.fish bukkit_priority:MONITOR:
       # Add missions with ID fish to a list.
