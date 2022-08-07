@@ -70,7 +70,7 @@ morb_filled:
   mechanisms:
     custom_model_data: 2
   flags:
-    right_click_script: filled_morb_throw
+    right_click_script: morb_throw_filled
 
 empty_morb_projectile:
   type: entity
