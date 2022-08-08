@@ -56,41 +56,41 @@ return_task:
   debug: false
   script:
     - define type <context.item.flag[type]>
-    - if !<context.item.has_flag[destination]>:
+    - if !<context.item.has_flag[tpa_destination]>:
       - narrate "<&c>This item has no saved location!"
       - stop
     - if <bungee.server> != <context.item.flag[server].if_null[herocraft]>:
       - narrate "<&c>The item lacks the ability to cross the multi-verse..."
       - stop
     - if <[type]> == scroll:
-      - if <context.item.flag[destination].world> != <player.location.world>:
+      - if <context.item.flag[tpa_destination].world> != <player.location.world>:
         - narrate "<&c>This item lacks the power for cross dimensional travel"
         - stop
-      - if <context.item.flag[destination].distance[<player.location>]> > 2000:
+      - if <context.item.flag[tpa_destination].distance[<player.location>]> > 2000:
         - narrate "<&c>This item lacks the power for distances grater than 2000 blocks"
         - stop
     - take iteminhand
     - if <[type]> == crystal:
       - run totem_test def:101
     - wait 2s
-    - run teleportation_animation_run def:<context.item.flag[destination]>
+    - run teleportation_animation_run def:<context.item.flag[tpa_destination]>
 
 return_crystal_save_location:
   type: task
   debug: false
   script:
     - wait 1t
-    - if <context.item.has_flag[destination]> && !<player.has_flag[overwrite_destination]>:
-      - flag <player> overwrite_destination:<context.item.flag[destination]>
+    - if <context.item.has_flag[tpa_destination]> && !<player.has_flag[overwrite_destination]>:
+      - flag <player> overwrite_destination:<context.item.flag[tpa_destination]>
       - narrate "<&c>This item has a destination already!"
       - narrate "<&e>Left click again to overwrite."
-      - flag player overwrite_destination:<context.item.flag[destination]> expire:10s
+      - flag player overwrite_destination:<context.item.flag[tpa_destination]> expire:10s
       - stop
-    - if <player.has_flag[overwrite_destination]> && <player.flag[overwrite_destination]> != <context.item.flag[destination]>:
+    - if <player.has_flag[overwrite_destination]> && <player.flag[overwrite_destination]> != <context.item.flag[tpa_destination]>:
       - narrate "<&c>This item has a destination already!"
       - narrate "<&e>Left click again to overwrite."
-      - flag player overwrite_destination:<context.item.flag[destination]> expire:10s
+      - flag player overwrite_destination:<context.item.flag[tpa_destination]> expire:10s
       - stop
-    - inventory flag slot:hand destination:<player.location>
+    - inventory flag tpa_destination:<player.location> slot:hand
     - narrate "<&a>Crystal Destination set to<&co> <player.location.simple>"
     - inventory adjust slot:hand "lore:<context.item.script.parsed_key[lore].include[<&a>Location<&co> <player.location.simple>]>" o:<player.inventory>
