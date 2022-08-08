@@ -92,3 +92,4 @@ return_crystal_save_location:
       - stop
     - inventory flag slot:<player.held_item_slot> destination:<player.location>
     - narrate "<&a>Crystal Destination set to: <player.location.simple>"
+    - inventory adjust slot:<player.held_item_slot> "lore:<context.item.script.parsed_key[lore].include[<&a>Location<&co> <player.location.simple>]>"
