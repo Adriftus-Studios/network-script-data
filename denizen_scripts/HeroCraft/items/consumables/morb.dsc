@@ -152,5 +152,5 @@ filled_morb_hits_block:
   type: task
   debug: false
   script:
-    - spawn <context.projectile.flag[spawn]> <context.location.add[<context.hit_face>]>
+    - spawn <context.projectile.flag[spawn]> <context.location.add[<context.hit_face>].center.below[0.5]>
     - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.location.add[<context.hit_face>]>
