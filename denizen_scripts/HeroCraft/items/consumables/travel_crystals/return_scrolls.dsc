@@ -79,6 +79,7 @@ return_crystal_save_location:
   type: task
   debug: false
   script:
+    - wait 1t
     - if <context.item.has_flag[destination]> && !<player.has_flag[overwrite_destination]>:
       - flag <player> overwrite_destination:<context.item.flag[destination]>
       - narrate "<&c>This item has a destination already!"
