@@ -8,11 +8,12 @@ return_scroll:
     - <&a><&l>Consumed on Use
     - <&a>-------------
     - <&e>Right Click while Holding
-    - <&e>Saves location when crafted
+    - <&e>Left Click Saves Location
     - <&c>Incapable of long distances
     - <&a>-------------
   flags:
     right_click_script: return_task
+    left_click_script: return_crystal_save_location
     type: scroll
   mechanisms:
     custom_model_data: 200
@@ -34,10 +35,11 @@ return_crystal:
     - <&a><&l>Consumed on Use
     - <&a>-------------
     - <&e>Right Click while Holding
-    - <&e>Saves location when crafted
+    - <&e>Left Click Saves Location
     - <&a>-------------
   flags:
     right_click_script: return_task
+    left_click_script: return_crystal_save_location
     type: crystal
   mechanisms:
     custom_model_data: 101
@@ -49,22 +51,16 @@ return_crystal:
       - air|lapis_block|air
       - magical_pylon|air|magical_pylon
 
-
-return_events:
-  type: world
-  debug: false
-  events:
-    on return_scroll|return_crystal recipe formed:
-      - define lore "<context.item.lore.include[<&b>Location<&co> <player.location.simple>]>"
-      - determine passively <context.item.with[flag=server:<bungee.server>;flag=destination:<player.location>;lore=<[lore]>]>
-
 return_task:
   type: task
   debug: false
   script:
     - define type <context.item.flag[type]>
+    - if !<context.item.has_flag[destination]>:
+      - narrate "<&c>This item has no saved location!"
+      - stop
     - if <bungee.server> != <context.item.flag[server].if_null[herocraft]>:
-      - narrate "<&c>The item lacks the ability to cross the multiuniverse..."
+      - narrate "<&c>The item lacks the ability to cross the multi-verse..."
       - stop
     - if <[type]> == scroll:
       - if <context.item.flag[destination].world> != <player.location.world>:
@@ -78,3 +74,21 @@ return_task:
       - run totem_test def:101
     - wait 2s
     - run teleportation_animation_run def:<context.item.flag[destination]>
+
+return_crystal_save_location:
+  type: task
+  debug: false
+  script:
+    - if <context.item.has_flag[destination]> && !<player.has_flag[overwrite_destination]>:
+      - flag <player> overwrite_destination:<context.item.flag[destination]>
+      - narrate "<&c>This item has a destination already!"
+      - narrate "<&e>Left click again to overwrite."
+      - flag player overwrite_destination:<context.item.flag[destination]> expire:10s
+      - stop
+    - if <player.has_flag[overwrite_destination]> && <player.flag[overwrite_destination]> != <context.item.flag[destination]>:
+      - narrate "<&c>This item has a destination already!"
+      - narrate "<&e>Left click again to overwrite."
+      - flag player overwrite_destination:<context.item.flag[destination]> expire:10s
+      - stop
+    - inventory flag slot:<player.held_item_slot> destination:<player.location>
+    - narrate "<&a>Crystal Destination set to: <player.location.simple>"
