@@ -90,6 +90,6 @@ return_crystal_save_location:
       - narrate "<&e>Left click again to overwrite."
       - flag player overwrite_destination:<context.item.flag[destination]> expire:10s
       - stop
-    - inventory flag slot:<player.held_item_slot> destination:<player.location>
-    - narrate "<&a>Crystal Destination set to: <player.location.simple>"
-    - inventory adjust slot:<player.held_item_slot> "lore:<context.item.script.parsed_key[lore].include[<&a>Location<&co> <player.location.simple>]>" o:<player.inventory>
+    - inventory flag slot:hand destination:<player.location>
+    - narrate "<&a>Crystal Destination set to<&co> <player.location.simple>"
+    - inventory adjust slot:hand "lore:<context.item.script.parsed_key[lore].include[<&a>Location<&co> <player.location.simple>]>" o:<player.inventory>
