@@ -108,4 +108,4 @@ mission_smelt_events:
           - foreach next
         - define item <context.result_item.script.name.if_null[<context.result_item.material.name>]>
         - if <player.flag[<[mission]>].get[item]> == <[item]>:
-          - run missions_update_progress def:add|<[mission]>|<context.item.quantity>
+          - run missions_update_progress def:add|<[mission]>|1
