@@ -8,6 +8,7 @@ dungeon_skeleton_1:
   mechanisms:
     custom_name: <&f>Thorny Skeleton
     custom_name_visible: true
+    on_entity_added: cancel
 
 dungeon_skeleton_murder_dog:
   type: task
