@@ -5,10 +5,10 @@ dungeon_skeleton_1:
   flags:
     on_combust: cancel
     on_damaged: dungeon_skeleton_dog_thorns
+    on_entity_added: remove_entity_1_tick
   mechanisms:
     custom_name: <&f>Thorny Skeleton
     custom_name_visible: true
-    on_entity_added: remove_entity_1_tick
 
 dungeon_skeleton_murder_dog:
   type: task
