@@ -85,13 +85,27 @@ mission_smelt_events:
   type: world
   debug: false
   events:
-    on player takes item from furnace flagged:missions.active.smelt:
+    #on player takes item from furnace flagged:missions.active.smelt:
+    #  # Add missions with ID smelt to a list.
+    #  - define missions <proc[missions_get].context[smelt]>
+    #  # Check each mission if their item matches the item.
+    #  - foreach <[missions]> as:mission:
+    #    - if <player.flag[<[mission]>].get[done]>:
+    #      - foreach next
+    #    - define item <context.item.script.name.if_null[<context.item.material.name>]>
+    #    - if <player.flag[<[mission]>].get[item]> == <[item]>:
+    #      - run missions_update_progress def:add|<[mission]>|<context.item.quantity>
+    after player right clicks furnace|blast_furnace:
+      - flag <context.location> last_player_interaction:<player>
+    after furnace|blast_furnace cooks item location_flagged:last_player_interaction:
+      - define player <context.location.flag[last_player_interaction]>
+      - stop if:<[player].is_online.if_null[false].not>
       # Add missions with ID smelt to a list.
       - define missions <proc[missions_get].context[smelt]>
       # Check each mission if their item matches the item.
       - foreach <[missions]> as:mission:
-        - if <player.flag[<[mission]>].get[done]>:
+        - if <[player].flag[<[mission]>].get[done]>:
           - foreach next
-        - define item <context.item.script.name.if_null[<context.item.material.name>]>
-        - if <player.flag[<[mission]>].get[item]> == <[item]>:
-          - run missions_update_progress def:add|<[mission]>|<context.item.quantity>
+        - define item <context.result_item.script.name.if_null[<context.item.material.name>]>
+        - if <[player].flag[<[mission]>].get[item]> == <[item]>:
+          - run missions_update_progress def:add|<[mission]>|<context.item.quantity> player:<[player]>
