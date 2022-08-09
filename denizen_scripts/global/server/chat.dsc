@@ -574,6 +574,7 @@ message_command:
 
     - define message "<element[<[WhisperTextOther]><&f><[msg]>].on_click[/msg <[self_name].strip_color.replace_text[<&sp>].with[_]> ].type[SUGGEST_COMMAND].on_hover[<&e>Click to Reply]>"
     - narrate <[message]> targets:<[target]>
+    - flag <[target]> last_direct_message:<player>
     #- run bungee_send_message def:<list_single[<server.flag[player_map.names.<[target_name]>.uuid]>].include_single[<[sender]>].include_single[<[message]>].include_single[true]>
     - define message <[WhisperTextSelf]><&f><[msg]>
     - narrate <[message]>
