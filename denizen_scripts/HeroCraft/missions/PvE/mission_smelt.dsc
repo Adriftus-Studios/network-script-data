@@ -99,7 +99,7 @@ mission_smelt_events:
       - flag <context.location> last_player_interaction:<player>
     after furnace|blast_furnace cooks item location_flagged:last_player_interaction:
       - define __player <context.location.flag[last_player_interaction]>
-      - stop if:<player.is_online.not>
+      - stop if:<player.is_online.not.or[<player.has_flag[missions.active.smelt].not>]>
       # Add missions with ID smelt to a list.
       - define missions <proc[missions_get].context[smelt]>
       # Check each mission if their item matches the item.
