@@ -10,14 +10,14 @@ Amethyst_pickaxe:
   lore:
     - <&r>Far more brittle than diamond.
   data:
-    recipe_book_category: tools.Amethyst.pickaxe
+    recipe_book_category: tools.amethyst.pickaxe
   display name: <&f>Amethyst Pickaxe
   recipes:
     1:
       type: shaped
       output_quantity: 1
       input:
-      - Amethyst_ingot|Amethyst_ingot|Amethyst_ingot
+      - amethyst_ingot|amethyst_ingot|amethyst_ingot
       - air|stick|air
       - air|stick|air
 

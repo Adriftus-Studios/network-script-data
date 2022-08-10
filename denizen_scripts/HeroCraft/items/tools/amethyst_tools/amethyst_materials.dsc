@@ -1,11 +1,11 @@
-Amethyst_ingot:
+amethyst_ingot:
   type: item
   material: diamond
   display name: <&r>Amethyst Ingot
   mechanisms:
     custom_model_data: 3
   data:
-      recipe_book_category: misc.Amethyst.ingot
+      recipe_book_category: misc.amethyst.ingot
   recipes:
     1:
       type: shaped
