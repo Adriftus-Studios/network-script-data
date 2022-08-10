@@ -17,7 +17,12 @@ Amethyst_hoe:
       type: shaped
       output_quantity: 1
       input:
+      - amethyst_ingot|amethyst_ingot|air
+      - air|stick|air
+      - air|stick|air
+    2:
+      type: shapeless
+      output_quantity: 1
+      input:
       - air|amethyst_ingot|amethyst_ingot
       - air|stick|air
-      - air|stick|air
-
