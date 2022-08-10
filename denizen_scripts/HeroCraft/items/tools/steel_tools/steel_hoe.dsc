@@ -1,4 +1,4 @@
-Steel_hoe:
+steel_hoe:
   type: item
   material: iron_hoe
   flags:
@@ -6,7 +6,7 @@ Steel_hoe:
       max: 469
       current: 0
   data:
-    recipe_book_category: tools.Steel.hoe
+    recipe_book_category: tools.steel.hoe
   mechanisms:
     custom_model_data: 2
   lore:
@@ -17,14 +17,14 @@ Steel_hoe:
       type: shaped
       output_quantity: 1
       input:
-      - Steel_ingot|Steel_ingot|air
+      - steel_ingot|steel_ingot|air
       - air|stick|air
       - air|stick|air
     2:
       type: shaped
       output_quantity: 1
       input:
-      - air|Steel_ingot|Steel_ingot
+      - air|steel_ingot|steel_ingot
       - air|stick|air
       - air|stick|air
 

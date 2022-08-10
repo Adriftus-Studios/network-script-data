@@ -1,4 +1,4 @@
-Steel_pickaxe:
+steel_pickaxe:
   type: item
   material: iron_pickaxe
   flags:
@@ -10,14 +10,14 @@ Steel_pickaxe:
   lore:
     - <&r>Tougher than iron.
   data:
-    recipe_book_category: tools.Steel.pickaxe
+    recipe_book_category: tools.steel.pickaxe
   display name: <&f>Steel Pickaxe
   recipes:
     1:
       type: shaped
       output_quantity: 1
       input:
-      - Steel_ingot|Steel_ingot|Steel_ingot
+      - steel_ingot|steel_ingot|steel_ingot
       - air|stick|air
       - air|stick|air
 
