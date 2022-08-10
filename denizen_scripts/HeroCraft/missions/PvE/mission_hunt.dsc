@@ -5,7 +5,8 @@ mission_hunt:
   category: PvE
   name: <&e>Hunt <&6>-mobs-
   description:
-    - <&e>Complete this by hunting innocent animals.
+    - <&e>Complete this by hunting innocent animals in the wilderness.
+    - <&e>(Only animals outside town plots count!)
   assignment: mission_hunt_assignment
   icon: crossbow
   cmd: 0
@@ -101,7 +102,7 @@ mission_hunt_events:
   debug: false
   events:
     on entity killed by entity_flagged:missions.active.hunt:
-      - if <context.damager.entity_type> != PLAYER:
+      - if <context.damager.entity_type> != PLAYER && <context.entity.location.has_town||false>:
         - stop
       - define __player <context.damager>
       # Add missions with ID hunt to a list.
