@@ -11,7 +11,7 @@ Amethyst_sword:
   mechanisms:
     custom_model_data: 100
   lore:
-    - Far more brittle than diamond.
+    - <&r>Far more brittle than diamond.
   recipes:
     1:
       type: shaped

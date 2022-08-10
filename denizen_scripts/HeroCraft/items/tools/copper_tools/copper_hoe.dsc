@@ -6,7 +6,7 @@ copper_hoe:
       max: 200
       current: 0
   lore:
-    - Softer than iron
+    - <&r>Softer than iron
   data:
     recipe_book_category: tools.copper.hoe
   mechanisms:

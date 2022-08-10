@@ -8,7 +8,7 @@ Amethyst_pickaxe:
   mechanisms:
     custom_model_data: 100
   lore:
-    - Far more brittle than diamond.
+    - <&r>Far more brittle than diamond.
   data:
     recipe_book_category: tools.Amethyst.pickaxe
   display name: <&f>Amethyst Pickaxe

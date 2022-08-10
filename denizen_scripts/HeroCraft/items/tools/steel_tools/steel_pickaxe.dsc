@@ -8,7 +8,7 @@ Steel_pickaxe:
   mechanisms:
     custom_model_data: 3
   lore:
-    - Tougher than iron
+    - <&r>Tougher than iron.
   data:
     recipe_book_category: tools.Steel.pickaxe
   display name: <&f>Steel Pickaxe

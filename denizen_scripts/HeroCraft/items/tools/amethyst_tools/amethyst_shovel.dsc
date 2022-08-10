@@ -6,7 +6,7 @@ Amethyst_shovel:
       max: 400
       current: 0
   lore:
-    - Far more brittle than diamond.
+    - <&r>Far more brittle than diamond.
   data:
     recipe_book_category: tools.Amethyst.shovel
   mechanisms:

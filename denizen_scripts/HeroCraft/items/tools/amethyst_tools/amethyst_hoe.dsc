@@ -10,7 +10,7 @@ Amethyst_hoe:
   mechanisms:
     custom_model_data: 100
   lore:
-    - Far more brittle than diamond.
+    - <&r>Far more brittle than diamond.
   display name: <&f>Amethyst Hoe
   recipes:
     1:
