@@ -46,8 +46,8 @@ bank_npc_inventory:
   inventory: chest
   title: <&a>This is a Bank... shh...
   definitions:
-    purchase_bank_note_100: <item[purchase_bank_note].with[flag=worth:10000;lore=<&a>Worth $100;display=<&a>Purchase Bank Note;custom_model_data=600]>
-    purchase_bank_note_1000: <item[purchase_bank_note].with[flag=worth:10000;lore=<&a>Worth $1,000;display=<&a>Purchase Bank Note;custom_model_data=601]>
+    purchase_bank_note_100: <item[purchase_bank_note].with[flag=worth:100;lore=<&a>Worth $100;display=<&a>Purchase Bank Note;custom_model_data=600]>
+    purchase_bank_note_1000: <item[purchase_bank_note].with[flag=worth:1000;lore=<&a>Worth $1,000;display=<&a>Purchase Bank Note;custom_model_data=601]>
     purchase_bank_note_10000: <item[purchase_bank_note].with[flag=worth:10000;lore=<&a>Worth $10,000;display=<&a>Purchase Bank Note;custom_model_data=602]>
   slots:
     - [purchase_bank_note_100] [] [] [] [purchase_bank_note_1000] [] [] [] [purchase_bank_note_10000]
