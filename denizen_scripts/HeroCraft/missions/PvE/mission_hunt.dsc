@@ -102,7 +102,7 @@ mission_hunt_events:
   debug: false
   events:
     on entity killed by entity_flagged:missions.active.hunt:
-      - if <context.damager.entity_type> != PLAYER && <context.entity.location.has_town||false>:
+      - if <context.damager.entity_type> != PLAYER || <context.entity.location.has_town||false>:
         - stop
       - define __player <context.damager>
       # Add missions with ID hunt to a list.
