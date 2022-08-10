@@ -95,7 +95,7 @@ mission_smelt_events:
     #    - define item <context.item.script.name.if_null[<context.item.material.name>]>
     #    - if <player.flag[<[mission]>].get[item]> == <[item]>:
     #      - run missions_update_progress def:add|<[mission]>|<context.item.quantity>
-    after player right clicks furnace|blast_furnace bukkit_priority:HIGHEST:
+    after player right clicks furnace|blast_furnace|smoker bukkit_priority:HIGHEST:
       - flag <context.location> last_player_interaction:<player>
     after furnace|blast_furnace cooks item location_flagged:last_player_interaction:
       - define __player <context.location.flag[last_player_interaction]>
