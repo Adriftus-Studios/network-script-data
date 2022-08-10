@@ -111,12 +111,13 @@ mission_snack_events:
   debug: false
   events:
     after player consumes item flagged:missions.active.snack:
+      - stop if:<script[mission_snack].data_key[items].contains[<context.item.script.name||<context.item.material.name>>].not>
         # Add missions with ID snack to a list.
       - define missions <proc[missions_get].context[snack]>
       # Check each mission if their item matches the item.
       - foreach <[missions]> as:mission:
         - if <player.flag[<[mission]>].get[done]>:
           - foreach next
-        - define item <context.item.material.name>
+        - define item <context.item.script.name||<context.item.material.name>>
         - if <player.flag[<[mission]>].get[item]> == <[item]>:
           - run missions_update_progress def:add|<[mission]>|1
