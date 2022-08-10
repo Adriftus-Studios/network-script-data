@@ -42,7 +42,7 @@ double_compressed_{material}:
   mechanisms:
     hides: ENCHANTS
   enchantments:
-  - sharpness:1
+  - sharpness:2
   lore:
     - "<&7>81 {material.replace('_', ' ').title()}"
   data:
@@ -68,7 +68,7 @@ triple_compressed_{material}:
   mechanisms:
     hides: ENCHANTS
   enchantments:
-  - sharpness:1
+  - sharpness:3
   lore:
     - "<&7>729 {material.replace('_', ' ').title()}"
   data:
@@ -94,7 +94,7 @@ quadruple_compressed_{material}:
   mechanisms:
     hides: ENCHANTS
   enchantments:
-  - sharpness:1
+  - sharpness:4
   lore:
     - "<&7>6561 {material.replace('_', ' ').title()}"
   data:

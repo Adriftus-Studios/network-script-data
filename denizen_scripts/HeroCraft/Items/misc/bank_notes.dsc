@@ -45,6 +45,7 @@ bank_npc_inventory:
   debug: false
   inventory: chest
   title: <&a>This is a Bank... shh...
+  gui: true
   definitions:
     purchase_bank_note_100: <item[purchase_bank_note].with[flag=worth:100;lore=<&a>Worth $100;display=<&a>Purchase Bank Note;custom_model_data=600]>
     purchase_bank_note_1000: <item[purchase_bank_note].with[flag=worth:1000;lore=<&a>Worth $1,000;display=<&a>Purchase Bank Note;custom_model_data=601]>
