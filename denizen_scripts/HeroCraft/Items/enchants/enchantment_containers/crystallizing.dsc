@@ -30,7 +30,7 @@ crystallizing_enchant_handler:
       - ratelimit <player> 2t
       - if <util.random.int[0].to[100].add[<player.item_in_hand.enchantment_map.get[crystallizing]>]> < 100 || <player.has_flag[custom_enchantment.crystallized_recently]>:
         - stop
-      - define item <list[diamond|emerald|redstone_dust|lapis_lazuli|glass|glowstone_dust].random>
+      - define item <list[diamond|emerald|redstone|lapis_lazuli|glass|glowstone_dust].random>
       - determine <[item]>
       - flag <player> custom_enchantment.crystallized_recently expire:1200t
       - define slot <player.held_item_slot>

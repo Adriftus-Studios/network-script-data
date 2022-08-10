@@ -74,14 +74,27 @@ achievement_data:
       announce: false
       hidden: false
       offset:
-        x: 2
-        y: 5
+        x: 3
+        y: 6
+    joined_town:
+      reward_script: herocraft_mission_2_start
+      icon: campfire
+      name: <&6>Your First... Home?
+      description: <&e>Created a Campsite!
+      parent: denizen:joined_herocraft
+      frame: task
+      sound: true
+      announce: false
+      hidden: false
+      offset:
+        x: 4
+        y: 6
     first_return_scroll:
       reward_script: herocraft_mission_3_start
       icon: feather[custom_model_data=200]
       name: <&6>Now You're Travelling
       description: <&e>Crafted A Return Scroll
-      parent: denizen:first_campsite
+      parent: denizen:joined_herocraft
       frame: task
       sound: true
       announce: false
@@ -100,8 +113,8 @@ achievement_data:
       announce: true
       hidden: false
       offset:
-        x: 4
-        y: 5
+        x: 5
+        y: 6
     ## Hub
     welcome_to_adriftus:
       icon: paper[custom_model_data=301]
