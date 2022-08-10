@@ -90,6 +90,6 @@ mission_slay_events:
       - foreach <[missions]> as:mission:
         - if <player.flag[<[mission]>].get[done]>:
           - foreach next
-        - define mob <context.entity.script.name.if_null[<context.entity.entity_type>]>
+        - define mob <context.entity.entity_type>
         - if <player.flag[<[mission]>].get[mob]> == <[mob]>:
           - run missions_update_progress def:add|<[mission]>|1

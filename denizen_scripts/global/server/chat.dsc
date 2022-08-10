@@ -527,9 +527,8 @@ message_command:
     1: <server.flag[player_map.names].keys>
   script:
     - if <context.alias> == reply || <context.alias> == r:
-      - if <yaml[global.player.<player.uuid>].contains[chat.message.history]>:
-        - foreach <yaml[global.player.<player.uuid>].read[chat.message.history].reverse>:
-          - define target_name <[value].get[sender]> if:<[value].get[sender].equals[<player.name>].not>
+      - if <player.has_flag[last_direct_message]>:
+          - define target_name <player.flag[last_direct_message]>
       - else:
         - narrate "<&c>No one has messaged you recently."
         - stop
@@ -538,10 +537,11 @@ message_command:
          - narrate "<&c>You need to include a player and a message!"
          - stop
       - define target_name <context.args.get[1]>
-    - if !<server.has_flag[player_map.names.<[target_name]>]>:
+    - define target <server.match_player[<[target_name]>].if_null[null]>
+    - if <[target]> == null:
       - narrate "<&c>Unknown Player<&co> <&e><[target_name].if_null[No Recent Message Received]>"
       - stop
-    - if <server.flag[player_map.names.<[target_name]>.uuid]> == <player.uuid>:
+    - if <player> == <[target]>:
       - narrate "<&c>You can't message yourself..."
       - stop
     # definitions
@@ -567,14 +567,16 @@ message_command:
     - define WhisperTextSelf <&font[adriftus:chat]><[Icon]><&r><&sp><&7><&lb>MSG<&rb><&r><&e>You<&b>-<&gt><&e><[other_name]><&co><&nl><&sp><&sp><&sp><&sp><&sp>
     - define WhisperTextOther <&font[adriftus:chat]><[Icon]><&r><&sp><&7><&lb>MSG<&rb><&r><&e><[self_name]><&b>-<&gt><&e>You<&co><&nl><&sp><&sp><&sp><&sp><&sp>
     # Whisper Channel
-    #- define WhisperTextSelf "<&7><&lb>MSG<&rb><&r><&e>You<&b>-<&gt><&e><[other_name]><&co> "
-    #- define WhisperTextOther "<&7><&lb>MSG<&rb><&r><&e><[self_name]><&b>-<&gt><&e>You<&co> "
+    - define WhisperTextSelf "<&7><&lb>MSG<&rb><&r><&e>You<&b>-<&gt><&e><[other_name]><&co> "
+    - define WhisperTextOther "<&7><&lb>MSG<&rb><&r><&e><[self_name]><&b>-<&gt><&e>You<&co> "
     # Disabled for Freedom!
     #- define WhisperTextMods "<&7><&lb>MSG<&rb><&r><proc[get_player_display_name]><&b>-<&gt><context.args.get[1].to_titlecase> "
 
     - define message "<element[<[WhisperTextOther]><&f><[msg]>].on_click[/msg <[self_name].strip_color.replace_text[<&sp>].with[_]> ].type[SUGGEST_COMMAND].on_hover[<&e>Click to Reply]>"
-    - run bungee_send_message def:<list_single[<server.flag[player_map.names.<[target_name]>.uuid]>].include_single[<[sender]>].include_single[<[message]>].include_single[true]>
+    - narrate <[message]> targets:<[target]>
+    - flag <[target]> last_direct_message:<player.name>
+    #- run bungee_send_message def:<list_single[<server.flag[player_map.names.<[target_name]>.uuid]>].include_single[<[sender]>].include_single[<[message]>].include_single[true]>
     - define message <[WhisperTextSelf]><&f><[msg]>
     - narrate <[message]>
-    - define map <map[time=<util.current_time_millis>;message=<[message]>]>
-    - run global_player_data_message_history def:<list_single[<player.uuid>].include_single[<[map]>]>
+    #- define map <map[time=<util.current_time_millis>;message=<[message]>]>
+    #- run global_player_data_message_history def:<list_single[<player.uuid>].include_single[<[map]>]>

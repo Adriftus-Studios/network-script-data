@@ -17,29 +17,29 @@ mission_farm:
     monthly: 400
   blocks:
     beetroot:
-      - 18
-      - 24
-      - 36
+      - 32
+      - 48
+      - 64
     carrot:
-      - 18
-      - 24
-      - 36
+      - 32
+      - 48
+      - 64
     potato:
-      - 18
-      - 24
-      - 36
+      - 32
+      - 48
+      - 64
     wheat:
-      - 18
-      - 24
-      - 36
-    melon_stem:
-      - 18
-      - 24
-      - 36
-    pumpkin_stem:
-      - 18
-      - 24
-      - 36
+      - 32
+      - 48
+      - 64
+    melon:
+      - 32
+      - 48
+      - 64
+    pumpkin:
+      - 32
+      - 48
+      - 64
 
 
 # Assignment Task

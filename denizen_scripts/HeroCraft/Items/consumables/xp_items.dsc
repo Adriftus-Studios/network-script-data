@@ -18,7 +18,7 @@ xp_item_10:
   recipes:
     1:
       type: shapeless
-      input: WRITABLE_BOOK|GLOW_INK_SAC|COPPER_BLOCK
+      input: GLASS_BOTTLE|GLOW_INK_SAC|COPPER_BLOCK
 
 xp_item_30:
   type: item
@@ -40,7 +40,7 @@ xp_item_30:
   recipes:
     1:
       type: shapeless
-      input: WRITABLE_BOOK|GLOW_INK_SAC|DIAMOND_BLOCK
+      input: GLASS_BOTTLE|GLOW_INK_SAC|DIAMOND_BLOCK
 
 xp_item_50:
   type: item
@@ -62,7 +62,7 @@ xp_item_50:
   recipes:
     1:
       type: shapeless
-      input: WRITABLE_BOOK|GLOW_INK_SAC|NETHERITE_BLOCK
+      input: GLASS_BOTTLE|GLOW_INK_SAC|NETHERITE_BLOCK
 
 xp_item_consume:
   type: task

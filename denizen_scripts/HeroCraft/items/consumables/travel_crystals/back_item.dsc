@@ -7,7 +7,7 @@ back_crystal:
   lore:
     - <&a><&l>Consumed on Use
     - "<&e>--------------------"
-    - "<&e>Return to your last location"
+    - "<&e>Return to your last death location"
     - "<&e>--------------------"
   flags:
     right_click_script:
@@ -33,7 +33,7 @@ back_scroll:
   lore:
     - <&a><&l>Consumed on Use
     - "<&e>--------------------"
-    - "<&e>Return to your last location"
+    - "<&e>Return to your last death location"
     - "<&c>Incapable of long distances"
     - "<&e>--------------------"
   flags:

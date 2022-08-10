@@ -22,7 +22,7 @@ teleportation_animation_default:
 
 teleportation_animation_default_run:
   type: task
-  debug: true
+  debug: false
   definitions: destination|color
   script:
     - define color white if:<[color].exists.not>
