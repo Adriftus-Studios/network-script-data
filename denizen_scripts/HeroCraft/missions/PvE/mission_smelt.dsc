@@ -21,6 +21,10 @@ mission_smelt:
       - 32
       - 48
       - 64
+    steel_ingot:
+      - 8
+      - 12
+      - 16
     copper_ingot:
       - 16
       - 32
