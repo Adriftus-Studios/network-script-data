@@ -251,7 +251,6 @@ waystone_teleport:
   type: task
   debug: false
   script:
-    - if <context.item.has_flag[town]> && <context.item>:
     - run teleportation_animation_run def:<context.item.flag[location]>
 
 waystone_open_teleport_submenu:
@@ -342,7 +341,7 @@ waystone_open_teleport_town_menu:
       - if <player.flag[waystones.town.<[town]>.location]> != <town[<[town]>].flag[waystone.location]>:
         - flag <player> waystones.town.<[town]>:!
         - foreach next
-      - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=town:<[town]>;flag=location:<[town].flag[waystone.tp_location]>;display=<town[<[town]>].name>] d:<[inventory]>
+      - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[town].flag[waystone.tp_location]>;display=<town[<[town]>].name>] d:<[inventory]>
     - inventory set slot:<[inventory].script.data_key[data.back]> o:waystone_back_to_main[flag=entity:<context.item.flag[entity]>] d:<[inventory]>
     - inventory open d:<[inventory]>
 
