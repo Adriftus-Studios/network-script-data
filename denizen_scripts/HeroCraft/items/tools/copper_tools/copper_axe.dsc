@@ -20,4 +20,11 @@ copper_axe:
       - copper_ingot|copper_ingot|air
       - copper_ingot|stick|air
       - air|stick|air
+    2:
+      type: shaped
+      output_quantity: 1
+      input:
+      - air|copper_ingot|copper_ingot
+      - air|stick|copper_ingot
+      - air|stick|air
 

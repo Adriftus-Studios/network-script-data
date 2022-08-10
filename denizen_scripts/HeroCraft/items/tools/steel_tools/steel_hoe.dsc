@@ -20,4 +20,11 @@ Steel_hoe:
       - Steel_ingot|Steel_ingot|air
       - air|stick|air
       - air|stick|air
+    2:
+      type: shaped
+      output_quantity: 1
+      input:
+      - air|Steel_ingot|Steel_ingot
+      - air|stick|air
+      - air|stick|air
 

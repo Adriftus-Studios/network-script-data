@@ -20,4 +20,11 @@ copper_hoe:
       - copper_ingot|copper_ingot|air
       - air|stick|air
       - air|stick|air
+    2:
+      type: shaped
+      output_quantity: 1
+      input:
+      - air|copper_ingot|copper_ingot
+      - air|stick|air
+      - air|stick|air
 

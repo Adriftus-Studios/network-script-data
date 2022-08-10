@@ -20,3 +20,10 @@ amethyst_axe:
       - amethyst_ingot|amethyst_ingot|air
       - amethyst_ingot|stick|air
       - air|stick|air
+    2:
+      type: shaped
+      output_quantity: 1
+      input:
+      - air|amethyst_ingot|amethyst_ingot
+      - air|stick|amethyst_ingot
+      - air|stick|air
