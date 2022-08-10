@@ -24,6 +24,34 @@ mission_cook:
       - 18
       - 24
       - 36
+    cooked_porkchop:
+      - 18
+      - 24
+      - 36
+    cooked_beef:
+      - 18
+      - 24
+      - 36
+    cooked_mutton:
+      - 18
+      - 24
+      - 36
+    cooked_chicken:
+      - 18
+      - 24
+      - 36
+    cooked_rabbit:
+      - 10
+      - 16
+      - 24
+    dried_kelp:
+      - 32
+      - 48
+      - 64
+    baked_potato:
+      - 18
+      - 24
+      - 36
 
 
 # Assignment Task
