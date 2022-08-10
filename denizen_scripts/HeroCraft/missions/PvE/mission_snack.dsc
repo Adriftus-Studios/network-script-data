@@ -36,15 +36,7 @@ mission_snack:
         - 64
         - 128
         - 256
-    apple:
-        - 16
-        - 32
-        - 64
     pumpkin_pie:
-        - 8
-        - 16
-        - 32
-    honey_bottle:
         - 8
         - 16
         - 32
@@ -56,8 +48,6 @@ mission_snack:
         - 4
         - 8
         - 16
-    golden_apple:
-        - 3
 
 
 # Assignment Task
