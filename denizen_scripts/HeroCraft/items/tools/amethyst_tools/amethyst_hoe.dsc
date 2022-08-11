@@ -26,3 +26,4 @@ Amethyst_hoe:
       input:
       - air|amethyst_ingot|amethyst_ingot
       - air|stick|air
+      - air|stick|air
