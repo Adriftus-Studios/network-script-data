@@ -13,8 +13,8 @@ mission_craft:
     max: mission_craft_complete
   rewards:
     daily: 100
-    weekly: 200
-    monthly: 400
+    weekly: 400
+    monthly: 800
   items:
     oak_planks:
       - 128
