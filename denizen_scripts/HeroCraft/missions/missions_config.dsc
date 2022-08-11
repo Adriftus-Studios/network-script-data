@@ -11,6 +11,7 @@ missions_config:
     - fish
     - smelt
     - cook
+    - snack
     - farm
     - slay
     - hunt
