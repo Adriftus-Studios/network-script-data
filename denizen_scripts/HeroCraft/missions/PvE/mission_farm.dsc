@@ -95,6 +95,8 @@ mission_farm_events:
     on player breaks vanilla_tagged:crops flagged:missions.active.farm:
       # Add missions with ID farm to a list.
       - define missions <proc[missions_get].context[farm]>
+      #Check if the crop is fully grown if it has an age.
+      - stop if:<context.material.age.if_null[0].equals[<context.material.maximum_age.if_null[0]>].not>
       # Check each mission if their item matches the item.
       - foreach <[missions]> as:mission:
         - if <player.flag[<[mission]>].get[done]>:
