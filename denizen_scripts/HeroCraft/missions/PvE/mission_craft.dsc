@@ -16,11 +16,197 @@ mission_craft:
     weekly: 400
     monthly: 800
   items:
+
+    ###Easy
     oak_planks:
       - 128
       - 256
       - 384
+    birch_planks:
+      - 128
+      - 256
+      - 384
+    spruce_planks:
+      - 128
+      - 256
+      - 384
+    dark_oak_planks:
+      - 128
+      - 256
+      - 384
+    composter:
+      - 16
+      - 32
+    scaffolding:
+      - 128
+      - 256
+    arrow:
+      - 128
+      - 256
+    glass_bottle:
+      - 64
+      - 128
+      - 256
+    stick:
+      - 256
+      - 512
+      - 1024
+    bowl:
+      - 128
+      - 256
+    pumpkin_seeds:
+      - 256
+      - 512
+      - 1024
+    melon_seeds:
+      - 64
+      - 128
+      - 256
+    black_dye:
+      - 16
+      - 32
+    blue_dye:
+      - 16
+      - 32
+    brown_dye:
+      - 16
+      - 32
+    gray_dye:
+      - 16
+      - 32
+    white_dye:
+      - 16
+      - 32
 
+    ###Medium
+    jungle_planks:
+      - 128
+      - 256
+      - 384
+    acacia_planks:
+      - 128
+      - 256
+      - 384
+    mangrove_planks:
+      - 128
+      - 256
+      - 384
+    crimson_planks:
+      - 128
+      - 256
+      - 384
+    warped_planks:
+      - 128
+      - 256
+      - 384
+    writable_book:
+      - 1
+      - 2
+      - 4
+    bucket:
+      - 8
+      - 16
+    clock:
+      - 8
+      - 16
+    lead:
+      - 8
+      - 16
+    compass:
+      - 16
+      - 32
+    rail:
+      - 128
+      - 256
+    powered_rail:
+      - 64
+      - 128
+    detector_rail:
+      - 64
+      - 128
+    minecart:
+      - 8
+      - 16
+    piston:
+      - 8
+      - 16
+    hopper:
+      - 8
+      - 16
+    dropper:
+      - 4
+      - 8
+      - 16
+    iron_door:
+      - 16
+      - 32
+    lectern:
+      - 4
+    target:
+      - 8
+      - 16
+
+    ###Hard
+    fire_charge:
+      - 96
+      - 192
+    leather_horse_armor:
+      - 3
+      - 6
+    custom_saddle:
+      - 3
+      - 6
+    custom_iron_horse_armor:
+      - 3
+      - 6
+    custom_golden_horse_armor:
+      - 3
+      - 6
+    custom_diamond_horse_armor:
+      - 2
+      - 4
+    firework_star:
+      - 8
+      - 16
+      - 32
+    spyglass:
+      - 8
+    specral_arrow:
+      - 64
+      - 128
+    magma_cream:
+      - 16
+      - 32
+      - 64
+    fermented_spider_eye:
+      - 8
+      - 16
+    cauldron:
+      - 3
+      - 6
+      - 9
+    brewing_stand:
+      - 3
+      - 6
+
+    ###Awful
+    creeper_banner_pattern:
+      - 1
+    skull_banner_pattern:
+      - 1
+      - 2
+    mojang_banner_pattern:
+      - 1
+    beacon:
+      - 1
+      - 2
+    recovery_compass:
+      - 1
+      - 2
+      - 3
+    leather:
+      - 8
+      - 16
 
 
 # Assignment Task
