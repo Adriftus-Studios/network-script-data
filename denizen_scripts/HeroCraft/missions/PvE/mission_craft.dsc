@@ -44,6 +44,89 @@ mission_craft:
       - 32
       - 48
       - 64
+    deepslate_bricks:
+      - 32
+      - 48
+      - 64
+    bricks:
+      - 32
+      - 48
+      - 64
+    mud_bricks:
+      - 32
+      - 48
+      - 64
+    nether_bricks:
+      - 16
+      - 32
+      - 48
+    jack_o_lantern:
+      - 8
+      - 16
+      - 32
+    blue_ice:
+      - 8
+      - 16
+      - 32
+    scaffolding:
+      - 64
+      - 128
+    black_dye:
+      - 32
+      - 64
+    blue_dye:
+      - 32
+      - 64
+    white_dye:
+      - 32
+      - 64
+    brown_dye:
+      - 32
+      - 64
+    light_gray_dye:
+      - 32
+      - 64
+    leather:
+      - 8
+      - 16
+    sugar:
+      - 64
+      - 128
+    fire_charge:
+      - 32
+      - 16
+    book:
+      - 32
+      - 64
+    bucket:
+      - 8
+      - 16
+    cake:
+      - 1
+      - 2
+      - 3
+    suspicious_stew:
+      - 4
+      - 8
+    flower_pot:
+      - 8
+      - 16
+    arrow:
+      - 32
+      - 64
+    specral_arrow:
+      - 32
+      - 64
+    stick:
+      - 256
+      - 512
+    hopper:
+      - 8
+      - 16
+    comparator:
+      - 4
+      - 8
+
 
 
 # Assignment Task
