@@ -6,7 +6,7 @@ copper_hoe:
       max: 200
       current: 0
   lore:
-    - Softer than iron
+    - <&r>Softer than iron
   data:
     recipe_book_category: tools.copper.hoe
   mechanisms:
@@ -18,6 +18,13 @@ copper_hoe:
       output_quantity: 1
       input:
       - copper_ingot|copper_ingot|air
+      - air|stick|air
+      - air|stick|air
+    2:
+      type: shaped
+      output_quantity: 1
+      input:
+      - air|copper_ingot|copper_ingot
       - air|stick|air
       - air|stick|air
 

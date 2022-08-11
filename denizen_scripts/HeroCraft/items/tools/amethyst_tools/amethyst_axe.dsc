@@ -10,7 +10,7 @@ amethyst_axe:
   mechanisms:
     custom_model_data: 100
   lore:
-    - Far more brittle than diamond.
+    - <&r>Far more brittle than diamond.
   display name: <&f>Amethyst Axe
   recipes:
     1:
@@ -19,4 +19,11 @@ amethyst_axe:
       input:
       - amethyst_ingot|amethyst_ingot|air
       - amethyst_ingot|stick|air
+      - air|stick|air
+    2:
+      type: shaped
+      output_quantity: 1
+      input:
+      - air|amethyst_ingot|amethyst_ingot
+      - air|stick|amethyst_ingot
       - air|stick|air
