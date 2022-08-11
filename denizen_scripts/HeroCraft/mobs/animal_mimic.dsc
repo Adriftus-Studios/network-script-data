@@ -18,7 +18,7 @@ animal_mimic_events:
 animal_mimic:
     type: entity
     debug: false
-    entity_type: skeleton
+    entity_type: husk
     flags:
         on_combust: cancel
         on_death: animal_mimic_death
