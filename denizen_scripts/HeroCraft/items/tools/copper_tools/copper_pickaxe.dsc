@@ -8,7 +8,7 @@ copper_pickaxe:
   mechanisms:
     custom_model_data: 2
   lore:
-    - Softer than iron
+    - <&r>Softer than iron
   data:
     recipe_book_category: tools.copper.pickaxe
   display name: <&f>Copper Pickaxe

@@ -1,4 +1,4 @@
-Amethyst_sword:
+amethyst_sword:
   type: item
   material: diamond_sword
   flags:
@@ -7,17 +7,17 @@ Amethyst_sword:
       current: 0
   display name: <&f>Amethyst Sword
   data:
-    recipe_book_category: tools.Amethyst.sword
+    recipe_book_category: tools.amethyst.sword
   mechanisms:
     custom_model_data: 100
   lore:
-    - Far more brittle than diamond.
+    - <&r>Far more brittle than diamond.
   recipes:
     1:
       type: shaped
       output_quantity: 1
       input:
-      - air|Amethyst_ingot|air
-      - air|Amethyst_ingot|air
+      - air|amethyst_ingot|air
+      - air|amethyst_ingot|air
       - air|stick|air
 

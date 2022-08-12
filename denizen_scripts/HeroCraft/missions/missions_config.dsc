@@ -11,8 +11,10 @@ missions_config:
     - fish
     - smelt
     - cook
+    - snack
     - farm
     - slay
+    - hunt
     - retrieve
     - pvp_zanzar
   # Max multipliers
