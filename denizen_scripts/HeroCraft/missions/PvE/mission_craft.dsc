@@ -77,6 +77,13 @@ mission_craft:
     white_dye:
       - 16
       - 32
+    cookie:
+      - 64
+      - 128
+    bread:
+      - 32
+      - 64
+      - 128
 
     ###Medium
     jungle_planks:
@@ -145,6 +152,9 @@ mission_craft:
     target:
       - 8
       - 16
+    beetroot_soup:
+      - 8
+      - 16
 
     ###Hard
     fire_charge:
@@ -188,6 +198,10 @@ mission_craft:
     brewing_stand:
       - 3
       - 6
+    pumpkin_pie:
+      - 8
+      - 16
+      - 32
 
     ###Awful
     creeper_banner_pattern:
@@ -205,6 +219,9 @@ mission_craft:
       - 2
       - 3
     leather:
+      - 8
+      - 16
+    golden_apple:
       - 8
       - 16
 
