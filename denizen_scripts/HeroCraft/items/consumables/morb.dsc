@@ -221,5 +221,5 @@ morb_cancel:
   type: task
   debug: false
   script:
-    - stop if:<context.item.flag[owner].uuid.equals[<context.entity.uuid>].not>
+    - stop if:<context.entity.flag[owner].uuid.equals[<context.entity.uuid>].not>
     - determine cancelled
