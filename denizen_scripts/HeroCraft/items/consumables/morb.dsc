@@ -165,7 +165,7 @@ morb_hits_entity:
     - flag <context.hit_entity> no_modify
     - flag <[item]> describe:<context.hit_entity.describe>
     - if <context.projectile.has_flag[rebounding]>:
-      - shoot <[item]> origin:<context.projectile.location> destination:<context.projectile.shooter.location>
+      - shoot <entity[dropped_item].with[item=<[item]>]> origin:<context.projectile.location> destination:<context.projectile.shooter.location>
     - else:
       - drop <[item]> <context.hit_entity.location.above[1]>
     - remove <context.hit_entity>
