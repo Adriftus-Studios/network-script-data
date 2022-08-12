@@ -221,5 +221,8 @@ morb_cancel:
   type: task
   debug: false
   script:
-    - stop if:<context.entity.flag[owner].uuid.equals[<context.entity.uuid>]>
-    - determine cancelled
+    - if <context.entity.flag[owner]> == <context.entity.uuid>:
+      - flag <context.item> on_item_pickup:!
+      - flag <context.item> on_item_pickup_inventory:!
+    - else:
+      - determine cancelled
