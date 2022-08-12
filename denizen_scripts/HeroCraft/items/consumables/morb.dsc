@@ -222,7 +222,6 @@ morb_cancel:
   debug: false
   script:
     - if <context.entity.flag[owner]> == <context.pickup_entity>:
-      - flag <context.item> on_item_pickup:!
-      - flag <context.item> on_item_pickup_inventory:!
+      - determine ITEM:<context.item.with[flag=on_item_pickup:!;flag=on_item_pickup_inventory:!]>
     - else:
       - determine cancelled
