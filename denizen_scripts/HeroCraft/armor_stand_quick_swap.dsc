@@ -1,6 +1,6 @@
 armor_stand_quick_swap:
   type: world
-  debug: false
+  debug: true
   events:
     on player right clicks armor_stand:
       - if <player.is_sneaking>:
