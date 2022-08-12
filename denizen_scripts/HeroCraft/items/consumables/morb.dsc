@@ -221,6 +221,5 @@ morb_cancel:
   type: task
   debug: false
   script:
-    - announce FIRED
-    - stop if:<context.item.flag[owner].uuid.equals[<context.entity.uuid>]>
+    - stop if:<context.item.flag[owner].uuid.equals[<context.entity.uuid>].not>
     - determine cancelled
