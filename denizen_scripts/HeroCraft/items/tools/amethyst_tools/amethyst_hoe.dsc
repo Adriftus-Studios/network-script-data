@@ -6,18 +6,24 @@ Amethyst_hoe:
       max: 400
       current: 0
   data:
-    recipe_book_category: tools.Amethyst.hoe
+    recipe_book_category: tools.amethyst.hoe
   mechanisms:
     custom_model_data: 100
   lore:
-    - Far more brittle than diamond.
+    - <&r>Far more brittle than diamond.
   display name: <&f>Amethyst Hoe
   recipes:
     1:
       type: shaped
       output_quantity: 1
       input:
-      - Amethyst_ingot|Amethyst_ingot|air
+      - amethyst_ingot|amethyst_ingot|air
       - air|stick|air
       - air|stick|air
-
+    2:
+      type: shaped
+      output_quantity: 1
+      input:
+      - air|amethyst_ingot|amethyst_ingot
+      - air|stick|air
+      - air|stick|air

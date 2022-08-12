@@ -1,4 +1,4 @@
-Steel_sword:
+steel_sword:
   type: item
   material: iron_sword
   flags:
@@ -7,17 +7,17 @@ Steel_sword:
       current: 0
   display name: <&f>Steel Sword
   data:
-    recipe_book_category: tools.Steel.sword
+    recipe_book_category: tools.steel.sword
   mechanisms:
     custom_model_data: 2
   lore:
-    - Tougher than iron
+    - <&r>Tougher than iron.
   recipes:
     1:
       type: shaped
       output_quantity: 1
       input:
-      - air|Steel_ingot|air
-      - air|Steel_ingot|air
+      - air|steel_ingot|air
+      - air|steel_ingot|air
       - air|stick|air
 

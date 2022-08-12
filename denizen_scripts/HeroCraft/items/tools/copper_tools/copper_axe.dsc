@@ -6,7 +6,7 @@ copper_axe:
       max: 200
       current: 0
   lore:
-    - Softer than iron
+    - <&r>Softer than iron
   data:
     recipe_book_category: tools.copper.axe
   mechanisms:
@@ -19,5 +19,12 @@ copper_axe:
       input:
       - copper_ingot|copper_ingot|air
       - copper_ingot|stick|air
+      - air|stick|air
+    2:
+      type: shaped
+      output_quantity: 1
+      input:
+      - air|copper_ingot|copper_ingot
+      - air|stick|copper_ingot
       - air|stick|air
 

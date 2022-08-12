@@ -5,7 +5,7 @@ steel_ingot:
   mechanisms:
     custom_model_data: 1
   lore:
-    - Its like iron with more carbon,
+    - <&r>Its like iron with more carbon!
   data:
       recipe_book_category: misc.steel.ingot
   recipes:
@@ -25,7 +25,7 @@ raw_steel:
   material: raw_iron
   display name: <&r>Raw Steel
   lore:
-    - Mixed and ready for smelting.
+    - <&r>Mixed and ready for smelting.
   mechanisms:
     custom_model_data: 1
   data:
