@@ -90,7 +90,7 @@ morb_throw:
   type: task
   debug: false
   script:
-    - shoot empty_morb_projectile speed:3.7 save:shot
+    - shoot empty_morb_projectile speed:3.7 shooter:<player> save:shot
     - flag <entry[shot].shot_entity> morb:<player>
     - flag <entry[shot].shot_entity> reuseable if:<context.item.has_flag[reuseable]>
     - flag <entry[shot].shot_entity> on_hit_entity:morb_hits_entity
@@ -102,6 +102,13 @@ morb_hits_entity:
   debug: false
   script:
     - stop if:<context.hit_entity.has_flag[no_morb]>
+    - if <context.hit_entity.location.town.exists>:
+      - if <context.hit_entity.location.town> != <context.projectile.shooter.town.if_null[null]>:
+        - inject morb_hits_block
+        - stop
+    - if <player.worldguard.can_build[<context.hit_entity.location>]>:
+      - inject morb_hits_block
+      - stop
     - if <script[morb_config].data_key[blacklisted_entities].contains[<context.hit_entity.entity_type>]>:
       - drop morb_empty_reuseable <context.hit_entity.location> if:<context.projectile.has_flag[reuseable]>
       - stop
@@ -135,7 +142,7 @@ morb_throw_filled:
   debug: false
   script:
     - take iteminhand quantity:1
-    - shoot filled_morb_projectile speed:3.7 save:shot
+    - shoot filled_morb_projectile speed:3.7 shooter:<player> save:shot
     - flag <entry[shot].shot_entity> spawn:<context.item.flag[describe]>
     - flag <entry[shot].shot_entity> reuseable if:<context.item.has_flag[reuseable]>
     - flag <entry[shot].shot_entity> on_hit_entity:filled_morb_hits_entity

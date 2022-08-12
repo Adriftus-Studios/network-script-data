@@ -80,7 +80,7 @@ achievement_data:
       reward_script: herocraft_mission_2_start
       icon: campfire
       name: <&6>Your First... Home?
-      description: <&e>Created a Campsite!
+      description: <&e>Joined A Town!
       parent: denizen:joined_herocraft
       frame: task
       sound: true
