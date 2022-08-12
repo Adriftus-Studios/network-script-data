@@ -62,6 +62,36 @@ morb_empty_reuseable:
         - morb_empty|nether_star|morb_empty
         - morb_empty|morb_empty|morb_empty
 
+morb_empty_rebounding:
+  type: item
+  debug: false
+  material: feather
+  display name: <&a>Rebounding Morb
+  lore:
+    - <&b><&l>Multiple Use Morb
+    - <&b><&l>Rebounds on Use
+    - <&b>Throw at an Entity to capture it.
+    - <&c>Does Not Work On<&co>
+    - <&c>- Players
+    - <&c>- Wither
+    - <&c>- Ender Dragon
+    - <&c>- Warden
+  mechanisms:
+    custom_model_data: 1
+  data:
+    recipe_book_category: gadgets.morb2
+  flags:
+    right_click_script: morb_throw
+    reuseable: true
+    rebounding: true
+  #recipes:
+    #1:
+      #type: shaped
+      #input:
+        #- morb_empty|morb_empty|morb_empty
+        #- morb_empty|nether_star|morb_empty
+        #- morb_empty|morb_empty|morb_empty
+
 morb_filled:
   type: item
   debug: false
@@ -93,6 +123,7 @@ morb_throw:
     - shoot empty_morb_projectile speed:3.7 shooter:<player> save:shot
     - flag <entry[shot].shot_entity> morb:<player>
     - flag <entry[shot].shot_entity> reuseable if:<context.item.has_flag[reuseable]>
+    - flag <entry[shot].shot_entity> rebounding if:<context.item.has_flag[rebounding]>
     - flag <entry[shot].shot_entity> on_hit_entity:morb_hits_entity
     - flag <entry[shot].shot_entity> on_hit_block:morb_hits_block
     - take iteminhand quantity:1
@@ -123,19 +154,30 @@ morb_hits_entity:
     - else:
       - define "list:->:<&e>Owner: <&7>Unowned"
     - adjust def:item lore:<[item].lore.if_null[<list>].include[<[list]>]>
-    - flag <[item]> reuseable if:<context.projectile.has_flag[reuseable]>
-    - adjust def:item "display:<&a>Reuseable <[item].display>" if:<context.projectile.has_flag[reuseable]>
+    - if <context.projectile.has_flag[rebounding]>:
+      - flag <[item]> reuseable
+      - flag <[item]> rebounding
+      - adjust def:item "display:<&a>Rebounding <[item].display>"
+    - else if <context.projectile.has_flag[reuseable]>:
+      - flag <[item]> rebounding
+      - adjust def:item "display:<&a>Reuseable <[item].display>"
     - flag <context.hit_entity> temp:! if:<context.hit_entity.has_flag[temp]>
     - flag <context.hit_entity> no_modify
     - flag <[item]> describe:<context.hit_entity.describe>
-    - drop <[item]> <context.hit_entity.location.above[1]>
+    - if <context.projectile.has_flag[rebounding]>:
+      - shoot <[item]> destination:<context.projectile.shooter.location>
+    - else:
+      - drop <[item]> <context.hit_entity.location.above[1]>
     - remove <context.hit_entity>
 
 morb_hits_block:
   type: task
   debug: false
   script:
-    - drop morb_empty_reuseable <context.projectile.location> if:<context.projectile.has_flag[reuseable]>
+    - if <context.projectile.has_flag[rebounding]>:
+      - shoot <entity[dropped_item].with[item=morb_empty_rebounding]> destination:<context.projectile.shooter.location>
+    - else:
+      - drop morb_empty_reuseable <context.projectile.location> if:<context.projectile.has_flag[reuseable]>
 
 morb_throw_filled:
   type: task
@@ -153,11 +195,17 @@ filled_morb_hits_entity:
   debug: false
   script:
     - spawn <context.projectile.flag[spawn]> <context.hit_entity.location>
-    - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
+    - if <context.projectile.has_flag[rebounding]>:
+      - shoot <entity[dropped_item].with[item=morb_empty_rebounding]> destination:<context.projectile.shooter.location>
+    - else:
+      - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
 
 filled_morb_hits_block:
   type: task
   debug: false
   script:
     - spawn <context.projectile.flag[spawn]> <context.location.add[<context.hit_face>].center.below[0.5]>
-    - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.location.add[<context.hit_face>]>
+    - if <context.projectile.has_flag[rebounding]>:
+      - shoot <entity[dropped_item].with[item=morb_empty_rebounding]> destination:<context.projectile.shooter.location>
+    - else:
+      - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.location.add[<context.hit_face>]>
