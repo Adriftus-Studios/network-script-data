@@ -49,5 +49,5 @@ animal_mimic_death:
     debug: false
     script:
         - playsound sound:entity_ghast_death <context.entity.location> sound_category:master volume:2.0 pitch:0.5
-        - determine passively <context.entity.flag[mimic_drops].if_null[<list[gold_ingot]>]>
-        - determine passively NO_XP
+        - determine passively <context.entity.flag[mimic_drops].if_null[<list[]>].include[<element[magical_pylon].repeat_as_list[<util.random.int[1].to[10]>]>]>
+        - determine passively <context.xp.mul[3]>
