@@ -2,10 +2,12 @@ animal_mimic_events:
     type: world
     debug: false
     events:
-        after cow|sheep|pig|chicken|rabbit spawns because NATURAL:
+        after cow|sheep|pig|chicken|rabbit|frog|llama|goat spawns because NATURAL:
             - stop if:<context.location.town.exists>
             - define chance 0.5
             - define chance:*:2 if:<context.location.world.has_storm>
+            - define chance:*:2 if:<context.location.world.time.is_more_than_or_equal_to[13000]>
+            - define chance:*:2 if:<context.entity.entity_type.is_in[llama|goat]>
             - if <util.random_chance[<[chance]>]>:
                 - flag <context.entity> animal_mimic expire:5m
         on entity_flagged:animal_mimic dies:
