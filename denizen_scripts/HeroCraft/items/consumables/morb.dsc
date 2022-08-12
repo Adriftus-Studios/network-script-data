@@ -221,7 +221,7 @@ morb_cancel:
   type: task
   debug: false
   script:
-    - if <context.entity.flag[owner]> == <context.entity.uuid>:
+    - if <context.entity.flag[owner]> == <context.entity>:
       - flag <context.item> on_item_pickup:!
       - flag <context.item> on_item_pickup_inventory:!
     - else:
