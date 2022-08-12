@@ -207,6 +207,6 @@ filled_morb_hits_block:
   script:
     - spawn <context.projectile.flag[spawn]> <context.location.add[<context.hit_face>].center.below[0.5]>
     - if <context.projectile.has_flag[rebounding]>:
-      - shoot <entity[dropped_item].with[item=morb_empty_rebounding]> origin:<context.location.add[<context.hit_face>]> destination:<context.projectile.shooter.location>
+      - shoot <entity[dropped_item].with[item=morb_empty_rebounding]> origin:<context.location.add[<context.hit_face.mul[1.5]>]> destination:<context.projectile.shooter.location>
     - else:
       - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.location.add[<context.hit_face>]>
