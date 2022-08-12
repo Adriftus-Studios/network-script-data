@@ -2,7 +2,7 @@ animal_mimic_events:
     type: world
     debug: false
     events:
-        after cow spawns because NATURAL:
+        after cow|sheep|pig|chicken|rabbit spawns because NATURAL:
             - stop if:<context.location.town.exists>
             - define chance 0.5
             - define chance:*:2 if:<context.location.world.has_storm>
