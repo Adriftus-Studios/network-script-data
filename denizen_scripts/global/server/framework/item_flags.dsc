@@ -47,6 +47,12 @@ item_flags:
           - inject <[value]>
       - else:
         - inject <context.item.flag[on_item_pickup]>
+    on inventory picks up item_flagged:on_item_pickup_inventory:
+      - if <context.item.flag[on_item_pickup_inventory].object_type> == List:
+        - foreach <context.item.flag[on_item_pickup_inventory]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[on_item_pickup_inventory]>
     on dropped_item added to world:
       - if <context.entity.item.has_flag[on_item_drop]>:
         - if <context.entity.item.flag[on_item_drop].object_type> == List:
