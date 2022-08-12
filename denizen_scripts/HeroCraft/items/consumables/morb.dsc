@@ -187,6 +187,7 @@ morb_throw_filled:
     - shoot filled_morb_projectile speed:3.7 shooter:<player> save:shot
     - flag <entry[shot].shot_entity> spawn:<context.item.flag[describe]>
     - flag <entry[shot].shot_entity> reuseable if:<context.item.has_flag[reuseable]>
+    - flag <entry[shot].shot_entity> rebounding if:<context.item.has_flag[rebounding]>
     - flag <entry[shot].shot_entity> on_hit_entity:filled_morb_hits_entity
     - flag <entry[shot].shot_entity> on_hit_block:filled_morb_hits_block
 
