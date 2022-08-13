@@ -54,6 +54,10 @@ adriftus_chest_handle_click:
           - if <context.item.material.name> != air:
             - define lore <context.item.lore.remove[last]>
             - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]> if:<context.item.has_flag[adriftus_server]>
+          - if <context.click> == right:
+            - wait 1t
+            - if <context.clicked_inventory.slot[<context.slot>]> == <context.item.with[quantity=<context.item.quantity.div[2].round_down>]>:
+              - inventory set slot:<context.slot> o:<context.item.with[lore=<[lore]>;flag=adriftus_server:!;quantity=<context.item.quantity.div[2].round_down>]> d:<context.clicked_inventory>
       - case shift_right shift_left:
         - if <context.clicked_inventory.script.name.if_null[null]> == adriftus_chest_inventory:
           - if <context.item.material.name> != air:
