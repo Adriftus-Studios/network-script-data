@@ -141,7 +141,11 @@ morb_hits_entity:
       - inject morb_hits_block
       - stop
     - if <script[morb_config].data_key[blacklisted_entities].contains[<context.hit_entity.entity_type>]>:
-      - drop morb_empty_reuseable <context.hit_entity.location> if:<context.projectile.has_flag[reuseable]>
+      - if <context.projectile.has_flag[rebounding]>:
+        - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.hit_entity.location> destination:<context.projectile.shooter.location> save:shot
+        - flag <entry[shot].shot_entity> owner:<context.projectile.shooter>
+      - else:
+        - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
       - stop
     - define item <item[morb_filled]>
     - if <context.hit_entity.custom_name.is_truthy>:
