@@ -52,7 +52,8 @@ adriftus_chest_handle_click:
         - else:
           - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
           - define lore "<context.item.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
-          - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>
+          - determine passively <context.item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>
+          - inventory update
       - default:
         - narrate "<&c>This action is not currently supported."
         - determine cancelled
