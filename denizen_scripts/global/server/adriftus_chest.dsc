@@ -34,7 +34,7 @@ adriftus_chest_handle_click:
     - choose <context.click>:
       - case left right:
         # Left or Right Click IN the Adriftus Chest
-        - if <context.clicked_inventory.script.name> == adriftus_chest_inventory:
+        - if <context.clicked_inventory.script.name.if_null[null]> == adriftus_chest_inventory:
           # Cursor Item
           - if <context.cursor_item.material.name> != air:
             - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
@@ -45,7 +45,7 @@ adriftus_chest_handle_click:
             - define lore <context.item.lore.remove[last]>
             - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]>
       - case shift_right shift_left:
-        - if <context.clicked_inventory.script.name> == adriftus_chest_inventory:
+        - if <context.clicked_inventory.script.name.if_null[null]> == adriftus_chest_inventory:
           - if <context.item.material.name> != air:
             - define lore <context.item.lore.remove[last]>
             - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]>
