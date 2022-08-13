@@ -56,7 +56,7 @@ adriftus_chest_handle_click:
           # Clicked Item
           - if <context.item.material.name> != air:
             - define lore <context.item.lore.remove[last]>
-            - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]>
+            - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]> if:<context.item.has_flag[adriftus_server]>
       - case shift_right shift_left:
         - if <context.clicked_inventory.script.name.if_null[null]> == adriftus_chest_inventory:
           - if <context.item.material.name> != air:
