@@ -6,7 +6,7 @@ mob_rarity_handler:
   events:
     after monster spawns:
     - stop if:<context.entity.exists.not>
-    - if <context.entity.is_mythicmob> || <context.entity.has_flag[no_modify]>:
+    - if <context.entity.is_mythicmob.if_null[false]> || <context.entity.has_flag[no_modify]>:
       - stop
     - if <context.entity.entity_type> != creeper:
       - flag <context.entity> emboldable
