@@ -4,7 +4,10 @@ adriftus_chest_inventory_open:
   script:
     - define inventory <inventory[adriftus_chest_inventory]>
     - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<map>>:
-      - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
+      - if <[value].has_flag[adriftus_server]> && <list[hub|<[value].flag[adriftus_server]>].contains[<bungee.server>]>:
+        - inventory set slot:<[key]> o:<[value].with[flag=adriftus_server:!;lore=<[value].lore.remove[last]>]> d:<[inventory]>
+      - else:
+        - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 adriftus_chest_inventory:
@@ -14,7 +17,6 @@ adriftus_chest_inventory:
   size: 45
   data:
     on_close: adriftus_chest_save
-    any_click: adriftus_chest_handle_click
 
 adriftus_chest_save:
   type: task
@@ -34,47 +36,3 @@ adriftus_chest_save:
       - else:
         - define map <[map].with[<[slot]>].as[<[item]>]>
     - run global_player_data_modify def:<player.uuid>|adriftus.chest.contents_map|<[map]>
-
-adriftus_chest_handle_click:
-  type: task
-  debug: true
-  script:
-    - if <context.item.has_flag[adriftus_server]> && ( !<list[<bungee.server>|hub].contains[<context.item.flag[adriftus_server]>]> || <list[hub|test].contains[<bungee.server>]>:
-      - determine cancelled
-    - choose <context.click>:
-      - case left right:
-        # Left or Right Click IN the Adriftus Chest
-        - if <context.clicked_inventory.script.name.if_null[null]> == adriftus_chest_inventory:
-          # Cursor Item
-          - if <context.cursor_item.material.name> != air:
-            - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
-            - define lore "<context.cursor_item.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
-            - adjust <player> item_on_cursor:<context.cursor_item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]> if:<context.cursor_item.has_flag[adriftus_server].not>
-          # Clicked Item
-          - if <context.item.material.name> != air:
-            - if <context.cursor_item.script.if_null[<context.cursor_item.material.name>]> == <context.item.script.if_null[<context.item.material.name>]>:
-              - stop
-            - define lore <context.item.lore.remove[last]>
-            - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]> if:<context.item.has_flag[adriftus_server]>
-            - if <context.click> == right && <context.item.quantity> > 1:
-              - wait 1t
-              - if <player.open_inventory.script.name.if_null[null]> == adriftus_chest_inventory:
-                - inventory adjust slot:<context.slot> d:<player.open_inventory> lore:<context.item.lore>
-                - inventory flag slot:<context.slot> d:<player.open_inventory> adriftus_server:<context.item.flag[adriftus_server]>
-      - case shift_right shift_left:
-        - if <context.clicked_inventory.script.name.if_null[null]> == adriftus_chest_inventory:
-          - if <context.item.material.name> != air:
-            - define lore <context.item.lore.remove[last]>
-            - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]> if:<context.item.has_flag[adriftus_server]>
-        - else:
-          - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
-          - define lore "<context.item.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
-          - determine passively <context.item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>
-          - wait 1t
-          - if <context.inventory.slot[<context.slot>]> == <context.item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>:
-            - define lore <context.item.lore.remove[last]>
-            - inventory set slot:<context.slot> <context.item.with[lore=<[lore]>;flag=adriftus_server:!]> if:<context.item.has_flag[adriftus_server]>
-          - inventory update
-      - default:
-        - narrate "<&c>This action is not currently supported."
-        - determine cancelled
