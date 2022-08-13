@@ -64,6 +64,9 @@ adriftus_chest_handle_click:
           - define lore "<context.item.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
           - determine passively <context.item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>
           - wait 1t
+          - if <context.inventory.slot[<context.slot>]> == <context.item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>:
+            - define lore <context.item.lore.remove[last]>
+            - inventory set slot:<context.slot> <context.item.with[lore=<[lore]>;flag=adriftus_server:!]> if:<context.item.has_flag[adriftus_server]>
           - inventory update
       - default:
         - narrate "<&c>This action is not currently supported."
