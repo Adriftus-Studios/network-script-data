@@ -52,6 +52,8 @@ adriftus_chest_handle_click:
             - adjust <player> item_on_cursor:<context.cursor_item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>
           # Clicked Item
           - if <context.item.material.name> != air:
+            - if <context.cursor_item.script.if_null[<context.cursor_item.material.name>]> == <context.item.script.if_null[<context.item.material.name>]>:
+              - stop
             - define lore <context.item.lore.remove[last]>
             - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]> if:<context.item.has_flag[adriftus_server]>
       - case shift_right shift_left:
