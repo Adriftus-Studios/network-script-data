@@ -61,7 +61,7 @@ adriftus_chest_handle_click:
         - if <context.clicked_inventory.script.name.if_null[null]> == adriftus_chest_inventory:
           - if <context.item.material.name> != air:
             - define lore <context.item.lore.remove[last]>
-            - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]>
+            - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]> if:<context.item.has_flag[adriftus_server]>
         - else:
           - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
           - define lore "<context.item.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
