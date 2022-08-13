@@ -13,6 +13,7 @@ animal_mimic_events:
         on entity_flagged:animal_mimic dies:
             - stop if:<context.damager.is_player.not.if_null[true]>
             - define location <context.entity.location>
+            - determine passive NO_DROPS
             - remove <context.entity> if:<context.entity.exists>
             - title "title:<dark_red><bold>You have been met with a terrible fate..." fade_in:1t fade_out:1s stay:1s
             - spawn "<entity[animal_mimic].with[custom_name=<dark_red><context.entity.name.to_titlecase> Mimic]>" <[location]> target:<context.damager.if_null[<[location].find_entities[player].within[50].first>]> persistent save:mimic
