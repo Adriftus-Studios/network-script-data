@@ -49,7 +49,7 @@ adriftus_chest_handle_click:
           - if <context.cursor_item.material.name> != air:
             - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
             - define lore "<context.cursor_item.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
-            - adjust <player> item_on_cursor:<context.cursor_item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]> if:<context.cursor_item.has_flag[adriftus_server]>
+            - adjust <player> item_on_cursor:<context.cursor_item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]> if:<context.cursor_item.has_flag[adriftus_server].not>
           # Clicked Item
           - if <context.item.material.name> != air:
             - if <context.cursor_item.script.if_null[<context.cursor_item.material.name>]> == <context.item.script.if_null[<context.item.material.name>]>:
