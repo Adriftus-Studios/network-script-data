@@ -104,6 +104,7 @@ morb_filled:
 
 empty_morb_projectile:
   type: entity
+  debug: false
   entity_type: snowball
   mechanisms:
     custom_name: <&7>Empty <&a>Morb
@@ -111,6 +112,7 @@ empty_morb_projectile:
 
 filled_morb_projectile:
   type: entity
+  debug: false
   entity_type: snowball
   mechanisms:
     custom_name: <&2>Filled <&a>Morb
