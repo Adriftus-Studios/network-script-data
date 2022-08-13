@@ -36,10 +36,10 @@ adriftus_chest_handle_click:
         # Left or Right Click IN the Adriftus Chest
         - if <context.clicked_inventory.script.name> == adriftus_chest_inventory:
           # Cursor Item
-          - if <player.item_on_cursor.material.name> != air:
+          - if <context.cursor_item.material.name> != air:
             - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
-            - define lore "<context.item_on_cursor.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
-            - adjust <player> item_on_cursor:<context.item_on_cursor.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>
+            - define lore "<context.cursor_item.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
+            - adjust <player> item_on_cursor:<context.cursor_item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>
           # Clicked Item
           - if <context.item.material.name> != air:
             - define lore <context.item.lore.remove[last]>
@@ -53,6 +53,7 @@ adriftus_chest_handle_click:
           - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
           - define lore "<context.item.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
           - determine passively <context.item.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>
+          - wait 1t
           - inventory update
       - default:
         - narrate "<&c>This action is not currently supported."
