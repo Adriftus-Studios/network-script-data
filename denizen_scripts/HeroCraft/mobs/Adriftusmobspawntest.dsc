@@ -25,7 +25,7 @@ mob_rarity_handler:
     - foreach <[suffix_master_list].random[<script[rarity_data_table].data_key[<[rarity]>.suffixes]>]> as:attribute:
       - flag <context.entity> <[attribute]>
       - define sufix_list:->:<[attribute]>
-    - adjust <context.entity> "custom_name:<script[rarity_data_table].data_key[<[rarity]>.color].parsed><[prefix_list].space_separated.to_titlecase> <Context.entity.entity_type.to_titlecase> <[sufix_list].insert[The].at[1].space_separated.to_titlecase.if_null[]>"
+    - adjust <context.entity> "custom_name:<script[rarity_data_table].data_key[<[rarity]>.color].parsed><[prefix_list].space_separated.to_titlecase> <context.entity.entity_type.replace[_].with[<&sp>].to_titlecase> <[sufix_list].insert[The].at[1].space_separated.to_titlecase.if_null[]>"
     - adjust <context.entity> custom_name_visible:true
     - flag <context.entity> rare_mob:<script[rarity_data_table].data_key[<[rarity]>.slaying]>
     - inject custom_mob_modifier_task
