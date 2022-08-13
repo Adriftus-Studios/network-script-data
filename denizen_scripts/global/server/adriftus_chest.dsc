@@ -18,7 +18,7 @@ adriftus_chest_inventory:
 
 adriftus_chest_save:
   type: task
-  debug: false
+  debug: true
   script:
     - define items <context.inventory.map_slots>
     - wait 1t
