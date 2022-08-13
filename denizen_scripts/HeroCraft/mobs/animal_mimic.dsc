@@ -14,10 +14,10 @@ animal_mimic_events:
             - stop if:<context.damager.is_player.not.if_null[true]>
             - define location <context.entity.location>
             - determine passively NO_DROPS
-            - remove <context.entity> if:<context.entity.exists>
             - spawn "<entity[animal_mimic].with[custom_name=<dark_red><context.entity.name.to_titlecase> Mimic]>" <[location]> target:<context.damager.if_null[<[location].find_entities[player].within[50].first>]> persistent save:mimic
             - flag <entry[mimic].spawned_entity> mimic_drops:<context.drops>
-            - run animal_mimic_spawn player:<context.damager> if:<context.damager.is_player>
+            - run animal_mimic_spawn player:<context.damager> def:<context.entity.location> if:<context.damager.is_player>
+            - remove <context.entity> if:<context.entity.exists>
         on player right clicks entity_flagged:animal_mimic:
             - determine passively cancelled
             - define location <context.entity.location>
@@ -49,10 +49,11 @@ animal_mimic:
 animal_mimic_spawn:
     type: task
     debug: false
+    definitions: location
     script:
         - title "title:<dark_red><bold>You have been met with a terrible fate..." fade_in:1t fade_out:1s stay:1s targets:<context.damager>
-        - playeffect effect:flame at:<context.entity.location> offset:0.5,3,0.5 quantity:100
-        - playsound sound:entity_ghast_scream at:<context.entity.location> volume:2.0 pitch:0.5 sound_category:master
+        - playeffect effect:flame at:<[location]> offset:0.5,3,0.5 quantity:100
+        - playsound sound:entity_ghast_scream at:<[location]> volume:2.0 pitch:0.5 sound_category:master
 
 animal_mimic_death:
     type: task
