@@ -22,8 +22,18 @@ adriftus_chest_save:
   script:
     - define items <context.inventory.map_slots>
     - wait 1t
-    - foreach 
-    - run global_player_data_modify def:<player.uuid>|adriftus.chest.contents_map|<context.inventory.map_slots>
+    - define contents <context.inventory.map_slots>
+    - define map <map>
+    - foreach <[contents]> key:slot as:item:
+      - if <[item].has_flag[adriftus.server.bypass]>:
+        - define map <[map].with[<[slot]>].as[<[item]>]>
+      - else if !<[item].has_flag[adriftus_server]>:
+        - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
+        - define lore "<[item].lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
+        - define map <[map].with[<[slot]>].as[<[item].with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>]>
+      - else:
+        - define map <[map].with[<[slot]>].as[<[item]>]>
+    - run global_player_data_modify def:<player.uuid>|adriftus.chest.contents_map|<[map]>
 
 adriftus_chest_handle_click:
   type: task
