@@ -12,7 +12,6 @@ animal_mimic_events:
                 - flag <context.entity> animal_mimic expire:5m
         on entity_flagged:animal_mimic dies:
             - stop if:<context.damager.is_player.not.if_null[true]>
-            - determine passively cancelled
             - define location <context.entity.location>
             - remove <context.entity> if:<context.entity.exists>
             - title "title:<dark_red><bold>You have been met with a terrible fate..." fade_in:1t fade_out:1s stay:1s
