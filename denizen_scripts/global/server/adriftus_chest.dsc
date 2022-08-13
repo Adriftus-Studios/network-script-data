@@ -17,6 +17,7 @@ adriftus_chest_inventory:
   size: 45
   data:
     on_close: adriftus_chest_save
+    any_click: adriftus_chest_validate_server
 
 adriftus_chest_save:
   type: task
@@ -36,3 +37,10 @@ adriftus_chest_save:
       - else:
         - define map <[map].with[<[slot]>].as[<[item]>]>
     - run global_player_data_modify def:<player.uuid>|adriftus.chest.contents_map|<[map]>
+
+adriftus_chest_validate_server:
+  type: task
+  debug: false
+  script:
+    - if <context.item.has_flag[adriftus_server]>:
+      - if <list[hub|<context.item.flag[adriftus_server]>].contains[<bungee.server>]>
