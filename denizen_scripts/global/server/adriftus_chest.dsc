@@ -12,6 +12,52 @@ adriftus_chest_inventory:
   inventory: chest
   title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6930]>
   size: 45
+  data:
+    on_close: adriftus_chest_save
+    any_click: adriftus_chest_handle_click
+
+adriftus_chest_save:
+  type: task
+  debug: false
+  script:
+    - define items <context.inventory.map_slots>
+    - wait 1t
+    - foreach 
+    - run global_player_data_modify def:<player.uuid>|adriftus.chest.contents_map|<context.inventory.map_slots>
+
+adriftus_chest_handle_click:
+  type: task
+  debug: false
+  script:
+    - if <context.item.has_flag[adriftus_server]> && !<list[<bungee.server>|test|hub].contains[<context.item.flag[adriftus_server]>]>:
+      - determine cancelled
+    - choose <context.click>:
+      - case left right:
+        # Left or Right Click IN the Adriftus Chest
+        - if <context.clicked_inventory.script.name> == adriftus_chest_inventory:
+          # Cursor Item
+          - if <player.item_on_cursor.material.name> != air:
+            - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
+            - define lore "<context.item_on_cursor.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
+            - adjust <player> item_on_cursor:<context.item_on_cursor.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>
+          # Clicked Item
+          - if <context.item.material.name> != air:
+            - define lore <context.item.lore.remove[last]>
+            - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]>
+      - case shift_right shift_left:
+        - if <context.clicked_inventory.script.name> == adriftus_chest_inventory:
+          - if <context.item.material.name> != air:
+            - define lore <context.item.lore.remove[last]>
+            - determine <context.item.with[lore=<[lore]>;flag=adriftus_server:!]>
+        - else:
+          - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
+          - define lore "<context.item.lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
+          - determine <context.item_on_cursor.with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>
+      - default:
+        - narrate "<&c>This action is not currently supported."
+        - determine cancelled
+          
+            
 
 adriftus_chest_inventory_events:
   type: world
@@ -26,7 +72,7 @@ adriftus_chest_inventory_events:
         - else if !<[item].has_flag[adriftus_server]>:
           - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
           - define lore "<[item].lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
-          - define map <[map].with[<[slot]>].as[<[item].with[lore=<[lore]>;flag=adriftus_server:<bungee.server>;flag=run_script:adriftus_chest_validate]>]>
+          - define map <[map].with[<[slot]>].as[<[item].with[lore=<[lore]>;flag=adriftus_server:<bungee.server>]>]>
         - else:
           - define map <[map].with[<[slot]>].as[<[item]>]>
       - run global_player_data_modify def:<player.uuid>|adriftus.chest.contents_map|<[map]>
