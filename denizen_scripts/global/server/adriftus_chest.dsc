@@ -4,7 +4,7 @@ adriftus_chest_inventory_open:
   script:
     - define inventory <inventory[adriftus_chest_inventory]>
     - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<map>>:
-      - if <[value].has_flag[adriftus_server]> && <list[hub|<[value].flag[adriftus_server]>].contains[<bungee.server>]>:
+      - if ( <[value].has_flag[adriftus_server]> && <list[hub|<[value].flag[adriftus_server]>].contains[<bungee.server>]> ) || <[value].flag[adriftus_server]> == hub:
         - inventory set slot:<[key]> o:<[value].with[flag=adriftus_server:!;lore=<[value].lore.remove[last]>;flag=run_script:!]> d:<[inventory]>
       - else:
         - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
