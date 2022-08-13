@@ -18,7 +18,7 @@ adriftus_chest_inventory:
 
 adriftus_chest_save:
   type: task
-  debug: true
+  debug: false
   script:
     - define items <context.inventory.map_slots>
     - wait 1t
@@ -37,7 +37,7 @@ adriftus_chest_save:
 
 adriftus_chest_handle_click:
   type: task
-  debug: false
+  debug: true
   script:
     - if <context.item.has_flag[adriftus_server]> && !<list[<bungee.server>|test|hub].contains[<context.item.flag[adriftus_server]>]>:
       - determine cancelled
