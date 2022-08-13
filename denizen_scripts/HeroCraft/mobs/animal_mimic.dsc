@@ -17,7 +17,7 @@ animal_mimic_events:
             - remove <context.entity> if:<context.entity.exists>
             - title "title:<dark_red><bold>You have been met with a terrible fate..." fade_in:1t fade_out:1s stay:1s
             - spawn "<entity[animal_mimic].with[custom_name=<dark_red><context.entity.name.to_titlecase> Mimic].with_flag[mimic_drops:<context.drops>]>" <[location]> target:<context.damager.if_null[<[location].find_entities[player].within[50].first>]> persistent
-        on player clicks entity_flagged:animal_mimic:
+        on player right clicks entity_flagged:animal_mimic:
             - determine passively cancelled
             - define location <context.entity.location>
             - remove <context.entity> if:<context.entity.exists>
