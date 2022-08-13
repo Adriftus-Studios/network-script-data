@@ -51,7 +51,7 @@ animal_mimic_spawn:
     debug: false
     definitions: location
     script:
-        - title "title:<dark_red><bold>You have been met with a terrible fate..." fade_in:1t fade_out:1s stay:1s targets:<context.damager>
+        - title "title:<dark_red><bold>You have been met with a terrible fate..." fade_in:1t fade_out:1s stay:1s
         - playeffect effect:flame at:<[location]> offset:0.5,3,0.5 quantity:100
         - playsound sound:entity_ghast_scream at:<[location]> volume:2.0 pitch:0.5 sound_category:master
 
