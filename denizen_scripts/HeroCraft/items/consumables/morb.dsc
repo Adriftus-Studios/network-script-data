@@ -182,11 +182,12 @@ morb_hits_block:
   debug: false
   script:
     - if <context.projectile.has_flag[rebounding]>:
-      - if <context.projectile.location.exists>:
+      - if <context.projectile.shooter.location.distance[<context.location>]> > 2.9:
         - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.projectile.location> destination:<context.projectile.shooter.eye_location> save:shot
+        - flag <entry[shot].shot_entity> owner:<context.projectile.shooter>
       - else:
-        - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.location.center.add[<context.hit_face>]> destination:<context.projectile.shooter.eye_location> save:shot
-      - flag <entry[shot].shot_entity> owner:<context.projectile.shooter>
+        - spawn <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> save:shot
+        - flag <entry[shot].spawned_entity> owner:<context.projectile.shooter>
     - else:
       - drop morb_empty_reuseable <context.projectile.location> if:<context.projectile.has_flag[reuseable]>
 
