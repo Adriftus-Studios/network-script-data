@@ -43,5 +43,5 @@ adriftus_chest_validate_server:
   debug: false
   script:
     - if <context.item.has_flag[adriftus_server]>:
-      - if !<list[hub|<context.item.flag[adriftus_server]>].contains[<bungee.server>]>:
+      - if <context.item.flag[adriftus_server]> != hub && !<list[hub|<context.item.flag[adriftus_server]>].contains[<bungee.server>]>:
         - determine cancelled
