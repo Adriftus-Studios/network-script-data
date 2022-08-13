@@ -44,7 +44,7 @@ animal_mimic:
         item_in_hand: air
         max_health: 100
         health: 100
-        speed: 0.2
+        speed: 0.5
 
 animal_mimic_spawn:
     type: task
