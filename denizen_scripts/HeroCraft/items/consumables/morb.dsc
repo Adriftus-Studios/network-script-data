@@ -186,7 +186,7 @@ morb_hits_block:
         - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.projectile.location> destination:<context.projectile.shooter.eye_location> save:shot
         - flag <entry[shot].shot_entity> owner:<context.projectile.shooter>
       - else:
-        - spawn <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> save:shot
+        - spawn <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> <context.projectile.location> save:shot
         - flag <entry[shot].spawned_entity> owner:<context.projectile.shooter>
     - else:
       - drop morb_empty_reuseable <context.projectile.location> if:<context.projectile.has_flag[reuseable]>
