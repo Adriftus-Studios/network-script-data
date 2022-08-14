@@ -333,6 +333,8 @@ waystone_open_teleport_town_menu:
       - if !<town[<[town]>].exists>:
         - flag <player> waystones.town.<[town]>:!
         - foreach next
+      - if !<town[<[town]>].has_flag[waystone.location]>:
+        - foreach next
       - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[town].flag[waystone.tp_location]>;display=<town[<[town]>].name>] d:<[inventory]>
     - inventory set slot:<[inventory].script.data_key[data.back]> o:waystone_back_to_main[flag=entity:<context.item.flag[entity]>] d:<[inventory]>
     - inventory open d:<[inventory]>
