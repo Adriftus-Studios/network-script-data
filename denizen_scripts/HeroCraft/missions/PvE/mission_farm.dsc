@@ -92,7 +92,7 @@ mission_farm_events:
   type: world
   debug: false
   events:
-    on player breaks pumpkin|melon|wheat|potato|carrot|beetroot flagged:missions.active.farm:
+    on player breaks pumpkin|melon|wheat|potatoes|carrot|beetroot flagged:missions.active.farm:
       # Add missions with ID farm to a list.
       - define missions <proc[missions_get].context[farm]>
       #Check if the crop is fully grown if it has an age.
