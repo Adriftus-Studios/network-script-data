@@ -8,6 +8,7 @@ custom_mob_prefix_corrosive:
       - define acid_strength <util.random.int[5].to[20]>
       - if <player.item_in_hand.max_durability||0> <1:
         - stop
+      - define acid_strength <[acid_strength].div[<player.item_in_hand.enchantment_map.get[hardened].add[1]>]> if:<player.item_in_hand.enchantments.contains[hardened]>
       - if <player.item_in_hand.durability.add[<[acid_strength]>]||9000> > <player.item_in_hand.max_durability>:
         - take iteminhand
         - playsound sound:item_shield_break <player.location>
@@ -43,6 +44,7 @@ Corrosive_prefix_armor_task:
       - determine <[acid_strength].div[5]>
   # % Define variables
     - define item <player.equipment_map.get[<[equipment]>]>
+    - define acid_strength <[acid_strength].div[<[item].enchantment_map.get[hardened].add[1]>]> if:<[item].enchantments.contains[hardened]>
     - define durability <[item].durability.add[<[acid_strength]>]>
   # % Item break check
     - if !<[item].repairable>:
