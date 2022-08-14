@@ -191,7 +191,7 @@ morb_hits_block:
         - spawn <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> <context.projectile.location> save:shot
         - flag <entry[shot].spawned_entity> owner:<context.projectile.shooter>
     - else:
-      - drop morb_empty_reuseable <context.projectile.location> if:<context.projectile.has_flag[reuseable]>
+      - drop morb_empty_reuseable <context.location.center.add[<context.hit_face>]> if:<context.projectile.has_flag[reuseable]>
 
 morb_throw_filled:
   type: task
@@ -225,7 +225,7 @@ filled_morb_hits_block:
       - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.location.add[<context.hit_face.mul[1.5]>]> destination:<context.projectile.shooter.eye_location> save:shot
       - flag <entry[shot].shot_entity> owner:<context.projectile.shooter>
     - else:
-      - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.location.add[<context.hit_face>]>
+      - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.location.center.add[<context.hit_face>]>
 
 morb_cancel:
   type: task
