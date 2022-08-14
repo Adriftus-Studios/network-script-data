@@ -1,6 +1,6 @@
 Hardened_enchantment:
   type: enchantment
-  id: Dark_Vision
+  id: hardened
   debug: false
   slots:
   - head
