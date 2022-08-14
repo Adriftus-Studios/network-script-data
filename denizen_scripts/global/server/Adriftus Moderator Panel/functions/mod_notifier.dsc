@@ -35,4 +35,4 @@ mod_chat_notifier:
         - run chat_system_speak "def.message:I have sent <[name]> from <[text]>." def.channel:moderation
       - case InventoryRestore:
         # -- Used for fully restoring inventories.
-        - run chat_system_speak "def.message:I have restored <[name]>'s inventory<&co> <[text]>." def.channel:moderation
+        - run chat_system_speak "def.message:I have restored <[name]>'s inventory on <bungee.server><&co> <[text]>." def.channel:moderation
