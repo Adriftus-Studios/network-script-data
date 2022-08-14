@@ -101,6 +101,9 @@ mission_farm_events:
       - foreach <[missions]> as:mission:
         - if <player.flag[<[mission]>].get[done]>:
           - foreach next
-        - define block <context.material.name>
+        - if <context.material.name> == potatoes:
+          - define block potato
+        - else:
+          - define block <context.material.name>
         - if <player.flag[<[mission]>].get[block]> == <[block]>:
           - run missions_update_progress def:add|<[mission]>|1
