@@ -186,10 +186,10 @@ morb_hits_block:
     - if <context.projectile.has_flag[rebounding]>:
       - if <context.projectile.shooter.location.distance[<context.location>]> > 3.9:
         - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.projectile.location> destination:<context.projectile.shooter.eye_location> save:shot
-        - flag <entry[shot].shot_entity> owner:<context.projectile.shooter>
+        - flag <entry[shot].shot_entity> owner:<context.projectile.flag[owner]>
       - else:
         - spawn <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> <context.projectile.location> save:shot
-        - flag <entry[shot].spawned_entity> owner:<context.projectile.shooter>
+        - flag <entry[shot].spawned_entity> owner:<context.projectile.flag[owner]>
     - else:
       - drop morb_empty_reuseable <context.location.center.add[<context.hit_face>]> if:<context.projectile.has_flag[reuseable]>
 
@@ -212,7 +212,7 @@ filled_morb_hits_entity:
     - spawn <context.projectile.flag[spawn]> <context.hit_entity.location>
     - if <context.projectile.has_flag[rebounding]>:
       - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.hit_entity.location> destination:<context.projectile.shooter.eye_location> save:shot
-      - flag <entry[shot].shot_entity> owner:<context.projectile.shooter>
+      - flag <entry[shot].shot_entity> owner:<context.projectile.flag[owner]>
     - else:
       - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
 
@@ -223,7 +223,7 @@ filled_morb_hits_block:
     - spawn <context.projectile.flag[spawn]> <context.location.add[<context.hit_face>].center.below[0.5]>
     - if <context.projectile.has_flag[rebounding]>:
       - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.location.add[<context.hit_face.mul[1.5]>]> destination:<context.projectile.shooter.eye_location> save:shot
-      - flag <entry[shot].shot_entity> owner:<context.projectile.shooter>
+      - flag <entry[shot].shot_entity> owner:<context.projectile.flag[owner]>
     - else:
       - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.location.center.add[<context.hit_face>]>
 
