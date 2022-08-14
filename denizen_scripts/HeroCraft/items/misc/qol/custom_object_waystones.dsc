@@ -193,9 +193,7 @@ waystone_use:
         - else:
           - run totem_test def:2
           - title "title:<&a>Waystone Unlocked!" fade_in:1s stay:1s fade_out:1s
-          - flag <player> waystones.town.<[entity].flag[town]>.location:<[entity].location.simple>
-          - flag <player> waystones.town.<[entity].flag[town]>.entity_uuid:<[entity].uuid>
-          - flag <[entity]> unlocked_players:->:<player>
+          - flag <player> waystones.town.<[entity].flag[town]>
       - case server:
         - inject waystone_open_teleport_main_menu
       - case wild:
@@ -214,9 +212,6 @@ waystone_remove:
     - choose <context.item.flag[type]>:
       - case town:
         - define town <context.item.flag[town]>
-        - define entity <context.item.flag[entity]>
-        - foreach <[town].flag[waystone.entity].flag[unlocked_players]>:
-          - flag <[value]> waystones.town.<[town]>:!
         - flag <[town]> waystone:!
       - case server:
         - define entity <context.item.flag[entity]>
@@ -336,9 +331,6 @@ waystone_open_teleport_town_menu:
       - if <[loop_index].mod[45]> == 0:
         - foreach stop
       - if !<town[<[town]>].exists>:
-        - flag <player> waystones.town.<[town]>:!
-        - foreach next
-      - if <player.flag[waystones.town.<[town]>.location]> != <town[<[town]>].flag[waystone.location]>:
         - flag <player> waystones.town.<[town]>:!
         - foreach next
       - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[town].flag[waystone.tp_location]>;display=<town[<[town]>].name>] d:<[inventory]>
