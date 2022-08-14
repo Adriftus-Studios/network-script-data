@@ -184,7 +184,7 @@ morb_hits_block:
   debug: false
   script:
     - if <context.projectile.has_flag[rebounding]>:
-      - if <context.projectile.shooter.location.distance[<context.location>]> > 2.9:
+      - if <context.projectile.shooter.location.distance[<context.location>]> > 3.9:
         - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.projectile.location> destination:<context.projectile.shooter.eye_location> save:shot
         - flag <entry[shot].shot_entity> owner:<context.projectile.shooter>
       - else:
