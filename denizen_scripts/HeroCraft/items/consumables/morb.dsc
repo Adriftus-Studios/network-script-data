@@ -232,6 +232,11 @@ morb_cancel:
   debug: false
   script:
     - if <context.entity.flag[owner]> == <context.pickup_entity>:
-      - determine ITEM:<context.item.with[flag=on_item_pickup:!;flag=on_item_pickup_inventory:!]>
+      - determine passively cancelled
+      - ratelimit <context.entity> 1s
+      - adjust <player> fake_pickup:<context.entity>
+      - give <context.item.with[flag=on_item_pickup:!;flag=on_item_pickup_inventory:!]> to:<context.pickup_entity.inventory>
+      - wait 1t
+      - remove <context.entity>
     - else:
       - determine cancelled
