@@ -103,6 +103,8 @@ mission_farm_events:
           - foreach next
         - if <context.material.name> == potatoes:
           - define block potato
+        - else if <context.material.name> == carrots:
+          - define block carrot
         - else:
           - define block <context.material.name>
         - if <player.flag[<[mission]>].get[block]> == <[block]>:
