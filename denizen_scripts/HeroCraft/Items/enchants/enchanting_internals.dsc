@@ -69,3 +69,10 @@ enchanted_book_highlighter:
       - if <server.flag[custom_enchant_data.valid_enchants].contains_any[<context.item.display.after[(].replace_text[<&sp>].with[_].before_last[_].if_null[fail]>]>:
         - adjust <context.entity> custom_name:<context.item.display>
         - adjust <context.entity> custom_name_visible:true
+
+enchanted_book_name_remover:
+  type: world
+  debug: false
+  events:
+    on player picks up enchanted_book:
+      - determine ITEM:<context.item.with[display=<empty>]>
