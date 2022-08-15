@@ -75,4 +75,4 @@ enchanted_book_name_remover:
   debug: false
   events:
     on player picks up enchanted_book:
-      - determine ITEM:<context.item.with[display=<empty>]>
+      - determine ITEM:<context.item.with[display="Enchanted Book"]>
