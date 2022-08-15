@@ -70,6 +70,7 @@ morb_empty_rebounding:
   lore:
     - <&b><&l>Multiple Use Morb
     - <&b><&l>Rebounds on Use
+    - <&c><&l>Does not work at extreme distances
     - <&b>Throw at an Entity to capture it.
     - <&c>Does Not Work On<&co>
     - <&c>- Players
