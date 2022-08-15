@@ -26,4 +26,6 @@ aging_enchantment:
     - ratelimit <player> 12t
     - if <util.random_chance[<context.level.mul[10]>].not> || <context.victim.is_baby.not>:
       - stop
+    - determine passively cancelled
+    - playeffect at:<context.victim.location> effect:villager_happy offset:0.5,0.5,0.5 quantity:100
     - age <context.victim> adult
