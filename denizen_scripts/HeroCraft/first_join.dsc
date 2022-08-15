@@ -31,7 +31,7 @@ Herocraft_RTP:
       - flag player hot_dropping:!
 
 hot_drop_death:
-  type: task
+  type: world
   debug: false
   events:
     on player dies flagged:hot_dropping:

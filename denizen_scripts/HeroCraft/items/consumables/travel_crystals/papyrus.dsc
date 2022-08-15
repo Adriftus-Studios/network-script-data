@@ -5,10 +5,10 @@ papyrus:
   data:
     recipe_book_category: misc
   lore:
-  - "<&a>-------------"
-  - "<&7>Crafting Material"
-  - "<&e>Magical Paper for Crafting"
-  - "<&a>-------------"
+  - <&a>-------------
+  - <&7>Crafting Material
+  - <&e>Magical Paper for Crafting
+  - <&a>-------------
   recipes:
     1:
       type: shaped

@@ -6,10 +6,10 @@ magical_pylon:
   data:
     recipe_book_category: misc
   lore:
-  - "<&a>-------------"
-  - "<&7>Crafting Material"
-  - "<&e>Magical Casing for Crystals"
-  - "<&a>-------------"
+  - <&a>-------------
+  - <&7>Crafting Material
+  - <&e>Magical Casing for Crystals
+  - <&a>-------------
   mechanisms:
     custom_model_data: 104
   recipes:

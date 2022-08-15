@@ -3,7 +3,7 @@ actor_weapon_blood_bandit:
   material: netherite_sword
   display name: <&c>The UGA
   lore:
-  - "<&e>Sword of the Blood Bandit"
+  - <&e>Sword of the Blood Bandit
   mechanisms:
     custom_model_data: 2
   flags:

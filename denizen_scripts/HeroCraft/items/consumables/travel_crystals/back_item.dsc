@@ -6,9 +6,9 @@ back_crystal:
     recipe_book_category: travel.crystal
   lore:
     - <&a><&l>Consumed on Use
-    - "<&e>--------------------"
-    - "<&e>Return to your last death location"
-    - "<&e>--------------------"
+    - <&e>--------------------
+    - <&e>Return to your last death location
+    - <&e>--------------------
   flags:
     right_click_script:
       - back_execute
@@ -32,10 +32,10 @@ back_scroll:
     recipe_book_category: travel.scroll
   lore:
     - <&a><&l>Consumed on Use
-    - "<&e>--------------------"
-    - "<&e>Return to your last death location"
-    - "<&c>Incapable of long distances"
-    - "<&e>--------------------"
+    - <&e>--------------------
+    - <&e>Return to your last death location
+    - <&c>Incapable of long distances
+    - <&e>--------------------
   flags:
     right_click_script:
       - back_execute

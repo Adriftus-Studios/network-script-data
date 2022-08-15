@@ -3,7 +3,7 @@ multiverse_dust:
   material: feather
   display name: <element[Multiverse Dust].rainbow>
   lore:
-  - "<&e>What the heck is this?"
+  - <&e>What the heck is this?
   data:
     recipe_book_category: travel
   flags:

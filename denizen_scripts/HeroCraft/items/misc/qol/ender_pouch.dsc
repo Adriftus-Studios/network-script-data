@@ -4,7 +4,7 @@ ender_pouch:
   material: feather
   display name: <&d>Ender Pouch
   lore:
-    - "<&b>Access your Ender Chest!"
+    - <&b>Access your Ender Chest!
   flags:
     right_click_script: ender_pouch_open
   mechanisms:
