@@ -224,7 +224,8 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_combust]>
-    on entity_flagged:on_spawn spawns:
+    after entity spawns because CUSTOM:
+      - stop if:<context.entity.has_flag[on_spawn].not>
       - if <context.entity.flag[on_spawn].object_type> == List:
         - foreach <context.entity.flag[on_spawn]>:
           - inject <[value]>
