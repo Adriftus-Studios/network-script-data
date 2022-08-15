@@ -69,6 +69,7 @@ Mob_drop_handler:
     on entity_flagged:rare_mob killed by player:
     - if <context.entity.has_flag[resurrecting]>:
       - stop
+    - stop if:<util.random_chance[99]>
     - define drop_type drop
     - if <context.entity.has_flag[explosive]>:
       - define drop_type give
