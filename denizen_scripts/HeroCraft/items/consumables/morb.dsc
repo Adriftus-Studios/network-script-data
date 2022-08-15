@@ -178,6 +178,7 @@ morb_hits_entity:
       - shoot "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<[item]>]>" origin:<context.projectile.location> destination:<context.projectile.shooter.eye_location> save:shot
     - else:
       - drop <[item]> <context.hit_entity.location.above[1]>
+    - inventory clear d:<context.hit_entity.inventory> if:<context.hit_entity.inventory.exists>
     - remove <context.hit_entity>
 
 morb_hits_block:
@@ -190,7 +191,7 @@ morb_hits_block:
       - else:
         - spawn "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]>" <context.projectile.location> save:shot
     - else:
-      - drop morb_empty_reuseable <context.location.center.add[<context.hit_face>]> if:<context.projectile.has_flag[reuseable]>
+      - drop morb_empty_reuseable <context.projectile.location.center.add[<context.hit_face>]> if:<context.projectile.has_flag[reuseable]>
 
 morb_throw_filled:
   type: task
