@@ -181,7 +181,7 @@ mission_craft:
       - 32
     spyglass:
       - 8
-    specral_arrow:
+    spectral_arrow:
       - 64
       - 128
     magma_cream:
