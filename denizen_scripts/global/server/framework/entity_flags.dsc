@@ -224,3 +224,9 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_combust]>
+    on entity_flagged:on_spawn spawns:
+      - if <context.entity.flag[on_spawn].object_type> == List:
+        - foreach <context.entity.flag[on_spawn]>:
+          - inject <[value]>
+      - else:
+        - inject <context.entity.flag[on_spawn]>
