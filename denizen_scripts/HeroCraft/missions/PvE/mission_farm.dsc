@@ -105,6 +105,8 @@ mission_farm_events:
           - define block potato
         - else if <context.material.name> == carrots:
           - define block carrot
+        - else if <context.material.name> == beetroots:
+          - define block beetroot
         - else:
           - define block <context.material.name>
         - if <player.flag[<[mission]>].get[block]> == <[block]>:
