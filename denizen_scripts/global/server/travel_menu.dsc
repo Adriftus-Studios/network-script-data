@@ -128,6 +128,7 @@ travel_menu_to_server:
   debug: false
   script:
     - determine passively cancelled
+    - flag player changing_server:<context.item.flag[server]> expire:3s
     - adjust <player> send_to:<context.item.flag[server]>
 
 travel_menu_inventory:
