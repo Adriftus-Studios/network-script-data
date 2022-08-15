@@ -128,7 +128,7 @@ travel_menu_to_server:
   debug: false
   script:
     - determine passively cancelled
-    - flag player changing_server:<context.item.flag[server]> expire:3s
+    - flag player "temp.leave_message:<player.name> has gone to <context.item.flag[server]>"
     - adjust <player> send_to:<context.item.flag[server]>
 
 travel_menu_inventory:
