@@ -550,8 +550,8 @@ message_command:
     - else:
       - define msg <context.args.get[2].to[last].separated_by[<&sp>]>
     - define sender <proc[get_player_display_name].strip_color.replace[<&sp>].with[_]>
-    - define self_name <proc[get_player_display_name]>
-    - define other_name <proc[get_player_display_name].context[<player[<server.flag[player_map.names.<[target_name]>.uuid]>]>]>
+    - define self_name <player.name>
+    - define other_name <[target].name>
     - define icon <&chr[1001]>
     # Allow Chat Colors in Chat
     - if <player.has_permission[adriftus.chat.color]>:
