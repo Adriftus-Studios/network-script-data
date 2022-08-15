@@ -524,7 +524,7 @@ message_command:
     - r
   description: Message another player
   tab completions:
-    1: <server.flag[player_map.names].keys>
+    1: <server.online_players.parse[name]>
   script:
     - if <context.alias> == reply || <context.alias> == r:
       - if <player.has_flag[last_direct_message]>:
