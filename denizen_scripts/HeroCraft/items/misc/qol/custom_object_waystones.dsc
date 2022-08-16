@@ -309,7 +309,7 @@ waystone_back_to_main:
 
 waystone_remove_item:
   type: item
-  material: barrier
+  material: paper
   display name: <&c>Remove Waystone
   flags:
     run_script: waystone_remove
