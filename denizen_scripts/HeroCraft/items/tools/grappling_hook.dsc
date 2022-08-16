@@ -96,8 +96,8 @@ grappling_hook_shoot:
     - determine passively cancelled
     - ratelimit <player> 1t
     - if <context.item.has_flag[last_used]>:
-      - narrate <&c>This item has not recharged
-      - narrate <&e>Cooldown Remaining<&co> <&f><duration[<context.item.script.data_key[data.cooldown]>].sub[<context.item.flag[last_used].from_now>].formatted>
+      - narrate "<&c>This item has not recharged"
+      - narrate "<&e>Cooldown Remaining<&co> <&f><duration[<context.item.script.data_key[data.cooldown]>].sub[<context.item.flag[last_used].from_now>].formatted>"
       - stop
     - define range <context.item.script.data_key[data.range]>
     - define target <player.eye_location.precise_cursor_on[<[range]>].if_null[null]>
