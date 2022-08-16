@@ -1,4 +1,4 @@
-custom_mob_prefix_shrieking:
+custom_mob_suffix_shrieking:
   Type: world
   debug: false
   events:
