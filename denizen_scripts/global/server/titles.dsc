@@ -39,6 +39,7 @@ titles_remove:
     - determine passively cancelled
     - define title_id <context.item.flag[cosmetic].if_null[default]> if:<[title_id].exists.not>
     - run global_player_data_modify def:<player.uuid>|titles.current_tag|!
+    - run global_player_data_modify def:<player.uuid>|titles.current|!
     - if <context.inventory.exists>:
       - define info_item <context.inventory.slot[<script[cosmetic_selection_inventory_open].data_key[data.slot_data.remove_slot]>]>
       - run cosmetic_selection_inventory_open def:<[info_item].flag[type]>|<[info_item].flag[page]>
