@@ -36,6 +36,8 @@ plucking_enchant_handler:
       - define slot <player.held_item_slot>
       - if <context.hand> == offhand:
         - define slot <player.inventory.slot[41]>
+      - if <player.item_in_hand.enchantment_map.get[shiny_blades].exists>:
+        - drop xp <context.entity.location> quantity:<player.item_in_hand.enchantment_map.get[shiny_blades].mul[1.5].round_down>
       - if <context.item.max_durability.sub[<context.item.durability>]> > 1:
         - inventory adjust slot:<[slot]> durability:<[slot].durability.add[1]>
         - stop
