@@ -313,13 +313,17 @@ waystone_remove_item:
   display name: <&c>Remove Waystone
   flags:
     run_script: waystone_remove
+  mechanisms:
+    custom_model_data: 206
 
 waystone_rename_item:
   type: item
-  material: name_tag
+  material: paper
   display name: <&b>Rename Waystone
   flags:
     run_script: waystone_rename
+  mechanisms:
+    custom_model_data: 205
 
 waystone_open_teleport_town_menu:
   type: task
