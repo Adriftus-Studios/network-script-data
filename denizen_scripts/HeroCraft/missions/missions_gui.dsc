@@ -8,9 +8,9 @@ missions_inv:
   size: 45
   definitions:
     daily: <item[feather].with[display_name=<&a>Daily;lore=<list[<&6>Resets<&sp>in<&co><&sp><&e><util.time_now.next_hour_of_day[11].from_now.formatted>]>;flag=timeframe:daily;custom_model_data=3;flag=run_script:missions_inv_run]>
-    weekly: <item[feather].with[display_name=<&e>Weekly;lore=<list[<&6>Resets<&sp>in<&co><&sp><&e><util.time_now.next_day_of_week[TUESDAY].from_now.formatted>]>;flag=timeframe:weekly;custom_model_data=3;flag=run_script:missions_inv_run]>
-    monthly: <item[feather].with[display_name=<&6>Monthly;lore=<list[<&6>Resets<&sp>in<&co><&sp><&e><util.time_now.next_day_of_month[1].from_now.formatted>]>;flag=timeframe:monthly;custom_model_data=3;flag=run_script:missions_inv_run]>
-    herocraft: <item[feather].with[display_name=<&b>HeroCraft;flag=timeframe:persistent;custom_model_data=3;flag=run_script:missions_inv_run]>
+    weekly: <item[feather].with[display_name=<&e>Weekly;lore=<list[<&6>Resets<&sp>in<&co><&sp><&e><util.time_now.next_day_of_week[TUESDAY].add[11h].from_now.formatted>]>;flag=timeframe:weekly;custom_model_data=3;flag=run_script:missions_inv_run]>
+    monthly: <item[feather].with[display_name=<&6>Monthly;lore=<list[<&6>Resets<&sp>in<&co><&sp><&e><util.time_now.next_day_of_month[1].add[11h].from_now.formatted>]>;flag=timeframe:monthly;custom_model_data=3;flag=run_script:missions_inv_run]>
+    herocraft: <item[feather].with[display_name=<&b>HeroCraft;lore=<list[<&6>Resets<&sp>in<&co><&sp><&e><util.time_now.next_day_of_month[1].add[11h].from_now.formatted>]>;flag=timeframe:persistent;custom_model_data=3;flag=run_script:missions_inv_run]>
     none: <item[barrier].with[display_name=<&c>No<&sp>Missions]>
     close: <item[feather].with[display_name=<&c><&l>χ<&sp>Close;custom_model_data=3;flag=run_script:missions_inv_close]>
   slots:
