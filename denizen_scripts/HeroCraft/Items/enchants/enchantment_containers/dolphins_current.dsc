@@ -57,3 +57,11 @@ Dolphins_Current_enchantment_events:
     - wait 1t
     - if <player.item_in_hand> == <context.item>:
       - inject locally path:scripts.give
+    on player swaps items main:item_enchanted:dolphins_current:
+    - if <context.main.enchantments.contains[dolphins_current]>:
+      - inject locally path:scripts.give
+    - else if <context.offhand.enchantments.contains[dolphins_current]>:
+      - inject locally path:scripts.take
+    on player swaps items offhand:item_enchanted:dolphins_current:
+    - if <context.offhand.enchantments.contains[dolphins_current]> && !<context.main.enchantments.contains[dolphins_current]>:
+      - inject locally path:scripts.take
