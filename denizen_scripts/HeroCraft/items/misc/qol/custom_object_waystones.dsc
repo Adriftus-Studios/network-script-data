@@ -209,15 +209,14 @@ waystone_remove:
   type: task
   debug: false
   script:
+    - define entity <context.item.flag[entity]>
     - choose <context.item.flag[type]>:
       - case town:
         - define town <context.item.flag[town]>
         - flag <[town]> waystone:!
       - case server:
-        - define entity <context.item.flag[entity]>
         - flag server waystones.server.<[entity].uuid>:!
       - case wild:
-        - define entity <context.item.flag[entity]>
         - foreach <[entity].flag[unlocked_players]>:
           - flag <[value]> waystones.wild.<[entity].uuid>:!
         - flag server waystones.wild.<[entity].uuid>:!
