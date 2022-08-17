@@ -128,6 +128,7 @@ travel_menu_to_server:
   debug: false
   script:
     - determine passively cancelled
+    - flag player "temp.leave_message:<player.name> has gone to <context.item.flag[server]>"
     - adjust <player> send_to:<context.item.flag[server]>
 
 travel_menu_inventory:
@@ -195,7 +196,7 @@ spawn_button_info:
   lore:
     - <&6>Return to Spawn!
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 502
   flags:
     run_script: teleport_to_spawn
 

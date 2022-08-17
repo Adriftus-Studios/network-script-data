@@ -92,7 +92,7 @@ mission_farm_events:
   type: world
   debug: false
   events:
-    on player breaks vanilla_tagged:crops flagged:missions.active.farm:
+    on player breaks pumpkin|melon|wheat|potatoes|carrots|beetroots flagged:missions.active.farm:
       # Add missions with ID farm to a list.
       - define missions <proc[missions_get].context[farm]>
       #Check if the crop is fully grown if it has an age.
@@ -101,6 +101,13 @@ mission_farm_events:
       - foreach <[missions]> as:mission:
         - if <player.flag[<[mission]>].get[done]>:
           - foreach next
-        - define block <context.material.name>
+        - if <context.material.name> == potatoes:
+          - define block potato
+        - else if <context.material.name> == carrots:
+          - define block carrot
+        - else if <context.material.name> == beetroots:
+          - define block beetroot
+        - else:
+          - define block <context.material.name>
         - if <player.flag[<[mission]>].get[block]> == <[block]>:
           - run missions_update_progress def:add|<[mission]>|1

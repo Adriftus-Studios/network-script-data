@@ -8,6 +8,10 @@ network_leave_join_messages:
       - determine passively NONE
       - if <yaml[global.player.<player.uuid>].contains[settings.leave_task]> && <script[network_leave_<yaml[global.player.<player.uuid>].read[settings.leave_task]>].exists>:
         - inject network_leave_<yaml[global.player.<player.uuid>].read[settings.leave_task]>
+      - else if <player.has_flag[temp.leave_message]>:
+        - define message <player.flag[temp.leave_message]>.
+        - define discord_message <player.flag[temp.leave_message]>.
+        - flag player temp.leave_message:!
       - else if <server.has_flag[leave_message]>:
         - define message <server.flag[leave_message].parsed>
         - define discord_message <server.flag[leave_message].parsed>

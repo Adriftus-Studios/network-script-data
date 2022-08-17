@@ -1,6 +1,6 @@
 Dark_Vision_enchantment:
   type: enchantment
-  id: Dark_Vision
+  id: dark_vision
   debug: false
   slots:
   - head

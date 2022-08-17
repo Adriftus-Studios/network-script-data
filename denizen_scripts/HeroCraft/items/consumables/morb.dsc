@@ -70,6 +70,7 @@ morb_empty_rebounding:
   lore:
     - <&b><&l>Multiple Use Morb
     - <&b><&l>Rebounds on Use
+    - <&c><&l>Does not work at extreme distances
     - <&b>Throw at an Entity to capture it.
     - <&c>Does Not Work On<&co>
     - <&c>- Players
@@ -126,6 +127,7 @@ morb_throw:
     - flag <entry[shot].shot_entity> morb:<player>
     - flag <entry[shot].shot_entity> reuseable if:<context.item.has_flag[reuseable]>
     - flag <entry[shot].shot_entity> rebounding if:<context.item.has_flag[rebounding]>
+    - flag <entry[shot].shot_entity> owner:<player> if:<context.item.has_flag[rebounding]>
     - flag <entry[shot].shot_entity> on_hit_entity:morb_hits_entity
     - flag <entry[shot].shot_entity> on_hit_block:morb_hits_block
     - take iteminhand quantity:1
@@ -144,7 +146,7 @@ morb_hits_entity:
       - stop
     - if <script[morb_config].data_key[blacklisted_entities].contains[<context.hit_entity.entity_type>]>:
       - if <context.projectile.has_flag[rebounding]>:
-        - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.item.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.hit_entity.location> destination:<context.projectile.shooter.eye_location> save:shot
+        - shoot "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]>" origin:<context.hit_entity.location> destination:<context.projectile.shooter.eye_location> save:shot
       - else:
         - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
       - stop
@@ -172,10 +174,11 @@ morb_hits_entity:
     - if <context.projectile.has_flag[rebounding]>:
       - flag <[item]> on_item_pickup_inventory:cancel
       - flag <[item]> on_item_pickup:morb_cancel
-      - flag <[item]> owner:<context.projectile.shooter>
-      - shoot <entity[dropped_item].with[item=<[item]>]> origin:<context.projectile.location> destination:<context.projectile.shooter.eye_location> save:shot
+      - flag <[item]> owner:<context.projectile.flag[owner]>
+      - shoot "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<[item]>]>" origin:<context.projectile.location> destination:<context.projectile.shooter.eye_location> save:shot
     - else:
       - drop <[item]> <context.hit_entity.location.above[1]>
+    - inventory clear d:<context.hit_entity.inventory> if:<context.hit_entity.inventory.exists>
     - remove <context.hit_entity>
 
 morb_hits_block:
@@ -184,11 +187,11 @@ morb_hits_block:
   script:
     - if <context.projectile.has_flag[rebounding]>:
       - if <context.projectile.shooter.location.distance[<context.location>]> > 3.9:
-        - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.item.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.projectile.location> destination:<context.projectile.shooter.eye_location> save:shot
+        - shoot "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]>" origin:<context.projectile.location> destination:<context.projectile.shooter.eye_location> save:shot
       - else:
-        - spawn <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.item.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> <context.projectile.location> save:shot
+        - spawn "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]>" <context.projectile.location> save:shot
     - else:
-      - drop morb_empty_reuseable <context.location.center.add[<context.hit_face>]> if:<context.projectile.has_flag[reuseable]>
+      - drop morb_empty_reuseable <context.projectile.location.center.add[<context.hit_face>]> if:<context.projectile.has_flag[reuseable]>
 
 morb_throw_filled:
   type: task
@@ -199,6 +202,7 @@ morb_throw_filled:
     - flag <entry[shot].shot_entity> spawn:<context.item.flag[describe]>
     - flag <entry[shot].shot_entity> reuseable if:<context.item.has_flag[reuseable]>
     - flag <entry[shot].shot_entity> rebounding if:<context.item.has_flag[rebounding]>
+    - flag <entry[shot].shot_entity> owner:<player> if:<context.item.has_flag[rebounding]>
     - flag <entry[shot].shot_entity> on_hit_entity:filled_morb_hits_entity
     - flag <entry[shot].shot_entity> on_hit_block:filled_morb_hits_block
 
@@ -208,7 +212,7 @@ filled_morb_hits_entity:
   script:
     - spawn <context.projectile.flag[spawn]> <context.hit_entity.location>
     - if <context.projectile.has_flag[rebounding]>:
-      - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.item.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.hit_entity.location> destination:<context.projectile.shooter.eye_location> save:shot
+      - shoot "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]>" origin:<context.hit_entity.location> destination:<context.projectile.shooter.eye_location> save:shot
     - else:
       - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
 
@@ -218,7 +222,7 @@ filled_morb_hits_block:
   script:
     - spawn <context.projectile.flag[spawn]> <context.location.add[<context.hit_face>].center.below[0.5]>
     - if <context.projectile.has_flag[rebounding]>:
-      - shoot <entity[dropped_item].with[item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.item.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]> origin:<context.location.add[<context.hit_face.mul[1.5]>]> destination:<context.projectile.shooter.eye_location> save:shot
+      - shoot "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]>" origin:<context.location.add[<context.hit_face.mul[1.5]>]> destination:<context.projectile.shooter.eye_location> save:shot
     - else:
       - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.location.center.add[<context.hit_face>]>
 

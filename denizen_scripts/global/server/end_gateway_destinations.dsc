@@ -15,6 +15,7 @@ gateway_teleport:
           - if <[gateway].has_flag[destination.location]>:
             - bungeerun <[gateway].flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<[gateway].flag[destination.location]>
           - wait 1t
+          - flag player "temp.leave_message:<&d>Disappeared into a mysterious portal."
           - adjust <player> send_to:<[gateway].flag[destination.server]>
           - wait 1t
           - stop

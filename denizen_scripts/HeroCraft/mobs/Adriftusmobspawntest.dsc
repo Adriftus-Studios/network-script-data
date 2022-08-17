@@ -61,6 +61,16 @@ rarity_data_table:
     prefixes: 2
     suffixes: 2
     slaying: 4
+  godly:
+    color: <gold><bold>
+    prefixes: 5
+    suffixes: 3
+    slaying: 5
+  dread:
+    color: <&c><bold>
+    prefixes: 8
+    suffixes: 4
+    slaying: 6
 
 Mob_drop_handler:
   type: world
@@ -69,6 +79,7 @@ Mob_drop_handler:
     on entity_flagged:rare_mob killed by player:
     - if <context.entity.has_flag[resurrecting]>:
       - stop
+    - stop if:<util.random_chance[95]>
     - define drop_type drop
     - if <context.entity.has_flag[explosive]>:
       - define drop_type give
@@ -91,7 +102,7 @@ Mob_drop_handler:
         - define rarity very_rare
         - define rarity_color <&d>
 #        - define glow_color magenta
-      - case 5:
+      - case 5 6 7:
         - define rarity very_rare
         - define rarity_color <&d>
 #        - define glow_color magenta
@@ -128,6 +139,8 @@ rarity_info_table:
   rare: <&b>
   epic: <&d>
   legendary: <&6>
+  godly: <gold><bold>
+  dread: <&c><bold>
 
 enchanted_book_mob_give_compiler:
   type: task

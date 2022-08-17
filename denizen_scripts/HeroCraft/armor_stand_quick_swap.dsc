@@ -2,7 +2,7 @@ armor_stand_quick_swap:
   type: world
   debug: false
   events:
-    on player right clicks armor_stand:
+    on player right clicks armor_stand bukkit_priority:HIGHEST:
       - if <player.is_sneaking>:
         - determine passively cancelled
         - ratelimit <player> 5t
