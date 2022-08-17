@@ -26,7 +26,7 @@ xp_finder_enchant_handler:
   type: world
   debug: false
   events:
-    on player breaks sandstone|stone|red_sandstone|andesite|granite|diorite|deepslate|endstone|tuff|dripstone_block with:item_enchanted:xp_finder:
+    on player breaks sandstone|stone|red_sandstone|andesite|granite|diorite|deepslate|endstone|tuff|calcite|dripstone_block|netherrack|blackstone|basalt|smooth_basalt with:item_enchanted:xp_finder:
       - ratelimit <player> 2t
       - stop if:<util.random_chance[<context.item.enchantment_map.get[xp_finder].mul[10]>].not>
       - determine passively NOTHING
