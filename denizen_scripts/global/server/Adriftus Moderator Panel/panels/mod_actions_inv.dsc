@@ -29,9 +29,7 @@ mod_actions_inv_events:
 
     on player right clicks mod_spectate_item in mod_actions_inv:
       - adjust <player> gamemode:spectator
-      - teleport <player> <server.match_player[<context.args.first>].location>
-      - wait 1t
-      - adjust <player> spectator_target:<server.match_player[<context.args.first>]>
+      - adjust <player> spectator_target:<player.flag[amp].get[player]>
       - narrate "<&7>[<&b>ModSpec<&7>] <&a>You are now spectating <player.flag[amp].get[name]>." targets:<player>
       - narrate "<&7>[<&b>ModSpec<&7>] <&a>Use <&hover[<&a>Click to toggle spectator mode.].type[SHOW_TEXT]><&click[/spectate]><&b>/spectate<&end_click><&end_hover> <&a>to return to your last position." targets:<player>
       - run mod_message_discord_command def:<player.uuid>|spectate<&sp><player.flag[amp].get[name]>
