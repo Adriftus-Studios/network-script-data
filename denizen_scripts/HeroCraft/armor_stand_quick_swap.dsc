@@ -3,7 +3,7 @@ armor_stand_quick_swap:
   debug: false
   events:
     on player right clicks armor_stand bukkit_priority:HIGHEST:
-      - if <player.is_sneaking>:
+      - if <player.is_sneaking> && <player.can_build[<context.entity.location>]>:
         - determine passively cancelled
         - ratelimit <player> 5t
         - define equipment <player.equipment>
