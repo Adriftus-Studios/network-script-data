@@ -196,7 +196,7 @@ spawn_button_info:
   lore:
     - <&6>Return to Spawn!
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 502
   flags:
     run_script: teleport_to_spawn
 
