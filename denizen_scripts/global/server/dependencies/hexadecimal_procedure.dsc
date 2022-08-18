@@ -3,11 +3,11 @@ hex:
   debug: false
   definitions: rgb
   script:
-    - define hexgraph <script.data_key[hex]>
+    - define hexgraph <script.data_key[data]>
     - foreach <[rgb].split[,]> as:c:
       - define hex:->:<[hexgraph].get[<[c].div[16].round_down>]><[hexgraph].get[<[c].mod[16]>]>
     - determine <&ns><[hex].unseparated>
-  hex:
+  data:
     0: 0
     1: 1
     2: 2
