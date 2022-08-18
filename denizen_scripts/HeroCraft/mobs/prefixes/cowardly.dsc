@@ -4,6 +4,7 @@ custom_mob_prefix_cowardly:
   events:
     after entity_flagged:cowardly damaged:
     - ratelimit <context.entity> 10s
+    - attack <context.entity> cancel
     - walk <context.entity> <context.entity.backward_flat[20]> speed:10
     - wait 10s
     - walk stop
