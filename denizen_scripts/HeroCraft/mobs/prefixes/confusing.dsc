@@ -3,7 +3,9 @@ custom_mob_prefix_confusing:
   debug: false
   events:
     after entity_flagged:confusing damages player:
-        - define hotbar <player.inventory.slot[1|2|3|4|5|6|7|8|9].random[9999]>
+        - ratelimit <context.damager> 20s
+        - define hotbar <player.inventory.slot[1|2|3|4|5|6|7|8|9].random[9]>
         - repeat 9:
-            - inventory set air slot:<[value]> d:<player.inventory>
-            - inventory set <[hotbar].get[<[value]>]> slot:<[value]> d:<player.inventory>
+          - fakeitem <[hotbar].get[<[value]>]> slot:<[value]> duration:5s
+        - wait 5.1s
+        - inventory update
