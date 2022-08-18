@@ -4,3 +4,4 @@ custom_mob_prefix_hungering:
   events:
     on player damaged by entity_flagged:hungering:
         - feed <player> amount:<util.random.int[1].to[10].mul[-1]>
+        - feed <player> amount:<util.random.int[1].to[10].mul[-1]> if:<context.damager.has_flag[ravenous]>
