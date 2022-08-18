@@ -16,8 +16,8 @@ mod_bug_report_command:
 mod_bug_report_url:
   type: data
   1url: https://github.com/Adriftus-Studios/network-script-data/issues
-  1hover: "<&e>View the issues page on our GitHub."
+  1hover: <&e>View the issues page on our GitHub.
   1text: <&b>Adriftus-Studios/network-script-data/issues
   2url: https://discord.com/channels/771099589713199145/903456196596494398
-  2hover: "<&e>View the issues channel on Syntrocity's Discord Server."
+  2hover: <&e>View the issues channel on Syntrocity's Discord Server.
   2text: <&b>#issues
