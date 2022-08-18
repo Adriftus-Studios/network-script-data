@@ -19,4 +19,4 @@ mock_web_showfake:
     on material falls:
       - stop if:<context.entity.has_flag[showfake].not>
       - determine passively cancelled
-      - showfake <context.entity.fallingblock_material> <context.location> players:<context.location.find_entities[player].within[40]> duration:1m
+      - showfake <context.entity.fallingblock_material> <context.location> players:<context.location.find_players_within[40]> duration:1m
