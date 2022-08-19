@@ -28,9 +28,9 @@ mob_rarity_handler:
     - adjust <context.entity> "custom_name:<script[rarity_data_table].data_key[<[rarity]>.color].parsed><[prefix_list].space_separated.to_titlecase> <context.entity.proc[entity_name]> <[suffix_list].insert[The].at[1].space_separated.to_titlecase.if_null[]>"
     - adjust <context.entity> custom_name_visible:true
     - flag <context.entity> rare_mob:<script[rarity_data_table].data_key[<[rarity]>.slaying]>
-    - inject custom_mob_modifier_task
+    - inject custom_mob_modifier_spawn
 
-custom_mob_modifier_task:
+custom_mob_modifier_spawn:
   type: task
   debug: false
   script:
@@ -71,7 +71,7 @@ rarity_data_table:
     suffixes: 4
     slaying: 6
 
-Mob_drop_handler:
+mob_drop_handler:
   type: world
   debug: false
   events:
@@ -163,7 +163,7 @@ process_mob_attributes_task:
   type: task
   debug: false
   data:
-    MobSpawnChanceMap:
+    spawn_chances:
       uncommon: 10
       rare: 5
       epic: 1
@@ -178,7 +178,7 @@ process_mob_attributes_task:
     - foreach <util.scripts.filter[name.advanced_matches[custom_mob_suffix_*]].parse[name.after[custom_mob_suffix_]]> as:suffix:
       - flag server custom_mob_data.valid_suffixes:->:<[suffix]>
     - narrate targets:<server.online_players.filter[has_permission[admin]]> <&e>Mob<&SP>Suffix<&SP>Data<&6><&SP>Compiled.
-    - define map <script.data_key[data.MobSpawnChanceMap].invert>
+    - define map <script.data_key[data.spawn_chances].invert>
     - define new_map <map>
     - define total 0
     - foreach <[map].keys.numerical>:
