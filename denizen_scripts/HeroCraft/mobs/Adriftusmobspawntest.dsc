@@ -183,6 +183,9 @@ process_mob_attributes_task:
       uncommon: 10
       rare: 5
       epic: 1
+      legendary: 0.5
+      godly: 0.1
+      dread: 0.01
   script:
     - flag server custom_mob_data:!
     - foreach <server.scripts.filter[name.advanced_matches[custom_mob_prefix_*]].parse[name.after[custom_mob_prefix_]]> as:prefix:
