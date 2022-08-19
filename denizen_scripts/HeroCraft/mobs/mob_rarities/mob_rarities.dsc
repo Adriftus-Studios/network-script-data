@@ -17,7 +17,7 @@ mob_rarity_handler:
         - define rarity <server.flag[custom_mob_data.mob_spawn_rates].get[<[value]>]>
         - foreach stop
     - define suffix_master_list <server.flag[custom_mob_data.valid_suffixes]>
-## For debugging, modify the server's valid prefix/suffix flags
+    ## For debugging, modify the server's valid prefix/suffix flags
     - define suffix_master_list <[suffix_master_list].replace[Vortexer].with[Impulsor].replace[leaping].with[Impulsor].replace[clingy].with[Impulsor]> if:<script.data_key[data.ranged].contains_any[<context.entity.entity_type>]>
     - foreach <server.flag[custom_mob_data.valid_prefixes].random[<script[rarity_data_table].data_key[<[rarity]>.prefixes]>]> as:attribute:
       - flag <context.entity> <[attribute]>
@@ -88,23 +88,18 @@ mob_drop_handler:
       - case 1:
         - define rarity common
         - define rarity_color <&f>
-#        - define glow_color white
       - case 2:
         - define rarity uncommon
         - define rarity_color <&a>
-#        - define glow_color green
       - case 3:
         - define rarity rare
         - define rarity_color <&b>
-#        - define glow_color blue
       - case 4:
         - define rarity very_rare
         - define rarity_color <&d>
-#        - define glow_color magenta
       - case 5 6 7:
         - define rarity very_rare
         - define rarity_color <&d>
-#        - define glow_color magenta
         - if <[drop_type]> == drop:
           - repeat 2:
             - inject enchanted_book_mob_drop_compiler
@@ -128,8 +123,6 @@ enchanted_book_mob_drop_compiler:
     - wait 1t
     - adjust <entry[dropped_entity].dropped_entity> custom_name:<[rarity_color].parsed>Enchanted<&sp>Book<&sp>(<[enchantment].before[_enchantment].replace[_].with[<&sp>].to_titlecase><&sp><[level].proc[arabic_to_roman]>)
     - adjust <entry[dropped_entity].dropped_entity> custom_name_visible:true
-#    - adjust <entry[dropped_entity].dropped_entity> glowing:true
-#    - team name:item_glow_color add:<entry[dropped_entity].dropped_entity.uuid> color:<[glow_color]>
 
 rarity_info_table:
   type: data
