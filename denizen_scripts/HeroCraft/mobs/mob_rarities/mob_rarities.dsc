@@ -40,7 +40,6 @@ custom_mob_modifier_task:
 
 rarity_data_table:
   type: data
-##    Rarity: Color
   uncommon:
     color: <&a>
     prefixes: 1
@@ -134,7 +133,6 @@ enchanted_book_mob_drop_compiler:
 
 rarity_info_table:
   type: data
-##    Rarity: Color
   uncommon: <&a>
   rare: <&b>
   epic: <&d>
@@ -152,14 +150,6 @@ enchanted_book_mob_give_compiler:
     - give <proc[enchanted_book_procedural_generator].context[<[enchantment].before[_enchantment]>|<[level]>]>
     - playsound <player.location> sound:entity_item_pickup
 
-
-#TO DO:
-#custom_mob_prefix_Alchemical_prefix_task:
-#  Type: world
-#  debug: false
-#  events:
-
-
 process_mob_data_reload:
   type: world
   debug: false
@@ -168,7 +158,6 @@ process_mob_data_reload:
       - run process_mob_attributes_task
     after server start:
       - run process_mob_attributes_task
-
 
 process_mob_attributes_task:
   type: task
@@ -196,3 +185,9 @@ process_mob_attributes_task:
       - define new_map <[new_map].with[<[value].add[<[total]>].div[100]>].as[<[map].get[<[value]>]>]>
       - define total <[total].add[<[value]>]>
     - flag server custom_mob_data.mob_spawn_rates:<[new_map]>
+
+#TO DO:
+#custom_mob_prefix_Alchemical_prefix_task:
+#  Type: world
+#  debug: false
+#  events:
