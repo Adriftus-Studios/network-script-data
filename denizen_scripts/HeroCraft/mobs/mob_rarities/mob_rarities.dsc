@@ -34,9 +34,9 @@ custom_mob_modifier_spawn:
   type: task
   debug: false
   script:
+    - wait 1t
     - if <[prefix_list].contains_any[fortified]>:
-      - adjust <context.entity> max_health:<context.entity.health_max.mul[2]>
-      - heal <context.entity>
+      - health <context.entity> <context.entity.health_max.mul[2]> heal
 
 rarity_data_table:
   type: data
