@@ -183,10 +183,10 @@ process_mob_attributes_task:
       dread: 0.01
   script:
     - flag server custom_mob_data:!
-    - foreach <server.scripts.filter[name.advanced_matches[custom_mob_prefix_*]].parse[name.after[custom_mob_prefix_]]> as:prefix:
+    - foreach <util.scripts.filter[name.advanced_matches[custom_mob_prefix_*]].parse[name.after[custom_mob_prefix_]]> as:prefix:
       - flag server custom_mob_data.valid_prefixes:->:<[prefix]>
     - narrate targets:<server.online_players.filter[has_permission[admin]]> <&e>Mob<&SP>Prefix<&SP>Data<&6><&SP>Compiled.
-    - foreach <server.scripts.filter[name.advanced_matches[custom_mob_suffix_*]].parse[name.after[custom_mob_suffix_]]> as:suffix:
+    - foreach <util.scripts.filter[name.advanced_matches[custom_mob_suffix_*]].parse[name.after[custom_mob_suffix_]]> as:suffix:
       - flag server custom_mob_data.valid_suffixes:->:<[suffix]>
     - narrate targets:<server.online_players.filter[has_permission[admin]]> <&e>Mob<&SP>Suffix<&SP>Data<&6><&SP>Compiled.
     - define map <script.data_key[data.MobSpawnChanceMap].invert>
