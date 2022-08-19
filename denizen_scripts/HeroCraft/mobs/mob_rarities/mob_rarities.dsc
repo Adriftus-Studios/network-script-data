@@ -38,6 +38,84 @@ custom_mob_modifier_spawn:
     - if <[prefix_list].contains_any[fortified]>:
       - health <context.entity> <context.entity.health_max.mul[2]> heal
 
+mob_drop_handler:
+  type: world
+  debug: false
+  events:
+    on entity_flagged:rare_mob killed by player:
+    - if <context.entity.has_flag[resurrecting]>:
+      - stop
+    - stop if:<util.random_chance[95]>
+    - define drop_type drop
+    - if <context.entity.has_flag[explosive]>:
+      - define drop_type give
+    - if <util.random.int[1].to[10]> > 9:
+      - define chance <element[1]>
+    - choose <context.entity.flag[rare_mob].add[<[chance]||0>]>:
+      - case 1:
+        - define rarity common
+        - define rarity_color <&f>
+      - case 2:
+        - define rarity uncommon
+        - define rarity_color <&a>
+      - case 3:
+        - define rarity rare
+        - define rarity_color <&b>
+      - case 4:
+        - define rarity very_rare
+        - define rarity_color <&d>
+      - case 5 6 7:
+        - define rarity very_rare
+        - define rarity_color <&d>
+        - if <[drop_type]> == drop:
+          - repeat 2:
+            - inject enchanted_book_mob_drop_compiler
+        - if <[drop_type]> == give:
+          - repeat 2:
+            - inject enchanted_book_mob_give_compiler
+        - stop
+    - if <[drop_type]> == drop:
+      - inject enchanted_book_mob_drop_compiler
+    - if <[drop_type]> == give:
+      - inject enchanted_book_mob_give_compiler
+
+process_mob_data_reload:
+  type: world
+  debug: false
+  events:
+    after script reload:
+      - run process_mob_attributes_task
+    after server start:
+      - run process_mob_attributes_task
+
+process_mob_attributes_task:
+  type: task
+  debug: false
+  data:
+    spawn_chances:
+      uncommon: 10
+      rare: 5
+      epic: 1
+      legendary: 0.5
+      godly: 0.1
+      dread: 0.01
+      insane: 0.001
+  script:
+    - flag server custom_mob_data:!
+    - foreach <util.scripts.filter[name.advanced_matches[custom_mob_prefix_*]].parse[name.after[custom_mob_prefix_]]> as:prefix:
+      - flag server custom_mob_data.valid_prefixes:->:<[prefix]>
+    - narrate targets:<server.online_players.filter[has_permission[admin]]> <&e>Mob<&SP>Prefix<&SP>Data<&6><&SP>Compiled.
+    - foreach <util.scripts.filter[name.advanced_matches[custom_mob_suffix_*]].parse[name.after[custom_mob_suffix_]]> as:suffix:
+      - flag server custom_mob_data.valid_suffixes:->:<[suffix]>
+    - narrate targets:<server.online_players.filter[has_permission[admin]]> <&e>Mob<&SP>Suffix<&SP>Data<&6><&SP>Compiled.
+    - define map <script.data_key[data.spawn_chances].invert>
+    - define new_map <map>
+    - define total 0
+    - foreach <[map].keys.numerical>:
+      - define new_map <[new_map].with[<[value].add[<[total]>].div[100]>].as[<[map].get[<[value]>]>]>
+      - define total <[total].add[<[value]>]>
+    - flag server custom_mob_data.mob_spawn_rates:<[new_map]>
+
 rarity_data_table:
   type: data
   uncommon:
@@ -86,47 +164,6 @@ rarity_info_table:
   dread: <&c><bold>
   insane: <dark_red><bold>
 
-mob_drop_handler:
-  type: world
-  debug: false
-  events:
-    on entity_flagged:rare_mob killed by player:
-    - if <context.entity.has_flag[resurrecting]>:
-      - stop
-    - stop if:<util.random_chance[95]>
-    - define drop_type drop
-    - if <context.entity.has_flag[explosive]>:
-      - define drop_type give
-    - if <util.random.int[1].to[10]> > 9:
-      - define chance <element[1]>
-    - choose <context.entity.flag[rare_mob].add[<[chance]||0>]>:
-      - case 1:
-        - define rarity common
-        - define rarity_color <&f>
-      - case 2:
-        - define rarity uncommon
-        - define rarity_color <&a>
-      - case 3:
-        - define rarity rare
-        - define rarity_color <&b>
-      - case 4:
-        - define rarity very_rare
-        - define rarity_color <&d>
-      - case 5 6 7:
-        - define rarity very_rare
-        - define rarity_color <&d>
-        - if <[drop_type]> == drop:
-          - repeat 2:
-            - inject enchanted_book_mob_drop_compiler
-        - if <[drop_type]> == give:
-          - repeat 2:
-            - inject enchanted_book_mob_give_compiler
-        - stop
-    - if <[drop_type]> == drop:
-      - inject enchanted_book_mob_drop_compiler
-    - if <[drop_type]> == give:
-      - inject enchanted_book_mob_give_compiler
-
 enchanted_book_mob_drop_compiler:
   type: task
   debug: false
@@ -148,43 +185,6 @@ enchanted_book_mob_give_compiler:
     - define level <util.random.int[1].to[<server.flag[custom_enchant_data.<[enchantment]>.max]>]>
     - give <proc[enchanted_book_procedural_generator].context[<[enchantment].before[_enchantment]>|<[level]>]>
     - playsound <player.location> sound:entity_item_pickup
-
-process_mob_data_reload:
-  type: world
-  debug: false
-  events:
-    after script reload:
-      - run process_mob_attributes_task
-    after server start:
-      - run process_mob_attributes_task
-
-process_mob_attributes_task:
-  type: task
-  debug: false
-  data:
-    spawn_chances:
-      uncommon: 10
-      rare: 5
-      epic: 1
-      legendary: 0.5
-      godly: 0.1
-      dread: 0.01
-      insane: 0.001
-  script:
-    - flag server custom_mob_data:!
-    - foreach <util.scripts.filter[name.advanced_matches[custom_mob_prefix_*]].parse[name.after[custom_mob_prefix_]]> as:prefix:
-      - flag server custom_mob_data.valid_prefixes:->:<[prefix]>
-    - narrate targets:<server.online_players.filter[has_permission[admin]]> <&e>Mob<&SP>Prefix<&SP>Data<&6><&SP>Compiled.
-    - foreach <util.scripts.filter[name.advanced_matches[custom_mob_suffix_*]].parse[name.after[custom_mob_suffix_]]> as:suffix:
-      - flag server custom_mob_data.valid_suffixes:->:<[suffix]>
-    - narrate targets:<server.online_players.filter[has_permission[admin]]> <&e>Mob<&SP>Suffix<&SP>Data<&6><&SP>Compiled.
-    - define map <script.data_key[data.spawn_chances].invert>
-    - define new_map <map>
-    - define total 0
-    - foreach <[map].keys.numerical>:
-      - define new_map <[new_map].with[<[value].add[<[total]>].div[100]>].as[<[map].get[<[value]>]>]>
-      - define total <[total].add[<[value]>]>
-    - flag server custom_mob_data.mob_spawn_rates:<[new_map]>
 
 #TO DO:
 #custom_mob_prefix_Alchemical_prefix_task:
