@@ -76,6 +76,16 @@ rarity_data_table:
     suffixes: <util.scripts.filter_tag[<[filter_value].starts_with[custom_mob_suffix_]>].size||4>
     slaying: 10
 
+rarity_info_table:
+  type: data
+  uncommon: <&a>
+  rare: <&b>
+  epic: <&d>
+  legendary: <&6>
+  godly: <gold><bold>
+  dread: <&c><bold>
+  insane: <dark_red><bold>
+
 mob_drop_handler:
   type: world
   debug: false
@@ -128,16 +138,6 @@ enchanted_book_mob_drop_compiler:
     - wait 1t
     - adjust <entry[dropped_entity].dropped_entity> custom_name:<[rarity_color].parsed>Enchanted<&sp>Book<&sp>(<[enchantment].before[_enchantment].replace[_].with[<&sp>].to_titlecase><&sp><[level].proc[arabic_to_roman]>)
     - adjust <entry[dropped_entity].dropped_entity> custom_name_visible:true
-
-rarity_info_table:
-  type: data
-  uncommon: <&a>
-  rare: <&b>
-  epic: <&d>
-  legendary: <&6>
-  godly: <gold><bold>
-  dread: <&c><bold>
-  insane: <dark_red><bold>
 
 enchanted_book_mob_give_compiler:
   type: task
