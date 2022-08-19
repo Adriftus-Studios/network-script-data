@@ -153,7 +153,7 @@ enchanted_book_mob_give_compiler:
     - playsound <player.location> sound:entity_item_pickup
 
 
-#TODO:
+#TO DO:
 #custom_mob_prefix_Alchemical_prefix_task:
 #  Type: world
 #  debug: false
