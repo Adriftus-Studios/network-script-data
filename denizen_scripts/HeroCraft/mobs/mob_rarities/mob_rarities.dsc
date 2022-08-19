@@ -164,14 +164,9 @@ process_mob_data_reload:
   type: world
   debug: false
   events:
-    on script reload:
+    after script reload:
       - run process_mob_attributes_task
-
-process_mob_data_start:
-  type: world
-  debug: false
-  events:
-    on server start:
+    after server start:
       - run process_mob_attributes_task
 
 
