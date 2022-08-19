@@ -4,4 +4,4 @@ custom_mob_prefix_light:
   events:
     on entity knocks back entity_flagged:light:
       - determine passively <context.acceleration.mul[2]>
-      - cast SPEED <context.entity> amplifier:10 duration:5s
+      - cast SPEED <context.entity> amplifier:3 duration:5s
