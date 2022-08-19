@@ -8,4 +8,4 @@ custom_mob_prefix_swapping:
     - define loc <context.target.location>
     - teleport <context.target> <context.entity.location>
     - teleport <context.entity> <[loc]>
-    - narrate "<&c>You have been swapped by <context.entity.custom_name>" targets:<context.target>
+    - narrate "<&c>You have been swapped by <context.entity.custom_name>!" targets:<context.target>
