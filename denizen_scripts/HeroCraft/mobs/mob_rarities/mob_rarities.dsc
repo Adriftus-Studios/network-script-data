@@ -70,6 +70,11 @@ rarity_data_table:
     prefixes: 8
     suffixes: 4
     slaying: 6
+  insane:
+    color: <dark_red><bold>
+    prefixes: <util.scripts.filter_tag[<[filter_value].starts_with[custom_mob_prefix_]>].size||8>
+    suffixes: <util.scripts.filter_tag[<[filter_value].starts_with[custom_mob_suffix_]>].size||4>
+    slaying: 10
 
 mob_drop_handler:
   type: world
@@ -132,6 +137,7 @@ rarity_info_table:
   legendary: <&6>
   godly: <gold><bold>
   dread: <&c><bold>
+  insane: <dark_red><bold>
 
 enchanted_book_mob_give_compiler:
   type: task
@@ -163,6 +169,7 @@ process_mob_attributes_task:
       legendary: 0.5
       godly: 0.1
       dread: 0.01
+      insane: 0.001
   script:
     - flag server custom_mob_data:!
     - foreach <util.scripts.filter[name.advanced_matches[custom_mob_prefix_*]].parse[name.after[custom_mob_prefix_]]> as:prefix:
