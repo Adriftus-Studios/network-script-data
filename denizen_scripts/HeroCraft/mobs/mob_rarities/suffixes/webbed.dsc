@@ -2,8 +2,8 @@ custom_mob_suffix_webbed:
   Type: world
   debug: false
   events:
-    after entity_flagged:Webbed targets entity:
-      - define cobwebUUID <util.random.uuid>
+    after entity_flagged:webbed targets entity:
+      - define cobwebUUID <util.random_uuid>
       - define targets <context.target.location.find.surface_blocks.within[2]>
       - foreach <[targets]>:
         - shoot falling_block[fallingblock_type=cobweb;fallingblock_drop_item=false] height:3 destination:<[value]> origin:<context.entity> save:web
@@ -19,4 +19,4 @@ mock_web_showfake:
     on material falls:
       - stop if:<context.entity.has_flag[showfake].not>
       - determine passively cancelled
-      - showfake <context.entity.fallingblock_material> <context.location> players:<context.location.find.players.within[40]> duration:1m
+      - showfake <context.entity.fallingblock_material> <context.location> players:<context.location.find_players_within[40]> duration:1m

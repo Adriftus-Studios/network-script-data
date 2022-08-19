@@ -2,7 +2,7 @@ do_not_use_customs_suffix_impulsor:
   Type: world
   debug: false
   events:
-    after entity_flagged:Impulsor targets entity:
+    after entity_flagged:impulsor targets entity:
       - while <context.entity.is_spawned> && <context.entity.target.exists>:
         - if <context.entity.location.distance[<context.entity.target.location>]> < 8:
             - if !<context.entity.has_flag[mobstuff_pushing]>:
