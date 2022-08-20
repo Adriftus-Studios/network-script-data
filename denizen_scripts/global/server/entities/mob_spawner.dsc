@@ -33,7 +33,7 @@ mob_spawner_armor_stand_spawn_mob_repeat:
     - while <context.entity.is_spawned> && <context.entity.has_flag[mob_to_spawn]>:
       - if <context.entity.has_flag[entities]> && !<context.entity.flag[entities].is_empty>:
         - flag <context.entity> entities:<context.entity.flag[entities].filter[is_spawned]>
-      - if <context.entity.flag[entities].if_null[0]> < 5:
+      - if <context.entity.flag[entities].size.if_null[0]> < 5:
         - spawn <context.entity.flag[mob_to_spawn]> <context.entity.location> save:ent
         - flag <context.entity> entities:<entry[ent].spawned_entity>
       - wait <context.entity.flag[mob_spawn_delay]>
