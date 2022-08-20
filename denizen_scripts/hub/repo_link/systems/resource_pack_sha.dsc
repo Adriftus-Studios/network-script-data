@@ -10,7 +10,7 @@ resource_pack_force:
   type: world
   debug: false
   events:
-    after player joins:
+    on player joins:
       - wait 1s
       - if !<player.has_permission[adriftus.staff]>:
         - if !<player.has_flag[RP_Enabled]> || <player.flag[RP_Enabled]> != <server.flag[rp_sha]>:
