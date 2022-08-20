@@ -3,8 +3,8 @@ stat_tracking:
   debug: false
   events:
     on player crafts item bukkit_priority:MONITOR:
-      - flag player stats.crafting.<context.item>:+:<context.amount>
-      - flag server stats.crafting.<context.item>:+:<context.amount>
+      - flag player stats.crafting.<context.item.script.name.if_null[<context.item.material.name>]>:+:<context.amount>
+      - flag server stats.crafting.<context.item.script.name.if_null[<context.item.material.name>]>:+:<context.amount>
     on entity dies bukkit_priority:MONITOR:
       - flag server stats.death.<context.entity.entity_type>:+:<context.amount>
     on player breaks block bukkit_priority:MONITOR:
