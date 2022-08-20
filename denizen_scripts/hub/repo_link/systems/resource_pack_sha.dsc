@@ -11,6 +11,7 @@ resource_pack_force:
   debug: false
   events:
     after player joins:
+      - wait 1s
       - if !<player.has_permission[adriftus.staff]>:
         - if !<player.has_flag[RP_Enabled]> || <player.flag[RP_Enabled]> != <server.flag[rp_sha]>:
           - resourcepack targets:<player> url:http://<server.flag[ip]>:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced if:<player.has_flag[rp_bypass].not>
