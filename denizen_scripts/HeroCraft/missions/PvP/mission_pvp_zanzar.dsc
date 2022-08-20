@@ -5,7 +5,7 @@ mission_pvp_zanzar:
   category: PvP
   name: <&c>Kill <&4>Players
   description:
-    - <&e>Complete this by killing other players in Zan<&sq>Zar.
+    - <&e>Complete this by killing other players.
   assignment: mission_pvp_zanzar_assignment
   icon: player_head
   cmd: 0
@@ -67,8 +67,6 @@ mission_pvp_zanzar_events:
   debug: false
   events:
     on player killed by entity_flagged:missions.active.pvp_zanzar:
-      - if <bungee.server> != zanzabar:
-        - stop
       - if <context.damager.entity_type> != PLAYER:
         - stop
       - define __player <context.damager>
