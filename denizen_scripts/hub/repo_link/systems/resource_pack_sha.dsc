@@ -37,3 +37,6 @@ resource_pack_force:
     on bungee player leaves network:
       - flag player rp_fail:!
       - flag player RP_Enabled:!
+    on server start:
+      - foreach <server.players_flagged[RP_enabled]>:
+        - flag <[value]> RP_enabled:!
