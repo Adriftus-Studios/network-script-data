@@ -111,8 +111,10 @@ quadruple_compressed_{material}:
 
     with open(f'output/compressed_{material}.dsc', 'w+') as f:
         f.write(file)
+    print(f'Created file: compressed_{material}.dsc')
 
 
-input_material = input(f'What material are you compressing: ')
+while True:
+    input_material = input(f'What material are you compressing: ')
 
-create_item(input_material)
+    create_item(input_material)
