@@ -3,4 +3,4 @@ custom_mob_prefix_attractive:
   debug: false
   events:
     after entity_flagged:attractive damages entity:
-        - look <context.entity> <context.damager.location>
+        - look <context.entity> <context.damager.eye_location>

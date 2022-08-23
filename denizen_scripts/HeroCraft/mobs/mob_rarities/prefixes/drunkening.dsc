@@ -3,4 +3,4 @@ custom_mob_prefix_drunkening:
   debug: false
   events:
     on player damaged by entity_flagged:drunkening:
-        - execute as_server "brew drink red_wine 5 <player.name>"
+        - execute as_server "brew drink beer 10 <player.name>"

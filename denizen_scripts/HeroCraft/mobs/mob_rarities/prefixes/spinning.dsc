@@ -3,4 +3,5 @@ custom_mob_prefix_spinning:
   debug: false
   events:
     on entity damaged by entity_flagged:spinning:
-        - rotate <context.entity> duration:3s frequency:5t yaw:15
+        - ratelimit <context.damager> 30s
+        - rotate <context.entity> duration:2s frequency:2t yaw:15
