@@ -3,7 +3,7 @@ reinforced_deepslate_recipe:
   material: reinforced_deepslate
   no_id: true
   data:
-    recipe_book_category: blocks.deepslate0
+    recipe_book_category: blocks.reinforced_deepslate0
   recipes:
     1:
       type: shaped
