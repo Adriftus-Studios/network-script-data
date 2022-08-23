@@ -407,3 +407,38 @@ waystone_rename_callback:
     - adjust <player.flag[waystone_rename]> custom_name:<[text_input].parse_color>
     - flag server waystones.<player.flag[waystone_rename].flag[type]>.<player.flag[waystone_rename].uuid>.name:<[text_input].parse_color>
     - flag player waystone_rename:!
+
+# waystone_command:
+#   type: command
+#   debug: false
+#   name: waystone
+#   description: Opens a waystone menu.
+#   usage: /waystone
+#   permission: adriftus.command.waystone
+#   permission message: Sorry, <player.name>, you can't use this command.
+#   tab completions:
+#     1: <tern[<player.has_permission[adriftus.command.waystone.other]>].pass[<server.online_players.parse[name]>].fail[<list>]>
+#   script:
+#   - run waystone_open_main_menu def:<server.match_player[<context.args.get[1]>].if_null[<player>]>
+
+waystone_open_main_menu:
+  type: task
+  debug: false
+  definitions: player
+  script:
+    - adjust <queue> linked_player:<[player].if_null[<player>]>
+    - define inventory <inventory[waystone_teleport_menu]>
+    - adjust <[inventory]> title:<&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[1005]>
+    - foreach <[inventory].script.data_key[data.slots]> key:type as:slots:
+      - define color_code <list[<&b>|<&e>|<&a>].get[<[loop_index]>]>
+      - foreach <[slots]> as:slot:
+        - inventory set slot:<[slot]> o:waystone_submenu_item[display=<[color_code]><[type].to_titlecase>;flag=type:<[type]>;flag=entity:<[entity]>] d:<[inventory]>
+    - inventory open d:<[inventory]>
+
+waystone_portable_item:
+  type: item
+  material: slime_ball
+  display name: Porta-Waystone
+  flags:
+    left_click_script:
+    - waystone_open_main_menu
