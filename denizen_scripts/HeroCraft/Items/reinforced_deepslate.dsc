@@ -2,6 +2,8 @@ reinforced_deepslate_recipe:
   type: item
   material: reinforced_deepslate
   no_id: true
+  data:
+    recipe_book_category: blocks.deepslate0
   recipes:
     1:
       type: shaped
