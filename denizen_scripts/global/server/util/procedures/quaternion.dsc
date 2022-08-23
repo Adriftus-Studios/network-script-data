@@ -1,4 +1,8 @@
 
+#
+# The following procedures ( and variable names ) were derived from the plugin ModelEngine
+#
+
 quaternion_from_euler:
   type: procedure
   # locationtag
@@ -124,7 +128,6 @@ quaternion_subtract:
   - define y <[var4].sub[<[var12]>]>
   - define z <[var6].sub[<[var14]>]>
   - define scalar <[var8].sub[<[var16]>]>
-  
   - determine <list[<[scalar]>|<location[<[x]>,<[y]>,<[z]>]>]>
 
 euler_combine:
@@ -223,17 +226,62 @@ quaternion_normalize:
   - define vector <[vector].mul[<element[1.0].div[<[var1]>]>]>
   - determine <list[<[scalar]>|<[vector]>]>
 
+quaternion_object_from_euler:
+  type: procedure
+  # locationtag
+  definitions: euler
+  debug: false
+  script:
+  - define var1 <proc[quaternion_from_euler].context[<[euler]>]>
+  - define var2 <custom_object[quaternion[scalar=<[var1].get[1]>;x=<[var1].get[2].x>;y=<[var1].get[2].y>;z=<[var1].get[2].z>]]>
+  - determine <[var2]>
+
 quaternion:
-    type: custom
-    x: 0
-    y: 0
-    z: 0
-    scalar: 1
-    tags:
-        normalize:
-        - define scalar <context.this.scalar>
-        - define vector <context.this.as_location>
-        - define result <proc[quaternion_normalize].context[<[scalar]>|<[vector]>]>
-        - determine <custom_object[quaternion[x=<[result].get[2].x>;y=<[result].get[2].y>;z=<[result].get[2].z>;scalar=<[result].get[1]>]]>
-        as_location:
-        - determine <location[<context.this.x>,<context.this.y>,<context.this.z>]>
+  type: custom
+  x: 0
+  y: 0
+  z: 0
+  scalar: 1
+  tags:
+    add:
+    - define other <context.value||>
+    - define scalar <context.this.scalar>
+    - define vector <context.this.to_vector>
+    - define result <proc[quaternion_add].context[<[scalar]>|<[vector]>|<[other].scalar>|<[other].as_vector>]>
+    - determine <custom_object[quaternion[x=<[result].get[2].x>;y=<[result].get[2].y>;z=<[result].get[2].z>;<[result].get[1]>]]>
+    sub:
+    - define other <context.value||>
+    - define scalar <context.this.scalar>
+    - define vector <context.this.to_vector>
+    - define result <proc[quaternion_subtract].context[<[scalar]>|<[vector]>|<[other].scalar>|<[other].as_vector>]>
+    - determine <custom_object[quaternion[x=<[result].get[2].x>;y=<[result].get[2].y>;z=<[result].get[2].z>;<[result].get[1]>]]>
+    mul:
+    - define other <context.value||>
+    - define scalar <context.this.scalar>
+    - define vector <context.this.to_vector>
+    - define result <proc[quaternion_multiply].context[<[scalar]>|<[vector]>|<[other].scalar>|<[other].as_vector>]>
+    - determine <custom_object[quaternion[x=<[result].get[2].x>;y=<[result].get[2].y>;z=<[result].get[2].z>;<[result].get[1]>]]>
+    dot:
+    - define other <context.value||>
+    - define scalar <context.this.scalar>
+    - define vector <context.this.to_vector>
+    - define result <proc[quaternion_dot].context[<[scalar]>|<[vector]>|<[other].scalar>|<[other].as_vector>]>
+    - determine <custom_object[quaternion[x=<[result].get[2].x>;y=<[result].get[2].y>;z=<[result].get[2].z>;<[result].get[1]>]]>
+    slerp:
+    - define other <context.value||>
+    - define scalar <context.this.scalar>
+    - define vector <context.this.to_vector>
+    - define result <proc[quaternion_slerp].context[<[scalar]>|<[vector]>|<[other].scalar>|<[other].as_vector>]>
+    - determine <custom_object[quaternion[x=<[result].get[2].x>;y=<[result].get[2].y>;z=<[result].get[2].z>;<[result].get[1]>]]>
+    normalize:
+    - define scalar <context.this.scalar>
+    - define vector <context.this.to_vector>
+    - define result <proc[quaternion_normalize].context[<[scalar]>|<[vector]>]>
+    - determine <custom_object[quaternion[x=<[result].get[2].x>;y=<[result].get[2].y>;z=<[result].get[2].z>;scalar=<[result].get[1]>]]>
+    to_vector:
+    - determine <location[<context.this.x>,<context.this.y>,<context.this.z>]>
+    to_euler:
+    - define scalar <context.this.scalar>
+    - define vector <context.this.to_vector>
+    - define euler <proc[quaternion_to_euler].context[<[scalar]>|<[vector]>]>
+    - determine <[euler]>
