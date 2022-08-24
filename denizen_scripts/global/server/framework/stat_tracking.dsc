@@ -6,7 +6,7 @@ stat_tracking:
       - flag player stats.crafting.<context.item.script.name.if_null[<context.item.material.name>]>:+:<context.amount>
       - flag server stats.crafting.<context.item.script.name.if_null[<context.item.material.name>]>:+:<context.amount>
     on entity dies bukkit_priority:MONITOR:
-      - flag server stats.death.<context.entity.entity_type>:+:<context.amount>
+      - flag server stats.death.<context.entity.entity_type>:+:1
     on player breaks block bukkit_priority:MONITOR:
       - flag player stats.mining.<context.material.name>:+:1
       - flag server stats.mining.<context.material.name>:+:1
