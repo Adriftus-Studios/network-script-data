@@ -50,7 +50,11 @@ chat_system_speak:
 
       # Allow Items in Chat
       - if <player.has_permission[adriftus.chat.link_item]> && <[msg].contains_text[<&lb>item<&rb>]>:
-        - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&7><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&7><&rb><&r><&end_hover>]>
+        - if <player.item_in_hand.quantity> == 1:
+          - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&7><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&7><&rb><&r><&end_hover>]>
+        - else:
+        - if <player.item_in_hand.quantity> == 1:
+          - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&7><&lb><player.item_in_hand.quantity>x<&sp><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&7><&rb><&r><&end_hover>]>
 
       # Build the Channel Text
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
