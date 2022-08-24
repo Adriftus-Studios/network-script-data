@@ -10,7 +10,8 @@ resource_pack_force:
   type: world
   debug: false
   events:
-    after player joins:
+    on player joins:
+      - wait 1s
       - if !<player.has_permission[adriftus.staff]>:
         - if !<player.has_flag[RP_Enabled]> || <player.flag[RP_Enabled]> != <server.flag[rp_sha]>:
           - resourcepack targets:<player> url:http://<server.flag[ip]>:25581/resource_pack.zip hash:<server.flag[rp_sha]> forced if:<player.has_flag[rp_bypass].not>
@@ -24,6 +25,7 @@ resource_pack_force:
             - flag <player> RP_Enabled:<server.flag[rp_sha]>
           - else:
             - flag <player> RP_Enabled:<server.flag[rp_staff_sha]>
+          - customevent id:resource_pack_loaded
         - case FAILED_DOWNLOAD:
             - wait 1s
             - if !<player.has_permission[adriftus.staff]>:
@@ -35,3 +37,6 @@ resource_pack_force:
     on bungee player leaves network:
       - flag player rp_fail:!
       - flag player RP_Enabled:!
+    on server start:
+      - foreach <server.players_flagged[RP_enabled]>:
+        - flag <[value]> RP_enabled:!

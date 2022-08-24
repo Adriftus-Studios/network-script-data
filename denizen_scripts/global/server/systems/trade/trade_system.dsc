@@ -101,7 +101,7 @@ trade_confirm_button:
   material: feather
   display name: <&a>Confirm Trade
   lore:
-    - "<&a>Accept the trade"
+    - <&a>Accept the trade
   mechanisms:
     custom_model_data: 3
   flags:
@@ -113,8 +113,8 @@ trade_cancel_confirm_button11:
   material: paper
   display name: <&a>Cancel Confirm
   lore:
-    - "<&a>Cancel the confirmation"
-    - "<&e>Allows further changes"
+    - <&a>Cancel the confirmation
+    - <&e>Allows further changes
   flags:
     run_script: trade_player_cancel_confirm
   mechanisms:
@@ -126,8 +126,8 @@ trade_cancel_confirm_button12:
   material: paper
   display name: <&a>Cancel Confirm
   lore:
-    - "<&a>Cancel the confirmation"
-    - "<&e>Allows further changes"
+    - <&a>Cancel the confirmation
+    - <&e>Allows further changes
   flags:
     run_script: trade_player_cancel_confirm
   mechanisms:
@@ -139,8 +139,8 @@ trade_cancel_confirm_button21:
   material: paper
   display name: <&a>Cancel Confirm
   lore:
-    - "<&a>Cancel the confirmation"
-    - "<&e>Allows further changes"
+    - <&a>Cancel the confirmation
+    - <&e>Allows further changes
   flags:
     run_script: trade_player_cancel_confirm
   mechanisms:
@@ -152,8 +152,8 @@ trade_cancel_confirm_button22:
   material: paper
   display name: <&a>Cancel Confirm
   lore:
-    - "<&a>Cancel the confirmation"
-    - "<&e>Allows further changes"
+    - <&a>Cancel the confirmation
+    - <&e>Allows further changes
   flags:
     run_script: trade_player_cancel_confirm
   mechanisms:
@@ -165,7 +165,7 @@ trade_currency_button:
   material: feather
   display name: <&a>Currency
   lore:
-    - "<&c>Unavailable"
+    - <&c>Unavailable
   flags:
     run_script: cancel
   mechanisms:
@@ -179,8 +179,8 @@ trade_open:
     - define player1 <player> if:<[player1].exists.not>
     - note <inventory[trade_inventory]> as:trade_<[player1].uuid>/<[player2].uuid>
     - define inv_script <inventory[trade_inventory].script>
-    - inventory set slot:<[inv_script].data_key[data.item_slots.player_1_head]> o:player_head[skull_skin=<[player1].skull_skin>;display=<&a><[player1].name>;custom_model_data=100;flag=uuid:<[player1].uuid>] d:trade_<[player1].uuid>/<[player2].uuid>
-    - inventory set slot:<[inv_script].data_key[data.item_slots.player_2_head]> o:player_head[skull_skin=<[player2].skull_skin>;display=<&a><[player2].name>;custom_model_data=101;flag=uuid:<[player2].uuid>] d:trade_<[player1].uuid>/<[player2].uuid>
+    - inventory set slot:<[inv_script].data_key[data.item_slots.player_1_head]> o:player_head[skull_skin=<[player1].skull_skin>;custom_model_data=100;flag=uuid:<[player1].uuid>;display=<&font[adriftus:overlay]><&chr[F90F]>;lore=<element[<&sp>].repeat_as_list[250]>] d:trade_<[player1].uuid>/<[player2].uuid>
+    - inventory set slot:<[inv_script].data_key[data.item_slots.player_2_head]> o:player_head[skull_skin=<[player2].skull_skin>;custom_model_data=101;flag=uuid:<[player2].uuid>;display=<&font[adriftus:overlay]><&chr[F90F]>;lore=<element[<&sp>].repeat_as_list[250]>] d:trade_<[player1].uuid>/<[player2].uuid>
     - foreach <[inv_script].data_key[data.item_slots.player_1_confirm]>|<[inv_script].data_key[data.item_slots.player_1_confirm2]>:
       - inventory set slot:<[value]> o:trade_confirm_button[flag=player:1] d:trade_<[player1].uuid>/<[player2].uuid>
     - foreach <[inv_script].data_key[data.item_slots.player_2_confirm]>|<[inv_script].data_key[data.item_slots.player_2_confirm2]>:

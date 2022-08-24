@@ -6,23 +6,23 @@ web_handler:
     self: 127.0.0.1
   events:
     on server start:
-      - web start port:25579
+      - webserver start port:25579
 
-    on get request:
+    on webserver web request port:25579 method:get:
       - announce to_console "<&c>--- get request ----------------------------------------------------------"
       - inject Web_Debug.Get_Response
-      - define query <context.query_map>
+      - define query <context.query>
 
-      - choose <context.request>:
+      - choose <context.path>:
 
       # % ██ [ Resource Pack  ] ██
         - case /resource_pack.zip:
-          - determine passively FILE:data/web/resource-pack/hosted-rp-main.zip
+          - determine passively FILE:resource-pack/hosted-rp-main.zip
           - determine CODE:200
 
       # % ██ [ Staff Resource Pack  ] ██
         - case /resource_pack_staff.zip:
-          - determine passively FILE:data/web/resource-pack/hosted-rp-staff.zip
+          - determine passively FILE:resource-pack/hosted-rp-staff.zip
           - determine CODE:200
 
       # % ██ [ Github oAuth Token Ex  ] ██
@@ -35,33 +35,33 @@ web_handler:
 
       # % ██ [ WebGet Hosting         ] ██
         - case /webget:
-          - if <server.has_file[../../../../web/webget/<context.query_map.get[name]||invalid>]>:
-            - determine FILE:../../../../web/webget/<context.query_map.get[name]>
+          - if <server.has_file[webget/<context.query_map.get[name]||invalid>]>:
+            - determine FILE:webget/<context.query_map.get[name]>
           - else:
             - determine CODE:404
 
       # % ██ [ FavIcon                ] ██
         - case /favicon.ico:
           - determine passively CODE:200
-          - determine FILE:../../../../web/favicon.ico
+          - determine FILE:favicon.ico
 
       # % ██ [ CSS Hosting            ] ██
         - case /css:
-          - if <server.has_file[../../../../web/css/<context.query_map.get[name]||invalid>.css]>:
+          - if <server.has_file[css/<context.query_map.get[name]||invalid>.css]>:
             - determine passively CODE:200
-            - determine FILE:../../../../web/css/<context.query_map.get[name]>.css
+            - determine FILE:css/<context.query_map.get[name]>.css
 
       # % ██ [ Webpages               ] ██
         - case /page:
-          - if <server.has_file[../../../../web/pages/<context.query_map.get[name]||invalid>.html]>:
+          - if <server.has_file[pages/<context.query_map.get[name]||invalid>.html]>:
             - determine passively CODE:200
-            - determine FILE:../../../../web/pages/<context.query_map.get[name]>.html
+            - determine FILE:pages/<context.query_map.get[name]>.html
 
       # % ██ [ Images                 ] ██
         - case /image:
-          - if <server.has_file[../../../../web/images/<context.query_map.get[name]||invalid>]>:
+          - if <server.has_file[images/<context.query_map.get[name]||invalid>]>:
             - determine passively CODE:200
-            - determine FILE:../../../../web/images/<context.query_map.get[name]>
+            - determine FILE:images/<context.query_map.get[name]>
 
       # % ██ [ Companion App          ] ██
         - case /companion:
@@ -76,10 +76,10 @@ web_handler:
         - default:
           - determine CODE:<list[406|418].random>
 
-    on post request:
+    on webserver web request port:25579 method:post:
       - announce to_console "<&c>--- post request ----------------------------------------------------------"
       - inject Web_Debug.Post_Request
-      - define domain <context.headers.get[Nginx.remote_addr]>
+      - define domain <context.headers.get[Nginx.remote_addr].first>
 
     # % ██ [ Github Content pushes    ] ██
       - if <[domain].starts_with[<script.data_key[domains.github]>]>:
@@ -87,7 +87,7 @@ web_handler:
 
     # % ██ [ Self Pings               ] ██
       - else if <[domain].starts_with[<script.data_key[domains.self]>]>:
-        - choose <context.request>:
+        - choose <context.path>:
           - case /reload/main:
             - bungee <bungee.list_servers.exclude[<bungee.server>]>:
               - reload
@@ -97,8 +97,8 @@ web_handler:
             - bungee test:
               - reload
           - case /reload/RP:
-            - if <context.query.parsed.get[adriftus_sha].exists>:
-              - bungeerun hub resource_pack_sha def:<context.query.parsed.get[adriftus_sha].before[<&sp>]>|<context.query.parsed.get[adriftus_staff_sha].before[<&sp>]>
+            - if <context.body.parsed.get[adriftus_sha].exists>:
+              - bungeerun hub resource_pack_sha def:<context.body.parsed.get[adriftus_sha].before[<&sp>]>|<context.body.parsed.get[adriftus_staff_sha].before[<&sp>]>
 
       # % ██ [ Denizen Interactions   ] ██
       - else if <context.headers.contains[X-signature-ed25519]>:

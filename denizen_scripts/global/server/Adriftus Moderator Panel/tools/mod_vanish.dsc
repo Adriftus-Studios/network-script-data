@@ -32,7 +32,6 @@ mod_vanish_task:
 
 mod_unvanish_task:
   type: task
-  debug: false
   script:
     - flag <player> vanished:!
     - flag server vanished_staff:<-:<player>

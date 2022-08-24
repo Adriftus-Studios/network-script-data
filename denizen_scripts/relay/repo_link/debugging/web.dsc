@@ -5,18 +5,18 @@ web_debug:
     - announce execute
   get_response:
     - announce to_console "<&3>-- <queue.script.name> - Get_Response ---------"
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>address<&6><&gt> <&b>| <&3><context.address||<&4>Invalid> <&b>| <&a>Returns the IP address of the device that sent the request."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>request<&6><&gt> <&b>| <&3><context.request||<&4>Invalid> <&b>| <&a>Returns the path that was requested."
+    - announce to_console "<&6><&lt><&e>context<&6>.<&e>remote_address<&6><&gt> <&b>| <&3><context.remote_address||<&4>Invalid> <&b>| <&a>Returns the IP address of the device that sent the request."
+    - announce to_console "<&6><&lt><&e>context<&6>.<&e>path<&6><&gt> <&b>| <&3><context.path||<&4>Invalid> <&b>| <&a>Returns the path that was requested."
     - announce to_console "<&6><&lt><&e>context<&6>.<&e>query<&6><&gt> <&b>| <&3><context.query||<&4>Invalid> <&b>| <&a>Returns an ElementTag of the raw query included with the request."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>query_map<&6><&gt> <&b>| <&3><context.query_map||<&4>Invalid> <&b>| <&a>Returns a map of the query."
+    - announce to_console "<&6><&lt><&e>context<&6>.<&e>body<&6><&gt> <&b>| <&3><context.body||<&4>Invalid> <&b>| <&a>Returns a map of the query."
     - announce to_console "<&6><&lt><&e>context<&6>.<&e>user_info<&6><&gt> <&b>| <&3><context.user_info||<&4>Invalid> <&b>| <&a>Returns info about the authenticated user sending the request, if any."
     - announce to_console <&3>-----------------------------------------------
   post_request:
     - announce to_console "<&3>-- <queue.script.name> - Post_Request ---------"
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>address<&6><&gt> <&b>| <&3><context.address||<&c>Invalid> <&b>| <&a>Returns the IP address of the device that sent the request."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>request<&6><&gt> <&b>| <&3><context.request||<&c>Invalid> <&b>| <&a>Returns the path that was requested."
+    - announce to_console "<&6><&lt><&e>context<&6>.<&e>remote_address<&6><&gt> <&b>| <&3><context.remote_address||<&c>Invalid> <&b>| <&a>Returns the IP address of the device that sent the request."
+    - announce to_console "<&6><&lt><&e>context<&6>.<&e>path<&6><&gt> <&b>| <&3><context.path||<&c>Invalid> <&b>| <&a>Returns the path that was requested."
     - announce to_console "<&6><&lt><&e>context<&6>.<&e>query<&6><&gt> <&b>| <&3><context.query||<&c>Invalid> <&b>| <&a>Returns a ElementTag of the raw query included with the request."
-    - announce to_console "<&6><&lt><&e>context<&6>.<&e>query_map<&6><&gt> <&b>| <&3><context.query_map||<&c>Invalid> <&b>| <&a>Returns a map of the query."
+    - announce to_console "<&6><&lt><&e>context<&6>.<&e>body<&6><&gt> <&b>| <&3><context.body||<&c>Invalid> <&b>| <&a>Returns a map of the query."
     - announce to_console "<&6><&lt><&e>context<&6>.<&e>user_info<&6><&gt> <&b>| <&3><context.user_info||<&c>Invalid> <&b>| <&a>Returns info about the authenticated user sending the request, if any."
     - announce to_console "<&6><&lt><&e>context<&6>.<&e>upload_name<&6><&gt> <&b>| <&3><context.upload_name||<&c>Invalid> <&b>| <&a>Returns the name of the file posted."
   #^- announce to_console "<&6><&lt><&e>context<&6>.<&e>upload_size_mb<&6><&gt> <&b>| <&3><context.upload_size_mb||<&c>Invalid> <&b>| <&a>returns the size of the upload in MegaBytes (where 1 MegaByte = 1 000 000 Bytes)."

@@ -108,7 +108,7 @@ premium_currency_remove:
         - if <[newBal]> < 0:
           - debug error "Script tried to take premium currency without checking the balance first."
           - determine false
-        - run global_player_data_modify def:<[player].uuid>|economy.premium.current|<[amount]>
+        - run global_player_data_modify def:<[player].uuid>|economy.premium.current|<[newBal]>
         - define message "SEARCHABLE_<[player].uuid>```<[player].name> has spent <[amount]> Premium Currency<&nl>Reason<&co> <[reason]>```"
         - bungeerun relay discord_sendMessage "def:Adriftus Staff|manager-logs|<[message].escaped>"
         - determine true

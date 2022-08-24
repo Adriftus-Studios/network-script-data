@@ -19,6 +19,11 @@ chat_system_speak:
       - define uuid <util.random_uuid>
       - define sender <player.uuid>
 
+      # Check for Chat Lock
+      - if <yaml[global.player.<player.uuid>].read[chat.locked].if_null[false]> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny].if_null[false]>:
+        - narrate "<&c>You are unable to speak in this channel, due to being chat locked."
+        - stop
+
       # Determine Chat Icon
       - define icon <yaml[global.player.<player.uuid>].parsed_key[chat.icon].if_null[null]>
       - if <[channel]> == server:
@@ -27,13 +32,8 @@ chat_system_speak:
         - define icon <yaml[chat_config].parsed_key[channels.<[channel]>.icon].if_null[null]> if:<[icon].equals[null]>
       - define icon <&chr[0001]> if:<[icon].equals[null]>
 
-      # Check for Chat Lock
-      - if <yaml[global.player.<player.uuid>].read[chat.locked].if_null[false]> && <yaml[chat_config].parsed_key[channels.<[channel]>.chat_lock_deny].if_null[false]>:
-        - narrate "<&c>You are unable to speak in this channel, due to being chat locked."
-        - stop
-
       # Allow Chat Colors in Chat
-      - if <player.has_permission[adriftus.chat.color]>:
+      - if <player.has_permission[adriftus.chat.advanced_color]>:
         # Custom Color Codes
         - if <[msg].contains_text[&z]>:
           - define msg <[msg].replace[&z].with[<&color[#010000]>]>
@@ -41,13 +41,19 @@ chat_system_speak:
           - define msg <[msg].replace[&y].with[<&color[#000001]>]>
         - if <[msg].contains_text[&x]>:
           - define msg <[msg].replace[&x].with[<&color[#000100]>]>
+      - else:
+          - define msg <[msg].replace[&#].with[]>
+      - if <player.has_permission[adriftus.chat.color]>:
         - define msg <[msg].parse_color>
       - else:
         - define msg <[msg].parse_color.strip_color>
 
       # Allow Items in Chat
-      - if <[msg].contains_text[<&lb>item<&rb>]> && <player.has_permission[adriftus.chat.link_item]>:
-        - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&7><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&7><&rb><&r><&end_hover>]>
+      - if <player.has_permission[adriftus.chat.link_item]> && <[msg].contains_text[<&lb>item<&rb>]>:
+        - if <player.item_in_hand.quantity> == 1:
+          - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&7><&lb><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&7><&rb><&r><&end_hover>]>
+        - else:
+          - define msg <[msg].replace_text[<&lb>item<&rb>].with[<&hover[<player.item_in_hand>].type[SHOW_ITEM]><&7><&lb><player.item_in_hand.quantity>x<&sp><player.item_in_hand.display||<player.item_in_hand.material.translated_name>><&7><&rb><&r><&end_hover>]>
 
       # Build the Channel Text
       - define Hover "<&color[#F3FFAD]>Click to switch to<&color[#26FFC9]>: <&color[#C1F2F7]><[channel].to_titlecase>"
@@ -62,7 +68,7 @@ chat_system_speak:
         - define Text <&chr[F802]><yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
         - define NameText <proc[msg_hover].context[<list_single[<[hover]>].include_single[<[text]>]>]>
       - else:
-        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <proc[get_player_display_color]><proc[get_player_display_name]><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
+        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <proc[get_player_display_name]><&nl><&color[#F3FFAD]>Title<&color[#26FFC9]>: <player.proc[get_player_title]><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
         - define Hint "msg <player.name> "
         - define Text <&chr[F802]><yaml[chat_config].parsed_key[channels.<[channel]>.format.name]>
         - define NameText <proc[msg_hint].context[<list_single[<[hover]>].include_single[<[text]>].include_single[<[hint]>]>]>
@@ -119,7 +125,7 @@ chat_history_show:
     - narrate <element[<&nl>].repeat_as_list[30].separated_by[<&nl>]>
     - define list <list>
     - foreach <yaml[global.player.<player.uuid>].list_keys[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
-      - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]>:
+      - if !<yaml[chat_history].contains[<[Channel]>_history]> || !<player.has_flag[chat.channels.<[channel]>]> || <list[town|nation].contains[<[channel]>]>:
         - foreach next
       - define list:|:<yaml[chat_history].read[<[Channel]>_history].filter[get[time].is_integer]>
     - if <yaml[global.player.<player.uuid>].contains[chat.message.history]>:
@@ -420,7 +426,6 @@ chat_back_to_main_menu:
     - main_menu_inventory_open
     - cancel
   mechanisms:
-    color: red
     custom_model_data: 3
 
 
@@ -477,11 +482,11 @@ chat_settings_open:
   debug: false
   script:
     - define inventory <inventory[chat_settings]>
-    - define slots <list[11|13|15|17|29|31|33|35]>
+    - define slots <list[11|13|15|17|21|23|25|29|31|33|35]>
     - foreach <yaml[chat_config].list_keys[channels]> as:channel:
       - define name <yaml[chat_config].parsed_key[channels.<[channel]>.format.channel]>
-      - if ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) || <yaml[chat_config].read[channels.<[channel]>.permission]> == none:
-        - if ( <[channel]> == town && !<player.has_town> ) || ( <[channel]> == nation && !<player.has_nation> ):
+      - if ( <yaml[chat_config].read[channels.<[channel]>.permission]> == none || ( !<player.is_op> && <player.has_permission[<yaml[chat_config].read[channels.<[channel]>.permission]>]> ) ):
+        - if <bungee.server> == herocraft && ( ( <[channel]> == town && !<player.town.exists> ) || ( <[channel]> == nation && !<player.nation.exists> ) ):
           - foreach next
         - if <yaml[global.player.<player.uuid>].read[chat.channels.active.<[channel]>]||false>:
           - if <[channel]> == server:
@@ -522,11 +527,11 @@ message_command:
     - r
   description: Message another player
   tab completions:
-    1: <server.flag[player_map.names].keys>
+    1: <server.online_players.parse[name]>
   script:
     - if <context.alias> == reply || <context.alias> == r:
-      - if <yaml[global.player.<player.uuid>].contains[chat.last_message.sender]>:
-        - define target_name <yaml[global.player.<player.uuid>].read[chat.last_message.sender]>
+      - if <player.has_flag[last_direct_message]>:
+          - define target_name <player.flag[last_direct_message]>
       - else:
         - narrate "<&c>No one has messaged you recently."
         - stop
@@ -535,17 +540,21 @@ message_command:
          - narrate "<&c>You need to include a player and a message!"
          - stop
       - define target_name <context.args.get[1]>
-    - if !<server.has_flag[player_map.names.<[target_name]>]>:
-      - narrate "<&c>Unknown Player<&co> <&e><[target_name]>"
+    - define target <server.match_player[<[target_name]>].if_null[null]>
+    - if <[target]> == null:
+      - narrate "<&c>Unknown Player<&co> <&e><[target_name].if_null[No Recent Message Received]>"
       - stop
-    - if <server.flag[player_map.names.<[target_name]>.uuid]> == <player.uuid>:
+    - if <player> == <[target]>:
       - narrate "<&c>You can't message yourself..."
       - stop
     # definitions
-    - define msg <context.args.get[2].to[last].separated_by[<&sp>]>
+    - if <context.alias> == reply || <context.alias> == r:
+      - define msg <context.args.get[1].to[last].separated_by[<&sp>]>
+    - else:
+      - define msg <context.args.get[2].to[last].separated_by[<&sp>]>
     - define sender <proc[get_player_display_name].strip_color.replace[<&sp>].with[_]>
-    - define self_name <proc[get_player_display_name]>
-    - define other_name <proc[get_player_display_name].context[<player[<server.flag[player_map.names.<[target_name]>.uuid]>]>]>
+    - define self_name <player.name>
+    - define other_name <[target].name>
     - define icon <&chr[1001]>
     # Allow Chat Colors in Chat
     - if <player.has_permission[adriftus.chat.color]>:
@@ -561,14 +570,16 @@ message_command:
     - define WhisperTextSelf <&font[adriftus:chat]><[Icon]><&r><&sp><&7><&lb>MSG<&rb><&r><&e>You<&b>-<&gt><&e><[other_name]><&co><&nl><&sp><&sp><&sp><&sp><&sp>
     - define WhisperTextOther <&font[adriftus:chat]><[Icon]><&r><&sp><&7><&lb>MSG<&rb><&r><&e><[self_name]><&b>-<&gt><&e>You<&co><&nl><&sp><&sp><&sp><&sp><&sp>
     # Whisper Channel
-    #- define WhisperTextSelf "<&7><&lb>MSG<&rb><&r><&e>You<&b>-<&gt><&e><[other_name]><&co> "
-    #- define WhisperTextOther "<&7><&lb>MSG<&rb><&r><&e><[self_name]><&b>-<&gt><&e>You<&co> "
+    - define WhisperTextSelf "<&7><&lb>MSG<&rb><&r><&e>You<&b>-<&gt><&e><[other_name]><&co> "
+    - define WhisperTextOther "<&7><&lb>MSG<&rb><&r><&e><[self_name]><&b>-<&gt><&e>You<&co> "
     # Disabled for Freedom!
     #- define WhisperTextMods "<&7><&lb>MSG<&rb><&r><proc[get_player_display_name]><&b>-<&gt><context.args.get[1].to_titlecase> "
 
     - define message "<element[<[WhisperTextOther]><&f><[msg]>].on_click[/msg <[self_name].strip_color.replace_text[<&sp>].with[_]> ].type[SUGGEST_COMMAND].on_hover[<&e>Click to Reply]>"
-    - run bungee_send_message def:<list_single[<server.flag[player_map.names.<[target_name]>.uuid]>].include_single[<[sender]>].include_single[<[message]>].include_single[true]>
+    - narrate <[message]> targets:<[target]>
+    - flag <[target]> last_direct_message:<player.name>
+    #- run bungee_send_message def:<list_single[<server.flag[player_map.names.<[target_name]>.uuid]>].include_single[<[sender]>].include_single[<[message]>].include_single[true]>
     - define message <[WhisperTextSelf]><&f><[msg]>
     - narrate <[message]>
-    - define map <map[time=<server.current_time_millis>;message=<[message]>]>
-    - run global_player_data_message_history def:<list_single[<player.uuid>].include_single[<[map]>]>
+    #- define map <map[time=<util.current_time_millis>;message=<[message]>]>
+    #- run global_player_data_message_history def:<list_single[<player.uuid>].include_single[<[map]>]>

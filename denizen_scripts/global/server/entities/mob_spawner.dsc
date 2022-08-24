@@ -24,12 +24,16 @@ mob_spawner_armor_stand_repeating:
   flags:
     on_entity_added: mob_spawner_armor_stand_spawn_mob_repeat
     mob_to_spawn: zombie
-    mob_spawn_delay: 5s
+    mob_spawn_delay: 8s
 
 mob_spawner_armor_stand_spawn_mob_repeat:
   type: task
   debug: false
   script:
     - while <context.entity.is_spawned> && <context.entity.has_flag[mob_to_spawn]>:
-      - spawn <context.entity.flag[mob_to_spawn]> <context.entity.location>
+      - if <context.entity.has_flag[entities]> && !<context.entity.flag[entities].is_empty>:
+        - flag <context.entity> entities:<context.entity.flag[entities].filter[is_spawned]>
+      - if <context.entity.flag[entities].size.if_null[0]> < 5:
+        - spawn <context.entity.flag[mob_to_spawn]> <context.entity.location> save:ent
+        - flag <context.entity> entities:<entry[ent].spawned_entity>
       - wait <context.entity.flag[mob_spawn_delay]>

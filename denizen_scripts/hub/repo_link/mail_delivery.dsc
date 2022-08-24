@@ -53,6 +53,7 @@ mail_delivery_start:
     - fakespawn mail_delivery_mailbox_glow_marker <[location]> players:<player> d:<[time]> save:mailbox_glow_<[number]>
     - define entity <entry[mailbox_<[number]>].faked_entity>
     - define glow <entry[mailbox_glow_<[number]>].faked_entity>
+    - adjust <[glow]> custom_name:<[number]>
     - glow <[glow]>
     - flag <[entity]> mailbox:<[number]>
     - flag <[glow]> mailbox:<[number]>

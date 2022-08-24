@@ -7,7 +7,7 @@ mod_kick_message:
     - define moderator <[moderator].as_player.name||Server>
     # -- Used in `- kick` messages for network bans.
     - if <[length]||null> != null && <[date]||null> != null:
-      - determine "<&6>Banned for: <&b><[infraction]> <&6>for <&b><[length]> <&6>on <&e><[date].format[yyyy-MM-dd<&sp>HH:mm:ss]><&nl><&6>Level: <&f><[level]>"
+      - determine "<&6>Banned for: <&b><[infraction]> <&6>for <&b><[length]> <&6>on <&e><[date].format[yyyy-MM-dd<&sp>HH:mm:ss]><&nl><&6>Level: <&f><[level]><&nl><&6>If you would like to appeal this ban please open a ticket at<&nl><&b>discord.gg/adriftus"
     # -- Used in `- kick` messages for kicking player from the network.
     - else:
       - determine "<&e>Kicked for: <&b><[infraction]><&nl><&e>Level: <&f><[level]>"
@@ -35,4 +35,4 @@ mod_chat_notifier:
         - run chat_system_speak "def.message:I have sent <[name]> from <[text]>." def.channel:moderation
       - case InventoryRestore:
         # -- Used for fully restoring inventories.
-        - run chat_system_speak "def.message:I have restored <[name]>'s inventory<&co> <[text]>." def.channel:moderation
+        - run chat_system_speak "def.message:I have restored <[name]>'s inventory on <bungee.server><&co> <[text]>." def.channel:moderation

@@ -38,7 +38,6 @@ per_player_loot:
 per_player_loot_additions:
   type: data
   zanzabar:
-    multiverse_dust: 0.5
     tpa_crystal: 2
     back_crystal: 2
     morb_empty: 0.5

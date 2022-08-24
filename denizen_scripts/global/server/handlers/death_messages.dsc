@@ -24,7 +24,46 @@ player_death_handler:
           # This is an example of a specific mob
           specific_mob:
             - "<[player]> got beaten up specifically by the specific_mob."
-
+          OrcWarHorse:
+            - "<[player]> got their skull kicked by a War Horse."
+          Orc:
+            - "<[player]> fell prey to the orcish horde."
+          OrcDrummer:
+            - "<[player]> Couldnt dance to the beat of the drum."
+          OrcShaman:
+            - "<[player]> couldn't overcome the hexes of an Orc Shaman."
+          OrcArcher:
+            - "<[player]> got shot through the neck by an Orc Archer."
+          OrcWargmaster:
+            - "<[player]> got shot through the neck by an Orc Wargmaster."
+          OrcAdept:
+            - "<[player]> couldn't overcome the hexes of an Orc Adept."
+          OrcBerserker:
+            - "<[player]> got forced to chill out by an Orc Berserker."
+          OrcChampion:
+            - "<[player]> Tried to throw down the gauntlet with an Orc Champion."
+          OrcBeastmaster:
+            - "<[player]> was stabbed by an Orc Beastmaster."
+          OrcWargMinion:
+            - "<[player]> was eaten alive by an Orc Warg."
+          OrcWarbearMinion:
+            - "<[player]> was mauled to death by an Orc WarBear."
+          OrcTigerMinion:
+            - "<[player]> was drug in by an Orcs Tiger."
+          OrcWarg:
+            - "<[player]> was eaten alive by an Orc Warg."
+          OrcWarg:
+            - "An Orc Warg devoured <[player]> with a mighty chomp."
+          OrcWarbear:
+            - "<[player]> was mauled to death by an Orc WarBear."
+          OrcWarbeast:
+            - "<[player]> was trampled by an Orc WarBeast."
+          OrcTiger:
+            - "<[player]> was drug in by an Orcs Tiger."
+          OrcTigerMount:
+            - "<[player]> was drug in by an Orcs Tiger."
+          OrcWarHorse:
+            - "<[player]> stood behind an Orc WarHorse."
         # Everything Else
         OTHER:
           - "<[player]><&e> was slain by <&c><[attacker]>."
@@ -227,9 +266,11 @@ player_death_handler:
       - determine passively NO_MESSAGE
       - define players_final "<&font[adriftus:chat]><&chr[2001]><&r> <&7><&l><&lb><&4><&l>DEATH<&7><&l><&rb><&r><&nl>     <[message]>"
       - define staff_final "<&font[adriftus:chat]><&chr[2001]><&r> <&7><&l><&lb><&4><&l>DEATH<&7><&l><&rb><&r> - <element[<&7><&lb><&d>Moderation Information<&7><&rb>].on_hover[<script.parsed_key[data.death_info].separated_by[<&nl>]>].on_click[/dtd forward_portal coordinates <player.location.x> <player.location.y> <player.location.z>].type[RUN_COMMAND]><&nl>     <[message]>"
-      - define staff <server.online_players.filter[has_permission[adriftus.staff]]>
+      - define player_final "<&font[adriftus:chat]><&chr[2001]><&r> <&7><&l><&lb><&4><&l>DEATH<&7><&l><&rb><&r> - <&e>Location<&co> <context.entity.location.simple><&nl>     <[message]>"
+      - define staff <server.online_players.filter[has_permission[adriftus.staff]].exclude[<player>]>
       - define players <server.online_players.exclude[<[staff]>]>
-      - narrate <[players_final]> targets:<[players]>
+      - narrate <[players_final]> targets:<[players].exclude[<player>]>
+      - narrate <[player_final]> targets:<player>
       - narrate <[staff_final]> targets:<[staff]>
       - wait 1t
       - if <yaml[chat_config].read[channels.server.integrations.Discord.<bungee.server>.active]>:

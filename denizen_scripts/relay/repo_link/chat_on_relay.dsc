@@ -231,7 +231,7 @@ chat_system_data_manager:
     - if <yaml.list.contains[discord_watcher]>:
       - yaml id:discord_watcher unload
     - yaml create id:discord_watcher
-    - foreach <yaml[chat_config].list_keys[channels]>:
+    - foreach <yaml[chat_config].list_keys[channels].exclude[server]>:
       - if <yaml[chat_config].read[channels.<[value]>.integrations.Discord.active]>:
         - yaml id:discord_watcher set watched.<yaml[chat_config].read[channels.<[value]>.integrations.Discord.channel]>:<[value]>
     - foreach <yaml[chat_config].list_keys[channels.server.integrations.Discord]>:

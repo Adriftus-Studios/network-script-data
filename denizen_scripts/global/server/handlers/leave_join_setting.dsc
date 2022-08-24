@@ -8,12 +8,18 @@ network_leave_join_messages:
       - determine passively NONE
       - if <yaml[global.player.<player.uuid>].contains[settings.leave_task]> && <script[network_leave_<yaml[global.player.<player.uuid>].read[settings.leave_task]>].exists>:
         - inject network_leave_<yaml[global.player.<player.uuid>].read[settings.leave_task]>
+      - else if <player.has_flag[temp.leave_message]>:
+        - define message <player.flag[temp.leave_message]>.
+        - define discord_message <player.flag[temp.leave_message]>.
+        - flag player temp.leave_message:!
       - else if <server.has_flag[leave_message]>:
         - define message <server.flag[leave_message].parsed>
         - define discord_message <server.flag[leave_message].parsed>
+        - playsound sound:UI_BUTTON_CLICK <server.online_players>
       - else:
         - define message "<proc[get_player_display_name]><&f> has left the Server."
         - define discord_message "<player.name><&f> has left the Server."
+        - playsound sound:UI_BUTTON_CLICK <server.online_players>
       - announce "<&font[adriftus:chat]><&chr[2003]><&r>  <&7><&l><&lb><&c><&l>Player Leaves<&7><&l><&rb><&r> - <proc[get_player_display_name]><&nl>     <[message]>"
       - bungeerun relay Player_Leave_Message def:<list[<bungee.server>|<player.name>|<player.uuid>].include[<[discord_message].strip_color>]>
 
@@ -24,9 +30,11 @@ network_leave_join_messages:
       - else if <server.has_flag[join_message]>:
         - define message <server.flag[join_message].parsed>
         - define discord_message <server.flag[join_message].parsed>
+        - playsound sound:ENTITY_EXPERIENCE_ORB_PICKUP <server.online_players>
       - else:
         - define message "<proc[get_player_display_name]><&f> has joined the Server."
         - define discord_message "<player.name><&f> has joined the Server."
+        - playsound sound:ENTITY_EXPERIENCE_ORB_PICKUP <server.online_players>
       - announce "<&font[adriftus:chat]><&chr[2002]><&r>  <&7><&l><&lb><&a><&l>Player Joined<&7><&l><&rb><&r> - <proc[get_player_display_name]><&nl>     <[message]>"
       - bungeerun relay Player_Join_Message def:<list[<bungee.server>|<player.name>|<player.uuid>].include[<[discord_message].strip_color>]>
 
@@ -146,14 +154,14 @@ network_join_hell:
   type: task
   debug: false
   script:
-    - title title:<&c><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:<&color[#880000]>Doom has come to this world" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&c><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:<&color[#880000]>Doom has come to this world" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - stop
 
 network_leave_hell:
   type: task
   debug: false
   script:
-    - title title:<&f><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The World feels a litte safer.." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&f><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The World feels a litte safer.." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - stop
 
 network_join_colors:
@@ -161,7 +169,7 @@ network_join_colors:
   debug: false
   script:
     - repeat 16:
-      - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The world feels more vibrant!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
+      - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The world feels more vibrant!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
       - wait 5t
     - define message "<player.name> has joined, making the world more vibrant!"
 
@@ -169,14 +177,14 @@ network_leave_colors:
   type: task
   debug: false
   script:
-    - title title:<&7><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The World is a little less colorful" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&7><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The World is a little less colorful" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "<player.name> has left, the world feels less colorful..."
 
 network_join_queen:
   type: task
   debug: false
   script:
-    - title title:<&6><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The Queen graces the land once more!" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&6><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The Queen graces the land once more!" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "The Queen graces the land once more!"
     - - define discord_message "The Queen graces the land once more!"
 
@@ -184,7 +192,7 @@ network_leave_queen:
   type: task
   debug: false
   script:
-    - title title:<&e><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The Queen departs this world..." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&e><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The Queen departs this world..." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "The Queen departs this world!"
     - define discord_message "The Queen departs this world!"
 
@@ -192,7 +200,7 @@ network_join_syn:
   type: task
   debug: false
   script:
-    - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The world feels a bit more... Synful!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
+    - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The world feels a bit more... Synful!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
     - define message "The world feels a bit more... Synful!"
     - define discord_message "The world feels a bit more... Synful!"
 
@@ -200,6 +208,6 @@ network_leave_syn:
   type: task
   debug: false
   script:
-    - title title:<&7><&font[adriftus:overlay]><&chr[0001]><&chr[F801]><&chr[0001]> "subtitle:The world is free of Syn... for now..." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
+    - title title:<&7><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The world is free of Syn... for now..." fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "The world is free of Syn... for now..."
     - define discord_message "The world is free of Syn... for now..."

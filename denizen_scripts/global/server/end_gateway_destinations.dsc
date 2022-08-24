@@ -7,7 +7,7 @@ gateway_teleport:
       - define gateway <player.location.find_blocks[end_gateway].within[2].get[1]>
       - if <[gateway].has_flag[destination.location]> || <[gateway].has_flag[destination.server]>:
         - playsound sound:ENTITY_ENDERMAN_TELEPORT <[gateway]> pitch:0.1
-        - title title:<&color[#000000]><&font[adriftus:overlay]><&chr[0004]><&chr[F801]><&chr[0004]> fade_in:1t fade_out:10t stay:1s
+        - title title:<&color[#000000]><&font[adriftus:overlay]><&chr[1004]><&chr[F802]><&chr[1004]> fade_in:1t fade_out:10t stay:1s
         - determine passively <player.location.forward[0.1]>
         - flag <player> force_tp duration:1s
         - ratelimit <player> 5t
@@ -15,6 +15,7 @@ gateway_teleport:
           - if <[gateway].has_flag[destination.location]>:
             - bungeerun <[gateway].flag[destination.server]> gateway_teleport_bungee def:<player.uuid>|<[gateway].flag[destination.location]>
           - wait 1t
+          - flag player "temp.leave_message:<&d>Disappeared into a mysterious portal."
           - adjust <player> send_to:<[gateway].flag[destination.server]>
           - wait 1t
           - stop

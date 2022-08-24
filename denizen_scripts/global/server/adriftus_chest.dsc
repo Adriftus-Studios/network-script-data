@@ -4,7 +4,13 @@ adriftus_chest_inventory_open:
   script:
     - define inventory <inventory[adriftus_chest_inventory]>
     - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<map>>:
-      - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
+      - if ( <[value].has_flag[adriftus_server]> && <list[hub|<[value].flag[adriftus_server]>].contains[<bungee.server>]> ) || <[value].flag[adriftus_server]> == hub:
+        - if <bungee.server> != hub:
+          - inventory set slot:<[key]> o:<[value].with[flag=adriftus_server:!;lore=<[value].lore.remove[last]>;flag=run_script:!]> d:<[inventory]>
+        - else:
+          - inventory set slot:<[key]> o:<[value].with[flag=run_script:!]> d:<[inventory]>
+      - else:
+        - inventory set slot:<[key]> o:<[value]> d:<[inventory]>
     - inventory open d:<[inventory]>
 
 adriftus_chest_inventory:
@@ -12,33 +18,35 @@ adriftus_chest_inventory:
   inventory: chest
   title: <&f><&font[adriftus:guis]><&chr[F808]><&chr[6930]>
   size: 45
+  data:
+    on_close: adriftus_chest_save
+    any_click: adriftus_chest_validate_server
 
-adriftus_chest_inventory_events:
-  type: world
-  debug: false
-  events:
-    on player closes adriftus_chest_inventory:
-      - define contents <context.inventory.map_slots>
-      - define map <map>
-      - foreach <[contents]> key:slot as:item:
-        - if <[item].has_flag[adriftus.server.bypass]>:
-          - define map <[map].with[<[slot]>].as[<[item]>]>
-        - else if !<[item].has_flag[adriftus_server]>:
-          - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
-          - define lore "<[item].lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
-          - define map <[map].with[<[slot]>].as[<[item].with[lore=<[lore]>;flag=adriftus_server:<bungee.server>;flag=run_script:adriftus_chest_validate]>]>
-        - else:
-          - define map <[map].with[<[slot]>].as[<[item]>]>
-      - run global_player_data_modify def:<player.uuid>|adriftus.chest.contents_map|<[map]>
-
-adriftus_chest_validate:
+adriftus_chest_save:
   type: task
   debug: false
   script:
-    - if <bungee.server> == hub:
-      - stop
-    - if <context.item.has_flag[adriftus_server]> && <context.item.flag[adriftus_server]> != <bungee.server> && <server.flag[linked_servers].contains[<context.item.flag[adriftus_server]>].if_null[false].not> && <context.item.flag[adriftus_server]> != hub:
-      - determine cancelled
-    - else:
-      - define lore <context.item.lore.remove[last]>
-      - determine <context.item.with[lore=<[lore]>;flag=run_script:!;flag=adriftus_server:!]>
+    - define items <context.inventory.map_slots>
+    - wait 1t
+    - define contents <context.inventory.map_slots>
+    - define map <map>
+    - foreach <[contents]> key:slot as:item:
+      - if <[item].has_flag[adriftus.server.bypass]>:
+        - define map <[map].with[<[slot]>].as[<[item]>]>
+      - else if !<[item].has_flag[adriftus_server]>:
+        - define server_name <server.flag[display_name]||<&6><bungee.server.replace[_].with[<&sp>].to_titlecase>>
+        - define lore "<[item].lore.include[<&e>Server<&co> <[server_name]>]||<&e>Server<&co> <[server_name]>>"
+        - define map <[map].with[<[slot]>].as[<[item].with[lore=<[lore]>;flag=adriftus_server:<bungee.server>;flag=run_script:cancel]>]>
+      - else if !<[item].has_flag[run_script]>:
+        - define map <[map].with[<[slot]>].as[<[item].with[flag=run_script:cancel]>]>
+      - else:
+        - define map <[map].with[<[slot]>].as[<[item]>]>
+    - run global_player_data_modify def:<player.uuid>|adriftus.chest.contents_map|<[map]>
+
+adriftus_chest_validate_server:
+  type: task
+  debug: false
+  script:
+    - if <context.item.has_flag[adriftus_server]>:
+      - if <context.item.flag[adriftus_server]> != hub && !<list[hub|<context.item.flag[adriftus_server]>].contains[<bungee.server>]>:
+        - determine cancelled
