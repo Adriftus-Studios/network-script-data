@@ -11,7 +11,7 @@ player_crafting_slots_override_events:
   set_inv:
     - if <player.inventory> != <player.open_inventory>:
       - wait 1t
-    - stop if:<player.inventory.equals[<player.open_inventory>].not>
+    - stop if:<player.inventory.equals[<player.open_inventory>].not.if_null[true]>
     - define inv <player.open_inventory>
     # Needed to prevent death dropping
     - repeat 5:
