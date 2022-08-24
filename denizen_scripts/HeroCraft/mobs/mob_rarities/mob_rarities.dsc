@@ -16,6 +16,18 @@ mob_rarity_handler:
       - if <[rarity_roll]> <= <[value]>:
         - define rarity <server.flag[custom_mob_data.mob_spawn_rates].get[<[value]>]>
         - foreach stop
+    - adjust <context.entity> max_health:<context.entity.health_max.add[<script[rarity_data_table].data_key[<[rarity]>.health]>]>
+    - heal <context.entity>
+    - adjust <context.entity> speed:<context.entity.health_max.mul[<script[rarity_data_table].data_key[<[rarity]>.speed]>]>
+    - adjust <context.entity> armor_bonus:<context.entity.armor_bonus.if_null[0].add[<script[rarity_data_table].data_key[<[rarity]>.armor]>]>
+    - adjust <context.entity> attribute_modifiers:[GENERIC_ATTACK_DAMAGE=<list[<map[operation=ADD_NUMBER;amount=<script[rarity_data_table].data_key[<[rarity]>.damage]>]>]>]
+#    - adjust <context.entity> attribute_modifiers:[GENERIC_KNOCKBACK_RESISTANCE=<list[<map[operation=ADD_NUMBER;amount=<script[rarity_data_table].data_key[<[rarity]>.damage]>]>]>]
+#TODO knockback resistance, morb, and sunburn resist.
+#    - adjust <context.entity>
+#    - if rarity >= 4
+#      - adjust <context.entity> sunburn
+#    - if rarity >= 7:
+#      - flag nomorb
     - define suffix_master_list <server.flag[custom_mob_data.valid_suffixes]>
     ## For debugging, modify the server's valid prefix/suffix flags
     - define suffix_master_list <[suffix_master_list].replace[Vortexer].with[Impulsor].replace[leaping].with[Impulsor].replace[clingy].with[Impulsor]> if:<script.data_key[data.ranged].contains_any[<context.entity.entity_type>]>
@@ -123,36 +135,71 @@ rarity_data_table:
     prefixes: 1
     suffixes: 0
     slaying: 1
+    knockback: 00
+    health: 5
+    armor: 2
+    speed: 1.05
+    damage: 2
   rare:
     color: <&b>
     prefixes: 2
     suffixes: 0
     slaying: 2
+    knockback: 00
+    health: 10
+    armor: 3
+    speed: 1.10
+    damage: 3
   epic:
     color: <&d>
     prefixes: 2
     suffixes: 1
     slaying: 3
+    knockback: 00
+    health: 15
+    armor: 4
+    speed: 1.15
+    damage: 4
   legendary:
     color: <&6>
     prefixes: 2
     suffixes: 2
     slaying: 4
+    knockback: 00
+    health: 25
+    armor: 5
+    speed: 1.16
+    damage: 7
   godly:
     color: <gold><bold>
     prefixes: 5
     suffixes: 3
     slaying: 5
+    knockback: 00
+    health: 35
+    armor: 6
+    speed: 1.17
+    damage: 8
   dread:
     color: <&c><bold>
     prefixes: 8
     suffixes: 4
     slaying: 6
+    knockback: 00
+    health: 45
+    armor: 7
+    speed: 1.20
+    damage: 10
   insane:
     color: <dark_red><bold>
     prefixes: <util.scripts.filter_tag[<[filter_value].starts_with[custom_mob_prefix_]>].size||8>
     suffixes: <util.scripts.filter_tag[<[filter_value].starts_with[custom_mob_suffix_]>].size||4>
     slaying: 10
+    knockback: 00
+    health: 55
+    armor: 9
+    speed: 1.25
+    damage: 12
 
 rarity_info_table:
   type: data
