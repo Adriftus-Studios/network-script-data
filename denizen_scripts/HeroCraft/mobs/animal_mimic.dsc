@@ -25,7 +25,7 @@ animal_mimic_events:
             - define location <context.entity.location>
             - remove <context.entity> if:<context.entity.exists>
             - title "title:<dark_red><bold>You have been met with a terrible fate..." fade_in:1t fade_out:1s stay:1s
-            - spawn "<entity[animal_mimic].with[custom_name=<dark_Red><context.entity.name.to_titlecase> Mimic]>" <[location]> target:<context.player> persistent save:mimic
+            - spawn "<entity[animal_mimic].with[custom_name=<dark_Red><context.entity.entity_type.replace[_].with[<&sp>].to_titlecase> Mimic]>" <[location]> target:<context.player> persistent save:mimic
             - flag <entry[mimic].spawned_entity> mimic_drops:<context.drops>
 
 animal_mimic:
