@@ -178,8 +178,8 @@ return_scroll_info:
   material: feather
   display name: <&6>Return Scroll
   lore:
-    - <&6>Saves Location when Crafted
-    - <&6>Returns you there when used
+    - <&6>Saves Location on Left Click
+    - <&6>Returns you there when Right Clicked
     - <&e>- 2,000 Block Range
     - <&e>- Replaces <&a>/home
     - <&b>-- Click to see Crafting Recipe --
@@ -251,8 +251,8 @@ return_crystal_info:
   material: feather
   display name: <&6>Return Crystal
   lore:
-    - <&6>Saves Location when Crafted
-    - <&6>Returns you there when used
+    - <&6>Saves Location on Left Click
+    - <&6>Returns you there when Right Clicked
     - <&e>- Unlimited Range
     - <&e>- Capable of Crossing Dimensions
     - <&e>- Replaces <&a>/home

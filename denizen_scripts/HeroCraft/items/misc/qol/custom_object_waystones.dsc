@@ -331,14 +331,17 @@ waystone_open_teleport_town_menu:
     - define inventory <inventory[waystone_town_teleport_menu]>
     - define slots <list[<[inventory].script.data_key[data.slots]>]>
     - foreach <player.flag[waystones.town]> key:town as:value:
+      - define town <town[<[town]>]>
       - if <[loop_index].mod[45]> == 0:
         - foreach stop
-      - if !<town[<[town]>].exists>:
+      - if !<[town].exists>:
         - flag <player> waystones.town.<[town]>:!
         - foreach next
-      - if !<town[<[town]>].has_flag[waystone.location]>:
+      - if <[town].outlaws.contains[<player>]>:
         - foreach next
-      - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[town].flag[waystone.tp_location]>;display=<town[<[town]>].name>] d:<[inventory]>
+      - if !<[town].has_flag[waystone.location]>:
+        - foreach next
+      - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[town].flag[waystone.tp_location]>;display=<[town].name>] d:<[inventory]>
     - inventory set slot:<[inventory].script.data_key[data.back]> o:waystone_back_to_main[flag=entity:<context.item.flag[entity]>] d:<[inventory]>
     - inventory open d:<[inventory]>
 
@@ -372,6 +375,9 @@ waystone_open_teleport_main_menu:
   script:
     - define entity <context.location.flag[entity].if_null[null]> if:<[entity].exists.not>
     - define entity <context.item.flag[entity]> if:<[entity].equals[null]>
+    - if <[entity].flag[type]> == town && <[entity].flag[town].outlaws.contains[<player>]>:
+      - narrate "<&c>You are outlawed in this Town."
+      - stop
     - define inventory <inventory[waystone_teleport_menu]>
     - adjust <[inventory]> title:<&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[1005]>
     - foreach <[inventory].script.data_key[data.slots]> key:type as:slots:
