@@ -81,3 +81,9 @@ block_properties:
             - inject <[value]>
         - else:
           - inject <context.block.flag[on_explodes]>
+    on redstone recalculated location_flagged:on_redstone:
+        - if <context.location.flag[on_redstone].object_type> == List:
+          - foreach <context.location.flag[on_redstone]>:
+            - inject <[value]>
+        - else:
+          - inject <context.location.flag[on_redstone]>
