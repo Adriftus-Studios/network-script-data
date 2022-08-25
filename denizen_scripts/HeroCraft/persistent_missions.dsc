@@ -40,7 +40,7 @@ herocraft_mission_1_start:
   type: task
   debug: false
   script:
-    - give tpa_crystal|campfire|cooked_beef[quantity=24]
+    - give tpa_crystal[quantity=3]|campfire|cooked_beef[quantity=24]
     - flag player missions.persistent.current:1
 
 mission_2_icon:

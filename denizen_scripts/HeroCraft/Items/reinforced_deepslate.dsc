@@ -17,5 +17,5 @@ reinforced_deepslate_events:
   debug: false
   events:
     on player breaks reinforced_deepslate with:netherite_pickaxe:
-    - if <player.gamemode.equals[survival]>:
+    - if <player.gamemode.equals[survival]> && <player.item_in_hand.enchantments.contains[silk_touch]>:
       - drop reinforced_deepslate <context.location.center>
