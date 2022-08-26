@@ -244,6 +244,8 @@ player_death_handler:
                 - define attacker "a ranged attack"
               - else if <context.damager.custom_name.exists>:
                 - define attacker <context.damager.custom_name>
+              - else if <context.damager.entity_type> == PLAYER:
+                - define attacker <context.daamger.name>
               - else:
                 - define attacker <context.damager.entity_type.replace[_].with[<&sp>].to_titlecase>
               - define message <script.parsed_key[data.messages.<context.cause>].random>
