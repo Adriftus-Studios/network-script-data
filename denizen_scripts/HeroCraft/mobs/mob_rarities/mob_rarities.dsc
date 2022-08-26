@@ -18,7 +18,7 @@ mob_rarity_handler:
         - foreach stop
     - adjust <context.entity> max_health:<context.entity.health_max.add[<script[rarity_data_table].data_key[<[rarity]>.health]>]>
     - heal <context.entity>
-    - adjust <context.entity> speed:<context.entity.health_max.mul[<script[rarity_data_table].data_key[<[rarity]>.speed]>]>
+    - adjust <context.entity> speed:<context.entity.speed.mul[<script[rarity_data_table].data_key[<[rarity]>.speed]>]>
     - adjust <context.entity> armor_bonus:<context.entity.armor_bonus.if_null[0].add[<script[rarity_data_table].data_key[<[rarity]>.armor]>]>
     - adjust <context.entity> attribute_modifiers:[GENERIC_ATTACK_DAMAGE=<list[<map[operation=ADD_NUMBER;amount=<script[rarity_data_table].data_key[<[rarity]>.damage]>]>]>]
 #    - adjust <context.entity> attribute_modifiers:[GENERIC_KNOCKBACK_RESISTANCE=<list[<map[operation=ADD_NUMBER;amount=<script[rarity_data_table].data_key[<[rarity]>.damage]>]>]>]
