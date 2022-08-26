@@ -330,7 +330,7 @@ waystone_open_teleport_town_menu:
   script:
     - define inventory <inventory[waystone_town_teleport_menu]>
     - define slots <list[<[inventory].script.data_key[data.slots]>]>
-    - foreach <player.flag[waystones.town]> key:town as:value:
+    - foreach <player.flag[waystones.town].if_null[<list>]> key:town as:value:
       - define town <town[<[town]>]>
       - if <[loop_index].mod[45]> == 0:
         - foreach stop
