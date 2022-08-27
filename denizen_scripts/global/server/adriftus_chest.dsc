@@ -47,6 +47,7 @@ adriftus_chest_validate_server:
   type: task
   debug: false
   script:
+    - determine cancelled if:<context.item.material.name.advanced_matches[*shulker*|bundle]>
     - if <context.item.has_flag[adriftus_server]>:
       - if <context.item.flag[adriftus_server]> != hub && !<list[hub|<context.item.flag[adriftus_server]>].contains[<bungee.server>]>:
         - determine cancelled
