@@ -47,7 +47,7 @@ adriftus_chest_validate_server:
   type: task
   debug: false
   script:
-    - if ( <context.clicked_inventory> == <player.inventory> && <context.item.material.name.advanced_matches[*shulker*|bundle]> ) || ( <context.hotbar_button> != 0 && <player.inventory.slot[<context.hotbar_button>].material.name.advanced_matches[*shulker*|bundle]> ):
+    - if <context.hotbar_button> != 0 && <player.inventory.slot[<context.hotbar_button>].material.name.advanced_matches[*shulker*|bundle]>:
       - determine cancelled
     - if <context.cursor_item.material.name.advanced_matches[*shulker*|bundle]> && <context.inventory> != <player.inventory>:
       - determine cancelled
