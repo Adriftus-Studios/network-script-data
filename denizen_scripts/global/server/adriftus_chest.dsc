@@ -49,6 +49,8 @@ adriftus_chest_validate_server:
   script:
     - if ( <context.clicked_inventory> == <player.inventory> && <context.item.material.name.advanced_matches[*shulker*|bundle]> ) || ( <context.hotbar_button> != 0 && <player.inventory.slot[<context.hotbar_button>].material.name.advanced_matches[*shulker*|bundle]> ):
       - determine cancelled
+    - if <context.cursor_item.material.name.advanced_matches[*shulker*|bundle]> && <context.inventory> != <player.inventory>:
+      - determine cancelled
     - if <context.item.has_flag[adriftus_server]>:
       - if <context.item.flag[adriftus_server]> != hub && !<list[hub|<context.item.flag[adriftus_server]>].contains[<bungee.server>]>:
         - determine cancelled
