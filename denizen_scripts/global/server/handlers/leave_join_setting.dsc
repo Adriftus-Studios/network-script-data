@@ -200,7 +200,7 @@ network_join_syn:
   type: task
   debug: false
   script:
-    - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The world feels a bit more... Synful!" fade_in:1t stay:6t fade_out:1t targets:<server.online_players>
+    - title title:<&color[<color[random].hex>]><&font[adriftus:overlay]><&chr[1001]><&chr[F802]><&chr[1001]> "subtitle:The world feels a bit more... Synful!" fade_in:10t stay:3s fade_out:10t targets:<server.online_players>
     - define message "The world feels a bit more... Synful!"
     - define discord_message "The world feels a bit more... Synful!"
 
