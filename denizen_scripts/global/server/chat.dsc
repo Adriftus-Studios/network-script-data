@@ -525,6 +525,7 @@ message_command:
   aliases:
     - reply
     - r
+    - R
   description: Message another player
   tab completions:
     1: <server.online_players.parse[name]>
