@@ -323,7 +323,7 @@ dwisp_kill_target:
     - if !<[target].is_living>:
       - remove <[target]>
     - else if <player.has_flag[dwisp.data.damage]> && <player.flag[dwisp.data.damage]> != kill:
-      - hurt <player.flag[dwisp.data.damage]> <[target]> cause:<player>
+      - hurt <player.flag[dwisp.data.damage]> <[target]>
     - else:
       - kill <[target]>
 
@@ -499,7 +499,7 @@ dwisp_run_movement:
                 - wait 1t
               - flag <[mob]> custom_damage.cause:<player.flag[dwisp.data.entity].custom_name>
               - if <player.has_flag[dwisp.data.damage]> && <player.flag[dwisp.data.damage]> != kill:
-                - hurt <player.flag[dwisp.data.damage]> <[mob]> cause:<[target]>
+                - hurt <player.flag[dwisp.data.damage]> <[mob]>
               - else:
                 - kill <[mob]>
               - wait 2t
