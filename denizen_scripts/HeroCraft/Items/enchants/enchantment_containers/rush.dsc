@@ -24,5 +24,5 @@ Rush_enchantment:
   is_discoverable: true
   can_enchant: <context.item.advanced_matches[*_boots]>
   after hurt:
-  - if <util.random.int[10].to[10]> > 9:
+  - if <util.random.int[1].to[5]> == 1:
     - cast speed amplifier:0 duration:<context.level>s
