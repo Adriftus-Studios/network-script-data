@@ -23,6 +23,7 @@ town_defence:
   flags:
     on_entity_added: custom_object_update
     no_morb: true
+    on_right_click: cancel
 
 town_defence_item:
   type: item
@@ -140,5 +141,6 @@ town_defence_use:
   type: task
   debug: false
   script:
+    - determine passively cancelled
     - if <player.is_sneaking> && <context.location.town> == <player.town> && <player.has_permission[towny.command.plot.asmayor]>:
       - run town_defence_remove def:<context.location.flag[custom_object]>
