@@ -140,5 +140,5 @@ town_defence_use:
   type: task
   debug: false
   script:
-    - if <player.is_sneaking> && <player.has_permission[towny.command.plot.asmayor]>:
+    - if <player.is_sneaking> && <context.location.town> == <player.town> && <player.has_permission[towny.command.plot.asmayor]>:
       - run town_defence_remove def:<context.location.flag[custom_object]>
