@@ -4,7 +4,7 @@ dungeon_zombie_1:
   entity_type: zombie
   flags:
     on_combust: cancel
-    on_damaged: dungeon_zombie_dog_thorns
+    on_damaged: dungeon_zombie_murder_dog
     on_entity_added: remove_entity_1_tick
   mechanisms:
     custom_name: <&f>Thorny Zombie

@@ -4,7 +4,7 @@ dungeon_spider_1:
   entity_type: spider
   flags:
     on_combust: cancel
-    on_damaged: dungeon_spider_dog_thorns
+    on_damaged: dungeon_spider_murder_dog
     on_entity_added: remove_entity_1_tick
   mechanisms:
     custom_name: <&f>Thorny Spider
