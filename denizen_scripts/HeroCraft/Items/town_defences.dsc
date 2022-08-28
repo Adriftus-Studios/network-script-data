@@ -43,8 +43,8 @@ town_defence_item:
     1:
       type: shaped
       input:
-        - compressed_amethyst_block|compressed_obisdian|compressed_amethyst_block
-        - air|compressed_emerald_block|air
+        - compressed_amethyst_block|double_compressed_obsidian|compressed_amethyst_block
+        - air|emerald_block|air
         - compressed_amethyst_block|compressed_obsidan|compressed_amethyst_block
 
 town_defence_watch:
