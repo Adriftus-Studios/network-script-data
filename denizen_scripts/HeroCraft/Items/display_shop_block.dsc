@@ -8,13 +8,12 @@ display_shop_block:
   - <&a>Place <&7>to create a new empty shop.
   data:
     recipe_book_category: gadgets.shop
-  no_id: true
   recipes:
     1:
       type: shaped
       input:
       - glass|ender_eye|glass
-      - steel|gold|steel
+      - steel_ingot|gold_block|steel_ingot
       - double_compressed_obsidian|double_compressed_obsidian|double_compressed_obsidian
 
 display_shop_block_fix:
