@@ -23,7 +23,7 @@ town_defence:
   flags:
     on_entity_added: custom_object_update
     no_morb: true
-    on_right_click: cancel
+    right_click_script: cancel
 
 town_defence_item:
   type: item
