@@ -176,7 +176,7 @@ morb_hits_entity:
     - flag <context.hit_entity> temp:! if:<context.hit_entity.has_flag[temp]>
     - flag <context.hit_entity> no_modify
     - if <context.hit_entity.inventory.exists>:
-      - drop <context.hit_entity.inventory.exclude_item[!morb_filled]> <context.hit_entity.location>
+      - drop <context.hit_entity.inventory.exclude_item[!morb_filled].list_contents> <context.hit_entity.location>
       - inventory set o:<context.hit_entity.inventory.exclude_item[morb_filled]> d:<context.hit_entity.inventory>
     - flag <[item]> describe:<context.hit_entity.describe>
     - if <context.projectile.has_flag[rebounding]>:
