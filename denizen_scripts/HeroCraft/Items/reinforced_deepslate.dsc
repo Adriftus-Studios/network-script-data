@@ -1,7 +1,6 @@
 reinforced_deepslate_recipe:
   type: item
   material: reinforced_deepslate
-  no_id: true
   data:
     recipe_book_category: blocks.reinforced_deepslate0
   recipes:
@@ -18,4 +17,4 @@ reinforced_deepslate_events:
   events:
     on player breaks reinforced_deepslate with:netherite_pickaxe:
     - if <player.gamemode.equals[survival]> && <player.item_in_hand.enchantments.contains[silk_touch]>:
-      - drop reinforced_deepslate <context.location.center>
+      - drop reinforced_deepslate_recipe <context.location.center>
