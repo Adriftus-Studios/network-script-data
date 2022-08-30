@@ -5,7 +5,7 @@ mission_hunt:
   category: PvE
   name: <&e>Hunt <&6>-mobs-
   description:
-    - <&e>Complete this by hunting innocent animals in the wilderness.
+    - <&e>Complete this by hunting animals in the wilderness.
     - <&e>(Only animals outside town plots count!)
   assignment: mission_hunt_assignment
   icon: crossbow
