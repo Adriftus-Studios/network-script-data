@@ -175,6 +175,9 @@ morb_hits_entity:
       - adjust def:item "display:<&a>Reuseable <[item].display>"
     - flag <context.hit_entity> temp:! if:<context.hit_entity.has_flag[temp]>
     - flag <context.hit_entity> no_modify
+    - if <context.hit_entity.inventory.exists>:
+      - drop <context.hit_entity.inventory.exclude_item[!filled_morb]> <context.hit_entity.location>
+      - inventory set o:<context.hit_entity.inventory.exclude_item[filled_morb]> d:<context.hit_entity.inventory>
     - flag <[item]> describe:<context.hit_entity.describe>
     - if <context.projectile.has_flag[rebounding]>:
       - flag <[item]> on_item_pickup_inventory:cancel

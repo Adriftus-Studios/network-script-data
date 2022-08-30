@@ -74,7 +74,7 @@ back_execute:
         - narrate "<&c>This item lacks the power for cross dimensional travel"
         - stop
       - if <player.flag[last_location].distance[<player.location>]> > 2000:
-        - narrate "<&c>This item lacks the power for distances grater than 2000 blocks"
+        - narrate "<&c>This item lacks the power for distances greater than 2000 blocks"
         - stop
     - take iteminhand
     - if <[type]> == crystal:

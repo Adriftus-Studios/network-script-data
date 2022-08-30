@@ -67,7 +67,7 @@ return_task:
         - narrate "<&c>This item lacks the power for cross dimensional travel"
         - stop
       - if <context.item.flag[tpa_destination].distance[<player.location>]> > 2000:
-        - narrate "<&c>This item lacks the power for distances grater than 2000 blocks"
+        - narrate "<&c>This item lacks the power for distances greater than 2000 blocks"
         - stop
     - take iteminhand
     - if <[type]> == crystal:
