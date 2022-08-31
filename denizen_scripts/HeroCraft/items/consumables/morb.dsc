@@ -150,6 +150,7 @@ morb_hits_entity:
         - shoot "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]>" origin:<context.hit_entity.location> destination:<context.projectile.shooter.eye_location> save:shot
       - else:
         - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
+      - stop
     - if <script[morb_config].data_key[blacklisted_entities].contains[<context.hit_entity.entity_type>]> || <context.hit_entity.owner.if_null[<context.projectile.shooter>]> != <context.projectile.shooter>:
       - if <context.projectile.has_flag[rebounding]>:
         - shoot "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]>" origin:<context.hit_entity.location> destination:<context.projectile.shooter.eye_location> save:shot
