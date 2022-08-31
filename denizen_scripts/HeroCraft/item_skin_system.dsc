@@ -709,7 +709,7 @@ item_skin_unlock:
         - narrate "<&c>You have already unlocked this."
         - stop
       - foreach <context.item.flag[armor]>:
-        - run item_skin_unlock_armor <[value]>
+        - run item_skin_unlock_armor def:<[value]>
     - if <context.item.has_flag[tools]>:
       - foreach <context.item.flag[tools]>:
         - run item_skin_unlock_tool def:<[value].before[.]>|<[value].after[.]>
