@@ -26,14 +26,14 @@ item_skin_system_data:
       iron_spear: 10056
       iron_cutlass: 10057
       iron_odachi: 10058
-      golden_broadsword: 10076
-      golden_dagger: 10077
-      golden_katana: 10078
-      golden_greatsword: 10079
-      golden_glaive: 10080
-      golden_spear: 10081
-      golden_cutlass: 10082
-      golden_odachi: 10083
+      gold_broadsword: 10076
+      gold_dagger: 10077
+      gold_katana: 10078
+      gold_greatsword: 10079
+      gold_glaive: 10080
+      gold_spear: 10081
+      gold_cutlass: 10082
+      gold_odachi: 10083
       diamond_broadsword: 10101
       diamond_dagger: 10102
       diamond_katana: 10103
@@ -67,11 +67,11 @@ item_skin_system_data:
       iron_ono: 10061
       iron_battleaxe: 10062
       iron_halberd: 10063
-      golden_broadaxe: 10084
-      golden_hatchet: 10085
-      golden_ono: 10086
-      golden_battleaxe: 10087
-      golden_halberd: 10088
+      gold_broadaxe: 10084
+      gold_hatchet: 10085
+      gold_ono: 10086
+      gold_battleaxe: 10087
+      gold_halberd: 10088
       diamond_broadaxe: 10109
       diamond_hatchet: 10110
       diamond_ono: 10111
@@ -96,10 +96,10 @@ item_skin_system_data:
       iron_sickle: 10073
       iron_kama: 10074
       iron_greatscythe: 10075
-      golden_handscythe: 10097
-      golden_sickle: 10098
-      golden_kama: 10099
-      golden_greatscythe: 10100
+      gold_handscythe: 10097
+      gold_sickle: 10098
+      gold_kama: 10099
+      gold_greatscythe: 10100
       diamond_handscythe: 10122
       diamond_sickle: 10123
       diamond_kama: 10124
@@ -122,10 +122,10 @@ item_skin_system_data:
       iron_mallet: 10069
       iron_sledge: 10070
       iron_warhammer: 10071
-      golden_mattock: 10093
-      golden_mallet: 10094
-      golden_sledge: 10095
-      golden_warhammer: 10096
+      gold_mattock: 10093
+      gold_mallet: 10094
+      gold_sledge: 10095
+      gold_warhammer: 10096
       diamond_mattock: 10118
       diamond_mallet: 10119
       diamond_sledge: 10120
@@ -148,10 +148,10 @@ item_skin_system_data:
       iron_pitchfork: 10065
       iron_spade: 10066
       iron_warffork: 10067
-      golden_trencher: 10089
-      golden_pitchfork: 10090
-      golden_spade: 10091
-      golden_warffork: 10092
+      gold_trencher: 10089
+      gold_pitchfork: 10090
+      gold_spade: 10091
+      gold_warffork: 10092
       diamond_trencher: 10114
       diamond_pitchfork: 10115
       diamond_spade: 10116
@@ -323,10 +323,10 @@ item_skin_system_data:
     iron_chestplate: 240
     iron_helmet: 165
     iron_boots: 195
-    golden_leggings: 105
-    golden_chestplate: 112
-    golden_helmet: 77
-    golden_boots: 91
+    gold_leggings: 105
+    gold_chestplate: 112
+    gold_helmet: 77
+    gold_boots: 91
     diamond_leggings: 495
     diamond_chestplate: 528
     diamond_helmet: 363
@@ -412,25 +412,25 @@ item_skin_system_data:
             amount: 2
             slot: head
     ## Leather
-    golden_boots:
+    gold_boots:
       GENERIC_ARMOR:
           1:
             operation: ADD_NUMBER
             amount: 1
             slot: feet
-    golden_leggings:
+    gold_leggings:
       GENERIC_ARMOR:
           1:
             operation: ADD_NUMBER
             amount: 3
             slot: legs
-    golden_chestplate:
+    gold_chestplate:
       GENERIC_ARMOR:
           1:
             operation: ADD_NUMBER
             amount: 5
             slot: head
-    golden_helmet:
+    gold_helmet:
       GENERIC_ARMOR:
           1:
             operation: ADD_NUMBER
