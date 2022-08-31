@@ -9,5 +9,5 @@ skin_unlock_sylvan:
     custom_model_data: 7
     color: <color[#0703FD]>
   flags:
-    right_click_script: item_skin_unlock_armor
+    right_click_script: item_skin_unlock
     armor: sylvan
