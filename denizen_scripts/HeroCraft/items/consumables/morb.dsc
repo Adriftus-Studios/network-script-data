@@ -23,7 +23,7 @@ morb_empty:
   mechanisms:
     custom_model_data: 1
   data:
-    recipe_book_category: gadgets.morb1
+    recipe_book_category: gadgets.1morb1
   flags:
     right_click_script: morb_throw
   recipes:
@@ -50,7 +50,7 @@ morb_empty_reuseable:
   mechanisms:
     custom_model_data: 1
   data:
-    recipe_book_category: gadgets.morb2
+    recipe_book_category: gadgets.1morb2
   flags:
     right_click_script: morb_throw
     reuseable: true
@@ -80,7 +80,7 @@ morb_empty_rebounding:
   mechanisms:
     custom_model_data: 1
   data:
-    recipe_book_category: gadgets.morb2
+    recipe_book_category: gadgets.1morb3
   flags:
     right_click_script: morb_throw
     reuseable: true
