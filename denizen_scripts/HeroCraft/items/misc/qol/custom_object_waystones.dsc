@@ -331,10 +331,10 @@ waystone_open_teleport_town_menu:
     - define inventory <inventory[waystone_town_teleport_menu]>
     - define slots <list[<[inventory].script.data_key[data.slots]>]>
     - foreach <player.flag[waystones.town].if_null[<list>]> key:town as:value:
-      - define town <town[<[town]>]>
+      - define town <town[<[town]>].if_null[null]>
       - if <[loop_index].mod[45]> == 0:
         - foreach stop
-      - if !<[town].exists>:
+      - if <[town]> == null:
         - flag <player> waystones.town.<[town]>:!
         - foreach next
       - if <[town].outlaws.contains[<player>]>:

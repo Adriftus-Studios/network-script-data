@@ -123,6 +123,7 @@ morb_throw:
   type: task
   debug: false
   script:
+    - ratelimit <player> 1t
     - shoot empty_morb_projectile speed:3.7 shooter:<player> save:shot
     - flag <entry[shot].shot_entity> morb:<player>
     - flag <entry[shot].shot_entity> reuseable if:<context.item.has_flag[reuseable]>
@@ -205,6 +206,7 @@ morb_throw_filled:
   type: task
   debug: false
   script:
+    - ratelimit <player> 1t
     - take iteminhand quantity:1
     - shoot filled_morb_projectile speed:3.7 shooter:<player> save:shot
     - flag <entry[shot].shot_entity> spawn:<context.item.flag[describe]>
