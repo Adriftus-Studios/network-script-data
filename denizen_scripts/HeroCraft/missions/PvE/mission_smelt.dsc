@@ -103,8 +103,6 @@ mission_smelt_events:
     after player right clicks furnace|blast_furnace|smoker bukkit_priority:HIGHEST:
       - flag <context.location> last_player_interaction:<player>
     after furnace|blast_furnace cooks item location_flagged:last_player_interaction:
-      - if <context.cancelled>:
-        - stop
       - define __player <context.location.flag[last_player_interaction]>
       - stop if:<player.is_online.not.or[<player.has_flag[missions.active.smelt].not>]>
       # Add missions with ID smelt to a list.

@@ -101,8 +101,6 @@ mission_snack_events:
   debug: false
   events:
     after player consumes item flagged:missions.active.snack:
-      - if <context.cancelled>:
-        - stop
       - stop if:<script[mission_snack].data_key[items].contains[<context.item.script.name||<context.item.material.name>>].not>
         # Add missions with ID snack to a list.
       - define missions <proc[missions_get].context[snack]>
