@@ -705,7 +705,7 @@ item_skin_unlock:
   script:
     - determine passively cancelled
     - if <context.item.has_flag[armor]>:
-      - if !<player.flag[cosmetics.armor].if_null[<list>].contains[<context.item.flag[armor]>]>:
+      - if <player.flag[cosmetics.armor].if_null[<list>].contains[<context.item.flag[armor]>]>:
         - narrate "<&c>You have already unlocked this."
         - stop
       - foreach <context.item.flag[armors]>:
