@@ -13,11 +13,11 @@ skin_unlock_medium_gold_item:
   flags:
     right_click_script: item_skin_unlock
     armor: <list[medium_gold]>
-    tools: <list[sword.golden_broadsword|axe.golden_broadaxe|shovel.golden_trencher|pickaxe.golden_mattock|hoe.golden_handscythe]>
+    tools: <list[sword.gold_broadsword|axe.gold_broadaxe|shovel.gold_trencher|pickaxe.gold_mattock|hoe.gold_handscythe]>
   recipes:
     1:
       type: shaped
       input:
-      - double_compressed_golden_block|double_compressed_golden_block|double_compressed_golden_block
-      - double_compressed_golden_block|chest|double_compressed_golden_block
-      - double_compressed_golden_block|double_compressed_golden_block|double_compressed_golden_block
+      - double_compressed_gold_block|double_compressed_gold_block|double_compressed_gold_block
+      - double_compressed_gold_block|chest|double_compressed_gold_block
+      - double_compressed_gold_block|double_compressed_gold_block|double_compressed_gold_block

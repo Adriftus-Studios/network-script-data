@@ -13,11 +13,11 @@ skin_unlock_samurai_gold_item:
   flags:
     right_click_script: item_skin_unlock
     armor: <list[samurai_gold]>
-    tools: <list[sword.golden_katana|axe.golden_ono|shovel.golden_spade|hoe.golden_kama]>
+    tools: <list[sword.gold_katana|axe.gold_ono|shovel.gold_spade|hoe.gold_kama]>
   recipes:
     1:
       type: shaped
       input:
-      - triple_compressed_golden_block|triple_compressed_golden_block|triple_compressed_golden_block
-      - triple_compressed_golden_block|samurai_headband|triple_compressed_golden_block
-      - triple_compressed_golden_block|triple_compressed_golden_block|triple_compressed_golden_block
+      - triple_compressed_gold_block|triple_compressed_gold_block|triple_compressed_gold_block
+      - triple_compressed_gold_block|samurai_headband|triple_compressed_gold_block
+      - triple_compressed_gold_block|triple_compressed_gold_block|triple_compressed_gold_block

@@ -13,11 +13,11 @@ skin_unlock_light_gold_item:
   flags:
     right_click_script: item_skin_unlock
     armor: <list[light_gold]>
-    tools: <list[sword.golden_dagger|axe.golden_hatchet|shovel.golden_pitchfork|pickaxe.golden_mallet|hoe.golden_sickle]>
+    tools: <list[sword.gold_dagger|axe.gold_hatchet|shovel.gold_pitchfork|pickaxe.gold_mallet|hoe.gold_sickle]>
   recipes:
     1:
       type: shaped
       input:
-      - compressed_golden_block|compressed_golden_block|compressed_golden_block
-      - compressed_golden_block|chest|compressed_golden_block
-      - compressed_golden_block|compressed_golden_block|compressed_golden_block
+      - compressed_gold_block|compressed_gold_block|compressed_gold_block
+      - compressed_gold_block|chest|compressed_gold_block
+      - compressed_gold_block|compressed_gold_block|compressed_gold_block

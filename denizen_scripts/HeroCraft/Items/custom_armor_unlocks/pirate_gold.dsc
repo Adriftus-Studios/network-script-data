@@ -13,11 +13,11 @@ skin_unlock_pirate_gold_item:
   flags:
     right_click_script: item_skin_unlock
     armor: <list[pirate_gold]>
-    tools: <list[sword.golden_cutlass]>
+    tools: <list[sword.gold_cutlass]>
   recipes:
     1:
       type: shaped
       input:
-      - triple_compressed_golden_block|triple_compressed_golden_block|triple_compressed_golden_block
-      - triple_compressed_golden_block|pirate_eye_patch|triple_compressed_golden_block
-      - triple_compressed_golden_block|triple_compressed_golden_block|triple_compressed_golden_block
+      - triple_compressed_gold_block|triple_compressed_gold_block|triple_compressed_gold_block
+      - triple_compressed_gold_block|pirate_eye_patch|triple_compressed_gold_block
+      - triple_compressed_gold_block|triple_compressed_gold_block|triple_compressed_gold_block

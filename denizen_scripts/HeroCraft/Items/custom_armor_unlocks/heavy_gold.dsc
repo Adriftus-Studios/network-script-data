@@ -13,11 +13,11 @@ skin_unlock_heavy_gold_item:
   flags:
     right_click_script: item_skin_unlock
     armor: <list[heavy_gold]>
-    tools: <list[sword.golden_greatsword|axe.golden_battleaxe|pickaxe.golden_sledge]>
+    tools: <list[sword.gold_greatsword|axe.gold_battleaxe|pickaxe.gold_sledge]>
   recipes:
     1:
       type: shaped
       input:
-      - triple_compressed_golden_block|triple_compressed_golden_block|triple_compressed_golden_block
-      - triple_compressed_golden_block|chest|triple_compressed_golden_block
-      - triple_compressed_golden_block|triple_compressed_golden_block|triple_compressed_golden_block
+      - triple_compressed_gold_block|triple_compressed_gold_block|triple_compressed_gold_block
+      - triple_compressed_gold_block|chest|triple_compressed_gold_block
+      - triple_compressed_gold_block|triple_compressed_gold_block|triple_compressed_gold_block

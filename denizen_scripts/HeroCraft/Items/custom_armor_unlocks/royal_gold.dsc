@@ -13,11 +13,11 @@ skin_unlock_royal_gold_item:
   flags:
     right_click_script: item_skin_unlock
     armor: <list[royal_gold]>
-    tools: <list[sword.golden_spear|axe.golden_halberd|shovel.golden_warffork|pickaxe.golden_warhammer|hoe.golden_greatscythe|sword.golden_odachi]>
+    tools: <list[sword.gold_spear|axe.gold_halberd|shovel.gold_warffork|pickaxe.gold_warhammer|hoe.gold_greatscythe|sword.gold_odachi]>
   recipes:
     1:
       type: shaped
       input:
-      - triple_compressed_golden_block|triple_compressed_golden_block|triple_compressed_golden_block
-      - triple_compressed_golden_block|royal_crest|triple_compressed_golden_block
-      - triple_compressed_golden_block|triple_compressed_golden_block|triple_compressed_golden_block
+      - triple_compressed_gold_block|triple_compressed_gold_block|triple_compressed_gold_block
+      - triple_compressed_gold_block|royal_crest|triple_compressed_gold_block
+      - triple_compressed_gold_block|triple_compressed_gold_block|triple_compressed_gold_block
