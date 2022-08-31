@@ -81,6 +81,8 @@ mission_slay_events:
   debug: false
   events:
     on entity killed by entity_flagged:missions.active.slay:
+      - if <context.cancelled>:
+        - stop
       - if <context.damager.entity_type> != PLAYER:
         - stop
       - define __player <context.damager>
