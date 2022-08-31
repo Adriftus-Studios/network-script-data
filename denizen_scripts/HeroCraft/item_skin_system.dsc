@@ -731,7 +731,7 @@ item_skin_unlock_tool:
   debug: false
   definitions: type|id
   script:
-    - if !<player.flag[cosmetics.<[type]>].if_null[<list>].contains[<[id]>]>:
+    - if !<player.flag[cosmetics.tool.<[type]>].if_null[<list>].contains[<[id]>]>:
       - flag player cosmetics.tool.<[type]>:->:<[id]>
       - narrate "<&a>You have unlocked a new tool cosmetic<&co><&6> <[id].replace[_].with[<&sp>].to_titlecase>"
     - else:
