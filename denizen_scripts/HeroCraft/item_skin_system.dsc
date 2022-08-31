@@ -708,7 +708,7 @@ item_skin_unlock:
       - if <player.flag[cosmetics.armor].if_null[<list>].contains[<context.item.flag[armor]>]>:
         - narrate "<&c>You have already unlocked this."
         - stop
-      - foreach <context.item.flag[armors]>:
+      - foreach <context.item.flag[armor]>:
         - run item_skin_unlock_armor <[value]>
     - if <context.item.has_flag[tools]>:
       - foreach <context.item.flag[tools]>:
