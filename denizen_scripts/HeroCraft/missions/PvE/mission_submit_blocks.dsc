@@ -79,6 +79,8 @@ mission_submit_blocks_events:
   debug: false
   events:
     on player takes item from furnace flagged:missions.active.submit_blocks:
+      - if <context.cancelled>:
+        - stop
       # Add missions with ID submit_blocks to a list.
       - define missions <proc[missions_get].context[submit_blocks]>
       # Check each mission if their item matches the item.

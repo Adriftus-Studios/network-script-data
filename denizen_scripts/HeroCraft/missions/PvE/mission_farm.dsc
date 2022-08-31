@@ -93,6 +93,8 @@ mission_farm_events:
   debug: false
   events:
     on player breaks pumpkin|melon|wheat|potatoes|carrots|beetroots flagged:missions.active.farm:
+      - if <context.cancelled>:
+        - stop
       # Add missions with ID farm to a list.
       - define missions <proc[missions_get].context[farm]>
       #Check if the crop is fully grown if it has an age.
