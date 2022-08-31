@@ -11,7 +11,7 @@ Herocraft_RTP:
       - wait 7s
       - teleport <player> <location[0,400,0,HeroCraft].random_offset[12500,0,12500]>
       - define current_chest <player.equipment_map.get[chestplate].if_null[<item[air]>]>
-      - equip <player> chest:elytra[flag=on_drop:delete_item;flag=run_script:determine_air;flag=on_item_pickup:remove_this_entity|cancel;flag=no_drop_on_death:true]
+      - equip <player> chest:elytra[flag=on_drop:delete_item;flag=run_script:determine_air;flag=on_item_pickup:<list[remove_this_entity|cancel]>;flag=no_drop_on_death:true]
       - wait 1t
       - adjust <player> gliding:true
       - flag player hot_dropping
