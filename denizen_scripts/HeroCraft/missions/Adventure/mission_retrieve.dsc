@@ -88,8 +88,6 @@ mission_retrieve_events:
   debug: false
   events:
     on entity dies by:player:
-      - if <context.cancelled>:
-        - stop
       - if <context.damager.has_flag[missions.active.retrieve].not>:
         - stop
       - define __player <context.damager>

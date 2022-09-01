@@ -277,8 +277,6 @@ mission_craft_events:
   debug: false
   events:
     on player crafts item flagged:missions.active.craft:
-      - if <context.cancelled>:
-        - stop
       - if <context.click_type> == NUMBER_KEY:
         - stop
       # Add missions with ID craft to a list.

@@ -118,8 +118,6 @@ mission_cook_events:
     #@@@THE BELOW SCRIPT RELIES ON THE FLAG 'last_player_interaction' from mission_smelt.dsc
 
     after furnace|smoker cooks item location_flagged:last_player_interaction:
-      - if <context.cancelled>:
-        - stop
       - define __player <context.location.flag[last_player_interaction]>
       - stop if:<player.is_online.not.or[<player.has_flag[missions.active.cook].not>]>
       # Add missions with ID cook to a list.
