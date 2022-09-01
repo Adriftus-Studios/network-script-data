@@ -19,5 +19,5 @@ skin_unlock_royal_gold_item:
       type: shaped
       input:
       - triple_compressed_gold_block|triple_compressed_gold_block|triple_compressed_gold_block
-      - triple_compressed_gold_block|royal_crest|triple_compressed_gold_block
+      - triple_compressed_gold_block|royal_emblem|triple_compressed_gold_block
       - triple_compressed_gold_block|triple_compressed_gold_block|triple_compressed_gold_block

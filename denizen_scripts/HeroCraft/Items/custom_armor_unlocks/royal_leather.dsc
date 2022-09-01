@@ -19,5 +19,5 @@ skin_unlock_royal_leather_item:
       type: shaped
       input:
       - triple_compressed_leather|triple_compressed_leather|triple_compressed_leather
-      - triple_compressed_leather|royal_crest|triple_compressed_leather
+      - triple_compressed_leather|royal_emblem|triple_compressed_leather
       - triple_compressed_leather|triple_compressed_leather|triple_compressed_leather

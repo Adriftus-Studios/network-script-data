@@ -19,5 +19,5 @@ skin_unlock_royal_diamond_item:
       type: shaped
       input:
       - triple_compressed_diamond_block|triple_compressed_diamond_block|triple_compressed_diamond_block
-      - triple_compressed_diamond_block|royal_crest|triple_compressed_diamond_block
+      - triple_compressed_diamond_block|royal_emblem|triple_compressed_diamond_block
       - triple_compressed_diamond_block|triple_compressed_diamond_block|triple_compressed_diamond_block

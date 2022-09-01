@@ -19,5 +19,5 @@ skin_unlock_royal_netherite_item:
       type: shaped
       input:
       - triple_compressed_netherite_ingot|triple_compressed_netherite_ingot|triple_compressed_netherite_ingot
-      - triple_compressed_netherite_ingot|royal_crest|triple_compressed_netherite_ingot
+      - triple_compressed_netherite_ingot|royal_emblem|triple_compressed_netherite_ingot
       - triple_compressed_netherite_ingot|triple_compressed_netherite_ingot|triple_compressed_netherite_ingot
