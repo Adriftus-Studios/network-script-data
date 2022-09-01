@@ -27,12 +27,6 @@ compressed_iron_ingot:
       type: shapeless
       input: double_compressed_iron_ingot
       output_quantity: 9
-    2:
-      type: shaped
-      input:
-      - iron_ingot|iron_ingot|iron_ingot
-      - iron_ingot|iron_ingot|iron_ingot
-      - iron_ingot|iron_ingot|iron_ingot
 
 double_compressed_iron_ingot:
   type: item
@@ -53,12 +47,6 @@ double_compressed_iron_ingot:
       type: shapeless
       input: triple_compressed_iron_ingot
       output_quantity: 9
-    2:
-      type: shaped
-      input:
-      - compressed_iron_ingot|compressed_iron_ingot|compressed_iron_ingot
-      - compressed_iron_ingot|compressed_iron_ingot|compressed_iron_ingot
-      - compressed_iron_ingot|compressed_iron_ingot|compressed_iron_ingot
 
 triple_compressed_iron_ingot:
   type: item
@@ -79,12 +67,6 @@ triple_compressed_iron_ingot:
       type: shapeless
       input: quadruple_compressed_iron_ingot
       output_quantity: 9
-    2:
-      type: shaped
-      input:
-      - double_compressed_iron_ingot|double_compressed_iron_ingot|double_compressed_iron_ingot
-      - double_compressed_iron_ingot|double_compressed_iron_ingot|double_compressed_iron_ingot
-      - double_compressed_iron_ingot|double_compressed_iron_ingot|double_compressed_iron_ingot
 
 quadruple_compressed_iron_ingot:
   type: item
@@ -100,10 +82,3 @@ quadruple_compressed_iron_ingot:
     recipe_book_category: blocks.iron_ingot4
   flags:
     on_place: cancel
-  recipes:
-    1:
-      type: shaped
-      input:
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
