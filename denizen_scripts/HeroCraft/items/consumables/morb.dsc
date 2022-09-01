@@ -145,8 +145,11 @@ morb_hits_entity:
           - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
         - stop
     - if !<player.worldguard.can_build[<context.hit_entity.location>]>:
-      - inject morb_hits_block
-      - stop
+        - if <context.projectile.has_flag[rebounding]>:
+          - shoot "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]>" origin:<context.hit_entity.location> destination:<context.projectile.shooter.eye_location> save:shot
+        - else:
+          - drop morb_empty_reuseable if:<context.projectile.has_flag[reuseable]> <context.hit_entity.location>
+        - stop
     - if <context.hit_entity.entity_type> == armor_stand && <context.hit_entity.script.exists> || <context.hit_entity.has_flag[no_morb]>:
       - if <context.projectile.has_flag[rebounding]>:
         - shoot "<entity[dropped_item].with[custom_name=<context.projectile.flag[owner].name>'s Morb;custom_name_visible=true;glowing=true;item=<item[morb_empty_rebounding].with[flag=owner:<context.projectile.flag[owner]>;flag=on_item_pickup:morb_cancel;flag=on_item_pickup_inventory:cancel]>]>" origin:<context.hit_entity.location> destination:<context.projectile.shooter.eye_location> save:shot
