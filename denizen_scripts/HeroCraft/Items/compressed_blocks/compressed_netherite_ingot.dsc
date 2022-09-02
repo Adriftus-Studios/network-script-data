@@ -28,12 +28,12 @@ compressed_netherite_ingot:
       input: double_compressed_netherite_ingot
       output_quantity: 9
     # BRUH this replaced the recipe for netherite block
-    # 2:
-    #   type: shaped
-    #   input:
-    #   - netherite_ingot|netherite_ingot|netherite_ingot
-    #   - netherite_ingot|netherite_ingot|netherite_ingot
-    #   - netherite_ingot|netherite_ingot|netherite_ingot
+     2:
+       type: shaped
+       input:
+       - netherite_ingot|netherite_ingot|netherite_ingot
+       - netherite_ingot|air|netherite_ingot
+       - netherite_ingot|netherite_ingot|netherite_ingot
 
 double_compressed_netherite_ingot:
   type: item
