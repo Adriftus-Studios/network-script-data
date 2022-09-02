@@ -1673,6 +1673,6 @@ titles:
     in_shop: false
   medusa:
     order: 276
-    tag: '&8｜<&7>Medusa&8｜'
+    tag: '&8｜<&color[#020000]>Medusa&8｜'
     description: She's a statue freak
     in_shop: false
