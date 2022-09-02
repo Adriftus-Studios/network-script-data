@@ -136,6 +136,11 @@ town_defence_attack:
     - playeffect at:<[entity].eye_location.points_between[<[target].location.above>].distance[0.5]> effect:dragon_breath quantity:5 offset:0.1 targets:<[target].location.find_players_within[120]>
     - flag <[target]> custom_damage.cause:<[entity].custom_name>
     - hurt <[target]> <[entity].location.town.flag[active_defences].size.mul[0.25].max[1].min[11]> cause:CUSTOM
+    - if !<context.entity.has_flag[pvp]>:
+      - narrate "<&e><&l>You have entered PvP, do not log out!" targets:<[target]>
+    - flag <[target]> pvp expire:30s
+    - if !<server.current_bossbars.contains[PvP_<[target].uuid>]>:
+      - run PvP_Bossbar def:<[target]>
 
 town_defence_use:
   type: task
