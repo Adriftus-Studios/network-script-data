@@ -1678,6 +1678,6 @@ titles:
     in_shop: false
   live:
     order: 277
-    tag: '<&8>｜<&4><&l>LIVE<&8>｜ '
+    tag: '<&8>[<&4><&l>LIVE<&8>] '
     description: Do a back flip
     in_shop: false
