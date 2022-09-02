@@ -2,7 +2,7 @@ PvP_tagging:
   type: world
   debug: false
   events:
-    on player damages player cancelled:false:
+    on player damages player cancelled:false bukkit_priority:MONITOR:
       - if !<context.entity.has_flag[pvp]>:
         - define targets:->:<context.entity
         - narrate "<&e><&l>You have entered PvP, do not log out!" targets:<context.entity>
