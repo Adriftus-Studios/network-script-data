@@ -1681,3 +1681,14 @@ titles:
     tag: '<&8>[<&4><&l>LIVE<&8>] '
     description: Do a back flip
     in_shop: false
+  youtube:
+    order: 278
+    tag: '<&8>[<&0><&l>You<&c>Tube<&8>] '
+    description: Imagine the clout
+    in_shop: false
+  twitch:
+    order: 278
+    tag: '<&8>[<&5><&l>Twitch<&8>] '
+    description: Streamer perks are awesome.
+    in_shop: false
+    
