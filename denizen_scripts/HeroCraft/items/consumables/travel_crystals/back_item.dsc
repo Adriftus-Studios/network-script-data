@@ -65,6 +65,9 @@ back_execute:
   type: task
   debug: false
   script:
+    - if <player.has_flag[pvp]>:
+      - narrate "<&c>You cannot teleport when in PvP."
+      - stop
     - if !<player.has_flag[last_location]>:
       - narrate "<&c>You have no location to return to"
       - stop

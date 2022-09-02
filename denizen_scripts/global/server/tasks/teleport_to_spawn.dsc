@@ -2,6 +2,9 @@ teleport_to_spawn:
   type: task
   debug: false
   script:
+    - if <player.has_flag[pvp]>:
+      - narrate "<&c>You cannot teleport when in PvP."
+      - stop
     - teleport <player> <server.worlds.first.spawn_location>
 
 respawn_handler:

@@ -63,6 +63,9 @@ tpa_remove_item:
   type: task
   debug: false
   script:
+    - if <player.has_flag[pvp]>:
+      - narrate "<&c>You cannot teleport when in PvP."
+      - stop
     - take iteminhand
     - wait 1t
     - run totem_test def:102

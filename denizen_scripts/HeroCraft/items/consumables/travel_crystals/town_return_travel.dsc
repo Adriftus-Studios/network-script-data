@@ -62,6 +62,9 @@ town_return_execute:
   type: task
   debug: false
   script:
+    - if <player.has_flag[pvp]>:
+      - narrate "<&c>You cannot teleport when in PvP."
+      - stop
     - define type <context.item.flag[type]>
     - if !<list[test|herocraft].contains[<bungee.server>]>:
       - narrate "<&c>The item has no reaction in this world..."

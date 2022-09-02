@@ -55,6 +55,9 @@ return_task:
   type: task
   debug: false
   script:
+    - if <player.has_flag[pvp]>:
+      - narrate "<&c>You cannot teleport when in PvP."
+      - stop
     - define type <context.item.flag[type]>
     - if !<context.item.has_flag[tpa_destination]>:
       - narrate "<&c>This item has no saved location!"
