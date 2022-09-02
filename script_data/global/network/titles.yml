@@ -1678,7 +1678,7 @@ titles:
     in_shop: false
   live:
     order: 277
-    tag: '<&8>[<&4><&l>LIVE<&8>] '
+    tag: '<element[<&8><&lb><&4><&l>LIVE<&8><&rb>].click_url[<player.flag[twitch.url]>]> '
     description: Do a back flip
     in_shop: false
   youtube:
@@ -1688,7 +1688,7 @@ titles:
     in_shop: false
   twitch:
     order: 278
-    tag: '<&8>[<&5><&l>Twitch<&8>] '
+    tag: '<element[<&8><&lb><&5><&l>Twitch<&8><&rb>].click_url[<player.flag[twitch.url]>]> '
     description: Streamer perks are awesome.
     in_shop: false
     
