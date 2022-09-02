@@ -6,7 +6,7 @@ uncompressed_netherite_ingot:
     1:
       type: shapeless
       input: compressed_netherite_ingot
-      output_quantity: 9
+      output_quantity: 8
 
 compressed_netherite_ingot:
   type: item
