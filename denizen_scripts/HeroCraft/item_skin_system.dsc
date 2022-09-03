@@ -686,8 +686,10 @@ item_skin_system_clear:
   type: task
   debug: false
   script:
-    - determine passively <context.item.with[flag=run_script:!]>
-    - determine passively cancelled:false
+    - if <list[RIGHT|SHIFT_RIGHT].contains[<context.click>]>:
+      - give <context.item.with[flag=run_script:!]>
+    - else:
+      - determine passively <context.item.with[flag=run_script:!]>
     - if <player.item_on_cursor.material.name> == air:
       - wait 1t
       - inventory clear d:<context.clicked_inventory>
