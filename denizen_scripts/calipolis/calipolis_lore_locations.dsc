@@ -81,6 +81,18 @@ calipolis_lore_locations_open:
           - <&e>One of the last remnants of an era long passed
           - <&e>Though once said to be an ancient people that thrived off the land
           - <&e>only their ruins remain.
+      OctoberBay:
+        name: <&6>October Bay
+        lore:
+          - <&e>Modern Calipolis citizens seldom travel to the docks of this grand bay.
+          - <&e>In the not so distant past this was the location where the Kalleandric Federation first made landfall
+          - <&e>What must they have felt gazing upon the taiga spruce trees that towered over their heads for the first time?
+      TheCalony:
+        name: <&6>The Calony
+        lore:
+          - <&e>A small outpost village that predates the Calipolis proper
+          - <&e>It marks the humble beginnings of the nation and reflects what the earlier years looked like
+          - <&e>One can see the immense progress and how far the nation has come
       LibraryOfCal:
         name: <&6>Library of Calexandria
         lore:
