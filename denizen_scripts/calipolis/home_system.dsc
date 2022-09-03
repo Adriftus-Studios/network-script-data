@@ -40,6 +40,7 @@ calipolis_set_home_callback:
     - flag player homes_data.<[input]>.display:<[input]>
     - flag player homes_data.<[input]>.lore:<player.location.simple>
     - flag player homes_data.<[input]>.location:<player.location>
+    - narrate "<&e>You have saved this location as home<&co> <&a><[input]>"
 
 home_system_inventory:
   type: inventory
