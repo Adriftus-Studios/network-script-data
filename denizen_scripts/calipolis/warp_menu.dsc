@@ -30,7 +30,7 @@ calipolis_warp_locations_open:
     - else:
       - foreach <script.data_key[data.admin_slots]>:
         - inventory set slot:<[value]> o:calipolis_warp_open_admin d:<[inventory]>
-    
+
     - inventory set slot:<script.data_key[data.back_button]> o:calipolis_lore_locations_back_button d:<[inventory]>
 
     - inventory open d:<[inventory]>
@@ -46,7 +46,7 @@ calipolis_warp_open_player:
     run_script: calipolis_warp_locations_open
     type: player
 
-calipolis_warp_open_player:
+calipolis_warp_open_admin:
   type: item
   debug: false
   material: feather
