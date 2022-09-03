@@ -20,7 +20,7 @@ calipolis_warp_locations_open:
     player_slots: 7|8|9
     admin_slots: 1|2|3
     warp_slots: 11|12|13|14|15|16|17|20|21|22|23|24|25|26|27
-    back_button: 46
+    back_button: 37
   script:
     - define type <context.item.flag[type]> if:<[type].exists.not>
     - define page 1 if:<[page].exists.not>
@@ -37,7 +37,7 @@ calipolis_warp_locations_open:
     - define end <[slots].size.mul[<[page]>]>
 
     - foreach <server.flag[waystones.<[type]>].keys.get[<[start]>].to[<[end]>]> as:waystone_id:
-      - 
+      - foreach next
       
 
     - inventory set slot:<script.data_key[data.back_button]> o:calipolis_lore_locations_back_button d:<[inventory]>
