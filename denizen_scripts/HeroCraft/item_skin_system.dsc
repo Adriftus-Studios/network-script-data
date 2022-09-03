@@ -649,7 +649,7 @@ item_skin_system_events:
   events:
     on player clicks in item_skin_system_inventory slot:48|52 bukkit_priority:HIGHEST ignorecancelled:true:
       - stop if:<context.clicked_inventory.equals[<player.inventory>]>
-      - stop if:<context.click.equals[DOUBLE_CLICK]>
+      - stop if:<context.click.equals[LEFT].not>
       - determine passively cancelled:false
       - if <context.slot> == 48 && <context.clicked_inventory.slot[52].material.name> != air:
         - give <context.clicked_inventory.slot[52].with[flag=run_script:!]> to:<player.inventory>
