@@ -14,9 +14,9 @@ home_system_open:
     - define slots <script.data_key[data.home_slots]>
     - foreach <player.flag[homes].if_null[<list>].pad_right[5].with[new]> as:name:
       - if <[name]> == new:
-        - inventory set slot:<[slots].get[<[loop_index]>]> o:green_wool[flag=run_script:calipolis_set_home] d:<[inventory]>
+        - inventory set slot:<[slots].get[<[loop_index]>]> o:green_wool[display=<&a>New<&sp>Home;flag=run_script:calipolis_set_home] d:<[inventory]>
       - else:
-        - inventory set slot:<[slots].get[<[loop_index]>]> o:green_wool[flag=run_script:calipolis_teleport_to_home;flag=home_id:<[name]>] d:<[inventory]>
+        - inventory set slot:<[slots].get[<[loop_index]>]> o:green_wool[display=<[name]>;flag=run_script:calipolis_teleport_to_home;flag=home_id:<[name]>] d:<[inventory]>
     - inventory open d:<[inventory]>
 
 calipolis_teleport_to_home:
