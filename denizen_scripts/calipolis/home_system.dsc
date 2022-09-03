@@ -2,7 +2,12 @@ home_system_open:
   type: task
   debug: false
   data:
-    home_slots: 12|13|14|15|16
+    home_slots: 
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
     back_button: 19
   script:
     - define inventory <inventory[home_system_inventory]>
