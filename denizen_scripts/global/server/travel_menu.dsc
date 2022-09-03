@@ -351,5 +351,6 @@ travel_menu_calipolis_warp_icon:
   mechanisms:
     custom_model_data: 3
   flags:
-    run_script: cancel
+    run_script: calipolis_warp_locations_open
+    type: admin
 
