@@ -4,10 +4,12 @@ teleportation_animation_run:
   definitions: destination
   script:
     - flag <player> last_location_teleport:<player.location>
+    - flag player pvp_immune expire:5s
     - if <yaml[global.player.<player.uuid>].contains[animations.teleportation.current]>:
       - inject <yaml[global.player.<player.uuid>].read[animations.teleportation.current.task]>
     - else:
       - inject teleportation_animation_default_run
+    - flag player pvp_immune expire:3s
 
 teleportation_animation_aggregator:
   type: world

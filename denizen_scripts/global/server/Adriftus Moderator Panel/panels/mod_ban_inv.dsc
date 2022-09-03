@@ -47,6 +47,7 @@ mod_ban_inv_open:
         - define item <item[mod_level<[level]>_item]>
         - define name <[item].flag[tag].parsed><&sp><[infraction]>
         - define lore <list[<&b>Level<&co><&sp><[item].flag[colour].parsed><[level]>]>
+        - define lore:->:<&b>Length<&co><&sp><[item].flag[colour].parsed><script[mod_ban_infractions].data_key[<[server]>.<[level]>.<[infraction]>.length]>
         - define lore:->:<&c>Right<&sp>Click<&sp>to<&sp>ban<&co>
         - define lore:->:<&r><player.flag[amp].get[name]>
         - define color <script[mod_color_codes].data_key[ban.<[level]>]>

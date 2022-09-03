@@ -14,5 +14,5 @@ dungeon_zombie_murder_dog:
   type: task
   debug: false
   script:
-    - if <context.attacker.entity_type> == wolf:
-      - hurt <context.attacker> 5
+    - if <context.damager.entity_type> == wolf:
+      - hurt <context.damager> 5

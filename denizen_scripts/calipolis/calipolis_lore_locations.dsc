@@ -81,11 +81,96 @@ calipolis_lore_locations_open:
           - <&e>One of the last remnants of an era long passed
           - <&e>Though once said to be an ancient people that thrived off the land
           - <&e>only their ruins remain.
+      OctoberBay:
+        name: <&6>October Bay
+        lore:
+          - <&e>Modern Calipolis citizens seldom travel to the docks of this grand bay.
+          - <&e>In the not so distant past this was the location where the Kalleandric Federation first made landfall
+          - <&e>What must they have felt gazing upon the taiga spruce trees that towered over their heads for the first time?
+      TheCalony:
+        name: <&6>The Calony
+        lore:
+          - <&e>A small outpost village that predates the Calipolis proper
+          - <&e>It marks the humble beginnings of the nation and reflects what the earlier years looked like
+          - <&e>One can see the immense progress and how far the nation has come
       LibraryOfCal:
         name: <&6>Library of Calexandria
         lore:
           - <&e>Knowledge and revelations are abound amongst these shelves
           - <&e>If ever you need answers this is the place to start
+      CelebrationRona:
+        name: <&6>Celebration Rona
+        lore:
+          - <&e>The modern day site for an ancient celebration. Once celebrated by the Kalu-Palu, 
+          - <&e>nowadays the current Calipolians put their own twist on it.
+      TheSecretSoupSociety: 
+        name: The Secret Soup Society
+        lore:
+          - <&e>Both friendship and betrayal are served in this establishment. 
+          - <&e>It reminds many of simpler times in the nation. 
+          - <&e>Before its owner decided to complicate the recipe.
+      TheCoronation: 
+        name: <&6>The Coronation
+        lore:
+          - <&e>These grounds have always represented change: 
+          - <&e>for better or worse. One such Calipolis queen knows this best of all. 
+          - <&e>For she has both dawned the crown and abdicated the throne in this very spot
+      ThundersnowPalace: 
+        name: <&6>Thundersnow Palace
+        lore:
+          - <&e>In the far reaches of the Scanadian north, one such palace puts all others to shame. 
+          - <&e>This grandiose yet resilient structure mirrored its late monarch in more ways than one.
+      FreedomWingsBase: 
+        name: <&6>Freedom Wings Base
+        lore:
+          - <&e>Freedom wings for when freedom rings. 
+          - <&e>This is the motto that the winged warriors of the Calipolis military live and die by. 
+          - <&e>Here they gather, planning out their next course of action to quell any dangers that threaten 
+          - <&e>the nation. Even if that means their own queen.
+      TheOlympics: 
+        name: <&6>The Olympics
+        lore:
+          - <&e>This series of sporting events was held in an effort to raise moral and international 
+          - <&e>relations in the aftermath of the United Nations attack. 
+          - <&e>It was all fun and games until the perpetrator appeared to declare a challenge. 
+          - <&e>A challenge that could only be decided in the ring.
+      TheCourthouse: 
+        name: <&6>The Courthouse
+        lore:
+          - <&e>Saying that justice has been served here would be incorrect. 
+          - <&e>The cruel hand of judgment shows little mercy to the accused in this court. 
+          - <&e>If you are to survive this judgment day keep your friends close and enemies closer.
+      TheCalthedral: 
+        name: <&6>The Calthedral
+        lore:
+          - <&e>Throughout its existence it has been known as a place that has brought others together 
+          - <&e>through love and matrimony. Simultaneously, it has bore witness to a great battle 
+          - <&e>that has torn nations and people apart.
+      IrohsFuneralSite: 
+        name: <&6>Iroh's Funeral Site
+        lore:
+          - <&e>Cautious and kind in life, the late first general of the Freedom Wings now resides here 
+          - <&e>after his untimely death. While the stories vary, all know that he fell to the cold 
+          - <&e>end of a blade during the wedding crisis. Though he lays amongst the flowering grove, 
+          - <&e>he is never truly gone. 
+      TheSummerFestival: 
+        name: <&6>The Summer Festival
+        lore: 
+          - <&e>In the spirit of the season this festival was arranged for Calipolian citizens 
+          - <&e>to forget about their troubles and enjoy the moment, or at least that was the hope. 
+          - <&e>Unfortunately it's not easy to hide the scars of war from those who know you best.
+      TheSASWarcore: 
+        name: <&6>The SAS Warcore
+        lore:
+          - <&e>A grand battleship constructed for the first of many battles during The Great Unrest. 
+          - <&e>The Calipolian navy savored their victory not knowing the tragic betrayal 
+          - <&e>that occurred on board the opposing vessel.
+      TheThroneRoomPrison: 
+        name: <&6>The Throne Room & Prison
+        lore: 
+          - <&e>Seated directly next to each other, these two rooms couldn't be more different. 
+          - <&e>One a symbol of Calipolian rule, and the other being criminal scum shackled by this power.
+          - <&e>Though there is more power than one would think hidden beneath these shackles.
     slot_map:
       back: 46
       next_page: 9

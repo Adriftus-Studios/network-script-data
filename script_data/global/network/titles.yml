@@ -1687,8 +1687,13 @@ titles:
     description: Imagine the clout
     in_shop: false
   twitch:
-    order: 278
+    order: 279
     tag: '<element[<&8><&lb><&5><&l>Twitch<&8><&rb>].click_url[<player.flag[twitch.url]>]> '
     description: Streamer perks are awesome.
     in_shop: false
+  trader:
+    order: 280
+    tag: '<&6><&l>Trader '
+    description: A man of culture, eh?
+    in_shop: true
     

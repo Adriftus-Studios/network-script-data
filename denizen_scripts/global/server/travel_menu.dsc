@@ -128,7 +128,7 @@ travel_menu_to_server:
   debug: false
   script:
     - determine passively cancelled
-    - flag player "temp.leave_message:<player.name> has gone to <context.item.flag[server]>"
+    - flag player "temp.leave_message:<player.name> has gone to <context.item.flag[server].replace[_].with[<&sp>].to_titlecase>"
     - adjust <player> send_to:<context.item.flag[server]>
 
 travel_menu_inventory:
@@ -322,12 +322,12 @@ travel_menu_calipolis_home_icon:
   debug: false
   display name: <&6>Homes
   lore:
-  - "<&6>You House!"
+  - "<&6>Your Homes!"
   material: feather
   mechanisms:
     custom_model_data: 3
   flags:
-    run_script: cancel
+    run_script: home_system_open
 
 travel_menu_calipolis_lore_icon:
   type: item
@@ -351,5 +351,6 @@ travel_menu_calipolis_warp_icon:
   mechanisms:
     custom_model_data: 3
   flags:
-    run_script: cancel
+    run_script: calipolis_warp_locations_open
+    type: admin
 

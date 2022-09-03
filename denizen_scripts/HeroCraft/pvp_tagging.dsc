@@ -2,7 +2,12 @@ PvP_tagging:
   type: world
   debug: false
   events:
-    on player damages player cancelled:false bukkit_priority:MONITOR:
+    on player damages player bukkit_priority:MONITOR:
+      - if <context.damager.has_flag[pvp_immune]> || <context.entity.has_flag[pvp_immune]>:
+        - determine cancelled
+      - stop if:<context.damager.equals[<context.attacker>]>
+      - if <context.entity.mcmmo.party.exists> && <context.entity.mcmmo.party.members.contains[<context.attacker>]>:
+        - stop
       - if !<context.entity.has_flag[pvp]>:
         - define targets:->:<context.entity
         - narrate "<&e><&l>You have entered PvP, do not log out!" targets:<context.entity>
