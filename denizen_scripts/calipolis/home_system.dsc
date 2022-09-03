@@ -17,6 +17,7 @@ home_system_open:
         - inventory set slot:<[slots].get[<[loop_index]>]> o:green_wool[flag=run_script:calipolis_set_home] d:<[inventory]>
       - else:
         - inventory set slot:<[slots].get[<[loop_index]>]> o:green_wool[flag=run_script:calipolis_teleport_to_home;flag=home_id:<[name]>] d:<[inventory]>
+    - inventory open d:<[inventory]>
 
 calipolis_teleport_to_home:
   type: task
