@@ -3,7 +3,7 @@ gateway_teleport:
   debug: false
   events:
     on player teleports cause:END_GATEWAY:
-      - flag <player> last_location:<player.location>
+      #- flag <player> last_location:<player.location>
       - define gateway <player.location.find_blocks[end_gateway].within[2].get[1]>
       - if <[gateway].has_flag[destination.location]> || <[gateway].has_flag[destination.server]>:
         - playsound sound:ENTITY_ENDERMAN_TELEPORT <[gateway]> pitch:0.1
