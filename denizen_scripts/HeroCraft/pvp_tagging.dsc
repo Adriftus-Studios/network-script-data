@@ -2,7 +2,7 @@ PvP_tagging:
   type: world
   debug: false
   events:
-    on player damages player bukkit_priority:MONITOR::
+    on player damages player bukkit_priority:MONITOR:
       - stop if:<context.damager.equals[<context.attacker>]>
       - if <context.entity.mcmmo.party.exists> && <context.entity.mcmmo.party.members.contains[<context.attacker>]>:
         - stop
