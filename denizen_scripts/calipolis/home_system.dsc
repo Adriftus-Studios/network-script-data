@@ -16,7 +16,7 @@ home_system_open:
       - if <[name]> == new:
         - inventory set slot:<[slots].get[<[loop_index]>]> o:feather[custom_model_data=801;display=<&a>New<&sp>Home;flag=run_script:calipolis_set_home] d:<[inventory]>
       - else if <[name]> == locked:
-        - inventory set slot:<[slots].get[<[loop_index]>]> o:feather[custom_model_data=802;display=<&a>Locked<&sp>Home;flag=run_script:cancel] d:<[inventory]>
+        - inventory set slot:<[slots].get[<[loop_index]>]> o:feather[custom_model_data=802;display=<&c>Locked<&sp>Home;flag=run_script:cancel] d:<[inventory]>
       - else:
         - inventory set slot:<[slots].get[<[loop_index]>]> o:feather[custom_model_data=800;display=<&a>Home<&co><&sp><&r><[name]>;lore=<&e><player.flag[homes_data.<[name]>.location].simple>;flag=run_script:calipolis_teleport_to_home;flag=home_id:<[name]>] d:<[inventory]>
 
