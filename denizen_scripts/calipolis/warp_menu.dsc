@@ -3,14 +3,14 @@ calipolis_warp_locations_admin:
   debug: false
   inventory: chest
   title: <&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[2200]>
-  size: 54
+  size: 45
 
 calipolis_warp_locations_player:
   type: inventory
   debug: false
   inventory: chest
   title: <&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[2201]>
-  size: 54
+  size: 45
 
 calipolis_warp_locations_open:
   type: task
