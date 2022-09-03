@@ -5,4 +5,4 @@ reload_all_scripts:
     - announce "<&c>Server is being updated, there will be a large lag spike in 10 seconds."
     - wait 10s
     - reload
-    - announce "<&c>Server has completed update."
+    - announce "<&c>Server has completed update! Sorry for any inconvenience."
