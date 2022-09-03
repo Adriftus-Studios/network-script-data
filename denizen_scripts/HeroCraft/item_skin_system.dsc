@@ -687,7 +687,7 @@ item_skin_system_clear:
   debug: false
   script:
     - determine passively <context.item.with[flag=run_script:!]>
-    - ratelimit <player> 1t
+    - determine passively cancelled:false
     - if <player.item_on_cursor.material.name> == air:
       - wait 1t
       - inventory clear d:<context.clicked_inventory>
