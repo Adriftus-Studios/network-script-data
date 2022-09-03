@@ -248,7 +248,7 @@ Shield_enchant_handler:
       - if <[enchants_list].contains_any[flamebrand]>:
         - if !<player.has_flag[temp.flamebrand.cd]>:
           - flag <player> temp.flamebrand.cd expire:40t
-          - burn <context.damager> duration:<player.item_in_hand.enchantment_map.get[flamebrand]>s
+          - burn <context.entity> duration:<player.item_in_hand.enchantment_map.get[flamebrand]>s
       - if <[enchants_list].contains_any[rebuking]>:
         - if !<player.has_flag[temp.rebuking.cd]>:
           - flag <player> temp.rebuking.cd expire:40t
