@@ -2,7 +2,7 @@ home_system_open:
   type: task
   debug: false
   data:
-    home_slots: 
+    home_slots:
     - 12
     - 13
     - 14
@@ -29,7 +29,7 @@ calipolis_set_home:
   type: task
   debug: false
   script:
-    - run anvil_gui_text_input "def:<&e>Name Your Home!|"
+    - run anvil_gui_text_input "def:<&e>Name Your Home!|calipolis_set_home_callback"
 
 calipolis_set_home_callback:
   type: task
