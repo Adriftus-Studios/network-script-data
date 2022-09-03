@@ -17,8 +17,8 @@ calipolis_warp_locations_open:
   debug: false
   definitions: type|page
   data:
-    player_slots: 7|8
-    admin_slots: 2|3
+    player_slots: 7|8|9
+    admin_slots: 1|2|3
     back_button: 46
   script:
     - define type <context.item.flag[type]> if:<[type].exists.not>
