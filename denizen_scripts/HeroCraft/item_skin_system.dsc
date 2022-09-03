@@ -686,7 +686,7 @@ item_skin_system_clear:
   type: task
   debug: false
   script:
-    - if <list[RIGHT|SHIFT_RIGHT].contains[<context.click>]>:
+    - if <list[RIGHT|SHIFT_RIGHT|SHIFT_LEFT].contains[<context.click>]>:
       - give <context.item.with[flag=run_script:!]>
     - else:
       - determine passively <context.item.with[flag=run_script:!]>
