@@ -322,12 +322,12 @@ travel_menu_calipolis_home_icon:
   debug: false
   display name: <&6>Homes
   lore:
-  - "<&6>You House!"
+  - "<&6>Your Homes!"
   material: feather
   mechanisms:
     custom_model_data: 3
   flags:
-    run_script: cancel
+    run_script: home_system_open
 
 travel_menu_calipolis_lore_icon:
   type: item
