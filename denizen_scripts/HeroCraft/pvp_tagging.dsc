@@ -3,6 +3,9 @@ PvP_tagging:
   debug: false
   events:
     on player damages player:
+      - stop if:<context.damager.equals[<context.attacker>]>
+      - if <context.entity.mcmmo.party.exists> && <context.entity.mcmmo.party.members.contains[<context.attacker>]>:
+        - stop
       - if !<context.entity.has_flag[pvp]>:
         - define targets:->:<context.entity
         - narrate "<&e><&l>You have entered PvP, do not log out!" targets:<context.entity>
