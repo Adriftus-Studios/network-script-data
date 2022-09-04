@@ -18,8 +18,6 @@ compressed_iron_ingot:
   - sharpness:1
   lore:
     - <&7>9 Iron Ingot
-  data:
-    recipe_book_category: blocks.iron_ingot1
   flags:
     on_place: cancel
   recipes:
@@ -38,8 +36,6 @@ double_compressed_iron_ingot:
   - sharpness:1
   lore:
     - <&7>81 Iron Ingot
-  data:
-    recipe_book_category: blocks.iron_ingot2
   flags:
     on_place: cancel
   recipes:
@@ -58,8 +54,6 @@ triple_compressed_iron_ingot:
   - sharpness:1
   lore:
     - <&7>729 Iron Ingot
-  data:
-    recipe_book_category: blocks.iron_ingot3
   flags:
     on_place: cancel
   recipes:
@@ -78,7 +72,5 @@ quadruple_compressed_iron_ingot:
   - sharpness:1
   lore:
     - <&7>6561 Iron Ingot
-  data:
-    recipe_book_category: blocks.iron_ingot4
   flags:
     on_place: cancel
