@@ -89,6 +89,6 @@ xp_item_take_xp:
   type: task
   debug: false
   script:
-    - stop if:<context.item.material.name.equals[air]>
+    - narrate <context.item> if:<player.name.equals[Xeane]>
     - define xp_needed <script[xp_item_consume].data_key[data.<context.item.flag[xp_levels]>]>
     - experience take <[xp_needed]>
