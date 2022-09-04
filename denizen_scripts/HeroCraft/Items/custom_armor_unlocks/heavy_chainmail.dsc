@@ -18,6 +18,6 @@ skin_unlock_heavy_chainmail_item:
     1:
       type: shaped
       input:
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
-      - triple_compressed_iron_ingot|chest|triple_compressed_iron_ingot
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
+      - triple_compressed_chain|triple_compressed_chain|triple_compressed_chain
+      - triple_compressed_chain|chest|triple_compressed_chain
+      - triple_compressed_chain|triple_compressed_chain|triple_compressed_chain

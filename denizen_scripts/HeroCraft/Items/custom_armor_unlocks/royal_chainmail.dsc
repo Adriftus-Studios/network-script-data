@@ -18,6 +18,6 @@ skin_unlock_royal_chainmail_item:
     1:
       type: shaped
       input:
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
-      - triple_compressed_iron_ingot|royal_emblem|triple_compressed_iron_ingot
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
+      - triple_compressed_chain|triple_compressed_chain|triple_compressed_chain
+      - triple_compressed_chain|royal_emblem|triple_compressed_chain
+      - triple_compressed_chain|triple_compressed_chain|triple_compressed_chain

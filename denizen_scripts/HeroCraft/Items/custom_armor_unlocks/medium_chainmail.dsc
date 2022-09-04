@@ -18,6 +18,6 @@ skin_unlock_medium_chainmail_item:
     1:
       type: shaped
       input:
-      - double_compressed_iron_ingot|double_compressed_iron_ingot|double_compressed_iron_ingot
-      - double_compressed_iron_ingot|chest|double_compressed_iron_ingot
-      - double_compressed_iron_ingot|double_compressed_iron_ingot|double_compressed_iron_ingot
+      - double_compressed_chain|double_compressed_chain|double_compressed_chain
+      - double_compressed_chain|chest|double_compressed_chain
+      - double_compressed_chain|double_compressed_chain|double_compressed_chain
