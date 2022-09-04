@@ -172,6 +172,7 @@ mod_color_codes:
     1: EFF200
     2: FFA800
     3: FF0000
+    4: FF0000
 
 mod_action_past_tense:
   type: data
