@@ -6,6 +6,7 @@ dungeon_zombie_1:
     on_combust: cancel
     on_damaged: dungeon_zombie_murder_dog
     on_entity_added: remove_entity_1_tick
+    on_item_pickup: cancel
   mechanisms:
     custom_name: <&f>Thorny Zombie
     custom_name_visible: true
