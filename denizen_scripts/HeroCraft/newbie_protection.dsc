@@ -16,13 +16,13 @@ new_player_protections:
         - flag player newbie:!
         - narrate "<&a>- <&b>New Player Protection <&a>-"
         - narrate "     <&c>De-activated"
-        - narrate "<&e>you are above power level 2000"
+        - narrate "<&e>you are above power level 1000"
     on mcmmo player levels down skill:
       - if <player.mcmmo.level> < 1000:
         - flag player newbie
         - narrate "<&a>- <&b>New Player Protection <&a>-"
         - narrate "     <&6>Activated!"
-        - narrate "<&e>you are below power level 2000"
+        - narrate "<&e>you are below power level 1000"
     on player joins:
       - if <player.mcmmo.level> > 1000:
         - flag player newbie:!
