@@ -11,13 +11,13 @@ new_player_protections:
       - narrate "<&a>You have been saved from death"
     on player damaged bukkit_priority:lowest priority:-1 flagged:newbie:
       - determine <context.final_damage.div[5].round> if:<context.damager.script.exists.not>
-    on mcmmo player levels up skill flagged:newbie:
+    after mcmmo player levels up skill flagged:newbie:
       - if <player.mcmmo.level> >= 500:
         - flag player newbie:!
         - narrate "<&a>- <&b>New Player Protection <&a>-"
         - narrate "     <&c>De-activated"
         - narrate "<&e>you are above power level 500"
-    on mcmmo player levels down skill:
+    after mcmmo player levels down skill:
       - stop if:<duration[<player.statistic[PLAY_ONE_MINUTE]>t].is_more_than[20h]>
       - if <player.mcmmo.level> < 500:
         - flag player newbie
@@ -25,6 +25,7 @@ new_player_protections:
         - narrate "     <&6>Activated!"
         - narrate "<&e>you are below power level 500"
     after player joins:
+      - wait 2s
       - if <player.mcmmo.level> > 500 || <duration[<player.statistic[PLAY_ONE_MINUTE]>t]> > 20h:
         - flag player newbie:!
       - else:
