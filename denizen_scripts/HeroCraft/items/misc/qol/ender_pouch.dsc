@@ -23,4 +23,7 @@ ender_pouch_open:
   type: task
   debug: false
   script:
+    - if <player.has_flag[pvp]>:
+      - narrate "<&c>You cannot use an Ender Pouch in PvP"
+      - stop
     - inventory open d:<player.enderchest>
