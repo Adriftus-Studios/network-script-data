@@ -25,7 +25,7 @@ new_player_protections:
         - narrate "     <&6>Activated!"
         - narrate "<&e>you are below power level 500"
     after player joins:
-      - wait 2s
+      - wait 3s
       - if <player.mcmmo.level> > 500 || <duration[<player.statistic[PLAY_ONE_MINUTE]>t]> > 20h:
         - flag player newbie:!
       - else:
