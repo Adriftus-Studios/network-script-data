@@ -12,19 +12,19 @@ new_player_protections:
     on player damaged bukkit_priority:lowest priority:-1 flagged:newbie:
       - determine <context.final_damage.div[5].round> if:<context.damager.script.exists.not>
     on mcmmo player levels up skill flagged:newbie:
-      - if <player.mcmmo.level> >= 2000:
+      - if <player.mcmmo.level> >= 1000:
         - flag player newbie:!
         - narrate "<&a>- <&b>New Player Protection <&a>-"
         - narrate "     <&c>De-activated"
         - narrate "<&e>you are above power level 2000"
     on mcmmo player levels down skill:
-      - if <player.mcmmo.level> < 2000:
+      - if <player.mcmmo.level> < 1000:
         - flag player newbie
         - narrate "<&a>- <&b>New Player Protection <&a>-"
         - narrate "     <&6>Activated!"
         - narrate "<&e>you are below power level 2000"
     on player joins:
-      - if <player.mcmmo.level> > 2000:
+      - if <player.mcmmo.level> > 1000:
         - flag player newbie:!
       - else:
         - flag player newbie
