@@ -15,10 +15,10 @@ mod_ban_inv:
     head: <item[mod_player_item]>
   slots:
     - [] [] [] [] [] [] [] [] []
-    - [lvl1] [lvl1] [] [] [] [] [] [] []
-    - [lvl2] [lvl2] [] [] [] [] [] [] []
-    - [lvl3] [lvl3] [] [] [] [] [] [] []
-    - [lvl4] [lvl4] [] [] [] [] [] [] []
+    - [lvl1] [] [] [] [] [] [] [] []
+    - [lvl2] [] [] [] [] [] [] [] []
+    - [lvl3] [] [] [] [] [] [] [] []
+    - [lvl4] [] [] [] [] [] [] [] []
     - [back] [] [] [] [head] [] [] [] []
 
 mod_ban_inv_events:
@@ -43,7 +43,7 @@ mod_ban_inv_open:
         - define server <bungee.server>
       - default:
         - define server default
-    - foreach <list[1|2|3]> as:level:
+    - foreach <list[1|2|3|4]> as:level:
       - foreach <script[mod_ban_infractions].list_keys[<[server]>.<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>
         - define name <[item].flag[tag].parsed><&sp><[infraction]>

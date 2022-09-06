@@ -17,6 +17,26 @@ mod_kick_infractions:
         category: Advantage
         cmd: 100
         slot: 30
+  herocraft:
+    1:
+      Harassment and Disrespect:
+        category: Behavioral
+        cmd: 100
+        slot: 12
+    2:
+      Names:
+        category: Player Rules
+        cmd: 100
+        slots: 21
+      Skins:
+        category: Player Rules
+        cmd: 100
+        slots: 22
+    3:
+      Player Hunting:
+        category: Game Rules
+        cmd: 100
+        slots: 30
   default:
     1:
       Spam:
@@ -103,6 +123,121 @@ mod_ban_infractions:
         length: 30d
         cmd: 100
         slot: 30
+  herocraft:
+    1:
+      Harassment and Disrespect:
+        category: Behavioral
+        length: 1d
+        cmd: 100
+        slot: 11
+      Names:
+        category: Player Rules
+        length: 1d
+        cmd: 100
+        slot: 12
+      Skins:
+        category: Player Rules
+        length: 1d
+        cmd: 100
+        slot: 13
+      Griefing:
+        category: Game Rules
+        length: 1d
+        cmd: 100
+        slot: 14
+      Obscenity:
+        category: Game Rules
+        length: 3d
+        cmd: 100
+        slot: 15
+      Player Hunting:
+        category: Game Rules
+        length: 1d
+        cmd: 100
+        slot: 16
+      X-Ray:
+        category: Game Function
+        length: 1d
+        cmd: 100
+        slot: 17
+      Hacking and Glitching:
+        category: Game Function
+        length: 7d
+        cmd: 100
+        slot: 18
+    2:
+      Stream Sniping:
+        category: Behavioral
+        length: 7d
+        cmd: 100
+        slot: 20
+      Griefing:
+        category: Game Rules
+        length: 3d
+        cmd: 100
+        slot: 21
+      Obscenity:
+        category: Game Rules
+        length: 5d
+        cmd: 100
+        slot: 22
+      X-Ray:
+        category: Game Function
+        length: 3d
+        cmd: 100
+        slot: 23
+      Hacking and Glitching:
+        category: Game Function
+        length: 15d
+        cmd: 100
+        slot: 24
+    3:
+      Griefing:
+        category: Game Rules
+        length: 7d
+        cmd: 100
+        slot: 29
+      Obscenity:
+        category: Game Rules
+        length: 10d
+        cmd: 100
+        slot: 30
+      X-Ray:
+        category: Game Function
+        length: 7d
+        cmd: 100
+        slot: 31
+      Hacking and Glitching:
+        category: Game Function
+        length: 30d
+        cmd: 100
+        slot: 32
+    4:
+      Endangerment:
+        category: Behavioral
+        length: 10y
+        cmd: 100
+        slot: 38
+      Griefing:
+        category: Game Rules
+        length: 10y
+        cmd: 100
+        slot: 39
+      Obscenity:
+        category: Game Rules
+        length: 10y
+        cmd: 100
+        slot: 40
+      X-Ray:
+        category: Game Function
+        length: 10y
+        cmd: 100
+        slot: 41
+      Hacking and Glitching:
+        category: Game Function
+        length: 10y
+        cmd: 100
+        slot: 42
   default:
     1:
       Minor Inappropriate Chat Usage:
