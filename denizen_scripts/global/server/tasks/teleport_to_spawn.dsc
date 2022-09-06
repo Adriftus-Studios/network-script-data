@@ -5,6 +5,9 @@ teleport_to_spawn:
     - if <player.has_flag[pvp]>:
       - narrate "<&c>You cannot teleport when in PvP."
       - stop
+    - if <player.location.town.exists> && <player.location.towny_type> == jail:
+      - narrate "<&c>You cannot return to spawn from a Jail plot."
+      - stop
     - teleport <player> <server.worlds.first.spawn_location>
 
 respawn_handler:

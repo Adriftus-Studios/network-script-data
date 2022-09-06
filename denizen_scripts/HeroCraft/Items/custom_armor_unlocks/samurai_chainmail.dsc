@@ -18,6 +18,6 @@ skin_unlock_samurai_chainmail_item:
     1:
       type: shaped
       input:
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
-      - triple_compressed_iron_ingot|samurai_headband|triple_compressed_iron_ingot
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
+      - triple_compressed_chain|triple_compressed_chain|triple_compressed_chain
+      - triple_compressed_chain|samurai_headband|triple_compressed_chain
+      - triple_compressed_chain|triple_compressed_chain|triple_compressed_chain

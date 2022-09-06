@@ -53,6 +53,7 @@ town_defence_watch:
   debug: false
   events:
     on towny player enters town:
+      - stop if:<player.gamemode.equals[spectator]>
       - if <context.town.outlaws.contains[<player>]>:
         - run town_defence_add_target def:<context.town>|<player>
     on towny player exits town:

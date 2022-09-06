@@ -18,6 +18,6 @@ skin_unlock_pirate_chainmail_item:
     1:
       type: shaped
       input:
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
-      - triple_compressed_iron_ingot|pirate_eye_patch|triple_compressed_iron_ingot
-      - triple_compressed_iron_ingot|triple_compressed_iron_ingot|triple_compressed_iron_ingot
+      - triple_compressed_chain|triple_compressed_chain|triple_compressed_chain
+      - triple_compressed_chain|pirate_eye_patch|triple_compressed_chain
+      - triple_compressed_chain|triple_compressed_chain|triple_compressed_chain

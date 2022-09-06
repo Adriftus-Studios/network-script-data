@@ -18,6 +18,6 @@ skin_unlock_light_chainmail_item:
     1:
       type: shaped
       input:
-      - compressed_iron_ingot|compressed_iron_ingot|compressed_iron_ingot
-      - compressed_iron_ingot|chest|compressed_iron_ingot
-      - compressed_iron_ingot|compressed_iron_ingot|compressed_iron_ingot
+      - compressed_chain|compressed_chain|compressed_chain
+      - compressed_chain|chest|compressed_chain
+      - compressed_chain|compressed_chain|compressed_chain
