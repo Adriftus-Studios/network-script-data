@@ -39,7 +39,7 @@ mod_ban_inv_open:
   script:
     - define inventory <inventory[mod_ban_inv]>
     - choose <bungee.server>:
-      - case test:
+      - case herocraft test:
         - define server <bungee.server>
       - default:
         - define server default
