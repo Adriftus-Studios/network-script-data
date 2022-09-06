@@ -8,6 +8,9 @@ teleport_to_spawn:
     - if <player.location.town.exists> && <player.location.towny_type> == jail:
       - narrate "<&c>You cannot return to spawn from a Jail plot."
       - stop
+    - if <player.location.below.material.name.advanced_matches[*air]>:
+      - narrate "<&c>You cannot use this mid-air"
+      - stop
     - teleport <player> <server.worlds.first.spawn_location>
 
 respawn_handler:
