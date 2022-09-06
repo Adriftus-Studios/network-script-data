@@ -90,7 +90,7 @@ airship_move:
     - wait 5t
 
     # Teleport all players
-    - foreach <cuboid[nomad_airship_<[id]>_area].players>:
+    - foreach <cuboid[nomad_airship_<[id]>_area].entities[player|villager|animal]>:
       - define relative <[value].location.sub[<[current_location]>]>
       - teleport <[value]> <[new_location].add[<[relative]>].with_pose[<[value]>]>
 
