@@ -13,6 +13,9 @@ new_player_protections:
       - narrate "<&a>- <&b>New Player Protection <&a>-"
       - narrate "<&a>You have been saved from death"
     on player damaged bukkit_priority:lowest priority:-1 flagged:newbie:
+      - if <player.mcmmo.level> > 500 || <duration[<player.statistic[PLAY_ONE_MINUTE]>t]> > 20h:
+        - flag <player> newbie:!
+        - stop
       - determine <context.final_damage.div[2].round> if:<context.damager.script.exists.not>
     after mcmmo player levels up skill flagged:newbie:
       - if <player.mcmmo.level> >= 500 || <duration[<player.statistic[PLAY_ONE_MINUTE]>t]> > 20h:
