@@ -10,14 +10,15 @@ mod_ban_inv:
     lvl1: <item[feather].with[display_name=<&f><&lb><&e>1<&f><&rb>;custom_model_data=3]>
     lvl2: <item[feather].with[display_name=<&7><&lb><&6>2<&7><&rb>;custom_model_data=3]>
     lvl3: <item[feather].with[display_name=<&8><&lb><&c>3<&8><&rb>;custom_model_data=3]>
+    lvl4: <item[feather].with[display_name=<&8><&lb><&c>4<&8><&rb>;custom_model_data=3]>
     back: <item[feather].with[display_name=<&c><&l>↩<&sp>Actions<&sp>panel;custom_model_data=3].with_flag[to:actions]>
     head: <item[mod_player_item]>
   slots:
     - [] [] [] [] [] [] [] [] []
-    - [lvl1] [lvl1] [] [] [] [] [] [] []
-    - [lvl2] [lvl2] [] [] [] [] [] [] []
-    - [lvl3] [lvl3] [] [] [] [] [] [] []
-    - [] [] [] [] [] [] [] [] []
+    - [lvl1] [] [] [] [] [] [] [] []
+    - [lvl2] [] [] [] [] [] [] [] []
+    - [lvl3] [] [] [] [] [] [] [] []
+    - [lvl4] [] [] [] [] [] [] [] []
     - [back] [] [] [] [head] [] [] [] []
 
 mod_ban_inv_events:
@@ -42,7 +43,7 @@ mod_ban_inv_open:
         - define server <bungee.server>
       - default:
         - define server default
-    - foreach <list[1|2|3]> as:level:
+    - foreach <list[1|2|3|4]> as:level:
       - foreach <script[mod_ban_infractions].list_keys[<[server]>.<[level]>]> as:infraction:
         - define item <item[mod_level<[level]>_item]>
         - define name <[item].flag[tag].parsed><&sp><[infraction]>
