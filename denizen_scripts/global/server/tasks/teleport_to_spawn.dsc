@@ -5,8 +5,8 @@ teleport_to_spawn:
     - if <player.has_flag[pvp]>:
       - narrate "<&c>You cannot teleport when in PvP."
       - stop
-    - if <player.location.town.exists> && <player.location.towny_type> == jail:
-      - narrate "<&c>You cannot return to spawn from a Jail plot."
+    - if <player.is_jailed>:
+      - narrate "<&c>You cannot return to spawn while Jailed."
       - stop
     - if <player.location.below.material.name.advanced_matches[*air]>:
       - narrate "<&c>You cannot use this mid-air"
