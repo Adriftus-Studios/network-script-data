@@ -613,7 +613,7 @@ item_skin_system_update:
           - adjust def:new_item color:<[map].get[color]>
           - adjust def:new_item durability:<[durability]>
           - adjust def:new_item custom_model_data:<[map].get[CMD]>
-          - adjust def:new_item attribute_modifiers:<script[item_skin_system_data].data_key[vanilla_attributes.<[material]>]>
+          - adjust def:new_item attribute_modifiers:<script[item_skin_system_data].data_key[vanilla_attributes.<[material]>]> if:<[item].material.name.advanced_matches[*_leggings|*_boots|*_helmet|*_chestplate]>
           - inventory set slot:<[slots].get[<[loop_index]>]> d:<[inventory]> "o:<[new_item].with[display=<[map].get[display]> <[material].after[_].to_titlecase>;flag=run_script:item_skin_system_skin_item]>"
     - else:
       - foreach <[cosmetics].get[<[start]>].to[<[end]>].if_null[<list>]> as:skin_name:
