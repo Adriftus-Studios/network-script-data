@@ -608,8 +608,7 @@ item_skin_system_update:
         - if <[key]> == air:
           - inventory set slot:<[slots].get[<[loop_index]>]> d:<[inventory]> o:air
         - else:
-          - define new_item <[item]>
-          - adjust def:new_item material:leather_<[material].after[_]>
+          - define new_item <item[leather_<[material].after[_]>].with[<[item].property_map>]>
           - adjust def:new_item color:<[map].get[color]>
           - adjust def:new_item durability:<[durability]>
           - adjust def:new_item custom_model_data:<[map].get[CMD]>
