@@ -4,7 +4,7 @@
   material: feather
   display name: <&a>$100 Bank Note
   lore:
-    - <&a>Exhchange at a Bank
+    - <&a>Exchange at a Bank
     - <&a>Worth $100
   flags:
     worth: 100
@@ -18,7 +18,7 @@
   material: feather
   display name: <&a>$1,000 Bank Note
   lore:
-    - <&a>Exhchange at a Bank
+    - <&a>Exchange at a Bank
     - <&a>Worth $1,000
   flags:
     worth: 1000
@@ -32,7 +32,7 @@
   material: feather
   display name: <&a>$10,000 Bank Note
   lore:
-    - <&a>Exhchange at a Bank
+    - <&a>Exchange at a Bank
     - <&a>Worth $10,000
   flags:
     worth: 10000
