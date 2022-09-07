@@ -60,7 +60,7 @@ airship_move:
 
     # Create Worldguard region
     - adjust <player> we_selection:<[final_cuboid]>
-    - execute as_op "rg create nomad_airship_<[id]>"
+    - execute as_op "rg create nomad_airship_<[id]>" silent
     - wait 1t
     - execute as_server "rg flag nomad_airship_<[id]> -w <[new_location].world.name> interact allow"
     - execute as_server "rg flag nomad_airship_<[id]> -w <[new_location].world.name> chest-access allow"
