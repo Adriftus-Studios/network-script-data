@@ -10,6 +10,8 @@ entity_flags:
   type: world
   debug: false
   events:
+    on entity_flagged:no_teleport teleports:
+      - determine cancelled
     on entity_flagged:no_fall_damage damaged by FALL:
       - determine cancelled
     on entity_flagged:no_fall_damage_once damaged by FALL:
