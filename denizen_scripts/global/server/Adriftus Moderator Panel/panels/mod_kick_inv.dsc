@@ -37,7 +37,7 @@ mod_kick_inv_open:
   script:
     - define inventory <inventory[mod_kick_inv]>
     - choose <bungee.server>:
-      - case test:
+      - case herocraft test:
         - define server <bungee.server>
       - default:
         - define server default

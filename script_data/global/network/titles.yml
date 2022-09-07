@@ -1696,4 +1696,8 @@ titles:
     tag: '<&6><&l>Trader '
     description: A man of culture, eh?
     in_shop: true
-    
+  guardian:
+    order: 281
+    tag: '<&e><&l>Guardian '
+    description: I am the guardian of this realm.
+    in_shop: false
