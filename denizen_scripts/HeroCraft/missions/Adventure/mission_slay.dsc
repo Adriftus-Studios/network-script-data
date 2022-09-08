@@ -24,10 +24,10 @@ mission_slay:
       - 24
       - 36
       - 48
-    creeper:
-      - 24
-      - 36
-      - 48
+    #creeper:
+      #- 24
+      #- 36
+      #- 48
 
 
 # Assignment Task
