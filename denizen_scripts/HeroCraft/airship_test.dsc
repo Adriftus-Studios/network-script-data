@@ -80,7 +80,7 @@ airship_move:
     - wait 1t
     - ~schematic paste <[new_location]> name:nomad_airship_<[id]> delayed noair
     - wait 1t
-    - title title:<&color[#000000]><&font[adriftus:overlay]><&chr[1004]><&chr[F802]><&chr[1004]> fade_in:5t stay:1s fade_out:1.5s targets:<[current_location].find_players_within[140].exclude[<cuboid[nomad_airship_<[id]>_area].players>]>
+    - title title:<&f><&font[adriftus:overlay]><&chr[1004]><&chr[F802]><&chr[1004]> fade_in:5t stay:1s fade_out:1.5s targets:<[current_location].find_players_within[140].exclude[<cuboid[nomad_airship_<[id]>_area].players>]>
     - title title:<&color[#000000]><&font[adriftus:overlay]><&chr[1004]><&chr[F802]><&chr[1004]> fade_in:5t stay:1s fade_out:1.5s targets:<cuboid[nomad_airship_<[id]>_area].players>
     - wait 1t
     - define new_lever <[new_location].add[-3,1,-2]>

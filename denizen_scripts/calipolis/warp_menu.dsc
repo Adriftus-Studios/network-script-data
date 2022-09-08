@@ -38,7 +38,6 @@ calipolis_warp_locations_open:
 
     - foreach <server.flag[waystones.<[type]>].keys.get[<[start]>].to[<[end]>]> as:waystone_id:
       - foreach next
-      
 
     - inventory set slot:<script.data_key[data.back_button]> o:calipolis_lore_locations_back_button d:<[inventory]>
 
@@ -48,7 +47,7 @@ calipolis_warp_open_player:
   type: item
   debug: false
   material: feather
-  display name: <&e>Unofficial Warps
+  display name: <&6>Unofficial Warps
   lore:
   - <&e>Player provided warps
   mechanisms:
