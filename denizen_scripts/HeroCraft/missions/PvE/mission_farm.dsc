@@ -92,7 +92,7 @@ mission_farm_events:
   type: world
   debug: false
   events:
-    on player breaks pumpkin|melon|wheat|potatoes|carrot|beetroots flagged:missions.active.farm bukkit_priority:HIGHEST:
+    on player breaks pumpkin|melon|wheat|potatoes|carrots|beetroots flagged:missions.active.farm bukkit_priority:HIGHEST:
       # Add missions with ID farm to a list.
       - define missions <proc[missions_get].context[farm]>
       #Check if the crop is fully grown if it has an age.
@@ -103,7 +103,7 @@ mission_farm_events:
           - foreach next
         - if <context.material.name> == potatoes:
           - define block potato
-        - else if <context.material.name> == carrot:
+        - else if <context.material.name> == carrots:
           - define block carrot
         - else if <context.material.name> == beetroots:
           - define block beetroot
