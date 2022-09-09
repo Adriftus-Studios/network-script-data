@@ -83,8 +83,8 @@ waystone_place_checks_player:
   debug: false
   script:
     - ratelimit <player> 1t
-    - if !<player.has_permission[adriftus.waystone.admin]>:
-      - narrate "<&c>You lack the permission to place an admin waystone."
+    - if <player.flag[waystones].size> < 5:
+      - narrate "<&c>You have too many Waystones."
       - stop
 
 waystone_after_place_player:
@@ -93,14 +93,15 @@ waystone_after_place_player:
   definitions: entity
   script:
     - flag server waystones.player.<[entity].uuid>.location:<player.location.with_pose[0,<player.location.yaw.sub[180]>]>
-    - flag server waystones.admin.<[entity].uuid>.name:<[entity].uuid>
-    - flag <[entity]> type:admin
+    - flag server waystones.player.<[entity].uuid>.name:<[entity].uuid>
+    - flag <[entity]> type:player
 
 waystone_remove:
   type: task
   debug: false
+  definitions: entity
   script:
-    - define entity <context.item.flag[entity]>
+    - define entity <context.item.flag[entity]> if:<[entity].exists.not>
     - choose <context.item.flag[type]>:
       - case admin:
         - flag server waystones.player.<[entity].uuid>:!
@@ -116,11 +117,11 @@ waystone_use:
     - define type <context.entity.flag[type]>
     - if <[type]> == admin:
       - if <player.is_sneaking> && <player.has_permission[adriftus.waystone.admin]>:
-        - run waystone_remove
+        - run waystone_remove def:<context.entity>
       - else:
         - run calipolis_warp_locations_open
     - else:
       - if <player.is_sneaking> && <context.entity.flag[owner]> == <player.uuid>:
-        - run waystone_remove
+        - run waystone_remove def:<context.entity>
       - else:
         - run calipolis_warp_locations_open

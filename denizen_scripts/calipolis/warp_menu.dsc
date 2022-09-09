@@ -37,7 +37,7 @@ calipolis_warp_locations_open:
     - define end <[slots].size.mul[<[page]>]>
 
     - foreach <server.flag[waystones.<[type]>].keys.get[<[start]>].to[<[end]>]> as:waystone_id:
-      - foreach next
+      - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[town].flag[waystone.tp_location]>;display=<[town].name>] d:<[inventory]>
 
     - inventory set slot:<script.data_key[data.back_button]> o:calipolis_lore_locations_back_button d:<[inventory]>
 
@@ -68,3 +68,12 @@ calipolis_warp_open_admin:
   flags:
     run_script: calipolis_warp_locations_open
     type: admin
+
+waystone_gui_item:
+  type: item
+  material: feather
+  display name: <&c>PLACEHOLDER
+  mechanisms:
+    custom_model_data: 20
+  flags:
+    run_script: waystone_teleport
