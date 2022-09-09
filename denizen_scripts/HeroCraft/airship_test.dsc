@@ -215,6 +215,8 @@ nomad_airship_elevator_added:
     - if !<context.entity.is_spawned>:
       - stop
     - define id <context.entity.flag[nomad_airship_id]>
+    - if !<server.flag[nomad_airship.<[id]>.elevator_status]>:
+      - stop
     - if <context.entity.flag[nomad_airship_location]> != <server.flag[nomad_airship.<[id]>.location]>:
       - remove <context.entity>
       - stop
