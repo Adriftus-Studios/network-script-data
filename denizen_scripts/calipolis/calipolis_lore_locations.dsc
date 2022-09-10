@@ -246,4 +246,4 @@ calipolis_lore_location_teleport_to:
   type: task
   debug: false
   script:
-    - run teleporation_animation_run def:<context.item.flag[target]>
+    - run teleportation_animation_run def:<context.item.flag[target]>

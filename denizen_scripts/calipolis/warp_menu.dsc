@@ -37,7 +37,7 @@ calipolis_warp_locations_open:
     - define end <[slots].size.mul[<[page]>]>
 
     - foreach <server.flag[waystones.<[type]>].keys.get[<[start]>].to[<[end]>].if_null[<list>]> as:waystone_id:
-      - define map <server.flag[waystones.<[waystone_id]>]>
+      - define map <server.flag[waystones.<[type]>.<[waystone_id]>]>
       - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[map].get[location]>;display=<[map].get[display]>] d:<[inventory]>
 
     - inventory set slot:<script.data_key[data.back_button]> o:calipolis_lore_locations_back_button d:<[inventory]>

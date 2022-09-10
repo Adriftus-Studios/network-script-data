@@ -87,7 +87,7 @@ calipolis_set_home_callback:
   script:
     - define uuid <util.random.uuid>
     - flag player homes_data.<[uuid]>.display:<[input]>
-    - flag player homes_data.<[uuid]>.lore:<list[<player.location.simple>]>
+    - flag player homes_data.<[uuid]>.lore:->:<player.location.simple>
     - flag player homes_data.<[uuid]>.location:<player.location>
     - narrate "<&e>You have saved this location as home<&co> <&a><[input]>"
 
