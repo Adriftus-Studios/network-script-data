@@ -115,7 +115,7 @@ waystone_use:
   type: task
   debug: false
   script:
-    - define type <context.entity.flag[type]>
+    - define type <context.location.flag[custom_object].flag[type]>
     # Left Click
     - if <context.click_type> == LEFT_CLICK_BLOCK:
       - if <[type]> == admin:
