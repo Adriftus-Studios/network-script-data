@@ -105,9 +105,9 @@ waystone_remove:
     - define entity <context.item.flag[entity]> if:<[entity].exists.not>
     - choose <[entity].flag[type]>:
       - case admin:
-        - flag server waystones.player.<[entity].uuid>:!
-      - case player:
         - flag server waystones.admin.<[entity].uuid>:!
+      - case player:
+        - flag server waystones.player.<[entity].uuid>:!
     - run custom_object_remove def:<[entity]>
     - inventory close
 
