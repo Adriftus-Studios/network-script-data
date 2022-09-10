@@ -740,3 +740,17 @@ item_skin_unlock_tool:
       - narrate "<&a>You have unlocked a new tool cosmetic<&co><&6> <[id].replace[_].with[<&sp>].to_titlecase>"
     - else:
       - narrate "<&c>You have already unlocked this."
+
+item_skins_kit_armorstand:
+  type: task
+  debug: false
+  definitions: armor_stand|type
+  script:
+    - define map <script[item_skin_system_data].data_key[armor.<[type]>]>
+    - define head leather_helmet[color=<[map].get[color]>;custom_model_data=<[map].get[CMD]>]
+    - define legs leather_leggings[color=<[map].get[color]>;custom_model_data=<[map].get[CMD]>]
+    - define boots leather_boots[color=<[map].get[color]>;custom_model_data=<[map].get[CMD]>]
+    - define chest leather_chestplate[color=<[map].get[color]>;custom_model_data=<[map].get[CMD]>]
+    - equip <[armor_stand]> head:<[head]> legs:<[legs]> boots:<[boots]> chest:<[chest]>
+    - adjust <[armor_stand]> custom_name:<&6><[type].replace[_].with[<&sp>].to_titlecase>
+    - adjust <[armor_stand]> custom_name_visible:true
