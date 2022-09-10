@@ -12,7 +12,7 @@ home_system_open:
   script:
     - define inventory <inventory[home_system_inventory]>
     - define slots <script.data_key[data.home_slots]>
-    - foreach <player.flag[homes].if_null[<list>].pad_right[<player.flag[homes_unlocked].if_null[1]>].with[new].pad_right[5].with[locked]> as:id:
+    - foreach <player.flag[homes_data].keys.if_null[<list>].pad_right[<player.flag[homes_unlocked].if_null[1]>].with[new].pad_right[5].with[locked]> as:id:
       - if <[id]> == new:
         - inventory set slot:<[slots].get[<[loop_index]>]> o:calipolis_home_new d:<[inventory]>
       - else if <[id]> == locked:
