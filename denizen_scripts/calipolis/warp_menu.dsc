@@ -3,6 +3,7 @@ calipolis_warp_locations_admin:
   debug: false
   inventory: chest
   title: <&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[2100]><&chr[F703]><&chr[2200]>
+  gui: true
   size: 54
 
 calipolis_warp_locations_player:
@@ -10,6 +11,7 @@ calipolis_warp_locations_player:
   debug: false
   inventory: chest
   title: <&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[2100]><&chr[F703]><&chr[2201]>
+  gui: true
   size: 54
 
 calipolis_warp_locations_open:
@@ -38,7 +40,7 @@ calipolis_warp_locations_open:
 
     - foreach <server.flag[waystones.<[type]>].keys.get[<[start]>].to[<[end]>].if_null[<list>]> as:waystone_id:
       - define map <server.flag[waystones.<[type]>.<[waystone_id]>]>
-      - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[map].get[location]>;display=<[map].get[display]>] d:<[inventory]>
+      - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[map].get[location]>;display=<[map].get[name]>] d:<[inventory]>
 
     - inventory set slot:<script.data_key[data.back_button]> o:calipolis_lore_locations_back_button d:<[inventory]>
 
@@ -78,3 +80,9 @@ waystone_gui_item:
     custom_model_data: 20
   flags:
     run_script: waystone_teleport
+
+waystone_teleport:
+  type: task
+  debug: false
+  script:
+    - run teleportation_animation_run def:<context.item.flag[location]>
