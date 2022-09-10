@@ -64,7 +64,7 @@ calipolis_lore_locations_open:
       # Page 2
       - FreedomWingsBase
       - Olympics
-      - Courthhouse
+      - Courthouse
       - Calthedral
       - IrohsFuneralSite
       - Masquerade

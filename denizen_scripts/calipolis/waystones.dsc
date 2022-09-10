@@ -103,7 +103,7 @@ waystone_remove:
   definitions: entity
   script:
     - define entity <context.item.flag[entity]> if:<[entity].exists.not>
-    - choose <context.item.flag[type]>:
+    - choose <[entity].flag[type]>:
       - case admin:
         - flag server waystones.player.<[entity].uuid>:!
       - case player:
