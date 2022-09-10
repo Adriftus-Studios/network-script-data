@@ -62,13 +62,13 @@ home_delete:
   debug: false
   definitions: display_item
   script:
-    - if <player.has_flag[delete_home]> && <player.flag[delete_home]> == <[display_item].display>:
-      - narrate "<&c>Deleted Home<&co> <&e><[display_item].display>"
+    - if <player.has_flag[delete_home]> && <player.flag[delete_home]> == <[display_item].flag[home_id]>:
+      - narrate "<&c>Deleted Home<&co> <&e><[display_item].display.after[<&co><&sp>]>"
       - flag player homes_data.<[display_item].flag[home_id]>:!
       - run home_system_open
     - else:
       - ratelimit <player> 5s
-      - narrate "<&c>Deleting Home<&co> <&e><[display_item].display>"
+      - narrate "<&c>Deleting Home<&co> <&e><[display_item].display.after[<&co><&sp>]>"
       - narrate "<&e>Wait 5 seconds and right click again to delete"
       - wait 99t
       - flag player delete_home:<[display_item].flag[home_id]> expire:10s
