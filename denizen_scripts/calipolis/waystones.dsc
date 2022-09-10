@@ -124,4 +124,4 @@ waystone_use:
       - if <player.is_sneaking> && <context.entity.flag[owner]> == <player.uuid>:
         - run waystone_remove def:<context.entity>
       - else:
-        - run calipolis_warp_locations_open
+        - run calipolis_warp_locations_open def:<[type]>
