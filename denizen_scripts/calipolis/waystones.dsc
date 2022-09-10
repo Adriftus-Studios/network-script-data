@@ -125,6 +125,8 @@ waystone_rename_callback:
   definitions: input
   script:
     - flag server waystones.<player.flag[rename_waystone].flag[type]>.<player.flag[rename_waystone].uuid>.name:<[input].parse_color>
+    - adjust <player.flag[rename_waystone]> custom_name:<[input].parse_color>
+    - flag player rename_waystone:!
     - narrate "<&a>Waystone Renamed!"
 
 waystone_use:
