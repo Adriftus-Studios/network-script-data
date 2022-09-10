@@ -3,14 +3,14 @@ calipolis_warp_locations_admin:
   debug: false
   inventory: chest
   title: <&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[2100]><&chr[F703]><&chr[2200]>
-  size: 45
+  size: 54
 
 calipolis_warp_locations_player:
   type: inventory
   debug: false
   inventory: chest
   title: <&f><&font[adriftus:travel_menu]><&chr[F808]><&chr[2100]><&chr[F703]><&chr[2201]>
-  size: 45
+  size: 54
 
 calipolis_warp_locations_open:
   type: task
@@ -19,25 +19,26 @@ calipolis_warp_locations_open:
   data:
     player_slots: 7|8|9
     admin_slots: 1|2|3
-    warp_slots: 11|12|13|14|15|16|17|20|21|22|23|24|25|26|27
-    back_button: 37
+    warp_slots: 21|22|23|24|25|26|27|30|31|32|33|34|35
+    back_button: 46
   script:
     - define type <context.item.flag[type]> if:<[type].exists.not>
     - define page 1 if:<[page].exists.not>
     - define inventory <inventory[calipolis_warp_locations_<[type]>]>
     - if <[type]> == admin:
       - foreach <script.data_key[data.player_slots]>:
-        - inventory set slot:<[value]> o:calipolis_warp_open_player d:<[inventory]>
+        - inventory set slot:<[value]> o:calipolis_warp_open_admin d:<[inventory]>
     - else:
       - foreach <script.data_key[data.admin_slots]>:
-        - inventory set slot:<[value]> o:calipolis_warp_open_admin d:<[inventory]>
+        - inventory set slot:<[value]> o:calipolis_warp_open_player d:<[inventory]>
 
     - define slots <list[<script.data_key[data.warp_slots]>]>
     - define start <[page].sub[1].mul[<[slots].size>].add[1]>
     - define end <[slots].size.mul[<[page]>]>
 
-    - foreach <server.flag[waystones.<[type]>].keys.get[<[start]>].to[<[end]>]> as:waystone_id:
-      - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[town].flag[waystone.tp_location]>;display=<[town].name>] d:<[inventory]>
+    - foreach <server.flag[waystones.<[type]>].keys.get[<[start]>].to[<[end]>].if_null[<list>]> as:waystone_id:
+      - define map <server.flag[waystones.<[waystone_id]>]>
+      - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[map].get[location]>;display=<[map].get[display]>] d:<[inventory]>
 
     - inventory set slot:<script.data_key[data.back_button]> o:calipolis_lore_locations_back_button d:<[inventory]>
 

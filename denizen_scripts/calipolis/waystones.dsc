@@ -9,6 +9,7 @@ custom_object_waystone_calipolis_admin:
   barrier_locations:
     - <[location]>
     - <[location].above>
+
 custom_object_waystone_calipolis_player:
   type: data
   item: waystone_player
@@ -115,13 +116,26 @@ waystone_use:
   debug: false
   script:
     - define type <context.entity.flag[type]>
-    - if <[type]> == admin:
-      - if <player.is_sneaking> && <player.has_permission[adriftus.waystone.admin]>:
-        - run waystone_remove def:<context.entity>
+    # Left Click
+    - if <context.click_type> == LEFT_CLICK_BLOCK:
+      - if <[type]> == admin:
+        - if <player.has_permission[adriftus.waystone.admin]>:
+          - run waystone_rename def:<context.entity>
+        - else:
+          - run calipolis_warp_locations_open def:<[type]>
       - else:
-        - run calipolis_warp_locations_open
+        - if <context.entity.flag[owner]> == <player.uuid>:
+          - run waystone_rename def:<context.entity>
+        - else:
+          - run calipolis_warp_locations_open def:<[type]>
     - else:
-      - if <player.is_sneaking> && <context.entity.flag[owner]> == <player.uuid>:
-        - run waystone_remove def:<context.entity>
+      - if <[type]> == admin:
+        - if <player.is_sneaking> && <player.has_permission[adriftus.waystone.admin]>:
+          - run waystone_remove def:<context.entity>
+        - else:
+          - run calipolis_warp_locations_open def:<[type]>
       - else:
-        - run calipolis_warp_locations_open def:<[type]>
+        - if <player.is_sneaking> && <context.entity.flag[owner]> == <player.uuid>:
+          - run waystone_remove def:<context.entity>
+        - else:
+          - run calipolis_warp_locations_open def:<[type]>
