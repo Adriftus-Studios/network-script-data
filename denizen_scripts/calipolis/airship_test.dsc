@@ -87,6 +87,7 @@ airship_move:
     - adjustblock <[new_lever]> switched:true
     - flag <[new_lever]> on_right_click:nomad_airship_toggle_lever
     - flag <[new_lever]> nomad_airship_id:<[id]>
+    - flag <[new_location].add[-3,-1,3]> "infinite_chest:<color[#020000]>Free Stuff!"
     - wait 5t
 
     # Teleport all players
@@ -106,6 +107,7 @@ airship_move:
     - define current_lever <[current_location].add[-3,1,-2]>
     - flag <[current_lever]> on_right_click:!
     - flag <[current_lever]> nomad_airship_id:!
+    - flag <[current_location].add[-3,-1,3]> infinite_chest:!
     - ~modifyblock <[old_cuboid].blocks[*_carpet|*torch|lever|tripwire_hook|*_bed|lantern|*sign|bell|*azalea|*_door|*_pressure_plate|*_banner]> air no_physics delayed
     - wait 1t
     - ~modifyblock <[old_cuboid].blocks> air delayed
