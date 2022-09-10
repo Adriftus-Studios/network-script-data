@@ -111,6 +111,22 @@ waystone_remove:
     - run custom_object_remove def:<[entity]>
     - inventory close
 
+waystone_rename:
+  type: task
+  debug: false
+  definitions: entity
+  script:
+    - flag player rename_waystone:<[entity]>
+    - run anvil_gui_text_input def:Blep|waystone_rename_callback
+
+waystone_rename_callback:
+  type: task
+  debug: false
+  definitions: input
+  script:
+    - flag server waystones.<player.flag[rename_waystone].flag[type]>.<player.flag[rename_waystone].uuid>.name:<[input]>
+    - narrate "<&a>Waystone Renamed!"
+
 waystone_use:
   type: task
   debug: false
