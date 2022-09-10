@@ -124,7 +124,7 @@ waystone_rename_callback:
   debug: false
   definitions: input
   script:
-    - flag server waystones.<player.flag[rename_waystone].flag[type]>.<player.flag[rename_waystone].uuid>.name:<[input]>
+    - flag server waystones.<player.flag[rename_waystone].flag[type]>.<player.flag[rename_waystone].uuid>.name:<[input].parse_color>
     - narrate "<&a>Waystone Renamed!"
 
 waystone_use:
