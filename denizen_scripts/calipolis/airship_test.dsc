@@ -87,7 +87,7 @@ airship_move:
     - adjustblock <[new_lever]> switched:true
     - flag <[new_lever]> on_right_click:nomad_airship_toggle_lever
     - flag <[new_lever]> nomad_airship_id:<[id]>
-    - flag <[new_location].add[-3,0,3]> "infinite_chest:<color[#020000]>Free Stuff!"
+    - flag <[new_location].add[-3,0,3]> "infinite_chest:<&color[#020000]>Free Stuff!"
     - wait 5t
 
     # Teleport all players

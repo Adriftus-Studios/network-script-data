@@ -19,7 +19,7 @@ calipolis_warp_locations_open:
   data:
     player_slots: 7|8|9
     admin_slots: 1|2|3
-    warp_slots: 21|22|23|24|25|26|27|30|31|32|33|34|35
+    warp_slots: 20|21|22|23|24|25|26|30|31|32|33|34|35
     back_button: 46
   script:
     - define type <context.item.flag[type]> if:<[type].exists.not>
@@ -27,10 +27,10 @@ calipolis_warp_locations_open:
     - define inventory <inventory[calipolis_warp_locations_<[type]>]>
     - if <[type]> == admin:
       - foreach <script.data_key[data.player_slots]>:
-        - inventory set slot:<[value]> o:calipolis_warp_open_admin d:<[inventory]>
+        - inventory set slot:<[value]> o:calipolis_warp_open_player d:<[inventory]>
     - else:
       - foreach <script.data_key[data.admin_slots]>:
-        - inventory set slot:<[value]> o:calipolis_warp_open_player d:<[inventory]>
+        - inventory set slot:<[value]> o:calipolis_warp_open_admin d:<[inventory]>
 
     - define slots <list[<script.data_key[data.warp_slots]>]>
     - define start <[page].sub[1].mul[<[slots].size>].add[1]>

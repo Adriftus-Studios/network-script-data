@@ -55,7 +55,7 @@ calipolis_handle_home_button:
       - case LEFT:
         - run teleportation_animation_run def:<player.flag[homes_data.<context.item.flag[home_id]>.location]>
       - case RIGHT:
-        - run home_delete_button def:<context.item>
+        - run home_delete def:<context.item>
 
 home_delete:
   type: task
