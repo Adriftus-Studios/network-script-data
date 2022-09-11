@@ -48,7 +48,7 @@ custom_durability_repair:
 
 custom_durability_handler:
   type: world
-  debug: true
+  debug: false
   events:
     on player item_flagged:custom_durability.max takes damage:
       - define slot <context.slot>
@@ -73,9 +73,7 @@ custom_durability_handler:
       - determine passively cancelled
       - remove <context.xp_orb>
       - define slot <player.inventory.find_item[<context.item>]>
-      - define custom_durability <context.item.flag[custom_durability.current].if_null[0].sub[<context.repair_amount>]>
-      - if <[custom_durability]> < 0:
-        - define custom_durability 0
+      - define custom_durability <context.item.flag[custom_durability.current].if_null[0].sub[<context.repair_amount>].max[0]>
       - define custom_percentage <[custom_durability].div[<context.item.flag[custom_durability.max]>]>
       - define vanilla_percentage <context.item.durability.if_null[0].div[<context.item.max_durability>]>
       - define lore <context.item.lore.if_null[<list>]>
