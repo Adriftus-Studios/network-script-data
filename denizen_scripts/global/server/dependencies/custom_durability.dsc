@@ -71,6 +71,7 @@ custom_durability_handler:
       - inventory flag slot:<[slot]> custom_durability.current:+:<context.damage>
     on player mends item_flagged:custom_durability.max:
       - determine passively cancelled
+      - remove <context.xp_orb>
       - define slot <player.inventory.find_item[<context.item>]>
       - define custom_durability <context.item.flag[custom_durability.current].if_null[0].sub[<context.repair_amount>]>
       - define custom_percentage <[custom_durability].div[<context.item.flag[custom_durability.max]>]>
@@ -85,6 +86,8 @@ custom_durability_handler:
         #- determine passively 0
       #- else:
         #- determine passively 1
+      - define new_durability <[custom_percentage].mul[<context.item.material.max_durability>].round_down>
+      - if <[new_durability]>
       - inventory adjust slot:<[slot]> durability:<[custom_percentage].mul[<context.item.material.max_durability>].round_down>
       - inventory adjust slot:<[slot]> lore:<[new_lore]>
       - inventory flag slot:<[slot]> custom_durability.current:-:<context.repair_amount>
