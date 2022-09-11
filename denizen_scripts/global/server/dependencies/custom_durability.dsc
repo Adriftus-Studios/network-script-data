@@ -90,3 +90,6 @@ custom_durability_handler:
         - inventory adjust slot:<[slot]> durability:<[custom_percentage].mul[<context.item.material.max_durability>].round_up>
       - inventory adjust slot:<[slot]> lore:<[new_lore]>
       - inventory flag slot:<[slot]> custom_durability.current:<[custom_durability]>
+
+van: 0.0363636363636364
+mod: 0.0385674931129477
