@@ -91,4 +91,4 @@ custom_durability_handler:
       - else:
         - inventory adjust slot:<[slot]> durability:<[custom_percentage].mul[<context.item.material.max_durability>].round_up>
       - inventory adjust slot:<[slot]> lore:<[new_lore]>
-      - inventory flag slot:<[slot]> custom_durability.current:-:<context.repair_amount>
+      - inventory flag slot:<[slot]> custom_durability.current:<[custom_durability]>
