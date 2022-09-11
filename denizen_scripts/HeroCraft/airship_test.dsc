@@ -19,7 +19,6 @@ airship_move:
       - stop
 
     # Build Old Cuboid
-    - define Xeane <server.match_player[Xeane]>
     - define current_location <server.flag[nomad_airship.<[id]>.location]>
     - define pos1 <[current_location].add[-40,-20,-50]>
     - define pos2 <[current_location].add[40,50,40]>
@@ -27,7 +26,6 @@ airship_move:
     - wait 1t
 
     # Build New Cuboid
-    - execute as_player "rg remove nomad_airship_<[id]>" player:<[Xeane]>
     - define pos1 <[exact_location].add[-40,-20,-50]>
     - define pos2 <[exact_location].add[40,50,40]>
     - define new_cuboid <[pos1].to_cuboid[<[pos2]>]>
@@ -60,11 +58,7 @@ airship_move:
 
     # Create Worldguard region
     - adjust <player> we_selection:<[final_cuboid]>
-    - execute as_op "rg create nomad_airship_<[id]>" silent
-    - wait 1t
-    - execute as_server "rg flag nomad_airship_<[id]> -w <[new_location].world.name> interact allow"
-    - execute as_server "rg flag nomad_airship_<[id]> -w <[new_location].world.name> chest-access allow"
-    - execute as_server "rg flag nomad_airship_<[id]> -w <[new_location].world.name> town-creation allow"
+    - execute as_op "rg redefine nomad_airship_<[id]>" silent
 
     # Blind Players at Destination
     - define target_players <[new_location].find_players_within[140]>
@@ -141,7 +135,7 @@ airship_create:
     - execute as_player "rg create nomad_airship_<[id]>" player:<[Xeane]>
     - execute as_server "rg flag nomad_airship_<[id]> -w <[location].world.name> interact allow"
     - execute as_server "rg flag nomad_airship_<[id]> -w <[location].world.name> chest-access allow"
-    - execute as_server "rg flag nomad_airship_<[id]> -w <[new_location].world.name> town-creation allow"
+    - execute as_server "rg flag nomad_airship_<[id]> -w <[location].world.name> town-creation deny"
     - wait 1t
     - ~run airship_create_elevators def:<[id]>
 
