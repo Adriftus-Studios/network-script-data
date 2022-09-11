@@ -83,4 +83,4 @@ custom_durability_handler:
         - define new_lore "<[lore].include[<&7>Durability<&co> <context.item.flag[custom_durability.max].sub[<[custom_durability]>]>/<context.item.flag[custom_durability.max]>]>"
       - inventory adjust slot:<[slot]> durability:<[custom_percentage].mul[<context.item.material.max_durability>].round_down>
       - inventory adjust slot:<[slot]> lore:<[new_lore]>
-      - inventory flag slot:<[slot]> custom_durability.current:+:<context.repair_amount>
+      - inventory flag slot:<[slot]> custom_durability.current:-:<context.repair_amount>
