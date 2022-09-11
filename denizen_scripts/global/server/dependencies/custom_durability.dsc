@@ -74,6 +74,8 @@ custom_durability_handler:
       - remove <context.xp_orb>
       - define slot <player.inventory.find_item[<context.item>]>
       - define custom_durability <context.item.flag[custom_durability.current].if_null[0].sub[<context.repair_amount>]>
+      - if <[custom_durability]> <= 0:
+        - define custom_durability 0
       - define custom_percentage <[custom_durability].div[<context.item.flag[custom_durability.max]>]>
       - define vanilla_percentage <context.item.durability.add[1].div[<context.item.max_durability>]>
       - define lore <context.item.lore.if_null[<list>]>
@@ -82,8 +84,8 @@ custom_durability_handler:
         - define new_lore "<[lore].overwrite[<&7>Durability<&co> <context.item.flag[custom_durability.max].sub[<[custom_durability]>]>/<context.item.flag[custom_durability.max]>].at[<[placement]>]>"
       - else:
         - define new_lore "<[lore].include[<&7>Durability<&co> <context.item.flag[custom_durability.max].sub[<[custom_durability]>]>/<context.item.flag[custom_durability.max]>]>"
-      - if <[custom_percentage]> >= 1:
-        - determine 1000
+      - if <[custom_percentage]> <= 0:
+        - determine passively 1000
       - else if <[custom_percentage]> < <[vanilla_percentage]>:
         - determine passively cancelled
       - else:
