@@ -84,9 +84,7 @@ custom_durability_handler:
         - define new_lore "<[lore].overwrite[<&7>Durability<&co> <context.item.flag[custom_durability.max].sub[<[custom_durability]>]>/<context.item.flag[custom_durability.max]>].at[<[placement]>]>"
       - else:
         - define new_lore "<[lore].include[<&7>Durability<&co> <context.item.flag[custom_durability.max].sub[<[custom_durability]>]>/<context.item.flag[custom_durability.max]>]>"
-      - if <[custom_percentage]> <= 0:
-        - determine passively cancelled
-      - else if <[custom_percentage]> < <[vanilla_percentage]>:
+      - if <[custom_percentage]> < <[vanilla_percentage]>:
         - determine passively cancelled
       - else:
         - inventory adjust slot:<[slot]> durability:<[custom_percentage].mul[<context.item.material.max_durability>].round_up>
