@@ -74,7 +74,7 @@ custom_durability_handler:
       - remove <context.xp_orb>
       - define slot <player.inventory.find_item[<context.item>]>
       - define custom_durability <context.item.flag[custom_durability.current].if_null[0].sub[<context.repair_amount>]>
-      - if <[custom_durability]> <= 0:
+      - if <[custom_durability]> < 0:
         - define custom_durability 0
       - define custom_percentage <[custom_durability].div[<context.item.flag[custom_durability.max]>]>
       - define vanilla_percentage <context.item.durability.if_null[0].div[<context.item.max_durability>]>
@@ -87,6 +87,3 @@ custom_durability_handler:
       - inventory adjust slot:<[slot]> durability:<[custom_percentage].mul[<context.item.material.max_durability>].round_up>
       - inventory adjust slot:<[slot]> lore:<[new_lore]>
       - inventory flag slot:<[slot]> custom_durability.current:<[custom_durability]>
-
-van: 0.0363636363636364
-mod: 0.0385674931129477
