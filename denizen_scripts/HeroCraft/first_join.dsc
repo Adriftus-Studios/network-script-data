@@ -18,13 +18,12 @@ Herocraft_RTP:
       - while <player.location.below.material.name.contains_text[air]>:
         - wait 5s
         - while stop if:<player.is_online.not>
+      - take item:elytra
+      - equip <player> chest:<[current_chest]>
       - if !<player.is_online>:
-        - inventory clear
         - flag player hot_dropping:!
         - flag player has_joined:!
         - stop
-      - take item:elytra
-      - equip <player> chest:<[current_chest]>
       - wait 2s
       - if !<player.has_advancement[denizen:failed_hot_drop]> && <player.has_flag[hot_dropping]>:
         - run achievement_give def:completed_hot_drop
