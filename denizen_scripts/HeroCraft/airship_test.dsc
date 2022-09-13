@@ -6,9 +6,6 @@ airship_move:
     - if !<server.has_flag[nomad_airship.<[id]>]>:
       - narrate "<&c>CRITICAL ERROR - REPORT TO XEANE"
       - stop
-    - if !<server.match_player[Xeane].exists>:
-      - narrate "<&c>Unable to move Airship at this time"
-      - stop
     - if <[exact_location].world.name> != <server.worlds.first.name>:
       - narrate "<&c>Cannot move Airship outside of it's world."
     - if <[exact_location].distance[<server.flag[nomad_airship.<[id]>.location]>]> < 500:
@@ -184,8 +181,8 @@ nomad_airship_up:
     - wait 1t
     - adjust <player> velocity:0,1,0
     - while <player.location.is_in[<context.area>]> && <player.is_spawned> && <server.flag[nomad_airship.<[id]>.elevator_status]>:
-      - adjust <player> velocity:<context.area.center.sub[<player.location>].div[10].with_y[0.6]>
-      - wait 1t
+      - adjust <player> velocity:<context.area.center.sub[<player.location>].div[10].with_y[0.6]> if:<player.is_sneaking.not>
+      - wait 2t
 
 nomad_airship_top:
   type: task
