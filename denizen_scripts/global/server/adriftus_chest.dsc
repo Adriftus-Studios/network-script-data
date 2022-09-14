@@ -5,6 +5,9 @@ adriftus_chest_inventory_open:
     - if <player.has_flag[pvp]>:
       - narrate "<&c>You cannot access the Adriftus Chest in PvP"
       - stop
+    - if <player.gamemode> == CREATIVE:
+      - narrate "<&c>Cannot open the Adriftus Chest in Creative Mode"
+      - stop
     - define inventory <inventory[adriftus_chest_inventory]>
     - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<map>>:
       - if ( <[value].has_flag[adriftus_server]> && <list[hub|<[value].flag[adriftus_server]>].contains[<bungee.server>]> ) || <[value].flag[adriftus_server]> == hub:
