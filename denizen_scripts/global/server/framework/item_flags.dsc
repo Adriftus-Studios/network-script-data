@@ -96,3 +96,9 @@ item_flags:
           - inject <[value]>
       - else:
         - inject <context.item_in_hand.flag[on_place]>
+    on player right clicks entity with:item_flagged:right_click_entity:
+      - if <context.item.flag[right_click_entity].object_type> == List:
+        - foreach <context.item.flag[right_click_entity]>:
+          - inject <[value]>
+      - else:
+        - inject <context.item.flag[right_click_entity]>

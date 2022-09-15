@@ -5,6 +5,8 @@ impossible_pickaxe:
   lore:
     - <&e>Bending Reality
     - <&b>Defies Physics
+  mechanisms:
+    custom_model_data: 1
 
 impossible_pickaxe_events:
   type: world

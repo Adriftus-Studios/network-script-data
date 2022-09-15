@@ -142,4 +142,5 @@ grappling_hook_pull:
       - adjust <player> velocity:<player.location.direction.vector.with_y[0.5]>
     - else:
       - adjust <player> velocity:0,0,0
+    - wait 1t
     - adjust <player> gravity:true

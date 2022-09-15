@@ -55,6 +55,9 @@ return_task:
   type: task
   debug: false
   script:
+    - if <player.has_flag[pvp]>:
+      - narrate "<&c>You cannot teleport when in PvP."
+      - stop
     - define type <context.item.flag[type]>
     - if !<context.item.has_flag[tpa_destination]>:
       - narrate "<&c>This item has no saved location!"
@@ -67,7 +70,7 @@ return_task:
         - narrate "<&c>This item lacks the power for cross dimensional travel"
         - stop
       - if <context.item.flag[tpa_destination].distance[<player.location>]> > 2000:
-        - narrate "<&c>This item lacks the power for distances grater than 2000 blocks"
+        - narrate "<&c>This item lacks the power for distances greater than 2000 blocks"
         - stop
     - take iteminhand
     - if <[type]> == crystal:

@@ -1671,3 +1671,33 @@ titles:
     tag: '&8｜<&color[#020000]>C4t Burglar &8｜'
     description: &eFor the most notorious thief...
     in_shop: false
+  medusa:
+    order: 276
+    tag: '&8｜<&color[#020000]>Medusa&8｜'
+    description: She's a statue freak
+    in_shop: false
+  live:
+    order: 277
+    tag: '<element[<&8><&lb><&color[#000200]><&l>LIVE<&8><&rb>].click_url[<player.flag[twitch.url]>]> '
+    description: Do a back flip
+    in_shop: false
+  youtube:
+    order: 278
+    tag: '<&8>[<&0><&l>You<&c>Tube<&8>] '
+    description: Imagine the clout
+    in_shop: false
+  twitch:
+    order: 279
+    tag: '<element[<&8><&lb><&5><&l>Twitch<&8><&rb>].click_url[<player.flag[twitch.url]>]> '
+    description: Streamer perks are awesome.
+    in_shop: false
+  trader:
+    order: 280
+    tag: '<&6><&l>Trader '
+    description: A man of culture, eh?
+    in_shop: true
+  guardian:
+    order: 281
+    tag: '<&e><&l>Guardian '
+    description: I am the guardian of this realm.
+    in_shop: false

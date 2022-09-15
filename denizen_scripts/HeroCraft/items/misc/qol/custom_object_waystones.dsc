@@ -331,10 +331,10 @@ waystone_open_teleport_town_menu:
     - define inventory <inventory[waystone_town_teleport_menu]>
     - define slots <list[<[inventory].script.data_key[data.slots]>]>
     - foreach <player.flag[waystones.town].if_null[<list>]> key:town as:value:
-      - define town <town[<[town]>]>
+      - define town <town[<[town]>].if_null[null]>
       - if <[loop_index].mod[45]> == 0:
         - foreach stop
-      - if !<[town].exists>:
+      - if <[town]> == null:
         - flag <player> waystones.town.<[town]>:!
         - foreach next
       - if <[town].outlaws.contains[<player>]>:
@@ -362,7 +362,7 @@ waystone_open_teleport_wild_menu:
   script:
     - define inventory <inventory[waystone_wild_teleport_menu]>
     - define slots <list[<[inventory].script.data_key[data.slots]>]>
-    - foreach <player.flag[waystones.wild].if_null[<list>].keys> as:waystone_uuid:
+    - foreach <player.flag[waystones.wild].if_null[<list>].keys.if_null[<list>]> as:waystone_uuid:
       - define data_map <server.flag[waystones.wild.<[waystone_uuid]>]>
       - inventory set slot:<[slots].get[<[loop_index]>]> o:waystone_gui_item[flag=location:<[data_map].get[location]>;display=<[data_map].get[name]>] d:<[inventory]>
     - inventory set slot:<[inventory].script.data_key[data.back]> o:waystone_back_to_main[flag=entity:<context.item.flag[entity]>] d:<[inventory]>

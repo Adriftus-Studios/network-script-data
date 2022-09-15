@@ -36,6 +36,12 @@ block_properties:
             - inject <[value]>
         - else:
           - inject <context.location.flag[on_right_click]>
+    on player left clicks block location_flagged:on_left_click:
+        - if <context.location.flag[on_left_click].object_type> == List:
+          - foreach <context.location.flag[on_left_click]>:
+            - inject <[value]>
+        - else:
+          - inject <context.location.flag[on_left_click]>
     on piston extends:
       - foreach <context.blocks.filter[has_flag[on_pistoned]]>:
         - if <[value].flag[on_pistoned].object_type> == List:

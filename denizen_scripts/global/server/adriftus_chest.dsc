@@ -2,6 +2,12 @@ adriftus_chest_inventory_open:
   type: task
   debug: false
   script:
+    - if <player.has_flag[pvp]>:
+      - narrate "<&c>You cannot access the Adriftus Chest in PvP"
+      - stop
+    - if <player.gamemode> == CREATIVE:
+      - narrate "<&c>Cannot open the Adriftus Chest in Creative Mode"
+      - stop
     - define inventory <inventory[adriftus_chest_inventory]>
     - foreach <yaml[global.player.<player.uuid>].read[adriftus.chest.contents_map]||<map>>:
       - if ( <[value].has_flag[adriftus_server]> && <list[hub|<[value].flag[adriftus_server]>].contains[<bungee.server>]> ) || <[value].flag[adriftus_server]> == hub:
@@ -47,6 +53,14 @@ adriftus_chest_validate_server:
   type: task
   debug: false
   script:
+    - if <context.hotbar_button> != 0 && <player.inventory.slot[<context.hotbar_button>].material.name.advanced_matches[*shulker*|bundle]>:
+      - determine cancelled
+    - if <context.item.material.name.advanced_matches[*shulker*|bundle]> && <context.clicked_inventory> == <player.inventory>:
+      - determine cancelled
+    - if <context.cursor_item.material.name.advanced_matches[*shulker*|bundle]>:
+      - determine cancelled
+    - if <context.item.material.name> == bundle && <context.click> == right:
+      - determine cancelled
     - if <context.item.has_flag[adriftus_server]>:
       - if <context.item.flag[adriftus_server]> != hub && !<list[hub|<context.item.flag[adriftus_server]>].contains[<bungee.server>]>:
         - determine cancelled

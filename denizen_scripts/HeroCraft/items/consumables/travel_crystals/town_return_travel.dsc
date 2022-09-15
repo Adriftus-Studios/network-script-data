@@ -62,6 +62,9 @@ town_return_execute:
   type: task
   debug: false
   script:
+    - if <player.has_flag[pvp]>:
+      - narrate "<&c>You cannot teleport when in PvP."
+      - stop
     - define type <context.item.flag[type]>
     - if !<list[test|herocraft].contains[<bungee.server>]>:
       - narrate "<&c>The item has no reaction in this world..."
@@ -74,7 +77,7 @@ town_return_execute:
         - narrate "<&c>This item lacks the power for cross dimensional travel"
         - stop
       - if <context.item.flag[town].spawn.distance[<player.location>]> > 2000:
-        - narrate "<&c>This item lacks the power for distances grater than 2000 blocks"
+        - narrate "<&c>This item lacks the power for distances greater than 2000 blocks"
         - stop
     - take iteminhand
     - if <[type]> == crystal:

@@ -10,6 +10,8 @@ entity_flags:
   type: world
   debug: false
   events:
+    on entity_flagged:no_teleport teleports:
+      - determine cancelled
     on entity_flagged:no_fall_damage damaged by FALL:
       - determine cancelled
     on entity_flagged:no_fall_damage_once damaged by FALL:
@@ -152,7 +154,13 @@ entity_flags:
           - inject <[value]>
       - else:
         - inject <context.entity.flag[on_breed]>
-    on entity_flagged:on_break breaks bukkit_priority:low:
+    on entity_flagged:on_break breaks hanging bukkit_priority:low:
+      - if <context.hanging.flag[on_break].object_type> == List:
+        - foreach <context.hanging.flag[on_break]>:
+          - inject <[value]>
+      - else:
+        - inject <context.hanging.flag[on_break]>
+    on entity_flagged:on_break breaks block bukkit_priority:low:
       - if <context.hanging.flag[on_break].object_type> == List:
         - foreach <context.hanging.flag[on_break]>:
           - inject <[value]>

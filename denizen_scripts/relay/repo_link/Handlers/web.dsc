@@ -89,9 +89,8 @@ web_handler:
       - else if <[domain].starts_with[<script.data_key[domains.self]>]>:
         - choose <context.path>:
           - case /reload/main:
-            - bungee <bungee.list_servers.exclude[<bungee.server>]>:
-              - reload
-            - wait 1t
+            - bungeerun <bungee.list_servers.exclude[<bungee.server>]> reload_all_scripts
+            - wait 1s
             - reload
           - case /reload/test:
             - bungee test:

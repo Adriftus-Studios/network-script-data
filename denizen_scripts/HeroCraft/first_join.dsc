@@ -11,20 +11,19 @@ Herocraft_RTP:
       - wait 7s
       - teleport <player> <location[0,400,0,HeroCraft].random_offset[12500,0,12500]>
       - define current_chest <player.equipment_map.get[chestplate].if_null[<item[air]>]>
-      - equip <player> chest:elytra[flag=on_drop:delete_item;flag=run_script:determine_air]
+      - equip <player> chest:elytra[flag=on_drop:delete_item;flag=run_script:determine_air;flag=on_item_pickup:<list[remove_this_entity|cancel]>;flag=no_drop_on_death:true]
       - wait 1t
       - adjust <player> gliding:true
       - flag player hot_dropping
       - while <player.location.below.material.name.contains_text[air]>:
         - wait 5s
         - while stop if:<player.is_online.not>
+      - take item:elytra
+      - equip <player> chest:<[current_chest]>
       - if !<player.is_online>:
-        - inventory clear
         - flag player hot_dropping:!
         - flag player has_joined:!
         - stop
-      - take item:elytra
-      - equip <player> chest:<[current_chest]>
       - wait 2s
       - if !<player.has_advancement[denizen:failed_hot_drop]> && <player.has_flag[hot_dropping]>:
         - run achievement_give def:completed_hot_drop

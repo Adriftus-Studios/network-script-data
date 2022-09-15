@@ -48,6 +48,7 @@ custom_object_place:
     - define entity <entry[object].spawned_entity>
     - modifyblock <[barriers]> barrier
     - flag <[barriers]> on_right_click:<[interaction]>
+    - flag <[barriers]> on_left_click:<[interaction]>
     - flag <[barriers]> custom_object:<entry[object].spawned_entity>
     - flag <entry[object].spawned_entity> barriers:<[barriers]>
     - flag <entry[object].spawned_entity> item:<[item]>
@@ -62,6 +63,7 @@ custom_object_remove:
   script:
     - define object <context.item.flag[entity]> if:<[object].exists.not>
     - flag <[object].flag[barriers]> on_right_click:!
+    - flag <[object].flag[barriers]> on_left_click:!
     - flag <[object].flag[barriers]> custom_object:!
     - modifyblock <[object].flag[barriers]> air
     - give <[object].flag[item]>

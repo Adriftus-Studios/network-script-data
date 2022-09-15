@@ -608,7 +608,7 @@ dwisp_run_movement:
           - teleport <player> <player.flag[dwisp.active.location]>
           - while <player.flag[dwisp.active.task].if_null[default]> == assumed && <player.is_online>:
             - if <[loop_index].mod[50]> == 0:
-              - define targets <[target].find_players_within[100]>
+              - define targets <player.flag[dwisp.active.entity].location.find_players_within[100]>
             - teleport <player.flag[dwisp.active.entity]> <player.location.below[0.5]>
             - playeffect effect:redstone at:<player.location> offset:0.05 quantity:5 special_data:1.5|<player.flag[dwisp.data.color1]> targets:<[targets]>
             - playeffect effect:redstone at:<player.location> offset:0.1 quantity:5 special_data:0.75|<player.flag[dwisp.data.color2]> targets:<[targets]>
