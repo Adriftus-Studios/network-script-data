@@ -16,39 +16,158 @@ mission_snack:
     weekly: 200
     monthly: 500
   items:
-    cookie:
-        - 32
-        - 64
-        - 128
-    melon_slice:
-        - 32
-        - 64
-        - 128
-    sweet_berries:
-        - 32
-        - 64
-        - 128
-    glow_berries:
-        - 32
-        - 64
-        - 128
+    enchanted_golden_apple:
+        - 2
+        - 4
+        - 6
+    golden_apple:
+        - 2
+        - 4
+        - 6
+    golden_carrot:
+        - 2
+        - 4
+        - 6
+    cooked_mutton:
+        - 4
+        - 8
+        - 12
+    cooked_porkchop:
+        - 4
+        - 8
+        - 12
+    cooked_salmon:
+        - 4
+        - 8
+        - 12
+    cooked_beef:
+        - 4
+        - 8
+        - 12
+    baked_potato:
+        - 6
+        - 12
+        - 18
+    beetroot:
+        - 6
+        - 12
+        - 18
+    beetroot_soup:
+        - 6
+        - 12
+        - 18
+    bread:
+        - 6
+        - 12
+        - 18
+    carrot:
+        - 6
+        - 12
+        - 18
+    cooked_chicken:
+        - 6
+        - 12
+        - 18
+    cooked_cod:
+        - 6
+        - 12
+        - 18
+    cooked_rabbit:
+        - 6
+        - 12
+        - 18
+    mushroom_stew:
+        - 6
+        - 12
+        - 18
+    rabbit_stew:
+        - 6
+        - 12
+        - 18
+    suspicious_stew:
+        - 6
+        - 12
+        - 18
+    apple:
+        - 8
+        - 16
+        - 24
     dried_kelp:
-        - 64
-        - 128
-        - 256
+        - 8
+        - 16
+        - 24
+    melon_slice:
+        - 8
+        - 16
+        - 24
+    poisonous_potato:
+        - 8
+        - 16
+        - 24
+    potato:
+        - 8
+        - 16
+        - 24
     pumpkin_pie:
         - 8
         - 16
-        - 32
-    mushroom_stew:
+        - 24
+    beef:
         - 8
         - 16
-        - 32
-    rabbit_stew:
-        - 4
+        - 24
+    chicken:
         - 8
         - 16
-
+        - 24
+    mutton:
+        - 8
+        - 16
+        - 24
+    porkchop:
+        - 8
+        - 16
+        - 24
+    rabbit:
+        - 8
+        - 16
+        - 24
+    cookie:
+        - 10
+        - 20
+        - 30
+    glow_berries:
+        - 10
+        - 20
+        - 30
+    pufferfish:
+        - 10
+        - 20
+        - 30
+    cod:
+        - 10
+        - 20
+        - 30
+    salmon:
+        - 10
+        - 20
+        - 30
+    rotten_flesh:
+        - 10
+        - 20
+        - 30
+    spider_eye:
+        - 10
+        - 20
+        - 30
+    sweet_berries:
+        - 10
+        - 20
+        - 30
+    tropical_fish:
+        - 10
+        - 20
+        - 30
 
 # Assignment Task
 mission_snack_assignment:
