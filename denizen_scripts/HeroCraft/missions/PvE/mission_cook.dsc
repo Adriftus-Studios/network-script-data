@@ -52,7 +52,41 @@ mission_cook:
       - 18
       - 24
       - 36
-
+    cookie:
+      - 64
+      - 128
+    bread:
+      - 32
+      - 64
+      - 128
+    beetroot_soup:
+      - 8
+      - 16
+      - 24
+    mushroom_soup:
+      - 8
+      - 16
+      - 24
+    suspicious_stew:
+      - 8
+      - 16
+      - 24
+    pumpkin_pie:
+      - 8
+      - 16
+      - 32
+    cake:
+      - 8
+      - 16
+      - 32
+    golden_apple:
+      - 4
+      - 8
+      - 16
+    golden_carrot:
+      - 4
+      - 8
+      - 16
 
 # Assignment Task
 mission_cook_assignment:

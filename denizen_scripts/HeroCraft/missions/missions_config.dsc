@@ -17,6 +17,7 @@ missions_config:
     - hunt
     - retrieve
     - pvp_zanzar
+    - mission_pick_flowers
   # Max multipliers
   multipliers:
     daily: 1

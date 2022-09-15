@@ -3,10 +3,10 @@ mission_hunt:
   type: data
   id: hunt
   category: PvE
-  name: <&e>Hunt <&6>-mobs-
+  name: <&6>Hunt <&e>-mobs-
   description:
-    - <&e>Complete this by hunting animals in the wilderness.
-    - <&e>(Only animals outside town plots count!)
+    - <&6>Complete this by <&e>hunting animals<&6>.
+    - <&6>(Only animals <&e>outside town count!<&6>)
   assignment: mission_hunt_assignment
   icon: crossbow
   cmd: 0
@@ -38,9 +38,9 @@ mission_hunt:
       - 72
       - 96
     squid:
+      - 24
+      - 36
       - 48
-      - 72
-      - 96
     cod:
       - 24
       - 36
@@ -49,6 +49,56 @@ mission_hunt:
       - 24
       - 36
       - 48
+    panda:
+      - 6
+      - 12
+      - 18
+    wolf:
+      - 6
+      - 12
+      - 18
+    axolotl:
+      - 6
+      - 12
+      - 18
+    frog:
+      - 6
+      - 12
+      - 18
+    dolphin:
+      - 1
+      - 2
+      - 3
+    fox:
+      - 6
+      - 12
+      - 18
+    goat:
+      - 6
+      - 12
+      - 18
+    hoglin:
+      - 6
+      - 12
+      - 18
+    strider:
+      - 6
+      - 12
+      - 18
+    bee:
+      - 6
+      - 12
+      - 18
+    ocelot:
+      - 6
+      - 12
+      - 18
+    polarbear:
+      - 6
+      - 12
+      - 18
+
+
 
 
 # Assignment Task
