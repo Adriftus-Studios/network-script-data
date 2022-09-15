@@ -16,6 +16,36 @@ mission_fish:
     weekly: 200
     monthly: 400
   items:
+ #   junk:
+  #    - 20
+  #    - 22
+   #   - 24
+  #    - 26
+    bow:
+      - 6
+      - 7
+      - 8
+      - 9
+    fishing_rod:
+      - 6
+      - 7
+      - 8
+      - 9
+    name_tag:
+      - 6
+      - 7
+      - 8
+      - 9
+    nautilus_shell:
+      - 6
+      - 7
+      - 8
+      - 9
+    saddle:
+      - 6
+      - 7
+      - 8
+      - 9
     cod:
       - 12
       - 14

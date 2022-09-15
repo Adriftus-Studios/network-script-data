@@ -24,6 +24,43 @@ mission_slay:
       - 24
       - 36
       - 48
+    ghast:
+      - 24
+      - 36
+      - 48
+    blaze:
+      - 24
+      - 36
+      - 48
+    silverfish:
+      - 24
+      - 36
+      - 48
+    drowned:
+      - 24
+      - 36
+      - 48
+    husk:
+      - 24
+      - 36
+      - 48
+    stray:
+      - 24
+      - 36
+      - 48
+    guardian:
+      - 24
+      - 36
+      - 48
+    pillager:
+      - 24
+      - 36
+      - 48
+    vindicator:
+      - 24
+      - 36
+      - 48
+
     #creeper:
       #- 24
       #- 36
