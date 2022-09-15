@@ -150,3 +150,12 @@ town_defence_use:
     - determine passively cancelled
     - if <player.is_sneaking> && <context.location.town> == <player.town> && <player.has_permission[towny.command.plot.asmayor]>:
       - run town_defence_remove def:<context.location.flag[custom_object]>
+
+town_defence_player_murder:
+  type: world
+  debug: false
+  events:
+    on player kills player:
+      - if <context.entity.location.town.exists> && <context.damager.town> != <context.entity.location.town>:
+        - execute as_server "ta town <context.entity.location.town.name> outlaw add <context.damager.name>"
+        - run town_defence_add_target def:<context.entity.location.town>|<context.damager>
