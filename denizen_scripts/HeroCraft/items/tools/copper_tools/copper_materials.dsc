@@ -23,7 +23,7 @@ hardened_copper_ingot:
 hardened_copper_block:
   type: item
   material: feather
-  display name: <&r>Copper Block
+  display name: <&r>Hardened Copper Block
   mechanisms:
     custom_model_data: 10002
   data:
@@ -43,14 +43,14 @@ hardened_copper_block:
 compressed_hardened_copper_block:
   type: item
   material: feather
-  display name: <&f>Compressed Copper Block
+  display name: <&f>Compressed Hardened Copper Block
   mechanisms:
     custom_model_data: 10002
     hides: ENCHANTS
   enchantments:
   - sharpness:1
   lore:
-    - "<&7>9 Copper Block"
+    - "<&7>9 Hardened Copper Block"
   data:
     recipe_book_category: blocks.hardened_copper_block1
   flags:
@@ -70,14 +70,14 @@ compressed_hardened_copper_block:
 double_compressed_hardened_copper_block:
   type: item
   material: feather
-  display name: <&f>Double Compressed Copper Block
+  display name: <&f>Double Compressed Hardened Copper Block
   mechanisms:
     custom_model_data: 10002
     hides: ENCHANTS
   enchantments:
   - sharpness:2
   lore:
-    - "<&7>81 Copper Blocks"
+    - "<&7>81 Hardened Copper Blocks"
   data:
     recipe_book_category: blocks.hardened_copper_block2
   flags:
@@ -97,14 +97,14 @@ double_compressed_hardened_copper_block:
 triple_compressed_hardened_copper_block:
   type: item
   material: feather
-  display name: <&f>Triple Compressed Copper Block
+  display name: <&f>Triple Compressed Hardened Copper Block
   mechanisms:
     custom_model_data: 10002
     hides: ENCHANTS
   enchantments:
   - sharpness:3
   lore:
-    - "<&7>729 Copper Blocks"
+    - "<&7>729 Hardened Copper Blocks"
   data:
     recipe_book_category: blocks.hardened_copper_block3
   flags:
@@ -124,14 +124,14 @@ triple_compressed_hardened_copper_block:
 quadruple_compressed_hardened_copper_block:
   type: item
   material: feather
-  display name: <&f>Quadruple Compressed Copper Block
+  display name: <&f>Quadruple Compressed Hardened Copper Block
   mechanisms:
     custom_model_data: 10002
     hides: ENCHANTS
   enchantments:
   - sharpness:4
   lore:
-    - "<&7>6561 Copper Blocks"
+    - "<&7>6561 Hardened Copper Blocks"
   data:
     recipe_book_category: blocks.hardened_copper_block4
   flags:
