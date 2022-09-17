@@ -93,7 +93,7 @@ mission_hunt:
       - 6
       - 12
       - 18
-    polarbear:
+    polar_bear:
       - 6
       - 12
       - 18
