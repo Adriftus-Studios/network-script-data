@@ -6,6 +6,7 @@ grappling_hook_basic:
     tier: <&7>Basic
     range: 15
     cooldown: 20s
+    recipe_book_category: travel.grappling.ABasic
   lore:
     - <&e>Tier: <script.parsed_key[data.tier]>
     - <&e>Range<&co> <&f><script.data_key[data.range]>
