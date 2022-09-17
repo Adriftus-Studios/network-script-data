@@ -16,7 +16,7 @@ grappling_hook_basic:
     uuid: <util.random_uuid>
   mechanisms:
     custom_model_data: 3
-recipes:
+  recipes:
     1:
       type: shaped
       output_quantity: 1
