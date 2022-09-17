@@ -48,5 +48,5 @@ chain_reaction_enchantment:
       - case 4:
         - define directional_list <list[<[eye_location].add[1,0,1]>|<[eye_location].sub[1,0,1]>|<[eye_location].add[0,0,1].sub[1,0,0]>|<[eye_location].sub[0,0,1].add[1,0,0]>|<[eye_location].sub[1,0,0]>|<[eye_location].sub[0,0,1]>|<[eye_location].add[0,0,1]>|<[eye_location].add[1,0,0]>]>
     - foreach <[directional_list]> as:location:
-      - shoot arrow origin:<[eye_location]> destination:<[location]> speed:1.5 save:arrow
+      - shoot arrow origin:<[eye_location]> destination:<[location]> speed:1.5 save:arrow shooter:<context.victim>
     - flag <entry[arrow].shot_entity> fake_arrow
