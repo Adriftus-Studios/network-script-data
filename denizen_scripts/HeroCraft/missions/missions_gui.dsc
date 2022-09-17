@@ -46,7 +46,7 @@ missions_inv_open:
       - define id <player.flag[<[mission]>].get[id]>
       - define name <player.flag[<[mission]>].get[name]>
       - define description <player.flag[<[mission]>].get[description]>
-      - define progress <&f>(<&b><player.flag[<[mission]>].get[progress]><&f>/<&f><&b><player.flag[<[mission]>].get[max]>)
+      - define progress <&f>(<&b><player.flag[<[mission]>].get[progress]><&f>/<&f><&b><player.flag[<[mission]>].get[max]><&f>)
       # Mission is not complete
       - if <player.flag[<[mission]>].get[done].not>:
         - define material <script[mission_<[id]>].data_key[icon]>
