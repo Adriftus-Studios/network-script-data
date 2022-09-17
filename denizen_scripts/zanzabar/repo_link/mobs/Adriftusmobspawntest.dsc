@@ -87,6 +87,21 @@ Mob_drop_handler:
         - define rarity rare
         - define rarity_color <&b>
 #        - define glow_color blue
+      - case 4:
+        - define rarity very_rare
+        - define rarity_color <&d>
+#        - define glow_color magenta
+      - case 5:
+        - define rarity very_rare
+        - define rarity_color <&d>
+#        - define glow_color magenta
+        - if <[drop_type]> == drop:
+          - repeat 2:
+            - inject enchanted_book_mob_drop_compiler
+        - if <[drop_type]> == give:
+          - repeat 2:
+            - inject enchanted_book_mob_give_compiler
+        - stop
     - if <[drop_type]> == drop:
       - inject enchanted_book_mob_drop_compiler
     - if <[drop_type]> == give:

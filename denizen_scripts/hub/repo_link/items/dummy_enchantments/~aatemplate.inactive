@@ -1,0 +1,30 @@
+##enchantment_template_enchantment:
+##  type: enchantment
+##  id: my_id
+##  slots:
+##  - mainhand
+##  rarity: common
+##  data:
+##    effect:
+##      - thang
+##    item_slots:
+##      - thang
+##  category: weapon
+##  full_name: <&7>My Enchantment <context.level.to_roman_numerals>
+##  min_level: 1
+##  max_level: 1
+##  min_cost: <context.level.mul[1]>
+##  max_cost: <context.level.mul[1]>
+##  treasure_only: true
+##  category: Can be any of: ARMOR, ARMOR_FEET, ARMOR_LEGS, ARMOR_CHEST, ARMOR_HEAD, # WEAPON, DIGGER, FISHING_ROD, TRIDENT, BREAKABLE, BOW, WEARABLE, CROSSBOW, VANISHABLE
+##  is_curse: false
+##  is_tradable: false
+##  is_discoverable: true
+##  is_compatible: <context.enchantment_key.advanced_matches[minecraft:lure|minecraft:luck*]>
+##  can_enchant: <context.item.advanced_matches[*_sword|*_axe]>
+##  damage_bonus: 0.0
+##  damage_protection: 0
+##  after attack:
+##  - narrate "You attacked <context.victim.name> with a <context.level> enchantment!"
+##  after hurt:
+##  - narrate "You got hurt by <context.attacker.name> and protected by a level <context.level> enchantment!"

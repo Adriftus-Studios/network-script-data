@@ -10,8 +10,6 @@ mod_online_inv:
     mask: <item[iron_pickaxe].with[display_name=<&6>Toggle<&sp>Mask;custom_model_data=1]>
     vanish: <item[ender_eye].with[display_name=<&d>Toggle<&sp>Vanish]>
     x: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    previous: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
-    next: <item[feather].with[display_name=<&sp>;custom_model_data=3]>
     close: <item[red_stained_glass_pane].with[display_name=<&c><&l>χ<&sp>Close].with_flag[to:close]>
   slots:
     - [] [] [] [] [] [] [] [] []
@@ -19,7 +17,7 @@ mod_online_inv:
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
     - [] [] [] [] [] [] [] [] []
-    - [close] [x] [mask] [vanish] [x] [x] [x] [previous] [next]
+    - [close] [] [mask] [vanish] [] [] [] [] []
 
 mod_online_inv_events:
   type: world
@@ -57,7 +55,7 @@ mod_online_inv_open:
     slot_data:
       slots_used: <util.list_numbers_to[45]>
       close: 46
-      page: 50
+      page: 46
       previous_page: 53
       next_page: 54
   script:
@@ -89,7 +87,7 @@ mod_online_inv_open:
         # Set the defined item an inventory slot.
         - inventory set o:<[item]> slot:<[slots].get[<[loop_index]>]> d:<[inventory]>
     # Pagination Item
-    - inventory set slot:<script.data_key[data.slot_data.page]> o:<item[feather].with[display_name=<&sp>;custom_model_data=3;flag=page:<[page]>]> d:<[inventory]>
+    - inventory set slot:<script.data_key[data.slot_data.page]> o:<item[red_stained_glass_pane].with[display_name=<&c><&l>χ<&sp>Close;flag=to:close;flag=page:<[page]>]> d:<[inventory]>
     # Previous Page Button
     - if <[page]> != 1:
       - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:mod_online_inv_previous_page;color=green;custom_model_data=6]> d:<[inventory]>

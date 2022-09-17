@@ -57,44 +57,44 @@ Colorize:
 Colorize_Green:
   type: format
   debug: false
-  format: <proc[Colorize].context[<text>|green]>
+  format: <proc[Colorize].context[<[text]>|green]>
 Colorize_Yellow:
   type: format
   debug: false
-  format: <proc[Colorize].context[<text>|yellow]>
+  format: <proc[Colorize].context[<[text]>|yellow]>
 Colorize_Very_Red:
   type: format
   debug: false
-  format: <proc[Colorize].context[<text>|very_red]>
+  format: <proc[Colorize].context[<[text]>|very_red]>
 Colorize_Red:
   type: format
   debug: false
-  format: <proc[Colorize].context[<text>|red]>
+  format: <proc[Colorize].context[<[text]>|red]>
 Colorize_Orange:
   type: format
   debug: false
-  format: <proc[Colorize].context[<text>|orange]>
+  format: <proc[Colorize].context[<[text]>|orange]>
 Colorize_Blue:
   type: format
   debug: false
-  format: <proc[Colorize].context[<text>|blue]>
+  format: <proc[Colorize].context[<[text]>|blue]>
 
 Accept_Cmd:
   type: format
   debug: false
-  format: <&color[#C1F2F7]>| <proc[msg_cmd].context[<[hover]>|<&a><&lb><&2><&l><&chr[2714]><&r><&a><&rb>|<[command]>]> <&color[#C1F2F7]>| <text>
+  format: <&color[#C1F2F7]>| <proc[msg_cmd].context[<[hover]>|<&a><&lb><&2><&l><&chr[2714]><&r><&a><&rb>|<[command]>]> <&color[#C1F2F7]>| <[text]>
 
 Decline_Cmd:
   type: format
   debug: false
-  format: <&color[#C1F2F7]>| <proc[msg_cmd].context[<[hover]>|<&c><&lb><&4><&chr[2716]><&c><&rb>|<[command]>]> <&color[#C1F2F7]>| <text>
+  format: <&color[#C1F2F7]>| <proc[msg_cmd].context[<[hover]>|<&c><&lb><&4><&chr[2716]><&c><&rb>|<[command]>]> <&color[#C1F2F7]>| <[text]>
 
 Accept_Script:
   type: format
   debug: false
-  format: <&color[#C1F2F7]>| <proc[msg_script].context[<[hover]>|<&a><&lb><&2><&l><&chr[2714]><&r><&a><&rb>|<[script]>]> <&color[#C1F2F7]>| <text>
+  format: <&color[#C1F2F7]>| <proc[msg_script].context[<[hover]>|<&a><&lb><&2><&l><&chr[2714]><&r><&a><&rb>|<[script]>]> <&color[#C1F2F7]>| <[text]>
 
 Decline_Script:
   type: format
   debug: false
-  format: <&color[#C1F2F7]>| <proc[msg_script].context[<[hover]>|<&c><&lb><&4><&chr[2716]><&c><&rb>|<[script]>]> <&color[#C1F2F7]>| <text>
+  format: <&color[#C1F2F7]>| <proc[msg_script].context[<[hover]>|<&c><&lb><&4><&chr[2716]><&c><&rb>|<[script]>]> <&color[#C1F2F7]>| <[text]>

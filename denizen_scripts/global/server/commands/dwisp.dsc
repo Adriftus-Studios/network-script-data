@@ -305,6 +305,7 @@ dwisp_kill_target:
   definitions: target
   script:
     - stop if:<[target].is_spawned.not>
+    - stop if:<[target].gamemode.equals[survival].not||false>
     - define distance <player.flag[dwisp.active.location].distance[<[target].location>].mul[0.1]>
     - define points <player.flag[dwisp.active.location].points_between[<[target].eye_location.below>].distance[<[distance]>]>
     - define targets <player.flag[dwisp.active.location].find_players_within[100]>
@@ -318,8 +319,10 @@ dwisp_kill_target:
       - playeffect effect:redstone at:<[target].location.above> offset:0.25,0.5,0.25 quantity:10 special_data:2|<player.flag[dwisp.data.color1]> targets:<[targets]>
       - playeffect effect:redstone at:<[target].location.above> offset:0.25,0.5,0.25 quantity:10 special_data:1|<player.flag[dwisp.data.color2]> targets:<[targets]>
       - wait 1t
-    - flag <[target]> custom_damage.cause:<player.flag[dwisp.data.entity].custom_name>
-    - if <player.has_flag[dwisp.data.damage]> && <player.flag[dwisp.data.damage]> != kill:
+    - flag <[target]> custom_damage.cause:<player.flag[dwisp.data.name]>
+    - if !<[target].is_living>:
+      - remove <[target]>
+    - else if <player.has_flag[dwisp.data.damage]> && <player.flag[dwisp.data.damage]> != kill:
       - hurt <player.flag[dwisp.data.damage]> <[target]>
     - else:
       - kill <[target]>
@@ -605,7 +608,7 @@ dwisp_run_movement:
           - teleport <player> <player.flag[dwisp.active.location]>
           - while <player.flag[dwisp.active.task].if_null[default]> == assumed && <player.is_online>:
             - if <[loop_index].mod[50]> == 0:
-              - define targets <[target].find_players_within[100]>
+              - define targets <player.flag[dwisp.active.entity].location.find_players_within[100]>
             - teleport <player.flag[dwisp.active.entity]> <player.location.below[0.5]>
             - playeffect effect:redstone at:<player.location> offset:0.05 quantity:5 special_data:1.5|<player.flag[dwisp.data.color1]> targets:<[targets]>
             - playeffect effect:redstone at:<player.location> offset:0.1 quantity:5 special_data:0.75|<player.flag[dwisp.data.color2]> targets:<[targets]>

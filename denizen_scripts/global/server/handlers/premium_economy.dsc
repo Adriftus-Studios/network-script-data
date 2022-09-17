@@ -1,14 +1,14 @@
 premium_currency_command:
     type: command
     ## The name of the currency is linked to the name datakey of this command ##
-    name: orbsus
+    name: currency
     description: A command for the premium currency on this server
     #- Might need to change the usage if you change the name -#
     tab completions:
         1: <tern[<player.has_permission[adriftus.economy.admin]>].pass[<list[give|remove|set].include[<server.online_players.parse[name]>]>].fail[<server.online_players>]>
         2: <server.online_players.parse[name]>
         3: <tern[<player.has_permission[adriftus.economy.admin]>].pass[<&lb>amount<&rb>].fail[]>
-    usage: /orbsus
+    usage: /currency
     script:
         - define currencyName <script[premium_currency_command].data_key[name]>
 
@@ -108,7 +108,7 @@ premium_currency_remove:
         - if <[newBal]> < 0:
           - debug error "Script tried to take premium currency without checking the balance first."
           - determine false
-        - run global_player_data_modify def:<[player].uuid>|economy.premium.current|<[amount]>
+        - run global_player_data_modify def:<[player].uuid>|economy.premium.current|<[newBal]>
         - define message "SEARCHABLE_<[player].uuid>```<[player].name> has spent <[amount]> Premium Currency<&nl>Reason<&co> <[reason]>```"
         - bungeerun relay discord_sendMessage "def:Adriftus Staff|manager-logs|<[message].escaped>"
         - determine true

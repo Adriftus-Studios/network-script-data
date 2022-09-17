@@ -1,5 +1,6 @@
 admin_mode_spectator:
   type: command
+  debug: false
   name: dmsp
   usage: /dmsp
   description: spectator mode, with particles!

@@ -53,6 +53,7 @@ mail_delivery_start:
     - fakespawn mail_delivery_mailbox_glow_marker <[location]> players:<player> d:<[time]> save:mailbox_glow_<[number]>
     - define entity <entry[mailbox_<[number]>].faked_entity>
     - define glow <entry[mailbox_glow_<[number]>].faked_entity>
+    - adjust <[glow]> custom_name:<[number]>
     - glow <[glow]>
     - flag <[entity]> mailbox:<[number]>
     - flag <[glow]> mailbox:<[number]>
@@ -171,6 +172,7 @@ mail_delivery_events:
     - define inventory <inventory[mailbox_<[number]>_<player.uuid>]>
     - flag <[inventory]> mailbox:<[number]>
     - flag <[inventory]> location:<context.entity.location>
+    - inventory set d:<[inventory]> slot:5 o:<item[iron_nugget].with[custom_model_data=<element[40].add[<[number]>]>]>
     - inventory open d:<[inventory]> player:<player>
     on player clicks in mail_delivery_mailbox_inventory:
     - if <context.item.flag[mailbox_number].equals[<context.inventory.flag[mailbox]>].not.if_null[false]>:
@@ -236,16 +238,7 @@ mail_delivery_generate_item:
   script:
   - define item <item[mail_delivery_mail_item].with[flag=mailbox_number:<[number]>].with[flag=no_stack:<util.random_uuid>]>
   - define item <[item].with[lore=<&e>Destination<&co><&sp><[number]>]>
-  - choose <util.random.int[1].to[3]>:
-    - case 1:
-      - define item <[item].with[material=crafting_table]>
-      - define item <[item].with[display_name=<&e>Package]>
-    - case 2:
-      - define item <[item].with[material=paper]>
-      - define item <[item].with[display_name=<&e>Letter]>
-    - case 3:
-      - define item <[item].with[material=stripped_oak_wood]>
-      - define item <[item].with[display_name=<&e>Container]>
+  - define item <[item].with[custom_model_data=<util.random.int[1001].to[1003]>]>
   - determine <[item]>
 
 mail_delivery_menu_inventory:

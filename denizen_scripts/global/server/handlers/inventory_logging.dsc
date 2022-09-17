@@ -16,7 +16,7 @@ inventory_logger_death_full:
       - stop if:<player.inventory.list_contents.is_empty>
       - flag <player> logged_inventories.death:->:<script.parsed_key[data.map]>
       - if <player.flag[logged_inventories.death].size> > 20:
-        - flag <player> logged_inventories.death:<player.flag[logged_inventories.death_full].remove[first]>
+        - flag <player> logged_inventories.death:<player.flag[logged_inventories.death].remove[first]>
 
 
 inventory_logger_logout:

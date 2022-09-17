@@ -46,6 +46,7 @@ player_data_handler:
 
     on bungee player leaves network:
       - if <bungee.server> == hub:
+        - wait 5t
         - ~yaml id:global.player.<context.uuid> unload
 
 network_map_handler:

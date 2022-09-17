@@ -3,6 +3,8 @@ early_join_prevention:
   debug: false
   events:
     on server start:
-      - flag server protected duration:10s
-    on player logs in server_flagged:protected:
+      - flag server protected
+      - wait 10s
+      - flag server protected:!
+    on player logs in server_flagged:protected1:
       - determine "KICKED:<&6>Server is still booting..."

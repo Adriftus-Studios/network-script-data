@@ -4,9 +4,10 @@ get_player_display_name:
   definitions: player
   script:
     - define player <player> if:<[player].exists.not>
-    - if <server.has_flag[player_map.uuids.<[player].uuid.if_null[invalid]>.display_name].if_null[invalid]>:
-      - determine <&translate[adriftus.user.display_name].with[<server.flag[player_map.uuids.<[player].uuid.if_null[invalid]>.display_name].if_null[invalid]>|<&7>(<&f><[player].name><&7>)<&f>]>
-    - else if <server.has_flag[player_map.uuids.<[player].uuid.if_null[invalid]>.display_color].if_null[invalid]>:
-      - determine <&translate[adriftus.user.display_name].with[<server.flag[player_map.uuids.<[player].uuid.if_null[invalid]>.display_color]><player.name.if_null[invalid]>|<&7>(<&f><[player].name><&7>)<&f>]>
+    - stop if:<[player].equals[player]>
+    - if <server.has_flag[player_map.uuids.<[player].uuid>.display_name]>:
+      - determine <&translate[adriftus.user.display_name].with[<server.flag[player_map.uuids.<[player].uuid>.display_name]>|<&7>(<&f><[player].name><&7>)<&f>]>
+    - else if <yaml[global.player.<[player].uuid>].contains[display.color]>:
+      - determine <yaml[global.player.<[player]>].parsed_key[display.color]><[player].name>
     - else:
-      - determine <[player].name.if_null[invalid]>
+      - determine <[player].name>

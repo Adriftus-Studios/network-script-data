@@ -8,4 +8,4 @@ github_command:
     - define URL https://github.com/Adriftus-Studios/network-script-data/issues
     - define Hover "<proc[Colorize].context[Click to file a feature request, or bug report:|green]><&nl><proc[Colorize].context[<[URL]>|blue]>"
     - define Text "<proc[Colorize].context[Click for the:|yellow]> <&b><&n>Github <&b><&n>Link"
-    - narrate <proc[msg_url].context[<def[Hover]>|<def[Text]>|<def[URL]>]>
+    - narrate <proc[msg_url].context[<[Hover]>|<[Text]>|<[URL]>]>

@@ -8,7 +8,7 @@ target_players_inventory:
 target_players_open:
   type: task
   debug: false
-  definitions: callback|list
+  definitions: callback|list|on_close_task
   script:
     - define callback <context.item.flag[callback]> if:<[callback].exists.not>
     - define inv <inventory[target_players_inventory]>

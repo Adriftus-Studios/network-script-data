@@ -9,7 +9,7 @@ code_redemption_command:
     - if <context.args.size> != 1 || <script[promo_code_<context.args.get[1]>].container_type||null> != DATA:
       - narrate "<&c>Invalid Promo Code."
       - stop
-    - if <script[promo_code_<context.args.get[1]>].data_key[expires]> && <script[promo_code_<context.args.get[1]>].parsed_key[expiration_date].is_after[<util.time_now>]>:
+    - if <script[promo_code_<context.args.get[1]>].data_key[expires]> && !<script[promo_code_<context.args.get[1]>].parsed_key[expiration_date].is_after[<util.time_now>]>:
       - narrate "<&c>This code has expired."
       - stop
     - if <yaml[global.player.<player.uuid>].contains[codes.<context.args.get[1]>]>:

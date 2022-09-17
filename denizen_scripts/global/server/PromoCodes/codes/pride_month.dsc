@@ -1,6 +1,6 @@
 promo_code_pride:
   type: data
-  expires: false
+  expires: true
   expiration_date: <time[2022/07/1_00:00:00]>
   run_task: promo_code_pride_month_task
 
