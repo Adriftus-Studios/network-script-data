@@ -12,7 +12,7 @@ Crystallizing_enchantment:
       - <empty>
       - Costs extra durability to use. Incompatible with fortune/silk touch
     item_slots:
-      - pickaxd
+      - pickaxe
   category: digger
   full_name: <&7>Crystallizing <context.level.to_roman_numerals>
   min_level: 1

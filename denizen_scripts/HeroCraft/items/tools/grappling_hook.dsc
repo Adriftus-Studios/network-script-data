@@ -6,6 +6,7 @@ grappling_hook_basic:
     tier: <&7>Basic
     range: 15
     cooldown: 20s
+    recipe_book_category: travel.grappling.ABasic
   lore:
     - <&e>Tier: <script.parsed_key[data.tier]>
     - <&e>Range<&co> <&f><script.data_key[data.range]>
@@ -15,15 +16,24 @@ grappling_hook_basic:
     uuid: <util.random_uuid>
   mechanisms:
     custom_model_data: 3
+  recipes:
+    1:
+      type: shaped
+      output_quantity: 1
+      input:
+      - iron_block|iron_block|air
+      - iron_block|bow|string
+      - air|string|stick
 
 grappling_hook_better:
   type: item
   material: tripwire_hook
   display name: <script.parsed_key[data.tier]> Grappling Hook
   data:
-    tier: <&a>Better
+    tier: <&a>Improved
     range: 20
     cooldown: 15s
+    recipe_book_category: travel.grappling.BImproved
   lore:
     - <&e>Tier: <script.parsed_key[data.tier]>
     - <&e>Range<&co> <&f><script.data_key[data.range]>
@@ -33,6 +43,15 @@ grappling_hook_better:
     uuid: <util.random_uuid>
   mechanisms:
     custom_model_data: 3
+  recipes:
+    1:
+      type: shaped
+      output_quantity: 1
+      input:
+      - steel_block|steel_block|air
+      - steel_block|grappling_hook_basic|string
+      - air|string|stick
+
 
 grappling_hook_advanced:
   type: item

@@ -1,12 +1,12 @@
 # -- PvE Mission - Flower Picking
-mission_pick_flowers:
+mission_pick:
   type: data
   id: pick
   category: PvE
-  name: <&a>Pick <&2>-Flowers-
+  name: <&a>Pick <&2>-blocks-
   description:
     - <&a>Complete this by picking flowers.
-  assignment: mission_flowere_assignment
+  assignment: mission_pick_assignment
   icon: poppy
   cmd: 0
   milestones:
