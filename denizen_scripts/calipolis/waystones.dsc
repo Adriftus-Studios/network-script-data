@@ -84,7 +84,7 @@ waystone_place_checks_player:
   debug: false
   script:
     - ratelimit <player> 1t
-    - if <player.flag[waystones].size> < 5:
+    - if <player.flag[waystones].size> < 2:
       - narrate "<&c>You have too many Waystones."
       - stop
 
@@ -96,6 +96,7 @@ waystone_after_place_player:
     - flag server waystones.player.<[entity].uuid>.location:<player.location.with_pose[0,<player.location.yaw.sub[180]>]>
     - flag server waystones.player.<[entity].uuid>.name:<[entity].uuid>
     - flag <[entity]> type:player
+    - flag <[entity]> owner:<player.uuid>
 
 waystone_remove:
   type: task
