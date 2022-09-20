@@ -6,6 +6,7 @@ custom_object_fixer:
     - define object <context.entity> if:<[object].exists.not>
     - if <[object].has_flag[barriers]>:
       - flag <[object].has_flag[barriers]> on_right_click:<context.entity.flag[right_click_script]>
+      - flag <[object].has_flag[barriers]> on_break:cancel
 
 custom_object_place:
   type: task
