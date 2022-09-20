@@ -163,3 +163,15 @@ mission_cook_events:
         - define item <context.result_item.script.name.if_null[<context.result_item.material.name>]>
         - if <player.flag[<[mission]>].get[item]> == <[item]>:
           - run missions_update_progress def:add|<[mission]>|1
+    on player crafts item flagged:missions.active.cook:
+      - if <context.click_type> == NUMBER_KEY:
+        - stop
+      # Add missions with ID craft to a list.
+      - define missions <proc[missions_get].context[cook]>
+      # Check each mission if their item matches the item.
+      - foreach <[missions]> as:mission:
+        - if <player.flag[<[mission]>].get[done]>:
+          - foreach next
+        - define item <context.item.script.name.if_null[<context.item.material.name>]>
+        - if <player.flag[<[mission]>].get[item]> == <[item]>:
+          - run missions_update_progress def:add|<[mission]>|<context.amount>
