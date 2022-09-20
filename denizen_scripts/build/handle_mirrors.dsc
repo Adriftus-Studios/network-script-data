@@ -16,7 +16,7 @@ tp_to_mirrors:
     - if <context.args.size> < 1:
       - narrate "<&c>Need to specify a mirror!"
       - stop
-    - if !<server.worlds.parse[name].contains[<context.args.first>]> || <context.args.first> == flatworld:
+    - if !<server.worlds.parse[name].contains[<context.args.first>]> && <context.args.first> != flatworld:
       - narrate "<&c>Unknown Mirror<&co> <context.args.first>"
       - stop
     - teleport <world[<context.args.first>].spawn_location>
