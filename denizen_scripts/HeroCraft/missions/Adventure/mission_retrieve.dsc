@@ -20,6 +20,14 @@ mission_retrieve:
       - 32
       - 48
       - 64
+    trident:
+      - 2
+      - 4
+      - 6
+    nautilus_shell:
+      - 1
+      - 2
+      - 3
 #    gunpowder:
 #      - 32
 #      - 48
@@ -28,10 +36,10 @@ mission_retrieve:
       - 32
       - 48
       - 64
-    slime_ball:
-      - 32
-      - 48
-      - 64
+#    slime_ball:
+#      - 32
+#      - 48
+#      - 64
     ender_pearl:
       - 12
       - 24

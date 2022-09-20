@@ -18,6 +18,10 @@ mission_craft:
   items:
 
     ###Easy
+    xp_item_10:
+      - 3
+      - 6
+      - 9
     oak_planks:
       - 128
       - 256
@@ -43,6 +47,10 @@ mission_craft:
     arrow:
       - 128
       - 256
+    kelp_bulb:
+      - 32
+      - 48
+      - 64
     glass_bottle:
       - 64
       - 128
@@ -79,6 +87,10 @@ mission_craft:
       - 32
 
     ###Medium
+    xp_item_30:
+      - 2
+      - 4
+      - 6
     jungle_planks:
       - 128
       - 256
@@ -207,7 +219,14 @@ mission_craft:
     leather:
       - 8
       - 16
-
+    morb_empty:
+      - 1
+      - 2
+      - 3
+    xp_item_50:
+      - 1
+      - 2
+      - 3
 
 # Assignment Task
 mission_craft_assignment:
