@@ -20,10 +20,10 @@ mission_retrieve:
       - 32
       - 48
       - 64
-    gunpowder:
-      - 32
-      - 48
-      - 64
+#    gunpowder:
+#      - 32
+#      - 48
+#      - 64
     rotten_flesh:
       - 32
       - 48

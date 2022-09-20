@@ -48,16 +48,16 @@ mission_craft:
       - 128
       - 256
     stick:
+      - 64
+      - 128
       - 256
-      - 512
-      - 1024
     bowl:
       - 128
       - 256
     pumpkin_seeds:
+      - 64
+      - 128
       - 256
-      - 512
-      - 1024
     melon_seeds:
       - 64
       - 128
