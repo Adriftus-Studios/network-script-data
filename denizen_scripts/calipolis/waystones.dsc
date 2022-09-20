@@ -136,7 +136,7 @@ waystone_use:
   debug: false
   script:
     - define type <context.location.flag[custom_object].flag[type]>
-    - define entity <context.location.flag[custom_object].flag[entity]>
+    - define owner <context.location.flag[custom_object].flag[owner]>
     # Left Click
     - if <context.click_type> == LEFT_CLICK_BLOCK:
       - if <[type]> == admin:
@@ -145,7 +145,7 @@ waystone_use:
         - else:
           - run calipolis_warp_locations_open def:<[type]>
       - else:
-        - if <[entity].flag[owner]> == <player.uuid>:
+        - if <[owner]> == <player.uuid>:
           - run waystone_rename def:<context.location.flag[custom_object]>
         - else:
           - run calipolis_warp_locations_open def:<[type]>
@@ -156,7 +156,7 @@ waystone_use:
         - else:
           - run calipolis_warp_locations_open def:<[type]>
       - else:
-        - if <player.is_sneaking> && <[entity].flag[owner]> == <player.uuid>:
+        - if <player.is_sneaking> && <[owner]> == <player.uuid>:
           - run waystone_remove def:<context.location.flag[custom_object]>
         - else:
           - run calipolis_warp_locations_open def:<[type]>
