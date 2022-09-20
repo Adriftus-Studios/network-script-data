@@ -20,6 +20,10 @@ mission_slay:
       - 24
       - 36
       - 48
+    witch:
+      - 4
+      - 8
+      - 12
     skeleton:
       - 24
       - 36
