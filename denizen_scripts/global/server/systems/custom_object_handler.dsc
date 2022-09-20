@@ -50,6 +50,7 @@ custom_object_place:
     - modifyblock <[barriers]> barrier
     - flag <[barriers]> on_right_click:<[interaction]>
     - flag <[barriers]> on_left_click:<[interaction]>
+    - flag <[barriers]> on_break:cancel
     - flag <[barriers]> custom_object:<entry[object].spawned_entity>
     - flag <entry[object].spawned_entity> barriers:<[barriers]>
     - flag <entry[object].spawned_entity> item:<[item]>
