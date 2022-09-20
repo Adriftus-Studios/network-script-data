@@ -94,7 +94,8 @@ waystone_after_place_player:
   definitions: entity
   script:
     - flag server waystones.player.<[entity].uuid>.location:<player.location.with_pose[0,<player.location.yaw.sub[180]>]>
-    - flag server waystones.player.<[entity].uuid>.name:<[entity].uuid>
+    - flag server "waystones.player.<[entity].uuid>.name:<player.name>'s Waystone"
+    - adjust <[entity]> "custom_name:<player.name>'s Waystone"
     - flag <[entity]> type:player
     - flag <[entity]> owner:<player.uuid>
 
