@@ -631,17 +631,19 @@ item_skin_system_update:
     - if <[page]> != 1:
       - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:item_skin_system_previous_page;color=green;custom_model_data=6;flag=page:<[page]>]> d:<[inventory]>
 
+    - inventory open d:<[inventory]>
+
 item_skin_system_next_page:
   type: task
   debug: false
   script:
-    - run item_skin_system_update def:<context.inventory.slot[48]>|<context.item.flag[page].add[1]>
+    - run item_skin_system_update def:<context.clicked_inventory.slot[48]>|<context.item.flag[page].add[1]>
 
 item_skin_system_previous_page:
   type: task
   debug: false
   script:
-    - run item_skin_system_update def:<context.inventory.slot[48]>|<context.item.flag[page].sub[1]>
+    - run item_skin_system_update def:<context.clicked_inventory.slot[48]>|<context.item.flag[page].sub[1]>
 
 item_skin_system_events:
   type: world
