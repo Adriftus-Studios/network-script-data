@@ -655,6 +655,7 @@ item_skin_system_events:
       - determine passively cancelled:false
       - if <context.slot> == 48 && <context.clicked_inventory.slot[52].material.name> != air:
         - give <context.clicked_inventory.slot[52].with[flag=run_script:!]> to:<player.inventory>
+        - inventory set slot:52 o:air d:<context.clicked_inventory>
       - if <context.slot> == 52 && <context.clicked_inventory.slot[48].material.name> != air:
         - determine cancelled
       - if <context.item.material.name> == air:
