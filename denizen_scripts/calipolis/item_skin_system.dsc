@@ -579,7 +579,7 @@ item_skin_system_update:
     - define inventory <context.inventory> if:<context.inventory.exists>
     - define inventory <player.open_inventory.with[flag=run_script:!]> if:<[inventory].exists.not>
     - wait 1t
-    - give <[inventory].slot[52]> if:<[inventory].slot[52].material.name.equals[air].not>
+    - give <[inventory].slot[52].with[flag=run_script:!]> if:<[inventory].slot[52].material.name.equals[air].not>
     - inventory clear d:<[inventory]>
     - inventory set slot:48 o:<[item].with_flag[run_script:item_skin_system_clear]> d:<[inventory]>
     - if <[item].has_flag[original_item]>:
