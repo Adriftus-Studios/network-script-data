@@ -577,7 +577,7 @@ item_skin_system_update:
   definitions: item|page
   script:
     - define inventory <context.inventory> if:<context.inventory.exists>
-    - define inventory <player.open_inventory> if:<[inventory].exists.not>
+    - define inventory <player.open_inventory.with[flag=run_script:!]> if:<[inventory].exists.not>
     - wait 1t
     - give <[inventory].slot[52]> if:<context.inventory.slot[52].material.name.equals[air].not>
     - inventory clear d:<[inventory]>
