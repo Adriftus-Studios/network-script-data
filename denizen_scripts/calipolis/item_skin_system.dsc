@@ -631,7 +631,6 @@ item_skin_system_update:
     - if <[page]> != 1:
       - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:item_skin_system_previous_page;color=green;custom_model_data=6;flag=page:<[page]>]> d:<[inventory]>
 
-    - inventory open d:<[inventory]>
 
 item_skin_system_next_page:
   type: task
