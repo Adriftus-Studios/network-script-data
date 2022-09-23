@@ -54,9 +54,8 @@ town_return_events:
   debug: false
   events:
     on town_return_scroll|town_return_crystal recipe formed:
-      - determine cancelled if:<player.has_town.not>
-      - define lore "<context.item.lore.include[<&b>Town<&co> <player.town.name>]>"
-      - determine passively <context.item.with[flag=town:<player.town>;lore=<[lore]>]>
+      - determine cancelled if:<player.has_town.not>"
+      - determine passively "<context.item.with[flag=town:<player.town>;display=<context.item.display><&co> <player.town.name>]>"
 
 town_return_execute:
   type: task

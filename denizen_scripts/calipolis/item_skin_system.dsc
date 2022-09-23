@@ -577,8 +577,9 @@ item_skin_system_update:
   definitions: item|page
   script:
     - define inventory <context.inventory> if:<context.inventory.exists>
-    - define inventory <player.open_inventory> if:<[inventory].exists.not>
+    - define inventory <player.open_inventory.with[flag=run_script:!]> if:<[inventory].exists.not>
     - wait 1t
+    - give <[inventory].slot[52].with[flag=run_script:!]> if:<[inventory].slot[52].material.name.equals[air].not>
     - inventory clear d:<[inventory]>
     - inventory set slot:48 o:<[item].with_flag[run_script:item_skin_system_clear]> d:<[inventory]>
     - if <[item].has_flag[original_item]>:
@@ -631,17 +632,18 @@ item_skin_system_update:
     - if <[page]> != 1:
       - inventory set slot:<script.data_key[data.slot_data.previous_page]> o:<item[leather_horse_armor].with[hides=all;display_name=<&a>Previous<&sp>Page;flag=run_script:item_skin_system_previous_page;color=green;custom_model_data=6;flag=page:<[page]>]> d:<[inventory]>
 
+
 item_skin_system_next_page:
   type: task
   debug: false
   script:
-    - run item_skin_system_update def:<context.inventory.slot[48]>|<context.item.flag[page].add[1]>
+    - run item_skin_system_update def:<context.clicked_inventory.slot[48]>|<context.item.flag[page].add[1]>
 
 item_skin_system_previous_page:
   type: task
   debug: false
   script:
-    - run item_skin_system_update def:<context.inventory.slot[48]>|<context.item.flag[page].sub[1]>
+    - run item_skin_system_update def:<context.clicked_inventory.slot[48]>|<context.item.flag[page].sub[1]>
 
 item_skin_system_events:
   type: world
@@ -653,6 +655,7 @@ item_skin_system_events:
       - determine passively cancelled:false
       - if <context.slot> == 48 && <context.clicked_inventory.slot[52].material.name> != air:
         - give <context.clicked_inventory.slot[52].with[flag=run_script:!]> to:<player.inventory>
+        - inventory set slot:52 o:air d:<context.clicked_inventory>
       - if <context.slot> == 52 && <context.clicked_inventory.slot[48].material.name> != air:
         - determine cancelled
       - if <context.item.material.name> == air:
