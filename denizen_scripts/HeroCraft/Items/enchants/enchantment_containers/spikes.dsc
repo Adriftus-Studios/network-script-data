@@ -19,6 +19,7 @@ spikes_enchantment:
   full_name: <&7>spikes <context.level.to_roman_numerals>
   min_level: 1
   max_level: 5
+  treasure_only: true
   is_tradable: false
   can_enchant: <context.item.advanced_matches[*shield]>
 #  is_compatible:
