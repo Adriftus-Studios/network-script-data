@@ -124,7 +124,6 @@ mission_pick_events:
   debug: false
   events:
     on player breaks dandelion|poppy|blue_orchid|allium|azure_bluet|red_tulip|orange_tulip|white_tulip|pink_tulip|oxeye_daisy|cornflower|lily_of_the_valley|wither_rose|sunflower|lilac|rose_bush|peony flagged:missions.active.pick bukkit_priority:HIGHEST:
-      - determine passively NOTHING
       # Add missions with ID pick to a list.
       - define missions <proc[missions_get].context[pick]>
       #Check if the crop is fully grown if it has an age.
@@ -136,4 +135,5 @@ mission_pick_events:
         - else:
           - define block <context.material.name>
         - if <player.flag[<[mission]>].get[block]> == <[block]>:
+          - determine passively NOTHING
           - run missions_update_progress def:add|<[mission]>|1
