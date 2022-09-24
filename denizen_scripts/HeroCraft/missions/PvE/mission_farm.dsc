@@ -108,8 +108,6 @@ mission_farm_events:
       - define missions <proc[missions_get].context[farm]>
       #Check if the crop is fully grown if it has an age.
       - stop if:<context.material.age.if_null[0].equals[<context.material.maximum_age.if_null[0]>].not>
-      - if <list[melon|pumpkin].contains_any[<context.material.name>]>:
-        - determine passively NOTHING
       # Check each mission if their item matches the item.
       - foreach <[missions]> as:mission:
         - if <player.flag[<[mission]>].get[done]>:
@@ -126,3 +124,5 @@ mission_farm_events:
           - define block <context.material.name>
         - if <player.flag[<[mission]>].get[block]> == <[block]>:
           - run missions_update_progress def:add|<[mission]>|1
+        - if <list[melon|pumpkin].contains_any[<[block]>]>:
+          - determine passively NOTHING

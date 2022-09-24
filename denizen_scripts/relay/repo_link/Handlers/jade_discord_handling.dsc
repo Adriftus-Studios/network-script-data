@@ -24,9 +24,11 @@ jade_link_user:
       - if <context.interaction.user.has_flag[minecraft.account_linked]>:
         - ~discordinteraction reply interaction:<context.interaction> "You are already linked to <context.interaction.user.flag[minecraft.account_linked].name>. Please /unlink if incorrect."
         - stop
+      - define user <context.interaction.user>
+      - define uname
       - bungee hub:
-        - flag <[player]> discord.account_linked:<context.interaction.user>
-        - flag <[player]> discord.notify.linked:<context.interaction.user.name>
+        - flag <[player]> discord.account_linked:<[user]>
+        - flag <[player]> discord.notify.linked:<[uname]>
       - flag <context.interaction.user> minecraft.account_linked:<[player]>
       - bungeetag server:hub <server.match_player[<[playername]>].name.if_null[<server.match_offline_player[<[playername]>].name>]> save:playername
       - define name <entry[player].results>
