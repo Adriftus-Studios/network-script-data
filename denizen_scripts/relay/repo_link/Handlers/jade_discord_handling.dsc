@@ -28,7 +28,9 @@ jade_link_user:
         - flag <[player]> discord.account_linked:<context.interaction.user>
         - flag <[player]> discord.notify.linked:<context.interaction.user.name>
       - flag <context.interaction.user> minecraft.account_linked:<[player]>
-      - ~discordinteraction reply interaction:<context.interaction> "You have successfully linked to <[player].name>. If incorrect please /unlink and type your complete name more carefully."
+      - bungeetag server:hub <server.match_player[<[playername]>].name.if_null[<server.match_offline_player[<[playername]>].name>]> save:playername
+      - define name <entry[player].results>
+      - ~discordinteraction reply interaction:<context.interaction> "You have successfully linked to <[name]>. If incorrect please /unlink and type your complete name more carefully."
       - stop
 
     on discord slash command name:unlink:
