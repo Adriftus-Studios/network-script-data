@@ -19,5 +19,6 @@ Flamebrand_enchantment:
   full_name: <&7>Flamebrand <context.level.to_roman_numerals>
   min_level: 1
   max_level: 4
+  treasure_only: true
   is_tradable: false
   can_enchant: <context.item.advanced_matches[*shield]>
