@@ -18,6 +18,8 @@ missions_config:
     - retrieve
     #- pvp_zanzar
     - pick
+    - feed
+    - tame
   # Max multipliers
   multipliers:
     daily: 1

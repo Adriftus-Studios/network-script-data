@@ -17,9 +17,8 @@ mission_snack:
     monthly: 500
   items:
     enchanted_golden_apple:
+        - 1
         - 2
-        - 4
-        - 6
     golden_apple:
         - 2
         - 4
