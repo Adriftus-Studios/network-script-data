@@ -3,7 +3,7 @@ mission_feed:
   type: data
   id: feed
   category: PvE
-  name: <&a>Feed <&2>-entities-
+  name: <&a>Feed <&2>-entity-
   description:
     - <&a>Complete this by feeding animals.
   assignment: mission_feed_assignment
@@ -15,7 +15,7 @@ mission_feed:
     daily: 100
     weekly: 200
     monthly: 400
-  entities:
+  entity:
     sheep:
       - 8
       - 16
@@ -229,7 +229,7 @@ mission_feed_assignment:
     map:
       id: <[config].data_key[id]>
       timeframe: <[timeframe]>
-      block: <[block]>
+      entity: <[entity]>
       max: <[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>
       name: <proc[missions_replace_name].context[<[config].parsed_key[name]>|<map[entities=<[name]>].escaped>]>
       description: <proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[items=<[name]>;max=<[max]>].escaped>]>
@@ -239,9 +239,9 @@ mission_feed_assignment:
     - stop if:<[timeframe].exists.not>
     - define config <script[mission_feed]>
     # Generate random item and amount from config.
-    - define block <[config].data_key[entities].keys.random>
-    - define name <[block].as_material.name.replace[_].with[<&sp>].to_titlecase>
-    - define max <[config].data_key[entities.<[block]>].random>
+    - define entity <[config].data_key[entities].keys.random>
+    - define name <[entity].as_material.name.replace[_].with[<&sp>].to_titlecase>
+    - define max <[config].data_key[entities.<[entity]>].random>
     # Define map
     - define map <script.parsed_key[data.map]>
     # Give mission
@@ -259,7 +259,7 @@ mission_feed_complete:
     - foreach <[missions]> as:mission:
       - if <player.flag[<[mission]>].get[done]> && <player.flag[<[mission]>].get[rewarded].not>:
         - define timeframe <player.flag[<[mission]>].get[timeframe]>
-        - define item <player.flag[<[mission]>].get[block]>
+        - define item <player.flag[<[mission]>].get[entity]>
         - define quantity <[config].data_key[rewards.<[timeframe]>].mul[<[bigconfig].data_key[multipliers.<[timeframe]>]>]>
         - money give quantity:<[quantity]>
         - flag <player> <[mission]>.rewarded:true
