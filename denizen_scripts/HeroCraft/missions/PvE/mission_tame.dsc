@@ -41,13 +41,13 @@ mission_tame:
       - 6
       - 9
     skeleton_horse:
+      - 1
+      - 2
       - 3
-      - 6
-      - 9
     trader_llama:
+      - 1
+      - 2
       - 3
-      - 6
-      - 9
     wolf:
       - 3
       - 6

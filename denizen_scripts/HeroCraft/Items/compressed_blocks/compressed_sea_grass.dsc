@@ -1,6 +1,6 @@
 uncompressed_sea_grass:
   type: item
-  material: sea_grass
+  material: seagrass
   no_id: true
   recipes:
     1:
@@ -10,7 +10,7 @@ uncompressed_sea_grass:
 
 compressed_sea_grass:
   type: item
-  material: sea_grass
+  material: seagrass
   display name: <&f>Compressed Sea Grass
   mechanisms:
     hides: ENCHANTS
@@ -30,13 +30,13 @@ compressed_sea_grass:
     2:
       type: shaped
       input:
-      - sea_grass|sea_grass|sea_grass
-      - sea_grass|sea_grass|sea_grass
-      - sea_grass|sea_grass|sea_grass
+      - seagrass|seagrass|seagrass
+      - seagrass|seagrass|seagrass
+      - seagrass|seagrass|seagrass
 
 double_compressed_sea_grass:
   type: item
-  material: sea_grass
+  material: seagrass
   display name: <&f>Double Compressed Sea Grass
   mechanisms:
     hides: ENCHANTS
@@ -62,7 +62,7 @@ double_compressed_sea_grass:
 
 triple_compressed_sea_grass:
   type: item
-  material: sea_grass
+  material: seagrass
   display name: <&f>Triple Compressed Sea Grass
   mechanisms:
     hides: ENCHANTS
@@ -88,7 +88,7 @@ triple_compressed_sea_grass:
 
 quadruple_compressed_sea_grass:
   type: item
-  material: sea_grass
+  material: seagrass
   display name: <&f>Quadruple Compressed Sea Grass
   mechanisms:
     hides: ENCHANTS
