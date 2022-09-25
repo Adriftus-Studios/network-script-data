@@ -135,8 +135,8 @@ jade_monday:
     skull_skin: 33d885df-8840-422c-8ebf-a97a2ae0566c|eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODQzMGIwMmIxNTVlNjY5MjczYTc3ODQwYjA3ZjQ1M2U3OWIzOTQ4OTBhNGQ2MGI0MGM3YWMzMGFhNzhmZTkzNiJ9fX0=
   lore:
   - <&e>Speed Fishing<&6><&co>
-  - <&6>-10<&pc><&e>Catch Time<&6>.
-  - <&6>+10<&pc><&e>Catch Rate<&6>.
+  - <&6>-10<&pc> <&e>Catch Time<&6>.
+  - <&6>+10<&pc> <&e>Catch Rate<&6>.
 
 jade_tuesday:
   type: item
