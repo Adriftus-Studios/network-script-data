@@ -57,7 +57,7 @@ bait_counter_worm:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 1
+    custom_model_data: 1001
   display name: <&f>Worms
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.worm]||0><&6>.
@@ -90,7 +90,7 @@ bait_counter_leech:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 1003
   display name: <&f>Leeches
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.leech]||0><&6>.
@@ -123,7 +123,7 @@ bait_counter_rabbit:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 5
+    custom_model_data: 1005
   display name: <&f>Rabbits Feet
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.rabbit]||0><&6>.
@@ -156,7 +156,7 @@ bait_counter_chum:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 6
+    custom_model_data: 1006
   display name: <&f>Chum
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.chum]||0><&6>.
@@ -189,7 +189,7 @@ bait_counter_magma:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 8
+    custom_model_data: 1008
   display name: <&f>Magma Lures
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.magma]||0><&6>.
@@ -223,7 +223,7 @@ bait_counter_gilded:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 10
+    custom_model_data: 1010
   display name: <&f>Gilded Worms
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.gilded]||0><&6>.
@@ -256,7 +256,7 @@ bait_counter_silverfish:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 12
+    custom_model_data: 1012
   display name: <&f>Silverfish Bait
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.silverfish]||0><&6>.
@@ -289,7 +289,7 @@ bait_counter_slime:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 14
+    custom_model_data: 1014
   display name: <&f>Slime Balls
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.slime]||0><&6>.
@@ -322,7 +322,7 @@ bait_counter_clay:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 15
+    custom_model_data: 1015
   display name: <&f>Clay Balls
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.clay]||0><&6>.
@@ -355,7 +355,7 @@ bait_counter_endmite:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 16
+    custom_model_data: 1016
   display name: <&f>Endmites
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.endmite]||0><&6>.
@@ -388,7 +388,7 @@ bait_counter_shulker:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 18
+    custom_model_data: 1018
   display name: <&f>Shulker Tongues
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.shulker]||0><&6>.
@@ -421,7 +421,7 @@ bait_counter_mysterious:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 20
+    custom_model_data: 1020
   display name: <&f>Mysterious Shards
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.mysterious]||0><&6>.
@@ -454,7 +454,7 @@ bait_counter_golden:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 22
+    custom_model_data: 1022
   display name: <&f>Golden Fragments
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.golden]||0><&6>.
@@ -487,7 +487,7 @@ bait_counter_blinding:
   debug: false
   material: amethyst_shard
   mechanisms:
-    custom_model_data: 24
+    custom_model_data: 1024
   display name: <&f>Blinding Shards
   lore:
   - <&6>Current Count<&co> <&e><player.flag[fishbot.bait.blinding]||0><&6>.
