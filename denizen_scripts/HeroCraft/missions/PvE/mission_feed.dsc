@@ -240,7 +240,7 @@ mission_feed_assignment:
     - define config <script[mission_feed]>
     # Generate random item and amount from config.
     - define entity <[config].data_key[entity].keys.random>
-    - define name <[entity].as_material.name.replace[_].with[<&sp>].to_titlecase>
+    - define name <[entity].as_entity.name.replace[_].with[<&sp>].to_titlecase.if_null[<[entity].as_entity.entity_type.replace[_].with[<&sp>].to_titlecase>]>
     - define max <[config].data_key[entity.<[entity]>].random>
     # Define map
     - define map <script.parsed_key[data.map]>
