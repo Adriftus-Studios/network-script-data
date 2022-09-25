@@ -2,4 +2,5 @@ throw_error:
   type: task
   debug: false
   script:
-    - error
+#    - error
+    - wait 1t
