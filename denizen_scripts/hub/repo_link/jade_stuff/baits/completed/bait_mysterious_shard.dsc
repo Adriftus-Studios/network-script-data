@@ -7,7 +7,7 @@ fishing_bait_mysterious:
   - <&sp>
   - <&6>Jade Level<&co> <&e>71
   mechanisms:
-    custom_model_data: 20
+    custom_model_data: 1020
   recipes:
     1:
       type: shaped
@@ -25,7 +25,7 @@ fishing_bait_mysterious_fragment_item:
   lore:
   - <&6>Broken to bits, maybe there is still a use for this.
   mechanisms:
-    custom_model_data: 21
+    custom_model_data: 1021
 
 fishing_bait_mysterious_giver:
   type: world

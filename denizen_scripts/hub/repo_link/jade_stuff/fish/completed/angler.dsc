@@ -3,4 +3,4 @@ angler:
   material: tropical_fish
   display name: <&F>Angler
   mechanisms:
-    custom_model_data: 1
+    custom_model_data: 1001

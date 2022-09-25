@@ -3,4 +3,4 @@ tuna:
   material: salmon
   display name: <&F>Tuna
   mechanisms:
-    custom_model_data: 6
+    custom_model_data: 1006

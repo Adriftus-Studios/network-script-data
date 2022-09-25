@@ -8,7 +8,7 @@ fishing_rod_soul:
   - <&e>Increases legendary catch rate by 100<&pc>.
   - <&6>Jade Level<&co> <&e>95
   mechanisms:
-      custom_model_data: 9
+      custom_model_data: 1009
   flags:
     durability: 400
     trips: 80

@@ -3,4 +3,4 @@ sheepfish:
   material: tropical_fish
   display name: <&F>Neon Tetra
   mechanisms:
-    custom_model_data: 8
+    custom_model_data: 1008

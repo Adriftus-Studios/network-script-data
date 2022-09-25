@@ -12,4 +12,4 @@ fishing_bait_hook:
       - iron_ingot|air|iron_ingot
       - air|iron_ingot|air
   mechanisms:
-    custom_model_data: 26
+    custom_model_data: 1026

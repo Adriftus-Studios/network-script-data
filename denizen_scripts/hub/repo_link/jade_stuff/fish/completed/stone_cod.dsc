@@ -3,4 +3,4 @@ stone_cod:
   material: cod
   display name: <&F>Stone Cod
   mechanisms:
-    custom_model_data: 8
+    custom_model_data: 1008

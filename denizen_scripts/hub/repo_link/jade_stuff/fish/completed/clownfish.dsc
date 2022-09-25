@@ -3,4 +3,4 @@ clownfish:
   material: tropical_fish
   display name: <&F>Clownfish
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 1003

@@ -3,4 +3,4 @@ goldfish:
   material: tropical_fish
   display name: <&F>Goldfish
   mechanisms:
-    custom_model_data: 29
+    custom_model_data: 1029

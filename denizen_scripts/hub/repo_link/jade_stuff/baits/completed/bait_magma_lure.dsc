@@ -7,7 +7,7 @@ fishing_bait_magma:
   - <&sp>
   - <&6>Jade Level<&co> <&e>21
   mechanisms:
-    custom_model_data: 8
+    custom_model_data: 1008
   recipes:
     1:
       type: shaped
@@ -24,7 +24,7 @@ fishing_bait_magma_item:
   lore:
   - <&6>Scalding to the touch.
   mechanisms:
-    custom_model_data: 9
+    custom_model_data: 1009
   recipes:
     1:
       type: shapeless

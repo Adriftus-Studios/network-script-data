@@ -3,4 +3,4 @@ quartz_eel:
   material: tropical_fish
   display name: <&F>Quartz Eel
   mechanisms:
-    custom_model_data: 17
+    custom_model_data: 1017

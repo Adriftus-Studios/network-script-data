@@ -3,4 +3,4 @@ golden_cod:
   material: cod
   display name: <&F>Golden Cod
   mechanisms:
-    custom_model_data: 4
+    custom_model_data: 1004

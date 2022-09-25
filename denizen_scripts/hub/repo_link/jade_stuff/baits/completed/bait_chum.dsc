@@ -7,7 +7,7 @@ fishing_bait_chum:
   - <&sp>
   - <&6>Jade Level<&co> <&e>16
   mechanisms:
-    custom_model_data: 6
+    custom_model_data: 1006
   recipes:
     1:
       type: shaped
@@ -25,7 +25,7 @@ fishing_bait_chum_item:
   lore:
   - <&6>Slimy and smells terrible.
   mechanisms:
-    custom_model_data: 7
+    custom_model_data: 1007
   recipes:
     1:
       type: shapeless

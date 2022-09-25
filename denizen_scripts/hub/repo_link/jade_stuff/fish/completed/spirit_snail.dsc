@@ -3,4 +3,4 @@ spirit_snail:
   material: pufferfish
   display name: <&F>Spirit Snail
   mechanisms:
-    custom_model_data: 21
+    custom_model_data: 1021

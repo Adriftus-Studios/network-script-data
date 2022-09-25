@@ -3,4 +3,4 @@ blazing_cod:
   material: cod
   display name: <&F>Blazing Cod
   mechanisms:
-    custom_model_data: 6
+    custom_model_data: 1006

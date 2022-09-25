@@ -3,4 +3,4 @@ lava_shark:
   material: tropical_fish
   display name: <&F>Lava Shark
   mechanisms:
-    custom_model_data: 25
+    custom_model_data: 1025

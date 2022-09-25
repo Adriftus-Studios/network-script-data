@@ -3,4 +3,4 @@ crimson_infected_cod:
   material: tropical_fish
   display name: <&F>Crimson-Infected Cod
   mechanisms:
-    custom_model_data: 36
+    custom_model_data: 1036

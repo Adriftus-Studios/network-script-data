@@ -3,4 +3,4 @@ Shrimp:
   material: pufferfish
   display name: <&F>Shrimp
   mechanisms:
-    custom_model_data: 8
+    custom_model_data: 1008

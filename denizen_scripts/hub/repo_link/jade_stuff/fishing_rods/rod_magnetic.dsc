@@ -8,7 +8,7 @@ fishing_rod_magnetic:
   - <&e>Increases item catch rate by 50<&pc>.
   - <&6>Jade Level<&co> <&e>50
   mechanisms:
-      custom_model_data: 5
+      custom_model_data: 1005
   flags:
     durability: 128
     trips: 25

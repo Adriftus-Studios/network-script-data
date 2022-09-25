@@ -3,4 +3,4 @@ pupfish:
   material: pufferfish
   display name: <&F>Pupfish
   mechanisms:
-    custom_model_data: 7
+    custom_model_data: 1007

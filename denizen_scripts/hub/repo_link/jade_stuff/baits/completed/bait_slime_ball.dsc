@@ -7,7 +7,7 @@ fishing_bait_slime:
   - <&sp>
   - <&6>Jade Level<&co> <&e>35
   mechanisms:
-    custom_model_data: 14
+    custom_model_data: 1014
   recipes:
     1:
       type: shaped

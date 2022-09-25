@@ -3,4 +3,4 @@ void_octopus:
   material: pufferfish
   display name: <&F>Void Octopus
   mechanisms:
-    custom_model_data: 15
+    custom_model_data: 1015

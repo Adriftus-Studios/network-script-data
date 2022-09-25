@@ -3,4 +3,4 @@ ghast_crab:
   material: tropical_fish
   display name: <&F>Ghast Crab
   mechanisms:
-    custom_model_data: 31
+    custom_model_data: 1031

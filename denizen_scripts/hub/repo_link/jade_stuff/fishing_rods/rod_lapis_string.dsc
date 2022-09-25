@@ -5,7 +5,7 @@ fishing_rod_lapis_line:
   lore:
   - <&6>A magical string, brimming with potential
   mechanisms:
-    custom_model_data: 10
+    custom_model_data: 1010
   recipes:
     1:
       type: shaped

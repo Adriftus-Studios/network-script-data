@@ -3,4 +3,4 @@ turqoise_octopus:
   material: pufferfish
   display name: <&F>Turqoise Octopus
   mechanisms:
-    custom_model_data: 17
+    custom_model_data: 1017

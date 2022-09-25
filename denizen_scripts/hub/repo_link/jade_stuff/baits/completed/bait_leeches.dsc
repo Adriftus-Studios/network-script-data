@@ -7,7 +7,7 @@ fishing_bait_leech:
   - <&sp>
   - <&6>Jade Level<&co> <&e>5
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 1003
   recipes:
     1:
       type: shaped
@@ -24,7 +24,7 @@ fishing_bait_leech_item:
   lore:
   - <&6>Nasty little suckers.
   mechanisms:
-    custom_model_data: 4
+    custom_model_data: 1004
 
 fishing_bait_leech_giver:
   type: world

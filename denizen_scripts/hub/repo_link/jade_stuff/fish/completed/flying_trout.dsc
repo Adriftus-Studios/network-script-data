@@ -1,6 +1,6 @@
 flying_trout:
   type: item
   material: tropical_fish
-  display name: <&F>flying_trout
+  display name: <&F>Flying Trout
   mechanisms:
-    custom_model_data: 32
+    custom_model_data: 1032

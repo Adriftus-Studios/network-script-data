@@ -7,7 +7,7 @@ fishing_rod_netherite:
   - <&sp>
   - <&6>Jade Level<&co> <&e>80
   mechanisms:
-      custom_model_data: 8
+      custom_model_data: 1008
   flags:
     durability: 600
     trips: 120

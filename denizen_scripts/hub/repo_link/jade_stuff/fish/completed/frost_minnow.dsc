@@ -3,4 +3,4 @@ frost_minnow:
   material: salmon
   display name: <&F>Frost Minnow
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 1003

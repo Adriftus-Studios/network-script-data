@@ -3,4 +3,4 @@ sunfish:
   material: pufferfish
   display name: <&F>Sunfish
   mechanisms:
-    custom_model_data: 11
+    custom_model_data: 1011

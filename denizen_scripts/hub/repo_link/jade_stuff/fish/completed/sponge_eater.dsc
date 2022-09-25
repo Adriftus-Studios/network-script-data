@@ -3,4 +3,4 @@ sponge_eater:
   material: pufferfish
   display name: <&F>Spoge Eater
   mechanisms:
-    custom_model_data: 20
+    custom_model_data: 1020

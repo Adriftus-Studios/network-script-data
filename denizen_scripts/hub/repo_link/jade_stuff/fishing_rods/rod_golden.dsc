@@ -8,7 +8,7 @@ fishing_rod_golden:
   - <&e>1<&pc> chance to catch a key each cast.
   - <&6>Jade Level<&co> <&e>70
   mechanisms:
-      custom_model_data: 7
+      custom_model_data: 1007
   flags:
     durability: 100
     trips: 20

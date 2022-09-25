@@ -3,4 +3,4 @@ vermillion_octopus:
   material: pufferfish
   display name: <&F>Vermillion Octopus
   mechanisms:
-    custom_model_data: 16
+    custom_model_data: 1016

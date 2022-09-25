@@ -7,7 +7,7 @@ fishing_bait_blinding:
   - <&sp>
   - <&6>Jade Level<&co> <&e>91
   mechanisms:
-    custom_model_data: 24
+    custom_model_data: 1024
   recipes:
     1:
       type: shaped
@@ -23,7 +23,7 @@ fishing_bait_blinding_shard_item:
   lore:
   - <&6>Emits a light that is painful to look at
   mechanisms:
-    custom_model_data: 25
+    custom_model_data: 1025
   recipes:
     1:
       type: shaped

@@ -3,4 +3,4 @@ flarefin_koi:
   material: tropical_fish
   display name: <&F>Flarefin Koi
   mechanisms:
-    custom_model_data: 5
+    custom_model_data: 1005

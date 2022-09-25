@@ -3,4 +3,4 @@ striped_coelacanth:
   material: pufferfish
   display name: <&F>Striped Coelacanth
   mechanisms:
-    custom_model_data: 19
+    custom_model_data: 1019

@@ -3,4 +3,4 @@ ghast_eel:
   material: tropical_fish
   display name: <&F>Ghast Eel
   mechanisms:
-    custom_model_data: 30
+    custom_model_data: 1030

@@ -10,7 +10,7 @@ fishing_rod_redstone_line:
       input:
       - redstone|fishing_rod_line|redstone
   mechanisms:
-    custom_model_data: 11
+    custom_model_data: 1011
 
 
 redstone_line_canceller:

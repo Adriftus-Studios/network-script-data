@@ -8,7 +8,7 @@ fishing_rod_glass:
   - <&e>Increases fish catch rate by 50<&pc>.
   - <&6>Jade Level<&co> <&e>40
   mechanisms:
-      custom_model_data: 4
+      custom_model_data: 1004
   flags:
     durability: 128
     trips: 25
