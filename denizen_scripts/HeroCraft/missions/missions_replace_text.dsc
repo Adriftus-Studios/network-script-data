@@ -7,6 +7,7 @@ missions_replace_text:
   mobs: -mobs-
   biome: -biome-
   max: -max-
+  entity: -entity-
 
 # Replace text in name
 missions_replace_name:
