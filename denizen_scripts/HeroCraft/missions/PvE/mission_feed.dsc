@@ -3,7 +3,7 @@ mission_feed:
   type: data
   id: feed
   category: PvE
-  name: <&a>Feed <&2>-animals-
+  name: <&a>Feed <&2>-entities-
   description:
     - <&a>Complete this by feeding animals.
   assignment: mission_feed_assignment
