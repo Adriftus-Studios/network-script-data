@@ -19,6 +19,17 @@ steel_ingot:
       cook_time: 60s
       experience: 0.15
       input: raw_steel
+    3:
+      type: furnace
+      cook_time: 115s
+      experience: 0.25
+      input: iron_ingot
+    4:
+      type: blast
+      cook_time: 550s
+      experience: 0.15
+      input: iron_ingot
+
 
 raw_steel:
   type: item
@@ -33,7 +44,7 @@ raw_steel:
   recipes:
     1:
       type: shapeless
-      input: raw_iron|coal/charcoal|coal/charcoal|raw_iron
+      input: raw_iron|coal/charcoal|coal/charcoal
 
 
 steel_block:
