@@ -260,7 +260,7 @@ MultiArg_With_MultiArgs_Command_Tabcomplete:
                     - if <[Arg<[Loop_Index]>]||null> != null:
                         - determine <[Arg<[Loop_Index]>].filter[starts_with[<context.args.get[<[Loop_Index]>]>]]>
                     - if  <[Arg<[Loop_Index].sub[1]>].contains[<context.args.get[<[Loop_Index].sub[1]>]>]>:
-                        - define Option <context.args.get[<[Loop_Index].sub[1]>]>:
+                        - define Option <context.args.get[<[Loop_Index].sub[1]>]>
                         - if <[Arg<[loop_index]><[Option]>Args]||null> != null:
                             - determine <[Arg<[Loop_Index]><[Option]>Args].filter[starts_with[<context.args.last>]]>
                 - else if <[Arg<[Loop_Index].add[1]>]||null> != null:
