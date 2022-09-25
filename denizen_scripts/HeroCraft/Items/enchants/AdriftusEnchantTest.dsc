@@ -64,7 +64,7 @@ enchantment_explainer_book_item:
   material: written_book
   mechanisms:
     book_title: Custom Enchantments and You!
-    book_author: Eutherin
+    book_author: Aedia
     book_pages: <server.flag[enchantment_book_pages]>
 
 enchantment_book_updater:
