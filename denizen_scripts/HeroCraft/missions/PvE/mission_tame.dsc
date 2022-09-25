@@ -3,7 +3,7 @@ mission_tame:
   type: data
   id: tame
   category: PvE
-  name: <&a>Tame <&2>-animals-
+  name: <&a>Tame <&2>-entities-
   description:
     - <&a>Complete this by taming animals.
   assignment: mission_tame_assignment
