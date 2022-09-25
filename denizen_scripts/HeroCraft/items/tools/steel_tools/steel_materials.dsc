@@ -49,7 +49,7 @@ steel_block:
       type: shaped
       input:
         - steel_ingot|steel_ingot|steel_ingot
-        - steel_ingot|air|steel_ingot
+        - steel_ingot|steel_ingot|steel_ingot
         - steel_ingot|steel_ingot|steel_ingot
     2:
       type: shapeless
