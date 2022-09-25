@@ -13,12 +13,12 @@ hardened_copper_ingot:
       type: furnace
       cook_time: 120s
       experience: 0.25
-      input: hardened_copper
+      input: copper_ingot
     2:
       type: blast
       cook_time: 60s
       experience: 0.15
-      input: hardened_copper
+      input: copper_ingot
 
 hardened_copper_block:
   type: item
