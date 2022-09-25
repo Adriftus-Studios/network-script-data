@@ -3,4 +3,4 @@ lava_crab:
   material: tropical_fish
   display name: <&F>Lava Crab
   mechanisms:
-    custom_model_data: 26
+    custom_model_data: 1026

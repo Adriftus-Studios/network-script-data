@@ -3,4 +3,4 @@ Muskfish:
   material: cod
   display name: <&F>Muskfish
   mechanisms:
-    custom_model_data: 5
+    custom_model_data: 1005

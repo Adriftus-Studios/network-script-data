@@ -7,7 +7,7 @@ fishing_bait_silverfish:
   - <&sp>
   - <&6>Jade Level<&co> <&e>31
   mechanisms:
-    custom_model_data: 12
+    custom_model_data: 1012
   recipes:
     1:
       type: shaped
@@ -25,7 +25,7 @@ fishing_bait_silverfish_item:
   lore:
   - <&6>Wily little feller.
   mechanisms:
-    custom_model_data: 13
+    custom_model_data: 1013
 
 
 fishing_bait_silverfish_giver:

@@ -3,4 +3,4 @@ warped_koi:
   material: tropical_fish
   display name: <&F>Warped Koi
   mechanisms:
-    custom_model_data: 10
+    custom_model_data: 1010

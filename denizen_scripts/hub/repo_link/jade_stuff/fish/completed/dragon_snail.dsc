@@ -3,4 +3,4 @@ dragon_snail:
   material: tropical_fish
   display name: <&F>Dragon Snail
   mechanisms:
-    custom_model_data: 34
+    custom_model_data: 1034

@@ -7,7 +7,7 @@ fishing_bait_golden:
   - <&sp>
   - <&6>Jade Level<&co> <&e>81
   mechanisms:
-    custom_model_data: 22
+    custom_model_data: 1022
   recipes:
     1:
       type: shaped
@@ -23,7 +23,7 @@ fishing_bait_gilded_fragment_item:
   lore:
   - <&6>Pulses with a strange energy
   mechanisms:
-    custom_model_data: 23
+    custom_model_data: 1023
   recipes:
     1:
       type: shaped

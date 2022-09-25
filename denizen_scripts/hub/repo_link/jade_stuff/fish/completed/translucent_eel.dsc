@@ -3,4 +3,4 @@ translucent_eel:
   material: pufferfish
   display name: <&F>Translucent Eel
   mechanisms:
-    custom_model_data: 18
+    custom_model_data: 1018

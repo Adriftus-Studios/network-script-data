@@ -7,7 +7,7 @@ fishing_bait_gilded:
   - <&sp>
   - <&6>Jade Level<&co> <&e>25
   mechanisms:
-    custom_model_data: 10
+    custom_model_data: 1010
   recipes:
     1:
       type: shaped
@@ -23,7 +23,7 @@ fishing_bait_gilded_worm_item:
   lore:
   - <&6>Leaves a thin trail of gold behind it.
   mechanisms:
-    custom_model_data: 11
+    custom_model_data: 1011
   recipes:
     1:
       type: shaped

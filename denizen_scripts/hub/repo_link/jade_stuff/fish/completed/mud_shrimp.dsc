@@ -3,4 +3,4 @@ mud_shrimp:
   material: tropical_fish
   display name: <&F>Mud Shrimp
   mechanisms:
-    custom_model_data: 20
+    custom_model_data: 1020

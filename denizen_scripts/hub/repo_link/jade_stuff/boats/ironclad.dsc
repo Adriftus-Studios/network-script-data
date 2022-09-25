@@ -8,6 +8,6 @@ fishing_boat_ironclad:
   - <&e>Increases fish catch rate by 3<&pc>.
   - <&6>Jade Level<&co> <&e>20
   mechanisms:
-    custom_model_data: 2
+    custom_model_data: 1002
   flags:
     trips: 20

@@ -3,4 +3,4 @@ octopus:
   material: pufferfish
   display name: <&F>Octopus
   mechanisms:
-    custom_model_data: 6
+    custom_model_data: 1006

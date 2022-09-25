@@ -3,4 +3,4 @@ bone_crab:
   material: pufferfish
   display name: <&F>Bone Crab
   mechanisms:
-    custom_model_data: 12
+    custom_model_data: 10012

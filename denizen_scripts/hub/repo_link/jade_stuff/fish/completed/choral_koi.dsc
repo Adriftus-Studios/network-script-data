@@ -3,4 +3,4 @@ choral_koi:
   material: tropical_fish
   display name: <&F>Choral Koi
   mechanisms:
-    custom_model_data: 37
+    custom_model_data: 1037

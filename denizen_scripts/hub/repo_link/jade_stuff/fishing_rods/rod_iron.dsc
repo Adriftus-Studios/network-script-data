@@ -7,7 +7,7 @@ fishing_rod_iron:
   - <&sp>
   - <&6>Jade Level<&co> <&e>20
   mechanisms:
-      custom_model_data: 2
+      custom_model_data: 1002
   flags:
     durability: 150
     trips: 30

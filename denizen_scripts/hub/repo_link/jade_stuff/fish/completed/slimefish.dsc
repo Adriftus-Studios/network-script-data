@@ -3,4 +3,4 @@ slimefish:
   material: pufferfish
   display name: <&F>Slimefish
   mechanisms:
-    custom_model_data: 9
+    custom_model_data: 1009

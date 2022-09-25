@@ -3,4 +3,4 @@ huskfish:
   material: tropical_fish
   display name: <&F>Huskfish
   mechanisms:
-    custom_model_data: 28
+    custom_model_data: 1028

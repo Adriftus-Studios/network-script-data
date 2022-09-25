@@ -7,7 +7,7 @@ fishing_rod_diamond:
   - <&sp>
   - <&6>Jade Level<&co> <&e>60
   mechanisms:
-      custom_model_data: 6
+      custom_model_data: 1006
   flags:
     durability_max: 400
     trips: 80

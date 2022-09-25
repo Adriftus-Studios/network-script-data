@@ -3,4 +3,4 @@ magma_carp:
   material: tropical_fish
   display name: <&F>Magma Carp
   mechanisms:
-    custom_model_data: 23
+    custom_model_data: 1023

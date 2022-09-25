@@ -3,4 +3,4 @@ mud_karp:
   material: tropical_fish
   display name: <&F>Mud Karp
   mechanisms:
-    custom_model_data: 21
+    custom_model_data: 1021

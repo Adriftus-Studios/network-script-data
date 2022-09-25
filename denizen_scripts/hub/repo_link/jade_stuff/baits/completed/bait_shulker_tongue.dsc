@@ -7,7 +7,7 @@ fishing_bait_shulker:
   - <&sp>
   - <&6>Jade Level<&co> <&e>61
   mechanisms:
-    custom_model_data: 18
+    custom_model_data: 1018
   recipes:
     1:
       type: shaped
@@ -24,7 +24,7 @@ fishing_bait_shulker_item:
   lore:
   - <&6>Smells terrible.
   mechanisms:
-    custom_model_data: 19
+    custom_model_data: 1019
 
 fishing_bait_shulker_giver:
   type: world

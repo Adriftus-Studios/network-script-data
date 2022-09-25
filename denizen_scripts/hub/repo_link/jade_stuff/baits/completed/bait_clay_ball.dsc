@@ -7,7 +7,7 @@ fishing_bait_clay:
   - <&sp>
   - <&6>Jade Level<&co> <&e>41
   mechanisms:
-    custom_model_data: 15
+    custom_model_data: 1015
   recipes:
     1:
       type: shaped

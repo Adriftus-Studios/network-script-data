@@ -8,6 +8,6 @@ fishing_boat_balloon:
   - <&e>Increases fish catch rate by 15<&pc>.
   - <&6>Jade Level<&co> <&e>60
   mechanisms:
-    custom_model_data: 5
+    custom_model_data: 1005
   flags:
     trips: 30

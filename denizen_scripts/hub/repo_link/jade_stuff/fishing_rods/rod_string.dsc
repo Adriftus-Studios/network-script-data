@@ -7,7 +7,7 @@ fishing_rod_line:
   - <&sp>
   - <&6>Jade Level<&co> <&e>0
   mechanisms:
-    custom_model_data: 1
+    custom_model_data: 1001
   flags:
     durability: 32
     trips: 6

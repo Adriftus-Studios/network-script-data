@@ -3,4 +3,4 @@ clam:
   material: tropical_fish
   display name: <&F>Clam
   mechanisms:
-    custom_model_data: 2
+    custom_model_data: 1002

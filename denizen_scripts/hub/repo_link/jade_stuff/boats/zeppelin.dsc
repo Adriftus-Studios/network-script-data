@@ -8,6 +8,6 @@ fishing_boat_zeppelin:
   - <&e>Increases fish catch rate by 7.5<&pc>.
   - <&6>Jade Level<&co> <&e>70
   mechanisms:
-    custom_model_data: 6
+    custom_model_data: 1006
   flags:
     trips: 60

@@ -3,4 +3,4 @@ crimson_koi:
   material: tropical_fish
   display name: <&F>Crimson Koi
   mechanisms:
-    custom_model_data: 35
+    custom_model_data: 1035

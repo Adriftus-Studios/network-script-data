@@ -3,4 +3,4 @@ daggerfish:
   material: pufferfish
   display name: <&F>Daggerfish
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 1003

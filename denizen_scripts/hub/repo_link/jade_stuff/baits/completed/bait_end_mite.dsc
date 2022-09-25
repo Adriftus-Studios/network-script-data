@@ -7,7 +7,7 @@ fishing_bait_endmite:
   - <&sp>
   - <&6>Jade Level<&co> <&e>51
   mechanisms:
-    custom_model_data: 16
+    custom_model_data: 1016
   recipes:
     1:
       type: shaped
@@ -25,7 +25,7 @@ fishing_bait_end_mite_item:
   lore:
   - <&6>Huh, something's wrong with this one
   mechanisms:
-    custom_model_data: 17
+    custom_model_data: 1017
   recipes:
     1:
       type: shapeless

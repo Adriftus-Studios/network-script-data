@@ -3,4 +3,4 @@ shroom_sponge:
   material: pufferfish
   display name: <&F>Shroom Sponge
   mechanisms:
-    custom_model_data: 22
+    custom_model_data: 1022

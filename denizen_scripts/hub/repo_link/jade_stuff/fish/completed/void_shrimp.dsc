@@ -3,4 +3,4 @@ void_shrimp:
   material: tropical_fish
   display name: <&F>Void Shrimp
   mechanisms:
-    custom_model_data: 11
+    custom_model_data: 1011

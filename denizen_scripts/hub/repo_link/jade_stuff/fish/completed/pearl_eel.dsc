@@ -3,4 +3,4 @@ pearl_eel:
   material: tropical_fish
   display name: <&F>Pearl Eel
   mechanisms:
-    custom_model_data: 19
+    custom_model_data: 1019

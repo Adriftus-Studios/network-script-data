@@ -8,6 +8,6 @@ fishing_boat_netherite:
   - <&e>Increases fish catch rate by 12<&pc>.
   - <&6>Jade Level<&co> <&e>40
   mechanisms:
-    custom_model_data: 3
+    custom_model_data: 1003
   flags:
     trips: 20

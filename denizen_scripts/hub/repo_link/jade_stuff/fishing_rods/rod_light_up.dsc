@@ -8,7 +8,7 @@ fishing_rod_light:
   - <&e>Increases legendary catch rate by 50<&pc>.
   - <&6>Jade Level<&co> <&e>30
   mechanisms:
-      custom_model_data: 3
+      custom_model_data: 1003
   flags:
     durability: 128
     trips: 24

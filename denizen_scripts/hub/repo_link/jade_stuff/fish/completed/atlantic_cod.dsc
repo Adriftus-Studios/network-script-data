@@ -3,4 +3,4 @@ atlantic_cod:
   material: cod
   display name: <&F>Atlantic Cod
   mechanisms:
-    custom_model_data: 1
+    custom_model_data: 1001

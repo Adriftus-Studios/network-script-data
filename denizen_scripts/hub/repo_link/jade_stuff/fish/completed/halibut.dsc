@@ -3,4 +3,4 @@ halibut:
   material: salmon
   display name: <&F>Halibut
   mechanisms:
-    custom_model_data: 4
+    custom_model_data: 1004

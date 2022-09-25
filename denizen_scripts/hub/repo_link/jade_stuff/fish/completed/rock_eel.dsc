@@ -3,4 +3,4 @@ rock_eel:
   material: tropical_fish
   display name: <&F>Rock Eel
   mechanisms:
-    custom_model_data: 15
+    custom_model_data: 1015

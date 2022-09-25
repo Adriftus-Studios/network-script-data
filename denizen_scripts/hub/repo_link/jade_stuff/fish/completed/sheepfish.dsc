@@ -3,4 +3,4 @@ sheepfish:
   material: pufferfish
   display name: <&F>Sheepfish
   mechanisms:
-    custom_model_data: 1
+    custom_model_data: 1001

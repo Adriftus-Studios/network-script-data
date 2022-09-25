@@ -14,7 +14,7 @@ fishing_bait_worm:
       - fishing_bait_earthworm_item|fishing_bait_hook|fishing_bait_earthworm_item
       - fishing_bait_earthworm_item|fishing_bait_earthworm_item|fishing_bait_earthworm_item
   mechanisms:
-    custom_model_data: 1
+    custom_model_data: 1001
 
 fishing_bait_earthworm_item:
   type: item
@@ -23,7 +23,7 @@ fishing_bait_earthworm_item:
   lore:
   - <&6>Fish love these!
   mechanisms:
-    custom_model_data: 2
+    custom_model_data: 1002
 
 worm_item_giver:
   type: world

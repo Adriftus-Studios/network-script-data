@@ -8,6 +8,6 @@ fishing_boat_quartz:
   - <&e>Increases fish catch rate by 6<&pc>.
   - <&6>Jade Level<&co> <&e>50
   mechanisms:
-    custom_model_data: 4
+    custom_model_data: 1004
   flags:
     trips: 40

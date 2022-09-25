@@ -3,4 +3,4 @@ wither_octopus:
   material: tropical_fish
   display name: <&F>Wither Octopus
   mechanisms:
-    custom_model_data: 9
+    custom_model_data: 1009

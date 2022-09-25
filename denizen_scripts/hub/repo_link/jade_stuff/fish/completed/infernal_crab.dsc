@@ -3,4 +3,4 @@ infernal_crab:
   material: tropical_fish
   display name: <&F>Infernal Crab
   mechanisms:
-    custom_model_data: 27
+    custom_model_data: 1027

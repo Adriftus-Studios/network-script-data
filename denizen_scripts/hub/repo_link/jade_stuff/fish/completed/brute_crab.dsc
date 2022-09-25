@@ -3,4 +3,4 @@ brute_crab:
   material: pufferfish
   display name: <&F>Brute Crab
   mechanisms:
-    custom_model_data: 13
+    custom_model_data: 1013

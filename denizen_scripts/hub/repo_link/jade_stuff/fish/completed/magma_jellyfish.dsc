@@ -3,4 +3,4 @@ magma_jellyfish:
   material: tropical_fish
   display name: <&F>Magma Jellyfish
   mechanisms:
-    custom_model_data: 22
+    custom_model_data: 1022
