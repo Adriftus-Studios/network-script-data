@@ -112,7 +112,7 @@ mission_feed:
 feed_data_key:
   type: data
   debug: false
-  entities:
+  entity:
     sheep:
       wheat: true
     cow:
@@ -231,7 +231,7 @@ mission_feed_assignment:
       timeframe: <[timeframe]>
       entity: <[entity]>
       max: <[max].mul[<script[missions_config].data_key[multipliers.<[timeframe]>]>]>
-      name: <proc[missions_replace_name].context[<[config].parsed_key[name]>|<map[entities=<[name]>].escaped>]>
+      name: <proc[missions_replace_name].context[<[config].parsed_key[name]>|<map[entity=<[name]>].escaped>]>
       description: <proc[missions_replace_description].context[<[config].parsed_key[description].escaped>|<map[items=<[name]>;max=<[max]>].escaped>]>
       rewarded: false
       done: false
@@ -239,9 +239,9 @@ mission_feed_assignment:
     - stop if:<[timeframe].exists.not>
     - define config <script[mission_feed]>
     # Generate random item and amount from config.
-    - define entity <[config].data_key[entities].keys.random>
+    - define entity <[config].data_key[entity].keys.random>
     - define name <[entity].as_material.name.replace[_].with[<&sp>].to_titlecase>
-    - define max <[config].data_key[entities.<[entity]>].random>
+    - define max <[config].data_key[entity.<[entity]>].random>
     # Define map
     - define map <script.parsed_key[data.map]>
     # Give mission
@@ -274,7 +274,7 @@ mission_feed_events:
       - if <context.entity.has_flag[fed]>:
         - stop
       - define entity <context.entity.entity_type>
-      - if !<list[<script[feed_data_key].list_keys[entities.<[entity]>]>].contains_any[<player.item_in_hand.material.name>]>:
+      - if !<list[<script[feed_data_key].list_keys[entity.<[entity]>]>].contains_any[<player.item_in_hand.material.name>]>:
         - stop
       - playsound sound:ENTITY_PLAYER_BURP <context.entity.location>
       - flag <context.entity> fed expire:6000t
