@@ -12,7 +12,7 @@ fishing_bait_slime:
     1:
       type: shaped
       input:
-      - slimeball|slimeball|slimeball
-      - slimeball|fishing_bait_hook|slimeball
-      - slimeball|slimeball|slimeball
+      - slime_ball|slime_ball|slime_ball
+      - slime_ball|fishing_bait_hook|slime_ball
+      - slime_ball|slime_ball|slime_ball
 

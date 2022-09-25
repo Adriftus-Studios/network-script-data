@@ -62,7 +62,7 @@ fish_boat_expander_item:
   lore:
   - <&e>Right Click<&6> to expand Jades Boat Storage by <&e>1<&6> slot.
 
-fish_barrel_expansion_script:
+fish_boat_expansion_script:
   type: world
   debug: false
   events:

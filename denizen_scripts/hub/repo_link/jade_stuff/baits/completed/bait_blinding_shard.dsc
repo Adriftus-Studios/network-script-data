@@ -28,6 +28,6 @@ fishing_bait_blinding_shard_item:
     1:
       type: shaped
       input:
-      - shroomlight|fishing_bait_gilded_fragment_item|froglight
+      - shroomlight|fishing_bait_gilded_fragment_item|ochre_froglight/verdant_froglight/pearlescent_froglight
       - fishing_bait_gilded_fragment_item|conduit|fishing_bait_gilded_fragment_item
       - sea_lantern|fishing_bait_gilded_fragment_item|glowstone
