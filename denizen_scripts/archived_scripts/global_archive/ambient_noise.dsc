@@ -4,7 +4,7 @@ ambient_noise:
   definitions: targets|sound|rate
   script:
     - repeat <[rate]>:
-      - ~playsound <[sound]> <[targets]>
+      - playsound <[sound]> <[targets]>
 
 ambient_noise_fluctuate:
   type: task
@@ -12,4 +12,4 @@ ambient_noise_fluctuate:
   definitions: targets|sound|rate
   script:
     - repeat <[rate]>:
-      - ~playsound <[sound]> <[targets]> pitch:<util.random.decimal[0.9].to[1.1]>
+      - playsound <[sound]> <[targets]> pitch:<util.random.decimal[0.9].to[1.1]>
