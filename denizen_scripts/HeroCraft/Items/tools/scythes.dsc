@@ -152,15 +152,15 @@ lawn_mower_proc:
   script:
   - choose <[size]>:
     - case 3:
-      - determine 5
+      - determine 4
     - case 4:
-      - determine 6
+      - determine 5
     - case 5:
-      - determine 7
+      - determine 6
     - case 6:
-      - determine 8
+      - determine 7
     - case 7:
-      - determine 9
+      - determine 8
     - case 8:
       - determine 3
 
