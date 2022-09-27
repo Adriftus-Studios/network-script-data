@@ -8,7 +8,7 @@ sycthe_wooden:
     size: 3
     size_max: 3
     mechanisms:
-        custom_model_data: 10025
+      custom_model_data: 10025
 
 sycthe_stone:
   type: item
@@ -20,7 +20,7 @@ sycthe_stone:
     size: 4
     size_max: 4
     mechanisms:
-        custom_model_data: 10050
+      custom_model_data: 10050
 
 sycthe_iron:
   type: item
@@ -32,7 +32,7 @@ sycthe_iron:
     size: 5
     size_max: 5
     mechanisms:
-        custom_model_data: 10075
+      custom_model_data: 10075
 
 sycthe_golden:
   type: item
@@ -44,7 +44,7 @@ sycthe_golden:
     size: 6
     size_max: 6
     mechanisms:
-        custom_model_data: 10100
+      custom_model_data: 10100
 
 sycthe_diamond:
   type: item
@@ -56,7 +56,7 @@ sycthe_diamond:
     size: 7
     size_max: 7
     mechanisms:
-        custom_model_data: 10125
+      custom_model_data: 10125
 
 sycthe_netherite:
   type: item
@@ -68,7 +68,7 @@ sycthe_netherite:
     size: 8
     size_max: 8
     mechanisms:
-        custom_model_data: 10150
+      custom_model_data: 10150
 
 lawn_mower_proc:
   type: procedure
@@ -98,13 +98,13 @@ lawn_mower_handler:
       - if <player.item_in_hand.flag[size]> < <script[<player.item_in_hand.script.name>].data_key[flags.size_max]>:
         - inventory flag slot:<player.held_item_slot> size:<proc[lawn_mower_proc].context[<context.item.flag[size]>]>
         - wait 1t
-        - inventory adjust slot:<player.held_item_slot> "lore:<&6>Current Size<&co> <&e><context.item.flag[size]>"
+        - inventory adjust slot:<player.held_item_slot> "lore:<&6>Current Size<&co> <&e><player.item_in_hand.flag[size]>"
         - narrate "<&6>The size of your remover is now: <&e><player.item_in_hand.flag[size]><&6>x<&e><player.item_in_hand.flag[size]>"
 
       - else:
         - inventory flag slot:<player.held_item_slot> size:3
         - wait 1t
-        - inventory adjust slot:<player.held_item_slot> "lore:<&6>Current Size<&co> <&e><context.item.flag[size]>"
+        - inventory adjust slot:<player.held_item_slot> "lore:<&6>Current Size<&co> <&e><player.item_in_hand.flag[size]>"
         - narrate "<&6>The size of your remover is now: <&e><player.item_in_hand.flag[size]><&6>x<&e><player.item_in_hand.flag[size]>"
     on player right clicks block with:sycthe_*:
       - determine passively cancelled
