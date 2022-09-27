@@ -196,7 +196,8 @@ lawn_mower_handler:
         - narrate "<&6>The size of your remover is now: <&e><player.item_in_hand.flag[size]><&6>x<&e><player.item_in_hand.flag[size]>"
     on player right clicks block with:scythe_*:
       - determine passively cancelled
-      - ~modifyblock <context.location.relative[-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>].to_cuboid[<context.location.relative[<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>]>].blocks[tall_grass|grass|dandelion|poppy|blue_orchid|allium|azure_bluet|red_tulip|orange_tulip|white_tulip|pink_tulip|oxeye_daisy|cornflower|lily_of_the_valley|wither_rose|sunflower|lilac|rose_bush|peony|moss_carpet|azalea|flowering_azalea|dead_bush|fern|large_fern]> air source:<player> naturally:<player.item_in_hand.material.name>
+      - define breaksize <context.item.flag[size].sub[2]>
+      - ~modifyblock <context.location.relative[-<[breaksize]>,-<[breaksize]>,-<[breaksize]>].to_cuboid[<context.location.relative[<[breaksize]>,<[breaksize]>,<[breaksize]>]>].blocks[tall_grass|grass|dandelion|poppy|blue_orchid|allium|azure_bluet|red_tulip|orange_tulip|white_tulip|pink_tulip|oxeye_daisy|cornflower|lily_of_the_valley|wither_rose|sunflower|lilac|rose_bush|peony|moss_carpet|azalea|flowering_azalea|dead_bush|fern|large_fern]> air source:<player> naturally:<player.item_in_hand.material.name>
       - define slot <player.held_item_slot>
-      - define value <context.item.flag[size]>
+      - define value <context.item.flag[size].mul[<context.item.flag[size]>]>
       - inject custom_durability_process_task
