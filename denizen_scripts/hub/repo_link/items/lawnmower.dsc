@@ -1,4 +1,4 @@
-sycthe_wooden:
+scythe_wooden:
   type: item
   material: wooden_hoe
   display name: <&r>Wooden Scythe
@@ -13,7 +13,7 @@ sycthe_wooden:
   mechanisms:
     custom_model_data: 10025
 
-sycthe_stone:
+scythe_stone:
   type: item
   material: iron_hoe
   display name: <&r>Iron Scythe
@@ -28,7 +28,7 @@ sycthe_stone:
   mechanisms:
     custom_model_data: 10050
 
-sycthe_iron:
+scythe_iron:
   type: item
   material: iron_hoe
   display name: <&r>Iron Scythe
@@ -43,7 +43,7 @@ sycthe_iron:
   mechanisms:
     custom_model_data: 10075
 
-sycthe_golden:
+scythe_golden:
   type: item
   material: golden_hoe
   display name: <&r>Golden Scythe
@@ -58,7 +58,7 @@ sycthe_golden:
   mechanisms:
     custom_model_data: 10100
 
-sycthe_diamond:
+scythe_diamond:
   type: item
   material: diamond_hoe
   display name: <&r>Diamond Scythe
@@ -73,7 +73,7 @@ sycthe_diamond:
   mechanisms:
     custom_model_data: 10125
 
-sycthe_netherite:
+scythe_netherite:
   type: item
   material: netherite_hoe
   display name: <&r>Netherite Scythe
@@ -110,7 +110,7 @@ lawn_mower_proc:
 lawn_mower_handler:
   type: world
   events:
-    on player left clicks block with:sycthe_*:
+    on player left clicks block with:scythe_*:
       - determine passively cancelled
       - ratelimit <player> 1s
       - if <player.item_in_hand.flag[size]> < <script[<player.item_in_hand.script.name>].data_key[flags.size_max]>:
@@ -124,7 +124,7 @@ lawn_mower_handler:
         - wait 1t
         - inventory adjust slot:<player.held_item_slot> "lore:<&6>Current Size<&co> <&e><player.item_in_hand.flag[size]>"
         - narrate "<&6>The size of your remover is now: <&e><player.item_in_hand.flag[size]><&6>x<&e><player.item_in_hand.flag[size]>"
-    on player right clicks block with:sycthe_*:
+    on player right clicks block with:scythe_*:
       - determine passively cancelled
       - ~modifyblock <context.location.relative[-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>].to_cuboid[<context.location.relative[<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>]>].blocks[tall_grass|grass|dandelion|poppy|blue_orchid|allium|azure_bluet|red_tulip|orange_tulip|white_tulip|pink_tulip|oxeye_daisy|cornflower|lily_of_the_valley|wither_rose|sunflower|lilac|rose_bush|peony|moss_carpet|azalea|flowering_azalea]> air source:<player> naturally:<player.item_in_hand.material.name>
       - define slot <player.held_item_slot>
