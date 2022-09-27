@@ -2,6 +2,8 @@ scythe_wooden:
   type: item
   material: wooden_hoe
   display name: <&r>Wooden Scythe
+  data:
+    recipe_book_category: tools.scythe.1Wooden
   lore:
   - <&6>Current Size<&co> <&e>3
   flags:
@@ -25,8 +27,10 @@ scythe_wooden:
 
 scythe_stone:
   type: item
-  material: iron_hoe
-  display name: <&r>Iron Scythe
+  material: stone_hoe
+  display name: <&r>Stone Scythe
+  data:
+    recipe_book_category: tools.scythe.2Stone
   lore:
   - <&6>Current Size<&co> <&e>4
   flags:
@@ -52,6 +56,8 @@ scythe_iron:
   type: item
   material: iron_hoe
   display name: <&r>Iron Scythe
+  data:
+    recipe_book_category: tools.scythe.3Iron
   lore:
   - <&6>Current Size<&co> <&e>5
   flags:
@@ -77,6 +83,8 @@ scythe_golden:
   type: item
   material: golden_hoe
   display name: <&r>Golden Scythe
+  data:
+    recipe_book_category: tools.scythe.4Golden
   lore:
   - <&6>Current Size<&co> <&e>6
   flags:
@@ -102,6 +110,8 @@ scythe_diamond:
   type: item
   material: diamond_hoe
   display name: <&r>Diamond Scythe
+  data:
+    recipe_book_category: tools.scythe.5Diamond
   lore:
   - <&6>Current Size<&co> <&e>7
   flags:
@@ -127,6 +137,8 @@ scythe_netherite:
   type: item
   material: netherite_hoe
   display name: <&r>Netherite Scythe
+  data:
+    recipe_book_category: tools.scythe.6Netherite
   lore:
   - <&6>Current Size<&co> <&e>8
   flags:
@@ -184,7 +196,7 @@ lawn_mower_handler:
         - narrate "<&6>The size of your remover is now: <&e><player.item_in_hand.flag[size]><&6>x<&e><player.item_in_hand.flag[size]>"
     on player right clicks block with:scythe_*:
       - determine passively cancelled
-      - ~modifyblock <context.location.relative[-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>].to_cuboid[<context.location.relative[<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>]>].blocks[tall_grass|grass|dandelion|poppy|blue_orchid|allium|azure_bluet|red_tulip|orange_tulip|white_tulip|pink_tulip|oxeye_daisy|cornflower|lily_of_the_valley|wither_rose|sunflower|lilac|rose_bush|peony|moss_carpet|azalea|flowering_azalea]> air source:<player> naturally:<player.item_in_hand.material.name>
+      - ~modifyblock <context.location.relative[-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>].to_cuboid[<context.location.relative[<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>]>].blocks[tall_grass|grass|dandelion|poppy|blue_orchid|allium|azure_bluet|red_tulip|orange_tulip|white_tulip|pink_tulip|oxeye_daisy|cornflower|lily_of_the_valley|wither_rose|sunflower|lilac|rose_bush|peony|moss_carpet|azalea|flowering_azalea|dead_bush|fern|large_fern]> air source:<player> naturally:<player.item_in_hand.material.name>
       - define slot <player.held_item_slot>
       - define value <context.item.flag[size]>
       - inject custom_durability_process_task
