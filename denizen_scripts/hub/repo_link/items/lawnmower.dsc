@@ -128,5 +128,5 @@ lawn_mower_handler:
       - determine passively cancelled
       - ~modifyblock <context.location.relative[-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>].to_cuboid[<context.location.relative[<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>]>].blocks[tall_grass|grass|dandelion|poppy|blue_orchid|allium|azure_bluet|red_tulip|orange_tulip|white_tulip|pink_tulip|oxeye_daisy|cornflower|lily_of_the_valley|wither_rose|sunflower|lilac|rose_bush|peony|moss_carpet|azalea|flowering_azalea]> air source:<player> naturally:<player.item_in_hand.material.name>
       - define slot <player.held_item_slot>
-      - define value <context.item.size.mul[<context.item.size>]>
+      - define value <context.item.flag[size].mul[<context.item.flag[size]>]>
       - inject custom_durability_process_task
