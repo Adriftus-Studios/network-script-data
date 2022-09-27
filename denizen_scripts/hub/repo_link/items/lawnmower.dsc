@@ -5,10 +5,13 @@ sycthe_wooden:
   lore:
   - <&6>Current Size<&co> <&e>3
   flags:
+    custom_durability:
+      max: 120
+      current: 0
     size: 3
     size_max: 3
-    mechanisms:
-      custom_model_data: 10025
+  mechanisms:
+    custom_model_data: 10025
 
 sycthe_stone:
   type: item
@@ -17,10 +20,13 @@ sycthe_stone:
   lore:
   - <&6>Current Size<&co> <&e>4
   flags:
+    custom_durability:
+      max: 260
+      current: 0
     size: 4
     size_max: 4
-    mechanisms:
-      custom_model_data: 10050
+  mechanisms:
+    custom_model_data: 10050
 
 sycthe_iron:
   type: item
@@ -29,10 +35,13 @@ sycthe_iron:
   lore:
   - <&6>Current Size<&co> <&e>5
   flags:
+    custom_durability:
+      max: 500
+      current: 0
     size: 5
     size_max: 5
-    mechanisms:
-      custom_model_data: 10075
+  mechanisms:
+    custom_model_data: 10075
 
 sycthe_golden:
   type: item
@@ -41,10 +50,13 @@ sycthe_golden:
   lore:
   - <&6>Current Size<&co> <&e>6
   flags:
+    custom_durability:
+      max: 600
+      current: 0
     size: 6
     size_max: 6
-    mechanisms:
-      custom_model_data: 10100
+  mechanisms:
+    custom_model_data: 10100
 
 sycthe_diamond:
   type: item
@@ -55,8 +67,11 @@ sycthe_diamond:
   flags:
     size: 7
     size_max: 7
-    mechanisms:
-      custom_model_data: 10125
+    custom_durability:
+      max: 3000
+      current: 0
+  mechanisms:
+    custom_model_data: 10125
 
 sycthe_netherite:
   type: item
@@ -67,8 +82,11 @@ sycthe_netherite:
   flags:
     size: 8
     size_max: 8
-    mechanisms:
-      custom_model_data: 10150
+    custom_durability:
+      max: 4000
+      current: 0
+  mechanisms:
+    custom_model_data: 10150
 
 lawn_mower_proc:
   type: procedure
@@ -109,3 +127,6 @@ lawn_mower_handler:
     on player right clicks block with:sycthe_*:
       - determine passively cancelled
       - ~modifyblock <context.location.relative[-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>,-<context.item.flag[size].sub[2]>].to_cuboid[<context.location.relative[<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>,<context.item.flag[size].sub[2]>]>].blocks[tall_grass|grass|dandelion|poppy|blue_orchid|allium|azure_bluet|red_tulip|orange_tulip|white_tulip|pink_tulip|oxeye_daisy|cornflower|lily_of_the_valley|wither_rose|sunflower|lilac|rose_bush|peony|moss_carpet|azalea|flowering_azalea]> air source:<player> naturally:<player.item_in_hand.material.name>
+      - define slot <player.held_item_slot>
+      - define value <context.item.size.mul[<context.item.size>]>
+      - inject custom_durability_process_task
