@@ -49,7 +49,7 @@ grappling_hook_better:
       output_quantity: 1
       input:
       - steel_block|steel_block|air
-      - steel_block|grappling_hook_basic|string
+      - steel_block|bow|string
       - air|string|stick
 
 
