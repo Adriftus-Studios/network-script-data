@@ -23,7 +23,7 @@ jade_link_user:
       - if <context.interaction.user.has_flag[minecraft.account_linked]>:
         - ~discordinteraction reply interaction:<context.interaction> "You are already linked to <context.interaction.user.flag[minecraft.account_linked].name>. Please /unlink if incorrect."
         - stop
-      - flag <[player]> discord.account_linked:<context.interaction.user>
+      - flag <[player]> discord.account_linked:<context.interaction.user.id>
       - flag <[player]> discord.notify.linked:<context.interaction.user.name>
       - flag <context.interaction.user> minecraft.account_linked:<[player]>
       - ~discordinteraction reply interaction:<context.interaction> "You have successfully linked to <[player].name>. If incorrect please /unlink and type your complete name more carefully."
