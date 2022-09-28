@@ -1,3 +1,13 @@
+unhardened_copper_ingot:
+  type: item
+  material: copper_ingot
+  no_id: true
+  recipes:
+    1:
+      type: shapeless
+      input: hardened_copper_ingot
+      output_quantity: 1
+
 hardened_copper_ingot:
   type: item
   material: feather
@@ -8,17 +18,6 @@ hardened_copper_ingot:
     - <&r>Its almost iron!!
   data:
       recipe_book_category: misc.hardened_copper.ingot
-  recipes:
-    1:
-      type: furnace
-      cook_time: 120s
-      experience: 0.25
-      input: copper_ingot
-    2:
-      type: blast
-      cook_time: 60s
-      experience: 0.15
-      input: copper_ingot
 
 hardened_copper_block:
   type: item
@@ -35,10 +34,6 @@ hardened_copper_block:
         - hardened_copper_ingot|hardened_copper_ingot|hardened_copper_ingot
         - hardened_copper_ingot|air|hardened_copper_ingot
         - hardened_copper_ingot|hardened_copper_ingot|hardened_copper_ingot
-    2:
-      type: shapeless
-      input: compressed_hardened_copper_block
-      output_quantity: 9
 
 compressed_hardened_copper_block:
   type: item
@@ -57,10 +52,6 @@ compressed_hardened_copper_block:
     right_click_script: cancel
   recipes:
     1:
-      type: shapeless
-      input: double_compressed_hardened_copper_block
-      output_quantity: 9
-    2:
       type: shaped
       input:
       - hardened_copper_block|hardened_copper_block|hardened_copper_block
@@ -84,10 +75,6 @@ double_compressed_hardened_copper_block:
     right_click_script: cancel
   recipes:
     1:
-      type: shapeless
-      input: triple_compressed_hardened_copper_block
-      output_quantity: 9
-    2:
       type: shaped
       input:
       - compressed_hardened_copper_block|compressed_hardened_copper_block|compressed_hardened_copper_block
@@ -111,10 +98,6 @@ triple_compressed_hardened_copper_block:
     right_click_script: cancel
   recipes:
     1:
-      type: shapeless
-      input: quadruple_compressed_hardened_copper_block
-      output_quantity: 9
-    2:
       type: shaped
       input:
       - double_compressed_hardened_copper_block|double_compressed_hardened_copper_block|double_compressed_hardened_copper_block
