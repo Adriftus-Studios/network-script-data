@@ -6,11 +6,11 @@ copper_rails:
       type: shaped
       output_quantity: 16
       input:
-      - hardened_copper_ingot|air|hardened_copper_ingot
-      - hardened_copper_ingot|stick|hardened_copper_ingot
-      - hardened_copper_ingot|air|hardened_copper_ingot
+      - copper_ingot|air|copper_ingot
+      - copper_ingot|stick|copper_ingot
+      - copper_ingot|air|copper_ingot
   data:
-      recipe_book_category: travel.hardened_copper.rail
+      recipe_book_category: travel.copper.rail
 
 copper_activator_rails:
   type: item
@@ -20,11 +20,11 @@ copper_activator_rails:
       type: shaped
       output_quantity: 6
       input:
-      - hardened_copper_ingot|stick|hardened_copper_ingot
-      - hardened_copper_ingot|redstone_torch|hardened_copper_ingot
-      - hardened_copper_ingot|stick|hardened_copper_ingot
+      - copper_ingot|stick|copper_ingot
+      - copper_ingot|redstone_torch|copper_ingot
+      - copper_ingot|stick|copper_ingot
   data:
-      recipe_book_category: travel.hardened_copper.rail2
+      recipe_book_category: travel.copper.rail2
 
 copper_detector_rails:
   type: item
@@ -34,11 +34,11 @@ copper_detector_rails:
       type: shaped
       output_quantity: 6
       input:
-      - hardened_copper_ingot|air|hardened_copper_ingot
-      - hardened_copper_ingot|stone_pressure_plate|hardened_copper_ingot
-      - hardened_copper_ingot|redstone|hardened_copper_ingot
+      - copper_ingot|air|copper_ingot
+      - copper_ingot|stone_pressure_plate|copper_ingot
+      - copper_ingot|redstone|copper_ingot
   data:
-      recipe_book_category: travel.hardened_copper.rail3
+      recipe_book_category: travel.copper.rail3
 
 copper_powered_rails:
   type: item
@@ -48,10 +48,10 @@ copper_powered_rails:
       type: shaped
       output_quantity: 6
       input:
-      - hardened_copper_ingot|air|hardened_copper_ingot
-      - hardened_copper_ingot|stick|hardened_copper_ingot
-      - hardened_copper_ingot|redstone|hardened_copper_ingot
+      - copper_ingot|air|copper_ingot
+      - copper_ingot|stick|copper_ingot
+      - copper_ingot|redstone|copper_ingot
   data:
-      recipe_book_category: travel.hardened_copper.rail4
+      recipe_book_category: travel.copper.rail4
 
 
