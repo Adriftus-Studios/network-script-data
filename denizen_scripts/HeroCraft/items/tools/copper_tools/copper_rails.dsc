@@ -4,7 +4,7 @@ copper_rails:
   recipes:
     1:
       type: shaped
-      output_quantity: 1
+      output_quantity: 16
       input:
       - hardened_copper_ingot|air|hardened_copper_ingot
       - hardened_copper_ingot|stick|hardened_copper_ingot
