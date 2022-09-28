@@ -124,5 +124,5 @@ mission_farm_events:
           - define block <context.material.name>
         - if <player.flag[<[mission]>].get[block]> == <[block]>:
           - run missions_update_progress def:add|<[mission]>|1
-        - if <list[melon|pumpkin].contains_any[<[block]>]>:
-          - determine passively NOTHING
+          - if <list[melon|pumpkin].contains_any[<[block]>]>:
+            - determine passively NOTHING
