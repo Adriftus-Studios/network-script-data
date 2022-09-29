@@ -122,7 +122,7 @@ grappling_hook_shoot:
     - ratelimit <player> 1t
     - if <player.has_flag[grapple.last_used]>:
       - narrate "<&c>This item has not recharged"
-      - narrate "<&e>Cooldown Remaining<&co> <&f><duration[<context.item.script.data_key[data.cooldown]>].sub[<player.flag[grapple.last_used].from_now>].formatted>"
+      - narrate "<&e>Cooldown Remaining<&co> <&f><player.flag_expiration[grapple.last_used].from_now>"
       - stop
     - define range <context.item.script.data_key[data.range]>
     - define target <player.eye_location.precise_cursor_on[<[range]>].if_null[null]>
