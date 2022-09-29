@@ -7,6 +7,10 @@ uncompressed_copper_block:
       type: shapeless
       input: compressed_copper_block
       output_quantity: 9
+    2:
+      type: shapeless
+      input: hardened_copper_block
+      output_quantity: 1
 
 compressed_copper_block:
   type: item
@@ -33,6 +37,10 @@ compressed_copper_block:
       - copper_block|copper_block|copper_block
       - copper_block|copper_block|copper_block
       - copper_block|copper_block|copper_block
+    3:
+      type: shapeless
+      input: compressed_hardened_copper_block
+      output_quantity: 1
 
 double_compressed_copper_block:
   type: item
@@ -59,6 +67,10 @@ double_compressed_copper_block:
       - compressed_copper_block|compressed_copper_block|compressed_copper_block
       - compressed_copper_block|compressed_copper_block|compressed_copper_block
       - compressed_copper_block|compressed_copper_block|compressed_copper_block
+    3:
+      type: shapeless
+      input: double_compressed_hardened_copper_block
+      output_quantity: 1
 
 triple_compressed_copper_block:
   type: item
@@ -85,6 +97,10 @@ triple_compressed_copper_block:
       - double_compressed_copper_block|double_compressed_copper_block|double_compressed_copper_block
       - double_compressed_copper_block|double_compressed_copper_block|double_compressed_copper_block
       - double_compressed_copper_block|double_compressed_copper_block|double_compressed_copper_block
+    3:
+      type: shapeless
+      input: triple_compressed_hardened_copper_block
+      output_quantity: 1
 
 quadruple_compressed_copper_block:
   type: item
@@ -107,3 +123,7 @@ quadruple_compressed_copper_block:
       - triple_compressed_copper_block|triple_compressed_copper_block|triple_compressed_copper_block
       - triple_compressed_copper_block|triple_compressed_copper_block|triple_compressed_copper_block
       - triple_compressed_copper_block|triple_compressed_copper_block|triple_compressed_copper_block
+    2:
+      type: shapeless
+      input: quadruple_compressed_hardened_copper_block
+      output_quantity: 1
