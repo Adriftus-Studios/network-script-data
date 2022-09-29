@@ -29,7 +29,10 @@ steel_ingot:
       cook_time: 550s
       experience: 0.15
       input: iron_ingot
-
+    5:
+      type: shapeless
+      input: steel_block
+      output_quantity: 9
 
 raw_steel:
   type: item
