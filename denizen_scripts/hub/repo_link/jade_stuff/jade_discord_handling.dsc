@@ -3,7 +3,7 @@ jade_startup:
   debug: false
   events:
     on server start:
-      - ~discordconnect id:jade token<secret[jade]>
+      - ~discordconnect id:jade token:<secret[jade]>
 
 jade_link_user:
   type: world
