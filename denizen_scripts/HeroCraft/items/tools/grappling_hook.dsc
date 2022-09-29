@@ -1,6 +1,6 @@
 grappling_hook_basic:
   type: item
-  material: tripwire_hook
+  material: shears
   display name: <script.parsed_key[data.tier]> Grappling Hook
   data:
     tier: <&7>Basic
@@ -27,7 +27,7 @@ grappling_hook_basic:
 
 grappling_hook_better:
   type: item
-  material: tripwire_hook
+  material: shears
   display name: <script.parsed_key[data.tier]> Grappling Hook
   data:
     tier: <&a>Improved
@@ -52,10 +52,9 @@ grappling_hook_better:
       - steel_block|grappling_hook_basic|string
       - air|string|stick
 
-
 grappling_hook_advanced:
   type: item
-  material: tripwire_hook
+  material: shears
   display name: <script.parsed_key[data.tier]> Grappling Hook
   data:
     tier: <&e>Advanced
@@ -73,7 +72,7 @@ grappling_hook_advanced:
 
 grappling_hook_master:
   type: item
-  material: tripwire_hook
+  material: shears
   display name: <script.parsed_key[data.tier]> Grappling Hook
   data:
     tier: <&6>Master
@@ -91,7 +90,7 @@ grappling_hook_master:
 
 grappling_hook_divine:
   type: item
-  material: tripwire_hook
+  material: shears
   display name: <script.parsed_key[data.tier]> Grappling Hook
   data:
     tier: <&b>Divine
@@ -107,6 +106,13 @@ grappling_hook_divine:
   mechanisms:
     custom_model_data: 3
 
+grappling_shear_stop:
+  type: world
+  debug: false
+  events:
+    on player shears entity:
+      - if <list[grappling_hook_divine|grappling_hook_master|grappling_hook_advanced|grappling_hook_better|grappling_hook_basic].contains_any[<player.item_in_hand.script.name>]>:
+        - determine passively cancelled
 
 grappling_hook_shoot:
   type: task
@@ -114,9 +120,9 @@ grappling_hook_shoot:
   script:
     - determine passively cancelled
     - ratelimit <player> 1t
-    - if <context.item.has_flag[last_used]>:
+    - if <player.has_flag[grapple.last_used]>:
       - narrate "<&c>This item has not recharged"
-      - narrate "<&e>Cooldown Remaining<&co> <&f><duration[<context.item.script.data_key[data.cooldown]>].sub[<context.item.flag[last_used].from_now>].formatted>"
+      - narrate "<&e>Cooldown Remaining<&co> <&f><duration[<context.item.script.data_key[data.cooldown]>].sub[<player.flag[grapple.last_used].from_now>].formatted>"
       - stop
     - define range <context.item.script.data_key[data.range]>
     - define target <player.eye_location.precise_cursor_on[<[range]>].if_null[null]>
@@ -124,12 +130,13 @@ grappling_hook_shoot:
     - if <[target]> == null || !<[target].with_pose[<player>].forward[0.05].material.is_solid>:
       - narrate "<&c>You have no target in range!"
       - stop
-    - spawn snowball[item=tripwire_hook[custom_model_data=3];gravity=false] <[start]> save:ent
+    - spawn snowball[item=shears[custom_model_data=3];gravity=false] <[start]> save:ent
     - if !<entry[ent].spawned_entity.is_spawned>:
       - narrate <&c>INTERNAL ERROR - REPORT Grappling0001
       - stop
     - adjust <entry[ent].spawned_entity> velocity:<[target].sub[<[start]>].normalize>
-    - inventory flag slot:<player.held_item_slot> last_used:<util.time_now> expire:<context.item.script.data_key[data.cooldown]>
+    - flag <player> grapple.last_used:<util.time_now> expire:<context.item.script.data_key[data.cooldown]>
+    - itemcooldown shears duration:<context.item.script.data_key[data.cooldown]>
     - flag <entry[ent].spawned_entity> on_hit_block:grappling_hook_pull
     - flag <entry[ent].spawned_entity> user:<player>
     - flag <entry[ent].spawned_entity> target:<[target]>
@@ -161,5 +168,4 @@ grappling_hook_pull:
       - adjust <player> velocity:<player.location.direction.vector.with_y[0.5]>
     - else:
       - adjust <player> velocity:0,0,0
-    - wait 1t
     - adjust <player> gravity:true
