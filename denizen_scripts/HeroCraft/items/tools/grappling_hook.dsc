@@ -13,7 +13,6 @@ grappling_hook_basic:
     - <&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>
   flags:
     right_click_script: grappling_hook_shoot
-    uuid: <util.random_uuid>
   mechanisms:
     custom_model_data: 3
   recipes:
@@ -40,7 +39,6 @@ grappling_hook_better:
     - <&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>
   flags:
     right_click_script: grappling_hook_shoot
-    uuid: <util.random_uuid>
   mechanisms:
     custom_model_data: 3
   recipes:
@@ -66,7 +64,6 @@ grappling_hook_advanced:
     - <&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>
   flags:
     right_click_script: grappling_hook_shoot
-    uuid: <util.random_uuid>
   mechanisms:
     custom_model_data: 3
 
@@ -84,7 +81,6 @@ grappling_hook_master:
     - <&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>
   flags:
     right_click_script: grappling_hook_shoot
-    uuid: <util.random_uuid>
   mechanisms:
     custom_model_data: 3
 
@@ -102,7 +98,6 @@ grappling_hook_divine:
     - <&e>Cooldown<&co> <&f><script.data_key[data.cooldown]>
   flags:
     right_click_script: grappling_hook_shoot
-    uuid: <util.random_uuid>
   mechanisms:
     custom_model_data: 3
 
