@@ -481,9 +481,9 @@ fishbot_data_storage:
       boat_tier: 0
       boat_required: None
       min_level: 0
-      duration: 300
+      duration: 30
       description: A nice lazy river wandering aimlessly through the plains.
-      rate: 60
+      rate: 6
       attack_chance: 10
       attack_repel_message: A wolf leapt at Jade from the shore, but only scratched the boat<&nl>(Durability left <number_left>/<boat_max>)
       attack_succeed_message: A pack of wolves howled on shore startling Jade.<&nl>He dropped some fish.

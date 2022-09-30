@@ -120,7 +120,7 @@ fishbot_command_checking:
       - if !<[item2].script.name.after[fishing_boat_].if_null[dontcontinuepls].contains_any_text[<[boat]>]> || <[foreach_skipper2].exists>:
         - define boat_storage:->:<[item2]>
         - foreach next
-      - if <[attack].exists>:
+      - if <list[succeed|fail].contains_any[attack]>:
         - if <[item2].flag[trips]> <= <[config].data_key[area.<[area]>.attack_damage]>:
           - define boat_durability_current <[item2].flag[trips]>
           - define foreach_skipper2 <element[1]>
@@ -148,7 +148,7 @@ fishbot_command_checking:
     - define bait_msg <&lt><[config].data_key[emoji_key.bait_<[bait]>].if_null[<[config].data_key[emoji_key.none]>].parsed><&gt><&sp><context.options.get[bait].if_null[None].replace_text[_].with[<&sp>].to_titlecase>
     - define rod <[rod].replace_text[_].with[<&sp>].to_titlecase>
     - define rod_msg <&lt><[config].data_key[emoji_key.rod_<[rod]>].if_null[<[config].data_key[emoji_key.none]>].parsed><&gt><&sp><context.options.get[rod].if_null[None].replace_text[_].with[<&sp>].to_titlecase><&sp>(Durability<&co><&sp><[rod_durability_current]>/<[rod_durability_max]>)
-    - define return_time <&sp><&lt>t<&co><util.time_now.add[<[fishing_time]>s].epoch_millis.div[1000].truncate>
+    - define return_time <&sp><&lt>t<&co><util.time_now.add[<[fishing_time]>s].epoch_millis.div[1000].truncate><&gt>
     - if <server.has_flag[fishbot.daily]>:
       - foreach <server.flag[fishbot.daily]> as:booster:
         - define daily_booster_message:->:<[config].data_key[boost_explainers.<[key]>]>
