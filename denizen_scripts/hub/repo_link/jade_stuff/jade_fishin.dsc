@@ -47,7 +47,7 @@ fishbot_command_checking:
     - if !<[config].list_keys[boat].contains_any[<[boat]>]>:
       - ~discordinteraction reply interaction:<context.interaction> "Jade doesn't know what kind of boat that is." ephemeral:true
       - stop
-    - define boat_tier <[config].data_key[boat.<[boat].if_null[<[user].flag[fishbot.boat_previous]>]>.tier].if_null[0]>
+    - define boat_tier <[config].data_key[boat.<[boat].if_null[<[user].flag[fishbot.boat_previous].if_null[none]>]>.tier].if_null[0]>
     - if <[boat_tier]> < <[config].data_key[area.<[area]>.boat_tier]>:
       - ~discordinteraction reply interaction:<context.interaction> "Jade's current boat just isn't up to the task." ephemeral:true
       - stop
