@@ -33,6 +33,6 @@ thundering_enchantment:
     - if <context.level> > 1 && <context.victim.entity_type> != player:
       - wait 4t
       - repeat <context.level.sub[1]>:
-        - flag <player> temp.damage_immune_thunder expire:10t
+        - flag <player> temp.damage_immune_thunder expire:5t
         - strike <[location].find.surface_blocks.within[3].random>
         - wait 4t
