@@ -117,7 +117,7 @@ fishbot_command_checking:
         - define attack fail
     - define boat_storage <list[]>
     - foreach <[user].flag[fishbot.boats_stored]> as:item2:
-      - if !<[item2].script.name.after[fishing_boat_].contains_any_text[<[boat]>]> || <[foreach_skipper2].exists>:
+      - if !<[item2].script.name.after[fishing_boat_].if_null[dontcontinuepls].contains_any_text[<[boat]>]> || <[foreach_skipper2].exists>:
         - define boat_storage:->:<[item2]>
         - foreach next
       - if <[attack].exists>:
@@ -148,17 +148,17 @@ fishbot_command_checking:
     - define bait_msg <&lt><[config].data_key[emoji_key.bait_<[bait]>].if_null[<[config].data_key[emoji_key.none]>].parsed><&gt><&sp><context.options.get[bait].if_null[None].replace_text[_].with[<&sp>].to_titlecase>
     - define rod <[rod].replace_text[_].with[<&sp>].to_titlecase>
     - define rod_msg <&lt><[config].data_key[emoji_key.rod_<[rod]>].if_null[<[config].data_key[emoji_key.none]>].parsed><&gt><&sp><context.options.get[rod].if_null[None].replace_text[_].with[<&sp>].to_titlecase><&sp>(Durability<&co><&sp><[rod_durability_current]>/<[rod_durability_max]>)
-    - define return_time <&sp><util.time_now.add[<[fishing_time]>s].format>
+    - define return_time <&sp><&lt>t<&co><util.time_now.add[<[fishing_time]>s].epoch_millis.div[1000].truncate>
     - if <server.has_flag[fishbot.daily]>:
       - foreach <server.flag[fishbot.daily]> as:booster:
         - define daily_booster_message:->:<[config].data_key[boost_explainers.<[key]>]>
-    - define daily_boost_message <[daily_booster_message].separated_by[<&nl>]>
+    - define daily_boost_message <[daily_booster_message].if_null[None].separated_by[<&nl>]>
     - define message "**Area<&co>**<&sp><[area].to_titlecase><&nl>**Rod<&co>**<&sp><[rod_msg]><&nl>**Boat<&co>**<&sp><[boat_msg]><&nl>**Bait<&co>**<&sp><[bait_msg]><&sp>(Quantity:<&sp><[bait_quantity].if_null[N/A]>)<&nl>**Return Time<&co>**<[return_time]><&nl><&nl>**Daily<&sp>Boosters<&co>**<&nl><[daily_boost_message].if_null[None]><[donor_messsge].if_null[]>"
     - define embed.color <color[0,254,255]>
     - define embed.title "Jade is Setting Sail!"
     - define embed.thumbnail https://media.discordapp.net/attachments/692370842813726724/1005278267303006278/water-transportation.png
     - define embed.description "<[message]>"
-    - ~discordinteraction reply interaction:<context.interaction> "He's on the way!" ephemeral:true
+    - ~discordinteraction reply interaction:<context.interaction> "She's on the way!" ephemeral:true
     - ~discordmessage channel:<[channel]> id:jade "<discord_embed.with_map[<[embed]>]>"
 
 
@@ -175,33 +175,3 @@ fishing_debugger:
   debug: true
   script:
     - narrate fishing_debugger
-
-create_fishbot_command:
-  type: task
-  debug: false
-  script:
-  - definemap options:
-      1:
-        type: string
-        name: area
-        description: Where will Jade set sail? (Default last used.)
-        required: true
-
-      2:
-        type: string
-        name: rod
-        description: Which fishing rod Jade will use. (Default last used.)
-        required: false
-
-      3:
-        type: string
-        name: boat
-        description: Which boat shall Jade take? (Default last used.)
-        required: false
-
-      4:
-        type: string
-        name: bait
-        description: What bait you would like Jade to use. (Default last used.)
-        required: false
-  - ~discordcommand id:jade create name:fish "description:Send jade on his way!" group:546895939781263360 options:<[options]>

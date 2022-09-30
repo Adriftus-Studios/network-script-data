@@ -238,6 +238,7 @@ fishbot_jade_key_inventory_events:
             - wait 2t
             - playsound sound:UI_BUTTON_CLICK <player.location>
             - inventory open d:fishbot_jade_menu
+
     on player closes fishbot_jade_key_inventory:
       - define amount <element[0]>
       - foreach <context.inventory.list_contents.exclude[standard_filler|standard_accept_button|standard_back_button|air]> as:item:
