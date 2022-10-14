@@ -147,6 +147,23 @@ cosmetic_selection_hats_menu:
   gui: true
   size: 54
 
+cosmetic_selection_plushies_menu:
+  type: inventory
+  debug: false
+  inventory: chest
+  title: <&f><&font[adriftus:cosmetics_guis]><&chr[F808]><&chr[1010]>
+  gui: true
+  size: 54
+  data:
+    on_close: cosmetic_selection_plushies_unflag
+
+# To remove flag placed when interacting with the custom object
+cosmetic_selection_plushies_unflag:
+  type: task
+  debug: false
+  script:
+    - flag player plushy_display:!
+
 cosmetic_selection_inventory_open:
   type: task
   debug: false
@@ -160,7 +177,14 @@ cosmetic_selection_inventory_open:
       previous_page: 47
       back: 1
     plushies:
-      dummy: true
+      players_list: <yaml[global.player.<player.uuid>].list_keys[plushies.unlocked].if_null[<list>]>
+      material: <server.flag[plushies.ids.<[cosmetic]>].parsed_key[display_data.material]>
+      display_name: <server.flag[plushies.ids.<[cosmetic]>].parsed_key[display_data.display_name]>
+      description: <server.flag[plushies.ids.<[cosmetic]>].parsed_key[display_data.description]> #this might have to be lore as the key
+      preview: <&e>Plush<&co> <&r><server.flag[plushies.ids.<[cosmetic]>].parsed_key[display_data.display_name]>
+      current: <player.flag[plushy_display].flag[plushy_id].if_null[default]>
+      equip_task: plushies_equip
+      remove_task: plushies_remove
     toys:
      dummy: true
     masks:
@@ -168,7 +192,7 @@ cosmetic_selection_inventory_open:
       material: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.material]>
       display_name: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.display_name]>
       description: <server.flag[masks.ids.<[cosmetic]>].parsed_key[display_data.description]>
-      preview: "<&e>Disguised Name<&co> <&r><server.flag[masks.ids.<[cosmetic]>].parsed_key[mask_data.display_name]>"
+      preview: <&e>Disguised Name<&co> <&r><server.flag[masks.ids.<[cosmetic]>].parsed_key[mask_data.display_name]>
       current: <yaml[global.player.<player.uuid>].read[masks.current.id].if_null[default]>
       equip_task: mask_wear
       remove_task: mask_remove
@@ -176,7 +200,7 @@ cosmetic_selection_inventory_open:
       players_list: <yaml[global.player.<player.uuid>].list_keys[titles.unlocked].if_null[<list>]>
       material: name_tag
       display_name: <[cosmetic]>
-      preview: "<&e>Preview<&co> <&r><yaml[titles].parsed_key[titles.<[cosmetic]>.tag].parse_color>"
+      preview: <&e>Preview<&co> <&r><yaml[titles].parsed_key[titles.<[cosmetic]>.tag].parse_color>
       description: <yaml[titles].parsed_key[titles.<[cosmetic]>.description].parse_color>
       current: <yaml[global.player.<player.uuid>].read[titles.current].if_null[default]>
       equip_task: titles_equip
@@ -185,7 +209,7 @@ cosmetic_selection_inventory_open:
       players_list: <yaml[global.player.<player.uuid>].list_keys[bowtrails.unlocked].if_null[<list>]>
       material: <yaml[bowtrails].read[bowtrails.<[cosmetic]>.icon]>
       display_name: <yaml[bowtrails].parsed_key[bowtrails.<[cosmetic]>.name].parse_color>
-      preview: "<&e>Trail Type<&co> <&r><&f><yaml[bowtrails].parsed_key[bowtrails.<[cosmetic]>.trail_type].replace_text[_].with[<&sp>].to_titlecase>"
+      preview: <&e>Trail Type<&co> <&r><&f><yaml[bowtrails].parsed_key[bowtrails.<[cosmetic]>.trail_type].replace_text[_].with[<&sp>].to_titlecase>
       description: <yaml[bowtrails].parsed_key[bowtrails.<[cosmetic]>.description].parse_color>
       current: <yaml[global.player.<player.uuid>].read[bowtrails.current].if_null[default]>
       equip_task: bowtrails_equip
@@ -195,7 +219,7 @@ cosmetic_selection_inventory_open:
       material: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.material]>
       display_name: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.display_name]>
       description: <server.flag[hats.ids.<[cosmetic]>].parsed_key[hat_data.description]>
-      preview: "<&e>Check out the Hat Shop for previews!"
+      preview: <&e>Check out the Hat Shop for previews!
       current: <yaml[global.player.<player.uuid>].read[hats.current.id].if_null[default]>
       equip_task: hat_wear
       remove_task: hat_remove

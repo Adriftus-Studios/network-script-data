@@ -89,7 +89,7 @@ travel_menu_open:
             - inventory set slot:<[value]> o:town_waystones_info d:<[inventory]>
           - foreach <script.data_key[data.herocraft.items].keys>:
             - inventory set slot:<script.data_key[data.herocraft.items.<[value]>]> o:<[value]>_info d:<[inventory]>
-          - inventory set slot:<script.data_key[data.herocraft.gui_waystone]> o:travel_menu_gui_waystone[lore=<&sp.repeat_as_list[250]>] d:<[inventory]>
+          - inventory set slot:<script.data_key[data.herocraft.gui_waystone]> o:travel_menu_gui_waystone[lore=<&sp.repeat_as_list[300]>] d:<[inventory]>
         # Calipolis tab
         - case calipolis:
           - foreach <script.data_key[data.calipolis.items].keys>:
