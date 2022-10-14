@@ -15,9 +15,9 @@ ender_pouch:
     1:
       type: shaped
       input:
-        - ender_eye|double_compressed_obsidian|ender_eye
-        - double_compressed_obsidian|ender_chest|double_compressed_obsidian
-        - ender_eye|double_compressed_obsidian|ender_eye
+        - ender_eye|obsidian|ender_eye
+        - obsidian|ender_chest|obsidian
+        - ender_eye|obsidian|ender_eye
 
 ender_pouch_open:
   type: task
