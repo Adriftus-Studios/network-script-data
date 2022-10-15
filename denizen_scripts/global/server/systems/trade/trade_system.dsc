@@ -177,6 +177,8 @@ trade_open:
   definitions: player2|player1
   script:
     - define player1 <player> if:<[player1].exists.not>
+    - stop if:<[player1].is_online.not.if_null[true]>
+    - stop if:<[player2].is_online.not.if_null[true]>
     - note <inventory[trade_inventory]> as:trade_<[player1].uuid>/<[player2].uuid>
     - define inv_script <inventory[trade_inventory].script>
     - inventory set slot:<[inv_script].data_key[data.item_slots.player_1_head]> o:player_head[skull_skin=<[player1].skull_skin>;custom_model_data=100;flag=uuid:<[player1].uuid>;display=<&font[adriftus:overlay]><&chr[F90F]>;lore=<element[<&sp>].repeat_as_list[300]>] d:trade_<[player1].uuid>/<[player2].uuid>

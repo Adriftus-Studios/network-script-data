@@ -72,7 +72,7 @@ home_delete:
       - narrate "<&e>Wait 5 seconds and right click again to delete"
       - wait 99t
       - flag player delete_home:<[display_item].flag[home_id]> expire:10s
-      
+
 
 calipolis_set_home:
   type: task
