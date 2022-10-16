@@ -19,6 +19,7 @@ Herocraft_RTP:
         - wait 5s
         - while stop if:<player.is_online.not>
       - take item:elytra
+      - wait 1t
       - equip <player> chest:<[current_chest]>
       - if !<player.is_online>:
         - flag player hot_dropping:!
