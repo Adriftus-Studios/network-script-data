@@ -17,7 +17,7 @@ teleportation_animation_cal_staff:
   colorable: false
 
   # The task for running the animation
-  task: teleportation_animation_cal_staff_run
+  task: teleportation_animation_cal_staff_secondary
 
 
 teleportation_animation_cal_staff_run:
