@@ -29,6 +29,7 @@ teleportation_animation_mj_run:
     - define star_locations <proc[define_star].context[<[start_location].above[0.1].with_pitch[90]>|5|15|5]>
     - adjust <player> gravity:false
     - adjust <player> walk_speed:0.01
+    - adjust <player> fly_speed:0.01
     - teleport <[start_location].above[0.1]>
     - define targets <player.location.find_players_within[60]>
     - wait 1t
@@ -66,3 +67,4 @@ teleportation_animation_mj_secondary:
     - wait 1t
     - adjust <player> gravity:true
     - adjust <player> walk_speed:0.2
+    - adjust <player> fly_speed:0.2
