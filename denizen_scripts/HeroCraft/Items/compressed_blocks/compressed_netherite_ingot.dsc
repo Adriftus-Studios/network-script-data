@@ -26,7 +26,7 @@ compressed_netherite_ingot:
     1:
       type: shapeless
       input: double_compressed_netherite_ingot
-      output_quantity: 9
+      output_quantity: 8
     # BRUH this replaced the recipe for netherite block
       2:
        type: shaped
@@ -53,12 +53,12 @@ double_compressed_netherite_ingot:
     1:
       type: shapeless
       input: triple_compressed_netherite_ingot
-      output_quantity: 9
+      output_quantity: 8
     2:
       type: shaped
       input:
       - compressed_netherite_ingot|compressed_netherite_ingot|compressed_netherite_ingot
-      - compressed_netherite_ingot|compressed_netherite_ingot|compressed_netherite_ingot
+      - compressed_netherite_ingot|air|compressed_netherite_ingot
       - compressed_netherite_ingot|compressed_netherite_ingot|compressed_netherite_ingot
 
 triple_compressed_netherite_ingot:
@@ -79,12 +79,12 @@ triple_compressed_netherite_ingot:
     1:
       type: shapeless
       input: quadruple_compressed_netherite_ingot
-      output_quantity: 9
+      output_quantity: 8
     2:
       type: shaped
       input:
       - double_compressed_netherite_ingot|double_compressed_netherite_ingot|double_compressed_netherite_ingot
-      - double_compressed_netherite_ingot|double_compressed_netherite_ingot|double_compressed_netherite_ingot
+      - double_compressed_netherite_ingot|air|double_compressed_netherite_ingot
       - double_compressed_netherite_ingot|double_compressed_netherite_ingot|double_compressed_netherite_ingot
 
 quadruple_compressed_netherite_ingot:
@@ -106,5 +106,5 @@ quadruple_compressed_netherite_ingot:
       type: shaped
       input:
       - triple_compressed_netherite_ingot|triple_compressed_netherite_ingot|triple_compressed_netherite_ingot
-      - triple_compressed_netherite_ingot|triple_compressed_netherite_ingot|triple_compressed_netherite_ingot
+      - triple_compressed_netherite_ingot|air|triple_compressed_netherite_ingot
       - triple_compressed_netherite_ingot|triple_compressed_netherite_ingot|triple_compressed_netherite_ingot
