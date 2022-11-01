@@ -40,10 +40,10 @@ mission_tame:
       - 3
       - 6
       - 9
-    skeleton_horse:
-      - 1
-      - 2
-      - 3
+#    skeleton_horse:
+#      - 1
+#      - 2
+#      - 3
     trader_llama:
       - 1
       - 2
