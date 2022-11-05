@@ -4,8 +4,9 @@ mod_kick_command_listener:
   debug: false
   events:
     on kick command:
-      - determine passively fulfilled
-      - inject mod_server_kick_task
+      - if <player.has_permission[adriftus.moderator]>:
+        - determine passively fulfilled
+        - inject mod_server_kick_task
 
 mod_server_kick_task:
   type: task
@@ -27,8 +28,9 @@ mod_ban_command_listener:
   debug: false
   events:
     on ban command:
-      - determine passively fulfilled
-      - inject mod_global_ban_task
+      - if <player.has_permission[adriftus.moderator]>:
+        - determine passively fulfilled
+        - inject mod_global_ban_task
 
 mod_global_ban_task:
   type: task
@@ -120,8 +122,9 @@ mod_unban_command_listener:
   debug: false
   events:
     on unban command:
-      - determine passively fulfilled
-      - inject mod_global_unban_task
+      - if <player.has_permission[adriftus.moderator]>:
+        - determine passively fulfilled
+        - inject mod_global_unban_task
 
 mod_global_unban_task:
   type: task
