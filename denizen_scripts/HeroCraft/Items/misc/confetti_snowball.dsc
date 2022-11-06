@@ -31,6 +31,5 @@ confetti_explosion:
   debug: false
   definitions: location
   script:
-    - define colors <list[22,255,216|241,134,255|241,228,47|0,200,0]>
     - repeat 10:
       - playeffect effect:redstone at:<[location]> visibility:50 quantity:20 special_data:<util.random.int[1].to[3]>|<util.random.int[0].to[255]>,<util.random.int[0].to[255]>,<util.random.int[0].to[255]> offset:0.5

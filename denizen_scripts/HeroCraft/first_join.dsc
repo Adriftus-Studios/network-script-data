@@ -10,7 +10,7 @@ Herocraft_RTP:
       - title "title:<&color[#010000]>Drop in!" "subtitle:Prepare to Glide!" fade_in:1s stay:5s fade_out:1s
       - wait 7s
       - teleport <player> <location[0,400,0,HeroCraft].random_offset[12500,0,12500]>
-      - define current_chest <player.equipment_map.get[chestplate].if_null[<item[air]>]>
+      - flag <player> hc.hot_drop.chest <player.equipment_map.get[chestplate].if_null[<item[air]>]>
       - equip <player> chest:elytra[flag=on_drop:delete_item;flag=run_script:determine_air;flag=on_item_pickup:<list[remove_this_entity|cancel]>;flag=no_drop_on_death:true]
       - wait 1t
       - adjust <player> gliding:true
@@ -20,7 +20,8 @@ Herocraft_RTP:
         - while stop if:<player.is_online.not>
       - take item:elytra
       - wait 1t
-      - equip <player> chest:<[current_chest]>
+      - equip <player> <player.flag[hc.hot_drop.chest]>
+      - flag <player> hc.hot_drop.chest:!
       - if !<player.is_online>:
         - flag player hot_dropping:!
         - flag player has_joined:!
@@ -49,6 +50,10 @@ herocraft_first_join:
   debug: false
   events:
     after player joins:
+      - if <player.has_flag[hc.hot_drop.chest]>:
+          - equip <player> <player.flag[hc.hot_drop.chest]>
+          - flag <player> hc.hot_drop.chest:!
+          - teleport <player> <world[<player.location.world>].spawn_location>
       - if !<player.has_advancement[denizen:herocraft]>:
         - wait 2s
         - run achievement_give_parent def:herocraft
