@@ -20,7 +20,7 @@ Herocraft_RTP:
         - while stop if:<player.is_online.not>
       - take item:elytra
       - wait 1t
-      - equip <player> <player.flag[hc.hot_drop.chest]>
+      - equip <player> chest:<player.flag[hc.hot_drop.chest]>
       - flag <player> hc.hot_drop.chest:!
       - if !<player.is_online>:
         - flag player hot_dropping:!
@@ -51,7 +51,7 @@ herocraft_first_join:
   events:
     after player joins:
       - if <player.has_flag[hc.hot_drop.chest]>:
-          - equip <player> <player.flag[hc.hot_drop.chest]>
+          - equip <player> chest:<player.flag[hc.hot_drop.chest]>
           - flag <player> hc.hot_drop.chest:!
           - teleport <player> <world[<player.location.world>].spawn_location>
       - if !<player.has_advancement[denizen:herocraft]>:
