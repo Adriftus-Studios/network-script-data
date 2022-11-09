@@ -9,7 +9,7 @@ Levitation_shot_enchantment:
   max_cost: <context.level.mul[2]>
   data:
     effect:
-      - Causes victims to levitate for 2 seconds.
+      - Can cause victims to levitate for 2 seconds.
       - <empty>
       - Levels increase the speed of levitation.
     item_slots:
