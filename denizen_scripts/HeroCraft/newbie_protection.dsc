@@ -14,11 +14,11 @@ new_player_protections:
       - narrate "<&a>- <&b>New Player Protection <&a>-"
       - narrate "<&a>You have been saved from death"
     on player damages player:
-      - if <context.entity.entity_type> == player && <context.damager.has_flag[newbie]>:
+      - if <context.damager.has_flag[newbie]>:
         - flag <context.damager> newbie:!
         - narrate "<&a>- <&b>New Player Protection <&a>-" targets:<context.damager>
         - narrate "     <&c>De-activated" targets:<context.damager>
-        - narrate "<&e>you have entered PVP combat." targets:<context.damager>
+        - narrate "<&e>you have entered PVP combat. Re log after combat to enable." targets:<context.damager>
         - narrate 
     on player damaged bukkit_priority:lowest priority:-1 flagged:newbie:
       - if <player.mcmmo.level> > 500 || <duration[<player.statistic[PLAY_ONE_MINUTE]>t]> > <duration[20h]>:
