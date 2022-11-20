@@ -23,7 +23,7 @@ mirroring_paste_schematic:
     - schematic load name:<[uuid]> filename:global/mirroring/<[uuid]>
     - foreach <schematic[<[uuid]>].cuboid[<[location]>].chunks>:
       - chunkload <[value]> duration:10s
-    - schematic paste name:<[uuid]> origin:<[location]> entities
+    - schematic paste name:<[uuid]> origin:<[location].with_world[<server.worlds.first>]> entities
 
 mirroring_transfer_entities:
   type: task
