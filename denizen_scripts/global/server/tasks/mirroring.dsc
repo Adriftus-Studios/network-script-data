@@ -21,7 +21,7 @@ mirroring_paste_schematic:
   definitions: UUID|location
   script:
     - schematic load name:<[uuid]> filename:global/mirroring/<[uuid]>
-    - foreach <schematic[<[uuid]>].cuboid[<[location]>].chunks>:
+    - foreach <schematic[<[uuid]>].cuboid[<[location].with_world[<server.worlds.first>]>].chunks>:
       - chunkload <[value]> duration:10s
     - schematic paste name:<[uuid]> origin:<[location].with_world[<server.worlds.first>]> entities
 
