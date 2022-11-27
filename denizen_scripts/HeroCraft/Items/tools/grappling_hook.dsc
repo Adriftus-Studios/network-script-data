@@ -58,6 +58,7 @@ grappling_hook_advanced:
     tier: <&e>Advanced
     range: 25
     cooldown: 10s
+    recipe_book_category: travel.grappling.CAdvanced
   lore:
     - <&e>Tier: <script.parsed_key[data.tier]>
     - <&e>Range<&co> <&f><script.data_key[data.range]>
@@ -66,6 +67,14 @@ grappling_hook_advanced:
     right_click_script: grappling_hook_shoot
   mechanisms:
     custom_model_data: 3
+  recipes:
+    1:
+      type: shaped
+      output_quantity: 1
+      input:
+      - double_compresed_diamond_block|double_compresed_diamond_block|air
+      - double_compresed_diamond_block|arcane_core|air
+      - air|air|grappling_hook_better
 
 grappling_hook_master:
   type: item
@@ -75,6 +84,7 @@ grappling_hook_master:
     tier: <&6>Master
     range: 30
     cooldown: 10s
+    recipe_book_category: travel.grappling.DMaster
   lore:
     - <&e>Tier: <script.parsed_key[data.tier]>
     - <&e>Range<&co> <&f><script.data_key[data.range]>
@@ -83,6 +93,14 @@ grappling_hook_master:
     right_click_script: grappling_hook_shoot
   mechanisms:
     custom_model_data: 3
+  recipes:
+    1:
+      type: shaped
+      output_quantity: 1
+      input:
+      - compressed_netherite_ingot|compressed_netherite_ingot|air
+      - compressed_netherite_ingot|arcane_rod|air
+      - air|air|grappling_hook_advanced
 
 grappling_hook_divine:
   type: item
