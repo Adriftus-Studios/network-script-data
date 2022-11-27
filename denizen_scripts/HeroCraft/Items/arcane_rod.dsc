@@ -19,5 +19,5 @@ arcane_rod:
       output_quantity: 1
       input:
       - double_compressed_netherite_ingot|double_compressed_diamond_block|air
-      - double_compresed_diamond_block|arcane_core_item|air
+      - double_compressed_diamond_block|arcane_core_item|air
       - air|air|double_compressed_netherite_ingot
