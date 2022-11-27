@@ -17,6 +17,6 @@ dispenser_instrument_Iron_Xylophone:
       input:
         - diamond|stick|stick
         - iron_ingot|iron_ingot|iron_ingot
-        - oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_log/warped_log|oak_planks/spruce_planks/birch_planks/jungle_planks/acacia_planks/dark_oak_planks/crimson_planks/warped_planks|oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_log/warped_log
+        - oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/dark_oak_log/crimson_stem|oak_planks/spruce_planks/birch_planks/jungle_planks/acacia_planks/dark_oak_planks/crimson_planks/warped_planks|oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/dark_oak_log/crimson_stem
   data:
     recipe_book_category: decor.instrument.xylophone_iron

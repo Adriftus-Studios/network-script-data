@@ -17,6 +17,6 @@ dispenser_instrument_Pling:
       input:
         - string|string|string
         - bone_block|obsidian|bone_block
-        - oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_log/warped_log|oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_log/warped_log|oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_log/warped_log
+        - oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/dark_oak_log/crimson_stem|oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/dark_oak_log/crimson_stem|oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/dark_oak_log/crimson_stem
   data:
     recipe_book_category: decor.instrument.pling

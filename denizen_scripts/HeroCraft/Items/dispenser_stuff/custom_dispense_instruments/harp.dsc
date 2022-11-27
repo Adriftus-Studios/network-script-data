@@ -15,8 +15,8 @@ dispenser_instrument_harp:
       type: shaped
       output_quantity: 1
       input:
-        - oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_log/warped_log|oak_planks/spruce_planks/birch_planks/jungle_planks/acacia_planks/dark_oak_planks/crimson_planks/warped_planks|stick
-        - oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_log/warped_log|string|stick
-        - oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_log/warped_log|oak_planks/spruce_planks/birch_planks/jungle_planks/acacia_planks/dark_oak_planks/crimson_planks/warped_planks|stick
+        - oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_stem/warped_stem|oak_planks/spruce_planks/birch_planks/jungle_planks/acacia_planks/dark_oak_planks/crimson_planks/warped_planks|stick
+        - oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_stem/warped_stem|string|stick
+        - oak_log/spruce_log/birch_log/jungle_log/acacia_log/dark_oak_log/crimson_stem/warped_stem|oak_planks/spruce_planks/birch_planks/jungle_planks/acacia_planks/dark_oak_planks/crimson_planks/warped_planks|stick
   data:
     recipe_book_category: decor.instrument.harp
