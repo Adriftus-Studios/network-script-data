@@ -8,7 +8,7 @@ dispenser_visual_confetti_charge:
   data:
     recipe_book_category: decor.confetti_charge
   mechanisms:
-    custom_model_data: 1
+    custom_model_data: 4
   flags:
     custom_dispense: confetti
 
