@@ -72,8 +72,8 @@ grappling_hook_advanced:
       type: shaped
       output_quantity: 1
       input:
-      - double_compresed_diamond_block|double_compresed_diamond_block|air
-      - double_compresed_diamond_block|arcane_core|air
+      - double_compressed_diamond_block|double_compressed_diamond_block|air
+      - double_compressed_diamond_block|arcane_core|air
       - air|air|grappling_hook_better
 
 grappling_hook_master:
