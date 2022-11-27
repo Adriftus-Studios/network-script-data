@@ -16,7 +16,7 @@ dispenser_instrument_bit:
       output_quantity: 1
       input:
         - white_wool/orange_wool/magenta_wool/light_blue_wool/yellow_wool/lime_wool/pink_wool/gray_wool/light_gray_wool/cyan_wool/purple_wool/blue_wool/brown_wool/green_wool/red_wool/black_wool|redstone_block|white_wool/orange_wool/magenta_wool/light_blue_wool/yellow_wool/lime_wool/pink_wool/gray_wool/light_gray_wool/cyan_wool/purple_wool/blue_wool/brown_wool/green_wool/red_wool/black_wool
-        - stone_button|blackstone_button|stone_button
+        - stone_button|polished_blackstone_button|stone_button
         - redstone|redstone|steel_ingot
   data:
     recipe_book_category: decor.instrument.bit

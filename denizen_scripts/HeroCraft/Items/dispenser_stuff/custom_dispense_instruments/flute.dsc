@@ -15,8 +15,8 @@ dispenser_instrument_flute:
       type: shaped
       output_quantity: 1
       input:
-        - stick|blackstone_button|air
+        - stick|polished_blackstone_button|air
         - stick|stone_button|air
-        - stick|blackstone_button|air
+        - stick|polished_blackstone_button|air
   data:
     recipe_book_category: decor.instrument.flute
