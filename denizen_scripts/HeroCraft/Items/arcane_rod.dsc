@@ -9,7 +9,7 @@ arcane_rod:
   enchantments:
   - sharpness:1
   data:
-      recipe_book_category: misc.upgrade.arcane_rod
+      recipe_book_category: misc.arcane_rod
   lore:
   - <&6>A mysterious rod, made of elaborate materials.
   - <&8>Used to upgrade items.
