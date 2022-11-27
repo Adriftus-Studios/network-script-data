@@ -7,7 +7,7 @@ Orc_spawn_task:
         - define count <server.online_players.size.div[5].round_up>
         - define select_few <server.online_players.random[<[count]>]>
         - foreach <[select_few]> as:poor_soul:
-          - if !<list[adventure|survival].contains_any[<[poor_soul].gamemode>]>:
+          - if !<list[adventure|survival].contains_any[<[poor_soul].gamemode>]> || <[poor_soul].location.town||notown> == notown:
             - foreach next
         #  - choose <[poor_soul].location.biome>:
             #- case *desert:
