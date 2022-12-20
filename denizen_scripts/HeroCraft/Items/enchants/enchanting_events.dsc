@@ -18,7 +18,7 @@ player_damage_enchant_handler:
         - hurt <context.entity> <[level].mul[1.5]>
       - if !<context.entity.has_flag[temp.custom_enchant_cruelty]> && !<context.entity.has_flag[temp.custom_enchant_cruelty]>:
         - flag <context.entity> temp.custom_enchant_cruelty
-      - if <player.health_percentage> > 90:
+      - if <player.health_percentage||0> > 90:
         - define cowardice_counter 0
         - foreach <list[38|39]> as:slot:
           - if <player.inventory.slot[<[slot]>].material.name> == air:
