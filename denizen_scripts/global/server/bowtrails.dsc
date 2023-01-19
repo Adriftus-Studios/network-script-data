@@ -80,6 +80,8 @@ bowtrails_handler:
         - spawn armor_stand[marker=true;fire_time=5s;gravity=false;visible=false;equipment=air|air|air|<yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.block]>] <context.projectile.location.add[0,-1.6,0]> save:as
         - wait 3s
         - remove <entry[as].spawned_entity>
+    after arrow hits *:
+      - flag <context.projectile> is_flying:!
 
 ####################
 ## BOWTRAIL TYPES ##
@@ -92,24 +94,30 @@ bow_trail_custom:
       - case Rainbow:
         - define colors <list[red|orange|yellow|green|blue|purple]>
         - wait 1t
-        - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+        - while true:
           - if !<context.projectile.is_spawned>:
-            - stop
+              - stop
+          - if !<context.projectile.has_flag[is_flying]>:
+              - stop
           - playeffect redstone at:<context.projectile.location> quantity:5 offset:0.25 special_data:2|<[colors].get[<[value].mod[6].add[1]>]> targets:<player.world.players>
           - wait <yaml[bowtrails].read[settings.ticksBetween]>t
       - case The_Drew:
         - wait 1t
-        - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+        - while true:
           - if !<context.projectile.is_spawned>:
-            - stop
+              - stop
+          - if !<context.projectile.has_flag[is_flying]>:
+              - stop
           - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|red targets:<player.world.players>
           - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|black targets:<player.world.players>
           - wait <yaml[bowtrails].read[settings.ticksBetween]>t
       - case Ice:
         - wait 1t
-        - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+        - while true:
           - if !<context.projectile.is_spawned>:
-            - stop
+              - stop
+          - if !<context.projectile.has_flag[is_flying]>:
+              - stop
           - playeffect block_crack at:<context.projectile.location> quantity:3 offset:0.25 special_data:ice targets:<player.world.players>
           - playeffect falling_dust at:<context.projectile.location> quantity:3 offset:0.25 special_data:ice targets:<player.world.players>
           - wait <yaml[bowtrails].read[settings.ticksBetween]>t
@@ -120,9 +128,11 @@ bow_trail_dust:
   script:
     - define block <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.material_dust]>
     - wait 1t
-    - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+    - while true:
       - if !<context.projectile.is_spawned>:
-        - stop
+          - stop
+      - if !<context.projectile.has_flag[is_flying]>:
+          - stop
       - playeffect falling_dust at:<context.projectile.location> quantity:5 offset:0.25 special_data:<[block]> targets:<player.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
 
@@ -132,9 +142,11 @@ bow_trail_particle:
   script:
     - define particle <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.particle]>
     - wait 1t
-    - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+    - while true:
       - if !<context.projectile.is_spawned>:
-        - stop
+          - stop
+      - if !<context.projectile.has_flag[is_flying]>:
+          - stop
       - playeffect <[particle]> at:<context.projectile.location> quantity:5 offset:0.25 targets:<player.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
 
@@ -145,9 +157,11 @@ bow_trail_moving_particle:
     - define particle <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.particle]>
     - define movement <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.speed]>
     - wait 1t
-    - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+    - while true:
       - if !<context.projectile.is_spawned>:
-        - stop
+          - stop
+      - if !<context.projectile.has_flag[is_flying]>:
+          - stop
       - playeffect <[particle]> at:<context.projectile.location> quantity:5 offset:0.25 data:<[movement]> targets:<player.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
 
@@ -157,9 +171,11 @@ bow_trail_item_crack:
   script:
     - define block <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.item_trail_type]>
     - wait 1t
-    - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+    - while true:
       - if !<context.projectile.is_spawned>:
-        - stop
+          - stop
+      - if !<context.projectile.has_flag[is_flying]>:
+          - stop
       - playeffect item_crack at:<context.projectile.location> quantity:5 offset:0.25 special_data:<[block]> targets:<player.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
 
@@ -169,11 +185,13 @@ bow_trail_block_break:
   script:
     - define block <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.material]>
     - wait 1t
-    - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+    - while true:
       - if !<context.projectile.is_spawned>:
-        - stop
+          - stop
+      - if !<context.projectile.has_flag[is_flying]>:
+          - stop
       - playeffect block_crack at:<context.projectile.location> quantity:5 offset:0.25 special_data:<[block]> targets:<player.world.players>
-      - wait <yaml[bowtrails].read[settings.ticksBetween]>t
+      - wait <yaml[bowtrails].read[settings.ticksBetween]>t 
 
 bow_trail_2_color:
   type: task
@@ -182,9 +200,11 @@ bow_trail_2_color:
     - wait 1t
     - define color1 <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.color1]>
     - define color2 <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.color2]>
-    - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+    - while true:
       - if !<context.projectile.is_spawned>:
-        - stop
+          - stop
+      - if !<context.projectile.has_flag[is_flying]>:
+          - stop
       - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|<[color1]> targets:<player.world.players>
       - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|<[color2]> targets:<player.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
@@ -195,9 +215,11 @@ bow_trail_block_with_particle:
   script:
     - wait 1t
     - define particle <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.particle]>
-    - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+    - while true:
       - if !<context.projectile.is_spawned>:
-        - stop
+          - stop
+      - if !<context.projectile.has_flag[is_flying]>:
+          - stop
       - playeffect <[particle]> at:<context.projectile.location> quantity:5 offset:0.25 targets:<player.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
 
@@ -207,9 +229,11 @@ bow_trail_block_with_dust:
   script:
     - wait 1t
     - define block <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.material_dust]>
-    - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+    - while true:
       - if !<context.projectile.is_spawned>:
-        - stop
+          - stop
+      - if !<context.projectile.has_flag[is_flying]>:
+          - stop
       - playeffect FALLING_DUST at:<context.projectile.location> quantity:5 offset:0.25 special_data:<[block]> targets:<player.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
 
@@ -220,9 +244,11 @@ bow_trail_block_2_color:
     - wait 1t
     - define color1 <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.color1]>
     - define color2 <yaml[bowtrails].read[bowtrails.<player.flag[bowtrail]>.color2]>
-    - repeat <yaml[bowtrails].read[settings.IterationsPerArrow]>:
+    - while true:
       - if !<context.projectile.is_spawned>:
-        - stop
+          - stop
+      - if !<context.projectile.has_flag[is_flying]>:
+          - stop
       - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|<[color1]> targets:<player.world.players>
       - playeffect redstone at:<context.projectile.location> quantity:3 offset:0.25 special_data:2|<[color2]> targets:<player.world.players>
       - wait <yaml[bowtrails].read[settings.ticksBetween]>t
